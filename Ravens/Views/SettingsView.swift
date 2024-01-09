@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @StateObject private var viewModel = BirdViewModel()
+    @StateObject private var viewModel = SpeciesGroupViewModel()
     
-    @State private var selectedGroup = 460
+    @EnvironmentObject var settings: Settings
     
     var body: some View {
-        Form {
-            VStack(alignment: .leading) {
-                Picker("Group", selection: $selectedGroup) {
-                    Text("Birds").tag(6)
-                    Text("Algea and Weeds").tag(460)
+        
+        NavigationStack {
+            Form {
+                Picker("Group:", selection: $settings.selectedSpeciesGroup) {
+                    ForEach(viewModel.speciesGroups, id:\.id) { speciesGroup in
+                        HStack() {
+                            Text("\(speciesGroup.id) - \(speciesGroup.name)")
+                        }
+                    }
                 }
-                .onChange(of: selectedGroup) {
-                    viewModel.fetchData(for: selectedGroup)
-                }
+                
+                
+                
+                
             }
+            .navigationTitle("Settings")
+        }
+        .onAppear(){
+            viewModel.fetchData()
         }
     }
 }

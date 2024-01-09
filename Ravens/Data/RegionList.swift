@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Region: Codable, Identifiable {
+struct RegionList: Codable, Identifiable {
     var id: Int
     let region: Int
     let species_group: Int

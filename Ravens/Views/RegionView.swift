@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct RegionView: View {
-    @StateObject private var viewModel = RegionViewModel()
+    @StateObject private var viewModel = RegionListViewModel()
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.regions, id:\.id) { region in
+                ForEach(viewModel.regionLists, id:\.id) { region in
                     VStack(alignment: .leading) {
                         Text("id \(region.id)")
                         Text("region \(region.region)")

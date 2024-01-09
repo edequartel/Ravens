@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 import Combine
 
-class RegionViewModel: ObservableObject { //<<change in region list not region
-    @Published var regions = [Region]()
+class RegionListViewModel: ObservableObject { //<<change in region list not region
+    @Published var regionLists = [RegionList]()
 
     func fetchData() {
         let url = "https://waarneming.nl/api/v1/region-lists"
@@ -27,7 +27,7 @@ class RegionViewModel: ObservableObject { //<<change in region list not region
                 do {
                     // Decode the JSON response into an array of Bird objects
                     let decoder = JSONDecoder()
-                    self.regions = try decoder.decode([Region].self, from: response.data!)
+                    self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }

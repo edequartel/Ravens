@@ -20,8 +20,8 @@
 		474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */; };
 		474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */; };
 		474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = 474C404E2B4BD24F0038B3A5 /* RichText */; };
-		474C40532B4BFD090038B3A5 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40522B4BFD090038B3A5 /* Region.swift */; };
-		474C40552B4BFDC90038B3A5 /* RegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40542B4BFDC90038B3A5 /* RegionViewModel.swift */; };
+		474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40522B4BFD090038B3A5 /* RegionList.swift */; };
+		474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */; };
 		474C40572B4BFE950038B3A5 /* RegionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40562B4BFE950038B3A5 /* RegionView.swift */; };
 		474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */; };
 		474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */; };
@@ -31,6 +31,7 @@
 		474C40632B4C091F0038B3A5 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40622B4C091F0038B3A5 /* LanguageView.swift */; };
 		474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C407E2B4D15610038B3A5 /* SettingsView.swift */; };
 		474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40832B4D189F0038B3A5 /* MapObservationView.swift */; };
+		474C40862B4D84030038B3A5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40852B4D84030038B3A5 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +46,8 @@
 		474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetails.swift; sourceTree = "<group>"; };
 		474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailsViewModel.swift; sourceTree = "<group>"; };
 		474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailsView.swift; sourceTree = "<group>"; };
-		474C40522B4BFD090038B3A5 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
-		474C40542B4BFDC90038B3A5 /* RegionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionViewModel.swift; sourceTree = "<group>"; };
+		474C40522B4BFD090038B3A5 /* RegionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionList.swift; sourceTree = "<group>"; };
+		474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListViewModel.swift; sourceTree = "<group>"; };
 		474C40562B4BFE950038B3A5 /* RegionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionView.swift; sourceTree = "<group>"; };
 		474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGroup.swift; sourceTree = "<group>"; };
 		474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGroupViewModel.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		474C40622B4C091F0038B3A5 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		474C407E2B4D15610038B3A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		474C40832B4D189F0038B3A5 /* MapObservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationView.swift; sourceTree = "<group>"; };
+		474C40852B4D84030038B3A5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +117,10 @@
 			children = (
 				474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
-				474C40542B4BFDC90038B3A5 /* RegionViewModel.swift */,
+				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
+				474C40852B4D84030038B3A5 /* Settings.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -127,7 +130,7 @@
 			children = (
 				474C403B2B4BC5070038B3A5 /* Bird.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
-				474C40522B4BFD090038B3A5 /* Region.swift */,
+				474C40522B4BFD090038B3A5 /* RegionList.swift */,
 				474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */,
 				474C405E2B4C08750038B3A5 /* Language.swift */,
 			);
@@ -230,10 +233,10 @@
 			files = (
 				474C40632B4C091F0038B3A5 /* LanguageView.swift in Sources */,
 				474C40572B4BFE950038B3A5 /* RegionView.swift in Sources */,
-				474C40552B4BFDC90038B3A5 /* RegionViewModel.swift in Sources */,
+				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
-				474C40532B4BFD090038B3A5 /* Region.swift in Sources */,
+				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
@@ -243,6 +246,7 @@
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
+				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* BirdViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,

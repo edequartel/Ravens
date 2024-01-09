@@ -28,13 +28,6 @@ struct SpeciesGroupView: View {
     }
 }
 
-
-
-#Preview {
-    RegionView()
-}
-
-
 #Preview {
     SpeciesGroupView()
 }
