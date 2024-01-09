@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import Combine
+//import Combine
 
 class BirdViewModel: ObservableObject {
     @Published var birds = [Bird]()
