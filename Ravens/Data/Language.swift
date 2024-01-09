@@ -13,7 +13,6 @@ struct Language: Codable {
     let results: [Result]
 }
 
-// MARK: - Result
 struct Result: Codable {
     let code, name_en, name_native: String
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegionView: View {
+struct RegionListView: View {
     @StateObject private var viewModel = RegionListViewModel()
     
     var body: some View {
@@ -32,6 +32,6 @@ struct RegionView: View {
 
 
 #Preview {
-    RegionView()
+    RegionListView()
 }
 
