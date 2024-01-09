@@ -1,0 +1,37 @@
+//
+//  RegionView.swift
+//  Ravens
+//
+//  Created by Eric de Quartel on 08/01/2024.
+//
+
+import SwiftUI
+
+struct RegionView: View {
+    @StateObject private var viewModel = RegionViewModel()
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(viewModel.regions, id:\.id) { region in
+                    VStack(alignment: .leading) {
+                        Text("id \(region.id)")
+                        Text("region \(region.region)")
+                        Text("group \(region.species_group)")
+                    }
+                }
+            }
+            .navigationTitle("Region-Lists")
+        }
+        .onAppear(){
+            viewModel.fetchData()
+        }
+    }
+}
+
+
+
+#Preview {
+    RegionView()
+}
+
