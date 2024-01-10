@@ -15,12 +15,14 @@ class BirdViewModel: ObservableObject {
 
 
     func fetchData(for groupID: Int) {
+        print("fetchData BirdViewModel \(groupID)")
         let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl"
         ]
+        
 
         // Use Alamofire to make the API request
         AF.request(url, headers: headers).responseJSON { response in

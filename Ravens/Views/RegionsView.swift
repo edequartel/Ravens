@@ -25,9 +25,6 @@ struct RegionsView: View {
             }
             .navigationTitle("Regions")
         }
-        .onAppear(){
-            viewModel.fetchData()
-        }
     }
 }
 

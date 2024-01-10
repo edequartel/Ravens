@@ -14,8 +14,10 @@ class RegionViewModel: ObservableObject {
     init() {
         fetchData()
     }
-
+    
+    
     func fetchData() {
+        print("fetchData RegionViewModel")
         let url = "https://waarneming.nl/api/v1/regions/"
 
         // Create a URLRequest with caching policy

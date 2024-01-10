@@ -12,7 +12,12 @@ import Combine
 class SpeciesGroupViewModel: ObservableObject {
     @Published var speciesGroups = [SpeciesGroup]()
 
+    init() {
+        fetchData()
+    }
+
     func fetchData() {
+        print("fetchData SpeciesGroupViewModel")
         let url = "https://waarneming.nl/api/v1/species-groups"
 
 //         Add the custom header 'Accept-Language: nl'

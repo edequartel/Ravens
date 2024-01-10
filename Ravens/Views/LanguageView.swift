@@ -27,9 +27,6 @@ struct LanguageView: View {
                 
             }
             .navigationBarTitle("Languages")
-            .onAppear {
-//                viewModel.fetchData()
-            }
         }
     }
 }

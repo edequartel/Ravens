@@ -12,7 +12,12 @@ import Combine
 class RegionListViewModel: ObservableObject { //<<change in region list not region
     @Published var regionLists = [RegionList]()
 
+    init() {
+        fetchData()
+    }
+
     func fetchData() {
+        print("fetchData RegionListViewModel")
         let url = "https://waarneming.nl/api/v1/region-lists"
         
         // Add the custom header 'Accept-Language: nl'

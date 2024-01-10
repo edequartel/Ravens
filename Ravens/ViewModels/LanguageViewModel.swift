@@ -17,6 +17,7 @@ class LanguageViewModel: ObservableObject {
     }
 
     func fetchData() {
+        print("fetchData LanguageViewModel")
         AF.request("https://waarneming.nl/api/v1/languages/").responseDecodable(of: Language.self) { response in
             switch response.result {
             case .success(let language):

@@ -126,7 +126,6 @@
 				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
-				474C40852B4D84030038B3A5 /* Settings.swift */,
 				474C408B2B4DAC590038B3A5 /* RegionViewModel.swift */,
 			);
 			path = ViewModels;
@@ -141,6 +140,7 @@
 				474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */,
 				474C405E2B4C08750038B3A5 /* Language.swift */,
 				474C40892B4DAA110038B3A5 /* Region.swift */,
+				474C40852B4D84030038B3A5 /* Settings.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";

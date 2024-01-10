@@ -22,9 +22,6 @@ struct SpeciesGroupView: View {
             }
             .navigationTitle("SpeciesGroups")
         }
-        .onAppear(){
-            viewModel.fetchData()
-        }
     }
 }
 

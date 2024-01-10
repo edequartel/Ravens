@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpeciesGroup: Codable, Identifiable {
+struct SpeciesGroup: Codable, Identifiable, Hashable {
     var id: Int
     var name: String
 }
