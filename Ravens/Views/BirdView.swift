@@ -9,12 +9,11 @@ import SwiftUI
 
 struct BirdView: View {
     @StateObject private var viewModel = BirdViewModel()
-    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
     
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     @State private var selectedRarityFilterOption: RarityFilterOption = .common
-//    @State private var selectedGroup = 460
+    //    @State private var selectedGroup = 460
     @EnvironmentObject var settings: Settings
     
     @State private var searchText = ""
@@ -31,24 +30,14 @@ struct BirdView: View {
                             Text("\(bird.scientific_name)")
                                 .italic()
                             // Additional information if needed
-//                            Text("\(bird.rarity)")
-//                            Text(bird.native ? "inheems" : "exoot")
+                            //                            Text("\(bird.rarity)")
+                            //                            Text(bird.native ? "inheems" : "exoot")
                         }
                     }
                 }
             }
             .toolbar{
                 Menu("Sort", systemImage: "arrow.up.arrow.down") {
-//                    Picker("Group:", selection: $selectedGroup) {
-//                        Text("Birds").tag(6)
-//                        Text("Algea and Weeds").tag(460)
-//                    }
-//                    .pickerStyle(.inline)
-//                    .onChange(of: selectedGroup) {
-//                        viewModel.fetchData(for: selectedGroup)
-//                    }
-                    
-                    
                     Picker("Sort by:", selection: $selectedSortOption) {
                         Text("Name").tag(SortOption.name)
                         Text("Scientific Name").tag(SortOption.scientific_name)
@@ -79,7 +68,6 @@ struct BirdView: View {
         .searchable(text: $searchText)
         .onAppear() {
             viewModel.fetchData(for: settings.selectedGroup)
-            print("---> \(settings.selectedGroup)")
         }
     }
     
@@ -93,14 +81,6 @@ struct BirdView: View {
         }
     }
     
-    
-    var getGroup: String {
-//        guard settings.selectedSpeciesGroup < speciesGroupViewModel.speciesGroups.count else {
-            return "Species" // or handle the out-of-bounds case accordingly
-//        }
-//        print("---> \(settings.selectedSpeciesGroup) \(speciesGroupViewModel.speciesGroups[settings.selectedSpeciesGroup].name)")
-//        return speciesGroupViewModel.speciesGroups[settings.selectedSpeciesGroup].name
-    }
 }
 
 

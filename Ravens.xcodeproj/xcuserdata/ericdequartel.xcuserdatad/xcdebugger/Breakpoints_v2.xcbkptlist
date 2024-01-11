@@ -52,5 +52,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ravens/Views/ObservationsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35 - b687b9947f05b90b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt; in closure #2 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt; in closure #1 () -&gt; SwiftUI.Form&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt;&gt; in Ravens.ObservationsView.body.getter : some"
+                  moduleName = "Ravens"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/ObservationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "1240">
+               </Location>
+               <Location
+                  uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35 - d52c779dbe375aa0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Ravens.Observation) -&gt; SwiftUI.VStack&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt; in closure #2 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt; in closure #1 () -&gt; SwiftUI.Form&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt;&gt; in Ravens.ObservationsView.body.getter : some"
+                  moduleName = "Ravens"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/ObservationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

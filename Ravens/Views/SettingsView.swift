@@ -19,35 +19,29 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 
-                Picker("Region", selection: $settings.selectedRegion) {
-                    ForEach(regionsViewModel.regions, id:\.id) { region in
-                        HStack() {
-                            Text("\(region.name)")
-                        }
-                    }
-                }
-                .onChange(of: settings.selectedRegion) {
-                    settings.selectedGroup = getId(region: settings.selectedRegion,groups: settings.selectedSpeciesGroup) ?? 1
-                    print("\(settings.selectedSpeciesGroup) - \(settings.selectedGroup)")
-                }
-                
-                Text("\(settings.selectedGroupString)")
+//                Picker("Region", selection: $settings.selectedRegion) {
+//                    ForEach(regionsViewModel.regions, id:\.id) { region in
+//                        HStack() {
+//                            Text("\(region.name)")
+//                        }
+//                    }
+//                }
+//                .onChange(of: settings.selectedRegion) {
+//                    settings.selectedGroup = getId(region: settings.selectedRegion,groups: settings.selectedSpeciesGroup) ?? 1
+//                    settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
+//                }
                 
                 Picker("Group", selection: $settings.selectedSpeciesGroup) {
-                    ForEach(Array(speciesGroupViewModel.speciesGroups.enumerated()), id: \.element.id) { index, speciesGroup in
+                    ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                         HStack() {
-                            Text("\(speciesGroup.id) - \(speciesGroup.name)")
+                            Text("\(speciesGroup.name)")
                         }
-                        .tag(index)
                     }
                 }
-                .onChange(of: settings.selectedSpeciesGroup) {tag in
-                    
-                    settings.selectedGroup = getId(region: settings.selectedRegion,groups: settings.selectedSpeciesGroup) ?? 1
-                    print("[\(tag)]+selectedSpeciesGroup \(settings.selectedSpeciesGroup) - selectedGroup \(settings.selectedGroup)")
-                    settings.selectedGroupString = "\(settings.selectedGroup) - \(speciesGroupViewModel.speciesGroups[tag].name)"
+                .onChange(of: settings.selectedSpeciesGroup) {
+                    settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
+                    settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                 }
-                
             }
             .navigationTitle("Settings")
         }
@@ -55,12 +49,25 @@ struct SettingsView: View {
     
     
     func getId(region: Int, groups: Int) -> Int? {
+        print("--> \(region) \(groups)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
+            print("= \(matchingItem)")
             return matchingItem.id
         }
         return nil
     }
+
+    
+    func getGroup(id: Int) -> String? {
+        if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {
+            print("= \(matchingItem)")
+            return matchingItem.name
+        }
+        return nil
+    }
+    
 }
+
 
 #Preview {
     SettingsView()

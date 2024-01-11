@@ -9,7 +9,7 @@ import Foundation
 
 struct Language: Codable {
     let count: Int
-    let next, previous: URL?
+    let next, previous: URL? //?? naar kijken
     let results: [Result]
 }
 

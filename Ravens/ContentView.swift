@@ -19,7 +19,6 @@ struct ContentView: View {
             
             // Tab 2
             MapObservationView()
-
                 .tabItem {
                     Text("Map")
                     Image(systemName: "location.fill")
@@ -27,12 +26,13 @@ struct ContentView: View {
             
             // Tab 3
 //            RegionListView()
-                        SpeciesGroupView()
+            ObservationsView()
+//            SpeciesGroupView()
                 .tabItem {
                     Text("Obs")
                     Image(systemName: "binoculars.fill")
                 }
-//        
+//
 //            
             // Tab 4
             SettingsView()
