@@ -62,7 +62,8 @@ struct BirdView: View {
                     .pickerStyle(.inline)
                 }
             }
-            .navigationTitle(settings.selectedGroupString)
+            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
+
             
         }
         .searchable(text: $searchText)

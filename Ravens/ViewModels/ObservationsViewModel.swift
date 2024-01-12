@@ -17,8 +17,8 @@ class ObservationsViewModel: ObservableObject {
     func locations()->[Location] {
         var locations = [Location]()
         
-        let max = (observations?.count ?? 0 > 99) ? 99 : (observations?.count ?? 0)
-//        let max = (observations?.count ?? 0)
+//        let max = (observations?.count ?? 0 > 99) ? 99 : (observations?.count ?? 0)
+        let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
     
             print("==>    \(observations?.count ?? 0) - \(i)")
@@ -52,6 +52,8 @@ class ObservationsViewModel: ObservableObject {
         ]
         
         let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)"
+        
+//        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=10000&species_group=19"
         
         print("\(url)")
         

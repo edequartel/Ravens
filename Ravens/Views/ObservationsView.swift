@@ -26,7 +26,7 @@ struct ObservationsView: View {
                     .onChange(of: selectedDate) { newDate in
                         // Perform your action when the date changes
                         let currentLocation = CLLocationManager().location
-                        observationsViewModel.fetchData(days: settings.days, endDate: Date(),
+                        observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
                                                         lat: currentLocation?.coordinate.latitude ?? latitude,
                                                         long: currentLocation?.coordinate.longitude ?? longitude,
                                                         radius: settings.radius)
@@ -68,7 +68,7 @@ struct ObservationsView: View {
         }
         .onAppear(){
             let currentLocation = CLLocationManager().location
-            observationsViewModel.fetchData(days: settings.days, endDate: Date(),
+            observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
                                             lat: currentLocation?.coordinate.latitude ?? latitude,
                                             long: currentLocation?.coordinate.longitude ?? longitude,
                                             radius: settings.radius)

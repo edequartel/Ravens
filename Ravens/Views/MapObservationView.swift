@@ -42,6 +42,15 @@ struct MapObservationView: View {
                 .onMapCameraChange { context in
                     print(context.region)
                 }
+                .onTapGesture { position in
+                            if let coordinate = proxy.convert(position, from: .local) {
+                                print(coordinate)
+//                                observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
+//                                                                lat: position.latitude ?? latitude,
+//                                                                long: position.longitude ?? longitude,
+//                                                                radius: settings.radius)
+                            }
+                        }
                 .mapControls() {
                     MapUserLocationButton()
                     MapPitchToggle()
