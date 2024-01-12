@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-
+import MapKit
 struct ContentView: View {
+    
     var body: some View {
         TabView {
             // Tab 1
@@ -40,6 +41,9 @@ struct ContentView: View {
                     Text("Settings")
                     Image(systemName: "gearshape.fill")
                 }
+        }
+        .onAppear() {
+            CLLocationManager().requestWhenInUseAuthorization()
         }
     }
 }

@@ -18,19 +18,6 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-                
-//                Picker("Region", selection: $settings.selectedRegion) {
-//                    ForEach(regionsViewModel.regions, id:\.id) { region in
-//                        HStack() {
-//                            Text("\(region.name)")
-//                        }
-//                    }
-//                }
-//                .onChange(of: settings.selectedRegion) {
-//                    settings.selectedGroup = getId(region: settings.selectedRegion,groups: settings.selectedSpeciesGroup) ?? 1
-//                    settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
-//                }
-                
                 Picker("Group", selection: $settings.selectedSpeciesGroup) {
                     ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                         HStack() {
@@ -42,6 +29,26 @@ struct SettingsView: View {
                     settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                     settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                 }
+                
+                
+                Picker("Days", selection: $settings.days) {
+                    ForEach(1 ... 14, id: \.self) { day in
+                        HStack() {
+                            Text("\(day)")
+                        }
+                    }
+                }
+                
+                
+//                VStack {
+//                           Text("Slider Value: \($settings.radius)")
+//                               .padding()
+//
+//                           Slider(value: $settings.radius, in: 0...100, step: 1)
+//                               .padding()
+//                               .accentColor(.blue)
+//                       }
+//                       .padding()
             }
             .navigationTitle("Settings")
         }

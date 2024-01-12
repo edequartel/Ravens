@@ -11,7 +11,11 @@ import MapKit
 struct ObservationsView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
     
+    @EnvironmentObject var settings: Settings
     @State private var selectedDate = Date()
+    
+    let longitude = 4.540332
+    let latitude = 52.459402
     
     var location = [Location]()
     
@@ -21,21 +25,39 @@ struct ObservationsView: View {
                 DatePicker("Select a Date", selection: $selectedDate, displayedComponents: [.date])
                     .onChange(of: selectedDate) { newDate in
                         // Perform your action when the date changes
-                        observationsViewModel.fetchData(days: 7, endDate: selectedDate, lat: 52.024052, long: 5.245350, radius: 500)
+                        let currentLocation = CLLocationManager().location
+                        observationsViewModel.fetchData(days: settings.days, endDate: Date(),
+                                                        lat: currentLocation?.coordinate.latitude ?? latitude,
+                                                        long: currentLocation?.coordinate.longitude ?? longitude,
+                                                        radius: settings.radius)
                     }
+                
                 Section("List") {
+                    Text("\(observationsViewModel.observations?.count ?? 0)")
+                    Text("\(observationsViewModel.observations?.results.count ?? 0)")
                     List {
                         if let observations = observationsViewModel.observations?.results {
-                            ForEach(observations.sorted(by: { $0.species_detail.name < $1.species_detail.name }), id: \.id) { result in
+                            
+                            ForEach(observations.indices, id: \.self) { index in
+                                let result = observations[index]
+
                                 VStack(alignment: .leading) {
-                                    Text("\(result.species_detail.name)")
+                                    Text("\(index + 1). \(result.species_detail.name)")
                                         .font(.subheadline)
                                     Text("User: \(result.user)")
                                         .font(.subheadline)
-                                    // Text("\(result.point.coordinates[0])")
-                                    // Text("\(result.point.coordinates[1])")
                                 }
                             }
+
+                            
+//                            ForEach(observations.sorted(by: { $0.species_detail.name < $1.species_detail.name }), id: \.id) { result in
+//                                VStack(alignment: .leading) {
+//                                    Text("\(result.species_detail.name)")
+//                                        .font(.subheadline)
+//                                    Text("User: \(result.user)")
+//                                        .font(.subheadline)
+//                                }
+//                            }
                         } else {
                             // Handle the case when observationsViewModel.observations?.results is nil
                             Text("No observations available")
@@ -45,7 +67,11 @@ struct ObservationsView: View {
             }
         }
         .onAppear(){
-            observationsViewModel.fetchData(days: 7, endDate: selectedDate, lat: 52.024052, long: 5.245350, radius: 500)
+            let currentLocation = CLLocationManager().location
+            observationsViewModel.fetchData(days: settings.days, endDate: Date(),
+                                            lat: currentLocation?.coordinate.latitude ?? latitude,
+                                            long: currentLocation?.coordinate.longitude ?? longitude,
+                                            radius: settings.radius)
         }
     }
 }

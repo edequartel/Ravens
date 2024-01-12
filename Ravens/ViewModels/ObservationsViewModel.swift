@@ -12,23 +12,37 @@ import MapKit
 class ObservationsViewModel: ObservableObject {
     @Published var observations: Observations?
     
+    
+    ///
     func locations()->[Location] {
         var locations = [Location]()
         
-        for i in 0..<(observations?.count ?? 0) {
-            let newlocation = Location(
-                name: (observations?.results[i].species_detail.name ?? "Unknown"),
-                coordinate: 
-                    CLLocationCoordinate2D(
-                        latitude: observations?.results[i].point.coordinates[i] ?? 52.024052,
-                        longitude: observations?.results[i].point.coordinates[i] ?? 5.2
-                    )
-            )
-            locations.append(newlocation)
+        let max = (observations?.count ?? 0 > 99) ? 99 : (observations?.count ?? 0)
+//        let max = (observations?.count ?? 0)
+        for i in 0 ..< max {
+    
+            print("==>    \(observations?.count ?? 0) - \(i)")
+            
+            
+            let name = observations?.results[i].species_detail.name ?? "Unknown"
+            let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
+            let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
+
+            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+
+            if newLocation != nil {
+                locations.append(newLocation)
+            } else {
+                print("Error in index or initialization")
+            }
+
+
+           
         }
         return locations
     }
-
+    
+    ///
     func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int) {
         print("fetchData ObservationsViewModel")
 
@@ -38,6 +52,8 @@ class ObservationsViewModel: ObservableObject {
         ]
         
         let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)"
+        
+        print("\(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {
@@ -49,6 +65,7 @@ class ObservationsViewModel: ObservableObject {
                 print("Error: \(error)")
             }
         }
+        
     }
     
     func formatCurrentDate(value: Date) -> String {

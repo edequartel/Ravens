@@ -13,5 +13,9 @@ class Settings: ObservableObject {
     @AppStorage("selectedRegion") var selectedRegion = 20
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
+    
+    @AppStorage("days") var days = 5
+    @AppStorage("radius") var radius = 500
+    
 //    @AppStorage("fontSize") var fontSize: Double = 16.0
 }

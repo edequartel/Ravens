@@ -13,7 +13,7 @@ struct BirdView: View {
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     @State private var selectedRarityFilterOption: RarityFilterOption = .common
-    //    @State private var selectedGroup = 460
+
     @EnvironmentObject var settings: Settings
     
     @State private var searchText = ""
