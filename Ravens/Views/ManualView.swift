@@ -43,7 +43,7 @@ struct ManualView: View {
       - Deze app maakt gebruik van de data die vrij wordt gegeven door [www.waarneming.nl](https://www.waarneming.nl).
       - Er is geen inlogcode of inlognaam nodig om de app te gebruiken. De maakt daarom ook geen inbreuk op je privacy.
       
-      Deze app heb is gemaakt om het struinen in de natuur nog leuker te maken. De app is gratis. Heb je een opmerkingen om de app beter te maken mail me dan (edequartel@protonmail).
+      Deze app heb is gemaakt om het struinen in de natuur nog leuker te maken. De app is gratis. Heb je een opmerkingen om de app beter te maken mail me dan ga dan naar [gitHub](https://edequartel.github.io/Ravens/)
 
       Met de *Ravens* app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
 
