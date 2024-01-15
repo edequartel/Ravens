@@ -14,6 +14,7 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   
 //    @State private var position = MapCameraPosition.region(
 //        MKCoordinateRegion(
@@ -26,10 +27,6 @@ struct MapObservationView: View {
         VStack {
             MapReader { proxy in
                 Map(position: $position) {
-                    
-//                    MapCircle(center: .position, radius: CLLocationDistance(250))
-//                    Marker("Me", systemImage: "mappin", coordinate: coordinate)
-                    
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
                             Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
@@ -40,10 +37,20 @@ struct MapObservationView: View {
                     
                     ForEach(observationsViewModel.locations) { location in
                         Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
-                            .tint(.green)
+                            .tint(Color(myColor(value: location.rarity)))
                     }
+                    
+                    
+                    let loco = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let rad = settings.radius
+                    
+                    MapCircle(center: circlePos, radius: CLLocationDistance(rad))
+                        .foregroundStyle(.clear.opacity(100))
+                        .stroke(.white, lineWidth: 1)
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
+                
+                
 //                .onMapCameraChange { context in
 //                    print(context.region)
 //                }
@@ -58,7 +65,9 @@ struct MapObservationView: View {
                                                                 species_group: settings.selectedGroupId)
                                 
                                 // Create a new CLLocation instance with the updated coordinates
+                                
                                 let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                                circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                 // Update currentLocation with the new CLLocation instance
                                 settings.currentLocation = newLocation
                             }
@@ -101,6 +110,15 @@ struct MapObservationView: View {
     }
 }
 
-#Preview {
-    MapObservationView()
+struct MapObservationView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Creating dummy data for preview
+        let observationsViewModel = ObservationsViewModel()
+        let settings = Settings()
+
+        // Setting up the environment objects for the preview
+        MapObservationView()
+            .environmentObject(observationsViewModel)
+            .environmentObject(settings)
+    }
 }

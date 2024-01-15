@@ -17,26 +17,38 @@ struct ObservationsView: View {
             Form {
                 Section("Details") {
                     HStack {
-                        Text("Obs:\(observationsViewModel.observations?.count ?? 0)")
+                        Text("Total \(observationsViewModel.observations?.results.count ?? 0) /")
+                        Text("Shown \(observationsViewModel.observations?.count ?? 0)")
                         Spacer()
-                        Text("Shown:\(observationsViewModel.observations?.results.count ?? 0)")
                     }
                 }
                 
                 Section("List") {
                     List {
-                        if let observations = observationsViewModel.observations?.results {
+                        if let results = observationsViewModel.observations?.results {
                             
-                            ForEach(observations.indices, id: \.self) { index in
-                                let result = observations[index]
-
+                            ForEach(results.sorted(by: {$0.rarity > $1.rarity} ), id: \.id) { result in
                                 VStack(alignment: .leading) {
-                                    Text("\(index + 1). \(result.species_detail.name)")
-                                        .font(.subheadline)
-                                    Text("User: \(result.user)")
-                                        .font(.subheadline)
+                                    HStack {
+                                        Image(systemName: "circle.fill")
+                                            .foregroundColor(Color(myColor(value: result.rarity)))
+                                        
+                                        Text("\(result.species_detail.name)")
+                                            .font(.subheadline)
+                                        
+                                        Spacer()
+                                        Text("\(result.user)")
+                                            .font(.subheadline)
+                                    }
+                                }
+                                .onTapGesture {
+                                    if let url = URL(string: result.permalink) {
+                                        UIApplication.shared.open(url)
+                                    }
                                 }
                             }
+                            
+                            
                         } else {
                             // Handle the case when observationsViewModel.observations?.results is nil
                             Text("No observations available")
@@ -49,7 +61,7 @@ struct ObservationsView: View {
             print("radius \(settings.radius)")
             print("days \(settings.days)")
             // Get the current locations of all the observations
-//            settings.currentLocation = CLLocationManager().location
+            //            settings.currentLocation = CLLocationManager().location
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,
@@ -59,6 +71,16 @@ struct ObservationsView: View {
     }
 }
 
-#Preview {
-    ObservationsView()
+struct ObservationsView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Creating dummy data for preview
+        let observationsViewModel = ObservationsViewModel()
+        let settings = Settings()
+        
+        // Setting up the environment objects for the preview
+        ObservationsView()
+            .environmentObject(observationsViewModel)
+            .environmentObject(settings)
+    }
 }
+

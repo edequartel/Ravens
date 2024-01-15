@@ -88,7 +88,13 @@ struct SettingsView: View {
     
 }
 
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Creating dummy data for preview
+        let settings = Settings()
 
-#Preview {
-    SettingsView()
+        // Setting up the environment objects for the preview
+        SettingsView()
+            .environmentObject(settings)
+    }
 }

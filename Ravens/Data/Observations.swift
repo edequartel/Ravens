@@ -6,7 +6,6 @@
 //
 
 import Foundation
-/*import*/ /*OptionallyDecodable*/ // https://github.com/idrougge/OptionallyDecodable
 
 // MARK: - Observation
 struct Observations: Codable {
@@ -16,42 +15,43 @@ struct Observations: Codable {
 }
 
 struct Observation: Codable, Identifiable {
-    let id: Int
-    let permalink: String
-    let date: String
-    let time: String?
-    let species_detail: SpeciesDetail
-    let number: Int
-    let sex: String
-    let activity: Int
-    let life_stage: Int
-    let method: Int
-    let has_photo: Bool
-    let has_sound: Bool
-    let point: Point
-    let location_detail: LocationDetail
-    let rarity: Int
-    let is_certain: Bool
-    let is_escape: Bool
-    let validation_status: String
-    let user: Int
+    var id: Int = 0
+    var permalink: String = ""
+    var date: String = ""
+    var time: String? = "11:00"
+    var species_detail: SpeciesDetail
+    var number: Int = 0
+    var sex: String = ""
+    var activity: Int = 0
+    var life_stage: Int = 0
+    var method: Int = 0
+    var has_photo: Bool = true
+    var has_sound: Bool = true
+    var point: Point
+    var location_detail: LocationDetail
+    var rarity: Int = 0
+    var is_certain: Bool = true
+    var is_escape: Bool = true
+    var validation_status: String = ""
+    var user: Int = 0
+    
 }
 
 struct SpeciesDetail: Codable {
-    let id: Int
-    let scientific_name: String
-    let name: String
-    let group: Int
+    var id: Int = 0
+    var scientific_name: String = ""
+    var name: String = ""
+    var group: Int = 0
 }
 
 struct Point: Codable {
-    let type: String
-    let coordinates: [Double]
+    var type: String = ""
+    var coordinates: [Double] = [0]
 }
 
 struct LocationDetail: Codable {
-    let id: Int
-    let name: String
-    let country_code: String
-    let permalink: String
+    var id: Int = 0
+    var name: String = ""
+    var country_code: String = ""
+    var permalink: String = ""
 }

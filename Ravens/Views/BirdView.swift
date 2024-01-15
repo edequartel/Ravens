@@ -103,7 +103,23 @@ enum RarityFilterOption: Int {
     case uncommon = 2
     case rare = 3
     case veryrare = 4
+    
+    var shape: some ShapeStyle {
+        switch self {
+        case .all:
+            return Color(UIColor.systemGray)
+        case .common:
+            return Color(UIColor.systemGreen)
+        case .uncommon:
+            return Color(UIColor.systemBlue)
+        case .rare:
+            return Color(UIColor.systemOrange)
+        case .veryrare:
+            return Color(UIColor.systemRed)
+        }
+    }
 }
+
 
 extension BirdViewModel {
     func sortedBirds(by sortOption: SortOption) -> [Bird] {
@@ -165,6 +181,15 @@ extension BirdViewModel {
     }
 }
 
-#Preview {
-    BirdView()
+struct BirdView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Creating dummy data for preview
+        let observationsViewModel = ObservationsViewModel()
+        let settings = Settings() 
+
+        // Setting up the environment objects for the preview
+        BirdView()
+            .environmentObject(observationsViewModel)
+            .environmentObject(settings)
+    }
 }
