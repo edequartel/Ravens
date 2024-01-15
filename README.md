@@ -30,10 +30,16 @@ De **Ravens** app biedt gebruikers de mogelijkheid om **waarnemingen** te zien i
 ## Belangrijk om te weten
 - Deze app maakt gebruik van de data die vrij wordt gegeven door [www.waarneming.nl](https://www.waarneming.nl).
 - Er is geen inlogcode of inlognaam nodig om de app te gebruiken. De maakt daarom ook geen inbreuk op je privacy.
+- Deze app kun je gebruiken op een iPhone met ios 17.
       
 Deze app heb is gemaakt om het struinen in de natuur nog leuker te maken. De app is gratis. Heb je een opmerkingen om de app beter te maken mail me dan (edequartel@protonmail).
 
 Met de *Ravens* app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
+
+## TestFlight
+Scan de QRCode en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan uitleg hoe je de app moet installeren.
+
+![QR](./images/QRCodeTestFlight.png)
 
 [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 
