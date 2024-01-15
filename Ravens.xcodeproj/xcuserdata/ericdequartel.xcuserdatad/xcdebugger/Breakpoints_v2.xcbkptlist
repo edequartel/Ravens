@@ -55,47 +55,110 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35"
+            uuid = "19A681D2-00CE-47E7-9213-CCD1C5F97FEA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ravens/Views/ObservationsView.swift"
+            filePath = "Ravens/ViewModels/ObservationsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "getLocations()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "19A681D2-00CE-47E7-9213-CCD1C5F97FEA - 5e6dc44f1e420f54"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ravens.ObservationsViewModel.thelocations() -&gt; ()"
+                  moduleName = "Ravens"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/ViewModels/ObservationsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "844">
+               </Location>
+               <Location
+                  uuid = "19A681D2-00CE-47E7-9213-CCD1C5F97FEA - 1b846e3679185d37"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ravens.ObservationsViewModel.getLocations() -&gt; ()"
+                  moduleName = "Ravens"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/ViewModels/ObservationsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "1036">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19DA305E-AB59-4013-8919-E50E007E8823"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ravens/Views/MapObservationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35 - b687b9947f05b90b"
+                  uuid = "19DA305E-AB59-4013-8919-E50E007E8823 - abfd606fd29f9493"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt; in closure #2 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt; in closure #1 () -&gt; SwiftUI.Form&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt;&gt; in Ravens.ObservationsView.body.getter : some"
+                  symbolName = "closure #1 () -&gt; _MapKit_SwiftUI.TupleMapContent&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Location&gt;, Foundation.UUID, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Location&gt;, Foundation.UUID, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 (_MapKit_SwiftUI.MapProxy) -&gt; &lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(_MapKit_SwiftUI.MapReader&lt;&lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Ravens.MapObservationView.body.getter : some"
                   moduleName = "Ravens"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/ObservationsView.swift"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/MapObservationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "1240">
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "676">
                </Location>
                <Location
-                  uuid = "100C0838-B3AC-4C61-9ED2-2A9FD30A4A35 - d52c779dbe375aa0"
+                  uuid = "19DA305E-AB59-4013-8919-E50E007E8823 - ed05b6582f31e340"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Ravens.Observation) -&gt; SwiftUI.VStack&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt; in closure #2 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt; in closure #1 () -&gt; SwiftUI.Form&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.List&lt;Swift.Never, SwiftUI._ConditionalContent&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Observation&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt;, SwiftUI.Text&gt;&gt;, SwiftUI.EmptyView&gt;)&gt;&gt; in Ravens.ObservationsView.body.getter : some"
+                  symbolName = "closure #2 (Ravens.Location) -&gt; &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; _MapKit_SwiftUI.TupleMapContent&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Location&gt;, Foundation.UUID, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Location&gt;, Foundation.UUID, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 (_MapKit_SwiftUI.MapProxy) -&gt; &lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(_MapKit_SwiftUI.MapReader&lt;&lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Ravens.MapObservationView.body.getter : some"
                   moduleName = "Ravens"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/ObservationsView.swift"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/MapObservationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "72">
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "19DA305E-AB59-4013-8919-E50E007E8823 - 3272f9a2688f8e2f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.Location&gt;, Foundation.UUID, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 (_MapKit_SwiftUI.MapProxy) -&gt; &lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(_MapKit_SwiftUI.MapReader&lt;&lt;&lt;opaque return type of SwiftUI.View.mapControls&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(() -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Ravens.MapObservationView.body.getter : some"
+                  moduleName = "Ravens"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/MapObservationView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "580">
                </Location>
             </Locations>
          </BreakpointContent>

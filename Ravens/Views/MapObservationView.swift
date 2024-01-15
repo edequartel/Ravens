@@ -8,73 +8,95 @@
 import SwiftUI
 import MapKit
 
-struct Location: Identifiable {
-    let id = UUID()
-    var name: String
-    var coordinate: CLLocationCoordinate2D
-}
 
 struct MapObservationView: View {
-    @StateObject private var observationsViewModel = ObservationsViewModel()
-    
-    @State private var selectedDate = Date()
+    @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-    
-//    let longitude = 4.606014
-//    let latitude = 52.456955
-    
-    let longitude = 4.540332
-    let latitude = 52.459402
-    
+  
+//    @State private var position = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: 52.023861, longitude: 5.243376),
+//            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//        )
+//    )
     
     var body: some View {
         VStack {
             MapReader { proxy in
                 Map(position: $position) {
-                    ForEach(observationsViewModel.locations()) { location in
+                    
+//                    MapCircle(center: .position, radius: CLLocationDistance(250))
+//                    Marker("Me", systemImage: "mappin", coordinate: coordinate)
+                    
+                    if (settings.poiOn) {
+                        ForEach(observationsViewModel.poiLocations) { location in
+                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
+                                .tint(.blue)
+                        }
+                    }
+                    
+                    
+                    ForEach(observationsViewModel.locations) { location in
                         Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
                             .tint(.green)
                     }
                 }
-                .mapStyle(.imagery(elevation: .realistic))
-                .onMapCameraChange { context in
-                    print(context.region)
-                }
+                .mapStyle(.hybrid(elevation: .realistic))
+//                .onMapCameraChange { context in
+//                    print(context.region)
+//                }
+                
+                
                 .onTapGesture { position in
                             if let coordinate = proxy.convert(position, from: .local) {
-                                print(coordinate)
-//                                observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
-//                                                                lat: position.latitude ?? latitude,
-//                                                                long: position.longitude ?? longitude,
-//                                                                radius: settings.radius)
+                                observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                                                lat: coordinate.latitude,
+                                                                long: coordinate.longitude,
+                                                                radius: settings.radius,
+                                                                species_group: settings.selectedGroupId)
+                                
+                                // Create a new CLLocation instance with the updated coordinates
+                                let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                                // Update currentLocation with the new CLLocation instance
+                                settings.currentLocation = newLocation
                             }
                         }
+                
                 .mapControls() {
                     MapUserLocationButton()
                     MapPitchToggle()
                 }
             }
             
-            DatePicker("Select a Date", selection: $selectedDate, displayedComponents: [.date])
-                .onChange(of: selectedDate) { newDate in
-                    // Perform your action when the date changes
-                    let currentLocation = CLLocationManager().location
-                    observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
-                                                    lat: currentLocation?.coordinate.latitude ?? latitude,
-                                                    long: currentLocation?.coordinate.longitude ?? longitude,
-                                                    radius: settings.radius)
-                }
-                .padding()
+            HStack {
+                Text("\(settings.selectedGroupString)")
+                    .lineLimit(1) 
+                    .truncationMode(.tail)
+                Spacer()
+                DatePicker("", selection: $settings.selectedDate, displayedComponents: [.date])
+                    .onChange(of: settings.selectedDate) {
+                        // Perform your action when the date changes
+                        observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                                        lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                                        long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                                        radius: settings.radius,
+                                                        species_group: settings.selectedGroupId)
+                    }
+            }
+            .padding()
+                
         }
         .onAppear(){
-            let currentLocation = CLLocationManager().location
-            observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
-                                            lat: currentLocation?.coordinate.latitude ?? latitude,
-                                            long: currentLocation?.coordinate.longitude ?? longitude,
-                                            radius: settings.radius)
-//            observationsViewModel.fetchData(days: 14, endDate: Date()+14, lat: 52.024052, long: 5.245350, radius: 1500)
+            print("radius \(settings.radius)")
+            print("days \(settings.days)")
+            // Get the current locations of all the observations
+            observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                            radius: settings.radius,
+                                            species_group: settings.selectedGroupId)
         }
     }
 }

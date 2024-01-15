@@ -9,32 +9,21 @@ import SwiftUI
 import MapKit
 
 struct ObservationsView: View {
-    @StateObject private var observationsViewModel = ObservationsViewModel()
-    
+    @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
-    @State private var selectedDate = Date()
-    
-    let longitude = 4.540332
-    let latitude = 52.459402
-    
-    var location = [Location]()
     
     var body: some View {
         NavigationStack {
             Form {
-                DatePicker("Select a Date", selection: $selectedDate, displayedComponents: [.date])
-                    .onChange(of: selectedDate) { newDate in
-                        // Perform your action when the date changes
-                        let currentLocation = CLLocationManager().location
-                        observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
-                                                        lat: currentLocation?.coordinate.latitude ?? latitude,
-                                                        long: currentLocation?.coordinate.longitude ?? longitude,
-                                                        radius: settings.radius)
+                Section("Details") {
+                    HStack {
+                        Text("Obs:\(observationsViewModel.observations?.count ?? 0)")
+                        Spacer()
+                        Text("Shown:\(observationsViewModel.observations?.results.count ?? 0)")
                     }
+                }
                 
                 Section("List") {
-                    Text("\(observationsViewModel.observations?.count ?? 0)")
-                    Text("\(observationsViewModel.observations?.results.count ?? 0)")
                     List {
                         if let observations = observationsViewModel.observations?.results {
                             
@@ -48,16 +37,6 @@ struct ObservationsView: View {
                                         .font(.subheadline)
                                 }
                             }
-
-                            
-//                            ForEach(observations.sorted(by: { $0.species_detail.name < $1.species_detail.name }), id: \.id) { result in
-//                                VStack(alignment: .leading) {
-//                                    Text("\(result.species_detail.name)")
-//                                        .font(.subheadline)
-//                                    Text("User: \(result.user)")
-//                                        .font(.subheadline)
-//                                }
-//                            }
                         } else {
                             // Handle the case when observationsViewModel.observations?.results is nil
                             Text("No observations available")
@@ -67,11 +46,15 @@ struct ObservationsView: View {
             }
         }
         .onAppear(){
-            let currentLocation = CLLocationManager().location
-            observationsViewModel.fetchData(days: settings.days, endDate: selectedDate,
-                                            lat: currentLocation?.coordinate.latitude ?? latitude,
-                                            long: currentLocation?.coordinate.longitude ?? longitude,
-                                            radius: settings.radius)
+            print("radius \(settings.radius)")
+            print("days \(settings.days)")
+            // Get the current locations of all the observations
+//            settings.currentLocation = CLLocationManager().location
+            observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                            radius: settings.radius,
+                                            species_group: settings.selectedGroupId)
         }
     }
 }

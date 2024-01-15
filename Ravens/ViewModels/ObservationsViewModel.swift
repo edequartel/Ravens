@@ -9,41 +9,52 @@ import Foundation
 import Alamofire
 import MapKit
 
+struct Location: Identifiable {
+    let id = UUID()
+    var name: String
+    var coordinate: CLLocationCoordinate2D
+    var rarity: Int
+}
+
 class ObservationsViewModel: ObservableObject {
     @Published var observations: Observations?
-    
+    var locations = [Location]()
+    var poiLocations = [Location]()
     
     ///
-    func locations()->[Location] {
-        var locations = [Location]()
+    func getLocations() {
+        locations.removeAll()
         
-//        let max = (observations?.count ?? 0 > 99) ? 99 : (observations?.count ?? 0)
         let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
-    
-            print("==>    \(observations?.count ?? 0) - \(i)")
-            
-            
-            let name = observations?.results[i].species_detail.name ?? "Unknown"
+ 
+            let name = observations?.results[i].species_detail.name ?? "Unknown name"
             let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
             let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
+            let rarity = observations?.results[i].rarity ?? 1
 
-            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity)
 
-            if newLocation != nil {
-                locations.append(newLocation)
-            } else {
-                print("Error in index or initialization")
-            }
+            locations.append(newLocation)
 
-
-           
         }
-        return locations
+    }
+   
+    func getPoiLocations() {
+        poiLocations.removeAll()
+        var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0)
+        poiLocations.append(newLocation)
+        newLocation = Location(name: "Werkhoven", coordinate: CLLocationCoordinate2D(latitude: 52.023861, longitude: 5.243376), rarity: 0)
+        poiLocations.append(newLocation)
+        newLocation = Location(name: "Oostvaardersplassen", coordinate: CLLocationCoordinate2D(latitude: 52.452926, longitude: 5.357325), rarity: 0)
+        poiLocations.append(newLocation)
+        newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0)
+        poiLocations.append(newLocation)
+
     }
     
     ///
-    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int) {
+    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int) {
         print("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
@@ -51,9 +62,7 @@ class ObservationsViewModel: ObservableObject {
             "Accept-Language": "nl"
         ]
         
-        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)"
-        
-//        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=10000&species_group=19"
+        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)"
         
         print("\(url)")
         
@@ -62,19 +71,14 @@ class ObservationsViewModel: ObservableObject {
             case .success(let observations):
                 DispatchQueue.main.async {
                     self.observations = observations
+                    self.getLocations()
+                    self.getPoiLocations()
+                    print("api locations count \(self.locations.count)")
                 }
             case .failure(let error):
                 print("Error: \(error)")
             }
         }
         
-    }
-    
-    func formatCurrentDate(value: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let currentDate = value
-        return dateFormatter.string(from: currentDate)
     }
 }

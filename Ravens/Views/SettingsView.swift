@@ -14,41 +14,54 @@ struct SettingsView: View {
     
     @EnvironmentObject var settings: Settings
     
+    let minimumRadius = 500.0
+    let maximumRadius = 5000.0
+    let step = 500.0
+    
     var body: some View {
         
         NavigationStack {
             Form {
-                Picker("Group", selection: $settings.selectedSpeciesGroup) {
-                    ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-                        HStack() {
+                Section("Species") {
+                    Picker("Group", selection: $settings.selectedSpeciesGroup) {
+                        ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                             Text("\(speciesGroup.name)")
+                                .lineLimit(1) 
+                                .truncationMode(.tail)
                         }
                     }
-                }
-                .onChange(of: settings.selectedSpeciesGroup) {
-                    settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
-                    settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
-                }
-                
-                
-                Picker("Days", selection: $settings.days) {
-                    ForEach(1 ... 14, id: \.self) { day in
-                        HStack() {
-                            Text("\(day)")
-                        }
+                    .onChange(of: settings.selectedSpeciesGroup) {
+                        settings.selectedGroupId = settings.selectedSpeciesGroup
+                        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
+                        settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                     }
                 }
                 
-                
-//                VStack {
-//                           Text("Slider Value: \($settings.radius)")
-//                               .padding()
-//
-//                           Slider(value: $settings.radius, in: 0...100, step: 1)
-//                               .padding()
-//                               .accentColor(.blue)
-//                       }
-//                       .padding()
+                Section("Map") {
+                    Toggle("Points of interests", isOn: $settings.poiOn)
+
+                    Picker("Days", selection: $settings.days) {
+                        ForEach(1 ... 14, id: \.self) { day in
+                            HStack() {
+                                Text("\(day)")
+                            }
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Radius")
+                        Spacer()
+                        Text("\(Int(settings.radius)) m")
+                    }
+                    
+                    Slider(value: Binding(get: {
+                        Double(settings.radius)
+                    }, set: {
+                        settings.radius = Int($0)
+                    }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
+                    .padding()
+                    
+                }
             }
             .navigationTitle("Settings")
         }
@@ -63,7 +76,7 @@ struct SettingsView: View {
         }
         return nil
     }
-
+    
     
     func getGroup(id: Int) -> String? {
         if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {

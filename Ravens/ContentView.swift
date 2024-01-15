@@ -8,33 +8,34 @@
 import SwiftUI
 import MapKit
 struct ContentView: View {
+    @StateObject private var observationsViewModel = ObservationsViewModel()
     
     var body: some View {
         TabView {
             // Tab 1
+            MapObservationView()
+                .environmentObject(observationsViewModel)
+                .tabItem {
+                    Text("Map")
+                    Image(systemName: "location.fill")
+                }
+            
+            // Tab 2
+            ObservationsView()
+                .environmentObject(observationsViewModel)
+                .tabItem {
+                    Text("Obs")
+                    Image(systemName: "binoculars.fill")
+                }
+            
+            // Tab 3
             BirdView()
                 .tabItem {
                     Text("Species")
                     Image(systemName: "tree.fill")
                 }
             
-            // Tab 2
-            MapObservationView()
-                .tabItem {
-                    Text("Map")
-                    Image(systemName: "location.fill")
-                }
-            
-            // Tab 3
-//            RegionListView()
-            ObservationsView()
-//            SpeciesGroupView()
-                .tabItem {
-                    Text("Obs")
-                    Image(systemName: "binoculars.fill")
-                }
-//
-//            
+
             // Tab 4
             SettingsView()
                 .tabItem {
