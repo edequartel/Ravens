@@ -2,6 +2,10 @@
 
 De **Ravens** app biedt gebruikers de mogelijkheid om **waarnemingen** te zien in zowel op een kaart als in een lijst. Deze app haalt de meest recente informatie van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. Hieronder volgt een uitleg over hoe je de app kunt gebruiken en instellen.
 
+![map](./images/nl.png)
+![map](./images/map.png)
+![map](./images/list.png)
+
 ### Weergave van waarnemingen
 - De app toont waarnemingen in zowel een kaart als in een lijst.
 - Door op de kaart een locatie aan te tikken zie je in een straal de waarneming die in dit gebied voor de gekozen periode zijn gemeld.
@@ -30,3 +34,6 @@ De **Ravens** app biedt gebruikers de mogelijkheid om **waarnemingen** te zien i
 Deze app heb is gemaakt om het struinen in de natuur nog leuker te maken. De app is gratis. Heb je een opmerkingen om de app beter te maken mail me dan (edequartel@protonmail).
 
 Met de *Ravens* app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
+
+[Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
+

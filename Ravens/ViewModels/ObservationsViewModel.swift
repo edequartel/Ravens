@@ -50,6 +50,20 @@ class ObservationsViewModel: ObservableObject {
         poiLocations.append(newLocation)
         newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0)
         poiLocations.append(newLocation)
+        newLocation = Location(name: "Mokbaai", coordinate: CLLocationCoordinate2D(latitude: 53.005861, longitude: 4.762873), rarity: 0)
+        poiLocations.append(newLocation)
+        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
+        poiLocations.append(newLocation)
+        newLocation = Location(name: "Lauwersoog", coordinate: CLLocationCoordinate2D(latitude: 53.381690, longitude: 6.188163), rarity: 0)
+        poiLocations.append(newLocation)
+        
+//        newLocation = Location(name: "De Kraaijenbergse Plassen", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
+//        poiLocations.append(newLocation)
+//        
+//        newLocation = Location(name: "De groen Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
+//        poiLocations.append(newLocation)
+        
+        
 
     }
     

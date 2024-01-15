@@ -27,7 +27,7 @@ struct SpeciesDetailsView: View {
                         AsyncImage(url: imageUrl) { image in
                             image.resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 200, height: 200)
+                                .frame(width: 300, height: 300)
                         } placeholder: {
                             ProgressView()
                         }

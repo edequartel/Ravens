@@ -16,13 +16,6 @@ struct MapObservationView: View {
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   
-//    @State private var position = MapCameraPosition.region(
-//        MKCoordinateRegion(
-//            center: CLLocationCoordinate2D(latitude: 52.023861, longitude: 5.243376),
-//            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//        )
-//    )
-    
     var body: some View {
         VStack {
             MapReader { proxy in
@@ -34,26 +27,17 @@ struct MapObservationView: View {
                         }
                     }
                     
-                    
                     ForEach(observationsViewModel.locations) { location in
                         Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
                             .tint(Color(myColor(value: location.rarity)))
                     }
                     
-                    
-                    let loco = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    let rad = settings.radius
-                    
-                    MapCircle(center: circlePos, radius: CLLocationDistance(rad))
+                    MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(.white, lineWidth: 1)
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
                 
-                
-//                .onMapCameraChange { context in
-//                    print(context.region)
-//                }
                 
                 
                 .onTapGesture { position in
@@ -65,7 +49,6 @@ struct MapObservationView: View {
                                                                 species_group: settings.selectedGroupId)
                                 
                                 // Create a new CLLocation instance with the updated coordinates
-                                
                                 let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                 circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                                 // Update currentLocation with the new CLLocation instance

@@ -37,8 +37,15 @@ struct ObservationsView: View {
                                             .font(.subheadline)
                                         
                                         Spacer()
-                                        Text("\(result.user)")
-                                            .font(.subheadline)
+                                        HStack {
+                                            Image(systemName: result.has_sound ? "speaker.fill" : "")
+                                            Image(systemName: result.has_photo ? "photo" : "")
+                                        }
+                                            
+                                        
+//                                        Spacer()
+//                                        Text("usr:\(result.user)")
+//                                            .font(.subheadline)
                                     }
                                 }
                                 .onTapGesture {
