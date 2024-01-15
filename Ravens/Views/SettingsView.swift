@@ -64,6 +64,13 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: ManualView()) {
+                        Label("Manual", systemImage: "info.circle")
+                    }
+                }
+            }
         }
     }
     
