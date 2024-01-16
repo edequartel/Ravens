@@ -32,3 +32,13 @@ func myColor(value: Int) -> Color {
         return .clear //You can provide a default color or handle other cases as needed
     }
 }
+
+extension String {
+    func localized() -> String {
+        return NSLocalizedString(self,
+                                 tableName: "Localizable",
+                                 bundle: .main,
+                                 value: self,
+                                 comment: self)
+    }
+}

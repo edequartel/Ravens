@@ -16,7 +16,7 @@ struct ContentView: View {
             MapObservationView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
-                    Text("Map")
+                    Text("map".localized())
                     Image(systemName: "location.fill")
                 }
             
@@ -24,14 +24,14 @@ struct ContentView: View {
             ObservationsView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
-                    Text("Obs")
+                    Text("obs".localized())
                     Image(systemName: "binoculars.fill")
                 }
             
             // Tab 3
             BirdView()
                 .tabItem {
-                    Text("Species")
+                    Text("species".localized())
                     Image(systemName: "tree.fill")
                 }
             
@@ -39,7 +39,7 @@ struct ContentView: View {
             // Tab 4
             SettingsView()
                 .tabItem {
-                    Text("Settings")
+                    Text("settings".localized())
                     Image(systemName: "gearshape.fill")
                 }
         }

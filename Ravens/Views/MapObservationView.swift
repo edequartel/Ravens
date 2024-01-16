@@ -81,8 +81,16 @@ struct MapObservationView: View {
                 
         }
         .onAppear(){
-            print("radius \(settings.radius)")
-            print("days \(settings.days)")
+            print("radius".localized()+"\(settings.radius)")
+            print("days".localized()+"\(settings.days)")
+            
+            
+            settings.currentLocation = position
+            
+            
+            
+            
+            
             // Get the current locations of all the observations
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,

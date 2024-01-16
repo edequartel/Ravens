@@ -15,13 +15,13 @@ struct RegionListView: View {
             List {
                 ForEach(viewModel.regionLists, id:\.id) { region in
                     VStack(alignment: .leading) {
-                        Text("id \(region.id)")
-                        Text("region \(region.region)")
-                        Text("group \(region.species_group)")
+                        Text("id".localized() + "\(region.id)")
+                        Text("region".localized() + "\(region.region)")
+                        Text("group".localized() + "\(region.species_group)")
                     }
                 }
             }
-            .navigationTitle("Region-Lists")
+            .navigationTitle("regionlists".localized())
         }
     }
 }

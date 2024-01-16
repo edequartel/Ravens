@@ -49,9 +49,9 @@ struct SpeciesDetailsView: View {
                     
 
                     
-                    Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
+                    Link("moreatwaarnemingnl".localized(), destination: URL(string: species.permalink)!)
                 } else {
-                    Text("Loading...")
+                    Text("loading".localized())
                 }
             }
         }

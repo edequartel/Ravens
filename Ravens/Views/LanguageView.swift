@@ -16,17 +16,17 @@ struct LanguageView: View {
                 if let language = viewModel.language {
                     ForEach(language.results, id: \.code) { result in
                         VStack(alignment: .leading) {
-                            Text("Code: \(result.code)")
-                            Text("English: \(result.name_en)")
-                            Text("Native: \(result.name_native)")
+                            Text("code".localized()+"\(result.code)")
+                            Text("english".localized()+"\(result.name_en)")
+                            Text("native".localized()+"\(result.name_native)")
                         }
                     }
                 } else {
-                    Text("Language data is nil.")
+                    Text("languagedataisnil".localized())
                 }
                 
             }
-            .navigationBarTitle("Languages")
+            .navigationBarTitle("languages".localized())
         }
     }
 }

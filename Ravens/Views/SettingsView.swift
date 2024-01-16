@@ -22,8 +22,8 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-                Section("Species") {
-                    Picker("Group", selection: $settings.selectedSpeciesGroup) {
+                Section("species".localized()) {
+                    Picker("group".localized(), selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                             Text("\(speciesGroup.name)")
                                 .lineLimit(1) 
@@ -33,14 +33,14 @@ struct SettingsView: View {
                     .onChange(of: settings.selectedSpeciesGroup) {
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
-                        settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
+                        settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown".localized()
                     }
                 }
                 
-                Section("Map") {
-                    Toggle("Points of interests", isOn: $settings.poiOn)
+                Section("map".localized()) {
+                    Toggle("poi".localized(), isOn: $settings.poiOn)
 
-                    Picker("Days", selection: $settings.days) {
+                    Picker("days".localized(), selection: $settings.days) {
                         ForEach(1 ... 14, id: \.self) { day in
                             HStack() {
                                 Text("\(day)")
@@ -49,7 +49,7 @@ struct SettingsView: View {
                     }
                     
                     HStack {
-                        Text("Radius")
+                        Text("radius".localized())
                         Spacer()
                         Text("\(Int(settings.radius)) m")
                     }
@@ -63,11 +63,11 @@ struct SettingsView: View {
                     
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("settings".localized())
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: ManualView()) {
-                        Label("Manual", systemImage: "info.circle")
+                        Label("manual".localized(), systemImage: "info.circle")
                     }
                 }
             }
