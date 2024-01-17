@@ -11,7 +11,7 @@ struct ObservationDetailsView: View {
     var link: String // Add link as a property
 
     var body: some View {
-        Text("space for observation \(link)")
+        Text("\(link)")
     }
     
 }
@@ -20,6 +20,6 @@ struct ObservationDetailsView_Previews: PreviewProvider {
     static var previews: some View {
 
         // Binding the dummy observation for the preview
-        ObservationDetailsView(link: "test")
+        ObservationDetailsView(link: "")
     }
 }

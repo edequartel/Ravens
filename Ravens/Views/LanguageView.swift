@@ -16,9 +16,9 @@ struct LanguageView: View {
                 if let language = viewModel.language {
                     ForEach(language.results, id: \.code) { result in
                         VStack(alignment: .leading) {
-                            Text("code \(result.code)")
-                            Text("english \(result.name_en)")
-                            Text("native \(result.name_native)")
+                            Text("Code \(result.code)")
+                            Text("English \(result.name_en)")
+                            Text("Native \(result.name_native)")
                         }
                     }
                 } else {
@@ -26,7 +26,7 @@ struct LanguageView: View {
                 }
                 
             }
-            .navigationBarTitle("languages")
+            .navigationBarTitle("Languages")
         }
     }
 }

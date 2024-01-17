@@ -22,8 +22,8 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-                Section("species") {
-                    Picker("group", selection: $settings.selectedSpeciesGroup) {
+                Section("Species") {
+                    Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                             Text("\(speciesGroup.name)")
                                 .lineLimit(1) 
@@ -37,10 +37,10 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("map") {
-                    Toggle("poi", isOn: $settings.poiOn)
+                Section("Map") {
+                    Toggle("Poi", isOn: $settings.poiOn)
 
-                    Picker("days", selection: $settings.days) {
+                    Picker("Days", selection: $settings.days) {
                         ForEach(1 ... 14, id: \.self) { day in
                             HStack() {
                                 Text("\(day)")
@@ -49,7 +49,7 @@ struct SettingsView: View {
                     }
                     
                     HStack {
-                        Text("radius")
+                        Text("Radius")
                         Spacer()
                         Text("\(Int(settings.radius)) m")
                     }
@@ -63,11 +63,11 @@ struct SettingsView: View {
                     
                 }
             }
-            .navigationTitle("settings")
+            .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: ManualView()) {
-                        Label("manual", systemImage: "info.circle")
+                        Label("Manual", systemImage: "info.circle")
                     }
                 }
             }

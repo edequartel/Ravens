@@ -15,15 +15,15 @@ struct ObservationsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("details") {
+                Section("Details") {
                     HStack {
-                        Text("total \(observationsViewModel.observations?.results.count ?? 0) /")
-                        Text("shown \(observationsViewModel.observations?.count ?? 0)")
+                        Text("Total \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+//                        Text("Shown \(observationsViewModel.observations?.count ?? 0)")
                         Spacer()
                     }
                 }
                 
-                Section("list") {
+                Section("List") {
                     List {
                         if let results = observationsViewModel.observations?.results {
                             
@@ -65,8 +65,8 @@ struct ObservationsView: View {
             }
         }
         .onAppear(){
-            print("radius  \(settings.radius)")
-            print("days \(settings.days)")
+            print("Radius  \(settings.radius)")
+            print("Days \(settings.days)")
             // Get the current locations of all the observations
             //            settings.currentLocation = CLLocationManager().location
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,

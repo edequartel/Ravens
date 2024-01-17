@@ -15,12 +15,12 @@ struct SpeciesGroupView: View {
             List {
                 ForEach(viewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id:\.id) { speciesGroup in
                     VStack(alignment: .leading) {
-                        Text("id \(speciesGroup.id)")
-                        Text("region \(speciesGroup.name)")
+                        Text("Id \(speciesGroup.id)")
+                        Text("Region \(speciesGroup.name)")
                     }
                 }
             }
-            .navigationTitle("speciesgroups")
+            .navigationTitle("Species groups")
         }
     }
 }

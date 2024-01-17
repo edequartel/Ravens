@@ -81,8 +81,8 @@ struct MapObservationView: View {
                 
         }
         .onAppear(){
-            print("radius \(settings.radius)")
-            print("days \(settings.days)")
+            print("Radius \(settings.radius)")
+            print("Days \(settings.days)")
             //
             circlePos.latitude = settings.currentLocation?.coordinate.latitude ?? latitude
             circlePos.longitude = settings.currentLocation?.coordinate.longitude ?? longitude
