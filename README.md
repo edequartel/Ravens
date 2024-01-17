@@ -1,5 +1,20 @@
 # Ravens
 
+[website Ravens](https://edequartel.github.io/Ravens)
+
+- Todo
+    - alle obs in view
+    - localisation english
+    - startup circle synchronise
+    - auth
+    - dataload mobile?
+    - max obs in mobile service
+
+- Design 
+    - nrofobs in mapsview
+    - get species obs in speciesListview
+
+
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. Hieronder volgt een uitleg over hoe je de app kunt gebruiken en instellen.
 
 ![Kaart](./images/nl.png)
@@ -24,13 +39,14 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 
 ## Belangrijk om te weten
 - Deze app maakt gebruik van de gegevens die vrijgegeven zijn door [www.waarneming.nl](https://www.waarneming.nl).
-- Er is geen inlogcode of inlognaam nodig om de app te gebruiken. De app tast daarom ook je privacy niet aan.
-- Deze app is compatibel met een iPhone met iOS 17.
+- Deze app is compatibel met een iPhone met iOS 17. Optie, inloggen en krijg neer obs van wn.
 
 Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://github.com/edequartel/Ravens). Met de *Ravens*-app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
 
 ## TestFlight
-Scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
+Gebruik de link of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
+
+[link Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) 
 
 ![QR-code](./images/QRCodeTestFlight.png)
 
