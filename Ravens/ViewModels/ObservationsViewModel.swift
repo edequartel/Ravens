@@ -44,8 +44,6 @@ class ObservationsViewModel: ObservableObject {
         poiLocations.removeAll()
         var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Werkhoven", coordinate: CLLocationCoordinate2D(latitude: 52.023861, longitude: 5.243376), rarity: 0)
-        poiLocations.append(newLocation)
         newLocation = Location(name: "Oostvaardersplassen", coordinate: CLLocationCoordinate2D(latitude: 52.452926, longitude: 5.357325), rarity: 0)
         poiLocations.append(newLocation)
         newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0)

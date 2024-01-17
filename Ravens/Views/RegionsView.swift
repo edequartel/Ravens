@@ -15,15 +15,15 @@ struct RegionsView: View {
             List {
                 ForEach(viewModel.regions, id:\.id) { region in
                     VStack(alignment: .leading) {
-                        Text("id".localized() + "\(region.id)")
-                        Text("name".localized() + "\(region.name)")
-                        Text("continent".localized() + "\(region.continent != nil ? "\(region.continent!)" : "unknown".localized())")
-                        Text("iso".localized() + "\(region.iso != nil ? "\(region.iso!)" : "unknown".localized())")
-                        Text("type".localized() + "\(region.type)")
+                        Text("id \(region.id)")
+                        Text("name \(region.name)")
+                        Text("continent \(region.continent != nil ? "\(region.continent!)" : "unknown")")
+                        Text("iso \(region.iso != nil ? "\(region.iso!)" : "unknown")")
+                        Text("type \(region.type)")
                     }
                 }
             }
-            .navigationTitle("regions".localized())
+            .navigationTitle("regions")
         }
     }
 }

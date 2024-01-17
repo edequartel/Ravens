@@ -37,27 +37,27 @@ struct BirdView: View {
                 }
             }
             .toolbar{
-                Menu("sort".localized(), systemImage: "arrow.up.arrow.down") {
-                    Picker("sortby".localized(), selection: $selectedSortOption) {
-                        Text("name".localized()).tag(SortOption.name)
-                        Text("scientificname".localized()).tag(SortOption.scientific_name)
+                Menu("sort", systemImage: "arrow.up.arrow.down") {
+                    Picker("sortby", selection: $selectedSortOption) {
+                        Text("name").tag(SortOption.name)
+                        Text("scientificname").tag(SortOption.scientific_name)
                         // Add more sorting options if needed
                     }
                     .pickerStyle(.inline)
                     
                     Picker("filterby", selection: $selectedFilterOption) {
-                        Text("all".localized()).tag(FilterOption.all)
-                        Text("native".localized()).tag(FilterOption.native)
+                        Text("all").tag(FilterOption.all)
+                        Text("native").tag(FilterOption.native)
                         // Add more filter options if needed
                     }
                     .pickerStyle(.inline)
                     
                     Picker("filterrarityby", selection: $selectedRarityFilterOption) {
-                        Text("all".localized()).tag(RarityFilterOption.all)
-                        Text("common".localized()).tag(RarityFilterOption.common)
-                        Text("uncommon".localized()).tag(RarityFilterOption.uncommon)
-                        Text("rare".localized()).tag(RarityFilterOption.rare)
-                        Text("veryrare".localized()).tag(RarityFilterOption.veryrare)
+                        Text("all").tag(RarityFilterOption.all)
+                        Text("common").tag(RarityFilterOption.common)
+                        Text("uncommon").tag(RarityFilterOption.uncommon)
+                        Text("rare").tag(RarityFilterOption.rare)
+                        Text("veryrare").tag(RarityFilterOption.veryrare)
                     }
                     .pickerStyle(.inline)
                 }
