@@ -1,0 +1,502 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%11d"
+          }
+        }
+      }
+    },
+    "%lld m" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%11d m"
+          }
+        }
+      }
+    },
+    "all" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle"
+          }
+        }
+      }
+    },
+    "code %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code %@"
+          }
+        }
+      }
+    },
+    "common" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algemeen"
+          }
+        }
+      }
+    },
+    "continent %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continent %@"
+          }
+        }
+      }
+    },
+    "days" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagen"
+          }
+        }
+      }
+    },
+    "details" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        }
+      }
+    },
+    "english %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engels %@"
+          }
+        }
+      }
+    },
+    "filterby" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter op"
+          }
+        }
+      }
+    },
+    "filterrarityby" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter zeldzaamheid op"
+          }
+        }
+      }
+    },
+    "group" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groep"
+          }
+        }
+      }
+    },
+    "group %lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "group $11d"
+          }
+        }
+      }
+    },
+    "id %lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "id %11d"
+          }
+        }
+      }
+    },
+    "iso %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ISO %@"
+          }
+        }
+      }
+    },
+    "languagedataisnil" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "languagedetailsnil"
+          }
+        }
+      }
+    },
+    "languages" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Talen"
+          }
+        }
+      }
+    },
+    "list" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lijst"
+          }
+        }
+      }
+    },
+    "loading" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden..."
+          }
+        }
+      }
+    },
+    "manual" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Handleiding"
+          }
+        }
+      }
+    },
+    "map" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaart"
+          }
+        }
+      }
+    },
+    "Map" : {
+
+    },
+    "moreatwaarnemingnl" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meer op waarneming.nl"
+          }
+        }
+      }
+    },
+    "name" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam"
+          }
+        }
+      }
+    },
+    "name %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam %@"
+          }
+        }
+      }
+    },
+    "native" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inheems"
+          }
+        }
+      }
+    },
+    "native %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inheems %@"
+          }
+        }
+      }
+    },
+    "nobsavaliable" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nobsavailable"
+          }
+        }
+      }
+    },
+    "obs" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarneming"
+          }
+        }
+      }
+    },
+    "Obs" : {
+
+    },
+    "poi" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point of Interest"
+          }
+        }
+      }
+    },
+    "radius" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Straal"
+          }
+        }
+      }
+    },
+    "rare" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zeldzaam"
+          }
+        }
+      }
+    },
+    "region %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Regio %@"
+          }
+        }
+      }
+    },
+    "region %lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regio %11d"
+          }
+        }
+      }
+    },
+    "regionlists" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regiolijst"
+          }
+        }
+      }
+    },
+    "regions" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regio's"
+          }
+        }
+      }
+    },
+    "scientificname" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wetenschappelijke naam"
+          }
+        }
+      }
+    },
+    "settings" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Settings" : {
+
+    },
+    "shown %lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toont"
+          }
+        }
+      }
+    },
+    "sort" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorteer"
+          }
+        }
+      }
+    },
+    "sortby" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorteer op"
+          }
+        }
+      }
+    },
+    "space for observation %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Space for observation %@"
+          }
+        }
+      }
+    },
+    "species" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soorten"
+          }
+        }
+      }
+    },
+    "Species" : {
+
+    },
+    "speciesgroups" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soortengroep"
+          }
+        }
+      }
+    },
+    "total %lld /" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totaal %11d / "
+          }
+        }
+      }
+    },
+    "type %lld" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type %11d"
+          }
+        }
+      }
+    },
+    "uncommon" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niet algemeen"
+          }
+        }
+      }
+    },
+    "veryrare" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeer zeldzaam"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

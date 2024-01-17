@@ -16,7 +16,7 @@ struct ContentView: View {
             MapObservationView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
-                    Text("map")
+                    Text("Map")
                     Image(systemName: "location.fill")
                 }
             
@@ -24,14 +24,14 @@ struct ContentView: View {
             ObservationsView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
-                    Text("obs")
+                    Text("Obs")
                     Image(systemName: "binoculars.fill")
                 }
             
             // Tab 3
             BirdView()
                 .tabItem {
-                    Text("species")
+                    Text("Species")
                     Image(systemName: "tree.fill")
                 }
             
@@ -39,7 +39,7 @@ struct ContentView: View {
             // Tab 4
             SettingsView()
                 .tabItem {
-                    Text("settings")
+                    Text("Settings")
                     Image(systemName: "gearshape.fill")
                 }
         }
@@ -60,6 +60,17 @@ struct ContentView: View {
 //    }
 //}
 
-#Preview {
-    ContentView()
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Creating dummy data for preview
+        let observationsViewModel = ObservationsViewModel()
+        let settings = Settings()
+
+        // Setting up the environment objects for the preview
+        ContentView()
+            .environmentObject(observationsViewModel)
+            .environmentObject(settings)
+    }
 }
+

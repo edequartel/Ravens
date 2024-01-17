@@ -17,7 +17,6 @@
 		474093942B564F49004F10C5 /* specieslist.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938D2B564F49004F10C5 /* specieslist.png */; };
 		474093952B564F49004F10C5 /* manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938E2B564F49004F10C5 /* manual.png */; };
 		474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */; };
-		474093992B567ADA004F10C5 /* Localizeable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4740939B2B567ADA004F10C5 /* Localizeable.strings */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
 		474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C402F2B4BC4080038B3A5 /* Assets.xcassets */; };
@@ -50,6 +49,8 @@
 		474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40972B5000370038B3A5 /* OptionallyDecodable */; };
 		474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */; };
 		474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C409B2B500AE90038B3A5 /* ObservationsView.swift */; };
+		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
+		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +64,6 @@
 		4740938D2B564F49004F10C5 /* specieslist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = specieslist.png; sourceTree = "<group>"; };
 		4740938E2B564F49004F10C5 /* manual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manual.png; sourceTree = "<group>"; };
 		4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRCodeTestFlight.png; sourceTree = "<group>"; };
-		4740939A2B567ADA004F10C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizeable.strings; sourceTree = "<group>"; };
-		4740939C2B567ADD004F10C5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizeable.strings; sourceTree = "<group>"; };
 		474C40282B4BC4040038B3A5 /* Ravens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ravens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		474C402B2B4BC4040038B3A5 /* RavensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensApp.swift; sourceTree = "<group>"; };
 		474C402D2B4BC4040038B3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +93,8 @@
 		474C408F2B4FFD820038B3A5 /* Observations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observations.swift; sourceTree = "<group>"; };
 		474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsViewModel.swift; sourceTree = "<group>"; };
 		474C409B2B500AE90038B3A5 /* ObservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsView.swift; sourceTree = "<group>"; };
+		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -146,7 +147,7 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
-				4740939B2B567ADA004F10C5 /* Localizeable.strings */,
+				4781539A2B57BDC2005F87CC /* README.md */,
 				474093882B564F49004F10C5 /* images */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
@@ -155,6 +156,7 @@
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
+				4781539C2B57C166005F87CC /* Localizable.xcstrings */,
 			);
 			path = Ravens;
 			sourceTree = "<group>";
@@ -289,14 +291,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				474093902B564F49004F10C5 /* settings.png in Resources */,
-				474093992B567ADA004F10C5 /* Localizeable.strings in Resources */,
 				474093942B564F49004F10C5 /* specieslist.png in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
 				474093952B564F49004F10C5 /* manual.png in Resources */,
 				474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */,
+				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
 				474093912B564F49004F10C5 /* nl.png in Resources */,
 				474093922B564F49004F10C5 /* map.png in Resources */,
+				4781539B2B57BDC2005F87CC /* README.md in Resources */,
 				474093932B564F49004F10C5 /* list.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,18 +344,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4740939B2B567ADA004F10C5 /* Localizeable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4740939A2B567ADA004F10C5 /* en */,
-				4740939C2B567ADD004F10C5 /* nl */,
-			);
-			name = Localizeable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		474C40342B4BC4080038B3A5 /* Debug */ = {
