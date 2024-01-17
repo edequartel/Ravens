@@ -36,9 +36,9 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://github.com/edequartel/Ravens). Met de *Ravens*-app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
 
 ## TestFlight
-Scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
+Gebruik de linj of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
 
-[TestFlight](https://testflight.apple.com/join/TzVrvU1x) 
+[link Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) 
 
 ![QR-code](./images/QRCodeTestFlight.png)
 
