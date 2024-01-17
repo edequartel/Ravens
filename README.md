@@ -1,8 +1,8 @@
 # Ravens
 
-[Ravens](https://edequartel.github.io/ravens/)
+[website Ravens](https://edequartel.github.io/Ravens
 
-- todo
+- Todo
     - alle obs in view
     - localisation english
     - startup circle synchronise
@@ -39,7 +39,6 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 
 ## Belangrijk om te weten
 - Deze app maakt gebruik van de gegevens die vrijgegeven zijn door [www.waarneming.nl](https://www.waarneming.nl).
-- Er is geen inlogcode of inlognaam nodig om de app te gebruiken. De app tast daarom ook je privacy niet aan.
 - Deze app is compatibel met een iPhone met iOS 17. Optie, inloggen en krijg neer obs van wn.
 
 Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://github.com/edequartel/Ravens). Met de *Ravens*-app heb je snel en eenvoudig toegang tot recente waarnemingen in jouw geselecteerde gebied. Veel plezier met het ontdekken van de natuur om je heen!
