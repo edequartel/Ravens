@@ -1,6 +1,6 @@
 # Ravens
 
-[website Ravens](https://edequartel.github.io/Ravens
+[website Ravens](https://edequartel.github.io/Ravens)
 
 - Todo
     - alle obs in view
