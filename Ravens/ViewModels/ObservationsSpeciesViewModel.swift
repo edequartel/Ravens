@@ -12,7 +12,7 @@ import Alamofire
 class ObservationsSpeciesViewModel: ObservableObject {
     @Published var observationsSpecies: ObservationsSpecies?
     
-    func fetchData(speciesId: Int, endDate: Date) {
+    func fetchData(speciesId:Int, endDate: Date) {
         print("fetchData ObservationsSpeciesViewModel")
         
         // Add the custom header 'Accept-Language: nl'
@@ -20,9 +20,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
             "Accept-Language": "nl",
             "Authorization": "Token 21047b0d6742dc36234bc5293053bc757623470b" //<<TOKEN LATER BIJ ZETTEN 3600??
         ]
-        
-        let url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after= \(formatCurrentDate(value: endDate))"
     
+        let url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(formatCurrentDate(value: endDate))"
         print("\(url)")
 
         AF.request(url, headers: headers).responseString { response in

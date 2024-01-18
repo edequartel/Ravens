@@ -7,24 +7,32 @@
 
 import SwiftUI
 
-struct loginView: View {
+struct LoginView: View {
     @EnvironmentObject var settings: Settings
+    @ObservedObject var loginViewModel: LoginViewModel
     
     var body: some View {
-        VStack {
-            Text("\(settings.login)")
-            Text("\(settings.password)")
+        Form{
+            VStack(alignment: .leading) {
+                Text("\(settings.login)")
+                Text("\(settings.password)")
+            }
+            Button("getToken") {
+                loginViewModel.loginUser(username: settings.login, password: settings.password)
+            }
+            Text("\(loginViewModel.token)")
+                .font(.headline)
         }
     }
 }
 
-struct loginView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         // Creating dummy data for preview
         let settings = Settings()
 
         // Setting up the environment objects for the preview
-        loginView()
+        LoginView(loginViewModel: LoginViewModel())
             .environmentObject(settings)
     }
 }

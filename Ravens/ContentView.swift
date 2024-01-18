@@ -9,16 +9,14 @@ import SwiftUI
 import MapKit
 struct ContentView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
-    @StateObject private var observationsSpeciesViewModel =
-        ObservationsSpeciesViewModel()
-    
+    @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
     
     var body: some View {
         TabView {
             // Tab 1
-//            TokenView(loginViewModel: loginViewModel)
-            ObservationsSpeciesView()
+            LoginView(loginViewModel: loginViewModel)
+
 //            MapObservationView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
@@ -33,6 +31,14 @@ struct ContentView: View {
                     Text("Obs")
                     Image(systemName: "binoculars.fill")
                 }
+            
+//            // Tab 3
+//            ObservationsSpeciesView()
+//                .environmentObject(observationsSpeciesViewModel)
+//                .tabItem {
+//                    Text("Species")
+//                    Image(systemName: "tree.fill")
+//                }
             
             // Tab 3
             BirdView()

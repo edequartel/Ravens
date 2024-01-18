@@ -57,7 +57,6 @@
 		478153B92B58022B005F87CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153B82B58022B005F87CC /* LoginView.swift */; };
 		478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BA2B5809FB005F87CC /* LoginViewModel.swift */; };
 		478153BD2B580A36005F87CC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BC2B580A36005F87CC /* Login.swift */; };
-		478153BF2B580A7A005F87CC /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BE2B580A7A005F87CC /* TokenView.swift */; };
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +107,6 @@
 		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		478153BA2B5809FB005F87CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		478153BC2B580A36005F87CC /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		478153BE2B580A7A005F87CC /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -232,7 +230,6 @@
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				478153B82B58022B005F87CC /* LoginView.swift */,
-				478153BE2B580A7A005F87CC /* TokenView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 			);
 			path = Views;
@@ -357,7 +354,6 @@
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
-				478153BF2B580A7A005F87CC /* TokenView.swift in Sources */,
 				478153B92B58022B005F87CC /* LoginView.swift in Sources */,
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,

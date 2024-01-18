@@ -6,6 +6,7 @@ class LoginViewModel: ObservableObject {
 
     func loginUser(username: String, password: String) {
         let url = "https://waarneming.nl/api/v1/auth/login/"
+        
 
         let parameters: [String: String] = [
             "username": username,
@@ -15,25 +16,22 @@ class LoginViewModel: ObservableObject {
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded",
         ]
-
+        
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
-            .cURLDescription { description in
-                            // Print the cURL command to the console
-                            print("Alamofire Request:")
-                            print(description)
-                        }
-            .responseDecodable(of: LoginModel.self) { response in
+            .responseJSON { response in
                 switch response.result {
-                case .success(let loginModel):
-                    DispatchQueue.main.async {
-                        self.token = loginModel.token
-                        // Handle any other logic or UI updates
+                case .success(let data):
+                    if let json = data as? [String: Any], let key = json["key"] as? String {
+                        print("Tokenkey: \(key)")
+                        self.token  = key
+                    } else {
+                        print("Error extracting key from JSON")
                     }
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    print("Error: \(error)")
                 }
             }
+        
     }
 }
-

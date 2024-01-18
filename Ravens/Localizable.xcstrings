@@ -147,6 +147,9 @@
         }
       }
     },
+    "getToken" : {
+
+    },
     "Group" : {
       "localizations" : {
         "nl" : {
@@ -467,6 +470,7 @@
 
     },
     "Token: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
