@@ -9,11 +9,17 @@ import SwiftUI
 import MapKit
 struct ContentView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
+    @StateObject private var observationsSpeciesViewModel =
+        ObservationsSpeciesViewModel()
+    
+    @StateObject private var loginViewModel = LoginViewModel()
     
     var body: some View {
         TabView {
             // Tab 1
-            MapObservationView()
+//            TokenView(loginViewModel: loginViewModel)
+            ObservationsSpeciesView()
+//            MapObservationView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
                     Text("Map")
@@ -51,6 +57,7 @@ struct ContentView: View {
 
 //struct ContentView: View {
 //    var body: some View {
+//        ObservationsSpeciesView()
 //        LanguageView()
 //        SpeciesGroupView()
 //        RegionView()
@@ -65,11 +72,15 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         // Creating dummy data for preview
         let observationsViewModel = ObservationsViewModel()
+        let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+        
+//        let loginViewModel = LoginViewModel()
         let settings = Settings()
 
         // Setting up the environment objects for the preview
         ContentView()
             .environmentObject(observationsViewModel)
+            .environmentObject(observationsSpeciesViewModel)
             .environmentObject(settings)
     }
 }

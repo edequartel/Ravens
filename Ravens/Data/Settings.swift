@@ -23,9 +23,13 @@ class Settings: ObservableObject {
     @AppStorage("radius") var radius: Int = 500
     
     @AppStorage("poiOn") var poiOn: Bool = true
+    @AppStorage("selectedRarity") var selectedRarity = 1
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     
     @Published var selectedDate: Date = Date()
+    
+    @AppStorage("login") var login = "edequartel"
+    @AppStorage("password") var password = "zeemeeuw2015"
 }
 

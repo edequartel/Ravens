@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MapKit
+//import MapKit
 
 struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
@@ -73,7 +73,8 @@ struct ObservationsView: View {
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                             radius: settings.radius,
-                                            species_group: settings.selectedGroupId)
+                                            species_group: settings.selectedGroupId,
+                                            min_rarity: settings.selectedRarity)
         }
     }
 }

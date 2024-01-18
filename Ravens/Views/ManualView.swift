@@ -41,9 +41,6 @@ struct ManualView: View {
     var body: some View {
         NavigationView {
             WebViewContainer(urlString: "https://edequartel.github.io/Ravens/")
-//                .navigationBarTitleDisplayMode(.inline)
-//                .navigationBarTitle("Ravens online", displayMode: .inline)
-//                .font(.system(size: 10))
         }
     }
 }

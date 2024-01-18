@@ -24,12 +24,32 @@
         }
       }
     },
+    "%lld %lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$lld %3$@"
+          }
+        }
+      }
+    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%11d m"
+          }
+        }
+      }
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
           }
         }
       }
@@ -73,6 +93,9 @@
           }
         }
       }
+    },
+    "Date: %@" : {
+
     },
     "Days" : {
       "localizations" : {
@@ -129,7 +152,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Group"
+            "value" : "Groep"
           }
         }
       }
@@ -294,6 +317,12 @@
         }
       }
     },
+    "Observation ID: %lld" : {
+
+    },
+    "Observations Species" : {
+
+    },
     "Poi" : {
       "localizations" : {
         "nl" : {
@@ -320,6 +349,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zeldzaam"
+          }
+        }
+      }
+    },
+    "Rarity" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeldzaamheid"
           }
         }
       }
@@ -424,6 +463,19 @@
         }
       }
     },
+    "Species name: %@" : {
+
+    },
+    "Token: %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token: %@"
+          }
+        }
+      }
+    },
     "Total %lld/%lld" : {
       "localizations" : {
         "en" : {
@@ -455,7 +507,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Minder algemeen"
+            "value" : "Vrij algemeen"
           }
         }
       }

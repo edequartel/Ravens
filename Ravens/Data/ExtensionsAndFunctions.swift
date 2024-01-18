@@ -19,16 +19,16 @@ func formatCurrentDate(value: Date) -> String {
 func myColor(value: Int) -> Color {
     switch value {
     case 0:
-        return .gray
+        return .gray //onbekend
     case 1:
-        return .green //common
+        return .green //algemeen
     case 2:
-        return .blue //uncommon
+        return .blue //vrij algemeen
     case 3:
         return .orange //rare
     case 4:
         return .red //very rare
     default:
-        return .clear //You can provide a default color or handle other cases as needed
+        return .gray //You can provide a default color or handle other cases as needed
     }
 }

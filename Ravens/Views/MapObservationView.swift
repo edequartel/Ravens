@@ -8,14 +8,14 @@
 import SwiftUI
 import MapKit
 
-
 struct MapObservationView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+    
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-  
+      
     var body: some View {
         VStack {
             MapReader { proxy in
@@ -41,20 +41,21 @@ struct MapObservationView: View {
                 
                 
                 .onTapGesture { position in
-                            if let coordinate = proxy.convert(position, from: .local) {
-                                observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                                                lat: coordinate.latitude,
-                                                                long: coordinate.longitude,
-                                                                radius: settings.radius,
-                                                                species_group: settings.selectedGroupId)
-                                
-                                // Create a new CLLocation instance with the updated coordinates
-                                let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                                circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                                // Update currentLocation with the new CLLocation instance
-                                settings.currentLocation = newLocation
-                            }
-                        }
+                    if let coordinate = proxy.convert(position, from: .local) {
+                        observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                                        lat: coordinate.latitude,
+                                                        long: coordinate.longitude,
+                                                        radius: settings.radius,
+                                                        species_group: settings.selectedGroupId,
+                                                        min_rarity: settings.selectedRarity)
+                        
+                        // Create a new CLLocation instance with the updated coordinates
+                        let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        // Update currentLocation with the new CLLocation instance
+                        settings.currentLocation = newLocation
+                    }
+                }
                 
                 .mapControls() {
                     MapUserLocationButton()
@@ -64,8 +65,11 @@ struct MapObservationView: View {
             
             HStack {
                 Text("\(settings.selectedGroupString)")
-                    .lineLimit(1) 
-                    .truncationMode(.tail)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                Spacer()
+                Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+
                 Spacer()
                 DatePicker("", selection: $settings.selectedDate, displayedComponents: [.date])
                     .onChange(of: settings.selectedDate) {
@@ -74,7 +78,8 @@ struct MapObservationView: View {
                                                         lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                                         long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                                         radius: settings.radius,
-                                                        species_group: settings.selectedGroupId)
+                                                        species_group: settings.selectedGroupId,
+                                                        min_rarity: settings.selectedRarity)
                     }
             }
             .padding()
@@ -83,15 +88,20 @@ struct MapObservationView: View {
         .onAppear(){
             print("Radius \(settings.radius)")
             print("Days \(settings.days)")
-            //
+            
+            //userLocation
+
             circlePos.latitude = settings.currentLocation?.coordinate.latitude ?? latitude
             circlePos.longitude = settings.currentLocation?.coordinate.longitude ?? longitude
+   
+            
             // Get the current locations of all the observations
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                             radius: settings.radius,
-                                            species_group: settings.selectedGroupId)
+                                            species_group: settings.selectedGroupId,
+                                            min_rarity: settings.selectedRarity)
         }
     }
 }

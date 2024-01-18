@@ -18,6 +18,7 @@ struct Location: Identifiable {
 
 class ObservationsViewModel: ObservableObject {
     @Published var observations: Observations?
+    
     var locations = [Location]()
     var poiLocations = [Location]()
     
@@ -32,7 +33,6 @@ class ObservationsViewModel: ObservableObject {
             let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
             let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
             let rarity = observations?.results[i].rarity ?? 1
-
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity)
 
             locations.append(newLocation)
@@ -66,7 +66,7 @@ class ObservationsViewModel: ObservableObject {
     }
     
     ///
-    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int) {
+    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int, min_rarity: Int) {
         print("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
@@ -74,7 +74,7 @@ class ObservationsViewModel: ObservableObject {
             "Accept-Language": "nl"
         ]
         
-        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)"
+        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)&min_rarity=\(min_rarity)"
         
         print("\(url)")
         

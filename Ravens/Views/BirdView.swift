@@ -25,13 +25,11 @@ struct BirdView: View {
                     // Display your bird information here
                     NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
                         VStack(alignment: .leading) {
-                            Text("\(bird.name)")
+                            Text("\(bird.rarity) \(bird.id) \(bird.name)")
                                 .bold()
                             Text("\(bird.scientific_name)")
                                 .italic()
                             // Additional information if needed
-                            //                            Text("\(bird.rarity)")
-                            //                            Text(bird.native ? "inheems" : "exoot")
                         }
                     }
                 }

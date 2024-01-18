@@ -14,6 +14,7 @@ struct SettingsView: View {
     
     @EnvironmentObject var settings: Settings
     
+    
     let minimumRadius = 500.0
     let maximumRadius = 5000.0
     let step = 500.0
@@ -36,9 +37,21 @@ struct SettingsView: View {
                         settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                     }
                 }
-                
                 Section("Map") {
                     Toggle("Poi", isOn: $settings.poiOn)
+                    
+                    Picker("Rarity", selection: $settings.selectedRarity) {
+                        ForEach(0..<5) { index in
+                            Image(systemName: "bird.fill")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(myColor(value: index), .clear)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .onChange(of: settings.selectedRarity) {
+                        print(settings.selectedRarity)
+                    }
+                    
 
                     Picker("Days", selection: $settings.days) {
                         ForEach(1 ... 14, id: \.self) { day in
