@@ -481,6 +481,7 @@
       }
     },
     "Total %lld/%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

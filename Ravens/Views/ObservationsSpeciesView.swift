@@ -12,6 +12,8 @@ struct ObservationsSpeciesView: View {
 
     @EnvironmentObject var settings: Settings
     
+    var speciesID: Int
+    
     var body: some View {
         NavigationStack {
             List {
@@ -30,7 +32,7 @@ struct ObservationsSpeciesView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData(speciesId: 32, endDate: settings.selectedDate)
+                viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate)
             }
             .navigationBarTitle("Observations Species")
         }
@@ -41,7 +43,7 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ObservationsSpeciesViewModel()
         let settings = Settings()
-        ObservationsSpeciesView()
+        ObservationsSpeciesView(speciesID: 32)
             .environmentObject(viewModel)
             .environmentObject(settings)
     }

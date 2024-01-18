@@ -10,6 +10,8 @@ import SwiftUI
 struct BirdView: View {
     @StateObject private var viewModel = BirdViewModel()
     
+    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     @State private var selectedRarityFilterOption: RarityFilterOption = .common
@@ -24,6 +26,7 @@ struct BirdView: View {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     // Display your bird information here
                     NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
+//                    NavigationLink(destination: ObservationsSpeciesView(speciesID: bird.id)) {
                         VStack(alignment: .leading) {
                             Text("\(bird.rarity) \(bird.id) \(bird.name)")
                                 .bold()
@@ -32,7 +35,14 @@ struct BirdView: View {
                             // Additional information if needed
                         }
                     }
+                    .swipeActions {
+                                Button("Obs") {
+                                    print("\(bird.id)")
+                                }
+                                .tint(.green)
+                            }
                 }
+                
             }
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
@@ -183,11 +193,13 @@ struct BirdView_Previews: PreviewProvider {
     static var previews: some View {
         // Creating dummy data for preview
         let observationsViewModel = ObservationsViewModel()
-        let settings = Settings() 
+        let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+        let settings = Settings()
 
         // Setting up the environment objects for the preview
         BirdView()
             .environmentObject(observationsViewModel)
+            .environmentObject(observationsSpeciesViewModel)
             .environmentObject(settings)
     }
 }

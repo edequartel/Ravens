@@ -17,9 +17,7 @@ struct ObservationsView: View {
             Form {
                 Section("Details") {
                     HStack {
-                        Text("Total \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
-//                        Text("Shown \(observationsViewModel.observations?.count ?? 0)")
-                        Spacer()
+                        Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
                     }
                 }
                 
@@ -32,17 +30,18 @@ struct ObservationsView: View {
                                     HStack {
                                         Image(systemName: "circle.fill")
                                             .foregroundColor(Color(myColor(value: result.rarity)))
-                                        
-                                        Text("\(result.species_detail.name)")
-                                            .font(.subheadline)
+                                        HStack {
+                                            Text("\(result.species_detail.name)")
+                                                .font(.subheadline)
+                                            Text("\(result.user)")
+                                        }
                                         
                                         Spacer()
                                         HStack {
-                                            Image(systemName: result.has_sound ? "speaker.fill" : "")
-                                            Image(systemName: result.has_photo ? "photo" : "")
+                                            if result.has_sound { Image(systemName: "speaker.fill" ) }
+                                            if result.has_photo { Image(systemName: "photo.fill") }
                                         }
-                                            
-                                        
+                          
 //                                        Spacer()
 //                                        Text("usr:\(result.user)")
 //                                            .font(.subheadline)

@@ -15,15 +15,14 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tab 1
-            LoginView(loginViewModel: loginViewModel)
-
-//            MapObservationView()
+//            LoginView(loginViewModel: loginViewModel)
+            MapObservationView()
                 .environmentObject(observationsViewModel)
                 .tabItem {
                     Text("Map")
                     Image(systemName: "location.fill")
                 }
-            
+
             // Tab 2
             ObservationsView()
                 .environmentObject(observationsViewModel)
@@ -32,14 +31,6 @@ struct ContentView: View {
                     Image(systemName: "binoculars.fill")
                 }
             
-//            // Tab 3
-//            ObservationsSpeciesView()
-//                .environmentObject(observationsSpeciesViewModel)
-//                .tabItem {
-//                    Text("Species")
-//                    Image(systemName: "tree.fill")
-//                }
-            
             // Tab 3
             BirdView()
                 .tabItem {
@@ -47,6 +38,16 @@ struct ContentView: View {
                     Image(systemName: "tree.fill")
                 }
             
+
+//            // Tab 3
+//            ObservationsSpeciesView(speciesID: 306)
+//                .environmentObject(observationsSpeciesViewModel)
+//                .tabItem {
+//                    Text("Species")
+//                    Image(systemName: "tree.fill")
+//                }
+            
+
 
             // Tab 4
             SettingsView()

@@ -22,7 +22,7 @@ struct ObservationSpecies: Codable, Identifiable {
     var sex: String = ""
     var point: Point
     var accuracy: Int = 0
-    var notes: String = ""
+    var notes: String?
     var is_certain: Bool = false
     var is_escape: Bool = false
     var activity: Int = 0
@@ -34,7 +34,7 @@ struct ObservationSpecies: Codable, Identifiable {
     var counting_method: Int?
     var embargo_date: String
     var uuid: String?
-    var external_reference: String?
+    let externalReference: [String]?
     var links: [String?]
     var details: [String?]
     var observer_location: Point?
