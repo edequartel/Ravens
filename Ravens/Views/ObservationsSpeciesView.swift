@@ -16,6 +16,9 @@ struct ObservationsSpeciesView: View {
     
     var body: some View {
         NavigationStack {
+            HStack() {
+                Text("Total: \(viewModel.observationsSpecies?.count ?? 0) \(viewModel.observationsSpecies?.results.count ?? 0)")
+            }
             List {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results, id: \.id) { result in
@@ -25,6 +28,8 @@ struct ObservationsSpeciesView: View {
                             Text("Date: \(result.date)")
                             Text("\(result.location_detail.name)")
                             Text("Date: \(result.user_detail.name)")
+                            Text("Time: \(result.time ?? "unknown")")
+                            Text("Substrate: \(result.substrate ?? 0)")
                             // Add more details as needed
                         }
                     }

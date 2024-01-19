@@ -52,6 +52,7 @@
 		47568D2D2B59B54500E69B1A /* ObservationsSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* ObservationsSpecies.swift */; };
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
+		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
 		478153B92B58022B005F87CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153B82B58022B005F87CC /* LoginView.swift */; };
@@ -102,6 +103,7 @@
 		47568D2C2B59B54500E69B1A /* ObservationsSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpecies.swift; sourceTree = "<group>"; };
 		47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesViewModel.swift; sourceTree = "<group>"; };
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
+		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -164,8 +166,8 @@
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
 				474C40822B4D17C00038B3A5 /* Views */,
-				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
+				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
 				4781539C2B57C166005F87CC /* Localizable.xcstrings */,
@@ -231,6 +233,7 @@
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				478153B82B58022B005F87CC /* LoginView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
+				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,

@@ -8,7 +8,7 @@ import Foundation
 // MARK: - ObservationsSpecies
 struct ObservationsSpecies: Codable {
     var count: Int?
-    var next, previous: URL?
+    var next, previous: String?
     var results: [ObservationSpecies]
 }
 
@@ -17,7 +17,7 @@ struct ObservationSpecies: Codable, Identifiable {
     var id: Int?
     var species: Int = 0
     var date: String = "2023-01-01"
-    var time: String = "11:00"
+    var time: String?
     var number: Int = 0
     var sex: String = ""
     var point: Point
@@ -27,8 +27,8 @@ struct ObservationSpecies: Codable, Identifiable {
     var is_escape: Bool = false
     var activity: Int = 0
     var life_stage: Int = 0
-    var method: Int = 0
-    var substrate: URL?
+    var method: Int?
+    var substrate: Int?
     var related_species: Int = 0
     var obscurity: Int = 0
     var counting_method: Int?
@@ -36,7 +36,7 @@ struct ObservationSpecies: Codable, Identifiable {
     var uuid: String?
     let externalReference: [String]?
     var links: [String?]
-    var details: [String?]
+//    var details: [String?]
     var observer_location: Point?
     var transect_uuid: URL?
     var species_detail: SpeciesDetail

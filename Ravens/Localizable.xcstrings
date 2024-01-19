@@ -250,6 +250,9 @@
         }
       }
     },
+    "MapSpecies" : {
+
+    },
     "More at waarneming.nl" : {
       "localizations" : {
         "nl" : {
@@ -324,6 +327,9 @@
 
     },
     "Observations Species" : {
+
+    },
+    "ObsSpecies" : {
 
     },
     "Poi" : {
@@ -469,6 +475,12 @@
     "Species name: %@" : {
 
     },
+    "Substrate: %lld" : {
+
+    },
+    "Time: %@" : {
+
+    },
     "Token: %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -493,6 +505,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Totaal %1$11d/%2$11d"
+          }
+        }
+      }
+    },
+    "Total: %lld %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Total: %1$lld %2$lld"
           }
         }
       }

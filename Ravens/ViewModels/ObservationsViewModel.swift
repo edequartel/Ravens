@@ -32,7 +32,7 @@ class ObservationsViewModel: ObservableObject {
             let name = observations?.results[i].species_detail.name ?? "Unknown name"
             let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
             let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
-            let rarity = observations?.results[i].rarity ?? 1
+            let rarity = observations?.results[i].rarity ?? 0
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity)
 
             locations.append(newLocation)

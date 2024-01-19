@@ -37,9 +37,10 @@ struct MapObservationView: View {
                         .stroke(.white, lineWidth: 1)
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
-                
-                
-                
+                .mapControls() {
+                    MapUserLocationButton()
+                    MapPitchToggle()
+                }
                 .onTapGesture { position in
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
@@ -57,10 +58,7 @@ struct MapObservationView: View {
                     }
                 }
                 
-                .mapControls() {
-                    MapUserLocationButton()
-                    MapPitchToggle()
-                }
+                
             }
             
             HStack {
