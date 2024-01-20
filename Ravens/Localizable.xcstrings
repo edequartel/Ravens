@@ -230,6 +230,9 @@
         }
       }
     },
+    "Location: %@" : {
+
+    },
     "Manual" : {
       "localizations" : {
         "nl" : {
@@ -249,9 +252,6 @@
           }
         }
       }
-    },
-    "MapSpecies" : {
-
     },
     "More at waarneming.nl" : {
       "localizations" : {
@@ -327,9 +327,6 @@
 
     },
     "Observations Species" : {
-
-    },
-    "ObsSpecies" : {
 
     },
     "Poi" : {
@@ -538,6 +535,9 @@
           }
         }
       }
+    },
+    "User: %@" : {
+
     },
     "Very rare" : {
       "localizations" : {

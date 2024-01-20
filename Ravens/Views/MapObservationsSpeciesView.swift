@@ -34,7 +34,7 @@ struct MapObservationsSpeciesView: View {
             
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate)
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
         }
     }
 }

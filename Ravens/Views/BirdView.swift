@@ -13,9 +13,9 @@ struct BirdView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     
     @State private var selectedSortOption: SortOption = .name
-    @State private var selectedFilterOption: FilterOption = .native
-    @State private var selectedRarityFilterOption: RarityFilterOption = .common
-
+    @State private var selectedFilterOption: FilterOption = .all
+    @State private var selectedRarityFilterOption: RarityFilterOption = .all
+    
     @EnvironmentObject var settings: Settings
     
     @State private var searchText = ""
@@ -25,8 +25,15 @@ struct BirdView: View {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     // Display your bird information here
-                    NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
-//                    NavigationLink(destination: ObservationsSpeciesView(speciesID: bird.id)) {
+                                        NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
+                    //                    NavigationLink(destination: ObservationsSpeciesView(speciesID: bird.id)) {
+                   
+                    
+//                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
+                        Image(systemName: "bird.fill")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(myColor(value: bird.rarity), .clear)
+                        
                         VStack(alignment: .leading) {
                             Text("\(bird.rarity) \(bird.id) \(bird.name)")
                                 .bold()
@@ -36,11 +43,11 @@ struct BirdView: View {
                         }
                     }
                     .swipeActions {
-                                Button("Obs") {
-                                    print("\(bird.id)")
-                                }
-                                .tint(.green)
-                            }
+                        Button("Obs") {
+                            print("\(bird.id)")
+                        }
+                        .tint(.green)
+                    }
                 }
                 
             }
@@ -71,7 +78,7 @@ struct BirdView: View {
                 }
             }
             .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
-
+            
             
         }
         .searchable(text: $searchText)
@@ -195,7 +202,7 @@ struct BirdView_Previews: PreviewProvider {
         let observationsViewModel = ObservationsViewModel()
         let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
         let settings = Settings()
-
+        
         // Setting up the environment objects for the preview
         BirdView()
             .environmentObject(observationsViewModel)

@@ -34,7 +34,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
     }
     
     
-    func fetchData(speciesId: Int, endDate: Date) {
+    func fetchData(speciesId: Int, endDate: Date, days: Int) {
         print("fetchData ObservationsSpeciesViewModel")
 
         // Add the custom header 'Accept-Language: nl'
@@ -43,8 +43,16 @@ class ObservationsSpeciesViewModel: ObservableObject {
             "Authorization": "Token 21047b0d6742dc36234bc5293053bc757623470b" //<<TOKEN LATER BIJ ZETTEN 3600??
         ]
         
-        let date = "2023-09-01"
-        var url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(date)"//&page=\(page)"
+//        if let startDate = Calendar.current.date(byAdding: .day, value: -14, to: endDate) {
+//            print("Start Date: \(startDate)")
+//        }
+
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
+        print("db \(date_after)")
+        let date_before = formatCurrentDate(value:endDate)
+        print("da \(date_before)")
+        
+        var url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"//&page=\(page)"
         
 
         print("\(url)")
@@ -52,7 +60,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
-//                print("Response as String: \(stringResponse)")
+                print("Response as String: \(stringResponse)")
 
                 // Now you can convert the stringResponse to Data and decode it
                 if let data = stringResponse.data(using: .utf8) {

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ObservationsSpeciesView: View {
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
-
     @EnvironmentObject var settings: Settings
     
     var speciesID: Int
@@ -26,8 +25,8 @@ struct ObservationsSpeciesView: View {
                             Text("Observation ID: \(result.species)")
                             Text("Species name: \(result.species_detail.name)")
                             Text("Date: \(result.date)")
-                            Text("\(result.location_detail.name)")
-                            Text("Date: \(result.user_detail.name)")
+                            Text("Location: \(result.location_detail.name)")
+                            Text("User: \(result.user_detail.name)")
                             Text("Time: \(result.time ?? "unknown")")
                             Text("Substrate: \(result.substrate ?? 0)")
                             // Add more details as needed
@@ -37,7 +36,7 @@ struct ObservationsSpeciesView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate)
+                viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
             }
             .navigationBarTitle("Observations Species")
         }

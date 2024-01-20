@@ -16,44 +16,44 @@ struct ContentView: View {
         TabView {
 //            // Tab 1
 ////            LoginView(loginViewModel: loginViewModel)
-//            MapObservationView()
-//                .environmentObject(observationsViewModel)
-//                .tabItem {
-//                    Text("Map")
-//                    Image(systemName: "location.fill")
-//                }
-//
-//            // Tab 2
-//            ObservationsView()
-//                .environmentObject(observationsViewModel)
-//                .tabItem {
-//                    Text("Obs")
-//                    Image(systemName: "binoculars.fill")
-//                }
-            
-//            // Tab 3
-//            BirdView()
-//                .tabItem {
-//                    Text("Species")
-//                    Image(systemName: "tree.fill")
-//                }
-            
-
-            // Tab 3
-            ObservationsSpeciesView(speciesID: 62)
-                .environmentObject(observationsSpeciesViewModel)
+            MapObservationView()
+                .environmentObject(observationsViewModel)
                 .tabItem {
-                    Text("MapSpecies")
-                    Image(systemName: "bird.fill")
-                }
-            
-            
-            MapObservationsSpeciesView(speciesID: 62)
-                .environmentObject(observationsSpeciesViewModel)
-                .tabItem {
-                    Text("ObsSpecies")
+                    Text("Map")
                     Image(systemName: "location.fill")
                 }
+//
+//            // Tab 2
+            ObservationsView()
+                .environmentObject(observationsViewModel)
+                .tabItem {
+                    Text("Obs")
+                    Image(systemName: "binoculars.fill")
+                }
+            
+            // Tab 3
+            BirdView()
+                .tabItem {
+                    Text("Species")
+                    Image(systemName: "tree.fill")
+                }
+            
+
+//            // Tab 3
+//            ObservationsSpeciesView(speciesID: 62)
+//                .environmentObject(observationsSpeciesViewModel)
+//                .tabItem {
+//                    Text("MapSpecies")
+//                    Image(systemName: "bird.fill")
+//                }
+//            
+//            
+//            MapObservationsSpeciesView(speciesID: 62)
+//                .environmentObject(observationsSpeciesViewModel)
+//                .tabItem {
+//                    Text("ObsSpecies")
+//                    Image(systemName: "location.fill")
+//                }
 
             // Tab 4
             SettingsView()

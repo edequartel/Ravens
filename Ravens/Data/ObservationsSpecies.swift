@@ -35,7 +35,7 @@ struct ObservationSpecies: Codable, Identifiable {
     var embargo_date: String
     var uuid: String?
     let externalReference: [String]?
-    var links: [String?]
+//    var links: [String?]
 //    var details: [String?]
     var observer_location: Point?
     var transect_uuid: URL?
