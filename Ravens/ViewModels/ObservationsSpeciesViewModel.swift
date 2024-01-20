@@ -60,7 +60,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
-                print("Response as String: \(stringResponse)")
+//                print("Response as String: \(stringResponse)")
 
                 // Now you can convert the stringResponse to Data and decode it
                 if let data = stringResponse.data(using: .utf8) {

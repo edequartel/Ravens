@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct BirdView: View {
+    let log = SwiftyBeaver.self
     @StateObject private var viewModel = BirdViewModel()
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
@@ -19,34 +21,54 @@ struct BirdView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var searchText = ""
+    @State private var isObservationSheetPresented = false
+    @State private var isMapObservationSheetPresented = false
+    
+    @State private var birdId = 1
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     // Display your bird information here
-                                        NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
-                    //                    NavigationLink(destination: ObservationsSpeciesView(speciesID: bird.id)) {
-                   
-                    
-//                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
-                        Image(systemName: "bird.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(myColor(value: bird.rarity), .clear)
-                        
+                    NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
+                        HStack { Image(systemName: "circle.fill")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(myColor(value: bird.rarity), .clear)
+                        }
                         VStack(alignment: .leading) {
-                            Text("\(bird.rarity) \(bird.id) \(bird.name)")
+                            Text("\(bird.id) \(bird.name)")
                                 .bold()
+                            
                             Text("\(bird.scientific_name)")
                                 .italic()
                             // Additional information if needed
                         }
                     }
                     .swipeActions {
-                        Button("Obs") {
-                            print("\(bird.id)")
+                        Button(action: {
+                            log.verbose("call isObservationSheetPresented with bird.id \(bird.id)")
+                            birdId = bird.id
+                            isObservationSheetPresented.toggle()
+                        }) {
+                            Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
+                                .foregroundColor(.blue) // You can customize the color
+                                .font(.title) // You can customize the font size
+                                .padding() // You can customize the padding
                         }
                         .tint(.green)
+                        
+                        Button(action: {
+                            log.verbose("call isMapObservationSheetPresented with bird.id \(bird.id)")
+                            birdId = bird.id
+                            isMapObservationSheetPresented.toggle()
+                        }) {
+                            Image(systemName: "map.fill") // Replace "eye" with the system image name you want
+                                .foregroundColor(.blue) // You can customize the color
+                                .font(.title) // You can customize the font size
+                                .padding() // You can customize the padding
+                        }
+                        .tint(.orange)
                     }
                 }
                 
@@ -81,6 +103,12 @@ struct BirdView: View {
             
             
         }
+        .sheet(isPresented: $isObservationSheetPresented, content: {
+            ObservationsSpeciesView(speciesID: birdId)
+        })
+        .sheet(isPresented: $isMapObservationSheetPresented, content: {
+            MapObservationsSpeciesView(speciesID: birdId)
+        })
         .searchable(text: $searchText)
         .onAppear() {
             viewModel.fetchData(for: settings.selectedGroup)

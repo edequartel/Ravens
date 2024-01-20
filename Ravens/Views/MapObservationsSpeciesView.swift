@@ -30,6 +30,7 @@ struct MapObservationsSpeciesView: View {
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
+                MapCompass() //tapping this makes it north
             }
             
         }

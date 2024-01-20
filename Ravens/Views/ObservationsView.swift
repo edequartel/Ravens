@@ -33,6 +33,7 @@ struct ObservationsView: View {
                                         HStack {
                                             Text("\(result.species_detail.name)")
                                                 .font(.subheadline)
+                                            Spacer()
                                             Text("\(result.user)")
                                         }
                                         

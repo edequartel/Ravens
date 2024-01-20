@@ -7,7 +7,11 @@
 
 import SwiftUI
 import MapKit
+import SwiftyBeaver
+
 struct ContentView: View {
+    let log = SwiftyBeaver.self
+    
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
@@ -63,6 +67,7 @@ struct ContentView: View {
                 }
         }
         .onAppear() {
+            log.verbose("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
         }
     }

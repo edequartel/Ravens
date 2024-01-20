@@ -31,7 +31,13 @@ struct ObservationsSpeciesView: View {
                             Text("Substrate: \(result.substrate ?? 0)")
                             // Add more details as needed
                         }
+                        .onTapGesture {
+                            if let url = URL(string: result.permalink) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
                     }
+                    
                     .font(.footnote)
                 }
             }

@@ -53,6 +53,7 @@
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
+		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
 		478153B92B58022B005F87CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153B82B58022B005F87CC /* LoginView.swift */; };
@@ -104,6 +105,7 @@
 		47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesViewModel.swift; sourceTree = "<group>"; };
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
+		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
+				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				4781539A2B57BDC2005F87CC /* README.md */,
+				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
 				474093882B564F49004F10C5 /* images */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
@@ -260,6 +264,7 @@
 				474C404E2B4BD24F0038B3A5 /* RichText */,
 				474C40972B5000370038B3A5 /* OptionallyDecodable */,
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
+				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -296,6 +301,7 @@
 				474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */,
 				474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -617,6 +623,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -644,6 +658,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */;
 			productName = OptionallyDecodable;
+		};
+		4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

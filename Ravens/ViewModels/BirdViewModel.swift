@@ -8,15 +8,17 @@
 
 import Foundation
 import Alamofire
-//import Combine
+import SwiftyBeaver
+
 
 class BirdViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var birds = [Bird]()
 
-
     func fetchData(for groupID: Int) {
-        print("fetchData BirdViewModel \(groupID)")
-        let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
+        log.verbose("fetchData BirdViewModel \(groupID)")
+//        let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
+        let url = "https://waarneming.nl/api/v1/region-lists/5001/species/" //??edq bug
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [

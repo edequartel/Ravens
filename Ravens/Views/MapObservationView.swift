@@ -40,6 +40,7 @@ struct MapObservationView: View {
                 .mapControls() {
                     MapUserLocationButton()
                     MapPitchToggle()
+                    MapCompass() //tapping this makes it north
                 }
                 .onTapGesture { position in
                     if let coordinate = proxy.convert(position, from: .local) {

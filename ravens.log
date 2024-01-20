@@ -1,0 +1,119 @@
+2024-01-20 16:32:20.995 VERBOSE: not so important
+2024-01-20 16:32:21.004 DEBUG: something to debug
+2024-01-20 16:32:21.007 INFO: a nice information
+2024-01-20 16:32:21.010 WARNING: oh no, that won’t be good
+2024-01-20 16:32:21.013 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:34:28.056 VERBOSE: not so important
+2024-01-20 16:34:28.063 DEBUG: something to debug
+2024-01-20 16:34:28.065 INFO: a nice information
+2024-01-20 16:34:28.068 WARNING: oh no, that won’t be good
+2024-01-20 16:34:28.071 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:36:07.731 VERBOSE: not so important
+2024-01-20 16:36:07.763 DEBUG: something to debug
+2024-01-20 16:36:07.777 INFO: a nice information
+2024-01-20 16:36:07.781 WARNING: oh no, that won’t be good
+2024-01-20 16:36:07.784 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:36:33.526 VERBOSE: not so important
+2024-01-20 16:36:33.532 DEBUG: something to debug
+2024-01-20 16:36:33.535 INFO: a nice information
+2024-01-20 16:36:33.543 WARNING: oh no, that won’t be good
+2024-01-20 16:36:33.546 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:37:09.088 VERBOSE: not so important
+2024-01-20 16:37:09.100 DEBUG: something to debug
+2024-01-20 16:37:09.104 INFO: a nice information
+2024-01-20 16:37:09.107 WARNING: oh no, that won’t be good
+2024-01-20 16:37:09.111 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:37:32.366 VERBOSE: not so important
+2024-01-20 16:37:32.372 DEBUG: something to debug
+2024-01-20 16:37:32.375 INFO: a nice information
+2024-01-20 16:37:32.378 WARNING: oh no, that won’t be good
+2024-01-20 16:37:32.381 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:37:51.740 VERBOSE: not so important
+2024-01-20 16:37:51.746 DEBUG: something to debug
+2024-01-20 16:37:51.748 INFO: a nice information
+2024-01-20 16:37:51.751 WARNING: oh no, that won’t be good
+2024-01-20 16:37:51.754 Beaver Love!: ouch, an error did occur!
+2024-01-20 16:44:04.974 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:45:58.890 VERBOSE: 
+NEW LAUNCH
+2024-01-20 16:46:53.030 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:47:56.389 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:48:18.170 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:48:20.897 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:49:05.016 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:49:14.613 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:49:37.177 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:50:12.562 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:50:15.404 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:50:46.072 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:50:48.841 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:51:13.271 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:51:14.932 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:51:51.327 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:51:52.930 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:52:16.652 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:52:21.645 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:53:11.455 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:53:13.424 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:53:53.572 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:53:58.034 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:55:00.294 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:55:04.926 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:56:36.061 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:56:42.790 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:57:31.099 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:57:34.227 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:58:40.525 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:58:43.894 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:59:36.395 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 16:59:40.235 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 16:59:43.173 VERBOSE: call ObservationsSpeciesView with bird.id 58
+2024-01-20 17:02:17.156 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:02:31.090 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:02:33.468 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:05:19.236 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:05:22.305 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:05:25.896 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:07:32.018 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:07:33.713 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:07:37.836 VERBOSE: call isSheetPresented with bird.id 58
+2024-01-20 17:08:10.806 VERBOSE: call isSheetPresented with bird.id 306
+2024-01-20 17:08:27.703 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:08:47.411 VERBOSE: call isObservationSheetPresented with bird.id 43
+2024-01-20 17:08:56.934 VERBOSE: call isObservationSheetPresented with bird.id 306
+2024-01-20 17:11:07.715 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:11:12.913 VERBOSE: call isObservationSheetPresented with bird.id 43
+2024-01-20 17:11:23.839 VERBOSE: call isObservationSheetPresented with bird.id 306
+2024-01-20 17:12:14.088 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:12:18.107 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:12:22.984 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:12:48.066 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:13:16.279 VERBOSE: call isSheetPresented with bird.id 61
+2024-01-20 17:14:26.562 VERBOSE: fetchData BirdViewModel 1
+2024-01-20 17:14:42.271 VERBOSE: fetchData BirdViewModel 1
+2024-01-20 17:14:46.192 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:14:49.005 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:14:52.549 VERBOSE: call isSheetPresented with bird.id 58
+2024-01-20 17:15:30.884 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:15:33.344 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:15:37.435 VERBOSE: call isSheetPresented with bird.id 58
+2024-01-20 17:16:08.549 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:16:11.466 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:18:15.371 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:18:17.627 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:18:21.703 VERBOSE: call isSheetPresented with bird.id 214
+2024-01-20 17:29:05.669 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:29:07.568 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:38:07.169 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:38:12.791 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:38:20.610 VERBOSE: call isMapObservationSheetPresented with bird.id 58
+2024-01-20 17:38:56.395 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:38:58.438 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:39:01.220 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:40:05.825 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:40:08.975 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:40:57.549 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:40:59.841 VERBOSE: fetchData BirdViewModel 5001
+2024-01-20 17:41:05.431 VERBOSE: call isObservationSheetPresented with bird.id 58
+2024-01-20 17:42:16.368 VERBOSE: *** NEW LAUNCH ***
+2024-01-20 17:43:00.549 VERBOSE: *** NEW LAUNCH ***
