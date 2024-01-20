@@ -105,9 +105,11 @@ struct BirdView: View {
         }
         .sheet(isPresented: $isObservationSheetPresented, content: {
             ObservationsSpeciesView(speciesID: birdId)
+//                .navigationTitle("birdId")
         })
         .sheet(isPresented: $isMapObservationSheetPresented, content: {
             MapObservationsSpeciesView(speciesID: birdId)
+//                .navigationTitle("birdId")
         })
         .searchable(text: $searchText)
         .onAppear() {

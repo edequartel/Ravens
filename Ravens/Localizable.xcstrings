@@ -64,6 +64,9 @@
         }
       }
     },
+    "birdId" : {
+
+    },
     "Code %@" : {
       "localizations" : {
         "nl" : {
