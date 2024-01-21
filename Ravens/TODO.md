@@ -4,7 +4,7 @@
 - the circle is not yet accurate when starting up around actual location
 - the api calls have to be cached
 - sort
-- show nrofobs 
+- show nrofobs on list view
 - recursive 
 - login 
 - check dataload?
