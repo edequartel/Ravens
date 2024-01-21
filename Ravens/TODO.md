@@ -3,6 +3,12 @@
 - regionlist/species and choice of country is now hard coded (see BirdViewModel)
 - the circle is not yet accurate when starting up around actual location
 - the api calls have to be cached
+- sort
+- show nrofobs 
+- recursive 
+- login 
+- check dataload?
+- flip
 
 let log = SwiftyBeaver.self
 log.verbose("not so important")  // prio 1, VERBOSE in silver
