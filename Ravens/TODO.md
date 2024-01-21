@@ -8,7 +8,8 @@
 - recursive 
 - login 
 - check dataload?
-- flip
+- flip 
+- sheet exyte
 
 let log = SwiftyBeaver.self
 log.verbose("not so important")  // prio 1, VERBOSE in silver
