@@ -11,6 +11,8 @@
 - flip 
 - sheet exyte
 
+**messages**
+
 let log = SwiftyBeaver.self
 
 - log.verbose("not so important")  // prio 1, VERBOSE in silver
