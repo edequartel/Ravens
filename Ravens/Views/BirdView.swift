@@ -31,7 +31,7 @@ struct BirdView: View {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     // Display your bird information here
-                    NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
+                    xxx NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
                         HStack { Image(systemName: "circle.fill")
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
@@ -50,7 +50,7 @@ struct BirdView: View {
                         Button(action: {
                             log.verbose("call isObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id
-                            isObservationSheetPresented.toggle()
+                            xxx isObservationSheetPresented.toggle()
                         }) {
                             Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
                                 .foregroundColor(.blue) // You can customize the color
@@ -62,7 +62,7 @@ struct BirdView: View {
                         Button(action: {
                             log.verbose("call isMapObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id
-                            isMapObservationSheetPresented.toggle()
+                            xxx isMapObservationSheetPresented.toggle()
                         }) {
                             Image(systemName: "map.fill") // Replace "eye" with the system image name you want
                                 .foregroundColor(.blue) // You can customize the color
@@ -105,11 +105,11 @@ struct BirdView: View {
             
         }
         .sheet(isPresented: $isObservationSheetPresented, content: {
-            ObservationsSpeciesView(speciesID: birdId)
+            xxx ObservationsSpeciesView(speciesID: birdId)
 //                .navigationTitle("birdId")
         })
         .sheet(isPresented: $isMapObservationSheetPresented, content: {
-            MapObservationsSpeciesView(speciesID: birdId)
+            xxx MapObservationsSpeciesView(speciesID: birdId)
 //                .navigationTitle("birdId")
         })
         .searchable(text: $searchText)
