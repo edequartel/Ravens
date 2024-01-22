@@ -14,10 +14,10 @@ struct ObservationsSpeciesView: View {
     var speciesID: Int
     
     var body: some View {
-        NavigationStack {
-            HStack() {
-                Text("Total: \(viewModel.observationsSpecies?.count ?? 0) \(viewModel.observationsSpecies?.results.count ?? 0)")
-            }
+//        NavigationStack {
+//            HStack() {
+//                Text("Total: \(viewModel.observationsSpecies?.count ?? 0) \(viewModel.observationsSpecies?.results.count ?? 0)")
+//            }
             List {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results, id: \.id) { result in
@@ -45,7 +45,7 @@ struct ObservationsSpeciesView: View {
                 viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
             }
             .navigationBarTitle("Observations Species")
-        }
+//        }
     }
 }
 

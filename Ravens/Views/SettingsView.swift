@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    
     @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
     @StateObject private var regionsViewModel = RegionViewModel()
     @StateObject private var regionListViewModel = RegionListViewModel()
     
     @EnvironmentObject var settings: Settings
+    
+//    @Binding var isShowing: Bool
     
     
     let minimumRadius = 500.0
@@ -31,7 +35,7 @@ struct SettingsView: View {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
                             Text("\(speciesGroup.name)")
-                                .lineLimit(1) 
+                                .lineLimit(1)
                                 .truncationMode(.tail)
                         }
                     }
@@ -56,14 +60,6 @@ struct SettingsView: View {
                         print(settings.selectedRarity)
                     }
                     
-
-                    Picker("Days", selection: $settings.days) {
-                        ForEach(1 ... 14, id: \.self) { day in
-                            HStack() {
-                                Text("\(day)")
-                            }
-                        }
-                    }
                     
                     HStack {
                         Text("Radius")
@@ -79,6 +75,28 @@ struct SettingsView: View {
                     .padding()
                     
                 }
+                Section("Days") {
+                    
+                    Picker("Window", selection: $settings.days) {
+                        ForEach(1 ... 14, id: \.self) { day in
+                            HStack() {
+                                Text("\(day)")
+                            }
+                        }
+                    }
+                    
+                    DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
+                        .onChange(of: settings.selectedDate) {
+                            // Perform your action when the date changes
+                            observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
+                                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                                            radius: settings.radius,
+                                                            species_group: settings.selectedGroupId,
+                                                            min_rarity: settings.selectedRarity)
+                        }
+                }
+                
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -115,10 +133,13 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         // Creating dummy data for preview
+        let observationsViewModel = ObservationsViewModel()
         let settings = Settings()
-
+        
         // Setting up the environment objects for the preview
         SettingsView()
             .environmentObject(settings)
+            .environmentObject(observationsViewModel)
     }
 }
+

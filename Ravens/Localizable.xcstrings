@@ -64,7 +64,7 @@
         }
       }
     },
-    "birdId" : {
+    "Close" : {
 
     },
     "Code %@" : {
@@ -96,6 +96,9 @@
           }
         }
       }
+    },
+    "Date" : {
+
     },
     "Date: %@" : {
 
@@ -317,6 +320,7 @@
       }
     },
     "Obs" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -509,16 +513,6 @@
         }
       }
     },
-    "Total: %lld %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Total: %1$lld %2$lld"
-          }
-        }
-      }
-    },
     "Type %lld" : {
       "localizations" : {
         "nl" : {
@@ -551,6 +545,9 @@
           }
         }
       }
+    },
+    "Window" : {
+
     }
   },
   "version" : "1.0"

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47370C8E2B5E3CAF0030BE57 /* SheetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47370C8D2B5E3CAF0030BE57 /* SheetSettingsView.swift */; };
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
@@ -53,6 +54,10 @@
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
+		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
+		4767396F2B5D5BEF00DC8187 /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */; };
+		476739722B5D5C1100DC8187 /* AnimatedTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 476739712B5D5C1100DC8187 /* AnimatedTabBar */; };
+		476739752B5D5C3B00DC8187 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 476739742B5D5C3B00DC8187 /* PopupView */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
@@ -60,9 +65,11 @@
 		478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BA2B5809FB005F87CC /* LoginViewModel.swift */; };
 		478153BD2B580A36005F87CC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BC2B580A36005F87CC /* Login.swift */; };
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
+		47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47370C8D2B5E3CAF0030BE57 /* SheetSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetSettingsView.swift; sourceTree = "<group>"; };
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		474093892B564F49004F10C5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -111,7 +118,8 @@
 		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		478153BA2B5809FB005F87CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		478153BC2B580A36005F87CC /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
+		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
+		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,11 +128,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
+				4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */,
+				476739752B5D5C3B00DC8187 /* PopupView in Frameworks */,
 				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
+				476739722B5D5C1100DC8187 /* AnimatedTabBar in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
+				4767396F2B5D5BEF00DC8187 /* ConcentricOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +160,8 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47370C8D2B5E3CAF0030BE57 /* SheetSettingsView.swift */,
+				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -166,6 +180,7 @@
 			children = (
 				4781539A2B57BDC2005F87CC /* README.md */,
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
+				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474093882B564F49004F10C5 /* images */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
@@ -206,7 +221,6 @@
 		474C40812B4D17B40038B3A5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C403B2B4BC5070038B3A5 /* Bird.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
 				474C40522B4BFD090038B3A5 /* RegionList.swift */,
@@ -265,6 +279,10 @@
 				474C40972B5000370038B3A5 /* OptionallyDecodable */,
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
 				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
+				4767396B2B5D5BE400DC8187 /* FloatingButton */,
+				4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */,
+				476739712B5D5C1100DC8187 /* AnimatedTabBar */,
+				476739742B5D5C3B00DC8187 /* PopupView */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -302,6 +320,10 @@
 				474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */,
+				4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
+				476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */,
+				476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -349,6 +371,7 @@
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* ObservationsSpecies.swift in Sources */,
+				47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
@@ -362,6 +385,7 @@
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
+				47370C8E2B5E3CAF0030BE57 /* SheetSettingsView.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
 				478153B92B58022B005F87CC /* LoginView.swift in Sources */,
@@ -510,6 +534,7 @@
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -540,6 +565,7 @@
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -623,6 +649,38 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/FloatingButton.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
+		4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ConcentricOnboarding.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+		476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/AnimatedTabBar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
+		476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.3;
+			};
+		};
 		4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
@@ -658,6 +716,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */;
 			productName = OptionallyDecodable;
+		};
+		4767396B2B5D5BE400DC8187 /* FloatingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */;
+			productName = FloatingButton;
+		};
+		4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */;
+			productName = ConcentricOnboarding;
+		};
+		476739712B5D5C1100DC8187 /* AnimatedTabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */;
+			productName = AnimatedTabBar;
+		};
+		476739742B5D5C3B00DC8187 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;

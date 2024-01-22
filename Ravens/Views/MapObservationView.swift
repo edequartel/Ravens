@@ -13,7 +13,6 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-    
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
       
     var body: some View {
@@ -23,7 +22,7 @@ struct MapObservationView: View {
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
                             Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
-                                .tint(.blue)
+                                .tint(.gray)
                         }
                     }
                     
@@ -58,31 +57,7 @@ struct MapObservationView: View {
                         settings.currentLocation = newLocation
                     }
                 }
-                
-                
             }
-            
-            HStack {
-                Text("\(settings.selectedGroupString)")
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                Spacer()
-                Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
-
-                Spacer()
-                DatePicker("", selection: $settings.selectedDate, displayedComponents: [.date])
-                    .onChange(of: settings.selectedDate) {
-                        // Perform your action when the date changes
-                        observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                                        lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                        long: settings.currentLocation?.coordinate.longitude ?? longitude,
-                                                        radius: settings.radius,
-                                                        species_group: settings.selectedGroupId,
-                                                        min_rarity: settings.selectedRarity)
-                    }
-            }
-            .padding()
-                
         }
         .onAppear(){
             print("Radius \(settings.radius)")

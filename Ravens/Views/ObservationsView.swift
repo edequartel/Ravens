@@ -12,8 +12,36 @@ struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     
+    @Binding var isShowing: Bool
+    
+    let records = [
+        (name: "John", age: 30),
+        (name: "Alice", age: 25),
+        (name: "Bob", age: 35),
+        (name: "Alice", age: 22)
+    ]
+    
+    
     var body: some View {
         NavigationStack {
+            Button {
+                isShowing = false
+                print("showingoff")
+            } label: {
+                Text("Close")
+                    .buttonStyle(.plain)
+                    .font(.system(size: 17))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 44)
+                    .background {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 0.29, green: 0.38, blue: 1))
+                    }
+            }
+            .buttonStyle(.plain)
+            .foregroundColor(.white)
+            .padding(.top, 12)
+            
             Form {
                 Section("Details") {
                     HStack {
@@ -24,8 +52,7 @@ struct ObservationsView: View {
                 Section("List") {
                     List {
                         if let results = observationsViewModel.observations?.results {
-                            
-                            ForEach(results.sorted(by: {$0.rarity > $1.rarity} ), id: \.id) { result in
+                            ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name) < ($0.rarity, $1.species_detail.name) }), id: \.id) { result in
                                 VStack(alignment: .leading) {
                                     HStack {
                                         Image(systemName: "circle.fill")
@@ -42,10 +69,6 @@ struct ObservationsView: View {
                                             if result.has_sound { Image(systemName: "speaker.fill" ) }
                                             if result.has_photo { Image(systemName: "photo.fill") }
                                         }
-                          
-//                                        Spacer()
-//                                        Text("usr:\(result.user)")
-//                                            .font(.subheadline)
                                     }
                                 }
                                 .onTapGesture {
@@ -86,7 +109,7 @@ struct ObservationsView_Previews: PreviewProvider {
         let settings = Settings()
         
         // Setting up the environment objects for the preview
-        ObservationsView()
+        ObservationsView(isShowing: .constant(false))
             .environmentObject(observationsViewModel)
             .environmentObject(settings)
     }

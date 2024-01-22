@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
+import PopupView
 
 struct ContentView: View {
     let log = SwiftyBeaver.self
@@ -16,55 +17,48 @@ struct ContentView: View {
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
     
+    @State private var isViewAVisible = true
+    
+    @State private var isSheetSettingsPresented = false
+    
     var body: some View {
         TabView {
-//            // Tab 1
-////            LoginView(loginViewModel: loginViewModel)
-            MapObservationView()
-                .environmentObject(observationsViewModel)
-                .tabItem {
-                    Text("Map")
-                    Image(systemName: "location.fill")
-                }
-//
-//            // Tab 2
-            ObservationsView()
-                .environmentObject(observationsViewModel)
-                .tabItem {
-                    Text("Obs")
-                    Image(systemName: "binoculars.fill")
-                }
+            // Tab 1
+            ZStack {
+                MapObservationView()
+                    .environmentObject(observationsViewModel)
+                    .transition(.flipView)
+                ScreenCircle(toggle: $isSheetSettingsPresented)
+            }
+            .tabItem {
+                Text("Map")
+                Image(systemName: "binoculars")
+            }
             
-            // Tab 3
+            // Tab 2
             BirdView()
                 .tabItem {
                     Text("Species")
-                    Image(systemName: "tree.fill")
+                    Image(systemName: "tree")
                 }
             
-
-//            // Tab 3
-//            ObservationsSpeciesView(speciesID: 62)
-//                .environmentObject(observationsSpeciesViewModel)
-//                .tabItem {
-//                    Text("MapSpecies")
-//                    Image(systemName: "bird.fill")
-//                }
-//            
-//            
-//            MapObservationsSpeciesView(speciesID: 62)
-//                .environmentObject(observationsSpeciesViewModel)
-//                .tabItem {
-//                    Text("ObsSpecies")
-//                    Image(systemName: "location.fill")
-//                }
-
-            // Tab 4
-            SettingsView()
+            // Tab 3
+                    SettingsView()
                 .tabItem {
                     Text("Settings")
-                    Image(systemName: "gearshape.fill")
+                    Image(systemName: "gearshape")
                 }
+        }
+        .popup(isPresented: $isSheetSettingsPresented) {
+            ObservationsView(isShowing: $isSheetSettingsPresented)
+        } customize: {
+            $0
+//                .type(.floater())
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .isOpaque(true)
+                .useKeyboardSafeArea(true)
         }
         .onAppear() {
             log.verbose("*** NEW LAUNCH ***")
@@ -82,6 +76,7 @@ struct ContentView: View {
 //        BirdView()
 //        SpeciesDetailsView(speciesID: 2)
 //        SettingsView()
+//        MapObservationsSpeciesView(speciesID: 62)
 //    }
 //}
 
@@ -92,9 +87,9 @@ struct ContentView_Previews: PreviewProvider {
         let observationsViewModel = ObservationsViewModel()
         let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
         
-//        let loginViewModel = LoginViewModel()
+        // let loginViewModel = LoginViewModel()
         let settings = Settings()
-
+        
         // Setting up the environment objects for the preview
         ContentView()
             .environmentObject(observationsViewModel)

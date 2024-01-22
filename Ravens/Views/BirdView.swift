@@ -37,6 +37,7 @@ struct BirdView: View {
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
                         }
                         VStack(alignment: .leading) {
+//                            ObservationsSpeciesView(speciesID: bird.id)
                             Text("\(bird.id) \(bird.name)")
                                 .bold()
                             
