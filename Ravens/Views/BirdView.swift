@@ -31,7 +31,10 @@ struct BirdView: View {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     // Display your bird information here
-                    xxx NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
+    
+                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
+                        
+                    //NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
                         HStack { Image(systemName: "circle.fill")
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
@@ -105,11 +108,11 @@ struct BirdView: View {
             
         }
         .sheet(isPresented: $isObservationSheetPresented, content: {
-            xxx ObservationsSpeciesView(speciesID: birdId)
+            ObservationsSpeciesView(speciesID: birdId)
 //                .navigationTitle("birdId")
         })
         .sheet(isPresented: $isMapObservationSheetPresented, content: {
-            xxx MapObservationsSpeciesView(speciesID: birdId)
+            SpeciesDetailsView(speciesID: birdId)
 //                .navigationTitle("birdId")
         })
         .searchable(text: $searchText)
