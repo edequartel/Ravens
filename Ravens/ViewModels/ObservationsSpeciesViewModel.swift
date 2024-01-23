@@ -8,8 +8,11 @@
 import Foundation
 import Alamofire
 import MapKit
+import SwiftyBeaver
 
 class ObservationsSpeciesViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
+    
     @Published var observationsSpecies: ObservationsSpecies?
     
     var locations = [Location]()
@@ -36,25 +39,19 @@ class ObservationsSpeciesViewModel: ObservableObject {
     
     func fetchData(speciesId: Int, endDate: Date, days: Int) {
         print("fetchData ObservationsSpeciesViewModel")
-
+        log.verbose("speciesID \(speciesId)")
+        
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl",
             "Authorization": "Token 21047b0d6742dc36234bc5293053bc757623470b" //<<TOKEN LATER BIJ ZETTEN 3600??
         ]
-        
-//        if let startDate = Calendar.current.date(byAdding: .day, value: -14, to: endDate) {
-//            print("Start Date: \(startDate)")
-//        }
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
-        print("db \(date_after)")
         let date_before = formatCurrentDate(value:endDate)
-        print("da \(date_before)")
         
         var url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"//&page=\(page)"
         
-
         print("\(url)")
 
         AF.request(url, headers: headers).responseString { response in

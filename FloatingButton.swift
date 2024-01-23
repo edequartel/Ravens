@@ -42,13 +42,13 @@ import FloatingButton
 //}
 
 
-struct ScreenCircle: View {
+struct ObservationCircle: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Binding var toggle : Bool
     
     var body: some View {
-        let mainButton = MainButton(imageName: "list.bullet", colorHex: "f7b731", toggle: $toggle)
+        let mainButton = MainButton(imageName: toggle ? "map" : "list.bullet" , colorHex: "f7b731", toggle: $toggle)
         let buttonsImage = MockData.iconImageNames.enumerated().map { index, value in
             IconButton(imageName: value, color: MockData.colors[index])
         }
@@ -65,7 +65,7 @@ struct ScreenCircle: View {
                 menu
                 Spacer()
             }
-            .padding(20)
+            .padding()
         }
     }
 }

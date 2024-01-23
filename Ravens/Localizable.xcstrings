@@ -34,12 +34,32 @@
         }
       }
     },
+    "%lld Locations: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld Locations: %2$lld"
+          }
+        }
+      }
+    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%11d m"
+          }
+        }
+      }
+    },
+    "%lld Total: %lld %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld Total: %2$lld %3$lld"
           }
         }
       }
@@ -98,9 +118,6 @@
       }
     },
     "Date" : {
-
-    },
-    "Date: %@" : {
 
     },
     "Days" : {
@@ -236,9 +253,6 @@
         }
       }
     },
-    "Location: %@" : {
-
-    },
     "Manual" : {
       "localizations" : {
         "nl" : {
@@ -320,7 +334,6 @@
       }
     },
     "Obs" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -329,12 +342,6 @@
           }
         }
       }
-    },
-    "Observation ID: %lld" : {
-
-    },
-    "Observations Species" : {
-
     },
     "Poi" : {
       "localizations" : {
@@ -476,15 +483,6 @@
         }
       }
     },
-    "Species name: %@" : {
-
-    },
-    "Substrate: %lld" : {
-
-    },
-    "Time: %@" : {
-
-    },
     "Token: %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -532,9 +530,6 @@
           }
         }
       }
-    },
-    "User: %@" : {
-
     },
     "Very rare" : {
       "localizations" : {

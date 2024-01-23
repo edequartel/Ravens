@@ -40,7 +40,7 @@ struct ObservationsView: View {
             }
             .buttonStyle(.plain)
             .foregroundColor(.white)
-            .padding(.top, 12)
+            .padding()
             
             Form {
                 Section("Details") {

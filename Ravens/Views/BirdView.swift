@@ -39,7 +39,7 @@ struct BirdView: View {
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
                         }
-                        VStack(alignment: .leading) {
+                        LazyVStack(alignment: .leading) {
 //                            ObservationsSpeciesView(speciesID: bird.id)
                             Text("\(bird.id) \(bird.name)")
                                 .bold()
@@ -47,6 +47,8 @@ struct BirdView: View {
                             Text("\(bird.scientific_name)")
                                 .italic()
                             // Additional information if needed
+                            
+//                            ObservationsSpeciesView(speciesID: bird.id)
                         }
                     }
                     .swipeActions {

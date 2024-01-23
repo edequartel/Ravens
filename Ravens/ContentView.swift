@@ -28,10 +28,10 @@ struct ContentView: View {
                 MapObservationView()
                     .environmentObject(observationsViewModel)
                     .transition(.flipView)
-                ScreenCircle(toggle: $isSheetSettingsPresented)
+                ObservationCircle(toggle: $isSheetSettingsPresented)
             }
             .tabItem {
-                Text("Map")
+                Text("Obs")
                 Image(systemName: "binoculars")
             }
             
