@@ -53,7 +53,7 @@ struct BirdView: View {
                         Button(action: {
                             log.verbose("call isObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id
-                            xxx isObservationSheetPresented.toggle()
+                            isObservationSheetPresented.toggle()
                         }) {
                             Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
                                 .foregroundColor(.blue) // You can customize the color
@@ -65,7 +65,7 @@ struct BirdView: View {
                         Button(action: {
                             log.verbose("call isMapObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id
-                            xxx isMapObservationSheetPresented.toggle()
+                            isMapObservationSheetPresented.toggle()
                         }) {
                             Image(systemName: "map.fill") // Replace "eye" with the system image name you want
                                 .foregroundColor(.blue) // You can customize the color
