@@ -11,6 +11,9 @@
 - flip 
 - sheet exyte
 - shareview
+- alerts
+- colors
+- select all species
 
 **messages**
 
