@@ -14,10 +14,12 @@ struct MapObservationsSpeciesView: View {
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
     
+    @State private var isSheetObservationsViewPresented = false
+    
     var speciesID: Int
     
     var body: some View {
-        VStack {
+        ZStack {
             MapReader { proxy in
                 Map(position: $position) {
                     ForEach(observationsSpeciesViewModel.locations) { location in
@@ -33,6 +35,10 @@ struct MapObservationsSpeciesView: View {
                 MapCompass() //tapping this makes it north
             }
             
+            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+        }
+        .sheet(isPresented: $isSheetObservationsViewPresented) {
+            ObservationsSpeciesView(speciesID: speciesID)
         }
         .onAppear {
             observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)

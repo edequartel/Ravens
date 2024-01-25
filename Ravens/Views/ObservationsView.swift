@@ -23,67 +23,43 @@ struct ObservationsView: View {
     
     
     var body: some View {
-        NavigationStack {
-            Button {
-                isShowing = false
-                print("showingoff")
-            } label: {
-                Text("Close")
-                    .buttonStyle(.plain)
-                    .font(.system(size: 17))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 44)
-                    .background {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(red: 0.29, green: 0.38, blue: 1))
-                    }
+        VStack {
+            HStack {
+                Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
             }
-            .buttonStyle(.plain)
-            .foregroundColor(.white)
-            .padding()
             
-            Form {
-                Section("Details") {
-                    HStack {
-                        Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
-                    }
-                }
-                
-                Section("List") {
-                    List {
-                        if let results = observationsViewModel.observations?.results {
-                            ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name) < ($0.rarity, $1.species_detail.name) }), id: \.id) { result in
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        Image(systemName: "circle.fill")
-                                            .foregroundColor(Color(myColor(value: result.rarity)))
-                                        HStack {
-                                            Text("\(result.species_detail.name)")
-                                                .font(.subheadline)
-                                            Spacer()
-                                            Text("\(result.user)")
-                                        }
-                                        
-                                        Spacer()
-                                        HStack {
-                                            if result.has_sound { Image(systemName: "speaker.fill" ) }
-                                            if result.has_photo { Image(systemName: "photo.fill") }
-                                        }
-                                    }
+            List {
+                if let results = observationsViewModel.observations?.results {
+                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name) < ($0.rarity, $1.species_detail.name) }), id: \.id) { result in
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .foregroundColor(Color(myColor(value: result.rarity)))
+                                HStack {
+                                    Text("\(result.species_detail.name)")
+                                        .font(.subheadline)
+                                    Spacer()
+                                    Text("\(result.user)")
                                 }
-                                .onTapGesture {
-                                    if let url = URL(string: result.permalink) {
-                                        UIApplication.shared.open(url)
-                                    }
+                                
+                                Spacer()
+                                HStack {
+                                    if result.has_sound { Image(systemName: "speaker.fill" ) }
+                                    if result.has_photo { Image(systemName: "photo.fill") }
                                 }
                             }
-                            
-                            
-                        } else {
-                            // Handle the case when observationsViewModel.observations?.results is nil
-                            Text("nobsavaliable")
+                        }
+                        .onTapGesture {
+                            if let url = URL(string: result.permalink) {
+                                UIApplication.shared.open(url)
+                            }
                         }
                     }
+                    
+                    
+                } else {
+                    // Handle the case when observationsViewModel.observations?.results is nil
+                    Text("nobsavaliable")
                 }
             }
         }
@@ -99,6 +75,11 @@ struct ObservationsView: View {
                                             species_group: settings.selectedGroupId,
                                             min_rarity: settings.selectedRarity)
         }
+        .padding(16)
+        .background(Color.white.cornerRadius(18))
+        .shadowedStyle()
+        .padding(.horizontal, 8)
+        .padding(.bottom, 30)
     }
 }
 
@@ -115,3 +96,22 @@ struct ObservationsView_Previews: PreviewProvider {
     }
 }
 
+//            Button {
+//                isShowing = false
+//                print("showingoff")
+//            } label: {
+//                Text("Close")
+//                    .buttonStyle(.plain)
+//                    .font(.system(size: 17))
+//                    .frame(maxWidth: .infinity)
+//                    .frame(height: 44)
+//                    .background {
+//                        RoundedRectangle(cornerRadius: 12)
+//                            .fill(Color(red: 0.29, green: 0.38, blue: 1))
+//                    }
+//            }
+//            .buttonStyle(.plain)
+//            .foregroundColor(.white)
+//            .padding()
+
+//            Form {

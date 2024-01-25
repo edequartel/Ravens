@@ -8,15 +8,13 @@
 import SwiftUI
 import AlamofireImage
 import RichText
+import SwiftyBeaver
 
 struct SpeciesDetailsView: View {
+    let log = SwiftyBeaver.self
     @ObservedObject var viewModel = SpeciesDetailsViewModel()
     
     var speciesID: Int // Add speciesID as a property
-
-    init(speciesID: Int) {
-        self.speciesID = speciesID
-    }
 
     var body: some View {
         Form{
@@ -46,16 +44,20 @@ struct SpeciesDetailsView: View {
                         
                     }
                     // Add more Text views as needed for other properties
-                    
-
-                    
                     Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                 } else {
                     Text("Loading")
                 }
             }
         }
+        .padding(16)
+        .background(Color.white.cornerRadius(18))
+        .shadowedStyle()
+        .padding(.horizontal, 8)
+        .padding(.bottom, 30)
+        
         .onAppear {
+            log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
             viewModel.fetchData(for: speciesID)
         }
     }

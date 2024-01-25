@@ -8,7 +8,6 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
-import PopupView
 
 struct ContentView: View {
     let log = SwiftyBeaver.self
@@ -19,7 +18,7 @@ struct ContentView: View {
     
     @State private var isViewAVisible = true
     
-    @State private var isSheetSettingsPresented = false
+    @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         TabView {
@@ -27,8 +26,7 @@ struct ContentView: View {
             ZStack {
                 MapObservationView()
                     .environmentObject(observationsViewModel)
-                    .transition(.flipView)
-                ObservationCircle(toggle: $isSheetSettingsPresented)
+                ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             }
             .tabItem {
                 Text("Obs")
@@ -43,22 +41,14 @@ struct ContentView: View {
                 }
             
             // Tab 3
-                    SettingsView()
+            SettingsView()
                 .tabItem {
                     Text("Settings")
                     Image(systemName: "gearshape")
                 }
         }
-        .popup(isPresented: $isSheetSettingsPresented) {
-            ObservationsView(isShowing: $isSheetSettingsPresented)
-        } customize: {
-            $0
-//                .type(.floater())
-                .position(.bottom)
-                .closeOnTap(false)
-                .backgroundColor(.black.opacity(0.4))
-                .isOpaque(true)
-                .useKeyboardSafeArea(true)
+        .sheet(isPresented: $isSheetObservationsViewPresented) {
+            ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         .onAppear() {
             log.verbose("*** NEW LAUNCH ***")
@@ -86,6 +76,7 @@ struct ContentView_Previews: PreviewProvider {
         // Creating dummy data for preview
         let observationsViewModel = ObservationsViewModel()
         let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+//        let @StateObject private var logStore = LogStore()
         
         // let loginViewModel = LoginViewModel()
         let settings = Settings()

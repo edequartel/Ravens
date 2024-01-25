@@ -13,63 +13,51 @@ struct BirdView: View {
     @StateObject private var viewModel = BirdViewModel()
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .all
     @State private var selectedRarityFilterOption: RarityFilterOption = .all
     
-    @EnvironmentObject var settings: Settings
-    
     @State private var searchText = ""
-    @State private var isObservationSheetPresented = false
     @State private var isMapObservationSheetPresented = false
-    
-    @State private var birdId = 1
+    @State private var birdId : Int?
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
-                    // Display your bird information here
-    
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
-                        
-                    //NavigationLink(destination: SpeciesDetailsView(speciesID: bird.id)) {
                         HStack { Image(systemName: "circle.fill")
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
                         }
-                        LazyVStack(alignment: .leading) {
-//                            ObservationsSpeciesView(speciesID: bird.id)
+                        VStack(alignment: .leading) {
                             Text("\(bird.id) \(bird.name)")
                                 .bold()
                             
                             Text("\(bird.scientific_name)")
                                 .italic()
                             // Additional information if needed
-                            
-//                            ObservationsSpeciesView(speciesID: bird.id)
                         }
+                        .onTapGesture() {
+                            log.verbose("onTapgesture \(bird.id)")
+                            birdId = bird.id
+                        }
+                        .onAppear() {
+                            birdId = bird.id
+                            log.verbose("onAppear \(bird.id)")
+                        }
+
                     }
                     .swipeActions {
                         Button(action: {
-                            log.verbose("call isObservationSheetPresented with bird.id \(bird.id)")
-                            birdId = bird.id
-                            isObservationSheetPresented.toggle()
-                        }) {
-                            Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
-                                .foregroundColor(.blue) // You can customize the color
-                                .font(.title) // You can customize the font size
-                                .padding() // You can customize the padding
-                        }
-                        .tint(.green)
-                        
-                        Button(action: {
-                            log.verbose("call isMapObservationSheetPresented with bird.id \(bird.id)")
-                            birdId = bird.id
+                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
+                            birdId = bird.id //<<
+                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(birdId)")
                             isMapObservationSheetPresented.toggle()
                         }) {
-                            Image(systemName: "map.fill") // Replace "eye" with the system image name you want
+                            Image(systemName: "tree.fill") // Replace "eye" with the system image name you want
                                 .foregroundColor(.blue) // You can customize the color
                                 .font(.title) // You can customize the font size
                                 .padding() // You can customize the padding
@@ -78,7 +66,10 @@ struct BirdView: View {
                     }
                 }
                 
+                
             }
+            
+            
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
                     Picker("Sort by", selection: $selectedSortOption) {
@@ -105,18 +96,13 @@ struct BirdView: View {
                     .pickerStyle(.inline)
                 }
             }
-            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
-            
-            
+            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline) 
         }
-        .sheet(isPresented: $isObservationSheetPresented, content: {
-            ObservationsSpeciesView(speciesID: birdId)
-//                .navigationTitle("birdId")
-        })
+        
         .sheet(isPresented: $isMapObservationSheetPresented, content: {
-            SpeciesDetailsView(speciesID: birdId)
-//                .navigationTitle("birdId")
+            SpeciesDetailsView(speciesID: birdId ?? 2).id(UUID())
         })
+
         .searchable(text: $searchText)
         .onAppear() {
             viewModel.fetchData(for: settings.selectedGroup)
@@ -238,7 +224,6 @@ struct BirdView_Previews: PreviewProvider {
         let observationsViewModel = ObservationsViewModel()
         let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
         let settings = Settings()
-        
         // Setting up the environment objects for the preview
         BirdView()
             .environmentObject(observationsViewModel)
@@ -246,3 +231,31 @@ struct BirdView_Previews: PreviewProvider {
             .environmentObject(settings)
     }
 }
+
+
+
+//                        Button(action: {
+//                            log.verbose("call isObservationsSpeciesViewPresented with bird.id \(bird.id)")
+//                            birdId = bird.id
+//                            isObservationsSpeciesViewPresented.toggle()
+//                        }) {
+//                            Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
+//                                .foregroundColor(.blue) // You can customize the color
+//                                .font(.title) // You can customize the font size
+//                                .padding() // You can customize the padding
+//                        }
+//                        .tint(.green)
+
+
+//Text("\(bird.id) \(bird.name)")
+//    .onAppear() {
+//        // Handle tap gesture for the bird
+//        birdId = bird.id
+//        print(">> \(birdId)")
+//    }
+//    .onTapGesture {
+//        // Handle tap gesture for the bird
+//        birdId = bird.id
+//        print("-- \(birdId)")
+//    }
+//}

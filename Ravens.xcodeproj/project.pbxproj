@@ -57,7 +57,6 @@
 		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
 		4767396F2B5D5BEF00DC8187 /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */; };
 		476739722B5D5C1100DC8187 /* AnimatedTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 476739712B5D5C1100DC8187 /* AnimatedTabBar */; };
-		476739752B5D5C3B00DC8187 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 476739742B5D5C3B00DC8187 /* PopupView */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
@@ -118,7 +117,7 @@
 		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		478153BA2B5809FB005F87CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		478153BC2B580A36005F87CC /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
+		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +128,6 @@
 			files = (
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
 				4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */,
-				476739752B5D5C3B00DC8187 /* PopupView in Frameworks */,
 				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */,
@@ -160,8 +158,8 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				47370C8D2B5E3CAF0030BE57 /* SheetSettingsView.swift */,
 				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
+				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -178,10 +176,10 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
+				474093882B564F49004F10C5 /* images */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
-				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
-				474093882B564F49004F10C5 /* images */,
+				47CF61DD2B60EDCD00709CE3 /* ViewsNotUsed */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
 				474C40822B4D17C00038B3A5 /* Views */,
@@ -239,21 +237,29 @@
 			isa = PBXGroup;
 			children = (
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
+				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
-				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
-				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
-				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
-				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
-				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
-				478153B82B58022B005F87CC /* LoginView.swift */,
-				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		47CF61DD2B60EDCD00709CE3 /* ViewsNotUsed */ = {
+			isa = PBXGroup;
+			children = (
+				47370C8D2B5E3CAF0030BE57 /* SheetSettingsView.swift */,
+				478153B82B58022B005F87CC /* LoginView.swift */,
+				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
+				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
+				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
+				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
+				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
+			);
+			path = ViewsNotUsed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,7 +288,6 @@
 				4767396B2B5D5BE400DC8187 /* FloatingButton */,
 				4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */,
 				476739712B5D5C1100DC8187 /* AnimatedTabBar */,
-				476739742B5D5C3B00DC8187 /* PopupView */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -323,7 +328,6 @@
 				4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 				4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
 				476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */,
-				476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -673,14 +677,6 @@
 				minimumVersion = 0.1.2;
 			};
 		};
-		476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/PopupView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.3;
-			};
-		};
 		4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
@@ -731,11 +727,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */;
 			productName = AnimatedTabBar;
-		};
-		476739742B5D5C3B00DC8187 /* PopupView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 476739732B5D5C3B00DC8187 /* XCRemoteSwiftPackageReference "PopupView" */;
-			productName = PopupView;
 		};
 		4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;

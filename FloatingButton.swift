@@ -47,8 +47,10 @@ struct ObservationCircle: View {
     
     @Binding var toggle : Bool
     
+    var colorHex: String // Add this property
+    
     var body: some View {
-        let mainButton = MainButton(imageName: toggle ? "map" : "list.bullet" , colorHex: "f7b731", toggle: $toggle)
+        let mainButton = MainButton(imageName: toggle ? "map" : "list.bullet" , colorHex: colorHex, toggle: $toggle)
         let buttonsImage = MockData.iconImageNames.enumerated().map { index, value in
             IconButton(imageName: value, color: MockData.colors[index])
         }
