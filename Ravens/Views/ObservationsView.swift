@@ -14,14 +14,6 @@ struct ObservationsView: View {
     
     @Binding var isShowing: Bool
     
-    let records = [
-        (name: "John", age: 30),
-        (name: "Alice", age: 25),
-        (name: "Bob", age: 35),
-        (name: "Alice", age: 22)
-    ]
-    
-    
     var body: some View {
         VStack {
             HStack {
@@ -30,25 +22,30 @@ struct ObservationsView: View {
             
             List {
                 if let results = observationsViewModel.observations?.results {
-                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name) < ($0.rarity, $1.species_detail.name) }), id: \.id) { result in
+                    ForEach(results.sorted(by: { ($1.rarity, $0.date, $0.species_detail.name) < ($0.rarity, $1.date, $1.species_detail.name) }), id: \.id) { result in
                         VStack(alignment: .leading) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(Color(myColor(value: result.rarity)))
                                 HStack {
                                     Text("\(result.species_detail.name)")
-                                        .font(.subheadline)
                                     Spacer()
                                     Text("\(result.user)")
                                 }
-                                
                                 Spacer()
                                 HStack {
                                     if result.has_sound { Image(systemName: "speaker.fill" ) }
                                     if result.has_photo { Image(systemName: "photo.fill") }
                                 }
                             }
+                            
+                            HStack {
+                                Text("\(result.date)")
+                                Text("\(result.time ?? "no time")")
+                                Spacer()
+                            }
                         }
+                        .font(.subheadline)
                         .onTapGesture {
                             if let url = URL(string: result.permalink) {
                                 UIApplication.shared.open(url)
@@ -75,11 +72,11 @@ struct ObservationsView: View {
                                             species_group: settings.selectedGroupId,
                                             min_rarity: settings.selectedRarity)
         }
-        .padding(16)
-        .background(Color.white.cornerRadius(18))
-        .shadowedStyle()
-        .padding(.horizontal, 8)
-        .padding(.bottom, 30)
+//        .padding(16)
+//        .background(Color.white.cornerRadius(18))
+//        .shadowedStyle()
+//        .padding(.horizontal, 8)
+//        .padding(.bottom, 30)
     }
 }
 

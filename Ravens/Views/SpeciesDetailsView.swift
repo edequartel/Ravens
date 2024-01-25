@@ -50,11 +50,11 @@ struct SpeciesDetailsView: View {
                 }
             }
         }
-        .padding(16)
-        .background(Color.white.cornerRadius(18))
-        .shadowedStyle()
-        .padding(.horizontal, 8)
-        .padding(.bottom, 30)
+//        .padding(16)
+//        .background(Color.white.cornerRadius(18))
+//        .shadowedStyle()
+//        .padding(.horizontal, 8)
+//        .padding(.bottom, 30)
         
         .onAppear {
             log.error("Calling SpeciesDetailsView FetchData \(speciesID)")

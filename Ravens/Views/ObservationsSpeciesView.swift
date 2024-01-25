@@ -50,11 +50,11 @@ struct ObservationsSpeciesView: View {
             log.verbose("speciesID \(speciesID)")
             viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
         }
-        .padding(16)
-        .background(Color.white.cornerRadius(18))
-        .shadowedStyle()
-        .padding(.horizontal, 8)
-        .padding(.bottom, 30)
+//        .padding(16)
+//        .background(Color.white.cornerRadius(18))
+//        .shadowedStyle()
+//        .padding(.horizontal, 8)
+//        .padding(.bottom, 30)
     }
 }
 
