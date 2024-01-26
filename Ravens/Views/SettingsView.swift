@@ -16,12 +16,13 @@ struct SettingsView: View {
     
     @EnvironmentObject var settings: Settings
     
-//    @Binding var isShowing: Bool
+
     
     
     let minimumRadius = 500.0
     let maximumRadius = 5000.0
     let step = 500.0
+    
     //region netherlands - id=200, type=20
     //speciousgroup birds = 1
     //regionlist - regionid=200 speciesgroup=1 -->5001
@@ -31,6 +32,9 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
+                
+                
+                
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
@@ -111,7 +115,7 @@ struct SettingsView: View {
     
     
     func getId(region: Int, groups: Int) -> Int? {
-        print("--> \(region) \(groups)")
+        print("\(region) \(groups)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
             print("= \(matchingItem)")
             return matchingItem.id

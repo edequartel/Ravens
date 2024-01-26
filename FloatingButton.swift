@@ -101,6 +101,8 @@ struct IconButton: View {
     let imageWidth: CGFloat = 20
     let buttonWidth: CGFloat = 45
     
+//    @Binding var toggle : Bool
+    
     var body: some View {
         ZStack {
             color
@@ -145,16 +147,16 @@ struct IconTextButton: View {
 struct MockData {
     
     static let colors = [
-        //        "e84393",
-        //        "0984e3",
-        //        "6c5ce7",
+                "e84393",
+                "0984e3",
+                "6c5ce7",
         "00b894"
     ].map { Color(hex: $0) }
     
     static let iconImageNames = [
-        //        "sun.max.fill",
-        //        "cloud.fill",
-        //        "cloud.rain.fill",
+                "sun.max.fill",
+                "cloud.fill",
+                "cloud.rain.fill",
         "cloud.snow.fill"
     ]
 }

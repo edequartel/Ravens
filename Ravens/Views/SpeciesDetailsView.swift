@@ -12,20 +12,22 @@ import SwiftyBeaver
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-    @ObservedObject var viewModel = SpeciesDetailsViewModel()
+    @StateObject var viewSDModel = SpeciesDetailsViewModel()
     
     var speciesID: Int // Add speciesID as a property
 
     var body: some View {
         Form{
             VStack {
-                if let species = viewModel.speciesDetails {
+                if let species = viewSDModel.speciesDetails {
                     
                     if let imageUrl = URL(string: species.photo) {
                         AsyncImage(url: imageUrl) { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 300, height: 300)
+                            image
+                                .resizable()
+                                .aspectRatio(nil, contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } placeholder: {
                             ProgressView()
                         }
@@ -58,7 +60,7 @@ struct SpeciesDetailsView: View {
         
         .onAppear {
             log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
-            viewModel.fetchData(for: speciesID)
+            viewSDModel.fetchData(for: speciesID)
         }
     }
 }

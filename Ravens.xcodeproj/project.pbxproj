@@ -238,10 +238,10 @@
 			children = (
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
-				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 			);

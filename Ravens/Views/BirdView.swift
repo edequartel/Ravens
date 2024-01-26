@@ -16,8 +16,8 @@ struct BirdView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
-    @State private var selectedFilterOption: FilterOption = .all
-    @State private var selectedRarityFilterOption: RarityFilterOption = .all
+    @State private var selectedFilterOption: FilterOption = .native
+    @State private var selectedRarityFilterOption: RarityFilterOption = .rare
     
     @State private var searchText = ""
     @State private var isMapObservationSheetPresented = false
@@ -28,17 +28,24 @@ struct BirdView: View {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
-                        HStack { Image(systemName: "circle.fill")
+                        HStack { 
+                            Image(systemName: "circle.fill")
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: bird.rarity), .clear)
                         }
+                        .padding(4)
+                        
                         VStack(alignment: .leading) {
                             Text("\(bird.id) \(bird.name)")
                                 .bold()
-                            
-                            Text("\(bird.scientific_name)")
-                                .italic()
-                            // Additional information if needed
+                            HStack {
+                                Text("\(bird.scientific_name)")
+                                    .italic()
+                                Spacer()
+                                // Additional information if needed
+                                ObservationDetailsView(speciesID: bird.id)
+                                //  .environmentObject(settings)
+                            }
                         }
                         .onTapGesture() {
                             log.verbose("onTapgesture \(bird.id)")
@@ -48,12 +55,13 @@ struct BirdView: View {
                             birdId = bird.id
                             log.verbose("onAppear \(bird.id)")
                         }
-
+                        
                     }
                     .swipeActions {
                         Button(action: {
                             log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id //<<
+                            viewModel.fetchData(for: birdId ?? 1)
                             log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(birdId)")
                             isMapObservationSheetPresented.toggle()
                         }) {
@@ -96,13 +104,13 @@ struct BirdView: View {
                     .pickerStyle(.inline)
                 }
             }
-            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline) 
+            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
         }
         
         .sheet(isPresented: $isMapObservationSheetPresented, content: {
             SpeciesDetailsView(speciesID: birdId ?? 2).id(UUID())
         })
-
+        
         .searchable(text: $searchText)
         .onAppear() {
             viewModel.fetchData(for: settings.selectedGroup)

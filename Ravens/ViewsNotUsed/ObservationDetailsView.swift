@@ -6,20 +6,37 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct ObservationDetailsView: View {
-    var link: String // Add link as a property
-
-    var body: some View {
-        Text("\(link)")
-    }
+    let log = SwiftyBeaver.self
     
+    @StateObject private var viewModel = ObservationsSpeciesViewModel()
+    
+    @EnvironmentObject var settings: Settings
+    
+    var speciesID: Int
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if ((viewModel.observationsSpecies?.count ?? 0) != 0) {
+                Text("Obs \(viewModel.observationsSpecies?.count ?? 0)")
+                    .foregroundColor(Color.blue)
+            }
+        }
+        
+        .onAppear {
+            log.verbose("speciesID \(speciesID)")
+            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
+        }
+    }
 }
 
 struct ObservationDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-
-        // Binding the dummy observation for the preview
-        ObservationDetailsView(link: "")
+        let settings = Settings()
+        ObservationDetailsView(speciesID: 20)
+//            .environmentObject(settings)
     }
 }
+

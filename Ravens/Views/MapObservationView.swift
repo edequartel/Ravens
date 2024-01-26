@@ -13,12 +13,17 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var position : MapCameraPosition = .automatic
+    
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    
+    @State private var selectedItem: MKMapItem?
       
     var body: some View {
         VStack {
             MapReader { proxy in
-                Map(position: $position) {
+                Map(position: $position, selection: $selectedItem) {
+                    
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
                             Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
@@ -34,14 +39,18 @@ struct MapObservationView: View {
                     MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(.white, lineWidth: 1)
+                    
+                    
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
+                
                 .mapControls() {
                     MapUserLocationButton()
                     MapPitchToggle()
                     MapCompass() //tapping this makes it north
                 }
-                .onTapGesture { position in
+                
+                .onTapGesture { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                                         lat: coordinate.latitude,
@@ -53,23 +62,21 @@ struct MapObservationView: View {
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        
                         // Update currentLocation with the new CLLocation instance
-                        settings.currentLocation = newLocation
+//                        settings.currentLocation = newLocation
                     }
                 }
             }
         }
         .onAppear(){
-            print("Radius \(settings.radius)")
-            print("Days \(settings.days)")
-            
-            //userLocation
-
+            // Get the actual location... not from settings
             circlePos.latitude = settings.currentLocation?.coordinate.latitude ?? latitude
             circlePos.longitude = settings.currentLocation?.coordinate.longitude ?? longitude
    
+            // Get the userlocation here and assign this to circlePos
             
-            // Get the current locations of all the observations
+            // Get the locations of all the observations... not from settings
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,

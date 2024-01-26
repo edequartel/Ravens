@@ -17,13 +17,14 @@ struct ObservationsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("\(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+                Text("Results \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
             }
+            .padding(16)
             
             List {
                 if let results = observationsViewModel.observations?.results {
-                    ForEach(results.sorted(by: { ($1.rarity, $0.date, $0.species_detail.name) < ($0.rarity, $1.date, $1.species_detail.name) }), id: \.id) { result in
-                        VStack(alignment: .leading) {
+                    ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
+                        LazyVStack(alignment: .leading) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(Color(myColor(value: result.rarity)))
@@ -61,10 +62,7 @@ struct ObservationsView: View {
             }
         }
         .onAppear(){
-            print("Radius  \(settings.radius)")
-            print("Days \(settings.days)")
             // Get the current locations of all the observations
-            //            settings.currentLocation = CLLocationManager().location
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,

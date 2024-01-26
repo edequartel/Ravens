@@ -44,6 +44,16 @@
         }
       }
     },
+    "%lld Total obs: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld Total obs: %2$lld"
+          }
+        }
+      }
+    },
     "%lld/%lld" : {
       "localizations" : {
         "en" : {
@@ -53,6 +63,9 @@
           }
         }
       }
+    },
+    "<#fatalError()#>" : {
+
     },
     "All" : {
       "localizations" : {
@@ -97,8 +110,15 @@
     "Date" : {
 
     },
-    "Date: %@" : {
-
+    "Date: %@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Date: %1$@ / %2$@"
+          }
+        }
+      }
     },
     "Days" : {
       "localizations" : {
@@ -130,6 +150,9 @@
           }
         }
       }
+    },
+    "Failed to load image" : {
+
     },
     "Filter by" : {
       "localizations" : {
@@ -184,6 +207,9 @@
         }
       }
     },
+    "Invalid URL" : {
+
+    },
     "ISO %@" : {
       "localizations" : {
         "nl" : {
@@ -235,7 +261,10 @@
         }
       }
     },
-    "Location: %@" : {
+    "Loading..." : {
+
+    },
+    "Location details: %@" : {
 
     },
     "Manual" : {
@@ -328,6 +357,9 @@
         }
       }
     },
+    "Obs %lld" : {
+
+    },
     "Observation ID: %lld" : {
 
     },
@@ -411,6 +443,16 @@
         }
       }
     },
+    "Results %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Results %1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "Scientific name" : {
       "localizations" : {
         "nl" : {
@@ -472,12 +514,6 @@
       }
     },
     "Species name: %@" : {
-
-    },
-    "Substrate: %lld" : {
-
-    },
-    "Time: %@" : {
 
     },
     "Token: %@" : {
