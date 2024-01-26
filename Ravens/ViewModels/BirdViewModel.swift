@@ -16,9 +16,10 @@ class BirdViewModel: ObservableObject {
     @Published var birds = [Bird]()
 
     func fetchData(for groupID: Int) {
-        log.verbose("fetchData BirdViewModel \(groupID)")
-//        let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
-        let url = "https://waarneming.nl/api/v1/region-lists/5001/species/" //??edq bug
+        log.error("fetchData BirdViewModel \(groupID)")
+        let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
+        
+//        let url = "https://waarneming.nl/api/v1/region-lists/5001/species/" //??edq bug
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [

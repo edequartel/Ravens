@@ -7,23 +7,22 @@
 
 import SwiftUI
 import MapKit
+import SwiftyBeaver
 
 struct MapObservationView: View {
+    let log = SwiftyBeaver.self
+    
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
 //    @State private var position : MapCameraPosition = .automatic
-    
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    
-    @State private var selectedItem: MKMapItem?
       
     var body: some View {
         VStack {
             MapReader { proxy in
-                Map(position: $position, selection: $selectedItem) {
-                    
+                Map(position: $position) {
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
                             Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
@@ -64,18 +63,19 @@ struct MapObservationView: View {
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         
                         // Update currentLocation with the new CLLocation instance
-//                        settings.currentLocation = newLocation
+                        settings.currentLocation = newLocation
                     }
                 }
             }
         }
         .onAppear(){
             // Get the actual location... not from settings
-            circlePos.latitude = settings.currentLocation?.coordinate.latitude ?? latitude
-            circlePos.longitude = settings.currentLocation?.coordinate.longitude ?? longitude
-   
-            // Get the userlocation here and assign this to circlePos
-            
+            let location: CLLocation? = CLLocationManager().location
+            circlePos.latitude = location?.coordinate.latitude ?? latitude
+            circlePos.longitude = location?.coordinate.latitude ?? longitude
+
+            settings.currentLocation = location
+
             // Get the locations of all the observations... not from settings
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                             lat: settings.currentLocation?.coordinate.latitude ?? latitude,

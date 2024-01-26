@@ -34,7 +34,6 @@ struct ContentView: View {
             }
             
             // Tab 2
-//            MapView()
             BirdView()
                 .tabItem {
                     Text("Species")

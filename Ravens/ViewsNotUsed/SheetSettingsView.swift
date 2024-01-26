@@ -23,6 +23,7 @@ struct SheetSettingsView: View {
             DatePicker("", selection: $settings.selectedDate, displayedComponents: [.date])
                 .onChange(of: settings.selectedDate) {
                     // Perform your action when the date changes
+                    
                     observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
                                                     lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                                     long: settings.currentLocation?.coordinate.longitude ?? longitude,

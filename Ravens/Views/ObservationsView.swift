@@ -18,6 +18,7 @@ struct ObservationsView: View {
         VStack {
             HStack {
                 Text("Results \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+                    .bold()
             }
             .padding(16)
             
@@ -44,7 +45,10 @@ struct ObservationsView: View {
                                 Text("\(result.date)")
                                 Text("\(result.time ?? "no time")")
                                 Spacer()
+                                
                             }
+                            
+                            Text("\(result.location_detail.name)")
                         }
                         .font(.subheadline)
                         .onTapGesture {

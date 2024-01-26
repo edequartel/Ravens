@@ -28,19 +28,21 @@ struct BirdView: View {
             List {
                 ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
-                        HStack { 
-                            Image(systemName: "circle.fill")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(myColor(value: bird.rarity), .clear)
-                        }
-                        .padding(4)
-                        
                         VStack(alignment: .leading) {
-                            Text("\(bird.id) \(bird.name)")
-                                .bold()
+                            HStack {
+                                Image(systemName: "circle.fill")
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(myColor(value: bird.rarity), .clear)
+                                Text("\(bird.id) \(bird.name)")
+                                    .bold()
+                                    .lineLimit(1) // Set the maximum number of lines to 1
+                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                            }
                             HStack {
                                 Text("\(bird.scientific_name)")
                                     .italic()
+                                    .lineLimit(1) // Set the maximum number of lines to 1
+                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                 Spacer()
                                 // Additional information if needed
                                 ObservationDetailsView(speciesID: bird.id)

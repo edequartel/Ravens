@@ -16,9 +16,6 @@ struct SettingsView: View {
     
     @EnvironmentObject var settings: Settings
     
-
-    
-    
     let minimumRadius = 500.0
     let maximumRadius = 5000.0
     let step = 500.0
@@ -26,19 +23,20 @@ struct SettingsView: View {
     //region netherlands - id=200, type=20
     //speciousgroup birds = 1
     //regionlist - regionid=200 speciesgroup=1 -->5001
-    
     //regionlist - regionid=20 speciesgroup=1 --> 461
+    
     var body: some View {
         
         NavigationStack {
             Form {
-                
-                
+//                Section("Language") {
+//                    
+//                }
                 
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-                            Text("\(speciesGroup.name)")
+                            Text("\(speciesGroup.id) \(speciesGroup.name)")
                                 .lineLimit(1)
                                 .truncationMode(.tail)
                         }

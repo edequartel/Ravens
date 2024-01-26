@@ -25,7 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
 //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-        console.minLevel = .verbose
+        console.minLevel = .error
         
         log.addDestination(console)
         log.addDestination(file)

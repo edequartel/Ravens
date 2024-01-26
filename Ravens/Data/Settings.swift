@@ -26,7 +26,6 @@ class Settings: ObservableObject {
     @AppStorage("selectedRarity") var selectedRarity = 1
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location
-    
     @Published var selectedDate: Date = Date()
     
     @AppStorage("login") var login = "edequartel"

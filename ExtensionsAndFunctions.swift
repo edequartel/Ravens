@@ -33,6 +33,23 @@ func myColor(value: Int) -> Color {
     }
 }
 
+func SpeciesColor(value: Int) -> Color {
+    switch value {
+    case 0:
+        return .gray //onbekend
+    case 1:
+        return .green //birds
+    case 2:
+        return .blue //vrij algemeen
+    case 3:
+        return .orange //rare
+    case 4:
+        return .red //very rare
+    default:
+        return .gray //You can provide a default color or handle other cases as needed
+    }
+}
+
 extension AnyTransition {
     static var flipView: AnyTransition {
         AnyTransition.scale
