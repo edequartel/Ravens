@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
+    "(%lld)" : {
 
     },
     "%@" : {
@@ -54,15 +54,8 @@
         }
       }
     },
-    "%lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld"
-          }
-        }
-      }
+    "%lldd" : {
+
     },
     "<#fatalError()#>" : {
 
@@ -404,6 +397,7 @@
       }
     },
     "Region %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -578,6 +572,9 @@
       }
     },
     "Window" : {
+
+    },
+    "xxx" : {
 
     }
   },

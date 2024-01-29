@@ -7,12 +7,15 @@
 
 import SwiftUI
 import MapKit
+import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
+    let log = SwiftyBeaver.self
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var position : MapCameraPosition = .automatic
     
     @State private var isSheetObservationsViewPresented = false
     
@@ -20,14 +23,19 @@ struct MapObservationsSpeciesView: View {
     
     var body: some View {
         ZStack {
-            MapReader { proxy in
+//            MapReader { proxy in
                 Map(position: $position) {
                     ForEach(observationsSpeciesViewModel.locations) { location in
                         Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
                             .tint(Color(myColor(value: location.rarity)))
                     }
                 }
-            }
+                .safeAreaInset(edge: .bottom) {
+                    SettingsDetailsView()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                }
+//            }
             .mapStyle(.hybrid(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
@@ -48,14 +56,10 @@ struct MapObservationsSpeciesView: View {
 
 struct MapObservationSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-        let settings = Settings()
-
         // Setting up the environment objects for the preview
         MapObservationsSpeciesView(speciesID: 62)
-            .environmentObject(observationsSpeciesViewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(Settings())
     }
 }
 

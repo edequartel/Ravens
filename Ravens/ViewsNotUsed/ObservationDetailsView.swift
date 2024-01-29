@@ -34,9 +34,8 @@ struct ObservationDetailsView: View {
 
 struct ObservationDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let settings = Settings()
         ObservationDetailsView(speciesID: 20)
-//            .environmentObject(settings)
+            .environmentObject(Settings())
     }
 }
 

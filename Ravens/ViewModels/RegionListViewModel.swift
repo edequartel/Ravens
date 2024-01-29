@@ -7,9 +7,10 @@
 
 import Foundation
 import Alamofire
-import Combine
+import SwiftyBeaver
 
 class RegionListViewModel: ObservableObject { //<<change in region list not region
+    let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
 
     init() {
@@ -17,8 +18,8 @@ class RegionListViewModel: ObservableObject { //<<change in region list not regi
     }
 
     func fetchData() {
-        print("fetchData RegionListViewModel")
-        let url = "https://waarneming.nl/api/v1/region-lists"
+        log.info("fetchData RegionListViewModel")
+        let url = endPoint+"region-lists"
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -34,10 +35,10 @@ class RegionListViewModel: ObservableObject { //<<change in region list not regi
                     let decoder = JSONDecoder()
                     self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    self.log.error("Error decoding JSON: \(error)")
                 }
             case .failure(let error):
-                print("Error fetching data: \(error)")
+                self.log.error("Error fetching data: \(error)")
             }
         }
     }

@@ -84,14 +84,10 @@ struct ObservationsView: View {
 
 struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsViewModel = ObservationsViewModel()
-        let settings = Settings()
-        
         // Setting up the environment objects for the preview
         ObservationsView(isShowing: .constant(false))
-            .environmentObject(observationsViewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsViewModel())
+            .environmentObject(Settings())
     }
 }
 

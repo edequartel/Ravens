@@ -101,11 +101,11 @@ struct ObservationsSpeciesView: View {
 
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ObservationsSpeciesViewModel()
-        let settings = Settings()
+//        let viewModel = ObservationsSpeciesViewModel()
+//        let settings = Settings()
         ObservationsSpeciesView(speciesID: 2)
-            .environmentObject(viewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(Settings())
     }
 }
 

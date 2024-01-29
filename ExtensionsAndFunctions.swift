@@ -16,6 +16,51 @@ func formatCurrentDate(value: Date) -> String {
     return dateFormatter.string(from: currentDate)
 }
 
+let endPoint = "https://waarneming-test.nl/api/v1/"
+let tokenKey = "9b4a34b46fa1b95ca0b4fdf3b036ba559660c789"
+
+//let endPoint = "https://waarneming.nl/api/v1/"
+//let tokenKey = "21047b0d6742dc36234bc5293053bc757623470b"
+
+//waarneming-test.nl
+
+extension Color {
+    static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255)
+    static let obsGreenSpider = Color(red: 31/255, green: 94/255, blue: 37/255)
+    static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255)
+    static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255)
+    static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255)
+}
+
+
+func GroupColor(value: Int) -> Color {
+    switch value {
+    case 0: return .gray   // all
+    case 1: return .green  // birds
+    case 2: return .blue   // mammals
+    case 3: return .orange // reptiles and amfibian
+    case 5: return .yellow    // butterflies
+    case 6: return .pink    // dragonflies
+    case 7: return .purple    // molluscs
+    case 8: return .brown    // moth and micros
+    case 9: return .gray    // fish
+    case 10: return .obsBackground   // plants
+    case 11: return .white   // fungi
+    case 12: return .indigo   // mosses and lichen
+    case 13: return .mint   // geleedpotigen
+    case 14: return .teal   // locusts and crickets
+    case 15: return .cyan   // wantsen cicaden en plantenluizen
+//    case 16: return .olive   // bugs
+//    case 17: return .lavender   // bees wasp ants
+//    case 18: return .amber   // flies and mossies
+//    case 19: return .coral   // algea
+//    case 20: return .peach   // overige invertabrates
+//    case 30: return .red   // verstoringen
+    default:
+        return .gray //You can provide a default color or handle other cases as needed
+    }
+}
+
 func myColor(value: Int) -> Color {
     switch value {
     case 0:

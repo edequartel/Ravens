@@ -36,28 +36,26 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    
     func fetchData(speciesId: Int, endDate: Date, days: Int) {
-        print("fetchData ObservationsSpeciesViewModel")
-        log.verbose("speciesID \(speciesId)")
+        log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl",
-            "Authorization": "Token 21047b0d6742dc36234bc5293053bc757623470b" //<<TOKEN LATER BIJ ZETTEN 3600??
+            "Authorization": "Token "+tokenKey //9b4a34b46fa1b95ca0b4fdf3b036ba559660c789" //<<TOKEN LATER BIJ ZETTEN 3600??
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
         let date_before = formatCurrentDate(value:endDate)
         
-        var url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"//&page=\(page)"
+        var url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"
         
-        print("\(url)")
+        log.verbose("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
-//                print("Response as String: \(stringResponse)")
+//                self.log.error("Response as String: \(stringResponse)")
 
                 // Now you can convert the stringResponse to Data and decode it
                 if let data = stringResponse.data(using: .utf8) {
@@ -78,11 +76,11 @@ class ObservationsSpeciesViewModel: ObservableObject {
 //                            }
                         }
                     } catch {
-                        print("Error decoding JSON: \(error)")
+                        self.log.error("Error decoding JSON: \(error)")
                     }
                 }
             case .failure(let error):
-                print("Error: \(error)")
+                self.log.error("Error: \(error)")
             }
         }
     }

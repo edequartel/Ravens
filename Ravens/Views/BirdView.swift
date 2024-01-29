@@ -10,9 +10,9 @@ import SwiftyBeaver
 
 struct BirdView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var viewModel = BirdViewModel()
+    @StateObject private var birdViewModel = BirdViewModel()
     
-    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel //??? why environmentObject
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
@@ -26,7 +26,7 @@ struct BirdView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
+                ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
                         VStack(alignment: .leading) {
                             HStack {
@@ -45,8 +45,9 @@ struct BirdView: View {
                                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                 Spacer()
                                 // Additional information if needed
-                                ObservationDetailsView(speciesID: bird.id)
-                                //  .environmentObject(settings)
+//                                if bird.id == 306 {
+//                                    ObservationDetailsView(speciesID: bird.id)
+//                                }
                             }
                         }
                         .onTapGesture() {
@@ -63,7 +64,7 @@ struct BirdView: View {
                         Button(action: {
                             log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
                             birdId = bird.id //<<
-                            viewModel.fetchData(for: birdId ?? 1)
+                            birdViewModel.fetchData(for: birdId ?? 1)
                             log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(birdId)")
                             isMapObservationSheetPresented.toggle()
                         }) {
@@ -115,15 +116,15 @@ struct BirdView: View {
         
         .searchable(text: $searchText)
         .onAppear() {
-            viewModel.fetchData(for: settings.selectedGroup)
+            birdViewModel.fetchData(for: settings.selectedGroup)
         }
     }
     
     var searchResults: [Bird] {
         if searchText.isEmpty {
-            return viewModel.sortedBirds(by: selectedSortOption)
+            return birdViewModel.sortedBirds(by: selectedSortOption)
         } else {
-            return viewModel.sortedBirds(by: selectedSortOption).filter {
+            return birdViewModel.sortedBirds(by: selectedSortOption).filter {
                 $0.name.contains(searchText) || $0.scientific_name.contains(searchText)
             }
         }
@@ -230,15 +231,11 @@ extension BirdViewModel {
 
 struct BirdView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsViewModel = ObservationsViewModel()
-        let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-        let settings = Settings()
         // Setting up the environment objects for the preview
         BirdView()
-            .environmentObject(observationsViewModel)
-            .environmentObject(observationsSpeciesViewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(Settings())
     }
 }
 

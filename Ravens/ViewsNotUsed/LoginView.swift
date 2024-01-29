@@ -28,12 +28,9 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let settings = Settings()
-
-        // Setting up the environment objects for the preview
+    // Setting up the environment objects for the preview
         LoginView(loginViewModel: LoginViewModel())
-            .environmentObject(settings)
+            .environmentObject(Settings())
     }
 }
 

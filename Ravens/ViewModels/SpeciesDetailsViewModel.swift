@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import Combine
 import SwiftyBeaver
 
 class SpeciesDetailsViewModel: ObservableObject {
@@ -15,10 +14,10 @@ class SpeciesDetailsViewModel: ObservableObject {
     @Published var speciesDetails: SpeciesDetails?
 
     func fetchData(for speciesID: Int) {
-        guard let url = URL(string: "https://waarneming.nl/api/v1/species/\(speciesID)/") else {
+        guard let url = URL(string: endPoint+"species/\(speciesID)/") else {
             return
         }
-        log.verbose("SpeciesDetailsViewModel speciesID: \(speciesID)")
+        log.info("SpeciesDetailsViewModel speciesID: \(speciesID)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -34,7 +33,7 @@ class SpeciesDetailsViewModel: ObservableObject {
                     self.speciesDetails = data
                 }
             case .failure(let error):
-                print("Error fetching data: \(error)")
+                self.log.error("Error fetching data: \(error)")
             }
         }
     }

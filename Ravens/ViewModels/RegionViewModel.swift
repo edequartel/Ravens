@@ -7,8 +7,10 @@
 
 import Foundation
 import Alamofire
+import SwiftyBeaver
 
 class RegionViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var regions = [Region]()
 
     init() {
@@ -17,8 +19,8 @@ class RegionViewModel: ObservableObject {
     
     
     func fetchData() {
-        print("fetchData RegionViewModel")
-        let url = "https://waarneming.nl/api/v1/regions/"
+        log.info("fetchData RegionViewModel")
+        let url = endPoint+"regions/"
 
         // Create a URLRequest with caching policy
         var urlRequest = URLRequest(url: URL(string: url)!)
@@ -33,10 +35,10 @@ class RegionViewModel: ObservableObject {
                     let decoder = JSONDecoder()
                     self.regions = try decoder.decode([Region].self, from: response.data!)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    self.log.error("Error decoding JSON: \(error)")
                 }
             case .failure(let error):
-                print("Error fetching data: \(error)")
+                self.log.error("Error fetching data: \(error)")
             }
         }
     }

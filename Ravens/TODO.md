@@ -3,20 +3,24 @@
 - regionlist/species and choice of country is now hard coded (see BirdViewModel)
 - the circle is not yet accurate when starting up around actual location
 - the api calls have to be cached
-- sort
+- sort (v)
 - show nrofobs on list view
 - recursive 
 - login 
 - check dataload?
-- flip 
-- sheet exyte
+- flip (v)
+- sheet exyte (?)
 - shareview
-- alerts
+- alerts new species
 - colors
 - select all species
-- overview project 
+- overview project in views pdf (v)
+- camera position
+- check log.'s
 
 **messages**
+
+import SwiftyBeaver
 
 let log = SwiftyBeaver.self
 

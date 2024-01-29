@@ -6,10 +6,11 @@
 //
 
 import Foundation
-
 import Alamofire
+import SwiftyBeaver
 
 class LanguageViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var language: Language?
     
     init() {
@@ -17,15 +18,15 @@ class LanguageViewModel: ObservableObject {
     }
 
     func fetchData() {
-        print("fetchData LanguageViewModel")
-        AF.request("https://waarneming.nl/api/v1/languages/").responseDecodable(of: Language.self) { response in
+        log.info("fetchData LanguageViewModel")
+        AF.request(endPoint+"languages/").responseDecodable(of: Language.self) { response in
             switch response.result {
             case .success(let language):
                 DispatchQueue.main.async {
                     self.language = language
                 }
             case .failure(let error):
-                print("Error: \(error)")
+                self.log.error("Error: \(error)")
             }
         }
     }

@@ -16,9 +16,9 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-//    @State private var position : MapCameraPosition = .automatic
+    //    @State private var position : MapCameraPosition = .automatic
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-      
+    
     var body: some View {
         VStack {
             MapReader { proxy in
@@ -49,6 +49,12 @@ struct MapObservationView: View {
                     MapCompass() //tapping this makes it north
                 }
                 
+                .safeAreaInset(edge: .bottom) {
+                    SettingsDetailsView()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                }
+                
                 .onTapGesture { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
@@ -73,13 +79,15 @@ struct MapObservationView: View {
             let location: CLLocation? = CLLocationManager().location
             circlePos.latitude = location?.coordinate.latitude ?? latitude
             circlePos.longitude = location?.coordinate.latitude ?? longitude
-
+            
             settings.currentLocation = location
-
+            
             // Get the locations of all the observations... not from settings
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                            //                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                            //                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                            lat: circlePos.latitude,
+                                            long: circlePos.longitude,
                                             radius: settings.radius,
                                             species_group: settings.selectedGroupId,
                                             min_rarity: settings.selectedRarity)
@@ -89,13 +97,9 @@ struct MapObservationView: View {
 
 struct MapObservationView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsViewModel = ObservationsViewModel()
-        let settings = Settings()
-
         // Setting up the environment objects for the preview
         MapObservationView()
-            .environmentObject(observationsViewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsViewModel())
+            .environmentObject(Settings())
     }
 }

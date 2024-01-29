@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import MapKit
+import SwiftyBeaver
 
 struct Location: Identifiable {
     let id = UUID()
@@ -17,6 +18,7 @@ struct Location: Identifiable {
 }
 
 class ObservationsViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var observations: Observations?
     
     var locations = [Location]()
@@ -67,16 +69,16 @@ class ObservationsViewModel: ObservableObject {
     
     ///
     func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int, min_rarity: Int) {
-        print("fetchData ObservationsViewModel")
+        log.info("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl"
         ]
         
-        let url = "https://waarneming.nl/api/v1/observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)&min_rarity=\(min_rarity)"
+        let url = endPoint+"observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)&min_rarity=\(min_rarity)"
         
-        print("\(url)")
+        log.verbose("\(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {
@@ -85,10 +87,10 @@ class ObservationsViewModel: ObservableObject {
                     self.observations = observations
                     self.getLocations()
                     self.getPoiLocations()
-                    print("api locations count \(self.locations.count)")
+                    self.log.error("api locations count \(self.locations.count)")
                 }
             case .failure(let error):
-                print("Error: \(error)")
+                self.log.error("Error: \(error)")
             }
         }
         

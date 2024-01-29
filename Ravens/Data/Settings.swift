@@ -18,6 +18,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
     @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
+//    @AppStorage("endPoint") var endPoint = "https://waarneming.nl/api/v1/"
     
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500

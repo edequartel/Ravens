@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let file = FileDestination()
 //        file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
-        file.minLevel = .verbose
+        file.minLevel = .error
         file.levelString.error = "Ravens"
         file.logFileURL = URL(fileURLWithPath: "/Users/ericdequartel/Developer/_myApps/Ravens/ravens.log")
         
@@ -25,7 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
 //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-        console.minLevel = .error
+        console.minLevel = .info
         
         log.addDestination(console)
         log.addDestination(file)
@@ -58,10 +58,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @StateObject private var settings = Settings()
+    let settings = Settings()
     let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-    let observationsModel =
-    ObservationsViewModel()
+    let observationsModel =  ObservationsViewModel()
     
     var body: some Scene {
         WindowGroup {

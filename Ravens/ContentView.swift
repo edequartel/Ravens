@@ -15,15 +15,29 @@ struct ContentView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
-    
-    @State private var isViewAVisible = true
+//    @State private var isViewAVisible = true
     
     @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         TabView {
+            RegionListView()
+                .tabItem {
+                    Text("Species")
+                    Image(systemName: "tree")
+                }
+
+            SpeciesGroupView()
+//                LoginView(loginViewModel: loginViewModel)
+                    .tabItem {
+                        Text("Species")
+                        Image(systemName: "tree")
+                    }
+            
+            
             // Tab 1
             ZStack {
+                Text("xxx")
                 MapObservationView()
                     .environmentObject(observationsViewModel)
                 ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
@@ -33,7 +47,7 @@ struct ContentView: View {
                 Image(systemName: "binoculars")
             }
             
-            // Tab 2
+            // Tab 2 //??
             BirdView()
                 .tabItem {
                     Text("Species")
@@ -58,35 +72,13 @@ struct ContentView: View {
     }
 }
 
-//struct ContentView: View {
-//    var body: some View {
-//        ObservationsSpeciesView()
-//        LanguageView()
-//        SpeciesGroupView()
-//        RegionView()
-//        BirdView()
-//        SpeciesDetailsView(speciesID: 2)
-//        SettingsView()
-//        MapObservationsSpeciesView(speciesID: 62)
-//    }
-//}
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsViewModel = ObservationsViewModel()
-        let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-//        let @StateObject private var logStore = LogStore()
-        
-        // let loginViewModel = LoginViewModel()
-        let settings = Settings()
-        
         // Setting up the environment objects for the preview
         ContentView()
-            .environmentObject(observationsViewModel)
-            .environmentObject(observationsSpeciesViewModel)
-            .environmentObject(settings)
+            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(Settings())
     }
 }
 

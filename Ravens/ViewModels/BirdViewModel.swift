@@ -16,11 +16,12 @@ class BirdViewModel: ObservableObject {
     @Published var birds = [Bird]()
 
     func fetchData(for groupID: Int) {
-        log.error("fetchData BirdViewModel \(groupID)")
-        let url = "https://waarneming.nl/api/v1/region-lists/\(groupID)/species/"
+        log.info("fetchData BirdViewModel should be 5001 for birds but is \(groupID)")
         
-//        let url = "https://waarneming.nl/api/v1/region-lists/5001/species/" //??edq bug
+        let url = endPoint+"region-lists/\(groupID)/species/"
+//        let url = endPoint+"region-lists/5001/species/" //??edq bug
         
+        log.verbose("url \(url)")
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl"
@@ -36,10 +37,10 @@ class BirdViewModel: ObservableObject {
                     let decoder = JSONDecoder()
                     self.birds = try decoder.decode([Bird].self, from: response.data!)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    self.log.error("Error decoding JSON: \(error)")
                 }
             case .failure(let error):
-                print("Error fetching data: \(error)")
+                self.log.error("Error fetching data: \(error)")
             }
         }
     }

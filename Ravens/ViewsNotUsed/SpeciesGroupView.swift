@@ -13,12 +13,15 @@ struct SpeciesGroupView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id:\.id) { speciesGroup in
-                    VStack(alignment: .leading) {
-                        Text("Id \(speciesGroup.id)")
-                        Text("Region \(speciesGroup.name)")
+                ForEach(viewModel.speciesGroups.sorted(by: {$0.id < $1.id}), id:\.id) { speciesGroup in
+                    HStack() {
+                        Text("\(speciesGroup.id) \(speciesGroup.name)")
+//                            .foregroundColor(GroupColor(value: speciesGroup.id))
                     }
+//                    .background(GroupColor(value: speciesGroup.id))
+                    .listRowBackground(GroupColor(value: speciesGroup.id))
                 }
+                
             }
             .navigationTitle("Species groups")
         }

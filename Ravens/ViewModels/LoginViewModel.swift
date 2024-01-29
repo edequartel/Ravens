@@ -1,11 +1,14 @@
 import SwiftUI
 import Alamofire
+import SwiftyBeaver
 
 class LoginViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var token: String = ""
 
     func loginUser(username: String, password: String) {
-        let url = "https://waarneming.nl/api/v1/auth/login/"
+        log.info("LoginViewModel")
+        let url = endPoint+"auth/login/"
         
 
         let parameters: [String: String] = [
@@ -26,10 +29,10 @@ class LoginViewModel: ObservableObject {
                         print("Tokenkey: \(key)")
                         self.token  = key
                     } else {
-                        print("Error extracting key from JSON")
+                        self.log.error("Error extracting key from JSON")
                     }
                 case .failure(let error):
-                    print("Error: \(error)")
+                    self.log.error("Error: \(error)")
                 }
             }
         

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct SettingsView: View {
+    let log = SwiftyBeaver.self
+    
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     
     @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
@@ -44,6 +47,7 @@ struct SettingsView: View {
                     .onChange(of: settings.selectedSpeciesGroup) {
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
+                        log.info("selectedGroup: \(settings.selectedGroup)")
                         settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                     }
                 }
@@ -111,7 +115,7 @@ struct SettingsView: View {
         }
     }
     
-    
+    //de data is nog niet gefetched ????
     func getId(region: Int, groups: Int) -> Int? {
         print("\(region) \(groups)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
@@ -121,7 +125,7 @@ struct SettingsView: View {
         return nil
     }
     
-    
+    //de data is nog niet gefetched ????
     func getGroup(id: Int) -> String? {
         if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {
             print("= \(matchingItem)")
@@ -134,14 +138,10 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        // Creating dummy data for preview
-        let observationsViewModel = ObservationsViewModel()
-        let settings = Settings()
-        
         // Setting up the environment objects for the preview
         SettingsView()
-            .environmentObject(settings)
-            .environmentObject(observationsViewModel)
+            .environmentObject(Settings())
+            .environmentObject(ObservationsViewModel())
     }
 }
 
