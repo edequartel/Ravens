@@ -15,11 +15,15 @@ struct ObservationsSpeciesView: View {
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    
     var speciesID: Int
+    var speciesName: String
     
     var body: some View {
         VStack {
-            Text("\(speciesID) Total obs: \(viewModel.observationsSpecies?.count ?? 0)")
+            Text("\(speciesID) \(speciesName) Total obs: \(viewModel.observationsSpecies?.count ?? 0)")
             
             //            \(viewModel.observationsSpecies?.results.count ?? 0)")
             //            Text("Locations: \(viewModel.locations.count)")
@@ -103,7 +107,7 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
 //        let viewModel = ObservationsSpeciesViewModel()
 //        let settings = Settings()
-        ObservationsSpeciesView(speciesID: 2)
+        ObservationsSpeciesView(speciesID: 2, speciesName: "Unknown")
             .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())
     }

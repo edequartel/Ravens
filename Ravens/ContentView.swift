@@ -15,24 +15,25 @@ struct ContentView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
     @StateObject private var loginViewModel = LoginViewModel()
+
 //    @State private var isViewAVisible = true
     
     @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         TabView {
-            RegionListView()
-                .tabItem {
-                    Text("Species")
-                    Image(systemName: "tree")
-                }
-
-            SpeciesGroupView()
-//                LoginView(loginViewModel: loginViewModel)
-                    .tabItem {
-                        Text("Species")
-                        Image(systemName: "tree")
-                    }
+//            RegionListView()
+//                .tabItem {
+//                    Text("Species")
+//                    Image(systemName: "tree")
+//                }
+//
+//            SpeciesGroupView()
+////                LoginView(loginViewModel: loginViewModel)
+//                    .tabItem {
+//                        Text("Species")
+//                        Image(systemName: "tree")
+//                    }
             
             
             // Tab 1

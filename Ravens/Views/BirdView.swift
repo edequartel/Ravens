@@ -27,7 +27,7 @@ struct BirdView: View {
         NavigationStack {
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
-                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id)) {
+                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
                         VStack(alignment: .leading) {
                             HStack {
                                 Image(systemName: "circle.fill")
@@ -46,7 +46,7 @@ struct BirdView: View {
                                 Spacer()
                                 // Additional information if needed
 //                                if bird.id == 306 {
-//                                    ObservationDetailsView(speciesID: bird.id)
+//                                    ObservationDetailsxxView(speciesID: bird.id)
 //                                }
                             }
                         }

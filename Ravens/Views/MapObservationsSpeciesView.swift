@@ -15,27 +15,27 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-//    @State private var position : MapCameraPosition = .automatic
+    //    @State private var position : MapCameraPosition = .automatic
     
     @State private var isSheetObservationsViewPresented = false
     
     var speciesID: Int
+    var speciesName: String
     
     var body: some View {
         ZStack {
-//            MapReader { proxy in
-                Map(position: $position) {
-                    ForEach(observationsSpeciesViewModel.locations) { location in
-                        Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
-                            .tint(Color(myColor(value: location.rarity)))
-                    }
+            Map(position: $position) {
+                ForEach(observationsSpeciesViewModel.locations) { location in
+                    Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
+                        .tint(Color(myColor(value: location.rarity)))
                 }
-                .safeAreaInset(edge: .bottom) {
-                    SettingsDetailsView()
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                }
-//            }
+            }
+            .safeAreaInset(edge: .bottom) {
+                SettingsDetailsView()
+                    .frame(maxWidth: .infinity)
+                    .padding()
+            }
+            
             .mapStyle(.hybrid(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
@@ -46,7 +46,7 @@ struct MapObservationsSpeciesView: View {
             ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsSpeciesView(speciesID: speciesID)
+            ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
             observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
@@ -57,7 +57,7 @@ struct MapObservationsSpeciesView: View {
 struct MapObservationSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationsSpeciesView(speciesID: 62)
+        MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
             .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())
     }

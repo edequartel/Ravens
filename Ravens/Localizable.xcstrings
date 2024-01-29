@@ -34,22 +34,22 @@
         }
       }
     },
+    "%lld %@ Total obs: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@ Total obs: %3$lld"
+          }
+        }
+      }
+    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%11d m"
-          }
-        }
-      }
-    },
-    "%lld Total obs: %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld Total obs: %2$lld"
           }
         }
       }
