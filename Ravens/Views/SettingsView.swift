@@ -14,13 +14,10 @@ struct SettingsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     
     @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
-    
-//    @StateObject private var regionsViewModel = RegionViewModel()
-//    @StateObject private var regionListViewModel = RegionListViewModel()    
+    @StateObject private var loginViewModel = LoginViewModel()
     
     @EnvironmentObject var regionsViewModel: RegionViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
-    
     @EnvironmentObject var settings: Settings
     
     let minimumRadius = 500.0
@@ -36,10 +33,7 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-                Section("Language") {
-                    LanguageView()
-                    RegionsView()
-                }
+                // LoginView(loginViewModel: loginViewModel)
                 
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
@@ -60,9 +54,10 @@ struct SettingsView: View {
                         settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
                     }
                 }
+                
                 Section("Map") {
                     Toggle("Poi", isOn: $settings.poiOn)
-                    
+                                        
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
                             Image(systemName: "binoculars.fill")
@@ -107,8 +102,14 @@ struct SettingsView: View {
                                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                                             radius: settings.radius,
                                                             species_group: settings.selectedGroupId,
-                                                            min_rarity: settings.selectedRarity)
+                                                            min_rarity: settings.selectedRarity,
+                                                            language: settings.selectedLanguage)
                         }
+                }
+                
+                Section("International") {
+                    LanguageView()
+                    RegionsView()
                 }
                 
             }
@@ -121,12 +122,17 @@ struct SettingsView: View {
                 }
             }
         }
+        
+        .onAppear() {
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+        }
+        
     }
     
     //de data is nog niet gefetched ????
     func getId(region: Int, groups: Int) -> Int? {
         log.error("getID region: \(region) groups: \(groups)")
-//        log.error("\(regionListViewModel.regionLists)")
+        //        log.error("\(regionListViewModel.regionLists)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
             log.error("getId= \(matchingItem)")
             return matchingItem.id

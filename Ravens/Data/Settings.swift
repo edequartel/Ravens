@@ -16,7 +16,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
 
     @AppStorage("selectedRegion") var selectedRegion = 200
-    @AppStorage("selectedLanguage") var selectedLanguage = 12
+    @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500
@@ -27,6 +27,7 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
     
+    @AppStorage("token") var token = "token"
     @AppStorage("login") var login = "edequartel"
     @AppStorage("password") var password = "zeemeeuw2015"
 }

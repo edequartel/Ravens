@@ -68,12 +68,12 @@ class ObservationsViewModel: ObservableObject {
     }
     
     ///
-    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int, min_rarity: Int) {
+    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int, min_rarity: Int, language: String) {
         log.info("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": "nl"
+            "Accept-Language": language
         ]
         
         let url = endPoint+"observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)&min_rarity=\(min_rarity)"

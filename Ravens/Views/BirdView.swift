@@ -14,7 +14,7 @@ struct BirdView: View {
     let log = SwiftyBeaver.self
     @StateObject private var birdViewModel = BirdViewModel()
     
-    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel //??? why environmentObject
+    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
@@ -27,31 +27,27 @@ struct BirdView: View {
     
     var body: some View {
         NavigationStack {
-//            Text("gr \(settings.selectedGroup)")
-//            Text("grid \(settings.selectedGroupId)")
-//            Text("spegrid \(settings.selectedSpeciesGroup)")
-//            Text("str \(settings.selectedGroupString)")
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
 
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
-                        VStack(alignment: .leading) { //??
+                        VStack(alignment: .leading) {
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(myColor(value: bird.rarity), .clear)
+                                ObservationDetailsView(speciesID: bird.id)
                                 Text("\(bird.id) \(bird.name)")
                                     .bold()
                                     .lineLimit(1) // Set the maximum number of lines to 1
                                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                ObservationDetailsView(speciesID: bird.id)
                             }
                             HStack {
                                 Text("\(bird.scientific_name)")
                                     .italic()
                                     .lineLimit(1) // Set the maximum number of lines to 1
                                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                                Spacer()
+
                             }
                         }
                         .onTapGesture() {
@@ -65,25 +61,9 @@ struct BirdView: View {
                         
                     }
                     .contentShape(Rectangle())
-//                    .swipeActions {
-//                        Button(action: {
-//                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
-//                            birdId = bird.id
-//                            isMapObservationSheetPresented.toggle()
-//                        }) {
-//                            Image(systemName: "tree.fill") // Replace "eye" with the system image name you want
-//                                .foregroundColor(.blue) // You can customize the color
-//                                .font(.title) // You can customize the font size
-//                                .padding() // You can customize the padding
-//                        }
-//                        .tint(.orange)
-//                    }
                 }
-                
-                
             }
-            
-            
+                
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
                     Picker("Sort by", selection: $selectedSortOption) {
@@ -112,18 +92,10 @@ struct BirdView: View {
             }
             .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
         }
-        
-        //sheet neemt de eerste keer birdid niet mee?
-//        .sheet(isPresented: $isMapObservationSheetPresented, content: {
-////            print("----> birdId  \(birdId)")
-//            Text("bird id \(birdId ?? -111)")
-//            SpeciesDetailsView(speciesID: birdId ?? 2) //.id(UUID())
-//        })
-        
         .searchable(text: $searchText)
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
-            birdViewModel.fetchData(for: settings.selectedGroup)
+            birdViewModel.fetchData(for: settings.selectedGroup, language: settings.selectedLanguage)
         }
     }
     
@@ -138,7 +110,6 @@ struct BirdView: View {
     }
     
 }
-
 
 enum SortOption: String, CaseIterable {
     case name
@@ -201,7 +172,6 @@ extension BirdViewModel {
             let filteredList = sortedBirdsList.filter { bird in
                 bird.name.lowercased().contains(searchText.lowercased()) ||
                 bird.scientific_name.lowercased().contains(searchText.lowercased())
-                // Add more fields if needed
             }
             
             let filtered  = applyFilter(to: filteredList, with: filterOption)
@@ -224,13 +194,13 @@ extension BirdViewModel {
         case .all:
             return birds
         case .common:
-            return birds.filter { $0.rarity == 1 }
+            return birds.filter { $0.rarity >= 1 }
         case .uncommon:
-            return birds.filter { $0.rarity == 2}
+            return birds.filter { $0.rarity >= 2}
         case .rare:
-            return birds.filter { $0.rarity == 3 }
+            return birds.filter { $0.rarity >= 3 }
         case .veryrare:
-            return birds.filter { $0.rarity == 4 }
+            return birds.filter { $0.rarity >= 4 }
             
         }
     }

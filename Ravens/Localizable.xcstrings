@@ -209,6 +209,9 @@
         }
       }
     },
+    "International" : {
+
+    },
     "Invalid URL" : {
 
     },
@@ -227,6 +230,7 @@
 
     },
     "languagedataisnil" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

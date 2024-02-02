@@ -240,6 +240,8 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
+				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
@@ -258,8 +260,6 @@
 				478153B82B58022B005F87CC /* LoginView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
-				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
-				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
 			);
 			path = ViewsNotUsed;

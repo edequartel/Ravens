@@ -17,6 +17,9 @@
 - overview project in views pdf (v)
 - camera position
 - check log.'s
+- login
+- species change name
+- 200 regions
 
 **messages**
 

@@ -72,7 +72,8 @@ struct ObservationsView: View {
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                             radius: settings.radius,
                                             species_group: settings.selectedGroupId,
-                                            min_rarity: settings.selectedRarity)
+                                            min_rarity: settings.selectedRarity,
+                                            language: settings.selectedLanguage)
         }
 //        .padding(16)
 //        .background(Color.white.cornerRadius(18))

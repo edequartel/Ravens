@@ -12,17 +12,17 @@ struct LoginView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     
     var body: some View {
-        Form{
             VStack(alignment: .leading) {
                 Text("\(settings.login)")
                 Text("\(settings.password)")
             }
             Button("getToken") {
                 loginViewModel.loginUser(username: settings.login, password: settings.password)
+                    settings.token = loginViewModel.token
             }
             Text("\(loginViewModel.token)")
+            Text("\(settings.token)")
                 .font(.headline)
-        }
     }
 }
 

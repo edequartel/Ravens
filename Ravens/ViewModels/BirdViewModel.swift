@@ -15,7 +15,7 @@ class BirdViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var birds = [Bird]()
 
-    func fetchData(for groupID: Int) {
+    func fetchData(for groupID: Int, language: String) {
         log.info("fetchData BirdViewModel should be 5001 for birds but is \(groupID)")
         
         let url = endPoint+"region-lists/\(groupID)/species/"
@@ -24,7 +24,7 @@ class BirdViewModel: ObservableObject {
         log.info("url \(url)")
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": "nl"
+            "Accept-Language": language
         ]
         
 

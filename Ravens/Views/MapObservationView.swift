@@ -69,7 +69,8 @@ struct MapObservationView: View {
                                                         long: coordinate.longitude,
                                                         radius: settings.radius,
                                                         species_group: settings.selectedGroupId,
-                                                        min_rarity: settings.selectedRarity)
+                                                        min_rarity: settings.selectedRarity,
+                                                        language: settings.selectedLanguage)
                         
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -96,7 +97,8 @@ struct MapObservationView: View {
                                             long: circlePos.longitude,
                                             radius: settings.radius,
                                             species_group: settings.selectedGroupId,
-                                            min_rarity: settings.selectedRarity)
+                                            min_rarity: settings.selectedRarity,
+                                            language: settings.selectedLanguage)
         }
     }
 }
