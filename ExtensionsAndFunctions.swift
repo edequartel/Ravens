@@ -8,6 +8,14 @@
 import Foundation
 import SwiftUI
 
+////werkhoven
+//let longitude = 5.243376
+//let latitude = 52.023861
+
+//gouda
+let latitude = 52.013077
+let longitude = 4.713450
+
 func formatCurrentDate(value: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -16,11 +24,11 @@ func formatCurrentDate(value: Date) -> String {
     return dateFormatter.string(from: currentDate)
 }
 
-let endPoint = "https://waarneming-test.nl/api/v1/"
-let tokenKey = "9b4a34b46fa1b95ca0b4fdf3b036ba559660c789"
+//let endPoint = "https://waarneming-test.nl/api/v1/"
+//let tokenKey = "9b4a34b46fa1b95ca0b4fdf3b036ba559660c789"
 
-//let endPoint = "https://waarneming.nl/api/v1/"
-//let tokenKey = "21047b0d6742dc36234bc5293053bc757623470b"
+let endPoint = "https://waarneming.nl/api/v1/"
+let tokenKey = "21047b0d6742dc36234bc5293053bc757623470b"
 
 //waarneming-test.nl
 

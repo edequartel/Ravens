@@ -9,26 +9,38 @@ import SwiftUI
 
 struct SettingsDetailsView: View {
     @EnvironmentObject var settings: Settings
+    
+    var count: Int = 0
+    
     var body: some View {
         HStack {
             Spacer()
+//            Picker("Rarity", selection: $settings.selectedRarity) {
+//                ForEach(0..<5) { index in
+//                    Image(systemName: "binoculars.fill")
+//                        .symbolRenderingMode(.palette)
+//                        .foregroundStyle(myColor(value: index), .clear)
+//                }
+//            }
+            Text("\(count)")
+            Image(systemName: "binoculars.circle.fill")
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(myColor(value: settings.selectedRarity), .white)
             Text("\(settings.selectedGroupString)")
-            Text("(\(settings.selectedRarity))")
             Text("\(settings.days)d")
             Text("\(settings.selectedDate, formatter: dateFormatter)")
         }
-        .padding(2)
-        .font(.footnote)
+        .padding(5)
+        .font(.headline)
         .foregroundColor(.obsGreenFlower)
+        .background(Color.obsGreenEagle.opacity(0.5))
     }
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-            formatter.dateFormat = "EE dd-MM"
-//            formatter.dateStyle = .short
-//            formatter.timeStyle = .short
-            return formatter
-        }
+        formatter.dateFormat = "EE dd-MM"
+        return formatter
+    }
 }
 
 #Preview {

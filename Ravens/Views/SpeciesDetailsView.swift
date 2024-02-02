@@ -12,6 +12,7 @@ import SwiftyBeaver
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
+//    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
     @StateObject var viewSDModel = SpeciesDetailsViewModel()
     
     var speciesID: Int // Add speciesID as a property
@@ -52,12 +53,6 @@ struct SpeciesDetailsView: View {
                 }
             }
         }
-//        .padding(16)
-//        .background(Color.white.cornerRadius(18))
-//        .shadowedStyle()
-//        .padding(.horizontal, 8)
-//        .padding(.bottom, 30)
-        
         .onAppear {
             log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
             viewSDModel.fetchData(for: speciesID)
@@ -66,5 +61,5 @@ struct SpeciesDetailsView: View {
 }
 
 #Preview {
-    SpeciesDetailsView(speciesID: 8085)
+    SpeciesDetailsView(speciesID: 245)
 }

@@ -14,13 +14,17 @@ struct SettingsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     
     @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
-    @StateObject private var regionsViewModel = RegionViewModel()
-    @StateObject private var regionListViewModel = RegionListViewModel()
+    
+//    @StateObject private var regionsViewModel = RegionViewModel()
+//    @StateObject private var regionListViewModel = RegionListViewModel()    
+    
+    @EnvironmentObject var regionsViewModel: RegionViewModel
+    @EnvironmentObject var regionListViewModel: RegionListViewModel
     
     @EnvironmentObject var settings: Settings
     
     let minimumRadius = 500.0
-    let maximumRadius = 5000.0
+    let maximumRadius = 10000.0
     let step = 500.0
     
     //region netherlands - id=200, type=20
@@ -32,9 +36,10 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-//                Section("Language") {
-//                    
-//                }
+                Section("Language") {
+                    LanguageView()
+                    RegionsView()
+                }
                 
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
@@ -46,6 +51,10 @@ struct SettingsView: View {
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
                         settings.selectedGroupId = settings.selectedSpeciesGroup
+                        //
+                        settings.selectedRegion = 200 //<<<<<<
+                        log.error(">>>selected region: \(settings.selectedRegion)")
+                        
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("selectedGroup: \(settings.selectedGroup)")
                         settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
@@ -56,7 +65,7 @@ struct SettingsView: View {
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
-                            Image(systemName: "bird.fill")
+                            Image(systemName: "binoculars.fill")
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(myColor(value: index), .clear)
                         }
@@ -65,7 +74,6 @@ struct SettingsView: View {
                     .onChange(of: settings.selectedRarity) {
                         print(settings.selectedRarity)
                     }
-                    
                     
                     HStack {
                         Text("Radius")
@@ -81,8 +89,8 @@ struct SettingsView: View {
                     .padding()
                     
                 }
+                
                 Section("Days") {
-                    
                     Picker("Window", selection: $settings.days) {
                         ForEach(1 ... 14, id: \.self) { day in
                             HStack() {
@@ -117,20 +125,24 @@ struct SettingsView: View {
     
     //de data is nog niet gefetched ????
     func getId(region: Int, groups: Int) -> Int? {
-        print("\(region) \(groups)")
+        log.error("getID region: \(region) groups: \(groups)")
+//        log.error("\(regionListViewModel.regionLists)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
-            print("= \(matchingItem)")
+            log.error("getId= \(matchingItem)")
             return matchingItem.id
         }
+        log.error("getId: NIL")
         return nil
     }
     
     //de data is nog niet gefetched ????
     func getGroup(id: Int) -> String? {
+        log.error("getGroup: \(id)")
         if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {
-            print("= \(matchingItem)")
+            log.error("getGroup= \(matchingItem)")
             return matchingItem.name
         }
+        log.error("getGroup: NIL")
         return nil
     }
     

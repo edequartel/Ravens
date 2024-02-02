@@ -18,10 +18,10 @@ class BirdViewModel: ObservableObject {
     func fetchData(for groupID: Int) {
         log.info("fetchData BirdViewModel should be 5001 for birds but is \(groupID)")
         
-//        let url = endPoint+"region-lists/\(groupID)/species/"
-        let url = endPoint+"region-lists/5001/species/" //??edq bug
+        let url = endPoint+"region-lists/\(groupID)/species/"
+//        let url = endPoint+"region-lists/5001/species/" //??edq bug
         
-        log.verbose("url \(url)")
+        log.info("url \(url)")
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl"

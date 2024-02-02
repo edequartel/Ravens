@@ -14,8 +14,15 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
     //    @State private var position : MapCameraPosition = .automatic
+    
+    @State private var position = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+            span: MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 4)
+        )
+    )
     
     @State private var isSheetObservationsViewPresented = false
     
@@ -26,14 +33,26 @@ struct MapObservationsSpeciesView: View {
         ZStack {
             Map(position: $position) {
                 ForEach(observationsSpeciesViewModel.locations) { location in
-                    Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
+                    Marker("", systemImage: "binoculars.fill", coordinate:  location.coordinate)
                         .tint(Color(myColor(value: location.rarity)))
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                SettingsDetailsView()
-                    .frame(maxWidth: .infinity)
-                    .padding()
+                HStack {
+                    VStack(alignment: .trailing) {
+                        Text("\(speciesName)")
+                            .padding(5)
+                            .font(.headline)
+                            .foregroundColor(.obsGreenFlower)
+                            .background(Color.obsGreenEagle.opacity(0.5))
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        SettingsDetailsView()
+                    }
+                }
+                .padding(2)
+                .font(.footnote)
+                .foregroundColor(.obsGreenFlower)
             }
             
             .mapStyle(.hybrid(elevation: .realistic))

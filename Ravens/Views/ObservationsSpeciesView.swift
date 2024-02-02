@@ -23,38 +23,25 @@ struct ObservationsSpeciesView: View {
     
     var body: some View {
         VStack {
-            Text("\(speciesID) \(speciesName) Total obs: \(viewModel.observationsSpecies?.count ?? 0)")
-            
-            //            \(viewModel.observationsSpecies?.results.count ?? 0)")
-            //            Text("Locations: \(viewModel.locations.count)")
+            Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
                 .padding(10)
+                .font(.headline)
+                .foregroundColor(.obsGreenEagle)
             
             
             List {
                 if let results =  viewModel.observationsSpecies?.results {
-                    //                    ForEach(results, id: \.id) { result in
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) { result in
                         VStack(alignment: .leading) {
-                            Text("Observation ID: \(result.species)")
+//                            Text("Observation ID: \(result.species)")
+//                            Text("Species name: \(result.species_detail.name)")
+                            Text("\(result.date) / \(result.time ?? "unknown")")
                                 .bold()
-                            Text("Species name: \(result.species_detail.name)")
-                            Text("Date: \(result.date) / \(result.time ?? "unknown")")
-                            //                            Text("Location: \(result.location_detail.name)")
-                            Text("User: \(result.user_detail.name)")
-                            Text("Location details: \(result.location_detail.name)")
                             
-//                            Text("Substrate: \(result.substrate ?? 0)")
-//                            Text("\(result.permalink)")
-//                            Text("\(result.photos.count)")
-//                            Add more details as needed
-//
-//                            ForEach(result.photos, id: \.self) { photo in
-//                                Text("\(photo): \(photo.count)")
-//                            }
-                            
+                            Text("\(result.location_detail.name)")
+                            Text("\(result.user_detail.name)")
                             
                             ForEach(result.photos, id: \.self) { imageURLString in
-                                
                                 if let imageURL = URL(string: imageURLString) {
                                     AsyncImage(url: imageURL) { phase in
                                         switch phase {
@@ -95,18 +82,11 @@ struct ObservationsSpeciesView: View {
             log.verbose("speciesID \(speciesID)")
             viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
         }
-        //        .padding(16)
-        //        .background(Color.white.cornerRadius(18))
-        //        .shadowedStyle()
-        //        .padding(.horizontal, 8)
-        //        .padding(.bottom, 30)
     }
 }
 
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
-//        let viewModel = ObservationsSpeciesViewModel()
-//        let settings = Settings()
         ObservationsSpeciesView(speciesID: 2, speciesName: "Unknown")
             .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())

@@ -27,20 +27,24 @@ struct ContentView: View {
 //                    Text("Species")
 //                    Image(systemName: "tree")
 //                }
-//
+////
 //            SpeciesGroupView()
 ////                LoginView(loginViewModel: loginViewModel)
 //                    .tabItem {
 //                        Text("Species")
 //                        Image(systemName: "tree")
 //                    }
+//            
+//            LanguageView()
+//                .tabItem {
+//                    Text("Language")
+//                    Image(systemName: "book")
+//                }
             
             
             // Tab 1
             ZStack {
-                Text("xxx")
                 MapObservationView()
-                    .environmentObject(observationsViewModel)
                 ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             }
             .tabItem {

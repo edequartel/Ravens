@@ -9,16 +9,14 @@ import Foundation
 import SwiftUI
 import MapKit
 
-let longitude = 5.243376
-let latitude = 52.023861
-
 class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460
-    @AppStorage("selectedRegion") var selectedRegion = 20
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
     @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
-//    @AppStorage("endPoint") var endPoint = "https://waarneming.nl/api/v1/"
+
+    @AppStorage("selectedRegion") var selectedRegion = 200
+    @AppStorage("selectedLanguage") var selectedLanguage = 12
     
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500

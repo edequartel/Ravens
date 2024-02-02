@@ -6,30 +6,28 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct RegionsView: View {
+    let log = SwiftyBeaver.self
+    
     @StateObject private var viewModel = RegionViewModel()
+    @EnvironmentObject var settings: Settings
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(viewModel.regions, id:\.id) { region in
-                    VStack(alignment: .leading) {
-                        Text("Id \(region.id)")
-                        Text("Name \(region.name)")
-                        Text("Continent \(region.continent != nil ? "\(region.continent!)" : "unknown")")
-                        Text("ISO \(region.iso != nil ? "\(region.iso!)" : "unknown")")
-                        Text("Type \(region.type)")
-                    }
-                }
+        Picker("Select a Region", selection: $settings.selectedRegion) {
+            ForEach(viewModel.regions, id: \.id) { region in
+                Text("\(region.name ?? "unknown")")
             }
-            .navigationTitle("Regions")
+        }
+        .onChange(of: settings.selectedRegion) {
+            log.verbose("selectedRegion \(settings.selectedRegion)")
         }
     }
 }
 
-#Preview {
-    RegionsView()
+struct RegionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegionsView()
+    }
 }
-
-

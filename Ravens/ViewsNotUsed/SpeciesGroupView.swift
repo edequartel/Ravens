@@ -19,7 +19,7 @@ struct SpeciesGroupView: View {
 //                            .foregroundColor(GroupColor(value: speciesGroup.id))
                     }
 //                    .background(GroupColor(value: speciesGroup.id))
-                    .listRowBackground(GroupColor(value: speciesGroup.id))
+//                    .listRowBackground(GroupColor(value: speciesGroup.id))
                 }
                 
             }

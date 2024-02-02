@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftyBeaver
 
+
+
 struct BirdView: View {
     let log = SwiftyBeaver.self
     @StateObject private var birdViewModel = BirdViewModel()
@@ -25,10 +27,15 @@ struct BirdView: View {
     
     var body: some View {
         NavigationStack {
+//            Text("gr \(settings.selectedGroup)")
+//            Text("grid \(settings.selectedGroupId)")
+//            Text("spegrid \(settings.selectedSpeciesGroup)")
+//            Text("str \(settings.selectedGroupString)")
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
+
                     NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading) { //??
                             HStack {
                                 Image(systemName: "circle.fill")
                                     .symbolRenderingMode(.palette)
@@ -37,17 +44,14 @@ struct BirdView: View {
                                     .bold()
                                     .lineLimit(1) // Set the maximum number of lines to 1
                                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                ObservationDetailsView(speciesID: bird.id)
                             }
                             HStack {
                                 Text("\(bird.scientific_name)")
                                     .italic()
                                     .lineLimit(1) // Set the maximum number of lines to 1
                                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                Spacer()
-                                // Additional information if needed
-//                                if bird.id == 306 {
-//                                    ObservationDetailsxxView(speciesID: bird.id)
-//                                }
+//                                Spacer()
                             }
                         }
                         .onTapGesture() {
@@ -60,21 +64,20 @@ struct BirdView: View {
                         }
                         
                     }
-                    .swipeActions {
-                        Button(action: {
-                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
-                            birdId = bird.id //<<
-                            birdViewModel.fetchData(for: birdId ?? 1)
-                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(birdId)")
-                            isMapObservationSheetPresented.toggle()
-                        }) {
-                            Image(systemName: "tree.fill") // Replace "eye" with the system image name you want
-                                .foregroundColor(.blue) // You can customize the color
-                                .font(.title) // You can customize the font size
-                                .padding() // You can customize the padding
-                        }
-                        .tint(.orange)
-                    }
+                    .contentShape(Rectangle())
+//                    .swipeActions {
+//                        Button(action: {
+//                            log.error("birdview swipeactions call isMapObservationSheetPresented with bird.id \(bird.id)")
+//                            birdId = bird.id
+//                            isMapObservationSheetPresented.toggle()
+//                        }) {
+//                            Image(systemName: "tree.fill") // Replace "eye" with the system image name you want
+//                                .foregroundColor(.blue) // You can customize the color
+//                                .font(.title) // You can customize the font size
+//                                .padding() // You can customize the padding
+//                        }
+//                        .tint(.orange)
+//                    }
                 }
                 
                 
@@ -110,12 +113,16 @@ struct BirdView: View {
             .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
         }
         
-        .sheet(isPresented: $isMapObservationSheetPresented, content: {
-            SpeciesDetailsView(speciesID: birdId ?? 2).id(UUID())
-        })
+        //sheet neemt de eerste keer birdid niet mee?
+//        .sheet(isPresented: $isMapObservationSheetPresented, content: {
+////            print("----> birdId  \(birdId)")
+//            Text("bird id \(birdId ?? -111)")
+//            SpeciesDetailsView(speciesID: birdId ?? 2) //.id(UUID())
+//        })
         
         .searchable(text: $searchText)
         .onAppear() {
+            log.error("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
         }
     }

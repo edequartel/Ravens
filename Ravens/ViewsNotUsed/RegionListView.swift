@@ -13,11 +13,12 @@ struct RegionListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.regionLists, id:\.id) { region in
-                    VStack(alignment: .leading) {
+                ForEach(viewModel.regionLists.sorted(by: {$0.region < $1.region}), id:\.id) { region in
+                    HStack() {
                         Text("Id \(region.id)")
                         Text("Region \(region.region)")
                         Text("Group \(region.species_group)")
+                        Spacer()
                     }
                 }
             }

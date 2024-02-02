@@ -57,17 +57,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    let settings = Settings()
-    let observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-    let observationsModel =  ObservationsViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(settings)
-                .environmentObject(observationsSpeciesViewModel)
-                .environmentObject(observationsModel)
+                .environmentObject(Settings())
+                .environmentObject(ObservationsSpeciesViewModel())
+                .environmentObject(ObservationsViewModel())
+                .environmentObject(RegionViewModel())
+                .environmentObject(RegionListViewModel())
+//                .environmentObject(SpeciesDetailsViewModel())
         }
     }
 }
+

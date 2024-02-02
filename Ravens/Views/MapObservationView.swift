@@ -15,7 +15,16 @@ struct MapObservationView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+    //@State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    
+    @State private var position = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+            span: MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 4)
+        )
+    )
+    
     //    @State private var position : MapCameraPosition = .automatic
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     
@@ -31,7 +40,7 @@ struct MapObservationView: View {
                     }
                     
                     ForEach(observationsViewModel.locations) { location in
-                        Marker(location.name, systemImage: "bird.fill", coordinate: location.coordinate)
+                        Marker(location.name, systemImage: "binoculars.fill", coordinate: location.coordinate)
                             .tint(Color(myColor(value: location.rarity)))
                     }
                     
@@ -50,11 +59,9 @@ struct MapObservationView: View {
                 }
                 
                 .safeAreaInset(edge: .bottom) {
-                    SettingsDetailsView()
-                        .frame(maxWidth: .infinity)
-                        .padding()
+                    SettingsDetailsView(count: observationsViewModel.locations.count)
                 }
-                
+                //.onLongPressGesture(minimumDuration:
                 .onTapGesture { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
@@ -75,7 +82,8 @@ struct MapObservationView: View {
             }
         }
         .onAppear(){
-            // Get the actual location... not from settings
+            
+            // Get the actual location
             let location: CLLocation? = CLLocationManager().location
             circlePos.latitude = location?.coordinate.latitude ?? latitude
             circlePos.longitude = location?.coordinate.latitude ?? longitude
@@ -84,8 +92,6 @@ struct MapObservationView: View {
             
             // Get the locations of all the observations... not from settings
             observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                            //                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                            //                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                             lat: circlePos.latitude,
                                             long: circlePos.longitude,
                                             radius: settings.radius,

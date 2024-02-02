@@ -21,6 +21,8 @@ class RegionViewModel: ObservableObject {
     func fetchData() {
         log.info("fetchData RegionViewModel")
         let url = endPoint+"regions/"
+        
+        log.info("url = \(url)")
 
         // Create a URLRequest with caching policy
         var urlRequest = URLRequest(url: URL(string: url)!)

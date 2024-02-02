@@ -37,7 +37,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
     }
     
     func fetchData(speciesId: Int, endDate: Date, days: Int) {
-        log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
+        log.verbose("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
