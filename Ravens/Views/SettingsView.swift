@@ -33,8 +33,6 @@ struct SettingsView: View {
         
         NavigationStack {
             Form {
-                // LoginView(loginViewModel: loginViewModel)
-                
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
@@ -47,7 +45,7 @@ struct SettingsView: View {
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         //
                         settings.selectedRegion = 200 //<<<<<<
-                        log.error(">>>selected region: \(settings.selectedRegion)")
+                        log.error(">>>>>>selected region: \(settings.selectedRegion)")
                         
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("selectedGroup: \(settings.selectedGroup)")
@@ -57,7 +55,8 @@ struct SettingsView: View {
                 
                 Section("Map") {
                     Toggle("Poi", isOn: $settings.poiOn)
-                                        
+                    
+                
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
                             Image(systemName: "binoculars.fill")
@@ -67,7 +66,7 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .onChange(of: settings.selectedRarity) {
-                        print(settings.selectedRarity)
+                        log.info(settings.selectedRarity)
                     }
                     
                     HStack {

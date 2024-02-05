@@ -12,6 +12,8 @@ import AlamofireImage
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
+    @StateObject private var authManager = AuthManager()
+    
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
@@ -21,25 +23,33 @@ struct ObservationsSpeciesView: View {
     var speciesID: Int
     var speciesName: String
     
+    
+    @State private var isSheetPresented = false
+    
     var body: some View {
         VStack {
-            Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
-                .padding(10)
-                .font(.headline)
-                .foregroundColor(.obsGreenEagle)
-            
-            
+            Button("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x") {
+                isSheetPresented.toggle()
+            }
+            .padding()
+            .buttonStyle(.bordered)
+            .foregroundColor(.obsGreenEagle)
+
             List {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) { result in
                         VStack(alignment: .leading) {
-//                            Text("Observation ID: \(result.species)")
-//                            Text("Species name: \(result.species_detail.name)")
+                            //                            Text("Observation ID: \(result.species)")
+                            //                            Text("Species name: \(result.species_detail.name)")
                             Text("\(result.date) / \(result.time ?? "unknown")")
                                 .bold()
                             
                             Text("\(result.location_detail.name)")
                             Text("\(result.user_detail.name)")
+                            if (result.notes?.count ?? 0 > 0) {
+                                Text("\(result.notes ?? "")")
+                                    .font(.footnote)
+                            }
                             
                             ForEach(result.photos, id: \.self) { imageURLString in
                                 if let imageURL = URL(string: imageURLString) {
@@ -51,7 +61,7 @@ struct ObservationsSpeciesView: View {
                                                 .aspectRatio(nil, contentMode: .fit)
                                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                                
+                                            
                                         case .failure:
                                             Text("Failed to load image")
                                         case .empty:
@@ -77,10 +87,14 @@ struct ObservationsSpeciesView: View {
                 }
             }
         }
+        .sheet(isPresented: $isSheetPresented) {
+                    SpeciesDetailsView(speciesID: speciesID)
+                }
+        
         
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
+            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken")
         }
     }
 }

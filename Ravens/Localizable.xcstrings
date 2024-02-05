@@ -67,6 +67,9 @@
     "%lldd" : {
 
     },
+    "%lldx" : {
+
+    },
     "<#fatalError()#>" : {
 
     },
@@ -113,7 +116,14 @@
       }
     },
     "Date" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        }
+      }
     },
     "Days" : {
       "localizations" : {
@@ -126,7 +136,14 @@
       }
     },
     "Destination %lld" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestemming %11d"
+          }
+        }
+      }
     },
     "Details" : {
       "extractionState" : "stale",
@@ -151,7 +168,14 @@
       }
     },
     "Failed to load image" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afbeelding fout bij laden"
+          }
+        }
+      }
     },
     "Filter by" : {
       "localizations" : {
@@ -174,10 +198,25 @@
       }
     },
     "getToken" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getToken"
+          }
+        }
+      }
     },
     "Go to Destination %lld" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga naar bestemming %11d"
+          }
+        }
+      }
     },
     "Group" : {
       "localizations" : {
@@ -210,10 +249,24 @@
       }
     },
     "International" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Internationaal"
+          }
+        }
+      }
     },
     "Invalid URL" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalide URK"
+          }
+        }
+      }
     },
     "ISO %@" : {
       "extractionState" : "stale",
@@ -227,7 +280,14 @@
       }
     },
     "Language" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taal"
+          }
+        }
+      }
     },
     "languagedataisnil" : {
       "extractionState" : "stale",
@@ -273,10 +333,44 @@
       }
     },
     "Loading..." : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden..."
+          }
+        }
+      }
+    },
+    "Login" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
+    },
+    "Login waarneming.nl" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login waarneming.nl"
+          }
+        }
+      }
     },
     "Main View" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main View"
+          }
+        }
+      }
     },
     "Manual" : {
       "localizations" : {
@@ -370,6 +464,16 @@
         }
       }
     },
+    "Password" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachtwoord"
+          }
+        }
+      }
+    },
     "Poi" : {
       "localizations" : {
         "nl" : {
@@ -459,6 +563,12 @@
             "state" : "new",
             "value" : "Results %1$lld/%2$lld"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resultaten %1$lld/%2$lld"
+          }
         }
       }
     },
@@ -473,7 +583,14 @@
       }
     },
     "Select a Region" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecteer een gebied"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -574,6 +691,9 @@
         }
       }
     },
+    "Username" : {
+
+    },
     "Very rare" : {
       "localizations" : {
         "nl" : {
@@ -585,7 +705,14 @@
       }
     },
     "Window" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raam"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

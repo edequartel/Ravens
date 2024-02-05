@@ -14,6 +14,7 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
+    @StateObject private var authManager = AuthManager()
 //    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
     //    @State private var position : MapCameraPosition = .automatic
     
@@ -47,7 +48,7 @@ struct MapObservationsSpeciesView: View {
                             .background(Color.obsGreenEagle.opacity(0.5))
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        SettingsDetailsView()
+                        SettingsDetailsView(count: observationsSpeciesViewModel.locations.count)
                     }
                 }
                 .padding(2)
@@ -68,7 +69,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days)
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken")
         }
     }
 }

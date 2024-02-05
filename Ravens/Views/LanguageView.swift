@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftyBeaver
 
 struct LanguageView: View {
+    let log = SwiftyBeaver.self
+    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
     // Define an array of strings
     let options = ["nl", "eng"]
     
@@ -21,6 +23,12 @@ struct LanguageView: View {
                 ForEach(options, id: \.self) { option in
                     Text(option)
                 }
+            }
+            .onChange(of: settings.selectedLanguage) {
+                log.info("LanguageView language changed to: \(settings.selectedLanguage)")
+                
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+                    
             }
         }
     }

@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 class ObservationsSpeciesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    
+
     @Published var observationsSpecies: ObservationsSpecies?
     
     var locations = [Location]()
@@ -36,13 +36,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, endDate: Date, days: Int) {
+    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String) {
         log.verbose("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": "nl",
-            "Authorization": "Token "+tokenKey //9b4a34b46fa1b95ca0b4fdf3b036ba559660c789" //<<TOKEN LATER BIJ ZETTEN 3600??
+            "Authorization": "Token "+token //9b4a34b46fa1b95ca0b4fdf3b036ba559660c789" //<<TOKEN LATER BIJ ZETTEN 3600??
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)

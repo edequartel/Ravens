@@ -14,7 +14,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
     @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
-
+    
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
@@ -26,9 +26,6 @@ class Settings: ObservableObject {
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
-    
-    @AppStorage("token") var token = "token"
-    @AppStorage("login") var login = "edequartel"
-    @AppStorage("password") var password = "zeemeeuw2015"
 }
+
 

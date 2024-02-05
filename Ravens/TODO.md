@@ -8,8 +8,6 @@
 - recursive 
 - login 
 - check dataload?
-- flip (v)
-- sheet exyte (?)
 - shareview
 - alerts new species
 - colors
@@ -17,9 +15,8 @@
 - overview project in views pdf (v)
 - camera position
 - check log.'s
-- login
 - species change name
-- 200 regions
+- 200 regions error
 
 **messages**
 

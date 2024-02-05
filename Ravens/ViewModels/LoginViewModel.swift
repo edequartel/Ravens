@@ -20,6 +20,7 @@ class LoginViewModel: ObservableObject {
             "Content-Type": "application/x-www-form-urlencoded",
         ]
         
+        log.info("loginView: \(url)")
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
             .responseJSON { response in

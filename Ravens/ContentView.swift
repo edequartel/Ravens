@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
-struct ContentView: View {
+struct RavensContentView: View {
     let log = SwiftyBeaver.self
     
     @StateObject private var observationsViewModel = ObservationsViewModel()
@@ -40,9 +40,9 @@ struct ContentView: View {
 //                    Text("Language")
 //                    Image(systemName: "book")
 //                }
-//            LoginView(loginViewModel: loginViewModel)
+//            StartLoginView()
 //                .tabItem {
-//                    Text("Language")
+//                    Text("Login")
 //                    Image(systemName: "book")
 //                }
             
@@ -82,10 +82,10 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RavensContentView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        ContentView()
+        RavensContentView()
             .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())

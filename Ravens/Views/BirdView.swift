@@ -19,48 +19,50 @@ struct BirdView: View {
     
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
-    @State private var selectedRarityFilterOption: RarityFilterOption = .rare
     
     @State private var searchText = ""
-    @State private var isMapObservationSheetPresented = false
+//    @State private var isMapObservationSheetPresented = false
     @State private var birdId : Int?
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: selectedRarityFilterOption), id: \.species) { bird in
+                ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity), id: \.species) { bird in
+                    HStack {
+                        NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(myColor(value: bird.rarity), .clear)
 
-                    NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                    .symbolRenderingMode(.palette)
-                                    .foregroundStyle(myColor(value: bird.rarity), .clear)
-                                ObservationDetailsView(speciesID: bird.id)
-                                Text("\(bird.id) \(bird.name)")
-                                    .bold()
-                                    .lineLimit(1) // Set the maximum number of lines to 1
-                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                    ObservationDetailsView(speciesID: bird.id)
+                                    
+                                    Text("\(bird.id) \(bird.name)")
+                                        .bold()
+                                        .lineLimit(1) // Set the maximum number of lines to 1
+                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                }
+                                HStack {
+                                    Text("\(bird.scientific_name)")
+                                        .italic()
+                                        .lineLimit(1) // Set the maximum number of lines to 1
+                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                    
+                                }
                             }
-                            HStack {
-                                Text("\(bird.scientific_name)")
-                                    .italic()
-                                    .lineLimit(1) // Set the maximum number of lines to 1
-                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-
+                            .onTapGesture() {
+                                log.verbose("onTapgesture \(bird.id)")
+                                birdId = bird.id
                             }
+                            .onAppear() {
+                                birdId = bird.id
+                                log.verbose("onAppear \(bird.id)")
+                            }
+                            
                         }
-                        .onTapGesture() {
-                            log.verbose("onTapgesture \(bird.id)")
-                            birdId = bird.id
-                        }
-                        .onAppear() {
-                            birdId = bird.id
-                            log.verbose("onAppear \(bird.id)")
-                        }
-                        
+                        .contentShape(Rectangle())
                     }
-                    .contentShape(Rectangle())
                 }
             }
                 
@@ -80,19 +82,34 @@ struct BirdView: View {
                     }
                     .pickerStyle(.inline)
                     
-                    Picker("Filter rarity by", selection: $selectedRarityFilterOption) {
-                        Text("All").tag(RarityFilterOption.all)
-                        Text("Common").tag(RarityFilterOption.common)
-                        Text("Uncommon").tag(RarityFilterOption.uncommon)
-                        Text("Rare").tag(RarityFilterOption.rare)
-                        Text("Very rare").tag(RarityFilterOption.veryrare)
+                    Picker("Filter rarity by", selection: $settings.selectedRarity) {
+                        Text("All").tag(0)
+                        Text("Common").tag(1)
+                        Text("Uncommon").tag(2)
+                        Text("Rare").tag(3)
+                        Text("Very rare").tag(4)
                     }
                     .pickerStyle(.inline)
+                    
+                    
+//                    Picker("Rarity", selection: $settings.selectedRarity) {
+//                        ForEach(0..<5) { index in
+//                            Image(systemName: "binoculars.fill")
+//                                .symbolRenderingMode(.palette)
+//                                .foregroundStyle(myColor(value: index), .clear)
+//                        }
+//                    }
+//                    .pickerStyle(.inline)
+
+                    
                 }
             }
             .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
         }
         .searchable(text: $searchText)
+
+        
+        
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup, language: settings.selectedLanguage)
@@ -123,30 +140,6 @@ enum FilterOption: String, CaseIterable {
     // Add more filter options if needed
 }
 
-enum RarityFilterOption: Int {
-    case all = 0
-    case common = 1
-    case uncommon = 2
-    case rare = 3
-    case veryrare = 4
-    
-    var shape: some ShapeStyle {
-        switch self {
-        case .all:
-            return Color(UIColor.systemGray)
-        case .common:
-            return Color(UIColor.systemGreen)
-        case .uncommon:
-            return Color(UIColor.systemBlue)
-        case .rare:
-            return Color(UIColor.systemOrange)
-        case .veryrare:
-            return Color(UIColor.systemRed)
-        }
-    }
-}
-
-
 extension BirdViewModel {
     func sortedBirds(by sortOption: SortOption) -> [Bird] {
         switch sortOption {
@@ -160,7 +153,7 @@ extension BirdViewModel {
 }
 
 extension BirdViewModel {
-    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: RarityFilterOption) -> [Bird] {
+    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int) -> [Bird] {
         let sortedBirdsList = sortedBirds(by: sortOption)
         
         if searchText.isEmpty {
@@ -189,19 +182,21 @@ extension BirdViewModel {
         }
     }
     
-    private func applyRarityFilter(to birds: [Bird], with filterOption: RarityFilterOption) -> [Bird] {
+    private func applyRarityFilter(to birds: [Bird], with filterOption: Int) -> [Bird] {
         switch filterOption {
-        case .all:
+        case 0:
             return birds
-        case .common:
-            return birds.filter { $0.rarity >= 1 }
-        case .uncommon:
-            return birds.filter { $0.rarity >= 2}
-        case .rare:
-            return birds.filter { $0.rarity >= 3 }
-        case .veryrare:
-            return birds.filter { $0.rarity >= 4 }
+        case 1:
+            return birds.filter { $0.rarity == 1 }
+        case 2:
+            return birds.filter { $0.rarity == 2}
+        case 3:
+            return birds.filter { $0.rarity == 3 }
+        case 4:
+            return birds.filter { $0.rarity == 4 }
             
+        default:
+           return birds
         }
     }
 }
@@ -216,30 +211,3 @@ struct BirdView_Previews: PreviewProvider {
     }
 }
 
-
-
-//                        Button(action: {
-//                            log.verbose("call isObservationsSpeciesViewPresented with bird.id \(bird.id)")
-//                            birdId = bird.id
-//                            isObservationsSpeciesViewPresented.toggle()
-//                        }) {
-//                            Image(systemName: "list.bullet") // Replace "eye" with the system image name you want
-//                                .foregroundColor(.blue) // You can customize the color
-//                                .font(.title) // You can customize the font size
-//                                .padding() // You can customize the padding
-//                        }
-//                        .tint(.green)
-
-
-//Text("\(bird.id) \(bird.name)")
-//    .onAppear() {
-//        // Handle tap gesture for the bird
-//        birdId = bird.id
-//        print(">> \(birdId)")
-//    }
-//    .onTapGesture {
-//        // Handle tap gesture for the bird
-//        birdId = bird.id
-//        print("-- \(birdId)")
-//    }
-//}

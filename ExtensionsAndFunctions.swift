@@ -28,7 +28,7 @@ func formatCurrentDate(value: Date) -> String {
 //let tokenKey = "9b4a34b46fa1b95ca0b4fdf3b036ba559660c789"
 
 let endPoint = "https://waarneming.nl/api/v1/"
-let tokenKey = "21047b0d6742dc36234bc5293053bc757623470b"
+//let tokenKey = "21047b0d6742dc36234bc5293053bc757623470b"
 
 //waarneming-test.nl
 
