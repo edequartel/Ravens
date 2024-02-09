@@ -28,10 +28,10 @@ struct LanguageView: View {
             .onChange(of: settings.selectedLanguage) {
                 log.info("LanguageView language changed to: \(settings.selectedLanguage)")
                 log.info("\(settings.selectedLanguage)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage) ////<<<<< async is the problem
-                log.info("LanguageView onChange ----))) \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-//                onChange?()
-                    
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: {
+                    log.info("Info LanguageView completed \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+                    onChange?()
+                })
             }
         }
     }

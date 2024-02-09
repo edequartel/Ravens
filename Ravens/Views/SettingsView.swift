@@ -13,7 +13,7 @@ struct SettingsView: View {
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     
-    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @StateObject private var loginViewModel = LoginViewModel()
     
     @EnvironmentObject var regionsViewModel: RegionViewModel
@@ -43,10 +43,12 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
+                        
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         // settings.selectedRegion = 200 //<<<<<<
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
+                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
                     }
                 }
                 
@@ -104,7 +106,7 @@ struct SettingsView: View {
                 
                 Section("International") {
                     LanguageView(onChange: {upDate()})
-//                    RegionsView(onChange: {upDate()})
+////                    RegionsView(onChange: {upDate()})
                 }
                 
             }
@@ -119,8 +121,9 @@ struct SettingsView: View {
         }
         
         .onAppear() {
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
-            print("\(settings.selectedLanguage)")
+//            print("ONAPPEAR SETTINGSVIEW")
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print ("completed") })
+//            print("\(settings.selectedLanguage)")
         }
         
     }
@@ -149,23 +152,8 @@ struct SettingsView: View {
     }
     
     func upDate() {
-        
-        
-        log.info("settings view Update() ---->>> \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-        speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
-        regionsViewModel.fetchData(language: settings.selectedLanguage)
-        
-        log.info("----))) \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-        
-        
-//        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
-//        log.info(">update>> 200 settings.selectedGroup: \(settings.selectedGroup)")
-
-        
-//        log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-//        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
-//        log.info("settings.selectedGroup \(settings.selectedGroup)")
-        
+          print("update()")
+          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
     }
     
 }

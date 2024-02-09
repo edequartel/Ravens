@@ -92,17 +92,15 @@ struct BirdView: View {
                     .pickerStyle(.inline)
                 }
             }
-//            .navigationBarTitle(">>"+String(settings.selectedGroup), displayMode: .inline) //?
             .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
             
         }
         .searchable(text: $searchText)
 
-        
-        
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup, language: settings.selectedLanguage)
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
         }
     }
     

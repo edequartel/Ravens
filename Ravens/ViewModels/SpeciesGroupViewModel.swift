@@ -15,11 +15,11 @@ class SpeciesGroupViewModel: ObservableObject {
     @Published var speciesGroups = [SpeciesGroup]()
     var speciesDictionary: [Int: String] = [:]
 
-    init() {
-        fetchData(language: "nl")
-    }
+//    init() {
+//        fetchData(language: "nl")
+//    }
 
-    func fetchData(language: String) {
+    func fetchData(language: String, completion: @escaping () -> Void) { //completion handling
         log.info("fetchData SpeciesGroupViewModel \(language)")
         let url = endPoint + "species-groups"
 
@@ -42,6 +42,8 @@ class SpeciesGroupViewModel: ObservableObject {
                     // Update the speciesDictionary
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
                     
+                    // Call the completion handler when the data is successfully fetched
+                    completion()                    
                 } catch {
                     self.log.error("Error SpeciesGroupViewModel decoding JSON: \(error)")
                 }
@@ -57,42 +59,3 @@ class SpeciesGroupViewModel: ObservableObject {
     }
 }
 
-
-//class SpeciesGroupViewModel: ObservableObject {
-//    let log = SwiftyBeaver.self
-//    
-//    @Published var speciesGroups = [SpeciesGroup]()
-//    
-//
-//    init() {
-//        fetchData(language: "nl")
-//    }
-//
-//    func fetchData(language: String) {
-//        log.info("fetchData SpeciesGroupViewModel")
-//        let url = endPoint+"species-groups"
-//
-////         Add the custom header 'Accept-Language: nl'
-//        let headers: HTTPHeaders = [
-//            "Accept-Language": language
-//        ]
-//        
-//        log.info("url SpeciesGroupViewModel: \(url)")
-//
-//        // Use Alamofire to make the API request
-//        AF.request(url, headers: headers).responseJSON { response in
-//            switch response.result {
-//            case .success(_):
-//                do {
-//                    // Decode the JSON response into an array of Bird objects
-//                    let decoder = JSONDecoder()
-//                    self.speciesGroups = try decoder.decode([SpeciesGroup].self, from: response.data!)
-//                } catch {
-//                    self.log.error("Error SpeciesGroupViewModel decoding JSON: \(error)")
-//                }
-//            case .failure(let error):
-//                self.log.error("Error SpeciesGroupViewModel fetching data: \(error)")
-//            }
-//        }
-//    }
-//}

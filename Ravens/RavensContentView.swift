@@ -76,7 +76,7 @@ struct RavensContentView: View {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         .onAppear() {
-            log.verbose("*** NEW LAUNCH ***")
+            log.warning("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
         }
     }

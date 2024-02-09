@@ -70,9 +70,6 @@
     "%lldx" : {
 
     },
-    "<#fatalError()#>" : {
-
-    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -169,6 +166,7 @@
       }
     },
     "Failed to load image" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -338,6 +336,7 @@
       }
     },
     "Loading..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

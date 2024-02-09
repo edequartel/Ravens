@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47075B122B6B87BA00D09F28 /* LabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47075B112B6B87BA00D09F28 /* LabView.swift */; };
+		4709931A2B7648F60072F0D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 470993192B7648F60072F0D3 /* Kingfisher */; };
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
@@ -25,7 +26,6 @@
 		474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403B2B4BC5070038B3A5 /* Bird.swift */; };
 		474C403E2B4BC5400038B3A5 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */; };
 		474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40402B4BC5780038B3A5 /* Alamofire */; };
-		474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40432B4BC5860038B3A5 /* AlamofireImage */; };
 		474C40462B4BC66A0038B3A5 /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40452B4BC66A0038B3A5 /* BirdView.swift */; };
 		474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */; };
 		474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */; };
@@ -129,8 +129,8 @@
 				4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */,
 				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
+				4709931A2B7648F60072F0D3 /* Kingfisher in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
-				474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 			);
@@ -278,13 +278,13 @@
 			name = Ravens;
 			packageProductDependencies = (
 				474C40402B4BC5780038B3A5 /* Alamofire */,
-				474C40432B4BC5860038B3A5 /* AlamofireImage */,
 				474C404E2B4BD24F0038B3A5 /* RichText */,
 				474C40972B5000370038B3A5 /* OptionallyDecodable */,
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
 				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
 				4767396B2B5D5BE400DC8187 /* FloatingButton */,
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
+				470993192B7648F60072F0D3 /* Kingfisher */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -317,13 +317,13 @@
 			mainGroup = 474C401F2B4BC4040038B3A5;
 			packageReferences = (
 				474C403F2B4BC5780038B3A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				474C40422B4BC5860038B3A5 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */,
 				474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				470993182B7648F60072F0D3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -611,6 +611,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		470993182B7648F60072F0D3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.2;
+			};
+		};
 		474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -625,14 +633,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.8.1;
-			};
-		};
-		474C40422B4BC5860038B3A5 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.3.0;
 			};
 		};
 		474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */ = {
@@ -678,6 +678,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		470993192B7648F60072F0D3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 470993182B7648F60072F0D3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		474093862B55B7AC004F10C5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
@@ -687,11 +692,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C403F2B4BC5780038B3A5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		474C40432B4BC5860038B3A5 /* AlamofireImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474C40422B4BC5860038B3A5 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
-			productName = AlamofireImage;
 		};
 		474C404E2B4BD24F0038B3A5 /* RichText */ = {
 			isa = XCSwiftPackageProductDependency;

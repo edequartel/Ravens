@@ -15,7 +15,12 @@ class RegionViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regions = [Region]()
 
+//    init() {
+//        fetchData(language: "nl")
+//    }
+    
     init() {
+        print("init RegionViewModel")
         fetchData(language: "nl")
     }
     

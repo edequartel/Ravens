@@ -27,6 +27,8 @@ class Settings: ObservableObject {
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
+    
+    init() { print ("init Settings")}
 }
 
 

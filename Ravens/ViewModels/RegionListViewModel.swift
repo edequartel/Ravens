@@ -14,12 +14,17 @@ class RegionListViewModel: ObservableObject { //<<change in region list not regi
     @Published var regionLists = [RegionList]()
 
     init() {
+        print("init RegionListViewModel")
         fetchData()
     }
 
+    
+    
     func fetchData() {
         log.info("fetchData RegionListViewModel")
         let url = endPoint+"region-lists"
+        
+        log.info("url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [

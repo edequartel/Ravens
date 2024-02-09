@@ -37,7 +37,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
     }
     
     func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String) {
-        log.verbose("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
+        log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -50,7 +50,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         var url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"
         
-        log.verbose("\(url)")
+        log.info("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

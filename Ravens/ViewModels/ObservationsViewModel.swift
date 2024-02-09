@@ -24,6 +24,8 @@ class ObservationsViewModel: ObservableObject {
     var locations = [Location]()
     var poiLocations = [Location]()
     
+    init() { print("init ObservationsViewModel") }
+    
     ///
     func getLocations() {
         locations.removeAll()

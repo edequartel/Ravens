@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-import AlamofireImage
+import Kingfisher
 
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
@@ -53,23 +53,11 @@ struct ObservationsSpeciesView: View {
                             
                             ForEach(result.photos, id: \.self) { imageURLString in
                                 if let imageURL = URL(string: imageURLString) {
-                                    AsyncImage(url: imageURL) { phase in
-                                        switch phase {
-                                        case .success(let image):
-                                            image
+                                    KFImage(URL(string: imageURLString)!)
                                                 .resizable()
                                                 .aspectRatio(nil, contentMode: .fit)
                                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                            
-                                        case .failure:
-                                            Text("Failed to load image")
-                                        case .empty:
-                                            Text("Loading...")
-                                        @unknown default:
-                                            Text("<#fatalError()#>")
-                                        }
-                                    }
                                 } else {
                                     Text("Invalid URL")
                                 }
