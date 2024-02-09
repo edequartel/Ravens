@@ -136,6 +136,7 @@
       }
     },
     "Destination %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -197,6 +198,9 @@
         }
       }
     },
+    "First Row" : {
+
+    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -209,6 +213,7 @@
       }
     },
     "Go to Destination %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -363,6 +368,7 @@
       }
     },
     "Main View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -582,6 +588,9 @@
         }
       }
     },
+    "Second Row" : {
+
+    },
     "Select a Region" : {
       "localizations" : {
         "nl" : {
@@ -641,6 +650,9 @@
           }
         }
       }
+    },
+    "Third Row" : {
+
     },
     "Token: %@" : {
       "extractionState" : "stale",

@@ -69,7 +69,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken")
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
         }
     }
 }

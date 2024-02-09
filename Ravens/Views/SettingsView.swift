@@ -32,31 +32,27 @@ struct SettingsView: View {
     var body: some View {
         
         NavigationStack {
-            Form {
+            List {
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-                            Text("\(speciesGroup.id) \(speciesGroup.name)")
+//                            Text("\(speciesGroup.id) \(speciesGroup.name)")
+                            Text("\(speciesGroup.name)")
                                 .lineLimit(1)
                                 .truncationMode(.tail)
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
-                        settings.selectedGroupId = settings.selectedSpeciesGroup
-                        //
-                        settings.selectedRegion = 200 //<<<<<<
-                        log.error(">>>>>>selected region: \(settings.selectedRegion)")
-                        
+                        log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+                        // settings.selectedRegion = 200 //<<<<<<
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
-                        log.info("selectedGroup: \(settings.selectedGroup)")
-                        settings.selectedGroupString = getGroup(id: settings.selectedSpeciesGroup) ?? "unknown"
+                        log.info("settings.selectedGroup \(settings.selectedGroup)")
                     }
                 }
                 
                 Section("Map") {
                     Toggle("Poi", isOn: $settings.poiOn)
                     
-                
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
                             Image(systemName: "binoculars.fill")
@@ -107,8 +103,8 @@ struct SettingsView: View {
                 }
                 
                 Section("International") {
-                    LanguageView()
-                    RegionsView()
+                    LanguageView(onChange: {upDate()})
+//                    RegionsView(onChange: {upDate()})
                 }
                 
             }
@@ -124,6 +120,7 @@ struct SettingsView: View {
         
         .onAppear() {
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+            print("\(settings.selectedLanguage)")
         }
         
     }
@@ -149,6 +146,26 @@ struct SettingsView: View {
         }
         log.error("getGroup: NIL")
         return nil
+    }
+    
+    func upDate() {
+        
+        
+        log.info("settings view Update() ---->>> \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+        speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+        regionsViewModel.fetchData(language: settings.selectedLanguage)
+        
+        log.info("----))) \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+        
+        
+//        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
+//        log.info(">update>> 200 settings.selectedGroup: \(settings.selectedGroup)")
+
+        
+//        log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+//        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
+//        log.info("settings.selectedGroup \(settings.selectedGroup)")
+        
     }
     
 }

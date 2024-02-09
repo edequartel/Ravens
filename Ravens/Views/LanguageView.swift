@@ -12,11 +12,12 @@ struct LanguageView: View {
     let log = SwiftyBeaver.self
     @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
     // Define an array of strings
-    let options = ["nl", "eng"]
+    let options = ["nl", "eng", "de", "fr"]
     
     // State variable to hold the selected option
     @EnvironmentObject var settings: Settings
     
+    var onChange: (() -> Void)?
     var body: some View {
         VStack {
             Picker("Language", selection: $settings.selectedLanguage) {
@@ -26,8 +27,10 @@ struct LanguageView: View {
             }
             .onChange(of: settings.selectedLanguage) {
                 log.info("LanguageView language changed to: \(settings.selectedLanguage)")
-                
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+                log.info("\(settings.selectedLanguage)")
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage) ////<<<<< async is the problem
+                log.info("LanguageView onChange ----))) \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+//                onChange?()
                     
             }
         }

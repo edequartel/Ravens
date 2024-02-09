@@ -87,10 +87,10 @@ class ObservationsViewModel: ObservableObject {
                     self.observations = observations
                     self.getLocations()
                     self.getPoiLocations()
-                    self.log.error("api locations count \(self.locations.count)")
+                    self.log.info("observations locations count \(self.locations.count)")
                 }
             case .failure(let error):
-                self.log.error("Error: \(error)")
+                self.log.error("Error ObservationsViewModel: \(error)")
             }
         }
         

@@ -19,24 +19,6 @@
       }
     },
     {
-      "identity" : "animatedtabbar",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/AnimatedTabBar.git",
-      "state" : {
-        "revision" : "f5f342227283e76c7b49371e735516bac3caef68",
-        "version" : "0.1.2"
-      }
-    },
-    {
-      "identity" : "concentriconboarding",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/ConcentricOnboarding.git",
-      "state" : {
-        "revision" : "2c29c123913f6d024b92535f51b20bf99cb6f059",
-        "version" : "1.0.5"
-      }
-    },
-    {
       "identity" : "floatingbutton",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/exyte/FloatingButton.git",

@@ -14,6 +14,8 @@ struct RegionsView: View {
     @StateObject private var viewModel = RegionViewModel()
     @EnvironmentObject var settings: Settings
     
+    var onChange: (() -> Void)?
+    
     var body: some View {
         Picker("Select a Region", selection: $settings.selectedRegion) {
             ForEach(viewModel.regions, id: \.id) { region in
@@ -22,6 +24,7 @@ struct RegionsView: View {
         }
         .onChange(of: settings.selectedRegion) {
             log.verbose("selectedRegion \(settings.selectedRegion)")
+            onChange?()
         }
     }
 }

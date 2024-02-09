@@ -15,13 +15,13 @@ struct BirdView: View {
     @StateObject private var birdViewModel = BirdViewModel()
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     
     @State private var searchText = ""
-//    @State private var isMapObservationSheetPresented = false
     @State private var birdId : Int?
     
     var body: some View {
@@ -36,7 +36,7 @@ struct BirdView: View {
                                         .symbolRenderingMode(.palette)
                                         .foregroundStyle(myColor(value: bird.rarity), .clear)
 
-                                    ObservationDetailsView(speciesID: bird.id)
+                                    ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
                                     
                                     Text("\(bird.id) \(bird.name)")
                                         .bold()
@@ -90,21 +90,11 @@ struct BirdView: View {
                         Text("Very rare").tag(4)
                     }
                     .pickerStyle(.inline)
-                    
-                    
-//                    Picker("Rarity", selection: $settings.selectedRarity) {
-//                        ForEach(0..<5) { index in
-//                            Image(systemName: "binoculars.fill")
-//                                .symbolRenderingMode(.palette)
-//                                .foregroundStyle(myColor(value: index), .clear)
-//                        }
-//                    }
-//                    .pickerStyle(.inline)
-
-                    
                 }
             }
-            .navigationBarTitle(settings.selectedGroupString, displayMode: .inline)
+//            .navigationBarTitle(">>"+String(settings.selectedGroup), displayMode: .inline) //?
+            .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
+            
         }
         .searchable(text: $searchText)
 

@@ -35,10 +35,10 @@ class RegionListViewModel: ObservableObject { //<<change in region list not regi
                     let decoder = JSONDecoder()
                     self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
                 } catch {
-                    self.log.error("Error decoding JSON: \(error)")
+                    self.log.error("Error RegionListViewModel decoding JSON: \(error)")
                 }
             case .failure(let error):
-                self.log.error("Error fetching data: \(error)")
+                self.log.error("Error RegionListViewModel fetching data: \(error)")
             }
         }
     }

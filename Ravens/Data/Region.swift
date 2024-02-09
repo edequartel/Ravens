@@ -10,7 +10,7 @@ import Foundation
 struct Region: Identifiable, Codable, Hashable {
     var id: Int
     var type: Int
-    var name: String?
+    var name: String
     var continent: Int?
     var iso: String?
 }

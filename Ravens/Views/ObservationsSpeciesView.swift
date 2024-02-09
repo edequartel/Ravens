@@ -94,7 +94,7 @@ struct ObservationsSpeciesView: View {
         
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken")
+            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
         }
     }
 }

@@ -26,7 +26,7 @@ class LanguageViewModel: ObservableObject {
                     self.language = language
                 }
             case .failure(let error):
-                self.log.error("Error: \(error)")
+                self.log.error("Error LanguageViewModel: \(error)")
             }
         }
     }

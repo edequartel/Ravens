@@ -36,13 +36,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String) {
+    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String) {
         log.verbose("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": "nl",
-            "Authorization": "Token "+token //9b4a34b46fa1b95ca0b4fdf3b036ba559660c789" //<<TOKEN LATER BIJ ZETTEN 3600??
+            "Accept-Language": language,
+            "Authorization": "Token "+token
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
@@ -76,11 +76,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
 //                            }
                         }
                     } catch {
-                        self.log.error("Error decoding JSON: \(error)")
+                        self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
+                        self.log.error("\(url)")
+//                        self.log.error("\(response.debugDescription)")
                     }
                 }
             case .failure(let error):
-                self.log.error("Error: \(error)")
+                self.log.error("Error ObservationsSpeciesViewModel: \(error)")
             }
         }
     }

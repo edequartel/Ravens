@@ -7,29 +7,18 @@
 
 import SwiftUI
 
-struct LabView: View {
+
+struct ContentView: View {
     var body: some View {
-            NavigationView {
-                List {
-                    ForEach(0...5, id: \.self) { index in
-                        NavigationLink(destination: Text("Destination \(index)")) {
-                            HStack {
-                                // Replace "binoculars.fill" with the name of your binoculars image in the Assets catalog
-                                Image(systemName: "binoculars.fill")
-                                    .renderingMode(.template)
-                                    .foregroundColor(.blue) // Adjust color as needed
-                                    .frame(width: 24, height: 24) // Adjust size as needed
-                                Text("Go to Destination \(index)")
-                            }
-                        }
-                    }
-                }
-                .navigationBarTitle("Main View")
-            }
-        }
-    }
+      List {
+        Text("First Row")
+        Text("Second Row")
+        Text("Third Row")
+      }
+   }
+}
 
 #Preview {
-    LabView()
+    ContentView()
 }
 

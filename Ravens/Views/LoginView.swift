@@ -16,12 +16,15 @@ class AuthManager: ObservableObject {
     @Published var token: String?
     
     init() {
+//OVERRIDE THE TOKEN BY SETTING IT
         let storedToken = "21047b0d6742dc36234bc5293053bc757623470b"
-        // Check if token exists in Keychain at the start
-        if let storedToken = try? Keychain(service: "ravens.app.bundle.identifier").get("AuthToken") {
-            self.token = storedToken
-            log.info("Token \(storedToken)")
-        }
+        self.token = storedToken
+        
+//        // Check if token exists in Keychain at the start
+//        if let storedToken = try? Keychain(service: "ravens.app.bundle.identifier").get("AuthToken") {
+//            self.token = storedToken
+//            log.verbose("AuthManager Token \(storedToken)")
+//        }
     }
     
     func updateToken(_ newToken: String?) {
@@ -40,6 +43,7 @@ struct StartLoginView: View {
     @State private var password: String = ""
     
     var body: some View {
+        
         if authManager.token == nil{
             LoginView(username: $username, password: $password, didLogin: { newToken in
                 authManager.updateToken(newToken)

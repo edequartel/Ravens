@@ -14,6 +14,7 @@ struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
 //    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
     @StateObject var viewSDModel = SpeciesDetailsViewModel()
+    @EnvironmentObject var settings: Settings
     
     var speciesID: Int // Add speciesID as a property
 
@@ -55,7 +56,7 @@ struct SpeciesDetailsView: View {
         }
         .onAppear {
             log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
-            viewSDModel.fetchData(for: speciesID)
+            viewSDModel.fetchData(for: speciesID, language: settings.selectedLanguage)
         }
     }
 }

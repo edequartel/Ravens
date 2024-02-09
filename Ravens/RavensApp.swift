@@ -60,6 +60,9 @@ struct RavensApp: App {
 
     var body: some Scene {
         WindowGroup {
+//            RegionsView()
+  
+            
             StartLoginView()
 //            RavensContentView()
                 .environmentObject(Settings())
@@ -67,6 +70,7 @@ struct RavensApp: App {
                 .environmentObject(ObservationsViewModel())
                 .environmentObject(RegionViewModel())
                 .environmentObject(RegionListViewModel())
+                .environmentObject(SpeciesGroupViewModel())
 //                .environmentObject(SpeciesDetailsViewModel())
         }
     }

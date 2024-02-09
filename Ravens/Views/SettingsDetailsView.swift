@@ -19,7 +19,7 @@ struct SettingsDetailsView: View {
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
-            Text("\(settings.selectedGroupString)")
+            Text("\(settings.selectedGroup)")
             Text("\(settings.days)d")
             Text("\(settings.selectedDate, formatter: dateFormatter)")
         }

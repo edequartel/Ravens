@@ -11,9 +11,10 @@ import MapKit
 
 class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460
+    
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
-    @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
+//    @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
     
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"

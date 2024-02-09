@@ -12,6 +12,9 @@ import SwiftUI
 //let longitude = 5.243376
 //let latitude = 52.023861
 
+//errorline
+let dash = "--------------------------------------------------------------------------"
+
 //gouda
 let latitude = 52.013077
 let longitude = 4.713450

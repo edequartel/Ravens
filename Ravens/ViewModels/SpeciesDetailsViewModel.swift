@@ -13,7 +13,7 @@ class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
 
-    func fetchData(for speciesID: Int) {
+    func fetchData(for speciesID: Int, language: String) {
         guard let url = URL(string: endPoint+"species/\(speciesID)/") else {
             return
         }
@@ -21,7 +21,7 @@ class SpeciesDetailsViewModel: ObservableObject {
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": "nl"
+            "Accept-Language": language
         ]
         log.verbose("SpeciesDetailsViewModel url: \(url)")
         
@@ -33,7 +33,7 @@ class SpeciesDetailsViewModel: ObservableObject {
                     self.speciesDetails = data
                 }
             case .failure(let error):
-                self.log.error("Error fetching data: \(error)")
+                self.log.error("Error SpeciesDetailsViewModel fetching data: \(error)")
             }
         }
     }

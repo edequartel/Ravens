@@ -27,13 +27,13 @@ class LoginViewModel: ObservableObject {
                 switch response.result {
                 case .success(let data):
                     if let json = data as? [String: Any], let key = json["key"] as? String {
-                        print("Tokenkey: \(key)")
+                        self.log.verbose("Tokenkey: \(key)")
                         self.token  = key
                     } else {
-                        self.log.error("Error extracting key from JSON")
+                        self.log.error("Error LoginViewModel extracting key from JSON")
                     }
                 case .failure(let error):
-                    self.log.error("Error: \(error)")
+                    self.log.error("Error LoginViewModel: \(error)")
                 }
             }
         

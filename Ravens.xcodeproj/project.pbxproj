@@ -19,7 +19,7 @@
 		474093952B564F49004F10C5 /* manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938E2B564F49004F10C5 /* manual.png */; };
 		474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
-		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
+		474C402E2B4BC4040038B3A5 /* RavensContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* RavensContentView.swift */; };
 		474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C402F2B4BC4080038B3A5 /* Assets.xcassets */; };
 		474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */; };
 		474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403B2B4BC5070038B3A5 /* Bird.swift */; };
@@ -55,8 +55,6 @@
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
-		4767396F2B5D5BEF00DC8187 /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */; };
-		476739722B5D5C1100DC8187 /* AnimatedTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 476739712B5D5C1100DC8187 /* AnimatedTabBar */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
@@ -81,7 +79,7 @@
 		4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRCodeTestFlight.png; sourceTree = "<group>"; };
 		474C40282B4BC4040038B3A5 /* Ravens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ravens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		474C402B2B4BC4040038B3A5 /* RavensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensApp.swift; sourceTree = "<group>"; };
-		474C402D2B4BC4040038B3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		474C402D2B4BC4040038B3A5 /* RavensContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensContentView.swift; sourceTree = "<group>"; };
 		474C402F2B4BC4080038B3A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		474C403B2B4BC5070038B3A5 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
@@ -134,9 +132,7 @@
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				474C40442B4BC5860038B3A5 /* AlamofireImage in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
-				476739722B5D5C1100DC8187 /* AnimatedTabBar in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
-				4767396F2B5D5BEF00DC8187 /* ConcentricOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +182,7 @@
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* ViewModels */,
 				474C40822B4D17C00038B3A5 /* Views */,
-				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
+				474C402D2B4BC4040038B3A5 /* RavensContentView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
@@ -238,9 +234,9 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				478153B82B58022B005F87CC /* LoginView.swift */,
-				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
@@ -288,8 +284,6 @@
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
 				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
 				4767396B2B5D5BE400DC8187 /* FloatingButton */,
-				4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */,
-				476739712B5D5C1100DC8187 /* AnimatedTabBar */,
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
 			);
 			productName = Ravens;
@@ -329,8 +323,6 @@
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */,
-				4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
-				476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */,
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
@@ -382,7 +374,7 @@
 				47568D2D2B59B54500E69B1A /* ObservationsSpecies.swift in Sources */,
 				47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
-				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
+				474C402E2B4BC4040038B3A5 /* RavensContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* BirdView.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
@@ -539,7 +531,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -570,7 +562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -667,22 +659,6 @@
 				minimumVersion = 1.2.2;
 			};
 		};
-		4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/ConcentricOnboarding.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
-			};
-		};
-		476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/AnimatedTabBar.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
-			};
-		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -731,16 +707,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */;
 			productName = FloatingButton;
-		};
-		4767396E2B5D5BEF00DC8187 /* ConcentricOnboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4767396D2B5D5BEF00DC8187 /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */;
-			productName = ConcentricOnboarding;
-		};
-		476739712B5D5C1100DC8187 /* AnimatedTabBar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 476739702B5D5C1100DC8187 /* XCRemoteSwiftPackageReference "AnimatedTabBar" */;
-			productName = AnimatedTabBar;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
