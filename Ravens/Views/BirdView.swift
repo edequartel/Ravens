@@ -29,39 +29,45 @@ struct BirdView: View {
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity), id: \.species) { bird in
                     HStack {
-                        NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Image(systemName: "circle.fill")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(myColor(value: bird.rarity), .clear)
-
-                                    ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
-                                    
-                                    Text("\(bird.id) \(bird.name)")
-                                        .bold()
-                                        .lineLimit(1) // Set the maximum number of lines to 1
-                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                        Button("oooo") {
+//                            print("xxxx")
+//                        }
+//                        Spacer()
+                        HStack {
+                            NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Image(systemName: "circle.fill")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(myColor(value: bird.rarity), .clear)
+                                        
+                                        ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
+                                        
+                                        Text("\(bird.id) \(bird.name)")
+                                            .bold()
+                                            .lineLimit(1) // Set the maximum number of lines to 1
+                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                    }
+                                    HStack {
+                                        Text("\(bird.scientific_name)")
+                                            .italic()
+                                            .lineLimit(1) // Set the maximum number of lines to 1
+                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                        
+                                    }
                                 }
-                                HStack {
-                                    Text("\(bird.scientific_name)")
-                                        .italic()
-                                        .lineLimit(1) // Set the maximum number of lines to 1
-                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                    
+                                .onTapGesture() {
+                                    log.verbose("onTapgesture \(bird.id)")
+                                    birdId = bird.id
                                 }
+                                .onAppear() {
+                                    birdId = bird.id
+                                    log.verbose("onAppear \(bird.id)")
+                                }
+                                
                             }
-                            .onTapGesture() {
-                                log.verbose("onTapgesture \(bird.id)")
-                                birdId = bird.id
-                            }
-                            .onAppear() {
-                                birdId = bird.id
-                                log.verbose("onAppear \(bird.id)")
-                            }
-                            
+                            .contentShape(Rectangle())
                         }
-                        .contentShape(Rectangle())
                     }
                 }
             }

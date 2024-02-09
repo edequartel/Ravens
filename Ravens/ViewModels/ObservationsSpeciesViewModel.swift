@@ -48,7 +48,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
         let date_before = formatCurrentDate(value:endDate)
         
-        var url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"
+        let url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"
         
         log.info("\(url)")
 
