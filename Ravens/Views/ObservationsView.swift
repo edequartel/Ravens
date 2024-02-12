@@ -25,8 +25,10 @@ struct ObservationsView: View {
             List {
                 if let results = observationsViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-                        ObsAltView(obs: result)
-                        ObsView(obsID: result.id)
+//                          ObsAltView(obs: result)
+                        if result.has_photo {
+                            ObsView(obsID: result.id)
+                        }
                     }
                 } else {
                     // Handle the case when observationsViewModel.observations?.results is nil
@@ -49,9 +51,8 @@ struct ObservationsView: View {
 
 
 struct ObsAltView: View {
-    
     var obs: Observation
- 
+
     var body: some View {
         LazyVStack(alignment: .leading) {
             HStack {
@@ -102,44 +103,3 @@ struct ObservationsView_Previews: PreviewProvider {
 }
 
 
-
-
-//LazyVStack(alignment: .leading) {
-//    HStack {
-//        Image(systemName: "circle.fill")
-//            .foregroundColor(Color(myColor(value: result.rarity)))
-//        HStack {
-//            Text("\(result.species_detail.name)")
-//            Spacer()
-////                                    Text("\(result.user)")
-//            Text("obs id: \(result.id)")
-//            
-//            
-////                                    ObsSpeciesView(obsSpecies: result.id)
-////                                    ObsSpeciesView(obsSpecies: )
-//            
-//            
-//        }
-//        Spacer()
-//        HStack {
-//            if result.has_sound { Image(systemName: "speaker.fill" ) }
-//            if result.has_photo { Image(systemName: "photo.fill") }
-//        }
-//    }
-//    
-//    HStack {
-//        Text("\(result.date)")
-//        Text("\(result.time ?? "no time")")
-//        Spacer()
-//       
-//        
-//        
-//    }
-//    
-//    Text("\(result.location_detail.name)")
-//}
-//.font(.subheadline)
-//.onTapGesture {
-//    if let url = URL(string: result.permalink) {
-//        UIApplication.shared.open(url)
-//    }

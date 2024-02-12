@@ -18,23 +18,24 @@ struct Obs: Codable, Identifiable {
     let notes: String?
     let is_certain, is_escape: Bool?
     let activity, lifeStage: Int?
-//    let method: Int? // Use String? instead of NSNull
+    let method: Int? // Use String? instead of NSNull
     let substrate, related_species, obscurity, counting_method: Int?
     let embargo_date: String?
-//    let uuid: String? // Use String? instead of NSNull
-//    let externalReference: String?
+    let uuid: String? // Use String? instead of NSNull
+    let externalReference: String?
 //    let links, details: [String]
-//    let observer_location, transectUUID: String? // Use String? instead of NSNull
+//    let observer_location: String? is a geoJSON
+    let transectUUID: String? // Use String? instead of NSNull
     let species_detail: SpeciesDetail
-//    let rarity, user: Int?
-//    let user_detail: UserDetail?
-//    let modified: String?
-//    let species_group: Int?
-//    let validation_status: String?
-//    let location: Int?
-//    let location_detail: LocationDetail?
+    let rarity, user: Int?
+    let user_detail: UserDetail?
+    let modified: String?
+    let species_group: Int?
+    let validation_status: String?
+    let location: Int?
+    let location_detail: LocationDetail?
     let photos: [String]
     let sounds: [String]
-//    let permalink: String
+    let permalink: String
 }
 
