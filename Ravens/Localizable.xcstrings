@@ -434,6 +434,9 @@
         }
       }
     },
+    "Name: %@" : {
+
+    },
     "Native" : {
       "localizations" : {
         "nl" : {
@@ -474,9 +477,6 @@
           }
         }
       }
-    },
-    "Observation ID: %lld" : {
-
     },
     "Password" : {
       "localizations" : {
@@ -655,12 +655,6 @@
           }
         }
       }
-    },
-    "Species: %lld" : {
-
-    },
-    "SpeciesDetailsName: %@" : {
-
     },
     "Token: %@" : {
       "extractionState" : "stale",

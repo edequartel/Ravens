@@ -18,6 +18,7 @@ struct LanguageView: View {
     @EnvironmentObject var settings: Settings
     
     var onChange: (() -> Void)?
+    
     var body: some View {
         VStack {
             Picker("Language", selection: $settings.selectedLanguage) {
@@ -37,9 +38,9 @@ struct LanguageView: View {
     }
 }
 
-#Preview {
-    LanguageView()
-}
+//#Preview {
+//    LanguageView()
+//}
 
 
 

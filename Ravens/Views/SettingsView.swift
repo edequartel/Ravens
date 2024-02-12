@@ -151,11 +151,10 @@ struct SettingsView: View {
     }
     
     func upDate() {
-          print("update()")
-          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
-        
-        print("language: \(settings.selectedLanguage)")
-//        settings.selectedSpeciesGroup = 4
+        log.verbose("update()")
+//          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
+          speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print ("update completed") })
+        log.verbose("language: \(settings.selectedLanguage)")
     }
     
 }

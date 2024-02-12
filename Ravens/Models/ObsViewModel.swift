@@ -31,11 +31,7 @@ class ObsViewModel: ObservableObject {
                 do {
                     // Decode the JSON response into an array of Bird objects
                     let decoder = JSONDecoder()
-                    
                     self.observation = try decoder.decode(Obs.self, from: response.data!)
-                    
-                    
-                    
                 } catch {
                     self.log.error("Error ObsViewModel decoding JSON: \(error)")
                 }
