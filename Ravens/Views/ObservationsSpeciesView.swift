@@ -37,40 +37,10 @@ struct ObservationsSpeciesView: View {
 
             List {
                 if let results =  viewModel.observationsSpecies?.results {
-                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) { result in
-                        VStack(alignment: .leading) {
-                            //                            Text("Observation ID: \(result.species)")
-                            //                            Text("Species name: \(result.species_detail.name)")
-                            Text("\(result.date) / \(result.time ?? "unknown")")
-                                .bold()
-                            
-                            Text("\(result.location_detail.name)")
-                            Text("\(result.user_detail.name)")
-                            if (result.notes?.count ?? 0 > 0) {
-                                Text("\(result.notes ?? "")")
-                                    .font(.footnote)
-                            }
-                            
-                            ForEach(result.photos, id: \.self) { imageURLString in
-                                if let imageURL = URL(string: imageURLString) {
-                                    KFImage(URL(string: imageURLString)!)
-                                                .resizable()
-                                                .aspectRatio(nil, contentMode: .fit)
-                                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                } else {
-                                    Text("Invalid URL")
-                                }
-                            }
-                            //
-                        }
-                        .onTapGesture {
-                            if let url = URL(string: result.permalink) {
-                                UIApplication.shared.open(url)
-                            }
-                        }
+                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
+                        result in
+                        ObsSpeciesView(obsSpecies: result)
                     }
-                    
                     .font(.footnote)
                 }
             }
@@ -78,14 +48,51 @@ struct ObservationsSpeciesView: View {
         .sheet(isPresented: $isSheetPresented) {
                     SpeciesDetailsView(speciesID: speciesID)
                 }
-        
-        
         .onAppear {
             log.verbose("speciesID \(speciesID)")
             viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
         }
     }
 }
+
+
+struct ObsSpeciesView: View {
+    var obsSpecies: ObservationSpecies
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("\(obsSpecies.date) / \(obsSpecies.time ?? "unknown")")
+                .bold()
+            
+            Text("\(obsSpecies.location_detail.name)")
+            Text("\(obsSpecies.user_detail.name)")
+            
+            if let notes = obsSpecies.notes, !notes.isEmpty {
+                Text(notes)
+                    .font(.footnote)
+            }
+            
+            ForEach(obsSpecies.photos, id: \.self) { imageURLString in
+                if URL(string: imageURLString) != nil {
+                    KFImage(URL(string: imageURLString)!)
+                        .resizable()
+                        .aspectRatio(nil, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    Text("Invalid URL")
+                }
+            }
+        }
+        .onTapGesture {
+            if let url = URL(string: obsSpecies.permalink) {
+                UIApplication.shared.open(url)
+            }
+        }
+    }
+}
+
+
 
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {

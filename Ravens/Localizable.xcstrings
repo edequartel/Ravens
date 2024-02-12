@@ -179,6 +179,9 @@
         }
       }
     },
+    "Fetching Observation..." : {
+
+    },
     "Filter by" : {
       "localizations" : {
         "nl" : {
@@ -472,6 +475,9 @@
         }
       }
     },
+    "Observation ID: %lld" : {
+
+    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -649,6 +655,12 @@
           }
         }
       }
+    },
+    "Species: %lld" : {
+
+    },
+    "SpeciesDetailsName: %@" : {
+
     },
     "Token: %@" : {
       "extractionState" : "stale",

@@ -23,6 +23,10 @@ struct SpeciesDetailsView: View {
             VStack {
                 if let species = viewSDModel.speciesDetails {
                     KFImage(URL(string: species.photo)!)
+                        .resizable()
+                        .aspectRatio(nil, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                     Divider()
                     

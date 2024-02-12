@@ -5,7 +5,7 @@
 
 import Foundation
 
-// MARK: - ObservationsSpecies
+// MARK: - ObservationsSpecies //
 struct ObservationsSpecies: Codable {
     var count: Int?
     var next, previous: String?

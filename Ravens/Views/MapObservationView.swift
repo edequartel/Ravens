@@ -99,6 +99,7 @@ struct MapObservationView: View {
                                             species_group: settings.selectedGroupId,
                                             min_rarity: settings.selectedRarity,
                                             language: settings.selectedLanguage)
+            log.error("species_group ===> id \(settings.selectedGroupId) : \(settings.selectedGroup)")
         }
     }
 }

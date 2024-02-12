@@ -18,6 +18,10 @@
 - species change name
 - 200 regions error
 
+- errors
+- mapobservationpecies no update
+- species details crash
+
 **messages**
 
 import SwiftyBeaver

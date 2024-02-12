@@ -64,6 +64,9 @@
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
 		47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */; };
+		47DB89B22B7A394B0093C1ED /* Obs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B12B7A394B0093C1ED /* Obs.swift */; };
+		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
+		47DB89B82B7A3AB20093C1ED /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +121,10 @@
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		47DB898E2B79FB4A0093C1ED /* krommerijn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = krommerijn.json; sourceTree = "<group>"; };
+		47DB89B12B7A394B0093C1ED /* Obs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obs.swift; sourceTree = "<group>"; };
+		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
+		47DB89B72B7A3AB20093C1ED /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +163,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47DB898E2B79FB4A0093C1ED /* krommerijn.json */,
 				47075B112B6B87BA00D09F28 /* LabView.swift */,
 				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
@@ -180,7 +188,7 @@
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
 				47CF61DD2B60EDCD00709CE3 /* ViewsNotUsed */,
 				474C40812B4D17B40038B3A5 /* Data */,
-				474C40802B4D17AA0038B3A5 /* ViewModels */,
+				474C40802B4D17AA0038B3A5 /* Models */,
 				474C40822B4D17C00038B3A5 /* Views */,
 				474C402D2B4BC4040038B3A5 /* RavensContentView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
@@ -199,7 +207,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		474C40802B4D17AA0038B3A5 /* ViewModels */ = {
+		474C40802B4D17AA0038B3A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */,
@@ -211,8 +219,9 @@
 				474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */,
 				478153BA2B5809FB005F87CC /* LoginViewModel.swift */,
 				47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */,
+				47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */,
 			);
-			path = ViewModels;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		474C40812B4D17B40038B3A5 /* Data */ = {
@@ -227,6 +236,7 @@
 				474C40852B4D84030038B3A5 /* Settings.swift */,
 				474C408F2B4FFD820038B3A5 /* Observations.swift */,
 				47568D2C2B59B54500E69B1A /* ObservationsSpecies.swift */,
+				47DB89B12B7A394B0093C1ED /* Obs.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -234,6 +244,7 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				478153B82B58022B005F87CC /* LoginView.swift */,
@@ -366,8 +377,10 @@
 				474C40572B4BFE950038B3A5 /* RegionListView.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
+				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
+				47DB89B22B7A394B0093C1ED /* Obs.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
@@ -380,6 +393,7 @@
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
 				474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */,
+				47DB89B82B7A3AB20093C1ED /* ObsView.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,

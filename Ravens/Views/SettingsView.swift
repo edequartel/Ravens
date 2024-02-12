@@ -43,9 +43,8 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
-                        
+                        settings.selectedGroupId = settings.selectedSpeciesGroup
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-                        // settings.selectedRegion = 200 //<<<<<<
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
                         speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
@@ -154,6 +153,9 @@ struct SettingsView: View {
     func upDate() {
           print("update()")
           print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
+        
+        print("language: \(settings.selectedLanguage)")
+//        settings.selectedSpeciesGroup = 4
     }
     
 }

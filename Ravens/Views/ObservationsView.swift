@@ -25,40 +25,9 @@ struct ObservationsView: View {
             List {
                 if let results = observationsViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-                        LazyVStack(alignment: .leading) {
-                            HStack {
-                                Image(systemName: "circle.fill")
-                                    .foregroundColor(Color(myColor(value: result.rarity)))
-                                HStack {
-                                    Text("\(result.species_detail.name)")
-                                    Spacer()
-                                    Text("\(result.user)")
-                                }
-                                Spacer()
-                                HStack {
-                                    if result.has_sound { Image(systemName: "speaker.fill" ) }
-                                    if result.has_photo { Image(systemName: "photo.fill") }
-                                }
-                            }
-                            
-                            HStack {
-                                Text("\(result.date)")
-                                Text("\(result.time ?? "no time")")
-                                Spacer()
-                                
-                            }
-                            
-                            Text("\(result.location_detail.name)")
-                        }
-                        .font(.subheadline)
-                        .onTapGesture {
-                            if let url = URL(string: result.permalink) {
-                                UIApplication.shared.open(url)
-                            }
-                        }
+                          ObsAltView(obs: result)
+//                        ObsView(obsID: result.id)
                     }
-                    
-                    
                 } else {
                     // Handle the case when observationsViewModel.observations?.results is nil
                     Text("nobsavaliable")
@@ -75,13 +44,53 @@ struct ObservationsView: View {
                                             min_rarity: settings.selectedRarity,
                                             language: settings.selectedLanguage)
         }
-//        .padding(16)
-//        .background(Color.white.cornerRadius(18))
-//        .shadowedStyle()
-//        .padding(.horizontal, 8)
-//        .padding(.bottom, 30)
     }
 }
+
+
+struct ObsAltView: View {
+    
+    var obs: Observation
+ 
+    var body: some View {
+        LazyVStack(alignment: .leading) {
+            HStack {
+                Image(systemName: "circle.fill")
+                    .foregroundColor(Color(myColor(value: obs.rarity)))
+                VStack(alignment: .leading, content: {
+                    Text("\(obs.species_detail.name)")
+////                    Spacer()
+//                    //                                    Text("\(result.user)")
+//                    Text("obs id: \(obs.id)")
+//                        .foregroundColor(.red)
+//                    Text("date: \(obs.date)")
+//                    Text("rarirty: \(obs.rarity)")
+//                    Text("activirty: \(obs.activity)")
+                })
+                Spacer()
+                HStack {
+                    if obs.has_sound { Image(systemName: "speaker.fill" ) }
+                    if obs.has_photo { Image(systemName: "photo.fill") }
+                }
+            }
+            
+            HStack {
+                Text("\(obs.date)")
+                Text("\(obs.time ?? "no time")")
+                Spacer()
+            }
+            
+            Text("\(obs.location_detail.name)")
+        }
+        .font(.subheadline)
+        .onTapGesture {
+            if let url = URL(string: obs.permalink) {
+                UIApplication.shared.open(url)
+            }
+        }
+    }
+}
+
 
 struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -92,22 +101,45 @@ struct ObservationsView_Previews: PreviewProvider {
     }
 }
 
-//            Button {
-//                isShowing = false
-//                print("showingoff")
-//            } label: {
-//                Text("Close")
-//                    .buttonStyle(.plain)
-//                    .font(.system(size: 17))
-//                    .frame(maxWidth: .infinity)
-//                    .frame(height: 44)
-//                    .background {
-//                        RoundedRectangle(cornerRadius: 12)
-//                            .fill(Color(red: 0.29, green: 0.38, blue: 1))
-//                    }
-//            }
-//            .buttonStyle(.plain)
-//            .foregroundColor(.white)
-//            .padding()
 
-//            Form {
+
+
+//LazyVStack(alignment: .leading) {
+//    HStack {
+//        Image(systemName: "circle.fill")
+//            .foregroundColor(Color(myColor(value: result.rarity)))
+//        HStack {
+//            Text("\(result.species_detail.name)")
+//            Spacer()
+////                                    Text("\(result.user)")
+//            Text("obs id: \(result.id)")
+//            
+//            
+////                                    ObsSpeciesView(obsSpecies: result.id)
+////                                    ObsSpeciesView(obsSpecies: )
+//            
+//            
+//        }
+//        Spacer()
+//        HStack {
+//            if result.has_sound { Image(systemName: "speaker.fill" ) }
+//            if result.has_photo { Image(systemName: "photo.fill") }
+//        }
+//    }
+//    
+//    HStack {
+//        Text("\(result.date)")
+//        Text("\(result.time ?? "no time")")
+//        Spacer()
+//       
+//        
+//        
+//    }
+//    
+//    Text("\(result.location_detail.name)")
+//}
+//.font(.subheadline)
+//.onTapGesture {
+//    if let url = URL(string: result.permalink) {
+//        UIApplication.shared.open(url)
+//    }

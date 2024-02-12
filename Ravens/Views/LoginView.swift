@@ -17,7 +17,9 @@ class AuthManager: ObservableObject {
     
     init() {
 //OVERRIDE THE TOKEN BY SETTING IT
-        let storedToken = "21047b0d6742dc36234bc5293053bc757623470b"
+//        let storedToken = "21047b0d6742dc36234bc5293053bc757623470b"
+//        let storedToken = "e285437a324c32a40e2df727b49691998bf68c07"
+        let storedToken = tokenKey
         self.token = storedToken
         
 //        // Check if token exists in Keychain at the start
