@@ -485,9 +485,6 @@
         }
       }
     },
-    "Observation ID: %lld" : {
-
-    },
     "Password" : {
       "localizations" : {
         "nl" : {

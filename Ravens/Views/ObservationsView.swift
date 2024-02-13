@@ -25,10 +25,10 @@ struct ObservationsView: View {
             List {
                 if let results = observationsViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-//                          ObsAltView(obs: result)
-                        if result.has_photo {
+                        //                          ObsAltView(obs: result)
+//                        if result.has_photo {
                             ObsView(obsID: result.id)
-                        }
+//                        }
                     }
                 } else {
                     // Handle the case when observationsViewModel.observations?.results is nil
@@ -52,7 +52,7 @@ struct ObservationsView: View {
 
 struct ObsAltView: View {
     var obs: Observation
-
+    
     var body: some View {
         LazyVStack(alignment: .leading) {
             HStack {
@@ -60,13 +60,13 @@ struct ObsAltView: View {
                     .foregroundColor(Color(myColor(value: obs.rarity)))
                 VStack(alignment: .leading, content: {
                     Text("\(obs.species_detail.name)")
-////                    Spacer()
-//                    //                                    Text("\(result.user)")
-//                    Text("obs id: \(obs.id)")
-//                        .foregroundColor(.red)
-//                    Text("date: \(obs.date)")
-//                    Text("rarirty: \(obs.rarity)")
-//                    Text("activirty: \(obs.activity)")
+                    ////                    Spacer()
+                    //                    //                                    Text("\(result.user)")
+                    //                    Text("obs id: \(obs.id)")
+                    //                        .foregroundColor(.red)
+                    //                    Text("date: \(obs.date)")
+                    //                    Text("rarirty: \(obs.rarity)")
+                    //                    Text("activirty: \(obs.activity)")
                 })
                 Spacer()
                 HStack {
