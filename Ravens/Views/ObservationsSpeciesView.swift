@@ -39,7 +39,8 @@ struct ObservationsSpeciesView: View {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
-                        ObsSpeciesView(obsSpecies: result)
+//                        ObsSpeciesView(obsSpecies: result) //<<<<
+                        ObsView(obsID: result.id ?? 0)
                     }
                     .font(.footnote)
                 }
@@ -56,41 +57,42 @@ struct ObservationsSpeciesView: View {
 }
 
 
-struct ObsSpeciesView: View {
-    var obsSpecies: ObservationSpecies
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(obsSpecies.date) / \(obsSpecies.time ?? "unknown")")
-                .bold()
-            
-            Text("\(obsSpecies.location_detail.name)")
-            Text("\(obsSpecies.user_detail.name)")
-            
-            if let notes = obsSpecies.notes, !notes.isEmpty {
-                Text(notes)
-                    .font(.footnote)
-            }
-            
-            ForEach(obsSpecies.photos, id: \.self) { imageURLString in
-                if URL(string: imageURLString) != nil {
-                    KFImage(URL(string: imageURLString)!)
-                        .resizable()
-                        .aspectRatio(nil, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    Text("Invalid URL")
-                }
-            }
-        }
-        .onTapGesture {
-            if let url = URL(string: obsSpecies.permalink) {
-                UIApplication.shared.open(url)
-            }
-        }
-    }
-}
+//struct ObsSpeciesView: View {
+//    var obsSpecies: ObservationSpecies
+//    
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            Text("\(obsSpecies.date) / \(obsSpecies.time ?? "unknown")")
+//                .bold()
+//            
+//            Text("\(obsSpecies.location_detail.name)")
+//            Text("\(obsSpecies.user_detail.name)")
+//            
+//            if let notes = obsSpecies.notes, !notes.isEmpty {
+//                Text(notes)
+//                    .font(.footnote)
+//            }
+//            
+//            ForEach(obsSpecies.photos, id: \.self) { imageURLString in
+//                if URL(string: imageURLString) != nil {
+//                    AFImageView(media: imageURLString)
+////                    KFImage(URL(string: imageURLString)!)
+////                        .resizable()
+////                        .aspectRatio(nil, contentMode: .fit)
+////                        .clipShape(RoundedRectangle(cornerRadius: 16))
+////                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                } else {
+//                    Text("Invalid URL")
+//                }
+//            }
+//        }
+//        .onTapGesture {
+//            if let url = URL(string: obsSpecies.permalink) {
+//                UIApplication.shared.open(url)
+//            }
+//        }
+//    }
+//}
 
 
 

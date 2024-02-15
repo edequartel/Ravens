@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsDetailsView: View {
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     
     var count: Int = 0
     
@@ -19,7 +20,7 @@ struct SettingsDetailsView: View {
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
-            Text("\(settings.selectedGroup)")
+            Text("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
             Text("\(settings.days)d")
             Text("\(settings.selectedDate, formatter: dateFormatter)")
         }
@@ -39,4 +40,5 @@ struct SettingsDetailsView: View {
 #Preview {
     SettingsDetailsView()
         .environmentObject(Settings())
+        .environmentObject(SpeciesGroupViewModel())
 }

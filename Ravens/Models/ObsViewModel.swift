@@ -12,9 +12,10 @@ import SwiftyBeaver
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @Published var observation: Obs? //??
+    @Published var observation: Obs? 
 
     func fetchData(for obsID: Int, language: String, token: String) {
+//    func fetchData(for obsID: Int, language: String, token: String) {
         
         let url = endPoint+"observations/\(obsID)/"
         
@@ -22,7 +23,6 @@ class ObsViewModel: ObservableObject {
             "Language" : language,
             "Authorization": "Token " + token
         ]
-        
         
         AF.request(url, headers: headers).responseJSON { response in
 //            self.log.info(response.debugDescription)

@@ -24,22 +24,22 @@
         }
       }
     },
-    "%@ / %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ / %2$@"
-          }
-        }
-      }
-    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
           }
         }
       }
@@ -215,6 +215,9 @@
     "Fruit List" : {
 
     },
+    "Genre: %@" : {
+
+    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -278,6 +281,7 @@
       }
     },
     "Invalid URL" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -440,6 +444,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam %@"
+          }
+        }
+      }
+    },
+    "Name: %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Name: %1$@ %2$@"
           }
         }
       }
@@ -613,6 +627,12 @@
         }
       }
     },
+    "Select a Singer" : {
+
+    },
+    "Select a singer to view details" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -622,6 +642,9 @@
           }
         }
       }
+    },
+    "Song: %@" : {
+
     },
     "Sort by" : {
       "localizations" : {

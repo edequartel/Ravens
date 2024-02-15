@@ -8,48 +8,74 @@
 import SwiftUI
 import SwiftyBeaver
 import Kingfisher
+import Alamofire
+import AlamofireImage
 
 struct ObsView: View {
     let log = SwiftyBeaver.self
-    @StateObject var viewModel = ObsViewModel()
+    @StateObject var obsViewModel = ObsViewModel()
     
     @EnvironmentObject var settings: Settings
     
+    
     var obsID: Int
+    
+//    let imageView = UIImageView()
+//    let imageURL = "https://example.com/image.jpg"
     
     var body: some View {
         LazyVStack {
-            if let obs = viewModel.observation {
+            if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
-                    //Text("Observation ID: \(obs.id)")
+//                    Text("Observation ID: \(obs.id)")
                     HStack {
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         Text("\(obs.species_detail.name)")
                             .bold()
+                        Spacer()
+                        Text("\(obs.species_detail.scientific_name)")
+                            .italic()
                     }
                     
+                    
                     Text("\(obs.date) \(obs.time ?? "")")
+//                    Text("\(obs ?? "")")
+
                     Text("\(obs.user_detail?.name ?? "unknown")")
                     Text("\(obs.location_detail?.name ?? "unknown")")
                     
+                    //
                     ForEach(obs.photos, id: \.self) { imageURLString in
-                        if URL(string: imageURLString) != nil {
-                            KFImage(URL(string: imageURLString)!)
-                                .resizable()
-                                .aspectRatio(nil, contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                        } else {
-                            Text("Invalid URL")
-                        }
+//                        Text("\(imageURLString)")
+                        AFImageView(media: imageURLString)
                     }
                     .onTapGesture {
                         if let url = URL(string: obs.permalink) {
                             UIApplication.shared.open(url)
                         }
                     }
+                    
+                    //or this!!
+                    
+//                    ForEach(obs.photos, id: \.self) { imageURLString in
+//                        Text("\(imageURLString)")
+//                        if URL(string: imageURLString) != nil {
+//                            KFImage(URL(string: imageURLString)!)
+//                                .resizable()
+//                                .aspectRatio(nil, contentMode: .fit)
+//                                .clipShape(RoundedRectangle(cornerRadius: 16))
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//
+//                        } else {
+//                            Text("Invalid URL")
+//                        }
+//                    }
+//                    .onTapGesture {
+//                        if let url = URL(string: obs.permalink) {
+//                            UIApplication.shared.open(url)
+//                        }
+//                    }
                     
                     ForEach(obs.sounds, id: \.self) { audioURL in
                         Text("Sounds: \(audioURL)")
@@ -62,7 +88,7 @@ struct ObsView: View {
             }
         }
         .onAppear {
-            viewModel.fetchData(for: obsID, language: settings.selectedLanguage, token: tokenKey)
+            obsViewModel.fetchData(for: obsID, language: settings.selectedLanguage, token: tokenKey)
         }
     }
 }

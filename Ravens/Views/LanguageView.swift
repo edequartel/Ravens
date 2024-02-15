@@ -38,9 +38,10 @@ struct LanguageView: View {
     }
 }
 
-//#Preview {
-//    LanguageView()
-//}
+#Preview {
+    LanguageView()
+        .environmentObject(Settings())
+}
 
 
 

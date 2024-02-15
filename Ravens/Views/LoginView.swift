@@ -137,3 +137,24 @@ struct LoginView: View {
             }
     }
 }
+
+
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let username = Binding<String>(
+//            get: { "PreviewUsername" },
+//            set: { _ in }
+//        )
+//        
+//        let password = Binding<String>(
+//            get: { "PreviewPassword" },
+//            set: { _ in }
+//        )
+//
+//        return LoginView(username: username, password: password, didLogin: { token in
+//            // Handle didLogin in preview if needed
+//            print("Did login with token: \(token)")
+//        })
+//    }
+//}
+

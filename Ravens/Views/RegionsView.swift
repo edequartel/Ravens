@@ -32,5 +32,6 @@ struct RegionsView: View {
 struct RegionsView_Previews: PreviewProvider {
     static var previews: some View {
         RegionsView()
+            .environmentObject(Settings())
     }
 }

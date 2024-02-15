@@ -45,8 +45,12 @@ struct RavensContentView: View {
 //                    Text("Book")
 //                    Image(systemName: "book")
 //                }
-            
-            
+//            ObsView(obsID: 123629598)
+//            LookUpsView()
+//                .tabItem {
+//                    Text("Book")
+//                    Image(systemName: "book")
+//                }
             // Tab 1
             ZStack {
                 MapObservationView()

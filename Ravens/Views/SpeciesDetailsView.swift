@@ -56,4 +56,5 @@ struct SpeciesDetailsView: View {
 
 #Preview {
     SpeciesDetailsView(speciesID: 245)
+        .environmentObject(Settings())
 }

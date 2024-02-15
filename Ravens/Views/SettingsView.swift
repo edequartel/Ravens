@@ -165,6 +165,7 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel())
+            .environmentObject(SpeciesGroupViewModel())
     }
 }
 

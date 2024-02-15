@@ -29,10 +29,6 @@ struct BirdView: View {
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity), id: \.species) { bird in
                     HStack {
-//                        Button("oooo") {
-//                            print("xxxx")
-//                        }
-//                        Spacer()
                         HStack {
                             NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
                                 VStack(alignment: .leading) {
@@ -201,6 +197,7 @@ struct BirdView_Previews: PreviewProvider {
         BirdView()
             .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(Settings())
     }
 }
