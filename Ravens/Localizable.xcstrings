@@ -455,6 +455,12 @@
             "state" : "new",
             "value" : "Name: %1$@ %2$@"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam %1$@ %2$@"
+          }
         }
       }
     },
@@ -667,7 +673,14 @@
       }
     },
     "Sounds: %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Geluid: %@"
+          }
+        }
+      }
     },
     "Species" : {
       "localizations" : {
@@ -739,7 +752,14 @@
       }
     },
     "Username" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebrukersnaam"
+          }
+        }
+      }
     },
     "Very rare" : {
       "localizations" : {
@@ -756,7 +776,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Raam"
+            "value" : "Spanne"
           }
         }
       }

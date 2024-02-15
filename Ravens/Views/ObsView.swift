@@ -33,9 +33,13 @@ struct ObsView: View {
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         Text("\(obs.species_detail.name)")
                             .bold()
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         Spacer()
                         Text("\(obs.species_detail.scientific_name)")
                             .italic()
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
                     
                     

@@ -37,9 +37,9 @@ struct BirdView: View {
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
                                         
-                                        ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
+//                                        ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
                                         
-                                        Text("\(bird.id) \(bird.name)")
+                                        Text("\(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
