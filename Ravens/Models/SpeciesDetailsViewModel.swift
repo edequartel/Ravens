@@ -14,7 +14,7 @@ class SpeciesDetailsViewModel: ObservableObject {
     @Published var speciesDetails: SpeciesDetails?
     
     init() {
-        print("init SpeciesDetailsViewModel")
+        log.info("init SpeciesDetailsViewModel")
 //        fetchData(for: 5001, language: "nl")
     }
 

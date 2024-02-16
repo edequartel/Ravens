@@ -38,11 +38,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
     
     func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
-//        log.warning("\(token)")
+        log.info("token ObservationsSpeciesViewModel - speciesID\(token)")
+
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": language,
-            "Authorization": "Token "+token
+            "Authorization": "Token "+token ///<<
+//            "Authorization": "Token "+"e285437a324c32a40e2df727b49691998bf68c07" ///<<
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
@@ -50,7 +52,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         let url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)"
         
-        log.warning("\(url)")
+        log.info("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

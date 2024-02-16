@@ -23,7 +23,16 @@ struct BirdView: View {
     
     @State private var searchText = ""
     @State private var birdId : Int?
+    //
+    @State private var bookMarks: [Int] = []
+
+        // Function to check if a number is in the array
+        func isNumberInBookMarks(number: Int) -> Bool {
+            return bookMarks.contains(number)
+        }
     
+    
+    //
     var body: some View {
         NavigationStack {
             List {
@@ -36,8 +45,8 @@ struct BirdView: View {
                                         Image(systemName: "circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
-                                        
-//                                        ObservationDetailsView(speciesID: bird.id)  //update maybe to many  !!!!!!!
+//                                        Text("\(bird.id)")
+                                        ObservationDetailsView(speciesID: bird.id)
                                         
                                         Text("\(bird.name)")
                                             .bold()
@@ -55,6 +64,18 @@ struct BirdView: View {
                                 .onTapGesture() {
                                     log.verbose("onTapgesture \(bird.id)")
                                     birdId = bird.id
+                                    
+//
+                                    if isNumberInBookMarks(number: bird.id) {
+                                        if let index = bookMarks.firstIndex(of: bird.id) {
+                                            bookMarks.remove(at: index)
+                                            }
+                                    } else
+                                        {
+                                        bookMarks.append(bird.id)
+                                    }
+//
+                                    
                                 }
                                 .onAppear() {
                                     birdId = bird.id
@@ -65,6 +86,7 @@ struct BirdView: View {
                             .contentShape(Rectangle())
                         }
                     }
+                    .listRowBackground(isNumberInBookMarks(number: bird.id) ? Color.obsGreenFlower : Color.white)
                 }
             }
                 

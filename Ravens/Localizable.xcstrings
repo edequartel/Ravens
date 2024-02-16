@@ -167,6 +167,9 @@
     "Details for %@" : {
 
     },
+    "Display Credentials" : {
+
+    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -302,6 +305,9 @@
         }
       }
     },
+    "Keychain Demo" : {
+
+    },
     "Language" : {
       "localizations" : {
         "nl" : {
@@ -375,6 +381,12 @@
           }
         }
       }
+    },
+    "Login Name" : {
+
+    },
+    "Login Name: %@" : {
+
     },
     "Login waarneming.nl" : {
       "localizations" : {
@@ -515,6 +527,9 @@
         }
       }
     },
+    "Password: %@" : {
+
+    },
     "Poi" : {
       "localizations" : {
         "nl" : {
@@ -612,6 +627,9 @@
           }
         }
       }
+    },
+    "Save" : {
+
     },
     "Scientific name" : {
       "localizations" : {

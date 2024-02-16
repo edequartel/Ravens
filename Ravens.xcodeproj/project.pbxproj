@@ -54,13 +54,13 @@
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
-		4757E0742B7DE02B003F148E /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0732B7DE02B003F148E /* Authentication.swift */; };
+		4757E0762B7F3426003F148E /* PassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* PassportView.swift */; };
 		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
-		478153B92B58022B005F87CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153B82B58022B005F87CC /* LoginView.swift */; };
+		478153B92B58022B005F87CC /* StartLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153B82B58022B005F87CC /* StartLoginView.swift */; };
 		478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BA2B5809FB005F87CC /* LoginViewModel.swift */; };
 		4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4784B53F2B7BDAA60051D03E /* AlamofireImage */; };
 		4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784B5412B7BE1040051D03E /* AFImageView.swift */; };
@@ -118,11 +118,11 @@
 		47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesViewModel.swift; sourceTree = "<group>"; };
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
-		4757E0732B7DE02B003F148E /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		4757E0752B7F3426003F148E /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
 		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		478153B82B58022B005F87CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		478153B82B58022B005F87CC /* StartLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartLoginView.swift; sourceTree = "<group>"; };
 		478153BA2B5809FB005F87CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
@@ -173,7 +173,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				4757E0732B7DE02B003F148E /* Authentication.swift */,
+				4757E0752B7F3426003F148E /* PassportView.swift */,
 				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
 				47DB898E2B79FB4A0093C1ED /* krommerijn.json */,
 				47075B112B6B87BA00D09F28 /* LabView.swift */,
@@ -261,7 +261,7 @@
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
-				478153B82B58022B005F87CC /* LoginView.swift */,
+				478153B82B58022B005F87CC /* StartLoginView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
@@ -395,7 +395,6 @@
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
-				4757E0742B7DE02B003F148E /* Authentication.swift in Sources */,
 				47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */,
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
@@ -421,10 +420,11 @@
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
-				478153B92B58022B005F87CC /* LoginView.swift in Sources */,
+				478153B92B58022B005F87CC /* StartLoginView.swift in Sources */,
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* BirdViewModel.swift in Sources */,
+				4757E0762B7F3426003F148E /* PassportView.swift in Sources */,
 				47075B122B6B87BA00D09F28 /* LabView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,

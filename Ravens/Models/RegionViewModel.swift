@@ -20,7 +20,7 @@ class RegionViewModel: ObservableObject {
 //    }
     
     init() {
-        print("init RegionViewModel")
+        log.info("init RegionViewModel")
         fetchData(language: "nl")
     }
     

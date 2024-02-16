@@ -30,7 +30,7 @@ struct ObservationDetailsView: View {
         }
         
         .onAppear {
-            log.verbose("speciesID \(speciesID)")
+            log.info("speciesID \(speciesID)")
             viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
         }
     }

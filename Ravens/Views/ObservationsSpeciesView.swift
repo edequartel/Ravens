@@ -57,45 +57,6 @@ struct ObservationsSpeciesView: View {
 }
 
 
-//struct ObsSpeciesView: View {
-//    var obsSpecies: ObservationSpecies
-//    
-//    var body: some View {
-//        VStack(alignment: .leading) {
-//            Text("\(obsSpecies.date) / \(obsSpecies.time ?? "unknown")")
-//                .bold()
-//            
-//            Text("\(obsSpecies.location_detail.name)")
-//            Text("\(obsSpecies.user_detail.name)")
-//            
-//            if let notes = obsSpecies.notes, !notes.isEmpty {
-//                Text(notes)
-//                    .font(.footnote)
-//            }
-//            
-//            ForEach(obsSpecies.photos, id: \.self) { imageURLString in
-//                if URL(string: imageURLString) != nil {
-//                    AFImageView(media: imageURLString)
-////                    KFImage(URL(string: imageURLString)!)
-////                        .resizable()
-////                        .aspectRatio(nil, contentMode: .fit)
-////                        .clipShape(RoundedRectangle(cornerRadius: 16))
-////                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                } else {
-//                    Text("Invalid URL")
-//                }
-//            }
-//        }
-//        .onTapGesture {
-//            if let url = URL(string: obsSpecies.permalink) {
-//                UIApplication.shared.open(url)
-//            }
-//        }
-//    }
-//}
-
-
-
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         ObservationsSpeciesView(speciesID: 2, speciesName: "Unknown")

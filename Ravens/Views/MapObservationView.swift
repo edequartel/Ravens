@@ -13,10 +13,10 @@ struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var settings: Settings
     
     //@State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-    
     
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -99,7 +99,10 @@ struct MapObservationView: View {
                                             species_group: settings.selectedGroupId,
                                             min_rarity: settings.selectedRarity,
                                             language: settings.selectedLanguage)
-            log.verbose("settings.selectedGroupId: \(settings.selectedGroupId) : \(settings.selectedGroup)")
+
+            log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { log.info("fetcheddata speciesGroupViewModel") })
+            
         }
     }
 }
@@ -109,6 +112,7 @@ struct MapObservationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationView()
             .environmentObject(ObservationsViewModel())
+            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(Settings())
     }
 }

@@ -8,8 +8,11 @@
 import Foundation
 import SwiftUI
 import MapKit
+import SwiftyBeaver
 
 class Settings: ObservableObject {
+    let log = SwiftyBeaver.self
+    
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460
     
     @AppStorage("selectedGroup") var selectedGroup = 1
@@ -28,7 +31,11 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
     
-    init() { print ("init Settings")}
+//    @AppStorage var bookMarks: [Int] = [] dit moet in swiftui data komen <<<
+    
+    init() { 
+        log.info("init Settings")
+    }
 }
 
 

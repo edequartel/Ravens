@@ -1,11 +1,10 @@
 #  Todo
 
-- regionlist/species and choice of country is now hard coded (see BirdViewModel)
-- the circle is not yet accurate when starting up around actual location
+
 - the api calls have to be cached
-- sort (v)
 - show nrofobs on list view
-- recursive 
+- @AppStorage var bookMarks: [Int] = [] dit moet in swiftui data komen in settings()
+- recursive (dont do this)
 - login 
 - check dataload?
 - shareview

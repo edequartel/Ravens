@@ -51,6 +51,13 @@ struct RavensContentView: View {
 //                    Text("Book")
 //                    Image(systemName: "book")
 //                }
+            
+//            PassportView()
+//                .tabItem {
+//                    Text("Book")
+//                    Image(systemName: "book")
+//                }
+//            
             // Tab 1
             ZStack {
                 MapObservationView()
