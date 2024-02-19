@@ -167,9 +167,6 @@
     "Details for %@" : {
 
     },
-    "Display Credentials" : {
-
-    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -305,9 +302,6 @@
         }
       }
     },
-    "Keychain Demo" : {
-
-    },
     "Language" : {
       "localizations" : {
         "nl" : {
@@ -381,6 +375,9 @@
           }
         }
       }
+    },
+    "Login %@" : {
+
     },
     "Login Name" : {
 
@@ -507,6 +504,9 @@
         }
       }
     },
+    "Notes" : {
+
+    },
     "Obs" : {
       "localizations" : {
         "nl" : {
@@ -627,9 +627,6 @@
           }
         }
       }
-    },
-    "Save" : {
-
     },
     "Scientific name" : {
       "localizations" : {

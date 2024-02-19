@@ -14,7 +14,7 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
-    @StateObject private var authManager = AuthManager()
+//    @StateObject private var authManager = AuthManager()
 //    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
     //    @State private var position : MapCameraPosition = .automatic
     
@@ -69,7 +69,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage)
         }
     }
 }

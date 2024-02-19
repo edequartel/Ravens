@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 import MapKit
 import SwiftyBeaver
 
@@ -31,11 +32,18 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
     
-//    @AppStorage var bookMarks: [Int] = [] dit moet in swiftui data komen <<<
-    
-    init() { 
+    init() {
         log.info("init Settings")
     }
 }
 
+//@Model 
+class UserData {
+//    var bookMarks: [Int] = []
+    var name : String
+    
+    init(name: String = "") {
+        self.name = name
+    }
+}
 

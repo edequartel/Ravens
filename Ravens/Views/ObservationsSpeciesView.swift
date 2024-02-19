@@ -12,7 +12,7 @@ import Kingfisher
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var authManager = AuthManager()
+//    @StateObject private var authManager = AuthManager()
     
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
@@ -51,7 +51,7 @@ struct ObservationsSpeciesView: View {
                 }
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: authManager.token ?? "noToken", language: settings.selectedLanguage)
+            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage)
         }
     }
 }

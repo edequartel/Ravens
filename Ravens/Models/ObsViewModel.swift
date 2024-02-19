@@ -23,7 +23,7 @@ class ObsViewModel: ObservableObject {
             "Language" : language,
             "Authorization": "Token " + token
         ]
-        
+//        log.error("102: \(url)")
         AF.request(url, headers: headers).responseJSON { response in
 //            self.log.info(response.debugDescription)
             switch response.result {

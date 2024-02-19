@@ -48,7 +48,12 @@ struct ObsView: View {
 
                     Text("\(obs.user_detail?.name ?? "unknown")")
                     Text("\(obs.location_detail?.name ?? "unknown")")
-                    
+                   
+                    if obs.notes?.count ?? 0 > 0 {
+                        Text("Notes")
+                            .bold()
+                        Text("\(obs.notes ?? "unknown")")
+                    }
                     //
                     ForEach(obs.photos, id: \.self) { imageURLString in
 //                        Text("\(imageURLString)")
@@ -92,13 +97,14 @@ struct ObsView: View {
             }
         }
         .onAppear {
+//            log.error("001 settings.selectedLanguage: \(settings.selectedLanguage)")
             obsViewModel.fetchData(for: obsID, language: settings.selectedLanguage, token: tokenKey)
         }
     }
 }
 
 #Preview {
-    ObsView(obsID: 123629598)
+    ObsView(obsID: 65)
         .environmentObject(Settings())
 }
 

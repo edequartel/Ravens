@@ -33,6 +33,10 @@ struct SettingsView: View {
         
         NavigationStack {
             List {
+                NavigationLink(destination: PassportView()) {
+                    Text("Login waarneming.nl")
+                }
+                
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in

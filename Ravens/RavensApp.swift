@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-
 import SwiftyBeaver
+import SwiftData
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     let log = SwiftyBeaver.self
@@ -60,10 +60,8 @@ struct RavensApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            RegionsView()
-//   ContentView()
-            StartLoginView()
-//            RavensContentView()
+//            StartLoginView()
+            RavensContentView()
                 .environmentObject(Settings())
                 .environmentObject(ObservationsSpeciesViewModel())
                 .environmentObject(ObservationsViewModel())
@@ -72,6 +70,7 @@ struct RavensApp: App {
                 .environmentObject(SpeciesGroupViewModel())
                 .environmentObject(SpeciesDetailsViewModel())
         }
+//        .modelContainer(for: UserData.self)
     }
 }
 
