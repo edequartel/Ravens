@@ -48,6 +48,8 @@ struct BirdView: View {
 //                                        Text("\(bird.id)")
                                         ObservationDetailsView(speciesID: bird.id)
                                         
+                                       //here count
+                                        
                                         Text("\(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1

@@ -92,6 +92,7 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
     
     func loginUser(username: String, password: String) {
         log.info("loginUser()")
+        tokenKey = "" // empty token at login
         
         // Perform authentication and get token
         // In a real-world scenario, you would make an API call to authenticate the user
