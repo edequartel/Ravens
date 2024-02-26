@@ -34,8 +34,18 @@ struct MapObservationsSpeciesView: View {
         ZStack {
             Map(position: $position) {
                 ForEach(observationsSpeciesViewModel.locations) { location in
-                    Marker("", systemImage: "binoculars.fill", coordinate:  location.coordinate)
-                        .tint(Color(myColor(value: location.rarity)))
+//                    Marker("", systemImage: "binoculars.fill", coordinate:  location.coordinate)
+//                        .tint(Color(myColor(value: location.rarity)))
+                    
+                    Annotation("", coordinate: location.coordinate) {
+                        Circle()
+                            .fill(Color(myColor(value: location.rarity)))
+                            .frame(width: 10, height: 10)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 1) // Customize the border color and width
+                            )
+                    }
                 }
             }
             .safeAreaInset(edge: .bottom) {
@@ -56,8 +66,8 @@ struct MapObservationsSpeciesView: View {
                 .foregroundColor(.obsGreenFlower)
             }
             
-//            .mapStyle(.hybrid(elevation: .realistic))
-            .mapStyle(.standard(elevation: .realistic))
+            .mapStyle(.hybrid(elevation: .realistic))
+//            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()

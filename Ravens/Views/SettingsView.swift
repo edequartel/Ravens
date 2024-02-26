@@ -26,7 +26,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 NavigationLink(destination: PassportView()) {
-                    Text("Login waarneming.nl")
+                    Text("Login")
                 }
                 
                 Section("Species") {
@@ -78,13 +78,13 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-//                    Picker("Window", selection: $settings.days) {
-//                        ForEach(1 ... 14, id: \.self) { day in
-//                            HStack() {
-//                                Text("\(day)")
-//                            }
-//                        }
-//                    }
+                    Picker("Window", selection: $settings.days) {
+                        ForEach(1 ... 14, id: \.self) { day in
+                            HStack() {
+                                Text("\(day)")
+                            }
+                        }
+                    }
                     
                     DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                         .onChange(of: settings.selectedDate) {
@@ -99,22 +99,6 @@ struct SettingsView: View {
 ////                    RegionsView(onChange: {upDate()})
                 }
                 
-                Section("EndPoint") {
-                    Picker("", selection: $settings.selectedInBetween) {
-                        Text("waarneming.nl")
-                            .tag("waarneming.nl")
-                        Text("waarneming.be")
-                            .tag("waarneming.be")
-                        Text("waarneming-test.nl")
-                            .tag("waarneming-test.nl")
-                        Text("waarneming-test.be")
-                            .tag("waarneming-test.be")
-                        Text("observations.be")
-                            .tag("observations.be")
-                        Text("observations.org")
-                            .tag("observations.org")
-                    }
-                }
             }
             .navigationTitle("Settings")
             .toolbar {

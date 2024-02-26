@@ -46,7 +46,8 @@ struct ObsView: View {
                     Text("\(obs.date) \(obs.time ?? "")")
 //                    Text("\(obs ?? "")")
 
-                    Text("\(obs.user_detail?.name ?? "unknown")")
+                    Text("\(obs.user_detail?.name ?? "unknown") - \(obs.user_detail?.id ?? 0)")
+                    
                     Text("\(obs.location_detail?.name ?? "unknown")")
                    
                     if obs.notes?.count ?? 0 > 0 {
@@ -60,11 +61,11 @@ struct ObsView: View {
 //                        Text("\(imageURLString)")
                         AFImageView(media: imageURLString)
                     }
-                    .onTapGesture {
-                        if let url = URL(string: obs.permalink) {
-                            UIApplication.shared.open(url)
-                        }
-                    }
+//                    .onTapGesture {
+//                        if let url = URL(string: obs.permalink) {
+//                            UIApplication.shared.open(url)
+//                        }
+//                    }
                     
                     //or this!!
                     
@@ -91,6 +92,12 @@ struct ObsView: View {
                         Text("Sounds: \(audioURL)")
                     }
                 }
+                .onTapGesture {
+                    if let url = URL(string: obs.permalink) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                
                 .font(.footnote)
             }
             else {

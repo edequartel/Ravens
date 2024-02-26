@@ -16,7 +16,7 @@ struct MapObservationView: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var settings: Settings
     
-    //@State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var myActualPosition : MapCameraPosition = .userLocation(fallback: .automatic)
     
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -27,6 +27,9 @@ struct MapObservationView: View {
     
     //    @State private var position : MapCameraPosition = .automatic
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    
+    @State private var long = "longitude"
+    @State private var lat = "latitude"
     
     var body: some View {
         VStack {
@@ -40,33 +43,64 @@ struct MapObservationView: View {
                     }
                     
                     ForEach(observationsViewModel.locations) { location in
-                        Marker(location.name, systemImage: "binoculars.fill", coordinate: location.coordinate)
-                            .tint(Color(myColor(value: location.rarity)))
+//                        Marker(location.name, systemImage: "binoculars.fill", coordinate: location.coordinate)
+//                            .tint(Color(myColor(value: location.rarity)))
+                        
+                        Annotation(location.name, coordinate: location.coordinate) {
+                            Circle()
+                                .fill(Color(myColor(value: location.rarity)))
+                                .frame(width: 20, height: 20)
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 1) // Customize the border color and width
+                                )
+//                                .onTapGesture {
+//                                    log.error("tappedit")
+//                                }
+                        }
                     }
                     
                     MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
-                        .stroke(.gray, lineWidth: 1)
+                        .stroke(.white, lineWidth: 1)
+                    
+//                    Marker("me", systemImahe: "mappin", coordinate: myActualPosition.camera?.centerCoordinate)
+//                        .tint(.red)
                     
                     
                 }
-//                .mapStyle(.hybrid(elevation: .realistic))
-                .mapStyle(.standard(elevation: .realistic))
+                .mapStyle(.hybrid(elevation: .realistic))
+//                .mapStyle(.standard(elevation: .realistic))
                 
                 .mapControls() {
-                    MapUserLocationButton()
+//                    MapUserLocationButton()
                     MapPitchToggle()
                     MapCompass() //tapping this makes it north
 //                    Map...
                 }
                 
                 .safeAreaInset(edge: .bottom) {
-                    SettingsDetailsView(count: observationsViewModel.locations.count)
+                    VStack {
+                        SettingsDetailsView(count: observationsViewModel.locations.count)
+//                        HStack() {
+//                            Text(long)
+//                            Spacer()
+//                            Text(lat)
+//                        }
+//                        .padding()
+//                        .foregroundColor(.white)
+                    }
+
                 }
-                //.onLongPressGesture(minimumDuration:
-                .onTapGesture { position in //get all the data from the location
+
+//                .onLongPressGesture(perform: {print("LONGPRESGESTURE")})
+                
+                .onTapGesture() { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
-                        observationsViewModel.fetchData(lat: coordinate.latitude,                             long: coordinate.longitude)
+                        observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
+                        lat =  String(coordinate.latitude)
+                        long = String(coordinate.longitude)
+                        
                         
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)

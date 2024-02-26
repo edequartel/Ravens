@@ -47,6 +47,29 @@ struct PassportView: View {
     var body: some View {
         Form {
             Section() {
+
+                Picker("EndPoint", selection: $settings.selectedInBetween) {
+                    Text("waarneming.nl")
+                        .tag("waarneming.nl")
+//                    Text("waarneming.be")
+//                        .tag("waarneming.be")
+                    Text("waarneming-test.nl")
+                        .tag("waarneming-test.nl")
+//                    Text("waarneming-test.be")
+//                        .tag("waarneming-test.be")
+//                    Text("observations.be")
+//                        .tag("observations.be")
+                    Text("observation.org")
+                        .tag("observation.org")
+                }
+                .onChange(of: settings.selectedInBetween) {
+                    print("Selected value changed to: \(settings.selectedInBetween)")
+                    print(settings.endPoint())
+                }
+
+                
+
+                
                 TextField("Login Name", text: $viewModel.loginName)
                     .padding()
                     .onChange(of: viewModel.loginName) {
@@ -81,7 +104,7 @@ struct PassportView: View {
                     """
 **\(settings.selectedInBetween)**
 
-Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [Waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
+Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
 
 Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
 
@@ -161,5 +184,6 @@ struct DisplayCredentialsView: View {
 struct PassportView_Previews: PreviewProvider {
     static var previews: some View {
         PassportView()
+            .environmentObject(Settings())
     }
 }

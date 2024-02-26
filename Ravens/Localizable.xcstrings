@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " %@" : {
 
     },
@@ -13,6 +10,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@"
+          }
+        }
+      }
+    },
+    "%@ - %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ - %2$lld"
           }
         }
       }
@@ -48,7 +55,6 @@
       }
     },
     "%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -393,6 +399,7 @@
 
     },
     "Login waarneming.nl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -521,10 +528,7 @@
         }
       }
     },
-    "observations.be" : {
-
-    },
-    "observations.org" : {
+    "observation.org" : {
 
     },
     "Password" : {
@@ -797,20 +801,13 @@
         }
       }
     },
-    "waarneming-test.be" : {
-
-    },
     "waarneming-test.nl" : {
-
-    },
-    "waarneming.be" : {
 
     },
     "waarneming.nl" : {
 
     },
     "Window" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
