@@ -12,10 +12,7 @@ struct SettingsView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
-    @StateObject private var loginViewModel = LoginViewModel()
-    
     @EnvironmentObject var regionsViewModel: RegionViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
@@ -46,7 +43,7 @@ struct SettingsView: View {
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
+                        speciesGroupViewModel.fetchData(completion: { print("fetcheddata") })
                     }
                 }
                 
@@ -81,24 +78,19 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                    Picker("Window", selection: $settings.days) {
-                        ForEach(1 ... 14, id: \.self) { day in
-                            HStack() {
-                                Text("\(day)")
-                            }
-                        }
-                    }
+//                    Picker("Window", selection: $settings.days) {
+//                        ForEach(1 ... 14, id: \.self) { day in
+//                            HStack() {
+//                                Text("\(day)")
+//                            }
+//                        }
+//                    }
                     
                     DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                         .onChange(of: settings.selectedDate) {
                             // Perform your action when the date changes
-                            observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
-                                                            radius: settings.radius,
-                                                            species_group: settings.selectedGroupId,
-                                                            min_rarity: settings.selectedRarity,
-                                                            language: settings.selectedLanguage)
+                            observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude)
                         }
                 }
                 
@@ -136,7 +128,7 @@ struct SettingsView: View {
         
         .onAppear() {
 //            print("ONAPPEAR SETTINGSVIEW")
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print ("completed") })
+            speciesGroupViewModel.fetchData(completion: { print ("completed") })
             print("--->>>\(settings.endPoint())")
         }
         
@@ -168,7 +160,7 @@ struct SettingsView: View {
     func upDate() {
         log.verbose("update()")
 //          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
-          speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print ("update completed") })
+          speciesGroupViewModel.fetchData(completion: { print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }
     
@@ -179,8 +171,8 @@ struct SettingsView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         SettingsView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(SpeciesGroupViewModel())
+            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(SpeciesGroupViewModel(settings: Settings()))
     }
 }
 

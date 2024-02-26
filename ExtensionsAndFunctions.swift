@@ -27,12 +27,8 @@ func formatCurrentDate(value: Date) -> String {
     return dateFormatter.string(from: currentDate)
 }
 
-let inBetween = "waarneming.nl"
-//let inBetween = "observations.org"
-//let inBetween = "waarneming-test.nl"
-
-let endPoint = "https://"+inBetween+"/api/v1/"
-var tokenKey = ""
+//var tokenKey = ""
+var tokenKey = "e285437a324c32a40e2df727b49691998bf68c07" //JUST FOR TESTING
 
 let bundleIdentifier = "ravens.app.bundle.identifier"
 

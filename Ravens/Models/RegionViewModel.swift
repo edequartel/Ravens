@@ -14,25 +14,24 @@ import SwiftyBeaver
 class RegionViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regions = [Region]()
-
-//    init() {
-//        fetchData(language: "nl")
-//    }
     
-    init() {
+    var settings: Settings
+    init(settings: Settings) {
         log.info("init RegionViewModel")
-        fetchData(language: "nl")
+        self.settings = settings
+        fetchData()
     }
-    
-    func fetchData(language: String) {
+
+
+    func fetchData() {
         log.info("fetchData RegionViewModel")
-        let url = endPoint + "regions/"
+        let url = settings.endPoint() + "regions/"
 
         log.info("url = \(url)")
 
         // Add the custom header 'Accept-Language: nl' eng, nl, de, fr
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
 
         // Create a URLRequest with caching policy and set the custom headers

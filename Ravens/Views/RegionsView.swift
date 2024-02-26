@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct RegionsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var viewModel = RegionViewModel()
+    @StateObject private var viewModel = RegionViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     
     var onChange: (() -> Void)?

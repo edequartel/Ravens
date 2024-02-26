@@ -41,5 +41,5 @@ struct SettingsDetailsView: View {
 #Preview {
     SettingsDetailsView()
         .environmentObject(Settings())
-        .environmentObject(SpeciesGroupViewModel())
+        .environmentObject(SpeciesGroupViewModel(settings: Settings()))
 }

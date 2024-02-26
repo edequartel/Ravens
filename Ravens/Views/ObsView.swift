@@ -13,7 +13,7 @@ import AlamofireImage
 
 struct ObsView: View {
     let log = SwiftyBeaver.self
-    @StateObject var obsViewModel = ObsViewModel()
+    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     
     @EnvironmentObject var settings: Settings
     
@@ -98,8 +98,7 @@ struct ObsView: View {
             }
         }
         .onAppear {
-//            log.error("001 settings.selectedLanguage: \(settings.selectedLanguage)")
-            obsViewModel.fetchData(for: obsID, language: settings.selectedLanguage, token: tokenKey)
+            obsViewModel.fetchData(for: obsID)
         }
     }
 }

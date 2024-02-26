@@ -52,7 +52,7 @@ struct ObservationsSpeciesView: View {
         .onAppear {
             log.verbose("speciesID \(speciesID)")
 
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage, limit: 100)
+            viewModel.fetchData(speciesId: speciesID, limit: 100)
         }
     }
 }
@@ -61,7 +61,7 @@ struct ObservationsSpeciesView: View {
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         ObservationsSpeciesView(speciesID: 2, speciesName: "Unknown")
-            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(Settings())
     }
 }

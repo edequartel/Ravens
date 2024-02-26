@@ -60,7 +60,6 @@
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
-		478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478153BA2B5809FB005F87CC /* LoginViewModel.swift */; };
 		4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4784B53F2B7BDAA60051D03E /* AlamofireImage */; };
 		4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784B5412B7BE1040051D03E /* AFImageView.swift */; };
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
@@ -121,7 +120,6 @@
 		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		478153BA2B5809FB005F87CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
 				474C408B2B4DAC590038B3A5 /* RegionViewModel.swift */,
 				474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */,
-				478153BA2B5809FB005F87CC /* LoginViewModel.swift */,
 				47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */,
 				47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */,
 			);
@@ -410,7 +407,6 @@
 				474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */,
 				47DB89B82B7A3AB20093C1ED /* ObsView.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
-				478153BB2B5809FB005F87CC /* LoginViewModel.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,

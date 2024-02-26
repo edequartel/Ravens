@@ -13,15 +13,21 @@ class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
     @Published var observation: Obs? 
+    
+    var settings: Settings
+    init(settings: Settings) {
+        log.info("init ObsViewModel")
+        self.settings = settings
+    }
 
-    func fetchData(for obsID: Int, language: String, token: String) {
+    func fetchData(for obsID: Int) {
 //    func fetchData(for obsID: Int, language: String, token: String) {
         
-        let url = endPoint+"observations/\(obsID)/"
+        let url = settings.endPoint()+"observations/\(obsID)/"
         
         let headers: HTTPHeaders = [
-            "Accept-Language" : language,
-            "Authorization": "Token " + token
+            "Accept-Language" : settings.selectedLanguage,
+            "Authorization": "Token " + tokenKey
         ]
 //        log.error("102: \(url)")
         AF.request(url, headers: headers).responseJSON { response in

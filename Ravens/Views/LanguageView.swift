@@ -10,7 +10,7 @@ import SwiftyBeaver
 
 struct LanguageView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel()
+    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
     // Define an array of strings
     let options = ["nl", "eng", "de", "fr"]
     
@@ -29,7 +29,7 @@ struct LanguageView: View {
             .onChange(of: settings.selectedLanguage) {
                 log.info("LanguageView language changed to: \(settings.selectedLanguage)")
                 log.info("\(settings.selectedLanguage)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: {
+                speciesGroupViewModel.fetchData(completion: {
                     log.info("Info LanguageView completed \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                     onChange?()
                 })

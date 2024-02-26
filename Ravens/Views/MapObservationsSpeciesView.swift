@@ -21,7 +21,7 @@ struct MapObservationsSpeciesView: View {
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 4)
+            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
         )
     )
     
@@ -48,7 +48,7 @@ struct MapObservationsSpeciesView: View {
                             .background(Color.obsGreenEagle.opacity(0.5))
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        SettingsDetailsView(count: observationsSpeciesViewModel.locations.count)
+//                        SettingsDetailsView(count: observationsSpeciesViewModel.locations.count)
                     }
                 }
                 .padding(2)
@@ -56,7 +56,8 @@ struct MapObservationsSpeciesView: View {
                 .foregroundColor(.obsGreenFlower)
             }
             
-            .mapStyle(.hybrid(elevation: .realistic))
+//            .mapStyle(.hybrid(elevation: .realistic))
+            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
@@ -69,8 +70,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            log.error(">>>> \(settings.selectedLanguage)")
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage, limit: 100)
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100)
         }
     }
 }
@@ -79,8 +79,8 @@ struct MapObservationSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
-            .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())
+            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
     }
 }
 

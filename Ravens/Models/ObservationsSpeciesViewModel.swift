@@ -16,6 +16,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
     @Published var observationsSpecies: ObservationsSpecies?
     
     var locations = [Location]()
+    
+    var settings: Settings
+    init(settings: Settings) {
+        log.info("init ObservationsSpeciesViewModel")
+        self.settings = settings
+
+    }
 
     ///
     func getLocations() {
@@ -36,20 +43,21 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String, limit: Int) {
+
+    func fetchData(speciesId: Int, limit: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
-        log.info("token ObservationsSpeciesViewModel - speciesID\(token)")
+
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+token,
-            "Accept-Language": "eng" //language  //Accept-Language
+            "Authorization": "Token "+tokenKey,
+            "Accept-Language": settings.selectedLanguage
         ]
 
-        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
-        let date_before = formatCurrentDate(value:endDate)
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
+        let date_before = formatCurrentDate(value: settings.selectedDate)
         
-        let url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
+        let url = settings.endPoint()+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.info("\(url)")
 
@@ -69,7 +77,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
                             // Continue with your logic
-                            self.log.warning("count  \(speciesId) - \(self.observationsSpecies?.count)")
+//                            self.log.warning("ObservationsSpeciesViewModel limit \(limit) specied ID\(speciesId) - count \(self.observationsSpecies?.count)")
                             self.getLocations()
                            
 

@@ -62,12 +62,12 @@ struct RavensApp: App {
         WindowGroup {
             RavensContentView()
                 .environmentObject(Settings())
-                .environmentObject(ObservationsSpeciesViewModel())
-                .environmentObject(ObservationsViewModel())
-                .environmentObject(RegionViewModel())
-                .environmentObject(RegionListViewModel())
-                .environmentObject(SpeciesGroupViewModel())
-                .environmentObject(SpeciesDetailsViewModel())
+                .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+                .environmentObject(ObservationsViewModel(settings: Settings()))
+                .environmentObject(RegionViewModel(settings: Settings()))
+                .environmentObject(RegionListViewModel(settings: Settings()))
+                .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
         }
 //        .modelContainer(for: UserData.self)
     }

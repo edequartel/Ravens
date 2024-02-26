@@ -13,13 +13,15 @@ class LanguageViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var language: Language?
     
-    init() {
+    var settings: Settings
+    init(settings: Settings) {
+        self.settings = settings
         fetchData()
     }
 
     func fetchData() {
         log.info("fetchData LanguageViewModel")
-        AF.request(endPoint+"languages/").responseDecodable(of: Language.self) { response in
+        AF.request(settings.endPoint()+"languages/").responseDecodable(of: Language.self) { response in
             switch response.result {
             case .success(let language):
                 DispatchQueue.main.async {

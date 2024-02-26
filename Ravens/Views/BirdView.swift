@@ -127,7 +127,7 @@ struct BirdView: View {
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
+            speciesGroupViewModel.fetchData(completion: { print("fetcheddata") })
         }
     }
     
@@ -220,9 +220,9 @@ struct BirdView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         BirdView()
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
-            .environmentObject(SpeciesGroupViewModel())
+            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+            .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(Settings())
     }
 }

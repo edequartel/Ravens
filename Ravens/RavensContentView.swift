@@ -12,9 +12,8 @@ import SwiftyBeaver
 struct RavensContentView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var observationsViewModel = ObservationsViewModel()
-    @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel()
-    @StateObject private var loginViewModel = LoginViewModel()
+    @StateObject private var observationsViewModel = ObservationsViewModel(settings: Settings())
+    @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
 
 //    @State private var isViewAVisible = true
     
@@ -89,8 +88,6 @@ struct RavensContentView: View {
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
-            
-            tokenKey = "e285437a324c32a40e2df727b49691998bf68c07" //JUST FOR TESTING
         }
     }
 }
@@ -99,8 +96,8 @@ struct RavensContentView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         RavensContentView()
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
+            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(Settings())
     }
 }

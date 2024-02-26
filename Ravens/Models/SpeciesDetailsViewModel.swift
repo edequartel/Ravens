@@ -18,15 +18,14 @@ class SpeciesDetailsViewModel: ObservableObject {
         self.settings = settings
     }
     
-    func fetchData(for speciesID: Int, language: String) {
-        guard let url = URL(string: endPoint+"species/\(speciesID)/") else {
+    func fetchData(for speciesID: Int) {
+        guard let url = URL(string: settings.endPoint()+"species/\(speciesID)/") else {
             return
         }
         log.info("SpeciesDetailsViewModel speciesID: \(speciesID)")
         
-        // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
         log.verbose("SpeciesDetailsViewModel url: \(url)")
         

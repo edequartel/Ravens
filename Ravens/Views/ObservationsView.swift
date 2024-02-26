@@ -38,13 +38,9 @@ struct ObservationsView: View {
         }
         .onAppear(){
             // Get the current locations of all the observations
-            observationsViewModel.fetchData(days: settings.days, endDate: settings.selectedDate,
-                                            lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
-                                            radius: settings.radius,
-                                            species_group: settings.selectedGroupId,
-                                            min_rarity: settings.selectedRarity,
-                                            language: settings.selectedLanguage)
+            observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                            long: settings.currentLocation?.coordinate.longitude ?? longitude
+                                            )
         }
     }
 }
@@ -97,7 +93,7 @@ struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         ObservationsView(isShowing: .constant(false))
-            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(Settings())
     }
 }

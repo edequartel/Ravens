@@ -12,21 +12,23 @@ import SwiftyBeaver
 class RegionListViewModel: ObservableObject { //<<change in region list not region
     let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
-
-    init() {
-        print("init RegionListViewModel")
+    
+    var settings: Settings
+    init(settings: Settings) {
+        log.verbose("init RegionListViewModel")
+        self.settings = settings
         fetchData()
     }
 
     func fetchData() {
         log.info("fetchData RegionListViewModel")
-        let url = endPoint+"region-lists"
+        let url = settings.endPoint()+"region-lists"
         
         log.info("url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": "nl"
+            "Accept-Language": settings.selectedLanguage
         ]
 
         // Use Alamofire to make the API request

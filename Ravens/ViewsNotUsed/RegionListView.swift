@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegionListView: View {
-    @StateObject private var viewModel = RegionListViewModel()
+    @StateObject private var viewModel = RegionListViewModel(settings: Settings())
     
     var body: some View {
         NavigationStack {

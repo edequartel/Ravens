@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var viewModel = ObservationsSpeciesViewModel()
+    @StateObject private var viewModel = ObservationsSpeciesViewModel(settings: Settings())
 //    @StateObject private var authManager = AuthManager()
     
     @EnvironmentObject var settings: Settings
@@ -31,7 +31,7 @@ struct ObservationDetailsView: View {
         
         .onAppear {
             log.info("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage, limit: 1)
+            viewModel.fetchData(speciesId: speciesID, limit: 1)
         }
     }
 }

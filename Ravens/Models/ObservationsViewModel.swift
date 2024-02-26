@@ -24,8 +24,13 @@ class ObservationsViewModel: ObservableObject {
     var locations = [Location]()
     var poiLocations = [Location]()
     
-    init() { log.info("init ObservationsViewModel") }
-    
+    var settings: Settings
+    init(settings: Settings) {
+        log.info("init ObservationsViewModel")
+        self.settings = settings
+
+    }
+
     ///
     func getLocations() {
         locations.removeAll()
@@ -70,15 +75,15 @@ class ObservationsViewModel: ObservableObject {
     }
     
     ///
-    func fetchData(days: Int, endDate: Date, lat: Double, long: Double, radius: Int, species_group: Int, min_rarity: Int, language: String) {
+    func fetchData(lat: Double, long: Double) {
         log.info("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
         
-        let url = endPoint+"observations/around-point/?days=\(days)&end_date=\(formatCurrentDate(value: endDate))&lat=\(lat)&lng=\(long)&radius=\(radius)&species_group=\(species_group)&min_rarity=\(min_rarity)"
+        let url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
         
         log.info("\(url)")
         

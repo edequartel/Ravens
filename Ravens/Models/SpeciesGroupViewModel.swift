@@ -15,17 +15,18 @@ class SpeciesGroupViewModel: ObservableObject {
     @Published var speciesGroups = [SpeciesGroup]()
     var speciesDictionary: [Int: String] = [:]
 
-//    init() {
-//        fetchData(language: "nl")
-//    }
+    var settings: Settings
+    init(settings: Settings) {
+        self.settings = settings
+    }
 
-    func fetchData(language: String, completion: @escaping () -> Void) { //completion handling
-        log.info("fetchData SpeciesGroupViewModel \(language)")
-        let url = endPoint + "species-groups"
+    func fetchData(completion: @escaping () -> Void) { //completion handling
+        log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
+        let url = settings.endPoint() + "species-groups"
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
         
         log.info("url SpeciesGroupViewModel: \(url)")

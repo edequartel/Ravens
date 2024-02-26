@@ -5,7 +5,7 @@ import Alamofire
 import MarkdownUI
 
 class KeychainViewModel: ObservableObject {
-    private let keychain = Keychain(service: "com.example.yourapp")
+    private let keychain = Keychain(service: bundleIdentifier)
     
     @EnvironmentObject var settings: Settings
     
@@ -37,6 +37,8 @@ struct PassportView: View {
     let log = SwiftyBeaver.self
     @StateObject private var viewModel = KeychainViewModel()
     
+    @EnvironmentObject var settings: Settings
+    
     @State var myMessage: String = ""
     //    var myMessage: String = ""
     
@@ -47,6 +49,10 @@ struct PassportView: View {
             Section() {
                 TextField("Login Name", text: $viewModel.loginName)
                     .padding()
+                    .onChange(of: viewModel.loginName) {
+                        viewModel.loginName = viewModel.loginName.lowercased()
+                    }
+                
                 SecureField("Password", text: $viewModel.password)
                     .padding()
             }
@@ -73,7 +79,7 @@ struct PassportView: View {
             Section() {
                 Markdown(
                     """
-**\(inBetween)**
+**\(settings.selectedInBetween)**
 
 Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [Waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
 
@@ -82,7 +88,7 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
 """)
             }
         }
-        .navigationTitle("Login \(inBetween)")
+        .navigationTitle("Login \(settings.selectedInBetween)")
         .onAppear {
             viewModel.retrieveCredentials()
             //            }
@@ -102,7 +108,7 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
             "Content-Type": "application/x-www-form-urlencoded",
         ]
         
-        AF.request(endPoint+"auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        AF.request(settings.endPoint()+"auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
             .responseData { response in
                 debugPrint(response)
