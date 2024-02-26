@@ -24,11 +24,6 @@ struct SettingsView: View {
     let maximumRadius = 10000.0
     let step = 500.0
     
-    //region netherlands - id=200, type=20
-    //speciousgroup birds = 1
-    //regionlist - regionid=200 speciesgroup=1 -->5001
-    //regionlist - regionid=20 speciesgroup=1 --> 461
-    
     var body: some View {
         
         NavigationStack {
@@ -112,6 +107,22 @@ struct SettingsView: View {
 ////                    RegionsView(onChange: {upDate()})
                 }
                 
+                Section("EndPoint") {
+                    Picker("", selection: $settings.selectedInBetween) {
+                        Text("waarneming.nl")
+                            .tag("waarneming.nl")
+                        Text("waarneming.be")
+                            .tag("waarneming.be")
+                        Text("waarneming-test.nl")
+                            .tag("waarneming-test.nl")
+                        Text("waarneming-test.be")
+                            .tag("waarneming-test.be")
+                        Text("observations.be")
+                            .tag("observations.be")
+                        Text("observations.org")
+                            .tag("observations.org")
+                    }
+                }
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -126,7 +137,7 @@ struct SettingsView: View {
         .onAppear() {
 //            print("ONAPPEAR SETTINGSVIEW")
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print ("completed") })
-//            print("\(settings.selectedLanguage)")
+            print("--->>>\(settings.endPoint())")
         }
         
     }

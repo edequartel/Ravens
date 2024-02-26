@@ -69,7 +69,8 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage)
+            log.error(">>>> \(settings.selectedLanguage)")
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage, limit: 100)
         }
     }
 }

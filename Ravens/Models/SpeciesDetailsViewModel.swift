@@ -13,11 +13,11 @@ class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
     
-    init() {
-        log.info("init SpeciesDetailsViewModel")
-//        fetchData(for: 5001, language: "nl")
+    var settings: Settings
+    init(settings: Settings) {
+        self.settings = settings
     }
-
+    
     func fetchData(for speciesID: Int, language: String) {
         guard let url = URL(string: endPoint+"species/\(speciesID)/") else {
             return

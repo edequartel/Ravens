@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 struct BirdView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var birdViewModel = BirdViewModel()
+    @StateObject private var birdViewModel = BirdViewModel(settings: Settings())
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
@@ -46,11 +46,12 @@ struct BirdView: View {
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
 //                                        Text("\(bird.id)")
+                                        
                                         ObservationDetailsView(speciesID: bird.id)
                                         
                                        //here count
                                         
-                                        Text("\(bird.name)")
+                                        Text(" \(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -125,7 +126,7 @@ struct BirdView: View {
 
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
-            birdViewModel.fetchData(for: settings.selectedGroup, language: settings.selectedLanguage)
+            birdViewModel.fetchData(for: settings.selectedGroup)
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { print("fetcheddata") })
         }
     }

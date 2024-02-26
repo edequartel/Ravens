@@ -20,7 +20,7 @@ class ObsViewModel: ObservableObject {
         let url = endPoint+"observations/\(obsID)/"
         
         let headers: HTTPHeaders = [
-            "Language" : language,
+            "Accept-Language" : language,
             "Authorization": "Token " + token
         ]
 //        log.error("102: \(url)")

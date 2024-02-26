@@ -16,6 +16,7 @@ struct SettingsDetailsView: View {
     var body: some View {
         HStack {
             Spacer()
+            Text("\(settings.selectedLanguage)")
             Text("\(count)x")
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)

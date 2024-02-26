@@ -36,24 +36,25 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String) {
+    func fetchData(speciesId: Int, endDate: Date, days: Int, token: String, language: String, limit: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         log.info("token ObservationsSpeciesViewModel - speciesID\(token)")
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language,
-            "Authorization": "Token "+token ///<<
-//            "Authorization": "Token "+"e285437a324c32a40e2df727b49691998bf68c07" ///<<
+            "Authorization": "Token "+token,
+            "Accept-Language": "eng" //language  //Accept-Language
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: endDate)!)
         let date_before = formatCurrentDate(value:endDate)
         
-        let url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=1"
+        let url = endPoint+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.info("\(url)")
 
+        log.error("headers: \(headers.dictionary)")
+        
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):

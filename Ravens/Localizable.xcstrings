@@ -4,6 +4,9 @@
     "" : {
 
     },
+    " %@" : {
+
+    },
     "%@" : {
       "localizations" : {
         "nl" : {
@@ -165,6 +168,9 @@
       }
     },
     "Details for %@" : {
+
+    },
+    "EndPoint" : {
 
     },
     "English %@" : {
@@ -504,9 +510,6 @@
         }
       }
     },
-    "Notes" : {
-
-    },
     "Obs" : {
       "localizations" : {
         "nl" : {
@@ -516,6 +519,12 @@
           }
         }
       }
+    },
+    "observations.be" : {
+
+    },
+    "observations.org" : {
+
     },
     "Password" : {
       "localizations" : {
@@ -767,6 +776,7 @@
       }
     },
     "Username" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -785,6 +795,18 @@
           }
         }
       }
+    },
+    "waarneming-test.be" : {
+
+    },
+    "waarneming-test.nl" : {
+
+    },
+    "waarneming.be" : {
+
+    },
+    "waarneming.nl" : {
+
     },
     "Window" : {
       "localizations" : {

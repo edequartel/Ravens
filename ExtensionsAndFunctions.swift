@@ -28,6 +28,7 @@ func formatCurrentDate(value: Date) -> String {
 }
 
 let inBetween = "waarneming.nl"
+//let inBetween = "observations.org"
 //let inBetween = "waarneming-test.nl"
 
 let endPoint = "https://"+inBetween+"/api/v1/"

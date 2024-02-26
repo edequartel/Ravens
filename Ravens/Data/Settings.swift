@@ -18,7 +18,7 @@ class Settings: ObservableObject {
     
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
-//    @AppStorage("selectedGroupString") var selectedGroupString = "unknown"
+    @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
     
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
@@ -35,10 +35,14 @@ class Settings: ObservableObject {
     init() {
         log.info("init Settings")
     }
+    
+    func endPoint() -> String {
+       return "https://"+selectedInBetween+"/api/v1/"
+    }
 }
 
 //@Model 
-class UserData {
+class NoUserData {
 //    var bookMarks: [Int] = []
     var name : String
     

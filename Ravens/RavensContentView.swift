@@ -89,6 +89,8 @@ struct RavensContentView: View {
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
+            
+            tokenKey = "e285437a324c32a40e2df727b49691998bf68c07" //JUST FOR TESTING
         }
     }
 }

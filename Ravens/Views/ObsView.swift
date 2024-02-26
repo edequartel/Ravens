@@ -50,9 +50,10 @@ struct ObsView: View {
                     Text("\(obs.location_detail?.name ?? "unknown")")
                    
                     if obs.notes?.count ?? 0 > 0 {
-                        Text("Notes")
-                            .bold()
+//                        Text("Notes")
+//                            .bold()
                         Text("\(obs.notes ?? "unknown")")
+                            .italic()
                     }
                     //
                     ForEach(obs.photos, id: \.self) { imageURLString in
@@ -104,7 +105,7 @@ struct ObsView: View {
 }
 
 #Preview {
-    ObsView(obsID: 65)
+    ObsView(obsID: 2)
         .environmentObject(Settings())
 }
 

@@ -31,11 +31,15 @@ struct SpeciesDetailsView: View {
                     Divider()
                     
                     VStack(alignment: .leading) {
-                        Text(species.name)
-                            .font(.title)
-                        Text(species.scientific_name)
-                        Text(species.group_name)
-                        Text(species.status)
+                        HStack {
+                            Text(species.name)
+                                .bold()
+                            Spacer()
+                            Text(species.scientific_name)
+                                .italic()
+                        }
+//                        Text(species.group_name)
+//                        Text(species.status)
                         Divider()
                         RichText(html: species.info_text)
                         

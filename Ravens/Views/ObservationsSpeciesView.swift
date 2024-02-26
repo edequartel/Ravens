@@ -40,7 +40,7 @@ struct ObservationsSpeciesView: View {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
 //                        ObsSpeciesView(obsSpecies: result) //<<<<
-                        ObsView(obsID: result.id ?? 0)
+                        ObsView(obsID: result.id ?? 0) //
                     }
                     .font(.footnote)
                 }
@@ -51,7 +51,8 @@ struct ObservationsSpeciesView: View {
                 }
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage)
+
+            viewModel.fetchData(speciesId: speciesID, endDate: settings.selectedDate, days: settings.days, token: tokenKey ?? "noToken", language: settings.selectedLanguage, limit: 100)
         }
     }
 }

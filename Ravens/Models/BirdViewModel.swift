@@ -14,17 +14,22 @@ import SwiftyBeaver
 class BirdViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var birds = [Bird]()
-
-    func fetchData(for groupID: Int, language: String) {
+    
+    var settings: Settings
+    init(settings: Settings) {
+        self.settings = settings
+    }
+    
+    func fetchData(for groupID: Int) {
         log.info("fetchData BirdViewModel should be 5001 for birds but is \(groupID)")
         
         let url = endPoint+"region-lists/\(groupID)/species/"
 
         log.info("url \(url)")
-        log.info("language \(language)")
+        log.info("bird view  model --->> language \(settings.selectedLanguage)")
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
         
         // Use Alamofire to make the API request
