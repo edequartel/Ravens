@@ -27,7 +27,7 @@ class ObsViewModel: ObservableObject {
         
         let headers: HTTPHeaders = [
             "Accept-Language" : settings.selectedLanguage,
-            "Authorization": "Token " + tokenKey
+            "Authorization": "Token " + settings.tokenKey
         ]
 //        log.error("102: \(url)")
         AF.request(url, headers: headers).responseJSON { response in

@@ -94,10 +94,17 @@
         }
       }
     },
-    "%lldd" : {
-
+    "%lld/%lldx" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lldx"
+          }
+        }
+      }
     },
-    "%lldx" : {
+    "%lldd" : {
 
     },
     "All" : {
@@ -742,6 +749,7 @@
       }
     },
     "Token: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

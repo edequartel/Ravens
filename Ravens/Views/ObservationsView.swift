@@ -23,13 +23,18 @@ struct ObservationsView: View {
             .padding(16)
             
             List {
+//                if let results = observationsViewModel.observations?.results {
+//                    ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
+//                            ObsView(obsID: result.id)
+//                    }
+                
+                //
                 if let results = observationsViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-                        //                          ObsAltView(obs: result)
-//                        if result.has_photo {
                             ObsView(obsID: result.id)
-//                        }
                     }
+                //
+                    
                 } else {
                     // Handle the case when observationsViewModel.observations?.results is nil
                     Text("nobsavaliable")

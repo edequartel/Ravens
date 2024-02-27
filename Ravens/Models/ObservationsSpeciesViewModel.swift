@@ -50,7 +50,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+tokenKey,
+            "Authorization": "Token "+settings.tokenKey,
             "Accept-Language": settings.selectedLanguage
         ]
 

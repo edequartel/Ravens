@@ -12,12 +12,13 @@ struct SettingsDetailsView: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     
     var count: Int = 0
+    var results: Int = 0
     
     var body: some View {
         HStack {
             Spacer()
-            Text("\(settings.selectedLanguage)")
-            Text("\(count)x")
+//            Text("\(settings.selectedLanguage)")
+            Text("\(count)/\(results)x")
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)

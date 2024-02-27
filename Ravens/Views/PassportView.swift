@@ -13,14 +13,14 @@ class KeychainViewModel: ObservableObject {
     @Published var loginName: String = ""
     @Published var password: String = ""
     
-    @Published var token: String = ""
+//    @Published var token: String = ""
     
     func saveCredentials() {
         do {
             try keychain.set(loginName, key: "loginName")
             try keychain.set(password, key: "password")
-            log.error("save my token \(token)")
-            try keychain.set(token, key: "token")
+//            log.error("save my token \(token)")
+//            try keychain.set(token, key: "token")
             
         } catch {
             // Handle errors
@@ -32,8 +32,8 @@ class KeychainViewModel: ObservableObject {
         do {
             loginName = try keychain.getString("loginName") ?? ""
             password = try keychain.getString("password") ?? ""
-            log.error("load my token \(token)")
-            tokenKey = try keychain.getString("token") ?? ""
+//            log.error("load my token \(token)")
+//            tokenKey = try keychain.getString("token") ?? ""
         } catch {
             // Handle errors
             print("Error retrieving credentials: \(error)")
@@ -129,7 +129,7 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
     
     func loginUser(username: String, password: String) {
         log.info("loginUser()")
-        tokenKey = "" // empty token at login
+        settings.tokenKey = "" // empty token at login
         
         // Perform authentication and get token
         // In a real-world scenario, you would make an API call to authenticate the user
@@ -155,7 +155,7 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
                                 log.error("103 token \(token)")
                                 //                                                                didLogin(token)
                                 myMessage = "Login success"
-                                tokenKey = token
+                                settings.tokenKey = token
                             } catch {
                                 log.info("Error saving token to Keychain: \(error.localizedDescription)")
                                 myMessage = "Login error"
@@ -182,7 +182,7 @@ struct DisplayCredentialsView: View {
             Text("Login Name: \(viewModel.loginName)")
             Text("Password: \(viewModel.password)")
             
-            Text("Token: \(viewModel.token)")
+//            Text("Token: \(viewModel.token)")
         }
         .onAppear {
             viewModel.retrieveCredentials()

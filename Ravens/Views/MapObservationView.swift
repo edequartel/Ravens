@@ -90,7 +90,7 @@ struct MapObservationView: View {
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
-                        SettingsDetailsView(count: observationsViewModel.locations.count)
+                        SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
 //                        HStack() {
 //                            Text(long)
 //                            Spacer()

@@ -20,9 +20,6 @@ struct ObsView: View {
     
     var obsID: Int
     
-//    let imageView = UIImageView()
-//    let imageURL = "https://example.com/image.jpg"
-    
     var body: some View {
         LazyVStack {
             if let obs = obsViewModel.observation {

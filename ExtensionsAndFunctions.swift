@@ -26,7 +26,7 @@ func formatCurrentDate(value: Date) -> String {
 }
 
 //var tokenKey = ""
-var tokenKey = "e285437a324c32a40e2df727b49691998bf68c07" //JUST FOR TESTING
+//var tokenKey = "e285437a324c32a40e2df727b49691998bf68c07" //JUST FOR TESTING
 
 let bundleIdentifier = "ravens.app.bundle.identifier"
 

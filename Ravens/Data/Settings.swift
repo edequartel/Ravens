@@ -19,6 +19,9 @@ class Settings: ObservableObject {
     @AppStorage("selectedGroup") var selectedGroup = 1
     @AppStorage("selectedGroupId") var selectedGroupId = 1
     @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
+    @AppStorage("tokenKey") var tokenKey = ""
+    
+
     
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
