@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let file = FileDestination()
 //        file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
-        file.minLevel = .error
+        file.minLevel = .warning
         file.levelString.error = "Ravens"
         file.logFileURL = URL(fileURLWithPath: "/Users/ericdequartel/Developer/_myApps/Ravens/ravens.log")
         
@@ -25,7 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
 //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-        console.minLevel = .info
+        console.minLevel = .warning
         
         log.addDestination(console)
         log.addDestination(file)

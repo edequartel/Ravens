@@ -43,7 +43,7 @@ struct SettingsView: View {
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(completion: { print("fetcheddata") })
+                        speciesGroupViewModel.fetchData(completion: { log.error("speciesGroupViewModel.fetchData completed") })
                     }
                 }
                 

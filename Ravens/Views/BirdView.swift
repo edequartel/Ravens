@@ -127,7 +127,7 @@ struct BirdView: View {
         .onAppear() {
             log.error("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
-            speciesGroupViewModel.fetchData(completion: { print("fetcheddata") })
+            speciesGroupViewModel.fetchData(completion: { log.info("speciesGroupViewModel.fetchData completed") })
         }
     }
     

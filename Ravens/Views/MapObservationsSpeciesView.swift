@@ -27,6 +27,7 @@ struct MapObservationsSpeciesView: View {
     
     @State private var isSheetObservationsViewPresented = false
     
+    //use species not these????????
     var speciesID: Int
     var speciesName: String
     
@@ -51,7 +52,7 @@ struct MapObservationsSpeciesView: View {
             .safeAreaInset(edge: .bottom) {
                 HStack {
                     VStack(alignment: .trailing) {
-                        Text("\(speciesName)")
+                        Text("\(speciesName) \(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
                             .padding(5)
                             .font(.headline)
                             .foregroundColor(.obsGreenFlower)

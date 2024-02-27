@@ -193,3 +193,25 @@ Maecenas maximus feugiat tellus sed vulputate. Proin ut ante vitae justo pulvina
 """
 }
 
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        // Define the points for the triangle
+        let topPoint = CGPoint(x: rect.midX, y: rect.minY)
+        let bottomLeftPoint = CGPoint(x: rect.minX, y: rect.maxY)
+        let bottomRightPoint = CGPoint(x: rect.maxX, y: rect.maxY)
+
+        // Move to the top point of the triangle
+        path.move(to: topPoint)
+
+        // Add lines to the bottom left and bottom right points to complete the triangle
+        path.addLine(to: bottomLeftPoint)
+        path.addLine(to: bottomRightPoint)
+
+        // Close the path to form a closed triangle
+        path.closeSubpath()
+
+        return path
+    }
+}

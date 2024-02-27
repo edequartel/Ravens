@@ -37,8 +37,20 @@ struct MapObservationView: View {
                 Map(position: $position) {
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
-                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
-                                .tint(.gray)
+//                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
+//                                .tint(.gray)
+                            
+                            Annotation(location.name, coordinate: location.coordinate) {
+                                Triangle()
+                                    .fill(Color.gray)
+                                    .frame(width: 5, height: 5)
+                                    .overlay(
+                                        Triangle()
+                                            .stroke(Color.white, lineWidth: 1) // Customize the border color and width
+                                    )
+                            }
+                            
+                            
                         }
                     }
                     
@@ -49,14 +61,11 @@ struct MapObservationView: View {
                         Annotation(location.name, coordinate: location.coordinate) {
                             Circle()
                                 .fill(Color(myColor(value: location.rarity)))
-                                .frame(width: 20, height: 20)
+                                .frame(width: 10, height: 10)
                                 .overlay(
                                     Circle()
                                         .stroke(Color.white, lineWidth: 1) // Customize the border color and width
                                 )
-//                                .onTapGesture {
-//                                    log.error("tappedit")
-//                                }
                         }
                     }
                     

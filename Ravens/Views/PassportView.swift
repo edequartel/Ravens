@@ -5,6 +5,7 @@ import Alamofire
 import MarkdownUI
 
 class KeychainViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     private let keychain = Keychain(service: bundleIdentifier)
     
     @EnvironmentObject var settings: Settings
@@ -12,10 +13,15 @@ class KeychainViewModel: ObservableObject {
     @Published var loginName: String = ""
     @Published var password: String = ""
     
+    @Published var token: String = ""
+    
     func saveCredentials() {
         do {
             try keychain.set(loginName, key: "loginName")
             try keychain.set(password, key: "password")
+            log.error("save my token \(token)")
+            try keychain.set(token, key: "token")
+            
         } catch {
             // Handle errors
             print("Error saving credentials: \(error)")
@@ -26,6 +32,8 @@ class KeychainViewModel: ObservableObject {
         do {
             loginName = try keychain.getString("loginName") ?? ""
             password = try keychain.getString("password") ?? ""
+            log.error("load my token \(token)")
+            tokenKey = try keychain.getString("token") ?? ""
         } catch {
             // Handle errors
             print("Error retrieving credentials: \(error)")
@@ -95,8 +103,8 @@ struct PassportView: View {
                         .padding()
                 }
                 
-                //                NavigationLink("Display Credentials", destination: DisplayCredentialsView(viewModel: viewModel))
-                //                    .padding()
+//                NavigationLink("Display Credentials", destination: DisplayCredentialsView(viewModel: viewModel))
+//                    .padding()
             }
             
             Section() {
@@ -173,6 +181,8 @@ struct DisplayCredentialsView: View {
         VStack {
             Text("Login Name: \(viewModel.loginName)")
             Text("Password: \(viewModel.password)")
+            
+            Text("Token: \(viewModel.token)")
         }
         .onAppear {
             viewModel.retrieveCredentials()
