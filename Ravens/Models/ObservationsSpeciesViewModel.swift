@@ -61,7 +61,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         log.info("\(url)")
 
-        log.error("headers: \(headers.dictionary)")
+//        log.error("headers: \(headers.dictionary)")
         
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

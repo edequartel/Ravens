@@ -21,6 +21,9 @@ class Settings: ObservableObject {
     @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
     @AppStorage("tokenKey") var tokenKey = ""
     
+    @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
+    @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
+    
 
     
     @AppStorage("selectedRegion") var selectedRegion = 200
@@ -42,15 +45,25 @@ class Settings: ObservableObject {
     func endPoint() -> String {
        return "https://"+selectedInBetween+"/api/v1/"
     }
+    
+    func saveBookMarks(array: [Int]) {
+            // Convert the array to a string
+            let arrayString = array.map { String($0) }.joined(separator: ",")
+
+            // Save the string to AppStorage
+            savedBookmarks = arrayString
+        }
+
+    func readBookmarks(array: inout [Int]) {
+            // Retrieve the string from AppStorage
+            let arrayString = savedBookmarks
+
+            // Convert the string back to an array of integers
+            array = arrayString
+                .components(separatedBy: ",")
+                .compactMap { Int($0) }
+        }
 }
 
-//@Model 
-class NoUserData {
-//    var bookMarks: [Int] = []
-    var name : String
-    
-    init(name: String = "") {
-        self.name = name
-    }
-}
+
 

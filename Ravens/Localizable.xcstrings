@@ -117,6 +117,12 @@
         }
       }
     },
+    "Bookmark" : {
+
+    },
+    "Close" : {
+
+    },
     "Code %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -747,6 +753,9 @@
           }
         }
       }
+    },
+    "This is the popup view." : {
+
     },
     "Token: %@" : {
       "extractionState" : "stale",

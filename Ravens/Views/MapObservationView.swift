@@ -67,6 +67,7 @@ struct MapObservationView: View {
                                         .stroke(Color.white, lineWidth: 1) // Customize the border color and width
                                 )
                         }
+                        
                     }
                     
                     MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
