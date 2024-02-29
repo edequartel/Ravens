@@ -95,7 +95,7 @@ struct ObsView: View {
                     }
                 }
                 
-                .font(.footnote)
+                .font(.customMedium)
             }
             else {
                 ProgressView("Fetching Observation...")

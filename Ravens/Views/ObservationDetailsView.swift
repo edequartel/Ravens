@@ -21,11 +21,13 @@ struct ObservationDetailsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if ((viewModel.observationsSpecies?.count ?? 0) != 0) {
-//                Text("Obs \(viewModel.observationsSpecies?.count ?? 0)")
-//                    .foregroundColor(Color.blue)
-                Image(systemName: "binoculars.fill")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(.blue, .red)
+                HStack {
+                    Image(systemName: "binoculars.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.blue, .red)
+//                    Text("\(viewModel.observationsSpecies?.count ?? 0)")
+//                        .foregroundColor(Color.blue)
+                }
             }
         }
         

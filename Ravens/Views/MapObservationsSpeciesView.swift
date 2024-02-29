@@ -44,7 +44,7 @@ struct MapObservationsSpeciesView: View {
                             .frame(width: 10, height: 10)
                             .overlay(
                                 Circle()
-                                    .stroke(Color.white, lineWidth: 1) // Customize the border color and width
+                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1) // Customize the border color and width
                             )
                     }
                 }

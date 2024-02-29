@@ -65,7 +65,9 @@ struct BirdView: View {
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
                                         //
-                                        Image(systemName: isNumberInBookMarks(number: bird.id) ? "bookmark" : "")
+                                        if isNumberInBookMarks(number: bird.id) {
+                                            Image(systemName: "bookmark")
+                                        }
                                     }
                                     HStack {
                                         Text("\(bird.scientific_name)")
@@ -108,7 +110,7 @@ struct BirdView: View {
 //                    .listRowBackground(isNumberInBookMarks(number: bird.id) ? Color.obsGreenFlower : Color.white)
                 }
             }
-            .font(.footnote)
+//            .font(.customLarge)
                 
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
@@ -141,7 +143,7 @@ struct BirdView: View {
                     
                     HStack {
 //                        Image(systemName: settings.isBookMarkVisible ? "circle.fill" : "circle")
-                        Button("Bookmark") {
+                        Button("Bookmarks") {
                             settings.isBookMarkVisible.toggle()
                         }
                     }
@@ -157,11 +159,11 @@ struct BirdView: View {
                 }
 
         .onAppear() {
-            log.error("birdview: selectedGroup \(settings.selectedGroup)")
+            log.info("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
             speciesGroupViewModel.fetchData(completion: { log.info("speciesGroupViewModel.fetchData completed") })
             settings.readBookmarks(array: &bookMarks)
-            print(bookMarks)
+//            print(bookMarks)
         }
     }
     

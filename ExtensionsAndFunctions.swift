@@ -215,3 +215,25 @@ struct Triangle: Shape {
         return path
     }
 }
+
+extension Font {
+    static var customTiny: Font {
+        return .system(size: 10)
+    }
+    
+    static var customSmall: Font {
+        return .system(size: 12)
+    }
+
+    static var customMedium: Font {
+        return .system(size: 16)
+    }
+
+    static var customLarge: Font {
+        return .system(size: 20)
+    }
+
+    static var customExtraLarge: Font {
+        return .system(size: 24)
+    }
+}
