@@ -27,7 +27,7 @@ struct ObsView: View {
                 LazyVStack(alignment: .leading) {
 //                    Text("Observation ID: \(obs.id)")
                     HStack {
-//                        Text("obsview")
+                        Text("ObsView")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         Text("\(obs.species_detail.name)")
