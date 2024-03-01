@@ -20,8 +20,9 @@ class SpeciesGroupViewModel: ObservableObject {
         self.settings = settings
     }
 
-    func fetchData(completion: @escaping () -> Void) { //completion handling
-        log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
+//    func fetchData(completion: @escaping () -> Void) { //completion handling
+    func fetchData(completion: @escaping (Bool) -> Void) {
+        log.warning("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
 
         // Add the custom header 'Accept-Language: nl'
@@ -30,6 +31,7 @@ class SpeciesGroupViewModel: ObservableObject {
         ]
         
         log.info("url SpeciesGroupViewModel: \(url)")
+        
 
         // Use Alamofire to make the API request
         AF.request(url, headers: headers).responseJSON { response in
@@ -44,12 +46,14 @@ class SpeciesGroupViewModel: ObservableObject {
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
                     
                     // Call the completion handler when the data is successfully fetched
-                    completion()                    
+                    completion(true)
                 } catch {
                     self.log.error("Error SpeciesGroupViewModel decoding JSON: \(error)")
+                    completion(false)
                 }
             case .failure(let error):
                 self.log.error("Error SpeciesGroupViewModel fetching data: \(error)")
+                completion(false)
             }
         }
     }

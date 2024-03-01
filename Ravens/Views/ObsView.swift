@@ -14,9 +14,10 @@ import AlamofireImage
 struct ObsView: View {
     let log = SwiftyBeaver.self
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
-    
     @EnvironmentObject var settings: Settings
     
+    @State private var selectedImageURL: URL?
+    @State private var isShareSheetPresented = false
     
     var obsID: Int
     
@@ -26,6 +27,7 @@ struct ObsView: View {
                 LazyVStack(alignment: .leading) {
 //                    Text("Observation ID: \(obs.id)")
                     HStack {
+                        Text("obsview")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         Text("\(obs.species_detail.name)")
@@ -54,36 +56,27 @@ struct ObsView: View {
                             .italic()
                     }
                     //
+//                    ForEach(obs.photos, id: \.self) { imageURLString in
+//                                AFImageView(media: imageURLString)
+//                                    .onTapGesture {
+//                                        // Set the selected image URL when tapped
+//                                        if let url = URL(string: imageURLString) {
+//                                            self.selectedImageURL = url
+//                                            self.isShareSheetPresented = true
+//                                        }
+//                                    }
+//                            }
+//                            .sheet(isPresented: $isShareSheetPresented) {
+//                                // Share sheet
+//                                if let selectedImageURL = selectedImageURL {
+//                                    ShareSheet(activityItems: [selectedImageURL])
+//                                }
+//                            }
+                    
                     ForEach(obs.photos, id: \.self) { imageURLString in
 //                        Text("\(imageURLString)")
                         AFImageView(media: imageURLString)
                     }
-//                    .onTapGesture {
-//                        if let url = URL(string: obs.permalink) {
-//                            UIApplication.shared.open(url)
-//                        }
-//                    }
-                    
-                    //or this!!
-                    
-//                    ForEach(obs.photos, id: \.self) { imageURLString in
-//                        Text("\(imageURLString)")
-//                        if URL(string: imageURLString) != nil {
-//                            KFImage(URL(string: imageURLString)!)
-//                                .resizable()
-//                                .aspectRatio(nil, contentMode: .fit)
-//                                .clipShape(RoundedRectangle(cornerRadius: 16))
-//                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//
-//                        } else {
-//                            Text("Invalid URL")
-//                        }
-//                    }
-//                    .onTapGesture {
-//                        if let url = URL(string: obs.permalink) {
-//                            UIApplication.shared.open(url)
-//                        }
-//                    }
                     
                     ForEach(obs.sounds, id: \.self) { audioURL in
                         Text("Sounds: \(audioURL)")
@@ -106,6 +99,19 @@ struct ObsView: View {
         }
     }
 }
+
+//struct ShareSheet: UIViewControllerRepresentable {
+//    let activityItems: [Any]
+//
+//    func makeUIViewController(context: Context) -> UIActivityViewController {
+//        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+//        return controller
+//    }
+//
+//    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+//        // Update the view controller if needed
+//    }
+//}
 
 #Preview {
     ObsView(obsID: 2)

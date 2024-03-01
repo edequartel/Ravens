@@ -120,9 +120,6 @@
     "Bookmarks" : {
 
     },
-    "Close" : {
-
-    },
     "Code %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -198,9 +195,6 @@
       }
     },
     "Details for %@" : {
-
-    },
-    "EndPoint" : {
 
     },
     "English %@" : {
@@ -415,9 +409,6 @@
     "Login %@" : {
 
     },
-    "Login Name" : {
-
-    },
     "Login Name: %@" : {
 
     },
@@ -552,6 +543,9 @@
       }
     },
     "observation.org" : {
+
+    },
+    "obsview" : {
 
     },
     "Password" : {
@@ -704,6 +698,9 @@
     "Song: %@" : {
 
     },
+    "Sorry,\nNo connection with waarneming.nl\nPlease try to login" : {
+
+    },
     "Sort by" : {
       "localizations" : {
         "nl" : {
@@ -734,6 +731,9 @@
         }
       }
     },
+    "Source" : {
+
+    },
     "Species" : {
       "localizations" : {
         "nl" : {
@@ -753,9 +753,6 @@
           }
         }
       }
-    },
-    "This is the popup view." : {
-
     },
     "Token: %@" : {
       "extractionState" : "stale",
@@ -826,9 +823,6 @@
           }
         }
       }
-    },
-    "waarneming-test.nl" : {
-
     },
     "waarneming.nl" : {
 

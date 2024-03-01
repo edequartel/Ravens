@@ -136,7 +136,7 @@ struct MapObservationView: View {
                                             long: circlePos.longitude)
 
             log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-            speciesGroupViewModel.fetchData(completion: { log.info("fetcheddata speciesGroupViewModel") })
+            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             
         }
     }

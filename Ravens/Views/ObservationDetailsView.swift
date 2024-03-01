@@ -7,14 +7,17 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Popovers
 
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self
     
     @StateObject private var viewModel = ObservationsSpeciesViewModel(settings: Settings())
-//    @StateObject private var authManager = AuthManager()
-    
     @EnvironmentObject var settings: Settings
+
+    @State private var isPopupVisible = false
+    
+    @State private var isViewActive = false
     
     var speciesID: Int
     
@@ -31,10 +34,31 @@ struct ObservationDetailsView: View {
             }
         }
         
+//        .popover(present: $isPopupVisible) {
+//            LoginMessageView()
+//        }
+        
         .onAppear {
             log.info("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 1)
+            viewModel.fetchData(speciesId: speciesID, limit: 1) {
+                success in
+//                isPopupVisible = !success
+            }
         }
+    }
+}
+
+struct LoginMessageView: View {
+    var body: some View {
+        Text("""
+Sorry,
+No connection with waarneming.nl
+Please try to login
+""")
+        .padding()
+        .foregroundColor(.white)
+        .background(.blue)
+        .cornerRadius(16)
     }
 }
 

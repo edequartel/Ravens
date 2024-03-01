@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-
+//import Popovers
 
 
 struct BirdView: View {
@@ -24,9 +24,9 @@ struct BirdView: View {
     @State private var searchText = ""
     @State private var birdId : Int?
     
-    @State private var isPopupVisible = false
+//    @State private var isPopupVisible = false
     @State private var isBookMarksVisible = false
-
+    
     //
     @State private var bookMarks: [Int] = []
 
@@ -53,12 +53,6 @@ struct BirdView: View {
                                         
                                         ObservationDetailsView(speciesID: bird.id)
                                         
-//                                        Image(systemName: isNumberInBookMarks(number: bird.id) ? "bookmark" : "")
-//                                            .symbolRenderingMode(.palette)
-//                                            .foregroundStyle(myColor(value: bird.rarity), .clear)
-                                        
-//                                        Spacer()
-                                        
                                         Text(" \(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -78,10 +72,8 @@ struct BirdView: View {
                                     }
                                 }
                                 .onLongPressGesture(minimumDuration: 1) {
-//                                .onTapGesture() {
-                                    log.verbose("onTapgesture \(bird.id)")
+                                    log.verbose("onLONGTapgesture \(bird.id)")
                                     birdId = bird.id
-                                    
 //
                                     if isNumberInBookMarks(number: bird.id) {
                                         if let index = bookMarks.firstIndex(of: bird.id) {
@@ -138,11 +130,10 @@ struct BirdView: View {
                     .pickerStyle(.inline)
                     
 //                    Button("Show Popup") {
-//                        isPopupVisible.toggle()
+//                        isPopupVisible = true
 //                    }
                     
                     HStack {
-//                        Image(systemName: settings.isBookMarkVisible ? "circle.fill" : "circle")
                         Button("Bookmarks") {
                             settings.isBookMarkVisible.toggle()
                         }
@@ -154,16 +145,19 @@ struct BirdView: View {
         }
         .searchable(text: $searchText)
         
-        .sheet(isPresented: $isPopupVisible) {
-                    PopupView()
-                }
+//        .popover(present: $isPopupVisible) {
+//            LoginMessageView()
+//        }
 
         .onAppear() {
             log.info("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
-            speciesGroupViewModel.fetchData(completion: { log.info("speciesGroupViewModel.fetchData completed") })
+            speciesGroupViewModel.fetchData(completion: { success in
+                log.info("speciesGroupViewModel.fetchData completed")
+//                isPopupVisible = !success
+            }
+            )
             settings.readBookmarks(array: &bookMarks)
-//            print(bookMarks)
         }
     }
     
@@ -258,72 +252,6 @@ extension BirdViewModel {
     }
 }
 
-struct PopupView: View {
-    var body: some View {
-        VStack {
-            Text("This is the popup view.")
-                .padding()
-            Button("Close") {
-                // Close the popup
-                // Set the binding variable to false or use a presentation mode
-            }
-            .padding()
-        }
-        .frame(width: 200, height: 150)
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
-}
-
-//extension BirdViewModel {
-//    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int) -> [Bird] {
-//        let sortedBirdsList = sortedBirds(by: sortOption)
-//        
-//        if searchText.isEmpty {
-//            let filteredList = applyFilter(to: sortedBirdsList, with: filterOption)
-//            let filtered  = applyFilter(to: filteredList, with: filterOption)
-//            return applyRarityFilter(to: filtered, with: rarityFilterOption)
-//            
-//        } else {
-//            let filteredList = sortedBirdsList.filter { bird in
-//                bird.name.lowercased().contains(searchText.lowercased()) ||
-//                bird.scientific_name.lowercased().contains(searchText.lowercased())
-//            }
-//            
-//            let filtered  = applyFilter(to: filteredList, with: filterOption)
-//            return applyRarityFilter(to: filtered, with: rarityFilterOption)
-//            
-//        }
-//    }
-//    
-//    private func applyFilter(to birds: [Bird], with filterOption: FilterOption) -> [Bird] {
-//        switch filterOption {
-//        case .all:
-//            return birds
-//        case .native:
-//            return birds.filter { $0.native }
-//        }
-//    }
-//    
-//    private func applyRarityFilter(to birds: [Bird], with filterOption: Int) -> [Bird] {
-//        switch filterOption {
-//        case 0:
-//            return birds
-//        case 1:
-//            return birds.filter { $0.rarity == 1 }
-//        case 2:
-//            return birds.filter { $0.rarity == 2}
-//        case 3:
-//            return birds.filter { $0.rarity == 3 }
-//        case 4:
-//            return birds.filter { $0.rarity == 4 }
-//            
-//        default:
-//           return birds
-//        }
-//    }
-//}
 
 struct BirdView_Previews: PreviewProvider {
     static var previews: some View {

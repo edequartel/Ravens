@@ -81,7 +81,8 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100)
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100) { _ in
+            }
         }
     }
 }

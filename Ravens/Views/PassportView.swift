@@ -13,18 +13,13 @@ class KeychainViewModel: ObservableObject {
     @Published var loginName: String = ""
     @Published var password: String = ""
     
-//    @Published var token: String = ""
-    
     func saveCredentials() {
         do {
             try keychain.set(loginName, key: "loginName")
             try keychain.set(password, key: "password")
-//            log.error("save my token \(token)")
-//            try keychain.set(token, key: "token")
-            
         } catch {
             // Handle errors
-            print("Error saving credentials: \(error)")
+            log.error("Error saving credentials: \(error)")
         }
     }
     
@@ -32,11 +27,9 @@ class KeychainViewModel: ObservableObject {
         do {
             loginName = try keychain.getString("loginName") ?? ""
             password = try keychain.getString("password") ?? ""
-//            log.error("load my token \(token)")
-//            tokenKey = try keychain.getString("token") ?? ""
         } catch {
             // Handle errors
-            print("Error retrieving credentials: \(error)")
+            log.error("Error retrieving credentials: \(error)")
         }
     }
 }
@@ -48,81 +41,49 @@ struct PassportView: View {
     @EnvironmentObject var settings: Settings
     
     @State var myMessage: String = ""
-    //    var myMessage: String = ""
-    
-    //    var didLogin: (String) -> Void
+
     
     var body: some View {
         Form {
-            Section() {
-
-                Picker("EndPoint", selection: $settings.selectedInBetween) {
-                    Text("waarneming.nl")
-                        .tag("waarneming.nl")
-//                    Text("waarneming.be")
-//                        .tag("waarneming.be")
-                    Text("waarneming-test.nl")
-                        .tag("waarneming-test.nl")
-//                    Text("waarneming-test.be")
-//                        .tag("waarneming-test.be")
-//                    Text("observations.be")
-//                        .tag("observations.be")
-                    Text("observation.org")
-                        .tag("observation.org")
-                }
-                .onChange(of: settings.selectedInBetween) {
-                    print("Selected value changed to: \(settings.selectedInBetween)")
-                    print(settings.endPoint())
-                }
-
-                
-
-                
-                TextField("Login Name", text: $viewModel.loginName)
-                    .padding()
-                    .onChange(of: viewModel.loginName) {
-                        viewModel.loginName = viewModel.loginName.lowercased()
-                    }
-                
-                SecureField("Password", text: $viewModel.password)
-                    .padding()
+            Picker("Source", selection: $settings.selectedInBetween) {
+                Text("waarneming.nl")
+                    .tag("waarneming.nl")
+                Text("observation.org")
+                    .tag("observation.org")
             }
-            //                Button("Save") {
-            //                    viewModel.saveCredentials()
-            //                }
-            //                .padding()
-            Section() {
-                Button("Login") {
-                    loginUser(username: viewModel.loginName, password: viewModel.password)
-                    viewModel.saveCredentials()
+            .pickerStyle(.inline)
+            .onChange(of: settings.selectedInBetween) {
+            }
+
+            Section("Login") {
+                VStack {
+                    TextField("Name", text: $viewModel.loginName)
+                        .onChange(of: viewModel.loginName) {
+                            viewModel.loginName = viewModel.loginName.lowercased()
+                        }
+                    SecureField("Password", text: $viewModel.password)
                 }
-                .padding()
-                if myMessage.count > 0 {
-                    Text("\(myMessage)")
-                        .foregroundColor(.red)
-                        .padding()
-                }
-                
-//                NavigationLink("Display Credentials", destination: DisplayCredentialsView(viewModel: viewModel))
-//                    .padding()
+            }
+
+            Button("Login") {
+                loginUser(username: viewModel.loginName, password: viewModel.password)
+                viewModel.saveCredentials()
+            }
+            if myMessage.count > 0 {
+                Text("\(myMessage)")
+                    .foregroundColor(.red)
             }
             
-            Section() {
-                Markdown(
-                    """
-**\(settings.selectedInBetween)**
-
-Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
-
-Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
-
-""")
-            }
+//            NavigationLink("Display Credentials", destination: DisplayCredentialsView(viewModel: viewModel))
+//                                .padding()
+//            
+//            Section() {
+//                InfoObservationView()
+//            }
         }
         .navigationTitle("Login \(settings.selectedInBetween)")
         .onAppear {
             viewModel.retrieveCredentials()
-            //            }
         }
     }
     
@@ -171,6 +132,22 @@ Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en *
                     myMessage = "Login error"
                 }
             }
+    }
+}
+
+struct InfoObservationView: View {
+    
+    @EnvironmentObject var settings: Settings
+    var body: some View {
+        Markdown(
+            """
+**\(settings.selectedInBetween)**
+
+Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
+
+Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
+
+""")
     }
 }
 

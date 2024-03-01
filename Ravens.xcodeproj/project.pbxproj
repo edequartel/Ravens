@@ -66,6 +66,7 @@
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
+		47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6F4B32B91AA05008DDFBC /* Popovers */; };
 		47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */; };
 		47DB89B22B7A394B0093C1ED /* Obs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B12B7A394B0093C1ED /* Obs.swift */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
@@ -143,6 +144,7 @@
 				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				4709931A2B7648F60072F0D3 /* Kingfisher in Frameworks */,
+				47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
@@ -305,6 +307,7 @@
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
 				470993192B7648F60072F0D3 /* Kingfisher */,
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
+				47B6F4B32B91AA05008DDFBC /* Popovers */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -345,6 +348,7 @@
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				470993182B7648F60072F0D3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -557,7 +561,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -588,7 +592,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -709,6 +713,14 @@
 				minimumVersion = 4.3.0;
 			};
 		};
+		47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/Popovers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -756,6 +768,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		47B6F4B32B91AA05008DDFBC /* Popovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */;
+			productName = Popovers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

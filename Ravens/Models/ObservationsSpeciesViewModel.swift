@@ -44,10 +44,10 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
+    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
 
-    func fetchData(speciesId: Int, limit: Int) {
+//    func fetchData(speciesId: Int, limit: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
-
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -62,13 +62,9 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         log.info("\(url)")
 
-//        log.error("headers: \(headers.dictionary)")
-        
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
-//                self.log.error("Response as String: \(stringResponse)")
-
                 // Now you can convert the stringResponse to Data and decode it
                 if let data = stringResponse.data(using: .utf8) {
                     do {
@@ -77,26 +73,20 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
-                            // Continue with your logic
-//                            self.log.warning("ObservationsSpeciesViewModel limit \(limit) specied ID\(speciesId) - count \(self.observationsSpecies?.count)")
                             self.getLocations()
-                           
-
-                            // Check if there is more data to fetch
-//                            if observationsSpecies.next != nil {
-//                                // Call the fetchData function recursively with the next page
-//                                url = observationsSpecies.next ?? ""
-//                                self.fetchData(speciesId: speciesId, endDate: endDate, page: page + 1)
-//                            }
                         }
+                        
+                        // Call the completion handler when the data is successfully fetched
+                        completion(true)
                     } catch {
                         self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
-//                        self.log.error("\(response.debugDescription)")
+                        completion(false)
                     }
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsSpeciesViewModel: \(error)")
+                completion(false)
             }
         }
     }

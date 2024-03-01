@@ -43,7 +43,7 @@ struct SettingsView: View {
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(completion: { log.error("speciesGroupViewModel.fetchData completed") })
+                        speciesGroupViewModel.fetchData(completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
                     }
                 }
                 
@@ -112,7 +112,7 @@ struct SettingsView: View {
         
         .onAppear() {
 //            print("ONAPPEAR SETTINGSVIEW")
-            speciesGroupViewModel.fetchData(completion: { print ("completed") })
+            speciesGroupViewModel.fetchData(completion: { _ in print ("completed") })
             print("--->>>\(settings.endPoint())")
         }
         
@@ -144,7 +144,7 @@ struct SettingsView: View {
     func upDate() {
         log.verbose("update()")
 //          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
-          speciesGroupViewModel.fetchData(completion: { print ("update completed") })
+        speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }
     
