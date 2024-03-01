@@ -12,26 +12,26 @@ import SwiftyBeaver
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @Published var observation: Obs? 
+    @Published var observation: Obs?
     
     var settings: Settings
     init(settings: Settings) {
         log.info("init ObsViewModel")
         self.settings = settings
     }
-
+    
     func fetchData(for obsID: Int) {
-//    func fetchData(for obsID: Int, language: String, token: String) {
-        
+        //  func fetchData(for obsID: Int, language: String, token: String) {
         let url = settings.endPoint()+"observations/\(obsID)/"
         
         let headers: HTTPHeaders = [
             "Accept-Language" : settings.selectedLanguage,
             "Authorization": "Token " + settings.tokenKey
         ]
-//        log.error("102: \(url)")
-        AF.request(url, headers: headers).responseJSON { response in
-//            self.log.info(response.debugDescription)
+        
+        AF.request(url, headers: headers).responseDecodable(of: Obs.self) {
+            response in
+            //  self.log.info(response.debugDescription)
             switch response.result {
             case .success(_):
                 do {

@@ -14,17 +14,16 @@ class SpeciesGroupViewModel: ObservableObject {
     
     @Published var speciesGroups = [SpeciesGroup]()
     var speciesDictionary: [Int: String] = [:]
-
+    
     var settings: Settings
     init(settings: Settings) {
         self.settings = settings
     }
-
-//    func fetchData(completion: @escaping () -> Void) { //completion handling
+    
     func fetchData(completion: @escaping (Bool) -> Void) {
         log.warning("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
-
+        
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
@@ -32,16 +31,15 @@ class SpeciesGroupViewModel: ObservableObject {
         
         log.info("url SpeciesGroupViewModel: \(url)")
         
-
         // Use Alamofire to make the API request
-        AF.request(url, headers: headers).responseJSON { response in
+        AF.request(url, headers: headers).responseDecodable(of: [SpeciesGroup].self) { response in
             switch response.result {
             case .success(_):
                 do {
                     // Decode the JSON response into an array of SpeciesGroup objects
                     let decoder = JSONDecoder()
                     self.speciesGroups = try decoder.decode([SpeciesGroup].self, from: response.data!)
-
+                    
                     // Update the speciesDictionary
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
                     
@@ -57,7 +55,7 @@ class SpeciesGroupViewModel: ObservableObject {
             }
         }
     }
-
+    
     // Function to get the name based on the id
     func getName(forID id: Int) -> String? {
         return speciesDictionary[id]

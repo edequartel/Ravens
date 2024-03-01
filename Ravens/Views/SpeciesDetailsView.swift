@@ -12,7 +12,7 @@ import Kingfisher
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-//    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
+
     @StateObject var viewSDModel = SpeciesDetailsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     
@@ -38,8 +38,6 @@ struct SpeciesDetailsView: View {
                             Text(species.scientific_name)
                                 .italic()
                         }
-//                        Text(species.group_name)
-//                        Text(species.status)
                         Divider()
                         RichText(html: species.info_text)
                         

@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-class RegionListViewModel: ObservableObject { //<<change in region list not region
+class RegionListViewModel: ObservableObject { 
     let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
     
@@ -32,7 +32,8 @@ class RegionListViewModel: ObservableObject { //<<change in region list not regi
         ]
 
         // Use Alamofire to make the API request
-        AF.request(url, headers: headers).responseJSON { response in
+        AF.request(url, headers: headers).responseDecodable(of: [RegionList].self)
+        {   response in
             switch response.result {
             case .success(_):
                 do {

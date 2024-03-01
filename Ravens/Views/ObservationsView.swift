@@ -23,22 +23,10 @@ struct ObservationsView: View {
             .padding(16)
             
             List {
-//                if let results = observationsViewModel.observations?.results {
-//                    ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-//                            ObsView(obsID: result.id)
-//                    }
-                
-                //
-//                if let results = observationsViewModel.observations?.results {
-//                    ForEach(results.sorted(by: { ($1.rarity, $1.date, $0.species_detail.name) < ($0.rarity, $0.date, $1.species_detail.name) }), id: \.id) { result in
-//                            ObsView(obsID: result.id)
-//                    }     
-                
                 if let results = observationsViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) { result in
                             ObsView(obsID: result.id)
                     }
-                //
                     
                 } else {
                     // Handle the case when observationsViewModel.observations?.results is nil
@@ -67,13 +55,6 @@ struct ObsAltView: View {
                     .foregroundColor(Color(myColor(value: obs.rarity)))
                 VStack(alignment: .leading, content: {
                     Text("\(obs.species_detail.name)")
-                    ////                    Spacer()
-                    //                    //                                    Text("\(result.user)")
-                    //                    Text("obs id: \(obs.id)")
-                    //                        .foregroundColor(.red)
-                    //                    Text("date: \(obs.date)")
-                    //                    Text("rarirty: \(obs.rarity)")
-                    //                    Text("activirty: \(obs.activity)")
                 })
                 Spacer()
                 HStack {

@@ -69,7 +69,6 @@ struct RavensApp: App {
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
         }
-//        .modelContainer(for: UserData.self)
     }
 }
 

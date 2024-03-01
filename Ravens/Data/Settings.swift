@@ -24,8 +24,6 @@ class Settings: ObservableObject {
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
     
-
-    
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
@@ -37,6 +35,8 @@ class Settings: ObservableObject {
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var selectedDate: Date = Date()
+    
+    @Published var isConnected: Bool = false
     
     init() {
         log.info("init Settings")

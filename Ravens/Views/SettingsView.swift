@@ -32,7 +32,6 @@ struct SettingsView: View {
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-//                            Text("\(speciesGroup.id) \(speciesGroup.name)")
                             Text("\(speciesGroup.name)")
                                 .lineLimit(1)
                                 .truncationMode(.tail)
@@ -111,17 +110,13 @@ struct SettingsView: View {
         }
         
         .onAppear() {
-//            print("ONAPPEAR SETTINGSVIEW")
             speciesGroupViewModel.fetchData(completion: { _ in print ("completed") })
-            print("--->>>\(settings.endPoint())")
         }
         
     }
     
-    //de data is nog niet gefetched ????
     func getId(region: Int, groups: Int) -> Int? {
         log.error("getID region: \(region) groups: \(groups)")
-        //        log.error("\(regionListViewModel.regionLists)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
             log.error("getId= \(matchingItem)")
             return matchingItem.id
@@ -130,7 +125,6 @@ struct SettingsView: View {
         return nil
     }
     
-    //de data is nog niet gefetched ????
     func getGroup(id: Int) -> String? {
         log.error("getGroup: \(id)")
         if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {
@@ -143,7 +137,6 @@ struct SettingsView: View {
     
     func upDate() {
         log.verbose("update()")
-//          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
         speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }

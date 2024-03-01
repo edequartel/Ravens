@@ -55,9 +55,6 @@ struct MapObservationView: View {
                     }
                     
                     ForEach(observationsViewModel.locations) { location in
-//                        Marker(location.name, systemImage: "binoculars.fill", coordinate: location.coordinate)
-//                            .tint(Color(myColor(value: location.rarity)))
-                        
                         Annotation(location.name, coordinate: location.coordinate) {
                             Circle()
                                 .fill(Color(myColor(value: location.rarity)))
@@ -73,44 +70,25 @@ struct MapObservationView: View {
                     MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(.white, lineWidth: 1)
-                    
-//                    Marker("me", systemImahe: "mappin", coordinate: myActualPosition.camera?.centerCoordinate)
-//                        .tint(.red)
-                    
-                    
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
-//                .mapStyle(.standard(elevation: .realistic))
                 
                 .mapControls() {
-//                    MapUserLocationButton()
                     MapPitchToggle()
                     MapCompass() //tapping this makes it north
-//                    Map...
                 }
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
-//                        HStack() {
-//                            Text(long)
-//                            Spacer()
-//                            Text(lat)
-//                        }
-//                        .padding()
-//                        .foregroundColor(.white)
                     }
-
                 }
-
-//                .onLongPressGesture(perform: {print("LONGPRESGESTURE")})
                 
                 .onTapGesture() { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
                         lat =  String(coordinate.latitude)
                         long = String(coordinate.longitude)
-                        
                         
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -136,8 +114,7 @@ struct MapObservationView: View {
                                             long: circlePos.longitude)
 
             log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
-            
+            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })            
         }
     }
 }

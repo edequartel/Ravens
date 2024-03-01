@@ -73,16 +73,10 @@ class ObservationsViewModel: ObservableObject {
         poiLocations.append(newLocation)
         newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false)
         poiLocations.append(newLocation)
-        
-        
-        
-        
+
 //
 //        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
 //        poiLocations.append(newLocation)
-        
-        
-
     }
     
     ///

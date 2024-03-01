@@ -29,11 +29,11 @@ class SpeciesDetailsViewModel: ObservableObject {
         ]
         log.verbose("SpeciesDetailsViewModel url: \(url)")
         
+    
         AF.request(url, headers: headers).responseDecodable(of: SpeciesDetails.self) { response in
             switch response.result {
             case .success(let data):
                 DispatchQueue.main.async {
-//                    self.log.verbose("succes in SpeciesDetailsViewModel \(data)")
                     self.speciesDetails = data
                 }
             case .failure(let error):

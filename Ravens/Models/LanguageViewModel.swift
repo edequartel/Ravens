@@ -21,7 +21,9 @@ class LanguageViewModel: ObservableObject {
 
     func fetchData() {
         log.info("fetchData LanguageViewModel")
-        AF.request(settings.endPoint()+"languages/").responseDecodable(of: Language.self) { response in
+        let url = settings.endPoint()+"languages/"
+        
+        AF.request(url).responseDecodable(of: Language.self) { response in
             switch response.result {
             case .success(let language):
                 DispatchQueue.main.async {

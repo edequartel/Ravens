@@ -14,49 +14,11 @@ struct RavensContentView: View {
     
     @StateObject private var observationsViewModel = ObservationsViewModel(settings: Settings())
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
-
-//    @State private var isViewAVisible = true
     
     @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         TabView {
-//            RegionListView()
-//                .tabItem {
-//                    Text("Species")
-//                    Image(systemName: "tree")
-//                }
-////
-//            SpeciesGroupView()
-////                LoginView(loginViewModel: loginViewModel)
-//                    .tabItem {
-//                        Text("Species")
-//                        Image(systemName: "tree")
-//                    }
-//            
-//            LanguageView()
-//                .tabItem {
-//                    Text("Language")
-//                    Image(systemName: "book")
-//                }
-//            ObsView(obsID: 123629598)
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
-//            ObsView(obsID: 123629598)
-//            LookUpsView()
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
-            
-//            PassportView()
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
-            
             // Tab 1
             ZStack {
                 MapObservationView()
@@ -102,3 +64,39 @@ struct RavensContentView_Previews: PreviewProvider {
     }
 }
 
+//            RegionListView()
+//                .tabItem {
+//                    Text("Species")
+//                    Image(systemName: "tree")
+//                }
+////
+//            SpeciesGroupView()
+////                LoginView(loginViewModel: loginViewModel)
+//                    .tabItem {
+//                        Text("Species")
+//                        Image(systemName: "tree")
+//                    }
+//
+//            LanguageView()
+//                .tabItem {
+//                    Text("Language")
+//                    Image(systemName: "book")
+//                }
+//            ObsView(obsID: 123629598)
+//                .tabItem {
+//                    Text("Book")
+//                    Image(systemName: "book")
+//                }
+//            ObsView(obsID: 123629598)
+//            LookUpsView()
+//                .tabItem {
+//                    Text("Book")
+//                    Image(systemName: "book")
+//                }
+            
+//            PassportView()
+//                .tabItem {
+//                    Text("Book")
+//                    Image(systemName: "book")
+//                }
+            

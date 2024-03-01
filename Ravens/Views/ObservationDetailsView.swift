@@ -14,8 +14,6 @@ struct ObservationDetailsView: View {
     
     @StateObject private var viewModel = ObservationsSpeciesViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
-
-    @State private var isPopupVisible = false
     
     @State private var isViewActive = false
     
@@ -34,16 +32,29 @@ struct ObservationDetailsView: View {
             }
         }
         
-//        .popover(present: $isPopupVisible) {
-//            LoginMessageView()
-//        }
-        
         .onAppear {
             log.info("speciesID \(speciesID)")
             viewModel.fetchData(speciesId: speciesID, limit: 1) {
                 success in
-//                isPopupVisible = !success
+                if success {
+                    print("success")
+                } else {
+                    print("no success")
+                }
+                settings.isConnected = !success
             }
+        }
+    }
+}
+
+struct NetworkView: View {
+    @EnvironmentObject var settings: Settings
+    
+    var body: some View {
+        if settings.isConnected {
+            Text("There is a connection.")
+        } else {
+            Text("No xxx connection.")
         }
     }
 }

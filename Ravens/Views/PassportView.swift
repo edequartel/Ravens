@@ -155,11 +155,9 @@ struct DisplayCredentialsView: View {
     @ObservedObject var viewModel: KeychainViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Login Name: \(viewModel.loginName)")
             Text("Password: \(viewModel.password)")
-            
-//            Text("Token: \(viewModel.token)")
         }
         .onAppear {
             viewModel.retrieveCredentials()

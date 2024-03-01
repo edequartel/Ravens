@@ -522,6 +522,9 @@
         }
       }
     },
+    "No xxx connection." : {
+
+    },
     "nobsavaliable" : {
       "localizations" : {
         "nl" : {
@@ -753,6 +756,9 @@
           }
         }
       }
+    },
+    "There is a connection." : {
+
     },
     "Token: %@" : {
       "extractionState" : "stale",

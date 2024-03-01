@@ -14,10 +14,6 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
-//    @StateObject private var authManager = AuthManager()
-//    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-    //    @State private var position : MapCameraPosition = .automatic
-    
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
@@ -27,7 +23,6 @@ struct MapObservationsSpeciesView: View {
     
     @State private var isSheetObservationsViewPresented = false
     
-    //use species not these????????
     var speciesID: Int
     var speciesName: String
     
@@ -35,16 +30,13 @@ struct MapObservationsSpeciesView: View {
         ZStack {
             Map(position: $position) {
                 ForEach(observationsSpeciesViewModel.locations) { location in
-//                    Marker("", systemImage: "binoculars.fill", coordinate:  location.coordinate)
-//                        .tint(Color(myColor(value: location.rarity)))
-                    
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
                             .fill(Color(myColor(value: location.rarity)))
                             .frame(width: 10, height: 10)
                             .overlay(
                                 Circle()
-                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1) // Customize the border color and width
+                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1)
                             )
                     }
                 }
@@ -59,7 +51,6 @@ struct MapObservationsSpeciesView: View {
                             .background(Color.obsGreenEagle.opacity(0.5))
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                        SettingsDetailsView(count: observationsSpeciesViewModel.locations.count)
                     }
                 }
                 .padding(2)
