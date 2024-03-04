@@ -37,6 +37,24 @@ struct UserView: View {
     }
 }
 
+struct UserSimpleView: View {
+    @EnvironmentObject var userViewModel:  UserViewModel
+    
+    @EnvironmentObject var keyChainviewModel: KeychainViewModel
+    @EnvironmentObject var settings: Settings
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if (keyChainviewModel.token.count > 0) {
+                Text("\(userViewModel.user?.name ?? "unknown")")
+            }
+        }
+        .onAppear {
+            userViewModel.fetchUserData(token: keyChainviewModel.token, settings: settings)
+        }
+    }
+}
+
 #Preview {
     UserView()
         .environmentObject(KeychainViewModel())

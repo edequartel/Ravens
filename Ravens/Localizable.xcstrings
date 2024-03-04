@@ -4,6 +4,9 @@
     " %@" : {
 
     },
+    "--" : {
+
+    },
     "%@" : {
       "localizations" : {
         "nl" : {
@@ -40,6 +43,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ %@, %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@, %3$lld"
           }
         }
       }
@@ -107,6 +120,12 @@
     "%lldd" : {
 
     },
+    "%lldx" : {
+
+    },
+    "++" : {
+
+    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -116,9 +135,6 @@
           }
         }
       }
-    },
-    "Bookmarks" : {
-
     },
     "Code %@" : {
       "extractionState" : "stale",
@@ -454,6 +470,9 @@
         }
       }
     },
+    "Me" : {
+
+    },
     "More at waarneming.nl" : {
       "localizations" : {
         "nl" : {
@@ -521,9 +540,6 @@
           }
         }
       }
-    },
-    "No xxx connection." : {
-
     },
     "nobsavaliable" : {
       "localizations" : {
@@ -698,9 +714,6 @@
     "Song: %@" : {
 
     },
-    "Sorry,\nNo connection with waarneming.nl\nPlease try to login" : {
-
-    },
     "Sort by" : {
       "localizations" : {
         "nl" : {
@@ -753,9 +766,6 @@
           }
         }
       }
-    },
-    "There is a connection." : {
-
     },
     "Token: %@" : {
       "localizations" : {

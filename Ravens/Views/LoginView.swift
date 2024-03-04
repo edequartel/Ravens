@@ -14,6 +14,10 @@ class KeychainViewModel: ObservableObject {
     
     @Published var loginFailed = false
     
+    init(){
+        retrieveCredentials()
+    }
+    
     func saveCredentials() {
         do {
             try keychain.set(loginName, key: "loginName")
@@ -31,7 +35,7 @@ class KeychainViewModel: ObservableObject {
             loginName = try keychain.getString("loginName") ?? ""
             password = try keychain.getString("password") ?? ""
             token = try keychain.getString("token") ?? ""
-            log.error("retrieved credentials are: \(loginName) \(password) \(token)")
+            log.info("retrieved credentials are: \(loginName) \(password) \(token)")
         } catch {
             // Handle errors
             log.error("Error retrieving credentials: \(error)")
@@ -107,7 +111,7 @@ struct LoginView: View {
             VStack {
                 HStack {
                     
-                    if (keyChainviewModel.token.count<=0) {
+                    if (keyChainviewModel.token.isEmpty) {
                         Button("Login") {
                             keyChainviewModel.fetchData(username: keyChainviewModel.loginName, password: keyChainviewModel.password, settings: settings)
                             keyChainviewModel.saveCredentials()
@@ -146,9 +150,6 @@ struct LoginView: View {
             //            DisplayCredentialsView()
         }
         .navigationTitle("Login \(settings.selectedInBetween)")
-        .onAppear {
-            keyChainviewModel.retrieveCredentials()
-        }
     }
 }
 

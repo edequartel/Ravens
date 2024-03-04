@@ -44,14 +44,11 @@ struct MapObservationsSpeciesView: View {
             }
             .safeAreaInset(edge: .bottom) {
                 HStack {
-                    Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
-                                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(speciesName) \(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
-//                            .padding(5)
-//                            .font(.headline)
-
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
@@ -60,8 +57,6 @@ struct MapObservationsSpeciesView: View {
                 .frame(maxWidth: .infinity)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
-//                .font(.footnote)
-//                .foregroundColor(.obsGreenFlower)
             }
             
             .mapStyle(.hybrid(elevation: .realistic))
@@ -79,7 +74,6 @@ struct MapObservationsSpeciesView: View {
         }
         .onAppear {
             observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100)
-            keyChainViewModel.retrieveCredentials()
         }
     }
 }

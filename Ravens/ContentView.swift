@@ -37,7 +37,7 @@ struct ContentView: View {
                 Image(systemName: "binoculars")
             }
             
-            // Tab 2 //??
+            // Tab 2
             BirdView()
                 .tabItem {
                     Text("Species")
@@ -45,6 +45,13 @@ struct ContentView: View {
                 }
             
             // Tab 3
+            MapObservationsUserView()
+                .tabItem {
+                    Text("Me")
+                    Image(systemName: "person")
+                }
+            
+            // Tab 4
             SettingsView()
                 .tabItem {
                     Text("Settings")

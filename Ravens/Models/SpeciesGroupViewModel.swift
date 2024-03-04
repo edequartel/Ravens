@@ -21,7 +21,7 @@ class SpeciesGroupViewModel: ObservableObject {
     }
     
     func fetchData(completion: @escaping (Bool) -> Void) {
-        log.warning("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
+        log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
         
         // Add the custom header 'Accept-Language: nl'

@@ -17,9 +17,8 @@ struct SettingsDetailsView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
-                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
-//            Spacer()
+            Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
             Spacer()
 //            Text("\(settings.selectedLanguage)")
             Text("\(count)/\(results)x")

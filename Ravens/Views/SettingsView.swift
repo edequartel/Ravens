@@ -119,7 +119,6 @@ struct SettingsView: View {
                 }
             }
         }
-        
         .onAppear() {
             speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }

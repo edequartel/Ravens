@@ -20,49 +20,22 @@ struct ObservationDetailsView: View {
     var speciesID: Int
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if ((viewModel.observationsSpecies?.count ?? 0) != 0) {
-                HStack {
+            HStack() {
+                if let count = viewModel.observationsSpecies?.count, count > 0 {
                     Image(systemName: "binoculars.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blue, .red)
-//                    Text("\(viewModel.observationsSpecies?.count ?? 0)")
-//                        .foregroundColor(Color.blue)
+//                    Spacer(minLength:2)
+//                    Text("\(count)")
+//                        .foregroundColor(.blue)
                 }
             }
-        }
-        
-        .onAppear {
-            log.info("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 1)
-        }
+            .onAppear {
+                log.info("speciesID \(speciesID)")
+                viewModel.fetchData(speciesId: speciesID, limit: 1)
+            }
     }
-}
 
-struct NetworkView: View {
-    @EnvironmentObject var settings: Settings
-    
-    var body: some View {
-        if settings.isConnected {
-            Text("There is a connection.")
-        } else {
-            Text("No xxx connection.")
-        }
-    }
-}
-
-struct LoginMessageView: View {
-    var body: some View {
-        Text("""
-Sorry,
-No connection with waarneming.nl
-Please try to login
-""")
-        .padding()
-        .foregroundColor(.white)
-        .background(.blue)
-        .cornerRadius(16)
-    }
 }
 
 struct ObservationDetailsView_Previews: PreviewProvider {

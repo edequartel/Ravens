@@ -18,8 +18,8 @@ struct ObservationsView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
-                            .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
+                Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                    .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .black)
                 
                 Text("Results \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
                     .bold()
@@ -30,7 +30,7 @@ struct ObservationsView: View {
                 List {
                     if let results = observationsViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) { result in
-                            ObsView(obsID: result.id)
+                            ObsView(obsID: result.id, showUsername: true)
                         }
                         
                     } else {
@@ -47,42 +47,6 @@ struct ObservationsView: View {
             observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude
                                             )
-        }
-    }
-}
-
-
-struct ObsAltView: View {
-    var obs: Observation
-    
-    var body: some View {
-        LazyVStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "circle.fill")
-                    .foregroundColor(Color(myColor(value: obs.rarity)))
-                VStack(alignment: .leading, content: {
-                    Text("\(obs.species_detail.name)")
-                })
-                Spacer()
-                HStack {
-                    if obs.has_sound { Image(systemName: "speaker.fill" ) }
-                    if obs.has_photo { Image(systemName: "photo.fill") }
-                }
-            }
-            
-            HStack {
-                Text("\(obs.date)")
-                Text("\(obs.time ?? "no time")")
-                Spacer()
-            }
-            
-            Text("\(obs.location_detail.name)")
-        }
-        .font(.subheadline)
-        .onTapGesture {
-            if let url = URL(string: obs.permalink) {
-                UIApplication.shared.open(url)
-            }
         }
     }
 }

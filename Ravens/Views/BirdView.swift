@@ -38,29 +38,28 @@ struct BirdView: View {
     //
     var body: some View {
         NavigationStack {
-            //            NetworkView()
-            
-            List {
+           List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { bird in
                     HStack {
                         HStack {
                             NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
                                 VStack(alignment: .leading) {
-                                    HStack() {
+                                    HStack(spacing: 4) {
                                         Image(systemName: "circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
-                                        // Text("\(bird.id)")
+//                                         Text("\(bird.id)")
                                         
                                         //are there any observations
-                                        ObservationDetailsView(speciesID: bird.id)
+                                        if (!keyChainViewModel.token.isEmpty) {
+                                            ObservationDetailsView(speciesID: bird.id)
+                                        }
                                         
                                         Text(" \(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
-                                        //
                                         if isNumberInBookMarks(number: bird.id) {
                                             Image(systemName: "bookmark")
                                         }
@@ -127,20 +126,22 @@ struct BirdView: View {
                         Text("Very rare").tag(4)
                     }
                     .pickerStyle(.inline)
-                    
-                    HStack {
-                        Button("Bookmarks") {
-                            settings.isBookMarkVisible.toggle()
-                        }
-                    }
                 }
             }
             .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
             
             .navigationBarItems(
                 leading: HStack {
-                    Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
-                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
+                    
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .blue)
+                    
+                    Button(action: {
+                        settings.isBookMarkVisible.toggle()
+                    }) {
+                        Image(systemName: settings.isBookMarkVisible ? "bookmark" : "bookmark.slash")
+                            .foregroundColor(.blue)
+                    }
                 }
             )
             

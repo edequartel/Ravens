@@ -1,4 +1,5 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
 //   var observationsSpecies = try? JSONDecoder().decode(ObservationsSpecies.self, from: jsonData)

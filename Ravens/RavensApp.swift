@@ -70,6 +70,7 @@ struct RavensApp: App {
                 .environmentObject(RegionListViewModel(settings: Settings()))
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
+                .environmentObject(ObservationsUserViewModel(settings: Settings()))
         }
     }
 }

@@ -21,6 +21,7 @@ struct ObsView: View {
     @State private var isShareSheetPresented = false
     
     var obsID: Int
+    var showUsername: Bool
     
     var body: some View {
         LazyVStack {
@@ -42,9 +43,11 @@ struct ObsView: View {
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
                     
-                    Text("\(obs.date) \(obs.time ?? "")")
+                    Text("\(obs.date) \(obs.time ?? ""), \(obs.number)")
 
-                    Text("\(obs.user_detail?.name ?? "unknown") - \(obs.user_detail?.id ?? 0)")
+                    if showUsername {
+                        Text("\(obs.user_detail?.name ?? "unknown") - \(obs.user_detail?.id ?? 0)")
+                    }
                     
                     Text("\(obs.location_detail?.name ?? "unknown")")
                    
@@ -75,14 +78,12 @@ struct ObsView: View {
         }
         .onAppear {
             obsViewModel.fetchData(for: obsID)
-            keychainViewModel.retrieveCredentials()
-            log.debug("==>>\(keychainViewModel.token)")
         }
     }
 }
 
 #Preview {
-    ObsView(obsID: 2)
+    ObsView(obsID: 2, showUsername: true)
         .environmentObject(KeychainViewModel())
         .environmentObject(Settings())
 }
