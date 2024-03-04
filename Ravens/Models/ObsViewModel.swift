@@ -14,19 +14,22 @@ class ObsViewModel: ObservableObject {
     
     @Published var observation: Obs?
     
+    private var keyChainViewModel =  KeychainViewModel()
+    
     var settings: Settings
     init(settings: Settings) {
-        log.info("init ObsViewModel")
+        log.debug("init ObsViewModel")
         self.settings = settings
     }
     
     func fetchData(for obsID: Int) {
-        //  func fetchData(for obsID: Int, language: String, token: String) {
         let url = settings.endPoint()+"observations/\(obsID)/"
+        
+        keyChainViewModel.retrieveCredentials()
         
         let headers: HTTPHeaders = [
             "Accept-Language" : settings.selectedLanguage,
-            "Authorization": "Token " + settings.tokenKey
+            "Authorization": "Token " + keyChainViewModel.token //settings.tokenKey
         ]
         
         AF.request(url, headers: headers).responseDecodable(of: Obs.self) {

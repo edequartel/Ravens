@@ -12,6 +12,7 @@ import SwiftyBeaver
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var position = MapCameraPosition.region(
@@ -43,19 +44,24 @@ struct MapObservationsSpeciesView: View {
             }
             .safeAreaInset(edge: .bottom) {
                 HStack {
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
+                                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
+                    Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(speciesName) \(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
-                            .padding(5)
-                            .font(.headline)
-                            .foregroundColor(.obsGreenFlower)
-                            .background(Color.obsGreenEagle.opacity(0.5))
+//                            .padding(5)
+//                            .font(.headline)
+
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
                 }
-                .padding(2)
-                .font(.footnote)
+                .padding(5)
+                .frame(maxWidth: .infinity)
                 .foregroundColor(.obsGreenFlower)
+                .background(Color.obsGreenEagle.opacity(0.5))
+//                .font(.footnote)
+//                .foregroundColor(.obsGreenFlower)
             }
             
             .mapStyle(.hybrid(elevation: .realistic))
@@ -72,8 +78,8 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100) { _ in
-            }
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100)
+            keyChainViewModel.retrieveCredentials()
         }
     }
 }
@@ -83,6 +89,7 @@ struct MapObservationSpeciesView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
             .environmentObject(Settings())
+            .environmentObject(KeychainViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
     }
 }

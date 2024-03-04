@@ -16,6 +16,7 @@ struct BirdView: View {
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
@@ -33,11 +34,11 @@ struct BirdView: View {
     func isNumberInBookMarks(number: Int) -> Bool {
         return bookMarks.contains(number)
     }
-
+    
     //
     var body: some View {
         NavigationStack {
-//            NetworkView()
+            //            NetworkView()
             
             List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { bird in
@@ -53,7 +54,7 @@ struct BirdView: View {
                                         
                                         //are there any observations
                                         ObservationDetailsView(speciesID: bird.id)
-
+                                        
                                         Text(" \(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -135,6 +136,13 @@ struct BirdView: View {
                 }
             }
             .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
+            
+            .navigationBarItems(
+                leading: HStack {
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "xmark.circle.fill" : "checkmark.circle.fill")
+                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .green)
+                }
+            )
             
         }
         .searchable(text: $searchText)
@@ -248,6 +256,7 @@ struct BirdView_Previews: PreviewProvider {
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+            .environmentObject(KeychainViewModel())
             .environmentObject(Settings())
     }
 }

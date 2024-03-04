@@ -15,6 +15,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
     @Published var observationsSpecies: ObservationsSpecies?
     
+    private var keyChainViewModel =  KeychainViewModel()
+    
     var locations = [Location]()
     
     var settings: Settings
@@ -43,12 +45,14 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
+//    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
+    func fetchData(speciesId: Int, limit: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
-
+        keyChainViewModel.retrieveCredentials()
+        
         // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+settings.tokenKey,
+            "Authorization": "Token "+keyChainViewModel.token,
             "Accept-Language": settings.selectedLanguage
         ]
 
@@ -72,18 +76,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
                         }
-                        
-                        // Call the completion handler when the data is successfully fetched
-                        completion(true)
                     } catch {
                         self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
-                        completion(false)
                     }
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsSpeciesViewModel: \(error)")
-                completion(false)
             }
         }
     }

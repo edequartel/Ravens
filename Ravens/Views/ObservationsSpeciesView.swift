@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Kingfisher
 
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
@@ -47,8 +46,7 @@ struct ObservationsSpeciesView: View {
                 }
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 100) { success in
-            }
+            viewModel.fetchData(speciesId: speciesID, limit: 100) 
         }
     }
 }

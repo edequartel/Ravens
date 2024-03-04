@@ -34,15 +34,7 @@ struct ObservationDetailsView: View {
         
         .onAppear {
             log.info("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 1) {
-                success in
-                if success {
-                    print("success")
-                } else {
-                    print("no success")
-                }
-                settings.isConnected = !success
-            }
+            viewModel.fetchData(speciesId: speciesID, limit: 1)
         }
     }
 }

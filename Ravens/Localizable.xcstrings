@@ -194,9 +194,6 @@
         }
       }
     },
-    "Details for %@" : {
-
-    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -241,9 +238,6 @@
           }
         }
       }
-    },
-    "Fruit List" : {
-
     },
     "Genre: %@" : {
 
@@ -409,6 +403,9 @@
     "Login %@" : {
 
     },
+    "Login failed" : {
+
+    },
     "Login Name: %@" : {
 
     },
@@ -422,6 +419,9 @@
           }
         }
       }
+    },
+    "Logout" : {
+
     },
     "Main View" : {
       "extractionState" : "stale",
@@ -546,9 +546,6 @@
       }
     },
     "observation.org" : {
-
-    },
-    "ObsView" : {
 
     },
     "Password" : {
@@ -761,7 +758,6 @@
 
     },
     "Token: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -842,9 +838,6 @@
           }
         }
       }
-    },
-    "xxx" : {
-
     }
   },
   "version" : "1.0"

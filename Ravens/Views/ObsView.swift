@@ -7,19 +7,18 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Kingfisher
 import Alamofire
 import AlamofireImage
 
 struct ObsView: View {
     let log = SwiftyBeaver.self
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
+    
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var keychainViewModel: KeychainViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
-    
-//    @Binding private var connectionOk = Bool
     
     var obsID: Int
     
@@ -29,7 +28,7 @@ struct ObsView: View {
                 LazyVStack(alignment: .leading) {
 //                    Text("Observation ID: \(obs.id)")
                     HStack {
-                        Text("ObsView")
+//                        Text("ObsView")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         Text("\(obs.species_detail.name)")
@@ -76,12 +75,15 @@ struct ObsView: View {
         }
         .onAppear {
             obsViewModel.fetchData(for: obsID)
+            keychainViewModel.retrieveCredentials()
+            log.debug("==>>\(keychainViewModel.token)")
         }
     }
 }
 
 #Preview {
     ObsView(obsID: 2)
+        .environmentObject(KeychainViewModel())
         .environmentObject(Settings())
 }
 

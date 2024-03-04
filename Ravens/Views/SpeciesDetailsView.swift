@@ -8,7 +8,8 @@
 import SwiftUI
 import RichText
 import SwiftyBeaver
-import Kingfisher
+import Alamofire
+import AlamofireImage
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
@@ -22,11 +23,7 @@ struct SpeciesDetailsView: View {
         Form{
             VStack {
                 if let species = viewSDModel.speciesDetails {
-                    KFImage(URL(string: species.photo)!)
-                        .resizable()
-                        .aspectRatio(nil, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    AFImageView(media: species.photo)
 
                     Divider()
                     

@@ -25,9 +25,20 @@ struct SettingsView: View {
         
         NavigationStack {
             List {
-                NavigationLink(destination: PassportView()) {
+                NavigationLink(destination: LoginView()) {
                     Text("Login")
                 }
+                
+                Picker("Source", selection: $settings.selectedInBetween) {
+                    Text("waarneming.nl")
+                        .tag("waarneming.nl")
+                    Text("observation.org")
+                        .tag("observation.org")
+                }
+                .pickerStyle(.inline)
+                .onChange(of: settings.selectedInBetween) {
+                }
+                
                 
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
@@ -95,7 +106,7 @@ struct SettingsView: View {
                 
                 Section("International") {
                     LanguageView(onChange: {upDate()})
-////                    RegionsView(onChange: {upDate()})
+                    ////                    RegionsView(onChange: {upDate()})
                 }
                 
             }
@@ -110,7 +121,7 @@ struct SettingsView: View {
         }
         
         .onAppear() {
-            speciesGroupViewModel.fetchData(completion: { _ in print ("completed") })
+            speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }
         
     }
