@@ -27,19 +27,24 @@ struct ObservationsUserView: View {
                 Text("Obs"+" ")
                 UserSimpleView()
                 Text("\(offset)")
-                Button("--") {
+                Button {
+                    if (offset + 100) < (viewModel.observationsSpecies?.count ?? 0) {
+                        offset += 100
+                        limit = 100
+                        viewModel.fetchData(limit: limit, offset: offset)
+                    }
+                } label: {
+                    Image(systemName: "plus.circle")
+                }
+                
+                Button {
                     if offset >= 100 {
                         offset = offset - 100
                     }
                     limit = 100
                     viewModel.fetchData(limit: limit, offset: offset)
-                }
-                Button("++") {
-                    if (offset+100) < (viewModel.observationsSpecies?.count ?? 0) {
-                        offset = offset + 100
-                    }
-                    limit = 100
-                    viewModel.fetchData(limit: limit, offset: offset)
+                } label: {
+                    Image(systemName: "minus.circle")
                 }
             }
             .padding()

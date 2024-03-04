@@ -57,19 +57,25 @@ struct MapObservationsUserView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
-                    Button("--") {
+                    
+                    Button {
+                        if (offset + 100) < (observationsUserViewModel.observationsSpecies?.count ?? 0) {
+                            offset += 100
+                            limit = 100
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
+                    
+                    Button {
                         if offset >= 100 {
                             offset = offset - 100
                         }
                         limit = 100
                         observationsUserViewModel.fetchData(limit: limit, offset: offset)
-                    }
-                    Button("++") {
-                        if (offset+100) < (observationsUserViewModel.observationsSpecies?.count ?? 0) {
-                            offset = offset + 100
-                        }
-                        limit = 100
-                        observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                    } label: {
+                        Image(systemName: "minus.circle")
                     }
                 }
                 .padding(5)
