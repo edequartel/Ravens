@@ -19,6 +19,8 @@ struct SettingsDetailsView: View {
         HStack {
             Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                 .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+//            Spacer()
+            NetworkView()
             Spacer()
 //            Text("\(settings.selectedLanguage)")
             Text("\(count)/\(results)x")

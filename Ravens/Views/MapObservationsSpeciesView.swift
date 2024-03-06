@@ -46,6 +46,7 @@ struct MapObservationsSpeciesView: View {
                 HStack {
                     Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                         .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+                    NetworkView()
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(speciesName) \(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")

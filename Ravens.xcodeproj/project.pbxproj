@@ -56,6 +56,8 @@
 		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
+		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
+		477ECF162B98972900D96BE9 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF152B98972900D96BE9 /* WeatherView.swift */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
 		4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4784B53F2B7BDAA60051D03E /* AlamofireImage */; };
@@ -123,6 +125,8 @@
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
+		477ECF152B98972900D96BE9 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				477ECF152B98972900D96BE9 /* WeatherView.swift */,
 				4785CD222B965237002F52BE /* ObservationUserView.swift */,
 				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
 				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
@@ -267,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				4757E0752B7F3426003F148E /* LoginView.swift */,
+				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
@@ -275,11 +281,11 @@
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
-				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
+				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD1A2B95C87E002F52BE /* UserView.swift */,
@@ -412,6 +418,7 @@
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
+				477ECF162B98972900D96BE9 /* WeatherView.swift in Sources */,
 				47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */,
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
@@ -432,6 +439,7 @@
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
+				477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */,
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,

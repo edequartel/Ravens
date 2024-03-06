@@ -26,10 +26,11 @@ struct ObservationsUserView: View {
             HStack() {
                 Text("Obs"+" ")
                 UserSimpleView()
-                Text("\(offset)")
+                
+                
                 Button {
-                    if (offset + 100) < (viewModel.observationsSpecies?.count ?? 0) {
-                        offset += 100
+                    if let maxOffset = viewModel.observationsSpecies?.count {
+                        offset = min(offset + 100, maxOffset)
                         limit = 100
                         viewModel.fetchData(limit: limit, offset: offset)
                     }
@@ -46,6 +47,8 @@ struct ObservationsUserView: View {
                 } label: {
                     Image(systemName: "minus.circle")
                 }
+                
+                Text("\(offset)")
             }
             .padding()
             
@@ -64,6 +67,37 @@ struct ObservationsUserView: View {
         }
     }
 }
+
+struct ObservationsUserViewExtra: View {
+    let log = SwiftyBeaver.self
+    
+    var viewModel: ObservationsUserViewModel
+    @EnvironmentObject var settings: Settings
+    
+//    @State private var scale: CGFloat = 1.0
+//    @State private var lastScale: CGFloat = 1.0
+    
+    var body: some View {
+        VStack {
+            HStack() {
+                Text("Obs"+" ")
+                UserSimpleView()
+            }
+            .padding()
+            
+            List {
+                if let results =  viewModel.observationsSpecies?.results {
+                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
+                        result in
+                        ObsView(obsID: result.id ?? 0, showUsername: false)
+                    }
+                    .font(.footnote)
+                }
+            }
+        }
+    }
+}
+
 
 
 struct ObservationsUserView_Previews: PreviewProvider {

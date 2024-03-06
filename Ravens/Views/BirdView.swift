@@ -135,7 +135,7 @@ struct BirdView: View {
                     
                     Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                         .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .blue)
-                    
+                    NetworkView()
                     Button(action: {
                         settings.isBookMarkVisible.toggle()
                     }) {

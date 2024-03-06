@@ -49,33 +49,35 @@ struct MapObservationsUserView: View {
                 HStack {
                     Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                         .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-                    Spacer()
-                    Text("\(offset)")
+                    NetworkView()
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(observationsUserViewModel.observationsSpecies?.count ?? 0)x")
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
-                    
-                    Button {
-                        if (offset + 100) < (observationsUserViewModel.observationsSpecies?.count ?? 0) {
-                            offset += 100
+                    Spacer()
+                    HStack {
+                        Button {
+                            if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
+                                offset = min(offset + 100, maxOffset)
+                                limit = 100
+                                observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                            }
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
+                        
+                        Button {
+                            if offset >= 100 {
+                                offset = offset - 100
+                            }
                             limit = 100
                             observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                        } label: {
+                            Image(systemName: "minus.circle")
                         }
-                    } label: {
-                        Image(systemName: "plus.circle")
-                    }
-                    
-                    Button {
-                        if offset >= 100 {
-                            offset = offset - 100
-                        }
-                        limit = 100
-                        observationsUserViewModel.fetchData(limit: limit, offset: offset)
-                    } label: {
-                        Image(systemName: "minus.circle")
+                        Text("\(offset)")
                     }
                 }
                 .padding(5)
@@ -96,7 +98,11 @@ struct MapObservationsUserView: View {
             ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsUserView()
+//            ObservationsUserView()
+            
+            ObservationsUserViewExtra(viewModel: observationsUserViewModel)
+            
+            
         }
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset)

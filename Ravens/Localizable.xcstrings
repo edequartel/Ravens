@@ -263,6 +263,9 @@
         }
       }
     },
+    "Globe" : {
+
+    },
     "Go to Destination %lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -760,6 +763,9 @@
           }
         }
       }
+    },
+    "Temperature in Amsterdam:" : {
+
     },
     "Token: %@" : {
       "localizations" : {

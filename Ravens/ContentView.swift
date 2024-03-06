@@ -21,12 +21,12 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-//            // Tab 0
-//            AnotherView(viewModel: keyChainviewModel)
-//            .tabItem {
-//                Text("Token")
-//                Image(systemName: "token")
-//            }
+            // Tab 0
+            WeatherView()
+            .tabItem {
+                Text("Globe")
+                Image(systemName: "Globe")
+            }
             // Tab 1
             ZStack {
                 MapObservationView()
