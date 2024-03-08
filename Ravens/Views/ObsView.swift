@@ -67,7 +67,7 @@ struct ObsView: View {
                     
                     ForEach(obs.sounds, id: \.self) { audioURL in
                         Text("Sounds: \(audioURL)")
-                        StreamingQueuPlayerView(audio: obs.sounds)
+                        StreamingQueuPlayerView(sounds: obs.sounds)
                     }
                 }
                 .font(.customMedium)

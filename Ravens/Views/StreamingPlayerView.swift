@@ -8,15 +8,30 @@
 import SwiftUI
 import SwiftAudioEx
 
+struct SoundsView: View {
+    let sounds = ["https://waarneming.nl/media/sound/235344.mp3",
+                 "https://waarneming.nl/media/sound/235393.mp3",
+                 "https://waarneming.nl/media/sound/235389.mp3",
+                 "https://waarneming.nl/media/sound/235338.mp3",
+                 "https://waarneming.nl/media/sound/235373.mp3/"
+    ]
+    var body: some View {
+        VStack {
+            StreamingQueuPlayerView(sounds: sounds)
+        }
+    }
+}
+
+#Preview {
+    SoundsView()
+}
+
 
 struct StreamingQueuPlayerView: View {
-    var audio: [String]
-
+    var sounds: [String]
     let qPlayer = QueuedAudioPlayer()
     
     @State private var isPlaying = false
-    
-    
 
     var body: some View {
         VStack {
@@ -24,7 +39,7 @@ struct StreamingQueuPlayerView: View {
             HStack {
 //                Text("\(qPlayer.currentIndex)")
                 Button(action: {
-                    for audioUrl in audio {
+                    for audioUrl in sounds {
                         let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
                         qPlayer.add(item: audioItem, playWhenReady: true)
                     }

@@ -194,9 +194,6 @@
 			children = (
 				477ECF152B98972900D96BE9 /* WeatherView.swift */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
-				4785CD222B965237002F52BE /* ObservationUserView.swift */,
-				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
-				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
 				47DB898E2B79FB4A0093C1ED /* krommerijn.json */,
 				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
@@ -220,7 +217,7 @@
 				474093882B564F49004F10C5 /* images */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
-				47CF61DD2B60EDCD00709CE3 /* ViewsNotUsed */,
+				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* Models */,
 				474C40822B4D17C00038B3A5 /* Views */,
@@ -281,7 +278,9 @@
 			isa = PBXGroup;
 			children = (
 				4757E0752B7F3426003F148E /* LoginView.swift */,
+				4785CD222B965237002F52BE /* ObservationUserView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
+				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
@@ -303,14 +302,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		47CF61DD2B60EDCD00709CE3 /* ViewsNotUsed */ = {
+		47CF61DD2B60EDCD00709CE3 /* NotUsed */ = {
 			isa = PBXGroup;
 			children = (
+				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
 				47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */,
 				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
 				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
 			);
-			path = ViewsNotUsed;
+			path = NotUsed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

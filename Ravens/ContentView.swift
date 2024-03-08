@@ -23,10 +23,10 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tab 0
-            WeatherView()
+            SoundsView()
             .tabItem {
-                Text("Globe")
-                Image(systemName: "Globe")
+                Text("weather")
+                Image(systemName: "globe")
             }
             // Tab 1
             ZStack {

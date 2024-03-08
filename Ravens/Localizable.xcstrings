@@ -252,9 +252,6 @@
         }
       }
     },
-    "Genre: %@" : {
-
-    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -265,9 +262,6 @@
           }
         }
       }
-    },
-    "Globe" : {
-
     },
     "Go to Destination %lld" : {
       "extractionState" : "stale",
@@ -396,7 +390,6 @@
       }
     },
     "Loading..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -505,6 +498,7 @@
       }
     },
     "Name: %@ %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -575,6 +569,9 @@
       }
     },
     "Password: %@" : {
+
+    },
+    "Plaats: %@" : {
 
     },
     "Poi" : {
@@ -695,12 +692,6 @@
         }
       }
     },
-    "Select a Singer" : {
-
-    },
-    "Select a singer to view details" : {
-
-    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -710,9 +701,6 @@
           }
         }
       }
-    },
-    "Song: %@" : {
-
     },
     "Sort by" : {
       "localizations" : {
@@ -766,6 +754,9 @@
           }
         }
       }
+    },
+    "Temperatuur: %@" : {
+
     },
     "Token: %@" : {
       "localizations" : {
@@ -836,7 +827,13 @@
         }
       }
     },
+    "Voelt als: %@" : {
+
+    },
     "waarneming.nl" : {
+
+    },
+    "weather" : {
 
     },
     "Window" : {
