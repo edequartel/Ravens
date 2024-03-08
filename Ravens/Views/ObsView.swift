@@ -42,6 +42,11 @@ struct ObsView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
+//                    .onTapGesture {xxx
+//                        if let url = URL(string: obs.permalink) {
+//                            UIApplication.shared.open(url)
+//                        }
+//                    }
                     
                     Text("\(obs.date) \(obs.time ?? ""), \(obs.number)")
 
@@ -62,14 +67,9 @@ struct ObsView: View {
                     
                     ForEach(obs.sounds, id: \.self) { audioURL in
                         Text("Sounds: \(audioURL)")
+                        StreamingQueuPlayerView(audio: obs.sounds)
                     }
                 }
-                .onTapGesture {
-                    if let url = URL(string: obs.permalink) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                
                 .font(.customMedium)
             }
             else {

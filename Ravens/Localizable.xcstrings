@@ -130,6 +130,9 @@
         }
       }
     },
+    "App details" : {
+
+    },
     "Code %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -763,9 +766,6 @@
           }
         }
       }
-    },
-    "Temperature in Amsterdam:" : {
-
     },
     "Token: %@" : {
       "localizations" : {

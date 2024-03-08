@@ -54,6 +54,8 @@
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
 		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
+		476FA8A62B9B031B00665613 /* StreamingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* StreamingPlayerView.swift */; };
+		476FA8A92B9B064E00665613 /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 476FA8A82B9B064E00665613 /* SwiftAudioEx */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
@@ -71,6 +73,7 @@
 		4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */; };
 		4785CD232B965237002F52BE /* ObservationUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationUserView.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
+		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
 		47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6F4B32B91AA05008DDFBC /* Popovers */; };
@@ -124,6 +127,7 @@
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		476FA8A52B9B031B00665613 /* StreamingPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPlayerView.swift; sourceTree = "<group>"; };
 		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		477ECF152B98972900D96BE9 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsUserView.swift; sourceTree = "<group>"; };
 		4785CD222B965237002F52BE /* ObservationUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationUserView.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
+		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
 		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 				47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
+				476FA8A92B9B064E00665613 /* SwiftAudioEx in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				477ECF152B98972900D96BE9 /* WeatherView.swift */,
+				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				4785CD222B965237002F52BE /* ObservationUserView.swift */,
 				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
 				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
@@ -208,6 +216,7 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
+				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				474093882B564F49004F10C5 /* images */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
@@ -289,6 +298,7 @@
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD1A2B95C87E002F52BE /* UserView.swift */,
+				476FA8A52B9B031B00665613 /* StreamingPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,6 +339,7 @@
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
 				47B6F4B32B91AA05008DDFBC /* Popovers */,
+				476FA8A82B9B064E00665613 /* SwiftAudioEx */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -369,6 +380,7 @@
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */,
+				476FA8A72B9B064E00665613 /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -391,6 +403,7 @@
 				474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */,
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
+				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
 				474093912B564F49004F10C5 /* nl.png in Resources */,
 				474093922B564F49004F10C5 /* map.png in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
@@ -439,6 +452,7 @@
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
+				476FA8A62B9B031B00665613 /* StreamingPlayerView.swift in Sources */,
 				477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */,
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				474C40902B4FFD820038B3A5 /* Observations.swift in Sources */,
@@ -589,11 +603,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ravens/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -620,11 +636,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ravens/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -709,6 +727,14 @@
 				minimumVersion = 1.2.2;
 			};
 		};
+		476FA8A72B9B064E00665613 /* XCRemoteSwiftPackageReference "SwiftAudioEx" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/doublesymmetry/SwiftAudioEx";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -768,6 +794,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */;
 			productName = FloatingButton;
+		};
+		476FA8A82B9B064E00665613 /* SwiftAudioEx */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 476FA8A72B9B064E00665613 /* XCRemoteSwiftPackageReference "SwiftAudioEx" */;
+			productName = SwiftAudioEx;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

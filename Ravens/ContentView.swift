@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
+
 struct ContentView: View {
     let log = SwiftyBeaver.self
     

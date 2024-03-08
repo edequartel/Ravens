@@ -71,6 +71,7 @@ struct RavensApp: App {
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
+//                .environmentObject(AudioPlayerManager())
         }
     }
 }

@@ -1,75 +1,19 @@
 import SwiftUI
 import Alamofire
-import SwiftyJSON
-
-class WeatherViewModel: ObservableObject {
-    @Published var temperature: String = "Loading..."
-    
-    init() {
-        fetchWeatherData()
-//        startBackgroundFetch()
-    }
-
-    func fetchWeatherData() {
-        let apiKey = "50489a3aba189f1c39be52d8a5822acf"
-        let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Amsterdam&appid=\(apiKey)"
-
-        AF.request(apiUrl).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                print("\(value)")
-//                let json = JSON(value)
-//                if let temp = json["main"]["temp"].double {
-//                    self.temperature = String(format: "%.1f°C", temp - 273.15)
-//                } else {
-//                    self.temperature = "N/A"
-//                }
-            case .failure(let error):
-                print("Error fetching weather data: \(error)")
-                self.temperature = "N/A"
-            }
-        }
-    }
-
-    func startBackgroundFetch() {
-        let apiKey = "50489a3aba189f1c39be52d8a5822acf"
-        let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Amsterdam&appid=\(apiKey)"
-
-        let backgroundQueue = DispatchQueue(label: "BackgroundFetchQueue", qos: .background, attributes: .concurrent)
-        let backgroundFetchTask = URLSession.shared.dataTask(with: URL(string: apiUrl)!) { (_, _, error) in
-            if let error = error {
-                print("Background fetch error: \(error)")
-            } else {
-                print("Background fetch successful")
-            }
-        }
-
-        // Schedule background fetch every 15 minutes
-//        backgroundFetchTask.resume()
-//        UIApplication.shared.setMinimumBackgroundFetchInterval(15 * 60)
-    }
-}
+import BackgroundTasks
+import SwiftySound
+import AVFoundation
 
 struct WeatherView: View {
-    @ObservedObject var viewModel = WeatherViewModel()
-
+    let audio = ["https://waarneming.nl/media/sound/235344.mp3",
+                 "https://waarneming.nl/media/sound/235393.mp3",
+                 "https://waarneming.nl/media/sound/235389.mp3",
+                 "https://waarneming.nl/media/sound/235338.mp3",
+                 "https://waarneming.nl/media/sound/235373.mp3/"
+    ]
     var body: some View {
         VStack {
-            Text("Temperature in Amsterdam:")
-                .font(.title)
-                .padding()
-
-            Text(viewModel.temperature)
-                .font(.headline)
-                .padding()
-        }
-        .onAppear {
-            // Fetch weather data when the view appears
-            viewModel.fetchWeatherData()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            // Refresh data when the app comes to the foreground
-            viewModel.fetchWeatherData()
+            StreamingQueuPlayerView(audio: audio)
         }
     }
 }
@@ -79,11 +23,62 @@ struct WeatherView: View {
 }
 
 
-//@main
-//struct WeatherApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            WeatherView()
-//        }
-//    }
-//}
+    //class WeatherViewModel: ObservableObject {
+    //    @Published var temperature: String = "Loading..."
+    //
+    //    init() {
+    //        fetchWeatherData()
+    //        startBackgroundFetch()
+    //    }
+    //
+    //    func fetchWeatherData() {
+    //        let apiKey = "50489a3aba189f1c39be52d8a5822acf"
+    //        let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=London&appid=\(apiKey)"
+    //
+    //        AF.request(apiUrl).responseJSON { response in
+    //            switch response.result {
+    //            case .success(let value):
+    //                print("Weather data fetched successfully:")
+    //                print(value)
+    //
+    //                let json = JSON(value)
+    //                if let temp = json["main"]["temp"].double {
+    //                    self.temperature = String(format: "%.1f°C", temp - 273.15)
+    //                    print("Temperature: \(self.temperature)")
+    //                } else {
+    //                    self.temperature = "N/A"
+    //                    print("Temperature not available")
+    //                }
+    //            case .failure(let error):
+    //                print("Error fetching weather data: \(error)")
+    //                self.temperature = "N/A"
+    //            }
+    //        }
+    //    }
+    //
+    //
+    //
+    //    func startBackgroundFetch() {
+    //        let backgroundQueue = DispatchQueue(label: "BackgroundFetchQueue", qos: .background, attributes: .concurrent)
+    //        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.example.weatherapp.backgroundfetch", using: backgroundQueue) { task in
+    //            self.handleAppRefreshTask(task: task as! BGAppRefreshTask)
+    //        }
+    //
+    //        // Schedule background fetch every 15 minutes
+    //        do {
+    //            let request = BGAppRefreshTaskRequest(identifier: "com.example.weatherapp.backgroundfetch")
+    //            request.earliestBeginDate = Date(timeIntervalSinceNow: 15)// * 60)
+    //            try BGTaskScheduler.shared.submit(request)
+    //        } catch {
+    //            print("Error scheduling background fetch task: \(error)")
+    //        }
+    //    }
+    //
+    //    func handleAppRefreshTask(task: BGAppRefreshTask) {
+    //        // Perform background fetch here
+    //        fetchWeatherData()
+    //
+    //        // Mark the task as completed
+    //        task.setTaskCompleted(success: true)
+    //    }
+    //}
