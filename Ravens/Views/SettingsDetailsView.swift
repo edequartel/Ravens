@@ -30,6 +30,7 @@ struct SettingsDetailsView: View {
             Text("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
             Text("\(settings.days)d")
             Text("\(settings.selectedDate, formatter: dateFormatter)")
+            
         }
         .padding(5)
         .font(.headline)

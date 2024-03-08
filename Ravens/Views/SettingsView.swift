@@ -10,12 +10,15 @@ import SwiftyBeaver
 
 struct SettingsView: View {
     let log = SwiftyBeaver.self
+    @Environment(\.locale) private var locale
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var regionsViewModel: RegionViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
+    
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     let minimumRadius = 500.0
     let maximumRadius = 10000.0
@@ -109,6 +112,13 @@ struct SettingsView: View {
                     ////                    RegionsView(onChange: {upDate()})
                 }
                 
+                Section(header: Text("App details")) {
+                    Text(version())
+                    Text(locale.description)
+                    //                        Text(voEnabled ? "Voiceover on" : "Voiceover off")
+                }
+                .font(.footnote)
+                
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -149,6 +159,13 @@ struct SettingsView: View {
         log.verbose("update()")
         speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
+    }
+    
+    func version() -> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        return "Version \(version) build \(build)"
     }
     
 }
