@@ -60,7 +60,9 @@ struct RavensApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RavensContentView()
+            ContentView()
+                .environmentObject(KeychainViewModel())
+                .environmentObject(UserViewModel())
                 .environmentObject(Settings())
                 .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
                 .environmentObject(ObservationsViewModel(settings: Settings()))
@@ -68,8 +70,8 @@ struct RavensApp: App {
                 .environmentObject(RegionListViewModel(settings: Settings()))
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
+                .environmentObject(ObservationsUserViewModel(settings: Settings()))
         }
-//        .modelContainer(for: UserData.self)
     }
 }
 

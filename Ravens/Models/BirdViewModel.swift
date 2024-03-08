@@ -31,10 +31,9 @@ class BirdViewModel: ObservableObject {
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
         ]
-        
-        // Use Alamofire to make the API request
-        AF.request(url, headers: headers).responseJSON { response in
-//            self.log.info(response.debugDescription)
+
+        AF.request(url, headers: headers).responseDecodable(of: [Bird].self){ response in
+//            log.info(response.debugDescription)
             switch response.result {
             case .success(_):
                 do {

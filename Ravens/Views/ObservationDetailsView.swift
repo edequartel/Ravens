@@ -14,52 +14,28 @@ struct ObservationDetailsView: View {
     
     @StateObject private var viewModel = ObservationsSpeciesViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
-
-    @State private var isPopupVisible = false
     
     @State private var isViewActive = false
     
     var speciesID: Int
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if ((viewModel.observationsSpecies?.count ?? 0) != 0) {
-                HStack {
+            HStack() {
+                if let count = viewModel.observationsSpecies?.count, count > 0 {
                     Image(systemName: "binoculars.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blue, .red)
-//                    Text("\(viewModel.observationsSpecies?.count ?? 0)")
-//                        .foregroundColor(Color.blue)
+//                    Spacer(minLength:2)
+//                    Text("\(count)")
+//                        .foregroundColor(.blue)
                 }
             }
-        }
-        
-//        .popover(present: $isPopupVisible) {
-//            LoginMessageView()
-//        }
-        
-        .onAppear {
-            log.info("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 1) {
-                success in
-//                isPopupVisible = !success
+            .onAppear {
+                log.info("speciesID \(speciesID)")
+                viewModel.fetchData(speciesId: speciesID, limit: 1)
             }
-        }
     }
-}
 
-struct LoginMessageView: View {
-    var body: some View {
-        Text("""
-Sorry,
-No connection with waarneming.nl
-Please try to login
-""")
-        .padding()
-        .foregroundColor(.white)
-        .background(.blue)
-        .cornerRadius(16)
-    }
 }
 
 struct ObservationDetailsView_Previews: PreviewProvider {

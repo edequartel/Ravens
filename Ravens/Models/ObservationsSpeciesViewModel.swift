@@ -15,6 +15,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
     @Published var observationsSpecies: ObservationsSpecies?
     
+    private var keyChainViewModel =  KeychainViewModel()
+    
     var locations = [Location]()
     
     var settings: Settings
@@ -24,7 +26,6 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
     }
 
-    ///
     func getLocations() {
         locations.removeAll()
         
@@ -44,21 +45,21 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
-
-//    func fetchData(speciesId: Int, limit: Int) {
+//    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
+    func fetchData(speciesId: Int, limit: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
-
-        // Add the custom header 'Accept-Language: nl'
+        keyChainViewModel.retrieveCredentials()
+        
+        // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+settings.tokenKey,
+            "Authorization": "Token "+keyChainViewModel.token,
             "Accept-Language": settings.selectedLanguage
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
-        let url = settings.endPoint()+"species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
+        let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.info("\(url)")
 
@@ -75,61 +76,15 @@ class ObservationsSpeciesViewModel: ObservableObject {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
                         }
-                        
-                        // Call the completion handler when the data is successfully fetched
-                        completion(true)
                     } catch {
                         self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
-                        completion(false)
                     }
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsSpeciesViewModel: \(error)")
-                completion(false)
             }
         }
     }
 
 }
-
-
-//func fetchData(speciesId:Int, endDate: Date) {
-//    print("fetchData ObservationsSpeciesViewModel")
-//    
-//    // Add the custom header 'Accept-Language: nl'
-//    let headers: HTTPHeaders = [
-//        "Accept-Language": "nl",
-//        "Authorization": "Token 21047b0d6742dc36234bc5293053bc757623470b" //<<TOKEN LATER BIJ ZETTEN 3600??
-//    ]
-//    let date = "2023-01-01"
-//    let url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(date)" //zwarte stern 32
-////        let url = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=\(formatCurrentDate(value: endDate))"
-//    print("\(url)")
-//
-//    AF.request(url, headers: headers).responseString { response in
-//        switch response.result {
-//        case .success(let stringResponse):
-//            print("Response as String: \(stringResponse)")
-//
-//            // Now you can convert the stringResponse to Data and decode it
-//            if let data = stringResponse.data(using: .utf8) {
-//                do {
-//                    let decoder = JSONDecoder()
-//                    let observationsSpecies = try decoder.decode(ObservationsSpecies.self, from: data)
-//
-//                    DispatchQueue.main.async {
-//                        self.observationsSpecies = observationsSpecies
-//                        // Continue with your logic
-//                        self.getLocations()
-//                    }
-//                } catch {
-//                    print("Error decoding JSON: \(error)")
-//                }
-//            }
-//        case .failure(let error):
-//            print("Error: \(error)")
-//        }
-//    }
-//
-//}

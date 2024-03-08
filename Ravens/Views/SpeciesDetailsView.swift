@@ -8,11 +8,12 @@
 import SwiftUI
 import RichText
 import SwiftyBeaver
-import Kingfisher
+import Alamofire
+import AlamofireImage
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-//    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
+
     @StateObject var viewSDModel = SpeciesDetailsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     
@@ -22,11 +23,7 @@ struct SpeciesDetailsView: View {
         Form{
             VStack {
                 if let species = viewSDModel.speciesDetails {
-                    KFImage(URL(string: species.photo)!)
-                        .resizable()
-                        .aspectRatio(nil, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    AFImageView(media: species.photo)
 
                     Divider()
                     
@@ -38,8 +35,6 @@ struct SpeciesDetailsView: View {
                             Text(species.scientific_name)
                                 .italic()
                         }
-//                        Text(species.group_name)
-//                        Text(species.status)
                         Divider()
                         RichText(html: species.info_text)
                         

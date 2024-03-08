@@ -19,7 +19,7 @@ struct RegionsView: View {
     var body: some View {
         Picker("Select a Region", selection: $settings.selectedRegion) {
             ForEach(viewModel.regions, id: \.id) { region in
-                Text("\(region.name ?? "unknown")")
+                Text("\(region.name )")
             }
         }
         .onChange(of: settings.selectedRegion) {

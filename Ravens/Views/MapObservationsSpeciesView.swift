@@ -12,11 +12,8 @@ import SwiftyBeaver
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
-//    @StateObject private var authManager = AuthManager()
-//    @State private var position : MapCameraPosition = .userLocation(fallback: .automatic)
-    //    @State private var position : MapCameraPosition = .automatic
     
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -27,7 +24,6 @@ struct MapObservationsSpeciesView: View {
     
     @State private var isSheetObservationsViewPresented = false
     
-    //use species not these????????
     var speciesID: Int
     var speciesName: String
     
@@ -35,36 +31,33 @@ struct MapObservationsSpeciesView: View {
         ZStack {
             Map(position: $position) {
                 ForEach(observationsSpeciesViewModel.locations) { location in
-//                    Marker("", systemImage: "binoculars.fill", coordinate:  location.coordinate)
-//                        .tint(Color(myColor(value: location.rarity)))
-                    
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
                             .fill(Color(myColor(value: location.rarity)))
                             .frame(width: 10, height: 10)
                             .overlay(
                                 Circle()
-                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1) // Customize the border color and width
+                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1)
                             )
                     }
                 }
             }
             .safeAreaInset(edge: .bottom) {
                 HStack {
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+                    NetworkView()
+                    Spacer()
                     VStack(alignment: .trailing) {
                         Text("\(speciesName) \(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
-                            .padding(5)
-                            .font(.headline)
-                            .foregroundColor(.obsGreenFlower)
-                            .background(Color.obsGreenEagle.opacity(0.5))
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                        SettingsDetailsView(count: observationsSpeciesViewModel.locations.count)
                     }
                 }
-                .padding(2)
-                .font(.footnote)
+                .padding(5)
+                .frame(maxWidth: .infinity)
                 .foregroundColor(.obsGreenFlower)
+                .background(Color.obsGreenEagle.opacity(0.5))
             }
             
             .mapStyle(.hybrid(elevation: .realistic))
@@ -81,8 +74,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100) { _ in
-            }
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100)
         }
     }
 }
@@ -92,6 +84,7 @@ struct MapObservationSpeciesView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
             .environmentObject(Settings())
+            .environmentObject(KeychainViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
     }
 }

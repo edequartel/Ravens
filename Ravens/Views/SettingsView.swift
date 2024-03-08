@@ -25,14 +25,24 @@ struct SettingsView: View {
         
         NavigationStack {
             List {
-                NavigationLink(destination: PassportView()) {
+                NavigationLink(destination: LoginView()) {
                     Text("Login")
                 }
+                
+                Picker("Source", selection: $settings.selectedInBetween) {
+                    Text("waarneming.nl")
+                        .tag("waarneming.nl")
+                    Text("observation.org")
+                        .tag("observation.org")
+                }
+                .pickerStyle(.inline)
+                .onChange(of: settings.selectedInBetween) {
+                }
+                
                 
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-//                            Text("\(speciesGroup.id) \(speciesGroup.name)")
                             Text("\(speciesGroup.name)")
                                 .lineLimit(1)
                                 .truncationMode(.tail)
@@ -96,7 +106,7 @@ struct SettingsView: View {
                 
                 Section("International") {
                     LanguageView(onChange: {upDate()})
-////                    RegionsView(onChange: {upDate()})
+                    ////                    RegionsView(onChange: {upDate()})
                 }
                 
             }
@@ -109,19 +119,14 @@ struct SettingsView: View {
                 }
             }
         }
-        
         .onAppear() {
-//            print("ONAPPEAR SETTINGSVIEW")
-            speciesGroupViewModel.fetchData(completion: { _ in print ("completed") })
-            print("--->>>\(settings.endPoint())")
+            speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }
         
     }
     
-    //de data is nog niet gefetched ????
     func getId(region: Int, groups: Int) -> Int? {
         log.error("getID region: \(region) groups: \(groups)")
-        //        log.error("\(regionListViewModel.regionLists)")
         if let matchingItem = regionListViewModel.regionLists.first(where: { $0.region == region && $0.species_group == groups }) {
             log.error("getId= \(matchingItem)")
             return matchingItem.id
@@ -130,7 +135,6 @@ struct SettingsView: View {
         return nil
     }
     
-    //de data is nog niet gefetched ????
     func getGroup(id: Int) -> String? {
         log.error("getGroup: \(id)")
         if let matchingItem = speciesGroupViewModel.speciesGroups.first(where: { $0.id == id } ) {
@@ -143,7 +147,6 @@ struct SettingsView: View {
     
     func upDate() {
         log.verbose("update()")
-//          print("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup))")
         speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }

@@ -44,6 +44,16 @@
         }
       }
     },
+    "%@ %@, %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@, %3$lld"
+          }
+        }
+      }
+    },
     "%@ %lldx" : {
       "localizations" : {
         "en" : {
@@ -107,6 +117,9 @@
     "%lldd" : {
 
     },
+    "%lldx" : {
+
+    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -116,9 +129,6 @@
           }
         }
       }
-    },
-    "Bookmarks" : {
-
     },
     "Code %@" : {
       "extractionState" : "stale",
@@ -194,9 +204,6 @@
         }
       }
     },
-    "Details for %@" : {
-
-    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -242,9 +249,6 @@
         }
       }
     },
-    "Fruit List" : {
-
-    },
     "Genre: %@" : {
 
     },
@@ -258,6 +262,9 @@
           }
         }
       }
+    },
+    "Globe" : {
+
     },
     "Go to Destination %lld" : {
       "extractionState" : "stale",
@@ -409,6 +416,9 @@
     "Login %@" : {
 
     },
+    "Login failed" : {
+
+    },
     "Login Name: %@" : {
 
     },
@@ -422,6 +432,9 @@
           }
         }
       }
+    },
+    "Logout" : {
+
     },
     "Main View" : {
       "extractionState" : "stale",
@@ -453,6 +466,9 @@
           }
         }
       }
+    },
+    "Me" : {
+
     },
     "More at waarneming.nl" : {
       "localizations" : {
@@ -543,9 +559,6 @@
       }
     },
     "observation.org" : {
-
-    },
-    "ObsView" : {
 
     },
     "Password" : {
@@ -698,9 +711,6 @@
     "Song: %@" : {
 
     },
-    "Sorry,\nNo connection with waarneming.nl\nPlease try to login" : {
-
-    },
     "Sort by" : {
       "localizations" : {
         "nl" : {
@@ -754,8 +764,10 @@
         }
       }
     },
+    "Temperature in Amsterdam:" : {
+
+    },
     "Token: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -836,9 +848,6 @@
           }
         }
       }
-    },
-    "xxx" : {
-
     }
   },
   "version" : "1.0"

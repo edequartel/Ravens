@@ -24,7 +24,6 @@ struct AFImageView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-//                Text("Loading image...")
                 ProgressView()
             }
         }

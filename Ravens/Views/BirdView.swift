@@ -16,6 +16,7 @@ struct BirdView: View {
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
@@ -24,41 +25,41 @@ struct BirdView: View {
     @State private var searchText = ""
     @State private var birdId : Int?
     
-//    @State private var isPopupVisible = false
-    @State private var isBookMarksVisible = false
+    // @State private var isPopupVisible = false <== bindable
     
-    //
+    @State private var isBookMarksVisible = false
     @State private var bookMarks: [Int] = []
-
+    
     // Function to check if a number is in the array
     func isNumberInBookMarks(number: Int) -> Bool {
         return bookMarks.contains(number)
     }
     
-    
     //
     var body: some View {
         NavigationStack {
-            List {
+           List {
                 ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { bird in
                     HStack {
                         HStack {
                             NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
                                 VStack(alignment: .leading) {
-                                    HStack {
+                                    HStack(spacing: 4) {
                                         Image(systemName: "circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
-//                                        Text("\(bird.id)")
+//                                         Text("\(bird.id)")
                                         
-                                        ObservationDetailsView(speciesID: bird.id)
+                                        //are there any observations
+                                        if (!keyChainViewModel.token.isEmpty) {
+                                            ObservationDetailsView(speciesID: bird.id)
+                                        }
                                         
                                         Text(" \(bird.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
-                                        //
                                         if isNumberInBookMarks(number: bird.id) {
                                             Image(systemName: "bookmark")
                                         }
@@ -68,26 +69,25 @@ struct BirdView: View {
                                             .italic()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                        
                                     }
                                 }
                                 .onLongPressGesture(minimumDuration: 1) {
                                     log.verbose("onLONGTapgesture \(bird.id)")
                                     birdId = bird.id
-//
+                                    //
                                     if isNumberInBookMarks(number: bird.id) {
                                         if let index = bookMarks.firstIndex(of: bird.id) {
                                             bookMarks.remove(at: index)
                                             settings.saveBookMarks(array: bookMarks)
                                             print(bookMarks)
-                                            }
+                                        }
                                     } else
-                                        {
+                                    {
                                         bookMarks.append(bird.id)
                                         settings.saveBookMarks(array: bookMarks)
                                         print(bookMarks)
                                     }
-//
+                                    //
                                     
                                 }
                                 .onAppear() {
@@ -99,11 +99,9 @@ struct BirdView: View {
                             .contentShape(Rectangle())
                         }
                     }
-//                    .listRowBackground(isNumberInBookMarks(number: bird.id) ? Color.obsGreenFlower : Color.white)
                 }
             }
-//            .font(.customLarge)
-                
+            
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
                     Picker("Sort by", selection: $selectedSortOption) {
@@ -128,35 +126,34 @@ struct BirdView: View {
                         Text("Very rare").tag(4)
                     }
                     .pickerStyle(.inline)
-                    
-//                    Button("Show Popup") {
-//                        isPopupVisible = true
-//                    }
-                    
-                    HStack {
-                        Button("Bookmarks") {
-                            settings.isBookMarkVisible.toggle()
-                        }
-                    }
                 }
             }
             .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
             
+            .navigationBarItems(
+                leading: HStack {
+                    
+                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .blue)
+                    NetworkView()
+                    Button(action: {
+                        settings.isBookMarkVisible.toggle()
+                    }) {
+                        Image(systemName: settings.isBookMarkVisible ? "bookmark" : "bookmark.slash")
+                            .foregroundColor(.blue)
+                    }
+                }
+            )
+            
         }
         .searchable(text: $searchText)
         
-//        .popover(present: $isPopupVisible) {
-//            LoginMessageView()
-//        }
-
         .onAppear() {
             log.info("birdview: selectedGroup \(settings.selectedGroup)")
             birdViewModel.fetchData(for: settings.selectedGroup)
             speciesGroupViewModel.fetchData(completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")
-//                isPopupVisible = !success
-            }
-            )
+            } )
             settings.readBookmarks(array: &bookMarks)
         }
     }
@@ -208,7 +205,7 @@ extension BirdViewModel {
         } else {
             let filteredList = sortedBirdsList.filter { bird in
                 bird.name.lowercased().contains(searchText.lowercased()) ||
-                    bird.scientific_name.lowercased().contains(searchText.lowercased())
+                bird.scientific_name.lowercased().contains(searchText.lowercased())
             }
             
             var filtered = applyFilter(to: filteredList, with: filterOption)
@@ -260,6 +257,7 @@ struct BirdView_Previews: PreviewProvider {
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+            .environmentObject(KeychainViewModel())
             .environmentObject(Settings())
     }
 }

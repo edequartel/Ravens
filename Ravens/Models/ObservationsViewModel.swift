@@ -73,16 +73,10 @@ class ObservationsViewModel: ObservableObject {
         poiLocations.append(newLocation)
         newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false)
         poiLocations.append(newLocation)
-        
-        
-        
-        
+
 //
 //        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
 //        poiLocations.append(newLocation)
-        
-        
-
     }
     
     ///
@@ -96,6 +90,7 @@ class ObservationsViewModel: ObservableObject {
         
         let url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
         
+
         log.info("\(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
@@ -114,3 +109,6 @@ class ObservationsViewModel: ObservableObject {
         
     }
 }
+
+
+//        let url =  "https://waarneming.nl/api/v1/user/observations/"

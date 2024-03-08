@@ -10,12 +10,17 @@ import SwiftUI
 struct SettingsDetailsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     
     var count: Int = 0
     var results: Int = 0
     
     var body: some View {
         HStack {
+            Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+//            Spacer()
+            NetworkView()
             Spacer()
 //            Text("\(settings.selectedLanguage)")
             Text("\(count)/\(results)x")
@@ -43,4 +48,5 @@ struct SettingsDetailsView: View {
     SettingsDetailsView()
         .environmentObject(Settings())
         .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+        .environmentObject(KeychainViewModel())
 }
