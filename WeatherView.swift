@@ -1,7 +1,6 @@
 import SwiftUI
 import Alamofire
 import BackgroundTasks
-import SwiftySound
 import AVFoundation
 
 struct WeatherView: View {

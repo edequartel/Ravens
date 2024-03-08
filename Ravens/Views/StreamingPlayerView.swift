@@ -70,6 +70,10 @@ struct StreamingQueuPlayerView: View {
     }
 }
 
+#Preview {
+    StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235293.mp3",
+                                    "https://waarneming.nl/media/sound/235293.mp3"])
+}
 
 struct StreamingPlayerView: View {
     var audio : String
