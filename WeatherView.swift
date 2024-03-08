@@ -1,8 +1,7 @@
 import SwiftUI
-import Alamofire
-import BackgroundTasks
-import SwiftySound
-import AVFoundation
+//import Alamofire
+//import BackgroundTasks
+//import AVFoundation
 
 struct WeatherView: View {
     let audio = ["https://waarneming.nl/media/sound/235344.mp3",
