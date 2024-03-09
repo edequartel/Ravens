@@ -48,7 +48,7 @@ struct BirdView: View {
                                         Image(systemName: "circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
-//                                         Text("\(bird.id)")
+
                                         
                                         //are there any observations
                                         if (!keyChainViewModel.token.isEmpty) {

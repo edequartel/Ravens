@@ -27,16 +27,19 @@ struct ObsView: View {
         LazyVStack {
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
-//                    Text("Observation ID: \(obs.id)")
+                    Text("Observation ID: \(obs.id)")
                     HStack {
 //                        Text("ObsView")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
+                        
                         Text("\(obs.species_detail.name)")
                             .bold()
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        
                         Spacer()
+//                        
                         Text("\(obs.species_detail.scientific_name)")
                             .italic()
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -66,7 +69,7 @@ struct ObsView: View {
                     }
                     
                     ForEach(obs.sounds, id: \.self) { audioURL in
-                        Text("Sounds: \(audioURL)")
+//                        Text("Sounds: \(audioURL)")
                         StreamingQueuPlayerView(sounds: obs.sounds)
                     }
                 }

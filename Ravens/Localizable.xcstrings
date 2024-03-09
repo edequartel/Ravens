@@ -466,6 +466,9 @@
     "Me" : {
 
     },
+    "Month" : {
+
+    },
     "More at waarneming.nl" : {
       "localizations" : {
         "nl" : {
@@ -554,6 +557,9 @@
           }
         }
       }
+    },
+    "Observation ID: %lld" : {
+
     },
     "observation.org" : {
 
@@ -723,6 +729,7 @@
       }
     },
     "Sounds: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -817,6 +824,9 @@
         }
       }
     },
+    "Value" : {
+
+    },
     "Very rare" : {
       "localizations" : {
         "nl" : {
@@ -831,9 +841,6 @@
 
     },
     "waarneming.nl" : {
-
-    },
-    "weather" : {
 
     },
     "Window" : {
