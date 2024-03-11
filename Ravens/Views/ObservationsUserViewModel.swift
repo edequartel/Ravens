@@ -37,8 +37,9 @@ class ObservationsUserViewModel: ObservableObject {
             let longitude = observationsSpecies?.results[i].point.coordinates[0] ?? 5.245350
             let rarity = observationsSpecies?.results[i].rarity ?? 0
             let hasPhoto = (observationsSpecies?.results[i].photos.count ?? 0 > 0)
+            let hasSound = (observationsSpecies?.results[i].sounds.count ?? 0 > 0)
             
-            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto)
+            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
 
             locations.append(newLocation)
         }

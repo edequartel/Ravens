@@ -8,74 +8,82 @@
 import SwiftUI
 import SwiftAudioEx
 
-struct SoundsView: View {
-    let sounds = ["https://waarneming.nl/media/sound/235344.mp3",
-                 "https://waarneming.nl/media/sound/235393.mp3",
-                 "https://waarneming.nl/media/sound/235389.mp3",
-                 "https://waarneming.nl/media/sound/235338.mp3",
-                 "https://waarneming.nl/media/sound/235373.mp3/"
-    ]
+
+
+struct AudioView: View {
     var body: some View {
         VStack {
-            StreamingQueuPlayerView(sounds: sounds)
+            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235291.mp3",
+                                            "https://waarneming.nl/media/sound/235292.mp3",
+                                            "https://waarneming.nl/media/sound/235293.mp3"] )
+            
+            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235783.wav",
+                                            "https://waarneming.nl/media/sound/235286.mp3",
+                                            "https://waarneming.nl/media/sound/235770.mp3"] )
+            .foregroundColor(.green)
+            
+            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235291.mp3",
+                                            "https://waarneming.nl/media/sound/235292.mp3",
+                                            "https://waarneming.nl/media/sound/235293.mp3"] )
+            .foregroundColor(.red)
         }
     }
 }
 
-#Preview {
-    SoundsView()
-}
-
-
 struct StreamingQueuPlayerView: View {
-    var sounds: [String]
+    var audio: [String]
+
     let qPlayer = QueuedAudioPlayer()
     
     @State private var isPlaying = false
+    
 
     var body: some View {
-        VStack {
-//            Text("\(qPlayer.currentItem?.getArtist() ?? "xxxx")")
-            HStack {
-//                Text("\(qPlayer.currentIndex)")
-                Button(action: {
-                    print("\(sounds)")
-                    for audioUrl in sounds {
-                        let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
-                        qPlayer.add(item: audioItem, playWhenReady: true)
+//        VStack {
+                HStack {
+//                    Text("\(index)")
+                    Button(action: {
+                        print("play")
+                        for audioUrl in audio {
+                            let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
+                            qPlayer.add(item: audioItem, playWhenReady: true)
+                        }
+                    }) {
+                        Image(systemName: "play.circle")
+                            .font(.system(size: 30))
                     }
-                }) {
-                    Image(systemName: "play.circle")
-                        .font(.system(size: 30))
-                }
-                
-                Button(action: {
-                    qPlayer.pause()
-                }) {
-                    Image(systemName: "pause.circle")
-                        .font(.system(size: 30))
-                }
-                Button(action: {
-                    qPlayer.previous()
-                }) {
-                    Image(systemName: "backward.end.circle")
-                        .font(.system(size: 30))
-                }
-                
-                Button(action: {
-                    qPlayer.next()
-                }) {
-                    Image(systemName: "forward.end.circle")
-                        .font(.system(size: 30))
-                }
-                Button(action: {
-                    qPlayer.stop()
-                }) {
-                    Image(systemName: "stop.circle")
-                        .font(.system(size: 30))
-                }
-            }
-            .padding(5)
+                    
+//                    Button(action: {
+//                        print("pause")
+//                        qPlayer.pause()
+//                    }) {
+//                        Image(systemName: "pause.circle")
+//                            .font(.system(size: 30))
+//                    }
+                    
+                    //                Button(action: {
+                    //                    qPlayer.previous()
+                    //                }) {
+                    //                    Image(systemName: "backward.end.circle")
+                    //                        .font(.system(size: 30))
+                    //                }
+                    //
+                    //                Button(action: {
+                    //                    qPlayer.next()
+                    //                }) {
+                    //                    Image(systemName: "forward.end.circle")
+                    //                        .font(.system(size: 30))
+                    //                }
+                    
+//                    Button(action: {
+//                        print("stop")
+//                        qPlayer.stop()
+//                    }) {
+//                        Image(systemName: "stop.circle")
+//                            .font(.system(size: 30))
+//                    }
+//            }
+//            .padding(5)
 //            .background(Color.white)  Set the background color if needed
 //            .border(Color.blue, width: 2) // Set the border color and width
 //            .cornerRadius(10) // Set the corner radius for a rounded appearance
@@ -86,6 +94,10 @@ struct StreamingQueuPlayerView: View {
     }
 }
 
+#Preview {
+    StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235293.mp3",
+                                    "https://waarneming.nl/media/sound/235293.mp3"])
+}
 
 struct StreamingPlayerView: View {
     var audio : String
@@ -101,6 +113,7 @@ struct StreamingPlayerView: View {
                 Image(systemName: "play.circle")
                     .font(.system(size: 30))
             }
+            
             Button(action: {
                 player.stop()
             }) {

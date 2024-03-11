@@ -16,6 +16,7 @@ struct Location: Identifiable {
     var coordinate: CLLocationCoordinate2D
     var rarity: Int
     var hasPhoto: Bool
+    var hasSound: Bool
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -44,7 +45,8 @@ class ObservationsViewModel: ObservableObject {
             let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
             let rarity = observations?.results[i].rarity ?? 0
             let hasPhoto = observations?.results[i].has_photo ?? false
-            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto)
+            let hasSound = observations?.results[i].has_sound ?? false
+            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
 
             locations.append(newLocation)
 
@@ -53,25 +55,25 @@ class ObservationsViewModel: ObservableObject {
    
     func getPoiLocations() {
         poiLocations.removeAll()
-        var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0, hasPhoto: false)
+        var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Oostvaardersplassen", coordinate: CLLocationCoordinate2D(latitude: 52.452926, longitude: 5.357325), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Oostvaardersplassen", coordinate: CLLocationCoordinate2D(latitude: 52.452926, longitude: 5.357325), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Mokbaai", coordinate: CLLocationCoordinate2D(latitude: 53.005861, longitude: 4.762873), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Mokbaai", coordinate: CLLocationCoordinate2D(latitude: 53.005861, longitude: 4.762873), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Lauwersoog", coordinate: CLLocationCoordinate2D(latitude: 53.381690, longitude: 6.188163), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Lauwersoog", coordinate: CLLocationCoordinate2D(latitude: 53.381690, longitude: 6.188163), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "De zouweboezem", coordinate: CLLocationCoordinate2D(latitude: 51.948497, longitude: 4.995383), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "De zouweboezem", coordinate: CLLocationCoordinate2D(latitude: 51.948497, longitude: 4.995383), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
 //        newLocation = Location(name: "Werkhoven", coordinate: CLLocationCoordinate2D(latitude: 52.024052, longitude: 5.245350), rarity: 0)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Blauwe kamer", coordinate: CLLocationCoordinate2D(latitude: 51.942360, longitude: 5.610475), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Blauwe kamer", coordinate: CLLocationCoordinate2D(latitude: 51.942360, longitude: 5.610475), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
-        newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false)
+        newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
 
 //

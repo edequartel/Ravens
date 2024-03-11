@@ -37,10 +37,14 @@ struct MapObservationsUserView: View {
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
                             .fill(Color(myColor(value: location.rarity)))
-                            .frame(width: 10, height: 10)
+                            .frame(width: 12, height: 12)
                             .overlay(
-                                Circle()
-                                    .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1)
+                                ZStack {
+                                    Circle()
+                                        .stroke(location.hasSound ? Color.black : Color.white, lineWidth: 3)
+                                    Circle()
+                                        .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1)
+                                }
                             )
                     }
                 }

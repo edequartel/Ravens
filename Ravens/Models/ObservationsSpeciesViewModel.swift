@@ -37,16 +37,16 @@ class ObservationsSpeciesViewModel: ObservableObject {
             let longitude = observationsSpecies?.results[i].point.coordinates[0] ?? 5.245350
             let rarity = observationsSpecies?.results[i].rarity ?? 0
             let hasPhoto = (observationsSpecies?.results[i].photos.count ?? 0 > 0)
+            let hasSound = (observationsSpecies?.results[i].sounds.count ?? 0 > 0)
             
-            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto)
+            let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
 
             locations.append(newLocation)
 
         }
     }
     
-//    func fetchData(speciesId: Int, limit: Int, completion: @escaping (Bool) -> Void) {
-    func fetchData(speciesId: Int, limit: Int) {
+    func fetchData(speciesId: Int, limit: Int, date: Date, days: Int) {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
@@ -56,8 +56,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
-        let date_before = formatCurrentDate(value: settings.selectedDate)
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
+        let date_before = formatCurrentDate(value: date)
         
         let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         

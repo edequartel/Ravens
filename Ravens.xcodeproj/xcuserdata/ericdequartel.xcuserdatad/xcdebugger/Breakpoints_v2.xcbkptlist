@@ -18,38 +18,6 @@
             endingLineNumber = "20"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "CC3180BA-B578-45CA-BACA-012E06FF0822 - 9ba45341d0c6ad17"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt; in closure #1 (Ravens.SpeciesGroup) -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.SpeciesGroup&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0 in Ravens.SpeciesGroupView.body.getter : some"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/SpeciesGroupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "1260">
-               </Location>
-               <Location
-                  uuid = "CC3180BA-B578-45CA-BACA-012E06FF0822 - e40bd31d44d633ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.Text in closure #1 (Ravens.SpeciesGroup) -&gt; SwiftUI.VStack&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Ravens.SpeciesGroup&gt;, Swift.Int, SwiftUI.VStack&lt;SwiftUI.Text&gt;&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0 in Ravens.SpeciesGroupView.body.getter : some"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/SpeciesGroupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "1024">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,38 +34,6 @@
             endingLineNumber = "36"
             landmarkName = "getLocations()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "19A681D2-00CE-47E7-9213-CCD1C5F97FEA - 5e6dc44f1e420f54"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ravens.ObservationsViewModel.thelocations() -&gt; ()"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/ViewModels/ObservationsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "844">
-               </Location>
-               <Location
-                  uuid = "19A681D2-00CE-47E7-9213-CCD1C5F97FEA - 1b846e3679185d37"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ravens.ObservationsViewModel.getLocations() -&gt; ()"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/ViewModels/ObservationsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "1036">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -114,38 +50,6 @@
             endingLineNumber = "27"
             landmarkName = "saveCredentials()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "16AF1CE7-6468-40B8-AEB1-A0A2F453D030 - 2c8e0c80cc6a36da"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ravens.AuthManager.init() -&gt; Ravens.AuthManager"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/LoginView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "740">
-               </Location>
-               <Location
-                  uuid = "16AF1CE7-6468-40B8-AEB1-A0A2F453D030 - 2c8e0c80cc6a3746"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ravens.AuthManager.init() -&gt; Ravens.AuthManager"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/LoginView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "248">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -194,53 +98,6 @@
             endingLineNumber = "88"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "65E68641-13ED-4095-9917-B2B790F4CAFF - 217d6659238d93c6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ravens.PassportView.body.getter : some"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/PassportView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "700">
-               </Location>
-               <Location
-                  uuid = "65E68641-13ED-4095-9917-B2B790F4CAFF - 5cf537ca4509b4ce"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.SecureField&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, Swift.Optional&lt;SwiftUI.Text&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Ravens.PassportView.body.getter : some"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/PassportView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "1012">
-               </Location>
-               <Location
-                  uuid = "65E68641-13ED-4095-9917-B2B790F4CAFF - 699b5e9ec66376e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, initial: Swift.Bool, _: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.SecureField&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;, Swift.Optional&lt;SwiftUI.Text&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Ravens.PassportView.body.getter : some"
-                  moduleName = "Ravens"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericdequartel/Developer/_myApps/Ravens/Ravens/Views/PassportView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "736">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

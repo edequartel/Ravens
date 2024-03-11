@@ -22,8 +22,8 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            // Tab 0
-//            SoundsView()
+//            // Tab 0
+//            AudioView()
 //            .tabItem {
 //                Text("weather")
 //                Image(systemName: "globe")
