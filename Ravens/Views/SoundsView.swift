@@ -40,7 +40,7 @@ struct StreamingQueuPlayerView: View {
 
     var body: some View {
 //        VStack {
-                HStack {
+//                HStack {
 //                    Text("\(index)")
                     Button(action: {
                         print("play")
@@ -87,10 +87,10 @@ struct StreamingQueuPlayerView: View {
 //            .background(Color.white)  Set the background color if needed
 //            .border(Color.blue, width: 2) // Set the border color and width
 //            .cornerRadius(10) // Set the corner radius for a rounded appearance
-        }
-        .onAppear() {
+//        }
+//        .onAppear() {
 //            qPlayer.nowPlayingInfoController.set(keyValue: NowPlayingInfoProperty.isLiveStream(true))
-        }
+//        }
     }
 }
 

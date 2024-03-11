@@ -34,15 +34,17 @@ struct MapObservationsSpeciesView: View {
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
                             .fill(Color(myColor(value: location.rarity)))
+                            .stroke(location.hasPhoto ? Color.white : Color.clear,lineWidth: 1)
                             .frame(width: 12, height: 12)
+                        
                             .overlay(
-                                ZStack {
                                     Circle()
-                                        .stroke(location.hasSound ? Color.black : Color.white, lineWidth: 3)
-                                    Circle()
-                                        .stroke(location.hasPhoto ? Color.red : Color.white, lineWidth: 1)
-                                }
+                                        .fill(location.hasSound ? Color.white : Color.clear)
+                                        .frame(width: 6, height: 6)
                             )
+                        
+                        
+                        
                     }
                 }
             }
