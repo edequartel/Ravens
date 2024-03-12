@@ -72,6 +72,7 @@ struct ObsView: View {
                     
                     if obs.sounds.count>0 {
                         StreamingQueuPlayerView(audio: obs.sounds)
+                            .padding(5)
                     }
 
                 }
