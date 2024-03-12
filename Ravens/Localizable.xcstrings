@@ -131,7 +131,14 @@
       }
     },
     "App details" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App dtails"
+          }
+        }
+      }
     },
     "Code %@" : {
       "extractionState" : "stale",
@@ -230,7 +237,14 @@
       }
     },
     "Fetching Observation..." : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarneming ophalen..."
+          }
+        }
+      }
     },
     "Filter by" : {
       "localizations" : {
@@ -252,9 +266,6 @@
         }
       }
     },
-    "Genre: %@" : {
-
-    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -265,9 +276,6 @@
           }
         }
       }
-    },
-    "Globe" : {
-
     },
     "Go to Destination %lld" : {
       "extractionState" : "stale",
@@ -396,7 +404,6 @@
       }
     },
     "Loading..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -417,13 +424,34 @@
       }
     },
     "Login %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login %@"
+          }
+        }
+      }
     },
     "Login failed" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login fout"
+          }
+        }
+      }
     },
     "Login Name: %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login naam %@"
+          }
+        }
+      }
     },
     "Login waarneming.nl" : {
       "extractionState" : "stale",
@@ -437,7 +465,14 @@
       }
     },
     "Logout" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log uit"
+          }
+        }
+      }
     },
     "Main View" : {
       "extractionState" : "stale",
@@ -471,7 +506,24 @@
       }
     },
     "Me" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ik"
+          }
+        }
+      }
+    },
+    "Month" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mand"
+          }
+        }
+      }
     },
     "More at waarneming.nl" : {
       "localizations" : {
@@ -505,6 +557,7 @@
       }
     },
     "Name: %@ %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -562,7 +615,14 @@
       }
     },
     "observation.org" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "observation.org"
+          }
+        }
+      }
     },
     "Password" : {
       "localizations" : {
@@ -575,14 +635,31 @@
       }
     },
     "Password: %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachtwoord: %@"
+          }
+        }
+      }
+    },
+    "Plaats: %@" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats: %@"
+          }
+        }
+      }
     },
     "Poi" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poi"
+            "value" : "Vogelplek"
           }
         }
       }
@@ -695,12 +772,6 @@
         }
       }
     },
-    "Select a Singer" : {
-
-    },
-    "Select a singer to view details" : {
-
-    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -710,9 +781,6 @@
           }
         }
       }
-    },
-    "Song: %@" : {
-
     },
     "Sort by" : {
       "localizations" : {
@@ -735,17 +803,25 @@
       }
     },
     "Sounds: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Geluid: %@"
+            "value" : "Geluid %@"
           }
         }
       }
     },
     "Source" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bron"
+          }
+        }
+      }
     },
     "Species" : {
       "localizations" : {
@@ -766,6 +842,9 @@
           }
         }
       }
+    },
+    "Temperatuur: %@" : {
+
     },
     "Token: %@" : {
       "localizations" : {
@@ -826,6 +905,16 @@
         }
       }
     },
+    "Value" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarde"
+          }
+        }
+      }
+    },
     "Very rare" : {
       "localizations" : {
         "nl" : {
@@ -836,15 +925,25 @@
         }
       }
     },
-    "waarneming.nl" : {
+    "Voelt als: %@" : {
 
+    },
+    "waarneming.nl" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "waarneming.nl"
+          }
+        }
+      }
     },
     "Window" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spanne"
+            "value" : "Tijdspanne"
           }
         }
       }

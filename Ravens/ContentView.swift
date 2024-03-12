@@ -22,12 +22,12 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            // Tab 0
-            WeatherView()
-            .tabItem {
-                Text("Globe")
-                Image(systemName: "Globe")
-            }
+//            // Tab 0
+//            AudioView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
             // Tab 1
             ZStack {
                 MapObservationView()

@@ -35,7 +35,10 @@ struct ObservationsSpeciesView: View {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
+                        //
                         ObsView(obsID: result.id ?? 0, showUsername: true) //
+                        //
+                        
                     }
                     .font(.footnote)
                 }
@@ -46,7 +49,8 @@ struct ObservationsSpeciesView: View {
                 }
         .onAppear {
             log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 100) 
+            viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
+            )
         }
     }
 }

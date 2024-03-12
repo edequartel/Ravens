@@ -27,6 +27,8 @@ struct SpeciesDetailsView: View {
 
                     Divider()
                     
+//                    YearView(monthlyViews: [12, 15, 8, 20, 50, 180, 250, 140, 60, 12, 20, 18])
+                    
                     VStack(alignment: .leading) {
                         HStack {
                             Text(species.name)

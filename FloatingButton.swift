@@ -145,7 +145,6 @@ struct IconTextButton: View {
 }
 
 struct MockData {
-    
     static let colors = [
                 "e84393",
                 "0984e3",

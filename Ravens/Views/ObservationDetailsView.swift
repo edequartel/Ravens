@@ -32,10 +32,10 @@ struct ObservationDetailsView: View {
             }
             .onAppear {
                 log.info("speciesID \(speciesID)")
-                viewModel.fetchData(speciesId: speciesID, limit: 1)
+                viewModel.fetchData(speciesId: speciesID, limit: 1, date: settings.selectedDate, days: settings.days
+                )
             }
     }
-
 }
 
 struct ObservationDetailsView_Previews: PreviewProvider {
