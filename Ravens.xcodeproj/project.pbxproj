@@ -11,13 +11,6 @@
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
-		474093902B564F49004F10C5 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 474093892B564F49004F10C5 /* settings.png */; };
-		474093912B564F49004F10C5 /* nl.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938A2B564F49004F10C5 /* nl.png */; };
-		474093922B564F49004F10C5 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938B2B564F49004F10C5 /* map.png */; };
-		474093932B564F49004F10C5 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938C2B564F49004F10C5 /* list.png */; };
-		474093942B564F49004F10C5 /* specieslist.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938D2B564F49004F10C5 /* specieslist.png */; };
-		474093952B564F49004F10C5 /* manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938E2B564F49004F10C5 /* manual.png */; };
-		474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
 		474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C402F2B4BC4080038B3A5 /* Assets.xcassets */; };
@@ -94,13 +87,6 @@
 		4717C0BE2B9CC41400B570D0 /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
-		474093892B564F49004F10C5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		4740938A2B564F49004F10C5 /* nl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nl.png; sourceTree = "<group>"; };
-		4740938B2B564F49004F10C5 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
-		4740938C2B564F49004F10C5 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
-		4740938D2B564F49004F10C5 /* specieslist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = specieslist.png; sourceTree = "<group>"; };
-		4740938E2B564F49004F10C5 /* manual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manual.png; sourceTree = "<group>"; };
-		4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRCodeTestFlight.png; sourceTree = "<group>"; };
 		474C40282B4BC4040038B3A5 /* Ravens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ravens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		474C402B2B4BC4040038B3A5 /* RavensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensApp.swift; sourceTree = "<group>"; };
 		474C402D2B4BC4040038B3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -189,20 +175,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		474093882B564F49004F10C5 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				474093892B564F49004F10C5 /* settings.png */,
-				4740938A2B564F49004F10C5 /* nl.png */,
-				4740938B2B564F49004F10C5 /* map.png */,
-				4740938C2B564F49004F10C5 /* list.png */,
-				4740938D2B564F49004F10C5 /* specieslist.png */,
-				4740938E2B564F49004F10C5 /* manual.png */,
-				4740938F2B564F49004F10C5 /* QRCodeTestFlight.png */,
-			);
-			path = images;
-			sourceTree = SOURCE_ROOT;
-		};
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
-				474093882B564F49004F10C5 /* images */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
 				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
@@ -418,23 +389,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				474093902B564F49004F10C5 /* settings.png in Resources */,
-				474093942B564F49004F10C5 /* specieslist.png in Resources */,
 				4771C2D62B9E229F0044783A /* empty.wav in Resources */,
 				4771C2D72B9E229F0044783A /* cat.wav in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
-				474093952B564F49004F10C5 /* manual.png in Resources */,
-				474093962B564F49004F10C5 /* QRCodeTestFlight.png in Resources */,
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
 				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
 				4771C2D52B9E229F0044783A /* dog.wav in Resources */,
-				474093912B564F49004F10C5 /* nl.png in Resources */,
 				4771C2D82B9E229F0044783A /* piano.wav in Resources */,
-				474093922B564F49004F10C5 /* map.png in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
-				474093932B564F49004F10C5 /* list.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
