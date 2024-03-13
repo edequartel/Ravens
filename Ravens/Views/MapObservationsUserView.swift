@@ -69,6 +69,7 @@ struct MapObservationsUserView: View {
                             }
                         } label: {
                             Image(systemName: "plus.circle")
+                                .font(.title) 
                         }
                         
                         Button {
@@ -79,6 +80,7 @@ struct MapObservationsUserView: View {
                             observationsUserViewModel.fetchData(limit: limit, offset: offset)
                         } label: {
                             Image(systemName: "minus.circle")
+                                .font(.title)
                         }
                         Text("\(offset)")
                     }
