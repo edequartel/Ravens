@@ -2,7 +2,7 @@
 
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. 
 
-In de [Handleiding](manual.md) volgt een uitleg over hoe je de app kunt gebruiken en instellen.
+In de [handleiding](manual.md) of [handleiding in PDF](./images/manual.pd)) volgt een uitleg over hoe je de app kunt gebruiken en instellen.
 
 ![Ravens](./images/01ravens.png)
 
@@ -16,12 +16,12 @@ Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je
 ## TestFlight
 Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
 
-![QR-code](./images/QRCodeTestFlight.png)
+![QR-code](./images/QR code.png)
 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://edequartel.github.io/Ravens)
 
 ## Koffie?
-Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een _kopje koffie_.
+Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een [**kopje koffie**](https://www.buymeacoffee.com/4f4r4t6ytba) .
 
 [![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)
