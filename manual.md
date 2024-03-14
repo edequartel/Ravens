@@ -1,5 +1,7 @@
 # Ravens
 
+[https://edequartel.github.io/Ravens/manual.html](https://edequartel.github.io/Ravens/manual.html)
+
 ### Waarneming
 
 Bij het openen van Ravens zie je de kaart van Nederland. Door op een locatie te tikken zie je een cirkel met daarin de laatste waargenomen soorten in dat gebied. De soortengroep kun je aangeven in instellingen. De waarnemingen hebben kleuren. Deze laat de zeldzaamheid zien. Een ring om de waarneming geeft aan dat er geluidsopname bij hoort en een stip een foto. 
