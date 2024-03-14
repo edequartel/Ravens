@@ -2,7 +2,6 @@
 
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. 
 
-
 In de [handleiding](manual.md) of [handleiding in PDF](./images/manual.pd)) volgt een uitleg over hoe je de app kunt gebruiken en instellen.
 
 ![Ravens](./images/01ravens.png)
@@ -17,7 +16,7 @@ Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je
 ## TestFlight
 Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
 
-![QR-code](./images/QRcode.png)
+![QR-code](./images/QRCode.png)
 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://edequartel.github.io/Ravens)
