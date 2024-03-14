@@ -2,7 +2,7 @@
 
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. 
 
-In de [handleiding in PDF](./images/manual.pdf) volgt een uitleg over hoe je de app kunt gebruiken en instellen.
+In de [handleiding in PDF](./images/manual.pdf) volgt een uitleg over hoe je de app kunt gebruiken en instellen. Zie ook de [video](https://vimeo.com/923223925?share=copy) voor snel een overzicht. 
 
 ![Ravens](./images/01ravens.png)
 
