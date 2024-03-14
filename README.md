@@ -21,4 +21,7 @@ Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://edequartel.github.io/Ravens)
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="4f4r4t6ytba" data-color="#5F7FFF" data-emoji="☕"  data-font="Cookie" data-text="Koop me een kopje  koffie?" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+## Koffie?
+Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een _kopje koffie_.
+
+[![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)
