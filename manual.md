@@ -1,6 +1,7 @@
-# Ravens
+# Handleiding - Ravens
 
-[https://edequartel.github.io/Ravens/manual.html](https://edequartel.github.io/Ravens/manual.html)
+* [https://edequartel.github.io/Ravens/manual.html](https://edequartel.github.io/Ravens/manual.html)
+* [Handleiding in PDF](./images/manual.pdf)
 
 ### Waarneming
 
