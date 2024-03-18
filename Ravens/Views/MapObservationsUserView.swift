@@ -37,6 +37,7 @@ struct MapObservationsUserView: View {
     var body: some View {
         ZStack {
             Map(position: $myPosition) {
+                UserAnnotation()
                 ForEach(observationsUserViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
@@ -106,8 +107,8 @@ struct MapObservationsUserView: View {
             .mapStyle(.hybrid(elevation: elevation))
 //            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
-                MapUserLocationButton()
-                MapPitchToggle()
+//                MapUserLocationButton()
+//                MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
             

@@ -17,13 +17,6 @@ struct MapObservationsSpeciesView: View {
     
     @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
     
-//    @State private var position = MapCameraPosition.region(
-//        MKCoordinateRegion(
-//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-//        )
-//    )
-//    
     @State private var isSheetObservationsViewPresented = false
     
     var speciesID: Int
@@ -32,6 +25,8 @@ struct MapObservationsSpeciesView: View {
     var body: some View {
         ZStack {
             Map(position: $myPosition) {
+                UserAnnotation()
+                
                 ForEach(observationsSpeciesViewModel.locations) { location in
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
@@ -67,13 +62,6 @@ struct MapObservationsSpeciesView: View {
                     //
                     
                     Button(action: {
-                        myPosition = .userLocation(fallback: .automatic)
-                    }) {
-                        Image(systemName: "circle.circle")
-                            .font(.title)
-                    }
-                    
-                    Button(action: {
                         if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                             // Limiting the date to not go beyond today
                             settings.selectedDate = min(newDate, Date())
@@ -84,7 +72,6 @@ struct MapObservationsSpeciesView: View {
                         Image(systemName: "backward.fill")
                     }
 
-                    
                     Button(action: {
                         // Calculate the potential new date by adding days to the selected date
                         if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
@@ -116,7 +103,6 @@ struct MapObservationsSpeciesView: View {
             
             .mapStyle(.hybrid(elevation: .realistic))
             .mapControls() {
-                MapUserLocationButton()
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }

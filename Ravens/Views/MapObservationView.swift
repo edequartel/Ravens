@@ -30,6 +30,9 @@ struct MapObservationView: View {
         VStack {
             MapReader { proxy in
                 Map(position: $myPosition) {
+                    
+                    UserAnnotation()
+                    
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
                             Annotation(location.name, coordinate: location.coordinate) {
@@ -66,10 +69,7 @@ struct MapObservationView: View {
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
                 
-                .mapControls() {
-                    MapPitchToggle()
-                    MapCompass() //tapping this makes it north
-                }
+
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
@@ -97,16 +97,19 @@ struct MapObservationView: View {
                         settings.currentLocation = newLocation
                     }
                 }
+                
+                .mapControls() {
+//                    MapPitchToggle()
+                    MapUserLocationButton()
+                    MapCompass() //tapping this makes it north
+                }
             }
         }
         .onAppear(){
-            
             // Get the actual location
             let location: CLLocation? = CLLocationManager().location
             circlePos.latitude = location?.coordinate.latitude ?? latitude
             circlePos.longitude = location?.coordinate.latitude ?? longitude
-            
-            
             
             settings.currentLocation = location
             // Get the locations of all the observations... not from settings

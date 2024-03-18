@@ -3,8 +3,14 @@ import MapKit
 
 struct SimpleMapView: View {
     
+    @State private var position: MapCameraPosition = .userLocation(fallback: .automatic)
+    
     var body: some View {
-        Text("Hello, World!")
+        Map(position: $position) {
+        }
+        .mapControls() {
+            MapUserLocationButton()
+        }
     }
 }
 
