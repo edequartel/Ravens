@@ -83,7 +83,7 @@ class ObservationsViewModel: ObservableObject {
     
     ///
     func fetchData(lat: Double, long: Double) {
-        log.info("fetchData ObservationsViewModel")
+        log.error("fetchData ObservationsViewModel")
 
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -102,7 +102,7 @@ class ObservationsViewModel: ObservableObject {
                     self.observations = observations
                     self.getLocations()
                     self.getPoiLocations()
-                    self.log.info("observations locations count \(self.locations.count)")
+                    self.log.error("observations locations count \(self.locations.count)")
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsViewModel: \(error)")

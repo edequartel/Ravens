@@ -107,8 +107,8 @@ struct MapObservationsUserView: View {
             .mapStyle(.hybrid(elevation: elevation))
 //            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
-//                MapUserLocationButton()
-//                MapPitchToggle()
+                MapUserLocationButton()
+                MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
             
