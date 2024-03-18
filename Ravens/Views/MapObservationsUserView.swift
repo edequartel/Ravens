@@ -62,6 +62,17 @@ struct MapObservationsUserView: View {
                     Spacer()
                     HStack {
                         Button {
+                            if offset >= 100 {
+                                offset = offset - 100
+                            }
+                            limit = 100
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                        } label: {
+                            Image(systemName: "minus.circle")
+                                .font(.title)
+                        }
+                        
+                        Button {
                             if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
@@ -72,16 +83,6 @@ struct MapObservationsUserView: View {
                                 .font(.title) 
                         }
                         
-                        Button {
-                            if offset >= 100 {
-                                offset = offset - 100
-                            }
-                            limit = 100
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
-                        } label: {
-                            Image(systemName: "minus.circle")
-                                .font(.title)
-                        }
                         Text("\(offset)")
                     }
                 }

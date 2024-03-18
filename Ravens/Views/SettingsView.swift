@@ -105,6 +105,8 @@ struct SettingsView: View {
                             observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                                             long: settings.currentLocation?.coordinate.longitude ?? longitude)
                         }
+                    
+                    
                 }
                 
                 Section("International") {
