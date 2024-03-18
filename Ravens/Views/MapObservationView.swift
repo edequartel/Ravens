@@ -17,22 +17,8 @@ struct MapObservationView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
-        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    )
-    @State private var tracking: MapUserTrackingMode = .follow
-    
-    
-    
     @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
-//    @State private var position = MapCameraPosition.region(
-//        MKCoordinateRegion(
-//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-//        )
-//    )
+
     
     //    @State private var position : MapCameraPosition = .automatic
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -46,9 +32,6 @@ struct MapObservationView: View {
                 Map(position: $myPosition) {
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
-//                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
-//                                .tint(.gray)
-                            
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Triangle()
                                     .fill(Color.gray)
@@ -58,8 +41,6 @@ struct MapObservationView: View {
                                             .stroke(Color.white, lineWidth: 1) // Customize the border color and width
                                     )
                             }
-                            
-                            
                         }
                     }
                     
@@ -86,23 +67,20 @@ struct MapObservationView: View {
                 .mapStyle(.hybrid(elevation: .realistic))
                 
                 .mapControls() {
-//                    MapPitchToggle()
+                    MapPitchToggle()
                     MapCompass() //tapping this makes it north
                 }
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
-//                    }
-                    
-                    Button(action: {
-                        myPosition = .userLocation(fallback: .automatic)
-                    }) {
-                        Image(systemName: "circle.circle")
-                            .font(.title)
-                    }
-                }
-                    
+                        Button(action: {
+                            myPosition = .userLocation(fallback: .automatic)
+                        }) {
+                            Image(systemName: "circle.circle")
+                                .font(.title)
+                        }
+                    } 
                 }
                 
                 .onTapGesture() { position in //get all the data from the location
@@ -136,7 +114,7 @@ struct MapObservationView: View {
                                             long: circlePos.longitude)
 
             log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })            
+            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
         }
     }
 }
