@@ -2,9 +2,12 @@
 
 ## 17
 - second language
-- scrolling trough days
-- scrolling trough obs
-- user posotions
+- scrolling through days (done in birdview)
+- scrolling through obs (done in userview)
+- user positions (made a start)
+
+## 18
+- notifications
 
 ## ToDo
 
