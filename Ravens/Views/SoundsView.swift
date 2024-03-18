@@ -35,6 +35,7 @@ struct StreamingQueuPlayerView: View {
 
     let qPlayer = QueuedAudioPlayer()
     
+    @State private var playerState: String = "Idle"
     @State private var isPlaying = false
     
 

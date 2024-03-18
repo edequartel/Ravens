@@ -21,18 +21,8 @@ struct MapObservationsUserView: View {
     @State private var offset = 0
     
     @State private var elevation: MapStyle.Elevation = .realistic
-    
-//    @State private var position = MapCameraPosition.region(
-//        MKCoordinateRegion(
-//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-//        )
-//    )
-//    
     @State private var isSheetObservationsViewPresented = false
     
-//    var speciesID: Int
-//    var speciesName: String
     
     var body: some View {
         ZStack {
@@ -61,54 +51,49 @@ struct MapObservationsUserView: View {
                         NetworkView()
                         Spacer()
                         VStack(alignment: .trailing) {
-                            Text("\(offset) \(observationsUserViewModel.observationsSpecies?.count ?? 0)x")
+                            Text("\(observationsUserViewModel.observationsSpecies?.count ?? 0)x -\(offset)")
                                 .lineLimit(1) // Set the maximum number of lines to 1
                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         }
                     }
                     .padding(5)
-                    .frame(maxHeight: 30)
+//                    .background(Color.obsGreenEagle.opacity(0.5))
 
                     HStack {
                         Spacer()
-                        Button {
+                        Button(action: {
                             if offset >= 100 {
                                 offset = offset - 100
                             }
                             limit = 100
                             observationsUserViewModel.fetchData(limit: limit, offset: offset)
-                        } label: {
+                        }) {
                             Image(systemName: "minus.circle")
-//                                .font(.title)
+                                .font(.title)
                         }
-                        
-                        Button {
+
+                        Button(action: {
                             if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
                                 observationsUserViewModel.fetchData(limit: limit, offset: offset)
                             }
-                        } label: {
+                        }) {
                             Image(systemName: "plus.circle")
-//                                .font(.title)
+                                .font(.title)
                         }
                     }
                     .padding(5)
-                    .frame(maxHeight: 30)
                 }
                 
                 .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
-//                .frame(maxHeight: 80)
-//                .padding(5)
-
             }
             
 
             
             .mapStyle(.hybrid(elevation: elevation))
-//            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
@@ -118,11 +103,7 @@ struct MapObservationsUserView: View {
             ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-//            ObservationsUserView()
-            
             ObservationsUserViewExtra(viewModel: observationsUserViewModel)
-            
-            
         }
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset)

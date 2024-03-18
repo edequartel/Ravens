@@ -84,16 +84,6 @@
         }
       }
     },
-    "%lld %lldx" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$lldx"
-          }
-        }
-      }
-    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
@@ -119,6 +109,16 @@
     },
     "%lldx" : {
 
+    },
+    "%lldx -%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lldx -%2$lld"
+          }
+        }
+      }
     },
     "All" : {
       "localizations" : {
