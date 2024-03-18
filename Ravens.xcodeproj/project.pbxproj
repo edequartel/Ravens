@@ -51,10 +51,6 @@
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		4771C2CF2B9E22340044783A /* SwiftySound in Frameworks */ = {isa = PBXBuildFile; productRef = 4771C2CE2B9E22340044783A /* SwiftySound */; };
-		4771C2D52B9E229F0044783A /* dog.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D02B9E229F0044783A /* dog.wav */; };
-		4771C2D62B9E229F0044783A /* empty.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D12B9E229F0044783A /* empty.wav */; };
-		4771C2D72B9E229F0044783A /* cat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D22B9E229F0044783A /* cat.wav */; };
-		4771C2D82B9E229F0044783A /* piano.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D32B9E229F0044783A /* piano.wav */; };
 		4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
@@ -122,10 +118,6 @@
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
-		4771C2D02B9E229F0044783A /* dog.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = dog.wav; path = Audio/dog.wav; sourceTree = "<group>"; };
-		4771C2D12B9E229F0044783A /* empty.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = empty.wav; path = Audio/empty.wav; sourceTree = "<group>"; };
-		4771C2D22B9E229F0044783A /* cat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat.wav; path = Audio/cat.wav; sourceTree = "<group>"; };
-		4771C2D32B9E229F0044783A /* piano.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = piano.wav; path = Audio/piano.wav; sourceTree = "<group>"; };
 		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinspingdoorvoer.mp3; path = Audio/perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
 		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
@@ -178,11 +170,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				4771C2D22B9E229F0044783A /* cat.wav */,
-				4771C2D02B9E229F0044783A /* dog.wav */,
-				4771C2D12B9E229F0044783A /* empty.wav */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
-				4771C2D32B9E229F0044783A /* piano.wav */,
 				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				477ECF152B98972900D96BE9 /* WeatherView.swift */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
@@ -389,15 +377,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4771C2D62B9E229F0044783A /* empty.wav in Resources */,
-				4771C2D72B9E229F0044783A /* cat.wav in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
 				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
-				4771C2D52B9E229F0044783A /* dog.wav in Resources */,
-				4771C2D82B9E229F0044783A /* piano.wav in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,7 +579,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -628,7 +612,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
