@@ -54,24 +54,23 @@ struct MapObservationsUserView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-                    NetworkView()
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("\(observationsUserViewModel.observationsSpecies?.count ?? 0)x")
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    }
-                    Spacer()
-//                    Button(action: {
-//                        myPosition = .userLocation(fallback: .automatic)
-//                    }) {
-//                        Image(systemName: "circle.circle")
-//                            .font(.title)
-//                    }
+                VStack {
                     HStack {
+                        Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                            .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+                        NetworkView()
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            Text("\(offset) \(observationsUserViewModel.observationsSpecies?.count ?? 0)x")
+                                .lineLimit(1) // Set the maximum number of lines to 1
+                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        }
+                    }
+                    .padding(5)
+                    .frame(maxHeight: 30)
+
+                    HStack {
+                        Spacer()
                         Button {
                             if offset >= 100 {
                                 offset = offset - 100
@@ -80,7 +79,7 @@ struct MapObservationsUserView: View {
                             observationsUserViewModel.fetchData(limit: limit, offset: offset)
                         } label: {
                             Image(systemName: "minus.circle")
-                                .font(.title)
+//                                .font(.title)
                         }
                         
                         Button {
@@ -91,18 +90,22 @@ struct MapObservationsUserView: View {
                             }
                         } label: {
                             Image(systemName: "plus.circle")
-                                .font(.title) 
+//                                .font(.title)
                         }
-                        
-                        Text("\(offset)")
                     }
+                    .padding(5)
+                    .frame(maxHeight: 30)
                 }
-                .padding(5)
-                .frame(maxWidth: .infinity)
+                
+                .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
+//                .frame(maxHeight: 80)
+//                .padding(5)
 
             }
+            
+
             
             .mapStyle(.hybrid(elevation: elevation))
 //            .mapStyle(.standard(elevation: .realistic))

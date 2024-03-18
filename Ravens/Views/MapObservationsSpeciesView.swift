@@ -64,6 +64,9 @@ struct MapObservationsSpeciesView: View {
                         Text("\(settings.days)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
                     }
+                    .padding(5)
+                    .frame(maxHeight: 30)
+                    
                     HStack {
                         Spacer()
                         Button(action: {
@@ -97,12 +100,17 @@ struct MapObservationsSpeciesView: View {
                             Image(systemName: "square.fill")
                         }
                     }
+                    .padding(5)
+                    .frame(maxHeight: 30)
                 }
-                .padding(5)
-                .frame(maxWidth: .infinity)
+//                .padding(5)
+                .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
+//            .frame(maxHeight: 80)
+           
+
             
             .mapStyle(.hybrid(elevation: .realistic))
             .mapControls() {

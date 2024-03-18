@@ -95,8 +95,6 @@ struct MapObservationView: View {
                 .onTapGesture() { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
-                        // Create a new CLLocation instance with the updated coordinates
-                        let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                     }
                 }
