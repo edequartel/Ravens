@@ -14,6 +14,7 @@ struct MapObservationView: View {
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var region = MKCoordinateRegion(
@@ -147,6 +148,7 @@ struct MapObservationView_Previews: PreviewProvider {
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+            .environmentObject(KeychainViewModel())
 
     }
 }
