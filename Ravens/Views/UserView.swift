@@ -9,9 +9,9 @@ import SwiftUI
 
 struct UserView: View {
     @EnvironmentObject var userViewModel:  UserViewModel
-    
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
+    
     
     var body: some View {
         VStack(alignment: .leading) {

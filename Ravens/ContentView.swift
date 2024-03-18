@@ -22,6 +22,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
+            // Tab 0
+//            SimpleMapView()
+//                .tabItem {
+//                    Text("weather")
+//                    Image(systemName: "globe")
+//                }
+
 //            // Tab 0
 //            AudioView()
 //            .tabItem {

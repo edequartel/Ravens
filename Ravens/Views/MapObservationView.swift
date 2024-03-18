@@ -16,14 +16,22 @@ struct MapObservationView: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var myActualPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-        )
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868),
+        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
     )
+    @State private var tracking: MapUserTrackingMode = .follow
+    
+    
+    
+    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    
+//    @State private var position = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
+//        )
+//    )
     
     //    @State private var position : MapCameraPosition = .automatic
     @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -34,7 +42,7 @@ struct MapObservationView: View {
     var body: some View {
         VStack {
             MapReader { proxy in
-                Map(position: $position) {
+                Map(position: $myPosition) {
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
 //                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
@@ -77,14 +85,23 @@ struct MapObservationView: View {
                 .mapStyle(.hybrid(elevation: .realistic))
                 
                 .mapControls() {
-                    MapPitchToggle()
+//                    MapPitchToggle()
                     MapCompass() //tapping this makes it north
                 }
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
+//                    }
+                    
+                    Button(action: {
+                        myPosition = .userLocation(fallback: .automatic)
+                    }) {
+                        Image(systemName: "circle.circle")
+                            .font(.title)
                     }
+                }
+                    
                 }
                 
                 .onTapGesture() { position in //get all the data from the location
@@ -110,8 +127,9 @@ struct MapObservationView: View {
             circlePos.latitude = location?.coordinate.latitude ?? latitude
             circlePos.longitude = location?.coordinate.latitude ?? longitude
             
-            settings.currentLocation = location
             
+            
+            settings.currentLocation = location
             // Get the locations of all the observations... not from settings
             observationsViewModel.fetchData(lat: circlePos.latitude,
                                             long: circlePos.longitude)

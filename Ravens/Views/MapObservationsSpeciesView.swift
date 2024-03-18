@@ -15,13 +15,15 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-        )
-    )
+    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
     
+//    @State private var position = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
+//        )
+//    )
+//    
     @State private var isSheetObservationsViewPresented = false
     
     var speciesID: Int
@@ -29,7 +31,7 @@ struct MapObservationsSpeciesView: View {
     
     var body: some View {
         ZStack {
-            Map(position: $position) {
+            Map(position: $myPosition) {
                 ForEach(observationsSpeciesViewModel.locations) { location in
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
@@ -63,6 +65,14 @@ struct MapObservationsSpeciesView: View {
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     //
+                    
+                    Button(action: {
+                        myPosition = .userLocation(fallback: .automatic)
+                    }) {
+                        Image(systemName: "circle.circle")
+                            .font(.title)
+                    }
+                    
                     Button(action: {
                         if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                             // Limiting the date to not go beyond today
