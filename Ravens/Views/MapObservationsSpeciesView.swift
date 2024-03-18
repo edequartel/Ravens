@@ -15,12 +15,7 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-        )
-    )
+    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
     
     @State private var isSheetObservationsViewPresented = false
     
@@ -29,7 +24,9 @@ struct MapObservationsSpeciesView: View {
     
     var body: some View {
         ZStack {
-            Map(position: $position) {
+            Map(position: $myPosition) {
+                UserAnnotation()
+                
                 ForEach(observationsSpeciesViewModel.locations) { location in
                     Annotation("", coordinate: location.coordinate) {
                         Circle()
@@ -49,54 +46,57 @@ struct MapObservationsSpeciesView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-                    NetworkView()
-                    //
-                    Spacer()
-                    Text("\(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
-                        .lineLimit(1) // Set the maximum number of lines to 1
-                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    //
-                    Text("\(speciesName)")
-                        .lineLimit(1) // Set the maximum number of lines to 1
-                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    //
-                    Button(action: {
-                        if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-                            // Limiting the date to not go beyond today
-                            settings.selectedDate = min(newDate, Date())
-                        }
-                        // Debugging or additional actions
-                        observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
-                    }) {
-                        Image(systemName: "backward.fill")
+                VStack {
+                    HStack {
+                        Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+                            .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+                        NetworkView()
+                        //
+                        Spacer()
+                        Text("\(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        //
+                        Text("\(speciesName)")
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        //
+                        Text("\(settings.days)d")
+                        Text("\(settings.selectedDate, formatter: dateFormatter)")
                     }
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+                                // Limiting the date to not go beyond today
+                                settings.selectedDate = min(newDate, Date())
+                            }
+                            // Debugging or additional actions
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                        }) {
+                            Image(systemName: "backward.fill")
+                        }
 
-                    
-                    Button(action: {
-                        // Calculate the potential new date by adding days to the selected date
-                        if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-                            // Ensure the new date does not go beyond today
-                            settings.selectedDate = min(newDate, Date())
+                        Button(action: {
+                            // Calculate the potential new date by adding days to the selected date
+                            if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+                                // Ensure the new date does not go beyond today
+                                settings.selectedDate = min(newDate, Date())
+                            }
+                            // Debugging or additional actions
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                        }) {
+                            Image(systemName: "forward.fill")
                         }
-                        // Debugging or additional actions
-                        observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
-                    }) {
-                        Image(systemName: "forward.fill")
+                        
+                        Button(action: {
+                            settings.selectedDate = Date()
+                            print("Date updated to \(settings.selectedDate)")
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                        }) {
+                            Image(systemName: "square.fill")
+                        }
                     }
-                    
-                    Button(action: {
-                        settings.selectedDate = Date()
-                        print("Date updated to \(settings.selectedDate)")
-                        observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
-                    }) {
-                        Image(systemName: "square.fill")
-                    }
- 
-                    Text("\(settings.days)d")
-                    Text("\(settings.selectedDate, formatter: dateFormatter)")
                 }
                 .padding(5)
                 .frame(maxWidth: .infinity)

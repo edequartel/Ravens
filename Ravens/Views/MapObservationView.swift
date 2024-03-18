@@ -9,37 +9,46 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
+    @Published var location: CLLocation?
+    
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        self.location = location
+    }
+}
+
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-    
+
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var myActualPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-        )
-    )
-    
-    //    @State private var position : MapCameraPosition = .automatic
-    @State private var circlePos = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    
-    @State private var long = "longitude"
-    @State private var lat = "latitude"
+    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+
+    @ObservedObject var locationManager = LocationManager()
+    @State private var circlePos: CLLocationCoordinate2D?
     
     var body: some View {
         VStack {
             MapReader { proxy in
-                Map(position: $position) {
+                Map(position: $myPosition) {
+                    
+                    UserAnnotation()
+                    
                     if (settings.poiOn) {
                         ForEach(observationsViewModel.poiLocations) { location in
-//                            Marker(location.name, systemImage: "mappin", coordinate: location.coordinate)
-//                                .tint(.gray)
-                            
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Triangle()
                                     .fill(Color.gray)
@@ -49,8 +58,6 @@ struct MapObservationView: View {
                                             .stroke(Color.white, lineWidth: 1) // Customize the border color and width
                                     )
                             }
-                            
-                            
                         }
                     }
                     
@@ -70,57 +77,58 @@ struct MapObservationView: View {
                         
                     }
                     
-                    MapCircle(center: circlePos, radius: CLLocationDistance(settings.radius))
+                    MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(.white, lineWidth: 1)
+                    
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
                 
-                .mapControls() {
-                    MapPitchToggle()
-                    MapCompass() //tapping this makes it north
-                }
+
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
-                    }
+                    } 
                 }
                 
                 .onTapGesture() { position in //get all the data from the location
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
-                        lat =  String(coordinate.latitude)
-                        long = String(coordinate.longitude)
-                        
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                        
-                        // Update currentLocation with the new CLLocation instance
-                        settings.currentLocation = newLocation
                     }
+                }
+                
+                .mapControls() {
+                    MapUserLocationButton()
+                    MapCompass() //tapping this makes it north
                 }
             }
         }
         .onAppear(){
-            
-            // Get the actual location
-            let location: CLLocation? = CLLocationManager().location
-            circlePos.latitude = location?.coordinate.latitude ?? latitude
-            circlePos.longitude = location?.coordinate.latitude ?? longitude
-            
-            settings.currentLocation = location
-            
-            // Get the locations of all the observations... not from settings
-            observationsViewModel.fetchData(lat: circlePos.latitude,
-                                            long: circlePos.longitude)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let location = self.locationManager.location {
+                    let myLatitude = location.coordinate.latitude
+                    let myLongitude = location.coordinate.longitude
+                    print("My location is: \(myLatitude), \(myLongitude)")
+                    circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                } else {
+                    print("Location is not available yet")
+                    // Handle the case when location is not available
+                }
 
-            log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-            speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })            
+                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+            }
         }
     }
 }
+
+
+
 
 struct MapObservationView_Previews: PreviewProvider {
     static var previews: some View {
@@ -129,6 +137,7 @@ struct MapObservationView_Previews: PreviewProvider {
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+            .environmentObject(KeychainViewModel())
 
     }
 }

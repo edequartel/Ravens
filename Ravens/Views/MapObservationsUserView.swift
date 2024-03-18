@@ -15,16 +15,20 @@ struct MapObservationsUserView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    
     @State private var limit = 100
     @State private var offset = 0
     
-    @State private var position = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
-        )
-    )
+    @State private var elevation: MapStyle.Elevation = .realistic
     
+//    @State private var position = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+//            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
+//        )
+//    )
+//    
     @State private var isSheetObservationsViewPresented = false
     
 //    var speciesID: Int
@@ -32,7 +36,8 @@ struct MapObservationsUserView: View {
     
     var body: some View {
         ZStack {
-            Map(position: $position) {
+            Map(position: $myPosition) {
+                UserAnnotation()
                 ForEach(observationsUserViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
@@ -60,6 +65,12 @@ struct MapObservationsUserView: View {
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
                     Spacer()
+//                    Button(action: {
+//                        myPosition = .userLocation(fallback: .automatic)
+//                    }) {
+//                        Image(systemName: "circle.circle")
+//                            .font(.title)
+//                    }
                     HStack {
                         Button {
                             if offset >= 100 {
@@ -93,7 +104,7 @@ struct MapObservationsUserView: View {
 
             }
             
-            .mapStyle(.hybrid(elevation: .realistic))
+            .mapStyle(.hybrid(elevation: elevation))
 //            .mapStyle(.standard(elevation: .realistic))
             .mapControls() {
                 MapUserLocationButton()
