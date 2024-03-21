@@ -29,14 +29,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-
+    
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-
+    
     @ObservedObject var locationManager = LocationManager()
     @State private var circlePos: CLLocationCoordinate2D?
     
@@ -69,9 +69,9 @@ struct MapObservationView: View {
                                 .frame(width: 12, height: 12)
                             
                                 .overlay(
-                                        Circle()
-                                            .fill(location.hasPhoto ? Color.white : Color.clear)
-                                            .frame(width: 6, height: 6)
+                                    Circle()
+                                        .fill(location.hasPhoto ? Color.white : Color.clear)
+                                        .frame(width: 6, height: 6)
                                 )
                         }
                         
@@ -84,7 +84,7 @@ struct MapObservationView: View {
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
                 
-
+                
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
@@ -93,10 +93,29 @@ struct MapObservationView: View {
                 }
                 
                 .onTapGesture() { position in //get all the data from the location
+                    //                    if let coordinate = proxy.convert(position, from: .local) {
+                    //                        observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
+                    //                        circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    //                    }
+                    //
+                    
                     if let coordinate = proxy.convert(position, from: .local) {
                         observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
+                        
+                        // Create a new CLLocation instance with the updated coordinates
+                        let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        
+                        // Update currentLocation with the new CLLocation instance
+                        settings.currentLocation = newLocation
                     }
+                    
+                    
+                    
+                    //
+                    
+                    
+                    
                 }
                 
                 .mapControls() {
@@ -117,7 +136,7 @@ struct MapObservationView: View {
                     print("Location is not available yet")
                     // Handle the case when location is not available
                 }
-
+                
                 log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                 speciesGroupViewModel.fetchData(completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
@@ -136,6 +155,6 @@ struct MapObservationView_Previews: PreviewProvider {
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(KeychainViewModel())
-
+        
     }
 }

@@ -36,9 +36,9 @@ struct MapObservationsUserView: View {
                             .frame(width: 12, height: 12)
                         
                             .overlay(
-                                    Circle()
-                                        .fill(location.hasPhoto ? Color.white : Color.clear)
-                                        .frame(width: 6, height: 6)
+                                Circle()
+                                    .fill(location.hasPhoto ? Color.white : Color.clear)
+                                    .frame(width: 6, height: 6)
                             )
                     }
                 }
@@ -51,27 +51,23 @@ struct MapObservationsUserView: View {
                         NetworkView()
                         Spacer()
                         VStack(alignment: .trailing) {
-                            Text("\(observationsUserViewModel.observationsSpecies?.count ?? 0)x -\(offset)")
-                                .lineLimit(1) // Set the maximum number of lines to 1
-                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                            HStack{
+                                Spacer()
+                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset)")
+                                Text(" - ")
+                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset + 100)")
+                                Text(" Obs")
+                            }
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         }
                     }
                     .padding(5)
-//                    .background(Color.obsGreenEagle.opacity(0.5))
-
+                    .frame(maxHeight: 30)
+                    
                     HStack {
                         Spacer()
-                        Button(action: {
-                            if offset >= 100 {
-                                offset = offset - 100
-                            }
-                            limit = 100
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
-                        }) {
-                            Image(systemName: "minus.circle")
-                                .font(.title)
-                        }
-
+                        
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
                                 offset = min(offset + 100, maxOffset)
@@ -79,11 +75,24 @@ struct MapObservationsUserView: View {
                                 observationsUserViewModel.fetchData(limit: limit, offset: offset)
                             }
                         }) {
-                            Image(systemName: "plus.circle")
-                                .font(.title)
+                            Image(systemName: "backward.fill")
+                            //                                .font(.title)
                         }
+                        
+                        Button(action: {
+                            if offset >= 100 {
+                                offset = offset - 100
+                            }
+                            limit = 100
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                        }) {
+                            Image(systemName: "forward.fill")
+                            //                                .font(.title)
+                        }
+
                     }
                     .padding(5)
+                    .frame(maxHeight: 30)
                 }
                 
                 .font(.headline)
@@ -91,7 +100,7 @@ struct MapObservationsUserView: View {
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
             
-
+            
             
             .mapStyle(.hybrid(elevation: elevation))
             .mapControls() {

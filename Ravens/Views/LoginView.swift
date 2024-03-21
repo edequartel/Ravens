@@ -99,6 +99,7 @@ struct LoginView: View {
         Form {
             Section("Login") {
                 VStack {
+//                    Text("Login to \(settings.selectedInBetween)")
                     TextField("Name", text: $keyChainviewModel.loginName)
                         .onChange(of: keyChainviewModel.loginName) {
                             keyChainviewModel.loginName = keyChainviewModel.loginName.lowercased()
@@ -128,6 +129,7 @@ struct LoginView: View {
                         }
                         .buttonStyle(.bordered)
                         .frame(maxWidth: .infinity)
+                        .foregroundColor(.red)
                     }
                     
                 }

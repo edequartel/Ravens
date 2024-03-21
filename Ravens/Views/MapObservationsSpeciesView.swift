@@ -35,9 +35,9 @@ struct MapObservationsSpeciesView: View {
                             .frame(width: 12, height: 12)
                         
                             .overlay(
-                                    Circle()
-                                        .fill(location.hasPhoto ? Color.white : Color.clear)
-                                        .frame(width: 6, height: 6)
+                                Circle()
+                                    .fill(location.hasPhoto ? Color.white : Color.clear)
+                                    .frame(width: 6, height: 6)
                             )
                         
                         
@@ -79,7 +79,7 @@ struct MapObservationsSpeciesView: View {
                         }) {
                             Image(systemName: "backward.fill")
                         }
-
+                        
                         Button(action: {
                             // Calculate the potential new date by adding days to the selected date
                             if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
@@ -103,14 +103,14 @@ struct MapObservationsSpeciesView: View {
                     .padding(5)
                     .frame(maxHeight: 30)
                 }
-//                .padding(5)
+                //                .padding(5)
                 .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
-//            .frame(maxHeight: 80)
-           
-
+            //            .frame(maxHeight: 80)
+            
+            
             
             .mapStyle(.hybrid(elevation: .realistic))
             .mapControls() {
@@ -126,7 +126,7 @@ struct MapObservationsSpeciesView: View {
         }
         .onAppear {
             observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
-)
+            )
         }
     }
     

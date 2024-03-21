@@ -37,8 +37,6 @@ struct ObservationsSpeciesView: View {
                         result in
                         //
                         ObsView(obsID: result.id ?? 0, showUsername: true) //
-                        //
-                        
                     }
                     .font(.footnote)
                 }

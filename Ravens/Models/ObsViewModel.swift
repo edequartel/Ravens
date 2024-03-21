@@ -14,6 +14,8 @@ class ObsViewModel: ObservableObject {
     
     @Published var observation: Obs?
     
+    private var lastRequestTime: Date? //
+    
     private var keyChainViewModel =  KeychainViewModel()
     
     var settings: Settings
@@ -23,6 +25,8 @@ class ObsViewModel: ObservableObject {
     }
     
     func fetchData(for obsID: Int) {
+        log.info("fetchData for ObsViewModel \(obsID) at \(Date())")
+        
         let url = settings.endPoint()+"observations/\(obsID)/"
         
         keyChainViewModel.retrieveCredentials()
@@ -32,9 +36,14 @@ class ObsViewModel: ObservableObject {
             "Authorization": "Token " + keyChainViewModel.token //settings.tokenKey
         ]
         
+        log.info("\(url) \(headers)")
+                  
         AF.request(url, headers: headers).responseDecodable(of: Obs.self) {
             response in
-            //  self.log.info(response.debugDescription)
+            //
+//            self.log.error(response.debugDescription)
+            self.log.info("Making request for obsID \(obsID) at \(Date())")
+            //
             switch response.result {
             case .success(_):
                 do {
@@ -45,7 +54,8 @@ class ObsViewModel: ObservableObject {
                     self.log.error("Error ObsViewModel decoding JSON: \(error)")
                 }
             case .failure(let error):
-                self.log.error("Error ObsViewModel fetching data: \(error)")
+                //
+                self.log.error("Error ObsViewModel fetching data; \(error)")
             }
         }
     }
