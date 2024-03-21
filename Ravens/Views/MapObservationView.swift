@@ -35,7 +35,15 @@ struct MapObservationView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    @State private var cameraPosition = MapCameraPosition
+        .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), //<<< userlocation
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
+    )
     
     @ObservedObject var locationManager = LocationManager()
     @State private var circlePos: CLLocationCoordinate2D?
@@ -43,7 +51,7 @@ struct MapObservationView: View {
     var body: some View {
         VStack {
             MapReader { proxy in
-                Map(position: $myPosition) {
+                Map(position: $cameraPosition) {
                     
                     UserAnnotation()
                     
@@ -119,7 +127,7 @@ struct MapObservationView: View {
                 }
                 
                 .mapControls() {
-                    MapUserLocationButton()
+//                    MapUserLocationButton()
                     MapCompass() //tapping this makes it north
                 }
             }

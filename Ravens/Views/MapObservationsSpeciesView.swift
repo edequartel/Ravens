@@ -15,16 +15,24 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
     
     @State private var isSheetObservationsViewPresented = false
+    
+    @State private var cameraPosition = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
+        )
+    )
+    
     
     var speciesID: Int
     var speciesName: String
     
     var body: some View {
         ZStack {
-            Map(position: $myPosition) {
+            Map(position: $cameraPosition) {
                 UserAnnotation()
                 
                 ForEach(observationsSpeciesViewModel.locations) { location in

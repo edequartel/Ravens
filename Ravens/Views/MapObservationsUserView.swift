@@ -15,7 +15,14 @@ struct MapObservationsUserView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    
+    @State private var cameraPosition = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+            span: MKCoordinateSpan(latitudeDelta: 6, longitudeDelta: 4)
+        )
+    )
     
     @State private var limit = 100
     @State private var offset = 0
@@ -26,7 +33,7 @@ struct MapObservationsUserView: View {
     
     var body: some View {
         ZStack {
-            Map(position: $myPosition) {
+            Map(position: $cameraPosition) {
                 UserAnnotation()
                 ForEach(observationsUserViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
