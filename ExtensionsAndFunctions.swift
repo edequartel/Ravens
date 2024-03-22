@@ -237,3 +237,43 @@ extension Font {
         return .system(size: 24)
     }
 }
+
+func deleteAllFiles() {
+    let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+    let fileManager = FileManager.default
+
+    do {
+        let files = try fileManager.contentsOfDirectory(atPath: documentsDirectoryPath as String)
+        
+        for file in files {
+            let filePath = documentsDirectoryPath.appendingPathComponent(file)
+            try fileManager.removeItem(atPath: filePath)
+        }
+    } catch {
+        print("Error deleting files: \(error)")
+    }
+}
+
+func calculateLocalStorageSize() -> String {
+    let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+    let fileManager = FileManager.default
+    var totalSize: UInt64 = 0
+
+    do {
+        let files = try fileManager.contentsOfDirectory(atPath: documentDirectoryPath as String)
+        
+        for file in files {
+            let filePath = documentDirectoryPath.appendingPathComponent(file)
+            let fileAttributes = try fileManager.attributesOfItem(atPath: filePath)
+            if let fileSize = fileAttributes[FileAttributeKey.size] as? UInt64 {
+                totalSize += fileSize
+            }
+        }
+    } catch {
+        print("Error getting file attributes: \(error)")
+    }
+
+    // Convert total size in bytes to MB
+    let sizeInMB = Double(totalSize) / 1024.0 / 1024.0
+    return String(format: "%.2f MB", sizeInMB)
+}

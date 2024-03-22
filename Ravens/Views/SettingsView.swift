@@ -18,6 +18,8 @@ struct SettingsView: View {
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var storage: String = ""
+    
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     let minimumRadius = 500.0
@@ -117,7 +119,14 @@ struct SettingsView: View {
                 Section(header: Text("App details")) {
                     Text(version())
                     Text(locale.description)
-                    //                        Text(voEnabled ? "Voiceover on" : "Voiceover off")
+                    HStack {
+                        Text("\(storage)")
+                        Spacer()
+                        Button("Cache Empty") {
+                            deleteAllFiles()
+                            storage = String(calculateLocalStorageSize())
+                        }
+                    }
                 }
                 .font(.footnote)
                 
@@ -132,6 +141,7 @@ struct SettingsView: View {
             }
         }
         .onAppear() {
+            storage = calculateLocalStorageSize()
             speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }
         
