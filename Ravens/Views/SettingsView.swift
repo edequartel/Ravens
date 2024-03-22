@@ -58,7 +58,7 @@ struct SettingsView: View {
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
+                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
                     }
                 }
                 
@@ -149,7 +149,7 @@ struct SettingsView: View {
         }
         .onAppear() {
             storage = calculateLocalStorageSize()
-            speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }
         
     }
@@ -176,7 +176,7 @@ struct SettingsView: View {
     
     func upDate() {
         log.verbose("update()")
-        speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
+        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }
     

@@ -20,13 +20,13 @@ class SpeciesGroupViewModel: ObservableObject {
         self.settings = settings
     }
     
-    func fetchData(completion: @escaping (Bool) -> Void) {
+    func fetchData(language: String, completion: @escaping (Bool) -> Void) {
         log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
         
         log.info("url SpeciesGroupViewModel: \(url)")

@@ -35,6 +35,12 @@ struct ContentView: View {
 //                Text("weather")
 //                Image(systemName: "globe")
 //            }
+            // Tab 0
+//            LookUpsView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
             
             // Tab 1
             ZStack {

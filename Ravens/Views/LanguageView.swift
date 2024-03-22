@@ -29,7 +29,7 @@ struct LanguageView: View {
             .onChange(of: settings.selectedLanguage) {
                 log.info("LanguageView language changed to: \(settings.selectedLanguage)")
                 log.info("\(settings.selectedLanguage)")
-                speciesGroupViewModel.fetchData(completion: {_ in 
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: {_ in 
                     log.info("Info LanguageView completed \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                     onChange?()
                 })
