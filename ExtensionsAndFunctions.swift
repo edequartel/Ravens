@@ -14,8 +14,12 @@ import SwiftUI
 
 
 //gouda
-let latitude = 52.013077
-let longitude = 4.713450
+let latitude = 52.013077-0.2
+let longitude = 4.713450+0.1
+
+let latitudeDelta = 4.5
+let longitudeDelta = 3.0
+
 
 func formatCurrentDate(value: Date) -> String {
     let dateFormatter = DateFormatter()

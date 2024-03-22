@@ -241,6 +241,7 @@
 				474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */,
 				47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */,
 				47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */,
+				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
 				4785CD182B95C856002F52BE /* UserViewModel.swift */,
 			);
 			path = Models;
@@ -271,7 +272,6 @@
 				4757E0752B7F3426003F148E /* LoginView.swift */,
 				4785CD222B965237002F52BE /* ObservationUserView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
-				4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,

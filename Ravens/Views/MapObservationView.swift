@@ -36,7 +36,9 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
 //    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
+//    @State private var cameraPosition: MapCameraPosition = .userLocation
+
+    @ObservedObject var locationManager = LocationManager()
     @State private var cameraPosition = MapCameraPosition
         .region(
         MKCoordinateRegion(
@@ -45,7 +47,7 @@ struct MapObservationView: View {
         )
     )
     
-    @ObservedObject var locationManager = LocationManager()
+
     @State private var circlePos: CLLocationCoordinate2D?
     
     var body: some View {

@@ -13,12 +13,23 @@ import AVFoundation
 
 class FetchRequestManager: ObservableObject {
     private var currentDelay: Double = 0
+    private var resetDelayTimer: Timer?
+    private let delayIncrement: Double = 0.1 // Time in seconds to wait before each request
+    private let resetDelayTime: TimeInterval = 2.0 // Time in seconds to wait before resetting delay
     
     func fetchDataAfterDelay(for obsID: Int, by viewModel: ObsViewModel) {
+        // Invalidate existing timer since we're making a new request
+        resetDelayTimer?.invalidate()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + currentDelay) {
             viewModel.fetchData(for: obsID)
         }
-        currentDelay += 0.10 // Increase delay for next request
+        currentDelay += delayIncrement // Increase delay for next request
+        
+        // Reset currentDelay after a specified period without new requests
+        resetDelayTimer = Timer.scheduledTimer(withTimeInterval: resetDelayTime, repeats: false) { [weak self] _ in
+            self?.currentDelay = 0
+        }
     }
 }
 
