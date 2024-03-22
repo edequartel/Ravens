@@ -23,18 +23,25 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tab 0
-//            SimpleMapView()
+//            LottieView(lottieFile: "LottieFile")
 //                .tabItem {
-//                    Text("weather")
+//                    Text("Lottie")
 //                    Image(systemName: "globe")
 //                }
 
-//            // Tab 0
+            // Tab 0
 //            AudioView()
 //            .tabItem {
 //                Text("weather")
 //                Image(systemName: "globe")
 //            }
+            // Tab 0
+//            LookUpsView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
+            
             // Tab 1
             ZStack {
                 MapObservationView()

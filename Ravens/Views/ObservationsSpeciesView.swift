@@ -24,12 +24,19 @@ struct ObservationsSpeciesView: View {
     
     var body: some View {
         VStack {
-            Button("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x") {
+            Button {
                 isSheetPresented.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "info.circle")
+                    Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
+                        .font(.headline)
+                }
             }
             .padding()
             .buttonStyle(.bordered)
             .foregroundColor(.obsGreenEagle)
+
 
             List {
                 if let results =  viewModel.observationsSpecies?.results {
@@ -37,8 +44,6 @@ struct ObservationsSpeciesView: View {
                         result in
                         //
                         ObsView(obsID: result.id ?? 0, showUsername: true) //
-                        //
-                        
                     }
                     .font(.footnote)
                 }

@@ -14,6 +14,8 @@ struct BirdView: View {
     let log = SwiftyBeaver.self
     @StateObject private var birdViewModel = BirdViewModel(settings: Settings())
     
+//    @StateObject private var birdViewModelsecLanguage = BirdViewModel(settings: Settings()) //<< second language later
+    
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -49,7 +51,6 @@ struct BirdView: View {
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(myColor(value: bird.rarity), .clear)
 
-                                        
                                         //are there any observations
                                         if (!keyChainViewModel.token.isEmpty) {
                                             ObservationDetailsView(speciesID: bird.id)
@@ -150,10 +151,15 @@ struct BirdView: View {
         
         .onAppear() {
             log.info("birdview: selectedGroup \(settings.selectedGroup)")
-            birdViewModel.fetchData(for: settings.selectedGroup)
-            speciesGroupViewModel.fetchData(completion: { success in
+            
+            birdViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+//            birdViewModelsecLanguage.fetchData(language: "eng", for: settings.selectedGroup) //<<second language later
+            
+            
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")
-            } )
+            })
+            
             settings.readBookmarks(array: &bookMarks)
         }
     }

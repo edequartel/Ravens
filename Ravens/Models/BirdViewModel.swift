@@ -20,7 +20,7 @@ class BirdViewModel: ObservableObject {
         self.settings = settings
     }
     
-    func fetchData(for groupID: Int) {
+    func fetchData(language: String, for groupID: Int) {
         log.info("fetchData BirdViewModel \(groupID)")
         
         let url = settings.endPoint()+"region-lists/\(groupID)/species/"
@@ -29,7 +29,7 @@ class BirdViewModel: ObservableObject {
         log.info("language \(settings.selectedLanguage)")
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: [Bird].self){ response in

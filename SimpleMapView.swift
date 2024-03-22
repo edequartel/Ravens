@@ -10,6 +10,7 @@ struct SimpleMapView: View {
         }
         .mapControls() {
             MapUserLocationButton()
+                .frame(width: 44, height: 44)
         }
     }
 }

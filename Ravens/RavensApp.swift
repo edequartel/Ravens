@@ -25,7 +25,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
 //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-        console.minLevel = .warning
+        console.minLevel = .error
         
         log.addDestination(console)
         log.addDestination(file)
@@ -57,6 +57,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var fetchRequestManager = FetchRequestManager()
 
     var body: some Scene {
         WindowGroup {
@@ -71,7 +72,8 @@ struct RavensApp: App {
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
-//                .environmentObject(AudioPlayerManager())
+                .environmentObject(Player())
+                .environmentObject(fetchRequestManager)
         }
     }
 }

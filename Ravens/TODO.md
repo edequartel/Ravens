@@ -2,9 +2,10 @@
 
 ## 17
 - second language
-- scrolling through days (done in birdview)
-- scrolling through obs (done in userview)
-- user positions (made a start)
++ scrolling through days (done in birdview)
++ scrolling through obs (done in userview)
++ user positions (made a start)
++ datarequests timed and cached so data usage is less
 
 ## 18
 - notifications

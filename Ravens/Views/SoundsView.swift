@@ -1,181 +1,129 @@
 //
-//  StreamingPlayerView.swift
-//  Ravens
+//  ContentView.swift
+//  TestSoundableStream
 //
-//  Created by Eric de Quartel on 08/03/2024.
+//  Created by Eric de Quartel on 20/03/2024.
 //
 
 import SwiftUI
 import SwiftAudioEx
 
-
-
-struct AudioView: View {
-    var body: some View {
-        VStack {
-            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235291.mp3",
-                                            "https://waarneming.nl/media/sound/235292.mp3",
-                                            "https://waarneming.nl/media/sound/235293.mp3"] )
-            
-            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235783.wav",
-                                            "https://waarneming.nl/media/sound/235286.mp3",
-                                            "https://waarneming.nl/media/sound/235770.mp3"] )
-            .foregroundColor(.green)
-            
-            StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235291.mp3",
-                                            "https://waarneming.nl/media/sound/235292.mp3",
-                                            "https://waarneming.nl/media/sound/235293.mp3"] )
-            .foregroundColor(.red)
+class Player: ObservableObject {
+    let queuedAudioPlayer: QueuedAudioPlayer
+    
+    @Published var status: AudioPlayerState = .idle
+    
+    init() {
+        queuedAudioPlayer = QueuedAudioPlayer()
+        queuedAudioPlayer.event.stateChange.addListener(self, handleAudioPlayerStateChange)
+    }
+    
+    func handleAudioPlayerStateChange(state: AudioPlayerState) {
+        // Handle the event
+        print("\(state)")
+        DispatchQueue.main.async {
+            self.status = state
         }
     }
-}
-
-struct StreamingQueuPlayerView: View {
-    var audio: [String]
-
-    let qPlayer = QueuedAudioPlayer()
     
-    @State private var isPlaying = false
+    func play(_ audioUrls: [String]) {
+//        queuedAudioPlayer.stop()
+        queuedAudioPlayer.clear()
+        for audioUrl in audioUrls {
+            let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
+            queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
+            print("playing \(audioUrl)")
+        }
+    }
     
-
-    var body: some View {
-//        VStack {
-//                HStack {
-//                    Text("\(index)")
-                    Button(action: {
-                        print("play")
-                        for audioUrl in audio {
-                            let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
-                            qPlayer.add(item: audioItem, playWhenReady: true)
-                        }
-                    }) {
-                        Image(systemName: "play.circle")
-                            .font(.system(size: 30))
-                    }
-                    
-//                    Button(action: {
-//                        print("pause")
-//                        qPlayer.pause()
-//                    }) {
-//                        Image(systemName: "pause.circle")
-//                            .font(.system(size: 30))
-//                    }
-                    
-                    //                Button(action: {
-                    //                    qPlayer.previous()
-                    //                }) {
-                    //                    Image(systemName: "backward.end.circle")
-                    //                        .font(.system(size: 30))
-                    //                }
-                    //
-                    //                Button(action: {
-                    //                    qPlayer.next()
-                    //                }) {
-                    //                    Image(systemName: "forward.end.circle")
-                    //                        .font(.system(size: 30))
-                    //                }
-                    
-//                    Button(action: {
-//                        print("stop")
-//                        qPlayer.stop()
-//                    }) {
-//                        Image(systemName: "stop.circle")
-//                            .font(.system(size: 30))
-//                    }
-//            }
-//            .padding(5)
-//            .background(Color.white)  Set the background color if needed
-//            .border(Color.blue, width: 2) // Set the border color and width
-//            .cornerRadius(10) // Set the corner radius for a rounded appearance
-//        }
-//        .onAppear() {
-//            qPlayer.nowPlayingInfoController.set(keyValue: NowPlayingInfoProperty.isLiveStream(true))
-//        }
+    func pause() {
+        queuedAudioPlayer.pause()
+        print("paused")
+    }
+    
+    func stop() {
+        queuedAudioPlayer.stop()
+        print("stopped")
+    }
+    
+    func previous() {
+        queuedAudioPlayer.previous()
+        print("previous")
+    }
+    
+    func next() {
+        queuedAudioPlayer.next()
+        print("next")
     }
 }
 
-#Preview {
-    StreamingQueuPlayerView(audio: ["https://waarneming.nl/media/sound/235293.mp3",
-                                    "https://waarneming.nl/media/sound/235293.mp3"])
-}
-
-struct StreamingPlayerView: View {
-    var audio : String
-
-    let player = AudioPlayer()
+struct PlayerControlsView: View {
+    @EnvironmentObject var player: Player
+    var audio: [String]
     
     var body: some View {
         HStack {
-            Button(action: {
-                let audioItem = DefaultAudioItem(audioUrl: audio, sourceType: .stream)
-                player.load(item: audioItem, playWhenReady: true) // Load the item and start playing when the player is ready.
-            }) {
-                Image(systemName: "play.circle")
-                    .font(.system(size: 30))
-            }
             
-            Button(action: {
-                player.stop()
-            }) {
-                Image(systemName: "stop.circle")
-                    .font(.system(size: 30))
-            }
+//            if player.status != .playing {
+                Button(action: {
+                    player.play(audio)
+                }) {
+                    Image(systemName: "play.circle")
+                        .font(.system(size: 30))
+                }
+//            } else {
+//                Button(action: {
+//                    player.stop()
+//                }) {
+//                    Image(systemName: "stop.circle")
+//                        .font(.system(size: 30))
+//                }
+//            }
+//
+//            
+//            Button(action: {
+//                player.stop()
+//            }) {
+//                Image(systemName: "stop.circle")
+//                    .font(.system(size: 30))
+//            }
+            
+            
         }
+        .padding(5)
     }
 }
 
-
-
-#Preview {
-    StreamingPlayerView(audio: "https://waarneming.nl/media/sound/235293.mp3")
+struct PlayerControlsView_Previews: PreviewProvider {
+    static var previews: some View {
+        PlayerControlsView(audio: [])
+            .environmentObject(Player())
+    }
 }
 
-
-//@State private var player: AVPlayer?
+//struct ContentView: View {
+//    @EnvironmentObject var player: Player
 //
-//var body: some View {
-//    HStack{
-//        Button(action: {
-//            print("play/pause")
-//            self.isPlaying.toggle()
-//            if self.player?.rate == 0 {
-//                self.playAudio()
-//            } else {
-//                self.pauseAudio()
-//            }
-//        }) {
-//            Image(systemName: self.isPlaying ? "pause.circle" : "play.circle")
-//                .font(.system(size: 40))
+//    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
+//                  "https://waarneming.nl/media/sound/235292.mp3",
+//                  "https://waarneming.nl/media/sound/235293.mp3"]
+//
+//    var audio2 = ["https://waarneming.nl/media/sound/235783.wav",
+//                  "https://waarneming.nl/media/sound/235293.mp3",
+//                  "https://waarneming.nl/media/sound/235770.mp3"]
+//
+//    var audio3 = ["https://waarneming.nl/media/sound/235783.wav",
+//                  "https://waarneming.nl/media/sound/235293.mp3",
+//                  "https://waarneming.nl/media/sound/235770.mp3"]
+//
+//
+//    var body: some View {
+//        VStack {
+//            Text("\(player.statePlayer)")
+//            PlayerControlsView(audio: audio1)
+//            PlayerControlsView(audio: audio2)
+//            PlayerControlsView(audio: audio3)
 //        }
-//        Button(action: {
-//            print("stop")
-//            self.stopAudio()
-//        }) {
-//            Image(systemName: "stop.circle")
-//                .font(.system(size: 40))
-//        }
+//        .padding(5)
 //    }
-//    .onAppear {
-//        self.setupPlayer()
-//        print("player started and shown")
-//    }
-//}
-//
-//private func setupPlayer() {
-//    let playerItem = AVPlayerItem(url: streamingURL)
-//    self.player = AVPlayer(playerItem: playerItem)
-//}
-//
-//private func playAudio() {
-//    self.player?.play()
-//}
-//
-//private func pauseAudio() {
-//    self.player?.pause()
-//}
-//
-//private func stopAudio() {
-//    self.player?.pause()
-//    self.player?.seek(to: CMTime.zero)
-//    self.isPlaying = false
 //}

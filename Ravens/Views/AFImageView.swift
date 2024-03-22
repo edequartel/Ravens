@@ -28,6 +28,7 @@ struct AFImageView: View {
             }
         }
         .onAppear {
+//            print("\(media)")
             loadImageFromURL()
         }
     }

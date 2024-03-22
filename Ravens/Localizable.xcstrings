@@ -1,7 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " - " : {
+
+    },
     " %@" : {
+
+    },
+    " Obs" : {
 
     },
     "%@" : {
@@ -84,16 +90,6 @@
         }
       }
     },
-    "%lld %lldx" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$lldx"
-          }
-        }
-      }
-    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
@@ -139,6 +135,9 @@
           }
         }
       }
+    },
+    "Cache Empty" : {
+
     },
     "Code %@" : {
       "extractionState" : "stale",
@@ -237,6 +236,7 @@
       }
     },
     "Fetching Observation..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -504,6 +504,9 @@
           }
         }
       }
+    },
+    "Map Style" : {
+
     },
     "Me" : {
       "localizations" : {

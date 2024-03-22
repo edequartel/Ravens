@@ -38,6 +38,8 @@ class Settings: ObservableObject {
     
     @Published var isConnected: Bool = false
     
+    @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
+    
     init() {
         log.info("init Settings")
     }
@@ -63,7 +65,23 @@ class Settings: ObservableObject {
                 .components(separatedBy: ",")
                 .compactMap { Int($0) }
         }
+    
+    var mapStyle: MapStyle {
+        switch mapStyleChoice {
+        case .standard:
+            return .standard
+        case .hybrid:
+            return .hybrid(elevation: .realistic)
+        case .imagery:
+            return .imagery
+        }
+    }
+    
 }
 
-
+enum MapStyleChoice: String, CaseIterable {
+    case standard
+    case hybrid
+    case imagery
+}
 

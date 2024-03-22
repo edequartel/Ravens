@@ -17,10 +17,12 @@ struct ObsView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var keychainViewModel: KeychainViewModel
     
+    @EnvironmentObject var fetchRequestManager: FetchRequestManager
+    
+    
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     
-    var audioPlayer: AVAudioPlayer?
     
     var obsID: Int
     var showUsername: Bool
@@ -30,7 +32,7 @@ struct ObsView: View {
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
                     HStack {
-//                        Text("ObsView")
+//                        Text("\(obsID)")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         
@@ -41,7 +43,7 @@ struct ObsView: View {
                         
                         Spacer()
                         
-//
+                        //
                         Text("\(obs.species_detail.scientific_name)")
                             .italic()
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -54,13 +56,13 @@ struct ObsView: View {
                     }
                     
                     Text("\(obs.date) \(obs.time ?? ""), \(obs.number)")
-
+                    
                     if showUsername {
                         Text("\(obs.user_detail?.name ?? "unknown") - \(obs.user_detail?.id ?? 0)")
                     }
                     
                     Text("\(obs.location_detail?.name ?? "unknown")")
-                   
+                    
                     if obs.notes?.count ?? 0 > 0 {
                         Text("\(obs.notes ?? "unknown")")
                             .italic()
@@ -71,23 +73,23 @@ struct ObsView: View {
                     }
                     
                     if obs.sounds.count>0 {
-                        StreamingQueuPlayerView(audio: obs.sounds)
-                            .padding(5)
+                        PlayerControlsView(audio: obs.sounds)
                     }
-
+                    
                 }
                 .font(.customMedium)
             }
             else {
-                ProgressView("Fetching Observation...")
+                ProgressView()
             }
         }
         .onAppear {
-            obsViewModel.fetchData(for: obsID)
+            fetchRequestManager.fetchDataAfterDelay(for: obsID, by: obsViewModel)
         }
     }
     
 }
+
 
 #Preview {
     ObsView(obsID: 2, showUsername: true)

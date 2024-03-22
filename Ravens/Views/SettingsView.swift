@@ -18,6 +18,8 @@ struct SettingsView: View {
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var storage: String = ""
+    
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     let minimumRadius = 500.0
@@ -56,11 +58,18 @@ struct SettingsView: View {
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
+                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
                     }
                 }
                 
                 Section("Map") {
+                    Picker("Map Style", selection: $settings.mapStyleChoice) {
+                        ForEach(MapStyleChoice.allCases, id: \.self) { choice in
+                            Text(choice.rawValue.capitalized).tag(choice)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
                     Toggle("Poi", isOn: $settings.poiOn)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
@@ -117,7 +126,14 @@ struct SettingsView: View {
                 Section(header: Text("App details")) {
                     Text(version())
                     Text(locale.description)
-                    //                        Text(voEnabled ? "Voiceover on" : "Voiceover off")
+                    HStack {
+                        Text("\(storage)")
+                        Spacer()
+                        Button("Cache Empty") {
+                            deleteAllFiles()
+                            storage = String(calculateLocalStorageSize())
+                        }
+                    }
                 }
                 .font(.footnote)
                 
@@ -132,7 +148,8 @@ struct SettingsView: View {
             }
         }
         .onAppear() {
-            speciesGroupViewModel.fetchData(completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
+            storage = calculateLocalStorageSize()
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
         }
         
     }
@@ -159,7 +176,7 @@ struct SettingsView: View {
     
     func upDate() {
         log.verbose("update()")
-        speciesGroupViewModel.fetchData(completion: { _ in print ("update completed") })
+        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in print ("update completed") })
         log.verbose("language: \(settings.selectedLanguage)")
     }
     
