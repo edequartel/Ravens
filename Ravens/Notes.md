@@ -1,5 +1,8 @@
 # Remarks development
 
+## 20
+- graphs
+
 ## 19
 - second language
 - notifications
