@@ -308,12 +308,34 @@
         }
       }
     },
+    "Hybrid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hibride"
+          }
+        }
+      }
+    },
     "Id %lld" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Id %11d"
+          }
+        }
+      }
+    },
+    "Imagery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afbeelding"
           }
         }
       }
@@ -842,6 +864,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soortgroepen"
+          }
+        }
+      }
+    },
+    "Standard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard"
           }
         }
       }

@@ -80,8 +80,7 @@ class Settings: ObservableObject {
 }
 
 enum MapStyleChoice: String, CaseIterable {
-    case standard
-    case hybrid
-    case imagery
+    case standard = "Standaard"
+    case hybrid = "Hibride"
+    case imagery = "Afbeeldingen"
 }
-
