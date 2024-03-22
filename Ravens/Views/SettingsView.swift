@@ -63,6 +63,13 @@ struct SettingsView: View {
                 }
                 
                 Section("Map") {
+                    Picker("Map Style", selection: $settings.mapStyleChoice) {
+                        ForEach(MapStyleChoice.allCases, id: \.self) { choice in
+                            Text(choice.rawValue.capitalized).tag(choice)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
                     Toggle("Poi", isOn: $settings.poiOn)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {

@@ -24,9 +24,8 @@ struct ObservationsUserView: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Obs"+" ")
+                Text("Waarnemingen"+" ")
                 UserSimpleView()
-                
                 
                 Button {
                     if let maxOffset = viewModel.observationsSpecies?.count {
@@ -80,10 +79,11 @@ struct ObservationsUserViewExtra: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Obs"+" ")
+                Text("Waarneming"+" ")
                 UserSimpleView()
             }
             .padding()
+            .font(.headline)
             
             List {
                 if let results =  viewModel.observationsSpecies?.results {

@@ -120,7 +120,7 @@ struct MapObservationsSpeciesView: View {
             
             
             
-            .mapStyle(.hybrid(elevation: .realistic))
+            .mapStyle(settings.mapStyle)
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()

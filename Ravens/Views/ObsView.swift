@@ -32,7 +32,7 @@ struct ObsView: View {
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
                     HStack {
-                        Text("\(obsID)")
+//                        Text("\(obsID)")
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         

@@ -30,11 +30,11 @@ struct MapObservationsUserView: View {
     @State private var elevation: MapStyle.Elevation = .realistic
     @State private var isSheetObservationsViewPresented = false
     
-    
     var body: some View {
         ZStack {
             Map(position: $cameraPosition) {
                 UserAnnotation()
+                
                 ForEach(observationsUserViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
@@ -108,8 +108,8 @@ struct MapObservationsUserView: View {
             }
             
             
+            .mapStyle(settings.mapStyle)
             
-            .mapStyle(.hybrid(elevation: elevation))
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()

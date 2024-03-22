@@ -20,7 +20,6 @@ let longitude = 4.713450+0.1
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
 
-
 func formatCurrentDate(value: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
