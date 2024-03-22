@@ -151,6 +151,7 @@
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47DB89B72B7A3AB20093C1ED /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
 		47E2DFBA2BA82A5400040221 /* SimpleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMapView.swift; sourceTree = "<group>"; };
+		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +207,7 @@
 				476843D22BA9D333004EF208 /* StartUp */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				4781539A2B57BDC2005F87CC /* README.md */,
+				47F5D2F02BADDB9F0071BB6E /* Notes.md */,
 				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* Models */,
