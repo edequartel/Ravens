@@ -1,14 +1,21 @@
 # Remarks development
 
-## 17
+## 19
 - second language
+- notifications
+- stats
+- 
+## 18
++ image download now cached so data traffic is less
+
+
+## 17
 + scrolling through days (done in birdview)
 + scrolling through obs (done in userview)
-+ user positions (made a start)
-+ datarequests timed and cached so data usage is less
-
-## 18
-- notifications
++ user positions (a start)
++ data requests timed 
++ data requests cached so data traffic is less
++ audio-recording streamed
 
 ## ToDo
 
