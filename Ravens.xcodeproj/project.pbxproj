@@ -271,6 +271,8 @@
 			children = (
 				4757E0752B7F3426003F148E /* LoginView.swift */,
 				4785CD222B965237002F52BE /* ObservationUserView.swift */,
+				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
@@ -279,8 +281,6 @@
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
-				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,

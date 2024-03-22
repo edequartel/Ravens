@@ -60,10 +60,10 @@ struct MapObservationsUserView: View {
                         VStack(alignment: .trailing) {
                             HStack{
                                 Spacer()
-                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset)")
-                                Text(" - ")
-                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset + 100)")
-                                Text(" Obs")
+                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset) - \((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset + limit)")
+                                //= \(offset) - \(limit)")
+                                    .foregroundColor(.obsGreenFlower)
+
                             }
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -77,6 +77,7 @@ struct MapObservationsUserView: View {
                         
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
+                                print("maxOffset: \(maxOffset)")
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
                                 observationsUserViewModel.fetchData(limit: limit, offset: offset)
