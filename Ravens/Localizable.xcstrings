@@ -1,13 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " - " : {
-
-    },
     " %@" : {
-
-    },
-    " Obs" : {
 
     },
     "%@" : {
@@ -76,6 +70,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%11d"
+          }
+        }
+      }
+    },
+    "%lld - %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld - %2$lld"
           }
         }
       }
@@ -308,12 +312,34 @@
         }
       }
     },
+    "Hybrid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hibride"
+          }
+        }
+      }
+    },
     "Id %lld" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Id %11d"
+          }
+        }
+      }
+    },
+    "Imagery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afbeelding"
           }
         }
       }
@@ -842,6 +868,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soortgroepen"
+          }
+        }
+      }
+    },
+    "Standard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard"
           }
         }
       }

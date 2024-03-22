@@ -125,7 +125,6 @@
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinspingdoorvoer.mp3; path = Audio/perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
-		4774D2CB2B5C208B0096A0E3 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		477ECF152B98972900D96BE9 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -207,7 +206,6 @@
 				476843D22BA9D333004EF208 /* StartUp */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				4781539A2B57BDC2005F87CC /* README.md */,
-				4774D2CB2B5C208B0096A0E3 /* TODO.md */,
 				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
 				474C40812B4D17B40038B3A5 /* Data */,
 				474C40802B4D17AA0038B3A5 /* Models */,
@@ -271,6 +269,8 @@
 			children = (
 				4757E0752B7F3426003F148E /* LoginView.swift */,
 				4785CD222B965237002F52BE /* ObservationUserView.swift */,
+				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
@@ -279,8 +279,6 @@
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
-				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
@@ -607,13 +605,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ravens/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -640,13 +639,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ravens/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

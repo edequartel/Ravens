@@ -37,15 +37,21 @@ struct ObservationsSpeciesView: View {
             .buttonStyle(.bordered)
             .foregroundColor(.obsGreenEagle)
 
-
             List {
-                if let results =  viewModel.observationsSpecies?.results {
-                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
-                        result in
-                        //
-                        ObsView(obsID: result.id ?? 0, showUsername: true) //
+                if let results = viewModel.observationsSpecies?.results {
+                    let sortedResults = results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") })
+                    ForEach(sortedResults.indices, id: \.self) { index in
+                        let result = sortedResults[index]
+                        ObsView(obsID: result.id ?? 0, showUsername: true)
+                            .font(.footnote)
+                            .onAppear {
+                                if index == sortedResults.count - 1 {
+                                    print("End of list reached")
+                                    // Perform any action you want when the end of the list is reached here
+                                    //viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days) <<< deze wijzige met 0 and 100
+                                }
+                            }
                     }
-                    .font(.footnote)
                 }
             }
         }

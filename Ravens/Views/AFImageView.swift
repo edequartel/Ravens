@@ -30,6 +30,7 @@ struct AFImageView: View {
         .onAppear {
 //            print("\(media)")
             loadImageFromURL()
+//            print("path: \(getDocumentsDirectory())")
         }
     }
 
@@ -38,14 +39,39 @@ struct AFImageView: View {
             return
         }
 
-        AF.request(url).responseImage { response in
-            switch response.result {
-            case .success(let uiImage):
-                self.downloadedImage = SwiftUI.Image(uiImage: uiImage)
-            case .failure(let error):
-                print("Error downloading image: \(error)")
+        let fileManager = FileManager.default
+        let imagesDirectory = getDocumentsDirectory().appendingPathComponent("images")
+
+        if !fileManager.fileExists(atPath: imagesDirectory.path) {
+            try? fileManager.createDirectory(at: imagesDirectory, withIntermediateDirectories: true, attributes: nil)
+        }
+
+        let path = imagesDirectory.appendingPathComponent(url.lastPathComponent)
+//        print("path: \(path)")
+
+        if let imageData = try? Data(contentsOf: path), let uiImage = UIImage(data: imageData) {
+//            print("Loaded image from disk")
+            self.downloadedImage = Image(uiImage: uiImage)
+        } else {
+            print("Downloading image from \(url)")
+            AF.request(url).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    if let uiImage = UIImage(data: data) {
+                        self.downloadedImage = Image(uiImage: uiImage)
+                        try? data.write(to: path)
+                    }
+                case .failure(let error):
+                    print("Error downloading image: \(error)")
+                }
             }
         }
+    }
+
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 }
 
