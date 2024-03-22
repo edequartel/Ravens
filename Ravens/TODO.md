@@ -4,7 +4,8 @@
 - second language
 - notifications
 - stats
-- 
+- camera position at start
+
 ## 18
 + image download now cached so data traffic is less
 
