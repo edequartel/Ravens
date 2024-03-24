@@ -121,7 +121,6 @@ struct MapObservationView: View {
                     }
                 }
                 .mapControls() {
-                    //                    MapUserLocationButton()
                     MapCompass() //tapping this makes it north
                 }
             }
@@ -133,7 +132,12 @@ struct MapObservationView: View {
                     let myLongitude = location.coordinate.longitude
                     print("My location is: \(myLatitude), \(myLongitude)")
                     circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                    
+                    
+                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude) 
+                    
+                    // save the location
+                    settings.currentLocation = location
                     
                     // Initialize cameraPosition with user's current location
                     cameraPosition = MapCameraPosition
@@ -143,12 +147,14 @@ struct MapObservationView: View {
                                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
                             )
                         )
+                    
                 } else {
                     print("Location is not available yet")
                     // Handle the case when location is not available
                 }
                 
                 log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                
                 speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
         }
