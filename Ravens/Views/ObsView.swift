@@ -76,16 +76,21 @@ struct ObsView: View {
                         PlayerControlsView(audio: obs.sounds)
                     }
                     
+                    
                 }
                 .font(.customMedium)
             }
             else {
                 ProgressView()
             }
+//            Divider()
         }
         .onAppear {
             fetchRequestManager.fetchDataAfterDelay(for: obsID, by: obsViewModel)
         }
+        
+//        .padding(.top, 20)
+//        .padding(.horizontal, 20)
     }
     
 }

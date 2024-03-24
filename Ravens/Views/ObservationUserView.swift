@@ -86,6 +86,7 @@ struct ObservationsUserViewExtra: View {
             .font(.headline)
             
             List {
+//            ScrollView {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in

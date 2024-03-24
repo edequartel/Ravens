@@ -64,20 +64,20 @@ struct PlayerControlsView: View {
     var body: some View {
         HStack {
             
-//            if player.status != .playing {
-                Button(action: {
-                    player.play(audio)
-                }) {
-                    Image(systemName: "play.circle")
-                        .font(.system(size: 30))
-                }
-//            } else {
-//                Button(action: {
-//                    player.stop()
-//                }) {
-//                    Image(systemName: "stop.circle")
-//                        .font(.system(size: 30))
-//                }
+            //            if player.status != .playing {
+            Button(action: {
+                player.play(audio)
+            }) {
+                Image(systemName: "play.circle")
+                    .font(.system(size: 30))
+            }
+            //            } else {
+//            Button(action: {
+//                player.stop()
+//            }) {
+//                Image(systemName: "stop.circle")
+//                    .font(.system(size: 30))
+//            }
 //            }
 //
 //            
