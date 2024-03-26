@@ -19,10 +19,8 @@ struct ObsView: View {
     
     @EnvironmentObject var fetchRequestManager: FetchRequestManager
     
-    
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
-    
     
     var obsID: Int
     var showUsername: Bool
@@ -68,7 +66,7 @@ struct ObsView: View {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "unknown")")
                         Spacer()
-                        Text("\(obs.location ?? 0)")
+                        Text("\(obs.location_detail?.id ?? 0)")
                     }
                     
                     if obs.notes?.count ?? 0 > 0 {
@@ -84,16 +82,21 @@ struct ObsView: View {
                         PlayerControlsView(audio: obs.sounds)
                     }
                     
+                    
                 }
                 .font(.customMedium)
             }
             else {
                 ProgressView()
             }
+//            Divider()
         }
         .onAppear {
             fetchRequestManager.fetchDataAfterDelay(for: obsID, by: obsViewModel)
         }
+        
+//        .padding(.top, 20)
+//        .padding(.horizontal, 20)
     }
     
 }

@@ -130,6 +130,16 @@
         }
       }
     },
+    "Area" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebied"
+          }
+        }
+      }
+    },
     "Cache Empty" : {
 
     },
@@ -181,6 +191,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dagen"
+          }
+        }
+      }
+    },
+    "Default Name" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
           }
         }
       }
@@ -428,6 +448,12 @@
           }
         }
       }
+    },
+    "Local map" : {
+
+    },
+    "Locations" : {
+
     },
     "Login" : {
       "localizations" : {
@@ -954,6 +980,9 @@
           }
         }
       }
+    },
+    "View on Website" : {
+
     },
     "Voelt als: %@" : {
 

@@ -19,6 +19,9 @@ struct ContentView: View {
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
     
     @State private var isSheetObservationsViewPresented = false
+    @State private var isSheetObservationsLocationsViewPresented = false
+    
+    @State private var locationId: Int?
     
     var body: some View {
         TabView {
@@ -41,6 +44,12 @@ struct ContentView: View {
 //                Text("weather")
 //                Image(systemName: "globe")
 //            }
+//                         Tab 0
+//            LocationLatLongView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
             
             // Tab 1
             ZStack {
@@ -50,6 +59,16 @@ struct ContentView: View {
             .tabItem {
                 Text("Obs")
                 Image(systemName: "binoculars")
+            }
+            
+            // Tab 2
+            ZStack {
+                MapObservationsLocationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
+                ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "d7b731")
+            }
+            .tabItem {
+                Text("Area")
+                Image(systemName: "globe")
             }
             
             // Tab 2
@@ -77,11 +96,12 @@ struct ContentView: View {
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
+        .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
+            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsLocationsViewPresented)
+        }
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
-//            keyChainviewModel.retrieveCredentials()
-//            log.error("Token from keychain \(keyChainviewModel.token)")
         }
     }
 }
