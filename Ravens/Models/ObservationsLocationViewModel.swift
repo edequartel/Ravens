@@ -19,6 +19,7 @@ class ObservationsLocationViewModel: ObservableObject {
     private var keyChainViewModel =  KeychainViewModel()
     
     var locations = [Location]()
+    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1)
     
     var settings: Settings
     init(settings: Settings) {
@@ -44,6 +45,27 @@ class ObservationsLocationViewModel: ObservableObject {
 
             locations.append(newLocation)
         }
+    }
+    
+    func getSpan() {
+        var coordinates: [CLLocationCoordinate2D] = []
+        
+        let max = (observationsSpecies?.results.count ?? 0)
+        for i in 0 ..< max {
+            let latitude = observationsSpecies?.results[i].point.coordinates[0] ?? 52.024052
+            let longitude = observationsSpecies?.results[i].point.coordinates[1] ?? 5.245350
+            coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        }
+
+        let minLatitude = coordinates.min(by: { $0.latitude < $1.latitude })?.latitude ?? 0
+        let maxLatitude = coordinates.max(by: { $0.latitude > $1.latitude })?.latitude ?? 0
+        let minLongitude = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? 0
+        let maxLongitude = coordinates.max(by: { $0.longitude > $1.longitude })?.longitude ?? 0
+
+        let latitudeDelta = maxLatitude - minLatitude
+        let longitudeDelta = maxLongitude - minLongitude
+
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
     }
     
 
@@ -75,6 +97,7 @@ class ObservationsLocationViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
+                            self.getSpan()
                         }
                     } catch {
                         self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")

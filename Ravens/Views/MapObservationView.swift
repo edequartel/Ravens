@@ -1,4 +1,3 @@
-//
 //  MapObservationView.swift
 //  Ravens
 //
@@ -13,9 +12,6 @@ struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
     @StateObject private var locationViewModel = LocationViewModel()
-   
-    @StateObject private var geoJSONViewModel = GeoJSONViewModel()
-    @State private var polyOverlays = [MKPolygon]()
     
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     
@@ -80,7 +76,6 @@ struct MapObservationView: View {
                                         .frame(width: 6, height: 6)
                                 )
                         }
-                        
                     }
                   
                     MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
@@ -103,13 +98,7 @@ struct MapObservationView: View {
                                 )
                         }
                     }
-                    
-                    //JSONData
-                    ForEach(polyOverlays, id: \.self) { polyOverlay in
-                        MapPolygon(polyOverlay)
-                            .stroke(.pink, lineWidth: 1)
-                            .foregroundStyle(.blue.opacity(0.1))
-                    }
+    
                     
                     
                 }
@@ -118,19 +107,6 @@ struct MapObservationView: View {
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
-
-                        if locationViewModel.locations.count > 0 {
-                            HStack {
-                                Text("\(locationViewModel.locations[0].name)")
-                                Spacer()
-                                Text("\(locationViewModel.locations[0].id)")
-                                
-                            }
-                            .foregroundColor(.white)
-                        } else {
-                            Text("Default Name")
-                        }
-                        
                     }
                 }
                 
@@ -148,7 +124,6 @@ struct MapObservationView: View {
                     }
                 }
                 .mapControls() {
-                    //                    MapUserLocationButton()
                     MapCompass() //tapping this makes it north
                 }
             }
@@ -171,7 +146,9 @@ struct MapObservationView: View {
                         .region(
                             MKCoordinateRegion(
                                 center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+//                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+
                             )
                         )
                 } else {

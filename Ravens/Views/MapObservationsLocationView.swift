@@ -169,10 +169,10 @@ struct MapObservationsLocationView: View {
                     polyOverlays.removeAll()
                     locationViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
                         // Use fetchedLocations here
+                        
                         for location in fetchedLocations {
                             geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
                                 polyOverlays = polyOverlaysIn
-                                
                                 locationId = location.id
                                 sharedLocationId = location.id
                                 observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0)
@@ -185,7 +185,8 @@ struct MapObservationsLocationView: View {
                         .region(
                             MKCoordinateRegion(
                                 center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+//                                span: MKCoordinateSpan(latitudeDelta: observationsLocationViewModel.span.latitudeDelta, longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
+                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
                             )
                         )
                 } else {

@@ -64,7 +64,7 @@ struct ContentView: View {
             // Tab 2
             ZStack {
                 MapObservationsLocationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
-                ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "d7b731")
+                ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "a7b731")
             }
             .tabItem {
                 Text("Area")
