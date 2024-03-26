@@ -44,7 +44,7 @@ struct ObservationsView: View {
         }
 
         .onAppear(){
-            // Get the current locations of all the observations
+            // Get the current locations of all the observations //<<=
             observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                             long: settings.currentLocation?.coordinate.longitude ?? longitude
                                             )
