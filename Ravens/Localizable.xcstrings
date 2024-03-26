@@ -195,6 +195,9 @@
         }
       }
     },
+    "Default Name" : {
+
+    },
     "Destination %lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -438,6 +441,12 @@
           }
         }
       }
+    },
+    "Local map" : {
+
+    },
+    "Locations" : {
+
     },
     "Login" : {
       "localizations" : {
@@ -964,6 +973,9 @@
           }
         }
       }
+    },
+    "View on Website" : {
+
     },
     "Voelt als: %@" : {
 

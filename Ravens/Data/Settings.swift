@@ -31,6 +31,8 @@ class Settings: ObservableObject {
     @AppStorage("radius") var radius: Int = 500
     
     @AppStorage("poiOn") var poiOn: Bool = true
+    @AppStorage("localMap") var localMap: Bool = true
+    
     @AppStorage("selectedRarity") var selectedRarity = 1
     
     @Published var currentLocation: CLLocation? = CLLocationManager().location

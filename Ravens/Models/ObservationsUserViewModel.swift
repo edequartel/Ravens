@@ -78,12 +78,12 @@ class ObservationsUserViewModel: ObservableObject {
                             self.getLocations()
                         }
                     } catch {
-                        self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
+                        self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
                     }
                 }
             case .failure(let error):
-                self.log.error("Error ObservationsSpeciesViewModel: \(error)")
+                self.log.error("Error ObservationsUserViewModel: \(error)")
             }
         }
     }

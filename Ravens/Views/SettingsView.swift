@@ -72,6 +72,8 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     
+                    Toggle("Local map", isOn: $settings.localMap)
+                    
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
                             Image(systemName: "binoculars.fill")

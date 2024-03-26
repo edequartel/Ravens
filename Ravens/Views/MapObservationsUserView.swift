@@ -49,6 +49,9 @@ struct MapObservationsUserView: View {
                             )
                     }
                 }
+                
+                
+                
             }
             .safeAreaInset(edge: .bottom) {
                 VStack {

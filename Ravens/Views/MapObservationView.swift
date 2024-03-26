@@ -30,6 +30,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
+    @StateObject private var locationViewModel = LocationViewModel()
+   
+    @StateObject private var geoJSONViewModel = GeoJSONViewModel()
+    @State private var polyOverlays = [MKPolygon]()
+    
+    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+    
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -39,10 +46,13 @@ struct MapObservationView: View {
     @ObservedObject var locationManager = LocationManager()
     @State private var cameraPosition: MapCameraPosition?
     
+    @State private var locationId: Int = 0
+    @Binding var sharedLocationId: Int
+    
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
             MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), //<<< userlocation
+                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), 
                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             )
         )
@@ -78,7 +88,29 @@ struct MapObservationView: View {
                         }
                     }
                     
-                    ForEach(observationsViewModel.locations) { location in
+//                    ForEach(observationsViewModel.locations) { location in
+//                        Annotation(location.name, coordinate: location.coordinate) {
+//                            Circle()
+//                                .fill(Color(myColor(value: location.rarity)))
+//                                .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
+//                                .frame(width: 12, height: 12)
+//                            
+//                                .overlay(
+//                                    Circle()
+//                                        .fill(location.hasPhoto ? Color.white : Color.clear)
+//                                        .frame(width: 6, height: 6)
+//                                )
+//                        }
+//                        
+//                    }
+//                    
+                    MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
+                        .foregroundStyle(.clear.opacity(100))
+                        .stroke(colorByMapStyle(), lineWidth: 1)
+                    
+                    
+                    // location observation
+                    ForEach(observationsLocationViewModel.locations) { location in
                         Annotation(location.name, coordinate: location.coordinate) {
                             Circle()
                                 .fill(Color(myColor(value: location.rarity)))
@@ -91,12 +123,15 @@ struct MapObservationView: View {
                                         .frame(width: 6, height: 6)
                                 )
                         }
-                        
                     }
                     
-                    MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
-                        .foregroundStyle(.clear.opacity(100))
-                        .stroke(colorByMapStyle(), lineWidth: 1)
+                    //JSONData
+                    ForEach(polyOverlays, id: \.self) { polyOverlay in
+                        MapPolygon(polyOverlay)
+                            .stroke(.pink, lineWidth: 1)
+                            .foregroundStyle(.blue.opacity(0.1))
+                    }
+                    
                     
                 }
                 .mapStyle(settings.mapStyle)
@@ -104,17 +139,51 @@ struct MapObservationView: View {
                 .safeAreaInset(edge: .bottom) {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
+
+                        if locationViewModel.locations.count > 0 {
+                            HStack {
+                                Text("\(locationViewModel.locations[0].name)")
+                                Spacer()
+                                Text("\(locationViewModel.locations[0].id)")
+                                
+                            }
+                            .foregroundColor(.white)
+                        } else {
+                            Text("Default Name")
+                        }
+                        
                     }
                 }
                 
                 .onTapGesture() { position in
                     
                     if let coordinate = proxy.convert(position, from: .local) {
-                        observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
+//??CIRCLE                       observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
                         
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                        
+                       
+                        
+                        //geoJSON
+                        polyOverlays.removeAll()
+                        locationViewModel.fetchLocations(latitude: coordinate.latitude, longitude: coordinate.longitude) { fetchedLocations in
+                            // Use fetchedLocations here
+                            print(locationViewModel.locations.count)
+                            for location in fetchedLocations {
+                                print(location.id)
+                                geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
+                                    polyOverlays = polyOverlaysIn
+                                    
+                                    locationId = location.id
+                                    sharedLocationId = location.id
+                                    
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0)
+                                }
+                            }
+                        }
+                    
                         
                         // Update currentLocation with the new CLLocation instance
                         settings.currentLocation = newLocation
@@ -133,7 +202,27 @@ struct MapObservationView: View {
                     let myLongitude = location.coordinate.longitude
                     print("My location is: \(myLatitude), \(myLongitude)")
                     circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                    
+//??CIRCLE observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                    
+                    // save the location
+                    settings.currentLocation = location
+                    
+                    // geoJSON
+                    polyOverlays.removeAll()
+                    locationViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
+                        // Use fetchedLocations here
+                        for location in fetchedLocations {
+                            geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
+                                polyOverlays = polyOverlaysIn
+                                
+                                locationId = location.id
+                                sharedLocationId = location.id
+                                
+                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0)
+                            }
+                        }
+                    }
                     
                     // Initialize cameraPosition with user's current location
                     cameraPosition = MapCameraPosition
@@ -165,12 +254,10 @@ struct MapObservationView: View {
 }
 
 
-
-
 struct MapObservationView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationView()
+        MapObservationView(sharedLocationId: .constant(0))
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))

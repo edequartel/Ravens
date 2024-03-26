@@ -20,6 +20,8 @@ struct ContentView: View {
     
     @State private var isSheetObservationsViewPresented = false
     
+    @State private var locationId: Int?
+    
     var body: some View {
         TabView {
             // Tab 0
@@ -41,10 +43,16 @@ struct ContentView: View {
 //                Text("weather")
 //                Image(systemName: "globe")
 //            }
+//                         Tab 0
+//            LocationLatLongView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
             
             // Tab 1
             ZStack {
-                MapObservationView()
+                MapObservationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
                 ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             }
             .tabItem {
@@ -75,13 +83,12 @@ struct ContentView: View {
         }
 
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsView(isShowing: $isSheetObservationsViewPresented)
+//            ObservationsView(isShowing: $isSheetObservationsViewPresented)
+            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsViewPresented)
         }
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")
             CLLocationManager().requestWhenInUseAuthorization()
-//            keyChainviewModel.retrieveCredentials()
-//            log.error("Token from keychain \(keyChainviewModel.token)")
         }
     }
 }

@@ -92,7 +92,13 @@ class ObservationsViewModel: ObservableObject {
         
         let url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
         
-
+        
+        
+//        //deze verder uitwerken met location.id /api/v1/locations/17829/observations/
+//        let url = settings.endPoint()+"locations/17820/observations/"
+////        "observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
+//        
+        
         log.info("\(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
