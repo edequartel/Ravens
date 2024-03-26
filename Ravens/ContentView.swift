@@ -19,6 +19,7 @@ struct ContentView: View {
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
     
     @State private var isSheetObservationsViewPresented = false
+    @State private var isSheetObservationsLocationsViewPresented = false
     
     @State private var locationId: Int?
     
@@ -52,12 +53,22 @@ struct ContentView: View {
             
             // Tab 1
             ZStack {
-                MapObservationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
+                MapObservationView()
                 ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             }
             .tabItem {
                 Text("Obs")
                 Image(systemName: "binoculars")
+            }
+            
+            // Tab 2
+            ZStack {
+                MapObservationsLocationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
+                ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "d7b731")
+            }
+            .tabItem {
+                Text("Area")
+                Image(systemName: "globe")
             }
             
             // Tab 2
@@ -83,8 +94,10 @@ struct ContentView: View {
         }
 
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-//            ObservationsView(isShowing: $isSheetObservationsViewPresented)
-            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsViewPresented)
+            ObservationsView(isShowing: $isSheetObservationsViewPresented)
+        }
+        .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
+            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsLocationsViewPresented)
         }
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")

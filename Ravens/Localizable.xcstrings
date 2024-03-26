@@ -14,16 +14,6 @@
         }
       }
     },
-    "%@ - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$lld"
-          }
-        }
-      }
-    },
     "%@ - %lldx" : {
       "localizations" : {
         "en" : {
@@ -140,6 +130,16 @@
         }
       }
     },
+    "Area" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebied"
+          }
+        }
+      }
+    },
     "Cache Empty" : {
 
     },
@@ -196,7 +196,14 @@
       }
     },
     "Default Name" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        }
+      }
     },
     "Destination %lld" : {
       "extractionState" : "stale",

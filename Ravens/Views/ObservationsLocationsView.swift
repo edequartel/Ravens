@@ -27,30 +27,31 @@ struct ObservationsLocationView: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Waarnemingen"+" ")
-                UserSimpleView()
+                Text("Waarnemingen"+" - "+"Area")
+                Spacer()
+                Text(String(locationId))
                 
-                Button {
-                    if let maxOffset = viewModel.observationsSpecies?.count {
-                        offset = min(offset + 100, maxOffset)
-                        limit = 100
-                        viewModel.fetchData(locationId: locationId, limit: limit, offset: offset)
-                    }
-                } label: {
-                    Image(systemName: "plus.circle")
-                }
-                
-                Button {
-                    if offset >= 100 {
-                        offset = offset - 100
-                    }
-                    limit = 100
-                    viewModel.fetchData(locationId: locationId, limit: limit, offset: offset)
-                } label: {
-                    Image(systemName: "minus.circle")
-                }
-                
-                Text("\(offset)")
+//                Button {
+//                    if let maxOffset = viewModel.observationsSpecies?.count {
+//                        offset = min(offset + 100, maxOffset)
+//                        limit = 100
+//                        viewModel.fetchData(locationId: locationId, limit: limit, offset: offset)
+//                    }
+//                } label: {
+//                    Image(systemName: "plus.circle")
+//                }
+//                
+//                Button {
+//                    if offset >= 100 {
+//                        offset = offset - 100
+//                    }
+//                    limit = 100
+//                    viewModel.fetchData(locationId: locationId, limit: limit, offset: offset)
+//                } label: {
+//                    Image(systemName: "minus.circle")
+//                }
+//                
+//                Text("\(offset)")
             }
             .padding()
             
@@ -58,7 +59,7 @@ struct ObservationsLocationView: View {
                 if let results =  viewModel.observationsSpecies?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
-                        ObsView(obsID: result.id ?? 0, showUsername: false)
+                        ObsView(obsID: result.id ?? 0, showUsername: true)
                     }
                     .font(.footnote)
                 }

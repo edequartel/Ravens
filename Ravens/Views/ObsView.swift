@@ -19,10 +19,8 @@ struct ObsView: View {
     
     @EnvironmentObject var fetchRequestManager: FetchRequestManager
     
-    
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
-    
     
     var obsID: Int
     var showUsername: Bool
@@ -58,10 +56,18 @@ struct ObsView: View {
                     Text("\(obs.date) \(obs.time ?? ""), \(obs.number)")
                     
                     if showUsername {
-                        Text("\(obs.user_detail?.name ?? "unknown") - \(obs.user_detail?.id ?? 0)")
+                        HStack {
+                            Text("\(obs.user_detail?.name ?? "unknown")")
+                            Spacer()
+                            Text("\(obs.user_detail?.id ?? 0)")
+                        }
                     }
                     
-                    Text("\(obs.location_detail?.name ?? "unknown")")
+                    HStack {
+                        Text("\(obs.location_detail?.name ?? "unknown")")
+                        Spacer()
+                        Text("\(obs.location_detail?.id ?? 0)")
+                    }
                     
                     if obs.notes?.count ?? 0 > 0 {
                         Text("\(obs.notes ?? "unknown")")
