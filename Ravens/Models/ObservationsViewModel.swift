@@ -22,6 +22,9 @@ struct Location: Identifiable {
 struct Span {
     var latitudeDelta: Double
     var longitudeDelta: Double
+    var latitude: Double
+    var longitude: Double
+    
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -30,7 +33,7 @@ class ObservationsViewModel: ObservableObject {
     
     var locations = [Location]()
     var poiLocations = [Location]()
-    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1)
+//    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
     
     var settings: Settings
     init(settings: Settings) {
@@ -54,28 +57,6 @@ class ObservationsViewModel: ObservableObject {
             locations.append(newLocation)
         }
     }
-    
-    func getSpan() {
-        var coordinates: [CLLocationCoordinate2D] = []
-        
-        let max = (observations?.results.count ?? 0)
-        for i in 0 ..< max {
-            let latitude = observations?.results[i].point.coordinates[0] ?? 52.024052
-            let longitude = observations?.results[i].point.coordinates[1] ?? 5.245350
-            coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        }
-
-        let minLatitude = coordinates.min(by: { $0.latitude < $1.latitude })?.latitude ?? 0
-        let maxLatitude = coordinates.max(by: { $0.latitude > $1.latitude })?.latitude ?? 0
-        let minLongitude = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? 0
-        let maxLongitude = coordinates.max(by: { $0.longitude > $1.longitude })?.longitude ?? 0
-
-        let latitudeDelta = maxLatitude - minLatitude
-        let longitudeDelta = maxLongitude - minLongitude
-
-        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-    }
-    
     
     func getPoiLocations() {
         poiLocations.removeAll()
@@ -124,8 +105,7 @@ class ObservationsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.observations = observations
                     self.getLocations()
-                    self.getSpan()
-                    self.getPoiLocations()
+//                    self.getPoiLocations()
                     self.log.error("observations locations count \(self.locations.count)")
                 }
             case .failure(let error):

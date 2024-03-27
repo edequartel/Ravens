@@ -24,7 +24,7 @@ class ObservationsLocationViewModel: ObservableObject {
 //    var maxLongitude: Double = 0
     
     var locations = [Location]()
-    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
     
     var settings: Settings
     init(settings: Settings) {
@@ -53,41 +53,38 @@ class ObservationsLocationViewModel: ObservableObject {
     }
     
     func getSpan() {
-        var coordinates: [CLLocationCoordinate2D] = []
+        var latitudes: [Double] = []
+        var longitudes: [Double] = []
         
         let max = (observationsSpecies?.results.count ?? 0)
         for i in 0 ..< max {
-            let latitude = observationsSpecies?.results[i].point.coordinates[0] ?? 52.024052
-            let longitude = observationsSpecies?.results[i].point.coordinates[1] ?? 5.245350
-            coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            let longitude = observationsSpecies?.results[i].point.coordinates[0] ?? 52.024052
+            let latitude = observationsSpecies?.results[i].point.coordinates[1] ?? 5.245350
+            latitudes.append(latitude)
+            longitudes.append(longitude)
         }
-
-        let minLatitude = coordinates.min(by: { $0.latitude < $1.latitude })?.latitude ?? 0
-        let maxLatitude = coordinates.max(by: { $0.latitude > $1.latitude })?.latitude ?? 0
         
-        let minLongitude = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? 0
-        let maxLongitude = coordinates.max(by: { $0.longitude > $1.longitude })?.longitude ?? 0
+        let minLatitude = latitudes.min() ?? 0
+        let maxLatitude = latitudes.max() ?? 0
+        let minLongitude = longitudes.min() ?? 0
+        let maxLongitude = longitudes.max() ?? 0
+        print("min \(minLatitude) \(minLongitude)")
+        print("max \(maxLatitude) \(maxLongitude)")
         
-//        print("\(minLatitude) \(maxLatitude) \(minLongitude) \(maxLongitude)")
-        //min 5.238430023193359
-        //max 5.250708016753912
+        let centreLatitude = (minLatitude + maxLatitude) / 2
+        let centreLongitude = (minLongitude + maxLongitude) / 2
         
-        //min 52.021517620396565
-        //max 52.02693733156565
-
-        let latitudeDelta = 5.250708016753912 - 5.238430023193359
-        let longitudeDelta = 52.02693733156565 - 52.021517620396565
-        
-//        let latitudeDelta = maxLatitude - minLatitude
-//        let longitudeDelta = maxLongitude - minLongitude
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
         
         print("delta \(latitudeDelta) \(longitudeDelta)")
+        print("position \(centreLatitude) \(centreLongitude)")
 
-        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
     
 
-    func fetchData(locationId: Int, limit: Int, offset: Int) {
+    func fetchData(locationId: Int, limit: Int, offset: Int, completion: @escaping () -> Void) {
         log.error("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
@@ -116,6 +113,7 @@ class ObservationsLocationViewModel: ObservableObject {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
                             self.getSpan()
+                            completion()
                         }
                     } catch {
                         self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")

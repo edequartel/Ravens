@@ -452,9 +452,6 @@
     "Local map" : {
 
     },
-    "Locations" : {
-
-    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -980,9 +977,6 @@
           }
         }
       }
-    },
-    "View on Website" : {
-
     },
     "Voelt als: %@" : {
 

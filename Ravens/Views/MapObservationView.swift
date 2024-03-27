@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var locationViewModel = LocationViewModel()
+    @StateObject private var locationIdViewModel = LocationIdViewModel()
     
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     
