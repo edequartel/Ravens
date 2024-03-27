@@ -66,7 +66,7 @@ struct ObservationsLocationView: View {
             }
         }
         .onAppear {
-            viewModel.fetchData(locationId: locationId, limit: limit, offset: offset)
+            viewModel.fetchData(locationId: locationId, limit: limit, offset: offset, completion: { print("fetchData ObservationsLocationViewc completed") })
         }
     }
 }

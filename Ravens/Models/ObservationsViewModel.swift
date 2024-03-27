@@ -19,24 +19,31 @@ struct Location: Identifiable {
     var hasSound: Bool
 }
 
+struct Span {
+    var latitudeDelta: Double
+    var longitudeDelta: Double
+    var latitude: Double
+    var longitude: Double
+    
+}
+
 class ObservationsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var observations: Observations?
     
     var locations = [Location]()
     var poiLocations = [Location]()
+//    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
     
     var settings: Settings
     init(settings: Settings) {
         log.info("init ObservationsViewModel")
         self.settings = settings
-
     }
 
     ///
     func getLocations() {
         locations.removeAll()
-        
         let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
  
@@ -47,12 +54,10 @@ class ObservationsViewModel: ObservableObject {
             let hasPhoto = observations?.results[i].has_photo ?? false
             let hasSound = observations?.results[i].has_sound ?? false
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
-
             locations.append(newLocation)
-
         }
     }
-   
+    
     func getPoiLocations() {
         poiLocations.removeAll()
         var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0, hasPhoto: false, hasSound: false)
@@ -70,7 +75,7 @@ class ObservationsViewModel: ObservableObject {
         newLocation = Location(name: "De zouweboezem", coordinate: CLLocationCoordinate2D(latitude: 51.948497, longitude: 4.995383), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
 //        newLocation = Location(name: "Werkhoven", coordinate: CLLocationCoordinate2D(latitude: 52.024052, longitude: 5.245350), rarity: 0)
-        poiLocations.append(newLocation)
+//        poiLocations.append(newLocation)
         newLocation = Location(name: "Blauwe kamer", coordinate: CLLocationCoordinate2D(latitude: 51.942360, longitude: 5.610475), rarity: 0, hasPhoto: false, hasSound: false)
         poiLocations.append(newLocation)
         newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false, hasSound: false)
@@ -92,13 +97,6 @@ class ObservationsViewModel: ObservableObject {
         
         let url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
         
-        
-        
-//        //deze verder uitwerken met location.id /api/v1/locations/17829/observations/
-//        let url = settings.endPoint()+"locations/17820/observations/"
-////        "observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
-//        
-        
         log.info("\(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
@@ -107,7 +105,7 @@ class ObservationsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.observations = observations
                     self.getLocations()
-                    self.getPoiLocations()
+//                    self.getPoiLocations()
                     self.log.error("observations locations count \(self.locations.count)")
                 }
             case .failure(let error):
@@ -118,5 +116,3 @@ class ObservationsViewModel: ObservableObject {
     }
 }
 
-
-//        let url =  "https://waarneming.nl/api/v1/user/observations/"

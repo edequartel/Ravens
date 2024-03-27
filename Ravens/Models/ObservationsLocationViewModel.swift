@@ -18,7 +18,13 @@ class ObservationsLocationViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
+//    var minLatitude: Double = 0
+//    var maxLatitude: Double = 0
+//    var minLongitude: Double = 0
+//    var maxLongitude: Double = 0
+    
     var locations = [Location]()
+    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
     
     var settings: Settings
     init(settings: Settings) {
@@ -46,8 +52,39 @@ class ObservationsLocationViewModel: ObservableObject {
         }
     }
     
+    func getSpan() {
+        var latitudes: [Double] = []
+        var longitudes: [Double] = []
+        
+        let max = (observationsSpecies?.results.count ?? 0)
+        for i in 0 ..< max {
+            let longitude = observationsSpecies?.results[i].point.coordinates[0] ?? 52.024052
+            let latitude = observationsSpecies?.results[i].point.coordinates[1] ?? 5.245350
+            latitudes.append(latitude)
+            longitudes.append(longitude)
+        }
+        
+        let minLatitude = latitudes.min() ?? 0
+        let maxLatitude = latitudes.max() ?? 0
+        let minLongitude = longitudes.min() ?? 0
+        let maxLongitude = longitudes.max() ?? 0
+        print("min \(minLatitude) \(minLongitude)")
+        print("max \(maxLatitude) \(maxLongitude)")
+        
+        let centreLatitude = (minLatitude + maxLatitude) / 2
+        let centreLongitude = (minLongitude + maxLongitude) / 2
+        
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
+        
+        print("delta \(latitudeDelta) \(longitudeDelta)")
+        print("position \(centreLatitude) \(centreLongitude)")
 
-    func fetchData(locationId: Int, limit: Int, offset: Int) {
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+    }
+    
+
+    func fetchData(locationId: Int, limit: Int, offset: Int, completion: @escaping () -> Void) {
         log.error("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
@@ -75,6 +112,8 @@ class ObservationsLocationViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
+                            self.getSpan()
+                            completion()
                         }
                     } catch {
                         self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")

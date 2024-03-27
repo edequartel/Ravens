@@ -13,7 +13,7 @@ import SwiftyBeaver
 struct MapObservationsLocationView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var locationViewModel = LocationViewModel()
+    @StateObject private var locationIdViewModel = LocationIdViewModel()
    
     @StateObject private var geoJSONViewModel = GeoJSONViewModel()
     @State private var polyOverlays = [MKPolygon]()
@@ -31,6 +31,10 @@ struct MapObservationsLocationView: View {
     
     @State private var locationId: Int = 0
     @Binding var sharedLocationId: Int
+    
+    @State private var deltaLat: Double = 0.1
+    @State private var deltaLong: Double = 0.1
+    
     
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
@@ -102,11 +106,11 @@ struct MapObservationsLocationView: View {
                     VStack {
                         SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
 
-                        if locationViewModel.locations.count > 0 {
+                        if locationIdViewModel.locations.count > 0 {
                             HStack {
-                                Text("\(locationViewModel.locations[0].name)")
+                                Text("\(locationIdViewModel.locations[0].name)")
                                 Spacer()
-                                Text("\(locationViewModel.locations[0].id)")
+                                Text("\(locationIdViewModel.locations[0].id)")
                                 
                             }
                             .foregroundColor(.white)
@@ -126,21 +130,36 @@ struct MapObservationsLocationView: View {
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         
                        
-                        
-                        //geoJSON
+                        //lat,long -> locationId -> geoJSON
                         polyOverlays.removeAll()
-                        locationViewModel.fetchLocations(latitude: coordinate.latitude, longitude: coordinate.longitude) { fetchedLocations in
-                            // Use fetchedLocations here
-                            print(locationViewModel.locations.count)
+                        locationIdViewModel.fetchLocations(latitude: coordinate.latitude, longitude: coordinate.longitude) { fetchedLocations in
+                            // Use fetchedLocations here, er is er echter altijd maar 1 daarom pakken we de eerste
                             for location in fetchedLocations {
-                                print(location.id)
+                                print(location.id) //dit is de locatieId en hiermee halen we de geoJSON data op
                                 geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
                                     polyOverlays = polyOverlaysIn
-                                    
+                    
                                     locationId = location.id
                                     sharedLocationId = location.id
                                     
-                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0)
+                                    //and now er get the observations from the locationId
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
+                                        print("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        print(observationsLocationViewModel.span)
+                                        cameraPosition = MapCameraPosition
+                                            .region(
+                                                MKCoordinateRegion(
+                                                    center: CLLocationCoordinate2D(
+                                                        latitude: observationsLocationViewModel.span.latitude,
+                                                        longitude: observationsLocationViewModel.span.longitude),
+                                                    
+                                                    span: MKCoordinateSpan(
+                                                        latitudeDelta: observationsLocationViewModel.span.latitudeDelta,
+                                                        longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
+                                                )
+                                            )
+                                    }
+                                    )
                                 }
                             }
                         }
@@ -151,6 +170,7 @@ struct MapObservationsLocationView: View {
                 }
                 .mapControls() {
                     MapCompass() //tapping this makes it north
+                    
                 }
             }
         }
@@ -167,27 +187,50 @@ struct MapObservationsLocationView: View {
                     
                     // geoJSON
                     polyOverlays.removeAll()
-                    locationViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
+                    
+                    locationIdViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
                         // Use fetchedLocations here
+                        
                         for location in fetchedLocations {
                             geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
                                 polyOverlays = polyOverlaysIn
-                                
                                 locationId = location.id
                                 sharedLocationId = location.id
-                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0)
+                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: { 
+                                    print("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                    print(observationsLocationViewModel.span)
+                                    cameraPosition = MapCameraPosition
+                                        .region(
+                                            MKCoordinateRegion(
+//                                                center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
+                                                center: CLLocationCoordinate2D(
+                                                    latitude: observationsLocationViewModel.span.latitude,
+                                                    longitude: observationsLocationViewModel.span.longitude),
+                                                
+                                                span: MKCoordinateSpan(
+                                                    latitudeDelta: observationsLocationViewModel.span.latitudeDelta,
+                                                    longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
+                                            )
+                                        )
+                                }
+                                )
+                
                             }
                         }
                     }
                     
                     // Initialize cameraPosition with user's current location
-                    cameraPosition = MapCameraPosition
-                        .region(
-                            MKCoordinateRegion(
-                                center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-                            )
-                        )
+//                    cameraPosition = MapCameraPosition
+//                        .region(
+//                            MKCoordinateRegion(
+//                                center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
+//                                span: MKCoordinateSpan(latitudeDelta: 0.012277993560553035, longitudeDelta: 0.005419711169082575)
+//                            )
+//                        )
+                    
+                    
+                    
+                    
                 } else {
                     print("Location is not available yet")
                     // Handle the case when location is not available

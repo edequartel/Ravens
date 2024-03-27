@@ -8,7 +8,8 @@
 import Foundation
 import Alamofire
 
-class LocationViewModel: ObservableObject {
+// get the LocationId from latitude and longitude
+class LocationIdViewModel: ObservableObject {
     @Published var locations: [LocationJSON] = []
     @Published var isLoading: Bool = false
 
