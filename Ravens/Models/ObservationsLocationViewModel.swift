@@ -18,6 +18,11 @@ class ObservationsLocationViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
+//    var minLatitude: Double = 0
+//    var maxLatitude: Double = 0
+//    var minLongitude: Double = 0
+//    var maxLongitude: Double = 0
+    
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1)
     
@@ -59,11 +64,24 @@ class ObservationsLocationViewModel: ObservableObject {
 
         let minLatitude = coordinates.min(by: { $0.latitude < $1.latitude })?.latitude ?? 0
         let maxLatitude = coordinates.max(by: { $0.latitude > $1.latitude })?.latitude ?? 0
+        
         let minLongitude = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? 0
         let maxLongitude = coordinates.max(by: { $0.longitude > $1.longitude })?.longitude ?? 0
+        
+//        print("\(minLatitude) \(maxLatitude) \(minLongitude) \(maxLongitude)")
+        //min 5.238430023193359
+        //max 5.250708016753912
+        
+        //min 52.021517620396565
+        //max 52.02693733156565
 
-        let latitudeDelta = maxLatitude - minLatitude
-        let longitudeDelta = maxLongitude - minLongitude
+        let latitudeDelta = 5.250708016753912 - 5.238430023193359
+        let longitudeDelta = 52.02693733156565 - 52.021517620396565
+        
+//        let latitudeDelta = maxLatitude - minLatitude
+//        let longitudeDelta = maxLongitude - minLongitude
+        
+        print("delta \(latitudeDelta) \(longitudeDelta)")
 
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
     }

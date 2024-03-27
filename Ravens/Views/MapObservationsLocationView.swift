@@ -180,13 +180,16 @@ struct MapObservationsLocationView: View {
                         }
                     }
                     
+                    print("\(observationsLocationViewModel.span.latitudeDelta) - \(observationsLocationViewModel.span.longitudeDelta)")
+                    
                     // Initialize cameraPosition with user's current location
                     cameraPosition = MapCameraPosition
                         .region(
                             MKCoordinateRegion(
                                 center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-//                                span: MKCoordinateSpan(latitudeDelta: observationsLocationViewModel.span.latitudeDelta, longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
-                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                                span: MKCoordinateSpan(latitudeDelta: observationsLocationViewModel.span.latitudeDelta, longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
+//                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+//                                span: MKCoordinateSpan(latitudeDelta: 0.012277993560553035, longitudeDelta: 0.005419711169082575)
                             )
                         )
                 } else {
