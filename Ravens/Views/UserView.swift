@@ -32,7 +32,7 @@ struct UserView: View {
             }
         }
         .onAppear {
-            userViewModel.fetchUserData(token: keyChainviewModel.token, settings: settings)
+            userViewModel.fetchUserData(settings: settings)
         }
     }
 }
@@ -50,7 +50,7 @@ struct UserSimpleView: View {
             }
         }
         .onAppear {
-            userViewModel.fetchUserData(token: keyChainviewModel.token, settings: settings)
+            userViewModel.fetchUserData(settings: settings)
         }
     }
 }

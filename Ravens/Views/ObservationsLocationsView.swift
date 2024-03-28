@@ -1,10 +1,10 @@
-////
-////  ObservationsLocationsView.swift
-////  Ravens
-////
-////  Created by Eric de Quartel on 25/03/2024.
-////
 //
+//  ObservationsLocationsView.swift
+//  Ravens
+//
+//  Created by Eric de Quartel on 25/03/2024.
+//
+
 import SwiftUI
 import SwiftyBeaver
 
@@ -27,7 +27,11 @@ struct ObservationsLocationView: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Waarnemingen"+" - "+"Area")
+                HStack {
+                    Text("Obs")
+                    Spacer()
+                    Text("Area")
+                }
                 Spacer()
                 Text(String(locationId))
                 

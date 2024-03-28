@@ -7,22 +7,29 @@
 
 import Foundation
 import Alamofire
+import SwiftyBeaver
 
 // get the LocationId from latitude and longitude
 class LocationIdViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
     @Published var locations: [LocationJSON] = []
     @Published var isLoading: Bool = false
+    
+    private var keyChainViewModel =  KeychainViewModel()
 
     func fetchLocations(latitude: Double, longitude: Double, completion: @escaping ([LocationJSON]) -> Void) {
         isLoading = true
         
+        keyChainViewModel.retrieveCredentials()
+        
+        // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token 01d3455e878b6c4e6712c550ef460e17b9d2dc2d",
+            "Authorization": "Token "+keyChainViewModel.token,
             "Accept": "application/json"
         ]
         
         let url = URL(string: "https://waarneming.nl/api/v1/locations/?lat=\(latitude)&lng=\(longitude)")!
-        print(url)
+        log.info(url)
         
         AF.request(url, headers: headers).responseDecodable(of: ApiResponse.self) { response in
             guard let responseData = response.value else { return }

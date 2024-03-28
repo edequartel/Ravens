@@ -64,7 +64,6 @@ struct MapObservationsUserView: View {
                             HStack{
                                 Spacer()
                                 Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset) - \((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset + limit)")
-                                //= \(offset) - \(limit)")
                                     .foregroundColor(.obsGreenFlower)
 
                             }

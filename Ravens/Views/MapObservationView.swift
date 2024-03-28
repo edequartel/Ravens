@@ -10,16 +10,13 @@ import SwiftyBeaver
 
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-    
-    @StateObject private var locationIdViewModel = LocationIdViewModel()
-    
-    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+
+    @ObservedObject var viewModel = POIViewModel()
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
     
     @ObservedObject var locationManager = LocationManager()
     @State private var cameraPosition: MapCameraPosition?
@@ -27,10 +24,12 @@ struct MapObservationView: View {
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
             MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), 
+                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             )
         )
+    
+    @State private var isFirstAppear = true
     
     // New computed property
     var cameraBinding: Binding<MapCameraPosition> {
@@ -50,8 +49,8 @@ struct MapObservationView: View {
                     UserAnnotation()
                     
                     if (settings.poiOn) {
-                        ForEach(observationsViewModel.poiLocations) { location in
-                            Annotation(location.name, coordinate: location.coordinate) {
+                        ForEach(viewModel.poiList, id: \.name) { poi in
+                            Annotation(poi.name, coordinate: poi.coordinate.cllocationCoordinate) {
                                 Triangle()
                                     .fill(Color.gray)
                                     .frame(width: 5, height: 5)
@@ -81,26 +80,6 @@ struct MapObservationView: View {
                     MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(colorByMapStyle(), lineWidth: 1)
-                    
-                    
-                    // location observation
-                    ForEach(observationsLocationViewModel.locations) { location in
-                        Annotation(location.name, coordinate: location.coordinate) {
-                            Circle()
-                                .fill(Color(myColor(value: location.rarity)))
-                                .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
-                                .frame(width: 12, height: 12)
-                            
-                                .overlay(
-                                    Circle()
-                                        .fill(location.hasPhoto ? Color.white : Color.clear)
-                                        .frame(width: 6, height: 6)
-                                )
-                        }
-                    }
-    
-                    
-                    
                 }
                 .mapStyle(settings.mapStyle)
                 
@@ -111,7 +90,6 @@ struct MapObservationView: View {
                 }
                 
                 .onTapGesture() { position in
-                    
                     if let coordinate = proxy.convert(position, from: .local) {
                     observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
                         
@@ -129,36 +107,42 @@ struct MapObservationView: View {
             }
         }
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if let location = self.locationManager.location {
-                    let myLatitude = location.coordinate.latitude
-                    let myLongitude = location.coordinate.longitude
-                    print("My location is: \(myLatitude), \(myLongitude)")
-                    circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    
-                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
-                    
-                    // save the location
-                    settings.currentLocation = location
-                    
-                    // Initialize cameraPosition with user's current location
-                    cameraPosition = MapCameraPosition
-                        .region(
-                            MKCoordinateRegion(
-                                center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-//                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
-
+            viewModel.fetchPOIs()
+            
+            if isFirstAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if let location = self.locationManager.location {
+                        let myLatitude = location.coordinate.latitude
+                        let myLongitude = location.coordinate.longitude
+                        print("My location is: \(myLatitude), \(myLongitude)")
+                        circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        
+                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                        
+                        // save the location
+                        settings.currentLocation = location
+                        
+                        // Initialize cameraPosition with user's current location
+                        cameraPosition = MapCameraPosition
+                            .region(
+                                MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
+                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                                    //                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+                                    
+                                )
                             )
-                        )
-                } else {
-                    print("Location is not available yet")
-                    // Handle the case when location is not available
+                    } else {
+                        print("Location is not available yet")
+                        // Handle the case when location is not available
+                    }
+                    
+                    log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                    speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                 }
-                
-                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+                isFirstAppear = false
             }
+            
         }
     }
     

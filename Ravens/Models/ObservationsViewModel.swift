@@ -32,8 +32,8 @@ class ObservationsViewModel: ObservableObject {
     @Published var observations: Observations?
     
     var locations = [Location]()
-    var poiLocations = [Location]()
-//    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
+
+    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
     
     var settings: Settings
     init(settings: Settings) {
@@ -41,7 +41,6 @@ class ObservationsViewModel: ObservableObject {
         self.settings = settings
     }
 
-    ///
     func getLocations() {
         locations.removeAll()
         let max = (observations?.results.count ?? 0)
@@ -58,39 +57,35 @@ class ObservationsViewModel: ObservableObject {
         }
     }
     
-    func getPoiLocations() {
-        poiLocations.removeAll()
-        var newLocation = Location(name: "IJmuiden", coordinate: CLLocationCoordinate2D(latitude: 52.459402, longitude:  4.540332), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "Oostvaardersplassen", coordinate: CLLocationCoordinate2D(latitude: 52.452926, longitude: 5.357325), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "Brouwersdam", coordinate: CLLocationCoordinate2D(latitude: 51.761799, longitude: 3.853920), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "Mokbaai", coordinate: CLLocationCoordinate2D(latitude: 53.005861, longitude: 4.762873), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "Lauwersoog", coordinate: CLLocationCoordinate2D(latitude: 53.381690, longitude: 6.188163), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "De zouweboezem", coordinate: CLLocationCoordinate2D(latitude: 51.948497, longitude: 4.995383), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-//        newLocation = Location(name: "Werkhoven", coordinate: CLLocationCoordinate2D(latitude: 52.024052, longitude: 5.245350), rarity: 0)
-//        poiLocations.append(newLocation)
-        newLocation = Location(name: "Blauwe kamer", coordinate: CLLocationCoordinate2D(latitude: 51.942360, longitude: 5.610475), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
-        newLocation = Location(name: "Steenwaard", coordinate: CLLocationCoordinate2D(latitude: 51.965423, longitude: 5.215302), rarity: 0, hasPhoto: false, hasSound: false)
-        poiLocations.append(newLocation)
+    func getSpan() {
+        var latitudes: [Double] = []
+        var longitudes: [Double] = []
+        
+        let max = (observations?.results.count ?? 0)
+        for i in 0 ..< max {
+            let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
+            let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
+            latitudes.append(latitude)
+            longitudes.append(longitude)
+        }
+        
+        let minLatitude = latitudes.min() ?? 0
+        let maxLatitude = latitudes.max() ?? 0
+        let minLongitude = longitudes.min() ?? 0
+        let maxLongitude = longitudes.max() ?? 0
+        
+        let centreLatitude = (minLatitude + maxLatitude) / 2
+        let centreLongitude = (minLongitude + maxLongitude) / 2
+        
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
 
-//
-//        newLocation = Location(name: "De groene Jonker", coordinate: CLLocationCoordinate2D(latitude: 52.180458, longitude: 4.825451), rarity: 0)
-//        poiLocations.append(newLocation)
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
     
-    ///
     func fetchData(lat: Double, long: Double) {
         log.error("fetchData ObservationsViewModel")
 
-        // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
         ]
@@ -105,7 +100,6 @@ class ObservationsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.observations = observations
                     self.getLocations()
-//                    self.getPoiLocations()
                     self.log.error("observations locations count \(self.locations.count)")
                 }
             case .failure(let error):

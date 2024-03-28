@@ -72,7 +72,7 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     
-                    Toggle("Local map", isOn: $settings.localMap)
+                    Toggle("Zoom", isOn: $settings.zoomActive)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
