@@ -449,9 +449,6 @@
         }
       }
     },
-    "Local map" : {
-
-    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -1000,6 +997,9 @@
           }
         }
       }
+    },
+    "Zoom" : {
+
     }
   },
   "version" : "1.0"

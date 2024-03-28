@@ -27,7 +27,11 @@ struct ObservationsLocationView: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Waarnemingen"+" - "+"Area")
+                HStack {
+                    Text("Obs")
+                    Spacer()
+                    Text("Area")
+                }
                 Spacer()
                 Text(String(locationId))
                 

@@ -8,9 +8,10 @@
 
 import SwiftUI
 import Alamofire
-//import AlamofireImage
+import SwiftyBeaver
 
 struct AFImageView: View {
+    let log = SwiftyBeaver.self
     @State private var downloadedImage: SwiftUI.Image? = nil
     
     var media: String
@@ -53,7 +54,7 @@ struct AFImageView: View {
 //            print("Loaded image from disk")
             self.downloadedImage = Image(uiImage: uiImage)
         } else {
-            print("Downloading image from \(url)")
+            log.info("Downloading image from \(url)")
             AF.request(url).responseData { response in
                 switch response.result {
                 case .success(let data):
@@ -62,7 +63,7 @@ struct AFImageView: View {
                         try? data.write(to: path)
                     }
                 case .failure(let error):
-                    print("Error downloading image: \(error)")
+                    log.error("Error downloading image: \(error)")
                 }
             }
         }

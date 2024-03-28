@@ -10,16 +10,11 @@ import SwiftyBeaver
 
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-    
-    @StateObject private var locationIdViewModel = LocationIdViewModel()
-    
-    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-    
+
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
     
     @ObservedObject var locationManager = LocationManager()
     @State private var cameraPosition: MapCameraPosition?
@@ -81,26 +76,6 @@ struct MapObservationView: View {
                     MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
                         .foregroundStyle(.clear.opacity(100))
                         .stroke(colorByMapStyle(), lineWidth: 1)
-                    
-                    
-                    // location observation
-                    ForEach(observationsLocationViewModel.locations) { location in
-                        Annotation(location.name, coordinate: location.coordinate) {
-                            Circle()
-                                .fill(Color(myColor(value: location.rarity)))
-                                .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
-                                .frame(width: 12, height: 12)
-                            
-                                .overlay(
-                                    Circle()
-                                        .fill(location.hasPhoto ? Color.white : Color.clear)
-                                        .frame(width: 6, height: 6)
-                                )
-                        }
-                    }
-    
-                    
-                    
                 }
                 .mapStyle(settings.mapStyle)
                 
@@ -111,7 +86,6 @@ struct MapObservationView: View {
                 }
                 
                 .onTapGesture() { position in
-                    
                     if let coordinate = proxy.convert(position, from: .local) {
                     observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
                         

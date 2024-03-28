@@ -14,11 +14,15 @@ class UserViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var user: UserData?
     
-    func fetchUserData(token: String, settings: Settings) {
+    private var keyChainViewModel =  KeychainViewModel()
+    
+    func fetchUserData(settings: Settings) {
+        
+        keyChainViewModel.retrieveCredentials()
         
         // Api Logic
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+token
+            "Authorization": "Token "+keyChainViewModel.token
         ]
         let url = settings.endPoint() + "user/info/"
         log.debug("\(url)")
