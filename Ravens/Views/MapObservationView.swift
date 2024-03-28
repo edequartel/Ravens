@@ -11,6 +11,8 @@ import SwiftyBeaver
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
 
+    @ObservedObject var viewModel = POIViewModel()
+    
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -22,10 +24,12 @@ struct MapObservationView: View {
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
             MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), 
+                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             )
         )
+    
+    @State private var isFirstAppear = true
     
     // New computed property
     var cameraBinding: Binding<MapCameraPosition> {
@@ -45,8 +49,8 @@ struct MapObservationView: View {
                     UserAnnotation()
                     
                     if (settings.poiOn) {
-                        ForEach(observationsViewModel.poiLocations) { location in
-                            Annotation(location.name, coordinate: location.coordinate) {
+                        ForEach(viewModel.poiList, id: \.name) { poi in
+                            Annotation(poi.name, coordinate: poi.coordinate.cllocationCoordinate) {
                                 Triangle()
                                     .fill(Color.gray)
                                     .frame(width: 5, height: 5)
@@ -103,36 +107,42 @@ struct MapObservationView: View {
             }
         }
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if let location = self.locationManager.location {
-                    let myLatitude = location.coordinate.latitude
-                    let myLongitude = location.coordinate.longitude
-                    print("My location is: \(myLatitude), \(myLongitude)")
-                    circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                    
-                    observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
-                    
-                    // save the location
-                    settings.currentLocation = location
-                    
-                    // Initialize cameraPosition with user's current location
-                    cameraPosition = MapCameraPosition
-                        .region(
-                            MKCoordinateRegion(
-                                center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-//                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
-
+            viewModel.fetchPOIs()
+            
+            if isFirstAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if let location = self.locationManager.location {
+                        let myLatitude = location.coordinate.latitude
+                        let myLongitude = location.coordinate.longitude
+                        print("My location is: \(myLatitude), \(myLongitude)")
+                        circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        
+                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                        
+                        // save the location
+                        settings.currentLocation = location
+                        
+                        // Initialize cameraPosition with user's current location
+                        cameraPosition = MapCameraPosition
+                            .region(
+                                MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
+                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                                    //                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+                                    
+                                )
                             )
-                        )
-                } else {
-                    print("Location is not available yet")
-                    // Handle the case when location is not available
+                    } else {
+                        print("Location is not available yet")
+                        // Handle the case when location is not available
+                    }
+                    
+                    log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                    speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                 }
-                
-                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+                isFirstAppear = false
             }
+            
         }
     }
     

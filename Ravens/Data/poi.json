@@ -1,0 +1,70 @@
+{
+  "poi": [
+    {
+      "name": "IJmuiden",
+      "coordinate": {
+        "latitude": 52.459402,
+        "longitude": 4.540332
+      }
+    },
+    {
+      "name": "Oostvaardersplassen",
+      "coordinate": {
+        "latitude": 52.452926,
+        "longitude": 5.357325
+      }
+    },
+    {
+      "name": "Brouwersdam",
+      "coordinate": {
+        "latitude": 51.761799,
+        "longitude": 3.853920
+      }
+    },
+    {
+      "name": "Mokbaai",
+      "coordinate": {
+        "latitude": 53.005861,
+        "longitude": 4.762873
+      }
+    },
+    {
+      "name": "De groene Jonker",
+      "coordinate": {
+        "latitude": 52.180458,
+        "longitude": 4.825451
+      }
+    },
+    {
+      "name": "Lauwersoog",
+      "coordinate": {
+        "latitude": 53.381690,
+        "longitude": 6.188163
+      }
+    },
+    {
+      "name": "De zouweboezem",
+      "coordinate": {
+        "latitude": 51.948497,
+        "longitude": 4.995383
+      }
+    },
+    {
+      "name": "Blauwe kamer",
+      "coordinate": {
+        "latitude": 51.942360,
+        "longitude": 5.610475
+      }
+    },
+    {
+      "name": "Steenwaard",
+      "coordinate": {
+        "latitude": 51.965423,
+        "longitude": 5.215302
+      }
+    }
+  ]
+}
+
+
+

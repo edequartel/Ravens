@@ -50,6 +50,12 @@ struct ContentView: View {
 //                Text("weather")
 //                Image(systemName: "globe")
 //            }
+//                         Tab 0
+//            POIsView()
+//            .tabItem {
+//                Text("weather")
+//                Image(systemName: "globe")
+//            }
             
             // Tab 1
             ZStack {

@@ -1,10 +1,10 @@
-////
-////  ObservationsLocationsView.swift
-////  Ravens
-////
-////  Created by Eric de Quartel on 25/03/2024.
-////
 //
+//  ObservationsLocationsView.swift
+//  Ravens
+//
+//  Created by Eric de Quartel on 25/03/2024.
+//
+
 import SwiftUI
 import SwiftyBeaver
 

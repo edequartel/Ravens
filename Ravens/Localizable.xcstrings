@@ -418,6 +418,16 @@
         }
       }
     },
+    "Latitude: %lf, Longitude: %lf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Latitude: %1$lf, Longitude: %2$lf"
+          }
+        }
+      }
+    },
     "List" : {
       "extractionState" : "stale",
       "localizations" : {
