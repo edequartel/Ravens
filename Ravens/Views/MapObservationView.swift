@@ -109,7 +109,7 @@ struct MapObservationView: View {
         .onAppear() {
             viewModel.fetchPOIs()
             
-            if isFirstAppear {
+//            if isFirstAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if let location = self.locationManager.location {
                         let myLatitude = location.coordinate.latitude
@@ -117,7 +117,10 @@ struct MapObservationView: View {
                         print("My location is: \(myLatitude), \(myLongitude)")
                         circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         
-                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
+                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude, completion: {}
+                        //
+                        
+                        )
                         
                         // save the location
                         settings.currentLocation = location
@@ -126,10 +129,9 @@ struct MapObservationView: View {
                         cameraPosition = MapCameraPosition
                             .region(
                                 MKCoordinateRegion(
-                                    center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                                    //                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
-                                    
+                                    center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude, 
+                                        longitude: observationsViewModel.span.longitude),
+                                    span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
                                 )
                             )
                     } else {
@@ -140,9 +142,8 @@ struct MapObservationView: View {
                     log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                     speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                 }
-                isFirstAppear = false
-            }
-            
+//                isFirstAppear = false
+//            }
         }
     }
     

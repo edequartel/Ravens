@@ -126,8 +126,8 @@
             filePath = "Ravens/Models/ObservationsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "fetchData(lat:long:)"
             landmarkType = "7">
          </BreakpointContent>
