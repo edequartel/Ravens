@@ -81,16 +81,17 @@ class ObservationsViewModel: ObservableObject {
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
         
-        let latitudeDelta = (maxLatitude - minLatitude) /** 1.5*/
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
         print("latitudeDelta \(latitudeDelta)")
-        let longitudeDelta = (maxLongitude - minLongitude) /** 1.5*/
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
         print("longitudeDelta \(longitudeDelta)")
 
-//        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
-        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: 10.004, longitude: 10.004)
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+//        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: 10.004, longitude: 10.004)
     }
     
-    func fetchData(lat: Double, long: Double) {
+    func fetchData(lat: Double, long: Double, completion: @escaping () -> Void) {
+//    func fetchData(lat: Double, long: Double) {
         log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
@@ -109,6 +110,7 @@ class ObservationsViewModel: ObservableObject {
                     self.getLocations()
                     self.getSpan()
                     self.log.error("observations locations count \(self.locations.count)")
+                    completion()
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsViewModel: \(error)")
