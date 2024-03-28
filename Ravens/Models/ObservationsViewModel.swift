@@ -81,9 +81,9 @@ class ObservationsViewModel: ObservableObject {
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
         
-        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.7
         print("latitudeDelta \(latitudeDelta)")
-        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.7
         print("longitudeDelta \(longitudeDelta)")
 
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
