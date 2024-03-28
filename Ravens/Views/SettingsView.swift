@@ -114,7 +114,8 @@ struct SettingsView: View {
                         .onChange(of: settings.selectedDate) {
                             // Perform your action when the date changes
                             observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude)
+                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                    completion: {print("fetchData observationsViewModel zzz completed")} )
                         }
                     
                     

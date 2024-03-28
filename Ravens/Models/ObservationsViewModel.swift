@@ -56,34 +56,42 @@ class ObservationsViewModel: ObservableObject {
             locations.append(newLocation)
         }
     }
-    
+
     func getSpan() {
         var latitudes: [Double] = []
         var longitudes: [Double] = []
         
         let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
-            let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
-            let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
+            let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
+            let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
             latitudes.append(latitude)
             longitudes.append(longitude)
         }
+        print("latitudes \(latitudes)")
         
         let minLatitude = latitudes.min() ?? 0
+        print("minLatitude \(minLatitude)")
         let maxLatitude = latitudes.max() ?? 0
+        print("maxLatitude \(maxLatitude)")
+        
         let minLongitude = longitudes.min() ?? 0
         let maxLongitude = longitudes.max() ?? 0
         
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
         
-        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
-        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
+        let latitudeDelta = (maxLatitude - minLatitude) * 1.7
+        print("latitudeDelta \(latitudeDelta)")
+        let longitudeDelta = (maxLongitude - minLongitude) * 1.7
+        print("longitudeDelta \(longitudeDelta)")
 
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+//        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: 10.004, longitude: 10.004)
     }
     
-    func fetchData(lat: Double, long: Double) {
+    func fetchData(lat: Double, long: Double, completion: @escaping () -> Void) {
+//    func fetchData(lat: Double, long: Double) {
         log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
@@ -100,7 +108,9 @@ class ObservationsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.observations = observations
                     self.getLocations()
+                    self.getSpan()
                     self.log.error("observations locations count \(self.locations.count)")
+                    completion()
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsViewModel: \(error)")

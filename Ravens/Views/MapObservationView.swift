@@ -91,7 +91,8 @@ struct MapObservationView: View {
                 
                 .onTapGesture() { position in
                     if let coordinate = proxy.convert(position, from: .local) {
-                    observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude)
+                    observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude,
+                    completion: {print("fetchData observationsViewModel xxx completed")} )
                         
                         // Create a new CLLocation instance with the updated coordinates
                         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -109,7 +110,7 @@ struct MapObservationView: View {
         .onAppear() {
             viewModel.fetchPOIs()
             
-            if isFirstAppear {
+//            if isFirstAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if let location = self.locationManager.location {
                         let myLatitude = location.coordinate.latitude
@@ -117,21 +118,40 @@ struct MapObservationView: View {
                         print("My location is: \(myLatitude), \(myLongitude)")
                         circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                         
-                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude)
-                        
                         // save the location
                         settings.currentLocation = location
                         
-                        // Initialize cameraPosition with user's current location
-                        cameraPosition = MapCameraPosition
+                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
+                                                        completion: {print("fetchData observationsViewModel yyy completed")
+                            // Initialize cameraPosition with user's current location
+                            cameraPosition = MapCameraPosition
                             .region(
                                 MKCoordinateRegion(
-                                    center: CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude),
-                                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                                    //                                span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
-                                    
+                                    center: CLLocationCoordinate2D(latitude: myLatitude,
+                                        longitude: myLongitude),
+//                                    center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude,
+//                                        longitude: observationsViewModel.span.longitude),
+                                    span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
                                 )
                             )
+                            
+                            
+                        } )
+                        
+                        
+                        
+//// Initialize cameraPosition with user's current location
+//cameraPosition = MapCameraPosition
+//.region(
+//    MKCoordinateRegion(
+//        center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude,
+//            longitude: observationsViewModel.span.longitude),
+//        span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+//    )
+//)
+
+
+
                     } else {
                         print("Location is not available yet")
                         // Handle the case when location is not available
@@ -140,9 +160,8 @@ struct MapObservationView: View {
                     log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                     speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                 }
-                isFirstAppear = false
-            }
-            
+//                isFirstAppear = false
+//            }
         }
     }
     
