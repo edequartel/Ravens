@@ -54,6 +54,8 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
+                        settings.isFirstAppear = true
+                        settings.isFirstAppearObsView = true
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
@@ -72,7 +74,6 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     
-//                    Toggle("Zoom", isOn: $settings.zoomActive)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
@@ -103,6 +104,11 @@ struct SettingsView: View {
                 
                 Section("Days") {
                     Toggle("Infinity", isOn: $settings.infinity)
+                        .onChange(of: settings.infinity) {
+                            settings.isFirstAppear = true
+                            settings.isFirstAppearObsView = true
+                        }
+                    
                     
                     if !(settings.infinity) {
                         Picker("Window", selection: $settings.days) {
@@ -112,6 +118,10 @@ struct SettingsView: View {
                                 }
                             }
                         }
+                        .onChange(of: settings.days) {
+                            settings.isFirstAppear = true
+                            settings.isFirstAppearObsView = true
+                        }
                         
                         DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                             .onChange(of: settings.selectedDate) {
@@ -119,6 +129,10 @@ struct SettingsView: View {
                                 observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                                                 long: settings.currentLocation?.coordinate.longitude ?? longitude,
                                                                 completion: {print("fetchData observationsViewModel zzz completed")} )
+                            }
+                            .onChange(of: settings.selectedDate) {
+                                settings.isFirstAppear = true
+                                settings.isFirstAppearObsView = true
                             }
                     }
                     

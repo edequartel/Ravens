@@ -36,7 +36,7 @@ struct MapObservationsLocationView: View {
     @State private var deltaLat: Double = 0.1
     @State private var deltaLong: Double = 0.1
     
-    @State private var isFirstAppear = true
+//    @State private var isFirstAppear = true
     
     
     @State private var MapCameraPositiondefault = MapCameraPosition
@@ -198,7 +198,7 @@ struct MapObservationsLocationView: View {
         .onAppear() {
             viewModel.fetchPOIs()
             
-            if isFirstAppear {
+            if settings.isFirstAppear {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if let location = self.locationManager.location {
@@ -240,7 +240,7 @@ struct MapObservationsLocationView: View {
                     speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                     
                     
-                 isFirstAppear=false
+                    settings.isFirstAppear=false
                 }
             }
         }

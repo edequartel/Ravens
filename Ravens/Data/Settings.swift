@@ -41,7 +41,11 @@ class Settings: ObservableObject {
     
     @Published var isConnected: Bool = false
     
+    @Published var isFirstAppear: Bool = true
+    @Published var isFirstAppearObsView: Bool = true
+    
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
+    
     
     init() {
         log.info("init Settings")
