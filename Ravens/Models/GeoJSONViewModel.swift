@@ -34,6 +34,8 @@ class GeoJSONViewModel: ObservableObject {
         }
     }
     
+    //getSpan
+    
     func parseGeoJSON(_ geoJSON: [MKGeoJSONObject])->[MKPolygon] {
         var overlays = [MKPolygon]()
         for item in geoJSON {

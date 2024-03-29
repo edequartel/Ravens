@@ -63,17 +63,12 @@ class ObservationsLocationViewModel: ObservableObject {
         let maxLatitude = latitudes.max() ?? 0
         let minLongitude = longitudes.min() ?? 0
         let maxLongitude = longitudes.max() ?? 0
-//        print("min \(minLatitude) \(minLongitude)")
-//        print("max \(maxLatitude) \(maxLongitude)")
         
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
         
         let latitudeDelta = (maxLatitude - minLatitude) * 1.5
         let longitudeDelta = (maxLongitude - minLongitude) * 1.5
-        
-//        print("delta \(latitudeDelta) \(longitudeDelta)")
-//        print("position \(centreLatitude) \(centreLongitude)")
 
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
@@ -86,16 +81,23 @@ class ObservationsLocationViewModel: ObservableObject {
         
         // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": settings.selectedLanguage
+            "authorization": "Token "+keyChainViewModel.token,
+            "accept-Language": settings.selectedLanguage,
         ]
-
-        let url = settings.endPoint() + "locations/\(locationId)/observations/"//+"?limit=\(limit)&offset=\(offset)"
         
-        log.error(">>> \(url)")
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
+        let date_before = formatCurrentDate(value: settings.selectedDate)
+        
+        
+        var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
+        if !settings.infinity {
+            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
+        }
+        
+        log.error("URL \(url)")
+        log.error("headers \(headers)")
 
         AF.request(url, headers: headers).responseString { response in
-//            print(response.value)
             switch response.result {
             case .success(let stringResponse):
                 // Now you can convert the stringResponse to Data and decode it

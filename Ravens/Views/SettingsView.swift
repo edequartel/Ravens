@@ -72,7 +72,7 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     
-                    Toggle("Zoom", isOn: $settings.zoomActive)
+//                    Toggle("Zoom", isOn: $settings.zoomActive)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
@@ -102,21 +102,25 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                    Picker("Window", selection: $settings.days) {
-                        ForEach(1 ... 14, id: \.self) { day in
-                            HStack() {
-                                Text("\(day)")
+                    Toggle("Infinity", isOn: $settings.infinity)
+                    
+                    if !(settings.infinity) {
+                        Picker("Window", selection: $settings.days) {
+                            ForEach(1 ... 14, id: \.self) { day in
+                                HStack() {
+                                    Text("\(day)")
+                                }
                             }
                         }
+                        
+                        DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
+                            .onChange(of: settings.selectedDate) {
+                                // Perform your action when the date changes
+                                observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                                                long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                                                completion: {print("fetchData observationsViewModel zzz completed")} )
+                            }
                     }
-                    
-                    DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
-                        .onChange(of: settings.selectedDate) {
-                            // Perform your action when the date changes
-                            observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
-                                    completion: {print("fetchData observationsViewModel zzz completed")} )
-                        }
                     
                     
                 }

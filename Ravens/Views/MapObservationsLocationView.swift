@@ -258,12 +258,12 @@ struct MapObservationsLocationView: View {
     func getCameraPosition(settings: Settings, observationsLocationViewModel: ObservationsLocationViewModel, latitude: Double, longitude: Double, latitudeDelta: Double, longitudeDelta: Double) -> MapCameraPosition {
         
         let center = CLLocationCoordinate2D(
-            latitude: settings.zoomActive ? observationsLocationViewModel.span.latitude : latitude,
-            longitude: settings.zoomActive ? observationsLocationViewModel.span.longitude : longitude)
+            latitude: observationsLocationViewModel.span.latitude,
+            longitude: observationsLocationViewModel.span.longitude)
         
         let span = MKCoordinateSpan(
-            latitudeDelta: settings.zoomActive ? observationsLocationViewModel.span.latitudeDelta: latitudeDelta,
-            longitudeDelta: settings.zoomActive ? observationsLocationViewModel.span.longitudeDelta: longitudeDelta)
+            latitudeDelta: observationsLocationViewModel.span.latitudeDelta,
+            longitudeDelta: observationsLocationViewModel.span.longitudeDelta)
         
         let region = MKCoordinateRegion(center: center, span: span)
         
