@@ -86,13 +86,22 @@ class ObservationsLocationViewModel: ObservableObject {
         
         // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": settings.selectedLanguage
+            "authorization": "Token "+keyChainViewModel.token,
+            "accept-Language": settings.selectedLanguage,
         ]
-
-        let url = settings.endPoint() + "locations/\(locationId)/observations/"//+"?limit=\(limit)&offset=\(offset)"
         
-        log.error(">>> \(url)")
+//        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
+//        let date_before = formatCurrentDate(value: date)
+
+//        let url = settings.endPoint() + "locations/\(locationId)/observations/"//+"?limit=\(limit)&offset=\(offset)"
+//        let url = settings.endPoint() + "locations/\(locationId)/observations/"+"?date_after=2024-02-21&date_before=2024-03-28&species_group=\(settings.selectedGroupId)&limit=\(limit)&offset=\(offset)"
+        let url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
+//        let url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))"
+        
+//        let url = settings.endPoint() + "locations/84130/observations/"//+"?limit=\(limit)&offset=\(offset)"
+        
+        log.error("URL \(url)")
+        log.error("headers \(headers)")
 
         AF.request(url, headers: headers).responseString { response in
 //            print(response.value)
