@@ -110,8 +110,8 @@
             filePath = "Ravens/Views/MapObservationsLocationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "Ravens/Models/ObservationsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "fetchData(lat:long:completion:)"
             landmarkType = "7">
          </BreakpointContent>

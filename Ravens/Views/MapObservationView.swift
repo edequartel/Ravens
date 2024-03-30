@@ -29,8 +29,6 @@ struct MapObservationView: View {
             )
         )
     
-    @State private var isFirstAppear = true
-    
     // New computed property
     var cameraBinding: Binding<MapCameraPosition> {
         Binding<MapCameraPosition>(
@@ -110,7 +108,7 @@ struct MapObservationView: View {
         .onAppear() {
             viewModel.fetchPOIs()
             
-            if isFirstAppear {
+            if settings.isFirstAppearObsView {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     if let location = self.locationManager.location {
                         let myLatitude = location.coordinate.latitude
@@ -123,15 +121,16 @@ struct MapObservationView: View {
                         
                         observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
                                                         completion: {print("fetchData observationsViewModel yyy completed")
+                            
+                            
                             // Initialize cameraPosition with user's current location
+                            let delta = Double(settings.radius) * 0.000032
                             cameraPosition = MapCameraPosition
                             .region(
                                 MKCoordinateRegion(
                                     center: CLLocationCoordinate2D(latitude: myLatitude,
                                         longitude: myLongitude),
-//                                    center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude,
-//                                        longitude: observationsViewModel.span.longitude),
-                                    span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+                                    span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
                                 )
                             )
                             
@@ -160,7 +159,7 @@ struct MapObservationView: View {
                     log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                     speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
                 }
-                isFirstAppear = false
+                settings.isFirstAppearObsView = false
             }
         }
     }

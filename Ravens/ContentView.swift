@@ -91,7 +91,14 @@ struct ContentView: View {
                     Image(systemName: "person")
                 }
             
-            // Tab 4
+//            // Tab 4
+//            EmptyView()
+//                .tabItem {
+//                    Text("Explorers")
+//                    Image(systemName: "person.2.fill")
+//                }
+            
+            // Tab 5
             SettingsView()
                 .tabItem {
                     Text("Settings")
