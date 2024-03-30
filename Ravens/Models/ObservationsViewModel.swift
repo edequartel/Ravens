@@ -24,7 +24,6 @@ struct Span {
     var longitudeDelta: Double
     var latitude: Double
     var longitude: Double
-    
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -68,30 +67,19 @@ class ObservationsViewModel: ObservableObject {
             latitudes.append(latitude)
             longitudes.append(longitude)
         }
-//        print("latitudes \(latitudes)")
-        
         let minLatitude = latitudes.min() ?? 0
-//        print("minLatitude \(minLatitude)")
         let maxLatitude = latitudes.max() ?? 0
-//        print("maxLatitude \(maxLatitude)")
-        
         let minLongitude = longitudes.min() ?? 0
         let maxLongitude = longitudes.max() ?? 0
-        
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
-        
         let latitudeDelta = (maxLatitude - minLatitude) * 1.7
-//        print("latitudeDelta \(latitudeDelta)")
         let longitudeDelta = (maxLongitude - minLongitude) * 1.7
-//        print("longitudeDelta \(longitudeDelta)")
 
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
-//        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: 10.004, longitude: 10.004)
     }
     
     func fetchData(lat: Double, long: Double, completion: @escaping () -> Void) {
-//    func fetchData(lat: Double, long: Double) {
         log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [

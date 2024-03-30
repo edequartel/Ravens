@@ -121,15 +121,16 @@ struct MapObservationView: View {
                         
                         observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
                                                         completion: {print("fetchData observationsViewModel yyy completed")
+                            
+                            
                             // Initialize cameraPosition with user's current location
+                            let delta = Double(settings.radius) * 0.000032
                             cameraPosition = MapCameraPosition
                             .region(
                                 MKCoordinateRegion(
                                     center: CLLocationCoordinate2D(latitude: myLatitude,
                                         longitude: myLongitude),
-//                                    center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude,
-//                                        longitude: observationsViewModel.span.longitude),
-                                    span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
+                                    span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
                                 )
                             )
                             

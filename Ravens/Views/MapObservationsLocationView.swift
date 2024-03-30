@@ -36,9 +36,6 @@ struct MapObservationsLocationView: View {
     @State private var deltaLat: Double = 0.1
     @State private var deltaLong: Double = 0.1
     
-//    @State private var isFirstAppear = true
-    
-    
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
             MKCoordinateRegion(
@@ -183,12 +180,7 @@ struct MapObservationsLocationView: View {
                             // Update currentLocation with the new CLLocation instance
                             settings.currentLocation = newLocation
                     }
-                    
-                    
-                    
-                    
-                    
-                }
+            }
                 .mapControls() {
                     MapCompass() //tapping this makes it north
                     
@@ -221,11 +213,24 @@ struct MapObservationsLocationView: View {
                                     polyOverlays = polyOverlaysIn
                                     locationId = location.id
                                     sharedLocationId = location.id
+                                    
                                     observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
                                         log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
                                         log.info(observationsLocationViewModel.span)
                                         
-                                        cameraPosition = getCameraPosition(settings: settings, observationsLocationViewModel: observationsLocationViewModel, latitude: latitude, longitude: longitude, latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+                                        cameraPosition = MapCameraPosition
+                                        .region(
+                                            MKCoordinateRegion(
+                                                center: CLLocationCoordinate2D(
+                                                    latitude: geoJSONViewModel.span.latitude,
+                                                    longitude: geoJSONViewModel.span.longitude),
+                                                span: MKCoordinateSpan(
+                                                    latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+                                                    longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+                                            )
+                                        )
+                                        
+
                                     }
                                     )
                                     
