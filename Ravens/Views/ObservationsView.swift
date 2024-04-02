@@ -27,7 +27,7 @@ struct ObservationsView: View {
             .padding(16)
             
             if (!keyChainViewModel.token.isEmpty) {
-                List {
+                List { //???
 //                ScrollView {
                     if let results = observationsViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) { result in

@@ -28,6 +28,8 @@ struct MapObservationView: View {
                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             )
         )
+
+    @State private var circlePos: CLLocationCoordinate2D?
     
     // New computed property
     var cameraBinding: Binding<MapCameraPosition> {
@@ -36,8 +38,6 @@ struct MapObservationView: View {
             set: { self.cameraPosition = $0 }
         )
     }
-    
-    @State private var circlePos: CLLocationCoordinate2D?
     
     var body: some View {
         VStack {
@@ -97,7 +97,7 @@ struct MapObservationView: View {
                         circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         
                         // Update currentLocation with the new CLLocation instance
-                        settings.currentLocation = newLocation
+                        settings.currentLocation = newLocation //?? why>>for other sheetview
                     }
                 }
                 .mapControls() {
@@ -108,62 +108,49 @@ struct MapObservationView: View {
         .onAppear() {
             viewModel.fetchPOIs()
             
-            if settings.isFirstAppearObsView {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                
+                
+                if settings.isFirstAppearObsView {
+                    
                     if let location = self.locationManager.location {
-                        let myLatitude = location.coordinate.latitude
-                        let myLongitude = location.coordinate.longitude
-                        print("My location is: \(myLatitude), \(myLongitude)")
-                        circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                        
-                        // save the location
-                        settings.currentLocation = location
-                        
-                        observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
-                                                        completion: {print("fetchData observationsViewModel yyy completed")
-                            
-                            
-                            // Initialize cameraPosition with user's current location
-                            let delta = Double(settings.radius) * 0.000032
-                            cameraPosition = MapCameraPosition
-                            .region(
-                                MKCoordinateRegion(
-                                    center: CLLocationCoordinate2D(latitude: myLatitude,
-                                        longitude: myLongitude),
-                                    span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-                                )
-                            )
-                            
-                            
-                        } )
-                        
-                        
-                        
-//// Initialize cameraPosition with user's current location
-//cameraPosition = MapCameraPosition
-//.region(
-//    MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(latitude: observationsViewModel.span.latitude,
-//            longitude: observationsViewModel.span.longitude),
-//        span: MKCoordinateSpan(latitudeDelta: observationsViewModel.span.latitudeDelta, longitudeDelta: observationsViewModel.span.longitudeDelta)
-//    )
-//)
-
-
-
+                        print("get the location at onAppear in MapObservationView")
+                        circlePos = location.coordinate
+                        settings.currentLocation = location //??why for other sheetview
                     } else {
                         print("Location is not available yet")
                         // Handle the case when location is not available
                     }
-                    
-                    log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                    speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+//                    settings.isFirstAppearObsView = false
                 }
-                settings.isFirstAppearObsView = false
+                
+                //getdata
+                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0,
+                                                completion: {print("fetchData observationsViewModel ONAPPEAR completed")
+                    
+                    // Initialize cameraPosition with user's current location
+                    if settings.isFirstAppearObsView {
+                        let delta = Double(settings.radius) * 0.000032
+                        cameraPosition = MapCameraPosition
+                            .region(
+                                MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: circlePos?.latitude ?? 0,
+                                                                   longitude: circlePos?.longitude ?? 0),
+                                    span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
+                                )
+                            )
+                        settings.isFirstAppearObsView = false
+                    } // 1
+
+                } 
+                )
+                //
+
+                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
         }
     }
-    
     
     func colorByMapStyle() -> Color {
         if settings.mapStyleChoice == .standard {
@@ -186,3 +173,45 @@ struct MapObservationView_Previews: PreviewProvider {
         
     }
 }
+
+
+
+//if settings.isFirstAppearObsView {
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//        if let location = self.locationManager.location {
+//            let myLatitude = location.coordinate.latitude
+//            let myLongitude = location.coordinate.longitude
+//            print("My location is: \(myLatitude), \(myLongitude)")
+//            circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//            
+//            // save the location
+//            settings.currentLocation = location
+//            
+//            observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
+//                                            completion: {print("fetchData observationsViewModel yyy completed")
+//                
+//                
+//                // Initialize cameraPosition with user's current location
+//                let delta = Double(settings.radius) * 0.000032
+//                cameraPosition = MapCameraPosition
+//                .region(
+//                    MKCoordinateRegion(
+//                        center: CLLocationCoordinate2D(latitude: myLatitude,
+//                            longitude: myLongitude),
+//                        span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
+//                    )
+//                )
+//                
+//                
+//            } )
+//
+//        } else {
+//            print("Location is not available yet")
+//            // Handle the case when location is not available
+//        }
+//        
+//        log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+//        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+//    }
+//    settings.isFirstAppearObsView = false
+//}

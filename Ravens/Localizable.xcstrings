@@ -558,6 +558,7 @@
 
     },
     "Me" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1000,6 +1001,9 @@
           }
         }
       }
+    },
+    "We" : {
+
     },
     "Window" : {
       "localizations" : {
