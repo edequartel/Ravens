@@ -63,7 +63,10 @@ struct ObservationsLocationView: View {
             List {
                 if let results =  viewModel.observationsSpecies?.results {
 //                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
-                    ForEach(results.sorted(by: { ($0.species_group, $1.rarity, $1.date, $0.species_detail.name) < ($1.species_group, $0.rarity, $0.date, $1.species_detail.name) } ), id: \.id) {
+                    
+                    
+//                    ForEach(results.sorted(by: { ($0.species_group, $1.rarity, $1.date, $0.species_detail.name) < ($1.species_group, $0.rarity, $0.date, $1.species_detail.name) } ), id: \.id) {
+                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) { 
                         result in
                         ObsView(obsID: result.id ?? 0, showUsername: true)
                     }
