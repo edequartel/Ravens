@@ -46,6 +46,8 @@ class Settings: ObservableObject {
     
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
     
+    @AppStorage("savedExplorers") private var savedExplorers: String = ""
+    
     
     init() {
         log.info("init Settings")
@@ -72,6 +74,25 @@ class Settings: ObservableObject {
                 .components(separatedBy: ",")
                 .compactMap { Int($0) }
         }
+    
+    func saveExplorerse(array: [Int]) {
+            // Convert the array to a string
+            let arrayString = array.map { String($0) }.joined(separator: ",")
+
+            // Save the string to AppStorage
+            savedExplorers = arrayString
+        }
+
+    func readExplorers(array: inout [Int]) {
+            // Retrieve the string from AppStorage
+            let arrayString = savedExplorers
+
+            // Convert the string back to an array of integers
+            array = arrayString
+                .components(separatedBy: ",")
+                .compactMap { Int($0) }
+        }
+    
     
     var mapStyle: MapStyle {
         switch mapStyleChoice {

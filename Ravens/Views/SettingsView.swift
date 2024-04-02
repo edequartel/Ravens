@@ -54,8 +54,8 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
-                        settings.isFirstAppear = true
-                        settings.isFirstAppearObsView = true
+//                        settings.isFirstAppear = true
+//                        settings.isFirstAppearObsView = true
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
@@ -105,8 +105,8 @@ struct SettingsView: View {
                 Section("Days") {
                     Toggle("Infinity", isOn: $settings.infinity)
                         .onChange(of: settings.infinity) {
-                            settings.isFirstAppear = true
-                            settings.isFirstAppearObsView = true
+//                            settings.isFirstAppear = true
+//                            settings.isFirstAppearObsView = true
                         }
                     
                     
@@ -119,8 +119,8 @@ struct SettingsView: View {
                             }
                         }
                         .onChange(of: settings.days) {
-                            settings.isFirstAppear = true
-                            settings.isFirstAppearObsView = true
+//                            settings.isFirstAppear = true
+//                            settings.isFirstAppearObsView = true
                         }
                         
                         DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
@@ -131,8 +131,8 @@ struct SettingsView: View {
                                                                 completion: {print("fetchData observationsViewModel zzz completed")} )
                             }
                             .onChange(of: settings.selectedDate) {
-                                settings.isFirstAppear = true
-                                settings.isFirstAppearObsView = true
+//                                settings.isFirstAppear = true
+//                                settings.isFirstAppearObsView = true
                             }
                     }
                     

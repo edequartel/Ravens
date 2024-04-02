@@ -86,7 +86,11 @@ class ObservationsViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
         
-        let url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
+        var url = settings.endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedGroupId)&min_rarity=\(settings.selectedRarity)"
+        
+//        if !settings.infinity {
+//            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
+//        }
         
         log.info("\(url)")
         

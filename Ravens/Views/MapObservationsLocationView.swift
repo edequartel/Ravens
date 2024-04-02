@@ -33,8 +33,10 @@ struct MapObservationsLocationView: View {
     @State private var locationId: Int = 0
     @Binding var sharedLocationId: Int
     
-    @State private var deltaLat: Double = 0.1
-    @State private var deltaLong: Double = 0.1
+//    @State private var deltaLat: Double = 0.1
+//    @State private var deltaLong: Double = 0.1
+    
+    @State private var circlePos: CLLocationCoordinate2D?
     
     @State private var MapCameraPositiondefault = MapCameraPosition
         .region(
@@ -52,7 +54,7 @@ struct MapObservationsLocationView: View {
         )
     }
     
-    @State private var circlePos: CLLocationCoordinate2D?
+
     
     var body: some View {
         VStack {
@@ -104,22 +106,23 @@ struct MapObservationsLocationView: View {
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
-                        HStack {
-                            Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-                            NetworkView()
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                HStack{
-                                    Spacer()
-                                    Text("\(observationsLocationViewModel.locations.count) - \(observationsLocationViewModel.observationsSpecies?.results.count ?? 0)")
-                                        .foregroundColor(.obsGreenFlower)
-                                    
-                                }
-                                .lineLimit(1) // Set the maximum number of lines to 1
-                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                            }
-                        }
+                        SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observationsSpecies?.count ?? 0 )
+//                        HStack {
+//                            Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
+//                                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
+//                            NetworkView()
+//                            Spacer()
+//                            VStack(alignment: .trailing) {
+//                                HStack{
+//                                    Spacer()
+//                                    Text("\(observationsLocationViewModel.locations.count) - \(observationsLocationViewModel.observationsSpecies?.results.count ?? 0)")
+//                                        .foregroundColor(.obsGreenFlower)
+//                                    
+//                                }
+//                                .lineLimit(1) // Set the maximum number of lines to 1
+//                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                            }
+//                        }
                         .padding(5)
                         .frame(maxHeight: 30)
                         
@@ -188,65 +191,69 @@ struct MapObservationsLocationView: View {
             }
         }
         .onAppear() {
+        //onappear
             viewModel.fetchPOIs()
-            
-            if settings.isFirstAppear {
-                
+        
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if let location = self.locationManager.location {
-                        let myLatitude = location.coordinate.latitude
-                        let myLongitude = location.coordinate.longitude
-                        log.info("My location is: \(myLatitude), \(myLongitude)")
-                        circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                        
-                        // save the location
-                        settings.currentLocation = location
-                        
-                        // geoJSON
-                        polyOverlays.removeAll()
-                        
-                        locationIdViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
-                            // Use fetchedLocations here
-                            
-                            for location in fetchedLocations {
-                                geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
-                                    polyOverlays = polyOverlaysIn
-                                    locationId = location.id
-                                    sharedLocationId = location.id
-                                    
-                                    observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                        log.info(observationsLocationViewModel.span)
-                                        
-                                        cameraPosition = MapCameraPosition
-                                        .region(
-                                            MKCoordinateRegion(
-                                                center: CLLocationCoordinate2D(
-                                                    latitude: geoJSONViewModel.span.latitude,
-                                                    longitude: geoJSONViewModel.span.longitude),
-                                                span: MKCoordinateSpan(
-                                                    latitudeDelta: geoJSONViewModel.span.latitudeDelta,
-                                                    longitudeDelta: geoJSONViewModel.span.longitudeDelta)
-                                            )
-                                        )
-                                        
-
-                                    }
-                                    )
-                                    
-                                }
-                            }
+                    
+                    //get the location
+                    if settings.isFirstAppear {
+                        if let location = self.locationManager.location {
+                            print("get the location at onAppear in MapObservationLocationView")
+                            circlePos = location.coordinate
+                            settings.currentLocation = location
+                        } else {
+                            log.info("Location is not available yet")
+                            // Handle the case when location is not available
                         }
-                    } else {
-                        log.info("Location is not available yet")
-                        // Handle the case when location is not available
                     }
+
+                    //getdata
+                    //-----------------------------------------//3
+                    //geoJSON
+                    polyOverlays.removeAll()
+        
+                    //-----------------------------------------//2
+                    locationIdViewModel.fetchLocations(latitude: circlePos?.latitude ?? 0, longitude: circlePos?.longitude ?? 0) { fetchedLocations in
+                        // Use fetchedLocations here //actually one location
+                        //-----------------------------------------//1
+                        for location in fetchedLocations { //1
+                            geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in //a
+                                polyOverlays = polyOverlaysIn
+                                locationId = location.id
+                                sharedLocationId = location.id
+                                
+                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
+                                    log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                    log.info(observationsLocationViewModel.span)
+                                    
+                                    if settings.isFirstAppear {
+                                        cameraPosition = MapCameraPosition
+                                            .region(
+                                                MKCoordinateRegion(
+                                                    center: CLLocationCoordinate2D(
+                                                        latitude: geoJSONViewModel.span.latitude,
+                                                        longitude: geoJSONViewModel.span.longitude),
+                                                    span: MKCoordinateSpan(
+                                                        latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+                                                        longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+                                                )
+                                            )
+                                        settings.isFirstAppear = false
+                                    }
+                                    
+                                } //settings.isFirstAppearObsView
+                                ) //fetchdata locationId
+                            } //alocation
+                        } //1
+                        //-----------------------------------------//1
+                    }
+                    //-----------------------------------------//2
+                    
+                    //-----------------------------------------//3
+                    
                     log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                     speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
-                    
-                    
-                    settings.isFirstAppear=false
-                }
             }
         }
     }
@@ -288,3 +295,68 @@ struct MapObservationLocationView_Previews: PreviewProvider {
         
     }
 }
+
+////onappear
+//{
+//    viewModel.fetchPOIs()
+//    
+//    if settings.isFirstAppear {
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//            
+//            if let location = self.locationManager.location {
+//                let myLatitude = location.coordinate.latitude
+//                let myLongitude = location.coordinate.longitude
+//                log.info("My location is: \(myLatitude), \(myLongitude)")
+//                circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//                
+//                // save the location
+//                settings.currentLocation = location
+//                
+//                // geoJSON
+//                polyOverlays.removeAll()
+//                
+//                locationIdViewModel.fetchLocations(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { fetchedLocations in
+//                    // Use fetchedLocations here
+//                    
+//                    for location in fetchedLocations {
+//                        geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
+//                            polyOverlays = polyOverlaysIn
+//                            locationId = location.id
+//                            sharedLocationId = location.id
+//                            
+//                            observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
+//                                log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+//                                log.info(observationsLocationViewModel.span)
+//                                
+//                                cameraPosition = MapCameraPosition
+//                                .region(
+//                                    MKCoordinateRegion(
+//                                        center: CLLocationCoordinate2D(
+//                                            latitude: geoJSONViewModel.span.latitude,
+//                                            longitude: geoJSONViewModel.span.longitude),
+//                                        span: MKCoordinateSpan(
+//                                            latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+//                                            longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+//                                    )
+//                                )
+//                                
+//
+//                            }
+//                            )
+//                            
+//                        }
+//                    }
+//                }
+//            } else {
+//                log.info("Location is not available yet")
+//                // Handle the case when location is not available
+//            }
+//            log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+//            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+//            
+//            
+//            settings.isFirstAppear=false
+//        }
+//    }
+//}

@@ -63,8 +63,8 @@ struct ContentView: View {
                 ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             }
             .tabItem {
-                Text("Obs")
-                Image(systemName: "binoculars")
+                Text("Radius")
+                Image(systemName: "circle")
             }
             
             // Tab 2
@@ -87,8 +87,8 @@ struct ContentView: View {
             // Tab 3
             MapObservationsUserView()
                 .tabItem {
-                    Text("Me")
-                    Image(systemName: "person")
+                    Text("We")
+                    Image(systemName: "person.2.fill")
                 }
             
 //            // Tab 4
@@ -110,7 +110,10 @@ struct ContentView: View {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
-            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsLocationsViewPresented)
+            ObservationsLocationView(
+                    locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+//                    locationStr: <#T##Binding<String>#>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+                    isShowing: $isSheetObservationsLocationsViewPresented)
         }
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")

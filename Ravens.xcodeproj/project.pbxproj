@@ -11,6 +11,7 @@
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
 		470411132BB2B87300A498F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411122BB2B87300A498F5 /* LocationManager.swift */; };
+		47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
 		4717C0BF2B9CC41400B570D0 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4717C0BE2B9CC41400B570D0 /* YearView.swift */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
@@ -99,6 +100,7 @@
 		4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationsView.swift; sourceTree = "<group>"; };
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
 		470411122BB2B87300A498F5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsExtendedView.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
 		4717C0BE2B9CC41400B570D0 /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsView.swift */,
+				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
@@ -487,6 +490,7 @@
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
 				470411132BB2B87300A498F5 /* LocationManager.swift in Sources */,
 				474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */,
+				47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */,
 				4717C0BF2B9CC41400B570D0 /* YearView.swift in Sources */,
 				47DB89B82B7A3AB20093C1ED /* ObsView.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,

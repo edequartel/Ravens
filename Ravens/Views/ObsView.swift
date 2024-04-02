@@ -30,7 +30,8 @@ struct ObsView: View {
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
                     HStack {
-//                        Text("\(obsID)")
+                        Text("\(obsID)")
+                        
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
                         
@@ -47,11 +48,11 @@ struct ObsView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     }
-                    .onTapGesture { //sounds
-                        if let url = URL(string: obs.permalink) {
-                            UIApplication.shared.open(url)
-                        }
-                    }
+//                    .onTapGesture { //sounds
+//                        if let url = URL(string: obs.permalink) {
+//                            UIApplication.shared.open(url)
+//                        }
+//                    }
                     
                     Text("\(obs.date) \(obs.time ?? ""), \(obs.number)")
                     
@@ -90,6 +91,17 @@ struct ObsView: View {
                 ProgressView()
             }
 //            Divider()
+            
+//            NavigationLink(destination: Text("eeee")) {
+//                              Text("Go to ObsExtendedView")
+//                                  .frame(minWidth: 0, maxWidth: .infinity)
+//                                  .padding()
+//                                  .foregroundColor(.white)
+//                                  .background(Color.blue)
+//                                  .cornerRadius(40)
+//                          }
+//                          .padding(.horizontal)
+            
         }
         .onAppear {
             fetchRequestManager.fetchDataAfterDelay(for: obsID, by: obsViewModel)
