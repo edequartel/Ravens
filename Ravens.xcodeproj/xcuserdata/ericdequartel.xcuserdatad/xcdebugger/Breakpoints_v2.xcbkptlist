@@ -135,15 +135,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7B48E9E2-3E45-4D8F-B84B-80EBE010CB3F"
-            shouldBeEnabled = "Yes"
+            uuid = "D88A85B1-2540-4541-B526-E3D5C3B4DDC8"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ravens/Views/MapObservationsLocationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

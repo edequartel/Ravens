@@ -110,7 +110,10 @@ struct ContentView: View {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
-            ObservationsLocationView(locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }), isShowing: $isSheetObservationsLocationsViewPresented)
+            ObservationsLocationView(
+                    locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+//                    locationStr: <#T##Binding<String>#>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+                    isShowing: $isSheetObservationsLocationsViewPresented)
         }
         .onAppear() {
             log.warning("*** NEW LAUNCH ***")

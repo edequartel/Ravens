@@ -110,18 +110,16 @@ struct MapObservationView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 
-                
                 if settings.isFirstAppearObsView {
                     
                     if let location = self.locationManager.location {
                         print("get the location at onAppear in MapObservationView")
                         circlePos = location.coordinate
-                        settings.currentLocation = location //??why for other sheetview
+                        settings.currentLocation = location
                     } else {
                         print("Location is not available yet")
                         // Handle the case when location is not available
                     }
-//                    settings.isFirstAppearObsView = false
                 }
                 
                 //getdata

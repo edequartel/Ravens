@@ -22,6 +22,7 @@ struct ObservationsLocationView: View {
     @State private var offset = 0
     
     @Binding var locationId: Int
+//    @Binding var locationStr: String
     @Binding var isShowing: Bool
     
     var body: some View {

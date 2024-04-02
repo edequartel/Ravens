@@ -191,71 +191,69 @@ struct MapObservationsLocationView: View {
             }
         }
         .onAppear() {
+        //onappear
             viewModel.fetchPOIs()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                
-                if settings.isFirstAppear {
+        
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     
-                    if let location = self.locationManager.location {
-                        print("get the location at onAppear in MapObservationLocationView")
-                        
-                        circlePos = location.coordinate
-                        settings.currentLocation = location
-                        
-                    } else {
-                        log.info("Location is not available yet")
-                        // Handle the case when location is not available
-                    }
-                }
-                
-                // getdata geoJSON
-                polyOverlays.removeAll()
-                
-                locationIdViewModel.fetchLocations(latitude: circlePos?.latitude ?? 0, longitude: circlePos?.longitude ?? 0) { fetchedLocations in
-                    // Use fetchedLocations here
-                    
-                    for location in fetchedLocations {
-                        geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
-                            polyOverlays = polyOverlaysIn
-                            locationId = location.id
-                            sharedLocationId = location.id
-                            
-                            observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
-                                log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                log.info(observationsLocationViewModel.span)
-                                
-                                if settings.isFirstAppearObsView {
-                                    cameraPosition = MapCameraPosition
-                                        .region(
-                                            MKCoordinateRegion(
-                                                center: CLLocationCoordinate2D(
-                                                    latitude: geoJSONViewModel.span.latitude,
-                                                    longitude: geoJSONViewModel.span.longitude),
-                                                span: MKCoordinateSpan(
-                                                    latitudeDelta: geoJSONViewModel.span.latitudeDelta,
-                                                    longitudeDelta: geoJSONViewModel.span.longitudeDelta)
-                                            )
-                                        )
-                                    settings.isFirstAppearObsView = false
-                                } //1
-                            } //2
-                            )
+                    //get the location
+                    if settings.isFirstAppear {
+                        if let location = self.locationManager.location {
+                            print("get the location at onAppear in MapObservationLocationView")
+                            circlePos = location.coordinate
+                            settings.currentLocation = location
+                        } else {
+                            log.info("Location is not available yet")
+                            // Handle the case when location is not available
                         }
                     }
-                }
-                
-                
-                
-                
-                
-                
-                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
-                
-                
-                //                    settings.isFirstAppear=false
-                //                }
+
+                    //getdata
+                    //-----------------------------------------//3
+                    //geoJSON
+                    polyOverlays.removeAll()
+        
+                    //-----------------------------------------//2
+                    locationIdViewModel.fetchLocations(latitude: circlePos?.latitude ?? 0, longitude: circlePos?.longitude ?? 0) { fetchedLocations in
+                        // Use fetchedLocations here //actually one location
+                        //-----------------------------------------//1
+                        for location in fetchedLocations { //1
+                            geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in //a
+                                polyOverlays = polyOverlaysIn
+                                locationId = location.id
+                                sharedLocationId = location.id
+                                
+                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
+                                    log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                    log.info(observationsLocationViewModel.span)
+                                    
+                                    if settings.isFirstAppear {
+                                        cameraPosition = MapCameraPosition
+                                            .region(
+                                                MKCoordinateRegion(
+                                                    center: CLLocationCoordinate2D(
+                                                        latitude: geoJSONViewModel.span.latitude,
+                                                        longitude: geoJSONViewModel.span.longitude),
+                                                    span: MKCoordinateSpan(
+                                                        latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+                                                        longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+                                                )
+                                            )
+                                        settings.isFirstAppear = false
+                                    }
+                                    
+                                } //settings.isFirstAppearObsView
+                                ) //fetchdata locationId
+                            } //alocation
+                        } //1
+                        //-----------------------------------------//1
+                    }
+                    //-----------------------------------------//2
+                    
+                    //-----------------------------------------//3
+                    
+                    log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                    speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
         }
     }
