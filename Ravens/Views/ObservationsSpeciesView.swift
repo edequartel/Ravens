@@ -40,7 +40,7 @@ struct ObservationsSpeciesView: View {
             List {
 //            ScrollView {
                 if let results = viewModel.observationsSpecies?.results {
-                    let sortedResults = results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") })
+                    let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                     ForEach(sortedResults.indices, id: \.self) { index in
                         let result = sortedResults[index]
                         ObsView(obsID: result.id ?? 0, showUsername: true)
