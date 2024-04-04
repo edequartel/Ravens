@@ -52,6 +52,7 @@ class ObsViewModel: ObservableObject {
     func fetchData(for obsID: Int) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
+        log.error(fileURL)
         
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
@@ -71,11 +72,14 @@ class ObsViewModel: ObservableObject {
             case .success(_):
                 do {
                     let decoder = JSONDecoder()
+                    
                     self.observation = try decoder.decode(Obs.self, from: response.data!)
+                    
                     
                     let encoder = JSONEncoder()
                     if let encodedData = try? encoder.encode(self.observation) {
                         try? encodedData.write(to: fileURL)
+                        
                     }
                 } catch {
                     self.log.error("Error ObsViewModel decoding JSON: \(error)")

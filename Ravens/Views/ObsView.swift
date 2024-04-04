@@ -23,10 +23,13 @@ struct ObsView: View {
     @State private var isShareSheetPresented = false
     
     var obsID: Int
+    var observationSpecies: ObservationSpecies //??
     var showUsername: Bool
     
     var body: some View {
         LazyVStack {
+            
+
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
                     HStack {
@@ -88,7 +91,8 @@ struct ObsView: View {
                 .font(.customMedium)
             }
             else {
-                ProgressView()
+                Text("\(obsID) \(observationSpecies) not found")
+//                ProgressView()
             }
 //            Divider()
             
@@ -114,9 +118,9 @@ struct ObsView: View {
 }
 
 
-#Preview {
-    ObsView(obsID: 2, showUsername: true)
-        .environmentObject(KeychainViewModel())
-        .environmentObject(Settings())
-}
+//#Preview {
+//    ObsView(obsID: 2, observationSpecies: <#T##ObservationSpecies#>,  showUsername: true)
+//        .environmentObject(KeychainViewModel())
+//        .environmentObject(Settings())
+//}
 

@@ -52,6 +52,10 @@ struct ObservationSpecies: Codable, Identifiable {
     var photos: [String]
     var sounds: [String]
     var permalink: String = ""
+    
+    
+    var detail: String?
+    var code: String?
 }
 
 // MARK: - UserDetail

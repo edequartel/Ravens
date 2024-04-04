@@ -25,7 +25,7 @@ struct MapObservationView: View {
         .region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
             )
         )
 
@@ -138,7 +138,7 @@ struct MapObservationView: View {
                                 )
                             )
                         settings.isFirstAppearObsView = false
-                    } // 1
+                    }
 
                 } 
                 )
@@ -171,45 +171,3 @@ struct MapObservationView_Previews: PreviewProvider {
         
     }
 }
-
-
-
-//if settings.isFirstAppearObsView {
-//    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//        if let location = self.locationManager.location {
-//            let myLatitude = location.coordinate.latitude
-//            let myLongitude = location.coordinate.longitude
-//            print("My location is: \(myLatitude), \(myLongitude)")
-//            circlePos = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//            
-//            // save the location
-//            settings.currentLocation = location
-//            
-//            observationsViewModel.fetchData(lat: myLatitude, long: myLongitude,
-//                                            completion: {print("fetchData observationsViewModel yyy completed")
-//                
-//                
-//                // Initialize cameraPosition with user's current location
-//                let delta = Double(settings.radius) * 0.000032
-//                cameraPosition = MapCameraPosition
-//                .region(
-//                    MKCoordinateRegion(
-//                        center: CLLocationCoordinate2D(latitude: myLatitude,
-//                            longitude: myLongitude),
-//                        span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-//                    )
-//                )
-//                
-//                
-//            } )
-//
-//        } else {
-//            print("Location is not available yet")
-//            // Handle the case when location is not available
-//        }
-//        
-//        log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-//        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
-//    }
-//    settings.isFirstAppearObsView = false
-//}

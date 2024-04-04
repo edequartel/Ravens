@@ -43,7 +43,10 @@ struct ObservationsSpeciesView: View {
                     let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                     ForEach(sortedResults.indices, id: \.self) { index in
                         let result = sortedResults[index]
-                        ObsView(obsID: result.id ?? 0, showUsername: true)
+                        
+                        
+                        
+                        ObsView(obsID: result.id ?? 0, observationSpecies: result, showUsername: true) //<< inject the result
                             .font(.footnote)
                             .onAppear {
                                 if index == sortedResults.count - 1 {
@@ -52,6 +55,8 @@ struct ObservationsSpeciesView: View {
                                     //viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days) <<< deze wijzige met 0 and 100
                                 }
                             }
+                        
+                        
                     }
                 }
             }

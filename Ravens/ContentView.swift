@@ -22,6 +22,7 @@ struct ContentView: View {
     @State private var isSheetObservationsLocationsViewPresented = false
     
     @State private var locationId: Int?
+//    @State private var locationString: String?
     
     var body: some View {
         TabView {
@@ -107,12 +108,13 @@ struct ContentView: View {
         }
 
         .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsView(isShowing: $isSheetObservationsViewPresented)
+//            ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
             ObservationsLocationView(
                     locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
-//                    locationStr: <#T##Binding<String>#>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+//                    locationStr: Binding<String>(get: { self.locationString ?? "" }, set: { self.locationString = $0 }),
+//                    locationStr: <#T##Binding<String>#>(get: { self.locationString ?? "" }, set: { self.locationString = $0 }),x
                     isShowing: $isSheetObservationsLocationsViewPresented)
         }
         .onAppear() {

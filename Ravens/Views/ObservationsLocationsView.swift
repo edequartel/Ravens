@@ -15,8 +15,8 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var scale: CGFloat = 1.0
-    @State private var lastScale: CGFloat = 1.0
+//    @State private var scale: CGFloat = 1.0
+//    @State private var lastScale: CGFloat = 1.0
     
     @State private var limit = 100
     @State private var offset = 0
@@ -35,6 +35,7 @@ struct ObservationsLocationView: View {
                 }
                 Spacer()
                 Text(String(locationId))
+//                Text(locationStr)
                 
 //                Button {
 //                    if let maxOffset = viewModel.observationsSpecies?.count {
@@ -45,7 +46,7 @@ struct ObservationsLocationView: View {
 //                } label: {
 //                    Image(systemName: "plus.circle")
 //                }
-//                
+//
 //                Button {
 //                    if offset >= 100 {
 //                        offset = offset - 100
@@ -55,20 +56,22 @@ struct ObservationsLocationView: View {
 //                } label: {
 //                    Image(systemName: "minus.circle")
 //                }
-//                
+//
 //                Text("\(offset)")
             }
             .padding()
             
             List {
                 if let results =  viewModel.observationsSpecies?.results {
-//                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
-                    
-                    
-//                    ForEach(results.sorted(by: { ($0.species_group, $1.rarity, $1.date, $0.species_detail.name) < ($1.species_group, $0.rarity, $0.date, $1.species_detail.name) } ), id: \.id) {
                     ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                         result in
-                        ObsView(obsID: result.id ?? 0, showUsername: true)
+                        
+                        
+                        
+                        ObsView(obsID: result.id ?? 0, observationSpecies: result, showUsername: true)
+                        
+                        
+                        
                     }
                     .font(.footnote)
                 }

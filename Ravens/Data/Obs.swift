@@ -37,5 +37,12 @@ struct Obs: Codable, Identifiable {
     let photos: [String]
     let sounds: [String]
     let permalink: String
+    
+    let detail: String?
+    let code: String?
 }
 
+//{
+//  "detail": "Not found.",
+//  "code": "not-found"
+//}
