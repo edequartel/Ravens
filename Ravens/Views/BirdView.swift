@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 struct BirdView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var birdViewModel = BirdViewModel(settings: Settings())
+    @StateObject private var birdViewModel = SpeciesViewModel(settings: Settings())
     
 //    @StateObject private var birdViewModelsecLanguage = BirdViewModel(settings: Settings()) //<< second language later
     
@@ -188,7 +188,7 @@ enum FilterOption: String, CaseIterable {
     // Add more filter options if needed
 }
 
-extension BirdViewModel {
+extension SpeciesViewModel {
     func sortedBirds(by sortOption: SortOption) -> [Bird] {
         switch sortOption {
         case .name:
@@ -200,7 +200,7 @@ extension BirdViewModel {
     }
 }
 
-extension BirdViewModel {
+extension SpeciesViewModel {
     func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Bird] {
         let sortedBirdsList = sortedBirds(by: sortOption)
         

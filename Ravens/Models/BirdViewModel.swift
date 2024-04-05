@@ -41,10 +41,10 @@ class SpeciesViewModel: ObservableObject {
                     let decoder = JSONDecoder()
                     self.birds = try decoder.decode([Bird].self, from: response.data!)
                 } catch {
-                    self.log.error("Error BirdViewModel decoding JSON: \(error)")
+                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
                 }
             case .failure(let error):
-                self.log.error("Error BirdViewModel fetching data: \(error)")
+                self.log.error("Error SpeciesViewModel fetching data: \(error)")
             }
         }
     }
