@@ -1,5 +1,5 @@
 //
-//  BirdView.swift
+//  SpeciesView.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 08/01/2024.
@@ -10,11 +10,9 @@ import SwiftyBeaver
 //import Popovers
 
 
-struct BirdView: View {
+struct SpeciesView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var birdViewModel = SpeciesViewModel(settings: Settings())
-    
-//    @StateObject private var birdViewModelsecLanguage = BirdViewModel(settings: Settings()) //<< second language later
+    @StateObject private var speciesViewModel = SpeciesViewModel(settings: Settings())
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
@@ -25,7 +23,7 @@ struct BirdView: View {
     @State private var selectedFilterOption: FilterOption = .native
     
     @State private var searchText = ""
-    @State private var birdId : Int?
+    @State private var speciesId : Int?
     
     // @State private var isPopupVisible = false <== bindable
     
@@ -41,50 +39,50 @@ struct BirdView: View {
     var body: some View {
         NavigationStack {
            List {
-                ForEach(birdViewModel.filteredBirds(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { bird in
+                ForEach(speciesViewModel.filteredSpecies(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { species in
                     HStack {
                         HStack {
-                            NavigationLink(destination: MapObservationsSpeciesView(speciesID: bird.id, speciesName: bird.name)) {
+                            NavigationLink(destination: MapObservationsSpeciesView(speciesID: species.id, speciesName: species.name)) {
                                 VStack(alignment: .leading) {
                                     HStack(spacing: 4) {
                                         Image(systemName: "circle.fill")
                                             .symbolRenderingMode(.palette)
-                                            .foregroundStyle(myColor(value: bird.rarity), .clear)
+                                            .foregroundStyle(myColor(value: species.rarity), .clear)
 
                                         //are there any observations
                                         if (!keyChainViewModel.token.isEmpty) {
-                                            ObservationDetailsView(speciesID: bird.id)
+                                            ObservationDetailsView(speciesID: species.id)
                                         }
                                         
-                                        Text(" \(bird.name)")
+                                        Text(" \(species.name)")
                                             .bold()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
-                                        if isNumberInBookMarks(number: bird.id) {
+                                        if isNumberInBookMarks(number: species.id) {
                                             Image(systemName: "bookmark")
                                         }
                                     }
                                     HStack {
-                                        Text("\(bird.scientific_name)")
+                                        Text("\(species.scientific_name)")
                                             .italic()
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                     }
                                 }
                                 .onLongPressGesture(minimumDuration: 1) {
-                                    log.verbose("onLONGTapgesture \(bird.id)")
-                                    birdId = bird.id
+                                    log.verbose("onLONGTapgesture \(species.id)")
+                                    speciesId = species.id
                                     //
-                                    if isNumberInBookMarks(number: bird.id) {
-                                        if let index = bookMarks.firstIndex(of: bird.id) {
+                                    if isNumberInBookMarks(number: species.id) {
+                                        if let index = bookMarks.firstIndex(of: species.id) {
                                             bookMarks.remove(at: index)
                                             settings.saveBookMarks(array: bookMarks)
                                             print(bookMarks)
                                         }
                                     } else
                                     {
-                                        bookMarks.append(bird.id)
+                                        bookMarks.append(species.id)
                                         settings.saveBookMarks(array: bookMarks)
                                         print(bookMarks)
                                     }
@@ -92,8 +90,8 @@ struct BirdView: View {
                                     
                                 }
                                 .onAppear() {
-                                    birdId = bird.id
-                                    log.verbose("onAppear \(bird.id)")
+                                    speciesId = species.id
+                                    log.verbose("onAppear \(species.id)")
                                 }
                                 
                             }
@@ -152,7 +150,7 @@ struct BirdView: View {
         .onAppear() {
             log.info("birdview: selectedGroup \(settings.selectedGroup)")
             
-            birdViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
 //            birdViewModelsecLanguage.fetchData(language: "eng", for: settings.selectedGroup) //<<second language later
             
             
@@ -166,9 +164,9 @@ struct BirdView: View {
     
     var searchResults: [Species] {
         if searchText.isEmpty {
-            return birdViewModel.sortedBirds(by: selectedSortOption)
+            return speciesViewModel.sortedBirds(by: selectedSortOption)
         } else {
-            return birdViewModel.sortedBirds(by: selectedSortOption).filter {
+            return speciesViewModel.sortedBirds(by: selectedSortOption).filter {
                 $0.name.contains(searchText) || $0.scientific_name.contains(searchText)
             }
         }
@@ -192,16 +190,16 @@ extension SpeciesViewModel {
     func sortedBirds(by sortOption: SortOption) -> [Species] {
         switch sortOption {
         case .name:
-            return birds.sorted { ($0.name < $1.name) }
+            return species.sorted { ($0.name < $1.name) }
         case .scientific_name:
-            return birds.sorted { ($0.scientific_name < $1.scientific_name) }
+            return species.sorted { ($0.scientific_name < $1.scientific_name) }
             // Add more sorting options if needed
         }
     }
 }
 
 extension SpeciesViewModel {
-    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
+    func filteredSpecies(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
         let sortedBirdsList = sortedBirds(by: sortOption)
         
         if searchText.isEmpty {
@@ -209,9 +207,9 @@ extension SpeciesViewModel {
             filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
             return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray)
         } else {
-            let filteredList = sortedBirdsList.filter { bird in
-                bird.name.lowercased().contains(searchText.lowercased()) ||
-                bird.scientific_name.lowercased().contains(searchText.lowercased())
+            let filteredList = sortedBirdsList.filter { species in
+                species.name.lowercased().contains(searchText.lowercased()) ||
+                species.scientific_name.lowercased().contains(searchText.lowercased())
             }
             
             var filtered = applyFilter(to: filteredList, with: filterOption)
@@ -220,46 +218,46 @@ extension SpeciesViewModel {
         }
     }
     
-    private func applyFilter(to birds: [Species], with filterOption: FilterOption) -> [Species] {
+    private func applyFilter(to species: [Species], with filterOption: FilterOption) -> [Species] {
         switch filterOption {
         case .all:
-            return birds
+            return species
         case .native:
-            return birds.filter { $0.native }
+            return species.filter { $0.native }
         }
     }
     
-    private func applyRarityFilter(to birds: [Species], with filterOption: Int) -> [Species] {
+    private func applyRarityFilter(to species: [Species], with filterOption: Int) -> [Species] {
         switch filterOption {
         case 0:
-            return birds
+            return species
         case 1:
-            return birds.filter { $0.rarity == 1 }
+            return species.filter { $0.rarity == 1 }
         case 2:
-            return birds.filter { $0.rarity == 2}
+            return species.filter { $0.rarity == 2}
         case 3:
-            return birds.filter { $0.rarity == 3 }
+            return species.filter { $0.rarity == 3 }
         case 4:
-            return birds.filter { $0.rarity == 4 }
+            return species.filter { $0.rarity == 4 }
         default:
-            return birds
+            return species
         }
     }
     
-    private func applyBookmarkFilter(to birds: [Species], isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
+    private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
         if isBookmarked {
-            return birds.filter { additionalIntArray.contains($0.id) }
+            return species.filter { additionalIntArray.contains($0.id) }
         } else {
-            return birds
+            return species
         }
     }
 }
 
 
-struct BirdView_Previews: PreviewProvider {
+struct SpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        BirdView()
+        SpeciesView()
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))

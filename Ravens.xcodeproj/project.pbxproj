@@ -27,10 +27,10 @@
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
 		474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C402F2B4BC4080038B3A5 /* Assets.xcassets */; };
 		474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */; };
-		474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403B2B4BC5070038B3A5 /* Bird.swift */; };
-		474C403E2B4BC5400038B3A5 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */; };
+		474C403C2B4BC5070038B3A5 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403B2B4BC5070038B3A5 /* Species.swift */; };
+		474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */; };
 		474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40402B4BC5780038B3A5 /* Alamofire */; };
-		474C40462B4BC66A0038B3A5 /* BirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40452B4BC66A0038B3A5 /* BirdView.swift */; };
+		474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40452B4BC66A0038B3A5 /* SpeciesView.swift */; };
 		474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */; };
 		474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */; };
 		474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */; };
@@ -114,9 +114,9 @@
 		474C402D2B4BC4040038B3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		474C402F2B4BC4080038B3A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		474C403B2B4BC5070038B3A5 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
-		474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewModel.swift; sourceTree = "<group>"; };
-		474C40452B4BC66A0038B3A5 /* BirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdView.swift; sourceTree = "<group>"; };
+		474C403B2B4BC5070038B3A5 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
+		474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModel.swift; sourceTree = "<group>"; };
+		474C40452B4BC66A0038B3A5 /* SpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesView.swift; sourceTree = "<group>"; };
 		474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetails.swift; sourceTree = "<group>"; };
 		474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailsViewModel.swift; sourceTree = "<group>"; };
 		474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailsView.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
-				474C403D2B4BC5400038B3A5 /* BirdViewModel.swift */,
+				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
 				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
@@ -274,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				472633202BB5981A00CEA05E /* poi.json */,
-				474C403B2B4BC5070038B3A5 /* Bird.swift */,
+				474C403B2B4BC5070038B3A5 /* Species.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
 				474C40522B4BFD090038B3A5 /* RegionList.swift */,
 				474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */,
@@ -303,7 +303,7 @@
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
-				474C40452B4BC66A0038B3A5 /* BirdView.swift */,
+				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
@@ -475,7 +475,7 @@
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
-				474C40462B4BC66A0038B3A5 /* BirdView.swift in Sources */,
+				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
@@ -492,12 +492,12 @@
 				472633252BB5998400CEA05E /* POIsView.swift in Sources */,
 				477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */,
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
-				474C403C2B4BC5070038B3A5 /* Bird.swift in Sources */,
+				474C403C2B4BC5070038B3A5 /* Species.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
-				474C403E2B4BC5400038B3A5 /* BirdViewModel.swift in Sources */,
+				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,

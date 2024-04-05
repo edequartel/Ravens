@@ -1,5 +1,5 @@
 //
-//  BirdViewModel.swift
+//  SpeciesViewModel.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 08/01/2024.
@@ -13,7 +13,7 @@ import SwiftyBeaver
 
 class SpeciesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    @Published var birds = [Species]()
+    @Published var species = [Species]()
     
     var settings: Settings
     init(settings: Settings) {
@@ -39,7 +39,7 @@ class SpeciesViewModel: ObservableObject {
                 do {
                     // Decode the JSON response into an array of Bird objects
                     let decoder = JSONDecoder()
-                    self.birds = try decoder.decode([Species].self, from: response.data!)
+                    self.species = try decoder.decode([Species].self, from: response.data!)
                 } catch {
                     self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
                 }

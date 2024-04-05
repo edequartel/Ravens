@@ -82,7 +82,7 @@ struct ContentView: View {
             }
             
             // Tab 2
-            BirdView()
+            SpeciesView()
                 .tabItem {
                     Text("Species")
                     Image(systemName: "tree")
