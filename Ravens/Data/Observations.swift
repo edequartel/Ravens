@@ -11,7 +11,7 @@ import Foundation
 struct Observations: Codable {
     var count: Int?
     var next, previous: URL?
-    var results: [Observation]
+    var results: [ObservationSpecies]
 }
 
 struct Observation: Codable, Identifiable {
