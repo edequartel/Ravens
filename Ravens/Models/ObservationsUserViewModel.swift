@@ -13,7 +13,7 @@ import SwiftyBeaver
 class ObservationsUserViewModel: ObservableObject {
     let log = SwiftyBeaver.self
 
-    @Published var observationsSpecies: ObservationsSpecies?
+    @Published var observationsSpecies: Observations?
     
     private var keyChainViewModel =  KeychainViewModel()
     
@@ -36,8 +36,8 @@ class ObservationsUserViewModel: ObservableObject {
             let latitude = observationsSpecies?.results[i].point.coordinates[1] ?? 52.024052
             let longitude = observationsSpecies?.results[i].point.coordinates[0] ?? 5.245350
             let rarity = observationsSpecies?.results[i].rarity ?? 0
-            let hasPhoto = (observationsSpecies?.results[i].photos.count ?? 0 > 0)
-            let hasSound = (observationsSpecies?.results[i].sounds.count ?? 0 > 0)
+            let hasPhoto = (observationsSpecies?.results[i].photos?.count ?? 0 > 0)
+            let hasSound = (observationsSpecies?.results[i].sounds?.count ?? 0 > 0)
             
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
 
@@ -71,7 +71,7 @@ class ObservationsUserViewModel: ObservableObject {
                 if let data = stringResponse.data(using: .utf8) {
                     do {
                         let decoder = JSONDecoder()
-                        let observationsSpecies = try decoder.decode(ObservationsSpecies.self, from: data)
+                        let observationsSpecies = try decoder.decode(Observations.self, from: data)
 
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies

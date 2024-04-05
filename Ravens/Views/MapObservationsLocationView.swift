@@ -99,7 +99,7 @@ struct MapObservationsLocationView: View {
                 
                 .safeAreaInset(edge: .bottom) {
                     VStack {
-                        SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observationsSpecies?.count ?? 0 )
+                        SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0 )
                         .padding(5)
                         .frame(maxHeight: 30)
                         

@@ -41,7 +41,7 @@ struct ObservationsLocationView: View {
             .padding()
             
             List {
-                if let results =  viewModel.observationsSpecies?.results {
+                if let results =  viewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                         result in
                         

@@ -17,7 +17,7 @@ struct ObsView: View {
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     
-    var obs: ObservationSpecies
+    var obs: Observation
     var showUsername: Bool = true
     var showLocation: Bool = true
     
@@ -53,17 +53,17 @@ struct ObsView: View {
             
             if showUsername {
                 HStack {
-                    Text("\(obs.user_detail.name)")
+                    Text("\(obs.user_detail?.name ?? "user_detail")")
                     Spacer()
-                    Text("\(obs.user_detail.id)")
+                    Text("\(obs.user_detail?.id ?? 0)")
                 }
             }
             
             if showLocation {
                 HStack {
-                    Text("\(obs.location_detail.name )")
+                    Text("\(obs.location_detail?.name ?? "name")")
                     Spacer()
-                    Text("\(obs.location_detail.id)")
+                    Text("\(obs.location_detail?.id ?? 0)")
                 }
             }
             
@@ -75,13 +75,13 @@ struct ObsView: View {
                 }
             }
             
-            ForEach(obs.photos, id: \.self) { imageURLString in
+            ForEach(obs.photos ?? [], id: \.self) { imageURLString in
                 AFImageView(media: imageURLString)
             }
             
-            if obs.sounds.count>0 {
+            if (obs.sounds?.count ?? 0)>0 {
                 HStack {
-                    PlayerControlsView(audio: obs.sounds)
+                    PlayerControlsView(audio: obs.sounds ?? [] )
                     Spacer()
                 }
             }

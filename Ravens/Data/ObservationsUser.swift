@@ -11,5 +11,5 @@ import Foundation
 struct ObservationsUser: Codable {
     var count: Int?
     var next, previous: String?
-    var results: [ObservationSpecies]
+    var results: [Observation]
 }

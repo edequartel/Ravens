@@ -7,22 +7,22 @@
 import Foundation
 
 // MARK: - ObservationsSpecies //
-struct ObservationsSpecies: Codable {
+struct Observations: Codable {
     var count: Int?
-    var next, previous: String?
-    var results: [ObservationSpecies]
+    var next, previous: URL?
+    var results: [Observation]
 }
 
 // MARK: - Result
-struct ObservationSpecies: Codable, Identifiable {
+struct Observation: Codable, Identifiable {
     var id: Int?
-    var species: Int = 0
+    var species: Int?
     var date: String = "2023-01-01"
     var time: String?
     var number: Int = 0
     var sex: String = ""
     var point: Point
-    var accuracy: Int = 0
+    var accuracy: Int?
     var notes: String?
     var is_certain: Bool = false
     var is_escape: Bool = false
@@ -30,12 +30,12 @@ struct ObservationSpecies: Codable, Identifiable {
     var life_stage: Int = 0
     var method: Int?
     var substrate: Int?
-    var related_species: Int = 0
-    var obscurity: Int = 0
-    var has_photo: Bool = true
-    var has_sound: Bool = true
+    var related_species: Int?
+    var obscurity: Int?
+    var has_photo: Bool?
+    var has_sound: Bool?
     var counting_method: Int?
-    var embargo_date: String
+    var embargo_date: String?
     var uuid: String?
     let externalReference: [String]?
 //    var links: [String?]
@@ -45,16 +45,15 @@ struct ObservationSpecies: Codable, Identifiable {
     var species_detail: SpeciesDetail
     var rarity: Int = 0
     var user: Int = 0
-    var user_detail: UserDetail
-    var modified: String = ""
-    var species_group: Int = 0
+    var user_detail: UserDetail?
+    var modified: String?
+    var species_group: Int?
     var validation_status: String = ""
-    var location: Int = 0
-    var location_detail: LocationDetail
-    var photos: [String]
-    var sounds: [String]
+    var location: Int?
+    var location_detail: LocationDetail?
+    var photos: [String]?
+    var sounds: [String]?
     var permalink: String = ""
-    
     
     var detail: String?
     var code: String?

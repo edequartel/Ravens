@@ -23,7 +23,7 @@ struct ObsDetailsView: View {
     @State private var isShareSheetPresented = false
     
     var obsID: Int
-    var observationSpecies: ObservationSpecies //??
+    var observationSpecies: Observation 
     var showUsername: Bool
     
     var body: some View {
