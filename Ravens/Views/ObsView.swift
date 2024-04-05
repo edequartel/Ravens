@@ -55,15 +55,17 @@ struct ObsView: View {
                 HStack {
                     Text("\(obs.user_detail?.name ?? String(obs.user))")
                     Spacer()
-                    Text("\(obs.user_detail?.id ?? 0)")
+//                    Text("\(obs.user_detail?.id ?? 0)")
                 }
             }
             
             if showLocation {
                 HStack {
                     Text("\(obs.location_detail?.name ?? "name")")
+                        .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
-                    Text("\(obs.location_detail?.id ?? 0)")
+//                    Text("\(obs.location_detail?.id ?? 0)")
+                        .lineLimit(1) // Set the maximum number of lines to 1
                 }
             }
             

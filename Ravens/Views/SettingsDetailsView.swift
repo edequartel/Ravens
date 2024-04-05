@@ -28,9 +28,10 @@ struct SettingsDetailsView: View {
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
             Text("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+                .lineLimit(1)
             
             if settings.infinity {
-                Text("Infinity (Area)")
+                Text("Infinity (Location)")
             } else {
                 Text("\(settings.days)d")
                 Text("\(settings.selectedDate, formatter: dateFormatter)")

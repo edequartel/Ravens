@@ -125,7 +125,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gebied"
+            "value" : "Locatie"
           }
         }
       }
@@ -346,10 +346,35 @@
       }
     },
     "Infinity" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oneindig"
+          }
+        }
+      }
     },
     "Infinity (Area)" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oneindig (locatie)"
+          }
+        }
+      }
+    },
+    "Infinity (Location)" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oneindig (locatie)"
+          }
+        }
+      }
     },
     "International" : {
       "localizations" : {
@@ -456,6 +481,16 @@
         }
       }
     },
+    "Location" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locatie"
+          }
+        }
+      }
+    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -549,7 +584,14 @@
       }
     },
     "Map Style" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaartstijl"
+          }
+        }
+      }
     },
     "Me" : {
       "localizations" : {
@@ -651,6 +693,7 @@
       }
     },
     "Obs" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
