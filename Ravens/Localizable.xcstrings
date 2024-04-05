@@ -24,12 +24,12 @@
         }
       }
     },
-    "%@ %@" : {
+    "%@ %@ -  %lldx" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ %2$@"
+            "value" : "%1$@ %2$@ -  %3$lldx"
           }
         }
       }
@@ -40,16 +40,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@, %3$lld"
-          }
-        }
-      }
-    },
-    "%@: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@: %2$@"
           }
         }
       }
@@ -196,6 +186,7 @@
       }
     },
     "Default Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -561,7 +552,6 @@
 
     },
     "Me" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1004,9 +994,6 @@
           }
         }
       }
-    },
-    "We" : {
-
     },
     "Window" : {
       "localizations" : {

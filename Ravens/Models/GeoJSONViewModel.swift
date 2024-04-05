@@ -18,7 +18,7 @@ class GeoJSONViewModel: ObservableObject {
 
     func fetchGeoJsonData(for locationID: String,  completion: @escaping ([MKPolygon]) -> Void) {
         let apiUrl = "https://waarneming.nl/api/v1/locations/geojson/?id=\(locationID)"
-        log.error(apiUrl)
+        log.info(apiUrl)
         AF.request(apiUrl).responseData { response in
             switch response.result {
             case .success(let value):

@@ -28,7 +28,7 @@ struct ObservationsUserView: View {
                 UserSimpleView()
                 
                 Button {
-                    if let maxOffset = viewModel.observationsSpecies?.count {
+                    if let maxOffset = viewModel.observations?.count {
                         offset = min(offset + 100, maxOffset)
                         limit = 100
                         viewModel.fetchData(limit: limit, offset: offset)
@@ -52,13 +52,10 @@ struct ObservationsUserView: View {
             .padding()
             
             List {
-                if let results =  viewModel.observationsSpecies?.results {
-                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) {
-//                    ForEach(results.sorted(by: { ($0.species_group, $1.rarity, $1.date, $0.species_detail.name) < ($1.species_group, $0.rarity, $0.date, $1.species_detail.name) } ), id: \.id) {
-//                    ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
-//                    ForEach(results.sorted(by: { ($0.species_group, $1.rarity, $1.date, $0.species_detail.name) < ($1.species_group, $0.rarity, $0.date, $1.species_detail.name) } ), id: \.id) {
+                if let results =  viewModel.observations?.results {
+                    ForEach(results.sorted(by: { (/*$0.species_group, */$1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < (/*$1.species_group, */$0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                         result in
-                        ObsView(obsID: result.id ?? 0, showUsername: false)
+                        ObsView(obs: result)
                     }
                     .font(.footnote)
                 }
@@ -76,8 +73,6 @@ struct ObservationsUserViewExtra: View {
     var viewModel: ObservationsUserViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var scale: CGFloat = 1.0
-//    @State private var lastScale: CGFloat = 1.0
     
     var body: some View {
         VStack {
@@ -85,17 +80,15 @@ struct ObservationsUserViewExtra: View {
                 Text("Waarneming"+" ")
                 UserSimpleView()
             }
-            .padding()
-            .font(.headline)
+            .padding(16)
+            .bold()
             
             List {
-//            ScrollView {
-                if let results =  viewModel.observationsSpecies?.results {
+                if let results =  viewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
-                        ObsView(obsID: result.id ?? 0, showUsername: false)
+                        ObsView(obs: result, showUsername: false)
                     }
-                    .font(.footnote)
                 }
             }
         }

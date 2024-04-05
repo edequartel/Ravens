@@ -27,16 +27,14 @@ struct ObservationsView: View {
             .padding(16)
             
             if (!keyChainViewModel.token.isEmpty) {
-                List { //???
-//                ScrollView {
+                List {
                     if let results = observationsViewModel.observations?.results {
-                        ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date) < ($0.rarity, $1.species_detail.name, $0.date) }), id: \.id) { 
+                        ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
-                            ObsView(obsID: result.id, showUsername: true)
+                            ObsView(obs: result, showUsername: true)
                         }
                         
                     } else {
-                        // Handle the case when observationsViewModel.observations?.results is nil
                         Text("nobsavaliable")
                     }
                 }

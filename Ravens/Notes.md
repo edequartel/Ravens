@@ -12,7 +12,7 @@
 + images now cached
 
 ## 17
-+ scrolling through days (done in birdview)
++ scrolling through days (done in speciesview)
 + scrolling through obs (done in userview)
 + user positions (a start)
 + data requests timed 

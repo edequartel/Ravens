@@ -15,7 +15,7 @@ class FetchRequestManager: ObservableObject {
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
         let decoder = JSONDecoder()
         
-        if let data = try? Data(contentsOf: fileURL), let loadedObs = try? decoder.decode(Obs.self, from: data) {
+        if let data = try? Data(contentsOf: fileURL), let loadedObs = try? decoder.decode(Observation.self, from: data) {
             viewModel.observation = loadedObs
             log.info("\(obsID) loaded from cache")
             return
@@ -37,7 +37,7 @@ class FetchRequestManager: ObservableObject {
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @Published var observation: Obs?
+    @Published var observation: Observation?
     
     private var lastRequestTime: Date?
     
@@ -52,6 +52,7 @@ class ObsViewModel: ObservableObject {
     func fetchData(for obsID: Int) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
+        log.error(fileURL)
         
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
@@ -66,16 +67,19 @@ class ObsViewModel: ObservableObject {
         
         log.info("\(url) \(headers)")
         
-        AF.request(url, headers: headers).responseDecodable(of: Obs.self) { response in
+        AF.request(url, headers: headers).responseDecodable(of: Observation.self) { response in
             switch response.result {
             case .success(_):
                 do {
                     let decoder = JSONDecoder()
-                    self.observation = try decoder.decode(Obs.self, from: response.data!)
+                    
+                    self.observation = try decoder.decode(Observation.self, from: response.data!)
+                    
                     
                     let encoder = JSONEncoder()
                     if let encodedData = try? encoder.encode(self.observation) {
                         try? encodedData.write(to: fileURL)
+                        
                     }
                 } catch {
                     self.log.error("Error ObsViewModel decoding JSON: \(error)")

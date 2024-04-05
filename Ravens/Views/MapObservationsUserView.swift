@@ -63,7 +63,7 @@ struct MapObservationsUserView: View {
                         VStack(alignment: .trailing) {
                             HStack{
                                 Spacer()
-                                Text("\((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset) - \((observationsUserViewModel.observationsSpecies?.count ?? 0) - offset + limit)")
+                                Text("\((observationsUserViewModel.observations?.count ?? 0) - offset) - \((observationsUserViewModel.observations?.count ?? 0) - offset + limit)")
                                     .foregroundColor(.obsGreenFlower)
 
                             }
@@ -78,7 +78,7 @@ struct MapObservationsUserView: View {
                         Spacer()
                         
                         Button(action: {
-                            if let maxOffset = observationsUserViewModel.observationsSpecies?.count {
+                            if let maxOffset = observationsUserViewModel.observations?.count {
                                 print("maxOffset: \(maxOffset)")
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
@@ -119,11 +119,13 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "77b731")
         }
+        
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsUserViewExtra(viewModel: observationsUserViewModel)
         }
+        
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset)
         }
