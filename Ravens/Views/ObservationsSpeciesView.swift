@@ -33,7 +33,8 @@ struct ObservationsSpeciesView: View {
                         .font(.headline)
                 }
             }
-            .padding()
+            .padding(16)
+            .bold()
             .buttonStyle(.bordered)
             .foregroundColor(.obsGreenEagle)
 
@@ -47,7 +48,6 @@ struct ObservationsSpeciesView: View {
                         
                         
                         ObsView(obs: result) 
-                            .font(.footnote)
                             .onAppear {
                                 if index == sortedResults.count - 1 {
                                     print("End of list reached")

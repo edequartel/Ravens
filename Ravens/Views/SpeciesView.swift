@@ -148,12 +148,10 @@ struct SpeciesView: View {
         .searchable(text: $searchText)
         
         .onAppear() {
-            log.info("birdview: selectedGroup \(settings.selectedGroup)")
+            log.info("speciesView: selectedGroup \(settings.selectedGroup)")
             
             speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-//            birdViewModelsecLanguage.fetchData(language: "eng", for: settings.selectedGroup) //<<second language later
-            
-            
+   
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")
             })
@@ -164,9 +162,9 @@ struct SpeciesView: View {
     
     var searchResults: [Species] {
         if searchText.isEmpty {
-            return speciesViewModel.sortedBirds(by: selectedSortOption)
+            return speciesViewModel.sortedSpecies(by: selectedSortOption)
         } else {
-            return speciesViewModel.sortedBirds(by: selectedSortOption).filter {
+            return speciesViewModel.sortedSpecies(by: selectedSortOption).filter {
                 $0.name.contains(searchText) || $0.scientific_name.contains(searchText)
             }
         }
@@ -187,7 +185,7 @@ enum FilterOption: String, CaseIterable {
 }
 
 extension SpeciesViewModel {
-    func sortedBirds(by sortOption: SortOption) -> [Species] {
+    func sortedSpecies(by sortOption: SortOption) -> [Species] {
         switch sortOption {
         case .name:
             return species.sorted { ($0.name < $1.name) }
@@ -200,14 +198,14 @@ extension SpeciesViewModel {
 
 extension SpeciesViewModel {
     func filteredSpecies(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
-        let sortedBirdsList = sortedBirds(by: sortOption)
+        let sortedSpeciesList = sortedSpecies(by: sortOption)
         
         if searchText.isEmpty {
-            var filteredList = applyFilter(to: sortedBirdsList, with: filterOption)
+            var filteredList = applyFilter(to: sortedSpeciesList, with: filterOption)
             filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
             return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray)
         } else {
-            let filteredList = sortedBirdsList.filter { species in
+            let filteredList = sortedSpeciesList.filter { species in
                 species.name.lowercased().contains(searchText.lowercased()) ||
                 species.scientific_name.lowercased().contains(searchText.lowercased())
             }

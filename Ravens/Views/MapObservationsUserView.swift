@@ -119,11 +119,13 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "77b731")
         }
+        
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsUserViewExtra(viewModel: observationsUserViewModel)
         }
+        
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset)
         }

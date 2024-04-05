@@ -80,7 +80,7 @@ class ObservationsViewModel: ObservableObject {
     }
     
     func fetchData(lat: Double, long: Double, completion: @escaping () -> Void) {
-        log.error("fetchData ObservationsViewModel")
+        log.info("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
@@ -92,7 +92,7 @@ class ObservationsViewModel: ObservableObject {
 //            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
 //        }
         
-        log.info("\(url)")
+        log.error(">>> \(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {

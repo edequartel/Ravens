@@ -37,7 +37,7 @@ class SpeciesViewModel: ObservableObject {
             switch response.result {
             case .success(_):
                 do {
-                    // Decode the JSON response into an array of Bird objects
+                    // Decode the JSON response into an array of Species objects
                     let decoder = JSONDecoder()
                     self.species = try decoder.decode([Species].self, from: response.data!)
                 } catch {

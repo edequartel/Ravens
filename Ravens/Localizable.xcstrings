@@ -186,6 +186,7 @@
       }
     },
     "Default Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
