@@ -23,7 +23,7 @@ struct ObsDetailsView: View {
     @State private var isShareSheetPresented = false
     
     var obsID: Int
-    var observationSpecies: Observation 
+    var observation: Observation
     var showUsername: Bool
     
     var body: some View {
@@ -33,10 +33,8 @@ struct ObsDetailsView: View {
             if let obs = obsViewModel.observation {
                 LazyVStack(alignment: .leading) {
                     HStack {
-//                        Text("\(obsID)")
-                        
                         Image(systemName: "circle.fill")
-                            .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
+                            .foregroundColor(Color(myColor(value: obs.rarity)))
                         
                         Text("\(obs.species_detail.name)")
                             .bold()
@@ -78,12 +76,12 @@ struct ObsDetailsView: View {
                             .italic()
                     }
                     
-                    ForEach(obs.photos, id: \.self) { imageURLString in
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
                         AFImageView(media: imageURLString)
                     }
                     
-                    if obs.sounds.count>0 {
-                        PlayerControlsView(audio: obs.sounds)
+                    if (obs.sounds?.count ?? 0) > 0 {
+                        PlayerControlsView(audio: obs.sounds ?? [])
                     }
                     
                     
@@ -91,28 +89,12 @@ struct ObsDetailsView: View {
                 .font(.customMedium)
             }
             else {
-                Text("\(obsID) \(observationSpecies) not found")
-//                ProgressView()
+                Text("\(obsID) \(observation) not found")
             }
-//            Divider()
-            
-//            NavigationLink(destination: Text("eeee")) {
-//                              Text("Go to ObsExtendedView")
-//                                  .frame(minWidth: 0, maxWidth: .infinity)
-//                                  .padding()
-//                                  .foregroundColor(.white)
-//                                  .background(Color.blue)
-//                                  .cornerRadius(40)
-//                          }
-//                          .padding(.horizontal)
-            
         }
         .onAppear {
             fetchRequestManager.fetchDataAfterDelay(for: obsID, by: obsViewModel)
         }
-        
-//        .padding(.top, 20)
-//        .padding(.horizontal, 20)
     }
     
 }

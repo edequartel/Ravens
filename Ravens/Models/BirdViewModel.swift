@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyBeaver
 
 
-class BirdViewModel: ObservableObject {
+class SpeciesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var birds = [Bird]()
     
@@ -21,7 +21,7 @@ class BirdViewModel: ObservableObject {
     }
     
     func fetchData(language: String, for groupID: Int) {
-        log.info("fetchData BirdViewModel \(groupID)")
+        log.info("fetchData SpeciesViewModel \(groupID)")
         
         let url = settings.endPoint()+"region-lists/\(groupID)/species/"
 

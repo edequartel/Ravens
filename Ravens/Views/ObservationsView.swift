@@ -27,17 +27,14 @@ struct ObservationsView: View {
             .padding(16)
             
             if (!keyChainViewModel.token.isEmpty) {
-                List { //???
-//                ScrollView {
+                List {
                     if let results = observationsViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
-//                            Text("\(String(describing: result.id))")
                             ObsView(obs: result, showUsername: false)
                         }
                         
                     } else {
-                        // Handle the case when observationsViewModel.observations?.results is nil
                         Text("nobsavaliable")
                     }
                 }
@@ -55,14 +52,14 @@ struct ObservationsView: View {
 }
 
 
-//struct ObservationsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Setting up the environment objects for the preview
-//        ObservationsView(isShowing: .constant(false))
-//            .environmentObject(ObservationsViewModel(settings: Settings()))
-//            .environmentObject(KeychainViewModel())
-//            .environmentObject(Settings())
-//    }
-//}
+struct ObservationsView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Setting up the environment objects for the preview
+        ObservationsView(isShowing: .constant(false))
+            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(KeychainViewModel())
+            .environmentObject(Settings())
+    }
+}
 
 

@@ -32,7 +32,10 @@ class SpeciesGroupViewModel: ObservableObject {
         log.info("url SpeciesGroupViewModel: \(url)")
         
         // Use Alamofire to make the API request
-        AF.request(url, headers: headers).responseDecodable(of: [SpeciesGroup].self) { response in
+        AF.request(url, headers: headers)
+            .responseDecodable(of: [SpeciesGroup].self) 
+
+        { response in
             switch response.result {
             case .success(_):
                 do {

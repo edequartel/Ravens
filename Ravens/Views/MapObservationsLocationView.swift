@@ -30,6 +30,9 @@ struct MapObservationsLocationView: View {
     
     @State private var locationId: Int = 0
     @Binding var sharedLocationId: Int
+    @State private var locationStr: String = "no location"
+    @Binding var sharedLocationStr: String
+
     
     @State private var circlePos: CLLocationCoordinate2D?
     
@@ -115,7 +118,6 @@ struct MapObservationsLocationView: View {
                                 .padding(5)
                                 .frame(maxHeight: 30)
                         }
-                        
                     }
                     .background(Color.obsGreenEagle.opacity(0.5))
                     .font(.headline)
@@ -143,6 +145,8 @@ struct MapObservationsLocationView: View {
                                         
                                         locationId = location.id
                                         sharedLocationId = location.id
+                                        locationStr = location.name
+                                        sharedLocationStr = location.name
                                         
                                         //and now er get the observations from the locationId
                                         observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
@@ -253,7 +257,7 @@ struct MapObservationsLocationView: View {
 struct MapObservationLocationView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationsLocationView(sharedLocationId: .constant(0))
+        MapObservationsLocationView(sharedLocationId: .constant(0), sharedLocationStr: .constant("locationStr"))
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))

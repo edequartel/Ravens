@@ -32,7 +32,7 @@ struct ObsExtendedView: View {
                     HStack {
 //                        Text("\(obsID)")
                         Image(systemName: "circle.fill")
-                            .foregroundColor(Color(myColor(value: obs.rarity ?? 0)))
+                            .foregroundColor(Color(myColor(value: obs.rarity)))
                         
                         Text("\(obs.species_detail.name)")
                             .bold()
@@ -74,12 +74,12 @@ struct ObsExtendedView: View {
                             .italic()
                     }
                     
-                    ForEach(obs.photos, id: \.self) { imageURLString in
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
                         AFImageView(media: imageURLString)
                     }
                     
-                    if obs.sounds.count>0 {
-                        PlayerControlsView(audio: obs.sounds)
+                    if (obs.sounds?.count ?? 0) > 0 {
+                        PlayerControlsView(audio: obs.sounds ?? [])
                     }
                     
                     

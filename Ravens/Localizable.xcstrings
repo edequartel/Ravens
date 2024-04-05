@@ -24,16 +24,6 @@
         }
       }
     },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
     "%@ %@ -  %lldx" : {
       "localizations" : {
         "en" : {
@@ -50,16 +40,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@, %3$lld"
-          }
-        }
-      }
-    },
-    "%@: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@: %2$@"
           }
         }
       }
@@ -571,7 +551,6 @@
 
     },
     "Me" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1014,9 +993,6 @@
           }
         }
       }
-    },
-    "We" : {
-
     },
     "Window" : {
       "localizations" : {

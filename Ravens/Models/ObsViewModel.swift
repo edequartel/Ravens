@@ -15,7 +15,7 @@ class FetchRequestManager: ObservableObject {
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
         let decoder = JSONDecoder()
         
-        if let data = try? Data(contentsOf: fileURL), let loadedObs = try? decoder.decode(Obs.self, from: data) {
+        if let data = try? Data(contentsOf: fileURL), let loadedObs = try? decoder.decode(Observation.self, from: data) {
             viewModel.observation = loadedObs
             log.info("\(obsID) loaded from cache")
             return
@@ -37,7 +37,7 @@ class FetchRequestManager: ObservableObject {
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @Published var observation: Obs?
+    @Published var observation: Observation?
     
     private var lastRequestTime: Date?
     
@@ -67,13 +67,13 @@ class ObsViewModel: ObservableObject {
         
         log.info("\(url) \(headers)")
         
-        AF.request(url, headers: headers).responseDecodable(of: Obs.self) { response in
+        AF.request(url, headers: headers).responseDecodable(of: Observation.self) { response in
             switch response.result {
             case .success(_):
                 do {
                     let decoder = JSONDecoder()
                     
-                    self.observation = try decoder.decode(Obs.self, from: response.data!)
+                    self.observation = try decoder.decode(Observation.self, from: response.data!)
                     
                     
                     let encoder = JSONEncoder()

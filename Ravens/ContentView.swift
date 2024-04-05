@@ -22,7 +22,7 @@ struct ContentView: View {
     @State private var isSheetObservationsLocationsViewPresented = false
     
     @State private var locationId: Int?
-//    @State private var locationString: String?
+    @State private var locationStr: String?
     
     var body: some View {
         TabView {
@@ -70,9 +70,10 @@ struct ContentView: View {
             
             // Tab 2
             ZStack {
-                MapObservationsLocationView(sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }))
-                
-                
+                MapObservationsLocationView(
+                    sharedLocationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
+                    sharedLocationStr: Binding<String>(get: { self.locationStr ?? "---" }, set: { self.locationStr = $0 })
+                )
                 ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "a7b731")
             }
             .tabItem {
@@ -90,8 +91,8 @@ struct ContentView: View {
             // Tab 3
             MapObservationsUserView()
                 .tabItem {
-                    Text("We")
-                    Image(systemName: "person.2.fill")
+                    Text("Me")
+                    Image(systemName: "person.fill")
                 }
             
 //            // Tab 4
@@ -115,8 +116,7 @@ struct ContentView: View {
         .sheet(isPresented: $isSheetObservationsLocationsViewPresented) {
             ObservationsLocationView(
                     locationId: Binding<Int>(get: { self.locationId ?? 0 }, set: { self.locationId = $0 }),
-//                    locationStr: Binding<String>(get: { self.locationString ?? "" }, set: { self.locationString = $0 }),
-//                    locationStr: <#T##Binding<String>#>(get: { self.locationString ?? "" }, set: { self.locationString = $0 }),x
+                    locationStr: Binding<String>(get: { self.locationStr ?? "test" }, set: { self.locationStr = $0 }),
                     isShowing: $isSheetObservationsLocationsViewPresented)
         }
         .onAppear() {
