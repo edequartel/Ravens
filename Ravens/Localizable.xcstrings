@@ -104,9 +104,6 @@
         }
       }
     },
-    "%lld not found" : {
-
-    },
     "%lld/%lldx" : {
       "localizations" : {
         "en" : {
