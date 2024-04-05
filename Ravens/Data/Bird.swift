@@ -6,7 +6,7 @@
 //
 // Data Model
 
-struct Bird: Codable, Identifiable {
+struct Species: Codable, Identifiable {
     var id: Int { species }
     let species: Int
     let name: String

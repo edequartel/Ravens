@@ -13,7 +13,7 @@ import SwiftyBeaver
 
 class SpeciesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    @Published var birds = [Bird]()
+    @Published var birds = [Species]()
     
     var settings: Settings
     init(settings: Settings) {
@@ -32,14 +32,14 @@ class SpeciesViewModel: ObservableObject {
             "Accept-Language": language
         ]
 
-        AF.request(url, headers: headers).responseDecodable(of: [Bird].self){ response in
+        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
 //            log.info(response.debugDescription)
             switch response.result {
             case .success(_):
                 do {
                     // Decode the JSON response into an array of Bird objects
                     let decoder = JSONDecoder()
-                    self.birds = try decoder.decode([Bird].self, from: response.data!)
+                    self.birds = try decoder.decode([Species].self, from: response.data!)
                 } catch {
                     self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
                 }

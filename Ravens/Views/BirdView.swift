@@ -164,7 +164,7 @@ struct BirdView: View {
         }
     }
     
-    var searchResults: [Bird] {
+    var searchResults: [Species] {
         if searchText.isEmpty {
             return birdViewModel.sortedBirds(by: selectedSortOption)
         } else {
@@ -189,7 +189,7 @@ enum FilterOption: String, CaseIterable {
 }
 
 extension SpeciesViewModel {
-    func sortedBirds(by sortOption: SortOption) -> [Bird] {
+    func sortedBirds(by sortOption: SortOption) -> [Species] {
         switch sortOption {
         case .name:
             return birds.sorted { ($0.name < $1.name) }
@@ -201,7 +201,7 @@ extension SpeciesViewModel {
 }
 
 extension SpeciesViewModel {
-    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Bird] {
+    func filteredBirds(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
         let sortedBirdsList = sortedBirds(by: sortOption)
         
         if searchText.isEmpty {
@@ -220,7 +220,7 @@ extension SpeciesViewModel {
         }
     }
     
-    private func applyFilter(to birds: [Bird], with filterOption: FilterOption) -> [Bird] {
+    private func applyFilter(to birds: [Species], with filterOption: FilterOption) -> [Species] {
         switch filterOption {
         case .all:
             return birds
@@ -229,7 +229,7 @@ extension SpeciesViewModel {
         }
     }
     
-    private func applyRarityFilter(to birds: [Bird], with filterOption: Int) -> [Bird] {
+    private func applyRarityFilter(to birds: [Species], with filterOption: Int) -> [Species] {
         switch filterOption {
         case 0:
             return birds
@@ -246,7 +246,7 @@ extension SpeciesViewModel {
         }
     }
     
-    private func applyBookmarkFilter(to birds: [Bird], isBookmarked: Bool, additionalIntArray: [Int]) -> [Bird] {
+    private func applyBookmarkFilter(to birds: [Species], isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
         if isBookmarked {
             return birds.filter { additionalIntArray.contains($0.id) }
         } else {
