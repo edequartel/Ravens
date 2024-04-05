@@ -15,8 +15,6 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var scale: CGFloat = 1.0
-//    @State private var lastScale: CGFloat = 1.0
     
     @State private var limit = 100
     @State private var offset = 0
@@ -32,11 +30,42 @@ struct ObservationsLocationView: View {
                     Text("Obs")
                     Spacer()
                     Text("Area")
+//                    Text("\(viewModel.locations.)")
                 }
                 Spacer()
                 Text(String(locationId))
 //                Text(locationStr)
                 
+
+            }
+            .padding()
+            
+            List {
+                if let results =  viewModel.observationsSpecies?.results {
+                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
+                        result in
+                        
+
+                        ObsView(obs: result, showLocation: false)
+                    }
+                    .font(.footnote)
+                }
+            }
+        }
+        .onAppear {
+            viewModel.fetchData(locationId: locationId, limit: limit, offset: offset, completion: { print("fetchData ObservationsLocationViewc completed") })
+        }
+    }
+}
+
+struct ObservationsLocationView_Previews: PreviewProvider {
+    static var previews: some View {
+        ObservationsUserView()
+            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+            .environmentObject(Settings())
+    }
+}
+
 //                Button {
 //                    if let maxOffset = viewModel.observationsSpecies?.count {
 //                        offset = min(offset + 100, maxOffset)
@@ -58,35 +87,3 @@ struct ObservationsLocationView: View {
 //                }
 //
 //                Text("\(offset)")
-            }
-            .padding()
-            
-            List {
-                if let results =  viewModel.observationsSpecies?.results {
-                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
-                        result in
-                        
-                        
-                        
-                        ObsView(obsID: result.id ?? 0, observationSpecies: result, showUsername: true)
-                        
-                        
-                        
-                    }
-                    .font(.footnote)
-                }
-            }
-        }
-        .onAppear {
-            viewModel.fetchData(locationId: locationId, limit: limit, offset: offset, completion: { print("fetchData ObservationsLocationViewc completed") })
-        }
-    }
-}
-
-struct ObservationsLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ObservationsUserView()
-            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
-            .environmentObject(Settings())
-    }
-}

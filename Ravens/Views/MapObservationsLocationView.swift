@@ -37,7 +37,7 @@ struct MapObservationsLocationView: View {
         .region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
             )
         )
     
@@ -48,8 +48,6 @@ struct MapObservationsLocationView: View {
             set: { self.cameraPosition = $0 }
         )
     }
-    
-
     
     var body: some View {
         VStack {

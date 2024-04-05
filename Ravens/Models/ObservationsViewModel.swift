@@ -101,7 +101,7 @@ class ObservationsViewModel: ObservableObject {
                     self.observations = observations
                     self.getLocations()
                     self.getSpan()
-                    self.log.error("observations locations count \(self.locations.count)")
+                    self.log.info("observations locations count \(self.locations.count)")
                     completion()
                 }
             case .failure(let error):

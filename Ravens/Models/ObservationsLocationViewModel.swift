@@ -75,7 +75,7 @@ class ObservationsLocationViewModel: ObservableObject {
     
 
     func fetchData(locationId: Int, limit: Int, offset: Int, completion: @escaping () -> Void) {
-        log.error("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
+        log.info("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
         
@@ -94,8 +94,8 @@ class ObservationsLocationViewModel: ObservableObject {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.error("URL \(url)")
-        log.error("headers \(headers)")
+        log.info("URL \(url)")
+//        log.error("headers \(headers)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

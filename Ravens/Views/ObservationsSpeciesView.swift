@@ -46,7 +46,7 @@ struct ObservationsSpeciesView: View {
                         
                         
                         
-                        ObsView(obsID: result.id ?? 0, observationSpecies: result, showUsername: true) //<< inject the result
+                        ObsView(obs: result) 
                             .font(.footnote)
                             .onAppear {
                                 if index == sortedResults.count - 1 {

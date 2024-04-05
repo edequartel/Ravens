@@ -34,6 +34,16 @@
         }
       }
     },
+    "%@ %@ -  %lldx" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ -  %3$lldx"
+          }
+        }
+      }
+    },
     "%@ %@, %lld" : {
       "localizations" : {
         "en" : {
@@ -93,6 +103,9 @@
           }
         }
       }
+    },
+    "%lld not found" : {
+
     },
     "%lld/%lldx" : {
       "localizations" : {
