@@ -32,6 +32,8 @@ struct ObservationSpecies: Codable, Identifiable {
     var substrate: Int?
     var related_species: Int = 0
     var obscurity: Int = 0
+    var has_photo: Bool = true
+    var has_sound: Bool = true
     var counting_method: Int?
     var embargo_date: String
     var uuid: String?
