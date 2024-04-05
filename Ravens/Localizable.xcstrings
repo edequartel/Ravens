@@ -392,7 +392,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalide URK"
+            "value" : "Invalide URL"
           }
         }
       }
