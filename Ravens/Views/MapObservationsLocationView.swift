@@ -182,11 +182,11 @@ struct MapObservationsLocationView: View {
                     //get the location
                     if settings.isFirstAppear {
                         if let location = self.locationManager.location {
-                            print("get the location at onAppear in MapObservationLocationView")
+                            log.info("get the location at onAppear in MapObservationLocationView")
                             circlePos = location.coordinate
                             settings.currentLocation = location
                         } else {
-                            log.info("Location is not available yet")
+                            log.error("Location is not available yet")
                             // Handle the case when location is not available
                         }
                     }

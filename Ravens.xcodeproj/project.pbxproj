@@ -291,7 +291,6 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */,
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,
@@ -301,7 +300,6 @@
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
-				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
@@ -337,6 +335,8 @@
 				47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */,
 				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
 				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
+				47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */,
+				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 			);
 			path = NotUsed;
 			sourceTree = "<group>";

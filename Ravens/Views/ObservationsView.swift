@@ -10,10 +10,8 @@ import SwiftUI
 
 struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
     @Binding var isShowing: Bool
     
     var body: some View {
@@ -32,25 +30,8 @@ struct ObservationsView: View {
                     if let results = observationsViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
-                            
                             ObsView(obs: result, showUsername: false)
-                            
-//                            if result.has_photo {
-//                                Image(systemName: "photo")
-//                                    .resizable()
-//                                    .frame(width: 100, height: 100)
-//                                    .padding(16)
-//                            }
-//                            
-//                            if result.has_sound {
-//                                Image(systemName: "sound")
-//                                    .resizable()
-//                                    .frame(width: 100, height: 100)
-//                                    .padding(16)
-//                            }
-                            
                         }
-                        
                     } else {
                         Text("nobsavaliable")
                     }

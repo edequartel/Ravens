@@ -102,7 +102,7 @@ struct MapObservationsSpeciesView: View {
                         
                         Button(action: {
                             settings.selectedDate = Date()
-                            print("Date updated to \(settings.selectedDate)")
+                            log.info("Date updated to \(settings.selectedDate)")
                             observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "square.fill")
