@@ -120,6 +120,58 @@ struct MapObservationsLocationView: View {
                             .frame(height: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            
+                            //
+//                            HStack {
+//                                Spacer()
+//                                Button(action: {
+//                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+//
+//                                        settings.selectedDate = min(newDate, Date())
+//                                    }
+//                                    // Debugging or additional actions
+////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
+//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+//                                        log.info(observationsLocationViewModel.span)
+//                                    } )
+//                                    
+//                                    
+//                                }) {
+//                                    Image(systemName: "backward.fill")
+//                                }
+//                                
+////                                Button(action: {
+////                                    // Calculate the potential new date by adding days to the selected date
+////                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+////                                        // Ensure the new date does not go beyond today
+////                                        settings.selectedDate = min(newDate, Date())
+////                                    }
+////                                    // Debugging or additional actions
+////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+////                                }) {
+////                                    Image(systemName: "forward.fill")
+////                                }
+////                                
+////                                Button(action: {
+////                                    settings.selectedDate = Date()
+////                                    log.info("Date updated to \(settings.selectedDate)")
+////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+////                                }) {
+////                                    Image(systemName: "square.fill")
+////                                }
+//                            }
+//                            .padding(5)
+//                            .frame(maxHeight: 30)
+//                            .foregroundColor(.obsGreenFlower)
+//                            .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            
+                            
+                            
+                            //
+                            
                         }
                     }
 

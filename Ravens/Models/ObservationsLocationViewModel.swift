@@ -88,13 +88,16 @@ class ObservationsLocationViewModel: ObservableObject {
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
+        print("date after \(date_after)")
+        print("date before \(date_before)")
+        
         
         var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
         if !settings.infinity {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.error("ObservationsLocationViewModel \(url)")
+        log.error(">>> ObservationsLocationViewModel \(url)")
 //        log.error("headers \(headers)")
 
         AF.request(url, headers: headers).responseString { response in

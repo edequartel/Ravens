@@ -110,14 +110,15 @@ struct MapObservationsSpeciesView: View {
                     }
                     .padding(5)
                     .frame(maxHeight: 30)
+                    
+                    
+                    
                 }
                 .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
 
-            
-            
             
             .mapStyle(settings.mapStyle)
             .mapControls() {
@@ -143,6 +144,8 @@ struct MapObservationsSpeciesView: View {
         return formatter
     }
 }
+
+
 
 struct MapObservationSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
