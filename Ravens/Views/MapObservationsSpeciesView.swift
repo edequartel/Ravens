@@ -111,12 +111,11 @@ struct MapObservationsSpeciesView: View {
                     .padding(5)
                     .frame(maxHeight: 30)
                 }
-                //                .padding(5)
                 .font(.headline)
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
-            //            .frame(maxHeight: 80)
+
             
             
             

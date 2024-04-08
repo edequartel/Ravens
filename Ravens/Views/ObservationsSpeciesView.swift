@@ -21,6 +21,7 @@ struct ObservationsSpeciesView: View {
     var speciesName: String
     
     @State private var isSheetPresented = false
+    @State private var endOfListReached = false
     
     var body: some View {
         VStack {
@@ -37,26 +38,26 @@ struct ObservationsSpeciesView: View {
             .bold()
             .buttonStyle(.bordered)
             .foregroundColor(.obsGreenEagle)
+            
+            if endOfListReached {
+                EndOfListObsView()
+            }
 
             List {
-//            ScrollView {
                 if let results = viewModel.observationsSpecies?.results {
                     let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                     ForEach(sortedResults.indices, id: \.self) { index in
                         let result = sortedResults[index]
                         
-                        
-                        
                         ObsView(obs: result) 
                             .onAppear {
                                 if index == sortedResults.count - 1 {
-                                    print("End of list reached")
+                                    endOfListReached = true
+                                    
                                     // Perform any action you want when the end of the list is reached here
                                     //viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days) <<< deze wijzige met 0 and 100
                                 }
                             }
-                        
-                        
                     }
                 }
             }

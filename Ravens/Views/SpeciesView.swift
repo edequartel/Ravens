@@ -60,7 +60,7 @@ struct SpeciesView: View {
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
                                         if isNumberInBookMarks(number: species.id) {
-                                            Image(systemName: "bookmark")
+                                            Image(systemName: "star.fill")
                                         }
                                     }
                                     HStack {
@@ -138,7 +138,7 @@ struct SpeciesView: View {
                     Button(action: {
                         settings.isBookMarkVisible.toggle()
                     }) {
-                        Image(systemName: settings.isBookMarkVisible ? "bookmark" : "bookmark.slash")
+                        Image(systemName: settings.isBookMarkVisible ? "star.fill" : "star")
                             .foregroundColor(.blue)
                     }
                 }

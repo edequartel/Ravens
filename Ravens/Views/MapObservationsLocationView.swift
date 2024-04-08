@@ -102,19 +102,24 @@ struct MapObservationsLocationView: View {
                     
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0)
-                            
+//                            HStack {
+                                SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0)
+//                            }
+//                            .padding(5)
+//                            .frame(maxHeight: 30)
                             
                             HStack {
                                 Spacer()
                                 let text = locationIdViewModel.locations.count > 0 ? "\(locationIdViewModel.locations[0].name)" : "Default Name"
                                 Text(text)
+                                    .frame(height: 30)
                             }
-                            .padding(5)
+//                            .padding(5)
                             .font(.headline)
+
+                            .frame(height: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
-                            .frame(height: 20)
                         }
                     }
 

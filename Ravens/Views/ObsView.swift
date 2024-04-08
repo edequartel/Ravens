@@ -35,7 +35,7 @@ struct ObsView: View {
                 }
                 
                 if obs.has_photo ?? false {
-                    Image(systemName: "audio") //for test
+                    Image(systemName: "waveform") //for test
                 }
                 
                 Text("\(obs.species_detail.name)")
