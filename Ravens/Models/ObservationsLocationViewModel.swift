@@ -88,23 +88,28 @@ class ObservationsLocationViewModel: ObservableObject {
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
+        print("date after \(date_after)")
+        print("date before \(date_before)")
+        
         
         var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
         if !settings.infinity {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.error("ObservationsLocationViewModel \(url)")
+        log.error(">>> ObservationsLocationViewModel \(url)")
 //        log.error("headers \(headers)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
-                // Now you can convert the stringResponse to Data and decode it
-                if let data = stringResponse.data(using: .utf8) {
+                // Convert the stringResponse to Data using the original encoding and decode it
+                if let data = stringResponse.data(using: .isoLatin1),
+                   let utf8String = String(data: data, encoding: .isoLatin1),
+                   let utf8Data = utf8String.data(using: .utf8) {
                     do {
                         let decoder = JSONDecoder()
-                        let observationsSpecies = try decoder.decode(Observations.self, from: data)
+                        let observationsSpecies = try decoder.decode(Observations.self, from: utf8Data)
 
                         DispatchQueue.main.async {
                             self.observations = Observations(results: observationsSpecies.results)
@@ -121,6 +126,30 @@ class ObservationsLocationViewModel: ObservableObject {
                 self.log.error("Error ObservationsLocationViewModel: \(error)")
             }
         }
+//        AF.request(url, headers: headers).responseString { response in
+//            switch response.result {
+//            case .success(let stringResponse):
+//                // Now you can convert the stringResponse to Data and decode it
+//                if let data = stringResponse.data(using: .utf8) {
+//                    do {
+//                        let decoder = JSONDecoder()
+//                        let observationsSpecies = try decoder.decode(Observations.self, from: data)
+//
+//                        DispatchQueue.main.async {
+//                            self.observations = Observations(results: observationsSpecies.results)
+//                            self.getLocations()
+//                            self.getSpan()
+//                            completion()
+//                        }
+//                    } catch {
+//                        self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
+//                        self.log.error("\(url)")
+//                    }
+//                }
+//            case .failure(let error):
+//                self.log.error("Error ObservationsLocationViewModel: \(error)")
+//            }
+//        }
     }
 }
 

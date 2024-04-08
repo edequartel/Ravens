@@ -31,11 +31,11 @@ struct ObsView: View {
                     .foregroundColor(Color(myColor(value: obs.rarity)))
                 
                 if obs.has_sound ?? false { //for test
-                    Image(systemName: "sound")
+                    Image(systemName: "waveform")
                 }
                 
                 if obs.has_photo ?? false {
-                    Image(systemName: "waveform") //for test
+                    Image(systemName: "photo") //for test
                 }
                 
                 Text("\(obs.species_detail.name)")

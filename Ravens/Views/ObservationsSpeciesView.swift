@@ -65,11 +65,11 @@ struct ObservationsSpeciesView: View {
         .sheet(isPresented: $isSheetPresented) {
                     SpeciesDetailsView(speciesID: speciesID)
                 }
-        .onAppear {
-            log.verbose("speciesID \(speciesID)")
-            viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
-            )
-        }
+//        .onAppear {
+//            log.verbose("speciesID \(speciesID)")
+////            viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
+////            )
+//        }
     }
 }
 
