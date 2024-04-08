@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftAudioEx
+import SwiftyBeaver
 
 class Player: ObservableObject {
+    let log = SwiftyBeaver.self
     let queuedAudioPlayer: QueuedAudioPlayer
     
     @Published var status: AudioPlayerState = .idle
@@ -20,7 +22,7 @@ class Player: ObservableObject {
     
     func handleAudioPlayerStateChange(state: AudioPlayerState) {
         // Handle the event
-        print("\(state)")
+        log.info("\(state)")
         DispatchQueue.main.async {
             self.status = state
         }
@@ -32,28 +34,28 @@ class Player: ObservableObject {
         for audioUrl in audioUrls {
             let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
             queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
-            print("playing \(audioUrl)")
+            log.info("playing \(audioUrl)")
         }
     }
     
     func pause() {
         queuedAudioPlayer.pause()
-        print("paused")
+        log.info("paused")
     }
     
     func stop() {
         queuedAudioPlayer.stop()
-        print("stopped")
+        log.info("stopped")
     }
     
     func previous() {
         queuedAudioPlayer.previous()
-        print("previous")
+        log.info("previous")
     }
     
     func next() {
         queuedAudioPlayer.next()
-        print("next")
+        log.info("next")
     }
 }
 

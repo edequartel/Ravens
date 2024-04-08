@@ -87,6 +87,7 @@
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
 		47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6F4B32B91AA05008DDFBC /* Popovers */; };
 		47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */; };
+		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
 		47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */; };
@@ -165,6 +166,7 @@
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
 		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListObsView.swift; sourceTree = "<group>"; };
 		47DB898E2B79FB4A0093C1ED /* krommerijn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = krommerijn.json; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsView.swift; sourceTree = "<group>"; };
@@ -291,7 +293,6 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */,
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,
@@ -301,7 +302,6 @@
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
-				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
@@ -316,6 +316,7 @@
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD1A2B95C87E002F52BE /* UserView.swift */,
 				476FA8A52B9B031B00665613 /* SoundsView.swift */,
+				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,6 +338,8 @@
 				47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */,
 				474C40562B4BFE950038B3A5 /* RegionListView.swift */,
 				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
+				47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */,
+				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
 			);
 			path = NotUsed;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
+				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,

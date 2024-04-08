@@ -79,7 +79,7 @@ struct MapObservationsUserView: View {
                         
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {
-                                print("maxOffset: \(maxOffset)")
+                                log.info("maxOffset: \(maxOffset)")
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
                                 observationsUserViewModel.fetchData(limit: limit, offset: offset)

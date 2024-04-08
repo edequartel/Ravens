@@ -10,10 +10,8 @@ import SwiftUI
 
 struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
     @Binding var isShowing: Bool
     
     var body: some View {
@@ -32,23 +30,14 @@ struct ObservationsView: View {
                     if let results = observationsViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
-                            
                             ObsView(obs: result, showUsername: false)
                         }
-                        
                     } else {
                         Text("nobsavaliable")
                     }
                 }
             }
             Spacer()
-        }
-
-        .onAppear(){
-            // Get the current locations of all the observations //<<=
-            observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
-            completion: {print("fetchData observationsViewModel completed")} )
         }
     }
 }

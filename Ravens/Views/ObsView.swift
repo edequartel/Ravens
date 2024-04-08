@@ -13,11 +13,14 @@ import AVFoundation
 
 struct ObsView: View {
     let log = SwiftyBeaver.self
+    
+    @StateObject var obsViewModel = ObsViewModel(settings: Settings()) //??
+    @EnvironmentObject var fetchRequestManager: FetchRequestManager
 
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     
-    var obs: Observation
+    @State var obs: Observation
     var showUsername: Bool = true
     var showLocation: Bool = true
     
@@ -26,6 +29,14 @@ struct ObsView: View {
             HStack {
                 Image(systemName: "circle.fill")
                     .foregroundColor(Color(myColor(value: obs.rarity)))
+                
+                if obs.has_sound ?? false { //for test
+                    Image(systemName: "sound")
+                }
+                
+                if obs.has_photo ?? false {
+                    Image(systemName: "waveform") //for test
+                }
                 
                 Text("\(obs.species_detail.name)")
                     .bold()
@@ -86,6 +97,14 @@ struct ObsView: View {
                     PlayerControlsView(audio: obs.sounds ?? [] )
                     Spacer()
                 }
+            }
+        }
+        .onAppear() {
+            if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
+                fetchRequestManager.fetchDataAfterDelay(for: obs.id ?? 0, by: obsViewModel, completion: {
+                    obs.photos = obsViewModel.observation?.photos
+                    obs.sounds = obsViewModel.observation?.sounds
+                })
             }
         }
     }

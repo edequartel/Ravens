@@ -89,7 +89,9 @@ struct MapObservationView: View {
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
                             observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude,
-                                                            completion: {print("fetchData observationsViewModel xxx completed")} )
+                                                            completion: {
+                                log.info("fetchData observationsViewModel completed")
+                            } )
                             
                             // Create a new CLLocation instance with the updated coordinates
                             let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -122,18 +124,19 @@ struct MapObservationView: View {
                 if settings.isFirstAppearObsView {
                     
                     if let location = self.locationManager.location {
-                        print("get the location at onAppear in MapObservationView")
+                        log.info("get the location at onAppear in MapObservationView")
                         circlePos = location.coordinate
                         settings.currentLocation = location
                     } else {
-                        print("Location is not available yet")
+                        log.error("Location is not available yet")
                         // Handle the case when location is not available
                     }
                 }
                 
                 //getdata
                 observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0,
-                                                completion: {print("fetchData observationsViewModel ONAPPEAR completed")
+                                                completion: {
+                    log.info("fetchData observationsViewModel ONAPPEAR completed")
                     
                     // Initialize cameraPosition with user's current location
                     if settings.isFirstAppearObsView {
