@@ -21,12 +21,16 @@ struct ObservationsLocationView: View {
     
     var locationId: Int
     var locationStr: String
-    
+
     @Binding var isShowing: Bool
     
     var body: some View {
         VStack {
-            Text("Locations")
+            
+            Text("Location")
+                .padding(16)
+                .bold()
+            
             List {
                 if let results =  viewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
@@ -35,9 +39,6 @@ struct ObservationsLocationView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            viewModel.fetchData(locationId: locationId, limit: limit, offset: offset, completion: { print("fetchData ObservationsLocationViewc completed") })
         }
     }
 }

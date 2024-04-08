@@ -34,6 +34,21 @@ struct ObservationsView: View {
                             result in
                             
                             ObsView(obs: result, showUsername: false)
+                            
+//                            if result.has_photo {
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .frame(width: 100, height: 100)
+//                                    .padding(16)
+//                            }
+//                            
+//                            if result.has_sound {
+//                                Image(systemName: "sound")
+//                                    .resizable()
+//                                    .frame(width: 100, height: 100)
+//                                    .padding(16)
+//                            }
+                            
                         }
                         
                     } else {
@@ -42,13 +57,6 @@ struct ObservationsView: View {
                 }
             }
             Spacer()
-        }
-
-        .onAppear(){
-            // Get the current locations of all the observations //<<=
-            observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                            long: settings.currentLocation?.coordinate.longitude ?? longitude,
-            completion: {print("fetchData observationsViewModel completed")} )
         }
     }
 }

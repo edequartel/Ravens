@@ -92,7 +92,7 @@ class ObservationsViewModel: ObservableObject {
 //            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
 //        }
         
-        log.error(">>> \(url)")
+        log.error("ObservationsViewModel \(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {
