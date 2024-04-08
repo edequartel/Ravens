@@ -110,7 +110,7 @@ struct SettingsView: View {
                         }
                     
                     
-                    if !(settings.infinity) {
+//                    if !(settings.infinity) {
                         Picker("Window", selection: $settings.days) {
                             ForEach(1 ... 14, id: \.self) { day in
                                 HStack() {
@@ -134,7 +134,7 @@ struct SettingsView: View {
 //                                settings.isFirstAppear = true
 //                                settings.isFirstAppearObsView = true
                             }
-                    }
+//                    }
                     
                     
                 }

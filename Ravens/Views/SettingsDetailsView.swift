@@ -14,6 +14,7 @@ struct SettingsDetailsView: View {
     
     var count: Int = 0
     var results: Int = 0
+    var showInfinity: Bool = true
     
     var body: some View {
         HStack {
@@ -28,9 +29,10 @@ struct SettingsDetailsView: View {
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
             Text("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+                .lineLimit(1)
             
-            if settings.infinity {
-                Text("Infinity (Area)")
+            if (settings.infinity && showInfinity) {
+                Image(systemName: "infinity")
             } else {
                 Text("\(settings.days)d")
                 Text("\(settings.selectedDate, formatter: dateFormatter)")

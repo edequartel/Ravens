@@ -1,12 +1,16 @@
 # Remarks development
 
-## 20
+## 21
 - graphs
-
-## 19
 - second language
 - notifications
 - stats
+
+## 20
+- adjustments in lists location, observations
+- adding locations
+
+## 19
 
 ## 18
 + images now cached

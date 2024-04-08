@@ -21,23 +21,17 @@ struct ObservationsLocationView: View {
     
     var locationId: Int
     var locationStr: String
-
+    
     @Binding var isShowing: Bool
     
     var body: some View {
         VStack {
-                HStack {
-                    Text("Obs")
-                    Text(locationStr)
-                }
-            .padding(16)
-            .bold()
-            
+            Text("Locations")
             List {
                 if let results =  viewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                         result in
-                        ObsView(obs: result, showLocation: false)
+                        ObsView(obs: result, showLocation: true)
                     }
                 }
             }

@@ -83,7 +83,7 @@ struct MapObservationView: View {
                     .mapStyle(settings.mapStyle)
                     
                     .safeAreaInset(edge: .bottom) {
-                        SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0 )
+                        SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
                     }
                     
                     .onTapGesture() { position in
