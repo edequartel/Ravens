@@ -9,7 +9,8 @@ import SwiftUI
 
 struct EndOfListObsView: View {
     var body: some View {
-        Text("End Of List")
+        EmptyView()
+//        Text("End Of List")
     }
 }
 
