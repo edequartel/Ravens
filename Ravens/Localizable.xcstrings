@@ -367,6 +367,7 @@
       }
     },
     "Infinity (Location)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
