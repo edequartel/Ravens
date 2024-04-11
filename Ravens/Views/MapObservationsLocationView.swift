@@ -30,9 +30,12 @@ struct MapObservationsLocationView: View {
     @State private var cameraPosition: MapCameraPosition?
     @State private var isSheetObservationsLocationsViewPresented = false
     
+    @State private var limit = 100
+    @State private var offset = 0
+    
     @State private var locationId: Int = 0
     @State private var locationStr: String = "no location"
-
+    
     @State private var circlePos: CLLocationCoordinate2D?
     
     @State private var MapCameraPositiondefault = MapCameraPosition
@@ -102,11 +105,11 @@ struct MapObservationsLocationView: View {
                     
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-//                            HStack {
-                                SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0)
-//                            }
-//                            .padding(5)
-//                            .frame(maxHeight: 30)
+                            //                            HStack {
+                            SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0)
+                            //                            }
+                            //                            .padding(5)
+                            //                            .frame(maxHeight: 30)
                             
                             HStack {
                                 Spacer()
@@ -114,75 +117,117 @@ struct MapObservationsLocationView: View {
                                 Text(text)
                                     .frame(height: 30)
                             }
-//                            .padding(5)
+                            //                            .padding(5)
                             .font(.headline)
-
+                            
                             .frame(height: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
                             
                             
                             //
-                            HStack {
+//                            HStack {
+//                                Spacer()
+//                                Text("days ")
+//                                    .bold()
+//                                Button(action: {
+//                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+//                                        settings.selectedDate = min(newDate, Date())
+//                                    }
+//                                    
+//                                    // Debugging or additional actions
+//                                    //                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+//                                        log.info(observationsLocationViewModel.span)
+//                                    } )
+//                                    
+//                                    
+//                                }) {
+//                                    Image(systemName: "backward.fill")
+//                                }
+//                                
+//                                Button(action: {
+//                                    // Calculate the potential new date by adding days to the selected date
+//                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+//                                        // Ensure the new date does not go beyond today
+//                                        settings.selectedDate = min(newDate, Date())
+//                                    }
+//                                    // Debugging or additional actions
+//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+//                                        log.info(observationsLocationViewModel.span)
+//                                    } )
+//                                    
+//                                    
+//                                    
+//                                }) {
+//                                    Image(systemName: "forward.fill")
+//                                }
+//                                
+//                                Button(action: {
+//                                    settings.selectedDate = Date()
+//                                    log.info("Date updated to \(settings.selectedDate)")
+//                                    
+//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+//                                        log.info(observationsLocationViewModel.span)
+//                                    } )
+//                                }) {
+//                                    Image(systemName: "square.fill")
+//                                }
+//                                
+//                                
+//                            }
+//                            .padding(5)
+//                            .frame(maxHeight: 30)
+//                            .foregroundColor(.obsGreenFlower)
+//                            .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            
+                            
+                            //
+                            HStack{
                                 Spacer()
+                                Text("count ")
+                                    .bold()
                                 Button(action: {
-                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-                                        settings.selectedDate = min(newDate, Date())
+                                    if let maxOffset = observationsLocationViewModel.observations?.count {
+                                        log.info("maxOffset: \(maxOffset)")
+                                        offset = min(offset + 100, maxOffset)
+                                        limit = 100
+                                        //   observationsViewModel.fetchData(limit: limit, offset: offset)
                                     }
-                                    print("==============================>\(settings.selectedDate)")
-                                    
-                                    // Debugging or additional actions
-//                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
-                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                        log.info(observationsLocationViewModel.span)
-                                    } )
-                                    
-                                    
                                 }) {
-                                    Image(systemName: "backward.fill")
+                                    Image(systemName: "minus.rectangle")
+                                    //                                .font(.title)
                                 }
                                 
                                 Button(action: {
-                                    // Calculate the potential new date by adding days to the selected date
-                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-                                        // Ensure the new date does not go beyond today
-                                        settings.selectedDate = min(newDate, Date())
+                                    if offset >= 100 {
+                                        offset = offset - 100
                                     }
-                                    // Debugging or additional actions
-                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                        log.info(observationsLocationViewModel.span)
-                                    } )
-                                    
-                                    
-                                    
+                                    limit = 100
+                                    // observationsViewModel.fetchData(limit: 100, offset: offset)
                                 }) {
-                                    Image(systemName: "forward.fill")
+                                    Image(systemName: "plus.rectangle")
+                                    //                                .font(.title)
                                 }
-                                
-                                Button(action: {
-                                    settings.selectedDate = Date()
-                                    log.info("Date updated to \(settings.selectedDate)")
-                                    
-                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                        log.info(observationsLocationViewModel.span)
-                                    } )
-                                }) {
-                                    Image(systemName: "square.fill")
-                                }
-                                
                                 
                             }
                             .padding(5)
                             .frame(maxHeight: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
-
+                            
+                            //
+                            
                         }
+                        
+                        
+                        
                     }
-
+                    
                     
                     .onTapGesture() { position in
                         
@@ -203,7 +248,7 @@ struct MapObservationsLocationView: View {
                                         polyOverlays = polyOverlaysIn
                                         locationId = location.id
                                         
-//                                        log.error("\(locationIdViewModel.count)")
+                                        //                                        log.error("\(locationIdViewModel.count)")
                                         
                                         //and now er get the observations from the locationId
                                         observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
@@ -239,62 +284,62 @@ struct MapObservationsLocationView: View {
         
         
         .onAppear() {
-        //onappear
+            //onappear
             viewModel.fetchPOIs()
-        
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    
-                    //get the location
-                    if settings.isFirstAppear {
-                        if let location = self.locationManager.location {
-                            log.info("get the location at onAppear in MapObservationLocationView")
-                            circlePos = location.coordinate
-                            settings.currentLocation = location
-                        } else {
-                            log.error("Location is not available yet")
-                            // Handle the case when location is not available
-                        }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                
+                //get the location
+                if settings.isFirstAppear {
+                    if let location = self.locationManager.location {
+                        log.info("get the location at onAppear in MapObservationLocationView")
+                        circlePos = location.coordinate
+                        settings.currentLocation = location
+                    } else {
+                        log.error("Location is not available yet")
+                        // Handle the case when location is not available
                     }
-
-                    //geoJSON
-                    polyOverlays.removeAll()
-        
-                    locationIdViewModel.fetchLocations(latitude: circlePos?.latitude ?? 0, longitude: circlePos?.longitude ?? 0) { fetchedLocations in
-                        // Use fetchedLocations here //actually it is one location
-                        for location in fetchedLocations {
-                            geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
-                                polyOverlays = polyOverlaysIn
-                                locationId = location.id
-                                locationStr = location.name // the first is the same
+                }
+                
+                //geoJSON
+                polyOverlays.removeAll()
+                
+                locationIdViewModel.fetchLocations(latitude: circlePos?.latitude ?? 0, longitude: circlePos?.longitude ?? 0) { fetchedLocations in
+                    // Use fetchedLocations here //actually it is one location
+                    for location in fetchedLocations {
+                        geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
+                            polyOverlays = polyOverlaysIn
+                            locationId = location.id
+                            locationStr = location.name // the first is the same
+                            
+                            observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                log.info(observationsLocationViewModel.span)
+                                //                                    log.error(observationsLocationViewModel.observations?.results.count ?? 0) //??
                                 
-                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, settings: settings, completion: {
-                                    log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-                                    log.info(observationsLocationViewModel.span)
-//                                    log.error(observationsLocationViewModel.observations?.results.count ?? 0) //??
-                                    
-                                    if settings.isFirstAppear {
-                                        cameraPosition = MapCameraPosition
-                                            .region(
-                                                MKCoordinateRegion(
-                                                    center: CLLocationCoordinate2D(
-                                                        latitude: geoJSONViewModel.span.latitude,
-                                                        longitude: geoJSONViewModel.span.longitude),
-                                                    span: MKCoordinateSpan(
-                                                        latitudeDelta: geoJSONViewModel.span.latitudeDelta,
-                                                        longitudeDelta: geoJSONViewModel.span.longitudeDelta)
-                                                )
+                                if settings.isFirstAppear {
+                                    cameraPosition = MapCameraPosition
+                                        .region(
+                                            MKCoordinateRegion(
+                                                center: CLLocationCoordinate2D(
+                                                    latitude: geoJSONViewModel.span.latitude,
+                                                    longitude: geoJSONViewModel.span.longitude),
+                                                span: MKCoordinateSpan(
+                                                    latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+                                                    longitudeDelta: geoJSONViewModel.span.longitudeDelta)
                                             )
-                                        settings.isFirstAppear = false
-                                    }
-                                    
+                                        )
+                                    settings.isFirstAppear = false
                                 }
-                                )
+                                
                             }
+                            )
                         }
                     }
-                    
-                    log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                    speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+                }
+                
+                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
         }
     }

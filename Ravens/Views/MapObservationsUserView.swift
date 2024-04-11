@@ -76,6 +76,8 @@ struct MapObservationsUserView: View {
                     
                     HStack {
                         Spacer()
+                        Text("count ")
+                            .bold()
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {
                                 log.info("maxOffset: \(maxOffset)")
@@ -87,7 +89,6 @@ struct MapObservationsUserView: View {
                             Image(systemName: "minus.rectangle")
                             //                                .font(.title)
                         }
-                        Text(" count ")
                         Button(action: {
                             if offset >= 100 {
                                 offset = offset - 100

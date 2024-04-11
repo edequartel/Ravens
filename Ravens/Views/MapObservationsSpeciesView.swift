@@ -14,8 +14,10 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
+
     
-//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var limit = 100
+    @State private var offset = 0
     
     @State private var isSheetObservationsViewPresented = false
     
@@ -77,13 +79,15 @@ struct MapObservationsSpeciesView: View {
                     
                     HStack {
                         Spacer()
+                        Text("days")
+                            .bold()
                         Button(action: {
                             if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                                 // Limiting the date to not go beyond today
                                 settings.selectedDate = min(newDate, Date())
                             }
                             // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0,date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "backward.fill")
                         }
@@ -95,7 +99,7 @@ struct MapObservationsSpeciesView: View {
                                 settings.selectedDate = min(newDate, Date())
                             }
                             // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "forward.fill")
                         }
@@ -103,7 +107,7 @@ struct MapObservationsSpeciesView: View {
                         Button(action: {
                             settings.selectedDate = Date()
                             log.info("Date updated to \(settings.selectedDate)")
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "square.fill")
                         }
@@ -111,6 +115,39 @@ struct MapObservationsSpeciesView: View {
                     .padding(5)
                     .frame(maxHeight: 30)
                     
+                    //
+//                    HStack{
+//                        Spacer()
+//                        Text("count ")
+//                            .bold()
+//                        Button(action: { print("xxx")
+//                            if let maxOffset = observationsSpeciesViewModel.observationsSpecies?.count {
+//                                log.info("maxOffset: \(maxOffset)")
+//                                offset = min(offset + 100, maxOffset)
+//                                limit = 100
+//                                observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: limit, offset: offset, date: settings.selectedDate, days: settings.days)
+//                            }
+//                        }) {
+//                            Image(systemName: "minus.rectangle")
+//                        }
+//                        
+//                        Button(action: {
+//                            if offset >= 100 {
+//                                offset = offset - 100
+//                            }
+//                            limit = 100
+//                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: limit, offset: offset, date: settings.selectedDate, days: settings.days)
+//                        }) {
+//                            Image(systemName: "plus.rectangle")
+//                        }
+//                        
+////                    }
+//                    .padding(5)
+//                    .frame(maxHeight: 30)
+//                    .foregroundColor(.obsGreenFlower)
+//                    .background(Color.obsGreenEagle.opacity(0.5))
+                    
+                    //
                     
                     
                 }
@@ -133,7 +170,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days
             )
         }
     }

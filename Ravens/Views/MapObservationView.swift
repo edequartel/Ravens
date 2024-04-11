@@ -10,7 +10,7 @@ import SwiftyBeaver
 
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-
+    
     @ObservedObject var viewModel = POIViewModel()
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
@@ -19,6 +19,10 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @ObservedObject var locationManager = LocationManager()
+    
+    @State private var limit = 100
+    @State private var offset = 0
+    
     @State private var cameraPosition: MapCameraPosition?
     @State private var isSheetObservationsViewPresented = false
     @State private var MapCameraPositiondefault = MapCameraPosition
@@ -28,7 +32,7 @@ struct MapObservationView: View {
                 span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
             )
         )
-
+    
     @State private var circlePos: CLLocationCoordinate2D?
     
     // New computed property
@@ -89,11 +93,12 @@ struct MapObservationView: View {
                             //
                             HStack {
                                 Spacer()
+                                Text("days ")
+                                    .bold()
                                 Button(action: {
                                     if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                                         settings.selectedDate = min(newDate, Date())
                                     }
-                                    print("==============================>\(settings.selectedDate)")
                                     
                                     // Debugging or additional actions
                                     observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
@@ -115,9 +120,6 @@ struct MapObservationView: View {
                                     observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
                                         log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
                                     } )
-                                    
-                                    
-                                    
                                 }) {
                                     Image(systemName: "forward.fill")
                                 }
@@ -141,9 +143,44 @@ struct MapObservationView: View {
                             .background(Color.obsGreenEagle.opacity(0.5))
                             
                             //
+                            
+                            
+                            //
+//                            HStack{
+//                                Spacer()
+//                                Text("count ")
+//                                    .bold()
+//                                Button(action: {
+//                                    if let maxOffset = observationsViewModel.observations?.count {
+//                                        log.info("maxOffset: \(maxOffset)")
+//                                        offset = min(offset + 100, maxOffset)
+//                                        limit = 100
+//                                        //   observationsViewModel.fetchData(limit: limit, offset: offset)
+//                                    }
+//                                }) {
+//                                    Image(systemName: "minus.rectangle")
+//                                    //                                .font(.title)
+//                                }
+//
+//                                Button(action: {
+//                                    if offset >= 100 {
+//                                        offset = offset - 100
+//                                    }
+//                                    limit = 100
+//                                    // observationsViewModel.fetchData(limit: 100, offset: offset)
+//                                }) {
+//                                    Image(systemName: "plus.rectangle")
+//                                    //                                .font(.title)
+//                                }
+//                                
+//                            }
+//                            .padding(5)
+//                            .frame(maxHeight: 30)
+//                            .foregroundColor(.obsGreenFlower)
+//                            .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            //
                         }
-
-                        //
                         
                     }
                     
@@ -169,7 +206,7 @@ struct MapObservationView: View {
             
             ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
-
+        
         //
         
         .sheet(isPresented: $isSheetObservationsViewPresented) {
@@ -177,7 +214,7 @@ struct MapObservationView: View {
         }
         //
         
-       .onAppear() {
+        .onAppear() {
             viewModel.fetchPOIs()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -217,11 +254,11 @@ struct MapObservationView: View {
                         
                         settings.isFirstAppearObsView = false
                     }
-
-                } 
+                    
+                }
                 )
                 //
-
+                
                 log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                 speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }
