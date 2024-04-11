@@ -2,42 +2,6 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-class FetchRequestManager: ObservableObject {
-    let log = SwiftyBeaver.self
-    
-    private var currentDelay: Double = 0
-    private var resetDelayTimer: Timer?
-    private let delayIncrement: Double = 0.1 // Time in seconds to wait before each request
-    private let resetDelayTime: TimeInterval = 2.0 // Time in seconds to wait before resetting delay
-
-    
-    func fetchDataAfterDelay(for obsID: Int, by viewModel: ObsViewModel, completion: @escaping () -> Void) {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
-        let decoder = JSONDecoder()
-        
-        if let data = try? Data(contentsOf: fileURL), let loadedObs = try? decoder.decode(Observation.self, from: data) {
-            viewModel.observation = loadedObs
-            log.info("\(obsID) loaded from cache")
-            return
-        } else {
-            // Invalidate existing timer since we're making a new request
-            resetDelayTimer?.invalidate()
-            DispatchQueue.main.asyncAfter(deadline: .now() + currentDelay) {
-                viewModel.fetchData(for: obsID, completion: {
-                    self.log.info("completed FetchRequestManager fetchData")
-                    completion()
-                })
-            }
-            currentDelay += delayIncrement // Increase delay for next request
-            // Reset currentDelay after a specified period without new requests
-            resetDelayTimer = Timer.scheduledTimer(withTimeInterval: resetDelayTime, repeats: false) { [weak self] _ in
-                self?.currentDelay = 0
-            }
-        }
-    }
-}
-
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
