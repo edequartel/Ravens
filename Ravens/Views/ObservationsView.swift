@@ -47,7 +47,7 @@ struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         ObservationsView(isShowing: .constant(false))
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(KeychainViewModel())
             .environmentObject(Settings())
     }

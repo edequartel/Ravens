@@ -101,10 +101,19 @@ struct ObsView: View {
         }
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-                fetchRequestManager.fetchDataAfterDelay(for: obs.id ?? 0, by: obsViewModel, completion: {
+                
+//                fetchRequestManager.fetchDataAfterDelay(for: obs.id ?? 0, by: obsViewModel, completion: {
+//                    print("onAppear OBSView Happens")
+//                    obs.photos = obsViewModel.observation?.photos
+//                    obs.sounds = obsViewModel.observation?.sounds
+//                })                
+                
+                obsViewModel.fetchData(for: obs.id ?? 0, completion: {
+                    print("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
+
             }
         }
     }

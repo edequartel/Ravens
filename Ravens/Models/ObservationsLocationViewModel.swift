@@ -20,13 +20,6 @@ class ObservationsLocationViewModel: ObservableObject {
     
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
-    
-    var settings: Settings
-    init(settings: Settings) {
-        log.info("init ObservationsLocationViewModel")
-        self.settings = settings
-
-    }
 
     func getLocations() {
         locations.removeAll()
@@ -74,7 +67,7 @@ class ObservationsLocationViewModel: ObservableObject {
     }
     
 
-    func fetchData(locationId: Int, limit: Int, offset: Int, completion: @escaping () -> Void) {
+    func fetchData(locationId: Int, limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
         log.info("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
@@ -88,44 +81,43 @@ class ObservationsLocationViewModel: ObservableObject {
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
-        print("date after \(date_after)")
-        print("date before \(date_before)")
-        
+        log.info("date after \(date_after)")
+        log.info("date before \(date_before)")
         
         var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
+
+        
         if !settings.infinity {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.error(">>> ObservationsLocationViewModel \(url)")
-//        log.error("headers \(headers)")
+        log.info("ObservationsLocationViewModel \(url)")
 
-        AF.request(url, headers: headers).responseString { response in
+        AF.request(url, headers: headers).responseData { response in
             switch response.result {
-            case .success(let stringResponse):
-                // Convert the stringResponse to Data using the original encoding and decode it
-                if let data = stringResponse.data(using: .isoLatin1),
-                   let utf8String = String(data: data, encoding: .isoLatin1),
-                   let utf8Data = utf8String.data(using: .utf8) {
-                    do {
-                        let decoder = JSONDecoder()
-                        let observationsSpecies = try decoder.decode(Observations.self, from: utf8Data)
+            case .success(let data):
+                do {
+                    let decoder = JSONDecoder()
+                    let observationsSpecies = try decoder.decode(Observations.self, from: data)
 
-                        DispatchQueue.main.async {
-                            self.observations = Observations(results: observationsSpecies.results)
-                            self.getLocations()
-                            self.getSpan()
-                            completion()
-                        }
-                    } catch {
-                        self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
-                        self.log.error("\(url)")
+                    DispatchQueue.main.async {
+                        self.observations = Observations(results: observationsSpecies.results)
+                        self.getLocations()
+                        self.getSpan()
+                        completion()
                     }
+                } catch {
+                    self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
+                    self.log.error("\(url)")
                 }
             case .failure(let error):
                 self.log.error("Error ObservationsLocationViewModel: \(error)")
             }
         }
+    }
+}
+
+
 //        AF.request(url, headers: headers).responseString { response in
 //            switch response.result {
 //            case .success(let stringResponse):
@@ -150,6 +142,4 @@ class ObservationsLocationViewModel: ObservableObject {
 //                self.log.error("Error ObservationsLocationViewModel: \(error)")
 //            }
 //        }
-    }
-}
 

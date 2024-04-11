@@ -15,7 +15,7 @@ struct ContentView: View {
     
     
     @StateObject private var keyChainviewModel = KeychainViewModel()
-    @StateObject private var observationsViewModel = ObservationsViewModel(settings: Settings())
+    @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
     
     @State private var locationId: Int?
@@ -78,7 +78,7 @@ struct ContentView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         ContentView()
             .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(Settings())
     }

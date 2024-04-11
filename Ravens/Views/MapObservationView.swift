@@ -83,13 +83,73 @@ struct MapObservationView: View {
                     .mapStyle(settings.mapStyle)
                     
                     .safeAreaInset(edge: .bottom) {
-                        SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                        VStack {
+                            SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                            
+                            //
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    print("==============================>\(settings.selectedDate)")
+                                    
+                                    // Debugging or additional actions
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservatiobsData completed")
+                                    } )
+                                    
+                                    
+                                }) {
+                                    Image(systemName: "backward.fill")
+                                }
+                                
+                                Button(action: {
+                                    // Calculate the potential new date by adding days to the selected date
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+                                        // Ensure the new date does not go beyond today
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    // Debugging or additional actions
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
+                                    } )
+                                    
+                                    
+                                    
+                                }) {
+                                    Image(systemName: "forward.fill")
+                                }
+                                
+                                Button(action: {
+                                    settings.selectedDate = Date()
+                                    log.info("Date updated to \(settings.selectedDate)")
+                                    
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
+                                    } )
+                                }) {
+                                    Image(systemName: "square.fill")
+                                }
+                                
+                                
+                            }
+                            .padding(5)
+                            .frame(maxHeight: 30)
+                            .foregroundColor(.obsGreenFlower)
+                            .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            //
+                        }
+
+                        //
+                        
                     }
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
-                            observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude,
-                                                            completion: {
+                            observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude, settings: settings, completion: {
                                 log.info("fetchData observationsViewModel completed")
                             } )
                             
@@ -111,6 +171,7 @@ struct MapObservationView: View {
         }
 
         //
+        
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
@@ -134,8 +195,7 @@ struct MapObservationView: View {
                 }
                 
                 //getdata
-                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0,
-                                                completion: {
+                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
                     log.info("fetchData observationsViewModel ONAPPEAR completed")
                     
                     // Initialize cameraPosition with user's current location
@@ -149,6 +209,12 @@ struct MapObservationView: View {
                                     span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
                                 )
                             )
+                        
+                        
+                        
+                        
+                        
+                        
                         settings.isFirstAppearObsView = false
                     }
 
@@ -177,7 +243,7 @@ struct MapObservationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(KeychainViewModel())
         

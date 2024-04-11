@@ -23,7 +23,6 @@ class ObservationsSpeciesViewModel: ObservableObject {
     init(settings: Settings) {
         log.info("init ObservationsSpeciesViewModel")
         self.settings = settings
-
     }
 
     func getLocations() {

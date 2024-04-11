@@ -71,24 +71,6 @@ class ObsViewModel: ObservableObject {
         
         log.info("\(url) \(headers)")
         
-//        AF.request(url, headers: headers).responseDecodable(of: Observation.self) { response in
-//            switch response.result {
-//            case .success(_):
-//                do {
-//                    let decoder = JSONDecoder()
-//                    
-//                    self.observation = try decoder.decode(Observation.self, from: response.data!)
-//                    
-//                    
-//                    let encoder = JSONEncoder()
-//                    if let encodedData = try? encoder.encode(self.observation) {
-//                        try? encodedData.write(to: fileURL)
-//                    }
-//                    
-//                    completion()
-//                } catch {
-//                    self.log.error("Error ObsViewModel decoding JSON: \(error)")
-//                }
         AF.request(url, headers: headers).responseData { response in
             switch response.result {
             case .success(let data):
@@ -107,7 +89,6 @@ class ObsViewModel: ObservableObject {
                         self.log.error("Error ObsViewModel decoding JSON: \(error)")
                     }
                 }
-//
             case .failure(let error):
                 self.log.error("Error ObsViewModel fetching data: \(url) \(headers) - \(error)")
                 self.log.error("\(String(describing: response.data))")

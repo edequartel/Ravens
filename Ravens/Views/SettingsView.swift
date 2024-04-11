@@ -127,7 +127,7 @@ struct SettingsView: View {
                             .onChange(of: settings.selectedDate) {
                                 // Perform your action when the date changes
                                 observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                                long: settings.currentLocation?.coordinate.longitude ?? longitude,
+                                                                long: settings.currentLocation?.coordinate.longitude ?? longitude, settings: settings,
                                                                 completion:
                                                                     {
                                     log.info("fetchData observationsViewModel completed")
@@ -218,7 +218,7 @@ struct SettingsView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         SettingsView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
     }
 }

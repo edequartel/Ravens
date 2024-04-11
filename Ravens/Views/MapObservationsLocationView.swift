@@ -123,55 +123,63 @@ struct MapObservationsLocationView: View {
                             
                             
                             //
-//                            HStack {
-//                                Spacer()
-//                                Button(action: {
-//                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//
-//                                        settings.selectedDate = min(newDate, Date())
-//                                    }
-//                                    // Debugging or additional actions
-////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
-//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
-//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-//                                        log.info(observationsLocationViewModel.span)
-//                                    } )
-//                                    
-//                                    
-//                                }) {
-//                                    Image(systemName: "backward.fill")
-//                                }
-//                                
-////                                Button(action: {
-////                                    // Calculate the potential new date by adding days to the selected date
-////                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-////                                        // Ensure the new date does not go beyond today
-////                                        settings.selectedDate = min(newDate, Date())
-////                                    }
-////                                    // Debugging or additional actions
-////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
-////                                }) {
-////                                    Image(systemName: "forward.fill")
-////                                }
-////                                
-////                                Button(action: {
-////                                    settings.selectedDate = Date()
-////                                    log.info("Date updated to \(settings.selectedDate)")
-////                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
-////                                }) {
-////                                    Image(systemName: "square.fill")
-////                                }
-//                            }
-//                            .padding(5)
-//                            .frame(maxHeight: 30)
-//                            .foregroundColor(.obsGreenFlower)
-//                            .background(Color.obsGreenEagle.opacity(0.5))
-                            
-                            
-                            
-                            
-                            //
-                            
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    print("==============================>\(settings.selectedDate)")
+                                    
+                                    // Debugging or additional actions
+//                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                    
+                                    
+                                }) {
+                                    Image(systemName: "backward.fill")
+                                }
+                                
+                                Button(action: {
+                                    // Calculate the potential new date by adding days to the selected date
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+                                        // Ensure the new date does not go beyond today
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    // Debugging or additional actions
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                    
+                                    
+                                    
+                                }) {
+                                    Image(systemName: "forward.fill")
+                                }
+                                
+                                Button(action: {
+                                    settings.selectedDate = Date()
+                                    log.info("Date updated to \(settings.selectedDate)")
+                                    
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                }) {
+                                    Image(systemName: "square.fill")
+                                }
+                                
+                                
+                            }
+                            .padding(5)
+                            .frame(maxHeight: 30)
+                            .foregroundColor(.obsGreenFlower)
+                            .background(Color.obsGreenEagle.opacity(0.5))
+
                         }
                     }
 
@@ -198,7 +206,7 @@ struct MapObservationsLocationView: View {
 //                                        log.error("\(locationIdViewModel.count)")
                                         
                                         //and now er get the observations from the locationId
-                                        observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, completion: {
+                                        observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
                                             log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
                                             log.info(observationsLocationViewModel.span)
                                         }
@@ -259,7 +267,7 @@ struct MapObservationsLocationView: View {
                                 locationId = location.id
                                 locationStr = location.name // the first is the same
                                 
-                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, completion: {
+                                observationsLocationViewModel.fetchData(locationId: locationId, limit: 100, offset: 0, settings: settings, completion: {
                                     log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
                                     log.info(observationsLocationViewModel.span)
 //                                    log.error(observationsLocationViewModel.observations?.results.count ?? 0) //??
@@ -322,7 +330,7 @@ struct MapObservationLocationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationsLocationView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(KeychainViewModel())
         

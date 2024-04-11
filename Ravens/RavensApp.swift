@@ -66,7 +66,7 @@ struct RavensApp: App {
                 .environmentObject(UserViewModel())
                 .environmentObject(Settings())
                 .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-                .environmentObject(ObservationsViewModel(settings: Settings()))
+                .environmentObject(ObservationsViewModel())
                 .environmentObject(RegionViewModel(settings: Settings()))
                 .environmentObject(RegionListViewModel(settings: Settings()))
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
@@ -74,7 +74,7 @@ struct RavensApp: App {
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
                 .environmentObject(Player())
                 .environmentObject(fetchRequestManager)
-                .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+                .environmentObject(ObservationsLocationViewModel())
         }
     }
 }

@@ -34,11 +34,11 @@ class ObservationsViewModel: ObservableObject {
 
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.info("init ObservationsViewModel")
-        self.settings = settings
-    }
+//    var settings: Settings
+//    init(settings: Settings) {
+//        log.info("init ObservationsViewModel")
+//        self.settings = settings
+//    }
 
     func getLocations() {
         locations.removeAll()
@@ -79,7 +79,7 @@ class ObservationsViewModel: ObservableObject {
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
     
-    func fetchData(lat: Double, long: Double, completion: @escaping () -> Void) {
+    func fetchData(lat: Double, long: Double, settings: Settings, completion: @escaping () -> Void) {
         log.info("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
