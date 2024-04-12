@@ -74,6 +74,16 @@
         }
       }
     },
+    "%lld + %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld + %2$lld"
+          }
+        }
+      }
+    },
     "%lld m" : {
       "localizations" : {
         "nl" : {
@@ -156,7 +166,15 @@
       }
     },
     "count " : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aantal"
+          }
+        }
+      }
     },
     "Date" : {
       "localizations" : {
@@ -169,7 +187,14 @@
       }
     },
     "days" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagen"
+          }
+        }
+      }
     },
     "Days" : {
       "localizations" : {
@@ -182,7 +207,14 @@
       }
     },
     "days " : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagen"
+          }
+        }
+      }
     },
     "Default Name" : {
       "extractionState" : "stale",

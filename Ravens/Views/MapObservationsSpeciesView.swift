@@ -49,9 +49,6 @@ struct MapObservationsSpeciesView: View {
                                     .fill(location.hasPhoto ? Color.white : Color.clear)
                                     .frame(width: 6, height: 6)
                             )
-                        
-                        
-                        
                     }
                 }
             }
@@ -63,20 +60,10 @@ struct MapObservationsSpeciesView: View {
                         NetworkView()
                         //
                         Spacer()
-                        
-//                        
-                        
                         Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")
                             .foregroundColor(.obsGreenFlower)
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        
-//                        Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0) - offset) - \((observationsSpeciesViewModel.observationsSpecies?.count ?? 0) - offset + limit)")
-//                            .foregroundColor(.obsGreenFlower)
-//                            .lineLimit(1) // Set the maximum number of lines to 1
-//                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        
-                        
                         //
                         Text("\(speciesName)")
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -85,8 +72,6 @@ struct MapObservationsSpeciesView: View {
                         Text("\(settings.days)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
                     }
-                    .padding(5)
-                    .frame(maxHeight: 30)
                     
                     //
                     HStack {
@@ -124,43 +109,10 @@ struct MapObservationsSpeciesView: View {
                             Image(systemName: "square.fill")
                         }
                     }
-                    .padding(5)
                     .frame(maxHeight: 30)
-                    
-                    //
-//                    HStack{
-//                        Spacer()
-//                        Text("count ")
-//                            .bold()
-//                        Button(action: { print("xxx")
-//                            if let maxOffset = observationsSpeciesViewModel.observationsSpecies?.count {
-//                                log.info("maxOffset: \(maxOffset)")
-//                                offset = min(offset + 100, maxOffset)
-//                                limit = 100
-//                                observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: limit, offset: offset, date: settings.selectedDate, days: settings.days)
-//                            }
-//                        }) {
-//                            Image(systemName: "minus.rectangle")
-//                        }
-//                        
-//                        Button(action: {
-//                            if offset >= 100 {
-//                                offset = offset - 100
-//                            }
-//                            limit = 100
-//                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: limit, offset: offset, date: settings.selectedDate, days: settings.days)
-//                        }) {
-//                            Image(systemName: "plus.rectangle")
-//                        }
-//                        
-//                    }
-//                    .padding(5)
-//                    .frame(maxHeight: 30)
-                    //
-                    
-                    
                 }
-                .font(.headline)
+                .padding(5)
+                .bold()
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }

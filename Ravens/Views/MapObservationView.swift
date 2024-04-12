@@ -88,20 +88,7 @@ struct MapObservationView: View {
                     
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            
-                            HStack {
-//                                Text("\((observationsViewModel.locations.count) - offset) - \((observationsViewModel.locations.count) - offset + limit)")
-//                                    .padding(5)
-//                                    .frame(height: 30)
-//                                    .foregroundColor(.obsGreenFlower)
-//                                    .background(Color.obsGreenEagle.opacity(0.5))
-//                                    .lineLimit(1) // Set the maximum number of lines to 1
-//                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                                
-//                                Spacer()
-                                
-                                SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
-                            }
+                            SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
                             
                             //
                             HStack {
@@ -150,50 +137,11 @@ struct MapObservationView: View {
                                 
                                 
                             }
-                            .padding(5)
                             .frame(maxHeight: 30)
+                        }
+                        .padding(5)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
-                            
-                            //
-                            
-                            
-                            //
-//                            HStack{
-//                                Spacer()
-//                                Text("count ")
-//                                    .bold()
-//                                Button(action: {
-//                                    if let maxOffset = observationsViewModel.observations?.count {
-//                                        log.info("maxOffset: \(maxOffset)")
-//                                        offset = min(offset + 100, maxOffset)
-//                                        limit = 100
-//                                        //   observationsViewModel.fetchData(limit: limit, offset: offset)
-//                                    }
-//                                }) {
-//                                    Image(systemName: "minus.rectangle")
-//                                    //                                .font(.title)
-//                                }
-//
-//                                Button(action: {
-//                                    if offset >= 100 {
-//                                        offset = offset - 100
-//                                    }
-//                                    limit = 100
-//                                    // observationsViewModel.fetchData(limit: 100, offset: offset)
-//                                }) {
-//                                    Image(systemName: "plus.rectangle")
-//                                    //                                .font(.title)
-//                                }
-//                                
-//                            }
-//                            .padding(5)
-//                            .frame(maxHeight: 30)
-//                            .foregroundColor(.obsGreenFlower)
-//                            .background(Color.obsGreenEagle.opacity(0.5))
-                            
-                            //
-                        }
                         
                     }
                     
@@ -259,19 +207,11 @@ struct MapObservationView: View {
                                     span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
                                 )
                             )
-                        
-                        
-                        
-                        
-                        
-                        
                         settings.isFirstAppearObsView = false
                     }
-                    
                 }
                 )
-                //
-                
+
                 log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                 speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
             }

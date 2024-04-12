@@ -41,10 +41,7 @@ struct SettingsDetailsView: View {
             
             
         }
-        .padding(5)
-        .font(.headline)
-        .foregroundColor(.obsGreenFlower)
-        .background(Color.obsGreenEagle.opacity(0.5))
+        .bold()
     }
     
     private var dateFormatter: DateFormatter {

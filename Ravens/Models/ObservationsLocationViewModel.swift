@@ -20,6 +20,7 @@ class ObservationsLocationViewModel: ObservableObject {
     
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
+    var count: Int = 0
 
     func getLocations() {
         locations.removeAll()
@@ -101,7 +102,9 @@ class ObservationsLocationViewModel: ObservableObject {
                     let observationsSpecies = try decoder.decode(Observations.self, from: data)
 
                     DispatchQueue.main.async {
-                        self.observations = Observations(results: observationsSpecies.results)
+                        self.observations = Observations(results: observationsSpecies.results) //<<<
+//                        print(">>>> \(observationsSpecies.count ?? 0)") ////<<<
+                        self.count = observationsSpecies.count ?? 0
                         self.getLocations()
                         self.getSpan()
                         completion()

@@ -27,6 +27,9 @@ struct MapObservationsUserView: View {
     @State private var limit = 100
     @State private var offset = 0
     
+    @State private var start = 0
+    @State private var end = 100
+    
     @State private var elevation: MapStyle.Elevation = .realistic
     @State private var isSheetObservationsViewPresented = false
     
@@ -60,8 +63,10 @@ struct MapObservationsUserView: View {
                             .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
                         NetworkView()
                         Spacer()
+                        
                         VStack(alignment: .trailing) {
                             HStack{
+                                Text("\(start) + \(end)")
                                 Spacer()
                                 Text("\((observationsUserViewModel.observations?.count ?? 0) - offset) - \((observationsUserViewModel.observations?.count ?? 0) - offset + limit)")
                                     .foregroundColor(.obsGreenFlower)
@@ -70,13 +75,28 @@ struct MapObservationsUserView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         }
+                        
+//                        VStack {
+//                            HStack {
+//                                Spacer()
+////                                Text("\(start) + \(end)")
+//    //                            let count = (observationsUserViewModel.observations?.count ?? 0) - (offset)
+//    //                            Text("\(count) \(observationsUserViewModel.observations?.count ?? 0) \(offset)")
+//                                if  ( end > 0 ) { // ?? offset) - offset
+//    //
+//                                    Text(observationsUserViewModel.observations?.results[end-1].date ?? "No date")
+//                                    Text("/")
+//                                    Text(observationsUserViewModel.observations?.results[start].date ?? "No date")
+//                                }
+//                            }
+//                    }
+                    
+
                     }
-                    .padding(5)
-                    .frame(maxHeight: 30)
                     
                     HStack {
                         Spacer()
-                        Text("count ")
+                        Text("Days")
                             .bold()
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {
@@ -84,10 +104,13 @@ struct MapObservationsUserView: View {
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
                                 observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                                start = 0
+                                end = observationsUserViewModel.observations?.results.count ?? 0
+                                
                             }
                         }) {
-                            Image(systemName: "minus.rectangle")
-                            //                                .font(.title)
+                            Image(systemName: "backward.fill")
+                                .bold()
                         }
                         Button(action: {
                             if offset >= 100 {
@@ -95,17 +118,28 @@ struct MapObservationsUserView: View {
                             }
                             limit = 100
                             observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                            
+                            start = 0
+                            end = observationsUserViewModel.observations?.results.count ?? 0
                         }) {
-                            Image(systemName: "plus.rectangle")
-                            //                                .font(.title)
+                            Image(systemName: "forward.fill")
+                                .bold()
+                        }
+                        
+                        Button(action: {
+                            offset = 0
+                            limit = 100
+                            
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                        }) {
+                            Image(systemName: "square.fill")
                         }
 
                     }
-                    .padding(5)
                     .frame(maxHeight: 30)
                 }
-                
-                .font(.headline)
+                .padding(5)
+                .bold()
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
@@ -119,7 +153,7 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "77b731")
+            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
         
         .sheet(isPresented: $isSheetObservationsViewPresented) {
