@@ -88,7 +88,20 @@ struct MapObservationView: View {
                     
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                            
+                            HStack {
+//                                Text("\((observationsViewModel.locations.count) - offset) - \((observationsViewModel.locations.count) - offset + limit)")
+//                                    .padding(5)
+//                                    .frame(height: 30)
+//                                    .foregroundColor(.obsGreenFlower)
+//                                    .background(Color.obsGreenEagle.opacity(0.5))
+//                                    .lineLimit(1) // Set the maximum number of lines to 1
+//                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                                
+//                                Spacer()
+                                
+                                SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                            }
                             
                             //
                             HStack {

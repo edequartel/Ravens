@@ -105,11 +105,20 @@ struct MapObservationsLocationView: View {
                     
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            //                            HStack {
-                            SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.count ?? 0)
-                            //                            }
-                            //                            .padding(5)
-                            //                            .frame(maxHeight: 30)
+
+                            HStack{
+//                                Text("\((observationsLocationViewModel.locations.count) - offset) - \((observationsLocationViewModel.locations.count) - offset + limit)")
+//                                    .padding(5)
+//                                    .frame(height: 30)
+//                                    .foregroundColor(.obsGreenFlower)
+//                                    .background(Color.obsGreenEagle.opacity(0.5))
+//                                    .lineLimit(1) // Set the maximum number of lines to 1
+//                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                                Spacer()
+                                SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.observations?.results.count ?? 0) //??
+                            }
+                            
+                            
                             
                             HStack {
                                 Spacer()
@@ -118,107 +127,112 @@ struct MapObservationsLocationView: View {
                                     .frame(height: 30)
                             }
                             //                            .padding(5)
-                            .font(.headline)
+//                            .font(.headline)
+//                            
+//                            .frame(height: 30)
+//                            .foregroundColor(.obsGreenFlower)
+//                            .background(Color.obsGreenEagle.opacity(0.5))
                             
-                            .frame(height: 30)
+                            .padding(5)
+                            .frame(maxHeight: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
                             
                             
                             //
-//                            HStack {
-//                                Spacer()
-//                                Text("days ")
-//                                    .bold()
-//                                Button(action: {
-//                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//                                        settings.selectedDate = min(newDate, Date())
-//                                    }
-//                                    
-//                                    // Debugging or additional actions
-//                                    //                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
-//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-//                                        log.info(observationsLocationViewModel.span)
-//                                    } )
-//                                    
-//                                    
-//                                }) {
-//                                    Image(systemName: "backward.fill")
-//                                }
-//                                
-//                                Button(action: {
-//                                    // Calculate the potential new date by adding days to the selected date
-//                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-//                                        // Ensure the new date does not go beyond today
-//                                        settings.selectedDate = min(newDate, Date())
-//                                    }
-//                                    // Debugging or additional actions
-//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-//                                        log.info(observationsLocationViewModel.span)
-//                                    } )
-//                                    
-//                                    
-//                                    
-//                                }) {
-//                                    Image(systemName: "forward.fill")
-//                                }
-//                                
-//                                Button(action: {
-//                                    settings.selectedDate = Date()
-//                                    log.info("Date updated to \(settings.selectedDate)")
-//                                    
-//                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
-//                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
-//                                        log.info(observationsLocationViewModel.span)
-//                                    } )
-//                                }) {
-//                                    Image(systemName: "square.fill")
-//                                }
-//                                
-//                                
-//                            }
-//                            .padding(5)
-//                            .frame(maxHeight: 30)
-//                            .foregroundColor(.obsGreenFlower)
-//                            .background(Color.obsGreenEagle.opacity(0.5))
-                            
-                            
-                            
-                            //
-                            HStack{
+                            HStack {
                                 Spacer()
-                                Text("count ")
+                                Text("days ")
                                     .bold()
                                 Button(action: {
-                                    if let maxOffset = observationsLocationViewModel.observations?.count {
-                                        log.info("maxOffset: \(maxOffset)")
-                                        offset = min(offset + 100, maxOffset)
-                                        limit = 100
-                                        //   observationsViewModel.fetchData(limit: limit, offset: offset)
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+                                        settings.selectedDate = min(newDate, Date())
                                     }
+                                    
+                                    // Debugging or additional actions
+                                    //                                    locationIdViewModel.fetchData(limit: 100, date: settings.selectedDate, days: settings.days)
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                    
+                                    
                                 }) {
-                                    Image(systemName: "minus.rectangle")
-                                    //                                .font(.title)
+                                    Image(systemName: "backward.fill")
                                 }
                                 
                                 Button(action: {
-                                    if offset >= 100 {
-                                        offset = offset - 100
+                                    // Calculate the potential new date by adding days to the selected date
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+                                        // Ensure the new date does not go beyond today
+                                        settings.selectedDate = min(newDate, Date())
                                     }
-                                    limit = 100
-                                    // observationsViewModel.fetchData(limit: 100, offset: offset)
+                                    // Debugging or additional actions
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                    
+                                    
+                                    
                                 }) {
-                                    Image(systemName: "plus.rectangle")
-                                    //                                .font(.title)
+                                    Image(systemName: "forward.fill")
                                 }
+                                
+                                Button(action: {
+                                    settings.selectedDate = Date()
+                                    log.info("Date updated to \(settings.selectedDate)")
+                                    
+                                    observationsLocationViewModel.fetchData(locationId:  locationId, limit: 100, offset: 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed use delta")
+                                        log.info(observationsLocationViewModel.span)
+                                    } )
+                                }) {
+                                    Image(systemName: "square.fill")
+                                }
+                                
                                 
                             }
                             .padding(5)
                             .frame(maxHeight: 30)
                             .foregroundColor(.obsGreenFlower)
                             .background(Color.obsGreenEagle.opacity(0.5))
+                            
+                            
+                            
+                            //
+//                            HStack{
+//                                Spacer()
+//                                Text("count ")
+//                                    .bold()
+//                                Button(action: {
+//                                    if let maxOffset = observationsLocationViewModel.observations?.count {
+//                                        log.info("maxOffset: \(maxOffset)")
+//                                        offset = min(offset + 100, maxOffset)
+//                                        limit = 100
+//                                        //   observationsViewModel.fetchData(limit: limit, offset: offset)
+//                                    }
+//                                }) {
+//                                    Image(systemName: "minus.rectangle")
+//                                    //                                .font(.title)
+//                                }
+//                                
+//                                Button(action: {
+//                                    if offset >= 100 {
+//                                        offset = offset - 100
+//                                    }
+//                                    limit = 100
+//                                    // observationsViewModel.fetchData(limit: 100, offset: offset)
+//                                }) {
+//                                    Image(systemName: "plus.rectangle")
+//                                    //                                .font(.title)
+//                                }
+//                                
+//                            }
+//                            .padding(5)
+//                            .frame(maxHeight: 30)
+//                            .foregroundColor(.obsGreenFlower)
+//                            .background(Color.obsGreenEagle.opacity(0.5))
                             
                             //
                             

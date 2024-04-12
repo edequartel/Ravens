@@ -63,9 +63,20 @@ struct MapObservationsSpeciesView: View {
                         NetworkView()
                         //
                         Spacer()
-                        Text("\(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
+                        
+//                        
+                        
+                        Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")
+                            .foregroundColor(.obsGreenFlower)
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        
+//                        Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0) - offset) - \((observationsSpeciesViewModel.observationsSpecies?.count ?? 0) - offset + limit)")
+//                            .foregroundColor(.obsGreenFlower)
+//                            .lineLimit(1) // Set the maximum number of lines to 1
+//                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        
+                        
                         //
                         Text("\(speciesName)")
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -77,6 +88,7 @@ struct MapObservationsSpeciesView: View {
                     .padding(5)
                     .frame(maxHeight: 30)
                     
+                    //
                     HStack {
                         Spacer()
                         Text("days")
@@ -141,12 +153,9 @@ struct MapObservationsSpeciesView: View {
 //                            Image(systemName: "plus.rectangle")
 //                        }
 //                        
-////                    }
+//                    }
 //                    .padding(5)
 //                    .frame(maxHeight: 30)
-//                    .foregroundColor(.obsGreenFlower)
-//                    .background(Color.obsGreenEagle.opacity(0.5))
-                    
                     //
                     
                     
