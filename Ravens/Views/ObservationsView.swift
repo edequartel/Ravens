@@ -20,7 +20,11 @@ struct ObservationsView: View {
                 Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                     .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .black)
                 
-                Text("Results \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+//                Text("Results \(observationsViewModel.observations?.results.count ?? 0)/\(observationsViewModel.observations?.count ?? 0)")
+                
+                Text("Radius")
+                    .bold()
+                Text("\(observationsViewModel.observations?.results.count ?? 0)x")
                     .bold()
             }
             .padding(16)

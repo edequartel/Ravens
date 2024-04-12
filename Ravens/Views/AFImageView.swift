@@ -132,9 +132,9 @@ struct AFImageView: View {
             albumChangeRequest.addAssets(enumeration)
         }) { success, error in
             if success {
-                print("Successfully added image to \(album.localizedTitle ?? "")")
+                log.info("Successfully added image to \(album.localizedTitle ?? "")")
             } else {
-                print("Error adding image to album: \(String(describing: error))")
+                log.error("Error adding image to album: \(String(describing: error))")
             }
         }
     }
