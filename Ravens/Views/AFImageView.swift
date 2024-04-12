@@ -9,6 +9,7 @@
 import SwiftUI
 import Alamofire
 import SwiftyBeaver
+import Photos
 
 struct AFImageView: View {
     let log = SwiftyBeaver.self
@@ -61,6 +62,9 @@ struct AFImageView: View {
                     if let uiImage = UIImage(data: data) {
                         self.downloadedImage = Image(uiImage: uiImage)
                         try? data.write(to: path)
+                        
+                        saveImageToAlbum(image: uiImage, albumName: "Ravens")
+
                     }
                 case .failure(let error):
                     log.error("Error downloading image: \(error)")
@@ -74,6 +78,68 @@ struct AFImageView: View {
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
+    
+    func saveImageToPhotos(image: UIImage) {
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized else {
+                print("Need authorization to access the photo library")
+                return
+            }
+            
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        }
+    }
+    
+    func saveImageToAlbum(image: UIImage, albumName: String) {
+        // Request authorization to access photo library
+        PHPhotoLibrary.requestAuthorization { status in
+            if status == .authorized {
+                // Check if album exists
+                var albumPlaceholder: PHObjectPlaceholder?
+                let fetchOptions = PHFetchOptions()
+                fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+                let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+                
+                if let album = collection.firstObject {
+                    // Album exists, save image directly
+                    saveImage(image: image, to: album)
+                } else {
+                    // Album does not exist, create new album
+                    PHPhotoLibrary.shared().performChanges({
+                        let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
+                        albumPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
+                    }) { success, error in
+                        if success {
+                            let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [albumPlaceholder!.localIdentifier], options: nil)
+                            let album = collectionFetchResult.firstObject
+                            saveImage(image: image, to: album!)
+                        } else {
+                            print("Error creating album: \(String(describing: error))")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func saveImage(image: UIImage, to album: PHAssetCollection) {
+        PHPhotoLibrary.shared().performChanges({
+            let assetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+            let assetPlaceholder = assetChangeRequest.placeholderForCreatedAsset
+            guard let albumChangeRequest = PHAssetCollectionChangeRequest(for: album),
+                  let photoPlaceholder = assetPlaceholder else { return }
+            let enumeration: NSArray = [photoPlaceholder]
+            albumChangeRequest.addAssets(enumeration)
+        }) { success, error in
+            if success {
+                print("Successfully added image to \(album.localizedTitle ?? "")")
+            } else {
+                print("Error adding image to album: \(String(describing: error))")
+            }
+        }
+    }
+
+    
 }
 
 struct ImageView_Previews: PreviewProvider {

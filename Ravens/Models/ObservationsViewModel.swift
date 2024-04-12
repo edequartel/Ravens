@@ -33,12 +33,6 @@ class ObservationsViewModel: ObservableObject {
     var locations = [Location]()
 
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
-    
-//    var settings: Settings
-//    init(settings: Settings) {
-//        log.info("init ObservationsViewModel")
-//        self.settings = settings
-//    }
 
     func getLocations() {
         locations.removeAll()

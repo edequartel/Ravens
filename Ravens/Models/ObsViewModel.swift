@@ -33,7 +33,7 @@ class ObsViewModel: ObservableObject {
             "Authorization": "Token " + keyChainViewModel.token
         ]
         
-        log.info("\(url) \(headers)")
+        log.error("\(url) \(headers)")
         
         AF.request(url, headers: headers).responseData { response in
             switch response.result {
@@ -50,7 +50,7 @@ class ObsViewModel: ObservableObject {
                         }
                         completion()
                     } catch {
-                        self.log.error("Error ObsViewModel decoding JSON: \(error)")
+                        self.log.error("Error ObsVichacheewModel decoding JSON: \(error)")
                     }
                 }
             case .failure(let error):
