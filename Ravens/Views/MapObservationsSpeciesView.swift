@@ -14,8 +14,10 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
+
     
-//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var limit = 100
+    @State private var offset = 0
     
     @State private var isSheetObservationsViewPresented = false
     
@@ -47,9 +49,6 @@ struct MapObservationsSpeciesView: View {
                                     .fill(location.hasPhoto ? Color.white : Color.clear)
                                     .frame(width: 6, height: 6)
                             )
-                        
-                        
-                        
                     }
                 }
             }
@@ -61,7 +60,8 @@ struct MapObservationsSpeciesView: View {
                         NetworkView()
                         //
                         Spacer()
-                        Text("\(observationsSpeciesViewModel.observationsSpecies?.count ?? 0)x")
+                        Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")
+                            .foregroundColor(.obsGreenFlower)
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         //
@@ -72,18 +72,19 @@ struct MapObservationsSpeciesView: View {
                         Text("\(settings.days)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
                     }
-                    .padding(5)
-                    .frame(maxHeight: 30)
                     
+                    //
                     HStack {
                         Spacer()
+                        Text("days")
+                            .bold()
                         Button(action: {
                             if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                                 // Limiting the date to not go beyond today
                                 settings.selectedDate = min(newDate, Date())
                             }
                             // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0,date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "backward.fill")
                         }
@@ -95,7 +96,7 @@ struct MapObservationsSpeciesView: View {
                                 settings.selectedDate = min(newDate, Date())
                             }
                             // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "forward.fill")
                         }
@@ -103,18 +104,15 @@ struct MapObservationsSpeciesView: View {
                         Button(action: {
                             settings.selectedDate = Date()
                             log.info("Date updated to \(settings.selectedDate)")
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days)
+                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
                         }) {
                             Image(systemName: "square.fill")
                         }
                     }
-                    .padding(5)
                     .frame(maxHeight: 30)
-                    
-                    
-                    
                 }
-                .font(.headline)
+                .padding(5)
+                .bold()
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
@@ -133,7 +131,7 @@ struct MapObservationsSpeciesView: View {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
         }
         .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days
+            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days
             )
         }
     }

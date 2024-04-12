@@ -24,7 +24,8 @@ struct SettingsDetailsView: View {
             NetworkView()
             Spacer()
 //            Text("\(settings.selectedLanguage)")
-            Text("\(count)/\(results)x")
+//            Text("\(count)/\(results)x")
+            Text("\(results)x")
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
@@ -40,10 +41,7 @@ struct SettingsDetailsView: View {
             
             
         }
-        .padding(5)
-        .font(.headline)
-        .foregroundColor(.obsGreenFlower)
-        .background(Color.obsGreenEagle.opacity(0.5))
+        .bold()
     }
     
     private var dateFormatter: DateFormatter {

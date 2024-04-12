@@ -56,9 +56,6 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-//        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
-//        let date_before = formatCurrentDate(value: settings.selectedDate)
-        
         let url = settings.endPoint() + "user/observations/"+"?limit=\(limit)&offset=\(offset)"  // /?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.error("\(url)")

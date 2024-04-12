@@ -256,7 +256,7 @@ struct SpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         SpeciesView()
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(KeychainViewModel())

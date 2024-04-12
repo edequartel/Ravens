@@ -57,7 +57,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject var fetchRequestManager = FetchRequestManager()
+//    @StateObject var fetchRequestManager = FetchRequestManager()
 
     var body: some Scene {
         WindowGroup {
@@ -66,15 +66,14 @@ struct RavensApp: App {
                 .environmentObject(UserViewModel())
                 .environmentObject(Settings())
                 .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-                .environmentObject(ObservationsViewModel(settings: Settings()))
+                .environmentObject(ObservationsViewModel())
                 .environmentObject(RegionViewModel(settings: Settings()))
                 .environmentObject(RegionListViewModel(settings: Settings()))
                 .environmentObject(SpeciesGroupViewModel(settings: Settings()))
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
                 .environmentObject(Player())
-                .environmentObject(fetchRequestManager)
-                .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+                .environmentObject(ObservationsLocationViewModel())
         }
     }
 }

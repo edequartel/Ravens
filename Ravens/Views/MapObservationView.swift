@@ -10,7 +10,7 @@ import SwiftyBeaver
 
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
-
+    
     @ObservedObject var viewModel = POIViewModel()
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
@@ -19,6 +19,10 @@ struct MapObservationView: View {
     @EnvironmentObject var settings: Settings
     
     @ObservedObject var locationManager = LocationManager()
+    
+    @State private var limit = 100
+    @State private var offset = 0
+    
     @State private var cameraPosition: MapCameraPosition?
     @State private var isSheetObservationsViewPresented = false
     @State private var MapCameraPositiondefault = MapCameraPosition
@@ -28,7 +32,7 @@ struct MapObservationView: View {
                 span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
             )
         )
-
+    
     @State private var circlePos: CLLocationCoordinate2D?
     
     // New computed property
@@ -83,13 +87,67 @@ struct MapObservationView: View {
                     .mapStyle(settings.mapStyle)
                     
                     .safeAreaInset(edge: .bottom) {
-                        SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                        VStack {
+                            SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                            
+                            //
+                            HStack {
+                                Spacer()
+                                Text("days ")
+                                    .bold()
+                                Button(action: {
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    
+                                    // Debugging or additional actions
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservatiobsData completed")
+                                    } )
+                                    
+                                    
+                                }) {
+                                    Image(systemName: "backward.fill")
+                                }
+                                
+                                Button(action: {
+                                    // Calculate the potential new date by adding days to the selected date
+                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+                                        // Ensure the new date does not go beyond today
+                                        settings.selectedDate = min(newDate, Date())
+                                    }
+                                    // Debugging or additional actions
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
+                                    } )
+                                }) {
+                                    Image(systemName: "forward.fill")
+                                }
+                                
+                                Button(action: {
+                                    settings.selectedDate = Date()
+                                    log.info("Date updated to \(settings.selectedDate)")
+                                    
+                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
+                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
+                                    } )
+                                }) {
+                                    Image(systemName: "square.fill")
+                                }
+                                
+                                
+                            }
+                            .frame(maxHeight: 30)
+                        }
+                        .padding(5)
+                            .foregroundColor(.obsGreenFlower)
+                            .background(Color.obsGreenEagle.opacity(0.5))
+                        
                     }
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
-                            observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude,
-                                                            completion: {
+                            observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude, settings: settings, completion: {
                                 log.info("fetchData observationsViewModel completed")
                             } )
                             
@@ -109,14 +167,15 @@ struct MapObservationView: View {
             
             ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
         }
-
+        
         //
+        
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)
         }
         //
         
-       .onAppear() {
+        .onAppear() {
             viewModel.fetchPOIs()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -134,8 +193,7 @@ struct MapObservationView: View {
                 }
                 
                 //getdata
-                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0,
-                                                completion: {
+                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
                     log.info("fetchData observationsViewModel ONAPPEAR completed")
                     
                     // Initialize cameraPosition with user's current location
@@ -151,10 +209,8 @@ struct MapObservationView: View {
                             )
                         settings.isFirstAppearObsView = false
                     }
-
-                } 
+                }
                 )
-                //
 
                 log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
                 speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
@@ -177,7 +233,7 @@ struct MapObservationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel(settings: Settings()))
+            .environmentObject(ObservationsViewModel())
             .environmentObject(SpeciesGroupViewModel(settings: Settings()))
             .environmentObject(KeychainViewModel())
         

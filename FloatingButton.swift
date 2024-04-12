@@ -62,12 +62,13 @@ struct ObservationCircle: View {
             .radius(70)
         
         return VStack {
-            Spacer()
+//            Spacer()
             HStack {
                 menu
                 Spacer()
             }
             .padding()
+            Spacer()
         }
     }
 }

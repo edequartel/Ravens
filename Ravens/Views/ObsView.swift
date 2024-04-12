@@ -14,8 +14,7 @@ import AVFoundation
 struct ObsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings()) //??
-    @EnvironmentObject var fetchRequestManager: FetchRequestManager
+    @StateObject var obsViewModel = ObsViewModel(settings: Settings()) 
 
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -101,10 +100,12 @@ struct ObsView: View {
         }
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-                fetchRequestManager.fetchDataAfterDelay(for: obs.id ?? 0, by: obsViewModel, completion: {
+                obsViewModel.fetchData(for: obs.id ?? 0, completion: {
+                    print("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
+
             }
         }
     }

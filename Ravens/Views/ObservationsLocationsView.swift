@@ -46,7 +46,8 @@ struct ObservationsLocationView: View {
 struct ObservationsLocationView_Previews: PreviewProvider {
     static var previews: some View {
         ObservationsUserView()
-            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+//            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+            .environmentObject(ObservationsLocationViewModel())
             .environmentObject(Settings())
     }
 }
