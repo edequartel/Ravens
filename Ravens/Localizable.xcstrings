@@ -763,6 +763,16 @@
         }
       }
     },
+    "Observations" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemingen"
+          }
+        }
+      }
+    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -876,6 +886,7 @@
       }
     },
     "Results %lld/%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -892,7 +903,14 @@
       }
     },
     "Save photos into album" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sla afbeelding op in album"
+          }
+        }
+      }
     },
     "Scientific name" : {
       "localizations" : {

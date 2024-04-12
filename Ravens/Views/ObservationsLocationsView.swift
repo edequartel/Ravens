@@ -26,10 +26,12 @@ struct ObservationsLocationView: View {
     
     var body: some View {
         VStack {
-            
-            Text("Location")
-                .padding(16)
-                .bold()
+            HStack {
+                Text("Location")
+                    .bold()
+                Text("\(viewModel.observations?.results.count ?? 0)x")
+                    .bold()
+            }
             
             List {
                 if let results =  viewModel.observations?.results {
@@ -40,6 +42,7 @@ struct ObservationsLocationView: View {
                 }
             }
         }
+        .padding(16)
     }
 }
 

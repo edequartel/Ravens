@@ -77,7 +77,7 @@ struct ObservationsUserViewExtra: View {
     var body: some View {
         VStack {
             HStack() {
-                Text("Waarneming"+" ")
+                Text("Observations")
                 UserSimpleView()
             }
             .padding(16)

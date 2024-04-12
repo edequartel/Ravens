@@ -144,6 +144,7 @@ struct MapObservationsLocationView: View {
                                             
                                         }) {
                                             Image(systemName: "backward.fill")
+                                                .background(Color.clear)
                                         }
                                         
                                         
