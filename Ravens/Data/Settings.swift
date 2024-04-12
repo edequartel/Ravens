@@ -30,6 +30,8 @@ class Settings: ObservableObject {
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500
     
+    @AppStorage("savePhotos") var savePhotos: Bool = false
+    
     @AppStorage("poiOn") var poiOn: Bool = true
 //    @AppStorage("zoomActive") var zoomActive: Bool = true
     @AppStorage("infinity") var infinity: Bool = true

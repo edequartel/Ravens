@@ -103,7 +103,7 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                    Toggle("Infinity", isOn: $settings.infinity)
+                    Toggle("Infinity (only location)", isOn: $settings.infinity)
                         .onChange(of: settings.infinity) {
 //                            settings.isFirstAppear = true
 //                            settings.isFirstAppearObsView = true
@@ -147,19 +147,25 @@ struct SettingsView: View {
                     ////                    RegionsView(onChange: {upDate()})
                 }
                 
+                
                 Section(header: Text("App details")) {
-                    Text(version())
-                    Text(locale.description)
-                    HStack {
-                        Text("\(storage)")
-                        Spacer()
-                        Button("Cache Empty") {
-                            deleteAllFiles()
-                            storage = String(calculateLocalStorageSize())
+                    Toggle("Save photos into album", isOn: $settings.savePhotos)
+                    
+                    VStack(alignment: .leading) {
+                        Text(version())
+                        Text(locale.description)
+                        HStack {
+                            Text("\(storage)")
+                            Spacer()
+                            Button("Cache Empty") {
+                                deleteAllFiles()
+                                storage = String(calculateLocalStorageSize())
+                            }
                         }
                     }
+                    .font(.footnote)
                 }
-                .font(.footnote)
+//                .font(.footnote)
                 
             }
             .navigationTitle("Settings")

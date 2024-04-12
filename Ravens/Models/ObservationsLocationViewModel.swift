@@ -92,7 +92,7 @@ class ObservationsLocationViewModel: ObservableObject {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.error("ObservationsLocationViewModel \(url)")
+        log.info("ObservationsLocationViewModel \(url)")
 
         AF.request(url, headers: headers).responseData { response in
             switch response.result {

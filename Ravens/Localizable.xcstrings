@@ -131,7 +131,14 @@
       }
     },
     "Cache Empty" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cache legen"
+          }
+        }
+      }
     },
     "Code %@" : {
       "extractionState" : "stale",
@@ -377,6 +384,7 @@
       }
     },
     "Infinity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -404,6 +412,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oneindig (locatie)"
+          }
+        }
+      }
+    },
+    "Infinity (only location)" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oneindig (alleen locatie)"
           }
         }
       }
@@ -872,6 +890,9 @@
           }
         }
       }
+    },
+    "Save photos into album" : {
+
     },
     "Scientific name" : {
       "localizations" : {
