@@ -13,6 +13,7 @@ struct ObservationsUserView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var viewModel: ObservationsUserViewModel
+    @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var scale: CGFloat = 1.0
@@ -31,7 +32,7 @@ struct ObservationsUserView: View {
                     if let maxOffset = viewModel.observations?.count {
                         offset = min(offset + 100, maxOffset)
                         limit = 100
-                        viewModel.fetchData(limit: limit, offset: offset)
+                        viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
                     }
                 } label: {
                     Image(systemName: "plus.circle")
@@ -42,7 +43,7 @@ struct ObservationsUserView: View {
                         offset = offset - 100
                     }
                     limit = 100
-                    viewModel.fetchData(limit: limit, offset: offset)
+                    viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
                 } label: {
                     Image(systemName: "minus.circle")
                 }
@@ -62,7 +63,7 @@ struct ObservationsUserView: View {
             }
         }
         .onAppear {
-            viewModel.fetchData(limit: limit, offset: offset)
+            viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
         }
     }
 }

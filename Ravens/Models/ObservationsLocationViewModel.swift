@@ -102,8 +102,7 @@ class ObservationsLocationViewModel: ObservableObject {
                     let observationsSpecies = try decoder.decode(Observations.self, from: data)
 
                     DispatchQueue.main.async {
-                        self.observations = Observations(results: observationsSpecies.results) //<<<
-//                        print(">>>> \(observationsSpecies.count ?? 0)") ////<<<
+                        self.observations = Observations(results: observationsSpecies.results)
                         self.count = observationsSpecies.count ?? 0
                         self.getLocations()
                         self.getSpan()

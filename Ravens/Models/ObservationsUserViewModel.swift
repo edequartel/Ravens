@@ -46,7 +46,7 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(limit: Int, offset: Int) {
+    func fetchData(limit: Int, offset: Int, userId: Int) {
         log.error("fetchData ObservationsUserViewModel limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
@@ -56,7 +56,15 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-        let url = settings.endPoint() + "user/observations/"+"?limit=\(limit)&offset=\(offset)"  // /?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
+        ///api/v1/user/<user_id>/observations
+        
+//        let url = settings.endPoint() + "user/observations/"+"?limit=\(limit)&offset=\(offset)"  //
+        
+        let url = settings.endPoint() + "user/151713/observations/"+"?limit=\(limit)&offset=\(offset)"  //
+//        let url = settings.endPoint() + "user/\(userId)/observations/"+"?limit=\(limit)&offset=\(offset)"  // 
+        
+        
+        //?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.error("\(url)")
 

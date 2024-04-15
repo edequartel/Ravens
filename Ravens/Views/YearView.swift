@@ -11,7 +11,7 @@ import Charts
 
 struct YearView: View {
     // An array representing monthly views, you can uncomment and use this hardcoded data or pass it externally.
-    // let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
+    //    var monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     var monthlyViews: [Double]
 
     var body: some View {

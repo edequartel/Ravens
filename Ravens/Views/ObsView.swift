@@ -65,7 +65,7 @@ struct ObsView: View {
                 HStack {
                     Text("\(obs.user_detail?.name ?? String(obs.user))")
                     Spacer()
-//                    Text("\(obs.user_detail?.id ?? 0)")
+                    Text("\(obs.user_detail?.id ?? 0)")
                 }
             }
             

@@ -204,10 +204,9 @@
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				47E2DFBA2BA82A5400040221 /* SimpleMapView.swift */,
-				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
-				477ECF152B98972900D96BE9 /* WeatherView.swift */,
 				47DB898E2B79FB4A0093C1ED /* krommerijn.json */,
 				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
+				477ECF152B98972900D96BE9 /* WeatherView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
@@ -295,6 +294,7 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,

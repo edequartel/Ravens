@@ -13,6 +13,7 @@ struct MapObservationsUserView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
+    @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
 //    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
@@ -76,22 +77,6 @@ struct MapObservationsUserView: View {
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         }
                         
-//                        VStack {
-//                            HStack {
-//                                Spacer()
-////                                Text("\(start) + \(end)")
-//    //                            let count = (observationsUserViewModel.observations?.count ?? 0) - (offset)
-//    //                            Text("\(count) \(observationsUserViewModel.observations?.count ?? 0) \(offset)")
-//                                if  ( end > 0 ) { // ?? offset) - offset
-//    //
-//                                    Text(observationsUserViewModel.observations?.results[end-1].date ?? "No date")
-//                                    Text("/")
-//                                    Text(observationsUserViewModel.observations?.results[start].date ?? "No date")
-//                                }
-//                            }
-//                    }
-                    
-
                     }
                     
                     HStack {
@@ -103,7 +88,7 @@ struct MapObservationsUserView: View {
                                 log.info("maxOffset: \(maxOffset)")
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
-                                observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                                observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0) 
                                 start = 0
                                 end = observationsUserViewModel.observations?.results.count ?? 0
                                 
@@ -117,7 +102,7 @@ struct MapObservationsUserView: View {
                                 offset = offset - 100
                             }
                             limit = 100
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
                             
                             start = 0
                             end = observationsUserViewModel.observations?.results.count ?? 0
@@ -130,7 +115,7 @@ struct MapObservationsUserView: View {
                             offset = 0
                             limit = 100
                             
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
                         }) {
                             Image(systemName: "square.fill")
                         }
@@ -161,7 +146,7 @@ struct MapObservationsUserView: View {
         }
         
         .onAppear {
-            observationsUserViewModel.fetchData(limit: limit, offset: offset)
+            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
         }
     }
 }

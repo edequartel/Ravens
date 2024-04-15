@@ -16,7 +16,7 @@ class UserViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-    func fetchUserData(settings: Settings) {
+    func fetchUserData(settings: Settings, completion: @escaping () -> Void) {
         
         keyChainViewModel.retrieveCredentials()
         
@@ -36,7 +36,7 @@ class UserViewModel: ObservableObject {
                       
                         self.log.debug("stringResponse: \(stringResponse)")
                         self.user = try JSONDecoder().decode(UserData.self, from: data)
-
+                        completion()
                         
                     } catch {
                         self.log.error("Error UserViewModel decoding JSON: \(error)")

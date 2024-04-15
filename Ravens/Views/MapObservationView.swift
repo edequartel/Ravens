@@ -15,6 +15,7 @@ struct MapObservationView: View {
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
@@ -175,7 +176,12 @@ struct MapObservationView: View {
         }
         //
         
-        .onAppear() {
+        .onAppear() { //wellicht op een andere plek
+            userViewModel.fetchUserData(settings: settings, completion: {
+                print("userViewModel.fetchUserData")
+                log.error(">>\(userViewModel.user?.id ?? 0)")
+            })
+            
             viewModel.fetchPOIs()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
