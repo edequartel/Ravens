@@ -88,7 +88,7 @@ struct MapObservationsUserView: View {
                                 log.info("maxOffset: \(maxOffset)")
                                 offset = min(offset + 100, maxOffset)
                                 limit = 100
-                                observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0) 
+                                observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") } )
                                 start = 0
                                 end = observationsUserViewModel.observations?.results.count ?? 0
                                 
@@ -102,7 +102,7 @@ struct MapObservationsUserView: View {
                                 offset = offset - 100
                             }
                             limit = 100
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
                             
                             start = 0
                             end = observationsUserViewModel.observations?.results.count ?? 0
@@ -115,7 +115,7 @@ struct MapObservationsUserView: View {
                             offset = 0
                             limit = 100
                             
-                            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+                            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
                         }) {
                             Image(systemName: "square.fill")
                         }
@@ -146,7 +146,7 @@ struct MapObservationsUserView: View {
         }
         
         .onAppear {
-            observationsUserViewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
         }
     }
 }

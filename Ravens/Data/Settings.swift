@@ -46,6 +46,8 @@ class Settings: ObservableObject {
     @Published var isFirstAppear: Bool = true
     @Published var isFirstAppearObsView: Bool = true
     
+    @AppStorage("userId") var userId: Int = 0
+    
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
     
     @AppStorage("savedExplorers") private var savedExplorers: String = ""

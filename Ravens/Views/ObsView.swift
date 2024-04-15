@@ -25,6 +25,9 @@ struct ObsView: View {
     
     var body: some View {
         LazyVStack {
+//            HStack {
+
+            
             HStack {
                 Image(systemName: "circle.fill")
                     .foregroundColor(Color(myColor(value: obs.rarity)))
@@ -50,23 +53,32 @@ struct ObsView: View {
                     .lineLimit(1) // Set the maximum number of lines to 1
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
             }
-            .onTapGesture { //sounds
+            .onTapGesture(count: 1) { //sounds
                 if let url = URL(string: obs.permalink) {
                     UIApplication.shared.open(url)
                 }
             }
+            
+            //            .onTapGesture(count: 1) { print("follow this one") }
             
             HStack {
                 Text("\(obs.date) \(obs.time ?? "") -  \(obs.number)x")
                 Spacer()
             }
             
-            if showUsername {
+            if showUsername || true {
                 HStack {
                     Text("\(obs.user_detail?.name ?? String(obs.user))")
                     Spacer()
                     Text("\(obs.user_detail?.id ?? 0)")
+                    Spacer()
+                    Button("follow") {
+                        print("Button was tapped")
+                    }
+                    .background(Color.gray)
+                    .foregroundColor(.black)
                 }
+                
             }
             
             if showLocation {
@@ -74,7 +86,7 @@ struct ObsView: View {
                     Text("\(obs.location_detail?.name ?? "name")")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
-//                    Text("\(obs.location_detail?.id ?? 0)")
+                    //                    Text("\(obs.location_detail?.id ?? 0)")
                         .lineLimit(1) // Set the maximum number of lines to 1
                 }
             }
@@ -97,7 +109,12 @@ struct ObsView: View {
                     Spacer()
                 }
             }
-        }
+            
+            Button("x") {
+                print("Button was tapped ")
+            }
+//        }
+    }
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {

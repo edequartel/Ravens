@@ -32,7 +32,8 @@ struct ObservationsUserView: View {
                     if let maxOffset = viewModel.observations?.count {
                         offset = min(offset + 100, maxOffset)
                         limit = 100
-                        viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+                        viewModel.fetchData(limit: limit, offset: offset, settings: settings, completion:
+                                                { print("viewModel.fetchData completion") } )
                     }
                 } label: {
                     Image(systemName: "plus.circle")
@@ -43,7 +44,7 @@ struct ObservationsUserView: View {
                         offset = offset - 100
                     }
                     limit = 100
-                    viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+                    viewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
                 } label: {
                     Image(systemName: "minus.circle")
                 }
@@ -63,7 +64,7 @@ struct ObservationsUserView: View {
             }
         }
         .onAppear {
-            viewModel.fetchData(limit: limit, offset: offset, userId: userViewModel.user?.id ?? 0)
+            viewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
         }
     }
 }
@@ -74,6 +75,8 @@ struct ObservationsUserViewExtra: View {
     var viewModel: ObservationsUserViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var userName: String = ""
+    
     
     var body: some View {
         VStack {
@@ -83,6 +86,34 @@ struct ObservationsUserViewExtra: View {
             }
             .padding(16)
             .bold()
+            Text("\(userName)")
+            
+            HStack {
+                TextField("userID", value: $settings.userId, formatter: NumberFormatter())
+                    .padding(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 3)
+                    )
+                    .onChange(of: settings.userId) {
+                        log.info("settings.userId \(settings.userId)")
+                    }
+                    .padding(16)
+                    .bold()
+                Spacer()
+                Button("Send") {
+                    viewModel.fetchData(limit: 100, offset: 0, settings: settings, completion: {
+                        print("viewModel.fetchData completion")
+                        print(">> \(viewModel.observations?.results[0].user_detail?.name ?? "no name")")
+                        userName = viewModel.observations?.results[0].user_detail?.name ?? "no name"
+                    })
+                    
+                }
+                .padding(16)
+            }
+            
+            
+            
             
             List {
                 if let results =  viewModel.observations?.results {

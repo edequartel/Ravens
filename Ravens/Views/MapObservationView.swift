@@ -179,6 +179,7 @@ struct MapObservationView: View {
         .onAppear() { //wellicht op een andere plek
             userViewModel.fetchUserData(settings: settings, completion: {
                 print("userViewModel.fetchUserData")
+                settings.userId = userViewModel.user?.id ?? 0
                 log.error(">>\(userViewModel.user?.id ?? 0)")
             })
             

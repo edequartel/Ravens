@@ -80,7 +80,7 @@
 		4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD1A2B95C87E002F52BE /* UserView.swift */; };
 		4785CD1D2B964C0E002F52BE /* ObservationsUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */; };
 		4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */; };
-		4785CD232B965237002F52BE /* ObservationUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationUserView.swift */; };
+		4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserView.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
@@ -159,7 +159,7 @@
 		4785CD1A2B95C87E002F52BE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserViewModel.swift; sourceTree = "<group>"; };
 		4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsUserView.swift; sourceTree = "<group>"; };
-		4785CD222B965237002F52BE /* ObservationUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationUserView.swift; sourceTree = "<group>"; };
+		4785CD222B965237002F52BE /* ObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserView.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 				4757E0752B7F3426003F148E /* LoginView.swift */,
 				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
-				4785CD222B965237002F52BE /* ObservationUserView.swift */,
+				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
@@ -462,7 +462,7 @@
 				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
-				4785CD232B965237002F52BE /* ObservationUserView.swift in Sources */,
+				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,
 				470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */,
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,

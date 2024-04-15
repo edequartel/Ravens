@@ -46,7 +46,7 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(limit: Int, offset: Int, userId: Int) {
+    func fetchData(limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
         log.error("fetchData ObservationsUserViewModel limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
@@ -56,20 +56,12 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-        ///api/v1/user/<user_id>/observations
-        
-//        let url = settings.endPoint() + "user/observations/"+"?limit=\(limit)&offset=\(offset)"  //
-        
-        let url = settings.endPoint() + "user/151713/observations/"+"?limit=\(limit)&offset=\(offset)"  //
-//        let url = settings.endPoint() + "user/\(userId)/observations/"+"?limit=\(limit)&offset=\(offset)"  // 
-        
-        
+        let url = settings.endPoint() + "user/\(settings.userId)/observations/"+"?limit=\(limit)&offset=\(offset)"  //
         //?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.error("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
-//            print(response.value)
             switch response.result {
             case .success(let stringResponse):
                 // Now you can convert the stringResponse to Data and decode it
@@ -82,6 +74,8 @@ class ObservationsUserViewModel: ObservableObject {
                             self.observations = observations
                             self.getLocations()
                         }
+                        
+                        completion()
                     } catch {
                         self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")

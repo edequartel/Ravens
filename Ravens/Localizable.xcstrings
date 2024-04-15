@@ -309,6 +309,9 @@
         }
       }
     },
+    "follow" : {
+
+    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -932,6 +935,9 @@
         }
       }
     },
+    "Send" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -1065,6 +1071,9 @@
         }
       }
     },
+    "userID" : {
+
+    },
     "Username" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1118,6 +1127,9 @@
           }
         }
       }
+    },
+    "x" : {
+
     }
   },
   "version" : "1.0"
