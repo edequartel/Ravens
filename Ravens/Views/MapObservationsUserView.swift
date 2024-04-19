@@ -35,7 +35,7 @@ struct MapObservationsUserView: View {
     @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             Map(position: $cameraPosition) {
                 UserAnnotation()
                 
@@ -138,7 +138,10 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            
+            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
+                .padding([.top, .leading], 20)
         }
         
         .sheet(isPresented: $isSheetObservationsViewPresented) {

@@ -33,7 +33,6 @@ class Settings: ObservableObject {
     @AppStorage("savePhotos") var savePhotos: Bool = false
     
     @AppStorage("poiOn") var poiOn: Bool = true
-//    @AppStorage("zoomActive") var zoomActive: Bool = true
     @AppStorage("infinity") var infinity: Bool = true
     
     @AppStorage("selectedRarity") var selectedRarity = 1
@@ -50,7 +49,7 @@ class Settings: ObservableObject {
     
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
     
-    @AppStorage("savedExplorers") private var savedExplorers: String = ""
+    @AppStorage("SavedExplorers") var savedExplorers: String = "" //to jsonData later
     
     
     init() {
@@ -79,7 +78,7 @@ class Settings: ObservableObject {
                 .compactMap { Int($0) }
         }
     
-    func saveExplorerse(array: [Int]) {
+    func saveExplorers(array: [Int]) {
             // Convert the array to a string
             let arrayString = array.map { String($0) }.joined(separator: ",")
 
@@ -116,3 +115,25 @@ enum MapStyleChoice: String, CaseIterable {
     case hybrid = "Hibride"
     case imagery = "Afbeeldingen"
 }
+
+
+//@AppStorage("SavedExplorers") var savedExplorers: Data? //changed to Data to handle jsonData
+//
+//func saveExplorers(array: [Explorer]) {
+//    // Convert the array to JSON data
+//    if let encodedData = try? JSONEncoder().encode(array) {
+//        // Save the data to AppStorage
+//        savedExplorers = encodedData
+//    }
+//}
+//
+//func readExplorers() -> [Explorer] {
+//    // Retrieve the data from AppStorage
+//    if let data = savedExplorers,
+//       let array = try? JSONDecoder().decode([Explorer].self, from: data) {
+//        // Convert the data back to an array of Explorer
+//        return array
+//    }
+//    
+//    return []
+//}

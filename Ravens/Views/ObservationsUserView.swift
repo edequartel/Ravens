@@ -75,7 +75,10 @@ struct ObservationsUserViewExtra: View {
     var viewModel: ObservationsUserViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var explorers: [Int] = []
     @State private var userName: String = ""
+    @State private var userId: Int = 0
+    
     
     
     var body: some View {
@@ -88,32 +91,21 @@ struct ObservationsUserViewExtra: View {
             .bold()
             Text("\(userName)")
             
-            HStack {
-                TextField("userID", value: $settings.userId, formatter: NumberFormatter())
-                    .padding(4)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 3)
-                    )
-                    .onChange(of: settings.userId) {
-                        log.info("settings.userId \(settings.userId)")
-                    }
-                    .padding(16)
-                    .bold()
-                Spacer()
-                Button("Send") {
+            Picker("Select User", selection: $userId) {
+                ForEach(explorers, id: \.self) { explorer in
+                    Text("\(explorer)")
+                }
+                .onChange(of: userId) {
+                    print("userId \(userId)")
+                    settings.userId = userId
                     viewModel.fetchData(limit: 100, offset: 0, settings: settings, completion: {
                         print("viewModel.fetchData completion")
                         print(">> \(viewModel.observations?.results[0].user_detail?.name ?? "no name")")
                         userName = viewModel.observations?.results[0].user_detail?.name ?? "no name"
                     })
-                    
                 }
-                .padding(16)
             }
-            
-            
-            
+            .padding(16)
             
             List {
                 if let results =  viewModel.observations?.results {
@@ -123,6 +115,9 @@ struct ObservationsUserViewExtra: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            settings.readExplorers(array: &explorers)
         }
     }
 }

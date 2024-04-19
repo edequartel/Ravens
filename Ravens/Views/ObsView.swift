@@ -15,13 +15,22 @@ struct ObsView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel(settings: Settings()) 
+    @EnvironmentObject var settings: Settings
 
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
+    @State private var userId: Int = 0
+    
+    @State private var explorers: [Int] = []
     
     @State var obs: Observation
     var showUsername: Bool = true
     var showLocation: Bool = true
+    
+    // Function to check if a number is in the array
+    func isUserIdInExplorers(number: Int) -> Bool {
+        return explorers.contains(number)
+    }
     
     var body: some View {
         LazyVStack {
@@ -66,17 +75,34 @@ struct ObsView: View {
                 Spacer()
             }
             
-            if showUsername || true {
+            if showUsername {
                 HStack {
-                    Text("\(obs.user_detail?.name ?? String(obs.user))")
+                    Text("\(obs.user_detail?.name ?? "noName")")
                     Spacer()
                     Text("\(obs.user_detail?.id ?? 0)")
                     Spacer()
-                    Button("follow") {
-                        print("Button was tapped")
+                    Button(action: {
+                        userId = obs.user_detail?.id ?? 0
+                        print("...\(userId)")
+                        
+                        if isUserIdInExplorers(number: userId) {
+                            if let index = explorers.firstIndex(of: userId) {
+                                explorers.remove(at: index)
+                            }
+                        } else
+                        {
+                            explorers.append(userId)
+                        }
+                        //
+                        settings.saveExplorers(array: explorers)
+                        print(explorers)
+                    }) {
+//                        Image(systemName: isUserIdInExplorers(number: userId) ? "person.fill" : "person.badge.plus")
+//                            .foregroundColor(.blue)
                     }
-                    .background(Color.gray)
-                    .foregroundColor(.black)
+                    Spacer()
+                    Image(systemName: isUserIdInExplorers(number: obs.user_detail?.id ?? 0) ? "person.fill" : "person.badge.plus")
+                        .foregroundColor(.blue)
                 }
                 
             }
@@ -109,13 +135,10 @@ struct ObsView: View {
                     Spacer()
                 }
             }
-            
-            Button("x") {
-                print("Button was tapped ")
-            }
-//        }
     }
         .onAppear() {
+            settings.readExplorers(array: &explorers)
+            
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {
                     print("onAppear OBSView Happens")

@@ -46,8 +46,8 @@ struct ObservationsSpeciesView: View {
                 EndOfListObsView()
             }
 
-            YearView(monthlyViews: monthlyViews)
-                .padding(16)
+//            YearView(monthlyViews: monthlyViews)
+//                .padding(16)
 
             List {
                 if let results = viewModel.observationsSpecies?.results {

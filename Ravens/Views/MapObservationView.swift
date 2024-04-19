@@ -45,7 +45,7 @@ struct MapObservationView: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             VStack {
                 MapReader { proxy in
                     Map(position: cameraBinding) {
@@ -166,7 +166,10 @@ struct MapObservationView: View {
                 }
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            
+            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
+                .padding([.top, .leading], 20)
         }
         
         //
