@@ -1,5 +1,5 @@
 {
-  "originHash" : "345380e46e5def4c42adc4a85380b64482ea03e83f5f36ef76d8836bdd7ff3b6",
+  "originHash" : "4479284deb05611af1aae3bac8e661007ef57c4e5c2efc6a0042d9415afc690b",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "1eaf3b6c6882bed10f6e7b119665599dd2329aa1",
         "version" : "4.3.0"
-      }
-    },
-    {
-      "identity" : "floatingbutton",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/FloatingButton.git",
-      "state" : {
-        "revision" : "301fba68ed56c68c04af0b40a4eb422518c8eaf8",
-        "version" : "1.2.2"
       }
     },
     {

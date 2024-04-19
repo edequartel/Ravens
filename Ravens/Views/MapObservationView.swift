@@ -166,13 +166,10 @@ struct MapObservationView: View {
                 }
             }
             
-//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
-            
             CircleButton(isToggleOn: $isSheetObservationsViewPresented)
                 .padding([.top, .leading], 20)
         }
         
-        //
         
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsView(isShowing: $isSheetObservationsViewPresented)

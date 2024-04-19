@@ -91,6 +91,7 @@ struct ObservationsUserViewExtra: View {
             .bold()
             Text("\(userName)")
             
+            
             Picker("Select User", selection: $userId) {
                 ForEach(explorers, id: \.self) { explorer in
                     Text("\(explorer)")
@@ -106,6 +107,12 @@ struct ObservationsUserViewExtra: View {
                 }
             }
             .padding(16)
+            
+            Button("Delete") {
+                explorers.removeAll()
+                settings.saveExplorers(array: explorers)
+            }
+            
             
             List {
                 if let results =  viewModel.observations?.results {

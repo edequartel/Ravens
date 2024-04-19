@@ -138,8 +138,6 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
-            
             CircleButton(isToggleOn: $isSheetObservationsViewPresented)
                 .padding([.top, .leading], 20)
         }

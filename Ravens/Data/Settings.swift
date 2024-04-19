@@ -11,6 +11,11 @@ import SwiftData
 import MapKit
 import SwiftyBeaver
 
+struct Explorer: Codable {
+    let id: Int
+    let name: String
+}
+
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
     
@@ -51,10 +56,74 @@ class Settings: ObservableObject {
     
     @AppStorage("SavedExplorers") var savedExplorers: String = "" //to jsonData later
     
-    
+    @AppStorage("Explorers") var Explorers: Data? //changed to Data to handle jsonData
+
     init() {
         log.info("init Settings")
     }
+    
+    func saveTheExplorers(array: [Explorer]) {
+        // Convert the array to JSON data
+        if let encodedData = try? JSONEncoder().encode(array) {
+            // Save the data to AppStorage
+            Explorers = encodedData
+        }
+    }
+
+    func readTheExplorers() -> [Explorer] {
+        // Retrieve the data from AppStorage
+        if let data = Explorers,
+           let array = try? JSONDecoder().decode([Explorer].self, from: data) {
+            // Convert the data back to an array of Explorer
+            return array
+        }
+        return []
+    }
+    
+    func explorerExists(id: Int) -> Bool {
+        // Retrieve the array of explorers from AppStorage
+        let storedExplorers = readTheExplorers()
+        
+        // Check if there is an explorer with the given id in the array
+        for explorer in storedExplorers {
+            if explorer.id == id {
+                return true
+            }
+        }
+        
+        // If no explorer with the given id is found, return false
+        return false
+    }
+    
+//    let newExplorer = Explorer(id: 3, name: "Explorer 3", age: 40)
+//    addAndSaveExplorer(newExplorer: newExplorer)
+    
+    func addAndSaveExplorer(newExplorer: Explorer) {
+        // Retrieve the array of explorers from AppStorage
+        var storedExplorers = readTheExplorers()
+        
+        // Add the new explorer to the array
+        storedExplorers.append(newExplorer)
+        
+        // Save the updated array to AppStorage
+        saveTheExplorers(array: storedExplorers)
+    }
+    
+//    struct ExplorersPicker: View {
+//        @State private var selectedExplorerId: Int = 0
+//        @ObservedObject var explorers: ExplorersData
+//
+//        var body: some View {
+//            Picker("Select Explorer", selection: $selectedExplorerId) {
+//                ForEach(explorers.list, id: \.id) { explorer in
+//                    Text("\(explorer.name)").tag(explorer.id)
+//                }
+//            }
+//        }
+//    }
+    
+    
+    //
     
     func endPoint() -> String {
        return "https://"+selectedInBetween+"/api/v1/"
@@ -117,23 +186,3 @@ enum MapStyleChoice: String, CaseIterable {
 }
 
 
-//@AppStorage("SavedExplorers") var savedExplorers: Data? //changed to Data to handle jsonData
-//
-//func saveExplorers(array: [Explorer]) {
-//    // Convert the array to JSON data
-//    if let encodedData = try? JSONEncoder().encode(array) {
-//        // Save the data to AppStorage
-//        savedExplorers = encodedData
-//    }
-//}
-//
-//func readExplorers() -> [Explorer] {
-//    // Retrieve the data from AppStorage
-//    if let data = savedExplorers,
-//       let array = try? JSONDecoder().decode([Explorer].self, from: data) {
-//        // Convert the data back to an array of Explorer
-//        return array
-//    }
-//    
-//    return []
-//}

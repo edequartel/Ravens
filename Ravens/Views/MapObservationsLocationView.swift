@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
-
 struct MapObservationsLocationView: View {
     let log = SwiftyBeaver.self
     
@@ -231,8 +230,6 @@ struct MapObservationsLocationView: View {
                     }
                 }
             }
-//            ObservationCircle(toggle: $isSheetObservationsLocationsViewPresented, colorHex: "f7b731")
-            
             CircleButton(isToggleOn: $isSheetObservationsLocationsViewPresented)
                 .padding([.top, .leading], 20)
             

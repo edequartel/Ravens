@@ -234,6 +234,9 @@
         }
       }
     },
+    "Delete" : {
+
+    },
     "Destination %lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -522,6 +525,7 @@
       }
     },
     "Loading..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -794,6 +798,7 @@
       }
     },
     "Plaats: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1017,9 +1022,6 @@
         }
       }
     },
-    "Temperatuur: %@" : {
-
-    },
     "Token: %@" : {
       "localizations" : {
         "nl" : {
@@ -1098,9 +1100,6 @@
           }
         }
       }
-    },
-    "Voelt als: %@" : {
-
     },
     "waarneming.nl" : {
       "localizations" : {
