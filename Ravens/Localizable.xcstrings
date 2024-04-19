@@ -420,6 +420,7 @@
       }
     },
     "Infinity (only location)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
