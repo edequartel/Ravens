@@ -33,7 +33,7 @@ struct MapObservationsSpeciesView: View {
     var speciesName: String
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             Map(position: $cameraPosition) {
                 UserAnnotation()
                 
@@ -125,7 +125,10 @@ struct MapObservationsSpeciesView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            
+            CircleButton(isToggleOn: $isSheetObservationsViewPresented)                
+                .padding([.top, .leading], 20) // Apply padding to the top and leading edges
         }
         .sheet(isPresented: $isSheetObservationsViewPresented) {
             ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)

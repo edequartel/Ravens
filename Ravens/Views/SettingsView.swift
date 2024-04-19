@@ -44,7 +44,6 @@ struct SettingsView: View {
                 .onChange(of: settings.selectedInBetween) {
                 }
                 
-                
                 Section("Species") {
                     Picker("Group", selection: $settings.selectedSpeciesGroup) {
                         ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in

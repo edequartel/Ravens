@@ -15,6 +15,7 @@ struct MapObservationView: View {
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
@@ -44,7 +45,7 @@ struct MapObservationView: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             VStack {
                 MapReader { proxy in
                     Map(position: cameraBinding) {
@@ -165,7 +166,10 @@ struct MapObservationView: View {
                 }
             }
             
-            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
+            
+            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
+                .padding([.top, .leading], 20)
         }
         
         //
@@ -175,7 +179,13 @@ struct MapObservationView: View {
         }
         //
         
-        .onAppear() {
+        .onAppear() { //wellicht op een andere plek
+            userViewModel.fetchUserData(settings: settings, completion: {
+                print("userViewModel.fetchUserData")
+                settings.userId = userViewModel.user?.id ?? 0
+                log.error(">>\(userViewModel.user?.id ?? 0)")
+            })
+            
             viewModel.fetchPOIs()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

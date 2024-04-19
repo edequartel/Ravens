@@ -12,6 +12,7 @@ struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
+    
     @EnvironmentObject var settings: Settings
     
     @State private var scale: CGFloat = 1.0
@@ -22,6 +23,8 @@ struct ObservationsSpeciesView: View {
     
     @State private var isSheetPresented = false
     @State private var endOfListReached = false
+    
+    let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     
     var body: some View {
         VStack {
@@ -42,6 +45,9 @@ struct ObservationsSpeciesView: View {
             if endOfListReached {
                 EndOfListObsView()
             }
+
+//            YearView(monthlyViews: monthlyViews)
+//                .padding(16)
 
             List {
                 if let results = viewModel.observationsSpecies?.results {

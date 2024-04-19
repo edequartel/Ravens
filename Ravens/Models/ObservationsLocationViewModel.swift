@@ -102,8 +102,7 @@ class ObservationsLocationViewModel: ObservableObject {
                     let observationsSpecies = try decoder.decode(Observations.self, from: data)
 
                     DispatchQueue.main.async {
-                        self.observations = Observations(results: observationsSpecies.results) //<<<
-//                        print(">>>> \(observationsSpecies.count ?? 0)") ////<<<
+                        self.observations = Observations(results: observationsSpecies.results)
                         self.count = observationsSpecies.count ?? 0
                         self.getLocations()
                         self.getSpan()
@@ -120,29 +119,4 @@ class ObservationsLocationViewModel: ObservableObject {
     }
 }
 
-
-//        AF.request(url, headers: headers).responseString { response in
-//            switch response.result {
-//            case .success(let stringResponse):
-//                // Now you can convert the stringResponse to Data and decode it
-//                if let data = stringResponse.data(using: .utf8) {
-//                    do {
-//                        let decoder = JSONDecoder()
-//                        let observationsSpecies = try decoder.decode(Observations.self, from: data)
-//
-//                        DispatchQueue.main.async {
-//                            self.observations = Observations(results: observationsSpecies.results)
-//                            self.getLocations()
-//                            self.getSpan()
-//                            completion()
-//                        }
-//                    } catch {
-//                        self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
-//                        self.log.error("\(url)")
-//                    }
-//                }
-//            case .failure(let error):
-//                self.log.error("Error ObservationsLocationViewModel: \(error)")
-//            }
-//        }
 

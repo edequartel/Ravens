@@ -15,16 +15,28 @@ struct ObsView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel(settings: Settings()) 
+    @EnvironmentObject var settings: Settings
 
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
+    @State private var userId: Int = 0
+    
+    @State private var explorers: [Int] = []
     
     @State var obs: Observation
     var showUsername: Bool = true
     var showLocation: Bool = true
     
+    // Function to check if a number is in the array
+    func isUserIdInExplorers(number: Int) -> Bool {
+        return explorers.contains(number)
+    }
+    
     var body: some View {
         LazyVStack {
+//            HStack {
+
+            
             HStack {
                 Image(systemName: "circle.fill")
                     .foregroundColor(Color(myColor(value: obs.rarity)))
@@ -50,11 +62,13 @@ struct ObsView: View {
                     .lineLimit(1) // Set the maximum number of lines to 1
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
             }
-            .onTapGesture { //sounds
+            .onTapGesture(count: 1) { //sounds
                 if let url = URL(string: obs.permalink) {
                     UIApplication.shared.open(url)
                 }
             }
+            
+            //            .onTapGesture(count: 1) { print("follow this one") }
             
             HStack {
                 Text("\(obs.date) \(obs.time ?? "") -  \(obs.number)x")
@@ -63,10 +77,34 @@ struct ObsView: View {
             
             if showUsername {
                 HStack {
-                    Text("\(obs.user_detail?.name ?? String(obs.user))")
+                    Text("\(obs.user_detail?.name ?? "noName")")
                     Spacer()
-//                    Text("\(obs.user_detail?.id ?? 0)")
+                    Text("\(obs.user_detail?.id ?? 0)")
+                    Spacer()
+                    Button(action: {
+                        userId = obs.user_detail?.id ?? 0
+                        print("...\(userId)")
+                        
+                        if isUserIdInExplorers(number: userId) {
+                            if let index = explorers.firstIndex(of: userId) {
+                                explorers.remove(at: index)
+                            }
+                        } else
+                        {
+                            explorers.append(userId)
+                        }
+                        //
+                        settings.saveExplorers(array: explorers)
+                        print(explorers)
+                    }) {
+//                        Image(systemName: isUserIdInExplorers(number: userId) ? "person.fill" : "person.badge.plus")
+//                            .foregroundColor(.blue)
+                    }
+                    Spacer()
+                    Image(systemName: isUserIdInExplorers(number: obs.user_detail?.id ?? 0) ? "person.fill" : "person.badge.plus")
+                        .foregroundColor(.blue)
                 }
+                
             }
             
             if showLocation {
@@ -74,7 +112,7 @@ struct ObsView: View {
                     Text("\(obs.location_detail?.name ?? "name")")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
-//                    Text("\(obs.location_detail?.id ?? 0)")
+                    //                    Text("\(obs.location_detail?.id ?? 0)")
                         .lineLimit(1) // Set the maximum number of lines to 1
                 }
             }
@@ -97,8 +135,10 @@ struct ObsView: View {
                     Spacer()
                 }
             }
-        }
+    }
         .onAppear() {
+            settings.readExplorers(array: &explorers)
+            
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {
                     print("onAppear OBSView Happens")

@@ -19,6 +19,7 @@ struct UserView: View {
                 Text("\(userViewModel.user?.name ?? "unknown")")
                     .bold()
                 Text("\(userViewModel.user?.email ?? "unknown")")
+                Text("\(userViewModel.user?.id ?? 0)")
                 
                 let url = userViewModel.user?.url ?? "unknown"
                 Button("\(url)") {
@@ -32,7 +33,7 @@ struct UserView: View {
             }
         }
         .onAppear {
-            userViewModel.fetchUserData(settings: settings)
+            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") })
         }
     }
 }
@@ -50,7 +51,7 @@ struct UserSimpleView: View {
             }
         }
         .onAppear {
-            userViewModel.fetchUserData(settings: settings)
+            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") } )
         }
     }
 }
