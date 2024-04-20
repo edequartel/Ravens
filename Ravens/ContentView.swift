@@ -22,12 +22,25 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            // Tab 1
-            MapObservationView()
+            // Tab 0
+//            POIsView()
+//            .tabItem {
+//                Text("Poi")
+//                Image(systemName: "map")
+//            }
+            
+            FlipRadiusView()
             .tabItem {
                 Text("Radius")
                 Image(systemName: "circle")
             }
+            
+            // Tab 1
+//            MapObservationView()
+//            .tabItem {
+//                Text("Radius")
+//                Image(systemName: "circle")
+//            }
             
             // Tab 2
             MapObservationsLocationView()

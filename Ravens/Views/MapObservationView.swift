@@ -166,8 +166,8 @@ struct MapObservationView: View {
                 }
             }
             
-            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
-                .padding([.top, .leading], 20)
+//            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
+//                .padding([.top, .leading], 20)
         }
         
         

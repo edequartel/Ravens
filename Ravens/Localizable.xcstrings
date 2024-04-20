@@ -494,15 +494,8 @@
         }
       }
     },
-    "Latitude: %lf, Longitude: %lf" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Latitude: %1$lf, Longitude: %2$lf"
-          }
-        }
-      }
+    "Latitude: %lf" : {
+
     },
     "List" : {
       "extractionState" : "stale",
@@ -606,6 +599,9 @@
           }
         }
       }
+    },
+    "Longitude: %lf" : {
+
     },
     "Main View" : {
       "extractionState" : "stale",

@@ -83,8 +83,12 @@ struct ObsView: View {
                     Spacer()
                     Button(action: {
                         userId = obs.user_detail?.id ?? 0
-                        print("...\(userId)")
+                        settings.
                         
+                        
+                        
+                        
+                        print("...\(userId)")
                         if isUserIdInExplorers(number: userId) {
                             if let index = explorers.firstIndex(of: userId) {
                                 explorers.remove(at: index)

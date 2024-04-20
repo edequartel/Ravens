@@ -291,3 +291,22 @@ extension Color {
     }
 }
 
+extension View {
+    func topLeft() -> some View {
+        self
+            .modifier(TopLeftModifier())
+    }
+}
+
+struct TopLeftModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        VStack {
+            HStack {
+                content
+                    .padding([.top, .leading], 10)
+                Spacer() // Pushes the view to the left
+            }
+            Spacer() // Pushes the view to the top
+        }
+    }
+}

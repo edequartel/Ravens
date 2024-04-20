@@ -14,7 +14,8 @@ struct POIsView: View {
         List(viewModel.poiList, id: \.name) { poi in
             VStack(alignment: .leading) {
                 Text(poi.name)
-                Text("Latitude: \(poi.coordinate.latitude), Longitude: \(poi.coordinate.longitude)")
+                Text("Latitude: \(poi.coordinate.latitude)")
+                Text("Longitude: \(poi.coordinate.longitude)")
             }
         }
         .onAppear {

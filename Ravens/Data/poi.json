@@ -63,6 +63,13 @@
         "longitude": 5.215302
       }
     },
+    {
+      "name": "Geres",
+      "coordinate": {
+          "latitude": 42.04118,
+          "longitude": -8.13161
+      }
+    },
   ]
 }
 

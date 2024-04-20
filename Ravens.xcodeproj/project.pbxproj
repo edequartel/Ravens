@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47012C642BD40F31009C5044 /* FlipRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47012C632BD40F31009C5044 /* FlipRadiusView.swift */; };
 		4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */; };
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47012C632BD40F31009C5044 /* FlipRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipRadiusView.swift; sourceTree = "<group>"; };
 		4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationViewModel.swift; sourceTree = "<group>"; };
 		4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationsView.swift; sourceTree = "<group>"; };
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
+				47012C632BD40F31009C5044 /* FlipRadiusView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
@@ -500,6 +503,7 @@
 				47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */,
 				471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */,
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
+				47012C642BD40F31009C5044 /* FlipRadiusView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 			);
