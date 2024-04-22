@@ -24,6 +24,7 @@ struct ObsView: View {
     @State private var explorers: [Int] = []
     
     @State var obs: Observation
+    
     var showUsername: Bool = true
     var showLocation: Bool = true
     
@@ -38,86 +39,85 @@ struct ObsView: View {
 
             
             HStack {
-                Image(systemName: "circle.fill")
-                    .foregroundColor(Color(myColor(value: obs.rarity)))
-                
-                if obs.has_sound ?? false { //for test
-                    Image(systemName: "waveform")
+                VStack {
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .foregroundColor(Color(myColor(value: obs.rarity)))
+                        if obs.has_sound ?? false { //for test
+                            Image(systemName: "waveform")
+                        }
+                        if obs.has_photo ?? false {
+                            Image(systemName: "photo") //for test
+                        }
+                        Text("\(obs.species_detail.name)")
+                            .bold()
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        Spacer()
+                    }
+
+                    HStack {
+                        Text("\(obs.species_detail.scientific_name)")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                            .italic()
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        Spacer()
+                    }
                 }
-                
-                if obs.has_photo ?? false {
-                    Image(systemName: "photo") //for test
-                }
-                
-                Text("\(obs.species_detail.name)")
-                    .bold()
-                    .lineLimit(1) // Set the maximum number of lines to 1
-                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                
-                Spacer()
-                
-                //
-                Text("\(obs.species_detail.scientific_name)")
-                    .italic()
-                    .lineLimit(1) // Set the maximum number of lines to 1
-                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
             }
-            .onTapGesture(count: 1) { //sounds
+            .onTapGesture(count: 1) {
                 if let url = URL(string: obs.permalink) {
                     UIApplication.shared.open(url)
                 }
             }
             
-            //            .onTapGesture(count: 1) { print("follow this one") }
-            
             HStack {
-                Text("\(obs.date) \(obs.time ?? "") -  \(obs.number)x")
+                Text("\(obs.date) \(obs.time ?? "")")
+                Text("\(obs.number) x")
                 Spacer()
             }
             
-            if showUsername {
-                HStack {
-                    Text("\(obs.user_detail?.name ?? "noName")")
-                    Spacer()
-                    Text("\(obs.user_detail?.id ?? 0)")
-                    Spacer()
-                    Button(action: {
-                        userId = obs.user_detail?.id ?? 0
-                        settings.
-                        
-                        
-                        
-                        
-                        print("...\(userId)")
-                        if isUserIdInExplorers(number: userId) {
-                            if let index = explorers.firstIndex(of: userId) {
-                                explorers.remove(at: index)
-                            }
-                        } else
-                        {
-                            explorers.append(userId)
-                        }
-                        //
-                        settings.saveExplorers(array: explorers)
-                        print(explorers)
-                    }) {
-//                        Image(systemName: isUserIdInExplorers(number: userId) ? "person.fill" : "person.badge.plus")
-//                            .foregroundColor(.blue)
-                    }
-                    Spacer()
-                    Image(systemName: isUserIdInExplorers(number: obs.user_detail?.id ?? 0) ? "person.fill" : "person.badge.plus")
-                        .foregroundColor(.blue)
-                }
-                
-            }
+// DIT IS VOOR LATER MET UITBREIDING FOLLOWERS
+//            if showUsername {
+//                VStack {
+//                    HStack {
+//                        Text("\(obs.user_detail?.name ?? "noName")")
+//                            .footnoteGrayStyle()
+//                        Spacer()
+//                        Text("\(obs.user_detail?.id ?? 0)")
+//                            .footnoteGrayStyle()
+//                    }
+//                    
+////                    HStack {
+////                        Button("(un)follow") {
+////                            userId = obs.user_detail?.id ?? 0
+////                            let explorer = Explorer(id: userId, name: obs.user_detail?.name ?? "noName")
+////                            if settings.explorerExists(id: userId) {
+////                                print("remove")
+////                                settings.removeAndSaveExplorer(id: userId)
+////                            } else {
+////                                print("add")
+////                                settings.addAndSaveExplorer(newExplorer: explorer)
+////                            }
+////                            settings.printExplorers()
+////                        }
+////                        Spacer()
+////                        Image(systemName: settings.explorerExists(
+////                            id: obs.user_detail?.id ?? 0) ? "person.fill" : "person.badge.plus"
+////                        )
+////                            .foregroundColor(.blue)
+////                    }
+//                }
+//            }
+
             
             if showLocation {
                 HStack {
                     Text("\(obs.location_detail?.name ?? "name")")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
-                    //                    Text("\(obs.location_detail?.id ?? 0)")
-                        .lineLimit(1) // Set the maximum number of lines to 1
                 }
             }
             
@@ -141,11 +141,11 @@ struct ObsView: View {
             }
     }
         .onAppear() {
-            settings.readExplorers(array: &explorers)
+//            settings.readExplorers(array: &explorers)
             
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {
-                    print("onAppear OBSView Happens")
+                    log.info("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
@@ -157,18 +157,28 @@ struct ObsView: View {
 
 
 //#Preview {
-////    var obs: ObservationSpecies
-//    ObsView(obs: ObservationSpecies)
+//    ObsView(obs: Observation(
+//        from: <#any Decoder#>, id: 1,
+//        date: "2024-02-12",
+//        number: 1,
+//        species_detail: SpeciesDetail(
+//            id: 1,
+//            scientific_name: "scientific_name", name: "species"
+//        ),
+//        user_detail: UserDetail(
+//            id: 1,
+//            name: "name"
+//        ),
+//        location_detail: LocationDetail(
+//            id: 1,
+//            name: "location"
+//        ),
+//        notes: "notes",
+//        photos: ["https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackbird"] //for test
+//        ))
 //}
 
-//struct ObsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ObsView(obs: ObservationSpecies(
-//            id: 1,
-//            species_detail: SpeciesDetail(
-//                id: 1,)
-//    }
-//}
+
 
 
 

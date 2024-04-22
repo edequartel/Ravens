@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FlipRadiusView: View {
-    
     @State private var isMapViewPresented = true
     
     var body: some View {
@@ -16,7 +15,7 @@ struct FlipRadiusView: View {
             if isMapViewPresented {
                 MapObservationView()
             } else {
-                ObservationsView(isShowing: $isMapViewPresented) //?? isToggleOn verwijderen!!
+                ObservationsView()
             }
             CircleButton(isToggleOn: $isMapViewPresented)
                 .topLeft()

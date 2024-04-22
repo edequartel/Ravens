@@ -16,7 +16,7 @@ class GeoJSONViewModel: ObservableObject {
     
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
 
-    func fetchGeoJsonData(for locationID: String,  completion: @escaping ([MKPolygon]) -> Void) {
+    func fetchGeoJsonData(for locationID: String,  completion: @escaping ([MKPolygon]) -> Void = {_ in }) {
         let apiUrl = "https://waarneming.nl/api/v1/locations/geojson/?id=\(locationID)"
         log.info(apiUrl)
         AF.request(apiUrl).responseData { response in

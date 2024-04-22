@@ -21,8 +21,6 @@ struct ObservationsLocationView: View {
     
     var locationId: Int
     var locationStr: String
-
-    @Binding var isShowing: Bool
     
     var body: some View {
         VStack {
@@ -42,18 +40,22 @@ struct ObservationsLocationView: View {
                 }
             }
         }
+        .onAppear() {
+//            settings.initialLoadLocation = true
+        }
         .padding(16)
     }
+        
 }
 
-struct ObservationsLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ObservationsUserView()
-//            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
-            .environmentObject(ObservationsLocationViewModel())
-            .environmentObject(Settings())
-    }
-}
+//struct ObservationsLocationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ObservationsUserView()
+////            .environmentObject(ObservationsLocationViewModel(settings: Settings()))
+//            .environmentObject(ObservationsLocationViewModel())
+//            .environmentObject(Settings())
+//    }
+//}
 
 //                Button {
 //                    if let maxOffset = viewModel.observationsSpecies?.count {

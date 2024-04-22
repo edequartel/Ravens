@@ -13,7 +13,7 @@ import SwiftUI
 //let latitude = 52.023861
 
 
-//gouda
+//gouda en span nederland
 let latitude = 52.013077-0.2
 let longitude = 4.713450+0.1
 
@@ -308,5 +308,16 @@ struct TopLeftModifier: ViewModifier {
             }
             Spacer() // Pushes the view to the top
         }
+    }
+}
+
+extension Text {
+    func footnoteGrayStyle() -> some View {
+        self
+            .foregroundColor(.gray)
+            .font(.footnote)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
     }
 }

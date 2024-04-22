@@ -92,6 +92,8 @@ struct SettingsView: View {
                         Text("\(Int(settings.radius)) m")
                     }
                     
+                    Toggle("Zoom", isOn: $settings.zoom)
+                    
                     Slider(value: Binding(get: {
                         Double(settings.radius)
                     }, set: {
@@ -102,11 +104,11 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-//                    Toggle("Infinity (only location)", isOn: $settings.infinity)
-//                        .onChange(of: settings.infinity) {
-////                            settings.isFirstAppear = true
-////                            settings.isFirstAppearObsView = true
-//                        }
+                    Toggle("Infinity (only location)", isOn: $settings.infinity)
+                        .onChange(of: settings.infinity) {
+//                            settings.isFirstAppear = true
+//                            settings.isFirstAppearObsView = true
+                        }
                     
                     
 //                    if !(settings.infinity) {

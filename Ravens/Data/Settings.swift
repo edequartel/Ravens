@@ -11,7 +11,7 @@ import SwiftData
 import MapKit
 import SwiftyBeaver
 
-struct Explorer: Codable {
+struct Explorer: Identifiable, Codable, Hashable {
     let id: Int
     let name: String
 }
@@ -32,47 +32,48 @@ class Settings: ObservableObject {
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
+    @AppStorage("zoom") var zoom: Bool = false
+    
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500
-    
     @AppStorage("savePhotos") var savePhotos: Bool = false
-    
     @AppStorage("poiOn") var poiOn: Bool = true
     @AppStorage("infinity") var infinity: Bool = true
-    
     @AppStorage("selectedRarity") var selectedRarity = 1
-    
-    @Published var currentLocation: CLLocation? = CLLocationManager().location
+    @AppStorage("userId") var userId: Int = 0
+    @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
+
+    @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
+
     @Published var selectedDate: Date = Date()
-    
     @Published var isConnected: Bool = false
-    
     @Published var isFirstAppear: Bool = true
     @Published var isFirstAppearObsView: Bool = true
+    @Published var currentLocation: CLLocation? = CLLocationManager().location
+    @Published var initialLoad = true
+    @Published var initialLoadLocation = true
     
-    @AppStorage("userId") var userId: Int = 0
+    @Published var locationId: Int = 0
+    @Published var locationStr: String = "NoLocation"
     
-    @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
-    
-    @AppStorage("SavedExplorers") var savedExplorers: String = "" //to jsonData later
-    
-    @AppStorage("Explorers") var Explorers: Data? //changed to Data to handle jsonData
+    @Published var tappedCoordinate: CLLocationCoordinate2D?
 
+    
     init() {
         log.info("init Settings")
     }
     
-    func saveTheExplorers(array: [Explorer]) {
+    func saveExplorers(array: [Explorer]) {
         // Convert the array to JSON data
         if let encodedData = try? JSONEncoder().encode(array) {
             // Save the data to AppStorage
-            Explorers = encodedData
+            explorers = encodedData
         }
     }
 
-    func readTheExplorers() -> [Explorer] {
+    func readExplorers() -> [Explorer] {
         // Retrieve the data from AppStorage
-        if let data = Explorers,
+        if let data = explorers,
            let array = try? JSONDecoder().decode([Explorer].self, from: data) {
             // Convert the data back to an array of Explorer
             return array
@@ -80,9 +81,29 @@ class Settings: ObservableObject {
         return []
     }
     
+    func printExplorers() {
+        if let data = explorers,
+           let jsonString = String(data: data, encoding: .utf8) {
+            print("JSON content of explorers: \(jsonString)")
+        } else {
+            print("Unable to get JSON content of explorers.")
+        }
+    }
+    
+    func removeAndSaveExplorer(id: Int) {
+        // Retrieve the array of explorers from AppStorage
+        var storedExplorers = readExplorers()
+        
+        // Filter out the explorer with the given id
+        storedExplorers = storedExplorers.filter { $0.id != id }
+        
+        // Save the updated array to AppStorage
+        saveExplorers(array: storedExplorers)
+    }
+    
     func explorerExists(id: Int) -> Bool {
         // Retrieve the array of explorers from AppStorage
-        let storedExplorers = readTheExplorers()
+        let storedExplorers = readExplorers()
         
         // Check if there is an explorer with the given id in the array
         for explorer in storedExplorers {
@@ -95,35 +116,17 @@ class Settings: ObservableObject {
         return false
     }
     
-//    let newExplorer = Explorer(id: 3, name: "Explorer 3", age: 40)
-//    addAndSaveExplorer(newExplorer: newExplorer)
-    
     func addAndSaveExplorer(newExplorer: Explorer) {
         // Retrieve the array of explorers from AppStorage
-        var storedExplorers = readTheExplorers()
+        var storedExplorers = readExplorers()
         
         // Add the new explorer to the array
         storedExplorers.append(newExplorer)
         
         // Save the updated array to AppStorage
-        saveTheExplorers(array: storedExplorers)
+        saveExplorers(array: storedExplorers)
     }
-    
-//    struct ExplorersPicker: View {
-//        @State private var selectedExplorerId: Int = 0
-//        @ObservedObject var explorers: ExplorersData
-//
-//        var body: some View {
-//            Picker("Select Explorer", selection: $selectedExplorerId) {
-//                ForEach(explorers.list, id: \.id) { explorer in
-//                    Text("\(explorer.name)").tag(explorer.id)
-//                }
-//            }
-//        }
-//    }
-    
-    
-    //
+
     
     func endPoint() -> String {
        return "https://"+selectedInBetween+"/api/v1/"
@@ -147,42 +150,24 @@ class Settings: ObservableObject {
                 .compactMap { Int($0) }
         }
     
-    func saveExplorers(array: [Int]) {
-            // Convert the array to a string
-            let arrayString = array.map { String($0) }.joined(separator: ",")
-
-            // Save the string to AppStorage
-            savedExplorers = arrayString
-        }
-
-    func readExplorers(array: inout [Int]) {
-            // Retrieve the string from AppStorage
-            let arrayString = savedExplorers
-
-            // Convert the string back to an array of integers
-            array = arrayString
-                .components(separatedBy: ",")
-                .compactMap { Int($0) }
-        }
-    
     
     var mapStyle: MapStyle {
         switch mapStyleChoice {
         case .standard:
-            return .standard
+            return .standard(elevation: .realistic)
         case .hybrid:
             return .hybrid(elevation: .realistic)
         case .imagery:
-            return .imagery
+            return .imagery(elevation: .realistic)
         }
     }
     
 }
 
 enum MapStyleChoice: String, CaseIterable {
-    case standard = "Standaard"
-    case hybrid = "Hibride"
-    case imagery = "Afbeeldingen"
+    case standard = "Standard"
+    case hybrid = "Hibrid"
+    case imagery = "Imagery"
 }
 
 

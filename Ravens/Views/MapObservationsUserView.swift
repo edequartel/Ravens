@@ -31,8 +31,8 @@ struct MapObservationsUserView: View {
     @State private var start = 0
     @State private var end = 100
     
-    @State private var elevation: MapStyle.Elevation = .realistic
-    @State private var isSheetObservationsViewPresented = false
+//    @State private var elevation: MapStyle.Elevation = .realistic
+//    @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -137,15 +137,7 @@ struct MapObservationsUserView: View {
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
-            
-            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
-                .padding([.top, .leading], 20)
         }
-        
-        .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsUserViewExtra(viewModel: observationsUserViewModel)
-        }
-        
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
         }
