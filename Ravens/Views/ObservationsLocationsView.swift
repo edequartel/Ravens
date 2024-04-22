@@ -15,7 +15,6 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
     @EnvironmentObject var settings: Settings
     
-    
     @State private var limit = 100
     @State private var offset = 0
     
@@ -39,9 +38,6 @@ struct ObservationsLocationView: View {
                     }
                 }
             }
-        }
-        .onAppear() {
-//            settings.initialLoadLocation = true
         }
         .padding(16)
     }

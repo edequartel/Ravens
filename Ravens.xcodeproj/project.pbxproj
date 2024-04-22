@@ -51,7 +51,6 @@
 		474C408A2B4DAA110038B3A5 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40892B4DAA110038B3A5 /* Region.swift */; };
 		474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408B2B4DAC590038B3A5 /* RegionViewModel.swift */; };
 		474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408D2B4DB2850038B3A5 /* RegionsView.swift */; };
-		474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40972B5000370038B3A5 /* OptionallyDecodable */; };
 		474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */; };
 		474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C409B2B500AE90038B3A5 /* ObservationsView.swift */; };
 		47568D2D2B59B54500E69B1A /* Observations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* Observations.swift */; };
@@ -63,7 +62,6 @@
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		47714FD12BD15A2600361C55 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47714FD02BD15A2600361C55 /* CircleButton.swift */; };
-		4771C2CF2B9E22340044783A /* SwiftySound in Frameworks */ = {isa = PBXBuildFile; productRef = 4771C2CE2B9E22340044783A /* SwiftySound */; };
 		4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
@@ -88,7 +86,6 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
-		47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6F4B32B91AA05008DDFBC /* Popovers */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
@@ -185,10 +182,7 @@
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
-				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
-				47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */,
-				4771C2CF2B9E22340044783A /* SwiftySound in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
@@ -296,13 +290,12 @@
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
-				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
-				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
-				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
+				476FA8A52B9B031B00665613 /* SoundsView.swift */,
+				4785CD1A2B95C87E002F52BE /* UserView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
+				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
@@ -311,16 +304,17 @@
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				47012C632BD40F31009C5044 /* FlipRadiusView.swift */,
-				47895E772BD593A400CEC1E9 /* FlipLocationView.swift */,
-				478747F62BD6A755009762BF /* FlipSpeciesView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
+				47895E772BD593A400CEC1E9 /* FlipLocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
+				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
+				478747F62BD6A755009762BF /* FlipSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
+				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				478747F82BD6AC06009762BF /* FlipUserView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
-				4785CD1A2B95C87E002F52BE /* UserView.swift */,
-				476FA8A52B9B031B00665613 /* SoundsView.swift */,
-				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
+				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,13 +361,10 @@
 			packageProductDependencies = (
 				474C40402B4BC5780038B3A5 /* Alamofire */,
 				474C404E2B4BD24F0038B3A5 /* RichText */,
-				474C40972B5000370038B3A5 /* OptionallyDecodable */,
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
 				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
-				47B6F4B32B91AA05008DDFBC /* Popovers */,
-				4771C2CE2B9E22340044783A /* SwiftySound */,
 				47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */,
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
 			);
@@ -409,13 +400,10 @@
 			packageReferences = (
 				474C403F2B4BC5780038B3A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */,
-				474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */,
-				4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */,
 				47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
@@ -765,28 +753,12 @@
 				minimumVersion = 2.3.0;
 			};
 		};
-		474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/idrougge/OptionallyDecodable";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamcichy/SwiftySound.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
 			};
 		};
 		4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
@@ -811,14 +783,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.3.0;
-			};
-		};
-		47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aheze/Popovers";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.2;
 			};
 		};
 		47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */ = {
@@ -847,20 +811,10 @@
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
 		};
-		474C40972B5000370038B3A5 /* OptionallyDecodable */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */;
-			productName = OptionallyDecodable;
-		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		4771C2CE2B9E22340044783A /* SwiftySound */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */;
-			productName = SwiftySound;
 		};
 		4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -876,11 +830,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
-		};
-		47B6F4B32B91AA05008DDFBC /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
 		};
 		47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */ = {
 			isa = XCSwiftPackageProductDependency;

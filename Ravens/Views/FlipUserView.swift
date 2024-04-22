@@ -25,6 +25,7 @@ struct FlipUserView: View {
         }
     }
 }
+
 #Preview {
     FlipUserView()
 }

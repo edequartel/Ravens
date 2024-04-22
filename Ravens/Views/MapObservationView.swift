@@ -25,6 +25,7 @@ struct MapObservationView: View {
     @ObservedObject var locationManager = LocationManager()
     
     @State private var circlePos: CLLocationCoordinate2D?
+    
     @State private var position: MapCameraPosition = .automatic
     
     

@@ -25,7 +25,6 @@ struct MapObservationsLocationView: View {
     @State private var POIs: [POI] = []
     @State private var polyOverlays = [MKPolygon]()
     
-    //    @State private var tappedCoordinate: CLLocationCoordinate2D?
     
     @State private var cameraPosition: MapCameraPosition = .automatic
     
@@ -74,8 +73,6 @@ struct MapObservationsLocationView: View {
                                 .stroke(.pink, lineWidth: 1)
                                 .foregroundStyle(.blue.opacity(0.1))
                         }
-                        
-                        
                     }
                     
                     .mapStyle(settings.mapStyle)
@@ -146,7 +143,7 @@ struct MapObservationsLocationView: View {
                         if let coordinate = proxy.convert(position, from: .local) {
                             settings.tappedCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                             
-                            print("Tapped coordinate: \(settings.tappedCoordinate)")
+//                            print("Tapped coordinate: \(settings.tappedCoordinate)")
                             
                             //lat,long -> locationId -> geoJSON > observation -> locations
                             polyOverlays.removeAll()
@@ -257,7 +254,7 @@ struct MapObservationsLocationView: View {
         var center: CLLocationCoordinate2D
         var span: MKCoordinateSpan
         
-        if settings.zoom {
+        if !settings.zoom {
              center = CLLocationCoordinate2D(
                 latitude: geoJSONViewModel.span.latitude,
                 longitude: geoJSONViewModel.span.longitude)
@@ -267,12 +264,20 @@ struct MapObservationsLocationView: View {
                 longitudeDelta: geoJSONViewModel.span.longitudeDelta)
         } else { //deze houden voor het bijhouden van de automatische nu in een zoom Variable maar dit moet de laatste Regio worden
              center = CLLocationCoordinate2D(
-                latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude)
+                latitude: latitude,
+                longitude: longitude)
             
              span = MKCoordinateSpan(
-                latitudeDelta: geoJSONViewModel.span.latitudeDelta * 15,
-                longitudeDelta: geoJSONViewModel.span.longitudeDelta * 15)
+                latitudeDelta: latitudeDelta,
+                longitudeDelta: longitudeDelta)
+            
+//             center = CLLocationCoordinate2D(
+//                latitude: geoJSONViewModel.span.latitude,
+//                longitude: geoJSONViewModel.span.longitude)
+//            
+//             span = MKCoordinateSpan(
+//                latitudeDelta: geoJSONViewModel.span.latitudeDelta * 15,
+//                longitudeDelta: geoJSONViewModel.span.longitudeDelta * 15)
         }
         
         let region = MKCoordinateRegion(center: center, span: span)
@@ -290,8 +295,6 @@ struct MapObservationsLocationView: View {
                 log.info(observationsLocationViewModel.span)
                 
                 cameraPosition = getCameraPosition()
-                
-                
             } )
     }
 }
