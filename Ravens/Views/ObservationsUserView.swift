@@ -12,8 +12,8 @@ import SwiftyBeaver
 struct ObservationsUserViewExtra: View {
     let log = SwiftyBeaver.self
     
-    //    var viewModel: ObservationsUserViewModel
     @EnvironmentObject var viewModel: ObservationsUserViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var settings: Settings
     
@@ -27,8 +27,8 @@ struct ObservationsUserViewExtra: View {
     
     
     var body: some View {
-        VStack {
-            VStack {
+        ZStack {
+//            VStack {
                 
 // DIT IS VOOR LATER MET UITBREIDING FOLLOWERS
 //                Picker("Observer", selection: $selectedExplorer) {
@@ -72,17 +72,25 @@ struct ObservationsUserViewExtra: View {
                         }
                     }
                 }
+
+//            }
+
+            Button("Dismiss") {
+                presentationMode.wrappedValue.dismiss()
             }
+            .topLeft()
+//            .padding(16)
+//            .buttonStyle(CircularButtonStyle())
             
         }
         
-        .alert(isPresented: $messageAlert) {
-            Alert(
-                title: Text("Action Not Allowed"),
-                message: Text("You cannot unfollow yourself."),
-                dismissButton: .default(Text("OK"))
-            )
-        }
+//        .alert(isPresented: $messageAlert) {
+//            Alert(
+//                title: Text("Action Not Allowed"),
+//                message: Text("You cannot unfollow yourself."),
+//                dismissButton: .default(Text("OK"))
+//            )
+//        }
         
         .onAppear() {
 // DIT IS VOOR LATER MET UITBREIDING FOLLOWERS
@@ -95,12 +103,12 @@ struct ObservationsUserViewExtra: View {
         }
     }
     
-    func fetchModelData() {
-        viewModel.fetchData(limit: 100, offset: 0, settings: settings, completion: {
-            userName = viewModel.observations?.results[0].user_detail?.name ?? "no name"
-        })
-        
-    }
+//    func fetchModelData() {
+//        viewModel.fetchData(limit: 100, offset: 0, settings: settings, completion: {
+//            userName = viewModel.observations?.results[0].user_detail?.name ?? "no name"
+//        })
+//        
+//    }
 }
 
 

@@ -49,9 +49,10 @@ struct SpeciesView: View {
                     HStack {
                         HStack {
                             NavigationLink(destination: 
-                                            FlipSpeciesView(
-                                                speciesID: species.id,
-                                                speciesName: species.name)
+                                           MapObservationsSpeciesView(
+                                            speciesID: species.id,
+                                               speciesName: species.name
+                                           )
                             )
                             {
                                 VStack(alignment: .leading) {

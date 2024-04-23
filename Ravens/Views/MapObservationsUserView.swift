@@ -16,8 +16,7 @@ struct MapObservationsUserView: View {
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
+    @State private var showFullScreenMap = false
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
@@ -31,8 +30,6 @@ struct MapObservationsUserView: View {
     @State private var start = 0
     @State private var end = 100
     
-//    @State private var elevation: MapStyle.Elevation = .realistic
-//    @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -137,7 +134,14 @@ struct MapObservationsUserView: View {
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
+            
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
         }
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsUserViewExtra()
+        }
+        
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
         }

@@ -14,6 +14,7 @@ struct ObservationsLocationView: View {
     
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
     @EnvironmentObject var settings: Settings
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var limit = 100
     @State private var offset = 0
@@ -22,24 +23,32 @@ struct ObservationsLocationView: View {
     var locationStr: String
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Location")
-                    .bold()
-                Text("\(viewModel.observations?.results.count ?? 0)x")
-                    .bold()
-            }
-            
-            List {
-                if let results =  viewModel.observations?.results {
-                    ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
-                        result in
-                        ObsView(obs: result, showLocation: true)
+        ZStack {
+            VStack {
+                HStack {
+                    Text("Location")
+                        .bold()
+                    Text("\(viewModel.observations?.results.count ?? 0)x")
+                        .bold()
+                }
+                
+                List {
+                    if let results =  viewModel.observations?.results {
+                        ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
+                            result in
+                            ObsView(obs: result, showLocation: true)
+                        }
                     }
                 }
             }
+            .padding(16)
+            
+            Button("Dismiss") {
+                presentationMode.wrappedValue.dismiss()
+            }
+            .topLeft()
         }
-        .padding(16)
+        
     }
         
 }

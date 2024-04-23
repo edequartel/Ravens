@@ -103,9 +103,6 @@
     "%lldx" : {
 
     },
-    "Action Not Allowed" : {
-
-    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -261,6 +258,9 @@
           }
         }
       }
+    },
+    "Dismiss" : {
+
     },
     "English %@" : {
       "extractionState" : "stale",
@@ -777,9 +777,6 @@
         }
       }
     },
-    "OK" : {
-
-    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -1120,12 +1117,6 @@
           }
         }
       }
-    },
-    "You cannot unfollow yourself." : {
-
-    },
-    "Zoom" : {
-
     }
   },
   "version" : "1.0"

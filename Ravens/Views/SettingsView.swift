@@ -92,7 +92,6 @@ struct SettingsView: View {
                         Text("\(Int(settings.radius)) m")
                     }
                     
-                    Toggle("Zoom", isOn: $settings.zoom)
                     
                     Slider(value: Binding(get: {
                         Double(settings.radius)

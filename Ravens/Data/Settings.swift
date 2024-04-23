@@ -32,8 +32,6 @@ class Settings: ObservableObject {
     @AppStorage("selectedRegion") var selectedRegion = 200
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
-    @AppStorage("zoom") var zoom: Bool = false
-    
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500
     @AppStorage("savePhotos") var savePhotos: Bool = false

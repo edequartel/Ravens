@@ -24,8 +24,8 @@ struct MapObservationView: View {
     
     @ObservedObject var locationManager = LocationManager()
     
+    @State private var showFullScreenMap = false
     @State private var circlePos: CLLocationCoordinate2D?
-    
     @State private var position: MapCameraPosition = .automatic
     
     
@@ -141,7 +141,15 @@ struct MapObservationView: View {
                     }
                 }
             }
+            
+            
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
         }
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsView()
+        }
+        
         .onAppear() {
             log.info("MapObservationView onAppear")
             
@@ -169,10 +177,10 @@ struct MapObservationView: View {
                 }
             } else {
                 log.info("MapObservationView NOT initiaLLoad")
-                circlePos = settings.currentLocation?.coordinate
-                
-                //get the observations
-                fetchDataModel()
+//                circlePos = settings.currentLocation?.coordinate
+//                
+//                //get the observations
+//                fetchDataModel()
             }
             
             //get selectedGroup

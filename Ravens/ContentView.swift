@@ -24,14 +24,16 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tab 1
-            FlipRadiusView()
+//            FlipRadiusView()
+            MapObservationView()
                 .tabItem {
                     Text("Radius")
                     Image(systemName: "circle")
                 }
 
             // Tab 2
-            FlipLocationView()
+//            FlipLocationView()
+            MapObservationsLocationView()
                 .tabItem {
                     Text("Location")
                     Image(systemName: "location")
@@ -49,7 +51,8 @@ struct ContentView: View {
                 }
             
             // Tab 4
-            FlipUserView()
+//            FlipUserView()
+            MapObservationsUserView()
                 .tabItem {
                     Text("Me")
                     Image(systemName: "person.fill")

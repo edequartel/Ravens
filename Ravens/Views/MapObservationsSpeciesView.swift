@@ -17,7 +17,7 @@ struct MapObservationsSpeciesView: View {
     
     @State private var limit = 100
     @State private var offset = 0
-    
+    @State private var showFullScreenMap = false
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
@@ -113,7 +113,17 @@ struct MapObservationsSpeciesView: View {
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
+            
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
         }
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsSpeciesView(
+                speciesID: speciesID,
+                speciesName: speciesName
+            )
+        }
+        
         .onAppear {
             fetchDataModel()
         }
