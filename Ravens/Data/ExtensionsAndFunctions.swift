@@ -321,3 +321,40 @@ extension Text {
             .truncationMode(.tail)
     }
 }
+
+
+
+struct RoundButtonStyle: ViewModifier {
+    var iconName: String
+    var backgroundColor: Color
+    var foregroundColor: Color
+    var shadowRadius: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .font(.title)  // Adjust the size of the image
+            .foregroundColor(foregroundColor)  // Color of the icon
+            .padding()  // Padding around the icon
+            .background(Circle()  // Creates a circular background
+                .fill(backgroundColor)  // Background color of the circle
+                .shadow(radius: shadowRadius))  // Shadow with a radius
+    }
+}
+
+// Extension to apply the modifier more easily
+extension View {
+    func roundButtonStyle(
+        iconName: String,
+        backgroundColor: Color,
+        foregroundColor: Color,
+        shadowRadius: CGFloat) -> some View {
+        self.modifier(
+            RoundButtonStyle(
+                iconName: iconName,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
+                shadowRadius: shadowRadius))
+    }
+}
+
+

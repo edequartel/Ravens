@@ -78,7 +78,7 @@ struct MapObservationsUserView: View {
                     
                     HStack {
                         Spacer()
-                        Text("Days")
+                        Text("Observations")
                             .bold()
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {

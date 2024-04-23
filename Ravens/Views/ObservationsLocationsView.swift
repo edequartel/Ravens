@@ -23,9 +23,21 @@ struct ObservationsLocationView: View {
     var locationStr: String
     
     var body: some View {
-        ZStack {
             VStack {
                 HStack {
+                    Button(action: {
+                        // Perform some action
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "map.fill")  // Use the iconName from the style
+                    }
+                    .roundButtonStyle(
+                        iconName: "map.fill",
+                        backgroundColor: .blue,
+                        foregroundColor: .white,
+                        shadowRadius: 6)
+                    
+                    Spacer()
                     Text("Location")
                         .bold()
                     Text("\(viewModel.observations?.results.count ?? 0)x")
@@ -42,13 +54,6 @@ struct ObservationsLocationView: View {
                 }
             }
             .padding(16)
-            
-            Button("Dismiss") {
-                presentationMode.wrappedValue.dismiss()
-            }
-            .topLeft()
-        }
-        
     }
         
 }

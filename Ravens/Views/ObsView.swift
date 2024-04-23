@@ -35,9 +35,6 @@ struct ObsView: View {
     
     var body: some View {
         LazyVStack {
-//            HStack {
-
-            
             HStack {
                 VStack {
                     HStack {
@@ -79,45 +76,23 @@ struct ObsView: View {
                 Spacer()
             }
             
-// DIT IS VOOR LATER MET UITBREIDING FOLLOWERS
-//            if showUsername {
-//                VStack {
-//                    HStack {
-//                        Text("\(obs.user_detail?.name ?? "noName")")
-//                            .footnoteGrayStyle()
-//                        Spacer()
-//                        Text("\(obs.user_detail?.id ?? 0)")
-//                            .footnoteGrayStyle()
-//                    }
-//                    
-////                    HStack {
-////                        Button("(un)follow") {
-////                            userId = obs.user_detail?.id ?? 0
-////                            let explorer = Explorer(id: userId, name: obs.user_detail?.name ?? "noName")
-////                            if settings.explorerExists(id: userId) {
-////                                print("remove")
-////                                settings.removeAndSaveExplorer(id: userId)
-////                            } else {
-////                                print("add")
-////                                settings.addAndSaveExplorer(newExplorer: explorer)
-////                            }
-////                            settings.printExplorers()
-////                        }
-////                        Spacer()
-////                        Image(systemName: settings.explorerExists(
-////                            id: obs.user_detail?.id ?? 0) ? "person.fill" : "person.badge.plus"
-////                        )
-////                            .foregroundColor(.blue)
-////                    }
-//                }
-//            }
-
-            
             if showLocation {
                 HStack {
                     Text("\(obs.location_detail?.name ?? "name")")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
+                }
+            }
+            
+            if showUsername {
+                VStack {
+                    HStack {
+                        Text("\(obs.user_detail?.name ?? "noName")")
+                            .footnoteGrayStyle()
+                        Spacer()
+//                        Text("\(obs.user_detail?.id ?? 0)")
+//                            .footnoteGrayStyle()
+                    }
                 }
             }
             

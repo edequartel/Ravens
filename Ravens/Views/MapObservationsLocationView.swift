@@ -75,6 +75,8 @@ struct MapObservationsLocationView: View {
                                 .stroke(.pink, lineWidth: 1)
                                 .foregroundStyle(.blue.opacity(0.1))
                         }
+//                        .drawingGroup()
+                        
                     }
                     
                     .mapStyle(settings.mapStyle)
@@ -228,7 +230,9 @@ struct MapObservationsLocationView: View {
                     //only once
                     settings.initialLoadLocation = false
                 }
-            } 
+            } else {
+                fetchDataModel()
+            }
             
             //get selectedGroup
             log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
@@ -260,6 +264,7 @@ struct MapObservationsLocationView: View {
     }
     
     func fetchDataModel() {
+        log.error("MapObservationsLocationView fetchDataModel")
         observationsLocationViewModel.fetchData(
             locationId:  settings.locationId,
             limit: 100,

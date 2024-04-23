@@ -259,9 +259,6 @@
         }
       }
     },
-    "Dismiss" : {
-
-    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -767,7 +764,6 @@
       }
     },
     "Observations" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

@@ -26,14 +26,14 @@ struct MapObservationView: View {
     
     @State private var showFullScreenMap = false
     @State private var circlePos: CLLocationCoordinate2D?
-    @State private var position: MapCameraPosition = .automatic
+    @State private var cameraPosition: MapCameraPosition = .automatic
     
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             VStack {
                 MapReader { proxy in
-                    Map(position: $position) { // centre and span for the camera
+                    Map(position: $cameraPosition) { // centre and span for the camera
                         
                         UserAnnotation() //give dynamically the users position
                         
@@ -171,6 +171,7 @@ struct MapObservationView: View {
                     
                     //get the observations
                     fetchDataModel()
+                    cameraPosition = getCameraPosition()
                     
                     //only once
                     settings.initialLoad = false
@@ -180,7 +181,8 @@ struct MapObservationView: View {
 //                circlePos = settings.currentLocation?.coordinate
 //                
 //                //get the observations
-//                fetchDataModel()
+                fetchDataModel()
+                cameraPosition = getCameraPosition()
             }
             
             //get selectedGroup
@@ -195,6 +197,20 @@ struct MapObservationView: View {
         } else {
             return Color.white
         }
+    }
+    
+    func getCameraPosition() -> MapCameraPosition {
+        let center = CLLocationCoordinate2D(
+            latitude: settings.currentLocation?.coordinate.latitude ?? 0,
+            longitude: settings.currentLocation?.coordinate.longitude ?? 0)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: Double(settings.radius) * 0.00004,
+            longitudeDelta: Double(settings.radius) * 0.00004)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
     }
     
     func fetchDataModel() {

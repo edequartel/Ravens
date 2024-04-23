@@ -27,21 +27,35 @@ struct ObservationsSpeciesView: View {
     let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     
     var body: some View {
-        ZStack {
             VStack {
-                Button {
-                    isSheetPresented.toggle()
-                } label: {
-                    HStack {
-                        Image(systemName: "info.circle")
-                        Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
-                            .font(.headline)
+                HStack {
+                    Button(action: {
+                        // Perform some action
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "map.fill")  // Use the iconName from the style
                     }
+                    .roundButtonStyle(
+                        iconName: "map.fill",
+                        backgroundColor: .blue,
+                        foregroundColor: .white,
+                        shadowRadius: 6)
+                    
+                    Spacer()
+                    Button {
+                        isSheetPresented.toggle()
+                    } label: {
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
+                                .font(.headline)
+                        }
+                    }
+                    .bold()
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.obsGreenEagle)
                 }
                 .padding(16)
-                .bold()
-                .buttonStyle(.bordered)
-                .foregroundColor(.obsGreenEagle)
                 
                 if endOfListReached {
                     EndOfListObsView()
@@ -69,14 +83,9 @@ struct ObservationsSpeciesView: View {
                     }
                 }
             }
-            Button("Dismiss") {
-                presentationMode.wrappedValue.dismiss()
-            }
-            .topLeft()
-        }
-//        .sheet(isPresented: $isSheetPresented) {
-//                    SpeciesDetailsView(speciesID: speciesID)
-//                }
+        .sheet(isPresented: $isSheetPresented) {
+                    SpeciesDetailsView(speciesID: speciesID)
+                }
     }
 }
 

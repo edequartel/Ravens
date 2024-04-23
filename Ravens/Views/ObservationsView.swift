@@ -11,15 +11,24 @@ import SwiftUI
 struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
-    
     @Environment(\.presentationMode) var presentationMode
-//    @EnvironmentObject var settings: Settings
-//    @Binding var isShowing: Bool
     
     var body: some View {
-        ZStack {
             VStack {
                 HStack {
+                    Button(action: {
+                        // Perform some action
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "map.fill")  // Use the iconName from the style
+                    }
+                    .roundButtonStyle(
+                        iconName: "map.fill",
+                        backgroundColor: .blue,
+                        foregroundColor: .white,
+                        shadowRadius: 6)
+                    
+                    Spacer()
                     Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                         .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .black)
                     
@@ -44,13 +53,6 @@ struct ObservationsView: View {
                 }
                 Spacer()
             }
-            
-            Button("Dismiss") {
-                presentationMode.wrappedValue.dismiss()
-            }
-            .topLeft()
-            
-        }
     }
 }
 
