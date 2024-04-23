@@ -39,10 +39,22 @@ struct SpeciesView: View {
     var body: some View {
         NavigationStack {
            List {
-                ForEach(speciesViewModel.filteredSpecies(by: selectedSortOption, searchText: searchText, filterOption: selectedFilterOption, rarityFilterOption: settings.selectedRarity, isBookmarked: settings.isBookMarkVisible, additionalIntArray: bookMarks), id: \.species) { species in
+                ForEach(speciesViewModel.filteredSpecies(
+                    by: selectedSortOption,
+                    searchText: searchText,
+                    filterOption: selectedFilterOption, 
+                    rarityFilterOption: settings.selectedRarity,
+                    isBookmarked: settings.isBookMarkVisible,
+                    additionalIntArray: bookMarks), id: \.species) { species in
                     HStack {
                         HStack {
-                            NavigationLink(destination: MapObservationsSpeciesView(speciesID: species.id, speciesName: species.name)) {
+                            NavigationLink(destination: 
+                                           MapObservationsSpeciesView(
+                                            speciesID: species.id,
+                                               speciesName: species.name
+                                           )
+                            )
+                            {
                                 VStack(alignment: .leading) {
                                     HStack(spacing: 4) {
                                         Image(systemName: "circle.fill")

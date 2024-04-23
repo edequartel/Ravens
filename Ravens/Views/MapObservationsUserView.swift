@@ -16,8 +16,7 @@ struct MapObservationsUserView: View {
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var myPosition : MapCameraPosition = .userLocation(fallback: .automatic)
-    
+    @State private var showFullScreenMap = false
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
@@ -31,8 +30,6 @@ struct MapObservationsUserView: View {
     @State private var start = 0
     @State private var end = 100
     
-    @State private var elevation: MapStyle.Elevation = .realistic
-    @State private var isSheetObservationsViewPresented = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -81,7 +78,7 @@ struct MapObservationsUserView: View {
                     
                     HStack {
                         Spacer()
-                        Text("Days")
+                        Text("Observations")
                             .bold()
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {
@@ -138,14 +135,11 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
             
-//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
-            
-            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
-                .padding([.top, .leading], 20)
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
         }
-        
-        .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsUserViewExtra(viewModel: observationsUserViewModel)
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsUserViewExtra()
         }
         
         .onAppear {

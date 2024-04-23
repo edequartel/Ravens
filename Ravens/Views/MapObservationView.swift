@@ -11,6 +11,9 @@ import SwiftyBeaver
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
+    @State private var locations: [Location] = []
+    @State private var POIs: [POI] = []
+    
     @ObservedObject var viewModel = POIViewModel()
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
@@ -21,52 +24,36 @@ struct MapObservationView: View {
     
     @ObservedObject var locationManager = LocationManager()
     
-    @State private var limit = 100
-    @State private var offset = 0
-    
-    @State private var cameraPosition: MapCameraPosition?
-    @State private var isSheetObservationsViewPresented = false
-    @State private var MapCameraPositiondefault = MapCameraPosition
-        .region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-            )
-        )
-    
+    @State private var showFullScreenMap = false
     @State private var circlePos: CLLocationCoordinate2D?
+    @State private var cameraPosition: MapCameraPosition = .automatic
     
-    // New computed property
-    var cameraBinding: Binding<MapCameraPosition> {
-        Binding<MapCameraPosition>(
-            get: { self.cameraPosition ?? self.MapCameraPositiondefault },
-            set: { self.cameraPosition = $0 }
-        )
-    }
     
     var body: some View {
         ZStack(alignment: .topLeading) {
             VStack {
                 MapReader { proxy in
-                    Map(position: cameraBinding) {
+                    Map(position: $cameraPosition) { // centre and span for the camera
                         
-                        UserAnnotation()
+                        UserAnnotation() //give dynamically the users position
                         
+                        // POI
                         if (settings.poiOn) {
-                            ForEach(viewModel.poiList, id: \.name) { poi in
+                            ForEach(POIs, id: \.name) { poi in
                                 Annotation(poi.name, coordinate: poi.coordinate.cllocationCoordinate) {
                                     Triangle()
                                         .fill(Color.gray)
                                         .frame(width: 5, height: 5)
                                         .overlay(
                                             Triangle()
-                                                .stroke(Color.white, lineWidth: 1) // Customize the border color and width
+                                                .stroke(Color.red, lineWidth: 1) // Customize the border color and width
                                         )
                                 }
                             }
                         }
                         
-                        ForEach(observationsViewModel.locations) { location in
+                        // observations
+                        ForEach(locations) { location in
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
                                     .fill(Color(myColor(value: location.rarity)))
@@ -81,12 +68,14 @@ struct MapObservationView: View {
                             }
                         }
                         
+                        // Circle
                         MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
                             .foregroundStyle(.clear.opacity(100))
-                            .stroke(colorByMapStyle(), lineWidth: 1)
+                            .stroke(colorByMapStyle(), lineWidth: 2)
+                        
+                        
                     }
                     .mapStyle(settings.mapStyle)
-                    
                     .safeAreaInset(edge: .bottom) {
                         VStack {
                             SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
@@ -100,13 +89,7 @@ struct MapObservationView: View {
                                     if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
                                         settings.selectedDate = min(newDate, Date())
                                     }
-                                    
-                                    // Debugging or additional actions
-                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservatiobsData completed")
-                                    } )
-                                    
-                                    
+                                    fetchDataModel()
                                 }) {
                                     Image(systemName: "backward.fill")
                                 }
@@ -117,10 +100,7 @@ struct MapObservationView: View {
                                         // Ensure the new date does not go beyond today
                                         settings.selectedDate = min(newDate, Date())
                                     }
-                                    // Debugging or additional actions
-                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
-                                    } )
+                                    fetchDataModel()
                                 }) {
                                     Image(systemName: "forward.fill")
                                 }
@@ -129,35 +109,31 @@ struct MapObservationView: View {
                                     settings.selectedDate = Date()
                                     log.info("Date updated to \(settings.selectedDate)")
                                     
-                                    observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
-                                        log.info("MapObservationsLocationView: fetchObservationsLocationData completed")
-                                    } )
+                                    fetchDataModel()
                                 }) {
                                     Image(systemName: "square.fill")
                                 }
-                                
-                                
+
                             }
                             .frame(maxHeight: 30)
                         }
                         .padding(5)
-                            .foregroundColor(.obsGreenFlower)
-                            .background(Color.obsGreenEagle.opacity(0.5))
-                        
+                        .foregroundColor(.obsGreenFlower)
+                        .background(Color.obsGreenEagle.opacity(0.5))
                     }
-                    
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
-                            observationsViewModel.fetchData(lat: coordinate.latitude, long: coordinate.longitude, settings: settings, completion: {
-                                log.info("fetchData observationsViewModel completed")
-                            } )
+                            circlePos = CLLocationCoordinate2D(
+                                latitude: coordinate.latitude,
+                                longitude: coordinate.longitude
+                            )
                             
-                            // Create a new CLLocation instance with the updated coordinates
-                            let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                            circlePos = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                            
-                            // Update currentLocation with the new CLLocation instance
-                            settings.currentLocation = newLocation //?? why>>for other sheetview
+                            settings.currentLocation = CLLocation(
+                                latitude: coordinate.latitude,
+                                longitude: coordinate.longitude
+                            )
+
+                            fetchDataModel()
                         }
                     }
                     .mapControls() {
@@ -166,65 +142,52 @@ struct MapObservationView: View {
                 }
             }
             
-//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
             
-            CircleButton(isToggleOn: $isSheetObservationsViewPresented)
-                .padding([.top, .leading], 20)
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
+        }
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsView()
         }
         
-        //
-        
-        .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsView(isShowing: $isSheetObservationsViewPresented)
-        }
-        //
-        
-        .onAppear() { //wellicht op een andere plek
+        .onAppear() {
+            log.info("MapObservationView onAppear")
+            
+            //getUser
             userViewModel.fetchUserData(settings: settings, completion: {
-                print("userViewModel.fetchUserData")
+                log.info("userViewModel.fetchUserData userid \(userViewModel.user?.id ?? 0)")
                 settings.userId = userViewModel.user?.id ?? 0
-                log.error(">>\(userViewModel.user?.id ?? 0)")
             })
             
-            viewModel.fetchPOIs()
+            //get the POIs
+            viewModel.fetchPOIs(completion: { POIs = viewModel.POIs} )
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                
-                if settings.isFirstAppearObsView {
+            //get the location
+            if settings.initialLoad {
+                log.info("MapObservationView initiaLLoad, get data at startUp and Position")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
+                    settings.currentLocation = self.locationManager.location
+                    circlePos = settings.currentLocation?.coordinate
                     
-                    if let location = self.locationManager.location {
-                        log.info("get the location at onAppear in MapObservationView")
-                        circlePos = location.coordinate
-                        settings.currentLocation = location
-                    } else {
-                        log.error("Location is not available yet")
-                        // Handle the case when location is not available
-                    }
-                }
-                
-                //getdata
-                observationsViewModel.fetchData(lat: circlePos?.latitude ?? 0, long: circlePos?.longitude ?? 0, settings: settings, completion: {
-                    log.info("fetchData observationsViewModel ONAPPEAR completed")
+                    //get the observations
+                    fetchDataModel()
+                    cameraPosition = getCameraPosition()
                     
-                    // Initialize cameraPosition with user's current location
-                    if settings.isFirstAppearObsView {
-                        let delta = Double(settings.radius) * 0.000032
-                        cameraPosition = MapCameraPosition
-                            .region(
-                                MKCoordinateRegion(
-                                    center: CLLocationCoordinate2D(latitude: circlePos?.latitude ?? 0,
-                                                                   longitude: circlePos?.longitude ?? 0),
-                                    span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-                                )
-                            )
-                        settings.isFirstAppearObsView = false
-                    }
+                    //only once
+                    settings.initialLoad = false
                 }
-                )
-
-                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("fetcheddata speciesGroupViewModel") })
+            } else {
+                log.info("MapObservationView NOT initiaLLoad")
+//                circlePos = settings.currentLocation?.coordinate
+//                
+//                //get the observations
+                fetchDataModel()
+                cameraPosition = getCameraPosition()
             }
+            
+            //get selectedGroup
+            log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
         }
     }
     
@@ -235,8 +198,31 @@ struct MapObservationView: View {
             return Color.white
         }
     }
+    
+    func getCameraPosition() -> MapCameraPosition {
+        let center = CLLocationCoordinate2D(
+            latitude: settings.currentLocation?.coordinate.latitude ?? 0,
+            longitude: settings.currentLocation?.coordinate.longitude ?? 0)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: Double(settings.radius) * 0.00004,
+            longitudeDelta: Double(settings.radius) * 0.00004)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
+    }
+    
+    func fetchDataModel() {
+        observationsViewModel.fetchData(
+            lat: circlePos?.latitude ?? 0,
+            long: circlePos?.longitude ?? 0,
+            settings: settings,
+            completion: { locations = observationsViewModel.locations }
+        )
+    }
+    
 }
-
 
 struct MapObservationView_Previews: PreviewProvider {
     static var previews: some View {

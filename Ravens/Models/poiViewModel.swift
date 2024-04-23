@@ -9,6 +9,7 @@ import Alamofire
 import Foundation
 import SwiftUI
 import MapKit
+import SwiftyBeaver
 
 struct POI: Decodable {
     let name: String
@@ -29,46 +30,33 @@ struct POIList: Decodable {
 }
 
 class POIViewModel: ObservableObject {
-    @Published var poiList = [POI]()
+    let log = SwiftyBeaver.self
+    
+    @Published var POIs = [POI]()
 
-    func fetchPOIs() {
+    func fetchPOIs(completion: @escaping () -> Void = {}) {
         // Try to load from local JSON file
         if let localData = self.loadJsonFromFile() {
-//            print("JSON data: \(String(data: localData, encoding: .utf8) ?? "Unable to format data as string")")
             let decoder = JSONDecoder()
-            if let poiList = try? decoder.decode(POIList.self, from: localData) {
-//                print("Decoded POIList: \(poiList)")
-                self.poiList = poiList.poi
-//                print(poiList.poi)
+            if let POIs = try? decoder.decode(POIList.self, from: localData) {
+                self.POIs = POIs.poi
+                completion()
+        
             }
             return
         }
-
-//        // Otherwise, fetch from network
-//        AF.request("https://api.example.com/poi").responseDecodable(of: POIList.self) { response in
-//            switch response.result {
-//            case .success(let poiList):
-//                DispatchQueue.main.async {
-//                    self.poiList = poiList.poi
-//                }
-//            case .failure(let error):
-//                print("Error: \(error)")
-//            }
-//        }
     }
 
     private func loadJsonFromFile() -> Data? {
         if let path = Bundle.main.path(forResource: "poi", ofType: "json") {
             do {
-//                print("File poi.json FOUND in app bundle.")
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 return data
             } catch {
-                // handle error
-                print("Error loading file: \(error.localizedDescription)")
+                log.error("Error loading file: \(error.localizedDescription)")
             }
         } else {
-//            print("File poi.json not found in app bundle.")
+            log.error("File poi.json not found in app bundle.")
         }
         return nil
     }

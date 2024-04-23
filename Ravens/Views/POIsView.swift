@@ -11,10 +11,11 @@ struct POIsView: View {
     @ObservedObject var viewModel = POIViewModel()
 
     var body: some View {
-        List(viewModel.poiList, id: \.name) { poi in
+        List(viewModel.POIs, id: \.name) { poi in
             VStack(alignment: .leading) {
                 Text(poi.name)
-                Text("Latitude: \(poi.coordinate.latitude), Longitude: \(poi.coordinate.longitude)")
+                Text("Latitude: \(poi.coordinate.latitude)")
+                Text("Longitude: \(poi.coordinate.longitude)")
             }
         }
         .onAppear {

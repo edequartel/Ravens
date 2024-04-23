@@ -50,7 +50,6 @@
 		474C408A2B4DAA110038B3A5 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40892B4DAA110038B3A5 /* Region.swift */; };
 		474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408B2B4DAC590038B3A5 /* RegionViewModel.swift */; };
 		474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408D2B4DB2850038B3A5 /* RegionsView.swift */; };
-		474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40972B5000370038B3A5 /* OptionallyDecodable */; };
 		474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40992B50073C0038B3A5 /* ObservationsViewModel.swift */; };
 		474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C409B2B500AE90038B3A5 /* ObservationsView.swift */; };
 		47568D2D2B59B54500E69B1A /* Observations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* Observations.swift */; };
@@ -58,16 +57,13 @@
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
-		4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 4767396B2B5D5BE400DC8187 /* FloatingButton */; };
 		476843D42BA9D43D004EF208 /* LottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 476843D32BA9D43D004EF208 /* LottieFile.json */; };
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
 		47714FD12BD15A2600361C55 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47714FD02BD15A2600361C55 /* CircleButton.swift */; };
-		4771C2CF2B9E22340044783A /* SwiftySound in Frameworks */ = {isa = PBXBuildFile; productRef = 4771C2CE2B9E22340044783A /* SwiftySound */; };
 		4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
-		477ECF162B98972900D96BE9 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF152B98972900D96BE9 /* WeatherView.swift */; };
 		477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED86D2BA9CFE900B0D73C /* LottieView.swift */; };
 		477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 477ED8702BA9D0AD00B0D73C /* Lottie */; };
 		477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */; };
@@ -86,13 +82,10 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
-		47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6F4B32B91AA05008DDFBC /* Popovers */; };
-		47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
 		47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */; };
-		47E2DFBB2BA82A5400040221 /* SimpleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2DFBA2BA82A5400040221 /* SimpleMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,13 +142,12 @@
 		47714FD02BD15A2600361C55 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinspingdoorvoer.mp3; path = Audio/perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
-		477ECF152B98972900D96BE9 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
-		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
+		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		4785CD162B95C835002F52BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4785CD182B95C856002F52BE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4785CD1A2B95C87E002F52BE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -167,13 +159,10 @@
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
-		47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
 		47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListObsView.swift; sourceTree = "<group>"; };
-		47DB898E2B79FB4A0093C1ED /* krommerijn.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = krommerijn.json; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsView.swift; sourceTree = "<group>"; };
-		47E2DFBA2BA82A5400040221 /* SimpleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMapView.swift; sourceTree = "<group>"; };
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,12 +173,8 @@
 			files = (
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
-				4767396C2B5D5BE400DC8187 /* FloatingButton in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
-				474C40982B5000370038B3A5 /* OptionallyDecodable in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
-				47B6F4B42B91AA05008DDFBC /* Popovers in Frameworks */,
-				4771C2CF2B9E22340044783A /* SwiftySound in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
@@ -203,14 +188,8 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				47714FD02BD15A2600361C55 /* CircleButton.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
-				47E2DFBA2BA82A5400040221 /* SimpleMapView.swift */,
-				47DB898E2B79FB4A0093C1ED /* krommerijn.json */,
-				47B7E3B52B5D9C5500B88043 /* FloatingButton.swift */,
-				477ECF152B98972900D96BE9 /* WeatherView.swift */,
-				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -280,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				472633202BB5981A00CEA05E /* poi.json */,
+				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C403B2B4BC5070038B3A5 /* Species.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
 				474C40522B4BFD090038B3A5 /* RegionList.swift */,
@@ -297,17 +277,17 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47714FD02BD15A2600361C55 /* CircleButton.swift */,
 				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
-				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
-				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
-				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
+				476FA8A52B9B031B00665613 /* SoundsView.swift */,
+				4785CD1A2B95C87E002F52BE /* UserView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
+				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
@@ -316,12 +296,13 @@
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
+				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
+				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
-				4785CD1A2B95C87E002F52BE /* UserView.swift */,
-				476FA8A52B9B031B00665613 /* SoundsView.swift */,
-				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
+				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,14 +349,10 @@
 			packageProductDependencies = (
 				474C40402B4BC5780038B3A5 /* Alamofire */,
 				474C404E2B4BD24F0038B3A5 /* RichText */,
-				474C40972B5000370038B3A5 /* OptionallyDecodable */,
 				474093862B55B7AC004F10C5 /* MarkdownUI */,
 				4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */,
-				4767396B2B5D5BE400DC8187 /* FloatingButton */,
 				4770754A2B711681002D2DD8 /* KeychainAccess */,
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
-				47B6F4B32B91AA05008DDFBC /* Popovers */,
-				4771C2CE2B9E22340044783A /* SwiftySound */,
 				47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */,
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
 			);
@@ -411,14 +388,10 @@
 			packageReferences = (
 				474C403F2B4BC5780038B3A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */,
-				474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */,
 				474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
-				4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 				477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */,
-				4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */,
 				47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
@@ -471,7 +444,6 @@
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
-				477ECF162B98972900D96BE9 /* WeatherView.swift in Sources */,
 				47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */,
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
@@ -480,7 +452,6 @@
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
-				47B7E3B62B5D9C5500B88043 /* FloatingButton.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
@@ -511,7 +482,6 @@
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
-				47E2DFBB2BA82A5400040221 /* SimpleMapView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
 				474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
@@ -767,36 +737,12 @@
 				minimumVersion = 2.3.0;
 			};
 		};
-		474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/idrougge/OptionallyDecodable";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
-		4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/FloatingButton.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.2;
-			};
-		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamcichy/SwiftySound.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
 			};
 		};
 		4774D2C82B5BEE420096A0E3 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
@@ -821,14 +767,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.3.0;
-			};
-		};
-		47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aheze/Popovers";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.2;
 			};
 		};
 		47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */ = {
@@ -857,25 +795,10 @@
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
 		};
-		474C40972B5000370038B3A5 /* OptionallyDecodable */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474C40962B5000370038B3A5 /* XCRemoteSwiftPackageReference "OptionallyDecodable" */;
-			productName = OptionallyDecodable;
-		};
-		4767396B2B5D5BE400DC8187 /* FloatingButton */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4767396A2B5D5BE400DC8187 /* XCRemoteSwiftPackageReference "FloatingButton" */;
-			productName = FloatingButton;
-		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		4771C2CE2B9E22340044783A /* SwiftySound */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4771C2CD2B9E22340044783A /* XCRemoteSwiftPackageReference "SwiftySound" */;
-			productName = SwiftySound;
 		};
 		4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -891,11 +814,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
-		};
-		47B6F4B32B91AA05008DDFBC /* Popovers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47B6F4B22B91AA05008DDFBC /* XCRemoteSwiftPackageReference "Popovers" */;
-			productName = Popovers;
 		};
 		47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */ = {
 			isa = XCSwiftPackageProductDependency;

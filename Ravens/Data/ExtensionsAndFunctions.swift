@@ -13,7 +13,7 @@ import SwiftUI
 //let latitude = 52.023861
 
 
-//gouda
+//gouda en span nederland
 let latitude = 52.013077-0.2
 let longitude = 4.713450+0.1
 
@@ -276,3 +276,85 @@ func calculateLocalStorageSize() -> String {
     let sizeInMB = Double(totalSize) / 1024.0 / 1024.0
     return String(format: "%.2f MB", sizeInMB)
 }
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+        
+        self.init(red: Double(r) / 0xff, green: Double(g) / 0xff, blue: Double(b) / 0xff)
+    }
+}
+
+extension View {
+    func topLeft() -> some View {
+        self
+            .modifier(TopLeftModifier())
+    }
+}
+
+struct TopLeftModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        VStack {
+            HStack {
+                content
+                    .padding([.top, .leading], 10)
+                Spacer() // Pushes the view to the left
+            }
+            Spacer() // Pushes the view to the top
+        }
+    }
+}
+
+extension Text {
+    func footnoteGrayStyle() -> some View {
+        self
+            .foregroundColor(.gray)
+            .font(.footnote)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+    }
+}
+
+
+
+struct RoundButtonStyle: ViewModifier {
+    var iconName: String
+    var backgroundColor: Color
+    var foregroundColor: Color
+    var shadowRadius: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .font(.title)  // Adjust the size of the image
+            .foregroundColor(foregroundColor)  // Color of the icon
+            .padding()  // Padding around the icon
+            .background(Circle()  // Creates a circular background
+                .fill(backgroundColor)  // Background color of the circle
+                .shadow(radius: shadowRadius))  // Shadow with a radius
+    }
+}
+
+// Extension to apply the modifier more easily
+extension View {
+    func roundButtonStyle(
+        iconName: String,
+        backgroundColor: Color,
+        foregroundColor: Color,
+        shadowRadius: CGFloat) -> some View {
+        self.modifier(
+            RoundButtonStyle(
+                iconName: iconName,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
+                shadowRadius: shadowRadius))
+    }
+}
+
+

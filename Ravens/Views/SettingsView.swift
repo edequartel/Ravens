@@ -92,6 +92,7 @@ struct SettingsView: View {
                         Text("\(Int(settings.radius)) m")
                     }
                     
+                    
                     Slider(value: Binding(get: {
                         Double(settings.radius)
                     }, set: {

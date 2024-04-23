@@ -17,24 +17,31 @@ struct ContentView: View {
     @StateObject private var keyChainviewModel = KeychainViewModel()
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
+
     
     @State private var locationId: Int?
     
     var body: some View {
         TabView {
             // Tab 1
+//            FlipRadiusView()
             MapObservationView()
-            .tabItem {
-                Text("Radius")
-                Image(systemName: "circle")
-            }
-            
+                .tabItem {
+                    Text("Radius")
+                    Image(systemName: "circle")
+                }
+
             // Tab 2
+//            FlipLocationView()
             MapObservationsLocationView()
+                .tabItem {
+                    Text("Location")
+                    Image(systemName: "location")
+                }
             .tabItem {
                 Text("Area")
                 Image(systemName: "pentagon")
-            }
+            }            
             
             // Tab 2
             SpeciesView()
@@ -44,6 +51,7 @@ struct ContentView: View {
                 }
             
             // Tab 4
+//            FlipUserView()
             MapObservationsUserView()
                 .tabItem {
                     Text("Me")

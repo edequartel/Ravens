@@ -20,7 +20,7 @@ class ObsViewModel: ObservableObject {
     func fetchData(for obsID: Int, completion: @escaping () -> Void) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
-        log.error(fileURL)
+        log.info("ObsViewModel \(fileURL)")
         
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
@@ -33,7 +33,7 @@ class ObsViewModel: ObservableObject {
             "Authorization": "Token " + keyChainViewModel.token
         ]
         
-        log.error("\(url) \(headers)")
+        log.info("ObsViewModel url: \(url) \(headers)")
         
         AF.request(url, headers: headers).responseData { response in
             switch response.result {

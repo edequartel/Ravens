@@ -14,20 +14,16 @@ struct MapObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-
     
     @State private var limit = 100
     @State private var offset = 0
-    
-    @State private var isSheetObservationsViewPresented = false
-    
+    @State private var showFullScreenMap = false
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
             span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
         )
     )
-    
     
     var speciesID: Int
     var speciesName: String
@@ -80,23 +76,18 @@ struct MapObservationsSpeciesView: View {
                             .bold()
                         Button(action: {
                             if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-                                // Limiting the date to not go beyond today
                                 settings.selectedDate = min(newDate, Date())
                             }
-                            // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0,date: settings.selectedDate, days: settings.days)
+                            fetchDataModel()
                         }) {
                             Image(systemName: "backward.fill")
                         }
                         
                         Button(action: {
-                            // Calculate the potential new date by adding days to the selected date
                             if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-                                // Ensure the new date does not go beyond today
                                 settings.selectedDate = min(newDate, Date())
                             }
-                            // Debugging or additional actions
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
+                            fetchDataModel()
                         }) {
                             Image(systemName: "forward.fill")
                         }
@@ -104,7 +95,7 @@ struct MapObservationsSpeciesView: View {
                         Button(action: {
                             settings.selectedDate = Date()
                             log.info("Date updated to \(settings.selectedDate)")
-                            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days)
+                            fetchDataModel()
                         }) {
                             Image(systemName: "square.fill")
                         }
@@ -116,8 +107,6 @@ struct MapObservationsSpeciesView: View {
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
-
-            
             .mapStyle(settings.mapStyle)
             .mapControls() {
                 MapUserLocationButton()
@@ -125,17 +114,18 @@ struct MapObservationsSpeciesView: View {
                 MapCompass() //tapping this makes it north
             }
             
-//            ObservationCircle(toggle: $isSheetObservationsViewPresented, colorHex: "f7b731")
-            
-            CircleButton(isToggleOn: $isSheetObservationsViewPresented)                
-                .padding([.top, .leading], 20) // Apply padding to the top and leading edges
+            CircleButton(isToggleOn: $showFullScreenMap)
+                .topLeft()
         }
-        .sheet(isPresented: $isSheetObservationsViewPresented) {
-            ObservationsSpeciesView(speciesID: speciesID, speciesName: speciesName)
-        }
-        .onAppear {
-            observationsSpeciesViewModel.fetchData(speciesId: speciesID, limit: 100, offset: 0, date: settings.selectedDate, days: settings.days
+        .fullScreenCover(isPresented: $showFullScreenMap) {
+            ObservationsSpeciesView(
+                speciesID: speciesID,
+                speciesName: speciesName
             )
+        }
+        
+        .onAppear {
+            fetchDataModel()
         }
     }
     
@@ -143,6 +133,17 @@ struct MapObservationsSpeciesView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE dd-MM"
         return formatter
+    }
+    
+    func fetchDataModel() {
+        // Debugging or additional actions
+        observationsSpeciesViewModel.fetchData(
+            speciesId: speciesID,
+            limit: 100,
+            offset: 0,
+            date: settings.selectedDate,
+            days: settings.days
+        )
     }
 }
 

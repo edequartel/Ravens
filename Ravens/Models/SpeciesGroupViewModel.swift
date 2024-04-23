@@ -20,7 +20,7 @@ class SpeciesGroupViewModel: ObservableObject {
         self.settings = settings
     }
     
-    func fetchData(language: String, completion: @escaping (Bool) -> Void) {
+    func fetchData(language: String, completion: @escaping (Bool) -> Void = {_ in }) {
         log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
         

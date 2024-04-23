@@ -10,13 +10,33 @@ import Alamofire
 import MapKit
 import SwiftyBeaver
 
-struct Location: Identifiable {
+struct Location: Identifiable, Hashable {
     let id = UUID()
     var name: String
     var coordinate: CLLocationCoordinate2D
     var rarity: Int
     var hasPhoto: Bool
     var hasSound: Bool
+
+    static func == (lhs: Location, rhs: Location) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.name == rhs.name &&
+               lhs.coordinate.latitude == rhs.coordinate.latitude &&
+               lhs.coordinate.longitude == rhs.coordinate.longitude &&
+               lhs.rarity == rhs.rarity &&
+               lhs.hasPhoto == rhs.hasPhoto &&
+               lhs.hasSound == rhs.hasSound
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(coordinate.latitude)
+        hasher.combine(coordinate.longitude)
+        hasher.combine(rarity)
+        hasher.combine(hasPhoto)
+        hasher.combine(hasSound)
+    }
 }
 
 struct Span {
@@ -73,8 +93,8 @@ class ObservationsViewModel: ObservableObject {
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
     
-    func fetchData(lat: Double, long: Double, settings: Settings, completion: @escaping () -> Void) {
-        log.info("fetchData ObservationsViewModel")
+    func fetchData(lat: Double, long: Double, settings: Settings, completion: @escaping () -> Void = {}) {
+        log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
@@ -86,7 +106,7 @@ class ObservationsViewModel: ObservableObject {
 //            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
 //        }
         
-        log.error("ObservationsViewModel \(url)")
+        log.info("ObservationsViewModel \(url)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {

@@ -1,5 +1,5 @@
 //
-//  SampleView.swift
+//  CircleButton.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 18/04/2024.
@@ -7,27 +7,12 @@
 
 import SwiftUI
 
-//struct SampleView: View {
-//    @State private var myBool : Bool = false
-//    
-//    var body: some View {
-//        ZStack(alignment: .topLeading) {
-//            // Background or other content
-//            Color.gray.edgesIgnoringSafeArea(.all)
-//            
-//            CircleButton(isToggleOn: $myBool)
-//                .padding([.top, .leading], 20) // Apply padding to the top and leading edges
-//        }
-//    }
-//}
-
 struct CircleButton: View {
     
     @Binding var isToggleOn : Bool
     
     var body: some View {
         Button(action: {
-            // Action to perform
             isToggleOn.toggle()
         }) {
             isToggleOn
@@ -36,7 +21,6 @@ struct CircleButton: View {
                     .font(.title)
                 : Image(systemName: "list.bullet")
                     .foregroundColor(.white)
-//                    .font(.largeTitle)
                     .font(.title)
 
         }
@@ -48,16 +32,13 @@ struct CircularButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color.blue) // Customize the button color
+//            .background(Color.blue) // Customize the button color
+//            .background(Color(red: 12, green: 0, blue: 0)) 
+            .background(Color(hex: "f7b731"))
+//            .background(Color(hex: "cbfc45"))
             .clipShape(Circle())
-            .shadow(radius: 10)
+            .shadow(radius: 5)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 }
-
-
-
-//#Preview {
-//    SampleView()
-//}

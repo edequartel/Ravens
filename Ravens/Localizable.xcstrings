@@ -24,12 +24,12 @@
         }
       }
     },
-    "%@ %@ -  %lldx" : {
+    "%@ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ %2$@ -  %3$lldx"
+            "value" : "%1$@ %2$@"
           }
         }
       }
@@ -83,6 +83,9 @@
           }
         }
       }
+    },
+    "%lld x" : {
+
     },
     "%lldd" : {
 
@@ -480,15 +483,8 @@
         }
       }
     },
-    "Latitude: %lf, Longitude: %lf" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Latitude: %1$lf, Longitude: %2$lf"
-          }
-        }
-      }
+    "Latitude: %lf" : {
+
     },
     "List" : {
       "extractionState" : "stale",
@@ -512,6 +508,7 @@
       }
     },
     "Loading..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -591,6 +588,9 @@
           }
         }
       }
+    },
+    "Longitude: %lf" : {
+
     },
     "Main View" : {
       "extractionState" : "stale",
@@ -784,6 +784,7 @@
       }
     },
     "Plaats: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -922,9 +923,6 @@
         }
       }
     },
-    "Select User" : {
-
-    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -1007,9 +1005,6 @@
         }
       }
     },
-    "Temperatuur: %@" : {
-
-    },
     "Token: %@" : {
       "localizations" : {
         "nl" : {
@@ -1088,9 +1083,6 @@
           }
         }
       }
-    },
-    "Voelt als: %@" : {
-
     },
     "waarneming.nl" : {
       "localizations" : {
