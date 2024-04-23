@@ -14,19 +14,11 @@ struct ObservationsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-            VStack {
+//            VStack {
                 HStack {
-                    Button(action: {
-                        // Perform some action
+                    CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "map.fill")  // Use the iconName from the style
                     }
-                    .roundButtonStyle(
-                        iconName: "map.fill",
-                        backgroundColor: .blue,
-                        foregroundColor: .white,
-                        shadowRadius: 6)
                     
                     Spacer()
                     Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
@@ -37,7 +29,9 @@ struct ObservationsView: View {
                     Text("\(observationsViewModel.observations?.results.count ?? 0)x")
                         .bold()
                 }
-                .padding(16)
+                .padding(8)
+                .background(Color(hex: obsStrNorthSeaBlue))
+
                 
                 if (!keyChainViewModel.token.isEmpty) {
                     List {
@@ -50,9 +44,10 @@ struct ObservationsView: View {
                             Text("nobsavaliable")
                         }
                     }
+                    .padding(-10)
                 }
-                Spacer()
-            }
+//                Spacer()
+//            }
     }
 }
 

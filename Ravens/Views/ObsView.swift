@@ -14,9 +14,9 @@ import AVFoundation
 struct ObsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings()) 
+    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
-
+    
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     @State private var userId: Int = 0
@@ -52,7 +52,7 @@ struct ObsView: View {
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         Spacer()
                     }
-
+                    
                     HStack {
                         Text("\(obs.species_detail.scientific_name)")
                             .foregroundColor(.gray)
@@ -90,8 +90,8 @@ struct ObsView: View {
                         Text("\(obs.user_detail?.name ?? "noName")")
                             .footnoteGrayStyle()
                         Spacer()
-//                        Text("\(obs.user_detail?.id ?? 0)")
-//                            .footnoteGrayStyle()
+                        //                        Text("\(obs.user_detail?.id ?? 0)")
+                        //                            .footnoteGrayStyle()
                     }
                 }
             }
@@ -114,9 +114,10 @@ struct ObsView: View {
                     Spacer()
                 }
             }
-    }
+        }
+        .accessibilityLabel("Observation")
         .onAppear() {
-//            settings.readExplorers(array: &explorers)
+            //            settings.readExplorers(array: &explorers)
             
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {
@@ -124,7 +125,7 @@ struct ObsView: View {
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
-
+                
             }
         }
     }

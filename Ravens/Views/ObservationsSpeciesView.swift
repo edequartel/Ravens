@@ -27,19 +27,11 @@ struct ObservationsSpeciesView: View {
     let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     
     var body: some View {
-            VStack {
+//            VStack {
                 HStack {
-                    Button(action: {
-                        // Perform some action
+                    CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "map.fill")  // Use the iconName from the style
                     }
-                    .roundButtonStyle(
-                        iconName: "map.fill",
-                        backgroundColor: .blue,
-                        foregroundColor: .white,
-                        shadowRadius: 6)
                     
                     Spacer()
                     Button {
@@ -55,7 +47,8 @@ struct ObservationsSpeciesView: View {
                     .buttonStyle(.bordered)
                     .foregroundColor(.obsGreenEagle)
                 }
-                .padding(16)
+                .padding(8)
+                .background(Color(hex: obsStrNorthSeaBlue))
                 
                 if endOfListReached {
                     EndOfListObsView()
@@ -82,7 +75,8 @@ struct ObservationsSpeciesView: View {
                         }
                     }
                 }
-            }
+                .padding(-10)
+//            }
         .sheet(isPresented: $isSheetPresented) {
                     SpeciesDetailsView(speciesID: speciesID)
                 }
