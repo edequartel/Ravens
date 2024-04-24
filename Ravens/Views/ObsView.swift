@@ -15,7 +15,7 @@ struct ObsView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
-    @EnvironmentObject var settings: Settings
+//    @EnvironmentObject var settings: Settings
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -27,11 +27,6 @@ struct ObsView: View {
     
     var showUsername: Bool = true
     var showLocation: Bool = true
-    
-    // Function to check if a number is in the array
-    func isUserIdInExplorers(number: Int) -> Bool {
-        return explorers.contains(number)
-    }
     
     var body: some View {
         LazyVStack {
@@ -115,7 +110,9 @@ struct ObsView: View {
                 }
             }
         }
-        .accessibilityLabel("Observation")
+//        .accessibility(hidden: true)
+        .accessibility(label: Text("Your Label"))
+        
         .onAppear() {
             //            settings.readExplorers(array: &explorers)
             
@@ -131,32 +128,10 @@ struct ObsView: View {
     }
 }
 
-
-//#Preview {
-//    ObsView(obs: Observation(
-//        from: <#any Decoder#>, id: 1,
-//        date: "2024-02-12",
-//        number: 1,
-//        species_detail: SpeciesDetail(
-//            id: 1,
-//            scientific_name: "scientific_name", name: "species"
-//        ),
-//        user_detail: UserDetail(
-//            id: 1,
-//            name: "name"
-//        ),
-//        location_detail: LocationDetail(
-//            id: 1,
-//            name: "location"
-//        ),
-//        notes: "notes",
-//        photos: ["https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackbird"] //for test
-//        ))
+//struct ObsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Initialize your ObsView with appropriate data
+//        ObsView(obs: Observation(from: <#any Decoder#>))
+//    }
 //}
-
-
-
-
-
-
 

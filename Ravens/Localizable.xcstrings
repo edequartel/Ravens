@@ -753,9 +753,6 @@
         }
       }
     },
-    "Observation" : {
-
-    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -1116,6 +1113,9 @@
           }
         }
       }
+    },
+    "Your Label" : {
+
     }
   },
   "version" : "1.0"

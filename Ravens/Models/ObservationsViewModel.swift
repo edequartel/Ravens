@@ -112,7 +112,7 @@ class ObservationsViewModel: ObservableObject {
 //                // Now you can convert the stringResponse to Data and decode it
 //                if let data = stringResponse.data(using: .utf8) {
 //        
-//        log.info("ObservationsViewModel \(url)")
+        log.error("ObservationsViewModel \(url) - \(settings.selectedGroupId)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {

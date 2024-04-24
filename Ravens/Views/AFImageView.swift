@@ -65,12 +65,9 @@ struct AFImageView: View {
                         self.downloadedImage = Image(uiImage: uiImage)
                         try? data.write(to: path)
                         
-                        log.error("before Photos")
                         if settings.savePhotos{
-                            log.error("saving Photos")
                             saveImageToAlbum(image: uiImage, albumName: "Ravens")
                         }
-                        
 
                     }
                 case .failure(let error):
