@@ -60,7 +60,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
         
-        log.error("\(url)")
+        log.info("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

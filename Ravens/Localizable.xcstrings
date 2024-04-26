@@ -508,6 +508,7 @@
       }
     },
     "Loading" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -752,6 +753,9 @@
           }
         }
       }
+    },
+    "obs 2023" : {
+
     },
     "observation.org" : {
       "localizations" : {

@@ -24,7 +24,6 @@ struct ObservationsSpeciesView: View {
     @State private var isSheetPresented = false
     @State private var endOfListReached = false
     
-    let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     
     var body: some View {
 //            VStack {
@@ -41,11 +40,17 @@ struct ObservationsSpeciesView: View {
                             Image(systemName: "info.circle")
                             Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
                                 .font(.headline)
+                                .lineLimit(1) // Limit text to a single line
+                                .truncationMode(.tail) // Add an ellipsis when the text is too long
+                                
                         }
                     }
-                    .bold()
+//                    .bold()
                     .buttonStyle(.bordered)
-                    .foregroundColor(.obsGreenEagle)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    Spacer()
                 }
                 .padding(8)
                 .background(Color(hex: obsStrNorthSeaBlue))
@@ -53,9 +58,6 @@ struct ObservationsSpeciesView: View {
                 if endOfListReached {
                     EndOfListObsView()
                 }
-                
-                //            YearView(monthlyViews: monthlyViews)
-                //                .padding(16)
                 
                 List {
                     if let results = viewModel.observationsSpecies?.results {
@@ -75,7 +77,7 @@ struct ObservationsSpeciesView: View {
                         }
                     }
                 }
-                .padding(-10)
+//                .padding(0)
 //            }
         .sheet(isPresented: $isSheetPresented) {
                     SpeciesDetailsView(speciesID: speciesID)

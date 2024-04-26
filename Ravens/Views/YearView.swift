@@ -8,24 +8,38 @@
 import SwiftUI
 import SwiftUI
 import Charts
+import SwiftyBeaver
 
 struct YearView: View {
-    // An array representing monthly views, you can uncomment and use this hardcoded data or pass it externally.
-    //    var monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
-    var monthlyViews: [Double]
-
+    let log = SwiftyBeaver.self
+    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
+    var speciesId: Int
+    
     var body: some View {
-        // The main body of the YearView, containing a Chart with BarMarks.
-        Chart {
-            // Using ForEach to iterate through the monthlyViews array.
-            ForEach(0..<monthlyViews.count, id: \.self) { index in
-                let monthName = getMonthName(for: index)
-                // Creating a BarMark for each month with its corresponding value.
-                BarMark(
-                    x: .value("Month", monthName), // Labeling x-axis with "Month" and index as the value.
-                    y: .value("Value", monthlyViews[index]) // Labeling y-axis with "Value" and monthlyViews value.
-                )
+        VStack {
+            Text("obs 2023")
+            Chart {
+                // Using ForEach to iterate through the monthlyViews array.
+                ForEach(0..<observationsYearViewModel.months.count, id: \.self) { index in
+                    if index < observationsYearViewModel.months.count {
+                        // Getting the month name from the index.
+//                    print("index: \(index)")
+                        let monthName = getMonthName(for: index)
+                        let firstCharacterString = String(monthName.first ?? Character(""))
+                        // Creating a BarMark for each month with its corresponding value.
+                        BarMark(
+                            x: .value("Month", monthName), // Labeling x-axis with "Month" and index as the value.
+                            y: .value("Value", observationsYearViewModel.months[index]) // Labeling y-axis with "Value" and monthlyViews value.
+                        )
+                    }
+                }
+                
             }
+            .frame(maxWidth: .infinity, maxHeight: 200)
+        }
+        .onAppear() {
+            observationsYearViewModel.fetchMonthData(speciesId: self.speciesId)
+//            observationsYearViewModel.deleteFilesInFolder()
         }
     }
     
@@ -43,9 +57,10 @@ struct YearView: View {
     }
 }
 
-
+//monthlyViews: [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
+// Preview for the YearView.
 struct YearView_Previews: PreviewProvider {
     static var previews: some View {
-        YearView(monthlyViews: [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180])
+        YearView(speciesId: 65)
     }
 }

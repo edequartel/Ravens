@@ -13,43 +13,49 @@ import AlamofireImage
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-
+    
     @StateObject var viewSDModel = SpeciesDetailsViewModel(settings: Settings())
+    
+    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
     
-    var speciesID: Int // Add speciesID as a property
-
+    var speciesID: Int
+    
     var body: some View {
         Form{
-            VStack {
+            VStack(alignment: .leading) {
                 if let species = viewSDModel.speciesDetails {
-                    AFImageView(media: species.photo)
-
-                    Divider()
-                    
-//                    YearView(monthlyViews: [12, 15, 8, 20, 50, 180, 250, 140, 60, 12, 20, 18])
-                    
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text(species.name)
-                                .bold()
-                            Spacer()
-                            Text(species.scientific_name)
-                                .italic()
-                        }
-                        Divider()
-                        RichText(html: species.info_text)
-                        
+                        Text(species.name)
+                            .bold()
+                            .font(.title)
+                        Text(species.scientific_name)
+                            .italic()
+                            .foregroundColor(.gray)
+                            .font(.footnote)
                     }
-                    // Add more Text views as needed for other properties
+                    Divider()
+                        .frame(height: 20)
+                    AFImageView(media: species.photo)
+                        .frame(maxWidth: .infinity, maxHeight: 400)
+                    Divider()
+                        .frame(height: 20)
+                        .opacity(0)
+                    YearView(speciesId: speciesID)
+                    Divider()
+                        .frame(height: 20)
+                        .opacity(0)
+                    RichText(html: species.info_text)
                     Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                 } else {
-                    Text("Loading")
+                    ProgressView()
                 }
+                
             }
         }
         .onAppear {
-            log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
+            log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
+            
             viewSDModel.fetchData(for: speciesID)
         }
     }
