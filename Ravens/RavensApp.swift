@@ -74,6 +74,7 @@ struct RavensApp: App {
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
                 .environmentObject(Player())
                 .environmentObject(ObservationsLocationViewModel())
+                .environmentObject(ObservationsYearViewModel(settings: Settings()))
         }
     }
 }

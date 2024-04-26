@@ -24,23 +24,13 @@ struct ObservationsSpeciesView: View {
     @State private var isSheetPresented = false
     @State private var endOfListReached = false
     
-    let monthlyViews: [Double] = [120, 150, 80, 200, 100, 180, 250, 300, 160, 120, 200, 180]
     
     var body: some View {
-            VStack {
+//            VStack {
                 HStack {
-                    Button(action: {
-                        // Perform some action
+                    CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "map.fill")  // Use the iconName from the style
                     }
-                    .roundButtonStyle(
-                        iconName: "map.fill",
-                        backgroundColor: .blue,
-                        foregroundColor: .white,
-                        shadowRadius: 6)
-                    
                     Spacer()
                     Button {
                         isSheetPresented.toggle()
@@ -49,20 +39,24 @@ struct ObservationsSpeciesView: View {
                             Image(systemName: "info.circle")
                             Text("\(speciesName) - \(viewModel.observationsSpecies?.count ?? 0)x")
                                 .font(.headline)
+                                .lineLimit(1) // Limit text to a single line
+                                .truncationMode(.tail) // Add an ellipsis when the text is too long
+                                
                         }
                     }
-                    .bold()
+//                    .bold()
                     .buttonStyle(.bordered)
-                    .foregroundColor(.obsGreenEagle)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    Spacer()
                 }
-                .padding(16)
+                .padding(8)
+                .background(Color(hex: obsStrNorthSeaBlue))
                 
                 if endOfListReached {
                     EndOfListObsView()
                 }
-                
-                //            YearView(monthlyViews: monthlyViews)
-                //                .padding(16)
                 
                 List {
                     if let results = viewModel.observationsSpecies?.results {
@@ -74,15 +68,13 @@ struct ObservationsSpeciesView: View {
                                 .onAppear {
                                     if index == sortedResults.count - 1 {
                                         endOfListReached = true
-                                        
-                                        // Perform any action you want when the end of the list is reached here
-                                        //viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days) <<< deze wijzige met 0 and 100
                                     }
                                 }
                         }
                     }
                 }
-            }
+//                .padding(0)
+//            }
         .sheet(isPresented: $isSheetPresented) {
                     SpeciesDetailsView(speciesID: speciesID)
                 }

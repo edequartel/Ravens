@@ -13,6 +13,8 @@ import Photos
 
 struct AFImageView: View {
     let log = SwiftyBeaver.self
+    
+    @EnvironmentObject var settings: Settings
     @State private var downloadedImage: SwiftUI.Image? = nil
     
     var media: String
@@ -63,7 +65,9 @@ struct AFImageView: View {
                         self.downloadedImage = Image(uiImage: uiImage)
                         try? data.write(to: path)
                         
-                        saveImageToAlbum(image: uiImage, albumName: "Ravens")
+                        if settings.savePhotos{
+                            saveImageToAlbum(image: uiImage, albumName: "Ravens")
+                        }
 
                     }
                 case .failure(let error):

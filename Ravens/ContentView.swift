@@ -24,7 +24,6 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tab 1
-//            FlipRadiusView()
             MapObservationView()
                 .tabItem {
                     Text("Radius")
@@ -32,16 +31,17 @@ struct ContentView: View {
                 }
 
             // Tab 2
-//            FlipLocationView()
-            MapObservationsLocationView()
-                .tabItem {
-                    Text("Location")
-                    Image(systemName: "location")
-                }
-            .tabItem {
-                Text("Area")
-                Image(systemName: "pentagon")
-            }            
+//            if !(keyChainviewModel.token.isEmpty) {
+                MapObservationsLocationView()
+                    .tabItem {
+                        Text("Location")
+                        Image(systemName: "location")
+                    }
+                    .tabItem {
+                        Text("Area")
+                        Image(systemName: "pentagon")
+                    }
+//            }
             
             // Tab 2
             SpeciesView()
@@ -51,12 +51,13 @@ struct ContentView: View {
                 }
             
             // Tab 4
-//            FlipUserView()
-            MapObservationsUserView()
-                .tabItem {
-                    Text("Me")
-                    Image(systemName: "person.fill")
-                }
+//            if !(keyChainviewModel.token.isEmpty) {
+                MapObservationsUserView()
+                    .tabItem {
+                        Text("Me")
+                        Image(systemName: "person.fill")
+                    }
+//            }
 
             
             // Tab 5

@@ -15,11 +15,23 @@ struct CircleButton: View {
         Button(action: {
             isToggleOn.toggle()
         }) {
-            isToggleOn
-                ? Image(systemName: "map.fill")
+            Image(systemName: "list.bullet")
                     .foregroundColor(.white)
                     .font(.title)
-                : Image(systemName: "list.bullet")
+
+        }
+        .buttonStyle(CircularButtonStyle())
+    }
+}
+
+struct CircleActionButton: View {
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: {
+           action()
+        }) {
+                Image(systemName: "map.fill")
                     .foregroundColor(.white)
                     .font(.title)
 
@@ -31,14 +43,14 @@ struct CircleButton: View {
 struct CircularButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding()
+            .padding(14)
 //            .background(Color.blue) // Customize the button color
 //            .background(Color(red: 12, green: 0, blue: 0)) 
-            .background(Color(hex: "f7b731"))
+            .background(Color(hex: obsStrDutchOrange))
 //            .background(Color(hex: "cbfc45"))
             .clipShape(Circle())
             .shadow(radius: 5)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+//            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+//            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 }
