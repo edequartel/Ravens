@@ -68,7 +68,7 @@ struct ContentView: View {
                 }
         }
         .onAppear() {
-            log.warning("*** NEW LAUNCH ***")
+            log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
         }
     }

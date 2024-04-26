@@ -26,12 +26,11 @@ class ObservationsYearViewModel: ObservableObject {
     
     
     func fetchMonthData(speciesId: Int) {
-        //        months.removeAll()
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let folderURL = documentsURL.appendingPathComponent("countObservations")
         var count = 0
         
-        log.info(folderURL)
+        log.error(folderURL)
         let fileURL = folderURL.appendingPathComponent("\(speciesId).json")
         
         //        if false { 
@@ -40,7 +39,7 @@ class ObservationsYearViewModel: ObservableObject {
                 log.error("filexists")
                 let jsonData = try Data(contentsOf: fileURL)
                 if let dataDict = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any] {
-                    log.info("Loaded data from file: \(dataDict)")
+                    log.error("Loaded data from file: \(dataDict)")
                     if let loadedMonths = dataDict["months"] as? [Int] {
                         self.months = loadedMonths
                     } else {
@@ -65,35 +64,38 @@ class ObservationsYearViewModel: ObservableObject {
                     self.maanden[m-1] = (value) //deze waarde later meenemen
 //                    self.months[m-1] = (value)
                     
-                    let dataDict: [String: Any] = [
-                        "months": self.months,
-                        "date_after": "2023-\(monthString)-01",
-                        "date_before": "2023-\(monthString)-28"
-                    ]
-                    
-                    guard let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted) else {
-                        self.log.error("Failed to create JSON data.")
-                        return
-                    }
-                    
-                    do {
-                        if !FileManager.default.fileExists(atPath: folderURL.path) {
-                            try FileManager.default.createDirectory(atPath: folderURL.path, withIntermediateDirectories: true, attributes: nil)
-                        }
-                    } catch {
-                        self.log.error("Failed to create directory: \(error.localizedDescription)")
-                    }
-                    
-                    do {
-                        try jsonData.write(to: fileURL)
-                        self.log.info("Successfully saved data to \(fileURL)")
-                    } catch {
-                        self.log.error("Failed to write JSON data: \(error.localizedDescription)")
-                    }
-                    
                     if count == 12 {
-//                        self.maanden[m-1] = (value) //deze waarde later meenemen
                         self.months = self.maanden
+                        
+                        let dataDict: [String: Any] = [
+                            "months": self.months,
+                            "date_after": "2023-\(monthString)-01",
+                            "date_before": "2023-\(monthString)-28"
+                        ]
+                        
+                        guard let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted) else {
+                            self.log.error("Failed to create JSON data.")
+                            return
+                        }
+                        
+                        do {
+                            if !FileManager.default.fileExists(atPath: folderURL.path) {
+                                try FileManager.default.createDirectory(atPath: folderURL.path, withIntermediateDirectories: true, attributes: nil)
+                            }
+                        } catch {
+                            self.log.error("Failed to create directory: \(error.localizedDescription)")
+                        }
+                        
+                        do {
+                            try jsonData.write(to: fileURL)
+                            self.log.info("Successfully saved data to \(fileURL)")
+                        } catch {
+                            self.log.error("Failed to write JSON data: \(error.localizedDescription)")
+                        }
+                        
+                        
+                        //                        self.maanden[m-1] = (value) //deze waarde later meenemen
+
                     }
                 }
             }

@@ -161,6 +161,7 @@ struct SettingsView: View {
                             Button("Cache Empty") {
                                 deleteAllFiles()
                                 storage = String(calculateLocalStorageSize())
+                                log.error("cache is emptied")
                             }
                         }
                     }
