@@ -38,6 +38,7 @@ struct YearView: View {
             .frame(maxWidth: .infinity, maxHeight: 200)
         }
         .onAppear() {
+            observationsYearViewModel.months = [0,0,0,0, 0,0,0,0 ,0,0,0,0]
             observationsYearViewModel.fetchMonthData(speciesId: self.speciesId)
 //            observationsYearViewModel.deleteFilesInFolder() //deze bij legen cache setting zetten !!!
         }
