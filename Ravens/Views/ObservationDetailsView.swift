@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Popovers
+//import Popovers
 
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self

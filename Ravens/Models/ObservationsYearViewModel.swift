@@ -14,6 +14,7 @@ class ObservationsYearViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var observationsSpecies: Observations?
     @Published var months: [Int] = [0,0,0, 0,0,0, 0,0,0, 0,0,0]
+    private var maanden: [Int] = [0,0,0, 0,0,0, 0,0,0, 0,0,0]
     
     private var keyChainViewModel =  KeychainViewModel()
     
@@ -28,6 +29,7 @@ class ObservationsYearViewModel: ObservableObject {
         //        months.removeAll()
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let folderURL = documentsURL.appendingPathComponent("countObservations")
+        var count = 0
         
         log.info(folderURL)
         let fileURL = folderURL.appendingPathComponent("\(speciesId).json")
@@ -57,9 +59,11 @@ class ObservationsYearViewModel: ObservableObject {
             for m in 1...12 {
                 let monthString = String(format: "%02d", m)
                 fetchData(speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-28") { (value) in
-                    
+                    count = count + 1
+                    print(">>>> \(count)")
                     self.log.info("\(monthString) : value: \(value)")
-                    self.months[m-1] = (value)
+                    self.maanden[m-1] = (value) //deze waarde later meenemen
+//                    self.months[m-1] = (value)
                     
                     let dataDict: [String: Any] = [
                         "months": self.months,
@@ -85,6 +89,11 @@ class ObservationsYearViewModel: ObservableObject {
                         self.log.info("Successfully saved data to \(fileURL)")
                     } catch {
                         self.log.error("Failed to write JSON data: \(error.localizedDescription)")
+                    }
+                    
+                    if count == 12 {
+//                        self.maanden[m-1] = (value) //deze waarde later meenemen
+                        self.months = self.maanden
                     }
                 }
             }

@@ -49,6 +49,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
+        self.observationsSpecies?.results.removeAll() //?? deze vrijdag voor de vakantie gewijzigd
+        
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,

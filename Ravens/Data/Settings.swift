@@ -35,6 +35,7 @@ class Settings: ObservableObject {
     @AppStorage("days") var days: Int = 5
     @AppStorage("radius") var radius: Int = 500
     @AppStorage("savePhotos") var savePhotos: Bool = false
+    @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
     @AppStorage("infinity") var infinity: Bool = true
     @AppStorage("selectedRarity") var selectedRarity = 1

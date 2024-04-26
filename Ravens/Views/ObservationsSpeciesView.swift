@@ -31,7 +31,6 @@ struct ObservationsSpeciesView: View {
                     CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
                     }
-                    
                     Spacer()
                     Button {
                         isSheetPresented.toggle()
@@ -69,9 +68,6 @@ struct ObservationsSpeciesView: View {
                                 .onAppear {
                                     if index == sortedResults.count - 1 {
                                         endOfListReached = true
-                                        
-                                        // Perform any action you want when the end of the list is reached here
-                                        //viewModel.fetchData(speciesId: speciesID, limit: 100, date: settings.selectedDate, days: settings.days) <<< deze wijzige met 0 and 100
                                     }
                                 }
                         }

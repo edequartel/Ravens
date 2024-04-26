@@ -118,9 +118,13 @@ struct MapObservationsSpeciesView: View {
                 .topLeft()
         }
         .fullScreenCover(isPresented: $showFullScreenMap) {
+            
+            
             ObservationsSpeciesView(
                 speciesID: speciesID,
                 speciesName: speciesName
+                
+                
             )
         }
         

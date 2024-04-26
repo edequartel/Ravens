@@ -19,7 +19,7 @@ struct SpeciesDetailsView: View {
     @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
     
-    var speciesID: Int
+    var speciesID: Int // Add speciesID as a property
     
     var body: some View {
         Form{

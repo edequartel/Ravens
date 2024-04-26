@@ -15,7 +15,7 @@ struct ObsView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
-//    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: Settings
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -79,7 +79,7 @@ struct ObsView: View {
                 }
             }
             
-            if showUsername {
+            if showUsername && settings.showUser {
                 VStack {
                     HStack {
                         Text("\(obs.user_detail?.name ?? "noName")")

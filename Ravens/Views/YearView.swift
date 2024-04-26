@@ -25,7 +25,7 @@ struct YearView: View {
                         // Getting the month name from the index.
 //                    print("index: \(index)")
                         let monthName = getMonthName(for: index)
-                        let firstCharacterString = String(monthName.first ?? Character(""))
+//                        let firstCharacterString = String(monthName.first ?? Character(""))
                         // Creating a BarMark for each month with its corresponding value.
                         BarMark(
                             x: .value("Month", monthName), // Labeling x-axis with "Month" and index as the value.
@@ -39,7 +39,7 @@ struct YearView: View {
         }
         .onAppear() {
             observationsYearViewModel.fetchMonthData(speciesId: self.speciesId)
-//            observationsYearViewModel.deleteFilesInFolder()
+//            observationsYearViewModel.deleteFilesInFolder() //deze bij legen cache setting zetten !!!
         }
     }
     

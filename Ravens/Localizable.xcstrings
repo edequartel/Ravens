@@ -947,6 +947,16 @@
         }
       }
     },
+    "Show observer" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon waarnemer"
+          }
+        }
+      }
+    },
     "Sort by" : {
       "localizations" : {
         "nl" : {
