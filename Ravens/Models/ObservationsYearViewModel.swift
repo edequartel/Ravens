@@ -57,10 +57,12 @@ class ObservationsYearViewModel: ObservableObject {
             
             for m in 1...12 {
                 let monthString = String(format: "%02d", m)
-                fetchData(speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-28") { (value) in
+                let daystring = String(format: "%02d", numberOfDaysInMonth(year: 2023, month: m) ?? 0)
+//                print("\(m) \(daystring)")
+                fetchData(speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
                     count = count + 1
                     print(">>>> \(count)")
-                    self.log.info("\(monthString) : value: \(value)")
+                    self.log.error("\(monthString) : value: \(value)")
                     self.maanden[m-1] = (value) //deze waarde later meenemen
 //                    self.months[m-1] = (value)
                     
@@ -100,6 +102,18 @@ class ObservationsYearViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func numberOfDaysInMonth(year: Int, month: Int) -> Int? {
+        let calendar = Calendar.current
+        let components = DateComponents(year: year, month: month)
+        
+        guard let date = calendar.date(from: components),
+            let range = calendar.range(of: .day, in: .month, for: date) else {
+            return nil
+        }
+        
+        return range.count
     }
     
     func deleteFilesInFolder() {
