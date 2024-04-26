@@ -34,6 +34,16 @@
         }
       }
     },
+    "%@ %@, %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@, %3$lld"
+          }
+        }
+      }
+    },
     "%lld" : {
       "localizations" : {
         "nl" : {
@@ -498,6 +508,7 @@
       }
     },
     "Loading" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -743,6 +754,9 @@
         }
       }
     },
+    "obs 2023" : {
+
+    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -933,6 +947,16 @@
         }
       }
     },
+    "Show observer" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon waarnemer"
+          }
+        }
+      }
+    },
     "Sort by" : {
       "localizations" : {
         "nl" : {
@@ -1103,6 +1127,9 @@
           }
         }
       }
+    },
+    "Your Label" : {
+
     }
   },
   "version" : "1.0"

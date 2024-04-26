@@ -49,6 +49,8 @@ class ObservationsSpeciesViewModel: ObservableObject {
         log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
+        self.observationsSpecies?.results.removeAll() //?? deze vrijdag voor de vakantie gewijzigd
+        
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,
@@ -60,7 +62,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         
         let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
         
-        log.error("\(url)")
+        log.info("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

@@ -33,13 +33,22 @@ let bundleIdentifier = "ravens.app.bundle.identifier"
 //waarneming-test.nl
 
 extension Color {
-    static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255)
-    static let obsGreenSpider = Color(red: 31/255, green: 94/255, blue: 37/255)
-    static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255)
-    static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255)
-    static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255)
+    static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255) //4CFDFB
+    static let obsGreenSpider = Color(red: 31/255, green: 94/255, blue: 37/255) //1F5E25
+    static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255) //CBFC45
+    static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
+    static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255) //6AE388
 }
 
+let obsStrGreenSpider = "1F5E25"
+let obsStrGreenFlower = "CBFC45"
+let obsStrGreenEagle = "1D9431"
+let obsStrBackground = "6AE388"
+let obsStrBlueButterfly = "4CFDFB"
+
+let obsStrNorthSeaBlue = "75d0fa"
+let obsStrDutchGreen = "c1e6ae"
+let obsStrDutchOrange = "f7b731"
 
 func GroupColor(value: Int) -> Color {
     switch value {

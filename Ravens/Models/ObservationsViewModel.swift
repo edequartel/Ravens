@@ -106,7 +106,13 @@ class ObservationsViewModel: ObservableObject {
 //            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
 //        }
         
-        log.info("ObservationsViewModel \(url)")
+//        AF.request(url, headers: headers).responseString { response in
+//            switch response.result {
+//            case .success(let stringResponse):
+//                // Now you can convert the stringResponse to Data and decode it
+//                if let data = stringResponse.data(using: .utf8) {
+//        
+        log.error("ObservationsViewModel \(url) - \(settings.selectedGroupId)")
         
         AF.request(url, headers: headers).responseDecodable(of: Observations.self) { response in
             switch response.result {

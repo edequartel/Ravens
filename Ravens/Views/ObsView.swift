@@ -14,9 +14,9 @@ import AVFoundation
 struct ObsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings()) 
+    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
-
+    
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     @State private var userId: Int = 0
@@ -27,11 +27,6 @@ struct ObsView: View {
     
     var showUsername: Bool = true
     var showLocation: Bool = true
-    
-    // Function to check if a number is in the array
-    func isUserIdInExplorers(number: Int) -> Bool {
-        return explorers.contains(number)
-    }
     
     var body: some View {
         LazyVStack {
@@ -52,7 +47,7 @@ struct ObsView: View {
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         Spacer()
                     }
-
+                    
                     HStack {
                         Text("\(obs.species_detail.scientific_name)")
                             .foregroundColor(.gray)
@@ -84,14 +79,14 @@ struct ObsView: View {
                 }
             }
             
-            if showUsername {
+            if showUsername && settings.showUser {
                 VStack {
                     HStack {
                         Text("\(obs.user_detail?.name ?? "noName")")
                             .footnoteGrayStyle()
                         Spacer()
-//                        Text("\(obs.user_detail?.id ?? 0)")
-//                            .footnoteGrayStyle()
+                        //                        Text("\(obs.user_detail?.id ?? 0)")
+                        //                            .footnoteGrayStyle()
                     }
                 }
             }
@@ -114,9 +109,12 @@ struct ObsView: View {
                     Spacer()
                 }
             }
-    }
+        }
+//        .accessibility(hidden: true)
+        .accessibility(label: Text("Your Label"))
+        
         .onAppear() {
-//            settings.readExplorers(array: &explorers)
+            //            settings.readExplorers(array: &explorers)
             
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(for: obs.id ?? 0, completion: {
@@ -124,38 +122,16 @@ struct ObsView: View {
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
-
+                
             }
         }
     }
 }
 
-
-//#Preview {
-//    ObsView(obs: Observation(
-//        from: <#any Decoder#>, id: 1,
-//        date: "2024-02-12",
-//        number: 1,
-//        species_detail: SpeciesDetail(
-//            id: 1,
-//            scientific_name: "scientific_name", name: "species"
-//        ),
-//        user_detail: UserDetail(
-//            id: 1,
-//            name: "name"
-//        ),
-//        location_detail: LocationDetail(
-//            id: 1,
-//            name: "location"
-//        ),
-//        notes: "notes",
-//        photos: ["https://upload.wikimedia.org/wikipedia/commons/3/3b/Blackbird"] //for test
-//        ))
+//struct ObsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Initialize your ObsView with appropriate data
+//        ObsView(obs: Observation(from: <#any Decoder#>))
+//    }
 //}
-
-
-
-
-
-
 

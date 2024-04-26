@@ -26,26 +26,18 @@ struct ObservationsUserViewExtra: View {
     
     
     var body: some View {
-        VStack {
+//        VStack {
             HStack {
-                Button(action: {
-                    // Perform some action
+                CircleActionButton() {
                     presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "map.fill")  // Use the iconName from the style
                 }
-                .roundButtonStyle(
-                    iconName: "map.fill",
-                    backgroundColor: .blue,
-                    foregroundColor: .white,
-                    shadowRadius: 6)
-                
-
                 Spacer()
                 Text(userName)
             }
-            .padding(16)
-            
+            .padding(8)
+            .background(Color(hex: obsStrNorthSeaBlue))
+
+        
             List {
                 if let results =  viewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
@@ -54,7 +46,7 @@ struct ObservationsUserViewExtra: View {
                     }
                 }
             }
-        }
+            .padding(-10)
     }
 }
 

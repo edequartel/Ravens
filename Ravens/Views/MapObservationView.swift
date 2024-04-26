@@ -182,7 +182,7 @@ struct MapObservationView: View {
 //                
 //                //get the observations
                 fetchDataModel()
-                cameraPosition = getCameraPosition()
+//                cameraPosition = getCameraPosition()
             }
             
             //get selectedGroup

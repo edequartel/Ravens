@@ -1,9 +1,13 @@
 # Remarks development
 
-## 21
+## 23
 - graphs
 - second language
 - notifications
+- verstoringen 30 in radius geeft een foutmelding (ws waarneming)
+
+## 22
+- more accessible
 - stats
 
 ## 20
