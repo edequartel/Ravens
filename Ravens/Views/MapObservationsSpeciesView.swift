@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
@@ -115,10 +115,10 @@ struct MapObservationsSpeciesView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            Button("DisMiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }
-            .topLeft()
+//            Button("Dismiss") {
+//                self.presentationMode.wrappedValue.dismiss()
+//            }
+//            .topLeft()
             
         }
         .onAppear {

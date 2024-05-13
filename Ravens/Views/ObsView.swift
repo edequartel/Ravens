@@ -65,6 +65,13 @@ struct ObsView: View {
                 }
             }
             
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button("favorite") {
+                    print("\(obs.user_detail?.name ?? "") \(obs.user_detail?.id ?? 0)")
+                }
+            }
+            
+            
             HStack {
                 Text("\(obs.date) \(obs.time ?? "")")
                 Text("\(obs.number) x")

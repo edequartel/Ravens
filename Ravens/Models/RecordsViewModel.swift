@@ -7,17 +7,21 @@
 
 import Foundation
 
-struct Record: Codable, Identifiable {
+struct Observer: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
     var name: String
-    var userID: String
+    var userID: Int
 }
 
 
 import SwiftUI
 
-class RecordsViewModel: ObservableObject {
-    @Published var records: [Record] = []
+class URLHandler: ObservableObject {
+    @Published var urlString: String = ""
+}
+
+class ObserversViewModel: ObservableObject {
+    @Published var records: [Observer] = []
     let filePath: URL
 
     init() {
@@ -31,7 +35,7 @@ class RecordsViewModel: ObservableObject {
     func loadRecords() {
         do {
             let data = try Data(contentsOf: filePath)
-            records = try JSONDecoder().decode([Record].self, from: data)
+            records = try JSONDecoder().decode([Observer].self, from: data)
         } catch {
             print("Error loading data: \(error)")
         }
@@ -46,12 +50,12 @@ class RecordsViewModel: ObservableObject {
         }
     }
 
-    func appendRecord(name: String, userID: String) {
+    func appendRecord(name: String, userID: Int) {
         guard !records.contains(where: { $0.userID == userID }) else {
             print("Record with userID \(userID) already exists.")
             return
         }
-        let newRecord = Record(name: name, userID: userID)
+        let newRecord = Observer(name: name, userID: userID)
         records.append(newRecord)
         saveRecords()
     }
@@ -64,15 +68,15 @@ class RecordsViewModel: ObservableObject {
 
 import SwiftUI
 
-struct RecordsView: View {
-    @StateObject private var viewModel = RecordsViewModel()
+struct ObserversView: View {
+    @EnvironmentObject private var viewModel: ObserversViewModel
     @State private var newName = ""
-    @State private var newUserID = ""
+    @State private var newUserID = 0
 
     var body: some View {
         VStack {
-            TextField("Name", text: $newName)
-            TextField("UserID", text: $newUserID)
+//            TextField("Name", text: $newName)
+//            TextField("UserID", text: $newUserID)
             NavigationView {
                 List {
                     ForEach(viewModel.records) { record in
@@ -80,14 +84,14 @@ struct RecordsView: View {
                     }
                     .onDelete(perform: viewModel.deleteRecord)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Add") {
-                            viewModel.appendRecord(name: newName, userID: newUserID)
-                        }
-                    }
-                }
-                .navigationTitle("Records")
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        Button("Add") {
+//                            viewModel.appendRecord(name: newName, userID: newUserID)
+//                        }
+//                    }
+//                }
+                .navigationTitle("Observers")
             }
         }
         .padding(10)

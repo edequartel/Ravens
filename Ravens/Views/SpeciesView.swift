@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftyBeaver
-//import Popovers
 
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
@@ -27,6 +26,8 @@ struct SpeciesView: View {
     @State private var selectedInfoItem: Species?
     @State private var selectedMapItem: Species?
     @State private var selectedListItem: Species?
+    @State private var selectedListMapItem: Species?
+
     
     // Function to check if a number is in the array
     func isNumberInBookMarks(number: Int) -> Bool {
@@ -43,7 +44,6 @@ struct SpeciesView: View {
                     rarityFilterOption: settings.selectedRarity,
                     isBookmarked: settings.isBookMarkVisible,
                     additionalIntArray: bookMarks), id: \.species) { species in
-                        
                         
                             VStack(alignment: .leading) {
                                 HStack(spacing: 4) {
@@ -73,7 +73,7 @@ struct SpeciesView: View {
                                 }
                             }
                             .onTapGesture {
-                                self.selectedInfoItem = species
+                                self.selectedListMapItem = species
                             }
 
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -95,19 +95,23 @@ struct SpeciesView: View {
                                 }
                                 .tint(.red)
                                 
-                                Button(action: {
-                                    self.selectedMapItem = species
-                                } ) {
-                                    Image(systemName: "map")
+                                if settings.listPreference {
+                                    Button(action: {
+                                        self.selectedMapItem = species
+                                    } ) {
+                                        Image(systemName: "map")
+                                    }
+                                    .tint(.green)
+                                } else {
+                                    
+                                    Button(action: {
+                                        self.selectedListItem = species
+                                    } ) {
+                                        Image(systemName: "list.bullet")
+                                    }
+                                    .tint(.green)
                                 }
-                                .tint(.orange)
                                 
-                                Button(action: {
-                                    selectedListItem = species
-                                }) {
-                                    Image(systemName: "list.bullet")
-                                }
-                                .tint(.green)
                             }
                     }
             }
@@ -160,16 +164,31 @@ struct SpeciesView: View {
         }
         .searchable(text: $searchText)
         
-        .fullScreenCover(item: $selectedInfoItem) { item in
+        .sheet(item: $selectedInfoItem) { item in
             SpeciesDetailsView(item: item)
         }
         
-        
-        .fullScreenCover(item: $selectedMapItem) { item in
-            MapObservationsSpeciesView(item: item)
+        .sheet(item: $selectedMapItem) { item in
+            if settings.listPreference {
+                 ObservationsSpeciesView(item: item)
+            } else {
+                MapObservationsSpeciesView(item: item)
+            }
         }        
         
-        .fullScreenCover(item: $selectedListItem) { item in
+        .sheet(item: $selectedListMapItem) { item in
+            if settings.listPreference {
+                ObservationsSpeciesView(item: item)
+            } else {
+                MapObservationsSpeciesView(item: item)
+            }
+        }
+        
+        .sheet(item: $selectedMapItem) { item in
+            MapObservationsSpeciesView(item: item)
+        }
+        
+        .sheet(item: $selectedListItem) { item in
             ObservationsSpeciesView(item: item)
         }
         
@@ -292,4 +311,3 @@ struct SpeciesView_Previews: PreviewProvider {
     }
 }
 
-//{

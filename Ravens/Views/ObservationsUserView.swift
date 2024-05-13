@@ -8,38 +8,28 @@
 import SwiftUI
 import SwiftyBeaver
 
-
 struct ObservationsUserViewExtra: View {
     let log = SwiftyBeaver.self
     
-    @EnvironmentObject var viewModel: ObservationsUserViewModel
-    @Environment(\.presentationMode) var presentationMode
-    
+    @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var explorers: [Explorer] = []
     @State private var userName: String = ""
     @State private var userId: Int = 0
     
-//    @State private var messageAlert: Bool = false
-//    @State private var selectedExplorer: Explorer?
+    
+    @State private var limit = 100
+    @State private var offset = 0
+    
+    @State private var start = 0
+    @State private var end = 100
     
     
     var body: some View {
-//        VStack {
-            HStack {
-                CircleActionButton() {
-                    presentationMode.wrappedValue.dismiss()
-                }
-                Spacer()
-                Text(userName)
-            }
-            .padding(8)
-            .background(Color(hex: obsStrNorthSeaBlue))
-
-        
+        VStack {
             List {
-                if let results =  viewModel.observations?.results {
+                if let results =  observationsUserViewModel.observations?.results {
                     ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
                         result in
                         ObsView(obs: result, showUsername: false)
@@ -47,15 +37,18 @@ struct ObservationsUserViewExtra: View {
                 }
             }
             .padding(-10)
+        }
+        .onAppear {
+            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
+        }
     }
 }
 
 
-
-//struct ObservationsUserView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ObservationsUserView()
-//            .environmentObject(ObservationsUserViewModel(settings: Settings()))
-//            .environmentObject(Settings())
-//    }
-//}
+struct ObservationsUserViewExtra_Previews: PreviewProvider {
+    static var previews: some View {
+        ObservationsUserViewExtra()
+            .environmentObject(ObservationsUserViewModel(settings: Settings()))
+            .environmentObject(Settings())
+    }
+}

@@ -11,10 +11,11 @@ import SwiftUI
 struct ObservationsView: View {
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-//            VStack {
+            VStack {
                 HStack {
                     CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
@@ -46,8 +47,7 @@ struct ObservationsView: View {
                     }
                     .padding(-10)
                 }
-//                Spacer()
-//            }
+            }
     }
 }
 

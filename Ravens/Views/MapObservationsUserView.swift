@@ -30,6 +30,9 @@ struct MapObservationsUserView: View {
     @State private var start = 0
     @State private var end = 100
     
+    @State private var showObservers: Bool = false
+    
+    @State private var showListView: Bool = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -125,22 +128,28 @@ struct MapObservationsUserView: View {
                 .foregroundColor(.obsGreenFlower)
                 .background(Color.obsGreenEagle.opacity(0.5))
             }
-            
-            
             .mapStyle(settings.mapStyle)
-            
+
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
             
-            CircleButton(isToggleOn: $showFullScreenMap)
-                .topLeft()
+//            CircleButton(isToggleOn: $showFullScreenMap)
+//                .topLeft()
+//            
+//            CircleButton(isToggleOn: $showObservers)
+//                .topRight()
         }
-        .fullScreenCover(isPresented: $showFullScreenMap) {
-            ObservationsUserViewExtra()
-        }
+        
+//        .sheet(isPresented: $showFullScreenMap) {
+//            ObservationsUserViewExtra()
+//        }
+//        
+//        .sheet(isPresented: $showObservers) {
+//            ObserversView()
+//        }
         
         .onAppear {
             observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })

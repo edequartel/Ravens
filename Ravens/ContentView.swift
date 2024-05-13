@@ -8,16 +8,21 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
+import SwiftUIPager
 
 
 struct ContentView: View {
     let log = SwiftyBeaver.self
     
+    var items = Array(0..<10)
+    
+    @EnvironmentObject var settings: Settings
     
     @StateObject private var keyChainviewModel = KeychainViewModel()
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
 
+    @StateObject var page: Page = .first()
     
     @State private var locationId: Int?
     
@@ -36,7 +41,7 @@ struct ContentView: View {
 //                    Image(systemName: "square")
 //                }
 //            
-//            RecordsView()
+//            ObserversView()
 //                .tabItem {
 //                    Text("Records")
 //                    Image(systemName: "square")
@@ -44,24 +49,28 @@ struct ContentView: View {
             
             
             // Tab 1
-            MapObservationView()
-                .tabItem {
-                    Text("Radius")
-                    Image(systemName: "circle")
-                }
+//            if settings.listPreference {
+                MapObservationView()
+                    .tabItem {
+                        Text("Radius")
+                        Image(systemName: "circle")
+                    }
+//            } else {
+//                ObservationsView()
+//                    .tabItem {
+//                        Text("Radius")
+//                        Image(systemName: "circle")
+//                    }
+//                
+//            }
 
             // Tab 2
-//            if !(keyChainviewModel.token.isEmpty) {
-                MapObservationsLocationView()
-                    .tabItem {
-                        Text("Location")
-                        Image(systemName: "location")
-                    }
-                    .tabItem {
-                        Text("Area")
-                        Image(systemName: "pentagon")
-                    }
-//            }
+            MapObservationsLocationView()
+                .tabItem {
+                    Text("Location")
+                    Image(systemName: "location")
+                }
+
             
             // Tab 2
             SpeciesView()
@@ -70,15 +79,32 @@ struct ContentView: View {
                     Image(systemName: "tree")
                 }
             
-            // Tab 4
-//            if !(keyChainviewModel.token.isEmpty) {
+//            Pager(page: page,
+//                  data: items,
+//                  id: \.self,
+//                  content: { index in
+//                // create a page based on the data passed
+//                Text("Page: \(index)")
+//            })
+//            .tabItem {
+//                Text("View A")
+//            }
+            
+//             Tab 4
+            if !settings.listPreference {
                 MapObservationsUserView()
                     .tabItem {
                         Text("Me")
                         Image(systemName: "person.fill")
                     }
-//            }
-
+            } else {
+                ObservationsUserViewExtra()
+                    .tabItem {
+                        Text("Me")
+                        Image(systemName: "person.fill")
+                    }
+            }
+            
             
             // Tab 5
             SettingsView()
@@ -109,6 +135,7 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(KeychainViewModel())
             .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+            .environmentObject(ObserversViewModel())
             .environmentObject(Settings())
     }
 }

@@ -33,6 +33,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedLanguage") var selectedLanguage = "nl"
     
     @AppStorage("days") var days: Int = 5
+    @AppStorage("listpreference") var listPreference: Bool = false
     @AppStorage("radius") var radius: Int = 500
     @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false

@@ -14,12 +14,12 @@
         }
       }
     },
-    "%@ (%@)" : {
+    "%@ (%lld)" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ (%2$@)"
+            "value" : "%1$@ (%2$lld)"
           }
         }
       }
@@ -103,9 +103,6 @@
     "%lldx" : {
 
     },
-    "Add" : {
-
-    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -127,6 +124,7 @@
       }
     },
     "Area" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -268,9 +266,6 @@
     "Details for %lld" : {
 
     },
-    "DisMiss" : {
-
-    },
     "End Of List" : {
 
     },
@@ -295,6 +290,9 @@
           }
         }
       }
+    },
+    "favorite" : {
+
     },
     "Fetching Observation..." : {
       "extractionState" : "stale",
@@ -530,6 +528,9 @@
           }
         }
       }
+    },
+    "List preference" : {
+
     },
     "Loading" : {
       "extractionState" : "stale",
@@ -801,6 +802,9 @@
         }
       }
     },
+    "Observers" : {
+
+    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -871,9 +875,6 @@
           }
         }
       }
-    },
-    "Records" : {
-
     },
     "Region %@" : {
       "extractionState" : "stale",
@@ -1106,9 +1107,6 @@
           }
         }
       }
-    },
-    "UserID" : {
-
     },
     "Username" : {
       "extractionState" : "stale",

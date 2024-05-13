@@ -12,14 +12,18 @@ struct UserView: View {
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    
+    @State private var navigateToObservers = false
     var body: some View {
         VStack(alignment: .leading) {
             if (keyChainviewModel.token.count > 0) {
+                
                 Text("\(userViewModel.user?.name ?? "unknown")")
                     .bold()
                 Text("\(userViewModel.user?.email ?? "unknown")")
-                Text("\(userViewModel.user?.id ?? 0)")
+                Text("\(String(userViewModel.user?.id ?? 0))")
+                
+                QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
+                    .frame(width: 100, height: 100)
                 
                 let url = userViewModel.user?.url ?? "unknown"
                 Button("\(url)") {
@@ -28,7 +32,7 @@ struct UserView: View {
                     }
                 }
                 let country = userViewModel.user?.country ?? "unknown"
-                Text(country)                
+                Text(country)
                 //            Text("Avatar: \(viewModel.user.avatar ?? "?")")
             }
         }

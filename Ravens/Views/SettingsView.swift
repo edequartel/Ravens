@@ -72,8 +72,8 @@ struct SettingsView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                     Toggle("Poi", isOn: $settings.poiOn)
-                    
                     Toggle("Show observer", isOn: $settings.showUser)
+                    Toggle("List preference", isOn: $settings.listPreference)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in

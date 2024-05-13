@@ -307,6 +307,13 @@ extension View {
     }
 }
 
+extension View {
+    func topRight() -> some View {
+        self
+            .modifier(TopRightModifier())
+    }
+}
+
 struct TopLeftModifier: ViewModifier {
     func body(content: Content) -> some View {
         VStack {
@@ -314,6 +321,19 @@ struct TopLeftModifier: ViewModifier {
                 content
                     .padding([.top, .leading], 10)
                 Spacer() // Pushes the view to the left
+            }
+            Spacer() // Pushes the view to the top
+        }
+    }
+}
+
+struct TopRightModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        VStack {
+            HStack {
+                Spacer() // Pushes the view to the right
+                content
+                    .padding([.top, .trailing], 10)
             }
             Spacer() // Pushes the view to the top
         }

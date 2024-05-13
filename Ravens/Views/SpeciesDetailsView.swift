@@ -13,7 +13,7 @@ import AlamofireImage
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @StateObject var viewSDModel = SpeciesDetailsViewModel(settings: Settings())
     
@@ -24,9 +24,9 @@ struct SpeciesDetailsView: View {
     
     var body: some View {
                     Form{
-                        Button("DisMiss") {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
+//                        Button("DisMiss") {
+//                            self.presentationMode.wrappedValue.dismiss()
+//                        }
             
                         VStack(alignment: .leading) {
                             if let species = viewSDModel.speciesDetails {

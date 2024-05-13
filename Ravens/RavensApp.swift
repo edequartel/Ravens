@@ -13,9 +13,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     let log = SwiftyBeaver.self
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-
+        
         let file = FileDestination()
-//        file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
+        //        file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.minLevel = .warning
         file.levelString.error = "Ravens"
@@ -24,7 +24,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let console = ConsoleDestination()  // log to Xcode Console
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
-//        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
+        //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
         console.minLevel = .error
         
         log.addDestination(console)
@@ -57,8 +57,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-//    @StateObject var fetchRequestManager = FetchRequestManager()
-
+    //    @StateObject var fetchRequestManager = FetchRequestManager()
+    let observersViewModel = ObserversViewModel()
+    let urlHandler = URLHandler() // create instance
+    
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -75,6 +78,16 @@ struct RavensApp: App {
                 .environmentObject(Player())
                 .environmentObject(ObservationsLocationViewModel())
                 .environmentObject(ObservationsYearViewModel(settings: Settings()))
+                .environmentObject(ObserversViewModel())
+                .environmentObject(urlHandler) // use instance
+                .environmentObject(observersViewModel) // use instance
+            
+                .onOpenURL { url in
+                    // Handle the URL appropriately
+                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
+                    let parts = urlString.split(separator: "/").map(String.init)
+                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                }
         }
     }
 }

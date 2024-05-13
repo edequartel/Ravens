@@ -13,7 +13,7 @@ struct ObservationsSpeciesView: View {
     
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
@@ -26,9 +26,9 @@ struct ObservationsSpeciesView: View {
     
     var body: some View {
         VStack() {            
-            Button("DisMiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }
+//            Button("Dismiss") {
+//                self.presentationMode.wrappedValue.dismiss()
+//            }
             
             List {
                 if let results = viewModel.observationsSpecies?.results {

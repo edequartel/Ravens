@@ -13,6 +13,8 @@ struct ObservationsLocationView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
+    @EnvironmentObject var observersViewModel: ObserversViewModel
+    
     @EnvironmentObject var settings: Settings
     @Environment(\.presentationMode) var presentationMode
     
@@ -23,7 +25,7 @@ struct ObservationsLocationView: View {
     var locationStr: String
     
     var body: some View {
-//            VStack {
+            VStack {
                 HStack {
                     CircleActionButton() {
                         presentationMode.wrappedValue.dismiss()
@@ -43,14 +45,22 @@ struct ObservationsLocationView: View {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
                             ObsView(obs: result, showLocation: true)
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button("Info") {
+                                        observersViewModel.appendRecord(
+                                            name: result.user_detail?.name ?? "unknown",
+                                            userID: result.user_detail?.id ?? 0)
+                                        print("Like")
+                                    }
+                                    .tint(.blue)
+                                }
                         }
+                        
                     }
                 }
                 .padding(-10)
-//            }
-
+            }
     }
-        
 }
 
 //struct ObservationsLocationView_Previews: PreviewProvider {

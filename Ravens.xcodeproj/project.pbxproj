@@ -58,6 +58,8 @@
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
+		4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */; };
+		4767EFFD2BF20E6F00BACDC6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */; };
 		476843D42BA9D43D004EF208 /* LottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 476843D32BA9D43D004EF208 /* LottieFile.json */; };
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
@@ -142,6 +144,7 @@
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		47714FD02BD15A2600361C55 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
+				4767EFFD2BF20E6F00BACDC6 /* SwiftUIPager in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
@@ -297,6 +301,7 @@
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				476FA8A52B9B031B00665613 /* SoundsView.swift */,
 				4785CD1A2B95C87E002F52BE /* UserView.swift */,
+				4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
@@ -367,6 +372,7 @@
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
 				47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */,
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
+				4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -406,6 +412,7 @@
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -468,6 +475,7 @@
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
 				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
+				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,
@@ -753,6 +761,14 @@
 				minimumVersion = 2.3.0;
 			};
 		};
+		4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -810,6 +826,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
+		};
+		4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
