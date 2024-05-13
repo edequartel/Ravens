@@ -151,7 +151,8 @@ struct MapObservationsUserView: View {
 struct MapObservationUserView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
+        let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
+        MapObservationsSpeciesView(item: testSpecies)
             .environmentObject(Settings())
             .environmentObject(KeychainViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))

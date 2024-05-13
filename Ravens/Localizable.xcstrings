@@ -14,12 +14,12 @@
         }
       }
     },
-    "%@ - %lldx" : {
+    "%@ (%@)" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ - %2$lldx"
+            "value" : "%1$@ (%2$@)"
           }
         }
       }
@@ -101,6 +101,9 @@
 
     },
     "%lldx" : {
+
+    },
+    "Add" : {
 
     },
     "All" : {
@@ -259,6 +262,18 @@
         }
       }
     },
+    "Details for %@" : {
+
+    },
+    "Details for %lld" : {
+
+    },
+    "DisMiss" : {
+
+    },
+    "End Of List" : {
+
+    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -291,6 +306,9 @@
           }
         }
       }
+    },
+    "Files" : {
+
     },
     "Filter by" : {
       "localizations" : {
@@ -429,6 +447,9 @@
         }
       }
     },
+    "Info" : {
+
+    },
     "International" : {
       "localizations" : {
         "nl" : {
@@ -460,6 +481,9 @@
           }
         }
       }
+    },
+    "Items" : {
+
     },
     "Language" : {
       "localizations" : {
@@ -848,6 +872,9 @@
         }
       }
     },
+    "Records" : {
+
+    },
     "Region %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1029,6 +1056,9 @@
         }
       }
     },
+    "Tap on item %@" : {
+
+    },
     "Token: %@" : {
       "localizations" : {
         "nl" : {
@@ -1076,6 +1106,9 @@
           }
         }
       }
+    },
+    "UserID" : {
+
     },
     "Username" : {
       "extractionState" : "stale",

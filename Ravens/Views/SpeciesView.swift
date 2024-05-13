@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftyBeaver
 //import Popovers
 
-
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
     @StateObject private var speciesViewModel = SpeciesViewModel(settings: Settings())
@@ -23,96 +22,96 @@ struct SpeciesView: View {
     @State private var selectedFilterOption: FilterOption = .native
     
     @State private var searchText = ""
-    @State private var speciesId : Int?
-    
-    // @State private var isPopupVisible = false <== bindable
-    
-    @State private var isBookMarksVisible = false
     @State private var bookMarks: [Int] = []
+    
+    @State private var selectedInfoItem: Species?
+    @State private var selectedMapItem: Species?
+    @State private var selectedListItem: Species?
     
     // Function to check if a number is in the array
     func isNumberInBookMarks(number: Int) -> Bool {
         return bookMarks.contains(number)
     }
     
-    //
     var body: some View {
         NavigationStack {
-           List {
+            List {
                 ForEach(speciesViewModel.filteredSpecies(
                     by: selectedSortOption,
                     searchText: searchText,
-                    filterOption: selectedFilterOption, 
+                    filterOption: selectedFilterOption,
                     rarityFilterOption: settings.selectedRarity,
                     isBookmarked: settings.isBookMarkVisible,
                     additionalIntArray: bookMarks), id: \.species) { species in
-                    HStack {
-                        HStack {
-                            NavigationLink(destination: 
-                                           MapObservationsSpeciesView(
-                                            speciesID: species.id,
-                                               speciesName: species.name
-                                           )
-                            )
-                            {
-                                VStack(alignment: .leading) {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "circle.fill")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(myColor(value: species.rarity), .clear)
-
-                                        //are there any observations
-                                        if (!keyChainViewModel.token.isEmpty) {
-                                            ObservationDetailsView(speciesID: species.id)
-                                        }
-                                        
-                                        Text(" \(species.name)")// - \(species.id)") //?
-                                            .bold()
-                                            .lineLimit(1) // Set the maximum number of lines to 1
-                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                        Spacer()
-                                        if isNumberInBookMarks(number: species.id) {
-                                            Image(systemName: "star.fill")
-                                        }
-                                    }
-                                    HStack {
-                                        Text("\(species.scientific_name)")
-                                            .italic()
-                                            .lineLimit(1) // Set the maximum number of lines to 1
-                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                    }
-                                }
-                                .onLongPressGesture(minimumDuration: 1) {
-                                    log.verbose("onLONGTapgesture \(species.id)")
-                                    speciesId = species.id
-                                    //
-                                    if isNumberInBookMarks(number: species.id) {
-                                        if let index = bookMarks.firstIndex(of: species.id) {
-                                            bookMarks.remove(at: index)
-                                            settings.saveBookMarks(array: bookMarks)
-                                            print(bookMarks)
-                                        }
-                                    } else
-                                    {
-                                        bookMarks.append(species.id)
-                                        settings.saveBookMarks(array: bookMarks)
-                                        print(bookMarks)
-                                    }
-                                    //
+                        
+                        
+                            VStack(alignment: .leading) {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "circle.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(myColor(value: species.rarity), .clear)
                                     
+                                    //are there any observations
+                                    if (!keyChainViewModel.token.isEmpty) {
+                                        ObservationDetailsView(speciesID: species.id)
+                                    }
+                                    
+                                    Text(" \(species.name)")// - \(species.id)") //?
+                                        .bold()
+                                        .lineLimit(1) // Set the maximum number of lines to 1
+                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                    Spacer()
+                                    if isNumberInBookMarks(number: species.id) {
+                                        Image(systemName: "star.fill")
+                                    }
                                 }
-                                .onAppear() {
-                                    speciesId = species.id
-                                    log.verbose("onAppear \(species.id)")
+                                HStack {
+                                    Text("\(species.scientific_name)")
+                                        .italic()
+                                        .lineLimit(1) // Set the maximum number of lines to 1
+                                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                 }
-                                
                             }
-                            .contentShape(Rectangle())
-                        }
+                            .onTapGesture {
+                                self.selectedInfoItem = species
+                            }
+
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button("Info") {
+                                    self.selectedInfoItem = species
+                                }
+                                .tint(.blue)
+                                
+                                Button(action: {
+                                    if isNumberInBookMarks(number: species.id) {
+                                        bookMarks.removeAll(where: { $0 == species.id })
+                                        
+                                    } else {
+                                        bookMarks.append(species.id)
+                                    }
+                                    settings.saveBookMarks(array: bookMarks)
+                                } ) {
+                                    Image(systemName: "star.fill")
+                                }
+                                .tint(.red)
+                                
+                                Button(action: {
+                                    self.selectedMapItem = species
+                                } ) {
+                                    Image(systemName: "map")
+                                }
+                                .tint(.orange)
+                                
+                                Button(action: {
+                                    selectedListItem = species
+                                }) {
+                                    Image(systemName: "list.bullet")
+                                }
+                                .tint(.green)
+                            }
                     }
-                }
             }
-//           .padding(0)
+
             
             .toolbar{
                 Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
@@ -140,6 +139,7 @@ struct SpeciesView: View {
                     .pickerStyle(.inline)
                 }
             }
+            
             .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
             
             .navigationBarItems(
@@ -160,16 +160,31 @@ struct SpeciesView: View {
         }
         .searchable(text: $searchText)
         
+        .fullScreenCover(item: $selectedInfoItem) { item in
+            SpeciesDetailsView(item: item)
+        }
+        
+        
+        .fullScreenCover(item: $selectedMapItem) { item in
+            MapObservationsSpeciesView(item: item)
+        }        
+        
+        .fullScreenCover(item: $selectedListItem) { item in
+            ObservationsSpeciesView(item: item)
+        }
+        
         .onAppear() {
             log.info("speciesView: selectedGroup \(settings.selectedGroup)")
             
             speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-   
+            
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")
             })
             
             settings.readBookmarks(array: &bookMarks)
+            
+            
         }
     }
     
@@ -277,3 +292,4 @@ struct SpeciesView_Previews: PreviewProvider {
     }
 }
 
+//{

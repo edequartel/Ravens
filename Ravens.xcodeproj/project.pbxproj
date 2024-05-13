@@ -80,6 +80,9 @@
 		4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */; };
 		4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserView.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
+		478EABE52BEB8A3E00414431 /* RecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */; };
+		478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE62BEB8B8600414431 /* FileListViewModel.swift */; };
+		478EABE92BED3A2300414431 /* TestMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE82BED3A2300414431 /* TestMe.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -157,6 +160,9 @@
 		4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsUserView.swift; sourceTree = "<group>"; };
 		4785CD222B965237002F52BE /* ObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserView.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
+		478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewModel.swift; sourceTree = "<group>"; };
+		478EABE62BEB8B8600414431 /* FileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewModel.swift; sourceTree = "<group>"; };
+		478EABE82BED3A2300414431 /* TestMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMe.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				478EABE82BED3A2300414431 /* TestMe.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
@@ -237,6 +244,8 @@
 		474C40802B4D17AA0038B3A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */,
+				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
@@ -458,6 +467,7 @@
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
+				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,
@@ -481,6 +491,7 @@
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
+				478EABE52BEB8A3E00414431 /* RecordsViewModel.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
@@ -489,6 +500,7 @@
 				474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
 				47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */,
+				478EABE92BED3A2300414431 /* TestMe.swift in Sources */,
 				471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */,
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,

@@ -23,6 +23,26 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
+            // Tab 0
+//            TestMeView()
+//                .tabItem {
+//                    Text("Records")
+//                    Image(systemName: "square")
+//                }         
+            
+//            FileListView()
+//                .tabItem {
+//                    Text("Records")
+//                    Image(systemName: "square")
+//                }
+//            
+//            RecordsView()
+//                .tabItem {
+//                    Text("Records")
+//                    Image(systemName: "square")
+//                }
+            
+            
             // Tab 1
             MapObservationView()
                 .tabItem {

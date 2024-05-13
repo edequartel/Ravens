@@ -11,13 +11,17 @@ import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
+    var item: Species
+    
     @State private var limit = 100
     @State private var offset = 0
     @State private var showFullScreenMap = false
+    
     @State private var cameraPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
@@ -25,11 +29,8 @@ struct MapObservationsSpeciesView: View {
         )
     )
     
-    var speciesID: Int
-    var speciesName: String
-    
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        ZStack(alignment: .leading) {
             Map(position: $cameraPosition) {
                 UserAnnotation()
                 
@@ -61,7 +62,7 @@ struct MapObservationsSpeciesView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         //
-                        Text("\(speciesName)")
+                        Text("\(item.name)")
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         //
@@ -114,20 +115,12 @@ struct MapObservationsSpeciesView: View {
                 MapCompass() //tapping this makes it north
             }
             
-            CircleButton(isToggleOn: $showFullScreenMap)
-                .topLeft()
-        }
-        .fullScreenCover(isPresented: $showFullScreenMap) {
+            Button("DisMiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            .topLeft()
             
-            
-            ObservationsSpeciesView(
-                speciesID: speciesID,
-                speciesName: speciesName
-                
-                
-            )
         }
-        
         .onAppear {
             fetchDataModel()
         }
@@ -140,9 +133,8 @@ struct MapObservationsSpeciesView: View {
     }
     
     func fetchDataModel() {
-        // Debugging or additional actions
         observationsSpeciesViewModel.fetchData(
-            speciesId: speciesID,
+            speciesId: item.id,
             limit: 100,
             offset: 0,
             date: settings.selectedDate,
@@ -152,11 +144,11 @@ struct MapObservationsSpeciesView: View {
 }
 
 
-
-struct MapObservationSpeciesView_Previews: PreviewProvider {
+struct MapObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationsSpeciesView(speciesID: 62, speciesName: "Unknown")
+        let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
+        MapObservationsSpeciesView(item: testSpecies)
             .environmentObject(Settings())
             .environmentObject(KeychainViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
