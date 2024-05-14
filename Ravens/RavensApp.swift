@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftyBeaver
 import SwiftData
 
+import UserNotifications
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     let log = SwiftyBeaver.self
     
@@ -61,6 +63,24 @@ struct RavensApp: App {
     let observersViewModel = ObserversViewModel()
     let urlHandler = URLHandler() // create instance
     
+    //v
+    let center = UNUserNotificationCenter.current()
+    
+    @State private var showingAlert = false
+    @State private var parts: [String] = []
+    
+    
+    init() { //get permissions notifications
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                // Handle the error here.
+                print(error.localizedDescription)
+            }
+            // Enable or disable features based on the authorization.
+        }
+    }
+    //^
     
     var body: some Scene {
         WindowGroup {
@@ -82,12 +102,57 @@ struct RavensApp: App {
                 .environmentObject(urlHandler) // use instance
                 .environmentObject(observersViewModel) // use instance
             
+            //v
                 .onOpenURL { url in
                     // Handle the URL appropriately
                     let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
                     let parts = urlString.split(separator: "/").map(String.init)
-                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                    showingAlert = true
+
+                    
+//                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+//                    
+                    
+                    
+                    // Create the notification content
+                    let content = UNMutableNotificationContent()
+                    content.title = "URL Opened"
+                    content.body = "The app opened a URL: \(url)"
+                    
+                    // Create the trigger
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                    
+                    // Create the request
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    
+                    // Schedule the request with the system.
+                    let notificationCenter = UNUserNotificationCenter.current()
+                    notificationCenter.add(request) { (error) in
+                        if let error = error {
+                            // Handle any errors.
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    //Update badge number
+                    center.setBadgeCount(1) { error in
+                        if let error = error {
+                            print("Error setting badge count: \(error)")
+                        }
+                    }
+                    
+
                 }
+            
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Append URL"),
+                          message: Text("Do you want to append this URL?"),
+                          primaryButton: .default(Text("Yes")) {
+                            observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                          },
+                          secondaryButton: .cancel(Text("No")))
+                }
+            //^
         }
     }
 }

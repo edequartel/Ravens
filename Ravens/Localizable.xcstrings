@@ -1,8 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " %@" : {
-
+    " %@ - %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@ - %2$lld"
+          }
+        }
+      }
     },
     "%@" : {
       "localizations" : {
@@ -123,8 +130,10 @@
         }
       }
     },
+    "Append URL" : {
+
+    },
     "Area" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -260,10 +269,7 @@
         }
       }
     },
-    "Details for %@" : {
-
-    },
-    "Details for %lld" : {
+    "Do you want to append this URL?" : {
 
     },
     "End Of List" : {
@@ -291,7 +297,7 @@
         }
       }
     },
-    "favorite" : {
+    "favo" : {
 
     },
     "Fetching Observation..." : {
@@ -480,9 +486,6 @@
         }
       }
     },
-    "Items" : {
-
-    },
     "Language" : {
       "localizations" : {
         "nl" : {
@@ -555,6 +558,7 @@
       }
     },
     "Location" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -670,6 +674,7 @@
       }
     },
     "Me" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -757,6 +762,9 @@
           }
         }
       }
+    },
+    "No" : {
+
     },
     "nobsavaliable" : {
       "localizations" : {
@@ -965,6 +973,9 @@
         }
       }
     },
+    "Sent Text" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -974,6 +985,9 @@
           }
         }
       }
+    },
+    "Share Text" : {
+
     },
     "Show observer" : {
       "localizations" : {
@@ -1057,9 +1071,6 @@
         }
       }
     },
-    "Tap on item %@" : {
-
-    },
     "Token: %@" : {
       "localizations" : {
         "nl" : {
@@ -1107,6 +1118,9 @@
           }
         }
       }
+    },
+    "Us" : {
+
     },
     "Username" : {
       "extractionState" : "stale",
@@ -1159,7 +1173,7 @@
         }
       }
     },
-    "Your Label" : {
+    "Yes" : {
 
     }
   },

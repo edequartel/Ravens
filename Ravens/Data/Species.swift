@@ -13,6 +13,14 @@ struct Species: Codable, Identifiable {
     let scientific_name: String
     let rarity: Int
     let native: Bool
+    
+    init(species: Int, name: String, scientific_name: String, rarity: Int, native: Bool) {
+        self.species = species
+        self.name = name
+        self.scientific_name = scientific_name
+        self.rarity = rarity
+        self.native = native
+    }
 }
 
 

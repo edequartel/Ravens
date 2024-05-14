@@ -16,6 +16,7 @@ struct ObsView: View {
     
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var observersViewModel: ObserversViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -66,9 +67,13 @@ struct ObsView: View {
             }
             
             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button("favorite") {
-                    print("\(obs.user_detail?.name ?? "") \(obs.user_detail?.id ?? 0)")
+                Button("favo") {
+//                    print("\(obs.user_detail?.name ?? "") \(obs.user_detail?.id ?? 0)")
+                    observersViewModel.appendRecord(
+                        name: obs.user_detail?.name ?? "unknown",
+                        userID: obs.user_detail?.id ?? 0)
                 }
+
             }
             
             
@@ -92,8 +97,8 @@ struct ObsView: View {
                         Text("\(obs.user_detail?.name ?? "noName")")
                             .footnoteGrayStyle()
                         Spacer()
-                        //                        Text("\(obs.user_detail?.id ?? 0)")
-                        //                            .footnoteGrayStyle()
+                        Text("\(obs.user_detail?.id ?? 0)")
+                            .footnoteGrayStyle()
                     }
                 }
             }
@@ -118,7 +123,7 @@ struct ObsView: View {
             }
         }
 //        .accessibility(hidden: true)
-        .accessibility(label: Text("Your Label"))
+//        .accessibility(label: Text("Your Label"))
         
         .onAppear() {
             //            settings.readExplorers(array: &explorers)

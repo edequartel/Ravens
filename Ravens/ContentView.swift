@@ -21,90 +21,68 @@ struct ContentView: View {
     @StateObject private var keyChainviewModel = KeychainViewModel()
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
-
+    
     @StateObject var page: Page = .first()
     
     @State private var locationId: Int?
     
     var body: some View {
         TabView {
-            // Tab 0
-//            TestMeView()
-//                .tabItem {
-//                    Text("Records")
-//                    Image(systemName: "square")
-//                }         
             
-//            FileListView()
-//                .tabItem {
-//                    Text("Records")
-//                    Image(systemName: "square")
-//                }
-//            
-//            ObserversView()
-//                .tabItem {
-//                    Text("Records")
-//                    Image(systemName: "square")
-//                }
+//            ShareTextView()
+//            .tabItem {
+//                Text("Records")
+//                Image(systemName: "square")
+//                            }
+            // Tab 0
+            //            TestMeView()
+            //                .tabItem {
+            //                    Text("Records")
+            //                    Image(systemName: "square")
+            //                }
+            
+            //            FileListView()
+            //                .tabItem {
+            //                    Text("Records")
+            //                    Image(systemName: "square")
+            //                }
+            //
+            //            ObserversView()
+            //                .tabItem {
+            //                    Text("Records")
+            //                    Image(systemName: "square")
+            //                }
             
             
             // Tab 1
-//            if settings.listPreference {
-                MapObservationView()
-                    .tabItem {
-                        Text("Radius")
-                        Image(systemName: "circle")
-                    }
-//            } else {
-//                ObservationsView()
-//                    .tabItem {
-//                        Text("Radius")
-//                        Image(systemName: "circle")
-//                    }
-//                
-//            }
-
-            // Tab 2
-            MapObservationsLocationView()
+            RadiusView()
                 .tabItem {
-                    Text("Location")
+                    Text("Radius")
+                    Image(systemName: "circle")
+                }
+            
+            // Tab 2
+            LocationView()
+                .tabItem {
+                    Text("Area")
                     Image(systemName: "location")
+                }
+            
+            
+            // Tab 3
+            UserObservationsView()
+                .tabItem {
+                    Text("Us")
+                    Image(systemName: "person.3.fill")
                 }
 
             
-            // Tab 2
+            // Tab 4
             SpeciesView()
                 .tabItem {
                     Text("Species")
                     Image(systemName: "tree")
                 }
-            
-//            Pager(page: page,
-//                  data: items,
-//                  id: \.self,
-//                  content: { index in
-//                // create a page based on the data passed
-//                Text("Page: \(index)")
-//            })
-//            .tabItem {
-//                Text("View A")
-//            }
-            
-//             Tab 4
-            if !settings.listPreference {
-                MapObservationsUserView()
-                    .tabItem {
-                        Text("Me")
-                        Image(systemName: "person.fill")
-                    }
-            } else {
-                ObservationsUserViewExtra()
-                    .tabItem {
-                        Text("Me")
-                        Image(systemName: "person.fill")
-                    }
-            }
-            
             
             // Tab 5
             SettingsView()
@@ -122,7 +100,7 @@ struct ContentView: View {
 
 struct AnotherView: View {
     @ObservedObject var viewModel: KeychainViewModel
-
+    
     var body: some View {
         Text("Token: \(viewModel.token)")
     }
@@ -169,7 +147,7 @@ struct ContentView_Previews: PreviewProvider {
 //                    Text("Book")
 //                    Image(systemName: "book")
 //                }
-            
+
 //            PassportView()
 //                .tabItem {
 //                    Text("Book")
@@ -207,4 +185,4 @@ struct ContentView_Previews: PreviewProvider {
 //                    Text("weather")
 //                    Image(systemName: "globe")
 //                }
-            
+

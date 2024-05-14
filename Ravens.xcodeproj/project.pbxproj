@@ -20,6 +20,7 @@
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
 		472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633222BB598E600CEA05E /* PoiViewModel.swift */; };
 		472633252BB5998400CEA05E /* POIsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633242BB5998400CEA05E /* POIsView.swift */; };
+		4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B6382BF380B500BF7557 /* LocationViewModel.swift */; };
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
@@ -60,6 +61,10 @@
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
 		4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */; };
 		4767EFFD2BF20E6F00BACDC6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */; };
+		4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFFE2BF2389000BACDC6 /* RadiusView.swift */; };
+		4767F0012BF251C200BACDC6 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0002BF251C200BACDC6 /* LocationView.swift */; };
+		4767F0032BF2529000BACDC6 /* UserObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0022BF2529000BACDC6 /* UserObservationsView.swift */; };
+		4767F0052BF256B100BACDC6 /* TabSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */; };
 		476843D42BA9D43D004EF208 /* LottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 476843D32BA9D43D004EF208 /* LottieFile.json */; };
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
@@ -108,6 +113,7 @@
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
 		472633222BB598E600CEA05E /* PoiViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoiViewModel.swift; sourceTree = "<group>"; };
 		472633242BB5998400CEA05E /* POIsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsView.swift; sourceTree = "<group>"; };
+		4738B6382BF380B500BF7557 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsYearViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +151,10 @@
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		4767EFFE2BF2389000BACDC6 /* RadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusView.swift; sourceTree = "<group>"; };
+		4767F0002BF251C200BACDC6 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		4767F0022BF2529000BACDC6 /* UserObservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservationsView.swift; sourceTree = "<group>"; };
+		4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSpeciesView.swift; sourceTree = "<group>"; };
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		47714FD02BD15A2600361C55 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -248,7 +258,6 @@
 		474C40802B4D17AA0038B3A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */,
 				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
@@ -267,6 +276,7 @@
 				470411122BB2B87300A498F5 /* LocationManager.swift */,
 				4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */,
 				472633222BB598E600CEA05E /* PoiViewModel.swift */,
+				4738B6382BF380B500BF7557 /* LocationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,11 +303,16 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4767F00B2BF3291400BACDC6 /* Lists */,
+				4767F0072BF322E900BACDC6 /* Radius */,
+				4767F0062BF27F2C00BACDC6 /* Area */,
+				4767F0082BF322F000BACDC6 /* Species */,
+				4767F0092BF3230400BACDC6 /* User */,
+				4767F00A2BF3230C00BACDC6 /* Settings */,
 				47714FD02BD15A2600361C55 /* CircleButton.swift */,
-				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
+				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
-				4757E0752B7F3426003F148E /* LoginView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				476FA8A52B9B031B00665613 /* SoundsView.swift */,
 				4785CD1A2B95C87E002F52BE /* UserView.swift */,
@@ -305,23 +320,71 @@
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
-				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
-				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
-				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
-				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
-				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
-				474093832B55B5DE004F10C5 /* ManualView.swift */,
-				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
-				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4767F0062BF27F2C00BACDC6 /* Area */ = {
+			isa = PBXGroup;
+			children = (
+				4767F0002BF251C200BACDC6 /* LocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
+			);
+			path = Area;
+			sourceTree = "<group>";
+		};
+		4767F0072BF322E900BACDC6 /* Radius */ = {
+			isa = PBXGroup;
+			children = (
+				4767EFFE2BF2389000BACDC6 /* RadiusView.swift */,
+				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
+				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
+			);
+			path = Radius;
+			sourceTree = "<group>";
+		};
+		4767F0082BF322F000BACDC6 /* Species */ = {
+			isa = PBXGroup;
+			children = (
+				4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */,
+				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
+			);
+			path = Species;
+			sourceTree = "<group>";
+		};
+		4767F0092BF3230400BACDC6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4767F0022BF2529000BACDC6 /* UserObservationsView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
 			);
-			path = Views;
+			path = User;
+			sourceTree = "<group>";
+		};
+		4767F00A2BF3230C00BACDC6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
+				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
+				4757E0752B7F3426003F148E /* LoginView.swift */,
+				474093832B55B5DE004F10C5 /* ManualView.swift */,
+				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4767F00B2BF3291400BACDC6 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */,
+			);
+			path = Lists;
 			sourceTree = "<group>";
 		};
 		476843D22BA9D333004EF208 /* StartUp */ = {
@@ -454,8 +517,10 @@
 				474093842B55B5DE004F10C5 /* ManualView.swift in Sources */,
 				474C40632B4C091F0038B3A5 /* LanguageView.swift in Sources */,
 				4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */,
+				4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */,
 				474C40572B4BFE950038B3A5 /* RegionListView.swift in Sources */,
 				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
+				4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
 				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,
@@ -504,7 +569,9 @@
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
+				4767F0032BF2529000BACDC6 /* UserObservationsView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
+				4767F0052BF256B100BACDC6 /* TabSpeciesView.swift in Sources */,
 				474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
 				47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */,
@@ -512,6 +579,7 @@
 				471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */,
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
+				4767F0012BF251C200BACDC6 /* LocationView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 			);
