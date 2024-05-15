@@ -42,7 +42,7 @@ struct ObsView: View {
                         if obs.has_photo ?? false {
                             Image(systemName: "photo") //for test
                         }
-                        Text("\(obs.species_detail.name)")
+                        Text("\(obs.species_detail.name) \(obs.species_detail.id)")
                             .bold()
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -67,12 +67,28 @@ struct ObsView: View {
             }
             
             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button("favo") {
-//                    print("\(obs.user_detail?.name ?? "") \(obs.user_detail?.id ?? 0)")
+                Button(action: {
                     observersViewModel.appendRecord(
                         name: obs.user_detail?.name ?? "unknown",
                         userID: obs.user_detail?.id ?? 0)
+                }) {
+                    Image(systemName: "person")
                 }
+                
+//                Button(action: {
+//                    self.selectedInfoItem = species
+//                }) {
+//                    Image(systemName: "info.circle")
+//                }
+//                .tint(.blue)
+//
+//                
+//                Button(action: {
+//                    bookMarksViewModel.appendRecord(speciesID: species.id)
+//                } ) {
+//                    Image(systemName: "star.fill")
+//                }
+//                .tint(.green)
 
             }
             

@@ -21,6 +21,7 @@
 		472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633222BB598E600CEA05E /* PoiViewModel.swift */; };
 		472633252BB5998400CEA05E /* POIsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633242BB5998400CEA05E /* POIsView.swift */; };
 		4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B6382BF380B500BF7557 /* LocationViewModel.swift */; };
+		4738B63B2BF4798800BF7557 /* BookMarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */; };
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
@@ -87,7 +88,7 @@
 		4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */; };
 		4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserView.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
-		478EABE52BEB8A3E00414431 /* RecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */; };
+		478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */; };
 		478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE62BEB8B8600414431 /* FileListViewModel.swift */; };
 		478EABE92BED3A2300414431 /* TestMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE82BED3A2300414431 /* TestMe.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
@@ -114,6 +115,7 @@
 		472633222BB598E600CEA05E /* PoiViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoiViewModel.swift; sourceTree = "<group>"; };
 		472633242BB5998400CEA05E /* POIsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsView.swift; sourceTree = "<group>"; };
 		4738B6382BF380B500BF7557 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarksViewModel.swift; sourceTree = "<group>"; };
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsYearViewModel.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 		4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsUserView.swift; sourceTree = "<group>"; };
 		4785CD222B965237002F52BE /* ObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserView.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
-		478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewModel.swift; sourceTree = "<group>"; };
+		478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversViewModel.swift; sourceTree = "<group>"; };
 		478EABE62BEB8B8600414431 /* FileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewModel.swift; sourceTree = "<group>"; };
 		478EABE82BED3A2300414431 /* TestMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMe.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -382,7 +384,8 @@
 		4767F00B2BF3291400BACDC6 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				478EABE42BEB8A3E00414431 /* RecordsViewModel.swift */,
+				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
+				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -561,10 +564,11 @@
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				474C403C2B4BC5070038B3A5 /* Species.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
+				4738B63B2BF4798800BF7557 /* BookMarksViewModel.swift in Sources */,
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
-				478EABE52BEB8A3E00414431 /* RecordsViewModel.swift in Sources */,
+				478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,

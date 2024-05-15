@@ -15,27 +15,21 @@ struct SpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     
     @State private var searchText = ""
-    @State private var bookMarks: [Int] = []
+//    @State private var bookMarks: [Int] = [] //???
     
     @State private var selectedInfoItem: Species?
     @State private var selectedMapItem: Species?
     @State private var selectedListItem: Species?
     @State private var selectedListMapItem: Species?
-    
     @State private var showFirstView = true
 
-    
-    // Function to check if a number is in the array
-    func isNumberInBookMarks(number: Int) -> Bool {
-        return bookMarks.contains(number)
-    }
-    
     var body: some View {
         NavigationView {
             List {
@@ -45,10 +39,9 @@ struct SpeciesView: View {
                     filterOption: selectedFilterOption,
                     rarityFilterOption: settings.selectedRarity,
                     isBookmarked: settings.isBookMarkVisible,
-                    additionalIntArray: bookMarks), id: \.species) { species in
-                        
-                           
-                                
+                    additionalIntArray: bookMarksViewModel
+                ), id: \.species) { species in
+
                                 NavigationLink(destination: TabSpeciesView(item: species)) {
                                     
                                     VStack(alignment: .leading) {
@@ -67,7 +60,8 @@ struct SpeciesView: View {
                                             .lineLimit(1) // Set the maximum number of lines to 1
                                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         Spacer()
-                                        if isNumberInBookMarks(number: species.id) {
+                                        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+//                                        if isNumberInBookMarks(number: species.id) {
                                             Image(systemName: "star.fill")
                                         }
                                     }
@@ -81,23 +75,36 @@ struct SpeciesView: View {
                             }
 
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button("Info") {
+                                Button(action: {
                                     self.selectedInfoItem = species
+                                }) {
+                                    Image(systemName: "info.circle")
                                 }
                                 .tint(.blue)
+
                                 
                                 Button(action: {
-                                    if isNumberInBookMarks(number: species.id) {
-                                        bookMarks.removeAll(where: { $0 == species.id })
-                                        
-                                    } else {
-                                        bookMarks.append(species.id)
-                                    }
-                                    settings.saveBookMarks(array: bookMarks)
+                                    bookMarksViewModel.appendRecord(speciesID: species.id)
                                 } ) {
                                     Image(systemName: "star.fill")
                                 }
-                                .tint(.red)
+                                .tint(.green)
+                                
+                                
+//                                Button(action: {
+//                                    self.selectedInfoItem = species
+//                                }) {
+//                                    Image(systemName: "wiki.circle")
+//                                }
+//                                .tint(.blue)
+                                
+                                
+//                                Button(action: {
+//                                    print("species.id: \(species.id)")
+//                                } ) {
+//                                    Image(systemName: "star.fill")
+//                                }
+//                                .tint(.green)
                                 
 //                                if settings.listPreference {
 //                                    Button(action: {
@@ -107,7 +114,7 @@ struct SpeciesView: View {
 //                                    }
 //                                    .tint(.green)
 //                                } else {
-//                                    
+//
 //                                    Button(action: {
 //                                        self.selectedListItem = species
 //                                    } ) {
@@ -178,7 +185,7 @@ struct SpeciesView: View {
             } else {
                 MapObservationsSpeciesView(item: item)
             }
-        }        
+        }
         
         .sheet(item: $selectedListMapItem) { item in
             if settings.listPreference {
@@ -204,10 +211,6 @@ struct SpeciesView: View {
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")
             })
-            
-            settings.readBookmarks(array: &bookMarks)
-            
-            
         }
     }
     
@@ -248,13 +251,13 @@ extension SpeciesViewModel {
 }
 
 extension SpeciesViewModel {
-    func filteredSpecies(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
+    func filteredSpecies(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: BookMarksViewModel) -> [Species] {
         let sortedSpeciesList = sortedSpecies(by: sortOption)
         
         if searchText.isEmpty {
             var filteredList = applyFilter(to: sortedSpeciesList, with: filterOption)
             filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
-            return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray)
+            return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
         } else {
             let filteredList = sortedSpeciesList.filter { species in
                 species.name.lowercased().contains(searchText.lowercased()) ||
@@ -263,7 +266,7 @@ extension SpeciesViewModel {
             
             var filtered = applyFilter(to: filteredList, with: filterOption)
             filtered = applyRarityFilter(to: filtered, with: rarityFilterOption)
-            return applyBookmarkFilter(to: filtered, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray)
+            return applyBookmarkFilter(to: filtered, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
         }
     }
     
@@ -293,15 +296,16 @@ extension SpeciesViewModel {
         }
     }
     
-    private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [Int]) -> [Species] {
+    private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
         if isBookmarked {
-            return species.filter { additionalIntArray.contains($0.id) }
+            return species.filter { species in additionalIntArray.contains(where: { $0.speciesID == species.id }) }
         } else {
             return species
         }
     }
+    
+    
 }
-
 
 struct SpeciesView_Previews: PreviewProvider {
     static var previews: some View {

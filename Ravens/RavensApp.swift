@@ -68,7 +68,7 @@ struct RavensApp: App {
     
     @State private var showingAlert = false
     @State private var parts: [String] = []
-    
+    @State private var badgeCount: Int = 0
     
     init() { //get permissions notifications
         let center = UNUserNotificationCenter.current()
@@ -99,6 +99,7 @@ struct RavensApp: App {
                 .environmentObject(ObservationsLocationViewModel())
                 .environmentObject(ObservationsYearViewModel(settings: Settings()))
                 .environmentObject(ObserversViewModel())
+                .environmentObject(BookMarksViewModel())
                 .environmentObject(urlHandler) // use instance
                 .environmentObject(observersViewModel) // use instance
             
@@ -106,7 +107,7 @@ struct RavensApp: App {
                 .onOpenURL { url in
                     // Handle the URL appropriately
                     let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
-                    let parts = urlString.split(separator: "/").map(String.init)
+                    self.parts = urlString.split(separator: "/").map(String.init)
                     showingAlert = true
 
                     
@@ -135,11 +136,15 @@ struct RavensApp: App {
                     }
                     
                     //Update badge number
-                    center.setBadgeCount(1) { error in
-                        if let error = error {
-                            print("Error setting badge count: \(error)")
-                        }
-                    }
+                    // Then in the function where you want to increase the badge count
+                    center.setBadgeCount(0)
+//                    center.setBadgeCount(badgeCount + 1) { error in
+//                        if let error = error {
+//                            print("Error setting badge count: \(error)")
+//                        } else {
+//                            badgeCount += 1
+//                        }
+//                    }
                     
 
                 }
@@ -148,7 +153,8 @@ struct RavensApp: App {
                     Alert(title: Text("Append URL"),
                           message: Text("Do you want to append this URL?"),
                           primaryButton: .default(Text("Yes")) {
-                            observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                        print("Appending \(parts[0]) \(parts[1])")
+                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
                           },
                           secondaryButton: .cancel(Text("No")))
                 }

@@ -11,6 +11,9 @@
         }
       }
     },
+    "(%lld)" : {
+
+    },
     "%@" : {
       "localizations" : {
         "nl" : {
@@ -47,6 +50,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@, %3$lld"
+          }
+        }
+      }
+    },
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
           }
         }
       }
@@ -296,9 +309,6 @@
           }
         }
       }
-    },
-    "favo" : {
-
     },
     "Fetching Observation..." : {
       "extractionState" : "stale",
