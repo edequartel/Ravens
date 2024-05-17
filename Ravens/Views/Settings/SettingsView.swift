@@ -17,7 +17,7 @@ struct SettingsView: View {
     @EnvironmentObject var regionsViewModel: RegionViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
-    @State private var showingShareText = false
+
     @State private var storage: String = ""
     
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -73,14 +73,7 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
-                    Toggle("List preference", isOn: $settings.listPreference)
-                    
-                    Button("Sent Text") {
-                        showingShareText = true
-                    }
-                    .sheet(isPresented: $showingShareText) {
-                        ShareTextView()
-                    }
+                    Toggle("Radius", isOn: $settings.radiusPreference)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
@@ -100,22 +93,25 @@ struct SettingsView: View {
                         Text("\(Int(settings.radius)) m")
                     }
                     
-                    
-                    Slider(value: Binding(get: {
-                        Double(settings.radius)
-                    }, set: {
-                        settings.radius = Int($0)
-                    }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
-                    .padding()
+                    if !(settings.radiusPreference) {
+                        Slider(value: Binding(get: {
+                            Double(settings.radius)
+                        }, set: {
+                            settings.radius = Int($0)
+                        }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
+                        .padding()
+                    }
                     
                 }
                 
                 Section("Days") {
-                    Toggle("Infinity (only location)", isOn: $settings.infinity)
-                        .onChange(of: settings.infinity) {
-//                            settings.isFirstAppear = true
-//                            settings.isFirstAppearObsView = true
-                        }
+                    if (settings.radiusPreference) {
+                        Toggle("Infinity (only location)", isOn: $settings.infinity)
+                            .onChange(of: settings.infinity) {
+                                //                            settings.isFirstAppear = true
+                                //                            settings.isFirstAppearObsView = true
+                            }
+                    }
                     
                     
 //                    if !(settings.infinity) {

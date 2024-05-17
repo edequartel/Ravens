@@ -12,7 +12,7 @@ struct BookMark: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
 //    var name: String?
 //    var group: String?
-    var speciesID: Int
+    var speciesID: Int //bookmarkID
 }
 
 
@@ -66,9 +66,15 @@ class BookMarksViewModel: ObservableObject {
         saveRecords()
     }
     
-    func deleteRecord(at indexSet: IndexSet) {
-        records.remove(atOffsets: indexSet)
-        saveRecords()
+    
+    func removeRecord(speciesID: Int) {
+        print("remove records bookmark")
+        if let index = records.firstIndex(where: { $0.speciesID == speciesID }) {
+            records.remove(at: index)
+            saveRecords()
+        } else {
+            print("Record with speciesID \(speciesID) does not exist.")
+        }
     }
 }
 
@@ -94,7 +100,8 @@ struct BookMarksView: View {
                             Spacer()
                         }
                     }
-                    .onDelete(perform: viewModel.deleteRecord)
+//                    .onDelete(perform: viewModel.deleteRecord)
+                    
                 }
             }
             //                .toolbar {

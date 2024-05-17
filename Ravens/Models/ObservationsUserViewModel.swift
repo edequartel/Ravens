@@ -15,6 +15,13 @@ class ObservationsUserViewModel: ObservableObject {
 
     @Published var observations: Observations?
     
+    @State private var limit = 100
+    @State private var offset = 0
+    
+    @State private var start = 0
+    @State private var end = 100
+    
+    
     private var keyChainViewModel =  KeychainViewModel()
     
     var locations = [Location]()

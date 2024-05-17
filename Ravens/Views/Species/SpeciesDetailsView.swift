@@ -20,7 +20,8 @@ struct SpeciesDetailsView: View {
     @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
 
-    var item: Species
+//    var item: Species
+    var speciesID: Int
     
     var body: some View {
                     Form{
@@ -44,7 +45,7 @@ struct SpeciesDetailsView: View {
                                 Divider()
                                     .frame(height: 20)
                                     .opacity(0)
-                                YearView(speciesId: item.id)// speciesID)
+                                YearView(speciesId: speciesID)// speciesID)
                                 Divider()
                                     .frame(height: 20)
                                     .opacity(0)
@@ -58,8 +59,8 @@ struct SpeciesDetailsView: View {
                     }
 //        }
         .onAppear {
-            log.error("Calling SpeciesDetailsView FetchData \(item.id)")
-            viewSDModel.fetchData(for: item.id)
+            log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
+            viewSDModel.fetchData(for: speciesID)
         }
     }
 }

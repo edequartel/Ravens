@@ -28,41 +28,15 @@ struct ObservationsLocationView: View {
     @State private var limit = 100
     @State private var offset = 0
     
-//    var locationId: Int
-//    var locationStr: String
 //    
     var body: some View {
             VStack {
-//                HStack {
-//                    CircleActionButton() {
-//                        presentationMode.wrappedValue.dismiss()
-//                    }
-//
-//                    Spacer()
-//                    Text("Location")
-//                        .bold()
-//                    Text("\(viewModel.observations?.results.count ?? 0)x")
-//                        .bold()
-//                }
-//                .padding(8)
-//                .background(Color(hex: obsStrNorthSeaBlue))
-//                
                 List {
                     if let results =  viewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             result in
-                            ObsView(obs: result, showLocation: true)
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    Button("Info") {
-                                        observersViewModel.appendRecord(
-                                            name: result.user_detail?.name ?? "unknown",
-                                            userID: result.user_detail?.id ?? 0)
-                                        print("Like")
-                                    }
-                                    .tint(.blue)
-                                }
+                            ObsAreaView(obs: result)
                         }
-                        
                     }
                 }
                 .padding(-10)

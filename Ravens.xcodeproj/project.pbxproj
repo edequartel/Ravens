@@ -15,6 +15,7 @@
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
 		471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsView.swift */; };
 		4717C0BF2B9CC41400B570D0 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4717C0BE2B9CC41400B570D0 /* YearView.swift */; };
+		471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 471875332BF7767600EF9F1F /* SwiftUIPager */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -22,6 +23,9 @@
 		472633252BB5998400CEA05E /* POIsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633242BB5998400CEA05E /* POIsView.swift */; };
 		4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B6382BF380B500BF7557 /* LocationViewModel.swift */; };
 		4738B63B2BF4798800BF7557 /* BookMarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */; };
+		4738B63D2BF4DEA400BF7557 /* ObsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */; };
+		4738B63F2BF4E43800BF7557 /* ObsAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B63E2BF4E43800BF7557 /* ObsAreaView.swift */; };
+		4738B6412BF4E7C900BF7557 /* ObsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B6402BF4E7C900BF7557 /* ObsUserView.swift */; };
 		474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093812B558F82004F10C5 /* ObservationDetailsView.swift */; };
 		474093842B55B5DE004F10C5 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474093832B55B5DE004F10C5 /* ManualView.swift */; };
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
@@ -61,10 +65,9 @@
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
 		4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */; };
-		4767EFFD2BF20E6F00BACDC6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */; };
 		4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFFE2BF2389000BACDC6 /* RadiusView.swift */; };
 		4767F0012BF251C200BACDC6 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0002BF251C200BACDC6 /* LocationView.swift */; };
-		4767F0032BF2529000BACDC6 /* UserObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0022BF2529000BACDC6 /* UserObservationsView.swift */; };
+		4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */; };
 		4767F0052BF256B100BACDC6 /* TabSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */; };
 		476843D42BA9D43D004EF208 /* LottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 476843D32BA9D43D004EF208 /* LottieFile.json */; };
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
@@ -78,6 +81,9 @@
 		477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
+		47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */; };
+		47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */; };
+		47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC22BF62DE4003E8F21 /* WikipediaView.swift */; };
 		4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4784B53F2B7BDAA60051D03E /* AlamofireImage */; };
 		4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784B5412B7BE1040051D03E /* AFImageView.swift */; };
 		4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */; };
@@ -86,11 +92,11 @@
 		4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD1A2B95C87E002F52BE /* UserView.swift */; };
 		4785CD1D2B964C0E002F52BE /* ObservationsUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */; };
 		4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */; };
-		4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserView.swift */; };
+		4785CD232B965237002F52BE /* ObservationsUserViewExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserViewExtra.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
 		478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */; };
 		478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE62BEB8B8600414431 /* FileListViewModel.swift */; };
-		478EABE92BED3A2300414431 /* TestMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE82BED3A2300414431 /* TestMe.swift */; };
+		478EABE92BED3A2300414431 /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE82BED3A2300414431 /* ShareTextView.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -116,6 +122,9 @@
 		472633242BB5998400CEA05E /* POIsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIsView.swift; sourceTree = "<group>"; };
 		4738B6382BF380B500BF7557 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarksViewModel.swift; sourceTree = "<group>"; };
+		4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsSpeciesView.swift; sourceTree = "<group>"; };
+		4738B63E2BF4E43800BF7557 /* ObsAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsAreaView.swift; sourceTree = "<group>"; };
+		4738B6402BF4E7C900BF7557 /* ObsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsUserView.swift; sourceTree = "<group>"; };
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsYearViewModel.swift; sourceTree = "<group>"; };
@@ -155,7 +164,7 @@
 		4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		4767EFFE2BF2389000BACDC6 /* RadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusView.swift; sourceTree = "<group>"; };
 		4767F0002BF251C200BACDC6 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		4767F0022BF2529000BACDC6 /* UserObservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservationsView.swift; sourceTree = "<group>"; };
+		4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUserObservationsView.swift; sourceTree = "<group>"; };
 		4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSpeciesView.swift; sourceTree = "<group>"; };
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
@@ -166,6 +175,9 @@
 		477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaPage.swift; sourceTree = "<group>"; };
+		47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaViewModel.swift; sourceTree = "<group>"; };
+		47826CC22BF62DE4003E8F21 /* WikipediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaView.swift; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
 		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		4785CD162B95C835002F52BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -173,11 +185,11 @@
 		4785CD1A2B95C87E002F52BE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		4785CD1C2B964C0E002F52BE /* ObservationsUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserViewModel.swift; sourceTree = "<group>"; };
 		4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsUserView.swift; sourceTree = "<group>"; };
-		4785CD222B965237002F52BE /* ObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserView.swift; sourceTree = "<group>"; };
+		4785CD222B965237002F52BE /* ObservationsUserViewExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserViewExtra.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversViewModel.swift; sourceTree = "<group>"; };
 		478EABE62BEB8B8600414431 /* FileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewModel.swift; sourceTree = "<group>"; };
-		478EABE82BED3A2300414431 /* TestMe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMe.swift; sourceTree = "<group>"; };
+		478EABE82BED3A2300414431 /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
@@ -199,7 +211,7 @@
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
-				4767EFFD2BF20E6F00BACDC6 /* SwiftUIPager in Frameworks */,
+				471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
@@ -212,7 +224,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				478EABE82BED3A2300414431 /* TestMe.swift */,
+				478EABE82BED3A2300414431 /* ShareTextView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
@@ -279,6 +291,7 @@
 				4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */,
 				472633222BB598E600CEA05E /* PoiViewModel.swift */,
 				4738B6382BF380B500BF7557 /* LocationViewModel.swift */,
+				47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +311,7 @@
 				47568D2C2B59B54500E69B1A /* Observations.swift */,
 				4785CD162B95C835002F52BE /* User.swift */,
 				4725B9622BB14C2C00F6F137 /* LocationJSON.swift */,
+				47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -308,11 +322,10 @@
 				4767F00B2BF3291400BACDC6 /* Lists */,
 				4767F0072BF322E900BACDC6 /* Radius */,
 				4767F0062BF27F2C00BACDC6 /* Area */,
-				4767F0082BF322F000BACDC6 /* Species */,
 				4767F0092BF3230400BACDC6 /* User */,
+				4767F0082BF322F000BACDC6 /* Species */,
 				4767F00A2BF3230C00BACDC6 /* Settings */,
 				47714FD02BD15A2600361C55 /* CircleButton.swift */,
-				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
@@ -323,6 +336,7 @@
 				4784B5412B7BE1040051D03E /* AFImageView.swift */,
 				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
+				47826CC22BF62DE4003E8F21 /* WikipediaView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +344,7 @@
 		4767F0062BF27F2C00BACDC6 /* Area */ = {
 			isa = PBXGroup;
 			children = (
+				4738B63E2BF4E43800BF7557 /* ObsAreaView.swift */,
 				4767F0002BF251C200BACDC6 /* LocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
@@ -340,6 +355,7 @@
 		4767F0072BF322E900BACDC6 /* Radius */ = {
 			isa = PBXGroup;
 			children = (
+				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
 				4767EFFE2BF2389000BACDC6 /* RadiusView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
@@ -350,6 +366,7 @@
 		4767F0082BF322F000BACDC6 /* Species */ = {
 			isa = PBXGroup;
 			children = (
+				4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */,
 				4767F0042BF256B100BACDC6 /* TabSpeciesView.swift */,
 				474C40452B4BC66A0038B3A5 /* SpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
@@ -362,9 +379,10 @@
 		4767F0092BF3230400BACDC6 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				4767F0022BF2529000BACDC6 /* UserObservationsView.swift */,
+				4738B6402BF4E7C900BF7557 /* ObsUserView.swift */,
+				4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
-				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
+				4785CD222B965237002F52BE /* ObservationsUserViewExtra.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -438,7 +456,7 @@
 				4784B53F2B7BDAA60051D03E /* AlamofireImage */,
 				47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */,
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
-				4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */,
+				471875332BF7767600EF9F1F /* SwiftUIPager */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -478,7 +496,7 @@
 				4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -524,9 +542,10 @@
 				474C40572B4BFE950038B3A5 /* RegionListView.swift in Sources */,
 				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
 				4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */,
+				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
-				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,
+				4785CD232B965237002F52BE /* ObservationsUserViewExtra.swift in Sources */,
 				470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */,
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
@@ -535,21 +554,25 @@
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
+				47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
+				4738B63F2BF4E43800BF7557 /* ObsAreaView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationView.swift in Sources */,
 				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
+				4738B63D2BF4DEA400BF7557 /* ObsSpeciesView.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
+				4738B6412BF4E7C900BF7557 /* ObsUserView.swift in Sources */,
 				470411132BB2B87300A498F5 /* LocationManager.swift in Sources */,
 				474C408C2B4DAC590038B3A5 /* RegionViewModel.swift in Sources */,
 				47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */,
@@ -571,15 +594,16 @@
 				478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
+				47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
-				4767F0032BF2529000BACDC6 /* UserObservationsView.swift in Sources */,
+				4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
 				4767F0052BF256B100BACDC6 /* TabSpeciesView.swift in Sources */,
 				474C409C2B500AE90038B3A5 /* ObservationsView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
 				47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */,
-				478EABE92BED3A2300414431 /* TestMe.swift in Sources */,
+				478EABE92BED3A2300414431 /* ShareTextView.swift in Sources */,
 				471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */,
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
@@ -809,6 +833,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
 		474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -831,14 +863,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.3.0;
-			};
-		};
-		4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.0;
 			};
 		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
@@ -884,6 +908,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		471875332BF7767600EF9F1F /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
+		};
 		474093862B55B7AC004F10C5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
@@ -898,11 +927,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
-		};
-		4767EFFC2BF20E6F00BACDC6 /* SwiftUIPager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4767EFFB2BF20E6F00BACDC6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
-			productName = SwiftUIPager;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

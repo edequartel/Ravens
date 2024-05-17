@@ -22,8 +22,6 @@ struct SpeciesView: View {
     @State private var selectedFilterOption: FilterOption = .native
     
     @State private var searchText = ""
-//    @State private var bookMarks: [Int] = [] //???
-    
     @State private var selectedInfoItem: Species?
     @State private var selectedMapItem: Species?
     @State private var selectedListItem: Species?
@@ -45,36 +43,37 @@ struct SpeciesView: View {
                                 NavigationLink(destination: TabSpeciesView(item: species)) {
                                     
                                     VStack(alignment: .leading) {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "circle.fill")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(myColor(value: species.rarity), .clear)
-                                        
-                                        //are there any observations
-                                        if (!keyChainViewModel.token.isEmpty) {
-                                            ObservationDetailsView(speciesID: species.id)
+//                                        Text("\(species.)")
+                                        HStack(spacing: 4) {
+                                            Image(systemName: "circle.fill")
+                                                .symbolRenderingMode(.palette)
+                                                .foregroundStyle(myColor(value: species.rarity), .clear)
+                                            
+                                            //are there any observations
+                                            if (!keyChainViewModel.token.isEmpty) {
+                                                ObservationDetailsView(speciesID: species.id)
+                                            }
+                                            
+                                            Text(" \(species.name) - \(species.id)") //?
+                                                .bold()
+                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                            Spacer()
+                                            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                                                //                                        if isNumberInBookMarks(number: species.id) {
+                                                Image(systemName: "star.fill")
+                                            }
                                         }
-                                        
-                                        Text(" \(species.name) - \(species.id)") //?
-                                            .bold()
-                                            .lineLimit(1) // Set the maximum number of lines to 1
-                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                        Spacer()
-                                        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-//                                        if isNumberInBookMarks(number: species.id) {
-                                            Image(systemName: "star.fill")
+                                        HStack {
+                                            Text("\(species.scientific_name)")
+                                                .italic()
+                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         }
                                     }
-                                    HStack {
-                                        Text("\(species.scientific_name)")
-                                            .italic()
-                                            .lineLimit(1) // Set the maximum number of lines to 1
-                                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                    }
-                                }
                             }
 
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(action: {
                                     self.selectedInfoItem = species
                                 }) {
@@ -84,7 +83,19 @@ struct SpeciesView: View {
 
                                 
                                 Button(action: {
-                                    bookMarksViewModel.appendRecord(speciesID: species.id)
+                                    print("bookmarks")
+                                    
+                                    
+                                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                                        print("bookmarks remove")
+                                        bookMarksViewModel.removeRecord(speciesID: species.id)
+                                    } else {
+                                        bookMarksViewModel.appendRecord(speciesID: species.id)
+                                        print("bookmarks append")
+                                    }
+                                    
+                                    
+                                    
                                 } ) {
                                     Image(systemName: "star.fill")
                                 }
@@ -176,7 +187,7 @@ struct SpeciesView: View {
         .searchable(text: $searchText)
         
         .sheet(item: $selectedInfoItem) { item in
-            SpeciesDetailsView(item: item)
+            SpeciesDetailsView(speciesID: item.id)
         }
         
         .sheet(item: $selectedMapItem) { item in

@@ -21,10 +21,44 @@ struct ObservationsSpeciesView: View {
     
     @State private var isSheetPresented = false
     @State private var endOfListReached = false
+    @State private var showingDetails = false
     
     
     var body: some View {
         VStack() {            
+            VStack {
+                HStack {
+                    Image(systemName: "circle.fill")
+                        .foregroundColor(Color(myColor(value: item.rarity)))
+                    Text("\(item.name) \(item.id)")
+                        .bold()
+                        .lineLimit(1) // Set the maximum number of lines to 1
+                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                    Spacer()
+                    Button(action: {
+                        showingDetails = true
+                    }) {
+                        Image(systemName: "info.circle")
+                    }
+                    .tint(.blue)
+                    .sheet(isPresented: $showingDetails) {
+                        SpeciesDetailsView(speciesID: item.id)
+                    }
+                }
+                HStack {
+                    Text("\(item.scientific_name)")
+                        .foregroundColor(.gray)
+                        .font(.footnote)
+                        .italic()
+                        .lineLimit(1) // Set the maximum number of lines to 1
+                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                    Spacer()
+                }
+                
+                
+            }
+                
+            .padding()
             
             List {
                 if let results = viewModel.observationsSpecies?.results {
@@ -32,7 +66,7 @@ struct ObservationsSpeciesView: View {
                     ForEach(sortedResults.indices, id: \.self) { index in
                         let result = sortedResults[index]
                         
-                        ObsView(obs: result)
+                        ObsSpeciesView(obs: result)
                             .onAppear {
                                 if index == sortedResults.count - 1 {
                                     endOfListReached = true

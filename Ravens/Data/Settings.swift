@@ -41,6 +41,8 @@ class Settings: ObservableObject {
     @AppStorage("infinity") var infinity: Bool = true
     @AppStorage("selectedRarity") var selectedRarity = 1
     @AppStorage("userId") var userId: Int = 0
+    @AppStorage("radiusPreference") var radiusPreference = true
+    
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
 
     @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
@@ -52,6 +54,7 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = CLLocationManager().location
     @Published var initialLoad = true
     @Published var initialLoadLocation = true
+    @Published var userName = ""
     
     @Published var locationId: Int = 0
     @Published var locationStr: String = "NoLocation"

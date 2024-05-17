@@ -22,6 +22,8 @@ struct ContentView: View {
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
     
+    @EnvironmentObject var userViewModel: UserViewModel
+    
     @StateObject var page: Page = .first()
     
     @State private var locationId: Int?
@@ -53,27 +55,34 @@ struct ContentView: View {
             //                    Image(systemName: "square")
             //                }
             
+            // Tab 1
+//            WikipediaView()
+//                .tabItem {
+//                    Text("Radius")
+//                    Image(systemName: "circle")
+//                }
             
             // Tab 1
-            RadiusView()
-                .tabItem {
-                    Text("Radius")
-                    Image(systemName: "circle")
-                }
-            
-            // Tab 2
-            LocationView()
-                .tabItem {
-                    Text("Area")
-                    Image(systemName: "location")
-                }
+            if settings.radiusPreference {
+                RadiusView()
+                    .tabItem {
+                        Text("Radius")
+                        Image(systemName: "circle")
+                    }
+            } else {
+                LocationView()
+                    .tabItem {
+                        Text("Area")
+                        Image(systemName: "location")
+                    }
+            }
             
             
             // Tab 3
-            UserObservationsView()
+            TabUserObservationsView()
                 .tabItem {
                     Text("Us")
-                    Image(systemName: "person.3.fill")
+                    Image(systemName: "person.2.fill")
                 }
 
             
@@ -94,8 +103,11 @@ struct ContentView: View {
         .onAppear() {
             log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
+            userViewModel.fetchUserData(settings: settings, completion: { settings.userName = userViewModel.user?.name ?? "onbekend" })
+            
         }
     }
+        
 }
 
 struct AnotherView: View {

@@ -74,32 +74,12 @@
         }
       }
     },
-    "%lld - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld - %2$lld"
-          }
-        }
-      }
-    },
     "%lld %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld %2$@"
-          }
-        }
-      }
-    },
-    "%lld + %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld + %2$lld"
           }
         }
       }
@@ -282,11 +262,36 @@
         }
       }
     },
-    "Do you want to append this URL?" : {
-
+    "Do you want to append this %@ %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to append this %1$@ %2$@?"
+          }
+        }
+      }
+    },
+    "Do you want to append this %@ to the database?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wil waarnemer %@ toevoegen?"
+          }
+        }
+      }
     },
     "End Of List" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einde van de lijst"
+          }
+        }
+      }
     },
     "English %@" : {
       "extractionState" : "stale",
@@ -343,6 +348,9 @@
           }
         }
       }
+    },
+    "get info when logged in: %lld" : {
+
     },
     "getToken" : {
       "extractionState" : "stale",
@@ -461,9 +469,6 @@
         }
       }
     },
-    "Info" : {
-
-    },
     "International" : {
       "localizations" : {
         "nl" : {
@@ -541,9 +546,6 @@
           }
         }
       }
-    },
-    "List preference" : {
-
     },
     "Loading" : {
       "extractionState" : "stale",
@@ -811,6 +813,7 @@
       }
     },
     "Observations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -820,8 +823,26 @@
         }
       }
     },
+    "Observer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemer"
+          }
+        }
+      }
+    },
     "Observers" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemers"
+          }
+        }
+      }
     },
     "Password" : {
       "localizations" : {
@@ -863,6 +884,9 @@
           }
         }
       }
+    },
+    "QRCode" : {
+
     },
     "Radius" : {
       "localizations" : {
@@ -936,6 +960,9 @@
         }
       }
     },
+    "remove" : {
+
+    },
     "Results %lld/%lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -973,6 +1000,16 @@
         }
       }
     },
+    "Search Wikipedia" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoek"
+          }
+        }
+      }
+    },
     "Select a Region" : {
       "localizations" : {
         "nl" : {
@@ -982,9 +1019,6 @@
           }
         }
       }
-    },
-    "Sent Text" : {
-
     },
     "Settings" : {
       "localizations" : {
@@ -996,8 +1030,25 @@
         }
       }
     },
+    "Share" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel"
+          }
+        }
+      }
+    },
     "Share Text" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel text"
+          }
+        }
+      }
     },
     "Show observer" : {
       "localizations" : {
@@ -1130,7 +1181,14 @@
       }
     },
     "Us" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wij"
+          }
+        }
+      }
     },
     "Username" : {
       "extractionState" : "stale",
@@ -1173,6 +1231,9 @@
         }
       }
     },
+    "Wikipedia Explorer" : {
+
+    },
     "Window" : {
       "localizations" : {
         "nl" : {
@@ -1184,7 +1245,14 @@
       }
     },
     "Yes" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

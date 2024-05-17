@@ -135,24 +135,27 @@ struct MapObservationsUserView: View {
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
             }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: ObserversView()) {
+                    Label("Observers", systemImage: "person.2.fill")
+                }
+            }
             
-//            CircleButton(isToggleOn: $showFullScreenMap)
-//                .topLeft()
-//            
-//            CircleButton(isToggleOn: $showObservers)
-//                .topRight()
+            ToolbarItem() {
+                HStack {
+//                    Text("Observer")
+                    Text("\(settings.userName)")
+                }
+            }
         }
         
-//        .sheet(isPresented: $showFullScreenMap) {
-//            ObservationsUserViewExtra()
-//        }
-//        
-//        .sheet(isPresented: $showObservers) {
-//            ObserversView()
-//        }
+        
+
         
         .onAppear {
-            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
+//            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
         }
     }
 }

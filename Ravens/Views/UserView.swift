@@ -19,22 +19,30 @@ struct UserView: View {
                 
                 Text("\(userViewModel.user?.name ?? "unknown")")
                     .bold()
-                Text("\(userViewModel.user?.email ?? "unknown")")
-                Text("\(String(userViewModel.user?.id ?? 0))")
+//                Button("set") {
+//                    settings.userId = userViewModel.user?.id ?? 0
+//                }
                 
+//                Text("\(userViewModel.user?.email ?? "unknown")")
+//                Text("\(String(userViewModel.user?.id ?? 0))")
+//
                 QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
                     .frame(width: 100, height: 100)
+                    .padding(10)
                 
-                let url = userViewModel.user?.url ?? "unknown"
-                Button("\(url)") {
-                    if let validURL = URL(string: url) {
-                        UIApplication.shared.open(validURL)
-                    }
-                }
-                let country = userViewModel.user?.country ?? "unknown"
-                Text(country)
+//                let url = userViewModel.user?.url ?? "unknown"
+//                Button("\(url)") {
+//                    if let validURL = URL(string: url) {
+//                        UIApplication.shared.open(validURL)
+//                    }
+//                }
+//                let country = userViewModel.user?.country ?? "unknown"
+//                Text(country)
                 //            Text("Avatar: \(viewModel.user.avatar ?? "?")")
             }
+        }
+        .onTapGesture {
+            settings.userId = userViewModel.user?.id ?? 0
         }
         .onAppear {
             userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") })
