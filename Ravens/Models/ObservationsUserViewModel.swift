@@ -9,6 +9,53 @@ import Foundation
 import Alamofire
 import MapKit
 import SwiftyBeaver
+import SwiftUI
+
+class window: ObservableObject {
+    @Published var start = 0
+    @Published var maximum = 1234
+    @Published var offset = 100
+    @Published var value = 0
+
+    func next() {
+        if value + offset > maximum {
+            value = maximum
+        } else {
+            value = value + offset
+        }
+    }
+    
+    func previous() {
+        if value - offset < 0 {
+            value = 0
+        } else {
+            value = value - offset
+        }
+    }
+}
+
+//to test
+struct WindowView: View {
+    @ObservedObject var windowObject = window()
+    
+    var body: some View {
+        VStack {
+            Text("Value: \(windowObject.value)")
+
+            Button(action: {
+                self.windowObject.next()
+            }) {
+                Text("Next")
+            }
+
+            Button(action: {
+                self.windowObject.previous()
+            }) {
+                Text("Previous")
+            }
+        }
+    }
+}
 
 class ObservationsUserViewModel: ObservableObject {
     let log = SwiftyBeaver.self

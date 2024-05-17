@@ -30,7 +30,11 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            
+//                        WindowView()
+//                        .tabItem {
+//                            Text("Records")
+//                            Image(systemName: "square")
+//                                        }
 //            ShareTextView()
 //            .tabItem {
 //                Text("Records")

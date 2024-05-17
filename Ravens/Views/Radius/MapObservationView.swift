@@ -26,7 +26,6 @@ struct MapObservationView: View {
     
     @State private var showFullScreenMap = false
     
-    
     @State private var circlePos: CLLocationCoordinate2D?
     @State private var cameraPosition: MapCameraPosition = .automatic
     
