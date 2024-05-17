@@ -15,11 +15,10 @@ class ObservationsUserViewModel: ObservableObject {
 
     @Published var observations: Observations?
     
-    @State private var limit = 100
-    @State private var offset = 0
-    
-    @State private var start = 0
-    @State private var end = 100
+    @Published var limit = 100
+    @Published var offset = 0
+    @Published var start = 0
+    @Published var end = 100
     
     
     private var keyChainViewModel =  KeychainViewModel()
@@ -63,7 +62,7 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-        let url = settings.endPoint() + "user/\(settings.userId)/observations/"+"?limit=\(limit)&offset=\(offset)"  //
+        let url = settings.endPoint() + "user/\(settings.userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"  //
         //?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
         
         log.error("\(url)")

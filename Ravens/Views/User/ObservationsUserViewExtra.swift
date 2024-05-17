@@ -19,11 +19,11 @@ struct ObservationsUserViewExtra: View {
     @State private var userId: Int = 0
     
     
-    @State private var limit = 100
-    @State private var offset = 0
-    
-    @State private var start = 0
-    @State private var end = 100
+//    @State private var limit = 100
+//    @State private var offset = 0
+//    
+//    @State private var start = 0
+//    @State private var end = 100
     
     
     var body: some View {
@@ -52,7 +52,12 @@ struct ObservationsUserViewExtra: View {
             }
         }
         .onAppear {
-            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
+            observationsUserViewModel.fetchData(
+                limit: observationsUserViewModel.limit,
+                offset: observationsUserViewModel.offset,
+                settings: settings,
+                completion: { print("viewModel.fetchData completion")
+                })
         }
     }
 }
