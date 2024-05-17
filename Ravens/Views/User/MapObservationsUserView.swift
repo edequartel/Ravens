@@ -27,14 +27,14 @@ struct MapObservationsUserView: View {
 //    @State private var limit = 100
 //    @State private var offset = 0
 //    
-    @State private var start = 0
-    @State private var end = 100
+//    @State private var start = 0
+//    @State private var end = 100
     
     @State private var showObservers: Bool = false
-    
     @State private var showListView: Bool = false
     
     var body: some View {
+        
         ZStack(alignment: .topLeading) {
             Map(position: $cameraPosition) {
                 UserAnnotation()
@@ -67,7 +67,7 @@ struct MapObservationsUserView: View {
                         
                         VStack(alignment: .trailing) {
                             HStack{
-                                Text("\(start) + \(end)")
+                                Text("\(observationsUserViewModel.start) + \(observationsUserViewModel.end)")
                                 Spacer()
                                 Text("\((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset) - \((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset + observationsUserViewModel.limit)")
                                     .foregroundColor(.obsGreenFlower)
@@ -86,36 +86,34 @@ struct MapObservationsUserView: View {
                         Button(action: {
                             if let maxOffset = observationsUserViewModel.observations?.count {
                                 log.info("maxOffset: \(maxOffset)")
-                                observationsUserViewModel.offset = min(offset + 100, observationsUserViewModel.maxOffset)
+                                observationsUserViewModel.offset = min(observationsUserViewModel.offset + 100, observationsUserViewModel.maxOffset)
                                 observationsUserViewModel.limit = 100
                                 observationsUserViewModel.fetchData(
-                                    limit: observationsUserViewModel.limit,
-                                    offset: observationsUserViewModel.offset,
                                     settings: settings,
                                     completion: { print("viewModel.fetchData completion")
                                     } )
-                                start = 0
-                                end = observationsUserViewModel.observations?.results.count ?? 0
+                                observationsUserViewModel.start = 0
+                                observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
                                 
                             }
                         }) {
                             Image(systemName: "backward.fill")
                                 .bold()
                         }
+                        
                         Button(action: {
                             if observationsUserViewModel.offset >= 100 {
                                 observationsUserViewModel.offset = observationsUserViewModel.offset - 100
                             }
+                            
                             observationsUserViewModel.limit = 100
                             observationsUserViewModel.fetchData(
-                                limit: observationsUserViewModel.limit,
-                                offset: observationsUserViewModel.offset,
                                 settings: settings,
                                 completion: { print("viewModel.fetchData completion")
                                 })
                             
-                            start = 0
-                            end = observationsUserViewModel.observations?.results.count ?? 0
+                            observationsUserViewModel.start = 0
+                            observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
                         }) {
                             Image(systemName: "forward.fill")
                                 .bold()
@@ -126,8 +124,6 @@ struct MapObservationsUserView: View {
                             observationsUserViewModel.limit = 100
                             
                             observationsUserViewModel.fetchData(
-                                limit: observationsUserViewModel.limit,
-                                offset: observationsUserViewModel.offset,
                                 settings: settings,
                                 completion: { print("viewModel.fetchData completion")
                                 })

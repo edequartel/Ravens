@@ -53,8 +53,8 @@ struct ObservationsUserViewExtra: View {
         }
         .onAppear {
             observationsUserViewModel.fetchData(
-                limit: observationsUserViewModel.limit,
-                offset: observationsUserViewModel.offset,
+                //limit: observationsUserViewModel.limit,
+                //offset: observationsUserViewModel.offset,
                 settings: settings,
                 completion: { print("viewModel.fetchData completion")
                 })

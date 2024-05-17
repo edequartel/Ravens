@@ -182,7 +182,7 @@ struct MapObservationsLocationView: View {
                 }
             }
         }
-        
+
         .onAppear() {
             log.error("MapObservationLocationView onAppear")
             

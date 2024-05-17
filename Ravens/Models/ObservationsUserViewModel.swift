@@ -17,6 +17,7 @@ class ObservationsUserViewModel: ObservableObject {
     
     @Published var limit = 100
     @Published var offset = 0
+    @Published var maxOffset = 200 //??
     @Published var start = 0
     @Published var end = 100
     
@@ -52,7 +53,8 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
+    func fetchData(settings: Settings, completion: @escaping () -> Void) {
+//    func fetchData(limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
         log.error("fetchData ObservationsUserViewModel limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         

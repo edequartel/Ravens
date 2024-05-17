@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabUserObservationsView: View {
-    //    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: Settings
     @State private var showFirstView = false
     
     
@@ -27,8 +27,14 @@ struct TabUserObservationsView: View {
                         showFirstView.toggle()
                     }) {
                         Image(systemName: "rectangle.2.swap") // Replace with your desired image
+//                        Text("\(settings.userName)")
                     }
+
                 }
+                
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Text("\(settings.userName)")
+//                }
             }
         }
     }

@@ -92,8 +92,8 @@ struct ObserversView: View {
     @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheer gelijk geopend
     @State private var userName: String = "unknown"
     
-    @State private var newName = ""
-    @State private var newUserID = ""
+//    @State private var newName = ""
+//    @State private var newUserID = ""
     
     var body: some View {
             VStack {

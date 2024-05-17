@@ -100,10 +100,20 @@ struct ContentView: View {
                     Image(systemName: "gearshape")
                 }
         }
+
         .onAppear() {
             log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
-            userViewModel.fetchUserData(settings: settings, completion: { settings.userName = userViewModel.user?.name ?? "onbekend" })
+            
+            userViewModel.fetchUserData(
+                settings: settings,
+                completion: {
+                    settings.userName = userViewModel.user?.name ?? "onbekend"
+                    //
+                    
+                    
+                } )
+            
             
         }
     }
