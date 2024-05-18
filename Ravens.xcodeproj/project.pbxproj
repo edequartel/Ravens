@@ -16,6 +16,7 @@
 		471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsView.swift */; };
 		4717C0BF2B9CC41400B570D0 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4717C0BE2B9CC41400B570D0 /* YearView.swift */; };
 		471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 471875332BF7767600EF9F1F /* SwiftUIPager */; };
+		471875372BF7B60500EF9F1F /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 471875362BF7B60500EF9F1F /* PartialSheet */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -210,6 +211,7 @@
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
+				471875372BF7B60500EF9F1F /* PartialSheet in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
@@ -457,6 +459,7 @@
 				47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */,
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
 				471875332BF7767600EF9F1F /* SwiftUIPager */,
+				471875362BF7B60500EF9F1F /* PartialSheet */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -497,6 +500,7 @@
 				47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */,
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -841,6 +845,14 @@
 				minimumVersion = 2.5.0;
 			};
 		};
+		471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -912,6 +924,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
 			productName = SwiftUIPager;
+		};
+		471875362BF7B60500EF9F1F /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
 		};
 		474093862B55B7AC004F10C5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

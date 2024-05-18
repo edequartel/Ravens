@@ -57,7 +57,7 @@ class ObserversViewModel: ObservableObject {
             print("Record with userID \(userID) already exists.")
             return
         }
-        let newRecord = Observer(name: name, userID: userID)
+        let newRecord = Observer(name: name.replacingOccurrences(of: "_", with: " "), userID: userID)
         records.append(newRecord)
         saveRecords()
     }
@@ -134,6 +134,7 @@ struct ObserversView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(action: {
+                                print(record.name)
                                 textToShare = "ravens://\(record.name)/\(record.userID)"
                                 print("sharetext: \(textToShare)")
                                 showingShareSheet = true
@@ -150,8 +151,15 @@ struct ObserversView: View {
                             .tint(.red)
                             
                             Button(action: {
+                                var cleanName = record.name.replacingOccurrences(of: " ", with: "_")
+                                let charactersToRemove = Set(["!", "?", "."])
+
+                                for character in charactersToRemove {
+                                    cleanName = cleanName.replacingOccurrences(of: String(character), with: "")
+                                }
+
                                 QRCode = IdentifiableString(
-                                    value: "ravens://\(record.name)/\(record.id)",
+                                    value: "ravens://\(cleanName)/\(record.userID)",
                                     name: record.name)
                                 showingQRCodeSheet = true
                             }) {

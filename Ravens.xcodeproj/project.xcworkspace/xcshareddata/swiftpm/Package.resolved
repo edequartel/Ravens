@@ -1,5 +1,5 @@
 {
-  "originHash" : "2bc292dd31e42930f837efce44dcbe4d311c66c3bf277c46cc23f081891abed1",
+  "originHash" : "4255e7a78affa5967f421624cfe5e98f9563b95d851463cdfe30cc29b448fcf3",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -44,6 +44,15 @@
       "state" : {
         "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
         "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "partialsheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AndreaMiotto/PartialSheet.git",
+      "state" : {
+        "revision" : "6c61890976181274ea7baf6a4c297418346db799",
+        "version" : "3.1.1"
       }
     },
     {
