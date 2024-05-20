@@ -98,34 +98,30 @@ struct ObserversView: View {
     var body: some View {
             VStack {
                 List {
-                    Text("\(userViewModel.user?.name ?? "unknown")")
-                        .onTapGesture {
-                            settings.userId = userViewModel.user?.id ?? 0
-                            settings.userName = userViewModel.user?.name ?? "unknown"
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button(action: {
-                                textToShare = "ravens://\(userViewModel.user?.id ?? 0)/\(userViewModel.user?.name ?? "unknown")"
-                                showingShareSheet = true
-                            }) {
-                                Label("Share", systemImage: "square.and.arrow.up")
-                            }
-                            .tint(.obsGreenEagle)
-                            
-                            Button(action: {
-                                QRCode = IdentifiableString(
-                                    value: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)",
-                                    name: userViewModel.user?.name ?? "unknown")
-                                showingQRCodeSheet = true
-                            }) {
-                                Label("QRCode", systemImage: "qrcode")
-                            }
-                            .tint(.gray)
-     
-                        }
-                        .foregroundColor((settings.userId == userViewModel.user?.id ?? 0) ? Color.blue : Color.primary)
-                    
+//                    Text("\(userViewModel.user?.name ?? "unknown")")
+//                        .onTapGesture {
+//                            settings.userId = userViewModel.user?.id ?? 0
+//                            settings.userName = userViewModel.user?.name ?? "unknown"
+//                            self.presentationMode.wrappedValue.dismiss()
+//                        }
+//                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                            
+////                            ShareLink(item: URL(string: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)")!)
+////                                .tint(.obsGreenEagle)
+//                            
+//                            Button(action: {
+//                                QRCode = IdentifiableString(
+//                                    value: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)",
+//                                    name: userViewModel.user?.name ?? "unknown")
+//                                showingQRCodeSheet = true
+//                            }) {
+//                                Label("QRCode", systemImage: "qrcode")
+//                            }
+//                            .tint(.gray)
+//     
+//                        }
+//                        .foregroundColor((settings.userId == userViewModel.user?.id ?? 0) ? Color.blue : Color.primary)
+//                    
                     
                     ForEach(viewModel.records) { record in
                         HStack{
@@ -133,15 +129,9 @@ struct ObserversView: View {
                             Spacer()
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button(action: {
-                                print(record.name)
-                                textToShare = "ravens://\(record.name)/\(record.userID)"
-                                print("sharetext: \(textToShare)")
-                                showingShareSheet = true
-                            }) {
-                                Label("Share", systemImage: "square.and.arrow.up")
-                            }
-                            .tint(.obsGreenEagle)
+                            ShareLink(item: URL(string: "ravens://\(record.userID)/\(record.name)")!)
+                                .tint(.obsGreenEagle)
+
                             
                             Button(action: {
                                 viewModel.removeRecord(userID: record.userID)
@@ -187,9 +177,10 @@ struct ObserversView: View {
                     }
                 }
                 
-                .sheet(isPresented: $showingShareSheet) {
-                    ShareSheet(items: [self.textToShare])
-                }
+//                .sheet(isPresented: $showingShareSheet) {
+////                    ShareSheet(items: [self.textToShare])
+//                    ShareLink(item: URL(string: self.textToShare)!)
+//                }
                 
 
             }

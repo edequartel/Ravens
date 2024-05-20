@@ -18,6 +18,7 @@ struct ObsAreaView: View {
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
+
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -133,6 +134,7 @@ struct ObsAreaView: View {
                 }
                 .tint(.red)
                 
+                
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
@@ -150,6 +152,10 @@ struct ObsAreaView: View {
                     Image(systemName: "info.circle")
                 }
                 .tint(.blue)
+                
+                
+                
+                
             }
         }
         

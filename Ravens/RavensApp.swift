@@ -103,6 +103,7 @@ struct RavensApp: App {
                 .environmentObject(BookMarksViewModel())
                 .environmentObject(urlHandler) // use instance
                 .environmentObject(observersViewModel) // use instance
+                .environmentObject(AreasViewModel()) // use instance
             
             //v
                 .onOpenURL { url in

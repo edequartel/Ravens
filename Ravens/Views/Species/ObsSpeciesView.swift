@@ -18,6 +18,7 @@ struct ObsSpeciesView: View {
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -105,6 +106,24 @@ struct ObsSpeciesView: View {
                     Image(systemName: "person.fill.badge.plus")
                 }
                 .tint(.red)
+                
+                Button(action: {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.removeRecord(
+                            areaID: obs.location_detail?.id ?? 0)
+                    } else {
+                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.appendRecord(
+                            areaName: obs.location_detail?.name ?? "unknown",
+                            areaID: obs.location_detail?.id ?? 0)
+                    }
+                    
+                    
+                }) {
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                }
+                .tint(.green)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {

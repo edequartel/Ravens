@@ -87,13 +87,15 @@ struct SettingsView: View {
                         log.info(settings.selectedRarity)
                     }
                     
-                    HStack {
-                        Text("Radius")
-                        Spacer()
-                        Text("\(Int(settings.radius)) m")
+                    if (settings.radiusPreference) {
+                        HStack {
+                            Text("Radius")
+                            Spacer()
+                            Text("\(Int(settings.radius)) m")
+                        }
                     }
                     
-                    if !(settings.radiusPreference) {
+                    if (settings.radiusPreference) {
                         Slider(value: Binding(get: {
                             Double(settings.radius)
                         }, set: {
@@ -105,7 +107,7 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                    if (settings.radiusPreference) {
+                    if !(settings.radiusPreference) {
                         Toggle("Infinity (only location)", isOn: $settings.infinity)
                             .onChange(of: settings.infinity) {
                                 //                            settings.isFirstAppear = true

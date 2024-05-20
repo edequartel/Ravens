@@ -63,7 +63,8 @@ class Settings: ObservableObject {
 
     
     init() {
-        log.info("init Settings")
+        log.error("** init Settings **")
+        log.error("\(userId)")
     }
     
     func saveExplorers(array: [Explorer]) {

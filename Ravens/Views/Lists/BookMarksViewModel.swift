@@ -68,7 +68,7 @@ class BookMarksViewModel: ObservableObject {
     
     
     func removeRecord(speciesID: Int) {
-        print("remove records bookmark")
+        print("removeRecord \(speciesID)")
         if let index = records.firstIndex(where: { $0.speciesID == speciesID }) {
             records.remove(at: index)
             saveRecords()

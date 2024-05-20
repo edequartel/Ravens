@@ -11,6 +11,9 @@
         }
       }
     },
+    "(%@)" : {
+
+    },
     "(%lld)" : {
 
     },
@@ -145,6 +148,9 @@
           }
         }
       }
+    },
+    "Areas" : {
+
     },
     "Cache Empty" : {
       "localizations" : {
@@ -1046,6 +1052,7 @@
       }
     },
     "Share" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

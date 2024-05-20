@@ -27,6 +27,20 @@ struct LocationView: View {
                         Image(systemName: "rectangle.2.swap") // Replace with your desired image
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AreasView()) {
+                        Label("Areas", systemImage: "pentagon.fill")
+                    }
+                }
+                    
+//                        ToolbarItem() {
+//                            HStack {
+//        //                        Text("Observer")
+//                                Text("\(settings.userName)")
+//                            }
+//                        }
+
             }
         }
         .edgesIgnoringSafeArea(.all)

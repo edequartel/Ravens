@@ -77,7 +77,7 @@ struct ContentView: View {
                 LocationView()
                     .tabItem {
                         Text("Area")
-                        Image(systemName: "location")
+                        Image(systemName: "pentagon")
                     }
             }
             
@@ -109,14 +109,14 @@ struct ContentView: View {
             log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
             
-            userViewModel.fetchUserData(
-                settings: settings,
-                completion: {
-                    settings.userName = userViewModel.user?.name ?? "onbekend"
-                    //
-                    
-                    
-                } )
+//            userViewModel.fetchUserData(
+//                settings: settings,
+//                completion: {
+//                    settings.userName = userViewModel.user?.name ?? "onbekend"
+//                    //
+//                    
+//                    
+//                } )
             
             
         }
