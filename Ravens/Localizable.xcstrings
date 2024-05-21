@@ -11,9 +11,6 @@
         }
       }
     },
-    "(%@)" : {
-
-    },
     "(%lld)" : {
 
     },
@@ -255,6 +252,9 @@
           }
         }
       }
+    },
+    "Delete" : {
+
     },
     "Destination %lld" : {
       "extractionState" : "stale",

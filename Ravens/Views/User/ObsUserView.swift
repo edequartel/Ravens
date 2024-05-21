@@ -18,6 +18,7 @@ struct ObsUserView: View {
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -66,23 +67,16 @@ struct ObsUserView: View {
                 
                 
                 HStack {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        Image(systemName: "pentagon.fill")
+                            .foregroundColor(.green)
+                    }
+
                     Text("\(obs.location_detail?.name ?? "name") \(obs.location_detail?.id ?? 0)")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
                 }
                 
-                
-                //                if showUsername && settings.showUser {
-                //                    VStack {
-                //                        HStack {
-                //                            Text("\(obs.user_detail?.name ?? "noName")")
-                //                                .footnoteGrayStyle()
-                //                            Spacer()
-                //                            Text("\(obs.user_detail?.id ?? 0)")
-                //                                .footnoteGrayStyle()
-                //                        }
-                //                    }
-                //                }
                 
                 if obs.notes?.count ?? 0 > 0 {
                     HStack {
@@ -111,7 +105,23 @@ struct ObsUserView: View {
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
+                Button(action: {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.removeRecord(
+                            areaID: obs.location_detail?.id ?? 0)
+                    } else {
+                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.appendRecord(
+                            areaName: obs.location_detail?.name ?? "unknown",
+                            areaID: obs.location_detail?.id ?? 0)
+                    }
+                }) {
+                Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+            }
+            .tint(.green)
                 
+                       
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)

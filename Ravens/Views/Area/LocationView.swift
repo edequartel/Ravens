@@ -33,6 +33,16 @@ struct LocationView: View {
                         Label("Areas", systemImage: "pentagon.fill")
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        print("dothis")
+                        //                    showFullScreenMap.toggle()
+                    } label: {
+                        Image(systemName: "pentagon")
+                    }
+                }
+
                     
 //                        ToolbarItem() {
 //                            HStack {

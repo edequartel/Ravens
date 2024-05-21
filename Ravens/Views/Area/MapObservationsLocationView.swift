@@ -73,7 +73,7 @@ struct MapObservationsLocationView: View {
                                 .stroke(.pink, lineWidth: 1)
                                 .foregroundStyle(.blue.opacity(0.1))
                         }
-//                        .drawingGroup()
+                        //                        .drawingGroup()
                         
                     }
                     
@@ -145,7 +145,7 @@ struct MapObservationsLocationView: View {
                         if let coordinate = proxy.convert(position, from: .local) {
                             settings.tappedCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                             
-//                            print("Tapped coordinate: \(settings.tappedCoordinate)")
+                            //                            print("Tapped coordinate: \(settings.tappedCoordinate)")
                             
                             //lat,long -> locationId -> geoJSON > observation -> locations
                             polyOverlays.removeAll()
@@ -182,7 +182,6 @@ struct MapObservationsLocationView: View {
                 }
             }
         }
-
         .onAppear() {
             log.error("MapObservationLocationView onAppear")
             
@@ -196,6 +195,7 @@ struct MapObservationsLocationView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
                     settings.currentLocation = self.locationManager.location
                     
+                    
                     //get the observations
                     //geoJSON
                     polyOverlays.removeAll()
@@ -208,6 +208,8 @@ struct MapObservationsLocationView: View {
                                     polyOverlays = polyOverlaysIn
                                     settings.locationId = location.id
                                     settings.locationStr = location.name // the first is the same
+                                    
+                                    print(">>>> \(settings.locationStr) \(settings.locationId)")
                                     
                                     fetchDataModel()
                                     cameraPosition = getCameraPosition()

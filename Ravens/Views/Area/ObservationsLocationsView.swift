@@ -41,6 +41,18 @@ struct ObservationsLocationView: View {
                 }
                 .padding(-10)
             }
+
+//            .toolbar {
+//                ToolbarItem(placement: .principal) {
+//                    
+//                    Button {
+//                        print("dothis")
+//                    } label: {
+//                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+//                    }
+//                }
+//            }
+
             .onAppear() {
                 log.error("ObservationsLocationView onAppear")
                 

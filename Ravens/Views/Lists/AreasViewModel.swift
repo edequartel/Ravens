@@ -11,7 +11,7 @@ import Foundation
 struct Area: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
     var name: String
-//    var group: String?
+    //    var group: String?
     var areaID: Int //locatiobID
 }
 
@@ -78,53 +78,29 @@ import SwiftUI
 
 struct AreasView: View {
     @EnvironmentObject private var viewModel: AreasViewModel
-//    @State private var newName = ""
     @State private var newAreaID = 0
     
     var body: some View {
-        //        VStack {
-        //            TextField("Name", text: $newName)
-        //            TextField("UserID", text: $newUserID)
-//        NavigationView {
-            VStack {
-//                UserView()
-                
-                List {
-                    ForEach(viewModel.records) { record in
-                        HStack{
-                            Text("(\(record.name))")
-                            Text("\(record.areaID)")
-                            Spacer()
+        VStack {
+            List {
+                ForEach(viewModel.records) { record in
+                    HStack{
+                        Text("\(record.name)")
+                        Text("\(record.areaID)")
+                        Spacer()
+                    }
+                    
+                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                        Button() {
+                            print("Delete")
+                            viewModel.removeRecord(areaID: record.areaID)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
                     }
-//                    Button(action: {
-////                        if viewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-////                            viewModel.removeRecord(userID: obs.user_detail?.id ?? 0)
-////                        } else {
-//                            viewModel.appendRecord(
-//                                areaID: 01245)
-////                                name: obs.user_detail?.name ?? "unknown",
-////                                userID: obs.user_detail?.id ?? 0)
-////                        }
-//                    }) {
-//                        Image(systemName: "pentagon")
-//                    }
-//                    .tint(.red)
-////                    .onDelete(perform: viewModel.deleteRecord)
-                    
                 }
             }
-            //                .toolbar {
-            //                    ToolbarItem(placement: .navigationBarTrailing) {
-            //                        Button("Add") {
-            //                            viewModel.appendRecord(name: newName, userID: newUserID)
-            //                        }
-            //                    }
-            //                }
-            //                .navigationTitle("Observers")
-//        }
-        //        }
-        //        .padding(10)
+        }
         .onAppear {
             viewModel.loadRecords()
         }

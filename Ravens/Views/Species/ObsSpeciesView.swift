@@ -46,6 +46,10 @@ struct ObsSpeciesView: View {
                 
                 if showLocation {
                     HStack {
+                        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                            Image(systemName: "pentagon.fill")
+                                .foregroundColor(.green)
+                        }
                         Text("\(obs.location_detail?.name ?? "name")")
                             .lineLimit(1) // Set the maximum number of lines to 1
                         Spacer()
@@ -103,7 +107,7 @@ struct ObsSpeciesView: View {
                             userID: obs.user_detail?.id ?? 0)
                     }
                 }) {
-                    Image(systemName: "person.fill.badge.plus")
+                    Image(systemName: areasViewModel.isIDInRecords(areaID: obs.user_detail?.id ?? 0) ? "person" : "square")
                 }
                 .tint(.red)
                 
@@ -118,8 +122,6 @@ struct ObsSpeciesView: View {
                             areaName: obs.location_detail?.name ?? "unknown",
                             areaID: obs.location_detail?.id ?? 0)
                     }
-                    
-                    
                 }) {
                     Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
                 }

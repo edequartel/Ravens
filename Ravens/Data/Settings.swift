@@ -161,8 +161,8 @@ class Settings: ObservableObject {
             return .standard(elevation: .realistic)
         case .hybrid:
             return .hybrid(elevation: .realistic)
-        case .imagery:
-            return .imagery(elevation: .realistic)
+//        case .imagery:
+//            return .imagery(elevation: .realistic)
         }
     }
     
@@ -171,7 +171,7 @@ class Settings: ObservableObject {
 enum MapStyleChoice: String, CaseIterable {
     case standard = "Standard"
     case hybrid = "Hibrid"
-    case imagery = "Imagery"
+    //case imagery = "Imagery"
 }
 
 
