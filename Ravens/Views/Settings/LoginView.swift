@@ -103,7 +103,7 @@ struct LoginView: View {
         Form {
             Section("Login") {
                 VStack {
-//                    Text("Login to \(settings.selectedInBetween)")
+                    //                    Text("Login to \(settings.selectedInBetween)")
                     TextField("Name", text: $keyChainviewModel.loginName)
                         .onChange(of: keyChainviewModel.loginName) {
                             keyChainviewModel.loginName = keyChainviewModel.loginName.lowercased()
@@ -118,7 +118,10 @@ struct LoginView: View {
                     
                     if (keyChainviewModel.token.isEmpty) {
                         Button("Login") {
-                            keyChainviewModel.fetchData(username: keyChainviewModel.loginName, password: keyChainviewModel.password, settings: settings)
+                            keyChainviewModel.fetchData(
+                                username: keyChainviewModel.loginName,
+                                password: keyChainviewModel.password,
+                                settings: settings)
                             keyChainviewModel.saveCredentials()
                         }
                         .buttonStyle(.borderedProminent)
@@ -149,15 +152,15 @@ struct LoginView: View {
                 }
             }
             
-//            Section() {
-//                ObserversView()
-//            }
+            Section() {
+                ObserversView()
+            }
             
             Section() {
                 InfoObservationView()
             }
             
-            //            DisplayCredentialsView()
+            DisplayCredentialsView()
         }
         .navigationTitle("Login \(settings.selectedInBetween)")
     }
@@ -190,6 +193,7 @@ struct DisplayCredentialsView: View {
             Text("Password: \(viewModel.password)")
             Text("Token: \(viewModel.token)")
         }
+        .font(.caption)
     }
 }
 

@@ -365,9 +365,6 @@
         }
       }
     },
-    "get info when logged in: %lld" : {
-
-    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -484,6 +481,9 @@
           }
         }
       }
+    },
+    "info obs: %lld" : {
+
     },
     "International" : {
       "localizations" : {

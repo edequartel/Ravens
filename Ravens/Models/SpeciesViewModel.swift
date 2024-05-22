@@ -48,5 +48,16 @@ class SpeciesViewModel: ObservableObject {
             }
         }
     }
+    
+    func findSpeciesByID(speciesID: Int) -> Species? {
+        log.info("findSpeciesByID \(speciesID)")
+        for i in 0 ..< species.count {
+            if species[i].id == speciesID {
+                return species[i]
+            }
+        }
+        return nil
+    }
+    
 }
 

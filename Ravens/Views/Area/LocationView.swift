@@ -9,8 +9,11 @@ import SwiftUI
 
 struct LocationView: View {
     @State private var showFirstView = true
+    @EnvironmentObject private var settings: Settings
     
     var body: some View {
+       
+        
         NavigationView {
             VStack {
                 if showFirstView {
@@ -24,8 +27,22 @@ struct LocationView: View {
                     Button(action: {
                         showFirstView.toggle()
                     }) {
-                        Image(systemName: "rectangle.2.swap") // Replace with your desired image
+                        Image(systemName: "rectangle.2.swap") 
                     }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    VStack {
+                        Text("\(settings.locationName)")
+                            .font(.caption2)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                        Text("\(settings.locationId)")
+                            .font(.caption2)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                        
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -33,24 +50,6 @@ struct LocationView: View {
                         Label("Areas", systemImage: "pentagon.fill")
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        print("dothis")
-                        //                    showFullScreenMap.toggle()
-                    } label: {
-                        Image(systemName: "pentagon")
-                    }
-                }
-
-                    
-//                        ToolbarItem() {
-//                            HStack {
-//        //                        Text("Observer")
-//                                Text("\(settings.userName)")
-//                            }
-//                        }
-
             }
         }
         .edgesIgnoringSafeArea(.all)

@@ -35,7 +35,7 @@ struct ObsSpeciesView: View {
         LazyVStack {
             VStack {
                 if obs.has_photo ?? false {
-                    Image(systemName: "photo") //for test
+                    Image(systemName: "photo")
                 }
                 
                 HStack {
@@ -46,13 +46,13 @@ struct ObsSpeciesView: View {
                 
                 if showLocation {
                     HStack {
-                        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                            Image(systemName: "pentagon.fill")
-                                .foregroundColor(.green)
-                        }
                         Text("\(obs.location_detail?.name ?? "name")")
                             .lineLimit(1) // Set the maximum number of lines to 1
                         Spacer()
+                        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                            Image(systemName: "pentagon.fill")
+//                                .foregroundColor(.green)
+                        }
                     }
                 }
                 
@@ -64,10 +64,10 @@ struct ObsSpeciesView: View {
                             Spacer()
                             Text("\(obs.user_detail?.id ?? 0)")
                                 .footnoteGrayStyle()
-                            
+                            Spacer()
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                                 Image(systemName: "person.fill")
-                                    .foregroundColor(.black)
+//                                    .foregroundColor(.black)
                             }
                         }
                     }
@@ -107,9 +107,12 @@ struct ObsSpeciesView: View {
                             userID: obs.user_detail?.id ?? 0)
                     }
                 }) {
-                    Image(systemName: areasViewModel.isIDInRecords(areaID: obs.user_detail?.id ?? 0) ? "person" : "square")
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "person.fill.badge.minus" : "person.fill.badge.plus")
+                                 
                 }
                 .tint(.red)
+                
+
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -124,6 +127,7 @@ struct ObsSpeciesView: View {
                     }
                 }) {
                     Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    
                 }
                 .tint(.green)
                 

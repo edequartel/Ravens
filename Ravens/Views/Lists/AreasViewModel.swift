@@ -78,6 +78,8 @@ import SwiftUI
 
 struct AreasView: View {
     @EnvironmentObject private var viewModel: AreasViewModel
+    @EnvironmentObject private var settings: Settings
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var newAreaID = 0
     
     var body: some View {
@@ -89,16 +91,24 @@ struct AreasView: View {
                         Text("\(record.areaID)")
                         Spacer()
                     }
-                    
-                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button() {
                             print("Delete")
                             viewModel.removeRecord(areaID: record.areaID)
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
+                        .tint(.red)
+                    }
+                    .onTapGesture {
+                        print("\(record.name) - \(record.areaID)")
+                        //deze wordt hier aangepast, nu kijken voor de area in de maps and the obslist
+                        settings.locationName = record.name
+                        settings.locationId = record.areaID
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
+                
             }
         }
         .onAppear {

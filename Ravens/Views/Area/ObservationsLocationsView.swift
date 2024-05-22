@@ -53,49 +53,48 @@ struct ObservationsLocationView: View {
 //                }
 //            }
 
-            .onAppear() {
-                log.error("ObservationsLocationView onAppear")
-                
-                //get the POIs
-//                viewModel.fetchPOIs(completion: { POIs = viewModel.POIs} )
-                
-                //get the location
-                if settings.initialLoadLocation {
-                    
-                    log.info("ObservationsLocationView initiaLLoad, get data at startUp and Position")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
-                        settings.currentLocation = self.locationManager.location
-                        
-                        //get the observations
-                        //geoJSON
-//                        polyOverlays.removeAll()
-                        locationIdViewModel.fetchLocations(
-                            latitude: settings.currentLocation?.coordinate.latitude ?? 0,
-                            longitude: settings.currentLocation?.coordinate.longitude ?? 0) { fetchedLocations in
-                                // Use fetchedLocations here //actually it is one location
-                                for location in fetchedLocations {
-                                    geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
-//                                        polyOverlays = polyOverlaysIn
-                                        settings.locationId = location.id
-                                        settings.locationStr = location.name // the first is the same
-                                        
-                                        fetchDataModel()
-//                                        cameraPosition = getCameraPosition()
-                                    }
-                                }
-                            }
-                        
-                        //only once
-                        settings.initialLoadLocation = false
-                    }
-                } else {
-                    fetchDataModel()
-                }
-                
-                //get selectedGroup
-                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
-            }
+//            .onAppear() {
+//                log.error("ObservationsLocationView onAppear")
+//                
+//                //get the POIs
+////                viewModel.fetchPOIs(completion: { POIs = viewModel.POIs} )
+//                
+//                //get the location
+//                if settings.initialLoadLocation {
+//                    log.info("ObservationsLocationView initiaLLoad, get data at startUp and Position")
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
+//                        settings.currentLocation = self.locationManager.location
+//                        
+//                        //get the observations
+//                        //geoJSON
+////                        polyOverlays.removeAll()
+//                        locationIdViewModel.fetchLocations(
+//                            latitude: settings.currentLocation?.coordinate.latitude ?? 0,
+//                            longitude: settings.currentLocation?.coordinate.longitude ?? 0) { fetchedLocations in
+//                                // Use fetchedLocations here //actually it is one location
+//                                for location in fetchedLocations {
+//                                    geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
+////                                        polyOverlays = polyOverlaysIn
+//                                        settings.locationId = location.id
+//                                        settings.locationName = location.name // the first is the same
+//                                        
+//                                        fetchDataModel()
+////                                        cameraPosition = getCameraPosition()
+//                                    }
+//                                }
+//                            }
+//                        
+//                        //only once
+//                        settings.initialLoadLocation = false
+//                    }
+//                } else {
+//                    fetchDataModel()
+//                }
+//                
+//                //get selectedGroup
+//                log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
+//                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+//            }
     }
     
     func fetchDataModel() {

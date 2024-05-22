@@ -14,17 +14,8 @@ struct ObservationsUserViewExtra: View {
     @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var explorers: [Explorer] = []
     @State private var userName: String = ""
     @State private var userId: Int = 0
-    
-    
-//    @State private var limit = 100
-//    @State private var offset = 0
-//    
-//    @State private var start = 0
-//    @State private var end = 100
-    
     
     var body: some View {
         VStack {
@@ -42,14 +33,16 @@ struct ObservationsUserViewExtra: View {
                         Label("Observers", systemImage: "person.2.fill")
                     }
                 }
-                
-                ToolbarItem() {
-                    HStack {
-//                        Text("Observer")
-                        Text("\(settings.userName)")
-                    }
-                }
             }
+        }
+        .refreshable {
+            print("refreshing")
+            observationsUserViewModel.fetchData(
+                //limit: observationsUserViewModel.limit,
+                //offset: observationsUserViewModel.offset,
+                settings: settings,
+                completion: { print("viewModel.fetchData completion")
+                })
         }
         .onAppear {
             observationsUserViewModel.fetchData(

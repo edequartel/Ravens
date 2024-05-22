@@ -18,6 +18,9 @@
 		471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 471875332BF7767600EF9F1F /* SwiftUIPager */; };
 		471875372BF7B60500EF9F1F /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 471875362BF7B60500EF9F1F /* PartialSheet */; };
 		471875392BFB938500EF9F1F /* AreasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875382BFB938500EF9F1F /* AreasViewModel.swift */; };
+		4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4718753B2BFCA77000EF9F1F /* SVGView */; };
+		4718753F2BFCA81900EF9F1F /* plus-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4718753E2BFCA81900EF9F1F /* plus-square.svg */; };
+		471875412BFD186700EF9F1F /* w_wikipedia.svg in Resources */ = {isa = PBXBuildFile; fileRef = 471875402BFD186700EF9F1F /* w_wikipedia.svg */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -118,6 +121,8 @@
 		471438BA2BBFD3AD00DF35DE /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
 		4717C0BE2B9CC41400B570D0 /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		471875382BFB938500EF9F1F /* AreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewModel.swift; sourceTree = "<group>"; };
+		4718753E2BFCA81900EF9F1F /* plus-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "plus-square.svg"; sourceTree = "<group>"; };
+		471875402BFD186700EF9F1F /* w_wikipedia.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = w_wikipedia.svg; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
@@ -211,6 +216,7 @@
 			files = (
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
+				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				471875372BF7B60500EF9F1F /* PartialSheet in Frameworks */,
@@ -225,6 +231,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4718753D2BFCA7F600EF9F1F /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
+				471875402BFD186700EF9F1F /* w_wikipedia.svg */,
+				4718753E2BFCA81900EF9F1F /* plus-square.svg */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
@@ -258,7 +274,6 @@
 				474C40822B4D17C00038B3A5 /* Views */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
-				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
 				4781539C2B57C166005F87CC /* Localizable.xcstrings */,
 			);
@@ -276,7 +291,6 @@
 		474C40802B4D17AA0038B3A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
@@ -341,6 +355,7 @@
 				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				47826CC22BF62DE4003E8F21 /* WikipediaView.swift */,
+				4718753D2BFCA7F600EF9F1F /* Graphics */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,6 +421,7 @@
 		4767F00B2BF3291400BACDC6 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 				471875382BFB938500EF9F1F /* AreasViewModel.swift */,
@@ -463,6 +479,7 @@
 				477ED8702BA9D0AD00B0D73C /* Lottie */,
 				471875332BF7767600EF9F1F /* SwiftUIPager */,
 				471875362BF7B60500EF9F1F /* PartialSheet */,
+				4718753B2BFCA77000EF9F1F /* SVGView */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -504,6 +521,7 @@
 				477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -521,9 +539,11 @@
 			files = (
 				472633212BB5981A00CEA05E /* poi.json in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
+				4718753F2BFCA81900EF9F1F /* plus-square.svg in Resources */,
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				476843D42BA9D43D004EF208 /* LottieFile.json in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
+				471875412BFD186700EF9F1F /* w_wikipedia.svg in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
 				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
@@ -857,6 +877,14 @@
 				minimumVersion = 3.1.1;
 			};
 		};
+		4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/SVGView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -933,6 +961,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */;
 			productName = PartialSheet;
+		};
+		4718753B2BFCA77000EF9F1F /* SVGView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */;
+			productName = SVGView;
 		};
 		474093862B55B7AC004F10C5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

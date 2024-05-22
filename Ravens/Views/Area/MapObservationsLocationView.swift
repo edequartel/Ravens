@@ -141,6 +141,7 @@ struct MapObservationsLocationView: View {
                         .foregroundColor(.obsGreenFlower)
                         .background(Color.obsGreenEagle.opacity(0.5))
                     }
+                    
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
                             settings.tappedCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -156,12 +157,13 @@ struct MapObservationsLocationView: View {
                                     for location in fetchedLocations {
                                         
                                         log.info(location.id) //dit is de locatieId en hiermee halen we de geoJSON data op
+                                        
                                         geoJSONViewModel.fetchGeoJsonData(
                                             for: String(location.id),
                                             completion: { polyOverlaysIn in
                                                 polyOverlays = polyOverlaysIn
                                                 settings.locationId = location.id
-                                                settings.locationStr = location.name // the first is the same
+                                                settings.locationName = location.name // the first is the same
                                                 
                                                 fetchDataModel()
                                             } )
@@ -175,6 +177,9 @@ struct MapObservationsLocationView: View {
                             )
                         }
                     }
+                    
+                    
+                    
                     .mapControls() {
                         MapCompass() //tapping this makes it north
                         
@@ -190,8 +195,7 @@ struct MapObservationsLocationView: View {
             
             //get the location
             if settings.initialLoadLocation {
-                
-                log.info("MapObservationView initiaLLoad, get data at startUp and Position")
+                log.error("MapObservationView initiaLLoad, get data at startUp and Position")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
                     settings.currentLocation = self.locationManager.location
                     
@@ -207,9 +211,9 @@ struct MapObservationsLocationView: View {
                                 geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
                                     polyOverlays = polyOverlaysIn
                                     settings.locationId = location.id
-                                    settings.locationStr = location.name // the first is the same
+                                    settings.locationName = location.name // the first is the same
                                     
-                                    print(">>>> \(settings.locationStr) \(settings.locationId)")
+                                    print(">>>> \(settings.locationName) \(settings.locationId)")
                                     
                                     fetchDataModel()
                                     cameraPosition = getCameraPosition()

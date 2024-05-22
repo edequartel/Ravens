@@ -92,98 +92,59 @@ struct ObserversView: View {
     @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheer gelijk geopend
     @State private var userName: String = "unknown"
     
-//    @State private var newName = ""
-//    @State private var newUserID = ""
     
     var body: some View {
-            VStack {
-                List {
-//                    Text("\(userViewModel.user?.name ?? "unknown")")
-//                        .onTapGesture {
-//                            settings.userId = userViewModel.user?.id ?? 0
-//                            settings.userName = userViewModel.user?.name ?? "unknown"
-//                            self.presentationMode.wrappedValue.dismiss()
-//                        }
-//                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//                            
-////                            ShareLink(item: URL(string: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)")!)
-////                                .tint(.obsGreenEagle)
-//                            
-//                            Button(action: {
-//                                QRCode = IdentifiableString(
-//                                    value: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)",
-//                                    name: userViewModel.user?.name ?? "unknown")
-//                                showingQRCodeSheet = true
-//                            }) {
-//                                Label("QRCode", systemImage: "qrcode")
-//                            }
-//                            .tint(.gray)
-//     
-//                        }
-//                        .foregroundColor((settings.userId == userViewModel.user?.id ?? 0) ? Color.blue : Color.primary)
-//                    
+        VStack {
+            List {
+                ForEach(viewModel.records) { record in
+                    HStack{
+                        Text("\(record.name) (\(record.userID))")
+                        Spacer()
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        ShareLink(item: URL(string: "ravens://\(cleanName(record.name))/\(record.userID)")!)
+                            .tint(.obsGreenEagle)
+                        
+                        
+                        Button(action: {
+                            viewModel.removeRecord(userID: record.userID)
+                        }) {
+                            Label("remove", systemImage: "person.fill.badge.minus")
+                        }
+                        .tint(.red)
+                        
+                        Button(action: {
+                            QRCode = IdentifiableString(
+                                value: "ravens://\(cleanName(record.name))/\(record.userID)",
+                                name: record.name)
+                            showingQRCodeSheet = true
+                        }) {
+                            Label("QRCode", systemImage: "qrcode")
+                        }
+                        .tint(.gray)
+                    }
                     
-                    ForEach(viewModel.records) { record in
-                        HStack{
-                            Text("\(record.name) (\(record.userID))")
-                            Spacer()
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            ShareLink(item: URL(string: "ravens://\(record.userID)/\(record.name)")!)
-                                .tint(.obsGreenEagle)
-
-                            
-                            Button(action: {
-                                viewModel.removeRecord(userID: record.userID)
-                            }) {
-                                Label("remove", systemImage: "person.fill.badge.minus")
-                            }
-                            .tint(.red)
-                            
-                            Button(action: {
-                                var cleanName = record.name.replacingOccurrences(of: " ", with: "_")
-                                let charactersToRemove = Set(["!", "?", "."])
-
-                                for character in charactersToRemove {
-                                    cleanName = cleanName.replacingOccurrences(of: String(character), with: "")
-                                }
-
-                                QRCode = IdentifiableString(
-                                    value: "ravens://\(cleanName)/\(record.userID)",
-                                    name: record.name)
-                                showingQRCodeSheet = true
-                            }) {
-                                Label("QRCode", systemImage: "qrcode")
-                            }
-                            .tint(.gray)
-                        }
-
-                        .onTapGesture {
-                            settings.userId = record.userID
-                            settings.userName = record.name
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        .foregroundColor(record.userID == settings.userId ? Color.blue : Color.primary)
+                    .onTapGesture {
+                        print(record.userID)
+                        settings.userId = record.userID
+                        settings.userName = record.name
+                        self.presentationMode.wrappedValue.dismiss()
                     }
-
+                    .foregroundColor(record.userID == settings.userId ? Color.blue : Color.primary)
                 }
                 
-                .sheet(item: $QRCode) { item in
-                    VStack{
-                        Text(item.name)
-                            .font(.title)
-                        QRCodeView(input: item.value)
-                            .frame(width: 200, height: 200)
-                    }
-                }
-                
-//                .sheet(isPresented: $showingShareSheet) {
-////                    ShareSheet(items: [self.textToShare])
-//                    ShareLink(item: URL(string: self.textToShare)!)
-//                }
-                
-
             }
+            
+            .sheet(item: $QRCode) { item in
+                VStack{
+                    Text(item.name)
+                        .font(.title)
+                    QRCodeView(input: item.value)
+                        .frame(width: 200, height: 200)
+                }
+            }
+        }
+
         .onAppear {
             viewModel.loadRecords()
         }

@@ -20,6 +20,17 @@ let longitude = 4.713450+0.1
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
 
+func cleanName(_ name: String) -> String {
+    var cleanName = name.replacingOccurrences(of: " ", with: "_")
+    let charactersToRemove = Set(["!", "?", "."])
+
+    for character in charactersToRemove {
+        cleanName = cleanName.replacingOccurrences(of: String(character), with: "")
+    }
+    
+    return cleanName
+}
+
 func formatCurrentDate(value: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -38,6 +49,7 @@ extension Color {
     static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255) //CBFC45
     static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
     static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255) //6AE388
+    static let obsStar = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
 }
 
 let obsStrGreenSpider = "1F5E25"
@@ -49,6 +61,7 @@ let obsStrBlueButterfly = "4CFDFB"
 let obsStrNorthSeaBlue = "75d0fa"
 let obsStrDutchGreen = "c1e6ae"
 let obsStrDutchOrange = "f7b731"
+
 
 func GroupColor(value: Int) -> Color {
     switch value {

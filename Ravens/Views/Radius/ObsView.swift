@@ -17,6 +17,8 @@ struct ObsView: View {
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -32,34 +34,90 @@ struct ObsView: View {
     
     var body: some View {
         LazyVStack {
-            HStack {
-                VStack {
+            VStack {
+                HStack {
+                    VStack {
+                        HStack {
+                            Image(systemName: "circle.fill")
+                                .foregroundColor(Color(myColor(value: obs.rarity)))
+                            if obs.has_sound ?? false { //for test
+                                Image(systemName: "waveform")
+                            }
+                            if obs.has_photo ?? false {
+                                Image(systemName: "photo") //for test
+                            }
+                            Text("\(obs.species_detail.name) \(obs.species_detail.id)")
+                                .bold()
+                                .lineLimit(1) // Set the maximum number of lines to 1
+                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                            Spacer()
+                            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                                //                                        if isNumberInBookMarks(number: species.id) {
+                                Image(systemName: "star.fill")
+                            }
+                        }
+                        
+                        HStack {
+                            Text("\(obs.species_detail.scientific_name)")
+                                .foregroundColor(.gray)
+                                .font(.footnote)
+                                .italic()
+                                .lineLimit(1) // Set the maximum number of lines to 1
+                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                            Spacer()
+                            Text("info obs: \(obs.id ?? 0)")
+                                .footnoteGrayStyle()
+                        }
+                    }
+                }
+                
+                
+                
+                HStack {
+                    Text("\(obs.date) \(obs.time ?? "")")
+                    Text("\(obs.number) x")
+                    Spacer()
+                }
+                
+                if showLocation {
                     HStack {
-                        Image(systemName: "circle.fill")
-                            .foregroundColor(Color(myColor(value: obs.rarity)))
-                        if obs.has_sound ?? false { //for test
-                            Image(systemName: "waveform")
-                        }
-                        if obs.has_photo ?? false {
-                            Image(systemName: "photo") //for test
-                        }
-                        Text("\(obs.species_detail.name) \(obs.species_detail.id)")
-                            .bold()
+                        Text("\(obs.location_detail?.name ?? "name")")
                             .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        Spacer()
+                        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                            Image(systemName: "pentagon.fill")
+                        }
+                    }
+                }
+                
+//                if showUsername && settings.showUser {
+//                    VStack {
+//                        HStack {
+//                            Text("\(obs.user_detail?.name ?? "noName")")
+//                                .footnoteGrayStyle()
+//                            Spacer()
+//                            Text("\(obs.user_detail?.id ?? 0)")
+//                                .footnoteGrayStyle()
+//                        }
+//                    }
+//                }
+                
+                if obs.notes?.count ?? 0 > 0 {
+                    HStack {
+                        Text("\(obs.notes ?? "unknown")")
+                            .italic()
                         Spacer()
                     }
-                    
+                }
+                
+                ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+                    AFImageView(media: imageURLString)
+                }
+                
+                if (obs.sounds?.count ?? 0)>0 {
                     HStack {
-                        Text("\(obs.species_detail.scientific_name)")
-                            .foregroundColor(.gray)
-                            .font(.footnote)
-                            .italic()
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        PlayerControlsView(audio: obs.sounds ?? [] )
                         Spacer()
-                        Text("get info when logged in: \(obs.id ?? 0)")
-                            .footnoteGrayStyle()
                     }
                 }
             }
@@ -79,7 +137,41 @@ struct ObsView: View {
                 }
                 .tint(.blue)
 
+                //
                 
+                Button(action: {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.removeRecord(
+                            areaID: obs.location_detail?.id ?? 0)
+                    } else {
+                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.appendRecord(
+                            areaName: obs.location_detail?.name ?? "unknown",
+                            areaID: obs.location_detail?.id ?? 0)
+                    }
+                }) {
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    
+                }
+                .tint(.green)
+                
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        print("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID:  obs.species_detail.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID:  obs.species_detail.id)
+                        print("bookmarks append")
+                    }
+
+                } ) {
+                    Image(systemName: "star")
+                }
+                .tint(.obsStar)
+                
+                
+                //
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
@@ -93,53 +185,9 @@ struct ObsView: View {
             }
             
             
-            HStack {
-                Text("\(obs.date) \(obs.time ?? "")")
-                Text("\(obs.number) x")
-                Spacer()
-            }
-            
-            if showLocation {
-                HStack {
-                    Text("\(obs.location_detail?.name ?? "name")")
-                        .lineLimit(1) // Set the maximum number of lines to 1
-                    Spacer()
-                }
-            }
-            
-            if showUsername && settings.showUser {
-                VStack {
-                    HStack {
-                        Text("\(obs.user_detail?.name ?? "noName")")
-                            .footnoteGrayStyle()
-                        Spacer()
-                        Text("\(obs.user_detail?.id ?? 0)")
-                            .footnoteGrayStyle()
-                    }
-                }
-            }
-            
-            if obs.notes?.count ?? 0 > 0 {
-                HStack {
-                    Text("\(obs.notes ?? "unknown")")
-                        .italic()
-                    Spacer()
-                }
-            }
-            
-            ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                AFImageView(media: imageURLString)
-            }
-            
-            if (obs.sounds?.count ?? 0)>0 {
-                HStack {
-                    PlayerControlsView(audio: obs.sounds ?? [] )
-                    Spacer()
-                }
-            }
         }
-//        .accessibility(hidden: true)
-//        .accessibility(label: Text("Your Label"))
+        //        .accessibility(hidden: true)
+        //        .accessibility(label: Text("Your Label"))
         .sheet(isPresented: $showingDetails) {
             SpeciesDetailsView(speciesID: obs.species_detail.id)
         }

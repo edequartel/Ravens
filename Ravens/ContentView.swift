@@ -30,11 +30,11 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-//                        WindowView()
-//                        .tabItem {
-//                            Text("Records")
-//                            Image(systemName: "square")
-//                                        }
+//            WindowView()
+//                .tabItem {
+//                    Text("Records")
+//                    Image(systemName: "square")
+//                }
 //            ShareTextView()
 //            .tabItem {
 //                Text("Records")
@@ -109,16 +109,15 @@ struct ContentView: View {
             log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
             
-//            userViewModel.fetchUserData(
-//                settings: settings,
-//                completion: {
-//                    settings.userName = userViewModel.user?.name ?? "onbekend"
-//                    //
-//                    
-//                    
-//                } )
-            
-            
+            userViewModel.fetchUserData(
+                settings: settings,
+                completion: {
+                    print("something goeds wrong here \(userViewModel.user?.id ?? 0)")
+                    settings.userId = userViewModel.user?.id ?? 0
+                    settings.userName = userViewModel.user?.name ?? "unknown"
+                }
+            )
+
         }
     }
         

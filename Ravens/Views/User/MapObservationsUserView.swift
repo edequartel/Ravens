@@ -153,13 +153,6 @@ struct MapObservationsUserView: View {
                     Label("Observers", systemImage: "person.2.fill")
                 }
             }
-            
-            ToolbarItem() {
-                HStack {
-//                    Text("Observer")
-                    Text("\(settings.userName)")
-                }
-            }
         }
         
         

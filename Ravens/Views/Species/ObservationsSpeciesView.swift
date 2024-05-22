@@ -12,6 +12,7 @@ struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var scale: CGFloat = 1.0
@@ -35,10 +36,28 @@ struct ObservationsSpeciesView: View {
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
+                    
+                    Button(action: {
+                        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
+                            print("bookmarks remove")
+                            bookMarksViewModel.removeRecord(speciesID: item.id)
+                        } else {
+                            bookMarksViewModel.appendRecord(speciesID: item.id)
+                            print("bookmarks append")
+                        }
+
+                    } ) {
+                        Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
+                    }
+//                    .tint(.obsStar)
+                    
+                    
+//                    Spacer()
                     Button(action: {
                         showingDetails = true
                     }) {
                         Image(systemName: "info.circle")
+                            .font(.title2)
                     }
                     .tint(.blue)
                     .sheet(isPresented: $showingDetails) {
@@ -75,6 +94,10 @@ struct ObservationsSpeciesView: View {
                     }
                 }
             }
+        }
+        .refreshable {
+            print("refreshing...")
+            fetchDataModel()
         }
         .onAppear() {
             fetchDataModel()

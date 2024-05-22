@@ -19,6 +19,7 @@ struct ObsUserView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -47,6 +48,11 @@ struct ObsUserView: View {
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        //                                        if isNumberInBookMarks(number: species.id) {
+                        Image(systemName: "star.fill")
+//                            .foregroundColor(.gray)
+                    }
                 }
                 
                 HStack {
@@ -67,14 +73,13 @@ struct ObsUserView: View {
                 
                 
                 HStack {
-                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                        Image(systemName: "pentagon.fill")
-                            .foregroundColor(.green)
-                    }
-
                     Text("\(obs.location_detail?.name ?? "name") \(obs.location_detail?.id ?? 0)")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        Image(systemName: "pentagon.fill")
+//                            .foregroundColor(.gray)
+                    }
                 }
                 
                 
@@ -117,11 +122,24 @@ struct ObsUserView: View {
                             areaID: obs.location_detail?.id ?? 0)
                     }
                 }) {
-                Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
-            }
-            .tint(.green)
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                }
+                .tint(.green)
+            
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        print("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
+                        print("bookmarks append")
+                    }
+                } ) {
+                    Image(systemName: "star.fill")
+                }
+                .tint(.obsStar)
+
                 
-                       
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
@@ -139,11 +157,6 @@ struct ObsUserView: View {
                     Image(systemName: "info.circle")
                 }
                 .tint(.blue)
-                
-                
-                
-                
-                //
                 
                 
                 

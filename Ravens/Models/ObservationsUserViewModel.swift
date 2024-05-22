@@ -10,11 +10,11 @@ import Alamofire
 import MapKit
 import SwiftyBeaver
 import SwiftUI
+import SVGView
 
 class window: ObservableObject {
-    @Published var start = 0
-    @Published var maximum = 1234
-    @Published var offset = 100
+    @Published var maximum = 123
+    @Published var offset = 15
     @Published var value = 0
 
     func next() {
@@ -26,14 +26,16 @@ class window: ObservableObject {
     }
     
     func previous() {
-        if value - offset < 0 {
+        let remainder = value % offset
+        if remainder != 0 {
+            value = value - remainder
+        } else if value - offset < 0 {
             value = 0
         } else {
             value = value - offset
         }
     }
 }
-
 //to test
 struct WindowView: View {
     @ObservedObject var windowObject = window()
@@ -41,7 +43,17 @@ struct WindowView: View {
     var body: some View {
         VStack {
             Text("Value: \(windowObject.value)")
-
+            ZStack {
+                SVGView(contentsOf: Bundle.main.url(forResource: "plus-square", withExtension: "svg")!)
+                    .frame(width: 16, height: 16, alignment: .bottomTrailing)
+                    .foregroundColor(.green)
+                
+                SVGView(contentsOf: Bundle.main.url(forResource: "w_wikipedia", withExtension: "svg")!)
+                    .frame(width: 64, height: 64, alignment: .center)
+                    .foregroundColor(.green)
+            }
+            
+            
             Button(action: {
                 self.windowObject.next()
             }) {

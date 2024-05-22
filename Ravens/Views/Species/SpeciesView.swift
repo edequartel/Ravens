@@ -11,6 +11,7 @@ import SwiftyBeaver
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
     @StateObject private var speciesViewModel = SpeciesViewModel(settings: Settings())
+    @StateObject private var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
@@ -58,6 +59,7 @@ struct SpeciesView: View {
                                                 .bold()
                                                 .lineLimit(1) // Set the maximum number of lines to 1
                                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                            
                                             Spacer()
                                             if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
                                                 //                                        if isNumberInBookMarks(number: species.id) {
@@ -70,6 +72,20 @@ struct SpeciesView: View {
                                                 .lineLimit(1) // Set the maximum number of lines to 1
                                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                         }
+                                        HStack{
+//                                            let speciesLangName = "english name placeholder"
+                                            
+                                            let speciesLang = speciesSecondLangViewModel.findSpeciesByID(speciesID: species.id)
+                                            
+                                            //speciesGroupViewModel.species.findSpeciesByID(speciesID: species.id)
+                                            
+                                            Text("\(speciesLang?.name ?? "placeholder")") //?
+                                            //                                                .bold()
+                                                .font(.caption)
+                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                            Spacer()
+                                        }
                                     }
                             }
 
@@ -81,11 +97,7 @@ struct SpeciesView: View {
                                 }
                                 .tint(.blue)
 
-                                
                                 Button(action: {
-                                    print("bookmarks")
-                                    
-                                    
                                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
                                         print("bookmarks remove")
                                         bookMarksViewModel.removeRecord(speciesID: species.id)
@@ -93,47 +105,11 @@ struct SpeciesView: View {
                                         bookMarksViewModel.appendRecord(speciesID: species.id)
                                         print("bookmarks append")
                                     }
-                                    
-                                    
-                                    
+
                                 } ) {
-                                    Image(systemName: "star.fill")
+                                    Image(systemName: "star")
                                 }
-                                .tint(.green)
-                                
-                                
-//                                Button(action: {
-//                                    self.selectedInfoItem = species
-//                                }) {
-//                                    Image(systemName: "wiki.circle")
-//                                }
-//                                .tint(.blue)
-                                
-                                
-//                                Button(action: {
-//                                    print("species.id: \(species.id)")
-//                                } ) {
-//                                    Image(systemName: "star.fill")
-//                                }
-//                                .tint(.green)
-                                
-//                                if settings.listPreference {
-//                                    Button(action: {
-//                                        self.selectedMapItem = species
-//                                    } ) {
-//                                        Image(systemName: "map")
-//                                    }
-//                                    .tint(.green)
-//                                } else {
-//
-//                                    Button(action: {
-//                                        self.selectedListItem = species
-//                                    } ) {
-//                                        Image(systemName: "list.bullet")
-//                                    }
-//                                    .tint(.green)
-//                                }
-                                
+                                .tint(.obsStar)
                             }
                     }
             }
@@ -218,6 +194,8 @@ struct SpeciesView: View {
             log.info("speciesView: selectedGroup \(settings.selectedGroup)")
             
             speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+            
+            speciesSecondLangViewModel.fetchData(language: "en", for: settings.selectedGroup)
             
             speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
                 log.info("speciesGroupViewModel.fetchData completed")

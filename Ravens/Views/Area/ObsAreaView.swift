@@ -18,6 +18,7 @@ struct ObsAreaView: View {
     @StateObject var obsViewModel = ObsViewModel(settings: Settings())
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
 
     
     @State private var selectedImageURL: URL?
@@ -47,6 +48,9 @@ struct ObsAreaView: View {
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        Image(systemName: "star.fill")
+                    }
                 }
                 
                 HStack {
@@ -144,6 +148,19 @@ struct ObsAreaView: View {
                 }
                 .tint(.yellow)
                 
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        print("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
+                        print("bookmarks append")
+                    }
+
+                } ) {
+                    Image(systemName: "star")
+                }
+                .tint(.obsStar)
                 
                 Button(action: {
                     print("Button tapped + Show Image from URL \(obs.species_detail.id)")

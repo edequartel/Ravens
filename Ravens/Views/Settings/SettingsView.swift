@@ -150,6 +150,8 @@ struct SettingsView: View {
                 
                 Section("International") {
                     LanguageView(onChange: {upDate()})
+                    
+//                    LanguageView(onChange: { })
                     ////                    RegionsView(onChange: {upDate()})
                 }
                 
