@@ -46,7 +46,7 @@ struct ObsView: View {
                             if obs.has_photo ?? false {
                                 Image(systemName: "photo") //for test
                             }
-                            Text("\(obs.species_detail.name) \(obs.species_detail.id)")
+                            Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                                 .bold()
                                 .lineLimit(1) // Set the maximum number of lines to 1
                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -65,8 +65,8 @@ struct ObsView: View {
                                 .lineLimit(1) // Set the maximum number of lines to 1
                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                             Spacer()
-                            Text("info obs: \(obs.id ?? 0)")
-                                .footnoteGrayStyle()
+//                            Text("info obs: \(obs.id ?? 0)")
+//                                .footnoteGrayStyle()
                         }
                     }
                 }
@@ -138,7 +138,6 @@ struct ObsView: View {
                 .tint(.blue)
 
                 //
-                
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                         print("remove areas \(obs.location_detail?.id ?? 0)")

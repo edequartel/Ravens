@@ -43,7 +43,7 @@ struct ObsUserView: View {
                     if obs.has_photo ?? false {
                         Image(systemName: "photo") //for test
                     }
-                    Text("\(obs.species_detail.name) \(obs.species_detail.id)")
+                    Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated

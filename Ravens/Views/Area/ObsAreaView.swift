@@ -19,6 +19,7 @@ struct ObsAreaView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
 
     
     @State private var selectedImageURL: URL?
@@ -43,7 +44,7 @@ struct ObsAreaView: View {
                     if obs.has_photo ?? false {
                         Image(systemName: "photo") //for test
                     }
-                    Text("\(obs.species_detail.name) \(obs.species_detail.id)")
+                    Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -74,6 +75,9 @@ struct ObsAreaView: View {
                     Text("\(obs.location_detail?.name ?? "name")")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        Image(systemName: "pentagon.fill")
+                    }
                 }
 
                 
@@ -83,8 +87,8 @@ struct ObsAreaView: View {
                             Text("\(obs.user_detail?.name ?? "noName")")
                                 .footnoteGrayStyle()
                             Spacer()
-                            Text("\(obs.user_detail?.id ?? 0)")
-                                .footnoteGrayStyle()
+//                            Text("\(obs.user_detail?.id ?? 0)")
+//                                .footnoteGrayStyle()
                             
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                                 Image(systemName: "person.fill")
@@ -138,6 +142,21 @@ struct ObsAreaView: View {
                 }
                 .tint(.red)
                 
+                Button(action: {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.removeRecord(
+                            areaID: obs.location_detail?.id ?? 0)
+                    } else {
+                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.appendRecord(
+                            areaName: obs.location_detail?.name ?? "unknown",
+                            areaID: obs.location_detail?.id ?? 0)
+                    }
+                }) {
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                }
+                .tint(.green)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {

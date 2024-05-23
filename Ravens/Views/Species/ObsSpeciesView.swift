@@ -38,12 +38,6 @@ struct ObsSpeciesView: View {
                     Image(systemName: "photo")
                 }
                 
-                HStack {
-                    Text("\(obs.date) \(obs.time ?? "")")
-                    Text("\(obs.number) x")
-                    Spacer()
-                }
-                
                 if showLocation {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
@@ -54,6 +48,12 @@ struct ObsSpeciesView: View {
 //                                .foregroundColor(.green)
                         }
                     }
+                }
+                
+                HStack {
+                    Text("\(obs.date) \(obs.time ?? "")")
+                    Text("\(obs.number) x")
+                    Spacer()
                 }
                 
                 if showUsername && settings.showUser {

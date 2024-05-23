@@ -96,9 +96,16 @@ struct ObserversView: View {
     var body: some View {
         VStack {
             List {
+                Button("\(userViewModel.user?.name ?? "unknown")") {
+                    settings.userId = userViewModel.user?.id ?? 0
+                    settings.userName = userViewModel.user?.name ?? "unknown"
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.red : Color.primary)
+                
                 ForEach(viewModel.records) { record in
                     HStack{
-                        Text("\(record.name) (\(record.userID))")
+                        Text("\(record.name)")// (\(record.userID))")
                         Spacer()
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {

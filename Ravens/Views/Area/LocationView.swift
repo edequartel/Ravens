@@ -31,19 +31,23 @@ struct LocationView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Spacer()
+//                }
+                ToolbarItem() {
                     VStack {
                         Text("\(settings.locationName)")
-                            .font(.caption2)
+//                            .font(.caption2)
                             .lineLimit(1)
                             .truncationMode(.tail)
-                        Text("\(settings.locationId)")
-                            .font(.caption2)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
+                            .foregroundColor(.blue)
                     }
                         
                 }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Spacer()
+//                }
+
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AreasView()) {
@@ -52,7 +56,7 @@ struct LocationView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
     }
 }
 

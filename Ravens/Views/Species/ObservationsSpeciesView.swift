@@ -31,7 +31,7 @@ struct ObservationsSpeciesView: View {
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundColor(Color(myColor(value: item.rarity)))
-                    Text("\(item.name) \(item.id)")
+                    Text("\(item.name)")// \(item.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated

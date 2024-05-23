@@ -32,11 +32,17 @@ struct TabUserObservationsView: View {
 
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Spacer()
+//                }
+                ToolbarItem() {
                     Text("\(settings.userName)")// \(settings.userId)")
                         .foregroundColor(.blue)
-//                        .bold()
                 }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Spacer()
+//                }
+                
             }
         }
     }
