@@ -18,10 +18,13 @@ class SpeciesViewModel: ObservableObject {
     var settings: Settings
     init(settings: Settings) {
         self.settings = settings
+        log.error(">>>> SpeciesViewModel init \(settings.selectedLanguage) \(settings.selectedGroup)")
+//        fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+        fetchData(language: "en", for: 5001)
     }
     
     func fetchData(language: String, for groupID: Int) {
-        log.info("fetchData SpeciesViewModel \(groupID)")
+        log.error(">>>> fetchData SpeciesViewModel \(groupID)")
         
         let url = settings.endPoint()+"region-lists/\(groupID)/species/"
 

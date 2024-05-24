@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct LocationManagerView: View {
-//    @EnvironmentObject var locationManager: LocationManagerModel
-    @StateObject var locationManager = LocationManagerModel()
+    @EnvironmentObject var locationManager: LocationManagerModel
 
     var body: some View {
         VStack {
@@ -34,14 +33,9 @@ struct LocationManagerView: View {
                 }
             }) {
                 Text("Get Current Location")
-//                    .font(.headline)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
             }
         }
-//        .padding()
+        .font(.caption2)
     }
 }
 

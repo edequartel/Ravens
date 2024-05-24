@@ -15,7 +15,7 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
     override init() {
         super.init()
-        print("LocationManagerModel init")
+        print("Init - LocationManagerModel init")
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()

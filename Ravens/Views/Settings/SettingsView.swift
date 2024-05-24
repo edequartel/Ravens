@@ -53,14 +53,14 @@ struct SettingsView: View {
                         }
                     }
                     .onChange(of: settings.selectedSpeciesGroup) {
-//                        settings.isFirstAppear = true
-//                        settings.isFirstAppearObsView = true
                         settings.selectedGroupId = settings.selectedSpeciesGroup
                         log.info("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
                         settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedSpeciesGroup) ?? 1
                         log.info("settings.selectedGroup \(settings.selectedGroup)")
-                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.error("speciesGroupViewModel.fetchData completed") })
+                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
                     }
+                    //
+                    LanguageView()
                 }
                 
                 Section("Map") {
@@ -149,10 +149,7 @@ struct SettingsView: View {
                 }
                 
                 Section("International") {
-                    LanguageView(onChange: {upDate()})
-                    
-//                    LanguageView(onChange: { })
-                    ////                    RegionsView(onChange: {upDate()})
+                    LanguageView()
                 }
                 
                 
@@ -178,8 +175,6 @@ struct SettingsView: View {
                 Section(header: Text("Location")) {
                     LocationManagerView()
                 }
-//                .font(.footnote)
-                
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -198,7 +193,7 @@ struct SettingsView: View {
         }
         .onAppear() {
             storage = calculateLocalStorageSize()
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in log.info("speciesGroupViewModel.fetchData completed") })
+            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
         }
         
     }
@@ -221,12 +216,6 @@ struct SettingsView: View {
         }
         log.error("getGroup: NIL")
         return nil
-    }
-    
-    func upDate() {
-        log.verbose("update()")
-        speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { _ in print ("update completed") })
-        log.verbose("language: \(settings.selectedLanguage)")
     }
     
     func version() -> String {

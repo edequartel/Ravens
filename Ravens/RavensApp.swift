@@ -59,7 +59,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-//    @StateObject var locationManager = LocationManagerModel()
+    
+    @StateObject var locationManager = LocationManagerModel()
+    @StateObject var languageViewModel = LanguageViewModel()
+    
+    @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings())
+    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())    
+    @StateObject var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
+    
+    
     
     
     //    @StateObject var fetchRequestManager = FetchRequestManager()
@@ -107,9 +115,14 @@ struct RavensApp: App {
                 .environmentObject(urlHandler) // use instance
                 .environmentObject(observersViewModel) // use instance
                 .environmentObject(AreasViewModel()) // use instance
-//                .environmentObject(LocationManager) // use instance
             
-            //v
+                .environmentObject(locationManager) // use instance
+                .environmentObject(speciesViewModel) // use instance)
+                .environmentObject(speciesSecondLangViewModel) // use instance
+                .environmentObject(speciesGroupViewModel) // use instance
+                .environmentObject(languageViewModel) // use instance)
+            
+
                 .onOpenURL { url in
                     // Handle the URL appropriately
                     let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")

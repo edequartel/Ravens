@@ -10,29 +10,23 @@ import SwiftyBeaver
 
 struct LanguageView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
-    // Define an array of strings
-    let options = ["nl", "eng", "de", "fr"]
+    @EnvironmentObject private var languageViewModel: LanguageViewModel
+    @EnvironmentObject private var speciesGroupViewModel: SpeciesGroupViewModel
     
     // State variable to hold the selected option
     @EnvironmentObject var settings: Settings
     
-    var onChange: (() -> Void)?
+    @State private var language = ""
     
     var body: some View {
         VStack {
             Picker("Language", selection: $settings.selectedLanguage) {
-                ForEach(options, id: \.self) { option in
-                    Text(option)
+                ForEach(languageViewModel.language?.results ?? [], id: \.self) { language in
+                    Text(language.name_en).tag(language.code)
                 }
             }
             .onChange(of: settings.selectedLanguage) {
-                log.info("LanguageView language changed to: \(settings.selectedLanguage)")
-                log.info("\(settings.selectedLanguage)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: {_ in 
-                    log.info("Info LanguageView completed \(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
-                    onChange?()
-                })
+                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
             }
         }
     }

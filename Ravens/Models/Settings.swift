@@ -25,7 +25,7 @@ class Settings: ObservableObject {
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
     
     @AppStorage("selectedRegion") var selectedRegion = 200
-    @AppStorage("selectedLanguage") var selectedLanguage = "nl"
+
     
     @AppStorage("days") var days: Int = 5
     @AppStorage("listpreference") var listPreference: Bool = false
@@ -59,6 +59,14 @@ class Settings: ObservableObject {
     @Published var locationName: String = "Unknown Location"
     
     @Published var tappedCoordinate: CLLocationCoordinate2D?
+    
+    @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
+    
+    @Published var selectedLanguage: String = "nl" {
+        didSet {
+            selectedLanguageStored = selectedLanguage
+        }
+    }
 
     
     init() {

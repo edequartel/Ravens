@@ -10,11 +10,11 @@ import SwiftyBeaver
 
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
-    @StateObject private var speciesViewModel = SpeciesViewModel(settings: Settings())
-    @StateObject private var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
+    @EnvironmentObject var speciesViewModel: SpeciesViewModel
+    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel    
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var settings: Settings
@@ -142,7 +142,7 @@ struct SpeciesView: View {
                 }
             }
             
-            .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")", displayMode: .inline) //?
+            .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown???")", displayMode: .inline) //?
             
             .navigationBarItems(
                 leading: HStack {
@@ -191,15 +191,15 @@ struct SpeciesView: View {
         }
         
         .onAppear() {
-            log.info("speciesView: selectedGroup \(settings.selectedGroup)")
+            log.error("--->speciesView: selectedGroup \(settings.selectedGroup)")
             
-            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+//            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
             
-            speciesSecondLangViewModel.fetchData(language: "en", for: settings.selectedGroup)
+//            speciesSecondLangViewModel.fetchData(language: "en", for: settings.selectedGroup)
             
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
-                log.info("speciesGroupViewModel.fetchData completed")
-            })
+//            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
+//                log.info("speciesGroupViewModel.fetchData completed")
+//            })
         }
     }
     

@@ -295,6 +295,7 @@
 		474C40802B4D17AA0038B3A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				474C40852B4D84030038B3A5 /* Settings.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				471875422C00542100EF9F1F /* LocationManagerModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
@@ -330,7 +331,6 @@
 				474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */,
 				474C405E2B4C08750038B3A5 /* Language.swift */,
 				474C40892B4DAA110038B3A5 /* Region.swift */,
-				474C40852B4D84030038B3A5 /* Settings.swift */,
 				47568D2C2B59B54500E69B1A /* Observations.swift */,
 				4785CD162B95C835002F52BE /* User.swift */,
 				4725B9622BB14C2C00F6F137 /* LocationJSON.swift */,

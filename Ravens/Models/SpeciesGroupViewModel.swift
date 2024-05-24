@@ -11,8 +11,8 @@ import SwiftyBeaver
 
 class SpeciesGroupViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    
     @Published var speciesGroups = [SpeciesGroup]()
+    
     var speciesDictionary: [Int: String] = [:]
     
     var settings: Settings
@@ -20,7 +20,7 @@ class SpeciesGroupViewModel: ObservableObject {
         self.settings = settings
     }
     
-    func fetchData(language: String, completion: @escaping (Bool) -> Void = {_ in }) {
+    func fetchData(language: String) {
         log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
         let url = settings.endPoint() + "species-groups"
         
@@ -46,14 +46,14 @@ class SpeciesGroupViewModel: ObservableObject {
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
                     
                     // Call the completion handler when the data is successfully fetched
-                    completion(true)
+//                    completion(true)
                 } catch {
                     self.log.error("Error SpeciesGroupViewModel decoding JSON: \(error)")
-                    completion(false)
+//                    completion(false)
                 }
             case .failure(let error):
                 self.log.error("Error SpeciesGroupViewModel fetching data: \(error)")
-                completion(false)
+//                completion(false)
             }
         }
     }
