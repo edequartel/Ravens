@@ -38,9 +38,11 @@ struct ObsAreaView: View {
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundColor(Color(myColor(value: obs.rarity)))
+                    
                     if obs.has_sound ?? false { //for test
                         Image(systemName: "waveform")
                     }
+                    
                     if obs.has_photo ?? false {
                         Image(systemName: "photo") //for test
                     }
@@ -89,7 +91,6 @@ struct ObsAreaView: View {
                             Spacer()
 //                            Text("\(obs.user_detail?.id ?? 0)")
 //                                .footnoteGrayStyle()
-                            
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                                 Image(systemName: "person.fill")
                                     .foregroundColor(.black)
@@ -188,14 +189,9 @@ struct ObsAreaView: View {
                     Image(systemName: "info.circle")
                 }
                 .tint(.blue)
-                
-                
-                
-                
             }
         }
         
-
         .sheet(isPresented: $showingDetails) {
             SpeciesDetailsView(speciesID: obs.species_detail.id)
         }

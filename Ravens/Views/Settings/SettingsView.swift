@@ -174,6 +174,10 @@ struct SettingsView: View {
                     }
                     .font(.footnote)
                 }
+                
+                Section(header: Text("Location")) {
+                    LocationManagerView()
+                }
 //                .font(.footnote)
                 
             }

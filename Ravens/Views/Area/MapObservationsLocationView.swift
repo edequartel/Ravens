@@ -16,8 +16,11 @@ struct MapObservationsLocationView: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
+    
+    
     @StateObject private var locationIdViewModel = LocationIdViewModel()
     @StateObject private var geoJSONViewModel = GeoJSONViewModel()
+    
     @ObservedObject var viewModel = POIViewModel()
     @ObservedObject var locationManager = LocationManager()
     
@@ -80,7 +83,9 @@ struct MapObservationsLocationView: View {
                     .mapStyle(settings.mapStyle)
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            SettingsDetailsView(count: observationsLocationViewModel.locations.count, results: observationsLocationViewModel.count) //??
+                            SettingsDetailsView(
+                                count: observationsLocationViewModel.locations.count,
+                                results: observationsLocationViewModel.count) //??
                             HStack {
                                 if settings.infinity {
                                     Spacer()

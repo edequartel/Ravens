@@ -31,20 +31,12 @@ struct TabUserObservationsView: View {
                     }
 
                 }
-                
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Spacer()
-//                }
-                ToolbarItem() {
-                    Text("\(settings.userName)")// \(settings.userId)")
-                        .foregroundColor(.blue)
-                }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Spacer()
-//                }
-                
             }
+            .navigationTitle("\(settings.userName)")
+            .navigationBarTitleDisplayMode(.inline)
+            
         }
+        
     }
 }
 

@@ -96,12 +96,38 @@ struct ObserversView: View {
     var body: some View {
         VStack {
             List {
-                Button("\(userViewModel.user?.name ?? "unknown")") {
-                    settings.userId = userViewModel.user?.id ?? 0
-                    settings.userName = userViewModel.user?.name ?? "unknown"
-                    self.presentationMode.wrappedValue.dismiss()
+                HStack {
+                    Button("\(userViewModel.user?.name ?? "unknown")") {
+                        settings.userId = userViewModel.user?.id ?? 0
+                        settings.userName = userViewModel.user?.name ?? "unknown"
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.blue : Color.primary)
+                    .bold()
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(action: {
+                            QRCode = IdentifiableString(
+                                value: "ravens://\(cleanName(settings.userName))/\(settings.userId)",
+                                name: settings.userName)
+                            showingQRCodeSheet = true
+                        }) {
+//                            Label("QRCode", systemImage: "qrcode")
+                            Image(systemName: "qrcode")
+                        }
+//                        .tint(.gray)
+                    }
+                    Spacer()
+                    Button(action: {
+                        QRCode = IdentifiableString(
+                            value: "ravens://\(cleanName(settings.userName))/\(settings.userId)",
+                            name: settings.userName)
+                        showingQRCodeSheet = true
+                    }) {
+//                        Label("QRCode", systemImage: "qrcode")
+                        Image(systemName: "qrcode")
+                    }
+//                    .tint(.gray)
                 }
-                .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.red : Color.primary)
                 
                 ForEach(viewModel.records) { record in
                     HStack{
@@ -109,8 +135,9 @@ struct ObserversView: View {
                         Spacer()
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        ShareLink(item: URL(string: "ravens://\(cleanName(record.name))/\(record.userID)")!)
-                            .tint(.obsGreenEagle)
+                        //Privacy Senstive
+//                        ShareLink(item: URL(string: "ravens://\(cleanName(record.name))/\(record.userID)")!)
+//                            .tint(.obsGreenEagle)
                         
                         
                         Button(action: {
@@ -119,16 +146,16 @@ struct ObserversView: View {
                             Label("remove", systemImage: "person.fill.badge.minus")
                         }
                         .tint(.red)
-                        
-                        Button(action: {
-                            QRCode = IdentifiableString(
-                                value: "ravens://\(cleanName(record.name))/\(record.userID)",
-                                name: record.name)
-                            showingQRCodeSheet = true
-                        }) {
-                            Label("QRCode", systemImage: "qrcode")
-                        }
-                        .tint(.gray)
+                        //Privacy Senstive
+//                        Button(action: {
+//                            QRCode = IdentifiableString(
+//                                value: "ravens://\(cleanName(record.name))/\(record.userID)",
+//                                name: record.name)
+//                            showingQRCodeSheet = true
+//                        }) {
+//                            Label("QRCode", systemImage: "qrcode")
+//                        }
+//                        .tint(.gray)
                     }
                     
                     .onTapGesture {

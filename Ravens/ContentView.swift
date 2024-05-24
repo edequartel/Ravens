@@ -17,10 +17,12 @@ struct ContentView: View {
     var items = Array(0..<10)
     
     @EnvironmentObject var settings: Settings
+//    @ObservedObject var locationManager: LocationManagerModel
     
     @StateObject private var keyChainviewModel = KeychainViewModel()
     @StateObject private var observationsViewModel = ObservationsViewModel()
     @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
+
     
     @EnvironmentObject var userViewModel: UserViewModel
     

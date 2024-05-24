@@ -59,6 +59,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+//    @StateObject var locationManager = LocationManagerModel()
+    
+    
     //    @StateObject var fetchRequestManager = FetchRequestManager()
     let observersViewModel = ObserversViewModel()
     let urlHandler = URLHandler() // create instance
@@ -104,6 +107,7 @@ struct RavensApp: App {
                 .environmentObject(urlHandler) // use instance
                 .environmentObject(observersViewModel) // use instance
                 .environmentObject(AreasViewModel()) // use instance
+//                .environmentObject(LocationManager) // use instance
             
             //v
                 .onOpenURL { url in

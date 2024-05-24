@@ -55,7 +55,7 @@ struct SpeciesView: View {
                                                 ObservationDetailsView(speciesID: species.id)
                                             }
                                             
-                                            Text(" \(species.name) - \(species.id)") //?
+                                            Text("\(species.name)")// - \(species.id)") //?
                                                 .bold()
                                                 .lineLimit(1) // Set the maximum number of lines to 1
                                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated

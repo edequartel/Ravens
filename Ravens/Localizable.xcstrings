@@ -1,16 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " %@ - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : " %1$@ - %2$lld"
-          }
-        }
-      }
-    },
     "(%lld)" : {
 
     },
@@ -310,6 +300,9 @@
         }
       }
     },
+    "Error: %@" : {
+
+    },
     "Failed to load image" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -355,6 +348,9 @@
         }
       }
     },
+    "Get Current Location" : {
+
+    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -376,6 +372,9 @@
           }
         }
       }
+    },
+    "GPS Location" : {
+
     },
     "Group" : {
       "localizations" : {
@@ -573,7 +572,6 @@
       }
     },
     "Location" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -893,9 +891,6 @@
     "Previous" : {
 
     },
-    "QRCode" : {
-
-    },
     "Radius" : {
       "localizations" : {
         "nl" : {
@@ -988,6 +983,9 @@
         }
       }
     },
+    "Retrieving location..." : {
+
+    },
     "Save photos into album" : {
       "localizations" : {
         "nl" : {
@@ -1017,6 +1015,9 @@
           }
         }
       }
+    },
+    "secondary name" : {
+
     },
     "Select a Region" : {
       "localizations" : {

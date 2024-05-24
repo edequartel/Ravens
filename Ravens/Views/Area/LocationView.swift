@@ -12,8 +12,6 @@ struct LocationView: View {
     @EnvironmentObject private var settings: Settings
     
     var body: some View {
-       
-        
         NavigationView {
             VStack {
                 if showFirstView {
@@ -22,6 +20,8 @@ struct LocationView: View {
                     ObservationsLocationView()
                 }
             }
+            .navigationTitle("\(settings.locationName)")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -30,25 +30,6 @@ struct LocationView: View {
                         Image(systemName: "rectangle.2.swap") 
                     }
                 }
-                
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Spacer()
-//                }
-                ToolbarItem() {
-                    VStack {
-                        Text("\(settings.locationName)")
-//                            .font(.caption2)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                            .foregroundColor(.blue)
-                    }
-                        
-                }
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Spacer()
-//                }
-
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AreasView()) {
                         Label("Areas", systemImage: "pentagon.fill")
@@ -56,7 +37,8 @@ struct LocationView: View {
                 }
             }
         }
-//        .edgesIgnoringSafeArea(.all)
+       
+
     }
 }
 

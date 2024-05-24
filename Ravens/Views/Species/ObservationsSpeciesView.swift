@@ -37,21 +37,11 @@ struct ObservationsSpeciesView: View {
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
                     
-                    Button(action: {
-                        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
-                            print("bookmarks remove")
-                            bookMarksViewModel.removeRecord(speciesID: item.id)
-                        } else {
-                            bookMarksViewModel.appendRecord(speciesID: item.id)
-                            print("bookmarks append")
-                        }
 
-                    } ) {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
                         Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
                     }
-//                    .tint(.obsStar)
-                    
-                    
+                            
 //                    Spacer()
                     Button(action: {
                         showingDetails = true
@@ -64,14 +54,22 @@ struct ObservationsSpeciesView: View {
                         SpeciesDetailsView(speciesID: item.id)
                     }
                 }
-                HStack {
-                    Text("\(item.scientific_name)")
-                        .foregroundColor(.gray)
-                        .font(.footnote)
-                        .italic()
-                        .lineLimit(1) // Set the maximum number of lines to 1
-                        .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    Spacer()
+                VStack {
+                    HStack {
+                        Text("secondary name")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                        Spacer()
+                    }
+                    HStack{
+                        Text("\(item.scientific_name)")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                            .italic()
+                            .lineLimit(1) // Set the maximum number of lines to 1
+                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                        Spacer()
+                    }
                 }
                 
                 

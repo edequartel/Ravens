@@ -21,6 +21,8 @@
 		4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4718753B2BFCA77000EF9F1F /* SVGView */; };
 		4718753F2BFCA81900EF9F1F /* plus-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4718753E2BFCA81900EF9F1F /* plus-square.svg */; };
 		471875412BFD186700EF9F1F /* w_wikipedia.svg in Resources */ = {isa = PBXBuildFile; fileRef = 471875402BFD186700EF9F1F /* w_wikipedia.svg */; };
+		471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875422C00542100EF9F1F /* LocationManagerModel.swift */; };
+		471875452C00546A00EF9F1F /* LocationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875442C00546A00EF9F1F /* LocationManagerView.swift */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -123,6 +125,8 @@
 		471875382BFB938500EF9F1F /* AreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewModel.swift; sourceTree = "<group>"; };
 		4718753E2BFCA81900EF9F1F /* plus-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "plus-square.svg"; sourceTree = "<group>"; };
 		471875402BFD186700EF9F1F /* w_wikipedia.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = w_wikipedia.svg; sourceTree = "<group>"; };
+		471875422C00542100EF9F1F /* LocationManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerModel.swift; sourceTree = "<group>"; };
+		471875442C00546A00EF9F1F /* LocationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerView.swift; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
+				471875422C00542100EF9F1F /* LocationManagerModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
 				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
@@ -409,6 +414,7 @@
 		4767F00A2BF3230C00BACDC6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				471875442C00546A00EF9F1F /* LocationManagerView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
 				4757E0752B7F3426003F148E /* LoginView.swift */,
@@ -578,6 +584,7 @@
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
 				47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */,
+				471875452C00546A00EF9F1F /* LocationManagerView.swift in Sources */,
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
@@ -593,6 +600,7 @@
 				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				4738B63D2BF4DEA400BF7557 /* ObsSpeciesView.swift in Sources */,
+				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* SpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,

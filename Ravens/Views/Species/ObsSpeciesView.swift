@@ -19,6 +19,7 @@ struct ObsSpeciesView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
+    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
@@ -61,9 +62,9 @@ struct ObsSpeciesView: View {
                         HStack {
                             Text("\(obs.user_detail?.name ?? "noName")")
                                 .footnoteGrayStyle()
-                            Spacer()
-                            Text("\(obs.user_detail?.id ?? 0)")
-                                .footnoteGrayStyle()
+//                            Spacer()
+//                            Text("\(obs.user_detail?.id ?? 0)")
+//                                .footnoteGrayStyle()
                             Spacer()
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                                 Image(systemName: "person.fill")
@@ -112,6 +113,19 @@ struct ObsSpeciesView: View {
                 }
                 .tint(.red)
                 
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        print("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
+                        print("bookmarks append")
+                    }
+
+                } ) {
+                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? "star.fill" : "star")
+                }
+                .tint(.obsStar)
 
                 
                 Button(action: {
@@ -126,8 +140,7 @@ struct ObsSpeciesView: View {
                             areaID: obs.location_detail?.id ?? 0)
                     }
                 }) {
-                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
-                    
+                    Image(systemName: areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) ? "pentagon" : "pentagon")
                 }
                 .tint(.green)
                 

@@ -25,8 +25,6 @@ struct SpeciesDetailsView: View {
     
     var body: some View {
                     Form{
-                        //Text("speciesdetailview")
-            
                         VStack(alignment: .leading) {
                             if let species = viewSDModel.speciesDetails {
                                 VStack(alignment: .leading) {
