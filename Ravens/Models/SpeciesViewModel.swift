@@ -20,7 +20,7 @@ class SpeciesViewModel: ObservableObject {
         self.settings = settings
         log.error(">>>> SpeciesViewModel init \(settings.selectedLanguage) \(settings.selectedGroup)")
 //        fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-        fetchData(language: "en", for: 5001)
+        fetchData(language: "en", for: 5001) //deze aanpassen zie ook de 5001 
     }
     
     func fetchData(language: String, for groupID: Int) {
