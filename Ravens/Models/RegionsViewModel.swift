@@ -15,9 +15,9 @@ class RegionsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regions = [Region]()
     
-    init(language: String) {
+    init(settings: Settings) {
         log.error("init RegionViewModel")
-        fetchData(language: language)
+        fetchData(language: settings.selectedLanguageStored)
     }
 
     func fetchData(language: String) {

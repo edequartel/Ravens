@@ -15,10 +15,8 @@ class SpeciesGroupViewModel: ObservableObject {
     
     var speciesDictionary: [Int: String] = [:]
     
-    var settings: Settings
     init(settings: Settings) {
-        self.settings = settings
-        fetchData(language: settings.selectedLanguage)
+        fetchData(language: settings.selectedLanguageStored)
     }
     
     func fetchData(language: String) {

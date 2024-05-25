@@ -61,16 +61,16 @@ struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject var settings = Settings()
-    
     @StateObject var locationManager = LocationManagerModel()
     @StateObject var languageViewModel = LanguageViewModel()
     
     @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings())
-    
-    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
+    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())    
     @StateObject var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
-    @StateObject var regionsViewModel = RegionsViewModel(language: "nl") //hier naar kijken
+    @StateObject var regionsViewModel = RegionsViewModel(settings: Settings())
     @StateObject var regionListViewModel = RegionListViewModel(settings: Settings())
+    
+    
     
     
     //    @StateObject var fetchRequestManager = FetchRequestManager()

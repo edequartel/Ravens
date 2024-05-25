@@ -72,15 +72,17 @@ class Settings: ObservableObject {
     
     @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
     
-    @Published var selectedLanguage: String = "nl" {
-        didSet {            
-            selectedLanguageStored = selectedLanguage
-        }
-    }
-
-    
     init() {
         log.info("** init Settings **")
+        selectedLanguage = selectedLanguageStored
+    }
+    
+    @Published var selectedLanguage: String = "nl" {
+ 
+        
+        didSet {
+            selectedLanguageStored = selectedLanguage
+        }
     }
     
     func endPoint() -> String {
