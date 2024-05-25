@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SpeciesGroupView: View {
-    @StateObject private var viewModel = SpeciesGroupViewModel(settings: Settings())
+    @EnvironmentObject private var viewModel: SpeciesGroupViewModel
     
     var body: some View {
         NavigationStack {

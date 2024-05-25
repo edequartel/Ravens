@@ -60,14 +60,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @StateObject var settings = Settings()
+    
     @StateObject var locationManager = LocationManagerModel()
     @StateObject var languageViewModel = LanguageViewModel()
     
     @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings())
-    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())    
+    
+    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
     @StateObject var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
-    
-    
+    @StateObject var regionsViewModel = RegionsViewModel(language: "nl") //hier naar kijken
+    @StateObject var regionListViewModel = RegionListViewModel(settings: Settings())
     
     
     //    @StateObject var fetchRequestManager = FetchRequestManager()
@@ -99,12 +102,14 @@ struct RavensApp: App {
             ContentView()
                 .environmentObject(KeychainViewModel())
                 .environmentObject(UserViewModel())
-                .environmentObject(Settings())
+                .environmentObject(settings)
                 .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
                 .environmentObject(ObservationsViewModel())
-                .environmentObject(RegionViewModel(settings: Settings()))
-                .environmentObject(RegionListViewModel(settings: Settings()))
-                .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+            
+                .environmentObject(regionsViewModel) // use instance
+            
+//                .environmentObject(RegionListViewModel(settings: Settings()))
+                .environmentObject(speciesGroupViewModel)
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
                 .environmentObject(Player())
@@ -121,6 +126,7 @@ struct RavensApp: App {
                 .environmentObject(speciesSecondLangViewModel) // use instance
                 .environmentObject(speciesGroupViewModel) // use instance
                 .environmentObject(languageViewModel) // use instance)
+                .environmentObject(regionListViewModel) // use instance)
             
 
                 .onOpenURL { url in

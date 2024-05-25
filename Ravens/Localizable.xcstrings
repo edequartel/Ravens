@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "--settings.selectedGroup %lld" : {
+
+    },
+    "--settings.selectedSpeciesGroup %lld" : {
+
+    },
     "(%lld)" : {
 
     },
@@ -117,6 +123,7 @@
 
     },
     "Area" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -159,6 +166,9 @@
           }
         }
       }
+    },
+    "continent" : {
+
     },
     "Continent %@" : {
       "extractionState" : "stale",
@@ -387,6 +397,7 @@
       }
     },
     "Group %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -407,7 +418,14 @@
         }
       }
     },
+    "id" : {
+
+    },
+    "Id" : {
+
+    },
     "Id %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -717,6 +735,9 @@
         }
       }
     },
+    "name" : {
+
+    },
     "Name" : {
       "localizations" : {
         "nl" : {
@@ -921,6 +942,9 @@
         }
       }
     },
+    "Region" : {
+
+    },
     "Region %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -933,6 +957,7 @@
       }
     },
     "Region %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -943,6 +968,7 @@
       }
     },
     "Region lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -952,8 +978,10 @@
         }
       }
     },
+    "RegionLists" : {
+
+    },
     "Regions" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1020,6 +1048,7 @@
 
     },
     "Select a Region" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1121,6 +1150,9 @@
         }
       }
     },
+    "Species group" : {
+
+    },
     "Species groups" : {
       "localizations" : {
         "nl" : {
@@ -1130,6 +1162,9 @@
           }
         }
       }
+    },
+    "SpeciesGroups" : {
+
     },
     "Standard" : {
       "extractionState" : "manual",
@@ -1169,6 +1204,9 @@
         }
       }
     },
+    "type" : {
+
+    },
     "Type %lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1191,6 +1229,7 @@
       }
     },
     "Us" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

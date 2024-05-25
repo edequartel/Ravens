@@ -54,6 +54,6 @@ struct SettingsDetailsView: View {
 #Preview {
     SettingsDetailsView()
         .environmentObject(Settings())
-        .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+//        .environmentObject(SpeciesGroupViewModel(settings: Settings())
         .environmentObject(KeychainViewModel())
 }

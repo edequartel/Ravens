@@ -18,18 +18,19 @@ class SpeciesGroupViewModel: ObservableObject {
     var settings: Settings
     init(settings: Settings) {
         self.settings = settings
+        fetchData(language: settings.selectedLanguage)
     }
     
     func fetchData(language: String) {
-        log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
-        let url = settings.endPoint() + "species-groups"
+        log.error("fetchData SpeciesGroupViewModel \(language)")
+        let url = endPoint + "species-groups"
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": language
         ]
         
-        log.info("url SpeciesGroupViewModel: \(url)")
+        log.error("url SpeciesGroupViewModel: \(url)")
         
         // Use Alamofire to make the API request
         AF.request(url, headers: headers)

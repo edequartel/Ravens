@@ -118,7 +118,7 @@ struct ObservationsLocationView_Previews: PreviewProvider {
         ObservationsLocationView()
             .environmentObject(ObservationsLocationViewModel())
             .environmentObject(ObserversViewModel())
-            .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+//            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(Settings())
     }
 }

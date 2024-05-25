@@ -27,12 +27,27 @@ struct ContentView: View {
     
     @EnvironmentObject var userViewModel: UserViewModel
     
-    @StateObject var page: Page = .first()
+//    @StateObject var page: Page = .first()
     
     @State private var locationId: Int?
     
     var body: some View {
         TabView {
+            RegionListsView()
+                .tabItem {
+                    Text("RegionLists")
+                    Image(systemName: "square")
+                }//   
+            RegionsView()
+                .tabItem {
+                    Text("Regions")
+                    Image(systemName: "square")
+                }//
+            SpeciesGroupsView()
+                .tabItem {
+                    Text("SpeciesGroups")
+                    Image(systemName: "square")
+                }//
 //            WindowView()
 //                .tabItem {
 //                    Text("Records")
@@ -70,30 +85,30 @@ struct ContentView: View {
 //                }
             
             // Tab 1
-            if settings.radiusPreference {
-                RadiusView()
-                    .tabItem {
-                        Text("Radius")
-                        Image(systemName: "circle")
-                    }
-            } else {
-                LocationView()
-                    .tabItem {
-                        Text("Area")
-                        Image(systemName: "pentagon")
-                    }
-            }
-            
+//            if settings.radiusPreference {
+//                RadiusView()
+//                    .tabItem {
+//                        Text("Radius")
+//                        Image(systemName: "circle")
+//                    }
+//            } else {
+//                LocationView()
+//                    .tabItem {
+//                        Text("Area")
+//                        Image(systemName: "pentagon")
+//                    }
+//            }
+//            
             
             // Tab 3
-            TabUserObservationsView()
-                .tabItem {
-                    Text("Us")
-                    Image(systemName: "person.2.fill")
-                }
-
-            
-            // Tab 4
+//            TabUserObservationsView()
+//                .tabItem {
+//                    Text("Us")
+//                    Image(systemName: "person.2.fill")
+//                }
+//
+//            
+//            // Tab 4
             SpeciesView()
                 .tabItem {
                     Text("Species")

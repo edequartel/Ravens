@@ -291,7 +291,7 @@ struct MapObservationLocationView_Previews: PreviewProvider {
         MapObservationsLocationView()
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel())
-            .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+//            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(KeychainViewModel())
         
     }

@@ -190,17 +190,17 @@ struct SpeciesView: View {
             ObservationsSpeciesView(item: item)
         }
         
-        .onAppear() {
-            log.error("--->speciesView: selectedGroup \(settings.selectedGroup)")
+//        .onAppear() {
+//            log.error("--->speciesView: selectedGroup \(settings.selectedGroup)")
             
 //            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
             
-//            speciesSecondLangViewModel.fetchData(language: "en", for: settings.selectedGroup)
+//            speciesSecondLangViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
             
 //            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
 //                log.info("speciesGroupViewModel.fetchData completed")
 //            })
-        }
+//        }
     }
     
     var searchResults: [Species] {
@@ -302,7 +302,7 @@ struct SpeciesView_Previews: PreviewProvider {
         SpeciesView()
             .environmentObject(ObservationsViewModel())
             .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-            .environmentObject(SpeciesGroupViewModel(settings: Settings()))
+//            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(KeychainViewModel())
             .environmentObject(Settings())
     }

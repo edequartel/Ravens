@@ -13,11 +13,21 @@ import SwiftyBeaver
 
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
+
     
-    @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460
+    @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460 //is deze wel nodig
     
     @AppStorage("selectedGroup") var selectedGroup = 1
-    @AppStorage("selectedGroupId") var selectedGroupId = 1
+    
+    @AppStorage("selectedGroupId") var selectedGroupIdStored = 1
+    @Published var selectedGroupId = 1 {
+        didSet {
+            selectedGroupIdStored = selectedGroupId
+        }
+    }
+    
+    
+    
     @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
     @AppStorage("tokenKey") var tokenKey = ""
     
@@ -63,7 +73,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
     
     @Published var selectedLanguage: String = "nl" {
-        didSet {
+        didSet {            
             selectedLanguageStored = selectedLanguage
         }
     }

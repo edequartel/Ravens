@@ -14,12 +14,12 @@ class LanguageViewModel: ObservableObject {
     @Published var language: Language?
     
     init() {
-        log.error(">>>> LanguageViewModel init")
+        log.info("LanguageViewModel init")
         fetchData()
     }
 
     func fetchData() {
-        log.error(">>>> fetchData LanguageViewModel \(endPoint)languages")
+        log.info("fetchData LanguageViewModel \(endPoint)languages")
         let url = endPoint+"languages/"
         
         AF.request(url).responseDecodable(of: Language.self) { response in
