@@ -10,32 +10,50 @@ import SwiftyBeaver
 
 struct LanguageView: View {
     let log = SwiftyBeaver.self
-    @EnvironmentObject private var languageViewModel: LanguageViewModel
-    @EnvironmentObject private var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject private var languagesViewModel: LanguagesViewModel
+    @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
     @EnvironmentObject private var regionsViewModel: RegionsViewModel
+    
+    @EnvironmentObject private var regionListViewModel: RegionListViewModel
     
     // State variable to hold the selected option
     @EnvironmentObject var settings: Settings
+    
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
     @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
     
     var body: some View {
         VStack {
             Picker("Language", selection: $settings.selectedLanguage) {
-                ForEach(languageViewModel.language?.results ?? [], id: \.self) { language in
+                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
                     Text(language.name_native).tag(language.code)
                 }
             }
             .onChange(of: settings.selectedLanguage) {
-                //
-                print("selectedGroup: \(settings.selectedGroup)")
-                speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+                speciesGroupsViewModel.fetchData(language: settings.selectedLanguage)
                 regionsViewModel.fetchData(language: settings.selectedLanguage)
+                //deze variable opslaan bij wijzigingen in region and species group settings
+                //als stored variabele later gebruiken bij opstarten
+                //en als published zodat de gewijzigd wordt en gelijk gebuikt
                 
-//                speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-//                speciesSecondLangViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+                print("settings.selectedSpeciesGroup \(settings.selectedSpeciesGroup)")
+                print("settings.selectedRegionListId \(settings.selectedRegionListId)")
+                let id = regionListViewModel.getId(region: settings.selectedRegionId, species_group: settings.selectedSpeciesGroup)
+                print("id \(id)")
+                //
+                speciesViewModel.fetchData(language: settings.selectedLanguage, for: id)
                 
             }
+            
+//            Picker("Second language", selection: $settings.selectedSecondLanguage) {
+//                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
+//                    Text(language.name_native).tag(language.code)
+//                }
+//            }
+//            .onChange(of: settings.selectedSecondLanguage) {
+//                speciesSecondLangViewModel.fetchData(language: settings.selectedSecondLanguage, for: settings.selectedSpeciesGroup) 
+//            }
+            
         }
     }
 }

@@ -15,7 +15,7 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var viewModel: ObservationsLocationViewModel
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     
     @ObservedObject var locationManager = LocationManager()
     

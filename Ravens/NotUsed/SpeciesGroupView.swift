@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct SpeciesGroupView: View {
-    @EnvironmentObject private var viewModel: SpeciesGroupViewModel
+    @EnvironmentObject private var speciesGroupsviewModel: SpeciesGroupsViewModel
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.speciesGroups.sorted(by: {$0.id < $1.id}), id:\.id) { speciesGroup in
+                ForEach(speciesGroupsviewModel.speciesGroups.sorted(by: {$0.id < $1.id}), id:\.id) { speciesGroup in
                     HStack() {
                         Text("\(speciesGroup.id) \(speciesGroup.name)")
-//                            .foregroundColor(GroupColor(value: speciesGroup.id))
                     }
-//                    .background(GroupColor(value: speciesGroup.id))
-//                    .listRowBackground(GroupColor(value: speciesGroup.id))
                 }
                 
             }

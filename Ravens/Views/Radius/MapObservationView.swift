@@ -17,7 +17,7 @@ struct MapObservationView: View {
     @ObservedObject var viewModel = POIViewModel()
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
@@ -213,7 +213,6 @@ struct MapObservationView: View {
     }
     
     func fetchSpeciesGroup() {
-        log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
         speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
     }
     

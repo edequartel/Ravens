@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsDetailsView: View {
     @EnvironmentObject var settings: Settings
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     
     var count: Int = 0
@@ -29,7 +29,8 @@ struct SettingsDetailsView: View {
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
-            Text("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown")")
+            
+            Text(">>> (speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) wijzigen!!")
                 .lineLimit(1)
             
             if (settings.infinity && showInfinity) {

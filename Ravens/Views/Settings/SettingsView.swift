@@ -15,7 +15,7 @@ struct SettingsView: View {
     
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var settings: Settings
@@ -46,30 +46,25 @@ struct SettingsView: View {
                 .onChange(of: settings.selectedInBetween) {
                 }
                 
+                //edit: 27052024
                 Section("Species") {
-//                    Picker("Group", selection: $settings.selectedSpeciesGroup) {
-                    Picker("Group", selection: $settings.selectedGroupId) {
-                        ForEach(speciesGroupViewModel.speciesGroups.sorted(by: {$0.name < $1.name}), id: \.id) { speciesGroup in
-                            Text("\(speciesGroup.name)").tag(speciesGroup.id)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
+                    LanguageView()
+                    RegionsView()
+                    //
+                    Picker("Group", selection: $settings.selectedSpeciesGroupId) {
+                        ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
+//                                Text("\(speciesGroup.name)").tag(speciesGroup.id)
+                                Text("\(speciesGroup.id) \(speciesGroup.name)").tag(speciesGroup.id)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
                         }
                     }
-//                    .onChange(of: settings.selectedSpeciesGroup) {
-                    .onChange(of: settings.selectedGroupId) {
-                        print(">>> \(settings.selectedGroupId)")
-//                        settings.selectedGroupId = settings.selectedSpeciesGroup
-                        log.error(")))\(speciesGroupViewModel.getName(forID: settings.selectedGroupId) ?? "unknown")")
-                        settings.selectedGroup = getId(region: settings.selectedRegion, groups: settings.selectedGroupId) ?? 1
-                        log.error("****settings.selectedGroup \(settings.selectedGroup)")
-//                        speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
-                        print("---")
+                    .onChange(of: settings.selectedSpeciesGroupId) {
+                        log.error("\(settings.selectedSpeciesGroupId)")
+                        settings.selectedRegionListId = regionListViewModel.getId(
+                            region: settings.selectedRegionId,
+                            species_group: settings.selectedSpeciesGroupId)
                     }
-                    //
-                    Text("--settings.selectedGroup \(settings.selectedGroup)")
-                    Text("--settings.selectedSpeciesGroup \(settings.selectedGroupId)")
-//                    RegionsView()
-                    LanguageView()
                 }
                 
                 Section("Map") {
@@ -207,10 +202,12 @@ struct SettingsView: View {
         
     }
     
-    func getId(region: Int, groups: Int) -> Int? {
-        log.error("getID region: \(region) groups: \(groups)")
+    
+    
+    func getId(region: Int, species_group: Int) -> Int? {
+        log.error("getID from regionListViewModel region: \(region) species_group: \(species_group)")
         if let matchingItem = regionListViewModel.regionLists.first(
-            where: { $0.region == region && $0.species_group == groups }) {
+            where: { $0.region == region && $0.species_group == species_group }) {
             log.error("---> getId= \(matchingItem)")
             return matchingItem.id
         }
@@ -220,7 +217,7 @@ struct SettingsView: View {
     
     func getGroup(id: Int) -> String? {
         log.error("getGroup: \(id)")
-        if let matchingItem = speciesGroupViewModel.speciesGroups.first(
+        if let matchingItem = speciesGroupsViewModel.speciesGroups.first(
             where: { $0.id == id } ) {
             log.error("getGroup= \(matchingItem)")
             return matchingItem.name

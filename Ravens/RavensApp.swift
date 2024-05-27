@@ -62,11 +62,20 @@ struct RavensApp: App {
     
     @StateObject var settings = Settings()
     @StateObject var locationManager = LocationManagerModel()
-    @StateObject var languageViewModel = LanguageViewModel()
+    @StateObject var languagesViewModel = LanguagesViewModel()
     
-    @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings())
-    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())    
-    @StateObject var speciesGroupViewModel = SpeciesGroupViewModel(settings: Settings())
+    //deze twee niet op settings maar op language and selectedRegionListIdStored bekijken
+//    @StateObject var speciesViewModel = SpeciesViewModel(language: "nl", regionListId: settings.selectedRegionListIdStored) //dit wil ik hoe aante pakken
+    @StateObject var speciesViewModel: SpeciesViewModel = {
+        SpeciesViewModel(language: "nl", regionListId: settings.selectedRegionIdStored)
+    }()
+    
+    
+    
+    
+//    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
+    
+    @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel(settings: Settings())
     @StateObject var regionsViewModel = RegionsViewModel(settings: Settings())
     @StateObject var regionListViewModel = RegionListViewModel(settings: Settings())
     
@@ -122,10 +131,12 @@ struct RavensApp: App {
                 .environmentObject(AreasViewModel()) // use instance
             
                 .environmentObject(locationManager) // use instance
+            
                 .environmentObject(speciesViewModel) // use instance)
-                .environmentObject(speciesSecondLangViewModel) // use instance
+//                .environmentObject(speciesSecondLangViewModel) // use instance
+            
                 .environmentObject(speciesGroupViewModel) // use instance
-                .environmentObject(languageViewModel) // use instance)
+                .environmentObject(languagesViewModel) // use instance)
                 .environmentObject(regionListViewModel) // use instance)
             
 

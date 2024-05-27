@@ -19,12 +19,23 @@ class RegionListViewModel: ObservableObject {
         self.settings = settings
         fetchData()
     }
-
+    
+    func getId(region: Int, species_group: Int) -> Int {
+        log.verbose("getID from regionListViewModel region: \(region) species_group: \(species_group)")
+        if let matchingItem = regionLists.first(
+            where: { $0.region == region && $0.species_group == species_group }) {
+            log.verbose("getId= \(matchingItem.id)")
+            return matchingItem.id
+        }
+        log.verbose("getId: not found")
+        return -1
+    }
+    
     func fetchData() {
         log.info("fetchData RegionListViewModel")
-        let url = settings.endPoint()+"region-lists"
+        let url = endPoint+"region-lists"
         
-        log.info("url = \(url)")
+        log.info("RegionListViewModel url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [

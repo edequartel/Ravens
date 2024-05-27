@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SpeciesGroupsView: View {
-    @EnvironmentObject private var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
     
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct SpeciesGroupsView: View {
                     Spacer()
                 }
                 .font(.caption)
-                ForEach(speciesGroupViewModel.speciesGroups, id:\.id) { speciesGroup in
+                ForEach(speciesGroupsViewModel.speciesGroups, id:\.id) { speciesGroup in
                     HStack() {
                         Text("\(speciesGroup.id)")
                         Text("\(speciesGroup.name)")

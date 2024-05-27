@@ -20,7 +20,13 @@ struct RegionListsView: View {
                     Spacer()
                 }
                 .font(.caption)
-                ForEach(viewModel.regionLists.sorted(by: {$0.region < $1.region}), id:\.id) { region in
+                ForEach(viewModel.regionLists.sorted(by: {
+                    if $0.region != $1.region {
+                        return $0.region < $1.region
+                    } else {
+                        return $0.species_group < $1.species_group
+                    }
+                }), id:\.id) { region in
                     HStack() {
                         Text("\(region.id)")
                         Text("\(region.region)")

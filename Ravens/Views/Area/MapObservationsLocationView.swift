@@ -13,7 +13,7 @@ struct MapObservationsLocationView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
@@ -241,8 +241,8 @@ struct MapObservationsLocationView: View {
             }
             
             //get selectedGroup
-            log.verbose("settings.selectedGroupId:  \(settings.selectedGroup)")
-            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
+            log.verbose("settings.selectedGroupId:  \(settings.selectedSpeciesGroup)")
+            speciesGroupsViewModel.fetchData(language: settings.selectedLanguage)
         }
     }
     

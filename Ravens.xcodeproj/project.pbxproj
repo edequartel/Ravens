@@ -83,6 +83,7 @@
 		47714FD12BD15A2600361C55 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47714FD02BD15A2600361C55 /* CircleButton.swift */; };
 		4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
+		47778E372C039D9E00C59A1A /* SonogramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47778E362C039D9E00C59A1A /* SonogramView.swift */; };
 		477ECF142B98897100D96BE9 /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ECF132B98897100D96BE9 /* NetworkView.swift */; };
 		477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED86D2BA9CFE900B0D73C /* LottieView.swift */; };
 		477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 477ED8702BA9D0AD00B0D73C /* Lottie */; };
@@ -184,6 +185,7 @@
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		47714FD02BD15A2600361C55 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinspingdoorvoer.mp3; path = Audio/perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
+		47778E362C039D9E00C59A1A /* SonogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonogramView.swift; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47778E362C039D9E00C59A1A /* SonogramView.swift */,
 				478EABE82BED3A2300414431 /* ShareTextView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
@@ -632,6 +635,7 @@
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
 				478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */,
+				47778E372C039D9E00C59A1A /* SonogramView.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */,

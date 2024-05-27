@@ -85,7 +85,7 @@ class ObservationsLocationViewModel: ObservableObject {
         log.info("date after \(date_after)")
         log.info("date before \(date_before)")
         
-        var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
+        var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
 
         
         if !settings.infinity {

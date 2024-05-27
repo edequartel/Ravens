@@ -25,7 +25,7 @@ class UserViewModel: ObservableObject {
             "Authorization": "Token "+keyChainViewModel.token
         ]
         let url = settings.endPoint() + "user/info/"
-        log.info("\(url)")
+        log.info("UserViewModel \(url)")
         
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

@@ -15,28 +15,33 @@ class SpeciesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var species = [Species]()
     
-    var settings: Settings
-    init(settings: Settings) {
-        self.settings = settings
-        log.error(">>>> SpeciesViewModel init \(settings.selectedLanguage) \(settings.selectedGroup)")
-//        fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-        fetchData(language: "en", for: 5001) //deze aanpassen zie ook de 5001 
+    //hier naar kijken of dit niet beter op language en stored variabele opgeroepen kan worden
+//    var settings: Settings
+//    init(settings: Settings) {
+    init(language: String, regionListId: Int) {
+//        self.settings = settings
+//        log.error("speciesViewModel init \(settings.selectedLanguageStored) \(settings.selectedRegionListIdStored)")
+//        fetchData(language: settings.selectedLanguage, for: settings.selectedRegionListIdStored)
+        fetchData(language: language, for: regionListId)
     }
     
+//    func fetchData(language: String, for groupID: Int) {
     func fetchData(language: String, for groupID: Int) {
-        log.error(">>>> fetchData SpeciesViewModel \(groupID)")
-        
-        let url = settings.endPoint()+"region-lists/\(groupID)/species/"
+        log.error("SpeciesViewModel fetchData \(language) groupID \(groupID)")
 
-        log.info("url \(url)")
-        log.info("language \(settings.selectedLanguage)")
+        //        let url = settings.endPoint()+"region-lists/\(groupID)/species/"
+        let url = endPoint+"region-lists/\(groupID)/species/"
+
+        log.error("speciesViewModel url \(url)")
+        log.error("speciesViewModellanguage \(language) groupID \(groupID)")
+        
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
             "Accept-Language": language
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
-//            log.info(response.debugDescription)
+//            print(response.debugDescription)
             switch response.result {
             case .success(_):
                 do {
@@ -47,7 +52,7 @@ class SpeciesViewModel: ObservableObject {
                     self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
                 }
             case .failure(let error):
-                self.log.error("Error SpeciesViewModel fetching data: \(error)")
+                self.log.error("---->Error SpeciesViewModel fetching data \(url) \(error)")
             }
         }
     }

@@ -1,12 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "--settings.selectedGroup %lld" : {
-
-    },
-    "--settings.selectedSpeciesGroup %lld" : {
-
-    },
     "(%lld)" : {
 
     },
@@ -99,6 +93,9 @@
     "%lldx" : {
 
     },
+    ">>> (speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) wijzigen!!" : {
+
+    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -166,9 +163,6 @@
           }
         }
       }
-    },
-    "continent" : {
-
     },
     "Continent %@" : {
       "extractionState" : "stale",
@@ -407,6 +401,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Hybrid" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -417,9 +414,6 @@
           }
         }
       }
-    },
-    "id" : {
-
     },
     "Id" : {
 
@@ -735,9 +729,6 @@
         }
       }
     },
-    "name" : {
-
-    },
     "Name" : {
       "localizations" : {
         "nl" : {
@@ -978,10 +969,8 @@
         }
       }
     },
-    "RegionLists" : {
-
-    },
     "Regions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1053,7 +1042,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selecteer een gebied"
+            "value" : "Gebied"
           }
         }
       }
@@ -1163,7 +1152,7 @@
         }
       }
     },
-    "SpeciesGroups" : {
+    "speciesGroupsViewModel.getName" : {
 
     },
     "Standard" : {
@@ -1203,9 +1192,6 @@
           }
         }
       }
-    },
-    "type" : {
-
     },
     "Type %lld" : {
       "extractionState" : "stale",

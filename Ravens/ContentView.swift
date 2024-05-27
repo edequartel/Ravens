@@ -33,21 +33,21 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            RegionListsView()
-                .tabItem {
-                    Text("RegionLists")
-                    Image(systemName: "square")
-                }//   
-            RegionsView()
-                .tabItem {
-                    Text("Regions")
-                    Image(systemName: "square")
-                }//
-            SpeciesGroupsView()
-                .tabItem {
-                    Text("SpeciesGroups")
-                    Image(systemName: "square")
-                }//
+//            RegionListsView()
+//                .tabItem {
+//                    Text("RegionLists")
+//                    Image(systemName: "square")
+//                }//   
+//            RegionsView()
+//                .tabItem {
+//                    Text("Regions")
+//                    Image(systemName: "square")
+//                }//
+//            SpeciesGroupsView()
+//                .tabItem {
+//                    Text("SpeciesGroups")
+//                    Image(systemName: "square")
+//                }//
 //            WindowView()
 //                .tabItem {
 //                    Text("Records")
@@ -127,10 +127,10 @@ struct ContentView: View {
             log.warning("*** NEW LAUNCHING ***")
             CLLocationManager().requestWhenInUseAuthorization()
             
-            userViewModel.fetchUserData(
+            userViewModel.fetchUserData(//? ook in @main
                 settings: settings,
                 completion: {
-                    print("something goeds wrong here \(userViewModel.user?.id ?? 0)")
+                    log.info("userViewModel.user \(userViewModel.user?.id ?? 0)")
                     settings.userId = userViewModel.user?.id ?? 0
                     settings.userName = userViewModel.user?.name ?? "unknown"
                 }

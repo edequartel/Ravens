@@ -11,8 +11,9 @@ import SwiftyBeaver
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
-    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel    
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupViewModel
+    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
+    
+    @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -32,7 +33,7 @@ struct SpeciesView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(speciesViewModel.filteredSpecies(
+                ForEach(speciesViewModel.filteredSpecies( //?
                     by: selectedSortOption,
                     searchText: searchText,
                     filterOption: selectedFilterOption,
@@ -77,7 +78,7 @@ struct SpeciesView: View {
                                             
                                             let speciesLang = speciesSecondLangViewModel.findSpeciesByID(speciesID: species.id)
                                             
-                                            //speciesGroupViewModel.species.findSpeciesByID(speciesID: species.id)
+//                                            speciesViewModel.species.findSpeciesByID(speciesID: species.id)
                                             
                                             Text("\(speciesLang?.name ?? "placeholder")") //?
                                             //                                                .bold()
@@ -142,7 +143,7 @@ struct SpeciesView: View {
                 }
             }
             
-            .navigationBarTitle("\(speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) ?? "unknown???")", displayMode: .inline) //?
+            .navigationBarTitle("speciesGroupsViewModel.getName") //?
             
             .navigationBarItems(
                 leading: HStack {

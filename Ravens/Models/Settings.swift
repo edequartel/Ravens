@@ -5,6 +5,7 @@
 //  Created by Eric de Quartel on 09/01/2024.
 //
 
+
 import Foundation
 import SwiftUI
 import SwiftData
@@ -13,19 +14,30 @@ import SwiftyBeaver
 
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
-
     
-    @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 460 //is deze wel nodig
-    
-    @AppStorage("selectedGroup") var selectedGroup = 1
-    
-    @AppStorage("selectedGroupId") var selectedGroupIdStored = 1
-    @Published var selectedGroupId = 1 {
+    @AppStorage("selectedRegionListId") var selectedRegionListIdStored = 1
+    @Published var selectedRegionListId = 1 {
         didSet {
-            selectedGroupIdStored = selectedGroupId
+            print("saving it in storage: \(selectedRegionListId)")
+            selectedRegionListIdStored = selectedRegionListId
         }
     }
     
+    @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroup = 1
+    
+    @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
+    @Published var selectedSpeciesGroupId = 1 {
+        didSet {
+            selectedSpeciesGroupIdStored = selectedSpeciesGroupId
+        }
+    }
+    
+    @AppStorage("selectedRegionId") var selectedRegionIdStored = 200
+    @Published var selectedRegionId = 200 {
+        didSet {
+            selectedRegionIdStored = selectedRegionId
+        }
+    }
     
     
     @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
@@ -34,7 +46,7 @@ class Settings: ObservableObject {
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
     
-    @AppStorage("selectedRegion") var selectedRegion = 200
+ 
 
     
     @AppStorage("days") var days: Int = 5
@@ -70,18 +82,28 @@ class Settings: ObservableObject {
     
     @Published var tappedCoordinate: CLLocationCoordinate2D?
     
-    @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
     
     init() {
         log.info("** init Settings **")
+        log.info("selectedLanguage: \(selectedLanguage) - selectedLanguageStored: \(selectedLanguageStored)")
         selectedLanguage = selectedLanguageStored
+        selectedSecondLanguage = selectedSecondLanguageStored
     }
     
+    @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
+    
     @Published var selectedLanguage: String = "nl" {
- 
-        
         didSet {
+            log.info("selectedLanguage: \(selectedLanguage)")
             selectedLanguageStored = selectedLanguage
+        }
+    }
+
+    @AppStorage("selectedSecondLanguage") var selectedSecondLanguageStored = "en"
+    @Published var selectedSecondLanguage: String = "en" {
+        didSet {
+            log.info("selectedSecondLanguage: \(selectedSecondLanguage)")
+            selectedSecondLanguageStored = selectedSecondLanguage
         }
     }
     

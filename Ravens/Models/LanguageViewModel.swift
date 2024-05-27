@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-class LanguageViewModel: ObservableObject {
+class LanguagesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var language: Language?
     
