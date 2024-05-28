@@ -24,7 +24,6 @@ struct RegionsView: View {
         Picker("Region", selection: $settings.selectedRegionId) {
             ForEach(regionsViewModel.regions, id: \.id) { region in
                 Text("\(region.name)").tag(region.id)
-//                Text("\(region.id) \(region.name)").tag(region.id)
             }
         }
         .onChange(of: settings.selectedRegionId) {

@@ -12,6 +12,7 @@ struct LanguageView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject private var languagesViewModel: LanguagesViewModel
     @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
+    
     @EnvironmentObject private var regionsViewModel: RegionsViewModel
     
     @EnvironmentObject private var regionListViewModel: RegionListViewModel
@@ -45,14 +46,15 @@ struct LanguageView: View {
                 
             }
             
-//            Picker("Second language", selection: $settings.selectedSecondLanguage) {
-//                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
-//                    Text(language.name_native).tag(language.code)
-//                }
-//            }
-//            .onChange(of: settings.selectedSecondLanguage) {
-//                speciesSecondLangViewModel.fetchData(language: settings.selectedSecondLanguage, for: settings.selectedSpeciesGroup) 
-//            }
+            Picker("Second language", selection: $settings.selectedSecondLanguage) {
+                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
+                    Text(language.name_native).tag(language.code)
+                }
+            }
+            .onChange(of: settings.selectedSecondLanguage) {
+                print("\(settings.selectedSecondLanguage)")
+                speciesSecondLangViewModel.fetchData(language: settings.selectedSecondLanguage, for: settings.selectedSpeciesGroup)
+            }
             
         }
     }

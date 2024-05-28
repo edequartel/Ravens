@@ -65,22 +65,12 @@ struct RavensApp: App {
     @StateObject var languagesViewModel = LanguagesViewModel()
     
     //deze twee niet op settings maar op language and selectedRegionListIdStored bekijken
-//    @StateObject var speciesViewModel = SpeciesViewModel(language: "nl", regionListId: settings.selectedRegionListIdStored) //dit wil ik hoe aante pakken
-    @StateObject var speciesViewModel: SpeciesViewModel = {
-        SpeciesViewModel(language: "nl", regionListId: settings.selectedRegionIdStored)
-    }()
-    
-    
-    
-    
-//    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings())
+    @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings(), primary: true)
+    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings(), primary: false)
     
     @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel(settings: Settings())
     @StateObject var regionsViewModel = RegionsViewModel(settings: Settings())
     @StateObject var regionListViewModel = RegionListViewModel(settings: Settings())
-    
-    
-    
     
     //    @StateObject var fetchRequestManager = FetchRequestManager()
     let observersViewModel = ObserversViewModel()
@@ -88,7 +78,7 @@ struct RavensApp: App {
     
     //
     let center = UNUserNotificationCenter.current()
-
+    
     
     @State private var showingAlert = false
     @State private var parts: [String] = []
@@ -117,7 +107,7 @@ struct RavensApp: App {
             
                 .environmentObject(regionsViewModel) // use instance
             
-//                .environmentObject(RegionListViewModel(settings: Settings()))
+            //                .environmentObject(RegionListViewModel(settings: Settings()))
                 .environmentObject(speciesGroupViewModel)
                 .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
                 .environmentObject(ObservationsUserViewModel(settings: Settings()))
@@ -132,23 +122,24 @@ struct RavensApp: App {
             
                 .environmentObject(locationManager) // use instance
             
-                .environmentObject(speciesViewModel) // use instance)
-//                .environmentObject(speciesSecondLangViewModel) // use instance
+            
             
                 .environmentObject(speciesGroupViewModel) // use instance
                 .environmentObject(languagesViewModel) // use instance)
                 .environmentObject(regionListViewModel) // use instance)
             
-
+                .environmentObject(speciesViewModel) // use instance)
+                .environmentObject(speciesSecondLangViewModel) // use instance
+            
                 .onOpenURL { url in
                     // Handle the URL appropriately
                     let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
                     self.parts = urlString.split(separator: "/").map(String.init)
                     showingAlert = true
-
                     
-//                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-//                    
+                    
+                    //                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                    //                    
                     
                     
                     // Create the notification content
@@ -174,15 +165,15 @@ struct RavensApp: App {
                     //Update badge number
                     // Then in the function where you want to increase the badge count
                     center.setBadgeCount(0)
-//                    center.setBadgeCount(badgeCount + 1) { error in
-//                        if let error = error {
-//                            print("Error setting badge count: \(error)")
-//                        } else {
-//                            badgeCount += 1
-//                        }
-//                    }
+                    //                    center.setBadgeCount(badgeCount + 1) { error in
+                    //                        if let error = error {
+                    //                            print("Error setting badge count: \(error)")
+                    //                        } else {
+                    //                            badgeCount += 1
+                    //                        }
+                    //                    }
                     
-
+                    
                 }
             
                 .alert(isPresented: $showingAlert) {
@@ -191,10 +182,9 @@ struct RavensApp: App {
                           primaryButton: .default(Text("Yes")) {
                         print("Appending \(parts[0]) \(parts[1])")
                         observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-                          },
+                    },
                           secondaryButton: .cancel(Text("No")))
                 }
-            //^
         }
     }
 }

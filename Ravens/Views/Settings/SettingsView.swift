@@ -12,7 +12,8 @@ struct SettingsView: View {
     let log = SwiftyBeaver.self
     @Environment(\.locale) private var locale
     
-    
+    @EnvironmentObject var speciesViewModel: SpeciesViewModel
+    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -31,6 +32,15 @@ struct SettingsView: View {
     var body: some View {
         
         NavigationView {
+            Button("printme") {
+                if (speciesViewModel.species.count > 0) {
+                    print(speciesViewModel.species[0].name)
+                }
+                
+                if (speciesSecondLangViewModel.species.count > 0) {
+                    print(speciesSecondLangViewModel.species[0].name)
+                }
+            }
             List {
                 NavigationLink(destination: LoginView()) {
                     Text("Login")

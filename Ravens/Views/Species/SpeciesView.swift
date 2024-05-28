@@ -32,87 +32,99 @@ struct SpeciesView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(speciesViewModel.filteredSpecies( //?
-                    by: selectedSortOption,
-                    searchText: searchText,
-                    filterOption: selectedFilterOption,
-                    rarityFilterOption: settings.selectedRarity,
-                    isBookmarked: settings.isBookMarkVisible,
-                    additionalIntArray: bookMarksViewModel
-                ), id: \.species) { species in
-
-                                NavigationLink(destination: TabSpeciesView(item: species)) {
-                                    
-                                    VStack(alignment: .leading) {
-//                                        Text("\(species.)")
-                                        HStack(spacing: 4) {
-                                            Image(systemName: "circle.fill")
-                                                .symbolRenderingMode(.palette)
-                                                .foregroundStyle(myColor(value: species.rarity), .clear)
-                                            
-                                            //are there any observations
-                                            if (!keyChainViewModel.token.isEmpty) {
-                                                ObservationDetailsView(speciesID: species.id)
-                                            }
-                                            
-                                            Text("\(species.name)")// - \(species.id)") //?
-                                                .bold()
-                                                .lineLimit(1) // Set the maximum number of lines to 1
-                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                            
-                                            Spacer()
-                                            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-                                                //                                        if isNumberInBookMarks(number: species.id) {
-                                                Image(systemName: "star.fill")
-                                            }
-                                        }
-                                        HStack {
-                                            Text("\(species.scientific_name)")
-                                                .italic()
-                                                .lineLimit(1) // Set the maximum number of lines to 1
-                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                        }
-                                        HStack{
-//                                            let speciesLangName = "english name placeholder"
-                                            
-                                            let speciesLang = speciesSecondLangViewModel.findSpeciesByID(speciesID: species.id)
-                                            
-//                                            speciesViewModel.species.findSpeciesByID(speciesID: species.id)
-                                            
-                                            Text("\(speciesLang?.name ?? "placeholder")") //?
-                                            //                                                .bold()
-                                                .font(.caption)
-                                                .lineLimit(1) // Set the maximum number of lines to 1
-                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                            Spacer()
-                                        }
-                                    }
-                            }
-
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button(action: {
-                                    self.selectedInfoItem = species
-                                }) {
-                                    Image(systemName: "info.circle")
-                                }
-                                .tint(.blue)
-
-                                Button(action: {
-                                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-                                        print("bookmarks remove")
-                                        bookMarksViewModel.removeRecord(speciesID: species.id)
-                                    } else {
-                                        bookMarksViewModel.appendRecord(speciesID: species.id)
-                                        print("bookmarks append")
-                                    }
-
-                                } ) {
-                                    Image(systemName: "star")
-                                }
-                                .tint(.obsStar)
-                            }
+            VStack {
+                Button("printme") {
+                    if (speciesViewModel.species.count > 0) {
+                        print(speciesViewModel.species[0].name)
                     }
+                    
+                    if (speciesSecondLangViewModel.species.count > 0) {
+                        print(speciesSecondLangViewModel.species[0].name)
+                    }
+                }
+                
+                List {
+                    ForEach(speciesViewModel.filteredSpecies( //?
+                        by: selectedSortOption,
+                        searchText: searchText,
+                        filterOption: selectedFilterOption,
+                        rarityFilterOption: settings.selectedRarity,
+                        isBookmarked: settings.isBookMarkVisible,
+                        additionalIntArray: bookMarksViewModel
+                                                            ), id: \.species) { species in
+                                                                
+                                                                NavigationLink(destination: TabSpeciesView(item: species)) {
+                                                                    
+                                                                    VStack(alignment: .leading) {
+                                                                        //                                        Text("\(species.)")
+                                                                        HStack(spacing: 4) {
+                                                                            Image(systemName: "circle.fill")
+                                                                                .symbolRenderingMode(.palette)
+                                                                                .foregroundStyle(myColor(value: species.rarity), .clear)
+                                                                            
+                                                                            //are there any observations
+                                                                            if (!keyChainViewModel.token.isEmpty) {
+                                                                                ObservationDetailsView(speciesID: species.id)
+                                                                            }
+                                                                            
+                                                                            Text("\(species.name)")// - \(species.id)") //?
+                                                                                .bold()
+                                                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                                                            
+                                                                            Spacer()
+                                                                            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                                                                                //                                        if isNumberInBookMarks(number: species.id) {
+                                                                                Image(systemName: "star.fill")
+                                                                            }
+                                                                        }
+                                                                        HStack {
+                                                                            Text("\(species.scientific_name)")
+                                                                                .italic()
+                                                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                                                        }
+                                                                        HStack{
+                                                                            
+                                                                            
+                                                                            let speciesLang = speciesSecondLangViewModel.findSpeciesByID(speciesID: species.id)
+                                                                            //                                            print("speciesLang: \(speciesLang?.name ?? "placeholder")")
+                                                                            //                                            speciesViewModel.species.findSpeciesByID(speciesID: species.id)
+                                                                            
+                                                                            Text("\(speciesLang?.name ?? "placeholder")") //?
+                                                                            //                                                .bold()
+                                                                                .font(.caption)
+                                                                                .lineLimit(1) // Set the maximum number of lines to 1
+                                                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                                                            Spacer()
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                                    Button(action: {
+                                                                        self.selectedInfoItem = species
+                                                                    }) {
+                                                                        Image(systemName: "info.circle")
+                                                                    }
+                                                                    .tint(.blue)
+                                                                    
+                                                                    Button(action: {
+                                                                        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                                                                            print("bookmarks remove")
+                                                                            bookMarksViewModel.removeRecord(speciesID: species.id)
+                                                                        } else {
+                                                                            bookMarksViewModel.appendRecord(speciesID: species.id)
+                                                                            print("bookmarks append")
+                                                                        }
+                                                                        
+                                                                    } ) {
+                                                                        Image(systemName: "star")
+                                                                    }
+                                                                    .tint(.obsStar)
+                                                                }
+                                                            }
+                }
             }
 
             
@@ -191,17 +203,18 @@ struct SpeciesView: View {
             ObservationsSpeciesView(item: item)
         }
         
-//        .onAppear() {
+        .onAppear() {
 //            log.error("--->speciesView: selectedGroup \(settings.selectedGroup)")
             
 //            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-            
-//            speciesSecondLangViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
+//        speciesViewModel.fetchData(language: "nl", for: settings.selectedRegionListIdStored)
+//        speciesSecondLangViewModel.fetchData(language: "nl", for: settings.selectedRegionListIdStored)
+//            speciesViewModel.fetchData(language: "en", for: settings.selectedRegionListIdStored)
             
 //            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
 //                log.info("speciesGroupViewModel.fetchData completed")
 //            })
-//        }
+        }
     }
     
     var searchResults: [Species] {
@@ -297,15 +310,15 @@ extension SpeciesViewModel {
     
 }
 
-struct SpeciesView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Setting up the environment objects for the preview
-        SpeciesView()
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-//            .environmentObject(SpeciesGroupViewModel())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(Settings())
-    }
-}
-
+//struct SpeciesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Setting up the environment objects for the preview
+//        SpeciesView()
+//            .environmentObject(ObservationsViewModel())
+//            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+////            .environmentObject(SpeciesGroupViewModel())
+//            .environmentObject(KeychainViewModel())
+//            .environmentObject(Settings())
+//    }
+//}
+//

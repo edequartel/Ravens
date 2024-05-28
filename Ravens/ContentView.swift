@@ -109,11 +109,11 @@ struct ContentView: View {
 //
 //            
 //            // Tab 4
-            SpeciesView()
-                .tabItem {
-                    Text("Species")
-                    Image(systemName: "tree")
-                }
+//            SpeciesView()
+//                .tabItem {
+//                    Text("Species")
+//                    Image(systemName: "tree")
+//                }
             
             // Tab 5
             SettingsView()
