@@ -15,7 +15,8 @@ import AVFoundation
 struct ObsUserView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
+    @StateObject var obsViewModel = ObsViewModel()
+    
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel

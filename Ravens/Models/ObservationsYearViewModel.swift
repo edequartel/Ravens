@@ -18,14 +18,14 @@ class ObservationsYearViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.info("init ObservationsYearViewModel")
-        self.settings = settings
-    }
+//    var settings: Settings
+//    init(settings: Settings) {
+//        log.info("init ObservationsYearViewModel")
+//        self.settings = settings
+//    }
     
     
-    func fetchMonthData(speciesId: Int) {
+    func fetchMonthData(language: String, speciesId: Int) {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let folderURL = documentsURL.appendingPathComponent("countObservations")
         var count = 0
@@ -59,7 +59,7 @@ class ObservationsYearViewModel: ObservableObject {
                 let monthString = String(format: "%02d", m)
                 let daystring = String(format: "%02d", numberOfDaysInMonth(year: 2023, month: m) ?? 0)
 //                print("\(m) \(daystring)")
-                fetchData(speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
+                fetchData(language: language, speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
                     count = count + 1
                     print(">>>> \(count)")
                     self.log.error("\(monthString) : value: \(value)")
@@ -132,17 +132,17 @@ class ObservationsYearViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, date_after: String, date_before: String, completion: @escaping (Int) -> Void) {
-        log.info("fetchData ObservationsYearViewModel - speciesID \(speciesId)")
+    func fetchData(language: String, speciesId: Int, date_after: String, date_before: String, completion: @escaping (Int) -> Void) {
+        log.error("fetchData ObservationsYearViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
         
-        let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=100&offset=0"
+        let url = endPoint + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=100&offset=0"
         
         log.info("url \(url)")
         

@@ -40,7 +40,8 @@ struct ObservationsUserViewExtra: View {
             observationsUserViewModel.fetchData(
                 //limit: observationsUserViewModel.limit,
                 //offset: observationsUserViewModel.offset,
-                settings: settings,
+                language: settings.selectedLanguage,
+                userId: settings.userId,
                 completion: { print("viewModel.fetchData completion")
                 })
         }
@@ -48,7 +49,8 @@ struct ObservationsUserViewExtra: View {
             observationsUserViewModel.fetchData(
                 //limit: observationsUserViewModel.limit,
                 //offset: observationsUserViewModel.offset,
-                settings: settings,
+                language: settings.selectedLanguage,
+                userId: settings.userId, <-hier the user?.id gebruiken van een eerder model, eerder deze userId setten bij start
                 completion: { print("viewModel.fetchData completion")
                 })
         }
@@ -59,7 +61,7 @@ struct ObservationsUserViewExtra: View {
 struct ObservationsUserViewExtra_Previews: PreviewProvider {
     static var previews: some View {
         ObservationsUserViewExtra()
-            .environmentObject(ObservationsUserViewModel(settings: Settings()))
+            .environmentObject(ObservationsUserViewModel())
             .environmentObject(Settings())
     }
 }

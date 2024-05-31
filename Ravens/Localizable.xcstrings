@@ -688,6 +688,9 @@
         }
       }
     },
+    "MapObservationsSpeciesView" : {
+
+    },
     "Me" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1202,7 +1205,6 @@
       }
     },
     "Us" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

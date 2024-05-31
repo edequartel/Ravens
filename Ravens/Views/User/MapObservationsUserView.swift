@@ -89,7 +89,8 @@ struct MapObservationsUserView: View {
                                 observationsUserViewModel.offset = min(observationsUserViewModel.offset + 100, observationsUserViewModel.maxOffset)
                                 observationsUserViewModel.limit = 100
                                 observationsUserViewModel.fetchData(
-                                    settings: settings,
+                                    language: settings.selectedLanguage,
+                                    userId: settings.userId,
                                     completion: { print("viewModel.fetchData completion")
                                     } )
                                 observationsUserViewModel.start = 0
@@ -108,7 +109,8 @@ struct MapObservationsUserView: View {
                             
                             observationsUserViewModel.limit = 100
                             observationsUserViewModel.fetchData(
-                                settings: settings,
+                                language: settings.selectedLanguage,
+                                userId: settings.userId,
                                 completion: { print("viewModel.fetchData completion")
                                 })
                             
@@ -124,7 +126,8 @@ struct MapObservationsUserView: View {
                             observationsUserViewModel.limit = 100
                             
                             observationsUserViewModel.fetchData(
-                                settings: settings,
+                                language: settings.selectedLanguage,
+                                userId: settings.userId,
                                 completion: { print("viewModel.fetchData completion")
                                 })
                         }) {
@@ -154,24 +157,23 @@ struct MapObservationsUserView: View {
                 }
             }
         }
-        
-        
 
-        
         .onAppear {
-//            observationsUserViewModel.fetchData(limit: limit, offset: offset, settings: settings, completion: { print("viewModel.fetchData completion") })
+            observationsUserViewModel.fetchData(
+                language: settings.selectedLanguage, userId: settings.userId,
+                completion: { print("viewModel.fetchData completion") })
         }
     }
 }
 
-struct MapObservationUserView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Setting up the environment objects for the preview
-        let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-        MapObservationsSpeciesView(item: testSpecies)
-            .environmentObject(Settings())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
-    }
-}
+//struct MapObservationUserView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Setting up the environment objects for the preview
+//        let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
+//        MapObservationsSpeciesView(item: testSpecies)
+//            .environmentObject(Settings())
+//            .environmentObject(KeychainViewModel())
+//            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+//    }
+//}
 

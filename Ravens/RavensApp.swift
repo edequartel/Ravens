@@ -11,6 +11,10 @@ import SwiftData
 
 import UserNotifications
 
+class URLHandler: ObservableObject {
+    @Published var urlString: String = ""
+}
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     let log = SwiftyBeaver.self
     
@@ -69,11 +73,19 @@ struct RavensApp: App {
     @StateObject var regionListViewModel = RegionListViewModel()
     @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
     @StateObject var userViewModel =  UserViewModel()
-//    
+    @StateObject var observationsUserViewModel = ObservationsUserViewModel()
+    
+    @StateObject var bookMarksViewModel = BookMarksViewModel()
+    @StateObject var observersViewModel = ObserversViewModel()
+    @StateObject var areasViewModel = AreasViewModel()
+    
+
+    
+//
     //    @StateObject var fetchRequestManager = FetchRequestManager()
     
 
-//    let observersViewModel = ObserversViewModel()
+
 //    let urlHandler = URLHandler()
     
     //
@@ -100,8 +112,7 @@ struct RavensApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(KeychainViewModel())
-                .environmentObject(BookMarksViewModel())
-            
+//
                 .environmentObject(locationManager)
                 .environmentObject(settings)
                 .environmentObject(languagesViewModel)
@@ -111,20 +122,22 @@ struct RavensApp: App {
                 .environmentObject(regionListViewModel)
                 .environmentObject(observationsSpeciesViewModel)
                 .environmentObject(userViewModel) 
-//
+                .environmentObject(observationsUserViewModel)
 
-//            
+//
+                .environmentObject(bookMarksViewModel)
+                .environmentObject(observersViewModel)
+                .environmentObject(areasViewModel)
+//
 //                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
-//                .environmentObject(ObservationsUserViewModel(settings: Settings()))
+
 //                .environmentObject(Player())
 //            
 //                .environmentObject(ObservationsLocationViewModel())
-//                .environmentObject(ObservationsYearViewModel(settings: Settings()))
-//                .environmentObject(ObserversViewModel())
-//                .environmentObject(AreasViewModel()) 
-//
+                .environmentObject(ObservationsYearViewModel())
+
 //                .environmentObject(urlHandler) // use instance
-//                .environmentObject(observersViewModel)
+
 //            
 
 

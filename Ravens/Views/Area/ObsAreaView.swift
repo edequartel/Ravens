@@ -15,7 +15,8 @@ import AVFoundation
 struct ObsAreaView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
+    @StateObject var obsViewModel = ObsViewModel()
+    
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -198,7 +199,7 @@ struct ObsAreaView: View {
 
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-                obsViewModel.fetchData(for: obs.id ?? 0, completion: {
+                obsViewModel.fetchData(language: settings.selectedLanguage, for: obs.id ?? 0, completion: {
                     log.info("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds

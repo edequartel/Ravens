@@ -11,25 +11,25 @@ class ObsViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.debug("init ObsViewModel")
-        self.settings = settings
-    }
+//    var settings: Settings
+//    init(settings: Settings) {
+//        log.debug("init ObsViewModel")
+//        self.settings = settings
+//    }
     
-    func fetchData(for obsID: Int, completion: @escaping () -> Void) {
+    func fetchData(language: String, for obsID: Int, completion: @escaping () -> Void) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
         log.info("ObsViewModel \(fileURL)")
         
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
-        let url = settings.endPoint()+"observations/\(obsID)/"
+        let url = endPoint+"observations/\(obsID)/"
         
         keyChainViewModel.retrieveCredentials()
         
         let headers: HTTPHeaders = [
-            "Accept-Language" : settings.selectedLanguage,
+            "Accept-Language" : language,
             "Authorization": "Token " + keyChainViewModel.token
         ]
         

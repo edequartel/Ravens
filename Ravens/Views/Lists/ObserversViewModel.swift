@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyBeaver
 
 struct Observer: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
@@ -14,15 +15,14 @@ struct Observer: Codable, Identifiable {
     var userID: Int
 }
 
-class URLHandler: ObservableObject {
-    @Published var urlString: String = ""
-}
-
 class ObserversViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
+    
     @Published var records: [Observer] = []
     let filePath: URL
     
     init() {
+        log.error("init ObserversViewModel")
         let fileManager = FileManager.default
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("observers.json")
@@ -34,6 +34,7 @@ class ObserversViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: filePath)
             records = try JSONDecoder().decode([Observer].self, from: data)
+            log.error("Loaded \(records.count) observers")
         } catch {
             print("Error loading data: \(error)")
         }

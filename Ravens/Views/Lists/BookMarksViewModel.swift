@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyBeaver
 
 
 struct BookMark: Codable, Identifiable {
@@ -18,15 +19,15 @@ struct BookMark: Codable, Identifiable {
 
 import SwiftUI
 
-//class URLHandler: ObservableObject {
-//    @Published var urlString: String = ""
-//}
 
 class BookMarksViewModel: ObservableObject {
+    let log = SwiftyBeaver.self
+    
     @Published var records: [BookMark] = []
     let filePath: URL
     
     init() {
+        log.error("init BookMarksViewModel")
         let fileManager = FileManager.default
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("bookmarks.json")
@@ -38,6 +39,7 @@ class BookMarksViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: filePath)
             records = try JSONDecoder().decode([BookMark].self, from: data)
+            log.error("Loadeds \(records.count) bookmarks")
         } catch {
             print("Error loading data: \(error)")
         }
@@ -115,8 +117,8 @@ struct BookMarksView: View {
 //        }
         //        }
         //        .padding(10)
-        .onAppear {
-            viewModel.loadRecords()
-        }
+//        .onAppear {
+//            viewModel.loadRecords()
+//        }
     }
 }

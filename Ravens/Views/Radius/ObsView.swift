@@ -14,7 +14,8 @@ import AVFoundation
 struct ObsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel(settings: Settings())
+    @StateObject var obsViewModel = ObsViewModel()
+    
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
@@ -89,18 +90,6 @@ struct ObsView: View {
                         }
                     }
                 }
-                
-//                if showUsername && settings.showUser {
-//                    VStack {
-//                        HStack {
-//                            Text("\(obs.user_detail?.name ?? "noName")")
-//                                .footnoteGrayStyle()
-//                            Spacer()
-//                            Text("\(obs.user_detail?.id ?? 0)")
-//                                .footnoteGrayStyle()
-//                        }
-//                    }
-//                }
                 
                 if obs.notes?.count ?? 0 > 0 {
                     HStack {
@@ -195,7 +184,7 @@ struct ObsView: View {
             //            settings.readExplorers(array: &explorers)
             
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-                obsViewModel.fetchData(for: obs.id ?? 0, completion: {
+                obsViewModel.fetchData(language: settings.selectedLanguage, for: obs.id ?? 0, completion: {
                     log.info("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds

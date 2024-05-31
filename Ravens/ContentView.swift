@@ -118,11 +118,11 @@ struct RavensView: View {
 ////            
 //            
 //            // Tab 3
-////            TabUserObservationsView()
-////                .tabItem {
-////                    Text("Us")
-////                    Image(systemName: "person.2.fill")
-////                }
+            TabUserObservationsView()
+                .tabItem {
+                    Text("Us")
+                    Image(systemName: "person.2.fill")
+                }
 //
 ////            
 ////            // Tab 4
