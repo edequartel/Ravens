@@ -88,7 +88,9 @@ struct AreasView: View {
                 ForEach(viewModel.records) { record in
                     HStack{
                         Text("\(record.name)")
-                        Text("\(record.areaID)")
+                            .lineLimit(1)
+                            
+//                        Text("\(record.areaID)")
                         Spacer()
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {

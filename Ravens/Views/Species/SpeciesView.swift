@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct SpeciesView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
-    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
+    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
     
     @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     
@@ -33,16 +33,6 @@ struct SpeciesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Button("printme") {
-                    if (speciesViewModel.species.count > 0) {
-                        print(speciesViewModel.species[0].name)
-                    }
-                    
-                    if (speciesSecondLangViewModel.species.count > 0) {
-                        print(speciesSecondLangViewModel.species[0].name)
-                    }
-                }
-                
                 List {
                     ForEach(speciesViewModel.filteredSpecies( //?
                         by: selectedSortOption,
@@ -63,9 +53,9 @@ struct SpeciesView: View {
                                                                                 .foregroundStyle(myColor(value: species.rarity), .clear)
                                                                             
                                                                             //are there any observations
-                                                                            if (!keyChainViewModel.token.isEmpty) {
-                                                                                ObservationDetailsView(speciesID: species.id)
-                                                                            }
+//                                                                            if (!keyChainViewModel.token.isEmpty) {
+//                                                                                ObservationDetailsView(speciesID: species.id)
+//                                                                            }
                                                                             
                                                                             Text("\(species.name)")// - \(species.id)") //?
                                                                                 .bold()
@@ -85,18 +75,16 @@ struct SpeciesView: View {
                                                                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                                                                         }
                                                                         HStack{
-                                                                            
-                                                                            
-                                                                            let speciesLang = speciesSecondLangViewModel.findSpeciesByID(speciesID: species.id)
-                                                                            //                                            print("speciesLang: \(speciesLang?.name ?? "placeholder")")
-                                                                            //                                            speciesViewModel.species.findSpeciesByID(speciesID: species.id)
-                                                                            
-                                                                            Text("\(speciesLang?.name ?? "placeholder")") //?
-                                                                            //                                                .bold()
-                                                                                .font(.caption)
-                                                                                .lineLimit(1) // Set the maximum number of lines to 1
-                                                                                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                                                                            Spacer()
+                                                                            let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
+                                                                                speciesID: species.id)//
+//                                                                            if speciesLang != species.name {
+                                                                                Text("\(speciesLang ?? "placeholder")") //?
+                                                                                    .bold()
+                                                                                    .font(.caption)
+                                                                                    .lineLimit(1) // Set the maximum number of lines to 1
+                                                                                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                                                                                Spacer()
+//                                                                            }
                                                                         }
                                                                     }
                                                                 }
@@ -155,7 +143,8 @@ struct SpeciesView: View {
                 }
             }
             
-            .navigationBarTitle("speciesGroupsViewModel.getName") //?
+            .navigationBarTitle(settings.selectedSpeciesGroupName)
+            .navigationBarTitleDisplayMode(.inline)
             
             .navigationBarItems(
                 leading: HStack {
@@ -174,6 +163,7 @@ struct SpeciesView: View {
             
         }
         .searchable(text: $searchText)
+        
         
         .sheet(item: $selectedInfoItem) { item in
             SpeciesDetailsView(speciesID: item.id)
@@ -201,19 +191,6 @@ struct SpeciesView: View {
         
         .sheet(item: $selectedListItem) { item in
             ObservationsSpeciesView(item: item)
-        }
-        
-        .onAppear() {
-//            log.error("--->speciesView: selectedGroup \(settings.selectedGroup)")
-            
-//            speciesViewModel.fetchData(language: settings.selectedLanguage, for: settings.selectedGroup)
-//        speciesViewModel.fetchData(language: "nl", for: settings.selectedRegionListIdStored)
-//        speciesSecondLangViewModel.fetchData(language: "nl", for: settings.selectedRegionListIdStored)
-//            speciesViewModel.fetchData(language: "en", for: settings.selectedRegionListIdStored)
-            
-//            speciesGroupViewModel.fetchData(language: settings.selectedLanguage, completion: { success in
-//                log.info("speciesGroupViewModel.fetchData completed")
-//            })
         }
     }
     

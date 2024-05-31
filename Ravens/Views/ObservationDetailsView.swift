@@ -12,7 +12,7 @@ import SwiftyBeaver
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject private var viewModel = ObservationsSpeciesViewModel(settings: Settings())
+    @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var isViewActive = false
@@ -32,7 +32,7 @@ struct ObservationDetailsView: View {
             }
             .onAppear {
                 log.info("speciesID \(speciesID)")
-                viewModel.fetchData(speciesId: speciesID, limit: 1, offset: 0, date: settings.selectedDate, days: settings.days
+                viewModel.fetchData(language: settings.selectedLanguage, speciesId: speciesID, limit: 1, offset: 0, date: settings.selectedDate, days: settings.days
                 )
             }
     }

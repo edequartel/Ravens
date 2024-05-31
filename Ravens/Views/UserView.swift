@@ -16,36 +16,20 @@ struct UserView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if (keyChainviewModel.token.count > 0) {
-                
-                Text("\(userViewModel.user?.name ?? "unknown")")
-                    .bold()
-//                Button("set") {
-//                    settings.userId = userViewModel.user?.id ?? 0
-//                }
-                
-//                Text("\(userViewModel.user?.email ?? "unknown")")
-//                Text("\(String(userViewModel.user?.id ?? 0))")
-//
-                QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
-                    .frame(width: 100, height: 100)
-                    .padding(10)
-                
-//                let url = userViewModel.user?.url ?? "unknown"
-//                Button("\(url)") {
-//                    if let validURL = URL(string: url) {
-//                        UIApplication.shared.open(validURL)
-//                    }
-//                }
-//                let country = userViewModel.user?.country ?? "unknown"
-//                Text(country)
-                //            Text("Avatar: \(viewModel.user.avatar ?? "?")")
+                HStack {
+                    Spacer()
+                    Text(userViewModel.user?.name ?? "unknown")
+                        .bold()
+                Spacer()
+                }
+                HStack {
+                    Spacer()
+                    QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
+                        .frame(width: 100, height: 100)
+                        .padding(10)
+                    Spacer()
+                }
             }
-        }
-        .onTapGesture {
-            settings.userId = userViewModel.user?.id ?? 0
-        }
-        .onAppear {
-            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") })
         }
     }
 }
@@ -61,9 +45,6 @@ struct UserSimpleView: View {
             if (keyChainviewModel.token.count > 0) {
                 Text("\(userViewModel.user?.name ?? "unknown")")
             }
-        }
-        .onAppear {
-            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") } )
         }
     }
 }

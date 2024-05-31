@@ -32,7 +32,7 @@ struct LocationView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AreasView()) {
-                        Label("Areas", systemImage: "pentagon.fill")
+                        Label("Areas", systemImage: "list.bullet")
                     }
                 }
             }

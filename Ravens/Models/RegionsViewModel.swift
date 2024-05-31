@@ -15,12 +15,8 @@ class RegionsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regions = [Region]()
     
-    init(settings: Settings) {
-        fetchData(language: settings.selectedLanguageStored)  //??
-    }
-
-    func fetchData(language: String) {
-        log.info("fetchData RegionViewModel \(language)")
+    func fetchData(language: String, completion: (() -> Void)? = nil) {
+        log.error("fetchData RegionViewModel \(language)")
         let url = endPoint + "regions/"
 
         log.info("url RegionViewModel \(url)")
@@ -44,6 +40,7 @@ class RegionsViewModel: ObservableObject {
                     // Decode the JSON response into an array of Region objects
                     let decoder = JSONDecoder()
                     self.regions = try decoder.decode([Region].self, from: response.data!)
+                    completion?() // call the completion handler if it exists
                 } catch {
                     self.log.error("Error RegionViewModel decoding JSON: \(error)")
                 }

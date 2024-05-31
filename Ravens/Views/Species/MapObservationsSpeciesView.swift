@@ -134,6 +134,7 @@ struct MapObservationsSpeciesView: View {
     
     func fetchDataModel() {
         observationsSpeciesViewModel.fetchData(
+            language: settings.selectedLanguage,
             speciesId: item.id,
             limit: 100,
             offset: 0,
@@ -151,7 +152,7 @@ struct MapObservationsSpeciesView_Previews: PreviewProvider {
         MapObservationsSpeciesView(item: testSpecies)
             .environmentObject(Settings())
             .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+            .environmentObject(ObservationsSpeciesViewModel())
     }
 }
 

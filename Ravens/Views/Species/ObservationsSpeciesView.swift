@@ -103,7 +103,7 @@ struct ObservationsSpeciesView: View {
     }
     
     func fetchDataModel() {
-        viewModel.fetchData(
+        viewModel.fetchData(language: settings.selectedLanguage,
             speciesId: item.id,
             limit: 100,
             offset: 0,
@@ -118,7 +118,7 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
         ObservationsSpeciesView(item: testSpecies)
-            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+            .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())
     }
 }

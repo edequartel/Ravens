@@ -13,7 +13,7 @@ struct SettingsView: View {
     @Environment(\.locale) private var locale
     
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
-    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
+//    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
     
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -29,18 +29,20 @@ struct SettingsView: View {
     let maximumRadius = 10000.0
     let step = 500.0
     
+//    @State private var selectedSpeciesGroupName: String = ""
+    
     var body: some View {
         
         NavigationView {
-            Button("printme") {
-                if (speciesViewModel.species.count > 0) {
-                    print(speciesViewModel.species[0].name)
-                }
-                
-                if (speciesSecondLangViewModel.species.count > 0) {
-                    print(speciesSecondLangViewModel.species[0].name)
-                }
-            }
+//            Button("printme") {
+//                if (speciesViewModel.species.count > 0) {
+//                    print(speciesViewModel.species[0].name)
+//                }                
+//                if (speciesViewModel.speciesSecondLanguage.count > 0) {
+//                    print(speciesViewModel.speciesSecondLanguage[0].name)
+//                }
+//            }
+            
             List {
                 NavigationLink(destination: LoginView()) {
                     Text("Login")
@@ -74,6 +76,18 @@ struct SettingsView: View {
                         settings.selectedRegionListId = regionListViewModel.getId(
                             region: settings.selectedRegionId,
                             species_group: settings.selectedSpeciesGroupId)
+                        
+                        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: {$0.id == settings.selectedSpeciesGroupId }) {
+                                // update the selectedSpeciesGroupName
+                            settings.selectedSpeciesGroupName = selectedGroup.name
+                            }
+                        
+                        print("+++> \(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
+                       
+                        speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
+                        speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+                        
+                        
                     }
                 }
                 

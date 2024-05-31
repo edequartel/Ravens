@@ -30,7 +30,7 @@ struct SettingsDetailsView: View {
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
             
-            Text(">>> (speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) wijzigen!!")
+            Text(settings.selectedSpeciesGroupName)
                 .lineLimit(1)
             
             if (settings.infinity && showInfinity) {

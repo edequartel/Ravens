@@ -145,7 +145,7 @@ struct MapObservationView: View {
             }
             .onAppear() {
                 log.error("MapObservationView onAppear")
-                fetchUserData()
+//                fetchUserData()
                 fetchPOIs()
                 setupInitialLocation()
                 fetchSpeciesGroup()
@@ -184,7 +184,7 @@ struct MapObservationView: View {
     }
     
     func fetchUserData() {
-        userViewModel.fetchUserData(settings: settings, completion: {
+        userViewModel.fetchUserData(completion: {
             log.error("userViewModel.fetchUserData userid \(userViewModel.user?.id ?? 0)")
             settings.userId = userViewModel.user?.id ?? 0
         })

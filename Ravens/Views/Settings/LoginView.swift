@@ -152,9 +152,9 @@ struct LoginView: View {
                 }
             }
             
-            Section() {
-                ObserversView()
-            }
+//            Section() {
+//                ObserversView()
+//            }
             
             Section() {
                 InfoObservationView()

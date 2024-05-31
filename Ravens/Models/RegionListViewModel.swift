@@ -13,13 +13,6 @@ class RegionListViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.verbose("init RegionListViewModel")
-        self.settings = settings
-        fetchData()
-    }
-    
     func getId(region: Int, species_group: Int) -> Int {
         log.verbose("getID from regionListViewModel region: \(region) species_group: \(species_group)")
         if let matchingItem = regionLists.first(
@@ -31,15 +24,15 @@ class RegionListViewModel: ObservableObject {
         return -1
     }
     
-    func fetchData() {
-        log.info("fetchData RegionListViewModel")
+    func fetchData(language: String, completion: (() -> Void)? = nil) {
+        log.error("fetchData RegionListViewModel")
         let url = endPoint+"region-lists"
         
         log.info("RegionListViewModel url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
 
         // Use Alamofire to make the API request
@@ -51,6 +44,7 @@ class RegionListViewModel: ObservableObject {
                     // Decode the JSON response into an array of Species objects
                     let decoder = JSONDecoder()
                     self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
+                    completion?() // call the completion handler if it exists
                 } catch {
                     self.log.error("Error RegionListViewModel decoding JSON: \(error)")
                 }

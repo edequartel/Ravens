@@ -30,7 +30,7 @@ struct ObservationsUserViewExtra: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: ObserversView()) {
-                        Label("Observers", systemImage: "person.2.fill")
+                        Label("Observers", systemImage: "list.bullet")
                     }
                 }
             }

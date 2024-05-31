@@ -30,7 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         console.minLevel = .error
         
         log.addDestination(console)
-        log.addDestination(file)
+//        log.addDestination(file)
         
         return true
     }
@@ -63,18 +63,18 @@ struct RavensApp: App {
     @StateObject var settings = Settings()
     @StateObject var locationManager = LocationManagerModel()
     @StateObject var languagesViewModel = LanguagesViewModel()
-    
-    //deze twee niet op settings maar op language and selectedRegionListIdStored bekijken
-    @StateObject var speciesViewModel = SpeciesViewModel(settings: Settings(), primary: true)
-    @StateObject var speciesSecondLangViewModel = SpeciesViewModel(settings: Settings(), primary: false)
-    
-    @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel(settings: Settings())
-    @StateObject var regionsViewModel = RegionsViewModel(settings: Settings())
-    @StateObject var regionListViewModel = RegionListViewModel(settings: Settings())
-    
+    @StateObject var speciesViewModel = SpeciesViewModel()
+    @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
+    @StateObject var regionsViewModel = RegionsViewModel()
+    @StateObject var regionListViewModel = RegionListViewModel()
+    @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+    @StateObject var userViewModel =  UserViewModel()
+//    
     //    @StateObject var fetchRequestManager = FetchRequestManager()
-    let observersViewModel = ObserversViewModel()
-    let urlHandler = URLHandler() // create instance
+    
+
+//    let observersViewModel = ObserversViewModel()
+//    let urlHandler = URLHandler()
     
     //
     let center = UNUserNotificationCenter.current()
@@ -100,91 +100,95 @@ struct RavensApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(KeychainViewModel())
-                .environmentObject(UserViewModel())
-                .environmentObject(settings)
-                .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-                .environmentObject(ObservationsViewModel())
-            
-                .environmentObject(regionsViewModel) // use instance
-            
-            //                .environmentObject(RegionListViewModel(settings: Settings()))
-                .environmentObject(speciesGroupViewModel)
-                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
-                .environmentObject(ObservationsUserViewModel(settings: Settings()))
-                .environmentObject(Player())
-                .environmentObject(ObservationsLocationViewModel())
-                .environmentObject(ObservationsYearViewModel(settings: Settings()))
-                .environmentObject(ObserversViewModel())
                 .environmentObject(BookMarksViewModel())
-                .environmentObject(urlHandler) // use instance
-                .environmentObject(observersViewModel) // use instance
-                .environmentObject(AreasViewModel()) // use instance
             
-                .environmentObject(locationManager) // use instance
+                .environmentObject(locationManager)
+                .environmentObject(settings)
+                .environmentObject(languagesViewModel)
+                .environmentObject(speciesViewModel)
+                .environmentObject(speciesGroupViewModel)
+                .environmentObject(regionsViewModel) 
+                .environmentObject(regionListViewModel)
+                .environmentObject(observationsSpeciesViewModel)
+                .environmentObject(userViewModel) 
+//
+
+//            
+//                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
+//                .environmentObject(ObservationsUserViewModel(settings: Settings()))
+//                .environmentObject(Player())
+//            
+//                .environmentObject(ObservationsLocationViewModel())
+//                .environmentObject(ObservationsYearViewModel(settings: Settings()))
+//                .environmentObject(ObserversViewModel())
+//                .environmentObject(AreasViewModel()) 
+//
+//                .environmentObject(urlHandler) // use instance
+//                .environmentObject(observersViewModel)
+//            
+
+
+//
+
+
+
+//            
+
             
+//                .onOpenURL { url in
+//                    // Handle the URL appropriately
+//                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
+//                    self.parts = urlString.split(separator: "/").map(String.init)
+//                    showingAlert = true
+//                    
+//                    
+//                    //  observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+//                    //                    
+//                    
+//                    
+//                    // Create the notification content
+//                    let content = UNMutableNotificationContent()
+//                    content.title = "URL Opened"
+//                    content.body = "The app opened a URL: \(url)"
+//                    
+//                    // Create the trigger
+//                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//                    
+//                    // Create the request
+//                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//                    
+//                    // Schedule the request with the system.
+//                    let notificationCenter = UNUserNotificationCenter.current()
+//                    notificationCenter.add(request) { (error) in
+//                        if let error = error {
+//                            // Handle any errors.
+//                            print(error.localizedDescription)
+//                        }
+//                    }
+//                    
+//                    //Update badge number
+//                    // Then in the function where you want to increase the badge count
+//                    center.setBadgeCount(0)
+//                    //                    center.setBadgeCount(badgeCount + 1) { error in
+//                    //                        if let error = error {
+//                    //                            print("Error setting badge count: \(error)")
+//                    //                        } else {
+//                    //                            badgeCount += 1
+//                    //                        }
+//                    //                    }
+//                    
+//                    
+//                }
             
-            
-                .environmentObject(speciesGroupViewModel) // use instance
-                .environmentObject(languagesViewModel) // use instance)
-                .environmentObject(regionListViewModel) // use instance)
-            
-                .environmentObject(speciesViewModel) // use instance)
-                .environmentObject(speciesSecondLangViewModel) // use instance
-            
-                .onOpenURL { url in
-                    // Handle the URL appropriately
-                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
-                    self.parts = urlString.split(separator: "/").map(String.init)
-                    showingAlert = true
-                    
-                    
-                    //                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-                    //                    
-                    
-                    
-                    // Create the notification content
-                    let content = UNMutableNotificationContent()
-                    content.title = "URL Opened"
-                    content.body = "The app opened a URL: \(url)"
-                    
-                    // Create the trigger
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                    
-                    // Create the request
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                    
-                    // Schedule the request with the system.
-                    let notificationCenter = UNUserNotificationCenter.current()
-                    notificationCenter.add(request) { (error) in
-                        if let error = error {
-                            // Handle any errors.
-                            print(error.localizedDescription)
-                        }
-                    }
-                    
-                    //Update badge number
-                    // Then in the function where you want to increase the badge count
-                    center.setBadgeCount(0)
-                    //                    center.setBadgeCount(badgeCount + 1) { error in
-                    //                        if let error = error {
-                    //                            print("Error setting badge count: \(error)")
-                    //                        } else {
-                    //                            badgeCount += 1
-                    //                        }
-                    //                    }
-                    
-                    
-                }
-            
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Append URL"),
-                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
-                          primaryButton: .default(Text("Yes")) {
-                        print("Appending \(parts[0]) \(parts[1])")
-                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-                    },
-                          secondaryButton: .cancel(Text("No")))
-                }
+//                .alert(isPresented: $showingAlert) {
+//                    Alert(title: Text("Append URL"),
+//                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
+//                          primaryButton: .default(Text("Yes")) {
+//                        print("Appending \(parts[0]) \(parts[1])")
+//                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
+//                    },
+//                          secondaryButton: .cancel(Text("No")))
+//                }
         }
     }
 }

@@ -97,9 +97,9 @@ struct ObserversView: View {
         VStack {
             List {
                 HStack {
-                    Button("\(userViewModel.user?.name ?? "unknown")") {
+                    Button(userViewModel.user?.name ?? "") { //?????? is dit wel de thuis user id
                         settings.userId = userViewModel.user?.id ?? 0
-                        settings.userName = userViewModel.user?.name ?? "unknown"
+                        settings.userName =  userViewModel.user?.name ?? ""
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.blue : Color.primary)
@@ -128,6 +128,7 @@ struct ObserversView: View {
                     }
 //                    .tint(.gray)
                 }
+
                 
                 ForEach(viewModel.records) { record in
                     HStack{

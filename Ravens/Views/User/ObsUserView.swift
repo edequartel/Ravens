@@ -157,25 +157,12 @@ struct ObsUserView: View {
                     Image(systemName: "info.circle")
                 }
                 .tint(.blue)
-                
-                
-                
             }
-            
-            
-            
         }
         .sheet(isPresented: $showingDetails) {
             SpeciesDetailsView(speciesID: obs.species_detail.id)
         }
         .onAppear() {
-            //            if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-            //                obsViewModel.fetchData(for: obs.id ?? 0, completion: {
-            //                    log.info("onAppear OBSView Happens")
-            //                    obs.photos = obsViewModel.observation?.photos
-            //                    obs.sounds = obsViewModel.observation?.sounds
-            //                })
-            //            }
         }
     }
 }

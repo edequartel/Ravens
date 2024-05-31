@@ -16,7 +16,7 @@ class UserViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-    func fetchUserData(settings: Settings, completion: @escaping () -> Void) {
+    func fetchUserData(completion: (() -> Void)? = nil) {
         
         keyChainViewModel.retrieveCredentials()
         
@@ -24,7 +24,7 @@ class UserViewModel: ObservableObject {
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token
         ]
-        let url = settings.endPoint() + "user/info/"
+        let url = endPoint + "user/info/"
         log.info("UserViewModel \(url)")
         
         AF.request(url, headers: headers).responseString { response in
@@ -36,7 +36,7 @@ class UserViewModel: ObservableObject {
                       
                         self.log.debug("stringResponse: \(stringResponse)")
                         self.user = try JSONDecoder().decode(UserData.self, from: data)
-                        completion()
+                        completion?() // call the completion handler if it exists
                         
                     } catch {
                         self.log.error("Error UserViewModel decoding JSON: \(error)")

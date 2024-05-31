@@ -18,13 +18,8 @@ class SpeciesGroupsViewModel: ObservableObject {
     
     var speciesDictionary: [Int: String] = [:]
     
-    init(settings: Settings) {
-        log.info("SpeciesGroupViewModel init \(settings.selectedLanguageStored)")
-        fetchData(language: settings.selectedLanguageStored)
-    }
-    
-    func fetchData(language: String) {
-        log.info("fetchData SpeciesGroupViewModel \(language)")
+    func fetchData(language: String, completion: (() -> Void)? = nil) {
+        log.error("fetchData SpeciesGroupViewModel \(language)")
         let url = endPoint + "species-groups"
         
         // Add the custom header 'Accept-Language: nl'
@@ -50,6 +45,7 @@ class SpeciesGroupsViewModel: ObservableObject {
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
                     
                     // Call the completion handler when the data is successfully fetched
+                    completion?() // call the completion handler if it exists
                 } catch {
                     self.log.error("Error SpeciesGroupViewModel decoding JSON: \(error)")
                 }

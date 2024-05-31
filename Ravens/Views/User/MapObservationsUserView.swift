@@ -171,7 +171,7 @@ struct MapObservationUserView_Previews: PreviewProvider {
         MapObservationsSpeciesView(item: testSpecies)
             .environmentObject(Settings())
             .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
+            .environmentObject(ObservationsSpeciesViewModel())
     }
 }
 

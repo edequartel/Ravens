@@ -19,12 +19,6 @@ class ObservationsSpeciesViewModel: ObservableObject {
     
     var locations = [Location]()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.info("init ObservationsSpeciesViewModel")
-        self.settings = settings
-    }
-
     func getLocations() {
         locations.removeAll()
         
@@ -45,22 +39,22 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(speciesId: Int, limit: Int, offset: Int, date: Date, days: Int) {
-        log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
+    func fetchData(language: String, speciesId: Int, limit: Int, offset: Int, date: Date, days: Int, completion: (() -> Void)? = nil) {
+        log.error("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
-        self.observationsSpecies?.results.removeAll() //?? deze vrijdag voor de vakantie gewijzigd
+        self.observationsSpecies?.results.removeAll()
         
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
 
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
         let date_before = formatCurrentDate(value: date)
         
-        let url = settings.endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
+        let url = endPoint + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
         
         log.info("\(url)")
 
@@ -76,7 +70,9 @@ class ObservationsSpeciesViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
                             self.getLocations()
+                            completion?() // call the completion handler if it exists
                         }
+                   
                     } catch {
                         self.log.error("Error ObservationsSpeciesViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")

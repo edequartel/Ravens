@@ -93,9 +93,6 @@
     "%lldx" : {
 
     },
-    ">>> (speciesGroupViewModel.getName(forID: settings.selectedSpeciesGroup) wijzigen!!" : {
-
-    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -115,9 +112,6 @@
           }
         }
       }
-    },
-    "Append URL" : {
-
     },
     "Area" : {
       "extractionState" : "stale",
@@ -251,6 +245,9 @@
         }
       }
     },
+    "details" : {
+
+    },
     "Details" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -258,16 +255,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Details"
-          }
-        }
-      }
-    },
-    "Do you want to append this %@ %@?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Do you want to append this %1$@ %2$@?"
           }
         }
       }
@@ -572,6 +559,9 @@
         }
       }
     },
+    "Loading data..." : {
+
+    },
     "Loading..." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -791,9 +781,6 @@
     "Next" : {
 
     },
-    "No" : {
-
-    },
     "nobsavaliable" : {
       "localizations" : {
         "nl" : {
@@ -901,9 +888,6 @@
       }
     },
     "Previous" : {
-
-    },
-    "printme" : {
 
     },
     "Radius" : {
@@ -1158,9 +1142,6 @@
         }
       }
     },
-    "speciesGroupsViewModel.getName" : {
-
-    },
     "Standard" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1289,6 +1270,7 @@
       }
     },
     "Yes" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
