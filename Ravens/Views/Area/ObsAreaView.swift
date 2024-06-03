@@ -146,11 +146,11 @@ struct ObsAreaView: View {
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
                         areasViewModel.removeRecord(
                             areaID: obs.location_detail?.id ?? 0)
                     } else {
-                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        log.info("adding area \(obs.location_detail?.id ?? 0)")
                         areasViewModel.appendRecord(
                             areaName: obs.location_detail?.name ?? "unknown",
                             areaID: obs.location_detail?.id ?? 0)
@@ -171,11 +171,11 @@ struct ObsAreaView: View {
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                        print("bookmarks remove")
+                        log.info("bookmarks remove")
                         bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
                     } else {
                         bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
-                        print("bookmarks append")
+                        log.info("bookmarks append")
                     }
 
                 } ) {
@@ -184,7 +184,7 @@ struct ObsAreaView: View {
                 .tint(.obsStar)
                 
                 Button(action: {
-                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
+                    log.info("Button tapped + Show Image from URL \(obs.species_detail.id)")
                     showingDetails = true
                 }) {
                     Image(systemName: "info.circle")

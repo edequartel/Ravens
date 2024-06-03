@@ -80,22 +80,50 @@ class AreasViewModel: ObservableObject {
 }
 
 import SwiftUI
+import SwiftyBeaver
 
 struct AreasView: View {
+    let log = SwiftyBeaver.self
     @EnvironmentObject private var viewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
+    
+    @EnvironmentObject private var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var newAreaID = 0
     
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.records) { record in
+                ForEach(viewModel.records, id: \.id) { record in
                     HStack{
-                        Text("\(record.name)")
-                            .lineLimit(1)
+                        Button(record.name) {
+                            settings.locationName = record.name
+                            settings.locationId = record.areaID
                             
-//                        Text("\(record.areaID)")
+                            //1. get the geoJSON for this area
+                            geoJSONViewModel.fetchGeoJsonData(
+                                for: record.areaID,
+                                completion:
+                                    {
+                                        log.info("geoJSONViewModel data loaded")
+                                        //2. get the observations for this area
+                                        observationsLocationViewModel.fetchData( //settings??
+                                            locationId: record.areaID,
+                                            limit: 100,
+                                            offset: 0,
+                                            settings:
+                                                settings,
+                                            completion: {
+                                                log.info("observationsLocationViewModel data loaded")
+                                            })
+                                    }
+                            )
+                            self.presentationMode.wrappedValue.dismiss()
+                            
+                        }
+                        .lineLimit(1)
                         Spacer()
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -106,13 +134,6 @@ struct AreasView: View {
                             Label("Delete", systemImage: "trash")
                         }
                         .tint(.red)
-                    }
-                    .onTapGesture {
-                        print("\(record.name) - \(record.areaID)")
-                        //deze wordt hier aangepast, nu kijken voor de area in de maps and the obslist
-                        settings.locationName = record.name
-                        settings.locationId = record.areaID
-                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
                 

@@ -19,7 +19,7 @@ class SpeciesDetailsViewModel: ObservableObject {
     }
     
     func fetchData(for speciesID: Int) {
-        guard let url = URL(string: settings.endPoint()+"species/\(speciesID)/") else {
+        guard let url = URL(string: endPoint()+"species/\(speciesID)/") else {
             return
         }
         log.info("SpeciesDetailsViewModel speciesID: \(speciesID)")

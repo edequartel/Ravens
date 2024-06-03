@@ -24,7 +24,7 @@ class ObsViewModel: ObservableObject {
         
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
-        let url = endPoint+"observations/\(obsID)/"
+        let url = endPoint()+"observations/\(obsID)/"
         
         keyChainViewModel.retrieveCredentials()
         

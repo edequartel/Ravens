@@ -106,7 +106,7 @@ class ObservationsUserViewModel: ObservableObject {
     
 
     func fetchData(language: String, userId: Int, completion: @escaping () -> Void) {
-        log.error("!! fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
+        log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header
@@ -115,9 +115,9 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": language
         ]
 
-        let url = endPoint + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)" 
+        let url = endPoint() + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)" 
 
-        log.error("fetchData ObservationsUserViewModel \(url)")
+        log.info("fetchData ObservationsUserViewModel \(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

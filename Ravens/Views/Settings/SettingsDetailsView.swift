@@ -18,31 +18,21 @@ struct SettingsDetailsView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-//            Spacer()
             NetworkView()
             Spacer()
-//            Text("\(settings.selectedLanguage)")
-//            Text("\(count)/\(results)x")
             Text("\(results)x")
             Image(systemName: "binoculars.circle.fill")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(myColor(value: settings.selectedRarity), .white)
-            
             Text(settings.selectedSpeciesGroupName)
                 .lineLimit(1)
-            
             if (settings.infinity && showInfinity) {
                 Image(systemName: "infinity")
             } else {
                 Text("\(settings.days)d")
                 Text("\(settings.selectedDate, formatter: dateFormatter)")
             }
-            
-            
         }
-        .bold()
     }
     
     private var dateFormatter: DateFormatter {

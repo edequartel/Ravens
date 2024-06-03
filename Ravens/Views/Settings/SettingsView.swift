@@ -48,15 +48,15 @@ struct SettingsView: View {
                     Text("Login")
                 }
                 
-                Picker("Source", selection: $settings.selectedInBetween) {
-                    Text("waarneming.nl")
-                        .tag("waarneming.nl")
-                    Text("observation.org")
-                        .tag("observation.org")
-                }
-                .pickerStyle(.inline)
-                .onChange(of: settings.selectedInBetween) {
-                }
+//                Picker("Source", selection: $settings.selectedInBetween) {
+//                    Text("waarneming.nl")
+//                        .tag("waarneming.nl")
+//                    Text("observation.org")
+//                        .tag("observation.org")
+//                }
+//                .pickerStyle(.inline)
+//                .onChange(of: settings.selectedInBetween) {
+//                }
                 
                 //edit: 27052024
                 Section("Species") {

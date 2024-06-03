@@ -46,16 +46,12 @@ struct SpeciesView: View {
                                                                 NavigationLink(destination: TabSpeciesView(item: species)) {
                                                                     
                                                                     VStack(alignment: .leading) {
-                                                                        //                                        Text("\(species.)")
+                                                    
                                                                         HStack(spacing: 4) {
                                                                             Image(systemName: "circle.fill")
                                                                                 .symbolRenderingMode(.palette)
                                                                                 .foregroundStyle(myColor(value: species.rarity), .clear)
                                                                             
-                                                                            //are there any observations
-//                                                                            if (!keyChainViewModel.token.isEmpty) {
-//                                                                                ObservationDetailsView(speciesID: species.id)
-//                                                                            }
                                                                             
                                                                             Text("\(species.name)")// - \(species.id)") //?
                                                                                 .bold()

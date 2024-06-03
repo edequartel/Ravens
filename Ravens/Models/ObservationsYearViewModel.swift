@@ -142,7 +142,7 @@ class ObservationsYearViewModel: ObservableObject {
             "Accept-Language": language
         ]
         
-        let url = endPoint + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=100&offset=0"
+        let url = endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=100&offset=0"
         
         log.info("url \(url)")
         

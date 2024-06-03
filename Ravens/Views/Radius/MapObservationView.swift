@@ -27,7 +27,7 @@ struct MapObservationView: View {
                 MapReader { proxy in
                     Map(position: $cameraPosition) { // centre and span for the camera
                         
-                        UserAnnotation() //give dynamically the users position
+//                        UserAnnotation() //give dynamically the users position
                         
                         // POI
                         if (settings.poiOn) {
@@ -71,43 +71,6 @@ struct MapObservationView: View {
                     .safeAreaInset(edge: .bottom) {
                         VStack {
                             SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
-                            
-                            //
-                            HStack {
-                                Spacer()
-                                Text("days ")
-                                    .bold()
-                                Button(action: {
-                                    if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-                                        settings.selectedDate = min(newDate, Date())
-                                    }
-                                    fetchDataModel()
-                                }) {
-                                    Image(systemName: "backward.fill")
-                                }
-                                
-                                Button(action: {
-                                    // Calculate the potential new date by adding days to the selected date
-                                    if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-                                        // Ensure the new date does not go beyond today
-                                        settings.selectedDate = min(newDate, Date())
-                                    }
-                                    fetchDataModel()
-                                }) {
-                                    Image(systemName: "forward.fill")
-                                }
-                                
-                                Button(action: {
-                                    settings.selectedDate = Date()
-                                    log.info("Date updated to \(settings.selectedDate)")
-                                    
-                                    fetchDataModel()
-                                }) {
-                                    Image(systemName: "square.fill")
-                                }
-
-                            }
-                            .frame(maxHeight: 30)
                         }
                         .padding(5)
                         .foregroundColor(.obsGreenFlower)
@@ -194,3 +157,40 @@ struct MapObservationView_Previews: PreviewProvider {
         
     }
 }
+
+//
+//HStack {
+//    Spacer()
+//    Text("days ")
+//        .bold()
+//    Button(action: {
+//        if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+//            settings.selectedDate = min(newDate, Date())
+//        }
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "backward.fill")
+//    }
+//    
+//    Button(action: {
+//        // Calculate the potential new date by adding days to the selected date
+//        if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+//            // Ensure the new date does not go beyond today
+//            settings.selectedDate = min(newDate, Date())
+//        }
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "forward.fill")
+//    }
+//    
+//    Button(action: {
+//        settings.selectedDate = Date()
+//        log.info("Date updated to \(settings.selectedDate)")
+//        
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "square.fill")
+//    }
+//
+//}
+//.frame(maxHeight: 30)

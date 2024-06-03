@@ -16,8 +16,7 @@ struct TabSpeciesView: View {
         NavigationView {
             VStack {
                 if showFirstView {
-//                    MapObservationsSpeciesView(item: item)
-                    Text("MapObservationsSpeciesView")
+                    MapObservationsSpeciesView(item: item)
                 } else {
                     ObservationsSpeciesView(item: item)
                 }

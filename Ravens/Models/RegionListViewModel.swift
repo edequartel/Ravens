@@ -26,7 +26,7 @@ class RegionListViewModel: ObservableObject {
     
     func fetchData(language: String, completion: (() -> Void)? = nil) {
         log.info("fetchData RegionListViewModel")
-        let url = endPoint+"region-lists"
+        let url = endPoint()+"region-lists"
         
         log.info("RegionListViewModel url = \(url)")
         

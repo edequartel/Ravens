@@ -13,6 +13,7 @@ struct ObservationsSpeciesView: View {
     
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    @EnvironmentObject var speciesViewModel: SpeciesViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var scale: CGFloat = 1.0
@@ -56,7 +57,8 @@ struct ObservationsSpeciesView: View {
                 }
                 VStack {
                     HStack {
-                        Text("secondary name")
+//                        let secondName = speciesViewModel.findSpeciesByID(speciesID: item.id)
+                        Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
                             .foregroundColor(.gray)
                             .font(.footnote)
                         Spacer()

@@ -160,6 +160,7 @@
       }
     },
     "days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -180,6 +181,7 @@
       }
     },
     "days " : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -654,9 +656,6 @@
         }
       }
     },
-    "MapObservationsSpeciesView" : {
-
-    },
     "Me" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -775,6 +774,7 @@
 
     },
     "observation.org" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -993,9 +993,6 @@
     "Second language" : {
 
     },
-    "secondary name" : {
-
-    },
     "Select a Region" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1080,6 +1077,7 @@
       }
     },
     "Source" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1216,6 +1214,7 @@
       }
     },
     "waarneming.nl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

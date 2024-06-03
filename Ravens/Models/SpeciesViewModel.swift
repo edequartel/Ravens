@@ -16,73 +16,73 @@ class SpeciesViewModel: ObservableObject {
     @Published var species = [Species]()
     @Published var speciesSecondLanguage = [Species]()
     
-//    func fetchDataFirst(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
-//        log.info("SpeciesViewModel fetchDataFirst \(language) groupID \(regionListId)")
-//        let url = endPoint+"region-lists/\(regionListId)/species/"
-//
-//        
-//        // Add the custom header 'Accept-Language: nl'
-//        let headers: HTTPHeaders = [
-//            "Accept-Language": language
-//        ]
-//
-//        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
-//            // Check if response data exists
-//            if let data = response.data {
-//                // Convert data to String and print
-//                let str = String(data: data, encoding: .utf8)
-//                self.log.verbose(str ?? "No data")
-//            }
-//
-//            switch response.result {
-//            case .success(_):
-//                do {
-//                    // Decode the JSON response into an array of Species objects
-//                    let decoder = JSONDecoder()
-//                    self.species = try decoder.decode([Species].self, from: response.data!)
-//                    completion?() // call the completion handler if it exists
-//                } catch {
-//                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
-//                }
-//            case .failure(let error):
-//                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
-//            }
-//        }
-//    }
+    func fetchDataFirst(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
+        log.info("SpeciesViewModel fetchDataFirst \(language) groupID \(regionListId)")
+        let url = endPoint()+"region-lists/\(regionListId)/species/"
+
+        
+        // Add the custom header 'Accept-Language: nl'
+        let headers: HTTPHeaders = [
+            "Accept-Language": language
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
+            // Check if response data exists
+            if let data = response.data {
+                // Convert data to String and print
+                let str = String(data: data, encoding: .utf8)
+                self.log.verbose(str ?? "No data")
+            }
+
+            switch response.result {
+            case .success(_):
+                do {
+                    // Decode the JSON response into an array of Species objects
+                    let decoder = JSONDecoder()
+                    self.species = try decoder.decode([Species].self, from: response.data!)
+                    completion?() // call the completion handler if it exists
+                } catch {
+                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
+                }
+            case .failure(let error):
+                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
+            }
+        }
+    }
     
-//    func fetchDataSecondLanguage(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
-//        log.info("SpeciesViewModel fetchDataSecondLanguage \(language) groupID \(regionListId)")
-//
-//        let url = endPoint+"region-lists/\(regionListId)/species/"
-//        
-//        // Add the custom header 'Accept-Language: nl'
-//        let headers: HTTPHeaders = [
-//            "Accept-Language": language
-//        ]
-//
-//        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
-//            // Check if response data exists
-//            if let data = response.data {
-//                // Convert data to String and print
-//                let str = String(data: data, encoding: .utf8)
-//                self.log.verbose(str ?? "No data")
-//            }
-//
-//            switch response.result {
-//            case .success(_):
-//                do {
-//                    // Decode the JSON response into an array of Species objects
-//                    let decoder = JSONDecoder()
-//                    self.speciesSecondLanguage = try decoder.decode([Species].self, from: response.data!)
-//                    completion?() // call the completion handler if it exists
-//                } catch {
-//                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
-//                }
-//            case .failure(let error):
-//                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
-//            }
-//        }
-//    }
+    func fetchDataSecondLanguage(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
+        log.info("SpeciesViewModel fetchDataSecondLanguage \(language) groupID \(regionListId)")
+
+        let url = endPoint()+"region-lists/\(regionListId)/species/"
+        
+        // Add the custom header 'Accept-Language: nl'
+        let headers: HTTPHeaders = [
+            "Accept-Language": language
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
+            // Check if response data exists
+            if let data = response.data {
+                // Convert data to String and print
+                let str = String(data: data, encoding: .utf8)
+                self.log.verbose(str ?? "No data")
+            }
+
+            switch response.result {
+            case .success(_):
+                do {
+                    // Decode the JSON response into an array of Species objects
+                    let decoder = JSONDecoder()
+                    self.speciesSecondLanguage = try decoder.decode([Species].self, from: response.data!)
+                    completion?() // call the completion handler if it exists
+                } catch {
+                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
+                }
+            case .failure(let error):
+                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
+            }
+        }
+    }
     
 //    func findSpeciesByID(speciesID: Int) -> Species? {
     func findSpeciesByID(speciesID: Int) -> String? {
@@ -100,72 +100,3 @@ class SpeciesViewModel: ObservableObject {
     }
 }
 
-extension SpeciesViewModel {
-    func fetchDataFirst(language: String, for regionListId: Int) async throws {
-        log.error("SpeciesViewModel fetchDataFirst \(language) groupID \(regionListId)")
-        let url = endPoint+"region-lists/\(regionListId)/species/"
-        
-        
-        // Add the custom header 'Accept-Language: nl'
-        let headers: HTTPHeaders = [
-            "Accept-Language": language
-        ]
-        
-        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
-            // Check if response data exists
-            if let data = response.data {
-                // Convert data to String and print
-                let str = String(data: data, encoding: .utf8)
-                self.log.verbose(str ?? "No data")
-            }
-            
-            switch response.result {
-            case .success(_):
-                do {
-                    // Decode the JSON response into an array of Species objects
-                    let decoder = JSONDecoder()
-                    self.species = try decoder.decode([Species].self, from: response.data!)
-                    //                        completion?() // call the completion handler if it exists
-                } catch {
-                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
-                }
-            case .failure(let error):
-                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
-            }
-        }
-    }
-    
-    func fetchDataSecondLanguage(language: String, for regionListId: Int) async throws {
-        log.error("SpeciesViewModel fetchDataSecondLanguage \(language) groupID \(regionListId)")
-        
-        let url = endPoint+"region-lists/\(regionListId)/species/"
-        
-        // Add the custom header 'Accept-Language: nl'
-        let headers: HTTPHeaders = [
-            "Accept-Language": language
-        ]
-        
-        AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
-            // Check if response data exists
-            if let data = response.data {
-                // Convert data to String and print
-                let str = String(data: data, encoding: .utf8)
-                self.log.verbose(str ?? "No data")
-            }
-            
-            switch response.result {
-            case .success(_):
-                do {
-                    // Decode the JSON response into an array of Species objects
-                    let decoder = JSONDecoder()
-                    self.speciesSecondLanguage = try decoder.decode([Species].self, from: response.data!)
-                    //                        completion?()  call the completion handler if it exists
-                } catch {
-                    self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
-                }
-            case .failure(let error):
-                self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
-            }
-        }
-    }
-}

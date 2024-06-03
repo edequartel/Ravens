@@ -15,15 +15,10 @@ struct MapObservationsLocationView: View {
     
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
-    
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-    
     @EnvironmentObject var poiViewModel: POIViewModel
-    
-
     
     @State private var cameraPosition: MapCameraPosition = .automatic
     
@@ -33,7 +28,7 @@ struct MapObservationsLocationView: View {
                 MapReader { proxy in
                     Map(position: $cameraPosition) {
                         
-                        UserAnnotation()
+//                        UserAnnotation()
                         
                         // POI
                         if (settings.poiOn) {
@@ -75,71 +70,16 @@ struct MapObservationsLocationView: View {
                     }
                     
                     .mapStyle(settings.mapStyle)
-//                    .safeAreaInset(edge: .bottom) {
-//                        VStack {
-//                            SettingsDetailsView(
-//                                count: observationsLocationViewModel.locations.count,
-//                                results: observationsLocationViewModel.count) //??
-//                            HStack {
-//                                if settings.infinity {
-//                                    Spacer()
-//                                }
-//                                HStack {
-//                                    //                                    Spacer()
-//                                    let text = locationIdViewModel.locations.count > 0 ? "\(locationIdViewModel.locations[0].name)" : "Default Name"
-//                                    Text(text)
-//                                        .frame(height: 30)
-//                                        .lineLimit(1)
-//                                }
-//                                .bold()
-//                                .frame(maxHeight: 30)
-//                                
-//                                
-//                                
-//                                if !settings.infinity {
-//                                    Spacer()
-//                                    HStack {
-//                                        Spacer()
-//                                        Text("days ")
-//                                            .bold()
-//                                        Button(action: {
-//                                            if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//                                                settings.selectedDate = min(newDate, Date())
-//                                            }
-//                                            fetchDataModel()
-//                                        }) {
-//                                            Image(systemName: "backward.fill")
-//                                                .background(Color.clear)
-//                                        }
-//                                        
-//                                        Button(action: {
-//                                            // Calculate the potential new date by adding days to the selected date
-//                                            if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-//                                                // Ensure the new date does not go beyond today
-//                                                settings.selectedDate = min(newDate, Date())
-//                                            }
-//                                            fetchDataModel()
-//                                            
-//                                        }) {
-//                                            Image(systemName: "forward.fill")
-//                                        }
-//                                        
-//                                        Button(action: {
-//                                            settings.selectedDate = Date()
-//                                            log.info("Date updated to \(settings.selectedDate)")
-//                                            fetchDataModel()
-//                                        }) {
-//                                            Image(systemName: "square.fill")
-//                                        }
-//                                    }
-//                                    .frame(maxHeight: 30)
-//                                }
-//                            }
-//                        }
-//                        .padding(5)
-//                        .foregroundColor(.obsGreenFlower)
-//                        .background(Color.obsGreenEagle.opacity(0.5))
-//                    }
+                    .safeAreaInset(edge: .bottom) {
+                        VStack {
+                            SettingsDetailsView(
+                                count: observationsLocationViewModel.locations.count,
+                                results: observationsLocationViewModel.count)
+                        }
+                        .padding(5)
+                        .foregroundColor(.obsGreenFlower)
+                        .background(Color.obsGreenEagle.opacity(0.5))
+                    }
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
@@ -169,6 +109,8 @@ struct MapObservationsLocationView: View {
                                                         settings,
                                                     completion: {
                                                         log.info("observationsLocationViewModel data loaded")
+                                                        cameraPosition = getCameraPosition()
+                                                        
                                                     })
                                             }
                                     )
@@ -184,6 +126,11 @@ struct MapObservationsLocationView: View {
                     }
                 }
             }
+//            .onAppear() {
+//                //
+//                print("xxxxxx")
+//                cameraPosition = getCameraPosition()
+//            }
         }
     }
     
@@ -196,19 +143,19 @@ struct MapObservationsLocationView: View {
         }
     }
     
-//    func getCameraPosition() -> MapCameraPosition {
-//        let center = CLLocationCoordinate2D(
-//            latitude: geoJSONViewModel.span.latitude,
-//            longitude: geoJSONViewModel.span.longitude)
-//        
-//        let span = MKCoordinateSpan(
-//            latitudeDelta: geoJSONViewModel.span.latitudeDelta,
-//            longitudeDelta: geoJSONViewModel.span.longitudeDelta)
-//        
-//        
-//        let region = MKCoordinateRegion(center: center, span: span)
-//        return MapCameraPosition.region(region)
-//    }
+    func getCameraPosition() -> MapCameraPosition {
+        let center = CLLocationCoordinate2D(
+            latitude: geoJSONViewModel.span.latitude,
+            longitude: geoJSONViewModel.span.longitude)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+            longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
+    }
 }
 
 struct MapObservationLocationView_Previews: PreviewProvider {
@@ -276,3 +223,50 @@ struct MapObservationLocationView_Previews: PreviewProvider {
 //            log.verbose("settings.selectedGroupId:  \(settings.selectedSpeciesGroup)")
 //            speciesGroupsViewModel.fetchData(language: settings.selectedLanguage)
 //        }
+
+
+//HStack {
+//                                if settings.infinity {
+//                                    Spacer()
+//                                }
+                                
+                                
+//                                if !settings.infinity {
+//                                    Spacer()
+//                                    HStack {
+//                                        Spacer()
+//                                        Text("days ")
+//                                            .bold()
+//                                        Button(action: {
+//                                            if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+//                                                settings.selectedDate = min(newDate, Date())
+//                                            }
+//                                            fetchDataModel()
+//                                        }) {
+//                                            Image(systemName: "backward.fill")
+//                                                .background(Color.clear)
+//                                        }
+//
+//                                        Button(action: {
+//                                            // Calculate the potential new date by adding days to the selected date
+//                                            if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+//                                                // Ensure the new date does not go beyond today
+//                                                settings.selectedDate = min(newDate, Date())
+//                                            }
+//                                            fetchDataModel()
+//
+//                                        }) {
+//                                            Image(systemName: "forward.fill")
+//                                        }
+//
+//                                        Button(action: {
+//                                            settings.selectedDate = Date()
+//                                            log.info("Date updated to \(settings.selectedDate)")
+//                                            fetchDataModel()
+//                                        }) {
+//                                            Image(systemName: "square.fill")
+//                                        }
+//                                    }
+//                                    .frame(maxHeight: 30)
+//                                }
+//                            }

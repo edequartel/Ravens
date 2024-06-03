@@ -57,7 +57,7 @@ class KeychainViewModel: ObservableObject {
             "Content-Type": "application/x-www-form-urlencoded",
         ]
         
-        AF.request(settings.endPoint()+"auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        AF.request(endPoint()+"auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .validate()
             .responseData { response in
                 // debugPrint(response)
@@ -162,7 +162,7 @@ struct LoginView: View {
             
             DisplayCredentialsView()
         }
-        .navigationTitle("Login \(settings.selectedInBetween)")
+        .navigationTitle("Login \(selectedInBetween)")
     }
 }
 
@@ -172,7 +172,7 @@ struct InfoObservationView: View {
     var body: some View {
         Markdown(
             """
-**\(settings.selectedInBetween)**
+**\(selectedInBetween)**
 
 Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
 

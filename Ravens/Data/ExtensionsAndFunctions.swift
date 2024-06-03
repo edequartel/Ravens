@@ -39,8 +39,14 @@ func formatCurrentDate(value: Date) -> String {
     return dateFormatter.string(from: currentDate)
 }
 
-var endPoint = "https://waarneming.nl/api/v1/"
+//var endPoint = "https://waarneming.nl/api/v1/"
+let selectedInBetween = "waarneming.nl"
+func endPoint() -> String {
+   return "https://"+selectedInBetween+"/api/v1/"
+}
+
 let bundleIdentifier = "ravens.app.bundle.identifier"
+
 
 //waarneming-test.nl
 

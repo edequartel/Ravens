@@ -11,8 +11,8 @@ import SwiftyBeaver
 
 struct BookMark: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
-//    var name: String?
-//    var group: String?
+    //    var name: String?
+    //    var group: String?
     var speciesID: Int //bookmarkID
 }
 
@@ -41,7 +41,7 @@ class BookMarksViewModel: ObservableObject {
             records = try JSONDecoder().decode([BookMark].self, from: data)
             log.info("Loaded \(records.count) bookmarks")
         } catch {
-            print("Error loading data: \(error)")
+            log.info("Error loading data: \(error)")
         }
     }
     
@@ -50,7 +50,7 @@ class BookMarksViewModel: ObservableObject {
             let data = try JSONEncoder().encode(records)
             try data.write(to: filePath, options: .atomicWrite)
         } catch {
-            print("Error saving data: \(error)")
+            log.info("Error saving data: \(error)")
         }
     }
     
@@ -60,7 +60,7 @@ class BookMarksViewModel: ObservableObject {
     
     func appendRecord(speciesID: Int) {
         guard !records.contains(where: { $0.speciesID == speciesID }) else {
-            print("Record with userID \(speciesID) already exists.")
+            log.info("Record with userID \(speciesID) already exists.")
             return
         }
         let newRecord = BookMark(speciesID: speciesID)
@@ -70,12 +70,12 @@ class BookMarksViewModel: ObservableObject {
     
     
     func removeRecord(speciesID: Int) {
-        print("removeRecord \(speciesID)")
+        log.info("removeRecord \(speciesID)")
         if let index = records.firstIndex(where: { $0.speciesID == speciesID }) {
             records.remove(at: index)
             saveRecords()
         } else {
-            print("Record with speciesID \(speciesID) does not exist.")
+            log.info("Record with speciesID \(speciesID) does not exist.")
         }
     }
 }
@@ -88,37 +88,16 @@ struct BookMarksView: View {
     @State private var newUserID = 0
     
     var body: some View {
-        //        VStack {
-        //            TextField("Name", text: $newName)
-        //            TextField("UserID", text: $newUserID)
-//        NavigationView {
-            VStack {
-                UserView()
-                
-                List {
-                    ForEach(viewModel.records) { record in
-                        HStack{
-                            Text("(\(record.speciesID))")
-                            Spacer()
-                        }
+        VStack {
+            UserView()
+            List {
+                ForEach(viewModel.records) { record in
+                    HStack{
+                        Text("(\(record.speciesID))")
+                        Spacer()
                     }
-//                    .onDelete(perform: viewModel.deleteRecord)
-                    
                 }
             }
-            //                .toolbar {
-            //                    ToolbarItem(placement: .navigationBarTrailing) {
-            //                        Button("Add") {
-            //                            viewModel.appendRecord(name: newName, userID: newUserID)
-            //                        }
-            //                    }
-            //                }
-            //                .navigationTitle("Observers")
-//        }
-        //        }
-        //        .padding(10)
-//        .onAppear {
-//            viewModel.loadRecords()
-//        }
+        }
     }
 }

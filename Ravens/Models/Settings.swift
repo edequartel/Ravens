@@ -15,7 +15,6 @@ import SwiftyBeaver
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @AppStorage("inBetween") var selectedInBetween = "waarneming.nl"
     @AppStorage("tokenKey") var tokenKey = ""
     
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
@@ -125,10 +124,6 @@ class Settings: ObservableObject {
             log.verbose("!!saving it in storage: \(selectedSecondLanguage)")
             selectedSecondLanguageStored = selectedSecondLanguage
         }
-    }
-    
-    func endPoint() -> String {
-       return "https://"+selectedInBetween+"/api/v1/"
     }
     
     var mapStyle: MapStyle {

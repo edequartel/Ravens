@@ -39,12 +39,7 @@ struct LanguageView: View {
                 //als stored variabele later gebruiken bij opstarten
                 //en als published zodat de gewijzigd wordt en gelijk gebuikt
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
-                Task {
-                    do {
-                        try await speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
-                    }
-                }
-                
+                speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
                 
             }
             
@@ -55,12 +50,7 @@ struct LanguageView: View {
             }
             .onChange(of: settings.selectedSecondLanguage) {
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
-                Task {
-                    do {
-                        try await speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
-                    }
-                }
-                
+                speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
             }
         }
     }

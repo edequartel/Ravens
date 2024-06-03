@@ -129,7 +129,7 @@ struct ObsView: View {
                 //
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                        print("remove areas \(obs.location_detail?.id ?? 0)")
+                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
                         areasViewModel.removeRecord(
                             areaID: obs.location_detail?.id ?? 0)
                     } else {
@@ -146,11 +146,11 @@ struct ObsView: View {
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                        print("bookmarks remove")
+                        log.info("bookmarks remove")
                         bookMarksViewModel.removeRecord(speciesID:  obs.species_detail.id)
                     } else {
                         bookMarksViewModel.appendRecord(speciesID:  obs.species_detail.id)
-                        print("bookmarks append")
+                        log.info("bookmarks append")
                     }
 
                 } ) {

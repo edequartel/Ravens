@@ -52,8 +52,6 @@ struct MapObservationsSpeciesView: View {
             .safeAreaInset(edge: .bottom) {
                 VStack {
                     HStack {
-                        Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                            .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
                         NetworkView()
                         //
                         Spacer()
@@ -69,39 +67,6 @@ struct MapObservationsSpeciesView: View {
                         Text("\(settings.days)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
                     }
-                    
-                    //
-                    HStack {
-                        Spacer()
-                        Text("days")
-                            .bold()
-                        Button(action: {
-                            if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-                                settings.selectedDate = min(newDate, Date())
-                            }
-                            fetchDataModel()
-                        }) {
-                            Image(systemName: "backward.fill")
-                        }
-                        
-                        Button(action: {
-                            if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-                                settings.selectedDate = min(newDate, Date())
-                            }
-                            fetchDataModel()
-                        }) {
-                            Image(systemName: "forward.fill")
-                        }
-                        
-                        Button(action: {
-                            settings.selectedDate = Date()
-                            log.info("Date updated to \(settings.selectedDate)")
-                            fetchDataModel()
-                        }) {
-                            Image(systemName: "square.fill")
-                        }
-                    }
-                    .frame(maxHeight: 30)
                 }
                 .padding(5)
                 .bold()
@@ -156,3 +121,34 @@ struct MapObservationsSpeciesView_Previews: PreviewProvider {
     }
 }
 
+//HStack {
+//    Spacer()
+//    Text("days")
+//        .bold()
+//    Button(action: {
+//        if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
+//            settings.selectedDate = min(newDate, Date())
+//        }
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "backward.fill")
+//    }
+//    
+//    Button(action: {
+//        if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
+//            settings.selectedDate = min(newDate, Date())
+//        }
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "forward.fill")
+//    }
+//    
+//    Button(action: {
+//        settings.selectedDate = Date()
+//        log.info("Date updated to \(settings.selectedDate)")
+//        fetchDataModel()
+//    }) {
+//        Image(systemName: "square.fill")
+//    }
+//}
+//.frame(maxHeight: 30)
