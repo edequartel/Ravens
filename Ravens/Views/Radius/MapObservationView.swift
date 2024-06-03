@@ -11,24 +11,15 @@ import SwiftyBeaver
 struct MapObservationView: View {
     let log = SwiftyBeaver.self
     
-    @State private var locations: [Location] = []
     @State private var POIs: [POI] = []
-    
     @ObservedObject var viewModel = POIViewModel()
-    
+
+    @EnvironmentObject var locationManager: LocationManagerModel
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
-    @EnvironmentObject var userViewModel:  UserViewModel
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
-    
-    @ObservedObject var locationManager = LocationManager()
-    
-    @State private var showFullScreenMap = false
     
     @State private var circlePos: CLLocationCoordinate2D?
     @State private var cameraPosition: MapCameraPosition = .automatic
-    
     
     var body: some View {
 
@@ -47,14 +38,14 @@ struct MapObservationView: View {
                                         .frame(width: 5, height: 5)
                                         .overlay(
                                             Triangle()
-                                                .stroke(Color.red, lineWidth: 1) // Customize the border color and width
+                                                .stroke(Color.red, lineWidth: 1)
                                         )
                                 }
                             }
                         }
                         
                         // observations
-                        ForEach(locations) { location in
+                        ForEach(observationsViewModel.locations) { location in
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
                                     .fill(Color(myColor(value: location.rarity)))
@@ -135,20 +126,17 @@ struct MapObservationView: View {
                             )
 
                             fetchDataModel()
-                            cameraPosition = getCameraPosition() //??
+                            cameraPosition = getCameraPosition()
                         }
                     }
                     .mapControls() {
-                        MapCompass() //tapping this makes it north
+                        MapCompass()
                     }
                 }
             }
             .onAppear() {
-                log.error("MapObservationView onAppear")
-//                fetchUserData()
-                fetchPOIs()
                 setupInitialLocation()
-                fetchSpeciesGroup()
+                cameraPosition = getCameraPosition()
             }
     }
     
@@ -179,43 +167,21 @@ struct MapObservationView: View {
             lat: circlePos?.latitude ?? 0,
             long: circlePos?.longitude ?? 0,
             settings: settings,
-            completion: { locations = observationsViewModel.locations }
+            completion: { print("observationsViewModel.locations") }
         )
     }
     
-    func fetchUserData() {
-        userViewModel.fetchUserData(completion: {
-            log.error("userViewModel.fetchUserData userid \(userViewModel.user?.id ?? 0)")
-            settings.userId = userViewModel.user?.id ?? 0
-        })
-    }
-    
-    func fetchPOIs() {
-        viewModel.fetchPOIs(completion: { POIs = viewModel.POIs} )
-    }
     
     func setupInitialLocation() {
         if settings.initialLoad {
-            log.error("MapObservationView initiaLLoad, get data at startUp and Position")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
                 settings.currentLocation = self.locationManager.location
-                circlePos = settings.currentLocation?.coordinate
-                fetchDataModel()
-                cameraPosition = getCameraPosition()
+                circlePos = locationManager.location?.coordinate
                 settings.initialLoad = false
             }
-        } else {
-            log.error("MapObservationView NOT initiaLLoad")
+        else {
             circlePos = settings.currentLocation?.coordinate
-            cameraPosition = getCameraPosition()
-            fetchDataModel()
         }
     }
-    
-    func fetchSpeciesGroup() {
-        speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
-    }
-    
 }
 
 struct MapObservationView_Previews: PreviewProvider {
@@ -224,7 +190,6 @@ struct MapObservationView_Previews: PreviewProvider {
         MapObservationView()
             .environmentObject(Settings())
             .environmentObject(ObservationsViewModel())
-//            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(KeychainViewModel())
         
     }

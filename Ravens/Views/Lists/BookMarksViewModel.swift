@@ -27,7 +27,7 @@ class BookMarksViewModel: ObservableObject {
     let filePath: URL
     
     init() {
-        log.error("init BookMarksViewModel")
+        log.info("init BookMarksViewModel")
         let fileManager = FileManager.default
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("bookmarks.json")
@@ -39,7 +39,7 @@ class BookMarksViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: filePath)
             records = try JSONDecoder().decode([BookMark].self, from: data)
-            log.error("Loadeds \(records.count) bookmarks")
+            log.info("Loaded \(records.count) bookmarks")
         } catch {
             print("Error loading data: \(error)")
         }

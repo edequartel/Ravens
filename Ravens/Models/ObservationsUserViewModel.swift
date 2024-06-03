@@ -105,9 +105,8 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(language: String, userId: Int, completion: (() -> Void)? = nil) {
-//    func fetchData(limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
-        log.error("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
+    func fetchData(language: String, userId: Int, completion: @escaping () -> Void) {
+        log.error("!! fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header
@@ -116,10 +115,9 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": language
         ]
 
-        let url = endPoint + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"  //
-        //?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
-        
-        log.error("\(url)")
+        let url = endPoint + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)" 
+
+        log.error("fetchData ObservationsUserViewModel \(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
@@ -133,10 +131,11 @@ class ObservationsUserViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observations = observations
                             self.getLocations()
-                            completion?() // call the completion handler if it exists
+                            completion() // call the completion handler if it exists
                         }
                         
                     } catch {
+                        print("\(stringResponse)")
                         self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
                     }

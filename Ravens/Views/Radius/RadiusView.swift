@@ -10,6 +10,7 @@ import SwiftUI
 struct RadiusView: View {
     //    @EnvironmentObject var settings: Settings
     @State private var showFirstView = true
+    @EnvironmentObject var settings: Settings
     
     var body: some View {
         NavigationView {
@@ -25,10 +26,13 @@ struct RadiusView: View {
                     Button(action: {
                         showFirstView.toggle()
                     }) {
-                        Image(systemName: "rectangle.2.swap") // Replace with your desired image
+                        Image(systemName: "rectangle.2.swap") 
                     }
                 }
             }
+            .navigationTitle(settings.selectedSpeciesGroupName)
+            .navigationBarTitleDisplayMode(.inline)
+            
         }
         .edgesIgnoringSafeArea(.all)
     }

@@ -8,14 +8,12 @@
 import SwiftUI
 import SwiftyBeaver
 
-struct ObservationsUserViewExtra: View {
+struct ObservationsUserView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var settings: Settings
-    
-    @State private var userName: String = ""
-    @State private var userId: Int = 0
     
     var body: some View {
         VStack {
@@ -35,32 +33,23 @@ struct ObservationsUserViewExtra: View {
                 }
             }
         }
+        
+        
         .refreshable {
-            print("refreshing")
+            log.info("refreshing")
             observationsUserViewModel.fetchData(
-                //limit: observationsUserViewModel.limit,
-                //offset: observationsUserViewModel.offset,
                 language: settings.selectedLanguage,
                 userId: settings.userId,
-                completion: { print("viewModel.fetchData completion")
-                })
-        }
-        .onAppear {
-            observationsUserViewModel.fetchData(
-                //limit: observationsUserViewModel.limit,
-                //offset: observationsUserViewModel.offset,
-                language: settings.selectedLanguage,
-                userId: settings.userId, <-hier the user?.id gebruiken van een eerder model, eerder deze userId setten bij start
-                completion: { print("viewModel.fetchData completion")
-                })
+                completion: { log.error("**observationsUserViewModel.fetchdata \( settings.userId)") }
+            )
         }
     }
 }
 
 
-struct ObservationsUserViewExtra_Previews: PreviewProvider {
+struct ObservationsUserView_Previews: PreviewProvider {
     static var previews: some View {
-        ObservationsUserViewExtra()
+        ObservationsUserView()
             .environmentObject(ObservationsUserViewModel())
             .environmentObject(Settings())
     }

@@ -16,7 +16,7 @@ class RegionsViewModel: ObservableObject {
     @Published var regions = [Region]()
     
     func fetchData(language: String, completion: (() -> Void)? = nil) {
-        log.error("fetchData RegionViewModel \(language)")
+        log.info("fetchData RegionViewModel \(language)")
         let url = endPoint + "regions/"
 
         log.info("url RegionViewModel \(url)")

@@ -22,8 +22,6 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-        
-        
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -37,6 +35,21 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
     func getCurrentLocation() -> CLLocation? {
         return self.location
+    }
+    
+    func checkLocation() -> Bool {
+        if let _ = self.errorMessage {
+            log.error("Location error.")
+            return false
+        } else if let location = self.location {
+            log.info("Location is available.")
+            log.info("Location accuracy: \(location.horizontalAccuracy) meters")
+            let accuracyThreshold = 100.0 // Define your own accuracy threshold
+            return location.horizontalAccuracy < accuracyThreshold
+        } else {
+            log.error("Location is not available.")
+            return false
+        }
     }
 }
 

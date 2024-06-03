@@ -19,7 +19,7 @@ class ObservationsLocationViewModel: ObservableObject {
     private var keyChainViewModel =  KeychainViewModel()
     
     var locations = [Location]()
-    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
+//    var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
     var count: Int = 0
 
     func getLocations() {
@@ -41,35 +41,35 @@ class ObservationsLocationViewModel: ObservableObject {
         }
     }
     
-    func getSpan() {
-        var latitudes: [Double] = []
-        var longitudes: [Double] = []
-        
-        let max = (observations?.results.count ?? 0)
-        for i in 0 ..< max {
-            let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
-            let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
-            latitudes.append(latitude)
-            longitudes.append(longitude)
-        }
-        
-        let minLatitude = latitudes.min() ?? 0
-        let maxLatitude = latitudes.max() ?? 0
-        let minLongitude = longitudes.min() ?? 0
-        let maxLongitude = longitudes.max() ?? 0
-        
-        let centreLatitude = (minLatitude + maxLatitude) / 2
-        let centreLongitude = (minLongitude + maxLongitude) / 2
-        
-        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
-        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
-
-        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
-    }
+//    func getSpan() {
+//        var latitudes: [Double] = []
+//        var longitudes: [Double] = []
+//        
+//        let max = (observations?.results.count ?? 0)
+//        for i in 0 ..< max {
+//            let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
+//            let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
+//            latitudes.append(latitude)
+//            longitudes.append(longitude)
+//        }
+//        
+//        let minLatitude = latitudes.min() ?? 0
+//        let maxLatitude = latitudes.max() ?? 0
+//        let minLongitude = longitudes.min() ?? 0
+//        let maxLongitude = longitudes.max() ?? 0
+//        
+//        let centreLatitude = (minLatitude + maxLatitude) / 2
+//        let centreLongitude = (minLongitude + maxLongitude) / 2
+//        
+//        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
+//        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
+//
+//        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+//    }
     
 
     func fetchData(locationId: Int, limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
-        log.info("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
+        log.error("fetchData ObservationsLocationViewModel locationid: \(locationId) limit:\(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
         
@@ -92,9 +92,10 @@ class ObservationsLocationViewModel: ObservableObject {
             url = url + "&date_after=\(date_after)&date_before=\(date_before)"
         }
         
-        log.info("ObservationsLocationViewModel \(url)")
+        log.error("ObservationsLocationViewModel \(url)")
 
         AF.request(url, headers: headers).responseData { response in
+            
             switch response.result {
             case .success(let data):
                 do {
@@ -105,10 +106,13 @@ class ObservationsLocationViewModel: ObservableObject {
                         self.observations = Observations(results: observationsSpecies.results)
                         self.count = observationsSpecies.count ?? 0
                         self.getLocations()
-                        self.getSpan()
+//                        self.getSpan()
                         completion()
                     }
                 } catch {
+                    print("--->>>> \(response.data)")
+                    self.log.error("-----------------------------------------------------------")
+                    self.log.error(">> \(response.description)")
                     self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
                     self.log.error("\(url)")
                 }

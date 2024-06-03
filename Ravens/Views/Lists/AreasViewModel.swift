@@ -26,7 +26,7 @@ class AreasViewModel: ObservableObject {
     let filePath: URL
     
     init() {
-        log.error("init AreasViewModel")
+        log.info("init AreasViewModel")
         let fileManager = FileManager.default
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("areas.json")
@@ -38,7 +38,7 @@ class AreasViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: filePath)
             records = try JSONDecoder().decode([Area].self, from: data)
-            log.error("Loaded \(records.count) areas")
+            log.info("Loaded \(records.count) areas")
         } catch {
             print("Error loading data: \(error)")
         }

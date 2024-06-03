@@ -74,14 +74,14 @@ struct ObsAreaView: View {
                 }
                 
 
-                HStack {
-                    Text("\(obs.location_detail?.name ?? "name")")
-                        .lineLimit(1) // Set the maximum number of lines to 1
-                    Spacer()
-                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                        Image(systemName: "pentagon.fill")
-                    }
-                }
+//                HStack { //?? deze in de navigationbar zetten
+//                    Text("\(obs.location_detail?.name ?? "name")")
+//                        .lineLimit(1) // Set the maximum number of lines to 1
+//                    Spacer()
+//                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+//                        Image(systemName: "pentagon.fill")
+//                    }
+//                }
 
                 
                 if settings.showUser {

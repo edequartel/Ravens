@@ -22,9 +22,9 @@ struct LanguageView: View {
 
     
     var body: some View {
-        Button("details") {
-            print("> selectedRegionListId \(settings.selectedRegionListId) selectedRegionId \(settings.selectedRegionId) selectedSpeciesGroupId \(settings.selectedSpeciesGroupId)")
-        }
+//        Button("details") {
+//            print("> selectedRegionListId \(settings.selectedRegionListId) selectedRegionId \(settings.selectedRegionId) selectedSpeciesGroupId \(settings.selectedSpeciesGroupId)")
+//        }
 
         VStack {
             Picker("Language", selection: $settings.selectedLanguage) {
@@ -39,7 +39,12 @@ struct LanguageView: View {
                 //als stored variabele later gebruiken bij opstarten
                 //en als published zodat de gewijzigd wordt en gelijk gebuikt
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
-                speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
+                Task {
+                    do {
+                        try await speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
+                    }
+                }
+                
                 
             }
             
@@ -50,7 +55,12 @@ struct LanguageView: View {
             }
             .onChange(of: settings.selectedSecondLanguage) {
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
-                speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+                Task {
+                    do {
+                        try await speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+                    }
+                }
+                
             }
         }
     }

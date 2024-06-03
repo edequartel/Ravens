@@ -25,13 +25,9 @@ struct ObsUserView: View {
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     @State private var showingDetails = false
-    //    @State private var userId: Int = 0
     
     @State var obs: Observation
-    
-    //    var showUsername: Bool = true
-    //    var showLocation: Bool = true
-    
+
     var body: some View {
         LazyVStack {
             VStack {
@@ -74,7 +70,7 @@ struct ObsUserView: View {
                 
                 
                 HStack {
-                    Text("\(obs.location_detail?.name ?? "name") \(obs.location_detail?.id ?? 0)")
+                    Text("\(obs.location_detail?.name ?? "name")")// \(obs.location_detail?.id ?? 0)")
                         .lineLimit(1) // Set the maximum number of lines to 1
                     Spacer()
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {

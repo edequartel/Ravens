@@ -18,7 +18,7 @@ struct TabUserObservationsView: View {
                 if showFirstView {
                     MapObservationsUserView()
                 } else {
-                    ObservationsUserViewExtra()
+                    ObservationsUserView()
                 }
             }
             .toolbar {

@@ -16,9 +16,10 @@ class GeoJSONViewModel: ObservableObject {
     
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
 
-    func fetchGeoJsonData(for locationID: String,  completion: @escaping ([MKPolygon]) -> Void = {_ in }) {
+    func fetchGeoJsonData(for locationID: Int,  completion: @escaping() -> Void ) {
         let apiUrl = "https://waarneming.nl/api/v1/locations/geojson/?id=\(locationID)"
-        log.info(apiUrl)
+        log.info("fetchGeoJsonData url \(apiUrl)")
+        
         AF.request(apiUrl).responseData { response in
             switch response.result {
             case .success(let value):
@@ -27,11 +28,10 @@ class GeoJSONViewModel: ObservableObject {
                        let geoJSON = try? MKGeoJSONDecoder().decode(jsonData) {
                         self.polyOverlays =  self.parseGeoJSON(geoJSON)
                         self.getSpan()
-                        completion(self.polyOverlays)
+                        completion()
                     }
             case .failure(let error):
-                self.log.error("Error fetching data: \(error)")
-                    
+                self.log.error("Error fetching data: \(error)")        
             }
         }
     }
@@ -57,7 +57,6 @@ class GeoJSONViewModel: ObservableObject {
         var maxLat = -CLLocationDegrees(MAXFLOAT)
         var minLon = CLLocationDegrees(MAXFLOAT)
         var maxLon = -CLLocationDegrees(MAXFLOAT)
-        print(polyOverlays.count)
         for polygon in polyOverlays {
             let points = polygon.points()
             for i in 0..<polygon.pointCount {

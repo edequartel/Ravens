@@ -84,9 +84,12 @@ struct SettingsView: View {
                         
                         print("+++> \(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
                        
-                        speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
-                        speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
-                        
+                        Task {
+                            do {
+                                try await speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
+                                try await speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+                            }
+                        }
                         
                     }
                 }

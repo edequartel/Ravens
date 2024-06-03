@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
-    @EnvironmentObject var viewModel: ObservationsSpeciesViewModel
+    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var settings: Settings
     
@@ -78,7 +78,7 @@ struct ObservationsSpeciesView: View {
             .padding()
             
             List {
-                if let results = viewModel.observationsSpecies?.results {
+                if let results = observationsSpeciesViewModel.observationsSpecies?.results {
                     let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                     ForEach(sortedResults.indices, id: \.self) { index in
                         let result = sortedResults[index]
@@ -103,7 +103,8 @@ struct ObservationsSpeciesView: View {
     }
     
     func fetchDataModel() {
-        viewModel.fetchData(language: settings.selectedLanguage,
+        observationsSpeciesViewModel.fetchData(
+            language: settings.selectedLanguage,
             speciesId: item.id,
             limit: 100,
             offset: 0,

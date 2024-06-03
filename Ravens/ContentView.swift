@@ -14,11 +14,9 @@ import SwiftUIPager
 struct ContentView: View {
     let log = SwiftyBeaver.self
     @State private var dataLoaded = false
-    // Assume speciesViewModel and settings are available here
-
+    
     var body: some View {
         if dataLoaded {
-            // Your main content view here
             RavensView()
         } else {
             SplashScreen(dataLoaded: $dataLoaded)
@@ -28,110 +26,37 @@ struct ContentView: View {
 
 struct RavensView: View {
     let log = SwiftyBeaver.self
-//    
-//    var items = Array(0..<10)
-//    
-//    @EnvironmentObject var settings: Settings
-//   
-////    @StateObject var locationManager = LocationManagerModel()
-//    
-//    @StateObject private var keyChainviewModel = KeychainViewModel()
-//    @StateObject private var observationsViewModel = ObservationsViewModel()
-//
-//    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-//    @EnvironmentObject var userViewModel: UserViewModel
-//    
-//    
-//    @EnvironmentObject var speciesViewModel: SpeciesViewModel //mag later worden verwijderd
-////    @StateObject var page: Page = .first()
-//    
-//    @State private var locationId: Int?
-//    
+    @EnvironmentObject var settings: Settings
+    
     var body: some View {
         TabView {
-////            Text(speciesViewModel.speciesSecondLanguage[0].name)
-////            RegionListsView()
-////                .tabItem {
-////                    Text("RegionLists")
-////                    Image(systemName: "square")
-////                }//   
-////            RegionsView()
-////                .tabItem {
-////                    Text("Regions")
-////                    Image(systemName: "square")
-////                }//
-////            SpeciesGroupsView()
-////                .tabItem {
-////                    Text("SpeciesGroups")
-////                    Image(systemName: "square")
-////                }//
-////            WindowView()
-////                .tabItem {
-////                    Text("Records")
-////                    Image(systemName: "square")
-////                }
-////            ShareTextView()
-////            .tabItem {
-////                Text("Records")
-////                Image(systemName: "square")
-////                            }
-//            // Tab 0
-//            //            TestMeView()
-//            //                .tabItem {
-//            //                    Text("Records")
-//            //                    Image(systemName: "square")
-//            //                }
-//            
-//            //            FileListView()
-//            //                .tabItem {
-//            //                    Text("Records")
-//            //                    Image(systemName: "square")
-//            //                }
-//            //
-//            //            ObserversView()
-//            //                .tabItem {
-//            //                    Text("Records")
-//            //                    Image(systemName: "square")
-//            //                }
-//            
-//            // Tab 1
-////            WikipediaView()
-////                .tabItem {
-////                    Text("Radius")
-////                    Image(systemName: "circle")
-////                }
-//            
-//            // Tab 1
-////            if settings.radiusPreference {
-////                RadiusView()
-////                    .tabItem {
-////                        Text("Radius")
-////                        Image(systemName: "circle")
-////                    }
-////            } else {
-////                LocationView()
-////                    .tabItem {
-////                        Text("Area")
-////                        Image(systemName: "pentagon")
-////                    }
-////            }
-////            
-//            
-//            // Tab 3
+            // Tab 1
+//            if settings.radiusPreference {
+//                RadiusView()
+//                    .tabItem {
+//                        Text("Radius")
+//                        Image(systemName: "circle")
+//                    }
+//            } else {
+                LocationView()
+                    .tabItem {
+                        Text("Area")
+                        Image(systemName: "pentagon")
+                    }
+//            }
+            // Tab 2
             TabUserObservationsView()
                 .tabItem {
                     Text("Us")
                     Image(systemName: "person.2.fill")
                 }
-//
-////            
-////            // Tab 4
+            // Tab 3
             SpeciesView()
                 .tabItem {
                     Text("Species")
                     Image(systemName: "tree")
                 }
-//            // Tab 5
+            // Tab 4
             SettingsView()
                 .tabItem {
                     Text("Settings")
@@ -148,6 +73,9 @@ struct SplashScreen: View {
     let log = SwiftyBeaver.self
     
     @Binding var dataLoaded: Bool
+    
+    @EnvironmentObject var locationManager: LocationManagerModel
+    
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var languagesViewModel: LanguagesViewModel
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -155,7 +83,14 @@ struct SplashScreen: View {
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+    
     @EnvironmentObject var userViewModel: UserViewModel
+    
+    @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
+    @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
     
     @State private var isLanguageDataLoaded = false
     @State private var isFirstLanguageDataLoaded = false
@@ -165,90 +100,214 @@ struct SplashScreen: View {
     @State private var isRegionListDataLoaded = false
     @State private var isObservationsSpeciesDataLoaded = false
     @State private var isUserDataLoaded = false
+    @State private var isObservationsUserDataLoaded = false
+    @State private var isObservationsDataLoaded = false
+    @State private var isObservationsLocationDataLoaded = false
+    @State private var isLocationIdDataLoaded = false
+    @State private var isGeoJSONDataLoaded = false
+    
+    let serialQueue = DispatchQueue(label: "com.yourapp.serialQueue")
     
     var body: some View {
-        Text("Loading data...")
-            .onAppear {
-                log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
-                
-                CLLocationManager().requestWhenInUseAuthorization()
-                
-                languagesViewModel.fetchLanguageData(completion: {
-                    print("Language data loaded")
+        VStack {
+            Text("Loading data...")
+        }
+        .onAppear {
+            log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
+            
+            CLLocationManager().requestWhenInUseAuthorization()
+            
+            Task {
+                do {
+                    try await languagesViewModel.fetchLanguageData()
+                    log.error("languagesViewModel Language data loaded")
                     isLanguageDataLoaded = true
                     checkDataLoaded()
-                })
-                speciesViewModel.fetchDataFirst(
-                    language: settings.selectedLanguage,
-                    for: settings.selectedRegionListId,
-                    completion: {
-                        print("First language data loaded")
-                        isFirstLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
-                speciesViewModel.fetchDataSecondLanguage(
-                    language: settings.selectedSecondLanguage,
-                    for: settings.selectedRegionListId,
-                    completion: {
-                        print("Second language data loaded")
-                        isSecondLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
-                speciesGroupViewModel.fetchData(
-                    language: settings.selectedLanguage,
-                    completion: {
-                        print("Species group data loaded")
-                        isSpeciesGroupDataLoaded = true
-                        checkDataLoaded()
-                    })
-                regionsViewModel.fetchData(
-                    language: settings.selectedLanguage,
-                    completion: {
-                        print("Region data loaded")
-                        isRegionDataLoaded = true
-                        checkDataLoaded()
-                    })
-                regionListViewModel.fetchData(
-                    language: settings.selectedLanguage,
-                    completion: {
-                        print("RegionList data loaded")
-                        isRegionListDataLoaded = true
-                        checkDataLoaded()
-                    })
-                observationsSpeciesViewModel.fetchData(
-                    language: settings.selectedLanguage,
-                    speciesId: 1,
-                    limit: 10,
-                    offset: 0,
-                    date: Date(),
-                    days: 10,
-                    completion: {
-                        print("ObservationsSpecies data loaded")
-                        isObservationsSpeciesDataLoaded = true
-                        checkDataLoaded()
-                    })
-                userViewModel.fetchUserData(
-                    completion: {
-                        print("User data loaded")
-                        isUserDataLoaded = true
-                        checkDataLoaded()
-                    })
-
+                } catch {
+                    // Handle your error here
+                    log.error("Failed to load language data: \(error)")
+                }
+                
+                do {
+                    try await speciesViewModel.fetchDataFirst(
+                        language: settings.selectedLanguage,
+                        for: settings.selectedRegionListId)
+                    log.error("speciesViewModel First language data loaded")
+                    isFirstLanguageDataLoaded = true
+                    checkDataLoaded()
+                } catch {
+                    // Handle your error here
+                    log.error("Failed to load species data: \(error)")
+                }
+                
+                do {
+                    try await speciesViewModel.fetchDataSecondLanguage(
+                        language: settings.selectedSecondLanguage,
+                        for: settings.selectedRegionListId)
+                    log.error("speciesViewModel Second language data loaded")
+                    isSecondLanguageDataLoaded = true
+                    checkDataLoaded()
+                } catch {
+                    // Handle your error here
+                    log.error("Failed to load species data: \(error)")
+                }
+                
+                
             }
+                    
+                    
+            
+            
+//            speciesViewModel.fetchDataFirst(
+//                language: settings.selectedLanguage,
+//                for: settings.selectedRegionListId,
+//                completion: {
+//                    log.info("speciesViewModel First language data loaded")
+//                    isFirstLanguageDataLoaded = true
+//                    checkDataLoaded()
+//                })
+//            
+//            speciesViewModel.fetchDataSecondLanguage(
+//                language: settings.selectedSecondLanguage,
+//                for: settings.selectedRegionListId,
+//                completion: {
+//                    log.info("speciesViewModel Second language data loaded")
+//                    isSecondLanguageDataLoaded = true
+//                    checkDataLoaded()
+//                })
+            
+            
+                    
+                    speciesGroupViewModel.fetchData(
+                        language: settings.selectedLanguage,
+                        completion: {
+                            log.info("speciesGroupViewModel group data loaded")
+                            isSpeciesGroupDataLoaded = true
+                            checkDataLoaded()
+                        })
+                    
+                    regionsViewModel.fetchData(
+                        language: settings.selectedLanguage,
+                        completion: {
+                            log.info("regionsViewModel data loaded")
+                            isRegionDataLoaded = true
+                            checkDataLoaded()
+                        })
+                    
+                    regionListViewModel.fetchData(
+                        language: settings.selectedLanguage,
+                        completion: {
+                            log.info("regionListViewModel data loaded")
+                            isRegionListDataLoaded = true
+                            checkDataLoaded()
+                        })
+                    
+                    observationsSpeciesViewModel.fetchData(
+                        language: settings.selectedLanguage,
+                        speciesId: 1,
+                        limit: 10,
+                        offset: 0,
+                        date: Date(),
+                        days: 10,
+                        completion: {
+                            log.info("observationsSpeciesViewModel data loaded")
+                            isObservationsSpeciesDataLoaded = true
+                            checkDataLoaded()
+                        })
+                    
+                    userViewModel.fetchUserData(
+                        completion: {
+                            log.error("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+                            isUserDataLoaded = true
+                            settings.userId = userViewModel.user?.id ?? 0
+                            settings.userName = userViewModel.user?.name ?? ""
+                            
+                            observationsUserViewModel.fetchData(
+                                language: settings.selectedLanguage,
+                                userId: userViewModel.user?.id ?? 0,
+                                completion: {
+                                    log.error("2. userViewModel data loaded")
+                                    isObservationsUserDataLoaded = true
+                                    checkDataLoaded()
+                                })
+                        })
+                    
+                    if locationManager.checkLocation() {
+                        let location = locationManager.getCurrentLocation()
+                        //for the radius
+                        observationsViewModel.fetchData(
+                            lat: location?.coordinate.latitude ?? 0,
+                            long: location?.coordinate.longitude ?? 0,
+                            settings: settings,
+                            completion: {
+                                log.error("observationsViewModel data loaded")
+                                isObservationsDataLoaded = true
+                                checkDataLoaded()
+                            })
+                        
+                        
+                        //get the location
+                        locationIdViewModel.fetchLocations(
+                            latitude: location?.coordinate.latitude ?? 0,
+                            longitude: location?.coordinate.longitude ?? 0,
+                            completion: { fetchedLocations in
+                                log.info("locationIdViewModel data loaded")
+                                // Use fetchedLocations here //actually it is one location
+                                settings.locationName = fetchedLocations[0].name
+                                for location in fetchedLocations {
+                                    log.info(location)
+                                }
+                                isLocationIdDataLoaded = true
+                                
+                                //1. get the geoJSON for this area / we pick the first one = 0
+                                geoJSONViewModel.fetchGeoJsonData(
+                                    for: fetchedLocations[0].id,
+                                    completion:
+                                        {
+                                            log.info("1. geoJSONViewModel data loaded")
+                                            isGeoJSONDataLoaded = true
+                                            
+                                            //2. get the observations for this area
+                                            observationsLocationViewModel.fetchData( //settings??
+                                                locationId: fetchedLocations[0].id,
+                                                limit: 100,
+                                                offset: 0,
+                                                settings:
+                                                    settings,
+                                                completion: {
+                                                    log.info("2. observationsLocationViewModel data loaded")
+                                                    isObservationsLocationDataLoaded = true
+                                                    checkDataLoaded()
+                                                })
+                                            
+                                        }
+                                )
+                            })
+                    }
+//                }
+//            }
+            
+        }
     }
     
     private func checkDataLoaded() {
         if isFirstLanguageDataLoaded &&
             isSecondLanguageDataLoaded &&
             isSpeciesGroupDataLoaded &&
-            isLanguageDataLoaded && 
+            isLanguageDataLoaded &&
             isRegionDataLoaded &&
             isRegionListDataLoaded &&
             isObservationsSpeciesDataLoaded &&
-            isUserDataLoaded {
-                self.dataLoaded = true
-            }
+            isUserDataLoaded &&
+            isObservationsUserDataLoaded &&
+            isObservationsDataLoaded &&
+            isObservationsLocationDataLoaded &&
+            isGeoJSONDataLoaded &&
+            isLocationIdDataLoaded 
+           {
+            self.dataLoaded = true
         }
+    }
 }
 
 struct AnotherView: View {
@@ -261,12 +320,7 @@ struct AnotherView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        // Setting up the environment objects for the preview
         ContentView()
-            .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
-            .environmentObject(ObserversViewModel())
             .environmentObject(Settings())
     }
 }
@@ -274,6 +328,33 @@ struct ContentView_Previews: PreviewProvider {
 
 
 
+//    ShareTextView()
+//        .tabItem {
+//            Text("Records")
+//            Image(systemName: "square")
+//        }
+//    TestMeView()
+//        .tabItem {
+//            Text("Records")
+//            Image(systemName: "square")
+//        }
+//
+//    FileListView()
+//        .tabItem {
+//            Text("Records")
+//            Image(systemName: "square")
+//        }
+//
+//    ObserversView()
+//        .tabItem {
+//            Text("Records")
+//            Image(systemName: "square")
+//        }
+//    WikipediaView()
+//        .tabItem {
+//            Text("Radius")
+//            Image(systemName: "circle")
+//        }
 
 //            RegionListView()
 //                .tabItem {
@@ -343,3 +424,139 @@ struct ContentView_Previews: PreviewProvider {
 //                    Image(systemName: "globe")
 //                }
 
+//{
+//    
+//
+//languagesViewModel.fetchLanguageData(completion: {
+//    log.info("languagesViewModel Language data loaded")
+//    isLanguageDataLoaded = true
+//    checkDataLoaded()
+//})
+//
+//speciesViewModel.fetchDataFirst(
+//    language: settings.selectedLanguage,
+//    for: settings.selectedRegionListId,
+//    completion: {
+//        log.info("speciesViewModel First language data loaded")
+//        isFirstLanguageDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//speciesViewModel.fetchDataSecondLanguage(
+//    language: settings.selectedSecondLanguage,
+//    for: settings.selectedRegionListId,
+//    completion: {
+//        log.info("speciesViewModel Second language data loaded")
+//        isSecondLanguageDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//speciesGroupViewModel.fetchData(
+//    language: settings.selectedLanguage,
+//    completion: {
+//        log.info("speciesGroupViewModel group data loaded")
+//        isSpeciesGroupDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//regionsViewModel.fetchData(
+//    language: settings.selectedLanguage,
+//    completion: {
+//        log.info("regionsViewModel data loaded")
+//        isRegionDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//regionListViewModel.fetchData(
+//    language: settings.selectedLanguage,
+//    completion: {
+//        log.info("regionListViewModel data loaded")
+//        isRegionListDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//observationsSpeciesViewModel.fetchData(
+//    language: settings.selectedLanguage,
+//    speciesId: 1,
+//    limit: 10,
+//    offset: 0,
+//    date: Date(),
+//    days: 10,
+//    completion: {
+//        log.info("observationsSpeciesViewModel data loaded")
+//        isObservationsSpeciesDataLoaded = true
+//        checkDataLoaded()
+//    })
+//
+//userViewModel.fetchUserData(
+//    completion: {
+//        log.error("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+//        isUserDataLoaded = true
+//        settings.userId = userViewModel.user?.id ?? 0
+//        settings.userName = userViewModel.user?.name ?? ""
+//        
+//        observationsUserViewModel.fetchData(
+//            language: settings.selectedLanguage,
+//            userId: userViewModel.user?.id ?? 0,
+//            completion: {
+//                log.error("2. userViewModel data loaded")
+//                isObservationsUserDataLoaded = true
+//                checkDataLoaded()
+//            })
+//    })
+//
+//    if locationManager.checkLocation() {
+//        let location = locationManager.getCurrentLocation()
+//        //for the radius
+//        observationsViewModel.fetchData(
+//            lat: location?.coordinate.latitude ?? 0,
+//            long: location?.coordinate.longitude ?? 0,
+//            settings: settings,
+//            completion: {
+//                log.error("observationsViewModel data loaded")
+//                isObservationsDataLoaded = true
+//                checkDataLoaded()
+//            })
+//        
+//        
+//        //get the location
+//        locationIdViewModel.fetchLocations(
+//            latitude: location?.coordinate.latitude ?? 0,
+//            longitude: location?.coordinate.longitude ?? 0,
+//            completion: { fetchedLocations in
+//                log.info("locationIdViewModel data loaded")
+//                // Use fetchedLocations here //actually it is one location
+//                settings.locationName = fetchedLocations[0].name
+//                for location in fetchedLocations {
+//                    log.info(location)
+//                }
+//                isLocationIdDataLoaded = true
+//                
+//                //1. get the geoJSON for this area / we pick the first one = 0
+//                geoJSONViewModel.fetchGeoJsonData(
+//                    for: fetchedLocations[0].id,
+//                    completion:
+//                        {
+//                            log.info("1. geoJSONViewModel data loaded")
+//                            isGeoJSONDataLoaded = true
+//                            
+//                            //2. get the observations for this area
+//                            observationsLocationViewModel.fetchData( //settings??
+//                                locationId: fetchedLocations[0].id,
+//                                limit: 100,
+//                                offset: 0,
+//                                settings:
+//                                    settings,
+//                                completion: {
+//                                    log.info("2. observationsLocationViewModel data loaded")
+//                                    isObservationsLocationDataLoaded = true
+//                                    checkDataLoaded()
+//                                })
+//                            
+//                        }
+//                )
+//                
+//                
+//            })
+//    }
+//}

@@ -16,19 +16,13 @@ struct MapObservationsUserView: View {
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var showFullScreenMap = false
-    @State private var cameraPosition = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-        )
-    )
-    
-//    @State private var limit = 100
-//    @State private var offset = 0
-//    
-//    @State private var start = 0
-//    @State private var end = 100
+    @State private var cameraPosition: MapCameraPosition = .automatic
+//    @State private var cameraPosition = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+//            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+//        )
+//    )
     
     @State private var showObservers: Bool = false
     @State private var showListView: Bool = false
@@ -57,91 +51,89 @@ struct MapObservationsUserView: View {
                 
                 
             }
-            .safeAreaInset(edge: .bottom) {
-                VStack {
-                    HStack {
-                        Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                            .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .obsGreenFlower)
-                        NetworkView()
-                        Spacer()
-                        
-                        VStack(alignment: .trailing) {
-                            HStack{
-                                Text("\(observationsUserViewModel.start) + \(observationsUserViewModel.end)")
-                                Spacer()
-                                Text("\((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset) - \((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset + observationsUserViewModel.limit)")
-                                    .foregroundColor(.obsGreenFlower)
-
-                            }
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        }
-                        
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        Text("Observations")
-                            .bold()
-                        Button(action: {
-                            if let maxOffset = observationsUserViewModel.observations?.count {
-                                log.info("maxOffset: \(maxOffset)")
-                                observationsUserViewModel.offset = min(observationsUserViewModel.offset + 100, observationsUserViewModel.maxOffset)
-                                observationsUserViewModel.limit = 100
-                                observationsUserViewModel.fetchData(
-                                    language: settings.selectedLanguage,
-                                    userId: settings.userId,
-                                    completion: { print("viewModel.fetchData completion")
-                                    } )
-                                observationsUserViewModel.start = 0
-                                observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
-                                
-                            }
-                        }) {
-                            Image(systemName: "backward.fill")
-                                .bold()
-                        }
-                        
-                        Button(action: {
-                            if observationsUserViewModel.offset >= 100 {
-                                observationsUserViewModel.offset = observationsUserViewModel.offset - 100
-                            }
-                            
-                            observationsUserViewModel.limit = 100
-                            observationsUserViewModel.fetchData(
-                                language: settings.selectedLanguage,
-                                userId: settings.userId,
-                                completion: { print("viewModel.fetchData completion")
-                                })
-                            
-                            observationsUserViewModel.start = 0
-                            observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
-                        }) {
-                            Image(systemName: "forward.fill")
-                                .bold()
-                        }
-                        
-                        Button(action: {
-                            observationsUserViewModel.offset = 0
-                            observationsUserViewModel.limit = 100
-                            
-                            observationsUserViewModel.fetchData(
-                                language: settings.selectedLanguage,
-                                userId: settings.userId,
-                                completion: { print("viewModel.fetchData completion")
-                                })
-                        }) {
-                            Image(systemName: "square.fill")
-                        }
-
-                    }
-                    .frame(maxHeight: 30)
-                }
-                .padding(5)
-                .bold()
-                .foregroundColor(.obsGreenFlower)
-                .background(Color.obsGreenEagle.opacity(0.5))
-            }
+//            .safeAreaInset(edge: .bottom) {
+//                VStack {
+//                    HStack {
+//                        NetworkView()
+//                        Spacer()
+//                        
+//                        VStack(alignment: .trailing) {
+//                            HStack{
+//                                Text("\(observationsUserViewModel.start) + \(observationsUserViewModel.end)")
+//                                Spacer()
+//                                Text("\((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset) - \((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset + observationsUserViewModel.limit)")
+//                                    .foregroundColor(.obsGreenFlower)
+//
+//                            }
+//                            .lineLimit(1) // Set the maximum number of lines to 1
+//                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                        }
+//                        
+//                    }
+//                    
+//                    HStack {
+//                        Spacer()
+//                        Text("Observations")
+//                            .bold()
+//                        Button(action: {
+//                            if let maxOffset = observationsUserViewModel.observations?.count {
+//                                log.info("maxOffset: \(maxOffset)")
+//                                observationsUserViewModel.offset = min(observationsUserViewModel.offset + 100, observationsUserViewModel.maxOffset)
+//                                observationsUserViewModel.limit = 100
+//                                observationsUserViewModel.fetchData(
+//                                    language: settings.selectedLanguage,
+//                                    userId: settings.userId,
+//                                    completion: { print("viewModel.fetchData completion")
+//                                    } )
+//                                observationsUserViewModel.start = 0
+//                                observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
+//                                
+//                            }
+//                        }) {
+//                            Image(systemName: "backward.fill")
+//                                .bold()
+//                        }
+//                        
+//                        Button(action: {
+//                            if observationsUserViewModel.offset >= 100 {
+//                                observationsUserViewModel.offset = observationsUserViewModel.offset - 100
+//                            }
+//                            
+//                            observationsUserViewModel.limit = 100
+//                            observationsUserViewModel.fetchData(
+//                                language: settings.selectedLanguage,
+//                                userId: settings.userId,
+//                                completion: { print("viewModel.fetchData completion")
+//                                })
+//                            
+//                            observationsUserViewModel.start = 0
+//                            observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
+//                        }) {
+//                            Image(systemName: "forward.fill")
+//                                .bold()
+//                        }
+//                        
+//                        Button(action: {
+//                            observationsUserViewModel.offset = 0
+//                            observationsUserViewModel.limit = 100
+//                            
+//                            observationsUserViewModel.fetchData(
+//                                language: settings.selectedLanguage,
+//                                userId: settings.userId,
+//                                completion: { print("viewModel.fetchData completion")
+//                                })
+//                        }) {
+//                            Image(systemName: "square.fill")
+//                        }
+//
+//                    }
+//                    .frame(maxHeight: 30)
+//                }
+//                .padding(5)
+//                .bold()
+//                .foregroundColor(.obsGreenFlower)
+//                .background(Color.obsGreenEagle.opacity(0.5))
+//            }
             .mapStyle(settings.mapStyle)
 
             .mapControls() {
@@ -153,14 +145,15 @@ struct MapObservationsUserView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: ObserversView()) {
-                    Label("Observers", systemImage: "person.2.fill")
+                    Label("Observers", systemImage: "list.bullet")
                 }
             }
         }
 
         .onAppear {
             observationsUserViewModel.fetchData(
-                language: settings.selectedLanguage, userId: settings.userId,
+                language: settings.selectedLanguage, 
+                userId: settings.userId,
                 completion: { print("viewModel.fetchData completion") })
         }
     }

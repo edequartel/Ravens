@@ -22,7 +22,7 @@ class ObserversViewModel: ObservableObject {
     let filePath: URL
     
     init() {
-        log.error("init ObserversViewModel")
+        log.info("init ObserversViewModel")
         let fileManager = FileManager.default
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("observers.json")
@@ -34,7 +34,7 @@ class ObserversViewModel: ObservableObject {
         do {
             let data = try Data(contentsOf: filePath)
             records = try JSONDecoder().decode([Observer].self, from: data)
-            log.error("Loaded \(records.count) observers")
+            log.info("Loaded \(records.count) observers")
         } catch {
             print("Error loading data: \(error)")
         }
@@ -74,6 +74,7 @@ class ObserversViewModel: ObservableObject {
 }
 
 import SwiftUI
+import SwiftyBeaver
 
 struct IdentifiableString: Identifiable {
     var id: String { self.value }
@@ -82,15 +83,18 @@ struct IdentifiableString: Identifiable {
 }
 
 struct ObserversView: View {
-    @EnvironmentObject private var viewModel: ObserversViewModel
+    let log = SwiftyBeaver.self
+    
+    @EnvironmentObject private var observersViewModel: ObserversViewModel
     @EnvironmentObject private var userViewModel:  UserViewModel
+    @EnvironmentObject private var observationsUserViewModel: ObservationsUserViewModel
     @EnvironmentObject private var settings: Settings
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var showingShareSheet = false
     @State private var showingQRCodeSheet = false
     @State private var textToShare: String = "your text"
-    @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheer gelijk geopend
+    @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheet gelijk geopend
     @State private var userName: String = "unknown"
     
     
@@ -98,9 +102,15 @@ struct ObserversView: View {
         VStack {
             List {
                 HStack {
-                    Button(userViewModel.user?.name ?? "") { //?????? is dit wel de thuis user id
+                    Button(userViewModel.user?.name ?? "") {
                         settings.userId = userViewModel.user?.id ?? 0
                         settings.userName =  userViewModel.user?.name ?? ""
+                        
+                        observationsUserViewModel.fetchData(
+                            language: settings.selectedLanguage,
+                            userId: userViewModel.user?.id ?? 0,
+                            completion: { log.error("**observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
+                        
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.blue : Color.primary)
@@ -108,69 +118,43 @@ struct ObserversView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(action: {
                             QRCode = IdentifiableString(
-                                value: "ravens://\(cleanName(settings.userName))/\(settings.userId)",
-                                name: settings.userName)
+                                value: "ravens://\(cleanName(userViewModel.user?.name ?? ""))/\(userViewModel.user?.id ?? 0)",
+                                name: userViewModel.user?.name ?? "")
                             showingQRCodeSheet = true
                         }) {
-//                            Label("QRCode", systemImage: "qrcode")
                             Image(systemName: "qrcode")
                         }
-//                        .tint(.gray)
                     }
                     Spacer()
-                    Button(action: {
-                        QRCode = IdentifiableString(
-                            value: "ravens://\(cleanName(settings.userName))/\(settings.userId)",
-                            name: settings.userName)
-                        showingQRCodeSheet = true
-                    }) {
-//                        Label("QRCode", systemImage: "qrcode")
-                        Image(systemName: "qrcode")
-                    }
-//                    .tint(.gray)
                 }
-
                 
-                ForEach(viewModel.records) { record in
+                
+                ForEach(observersViewModel.records) { record in
                     HStack{
-                        Text("\(record.name)")// (\(record.userID))")
+                        Button(record.name) {
+                            settings.userId = record.userID
+                            settings.userName =  record.name
+                           
+                            observationsUserViewModel.fetchData(
+                                language: settings.selectedLanguage,
+                                userId: record.userID,
+                                completion: { log.error("**observationsUserViewModel.fetchdata \(record.userID)") }
+                                )
+                                                        
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                         Spacer()
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        //Privacy Senstive
-//                        ShareLink(item: URL(string: "ravens://\(cleanName(record.name))/\(record.userID)")!)
-//                            .tint(.obsGreenEagle)
-                        
-                        
                         Button(action: {
-                            viewModel.removeRecord(userID: record.userID)
+                            observersViewModel.removeRecord(userID: record.userID)
                         }) {
                             Label("remove", systemImage: "person.fill.badge.minus")
                         }
                         .tint(.red)
-                        //Privacy Senstive
-//                        Button(action: {
-//                            QRCode = IdentifiableString(
-//                                value: "ravens://\(cleanName(record.name))/\(record.userID)",
-//                                name: record.name)
-//                            showingQRCodeSheet = true
-//                        }) {
-//                            Label("QRCode", systemImage: "qrcode")
-//                        }
-//                        .tint(.gray)
                     }
-                    
-                    .onTapGesture {
-                        print(record.userID)
-                        settings.userId = record.userID
-                        settings.userName = record.name
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                    .foregroundColor(record.userID == settings.userId ? Color.blue : Color.primary)
                 }
-                
             }
-            
             .sheet(item: $QRCode) { item in
                 VStack{
                     Text(item.name)
@@ -182,7 +166,34 @@ struct ObserversView: View {
         }
 
         .onAppear {
-            viewModel.loadRecords()
+            observersViewModel.loadRecords()
         }
     }
 }
+
+
+// Privacy Senstive
+//                    Spacer()
+//                    Button(action: {
+//                        QRCode = IdentifiableString(
+//                            value: "ravens://\(cleanName(settings.userName))/\(userViewModel.user?.id ?? 0)",
+//                            name: settings.userName)
+//                        showingQRCodeSheet = true
+//                    }) {
+//                        Label("QRCode", systemImage: "qrcode")
+//                        Image(systemName: "qrcode")
+//                    }
+//                    .tint(.gray)
+//
+//                        Button(action: {
+//                            QRCode = IdentifiableString(
+//                                value: "ravens://\(cleanName(record.name))/\(record.userID)",
+//                                name: record.name)
+//                            showingQRCodeSheet = true
+//                        }) {
+//                            Label("QRCode", systemImage: "qrcode")
+//                        }
+//                        .tint(.gray)
+//
+//                        ShareLink(item: URL(string: "ravens://\(cleanName(record.name))/\(record.userID)")!)
+//                            .tint(.obsGreenEagle)

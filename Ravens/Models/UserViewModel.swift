@@ -17,6 +17,7 @@ class UserViewModel: ObservableObject {
     private var keyChainViewModel =  KeychainViewModel()
     
     func fetchUserData(completion: (() -> Void)? = nil) {
+        log.info("fetchUserData")
         
         keyChainViewModel.retrieveCredentials()
         
@@ -36,6 +37,7 @@ class UserViewModel: ObservableObject {
                       
                         self.log.debug("stringResponse: \(stringResponse)")
                         self.user = try JSONDecoder().decode(UserData.self, from: data)
+                        self.log.info("UserViewModel user: \(self.user)")
                         completion?() // call the completion handler if it exists
                         
                     } catch {

@@ -64,8 +64,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @StateObject var settings = Settings()
     @StateObject var locationManager = LocationManagerModel()
+    
+    @StateObject var settings = Settings()
+   
     @StateObject var languagesViewModel = LanguagesViewModel()
     @StateObject var speciesViewModel = SpeciesViewModel()
     @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
@@ -75,9 +77,17 @@ struct RavensApp: App {
     @StateObject var userViewModel =  UserViewModel()
     @StateObject var observationsUserViewModel = ObservationsUserViewModel()
     
+    @StateObject var observationsViewModel = ObservationsViewModel()
+    @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
+    @StateObject var locationIdViewModel = LocationIdViewModel()
+    @StateObject var poiViewModel = POIViewModel()
+    @StateObject var geoJSONViewModel = GeoJSONViewModel()
+    
+    
     @StateObject var bookMarksViewModel = BookMarksViewModel()
     @StateObject var observersViewModel = ObserversViewModel()
     @StateObject var areasViewModel = AreasViewModel()
+    
     
 
     
@@ -114,6 +124,7 @@ struct RavensApp: App {
                 .environmentObject(KeychainViewModel())
 //
                 .environmentObject(locationManager)
+            
                 .environmentObject(settings)
                 .environmentObject(languagesViewModel)
                 .environmentObject(speciesViewModel)
@@ -122,9 +133,14 @@ struct RavensApp: App {
                 .environmentObject(regionListViewModel)
                 .environmentObject(observationsSpeciesViewModel)
                 .environmentObject(userViewModel) 
+            
                 .environmentObject(observationsUserViewModel)
-
-//
+                .environmentObject(observationsViewModel)
+                .environmentObject(observationsLocationViewModel)
+                .environmentObject(locationIdViewModel)
+                .environmentObject(geoJSONViewModel)
+                .environmentObject(poiViewModel)
+                    
                 .environmentObject(bookMarksViewModel)
                 .environmentObject(observersViewModel)
                 .environmentObject(areasViewModel)
