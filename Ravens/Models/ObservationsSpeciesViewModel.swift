@@ -40,7 +40,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
     }
     
     func fetchData(language: String, speciesId: Int, limit: Int, offset: Int, date: Date, days: Int, completion: (() -> Void)? = nil) {
-        log.info("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
+        log.error("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
         self.observationsSpecies?.results.removeAll()

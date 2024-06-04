@@ -117,29 +117,13 @@ struct SplashScreen: View {
                 
                 CLLocationManager().requestWhenInUseAuthorization()
                 
+                //?? deze standaard slechts 1 keer laden,
+                //?? betekend ergens opslaan, todo
                 languagesViewModel.fetchLanguageData(completion: {
                     log.info("languagesViewModel Language data loaded")
                     isLanguageDataLoaded = true
                     checkDataLoaded()
                 })
-                
-                speciesViewModel.fetchDataFirst(
-                    language: settings.selectedLanguage,
-                    for: settings.selectedRegionListId,
-                    completion: {
-                        log.info("speciesViewModel First language data loaded")
-                        isFirstLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
-                speciesViewModel.fetchDataSecondLanguage(
-                    language: settings.selectedSecondLanguage,
-                    for: settings.selectedRegionListId,
-                    completion: {
-                        log.info("speciesViewModel Second language data loaded")
-                        isSecondLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
                 
                 speciesGroupViewModel.fetchData(
                     language: settings.selectedLanguage,
@@ -165,19 +149,26 @@ struct SplashScreen: View {
                         checkDataLoaded()
                     })
                 
-//                observationsSpeciesViewModel.fetchData(
-//                    language: settings.selectedLanguage,
-//                    speciesId: 1,
-//                    limit: 10,
-//                    offset: 0,
-//                    date: Date(),
-//                    days: 10,
-//                    completion: {
-//                        log.info("observationsSpeciesViewModel data loaded")
-//                        isObservationsSpeciesDataLoaded = true
-//                        checkDataLoaded()
-//                    })
+            
+                speciesViewModel.fetchDataFirst(
+                    language: settings.selectedLanguage,
+                    for: settings.selectedRegionListId,
+                    completion: {
+                        log.info("speciesViewModel First language data loaded")
+                        isFirstLanguageDataLoaded = true
+                        checkDataLoaded()
+                    })
                 
+                speciesViewModel.fetchDataSecondLanguage(
+                    language: settings.selectedSecondLanguage,
+                    for: settings.selectedRegionListId,
+                    completion: {
+                        log.info("speciesViewModel Second language data loaded")
+                        isSecondLanguageDataLoaded = true
+                        checkDataLoaded()
+                    })
+                
+                //iedere keer
                 userViewModel.fetchUserData(
                     completion: {
                         log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
@@ -195,60 +186,62 @@ struct SplashScreen: View {
                             })
                     })
                 
-                    if locationManager.checkLocation() {
-                        let location = locationManager.getCurrentLocation()
-                        //for the radius
-                        observationsViewModel.fetchData(
-                            lat: location?.coordinate.latitude ?? 0,
-                            long: location?.coordinate.longitude ?? 0,
-                            settings: settings,
-                            completion: {
-                                log.info("observationsViewModel data loaded")
-                                isObservationsDataLoaded = true
-                                checkDataLoaded()
-                            })
-                        
-                        
-                        //get the location
-                        locationIdViewModel.fetchLocations(
-                            latitude: location?.coordinate.latitude ?? 0,
-                            longitude: location?.coordinate.longitude ?? 0,
-                            completion: { fetchedLocations in
-                                log.info("locationIdViewModel data loaded")
-                                // Use fetchedLocations here //actually it is one location
-                                settings.locationName = fetchedLocations[0].name
-                                for location in fetchedLocations {
-                                    log.info(location)
-                                }
-                                isLocationIdDataLoaded = true
-                                
-                                //1. get the geoJSON for this area / we pick the first one = 0
-                                geoJSONViewModel.fetchGeoJsonData(
-                                    for: fetchedLocations[0].id,
-                                    completion:
-                                        {
-                                            log.info("1. geoJSONViewModel data loaded")
-                                            isGeoJSONDataLoaded = true
-                                            
-                                            //2. get the observations for this area
-                                            observationsLocationViewModel.fetchData( //settings??
-                                                locationId: fetchedLocations[0].id,
-                                                limit: 100,
-                                                offset: 0,
-                                                settings:
-                                                    settings,
-                                                completion: {
-                                                    log.info("2. observationsLocationViewModel data loaded")
-                                                    isObservationsLocationDataLoaded = true
-                                                    checkDataLoaded()
-                                                })
-                                            
-                                        }
-                                )
-                                
-                                
-                            })
-                    }
+                //?? wellicht laden bij onAppear
+                //?? het is een functie die elders ook wordt gebruikt
+                if locationManager.checkLocation() {
+                    let location = locationManager.getCurrentLocation()
+                    //for the radius
+                    observationsViewModel.fetchData(
+                        lat: location?.coordinate.latitude ?? 0,
+                        long: location?.coordinate.longitude ?? 0,
+                        settings: settings,
+                        completion: {
+                            log.info("observationsViewModel data loaded")
+                            isObservationsDataLoaded = true
+                            checkDataLoaded()
+                        })
+                    
+                    
+                    //get the location
+                    locationIdViewModel.fetchLocations(
+                        latitude: location?.coordinate.latitude ?? 0,
+                        longitude: location?.coordinate.longitude ?? 0,
+                        completion: { fetchedLocations in
+                            log.info("locationIdViewModel data loaded")
+                            // Use fetchedLocations here //actually it is one location
+                            settings.locationName = fetchedLocations[0].name
+                            for location in fetchedLocations {
+                                log.info(location)
+                            }
+                            isLocationIdDataLoaded = true
+                            
+                            //1. get the geoJSON for this area / we pick the first one = 0
+                            geoJSONViewModel.fetchGeoJsonData(
+                                for: fetchedLocations[0].id,
+                                completion:
+                                    {
+                                        log.info("1. geoJSONViewModel data loaded")
+                                        isGeoJSONDataLoaded = true
+                                        
+                                        //2. get the observations for this area
+                                        observationsLocationViewModel.fetchData( //settings??
+                                            locationId: fetchedLocations[0].id,
+                                            limit: 100,
+                                            offset: 0,
+                                            settings:
+                                                settings,
+                                            completion: {
+                                                log.info("2. observationsLocationViewModel data loaded")
+                                                isObservationsLocationDataLoaded = true
+                                                checkDataLoaded()
+                                            })
+                                        
+                                    }
+                            )
+                            
+                            
+                        })
+                }
             }
     }
     

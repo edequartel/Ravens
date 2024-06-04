@@ -1,11 +1,22 @@
 # Remarks development
 
 ## 23
-- graphs
+! cameraposition < span teruggeven naar callers >
+- bug in settings, talen, vreemde response (!.pickerStyle(.navigationLink) changed)
+! door de dagen en de waarneming gaan, kind of sheetview met instellingen
+! opstarten met te veel fetches, fetches verspreiden over app (visie), 
+    ! SpeciesViewModel, observationsSpeciesViewModel
+    ! check how this is done with obs (is een system daar)
+! folders obs /check these
+! folder for data ones like regions (welke weg worden gehaald wanneer cache wordt geleegd)
+! filemanager uitbreiden en in login setten als easter eggs (alleen onder mijn naam, if user is)
+!! player in view no obs
+
+? graphs
 - second language
-- notifications
-- stats
-- verstoringen 30 in radius geeft een foutmelding (ws waarneming)
+? notifications
+? stats
+? verstoringen 30 in radius geeft een foutmelding (ws waarneming)
 
 ## 22
 - more accessible

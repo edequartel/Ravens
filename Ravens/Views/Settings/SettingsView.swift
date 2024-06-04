@@ -48,18 +48,19 @@ struct SettingsView: View {
                     Text("Login")
                 }
                 
-//                Picker("Source", selection: $settings.selectedInBetween) {
-//                    Text("waarneming.nl")
-//                        .tag("waarneming.nl")
-//                    Text("observation.org")
-//                        .tag("observation.org")
-//                }
-//                .pickerStyle(.inline)
-//                .onChange(of: settings.selectedInBetween) {
-//                }
+                Picker("Source", selection: $settings.selectedInBetween) {
+                    Text("waarneming.nl")
+                        .tag("waarneming.nl")
+                    Text("observation.org")
+                        .tag("observation.org")
+                }
+                .pickerStyle(.inline)
+                .onChange(of: settings.selectedInBetween) {
+                }
                 
                 //edit: 27052024
                 Section("Species") {
+                    //
                     LanguageView()
                     RegionsView()
                     //
@@ -84,7 +85,7 @@ struct SettingsView: View {
                         
                         print("+++> \(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
                        
-                        Task {
+                        Task {??
                             do {
                                 try await speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
                                 try await speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
@@ -179,10 +180,10 @@ struct SettingsView: View {
                     
                 }
                 
-                Section("International") {
-                    LanguageView()
-                }
-                
+//                Section("International") {
+//                    LanguageView()
+//                }
+//                
                 
                 Section(header: Text("App details")) {
                     Toggle("Save photos into album", isOn: $settings.savePhotos)

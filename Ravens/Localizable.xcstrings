@@ -439,6 +439,7 @@
       }
     },
     "International" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -774,7 +775,6 @@
 
     },
     "observation.org" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1077,7 +1077,6 @@
       }
     },
     "Source" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1214,7 +1213,6 @@
       }
     },
     "waarneming.nl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

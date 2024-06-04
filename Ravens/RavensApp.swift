@@ -83,20 +83,16 @@ struct RavensApp: App {
     @StateObject var poiViewModel = POIViewModel()
     @StateObject var geoJSONViewModel = GeoJSONViewModel()
     
-    
     @StateObject var bookMarksViewModel = BookMarksViewModel()
     @StateObject var observersViewModel = ObserversViewModel()
     @StateObject var areasViewModel = AreasViewModel()
     
-    
 
-    
-//
     //    @StateObject var fetchRequestManager = FetchRequestManager()
     
 
 
-//    let urlHandler = URLHandler()
+    let urlHandler = URLHandler()
     
     //
     let center = UNUserNotificationCenter.current()
@@ -144,71 +140,63 @@ struct RavensApp: App {
                 .environmentObject(bookMarksViewModel)
                 .environmentObject(observersViewModel)
                 .environmentObject(areasViewModel)
-//
+
+            //??
 //                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
-
 //                .environmentObject(Player())
-//            
 //                .environmentObject(ObservationsLocationViewModel())
-                .environmentObject(ObservationsYearViewModel())
-
-//                .environmentObject(urlHandler) // use instance
-
-//            
-
-
-//
-
-
-
-//            
-
             
-//                .onOpenURL { url in
-//                    // Handle the URL appropriately
-//                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
-//                    self.parts = urlString.split(separator: "/").map(String.init)
-//                    showingAlert = true
-//                    
-//                    
-//                    //  observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-//                    //                    
-//                    
-//                    
-//                    // Create the notification content
-//                    let content = UNMutableNotificationContent()
-//                    content.title = "URL Opened"
-//                    content.body = "The app opened a URL: \(url)"
-//                    
-//                    // Create the trigger
-//                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//                    
-//                    // Create the request
-//                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//                    
-//                    // Schedule the request with the system.
-//                    let notificationCenter = UNUserNotificationCenter.current()
-//                    notificationCenter.add(request) { (error) in
+                .environmentObject(ObservationsYearViewModel())
+            
+
+                .environmentObject(urlHandler) // use instance
+                .onOpenURL { url in
+                    // Handle the URL appropriately
+                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
+                    self.parts = urlString.split(separator: "/").map(String.init)
+                    showingAlert = true
+                    
+                    
+                    //  observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                    //                    
+                    
+                    
+                    // Create the notification content
+                    let content = UNMutableNotificationContent()
+                    content.title = "URL Opened"
+                    content.body = "The app opened a URL: \(url)"
+                    
+                    // Create the trigger
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                    
+                    // Create the request
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    
+                    // Schedule the request with the system.
+                    let notificationCenter = UNUserNotificationCenter.current()
+                    notificationCenter.add(request) { (error) in
+                        if let error = error {
+                            // Handle any errors.
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+        }
+    }
+}
+
+
+//Update badge number
+// Then in the function where you want to increase the badge count
+//center.setBadgeCount(0)
+//                    center.setBadgeCount(badgeCount + 1) { error in
 //                        if let error = error {
-//                            // Handle any errors.
-//                            print(error.localizedDescription)
+//                            print("Error setting badge count: \(error)")
+//                        } else {
+//                            badgeCount += 1
 //                        }
 //                    }
-//                    
-//                    //Update badge number
-//                    // Then in the function where you want to increase the badge count
-//                    center.setBadgeCount(0)
-//                    //                    center.setBadgeCount(badgeCount + 1) { error in
-//                    //                        if let error = error {
-//                    //                            print("Error setting badge count: \(error)")
-//                    //                        } else {
-//                    //                            badgeCount += 1
-//                    //                        }
-//                    //                    }
-//                    
-//                    
-//                }
-            
+
 //                .alert(isPresented: $showingAlert) {
 //                    Alert(title: Text("Append URL"),
 //                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
@@ -218,7 +206,3 @@ struct RavensApp: App {
 //                    },
 //                          secondaryButton: .cancel(Text("No")))
 //                }
-        }
-    }
-}
-

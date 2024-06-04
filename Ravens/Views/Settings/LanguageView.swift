@@ -20,18 +20,19 @@ struct LanguageView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
-    
     var body: some View {
 //        Button("details") {
 //            print("> selectedRegionListId \(settings.selectedRegionListId) selectedRegionId \(settings.selectedRegionId) selectedSpeciesGroupId \(settings.selectedSpeciesGroupId)")
 //        }
 
-        VStack {
+//        VStack {
+            
             Picker("Language", selection: $settings.selectedLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
                     Text(language.name_native).tag(language.code)
                 }
             }
+            .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedLanguage) {
                 speciesGroupsViewModel.fetchData(language: settings.selectedLanguage)
                 regionsViewModel.fetchData(language: settings.selectedLanguage)
@@ -40,19 +41,21 @@ struct LanguageView: View {
                 //en als published zodat de gewijzigd wordt en gelijk gebuikt
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
-                
             }
+            
+
             
             Picker("Second language", selection: $settings.selectedSecondLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
                     Text(language.name_native).tag(language.code)
                 }
             }
+            .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedSecondLanguage) {
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
             }
-        }
+//        }
     }
 }
 
