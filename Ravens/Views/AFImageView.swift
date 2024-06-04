@@ -45,7 +45,6 @@ struct AFImageView: View {
 
         let fileManager = FileManager.default
         let imagesDirectory = getDocumentsDirectory().appendingPathComponent("images")
-
         if !fileManager.fileExists(atPath: imagesDirectory.path) {
             try? fileManager.createDirectory(at: imagesDirectory, withIntermediateDirectories: true, attributes: nil)
         }

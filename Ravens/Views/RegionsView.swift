@@ -26,6 +26,7 @@ struct RegionsView: View {
                 Text("\(region.name)").tag(region.id)
             }
         }
+        .pickerStyle(.navigationLink)
         .onChange(of: settings.selectedRegionId) {
             // get the copy of speciesGroupsViewModel.speciesGroups
             speciesGroupsViewModel.speciesGroupsByRegion = speciesGroupsViewModel.speciesGroups

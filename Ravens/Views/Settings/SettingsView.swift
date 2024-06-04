@@ -67,11 +67,12 @@ struct SettingsView: View {
                     Picker("Group", selection: $settings.selectedSpeciesGroupId) {
                         ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
 //                                Text("\(speciesGroup.name)").tag(speciesGroup.id)
-                                Text("\(speciesGroup.id) \(speciesGroup.name)").tag(speciesGroup.id)
+                                Text("\(speciesGroup.name)").tag(speciesGroup.id)
                                     .lineLimit(1)
                                     .truncationMode(.tail)
                         }
                     }
+                    .pickerStyle(.navigationLink)
                     .onChange(of: settings.selectedSpeciesGroupId) {
                         log.error("\(settings.selectedSpeciesGroupId)")
                         settings.selectedRegionListId = regionListViewModel.getId(
@@ -85,13 +86,9 @@ struct SettingsView: View {
                         
                         print("+++> \(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
                        
-                        Task {??
-                            do {
-                                try await speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
-                                try await speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
-                            }
-                        }
-                        
+                        speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
+                        speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+
                     }
                 }
                 
@@ -103,7 +100,7 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    Toggle("Poi", isOn: $settings.poiOn)
+//                    Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
                     Toggle("Radius", isOn: $settings.radiusPreference)
                     
