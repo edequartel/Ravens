@@ -22,7 +22,7 @@ struct ObservationsView: View {
                                         ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00")
                                 }), id: \.id) {
                                     result in
-                                    ObsView(obs: result, showUsername: false)
+                                    ObsRadiusView(obs: result, showUsername: false)
                                 }
                         } else {
                             Text("nobsavaliable")

@@ -1,5 +1,5 @@
 //
-//  ObsView.swift
+//  ObsRadiusView.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 12/02/2024.
@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireImage
 import AVFoundation
 
-struct ObsView: View {
+struct ObsRadiusView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel()
@@ -39,7 +39,8 @@ struct ObsView: View {
                 HStack {
                     VStack {
                         HStack {
-                            Image(systemName: "circle.fill")
+//                            Image(systemName: "circle.fill")
+                            Image(systemName: "circle")
                                 .foregroundColor(Color(myColor(value: obs.rarity)))
                             if obs.has_sound ?? false { //for test
                                 Image(systemName: "waveform")
@@ -181,8 +182,6 @@ struct ObsView: View {
         }
         
         .onAppear() {
-            //            settings.readExplorers(array: &explorers)
-            
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(language: settings.selectedLanguage, for: obs.id ?? 0, completion: {
                     log.info("onAppear OBSView Happens")
@@ -195,7 +194,7 @@ struct ObsView: View {
     }
 }
 
-//struct ObsView_Previews: PreviewProvider {
+//struct ObsRadiusView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        // Initialize your ObsView with appropriate data
 //        ObsView(obs: Observation(from: <#any Decoder#>))

@@ -31,11 +31,11 @@ struct RavensView: View {
     var body: some View {
         TabView {
             // Tab 0
-            FileListView()
-                .tabItem {
-                    Text("Records")
-                    Image(systemName: "square")
-                }
+//            FileListView()
+//                .tabItem {
+//                    Text("Records")
+//                    Image(systemName: "square")
+//                }
             
             // Tab 1
             if settings.radiusPreference {

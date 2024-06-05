@@ -12,7 +12,7 @@
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
 		47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
-		471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsView.swift */; };
+		471438BB2BBFD3AD00DF35DE /* ObsRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsRadiusView.swift */; };
 		4717C0BF2B9CC41400B570D0 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4717C0BE2B9CC41400B570D0 /* YearView.swift */; };
 		471875342BF7767600EF9F1F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 471875332BF7767600EF9F1F /* SwiftUIPager */; };
 		471875372BF7B60500EF9F1F /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 471875362BF7B60500EF9F1F /* PartialSheet */; };
@@ -120,7 +120,7 @@
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
 		47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsExtendedView.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
-		471438BA2BBFD3AD00DF35DE /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
+		471438BA2BBFD3AD00DF35DE /* ObsRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsRadiusView.swift; sourceTree = "<group>"; };
 		4717C0BE2B9CC41400B570D0 /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		471875382BFB938500EF9F1F /* AreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewModel.swift; sourceTree = "<group>"; };
 		4718753E2BFCA81900EF9F1F /* plus-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "plus-square.svg"; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 		4767F0072BF322E900BACDC6 /* Radius */ = {
 			isa = PBXGroup;
 			children = (
-				471438BA2BBFD3AD00DF35DE /* ObsView.swift */,
+				471438BA2BBFD3AD00DF35DE /* ObsRadiusView.swift */,
 				4767EFFE2BF2389000BACDC6 /* RadiusView.swift */,
 				474C40832B4D189F0038B3A5 /* MapObservationView.swift */,
 				474C409B2B500AE90038B3A5 /* ObservationsView.swift */,
@@ -644,7 +644,7 @@
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
 				47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */,
 				478EABE92BED3A2300414431 /* ShareTextView.swift in Sources */,
-				471438BB2BBFD3AD00DF35DE /* ObsView.swift in Sources */,
+				471438BB2BBFD3AD00DF35DE /* ObsRadiusView.swift in Sources */,
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
 				4767F0012BF251C200BACDC6 /* LocationView.swift in Sources */,

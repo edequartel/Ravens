@@ -19,7 +19,9 @@ class ObsViewModel: ObservableObject {
     
     func fetchData(language: String, for obsID: Int, completion: @escaping () -> Void) {
 //        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        ?? uitzoeken waarom dit niet werkt
+
+        log.error("!!! fetchData API Call for ObsViewModel \(obsID) at \(Date())")
+        
         let fileManager = FileManager.default
         let obsDirectory = getDocumentsDirectory().appendingPathComponent("obs")
         if !fileManager.fileExists(atPath: obsDirectory.path) {
@@ -29,7 +31,7 @@ class ObsViewModel: ObservableObject {
         let fileURL = obsDirectory.appendingPathComponent("\(obsID).json")
 //        log.error("ObsViewModel \(fileURL)")
         
-        log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
+        log.error("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
         let url = endPoint()+"observations/\(obsID)/"
         
@@ -65,13 +67,6 @@ class ObsViewModel: ObservableObject {
                 self.log.error("\(String(describing: response.data))")
             }
         }
-    }
-    
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
 }
 

@@ -176,7 +176,7 @@ struct ObsSpeciesView: View {
                 
             }
         }
-        .onAppear() {
+        .onAppear() { //if the obs has photos or sounds get them
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(language: settings.selectedLanguage, for: obs.id ?? 0, completion: {
                     log.info("onAppear OBSView Happens")
