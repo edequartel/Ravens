@@ -14,12 +14,14 @@ struct MapObservationView: View {
     @State private var POIs: [POI] = []
     @ObservedObject var viewModel = POIViewModel()
 
-    @EnvironmentObject var locationManager: LocationManagerModel
-    @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject var locationManagerModel: LocationManagerModel
+    @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var circlePos: CLLocationCoordinate2D?
     @State private var cameraPosition: MapCameraPosition = .automatic
+    
+    @State private var initialLoad = true
     
     var body: some View {
 
@@ -45,7 +47,7 @@ struct MapObservationView: View {
                         }
                         
                         // observations
-                        ForEach(observationsViewModel.locations) { location in
+                        ForEach(observationsRadiusViewModel.locations) { location in
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
                                     .fill(Color(myColor(value: location.rarity)))
@@ -70,7 +72,7 @@ struct MapObservationView: View {
                     .mapStyle(settings.mapStyle)
                     .safeAreaInset(edge: .bottom) {
                         VStack {
-                            SettingsDetailsView(count: observationsViewModel.locations.count, results: observationsViewModel.observations?.count ?? 0, showInfinity: false )
+                            SettingsDetailsView(count: observationsRadiusViewModel.locations.count, results: observationsRadiusViewModel.observations?.count ?? 0, showInfinity: false )
                         }
                         .padding(5)
                         .foregroundColor(.obsGreenFlower)
@@ -126,7 +128,7 @@ struct MapObservationView: View {
     }
     
     func fetchDataModel() {
-        observationsViewModel.fetchData(
+        observationsRadiusViewModel.fetchData(
             lat: circlePos?.latitude ?? 0,
             long: circlePos?.longitude ?? 0,
             settings: settings,
@@ -136,14 +138,31 @@ struct MapObservationView: View {
     
     
     func setupInitialLocation() {
-        if settings.initialLoad {
-                settings.currentLocation = self.locationManager.location
-                circlePos = locationManager.location?.coordinate
-                settings.initialLoad = false
+        if initialLoad {
+                settings.currentLocation = self.locationManagerModel.location
+                circlePos = locationManagerModel.location?.coordinate
+                initialLoad = false
+                print("only once not againonly once not againonly once not againonly once not againonly once not againonly once not againonly once not again")
             }
         else {
             circlePos = settings.currentLocation?.coordinate
         }
+    }
+    
+    
+    func getDataModel() {
+        if locationManagerModel.checkLocation() {
+            let location = locationManagerModel.getCurrentLocation()
+            //for the radius
+            observationsRadiusViewModel.fetchData(
+                lat: location?.coordinate.latitude ?? 0,
+                long: location?.coordinate.longitude ?? 0,
+                settings: settings,
+                completion: {
+                    log.info("observationsViewModel data loaded")
+                })
+        }
+
     }
 }
 
@@ -152,45 +171,9 @@ struct MapObservationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsRadiusViewModel())
             .environmentObject(KeychainViewModel())
         
     }
 }
 
-//
-//HStack {
-//    Spacer()
-//    Text("days ")
-//        .bold()
-//    Button(action: {
-//        if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//            settings.selectedDate = min(newDate, Date())
-//        }
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "backward.fill")
-//    }
-//    
-//    Button(action: {
-//        // Calculate the potential new date by adding days to the selected date
-//        if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-//            // Ensure the new date does not go beyond today
-//            settings.selectedDate = min(newDate, Date())
-//        }
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "forward.fill")
-//    }
-//    
-//    Button(action: {
-//        settings.selectedDate = Date()
-//        log.info("Date updated to \(settings.selectedDate)")
-//        
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "square.fill")
-//    }
-//
-//}
-//.frame(maxHeight: 30)

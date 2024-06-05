@@ -77,7 +77,7 @@ struct RavensApp: App {
     @StateObject var userViewModel =  UserViewModel()
     @StateObject var observationsUserViewModel = ObservationsUserViewModel()
     
-    @StateObject var observationsViewModel = ObservationsViewModel()
+    @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
     @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
     @StateObject var locationIdViewModel = LocationIdViewModel()
     @StateObject var poiViewModel = POIViewModel()
@@ -131,7 +131,7 @@ struct RavensApp: App {
                 .environmentObject(userViewModel) 
             
                 .environmentObject(observationsUserViewModel)
-                .environmentObject(observationsViewModel)
+                .environmentObject(observationsRadiusViewModel)
                 .environmentObject(observationsLocationViewModel)
                 .environmentObject(locationIdViewModel)
                 .environmentObject(geoJSONViewModel)

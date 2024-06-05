@@ -31,7 +31,7 @@ struct ObsRadiusView: View {
     @State var obs: Observation
     
     var showUsername: Bool = true
-    var showLocation: Bool = true
+//    var showLocation: Bool = true
     
     var body: some View {
         LazyVStack {
@@ -39,8 +39,7 @@ struct ObsRadiusView: View {
                 HStack {
                     VStack {
                         HStack {
-//                            Image(systemName: "circle.fill")
-                            Image(systemName: "circle")
+                            Image(systemName: "circle.fill")
                                 .foregroundColor(Color(myColor(value: obs.rarity)))
                             if obs.has_sound ?? false { //for test
                                 Image(systemName: "waveform")
@@ -54,7 +53,6 @@ struct ObsRadiusView: View {
                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                             Spacer()
                             if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                                //                                        if isNumberInBookMarks(number: species.id) {
                                 Image(systemName: "star.fill")
                             }
                         }
@@ -81,7 +79,7 @@ struct ObsRadiusView: View {
                     Spacer()
                 }
                 
-                if showLocation {
+//                if showLocation {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -89,7 +87,7 @@ struct ObsRadiusView: View {
                         if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                             Image(systemName: "pentagon.fill")
                         }
-                    }
+//                    }
                 }
                 
                 if obs.notes?.count ?? 0 > 0 {

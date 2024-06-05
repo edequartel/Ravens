@@ -163,7 +163,7 @@ struct MapObservationLocationView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         MapObservationsLocationView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsRadiusViewModel())
 //            .environmentObject(SpeciesGroupViewModel())
             .environmentObject(KeychainViewModel())
         

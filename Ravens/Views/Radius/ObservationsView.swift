@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ObservationsView: View {
-    @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     
     var body: some View {
             VStack {
                 if (!keyChainViewModel.token.isEmpty) {
                     List {
-                        if let results = observationsViewModel.observations?.results {
+                        if let results = observationsRadiusViewModel.observations?.results {
                             ForEach(results.sorted(
                                 by: {
                                     ($1.rarity, $0.species_detail.name, $1.date, $0.time ?? "00:00") <
@@ -37,7 +37,7 @@ struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
         ObservationsView()
-            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsRadiusViewModel())
             .environmentObject(KeychainViewModel())
     }
 }

@@ -81,7 +81,7 @@ struct SplashScreen: View {
     
     @Binding var dataLoaded: Bool
     
-    @EnvironmentObject var locationManager: LocationManagerModel
+    @EnvironmentObject var locationManagerModel: LocationManagerModel
     
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var languagesViewModel: LanguagesViewModel
@@ -89,15 +89,16 @@ struct SplashScreen: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
-    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+
     
     @EnvironmentObject var userViewModel: UserViewModel
-    
+
+    @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
-    @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+    //    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     
     @State private var isLanguageDataLoaded = false
     @State private var isFirstLanguageDataLoaded = false
@@ -195,10 +196,10 @@ struct SplashScreen: View {
                 
                 //?? wellicht laden bij onAppear
                 //?? het is een functie die elders ook wordt gebruikt
-                if locationManager.checkLocation() {
-                    let location = locationManager.getCurrentLocation()
+                if locationManagerModel.checkLocation() {
+                    let location = locationManagerModel.getCurrentLocation()
                     //for the radius
-                    observationsViewModel.fetchData(
+                    observationsRadiusViewModel.fetchData(
                         lat: location?.coordinate.latitude ?? 0,
                         long: location?.coordinate.longitude ?? 0,
                         settings: settings,
@@ -207,48 +208,52 @@ struct SplashScreen: View {
                             isObservationsDataLoaded = true
                             checkDataLoaded()
                         })
-                    
-                    
-                    //get the location
-                    locationIdViewModel.fetchLocations(
-                        latitude: location?.coordinate.latitude ?? 0,
-                        longitude: location?.coordinate.longitude ?? 0,
-                        completion: { fetchedLocations in
-                            log.info("locationIdViewModel data loaded")
-                            // Use fetchedLocations here //actually it is one location
-                            settings.locationName = fetchedLocations[0].name
-                            for location in fetchedLocations {
-                                log.info(location)
-                            }
-                            isLocationIdDataLoaded = true
-                            
-                            //1. get the geoJSON for this area / we pick the first one = 0
-                            geoJSONViewModel.fetchGeoJsonData(
-                                for: fetchedLocations[0].id,
-                                completion:
-                                    {
-                                        log.info("1. geoJSONViewModel data loaded")
-                                        isGeoJSONDataLoaded = true
-                                        
-                                        //2. get the observations for this area
-                                        observationsLocationViewModel.fetchData( //settings??
-                                            locationId: fetchedLocations[0].id,
-                                            limit: 100,
-                                            offset: 0,
-                                            settings:
-                                                settings,
-                                            completion: {
-                                                log.info("2. observationsLocationViewModel data loaded")
-                                                isObservationsLocationDataLoaded = true
-                                                checkDataLoaded()
-                                            })
-                                        
-                                    }
-                            )
-                            
-                            
-                        })
                 }
+                    
+//                if locationManagerModel.checkLocation() {
+//                    let location = locationManagerModel.getCurrentLocation()
+//                    //get the location
+//                    locationIdViewModel.fetchLocations(
+//                        latitude: location?.coordinate.latitude ?? 0,
+//                        longitude: location?.coordinate.longitude ?? 0,
+//                        completion: { fetchedLocations in
+//                            log.info("locationIdViewModel data loaded")
+//                            // Use fetchedLocations here //actually it is one location
+//                            settings.locationName = fetchedLocations[0].name
+//                            for location in fetchedLocations {
+//                                log.info(location)
+//                            }
+//                            isLocationIdDataLoaded = true
+//                            
+//                            //1. get the geoJSON for this area / we pick the first one = 0
+//                            geoJSONViewModel.fetchGeoJsonData(
+//                                for: fetchedLocations[0].id,
+//                                completion:
+//                                    {
+//                                        log.info("1. geoJSONViewModel data loaded")
+//                                        isGeoJSONDataLoaded = true
+//                                        
+//                                        //2. get the observations for this area
+//                                        observationsLocationViewModel.fetchData( //settings??
+//                                            locationId: fetchedLocations[0].id,
+//                                            limit: 100,
+//                                            offset: 0,
+//                                            settings:
+//                                                settings,
+//                                            completion: {
+//                                                log.info("2. observationsLocationViewModel data loaded")
+//                                                isObservationsLocationDataLoaded = true
+//                                                checkDataLoaded()
+//                                            })
+//                                        
+//                                    }
+//                            )
+//                            
+//                            
+//                        })
+//                }
+                
+                
             }
     }
     
@@ -262,10 +267,10 @@ struct SplashScreen: View {
 //            isObservationsSpeciesDataLoaded &&
             isUserDataLoaded &&
             isObservationsUserDataLoaded &&
-            isObservationsDataLoaded &&
-            isObservationsLocationDataLoaded &&
-            isGeoJSONDataLoaded &&
-            isLocationIdDataLoaded 
+            isObservationsDataLoaded //&&
+//            isObservationsLocationDataLoaded &&
+//            isGeoJSONDataLoaded &&
+//            isLocationIdDataLoaded 
            {
             self.dataLoaded = true
         }

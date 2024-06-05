@@ -46,7 +46,7 @@ struct Span {
     var longitude: Double
 }
 
-class ObservationsViewModel: ObservableObject {
+class ObservationsRadiusViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var observations: Observations?
     

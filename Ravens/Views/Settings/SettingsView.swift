@@ -15,7 +15,7 @@ struct SettingsView: View {
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
 //    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
     
-    @EnvironmentObject var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
@@ -161,7 +161,7 @@ struct SettingsView: View {
                         DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                             .onChange(of: settings.selectedDate) {
                                 // Perform your action when the date changes
-                                observationsViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
+                                observationsRadiusViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
                                                                 long: settings.currentLocation?.coordinate.longitude ?? longitude, settings: settings,
                                                                 completion:
                                                                     {
@@ -265,7 +265,7 @@ struct SettingsView_Previews: PreviewProvider {
         // Setting up the environment objects for the preview
         SettingsView()
             .environmentObject(Settings())
-            .environmentObject(ObservationsViewModel())
+            .environmentObject(ObservationsRadiusViewModel())
 //            .environmentObject(SpeciesGroupViewModel())
     }
 }
