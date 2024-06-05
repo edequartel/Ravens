@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct RadiusView: View {
-    //    @EnvironmentObject var settings: Settings
     @State private var showFirstView = true
     @EnvironmentObject var settings: Settings
     
     var body: some View {
         NavigationView {
             VStack {
-                if showFirstView {
+                if !showFirstView {
                     MapObservationView()
                 } else {
                     ObservationsView()

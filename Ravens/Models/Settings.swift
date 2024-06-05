@@ -43,7 +43,7 @@ class Settings: ObservableObject {
     @Published var isFirstAppear: Bool = true
     @Published var isFirstAppearObsView: Bool = true
     @Published var currentLocation: CLLocation? = CLLocationManager().location
-//    @Published var initialLoad = true
+    @Published var initialRadiusLoad = true
     @Published var initialLoadLocation = true
     
 

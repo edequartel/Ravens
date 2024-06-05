@@ -54,3 +54,21 @@ struct ObservationsUserView_Previews: PreviewProvider {
             .environmentObject(Settings())
     }
 }
+
+
+//userViewModel.fetchUserData(
+//    completion: {
+//        log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+//        isUserDataLoaded = true
+//        settings.userId = userViewModel.user?.id ?? 0
+//        settings.userName = userViewModel.user?.name ?? ""
+//        
+//        observationsUserViewModel.fetchData(
+//            language: settings.selectedLanguage,
+//            userId: userViewModel.user?.id ?? 0,
+//            completion: {
+//                log.info("2. userViewModel data loaded")
+//                isObservationsUserDataLoaded = true
+//                checkDataLoaded()
+//            })
+//    })

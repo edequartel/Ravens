@@ -751,6 +751,7 @@
 
     },
     "nobsavaliable" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

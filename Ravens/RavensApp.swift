@@ -86,11 +86,6 @@ struct RavensApp: App {
     @StateObject var bookMarksViewModel = BookMarksViewModel()
     @StateObject var observersViewModel = ObserversViewModel()
     @StateObject var areasViewModel = AreasViewModel()
-    
-
-    //    @StateObject var fetchRequestManager = FetchRequestManager()
-    
-
 
     let urlHandler = URLHandler()
     
@@ -112,15 +107,13 @@ struct RavensApp: App {
             // Enable or disable features based on the authorization.
         }
     }
-    //^
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(KeychainViewModel())
-//
+
                 .environmentObject(locationManager)
-            
                 .environmentObject(settings)
                 .environmentObject(languagesViewModel)
                 .environmentObject(speciesViewModel)
@@ -141,25 +134,19 @@ struct RavensApp: App {
                 .environmentObject(observersViewModel)
                 .environmentObject(areasViewModel)
 
-            //??
-//                .environmentObject(SpeciesDetailsViewModel(settings: Settings()))
-//                .environmentObject(Player())
-//                .environmentObject(ObservationsLocationViewModel())
+                .environmentObject(Player())
             
                 .environmentObject(ObservationsYearViewModel())
-            
 
                 .environmentObject(urlHandler) // use instance
+
                 .onOpenURL { url in
                     // Handle the URL appropriately
                     let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
                     self.parts = urlString.split(separator: "/").map(String.init)
                     showingAlert = true
                     
-                    
                     //  observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-                    //                    
-                    
                     
                     // Create the notification content
                     let content = UNMutableNotificationContent()

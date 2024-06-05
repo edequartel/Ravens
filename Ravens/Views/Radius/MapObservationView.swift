@@ -90,7 +90,12 @@ struct MapObservationView: View {
                                 longitude: coordinate.longitude
                             )
 
-                            fetchDataModel()
+//                            fetchDataModel()
+                            
+                            if let circlePosition = circlePos {
+                                fetchDataLocation(location: circlePosition)
+                            }
+                            
                             cameraPosition = getCameraPosition()
                         }
                     }
@@ -127,10 +132,19 @@ struct MapObservationView: View {
         return MapCameraPosition.region(region)
     }
     
-    func fetchDataModel() {
+//    func fetchDataModel() {
+//        observationsRadiusViewModel.fetchData(
+//            lat: circlePos?.latitude ?? 0,
+//            long: circlePos?.longitude ?? 0,
+//            settings: settings,
+//            completion: { print("observationsViewModel.locations") }
+//        )
+//    }
+    
+    func fetchDataLocation(location: CLLocationCoordinate2D) {
         observationsRadiusViewModel.fetchData(
-            lat: circlePos?.latitude ?? 0,
-            long: circlePos?.longitude ?? 0,
+            lat: location.latitude,
+            long: location.longitude,
             settings: settings,
             completion: { print("observationsViewModel.locations") }
         )
@@ -138,32 +152,24 @@ struct MapObservationView: View {
     
     
     func setupInitialLocation() {
-        if initialLoad {
-                settings.currentLocation = self.locationManagerModel.location
-                circlePos = locationManagerModel.location?.coordinate
-                initialLoad = false
-                print("only once not againonly once not againonly once not againonly once not againonly once not againonly once not againonly once not again")
+        if settings.initialRadiusLoad {
+            let location = locationManagerModel.getCurrentLocation()
+            settings.currentLocation = location
+            circlePos = location?.coordinate
+            
+            //for the Radius
+            if let circlePosition = circlePos {
+                fetchDataLocation(location: circlePosition)
+            }
+
+            settings.initialRadiusLoad = false
+                print("This is not allowed to happen")
             }
         else {
             circlePos = settings.currentLocation?.coordinate
         }
     }
-    
-    
-    func getDataModel() {
-        if locationManagerModel.checkLocation() {
-            let location = locationManagerModel.getCurrentLocation()
-            //for the radius
-            observationsRadiusViewModel.fetchData(
-                lat: location?.coordinate.latitude ?? 0,
-                long: location?.coordinate.longitude ?? 0,
-                settings: settings,
-                completion: {
-                    log.info("observationsViewModel data loaded")
-                })
-        }
 
-    }
 }
 
 struct MapObservationView_Previews: PreviewProvider {

@@ -89,32 +89,26 @@ struct SplashScreen: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
-
-    
     @EnvironmentObject var userViewModel: UserViewModel
 
-    @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
-    @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
-    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
-    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-    //    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-    
     @State private var isLanguageDataLoaded = false
     @State private var isFirstLanguageDataLoaded = false
     @State private var isSecondLanguageDataLoaded = false
     @State private var isSpeciesGroupDataLoaded = false
     @State private var isRegionDataLoaded = false
     @State private var isRegionListDataLoaded = false
-    @State private var isObservationsSpeciesDataLoaded = false
     @State private var isUserDataLoaded = false
+    
+    @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
     @State private var isObservationsUserDataLoaded = false
-    @State private var isObservationsDataLoaded = false
+    
     @State private var isObservationsLocationDataLoaded = false
     @State private var isLocationIdDataLoaded = false
     @State private var isGeoJSONDataLoaded = false
-    
-    let serialQueue = DispatchQueue(label: "com.yourapp.serialQueue")
+    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+
     
     var body: some View {
         VStack {
@@ -183,32 +177,17 @@ struct SplashScreen: View {
                         isUserDataLoaded = true
                         settings.userId = userViewModel.user?.id ?? 0
                         settings.userName = userViewModel.user?.name ?? ""
-                        
-                        observationsUserViewModel.fetchData(
-                            language: settings.selectedLanguage,
-                            userId: userViewModel.user?.id ?? 0,
-                            completion: {
-                                log.info("2. userViewModel data loaded")
-                                isObservationsUserDataLoaded = true
-                                checkDataLoaded()
-                            })
+//                        
+//                        observationsUserViewModel.fetchData(
+//                            language: settings.selectedLanguage,
+//                            userId: userViewModel.user?.id ?? 0,
+//                            completion: {
+//                                log.info("2. userViewModel data loaded")
+//                                isObservationsUserDataLoaded = true
+//                                checkDataLoaded()
+//                            })
                     })
                 
-                //?? wellicht laden bij onAppear
-                //?? het is een functie die elders ook wordt gebruikt
-                if locationManagerModel.checkLocation() {
-                    let location = locationManagerModel.getCurrentLocation()
-                    //for the radius
-                    observationsRadiusViewModel.fetchData(
-                        lat: location?.coordinate.latitude ?? 0,
-                        long: location?.coordinate.longitude ?? 0,
-                        settings: settings,
-                        completion: {
-                            log.info("observationsViewModel data loaded")
-                            isObservationsDataLoaded = true
-                            checkDataLoaded()
-                        })
-                }
                     
 //                if locationManagerModel.checkLocation() {
 //                    let location = locationManagerModel.getCurrentLocation()
@@ -264,10 +243,13 @@ struct SplashScreen: View {
             isLanguageDataLoaded &&
             isRegionDataLoaded &&
             isRegionListDataLoaded &&
-//            isObservationsSpeciesDataLoaded &&
-            isUserDataLoaded &&
-            isObservationsUserDataLoaded &&
-            isObservationsDataLoaded //&&
+            //            isObservationsSpeciesDataLoaded &&
+            
+            isUserDataLoaded } //&&
+//            isObservationsUserDataLoaded //&&
+        
+
+        
 //            isObservationsLocationDataLoaded &&
 //            isGeoJSONDataLoaded &&
 //            isLocationIdDataLoaded 
