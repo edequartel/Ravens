@@ -102,7 +102,14 @@ struct SettingsView: View {
                     
 //                    Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
-                    Toggle("Radius", isOn: $settings.radiusPreference)
+                    
+                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
+//                        .onChange(of: settings.radiusPreference) {
+//                            log.error(settings.radiusPreference)
+//                            settings.initialLoadArea = true
+//                        }
+                    
+                    Toggle("Map", isOn: $settings.mapPreference)
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
@@ -129,6 +136,7 @@ struct SettingsView: View {
                             Double(settings.radius)
                         }, set: {
                             settings.radius = Int($0)
+                            settings.isRadiusChanged = true
                         }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
                         .padding()
                     }

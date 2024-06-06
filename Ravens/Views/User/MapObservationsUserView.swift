@@ -69,105 +69,14 @@ struct MapObservationsUserView: View {
         }
 
         .onAppear {
-            observationsUserViewModel.fetchData(
-                language: settings.selectedLanguage, 
-                userId: settings.userId,
-                completion: { print("viewModel.fetchData completion") })
+            if settings.initialUsersLoad {
+                observationsUserViewModel.fetchData(
+                    language: settings.selectedLanguage,
+                    userId: settings.userId,
+                    completion: { log.info("viewModel.fetchData completion") })
+                settings.initialUsersLoad = false
+            }
         }
     }
 }
 
-//struct MapObservationUserView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Setting up the environment objects for the preview
-//        let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-//        MapObservationsSpeciesView(item: testSpecies)
-//            .environmentObject(Settings())
-//            .environmentObject(KeychainViewModel())
-//            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-//    }
-//}
-
-//            .safeAreaInset(edge: .bottom) {
-//                VStack {
-//                    HStack {
-//                        NetworkView()
-//                        Spacer()
-//
-//                        VStack(alignment: .trailing) {
-//                            HStack{
-//                                Text("\(observationsUserViewModel.start) + \(observationsUserViewModel.end)")
-//                                Spacer()
-//                                Text("\((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset) - \((observationsUserViewModel.observations?.count ?? 0) - observationsUserViewModel.offset + observationsUserViewModel.limit)")
-//                                    .foregroundColor(.obsGreenFlower)
-//
-//                            }
-//                            .lineLimit(1) // Set the maximum number of lines to 1
-//                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                        }
-//
-//                    }
-//
-//                    HStack {
-//                        Spacer()
-//                        Text("Observations")
-//                            .bold()
-//                        Button(action: {
-//                            if let maxOffset = observationsUserViewModel.observations?.count {
-//                                log.info("maxOffset: \(maxOffset)")
-//                                observationsUserViewModel.offset = min(observationsUserViewModel.offset + 100, observationsUserViewModel.maxOffset)
-//                                observationsUserViewModel.limit = 100
-//                                observationsUserViewModel.fetchData(
-//                                    language: settings.selectedLanguage,
-//                                    userId: settings.userId,
-//                                    completion: { print("viewModel.fetchData completion")
-//                                    } )
-//                                observationsUserViewModel.start = 0
-//                                observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
-//
-//                            }
-//                        }) {
-//                            Image(systemName: "backward.fill")
-//                                .bold()
-//                        }
-//
-//                        Button(action: {
-//                            if observationsUserViewModel.offset >= 100 {
-//                                observationsUserViewModel.offset = observationsUserViewModel.offset - 100
-//                            }
-//
-//                            observationsUserViewModel.limit = 100
-//                            observationsUserViewModel.fetchData(
-//                                language: settings.selectedLanguage,
-//                                userId: settings.userId,
-//                                completion: { print("viewModel.fetchData completion")
-//                                })
-//
-//                            observationsUserViewModel.start = 0
-//                            observationsUserViewModel.end = observationsUserViewModel.observations?.results.count ?? 0
-//                        }) {
-//                            Image(systemName: "forward.fill")
-//                                .bold()
-//                        }
-//
-//                        Button(action: {
-//                            observationsUserViewModel.offset = 0
-//                            observationsUserViewModel.limit = 100
-//
-//                            observationsUserViewModel.fetchData(
-//                                language: settings.selectedLanguage,
-//                                userId: settings.userId,
-//                                completion: { print("viewModel.fetchData completion")
-//                                })
-//                        }) {
-//                            Image(systemName: "square.fill")
-//                        }
-//
-//                    }
-//                    .frame(maxHeight: 30)
-//                }
-//                .padding(5)
-//                .bold()
-//                .foregroundColor(.obsGreenFlower)
-//                .background(Color.obsGreenEagle.opacity(0.5))
-//            }

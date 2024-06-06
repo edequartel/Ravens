@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftyBeaver
+import MapKit
 
 struct ObservationsView: View {
     let log = SwiftyBeaver.self
@@ -41,20 +42,40 @@ struct ObservationsView: View {
     
     func getDataRadiusModel() {
         if settings.initialRadiusLoad {
+            print("OBS LIST only when start first time")
             if locationManagerModel.checkLocation() {
-                let location = locationManagerModel.getCurrentLocation()
-                settings.currentLocation = location
+                let location = locationManagerModel.getCurrentLocation() //<<
+                settings.currentLocation = location //<<
+//                settings.circlePos = location?.coordinate
                 //for the radius
+//                fetchDataLocation(location: location?.coordinate)
                 observationsRadiusViewModel.fetchData(
                     lat: location?.coordinate.latitude ?? 0,
                     long: location?.coordinate.longitude ?? 0,
                     settings: settings,
                     completion: {
-                        log.info("observationsViewModel data loaded")
+                        log.info("settings.initialRadiusLoad observationsViewModel data loaded")
                     })
             }
             settings.initialRadiusLoad = false
         }
+        //
+        if settings.isRadiusChanged {
+            print("changed Radius")
+            if let circlePosition = settings.circlePos {
+                fetchDataLocation(location: circlePosition)
+            }
+            settings.isRadiusChanged = false
+        }
+    }
+    
+    func fetchDataLocation(location: CLLocationCoordinate2D) {
+        observationsRadiusViewModel.fetchData(
+            lat: location.latitude,
+            long: location.longitude,
+            settings: settings,
+            completion: { print("observationsViewModel.locations") }
+        )
     }
 }
 

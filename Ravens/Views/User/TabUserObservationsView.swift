@@ -11,7 +11,6 @@ struct TabUserObservationsView: View {
     @EnvironmentObject var settings: Settings
     @State private var showFirstView = false
     
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -34,9 +33,10 @@ struct TabUserObservationsView: View {
             }
             .navigationTitle("\(settings.userName)")
             .navigationBarTitleDisplayMode(.inline)
-            
+            .onAppearOnce {
+                showFirstView = settings.mapPreference
+            }
         }
-        
     }
 }
 

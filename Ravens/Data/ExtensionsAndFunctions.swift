@@ -406,4 +406,24 @@ extension View {
     }
 }
 
+struct RunOnceModifier: ViewModifier {
+    @State private var hasRun = false
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                if !hasRun {
+                    action()
+                    hasRun = true
+                }
+            }
+    }
+}
+
+extension View {
+    func onAppearOnce(perform action: @escaping () -> Void) -> some View {
+        self.modifier(RunOnceModifier(action: action))
+    }
+}
 

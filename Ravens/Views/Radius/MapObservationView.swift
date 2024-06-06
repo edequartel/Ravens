@@ -18,7 +18,7 @@ struct MapObservationView: View {
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var circlePos: CLLocationCoordinate2D?
+//    @State private var circlePos: CLLocationCoordinate2D?
     @State private var cameraPosition: MapCameraPosition = .automatic
     
     @State private var initialLoad = true
@@ -63,7 +63,7 @@ struct MapObservationView: View {
                         }
                         
                         // Circle
-                        MapCircle(center: circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
+                        MapCircle(center: settings.circlePos ?? CLLocationCoordinate2D(), radius: CLLocationDistance(settings.radius))
                             .foregroundStyle(.clear.opacity(100))
                             .stroke(colorByMapStyle(), lineWidth: 2)
                         
@@ -80,7 +80,7 @@ struct MapObservationView: View {
                     }
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
-                            circlePos = CLLocationCoordinate2D(
+                            settings.circlePos = CLLocationCoordinate2D(
                                 latitude: coordinate.latitude,
                                 longitude: coordinate.longitude
                             )
@@ -92,11 +92,11 @@ struct MapObservationView: View {
 
 //                            fetchDataModel()
                             
-                            if let circlePosition = circlePos {
+                            if let circlePosition = settings.circlePos {
                                 fetchDataLocation(location: circlePosition)
                             }
                             
-                            cameraPosition = getCameraPosition()
+//                            cameraPosition = getCameraPosition()
                         }
                     }
                     .mapControls() {
@@ -106,7 +106,7 @@ struct MapObservationView: View {
             }
             .onAppear() {
                 setupInitialLocation()
-                cameraPosition = getCameraPosition()
+//                cameraPosition = getCameraPosition()
             }
     }
     
@@ -132,14 +132,6 @@ struct MapObservationView: View {
         return MapCameraPosition.region(region)
     }
     
-//    func fetchDataModel() {
-//        observationsRadiusViewModel.fetchData(
-//            lat: circlePos?.latitude ?? 0,
-//            long: circlePos?.longitude ?? 0,
-//            settings: settings,
-//            completion: { print("observationsViewModel.locations") }
-//        )
-//    }
     
     func fetchDataLocation(location: CLLocationCoordinate2D) {
         observationsRadiusViewModel.fetchData(
@@ -150,23 +142,30 @@ struct MapObservationView: View {
         )
     }
     
-    
     func setupInitialLocation() {
         if settings.initialRadiusLoad {
+            print("MAP only when start first time")
             let location = locationManagerModel.getCurrentLocation()
             settings.currentLocation = location
-            circlePos = location?.coordinate
+            settings.circlePos = location?.coordinate
             
             //for the Radius
-            if let circlePosition = circlePos {
+            if let circlePosition = settings.circlePos {
                 fetchDataLocation(location: circlePosition)
             }
 
             settings.initialRadiusLoad = false
-                print("This is not allowed to happen")
             }
         else {
-            circlePos = settings.currentLocation?.coordinate
+            settings.circlePos = settings.currentLocation?.coordinate
+        }
+
+        if settings.isRadiusChanged {
+            print("changed Radius")
+            if let circlePosition = settings.circlePos {
+                fetchDataLocation(location: circlePosition)
+            }
+            settings.isRadiusChanged = false
         }
     }
 

@@ -24,14 +24,24 @@ class Settings: ObservableObject {
     
     @AppStorage("days") var days: Int = 5
     @AppStorage("listpreference") var listPreference: Bool = false
-    @AppStorage("radius") var radius: Int = 500
+    
+
+    
+    
     @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
     @AppStorage("infinity") var infinity: Bool = true
     @AppStorage("selectedRarity") var selectedRarity = 1
-
     @AppStorage("radiusPreference") var radiusPreference = true
+    
+    @AppStorage("mapPreference") var mapPreferenceStored = false //VIP
+    @Published var mapPreference = false {
+        didSet {
+            log.verbose("!!saving it in storage: \(mapPreference)")
+            mapPreferenceStored = mapPreference
+        }
+    }
     
     
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
@@ -42,9 +52,39 @@ class Settings: ObservableObject {
     @Published var isConnected: Bool = false
     @Published var isFirstAppear: Bool = true
     @Published var isFirstAppearObsView: Bool = true
-    @Published var currentLocation: CLLocation? = CLLocationManager().location
-    @Published var initialRadiusLoad = true
+    
+    @Published var currentLocation: CLLocation? = nil //CLLocationManager().location 
+    {
+        didSet {
+            log.error("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
+        }
+    }
+    
+    
+    @Published var initialRadiusLoad = true {
+        didSet {
+            log.error("!!initialRadiusLoad saving it initialRadiusLoad: \(initialRadiusLoad)")
+        }
+    }
+    
+    @Published var isRadiusChanged = false {
+        didSet {
+            log.error("!!isRadiusChanged saving it radiusChanged: \(isRadiusChanged)")
+        }
+    }
+    
+    @AppStorage("radius") var radiusStored: Int = 500
+    @Published var radius: Int = 500 {
+        didSet {
+            log.error("!!radius saving it in storage: \(radius)")
+            radiusStored = radius
+//            isRadiusChanged = true
+        }
+    }
+    
+    @Published var initialUsersLoad = true
     @Published var initialLoadLocation = true
+    @Published var initialLoadArea = true
     
 
     @Published var userId: Int = 0 
@@ -54,19 +94,6 @@ class Settings: ObservableObject {
     @Published var locationName: String = "Unknown Location"
     
     @Published var tappedCoordinate: CLLocationCoordinate2D?
-    
-    
-    init() {
-        log.error("** init Settings **")
-        selectedLanguage = selectedLanguageStored
-        selectedSecondLanguage = selectedSecondLanguageStored
-        
-        selectedRegionListId = selectedRegionListIdStored
-        selectedSpeciesGroup = selectedSpeciesGroupStored 
-        selectedSpeciesGroupId = selectedSpeciesGroupIdStored
-        
-        selectedSpeciesGroupName = selectedSpeciesGroupNameStored        
-    }
     
     @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
     @Published var selectedSpeciesGroupName: String = "" {
@@ -136,6 +163,26 @@ class Settings: ObservableObject {
         }
     }
     
+    @Published var circlePos: CLLocationCoordinate2D? = nil {
+        didSet {
+            log.error("!!circlePos saving it in circlePos: \(circlePos?.latitude ?? 0)")
+        }
+    }
+    
+    init() {
+        log.error("** init Settings **")
+        selectedLanguage = selectedLanguageStored
+        selectedSecondLanguage = selectedSecondLanguageStored
+        
+        selectedRegionListId = selectedRegionListIdStored
+        selectedSpeciesGroup = selectedSpeciesGroupStored
+        selectedSpeciesGroupId = selectedSpeciesGroupIdStored
+        
+        selectedSpeciesGroupName = selectedSpeciesGroupNameStored
+        
+        mapPreference = mapPreferenceStored
+        radius = radiusStored
+    }
 }
 
 enum MapStyleChoice: String, CaseIterable {

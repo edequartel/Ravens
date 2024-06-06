@@ -14,9 +14,10 @@ struct RadiusView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if !showFirstView {
+                if showFirstView {
                     MapObservationView()
                 } else {
+//                    EmptyView()
                     ObservationsView()
                 }
             }
@@ -32,6 +33,9 @@ struct RadiusView: View {
             .navigationTitle(settings.selectedSpeciesGroupName)
             .navigationBarTitleDisplayMode(.inline)
             
+        }
+        .onAppearOnce {
+//            showFirstView = settings.mapPreference
         }
         .edgesIgnoringSafeArea(.all)
     }

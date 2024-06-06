@@ -22,17 +22,18 @@ struct MapObservationsSpeciesView: View {
     @State private var offset = 0
     @State private var showFullScreenMap = false
     
-    @State private var cameraPosition = MapCameraPosition.region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-        )
-    )
+    @State private var cameraPosition: MapCameraPosition = .automatic
+//    @State private var cameraPosition = MapCameraPosition.region(
+//        MKCoordinateRegion(
+//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+//            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+//        )
+//    )
     
     var body: some View {
         ZStack(alignment: .leading) {
             Map(position: $cameraPosition) {
-                UserAnnotation()
+//                UserAnnotation()
                 
                 ForEach(observationsSpeciesViewModel.locations) { location in
                     Annotation("", coordinate: location.coordinate) {

@@ -7,12 +7,17 @@
 
 import SwiftUI
 import SwiftyBeaver
+import MapKit
 
 
 struct ObservationsLocationView: View {
     let log = SwiftyBeaver.self
 
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+    @EnvironmentObject var locationManagerModel: LocationManagerModel
+    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+
     @EnvironmentObject var settings: Settings
 
     var body: some View {
@@ -26,6 +31,51 @@ struct ObservationsLocationView: View {
                     }
                 }
             }
+            .onAppear()  {
+            if settings.initialLoadArea {
+                log.info("MapObservationsLocationView onAppear")
+                if locationManagerModel.checkLocation() {
+                    let location = locationManagerModel.getCurrentLocation()
+                    let defaultCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+                    fetchLocationData(coordinate: location?.coordinate ?? defaultCoordinate)
+                    settings.initialLoadArea = false
+                }
+            }
+        }
+    }
+        
+    
+    func fetchLocationData(coordinate: CLLocationCoordinate2D) {
+        locationIdViewModel.fetchLocations(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude,
+            completion: { fetchedLocations in
+                log.info("locationIdViewModel data loaded")
+                // Use fetchedLocations here //actually it is one location
+                settings.locationName = fetchedLocations[0].name
+                for location in fetchedLocations {
+                    log.info(location)
+                }
+                
+                //1. get the geoJSON for this area / we pick the first one = 0
+                geoJSONViewModel.fetchGeoJsonData(
+                    for: fetchedLocations[0].id,
+                    completion:
+                        {
+                            log.info("geoJSONViewModel data loaded")
+                            //2. get the observations for this area
+                            observationsLocationViewModel.fetchData( //settings??
+                                locationId: fetchedLocations[0].id,
+                                limit: 100,
+                                offset: 0,
+                                settings: settings,
+                                completion: {
+                                    log.info("observationsLocationViewModel data loaded")
+//                                    cameraPosition = getCameraPosition()
+                                })
+                        }
+                )
+            })
     }
 }
 

@@ -109,7 +109,7 @@ struct ObserversView: View {
                         observationsUserViewModel.fetchData(
                             language: settings.selectedLanguage,
                             userId: userViewModel.user?.id ?? 0,
-                            completion: { log.error("**observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
+                            completion: { log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
                         
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -138,7 +138,7 @@ struct ObserversView: View {
                             observationsUserViewModel.fetchData(
                                 language: settings.selectedLanguage,
                                 userId: record.userID,
-                                completion: { log.error("**observationsUserViewModel.fetchdata \(record.userID)") }
+                                completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
                                 )
                                                         
                             self.presentationMode.wrappedValue.dismiss()
@@ -172,7 +172,7 @@ struct ObserversView: View {
 }
 
 
-// Privacy Senstive
+// Privacy Senstive Do Not Remove
 //                    Spacer()
 //                    Button(action: {
 //                        QRCode = IdentifiableString(
