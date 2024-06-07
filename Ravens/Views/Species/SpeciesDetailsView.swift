@@ -19,7 +19,7 @@ struct SpeciesDetailsView: View {
     
 //    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
-@State var i = 0
+//@State var i = 0
 //    var item: Species
     var speciesID: Int
     
@@ -41,16 +41,16 @@ struct SpeciesDetailsView: View {
                                 
                                 Text(species.photo)
                                 
-//                                AFImageView(media: species.photo)
-//                                    .frame(maxWidth: .infinity, maxHeight: 400)
-//                                Divider()
-//                                    .frame(height: 20)
-//                                    .opacity(0)
-//                                YearView(speciesId: speciesID)
-//                                Divider()
-//                                    .frame(height: 20)
-//                                    .opacity(0)
-//
+                                AFImageView(media: species.photo)
+                                    .frame(maxWidth: .infinity, maxHeight: 400)
+                                Divider()
+                                    .frame(height: 20)
+                                    .opacity(0)
+                                YearView(speciesId: speciesID)
+                                Divider()
+                                    .frame(height: 20)
+                                    .opacity(0)
+
                                 RichText(html: species.info_text)
                                 Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                             } else {

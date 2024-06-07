@@ -45,20 +45,20 @@ struct ObservationsSpeciesView: View {
                             
 //                    Spacer()
                     Button(action: {
-//                        showingDetails = true
-                        isSheetPresented = true
+                        showingDetails = true
+//                        isSheetPresented = true
                     }) {
                         Image(systemName: "info.circle")
                             .font(.title2)
                     }
                     .tint(.blue)
                     
-//                    .sheet(isPresented: $showingDetails) {
-//                        SpeciesDetailsView(speciesID: item.id)
-////                        Text("xxx SpeciesDetailsView \(item.id)")
-////                        AFImageView(media: item.photo)
-////                            .frame(maxWidth: .infinity, maxHeight: 400)
-//                    }
+                    .sheet(isPresented: $showingDetails) { //<<---
+                        SpeciesDetailsView(speciesID: item.id)
+//                        Text("xxx SpeciesDetailsView \(item.id)")
+//                        AFImageView(media: item.photo)
+//                            .frame(maxWidth: .infinity, maxHeight: 400)
+                    }
                     
 //                    .sheet(isPresented: $showingDetails) {
 //                                VStack {
@@ -121,12 +121,12 @@ struct ObservationsSpeciesView: View {
         }
 //
         
-        .sheet(isPresented: $isSheetPresented) {
-            SpeciesDetailsView(speciesID: item.id)
+//        .sheet(isPresented: $isSheetPresented) {
+//            SpeciesDetailsView(speciesID: item.id)
 //                        Text("xxx SpeciesDetailsView \(item.id)")
 //                        AFImageView(media: item.photo)
 //                            .frame(maxWidth: .infinity, maxHeight: 400)
-        }
+//        }
 //
         .refreshable {
             print("refreshing...")

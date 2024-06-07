@@ -90,7 +90,7 @@ class Settings: ObservableObject {
         didSet {
             log.error("!!radius saving it in storage: \(radius)")
             radiusStored = radius
-            if !isInit { isRadiusChanged = true }
+            if !isInit { isRadiusChanged = true } //<<-- bij start deze meling niet... of wel?? checkthis
         }
     }
     
