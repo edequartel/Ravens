@@ -54,7 +54,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
 
     func fetchData(lat: Double, long: Double, settings: Settings, completion: @escaping () -> Void = {}) {
-        log.info("fetchData ObservationsViewModel")
+        log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage

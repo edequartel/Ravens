@@ -22,12 +22,18 @@ class Settings: ObservableObject {
     
     @AppStorage("selectedInBetween") var selectedInBetween: String = "waarneming.nl"
     
-    @AppStorage("days") var days: Int = 5
+    @AppStorage("days") var daysStored: Int = 5
+    @Published var days: Int = 5 {
+        didSet {
+            log.info("!!saving it in storage: \(days)")
+            daysStored = days
+            if !isInit { isRadiusChanged = true }
+        }
+    }
+    
     @AppStorage("listpreference") var listPreference: Bool = false
     
 
-    
-    
     @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
@@ -48,46 +54,54 @@ class Settings: ObservableObject {
 
     @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
 
-    @Published var selectedDate: Date = Date()
+    @Published var selectedDate: Date = Date() {
+        didSet {
+            log.info("!!saving selectedDate it in storage: \(selectedDate)")
+            if !isInit { isRadiusChanged = true }
+        }
+    }
+    
     @Published var isConnected: Bool = false
     @Published var isFirstAppear: Bool = true
     @Published var isFirstAppearObsView: Bool = true
     
-    @Published var currentLocation: CLLocation? = nil //CLLocationManager().location 
+    @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
     {
         didSet {
-            log.error("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
+            log.info("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
         }
     }
     
     
     @Published var initialRadiusLoad = true {
         didSet {
-            log.error("!!initialRadiusLoad saving it initialRadiusLoad: \(initialRadiusLoad)")
+            log.info("!!initialRadiusLoad saving it initialRadiusLoad: \(initialRadiusLoad)")
         }
     }
     
     @Published var isRadiusChanged = false {
         didSet {
-            log.error("!!isRadiusChanged saving it radiusChanged: \(isRadiusChanged)")
+            log.info("!!isRadiusChanged saving it radiusChanged: \(isRadiusChanged)")
         }
     }
     
-    @AppStorage("radius") var radiusStored: Int = 500
+    @AppStorage("radius") var radiusStored: Int = 500 //init op 500m
     @Published var radius: Int = 500 {
         didSet {
             log.error("!!radius saving it in storage: \(radius)")
             radiusStored = radius
-//            isRadiusChanged = true
+            if !isInit { isRadiusChanged = true }
         }
     }
+    
+    
     
     @Published var initialUsersLoad = true
     @Published var initialLoadLocation = true
     @Published var initialLoadArea = true
     
 
-    @Published var userId: Int = 0 
+    @Published var userId: Int = 0
     @Published var userName = "unknown"
     
     @Published var locationId: Int = 0
@@ -98,7 +112,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
     @Published var selectedSpeciesGroupName: String = "" {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedSpeciesGroupName)")
+            log.info("!!saving it in storage: \(selectedSpeciesGroupName)")
             selectedSpeciesGroupNameStored = selectedSpeciesGroupName
         }
     }
@@ -107,7 +121,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedRegionListId") var selectedRegionListIdStored = 5001
     @Published var selectedRegionListId = 1 {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedRegionListId)")
+            log.info("!!saving it in storage: \(selectedRegionListId)")
             selectedRegionListIdStored = selectedRegionListId
         }
     }
@@ -115,7 +129,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
     @Published var selectedSpeciesGroup = 1 {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedSpeciesGroup)")
+            log.info("!!saving it in storage: \(selectedSpeciesGroup)")
             selectedSpeciesGroupStored = selectedSpeciesGroupId
         }
     }
@@ -123,7 +137,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
     @Published var selectedSpeciesGroupId = 1 {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedSpeciesGroupId)")
+            log.info("!!saving it in storage: \(selectedSpeciesGroupId)")
             selectedSpeciesGroupIdStored = selectedSpeciesGroupId
         }
     }
@@ -131,7 +145,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedRegionId") var selectedRegionIdStored = 200
     @Published var selectedRegionId = 200 {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedRegionId)")
+            log.info("!!saving it in storage: \(selectedRegionId)")
             selectedRegionIdStored = selectedRegionId
         }
     }
@@ -139,7 +153,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
     @Published var selectedLanguage: String = "nl" {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedLanguage)")
+            log.info("!!saving it in storage: \(selectedLanguage)")
             selectedLanguageStored = selectedLanguage
         }
     }
@@ -147,7 +161,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSecondLanguage") var selectedSecondLanguageStored = "en"
     @Published var selectedSecondLanguage: String = "en" {
         didSet {
-            log.verbose("!!saving it in storage: \(selectedSecondLanguage)")
+            log.info("!!saving it in storage: \(selectedSecondLanguage)")
             selectedSecondLanguageStored = selectedSecondLanguage
         }
     }
@@ -165,12 +179,13 @@ class Settings: ObservableObject {
     
     @Published var circlePos: CLLocationCoordinate2D? = nil {
         didSet {
-            log.error("!!circlePos saving it in circlePos: \(circlePos?.latitude ?? 0)")
+            log.info("!!circlePos saving it in circlePos: \(circlePos?.latitude ?? 0)")
         }
     }
     
+    var isInit: Bool = true
     init() {
-        log.error("** init Settings **")
+        log.info("** init Settings **")
         selectedLanguage = selectedLanguageStored
         selectedSecondLanguage = selectedSecondLanguageStored
         
@@ -180,8 +195,14 @@ class Settings: ObservableObject {
         
         selectedSpeciesGroupName = selectedSpeciesGroupNameStored
         
+
+        
         mapPreference = mapPreferenceStored
-        radius = radiusStored
+        
+        //for updating published values
+        days = daysStored
+        radius = radiusStored //haal de radius op uit de storage
+        isInit = false
     }
 }
 

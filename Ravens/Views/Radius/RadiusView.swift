@@ -17,7 +17,6 @@ struct RadiusView: View {
                 if showFirstView {
                     MapObservationView()
                 } else {
-//                    EmptyView()
                     ObservationsView()
                 }
             }
@@ -35,7 +34,7 @@ struct RadiusView: View {
             
         }
         .onAppearOnce {
-//            showFirstView = settings.mapPreference
+            showFirstView = settings.mapPreference
         }
         .edgesIgnoringSafeArea(.all)
     }

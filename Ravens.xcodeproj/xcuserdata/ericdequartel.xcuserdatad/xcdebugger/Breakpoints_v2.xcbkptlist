@@ -199,17 +199,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CFBAE174-B864-4C4B-B529-3F4549CC8EBC"
+            uuid = "67C43008-09E6-41DF-92FE-9BDD86C6781B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ravens/Views/Radius/MapObservationView.swift"
+            filePath = "Ravens/Views/Radius/ObservationsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getDataRadiusModel()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -156,11 +156,10 @@ struct ObsUserView: View {
                 .tint(.blue)
             }
         }
-        .sheet(isPresented: $showingDetails) {
-            SpeciesDetailsView(speciesID: obs.species_detail.id)
-        }
-        .onAppear() {
-        }
+//        .sheet(isPresented: $showingDetails) {
+//            SpeciesDetailsView(speciesID: obs.species_detail.id)
+//        }
+
     }
 }
 

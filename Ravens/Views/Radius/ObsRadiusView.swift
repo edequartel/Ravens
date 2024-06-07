@@ -175,9 +175,9 @@ struct ObsRadiusView: View {
         }
         //        .accessibility(hidden: true)
         //        .accessibility(label: Text("Your Label"))
-        .sheet(isPresented: $showingDetails) {
-            SpeciesDetailsView(speciesID: obs.species_detail.id)
-        }
+//        .sheet(isPresented: $showingDetails) {
+//            SpeciesDetailsView(speciesID: obs.species_detail.id)
+//        }
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

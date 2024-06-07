@@ -12,22 +12,17 @@ import SwiftyBeaver
 class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
-    
-    var settings: Settings
-    init(settings: Settings) {
-        self.settings = settings
-    }
-    
-    func fetchData(for speciesID: Int) {
+        
+    func fetchData(language: String, for speciesID: Int) {
         guard let url = URL(string: endPoint()+"species/\(speciesID)/") else {
             return
         }
-        log.info("SpeciesDetailsViewModel speciesID: \(speciesID)")
+        log.error("SpeciesDetailsViewModel speciesID: \(speciesID)")
         
         let headers: HTTPHeaders = [
-            "Accept-Language": settings.selectedLanguage
+            "Accept-Language": language
         ]
-        log.verbose("SpeciesDetailsViewModel url: \(url)")
+        log.error("SpeciesDetailsViewModel url: \(url)")
         
     
         AF.request(url, headers: headers).responseDecodable(of: SpeciesDetails.self) { response in

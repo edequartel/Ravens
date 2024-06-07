@@ -136,7 +136,6 @@ struct SettingsView: View {
                             Double(settings.radius)
                         }, set: {
                             settings.radius = Int($0)
-                            settings.isRadiusChanged = true
                         }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
                         .padding()
                     }
@@ -154,35 +153,15 @@ struct SettingsView: View {
                     
                     
 //                    if !(settings.infinity) {
-                        Picker("Window", selection: $settings.days) {
-                            ForEach(1 ... 14, id: \.self) { day in
-                                HStack() {
-                                    Text("\(day)")
-                                }
+                    Picker("Window", selection: $settings.days) {
+                        ForEach(1 ... 14, id: \.self) { day in
+                            HStack() {
+                                Text("\(day)")
                             }
                         }
-                        .onChange(of: settings.days) {
-//                            settings.isFirstAppear = true
-//                            settings.isFirstAppearObsView = true
-                        }
-                        
-                        DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
-                            .onChange(of: settings.selectedDate) {
-                                // Perform your action when the date changes
-                                observationsRadiusViewModel.fetchData(lat: settings.currentLocation?.coordinate.latitude ?? latitude,
-                                                                long: settings.currentLocation?.coordinate.longitude ?? longitude, settings: settings,
-                                                                completion:
-                                                                    {
-                                    log.info("fetchData observationsViewModel completed")
-                                } )
-                            }
-                            .onChange(of: settings.selectedDate) {
-//                                settings.isFirstAppear = true
-//                                settings.isFirstAppearObsView = true
-                            }
-//                    }
+                    }
                     
-                    
+                    DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                 }
                 
 //                Section("International") {

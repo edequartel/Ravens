@@ -20,6 +20,7 @@ struct ObservationsView: View {
         VStack {
             if (!keyChainViewModel.token.isEmpty) {
                 if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
+//                let results = observationsRadiusViewModel.observations?.results ?? []
                     List {
                         ForEach(results.sorted(
                             by: {
@@ -42,39 +43,33 @@ struct ObservationsView: View {
     
     func getDataRadiusModel() {
         if settings.initialRadiusLoad {
-            print("OBS LIST only when start first time")
             if locationManagerModel.checkLocation() {
-                let location = locationManagerModel.getCurrentLocation() //<<
-                settings.currentLocation = location //<<
-//                settings.circlePos = location?.coordinate
-                //for the radius
-//                fetchDataLocation(location: location?.coordinate)
-                observationsRadiusViewModel.fetchData(
-                    lat: location?.coordinate.latitude ?? 0,
-                    long: location?.coordinate.longitude ?? 0,
-                    settings: settings,
-                    completion: {
-                        log.info("settings.initialRadiusLoad observationsViewModel data loaded")
-                    })
+                let location = locationManagerModel.getCurrentLocation()
+                settings.currentLocation = location
+                fetchDataLocation(location: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.error("error observationsView getDataRadiusModel initialRadiusLoad")
             }
             settings.initialRadiusLoad = false
         }
-        //
+        
         if settings.isRadiusChanged {
-            print("changed Radius")
-            if let circlePosition = settings.circlePos {
-                fetchDataLocation(location: circlePosition)
+            if locationManagerModel.checkLocation() {
+                let location = settings.currentLocation //and now for the saved locations
+                fetchDataLocation(location: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.error("error observationsView getDataRadiusModel isRadiusChanged")
             }
             settings.isRadiusChanged = false
         }
     }
-    
+
     func fetchDataLocation(location: CLLocationCoordinate2D) {
         observationsRadiusViewModel.fetchData(
             lat: location.latitude,
             long: location.longitude,
             settings: settings,
-            completion: { print("observationsViewModel.locations") }
+            completion: { log.info("LIST observationsViewModel.locations") }
         )
     }
 }

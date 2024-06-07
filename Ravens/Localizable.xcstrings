@@ -1111,6 +1111,9 @@
         }
       }
     },
+    "SpeciesDetailsView %lld" : {
+
+    },
     "Standard" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -15,11 +15,11 @@ struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var viewSDModel = SpeciesDetailsViewModel(settings: Settings())
+    @StateObject var viewSDModel = SpeciesDetailsViewModel()
     
-    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
+//    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
-
+@State var i = 0
 //    var item: Species
     var speciesID: Int
     
@@ -38,15 +38,19 @@ struct SpeciesDetailsView: View {
                                 }
                                 Divider()
                                     .frame(height: 20)
-                                AFImageView(media: species.photo)
-                                    .frame(maxWidth: .infinity, maxHeight: 400)
-                                Divider()
-                                    .frame(height: 20)
-                                    .opacity(0)
-                                YearView(speciesId: speciesID)// speciesID)
-                                Divider()
-                                    .frame(height: 20)
-                                    .opacity(0)
+                                
+                                Text(species.photo)
+                                
+//                                AFImageView(media: species.photo)
+//                                    .frame(maxWidth: .infinity, maxHeight: 400)
+//                                Divider()
+//                                    .frame(height: 20)
+//                                    .opacity(0)
+//                                YearView(speciesId: speciesID)
+//                                Divider()
+//                                    .frame(height: 20)
+//                                    .opacity(0)
+//
                                 RichText(html: species.info_text)
                                 Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                             } else {
@@ -58,7 +62,7 @@ struct SpeciesDetailsView: View {
 //        }
         .onAppear {
             log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
-            viewSDModel.fetchData(for: speciesID)
+            viewSDModel.fetchData(language: settings.selectedLanguage, for: speciesID)
         }
     }
 }

@@ -18,12 +18,6 @@ class ObservationsYearViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-//    var settings: Settings
-//    init(settings: Settings) {
-//        log.info("init ObservationsYearViewModel")
-//        self.settings = settings
-//    }
-    
     
     func fetchMonthData(language: String, speciesId: Int) {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -61,7 +55,7 @@ class ObservationsYearViewModel: ObservableObject {
 //                print("\(m) \(daystring)")
                 fetchData(language: language, speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
                     count = count + 1
-                    print(">>>> \(count)")
+                    self.log.error("count \(count)")
                     self.log.error("\(monthString) : value: \(value)")
                     self.maanden[m-1] = (value) //deze waarde later meenemen
 //                    self.months[m-1] = (value)

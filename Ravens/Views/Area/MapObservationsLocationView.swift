@@ -87,6 +87,7 @@ struct MapObservationsLocationView: View {
                         if let coordinate = proxy.convert(position, from: .local) {
                             fetchLocationData(coordinate: coordinate)
                         }
+                        cameraPosition = getCameraPosition()
                     }
 
                     .mapControls() {
