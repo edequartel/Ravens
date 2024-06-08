@@ -21,7 +21,6 @@ struct ObservationsSpeciesView: View {
     
     var item: Species
     
-    @State private var isSheetPresented = false
     @State private var endOfListReached = false
     @State private var showingDetails = false
     
@@ -43,45 +42,36 @@ struct ObservationsSpeciesView: View {
                         Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
                     }
                             
-//                    Spacer()
                     Button(action: {
                         showingDetails = true
-//                        isSheetPresented = true
                     }) {
                         Image(systemName: "info.circle")
                             .font(.title2)
                     }
                     .tint(.blue)
                     
-                    .sheet(isPresented: $showingDetails) { //<<---
-                        SpeciesDetailsView(speciesID: item.id)
-//                        Text("xxx SpeciesDetailsView \(item.id)")
-//                        AFImageView(media: item.photo)
-//                            .frame(maxWidth: .infinity, maxHeight: 400)
-                    }
                     
-//                    .sheet(isPresented: $showingDetails) {
-//                                VStack {
-//                                    HStack {
-//                                        Spacer()
-//                                        Button(action: {
-//                                            showingDetails = false
-//                                        }) {
-//                                            Image(systemName: "xmark")
-//                                                .font(.title)
-//                                                .padding()
-//                                                .foregroundColor(.white)
-//                                        }
-//                                    }
-//                                    Text("xxx SpeciesDetailsView \(item.id)")
-//                                    // Rest of your sheet content
-//                                }
-//                                .background(Color.blue) // or whatever color you want
-//                            }
+                    .sheet(isPresented: $showingDetails) {
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            showingDetails = false
+                                        }) {
+                                            Image(systemName: "xmark")
+                                                .font(.title)
+                                                .padding()
+                                                .foregroundColor(.white)
+                                        }
+                                    }
+                                    Text("SpeciesDetailsView \(item.id)")
+                                    // Rest of your sheet content
+                                }
+                                .background(Color.blue) // or whatever color you want
+                            }
                 }
                 VStack {
                     HStack {
-//                        let secondName = speciesViewModel.findSpeciesByID(speciesID: item.id)
                         Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
                             .foregroundColor(.gray)
                             .font(.footnote)
@@ -119,15 +109,6 @@ struct ObservationsSpeciesView: View {
                 }
             }
         }
-//
-        
-//        .sheet(isPresented: $isSheetPresented) {
-//            SpeciesDetailsView(speciesID: item.id)
-//                        Text("xxx SpeciesDetailsView \(item.id)")
-//                        AFImageView(media: item.photo)
-//                            .frame(maxWidth: .infinity, maxHeight: 400)
-//        }
-//
         .refreshable {
             print("refreshing...")
             fetchDataModel()
