@@ -97,6 +97,9 @@
     "Areas" : {
 
     },
+    "Button" : {
+
+    },
     "Cache Empty" : {
       "localizations" : {
         "nl" : {
@@ -680,6 +683,7 @@
       }
     },
     "More at waarneming.nl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

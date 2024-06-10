@@ -31,13 +31,19 @@ struct ObservationsRadiusView: View {
                             }), id: \.id) {
                                 result in
                                 ObsRadiusView(obs: result, showUsername: false)
-                                    .onTapGesture {
-                                        speciesID = result.species_detail.id
-                                        showingDetails = true
+                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        Button {
+                                            log.info("Button tapped")
+                                            speciesID = result.species_detail.id
+                                            showingDetails.toggle()
+                                        } label: {
+                                            Label("Button", systemImage: "star")
+                                        }
                                     }
                             }
                     }
                     .sheet(isPresented: $showingDetails) {
+//                        Text("Details for speciesID: \(speciesID)")
                         SpeciesDetailsView(speciesID: speciesID)
                     }
                 } else {

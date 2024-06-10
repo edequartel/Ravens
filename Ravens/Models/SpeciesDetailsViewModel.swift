@@ -24,8 +24,6 @@ class SpeciesDetailsViewModel: ObservableObject {
         let headers: HTTPHeaders = [
             "Accept-Language": language
         ]
-        log.error("SpeciesDetailsViewModel url: \(url)")
-        
     
         AF.request(url, headers: headers).responseDecodable(of: SpeciesDetails.self) { response in
             switch response.result {
