@@ -13,14 +13,12 @@ import AlamofireImage
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var viewSDModel = SpeciesDetailsViewModel()
+    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
     
 //    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
-//@State var i = 0
-//    var item: Species
+
     var speciesID: Int
     
     var body: some View {
@@ -39,17 +37,18 @@ struct SpeciesDetailsView: View {
                                 Divider()
                                     .frame(height: 20)
                                 
-                                Text(species.photo)
+//                                Text(species.photo)
                                 
                                 AFImageView(media: species.photo)
                                     .frame(maxWidth: .infinity, maxHeight: 400)
                                 Divider()
                                     .frame(height: 20)
                                     .opacity(0)
-                                YearView(speciesId: speciesID)
-                                Divider()
-                                    .frame(height: 20)
-                                    .opacity(0)
+                                
+//                                YearView(speciesId: speciesID)
+//                                Divider()
+//                                    .frame(height: 20)
+//                                    .opacity(0)
 
                                 RichText(html: species.info_text)
                                 Link("More at waarneming.nl", destination: URL(string: species.permalink)!)

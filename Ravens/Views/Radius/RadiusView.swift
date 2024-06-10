@@ -15,9 +15,9 @@ struct RadiusView: View {
         NavigationView {
             VStack {
                 if showFirstView {
-                    MapObservationView()
+                    MapObservationRadiusView()
                 } else {
-                    ObservationsView()
+                    ObservationsRadiusView()
                 }
             }
             .toolbar {

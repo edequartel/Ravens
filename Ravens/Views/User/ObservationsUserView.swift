@@ -20,9 +20,8 @@ struct ObservationsUserView: View {
             if let results = observationsUserViewModel.observations?.results, results.count > 0 {
                 List {
                     if let results =  observationsUserViewModel.observations?.results {
-                        ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) {
-                            result in
-                            ObsUserView(obs: result)
+                        ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) { obs in
+                            ObsUserView(obs: obs)
                         }
                     }
                 }

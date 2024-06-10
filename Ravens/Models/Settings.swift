@@ -95,7 +95,6 @@ class Settings: ObservableObject {
     }
     
     
-    
     @Published var initialUsersLoad = true
     @Published var initialLoadLocation = true
     @Published var initialLoadArea = true
@@ -129,16 +128,18 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
     @Published var selectedSpeciesGroup = 1 {
         didSet {
-            log.info("!!saving it in storage: \(selectedSpeciesGroup)")
-            selectedSpeciesGroupStored = selectedSpeciesGroupId
+            log.error("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
+            selectedSpeciesGroupStored = selectedSpeciesGroup
+            if !isInit { isRadiusChanged = true }
         }
     }
     
     @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
     @Published var selectedSpeciesGroupId = 1 {
         didSet {
-            log.info("!!saving it in storage: \(selectedSpeciesGroupId)")
+            log.error("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
             selectedSpeciesGroupIdStored = selectedSpeciesGroupId
+            if !isInit { isRadiusChanged = true }
         }
     }
     
@@ -155,6 +156,7 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving it in storage: \(selectedLanguage)")
             selectedLanguageStored = selectedLanguage
+            if !isInit { isRadiusChanged = true }
         }
     }
 
@@ -163,6 +165,7 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving it in storage: \(selectedSecondLanguage)")
             selectedSecondLanguageStored = selectedSecondLanguage
+            if !isInit { isRadiusChanged = true }
         }
     }
     
@@ -172,8 +175,6 @@ class Settings: ObservableObject {
             return .standard(elevation: .realistic)
         case .hybrid:
             return .hybrid(elevation: .realistic)
-//        case .imagery:
-//            return .imagery(elevation: .realistic)
         }
     }
     

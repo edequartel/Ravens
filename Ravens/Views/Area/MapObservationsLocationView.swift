@@ -96,7 +96,7 @@ struct MapObservationsLocationView: View {
                     }
                 }
             }
-            .onAppear() {
+            .onAppear() { //check hier
                 if settings.initialLoadArea {
                     log.info("MapObservationsLocationView onAppear")
                     if locationManagerModel.checkLocation() {
@@ -106,6 +106,7 @@ struct MapObservationsLocationView: View {
                         settings.initialLoadArea = false
                     }
                 }
+                cameraPosition = getCameraPosition()
             }
         }
     }

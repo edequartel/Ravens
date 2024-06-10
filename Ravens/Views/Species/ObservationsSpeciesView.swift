@@ -51,24 +51,24 @@ struct ObservationsSpeciesView: View {
                     .tint(.blue)
                     
                     
-                    .sheet(isPresented: $showingDetails) {
-                                VStack {
-                                    HStack {
-                                        Spacer()
-                                        Button(action: {
-                                            showingDetails = false
-                                        }) {
-                                            Image(systemName: "xmark")
-                                                .font(.title)
-                                                .padding()
-                                                .foregroundColor(.white)
-                                        }
-                                    }
-                                    Text("SpeciesDetailsView \(item.id)")
-                                    // Rest of your sheet content
-                                }
-                                .background(Color.blue) // or whatever color you want
-                            }
+//                    .sheet(isPresented: $showingDetails) {
+//                                VStack {
+//                                    HStack {
+//                                        Spacer()
+//                                        Button(action: {
+//                                            showingDetails = false
+//                                        }) {
+//                                            Image(systemName: "xmark")
+//                                                .font(.title)
+//                                                .padding()
+//                                                .foregroundColor(.white)
+//                                        }
+//                                    }
+//                                    Text("SpeciesDetailsView \(item.id)")
+//                                    // Rest of your sheet content
+//                                }
+//                                .background(Color.blue) // or whatever color you want
+//                            }
                 }
                 VStack {
                     HStack {

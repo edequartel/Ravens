@@ -50,10 +50,10 @@ struct AFImageView: View {
         }
 
         let path = imagesDirectory.appendingPathComponent(url.lastPathComponent)
-//        print("path: \(path)")
+        log.info("path: \(path)")
 
         if let imageData = try? Data(contentsOf: path), let uiImage = UIImage(data: imageData) {
-//            print("Loaded image from disk")
+            log.info("Loaded image from disk")
             self.downloadedImage = Image(uiImage: uiImage)
         } else {
             log.info("Downloading image from \(url)")
@@ -141,9 +141,25 @@ struct AFImageView: View {
             }
         }
     }
-
-    
 }
+
+
+//struct ZoomImageView: View {
+//    @GestureState private var scale: CGFloat = 1.0  // Change here
+//    var image: Image
+//
+//    var body: some View {
+//        ScrollView([.horizontal, .vertical], showsIndicators: true) {
+//            image
+//                .resizable()
+//                .scaledToFit()
+//                .gesture(MagnificationGesture().updating($scale, body: { (value, scale, transaction) in
+//                    scale = value.magnitude
+//                }))
+//                .scaleEffect(scale)
+//        }
+//    }
+//}
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {

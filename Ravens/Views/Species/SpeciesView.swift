@@ -162,8 +162,8 @@ struct SpeciesView: View {
         
         
         .sheet(item: $selectedInfoItem) { item in
-//            SpeciesDetailsView(speciesID: item.id)
-            Text("SpeciesDetailsView \(item.id)")
+            SpeciesDetailsView(speciesID: item.id)
+//            Text("SpeciesDetailsView \(item.id)")
         }
         
         .sheet(item: $selectedMapItem) { item in

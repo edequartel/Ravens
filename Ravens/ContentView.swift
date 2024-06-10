@@ -38,19 +38,19 @@ struct RavensView: View {
 //                }
             
             // Tab 1
-            if settings.radiusPreference {
+//            if settings.radiusPreference {
                 RadiusView()
                     .tabItem {
                         Text("Radius")
                         Image(systemName: "circle")
                     }
-            } else {
-                LocationView()
-                    .tabItem {
-                        Text("Area")
-                        Image(systemName: "pentagon")
-                    }
-            }
+//            } else {
+//                LocationView()
+//                    .tabItem {
+//                        Text("Area")
+//                        Image(systemName: "pentagon")
+//                    }
+//            }
             // Tab 2
             TabUserObservationsView()
                 .tabItem {

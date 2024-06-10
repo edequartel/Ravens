@@ -76,6 +76,7 @@ struct RavensApp: App {
     @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
     @StateObject var userViewModel =  UserViewModel()
     @StateObject var observationsUserViewModel = ObservationsUserViewModel()
+    @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
     
     @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
     @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
@@ -129,6 +130,7 @@ struct RavensApp: App {
                 .environmentObject(locationIdViewModel)
                 .environmentObject(geoJSONViewModel)
                 .environmentObject(poiViewModel)
+                .environmentObject(speciesDetailsViewModel)
                     
                 .environmentObject(bookMarksViewModel)
                 .environmentObject(observersViewModel)
@@ -146,7 +148,8 @@ struct RavensApp: App {
                     self.parts = urlString.split(separator: "/").map(String.init)
                     showingAlert = true
                     
-                    //  observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+                    // Add the observer
+                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
                     
                     // Create the notification content
                     let content = UNMutableNotificationContent()

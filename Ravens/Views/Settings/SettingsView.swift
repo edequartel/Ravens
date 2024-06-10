@@ -84,7 +84,7 @@ struct SettingsView: View {
                             settings.selectedSpeciesGroupName = selectedGroup.name
                             }
                         
-                        print("+++> \(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
+                        log.info("\(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
                        
                         speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
                         speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
@@ -103,11 +103,7 @@ struct SettingsView: View {
 //                    Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
                     
-                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
-//                        .onChange(of: settings.radiusPreference) {
-//                            log.error(settings.radiusPreference)
-//                            settings.initialLoadArea = true
-//                        }
+//                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
                     
                     Toggle("Map", isOn: $settings.mapPreference)
                     

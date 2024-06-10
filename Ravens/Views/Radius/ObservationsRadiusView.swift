@@ -1,5 +1,5 @@
 //
-//  ObservationsView.swift
+//  ObservationsRadiusView.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 11/01/2024.
@@ -9,18 +9,20 @@ import SwiftUI
 import SwiftyBeaver
 import MapKit
 
-struct ObservationsView: View {
+struct ObservationsRadiusView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var showingDetails = false
+    @State private var speciesID = 58
+    
     var body: some View {
         VStack {
             if (!keyChainViewModel.token.isEmpty) {
                 if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
-//                let results = observationsRadiusViewModel.observations?.results ?? []
                     List {
                         ForEach(results.sorted(
                             by: {
@@ -29,13 +31,21 @@ struct ObservationsView: View {
                             }), id: \.id) {
                                 result in
                                 ObsRadiusView(obs: result, showUsername: false)
+                                    .onTapGesture {
+                                        speciesID = result.species_detail.id
+                                        showingDetails = true
+                                    }
                             }
+                    }
+                    .sheet(isPresented: $showingDetails) {
+                        SpeciesDetailsView(speciesID: speciesID)
                     }
                 } else {
                     ProgressView()
                 }
             }
         }
+
         .onAppear() {
             getDataRadiusModel()
         }
@@ -77,7 +87,7 @@ struct ObservationsView: View {
 struct ObservationsView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        ObservationsView()
+        ObservationsRadiusView()
             .environmentObject(ObservationsRadiusViewModel())
             .environmentObject(KeychainViewModel())
     }

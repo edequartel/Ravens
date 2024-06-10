@@ -117,7 +117,7 @@ class ObservationsUserViewModel: ObservableObject {
 
         let url = endPoint() + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)" 
 
-        log.info("fetchData ObservationsUserViewModel \(url)")
+        log.error("fetchData ObservationsUserViewModel \(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

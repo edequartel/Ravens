@@ -1,4 +1,4 @@
-//  MapObservationView.swift
+//  MapObservationRadiusView.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 09/01/2024.
@@ -8,7 +8,7 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
-struct MapObservationView: View {
+struct MapObservationRadiusView: View {
     let log = SwiftyBeaver.self
     
     @State private var POIs: [POI] = []
@@ -18,10 +18,7 @@ struct MapObservationView: View {
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var settings: Settings
     
-//    @State private var circlePos: CLLocationCoordinate2D?
     @State private var cameraPosition: MapCameraPosition = .automatic
-    
-    @State private var initialLoad = true
     
     var body: some View {
 
@@ -29,7 +26,7 @@ struct MapObservationView: View {
                 MapReader { proxy in
                     Map(position: $cameraPosition) { // centre and span for the camera
                         
-//                        UserAnnotation() //give dynamically the users position
+                        UserAnnotation() //give dynamically the users position
                         
                         // POI
                         if (settings.poiOn) {
@@ -174,7 +171,7 @@ struct MapObservationView: View {
 struct MapObservationView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-        MapObservationView()
+        MapObservationRadiusView()
             .environmentObject(Settings())
             .environmentObject(ObservationsRadiusViewModel())
             .environmentObject(KeychainViewModel())

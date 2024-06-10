@@ -15,21 +15,21 @@ import AVFoundation
 struct ObsUserView: View {
     let log = SwiftyBeaver.self
     
-    @StateObject var obsViewModel = ObsViewModel()
+//    @StateObject var obsViewModel = ObsViewModel()
     
-    @EnvironmentObject var settings: Settings
+//    @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     
-    @State private var selectedImageURL: URL?
-    @State private var isShareSheetPresented = false
+//    @State private var selectedImageURL: URL?
+//    @State private var isShareSheetPresented = false
     @State private var showingDetails = false
     
     @State var obs: Observation
 
     var body: some View {
-        LazyVStack {
+//        LazyVStack {
             VStack {
                 HStack {
                     Image(systemName: "circle.fill")
@@ -46,9 +46,7 @@ struct ObsUserView: View {
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                        //                                        if isNumberInBookMarks(number: species.id) {
                         Image(systemName: "star.fill")
-//                            .foregroundColor(.gray)
                     }
                 }
                 
@@ -75,7 +73,6 @@ struct ObsUserView: View {
                     Spacer()
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                         Image(systemName: "pentagon.fill")
-//                            .foregroundColor(.gray)
                     }
                 }
                 
@@ -99,12 +96,6 @@ struct ObsUserView: View {
                     }
                 }
             }
-            .onTapGesture(count: 1) {
-                if let url = URL(string: obs.permalink) {
-                    UIApplication.shared.open(url)
-                }
-            }
-            
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
                 Button(action: {
@@ -122,7 +113,7 @@ struct ObsUserView: View {
                     Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
                 }
                 .tint(.green)
-            
+                
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
                         print("bookmarks remove")
@@ -135,7 +126,7 @@ struct ObsUserView: View {
                     Image(systemName: "star.fill")
                 }
                 .tint(.obsStar)
-
+                
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
@@ -155,11 +146,10 @@ struct ObsUserView: View {
                 }
                 .tint(.blue)
             }
-        }
+//        }
 //        .sheet(isPresented: $showingDetails) {
 //            SpeciesDetailsView(speciesID: obs.species_detail.id)
 //        }
-
     }
 }
 

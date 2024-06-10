@@ -120,11 +120,11 @@ struct ObsAreaView: View {
                 }
             }
             
-            .onTapGesture(count: 1) {
-                if let url = URL(string: obs.permalink) {
-                    UIApplication.shared.open(url)
-                }
-            }
+//            .onTapGesture(count: 1) {
+//                if let url = URL(string: obs.permalink) {
+//                    UIApplication.shared.open(url)
+//                }
+//            }
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button(action: {

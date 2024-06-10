@@ -9,15 +9,17 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
+
+
 class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
         
     func fetchData(language: String, for speciesID: Int) {
-        guard let url = URL(string: endPoint()+"species/\(speciesID)/") else {
-            return
-        }
         log.error("SpeciesDetailsViewModel speciesID: \(speciesID)")
+        
+        let url = endPoint()+"species/\(speciesID)/"
+        log.error("SpeciesDetailsViewModel url: \(url)")
         
         let headers: HTTPHeaders = [
             "Accept-Language": language
