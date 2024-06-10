@@ -42,13 +42,13 @@ struct ObservationsSpeciesView: View {
                         Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
                     }
                             
-                    Button(action: {
-                        showingDetails = true
-                    }) {
-                        Image(systemName: "info.circle")
-                            .font(.title2)
-                    }
-                    .tint(.blue)
+//                    Button(action: {
+//                        showingDetails = true
+//                    }) {
+//                        Image(systemName: "info.circle")
+//                            .font(.title2)
+//                    }
+//                    .tint(.blue)
                     
                     
 //                    .sheet(isPresented: $showingDetails) {

@@ -84,7 +84,6 @@
       }
     },
     "Area" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -95,9 +94,6 @@
       }
     },
     "Areas" : {
-
-    },
-    "Button" : {
 
     },
     "Cache Empty" : {
@@ -683,7 +679,6 @@
       }
     },
     "More at waarneming.nl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

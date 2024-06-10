@@ -115,8 +115,8 @@ struct ObsRadiusView: View {
 //                }
 //            }
             
-//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//                
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                
 //                Button(action: {
 //                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
 //                    showingDetails = true
@@ -124,52 +124,52 @@ struct ObsRadiusView: View {
 //                    Image(systemName: "info.circle")
 //                }
 //                .tint(.blue)
-//
-//                //
-//                Button(action: {
-//                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-//                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
-//                        areasViewModel.removeRecord(
-//                            areaID: obs.location_detail?.id ?? 0)
-//                    } else {
-//                        print("adding area \(obs.location_detail?.id ?? 0)")
-//                        areasViewModel.appendRecord(
-//                            areaName: obs.location_detail?.name ?? "unknown",
-//                            areaID: obs.location_detail?.id ?? 0)
-//                    }
-//                }) {
-//                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
-//                    
-//                }
-//                .tint(.green)
-//                
-//                Button(action: {
-//                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-//                        log.info("bookmarks remove")
-//                        bookMarksViewModel.removeRecord(speciesID:  obs.species_detail.id)
-//                    } else {
-//                        bookMarksViewModel.appendRecord(speciesID:  obs.species_detail.id)
-//                        log.info("bookmarks append")
-//                    }
-//
-//                } ) {
-//                    Image(systemName: "star")
-//                }
-//                .tint(.obsStar)
-//                
-//                
-//                //
-//                
-//                Button(action: {
-//                    if let url = URL(string: obs.permalink) {
-//                        UIApplication.shared.open(url)
-//                    }
-//                }) {
-//                    Image(systemName: "binoculars.fill")
-//                }
-//                .tint(.yellow)
-//
-//            }
+
+                //
+                Button(action: {
+                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.removeRecord(
+                            areaID: obs.location_detail?.id ?? 0)
+                    } else {
+                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        areasViewModel.appendRecord(
+                            areaName: obs.location_detail?.name ?? "unknown",
+                            areaID: obs.location_detail?.id ?? 0)
+                    }
+                }) {
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    
+                }
+                .tint(.green)
+                
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+                        log.info("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID:  obs.species_detail.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID:  obs.species_detail.id)
+                        log.info("bookmarks append")
+                    }
+
+                } ) {
+                    Image(systemName: "star")
+                }
+                .tint(.obsStar)
+                
+                
+                //
+                
+                Button(action: {
+                    if let url = URL(string: obs.permalink) {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    Image(systemName: "binoculars.fill")
+                }
+                .tint(.yellow)
+
+            }
             
             
 //        }

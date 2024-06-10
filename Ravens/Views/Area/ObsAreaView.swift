@@ -183,13 +183,13 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsStar)
                 
-                Button(action: {
-                    log.info("Button tapped + Show Image from URL \(obs.species_detail.id)")
-                    showingDetails = true
-                }) {
-                    Image(systemName: "info.circle")
-                }
-                .tint(.blue)
+//                Button(action: {
+//                    log.info("Button tapped + Show Image from URL \(obs.species_detail.id)")
+//                    showingDetails = true
+//                }) {
+//                    Image(systemName: "info.circle")
+//                }
+//                .tint(.blue)
             }
         }
         

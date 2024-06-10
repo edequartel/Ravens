@@ -138,13 +138,13 @@ struct ObsUserView: View {
                 }
                 .tint(.yellow)
                 
-                Button(action: {
-                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
-                    showingDetails = true
-                }) {
-                    Image(systemName: "info.circle")
-                }
-                .tint(.blue)
+//                Button(action: {
+//                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
+//                    showingDetails = true
+//                }) {
+//                    Image(systemName: "info.circle")
+//                }
+//                .tint(.blue)
             }
 //        }
 //        .sheet(isPresented: $showingDetails) {

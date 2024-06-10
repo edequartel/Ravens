@@ -103,7 +103,7 @@ struct SettingsView: View {
 //                    Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
                     
-//                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
+                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
                     
                     Toggle("Map", isOn: $settings.mapPreference)
                     
