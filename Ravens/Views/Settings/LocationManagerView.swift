@@ -13,11 +13,12 @@ struct LocationManagerView: View {
     var body: some View {
         VStack {
             if let location = locationManager.location {
-                VStack(alignment: .leading) {
-                    Text("GPS Location")
+                HStack() {
+                    Text("GPS ")
                         .bold()
-                    Text("Latitude: \(location.coordinate.latitude)")
-                    Text("Longitude: \(location.coordinate.longitude)")
+                    Text("Lat \(location.coordinate.latitude, format: .number.precision(.fractionLength(2)))")
+                    Text("Long \(location.coordinate.longitude, format: .number.precision(.fractionLength(2)))")
+                    Spacer()
                 }
             } else if let errorMessage = locationManager.errorMessage {
                 Text("Error: \(errorMessage)")
@@ -25,15 +26,15 @@ struct LocationManagerView: View {
                 Text("Retrieving location...")
             }
             
-            Button(action: {
-                if let currentLocation = locationManager.getCurrentLocation() {
-                    print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
-                } else {
-                    print("Location not available")
-                }
-            }) {
-                Text("Get Current Location")
-            }
+//            Button(action: {
+//                if let currentLocation = locationManager.getCurrentLocation() {
+//                    print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
+//                } else {
+//                    print("Location not available")
+//                }
+//            }) {
+//                Text("Get Current Location")
+//            }
         }
         .font(.caption2)
     }

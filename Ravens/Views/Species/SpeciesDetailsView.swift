@@ -37,7 +37,7 @@ struct SpeciesDetailsView: View {
                                 Divider()
                                     .frame(height: 20)
                                 
-                                Text(species.photo)
+//                                Text(species.photo)
                                 
                                 AFImageView(media: species.photo)
                                     .frame(maxWidth: .infinity, maxHeight: 400)

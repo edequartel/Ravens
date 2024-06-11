@@ -42,16 +42,17 @@ struct MapObservationsUserView: View {
                     }
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                VStack {
-                    SettingsDetailsView(
-                        count: observationsUserViewModel.locations.count,
-                        results: observationsUserViewModel.observations?.results.count ?? 0)
-                }
-                .padding(5)
-                .foregroundColor(.obsGreenFlower)
-                .background(Color.obsGreenEagle.opacity(0.5))
-            }
+//            .safeAreaInset(edge: .bottom) {
+//                VStack {
+//                    SettingsDetailsView(
+//                        count: observationsUserViewModel.locations.count,
+//                        results: observationsUserViewModel.observations?.results.count ?? 0)
+//                }
+//                .padding(5)
+//                .foregroundColor(.obsGreenFlower)
+//                .background(Color.obsGreenEagle.opacity(0.5))
+//            }
+            
             .mapStyle(settings.mapStyle)
 
             .mapControls() {

@@ -26,95 +26,96 @@ struct ObservationsSpeciesView: View {
     
     
     var body: some View {
-        VStack() {            
+        VStack {
+            HStack {
+                Image(systemName: "circle.fill")
+                    .foregroundColor(Color(myColor(value: item.rarity)))
+                Text("\(item.name) - \(item.id)")
+                    .bold()
+                    .lineLimit(1) // Set the maximum number of lines to 1
+                    .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+                Spacer()
+                
+                
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
+                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
+                }
+                
+                Button(action: {
+                    showingDetails = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .font(.title2)
+                }
+                .tint(.blue)
+            }
             VStack {
                 HStack {
-                    Image(systemName: "circle.fill")
-                        .foregroundColor(Color(myColor(value: item.rarity)))
-                    Text("\(item.name)")// \(item.id)")
-                        .bold()
+                    Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
+                        .foregroundColor(.gray)
+                        .font(.footnote)
+                    Spacer()
+                }
+                HStack{
+                    Text("\(item.scientific_name)")
+                        .foregroundColor(.gray)
+                        .font(.footnote)
+                        .italic()
                         .lineLimit(1) // Set the maximum number of lines to 1
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
-                    
-
-                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
-                        Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
-                    }
-                            
-//                    Button(action: {
-//                        showingDetails = true
-//                    }) {
-//                        Image(systemName: "info.circle")
-//                            .font(.title2)
-//                    }
-//                    .tint(.blue)
-                    
-                    
-//                    .sheet(isPresented: $showingDetails) {
-//                                VStack {
-//                                    HStack {
-//                                        Spacer()
-//                                        Button(action: {
-//                                            showingDetails = false
-//                                        }) {
-//                                            Image(systemName: "xmark")
-//                                                .font(.title)
-//                                                .padding()
-//                                                .foregroundColor(.white)
-//                                        }
-//                                    }
-//                                    Text("SpeciesDetailsView \(item.id)")
-//                                    // Rest of your sheet content
-//                                }
-//                                .background(Color.blue) // or whatever color you want
-//                            }
                 }
-                VStack {
-                    HStack {
-                        Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
-                            .foregroundColor(.gray)
-                            .font(.footnote)
-                        Spacer()
-                    }
-                    HStack{
-                        Text("\(item.scientific_name)")
-                            .foregroundColor(.gray)
-                            .font(.footnote)
-                            .italic()
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        Spacer()
-                    }
-                }
-                
-                
             }
-                
-            .padding()
             
-            List {
-                if let results = observationsSpeciesViewModel.observationsSpecies?.results {
-                    let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
-                    ForEach(sortedResults.indices, id: \.self) { index in
-                        let result = sortedResults[index]
-                        
-                        ObsSpeciesView(obs: result)
-                            .onAppear {
-                                if index == sortedResults.count - 1 {
-                                    endOfListReached = true
-                                }
+            
+        }
+        
+        .padding()
+        
+        List {
+            if let results = observationsSpeciesViewModel.observationsSpecies?.results {
+                let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
+                ForEach(sortedResults.indices, id: \.self) { index in
+                    let result = sortedResults[index]
+                    
+                    ObsSpeciesView(obs: result)
+                        .onAppear {
+                            if index == sortedResults.count - 1 {
+                                endOfListReached = true
                             }
-                    }
+                        }
                 }
             }
+            
         }
+        
+        .sheet(isPresented: $showingDetails) {
+            VStack {
+                HStack {
+                    Button(action: {
+                        showingDetails = false
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black)
+                            .padding()
+                    }
+                    
+                    Spacer()
+                }
+                SpeciesDetailsView(speciesID: item.id)
+            }
+                }
+        
         .refreshable {
             print("refreshing...")
             fetchDataModel()
         }
+        
         .onAppear() {
-            fetchDataModel()
+            if settings.initialSpeciesLoad {
+                fetchDataModel()
+                settings.initialSpeciesLoad = false
+            }
         }
     }
     

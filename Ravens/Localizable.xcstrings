@@ -14,6 +14,16 @@
         }
       }
     },
+    "%@ - %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ - %2$lld"
+          }
+        }
+      }
+    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -307,9 +317,6 @@
         }
       }
     },
-    "Get Current Location" : {
-
-    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -332,7 +339,7 @@
         }
       }
     },
-    "GPS Location" : {
+    "GPS " : {
 
     },
     "Group" : {
@@ -429,6 +436,7 @@
       }
     },
     "Infinity (only location)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -502,6 +510,9 @@
           }
         }
       }
+    },
+    "Lat %@" : {
+
     },
     "Latitude: %lf" : {
 
@@ -612,6 +623,9 @@
           }
         }
       }
+    },
+    "Long %@" : {
+
     },
     "Longitude: %lf" : {
 

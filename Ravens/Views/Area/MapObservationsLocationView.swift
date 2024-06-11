@@ -29,7 +29,7 @@ struct MapObservationsLocationView: View {
                 MapReader { proxy in
                     Map(position: $cameraPosition) {
                         
-//                        UserAnnotation()
+                        UserAnnotation()
                         
                         // POI
                         if (settings.poiOn) {
@@ -85,9 +85,15 @@ struct MapObservationsLocationView: View {
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {
-                            fetchLocationData(coordinate: coordinate)
+                            settings.currentLocation = CLLocation(
+                                latitude: coordinate.latitude,
+                                longitude: coordinate.longitude
+                            )
+                            
+                            fetchDataLocation(coordinate: coordinate)
                         }
-                        cameraPosition = getCameraPosition()
+                        
+//                        cameraPosition = getCameraPosition()
                     }
 
                     .mapControls() {
@@ -96,31 +102,50 @@ struct MapObservationsLocationView: View {
                     }
                 }
             }
-            .onAppear() { //check hier
-                if settings.initialLoadArea {
-                    log.info("MapObservationsLocationView onAppear")
-                    if locationManagerModel.checkLocation() {
-                        let location = locationManagerModel.getCurrentLocation()
-                        let defaultCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-                        fetchLocationData(coordinate: location?.coordinate ?? defaultCoordinate)
-                        settings.initialLoadArea = false
-                    }
-                }
-                cameraPosition = getCameraPosition()
+            .onAppear() {
+                getDataAreaModel()
+//                cameraPosition = getCameraPosition()
+                
             }
         }
     }
     
+    func getDataAreaModel() {
+        log.error("getDataAreaModel")
+        if settings.initialAreaLoad {
+            log.error("MapObservationsLocationView onAppear")
+            if locationManagerModel.checkLocation() {
+                let location = locationManagerModel.getCurrentLocation()
+                settings.currentLocation = location
+                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.error("error observationsLocationsView getDataAreaModel initialAreaLoad")
+            }
+            settings.initialAreaLoad = false
+        }
+        
+        if settings.isAreaChanged {
+            log.error("isAreaChanged")
+            if locationManagerModel.checkLocation() {
+                let location = settings.currentLocation
+                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
+            }
+            settings.isRadiusChanged = false
+        }
+    }
     
-    func fetchLocationData(coordinate: CLLocationCoordinate2D) {
+    
+    func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
+        log.error("fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             completion: { fetchedLocations in
-                log.info("locationIdViewModel data loaded")
+                log.error("locationIdViewModel data loaded")
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
-                settings.locationId = fetchedLocations[0].id
                 for location in fetchedLocations {
                     log.error(location)
                 }
@@ -130,21 +155,25 @@ struct MapObservationsLocationView: View {
                     for: fetchedLocations[0].id,
                     completion:
                         {
-                            log.info("geoJSONViewModel data loaded")
+                            log.error("geoJSONViewModel data loaded")
+                            
                             //2. get the observations for this area
-                            observationsLocationViewModel.fetchData( //settings??
+                            observationsLocationViewModel.fetchData(
                                 locationId: fetchedLocations[0].id,
                                 limit: 100,
                                 offset: 0,
                                 settings: settings,
                                 completion: {
-                                    log.info("observationsLocationViewModel data loaded")
-//                                    cameraPosition = getCameraPosition()
+                                    log.error("observationsLocationViewModel data loaded")
+                                    
+                                    cameraPosition = getCameraPosition() //automatic of not?
+                                    
                                 })
                         }
                 )
             })
     }
+
     
     
     func colorByMapStyle() -> Color {
@@ -183,102 +212,3 @@ struct MapObservationsLocationView: View {
 //}
 
 
-//        .onAppear() {
-//            log.error("MapObservationLocationView onAppear")
-//
-//            //get the POIs
-//            viewModel.fetchPOIs(completion: { POIs = viewModel.POIs} )
-//
-//            //get the location
-//            if settings.initialLoadLocation {
-//                log.error("MapObservationView initiaLLoad, get data at startUp and Position")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { //opstarten
-////                    settings.currentLocation = self.locationManager.location
-//
-//
-//                    //get the observations
-//                    //geoJSON
-//                    polyOverlays.removeAll()
-//                    locationIdViewModel.fetchLocations(
-//                        latitude: settings.currentLocation?.coordinate.latitude ?? 0,
-//                        longitude: settings.currentLocation?.coordinate.longitude ?? 0) { fetchedLocations in
-//                            // Use fetchedLocations here //actually it is one location
-////                            for location in fetchedLocations {
-////                                geoJSONViewModel.fetchGeoJsonData(for: String(location.id)) { polyOverlaysIn in
-////                                    polyOverlays = polyOverlaysIn
-////                                    settings.locationId = location.id
-////                                    settings.locationName = location.name // the first is the same
-////
-////                                    print(">>>> \(settings.locationName) \(settings.locationId)")
-////
-////                                    fetchDataModel()
-////                                    cameraPosition = getCameraPosition()
-////                                }
-////                            }
-//                        }
-//
-//                    //only once
-//                    settings.initialLoadLocation = false
-//                }
-//            } else {
-////                circlePos = settings.currentLocation?.coordinate
-////                settings.currentLocation = self.locationManager.location
-////                settings.locationId = location.id
-////                settings.locationStr = location.name // the first is the same
-////                cameraPosition = getCameraPosition()
-//
-//
-//                fetchDataModel()
-//            }
-//
-//            //get selectedGroup
-//            log.verbose("settings.selectedGroupId:  \(settings.selectedSpeciesGroup)")
-//            speciesGroupsViewModel.fetchData(language: settings.selectedLanguage)
-//        }
-
-
-//HStack {
-//                                if settings.infinity {
-//                                    Spacer()
-//                                }
-                                
-                                
-//                                if !settings.infinity {
-//                                    Spacer()
-//                                    HStack {
-//                                        Spacer()
-//                                        Text("days ")
-//                                            .bold()
-//                                        Button(action: {
-//                                            if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//                                                settings.selectedDate = min(newDate, Date())
-//                                            }
-//                                            fetchDataModel()
-//                                        }) {
-//                                            Image(systemName: "backward.fill")
-//                                                .background(Color.clear)
-//                                        }
-//
-//                                        Button(action: {
-//                                            // Calculate the potential new date by adding days to the selected date
-//                                            if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-//                                                // Ensure the new date does not go beyond today
-//                                                settings.selectedDate = min(newDate, Date())
-//                                            }
-//                                            fetchDataModel()
-//
-//                                        }) {
-//                                            Image(systemName: "forward.fill")
-//                                        }
-//
-//                                        Button(action: {
-//                                            settings.selectedDate = Date()
-//                                            log.info("Date updated to \(settings.selectedDate)")
-//                                            fetchDataModel()
-//                                        }) {
-//                                            Image(systemName: "square.fill")
-//                                        }
-//                                    }
-//                                    .frame(maxHeight: 30)
-//                                }
-//                            }

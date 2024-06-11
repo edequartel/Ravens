@@ -25,27 +25,47 @@ struct ObservationsLocationView: View {
                 List {
                     if let results =  observationsLocationViewModel.observations?.results {
                         ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
-                            result in
-                            ObsAreaView(obs: result)
+                            obs in
+                            ObsAreaView(obs: obs)
                         }
                     }
                 }
             }
+        
             .onAppear()  {
-            if settings.initialLoadArea {
-                log.info("MapObservationsLocationView onAppear")
-                if locationManagerModel.checkLocation() {
-                    let location = locationManagerModel.getCurrentLocation()
-                    let defaultCoordinate = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-                    fetchLocationData(coordinate: location?.coordinate ?? defaultCoordinate)
-                    settings.initialLoadArea = false
-                }
+                getDataAreaModel()
             }
+    }
+     
+    func getDataAreaModel() {
+        log.info("getDataAreaModel")
+        if settings.initialAreaLoad {
+            log.info("MapObservationsLocationView onAppear")
+            if locationManagerModel.checkLocation() {
+                let location = locationManagerModel.getCurrentLocation()
+                settings.currentLocation = location
+                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.info("error observationsLocationsView getDataAreaModel initialAreaLoad")
+            }
+            settings.initialAreaLoad = false
+        }
+        
+        if settings.isAreaChanged {
+            log.info("isAreaChanged")
+            if locationManagerModel.checkLocation() {
+                let location = settings.currentLocation
+                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+            } else {
+                log.info("error observationsLocationsView getDataAreaModel isAreaChanged")
+            }
+            settings.isRadiusChanged = false
         }
     }
-        
     
-    func fetchLocationData(coordinate: CLLocationCoordinate2D) {
+    
+    func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
+        log.info("fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
@@ -63,15 +83,15 @@ struct ObservationsLocationView: View {
                     completion:
                         {
                             log.info("geoJSONViewModel data loaded")
+                            
                             //2. get the observations for this area
-                            observationsLocationViewModel.fetchData( //settings??
+                            observationsLocationViewModel.fetchData(
                                 locationId: fetchedLocations[0].id,
                                 limit: 100,
                                 offset: 0,
                                 settings: settings,
                                 completion: {
                                     log.info("observationsLocationViewModel data loaded")
-//                                    cameraPosition = getCameraPosition()
                                 })
                         }
                 )

@@ -27,17 +27,23 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving it in storage: \(days)")
             daysStored = days
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+                initialSpeciesLoad = true
+            }
         }
     }
     
     @AppStorage("listpreference") var listPreference: Bool = false
     
+//    @AppStorage("obsSource") var obsSource: String = "waarneming.nl"
+    
 
     @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
-    @AppStorage("infinity") var infinity: Bool = true
+//    @AppStorage("infinity") var infinity: Bool = true
     @AppStorage("selectedRarity") var selectedRarity = 1
     @AppStorage("radiusPreference") var radiusPreference = true
     
@@ -57,7 +63,11 @@ class Settings: ObservableObject {
     @Published var selectedDate: Date = Date() {
         didSet {
             log.info("!!saving selectedDate it in storage: \(selectedDate)")
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+                initialSpeciesLoad = true
+            }
         }
     }
     
@@ -85,19 +95,38 @@ class Settings: ObservableObject {
         }
     }
     
+    @Published var initialAreaLoad = true {
+        didSet {
+            log.error("!!initialLoadArea saving it initialLoadArea: \(initialAreaLoad)")
+        }
+    }
+    
+    @Published var isAreaChanged = false {
+        didSet {
+            log.error("!!isAreaChanged saving it areaChanged: \(isAreaChanged)")
+        }
+    }
+    
+    @Published var initialSpeciesLoad = true {
+        didSet {
+            log.error("!!initialSpeciesLoad saving it to speciesLoad: \(initialSpeciesLoad)")
+        }
+    }
+    
+    
     @AppStorage("radius") var radiusStored: Int = 500 //init op 500m
     @Published var radius: Int = 500 {
         didSet {
             log.error("!!radius saving it in storage: \(radius)")
             radiusStored = radius
-            if !isInit { isRadiusChanged = true } //<<-- bij start deze meling niet... of wel?? checkthis
+            if !isInit { isRadiusChanged = true }
         }
     }
     
     
     @Published var initialUsersLoad = true
     @Published var initialLoadLocation = true
-    @Published var initialLoadArea = true
+
     
 
     @Published var userId: Int = 0

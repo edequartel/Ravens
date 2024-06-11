@@ -88,7 +88,10 @@ struct MapObservationsSpeciesView: View {
             
         }
         .onAppear {
-            fetchDataModel()
+            if settings.initialSpeciesLoad {
+                fetchDataModel()
+                settings.initialSpeciesLoad = false
+            }
         }
     }
     

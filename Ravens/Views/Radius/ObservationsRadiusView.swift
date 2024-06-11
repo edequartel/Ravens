@@ -64,7 +64,7 @@ struct ObservationsRadiusView: View {
                 settings.currentLocation = location
                 fetchDataLocation(location: location?.coordinate ?? CLLocationCoordinate2D())
             } else {
-                log.error("error observationsView getDataRadiusModel initialRadiusLoad")
+                log.error("error observationsRadiusView getDataRadiusModel initialRadiusLoad")
             }
             settings.initialRadiusLoad = false
         }

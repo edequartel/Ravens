@@ -55,15 +55,15 @@ class ObservationsLocationViewModel: ObservableObject {
         let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
-        log.info("date after \(date_after)")
-        log.info("date before \(date_before)")
+        log.error("date after \(date_after)")
+        log.error("date before \(date_before)")
         
         var url = endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
         
         
-        if !settings.infinity {
-            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
-        }
+//        if !settings.infinity {
+        url = url + "&date_after=\(date_after)&date_before=\(date_before)"
+//        }
         
         log.info("ObservationsLocationViewModel \(url)")
         
