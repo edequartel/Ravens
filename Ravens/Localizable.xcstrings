@@ -93,6 +93,9 @@
         }
       }
     },
+    "Append URL" : {
+
+    },
     "Area" : {
       "localizations" : {
         "nl" : {
@@ -233,6 +236,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Details"
+          }
+        }
+      }
+    },
+    "Do you want to append this %@ %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to append this %1$@ %2$@?"
           }
         }
       }
@@ -764,6 +777,9 @@
     "Next" : {
 
     },
+    "No" : {
+
+    },
     "nobsavaliable" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1252,7 +1268,6 @@
       }
     },
     "Yes" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

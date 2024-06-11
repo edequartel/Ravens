@@ -171,6 +171,17 @@ struct RavensApp: App {
                         }
                     }
                 }
+                
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Append URL"),
+                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
+                          primaryButton: .default(Text("Yes")) {
+                        print("Appending \(parts[0]) \(parts[1])")
+                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
+                    },
+                          secondaryButton: .cancel(Text("No")))
+                }
+            
         }
     }
 }
