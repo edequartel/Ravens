@@ -21,7 +21,13 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var settings: Settings
 
     var body: some View {
+        
             VStack {
+                Text(settings.locationName)
+                    .bold()
+                    .lineLimit(1)
+                    .foregroundColor(.blue)
+//                    .padding()
                 List {
                     if let results =  observationsLocationViewModel.observations?.results {
                         ForEach(results
