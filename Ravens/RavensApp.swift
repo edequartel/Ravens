@@ -67,7 +67,6 @@ struct RavensApp: App {
     @StateObject var locationManager = LocationManagerModel()
     
     @StateObject var settings = Settings()
-   
     @StateObject var languagesViewModel = LanguagesViewModel()
     @StateObject var speciesViewModel = SpeciesViewModel()
     @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()

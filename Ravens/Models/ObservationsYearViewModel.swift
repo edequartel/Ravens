@@ -24,29 +24,29 @@ class ObservationsYearViewModel: ObservableObject {
         let folderURL = documentsURL.appendingPathComponent("countObservations")
         var count = 0
         
-        log.error(folderURL)
+        log.info(folderURL)
         let fileURL = folderURL.appendingPathComponent("\(speciesId).json")
         
         //        if false { 
         if FileManager.default.fileExists(atPath: fileURL.path) {
             do {
-                log.error("filexists")
+                log.info("filexists")
                 let jsonData = try Data(contentsOf: fileURL)
                 if let dataDict = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any] {
-                    log.error("Loaded data from file: \(dataDict)")
+                    log.info("Loaded data from file: \(dataDict)")
                     if let loadedMonths = dataDict["months"] as? [Int] {
                         self.months = loadedMonths
                     } else {
-                        log.error("Failed to decode months array from JSON data.")
+                        log.info("Failed to decode months array from JSON data.")
                     }
                 } else {
-                    log.error("Failed to decode JSON data.")
+                    log.info("Failed to decode JSON data.")
                 }
             } catch {
-                log.error("Failed to load data from file: \(error)")
+                log.info("Failed to load data from file: \(error)")
             }
         } else {
-            log.error("file does not exists")
+            log.info("file does not exists")
             
             
             for m in 1...12 {
@@ -55,8 +55,8 @@ class ObservationsYearViewModel: ObservableObject {
 //                print("\(m) \(daystring)")
                 fetchData(language: language, speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
                     count = count + 1
-                    self.log.error("count \(count)")
-                    self.log.error("\(monthString) : value: \(value)")
+                    self.log.info("count \(count)")
+                    self.log.info("\(monthString) : value: \(value)")
                     self.maanden[m-1] = (value) //deze waarde later meenemen
 //                    self.months[m-1] = (value)
                     
@@ -70,7 +70,7 @@ class ObservationsYearViewModel: ObservableObject {
                         ]
                         
                         guard let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted) else {
-                            self.log.error("Failed to create JSON data.")
+                            self.log.info("Failed to create JSON data.")
                             return
                         }
                         
@@ -79,7 +79,7 @@ class ObservationsYearViewModel: ObservableObject {
                                 try FileManager.default.createDirectory(atPath: folderURL.path, withIntermediateDirectories: true, attributes: nil)
                             }
                         } catch {
-                            self.log.error("Failed to create directory: \(error.localizedDescription)")
+                            self.log.info("Failed to create directory: \(error.localizedDescription)")
                         }
                         
                         do {
@@ -127,7 +127,7 @@ class ObservationsYearViewModel: ObservableObject {
     }
     
     func fetchData(language: String, speciesId: Int, date_after: String, date_before: String, completion: @escaping (Int) -> Void) {
-        log.error("fetchData ObservationsYearViewModel - speciesID \(speciesId)")
+        log.info("fetchData ObservationsYearViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header

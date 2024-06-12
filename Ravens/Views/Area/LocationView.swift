@@ -49,6 +49,10 @@ struct LocationView: View {
                         Label("Areas", systemImage: "list.bullet")
                     }
                 }
+                
+            }
+            .onAppear {
+                print("LocationView onAppear")
             }
             .onAppearOnce {
                 showFirstView = settings.mapPreference

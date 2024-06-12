@@ -17,6 +17,7 @@ struct AFImageView: View {
     @EnvironmentObject var settings: Settings
     @State private var downloadedImage: SwiftUI.Image? = nil
     
+//    @Binding 
     var media: String
 
     var body: some View {
@@ -25,7 +26,7 @@ struct AFImageView: View {
                 image
                     .resizable()
                     .aspectRatio(nil, contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ProgressView()
@@ -142,24 +143,6 @@ struct AFImageView: View {
         }
     }
 }
-
-
-//struct ZoomImageView: View {
-//    @GestureState private var scale: CGFloat = 1.0  // Change here
-//    var image: Image
-//
-//    var body: some View {
-//        ScrollView([.horizontal, .vertical], showsIndicators: true) {
-//            image
-//                .resizable()
-//                .scaledToFit()
-//                .gesture(MagnificationGesture().updating($scale, body: { (value, scale, transaction) in
-//                    scale = value.magnitude
-//                }))
-//                .scaleEffect(scale)
-//        }
-//    }
-//}
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {

@@ -14,16 +14,6 @@
         }
       }
     },
-    "%@ - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$lld"
-          }
-        }
-      }
-    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -281,6 +271,9 @@
           }
         }
       }
+    },
+    "Error" : {
+
     },
     "Error: %@" : {
 
@@ -576,6 +569,9 @@
         }
       }
     },
+    "Locations" : {
+
+    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -846,6 +842,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "Password" : {
       "localizations" : {

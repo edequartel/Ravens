@@ -96,30 +96,33 @@ struct AreasView: View {
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.records, id: \.id) { record in
+//                ForEach(viewModel.records, id: \.id) { record in
+                ForEach(viewModel.records.sorted { $0.name < $1.name }) { record in
                     HStack{
                         Button(record.name) {
                             settings.locationName = record.name
                             settings.locationId = record.areaID
+                            settings.isLocationIDChanged = true
                             
-                            //1. get the geoJSON for this area
-                            geoJSONViewModel.fetchGeoJsonData(
-                                for: record.areaID,
-                                completion:
-                                    {
-                                        log.info("geoJSONViewModel data loaded")
-                                        //2. get the observations for this area
-                                        observationsLocationViewModel.fetchData( //settings??
-                                            locationId: record.areaID,
-                                            limit: 100,
-                                            offset: 0,
-                                            settings:
-                                                settings,
-                                            completion: {
-                                                log.info("observationsLocationViewModel data loaded")
-                                            })
-                                    }
-                            )
+//                            //1. get the geoJSON for this area
+//                            geoJSONViewModel.fetchGeoJsonData(
+//                                for: record.areaID,
+//                                completion:
+//                                    {
+//                                        log.info("geoJSONViewModel data loaded")
+//                                        //2. get the observations for this area
+//                                        observationsLocationViewModel.fetchData( //settings??
+//                                            locationId: record.areaID,
+//                                            limit: 100,
+//                                            offset: 0,
+//                                            settings:
+//                                                settings,
+//                                            completion: {
+//                                                log.info("observationsLocationViewModel data loaded")
+//                                            })
+//                                    }
+//                            )
+//                            
                             self.presentationMode.wrappedValue.dismiss()
                             
                         }
@@ -143,4 +146,7 @@ struct AreasView: View {
             viewModel.loadRecords()
         }
     }
+    
+    
+    
 }

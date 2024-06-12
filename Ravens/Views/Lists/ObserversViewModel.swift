@@ -129,7 +129,7 @@ struct ObserversView: View {
                 }
                 
                 
-                ForEach(observersViewModel.records) { record in
+                ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
                     HStack{
                         Button(record.name) {
                             settings.userId = record.userID

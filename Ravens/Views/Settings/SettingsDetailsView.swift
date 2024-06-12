@@ -29,7 +29,7 @@ struct SettingsDetailsView: View {
 //            if (settings.infinity && showInfinity) {
 //                Image(systemName: "infinity")
 //            } else {
-//                Text("\(settings.days)d")
+            Text("\(settings.days)d")
             Text("\(settings.selectedDate, formatter: dateFormatter)")
 //            }
         }

@@ -24,14 +24,15 @@ struct ObservationsLocationView: View {
             VStack {
                 List {
                     if let results =  observationsLocationViewModel.observations?.results {
-                        ForEach(results.sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
+                        ForEach(results
+                            .filter { $0.rarity >= settings.selectedRarity }
+                            .sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") }), id: \.id) {
                             obs in
                             ObsAreaView(obs: obs)
                         }
                     }
                 }
             }
-        
             .onAppear()  {
                 getDataAreaModel()
             }
@@ -39,6 +40,7 @@ struct ObservationsLocationView: View {
      
     func getDataAreaModel() {
         log.info("getDataAreaModel")
+        
         if settings.initialAreaLoad {
             log.info("MapObservationsLocationView onAppear")
             if locationManagerModel.checkLocation() {
@@ -59,7 +61,17 @@ struct ObservationsLocationView: View {
             } else {
                 log.info("error observationsLocationsView getDataAreaModel isAreaChanged")
             }
-            settings.isRadiusChanged = false
+            settings.isAreaChanged = false
+        }
+        
+        if settings.isLocationIDChanged {
+            log.error("isAreaChanged")
+            if locationManagerModel.checkLocation() {
+                fetchDataLocationID()
+            } else {
+                log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
+            }
+            settings.isLocationIDChanged = false
         }
     }
     
@@ -73,6 +85,7 @@ struct ObservationsLocationView: View {
                 log.info("locationIdViewModel data loaded")
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
+                settings.locationId = fetchedLocations[0].id
                 for location in fetchedLocations {
                     log.info(location)
                 }
@@ -96,6 +109,31 @@ struct ObservationsLocationView: View {
                         }
                 )
             })
+    }
+    
+    func fetchDataLocationID() {
+        log.error("fetchDataLocationID")
+        //1. get the geoJSON for this area / we pick the first one = 0
+        geoJSONViewModel.fetchGeoJsonData(
+            for: settings.locationId,
+            completion:
+                {
+                    log.error("geoJSONViewModel data loaded")
+                    
+                    //2. get the observations for this area
+                    observationsLocationViewModel.fetchData(
+                        locationId: settings.locationId,
+                        limit: 100,
+                        offset: 0,
+                        settings: settings,
+                        completion: {
+                            log.error("observationsLocationViewModel data loaded")
+                            
+                            //cameraPosition = getCameraPosition() //automatic of not?
+                            
+                        })
+                }
+        )
     }
 }
 

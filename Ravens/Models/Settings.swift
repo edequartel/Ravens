@@ -44,7 +44,18 @@ class Settings: ObservableObject {
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
 //    @AppStorage("infinity") var infinity: Bool = true
-    @AppStorage("selectedRarity") var selectedRarity = 1
+    
+    @AppStorage("selectedRarity") var selectedRarityStored = 1
+    @Published var selectedRarity = 1 {
+        didSet {
+            log.info("!!saving selectedRarity in storage: \(selectedRarity)")
+            selectedRarityStored = selectedRarity
+            if !isInit { isRadiusChanged = true }
+        }
+    }
+    
+    
+    
     @AppStorage("radiusPreference") var radiusPreference = true
     
     @AppStorage("mapPreference") var mapPreferenceStored = false //VIP
@@ -70,6 +81,8 @@ class Settings: ObservableObject {
             }
         }
     }
+    
+    @AppStorage("isLocationIDChanged") var isLocationIDChanged: Bool = false
     
     @Published var isConnected: Bool = false
     @Published var isFirstAppear: Bool = true
@@ -228,6 +241,7 @@ class Settings: ObservableObject {
 
         
         mapPreference = mapPreferenceStored
+        selectedRarity = selectedRarityStored
         
         //for updating published values
         days = daysStored

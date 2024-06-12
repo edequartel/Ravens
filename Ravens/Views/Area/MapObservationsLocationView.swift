@@ -47,7 +47,11 @@ struct MapObservationsLocationView: View {
                         }
                         
                         // location observations
-                        ForEach(observationsLocationViewModel.locations) { location in
+//                        ForEach(observationsLocationViewModel.locations) { location in
+//                        ForEach(observationsLocationViewModel.locations.sorted { $0.rarity < $1.rarity })
+                        ForEach(observationsLocationViewModel.locations.filter { $0.rarity >= settings.selectedRarity }) 
+                            { location in
+                            
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
                                     .fill(Color(myColor(value: location.rarity)))
@@ -103,6 +107,7 @@ struct MapObservationsLocationView: View {
                 }
             }
             .onAppear() {
+                print("MapObservationsLocationView onAppear")
                 getDataAreaModel()
 //                cameraPosition = getCameraPosition()
                 
@@ -132,8 +137,19 @@ struct MapObservationsLocationView: View {
             } else {
                 log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
             }
-            settings.isRadiusChanged = false
+            settings.isAreaChanged = false
         }
+        
+        if settings.isLocationIDChanged {
+            log.error("isAreaChanged")
+            if locationManagerModel.checkLocation() {
+                fetchDataLocationID()
+            } else {
+                log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
+            }
+            settings.isLocationIDChanged = false
+        }
+        
     }
     
     
@@ -146,6 +162,7 @@ struct MapObservationsLocationView: View {
                 log.error("locationIdViewModel data loaded")
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
+                settings.locationId = fetchedLocations[0].id
                 for location in fetchedLocations {
                     log.error(location)
                 }
@@ -174,7 +191,31 @@ struct MapObservationsLocationView: View {
             })
     }
 
-    
+    func fetchDataLocationID() {
+        log.error("fetchDataLocationID")
+        //1. get the geoJSON for this area / we pick the first one = 0
+        geoJSONViewModel.fetchGeoJsonData(
+            for: settings.locationId,
+            completion:
+                {
+                    log.error("geoJSONViewModel data loaded")
+                    
+                    //2. get the observations for this area
+                    observationsLocationViewModel.fetchData(
+                        locationId: settings.locationId,
+                        limit: 100,
+                        offset: 0,
+                        settings: settings,
+                        completion: {
+                            log.error("observationsLocationViewModel data loaded")
+                            
+                            cameraPosition = getCameraPosition() //automatic of not?
+                            
+                        })
+                }
+        )
+    }
+
     
     func colorByMapStyle() -> Color {
         if settings.mapStyleChoice == .standard {

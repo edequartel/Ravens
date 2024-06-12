@@ -10,6 +10,8 @@ import SwiftUI
 struct TabSpeciesView: View {
     @State private var showFirstView = false
     
+    @EnvironmentObject var settings: Settings
+    
     var item: Species
     
     var body: some View {
@@ -30,6 +32,9 @@ struct TabSpeciesView: View {
                     Image(systemName: "rectangle.2.swap") // Replace with your desired image
                 }
             }
+        }
+        .onAppear() {
+            settings.initialSpeciesLoad = true
         }
     }
 }

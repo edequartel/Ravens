@@ -112,6 +112,8 @@
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
 		47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */; };
+		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
+		47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -213,6 +215,7 @@
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsView.swift; sourceTree = "<group>"; };
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLocationsList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */,
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
@@ -434,6 +438,7 @@
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 				471875382BFB938500EF9F1F /* AreasViewModel.swift */,
+				47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				471875332BF7767600EF9F1F /* SwiftUIPager */,
 				471875362BF7B60500EF9F1F /* PartialSheet */,
 				4718753B2BFCA77000EF9F1F /* SVGView */,
+				47FAD0E02C19D25C007D0F63 /* Kingfisher */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -531,6 +537,7 @@
 				471875322BF7767600EF9F1F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				471875352BF7B60500EF9F1F /* XCRemoteSwiftPackageReference "PartialSheet" */,
 				4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */,
+				47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -639,6 +646,7 @@
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
 				4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
+				47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */,
 				4767F0052BF256B100BACDC6 /* TabSpeciesView.swift in Sources */,
 				474C409C2B500AE90038B3A5 /* ObservationsRadiusView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* AFImageView.swift in Sources */,
@@ -961,6 +969,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1018,6 +1034,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */;
 			productName = SwiftAudioEx;
+		};
+		47FAD0E02C19D25C007D0F63 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

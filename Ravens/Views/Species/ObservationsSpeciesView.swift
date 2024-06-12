@@ -30,7 +30,7 @@ struct ObservationsSpeciesView: View {
             HStack {
                 Image(systemName: "circle.fill")
                     .foregroundColor(Color(myColor(value: item.rarity)))
-                Text("\(item.name) - \(item.id)")
+                Text("\(item.name)")// - \(item.id)")
                     .bold()
                     .lineLimit(1) // Set the maximum number of lines to 1
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -41,13 +41,16 @@ struct ObservationsSpeciesView: View {
                     Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
                 }
                 
-                Button(action: {
-                    showingDetails = true
-                }) {
+                NavigationLink(destination: SpeciesDetailsView(speciesID: item.id)
+                                .navigationBarTitleDisplayMode(.inline)
+                                .navigationBarHidden(true),
+                               label: {
                     Image(systemName: "info.circle")
                         .font(.title2)
-                }
-                .tint(.blue)
+                        .foregroundColor(.blue)
+                })
+                
+
             }
             VStack {
                 HStack {
@@ -88,23 +91,6 @@ struct ObservationsSpeciesView: View {
             }
             
         }
-        
-        .sheet(isPresented: $showingDetails) {
-            VStack {
-                HStack {
-                    Button(action: {
-                        showingDetails = false
-                    }) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.black)
-                            .padding()
-                    }
-                    
-                    Spacer()
-                }
-                SpeciesDetailsView(speciesID: item.id)
-            }
-                }
         
         .refreshable {
             print("refreshing...")

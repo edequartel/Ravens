@@ -9,22 +9,21 @@ import SwiftUI
 import RichText
 import SwiftyBeaver
 import Alamofire
-import AlamofireImage
+import Kingfisher
 
 struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
-    
-    @EnvironmentObject var viewSDModel: SpeciesDetailsViewModel
-    
-//    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
+    @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
+    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
 
     var speciesID: Int
+    @State private var imageURL: String = ""
     
     var body: some View {
                     Form{
                         VStack(alignment: .leading) {
-                            if let species = viewSDModel.speciesDetails {
+                            if let species = viewSpeciesDetailsDModel.speciesDetails {
                                 VStack(alignment: .leading) {
                                     Text(species.name)
                                         .bold()
@@ -37,15 +36,21 @@ struct SpeciesDetailsView: View {
                                 Divider()
                                     .frame(height: 20)
                                 
-//                                Text(species.photo)
+                                if !imageURL.isEmpty {
+                                    KFImage(URL(string: imageURL))
+                                        .resizable()
+                                        .aspectRatio(nil, contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
+                                if !imageURL.isEmpty {
+                                    Divider()
+                                        .frame(height: 20)
+                                        .opacity(0)
+                                }
                                 
-                                AFImageView(media: species.photo)
-                                    .frame(maxWidth: .infinity, maxHeight: 400)
-                                Divider()
-                                    .frame(height: 20)
-                                    .opacity(0)
-                                
-//                                YearView(speciesId: speciesID)
+//                                YearView(speciesId: species.id)
+//                                
 //                                Divider()
 //                                    .frame(height: 20)
 //                                    .opacity(0)
@@ -59,12 +64,19 @@ struct SpeciesDetailsView: View {
                         }
                     }
 //        }
-        .onAppear {
-            log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
-            viewSDModel.fetchData(language: settings.selectedLanguage, for: speciesID)
-        }
+                    .onAppear {
+                        log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
+                        viewSpeciesDetailsDModel.fetchData(
+                            language: settings.selectedLanguage,
+                            for: speciesID,
+                            onCompletion: {
+                                print("SpeciesDetailsView onAppear \(viewSpeciesDetailsDModel.speciesDetails?.photo ?? "")")
+                                imageURL = viewSpeciesDetailsDModel.speciesDetails?.photo ?? ""
+                            } )
+                    }
     }
 }
+
 
 //#Preview {
 //    SpeciesDetailsView(item: Species())
