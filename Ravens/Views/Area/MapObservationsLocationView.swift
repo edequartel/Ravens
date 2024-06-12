@@ -96,21 +96,16 @@ struct MapObservationsLocationView: View {
                             
                             fetchDataLocation(coordinate: coordinate)
                         }
-                        
-//                        cameraPosition = getCameraPosition()
                     }
 
                     .mapControls() {
                         MapCompass() //tapping this makes it north
-                        
                     }
                 }
             }
             .onAppear() {
                 print("MapObservationsLocationView onAppear")
                 getDataAreaModel()
-//                cameraPosition = getCameraPosition()
-                
             }
         }
     }
@@ -152,9 +147,8 @@ struct MapObservationsLocationView: View {
         
     }
     
-    
     func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-        log.error("fetchDataLocation")
+        log.error("MapObservationsLocationView fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
@@ -163,6 +157,7 @@ struct MapObservationsLocationView: View {
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
                 settings.locationId = fetchedLocations[0].id
+                
                 for location in fetchedLocations {
                     log.error(location)
                 }
@@ -183,7 +178,7 @@ struct MapObservationsLocationView: View {
                                 completion: {
                                     log.error("observationsLocationViewModel data loaded")
                                     
-                                    cameraPosition = getCameraPosition() //automatic of not?
+//                                    cameraPosition = getCameraPosition() //automatic of not?
                                     
                                 })
                         }

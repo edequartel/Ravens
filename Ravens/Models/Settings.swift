@@ -82,7 +82,13 @@ class Settings: ObservableObject {
         }
     }
     
-    @AppStorage("isLocationIDChanged") var isLocationIDChanged: Bool = false
+    @AppStorage("isLocationIDChanged") var isLocationIDChangedStored: Bool = false
+    @Published var isLocationIDChanged: Bool = false {
+        didSet {
+            log.error("!!saving isLocationIDChanged in storage: \(isLocationIDChanged)")
+            isLocationIDChangedStored = isLocationIDChanged
+        }
+    }
     
     @Published var isConnected: Bool = false
     @Published var isFirstAppear: Bool = true
@@ -242,6 +248,12 @@ class Settings: ObservableObject {
         
         mapPreference = mapPreferenceStored
         selectedRarity = selectedRarityStored
+        
+        //
+//        isLocationIDChanged = true
+//        initialAreaLoad = true
+//        isAreaChanged = true
+        
         
         //for updating published values
         days = daysStored

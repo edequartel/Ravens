@@ -17,21 +17,31 @@ struct SettingsDetailsView: View {
     var showInfinity: Bool = true
     
     var body: some View {
-        HStack {
-            NetworkView()
-            Spacer()
-            Text("\(results)x")
-            Image(systemName: "binoculars.circle.fill")
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(myColor(value: settings.selectedRarity), .white)
-            Text(settings.selectedSpeciesGroupName)
-                .lineLimit(1)
-//            if (settings.infinity && showInfinity) {
-//                Image(systemName: "infinity")
-//            } else {
-            Text("\(settings.days)d")
-            Text("\(settings.selectedDate, formatter: dateFormatter)")
-//            }
+        VStack() {
+            HStack {
+                Text(settings.locationName)
+                Spacer()
+
+            }
+            HStack {
+                NetworkView()
+                Image(systemName: "binoculars.circle.fill")
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(myColor(value: settings.selectedRarity), .white)
+                Text(settings.selectedSpeciesGroupName)
+                    .lineLimit(1)
+                //            if (settings.infinity && showInfinity) {
+                //                Image(systemName: "infinity")
+                //            } else {
+                Spacer()
+                Text("\(results)x")
+                
+                Text("\(settings.days)d")
+                Text("\(settings.selectedDate, formatter: dateFormatter)")
+                //            }
+
+
+            }
         }
     }
     

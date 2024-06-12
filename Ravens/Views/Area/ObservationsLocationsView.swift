@@ -39,10 +39,11 @@ struct ObservationsLocationView: View {
     }
      
     func getDataAreaModel() {
-        log.info("getDataAreaModel")
-        
+        log.error("--> getDataAreaModel")
+//        print("YYY")
+        print(settings.initialAreaLoad)
         if settings.initialAreaLoad {
-            log.info("MapObservationsLocationView onAppear")
+            log.error("--> MapObservationsLocationView onAppear")
             if locationManagerModel.checkLocation() {
                 let location = locationManagerModel.getCurrentLocation()
                 settings.currentLocation = location
@@ -51,8 +52,12 @@ struct ObservationsLocationView: View {
                 log.info("error observationsLocationsView getDataAreaModel initialAreaLoad")
             }
             settings.initialAreaLoad = false
+//            print("XXXX")
+//            settings.isLocationIDChanged = true
+//            print("XXXX")
         }
         
+        print(settings.isAreaChanged)
         if settings.isAreaChanged {
             log.info("isAreaChanged")
             if locationManagerModel.checkLocation() {
@@ -64,8 +69,9 @@ struct ObservationsLocationView: View {
             settings.isAreaChanged = false
         }
         
+        print(settings.isLocationIDChanged)
         if settings.isLocationIDChanged {
-            log.error("isAreaChanged")
+            log.error("isLocationIDChanged")
             if locationManagerModel.checkLocation() {
                 fetchDataLocationID()
             } else {
@@ -128,9 +134,6 @@ struct ObservationsLocationView: View {
                         settings: settings,
                         completion: {
                             log.error("observationsLocationViewModel data loaded")
-                            
-                            //cameraPosition = getCameraPosition() //automatic of not?
-                            
                         })
                 }
         )

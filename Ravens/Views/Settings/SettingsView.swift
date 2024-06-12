@@ -34,15 +34,6 @@ struct SettingsView: View {
     var body: some View {
         
         NavigationView {
-//            Button("printme") {
-//                if (speciesViewModel.species.count > 0) {
-//                    print(speciesViewModel.species[0].name)
-//                }                
-//                if (speciesViewModel.speciesSecondLanguage.count > 0) {
-//                    print(speciesViewModel.speciesSecondLanguage[0].name)
-//                }
-//            }
-            
             List {
                 NavigationLink(destination: LoginView()) {
                     Text("Login")

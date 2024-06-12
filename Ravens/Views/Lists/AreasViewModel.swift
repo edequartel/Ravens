@@ -84,7 +84,7 @@ import SwiftyBeaver
 
 struct AreasView: View {
     let log = SwiftyBeaver.self
-    @EnvironmentObject private var viewModel: AreasViewModel
+    @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
     
     @EnvironmentObject private var observationsLocationViewModel: ObservationsLocationViewModel
@@ -96,8 +96,7 @@ struct AreasView: View {
     var body: some View {
         VStack {
             List {
-//                ForEach(viewModel.records, id: \.id) { record in
-                ForEach(viewModel.records.sorted { $0.name < $1.name }) { record in
+                ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
                     HStack{
                         Button(record.name) {
                             settings.locationName = record.name
@@ -132,7 +131,7 @@ struct AreasView: View {
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button() {
                             print("Delete")
-                            viewModel.removeRecord(areaID: record.areaID)
+                            areasViewModel.removeRecord(areaID: record.areaID)
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
@@ -143,7 +142,7 @@ struct AreasView: View {
             }
         }
         .onAppear {
-            viewModel.loadRecords()
+            areasViewModel.loadRecords()
         }
     }
     

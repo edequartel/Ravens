@@ -30,7 +30,7 @@ struct RavensView: View {
     
     var body: some View {
         TabView {
-            // Tab 0
+//            // Tab 0
 //            LocationListView()
 //                .tabItem {
 //                    Text("Records")

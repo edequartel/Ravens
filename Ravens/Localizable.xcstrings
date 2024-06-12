@@ -272,9 +272,6 @@
         }
       }
     },
-    "Error" : {
-
-    },
     "Error: %@" : {
 
     },
@@ -569,9 +566,6 @@
         }
       }
     },
-    "Locations" : {
-
-    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -843,9 +837,6 @@
         }
       }
     },
-    "OK" : {
-
-    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -1010,6 +1001,9 @@
           }
         }
       }
+    },
+    "Search" : {
+
     },
     "Search Wikipedia" : {
       "localizations" : {

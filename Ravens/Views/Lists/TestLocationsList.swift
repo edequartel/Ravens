@@ -68,30 +68,39 @@ class LocationXViewModel: ObservableObject {
 // MARK: - View
 
 struct LocationListView: View {
+    @EnvironmentObject private var areasViewModel: AreasViewModel
+    @EnvironmentObject private var settings: Settings
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @ObservedObject var viewModel = LocationXViewModel()
     
-//    @State private var searchText = ""
+    @State private var searchText = ""
+    @State private var locationID: Int = 0
 
     var body: some View {
-        NavigationView {
-//            TextField("Search", text: $searchText) {
-//                viewModel.fetchLocations(searchString: searchText)
-//            }
-            List(viewModel.locations) { location in
-                VStack(alignment: .leading) {
-                    Text(location.name)
-                        .font(.headline)
-//                    Text(location.permalink)
-//                        .font(.subheadline)
-//                        .foregroundColor(.blue)
+        VStack(alignment: .leading) { // Vertically stack the views with alignment to leading edge
+            Form {
+                TextField("Search", text: $searchText)
+                    .onSubmit {
+                        viewModel.fetchLocations(searchString: searchText)
+                    }
+                    .autocapitalization(.none)
+//                    .padding(.horizontal) // Add horizontal padding to TextField
+                
+                Picker("Location", selection: $locationID) {
+                    ForEach(viewModel.locations, id: \.id) { location in
+                        Text("\(location.name)")// \(location.id)")
+                    }
                 }
-            }
-            .navigationTitle("Locations")
-            .onAppear {
-                viewModel.fetchLocations(searchString: "telpost")
-            }
-            .alert(item: $viewModel.errorMessage) { errorMessage in
-                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                .pickerStyle(.inline)
+//                .padding(.horizontal)  Add horizontal padding to Picker
+                .onChange(of: locationID) {
+                    print("YYY: \(locationID)")
+                    settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
+                    settings.locationId = locationID
+                    settings.isLocationIDChanged = true
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
         }
     }

@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct LocationView: View {
-    @State private var showFirstView = true
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var areasViewModel: AreasViewModel
+    
+    @State private var searchText: String = ""
+    @State private var showFirstView = true
+    @State private var isShowingLocationList = false
     
     var body: some View {
         NavigationView {
@@ -21,8 +24,9 @@ struct LocationView: View {
                     ObservationsLocationView()
                 }
             }
-            .navigationTitle("\(settings.locationName)")
-            .navigationBarTitleDisplayMode(.inline)
+//            .navigationTitle(settings.locationName)
+//            .navigationBarTitleDisplayMode(.inline)
+
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -31,7 +35,7 @@ struct LocationView: View {
                         Image(systemName: "rectangle.2.swap")
                     }
                 }
-                
+    
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         if areasViewModel.isIDInRecords(areaID: settings.locationId) {
@@ -47,6 +51,12 @@ struct LocationView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AreasView()) {
                         Label("Areas", systemImage: "list.bullet")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: LocationListView()) {
+                        Image(systemName: "magnifyingglass")
                     }
                 }
                 
