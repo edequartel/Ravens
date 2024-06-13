@@ -107,12 +107,10 @@ struct ObservationsSpeciesView: View {
     
     func fetchDataModel() {
         observationsSpeciesViewModel.fetchData(
-            language: settings.selectedLanguage,
+            settings: settings,
             speciesId: item.id,
             limit: 100,
-            offset: 0,
-            date: settings.selectedDate,
-            days: settings.days
+            offset: 0
         )
     }
 }

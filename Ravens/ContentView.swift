@@ -139,7 +139,7 @@ struct SplashScreen: View {
                     })
                 
                 regionsViewModel.fetchData(
-                    language: settings.selectedLanguage,
+                    settings: settings,
                     completion: {
                         log.info("regionsViewModel data loaded")
                         isRegionDataLoaded = true

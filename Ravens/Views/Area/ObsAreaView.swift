@@ -201,7 +201,7 @@ struct ObsAreaView: View {
 
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
-                obsViewModel.fetchData(language: settings.selectedLanguage, for: obs.id ?? 0, completion: {
+                obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {
                     log.info("onAppear OBSView Happens")
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds

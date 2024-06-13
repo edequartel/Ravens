@@ -32,7 +32,11 @@ struct ObservationDetailsView: View {
             }
             .onAppear {
                 log.info("speciesID \(speciesID)")
-                viewModel.fetchData(language: settings.selectedLanguage, speciesId: speciesID, limit: 1, offset: 0, date: settings.selectedDate, days: settings.days
+                viewModel.fetchData(
+                    settings: settings,
+                    speciesId: speciesID,
+                    limit: 1, 
+                    offset: 0
                 )
             }
     }

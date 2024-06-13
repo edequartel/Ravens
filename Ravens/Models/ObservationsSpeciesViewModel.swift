@@ -39,7 +39,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchData(language: String, speciesId: Int, limit: Int, offset: Int, date: Date, days: Int, completion: (() -> Void)? = nil) {
+    func fetchData(settings: Settings, speciesId: Int, limit: Int, offset: Int, completion: (() -> Void)? = nil) {
         log.error("fetchData ObservationsSpeciesViewModel - speciesID \(speciesId)")
         keyChainViewModel.retrieveCredentials()
         
@@ -48,13 +48,13 @@ class ObservationsSpeciesViewModel: ObservableObject {
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
 
-        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
-        let date_before = formatCurrentDate(value: date)
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
+        let date_before = formatCurrentDate(value: settings.selectedDate)
         
-        let url = endPoint() + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
+        let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)&offset=\(offset)"
         
         log.info("\(url)")
 

@@ -29,7 +29,7 @@ struct LanguageView: View {
             .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedLanguage) {
                 speciesGroupsViewModel.fetchData(settings: settings) 
-                regionsViewModel.fetchData(language: settings.selectedLanguage)
+                regionsViewModel.fetchData(settings: settings)
                 //deze variable opslaan bij wijzigingen in region and species group settings
                 //als stored variabele later gebruiken bij opstarten
                 //en als published zodat de gewijzigd wordt en gelijk gebuikt
