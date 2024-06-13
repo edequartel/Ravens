@@ -67,7 +67,7 @@ struct SpeciesDetailsView: View {
                     .onAppear {
                         log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
                         viewSpeciesDetailsDModel.fetchData(
-                            language: settings.selectedLanguage,
+                            settings: settings,
                             for: speciesID,
                             onCompletion: {
                                 print("SpeciesDetailsView onAppear \(viewSpeciesDetailsDModel.speciesDetails?.photo ?? "")")

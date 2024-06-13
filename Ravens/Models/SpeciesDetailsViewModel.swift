@@ -14,14 +14,14 @@ class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
         
-    func fetchData(language: String, for speciesID: Int, onCompletion: (() -> Void)? = nil) {
+    func fetchData(settings: Settings, for speciesID: Int, onCompletion: (() -> Void)? = nil) {
         log.error("SpeciesDetailsViewModel speciesID: \(speciesID)")
         
         let url = endPoint(value: settings.selectedInBetween)+"species/\(speciesID)/"
         log.error("SpeciesDetailsViewModel url: \(url)")
         
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
         
         AF.request(url, headers: headers).responseDecodable(of: SpeciesDetails.self) { response in
