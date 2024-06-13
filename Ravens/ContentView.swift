@@ -122,11 +122,13 @@ struct SplashScreen: View {
                 
                 //?? deze standaard slechts 1 keer laden,
                 //?? betekend ergens opslaan, todo
-                languagesViewModel.fetchLanguageData(completion: {
-                    log.info("languagesViewModel Language data loaded")
-                    isLanguageDataLoaded = true
-                    checkDataLoaded()
-                })
+                languagesViewModel.fetchLanguageData(
+                    settings: settings,
+                    completion: {
+                        log.info("languagesViewModel Language data loaded")
+                        isLanguageDataLoaded = true
+                        checkDataLoaded()
+                    })
                 
                 speciesGroupViewModel.fetchData(
                     settings: settings,
@@ -145,7 +147,7 @@ struct SplashScreen: View {
                     })
                 
                 regionListViewModel.fetchData(
-                    language: settings.selectedLanguage,
+                    settings: settings,
                     completion: {
                         log.info("regionListViewModel data loaded")
                         isRegionListDataLoaded = true

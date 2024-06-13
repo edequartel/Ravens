@@ -13,9 +13,9 @@ class LanguagesViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var language: Language?
 
-    func fetchLanguageData(completion: (() -> Void)? = nil) {
-        log.info("fetchData LanguageViewModel \(endPoint())languages")
-        let url = endPoint()+"languages/"
+    func fetchLanguageData(settings: Settings, completion: (() -> Void)? = nil) {
+        log.info("fetchData LanguageViewModel \(endPoint(value: settings.selectedInBetween))languages")
+        let url = endPoint(value: settings.selectedInBetween)+"languages/"
         
         AF.request(url).responseDecodable(of: Language.self) { response in
             switch response.result {

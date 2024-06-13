@@ -24,15 +24,15 @@ class RegionListViewModel: ObservableObject {
         return -1
     }
     
-    func fetchData(language: String, completion: (() -> Void)? = nil) {
+    func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchData RegionListViewModel")
-        let url = endPoint()+"region-lists"
+        let url = endPoint(value: settings.selectedInBetween)+"region-lists"
         
         log.info("RegionListViewModel url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
 
         // Use Alamofire to make the API request
