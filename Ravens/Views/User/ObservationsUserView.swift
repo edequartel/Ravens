@@ -39,7 +39,7 @@ struct ObservationsUserView: View {
         .onAppear {
             if settings.initialUsersLoad {
                 observationsUserViewModel.fetchData(
-                    language: settings.selectedLanguage,
+                    settings: settings,
                     userId: settings.userId,
                     completion: { log.info("viewModel.fetchData completion") })
                 settings.initialUsersLoad = false
@@ -48,7 +48,7 @@ struct ObservationsUserView: View {
         .refreshable {
             log.info("refreshing")
             observationsUserViewModel.fetchData(
-                language: settings.selectedLanguage,
+                settings: settings,
                 userId: settings.userId,
                 completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
             )

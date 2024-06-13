@@ -55,14 +55,15 @@ class ObservationsRadiusViewModel: ObservableObject {
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
 
-    func fetchData(lat: Double, long: Double, settings: Settings, completion: @escaping () -> Void = {}) {
+    func fetchData(settings: Settings, lat: Double, long: Double, completion: @escaping () -> Void = {}) {
         log.error("fetchData ObservationsViewModel")
 
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
         ]
         
-        let url = endPoint()+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedSpeciesGroupId)&min_rarity=\(settings.selectedRarity)"
+        let url = endPoint(
+            value: settings.selectedInBetween)+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedSpeciesGroupId)&min_rarity=\(settings.selectedRarity)"
         
         log.info("fetchData ObservationsViewModel url \(url)")
         

@@ -150,9 +150,9 @@ struct MapObservationRadiusView: View {
 
     func fetchDataLocation(location: CLLocationCoordinate2D) {
         observationsRadiusViewModel.fetchData(
+            settings: settings,
             lat: location.latitude,
             long: location.longitude,
-            settings: settings,
             completion: {
                 log.info("MAP observationsViewModel.locations")
                 settings.cameraRadiusPosition = observationsRadiusViewModel.getCameraPosition()

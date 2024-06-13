@@ -72,7 +72,7 @@ struct MapObservationsUserView: View {
         .onAppear {
             if settings.initialUsersLoad {
                 observationsUserViewModel.fetchData(
-                    language: settings.selectedLanguage,
+                    settings: settings,
                     userId: settings.userId,
                     completion: { log.info("viewModel.fetchData completion") })
                 settings.initialUsersLoad = false

@@ -113,7 +113,7 @@ struct ObserversView: View {
                         settings.userName =  userViewModel.user?.name ?? ""
                         
                         observationsUserViewModel.fetchData(
-                            language: settings.selectedLanguage,
+                            settings: settings,
                             userId: userViewModel.user?.id ?? 0,
                             completion: { log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
                         
@@ -142,7 +142,7 @@ struct ObserversView: View {
                             settings.userName =  record.name
                            
                             observationsUserViewModel.fetchData(
-                                language: settings.selectedLanguage,
+                                settings: settings,
                                 userId: record.userID,
                                 completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
                                 )

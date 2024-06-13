@@ -105,17 +105,17 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(language: String, userId: Int, completion: @escaping () -> Void) {
+    func fetchData(settings: Settings, userId: Int, completion: @escaping () -> Void) {
         log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token,
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
 
-        let url = endPoint() + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)" 
+        let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
         log.error("fetchData ObservationsUserViewModel \(url)")
 

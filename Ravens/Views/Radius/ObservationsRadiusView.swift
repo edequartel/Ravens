@@ -69,9 +69,9 @@ struct ObservationsRadiusView: View {
 
     func fetchDataLocation(location: CLLocationCoordinate2D) {
         observationsRadiusViewModel.fetchData(
+            settings: settings,
             lat: location.latitude,
             long: location.longitude,
-            settings: settings,
             completion: { log.info("LIST observationsViewModel.locations") }
         )
     }
