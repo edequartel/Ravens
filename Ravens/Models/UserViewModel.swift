@@ -16,7 +16,7 @@ class UserViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
     
-    func fetchUserData(completion: (() -> Void)? = nil) {
+    func fetchUserData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchUserData")
         
         keyChainViewModel.retrieveCredentials()
@@ -25,7 +25,7 @@ class UserViewModel: ObservableObject {
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token
         ]
-        let url = endPoint() + "user/info/"
+        let url = endPoint(value: settings.selectedInBetween) + "user/info/"
         log.info("UserViewModel \(url)")
         
         AF.request(url, headers: headers).responseString { response in

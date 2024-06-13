@@ -62,8 +62,7 @@ class ObservationsRadiusViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
         
-        let url = endPoint(
-            value: settings.selectedInBetween)+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedSpeciesGroupId)&min_rarity=\(settings.selectedRarity)"
+        let url = endPoint(value:settings.selectedInBetween)+"observations/around-point/?days=\(settings.days)&end_date=\(formatCurrentDate(value: settings.selectedDate))&lat=\(lat)&lng=\(long)&radius=\(settings.radius)&species_group=\(settings.selectedSpeciesGroupId)&min_rarity=\(settings.selectedRarity)"
         
         log.info("fetchData ObservationsViewModel url \(url)")
         

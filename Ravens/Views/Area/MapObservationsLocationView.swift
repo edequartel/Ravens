@@ -175,10 +175,10 @@ struct MapObservationsLocationView: View {
                             
                             //2. get the observations for this area
                             observationsLocationViewModel.fetchData(
+                                settings: settings,
                                 locationId: fetchedLocations[0].id,
                                 limit: 100,
                                 offset: 0,
-                                settings: settings,
                                 completion: {
                                     log.info("observationsLocationViewModel data loaded")
                                     settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
@@ -199,10 +199,10 @@ struct MapObservationsLocationView: View {
                     
                     //2. get the observations for this area
                     observationsLocationViewModel.fetchData(
+                        settings: settings,
                         locationId: settings.locationId,
                         limit: 100,
                         offset: 0,
-                        settings: settings,
                         completion: {
                             log.error(">>>>observationsLocationViewModel data loaded")
                             

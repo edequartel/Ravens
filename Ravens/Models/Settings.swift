@@ -38,7 +38,14 @@ class Settings: ObservableObject {
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
     
-    @AppStorage("selectedInBetween") var selectedInBetween: String = "waarneming.nl"
+    @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
+    @Published var selectedInBetween: String = "waarneming.nl" {
+        didSet {
+            log.error("!!saving it in selectedInBetween: \(selectedInBetween)")
+            selectedInBetweenStored = selectedInBetween
+        }
+    }
+    
     
     @AppStorage("days") var daysStored: Int = 5
     @Published var days: Int = 5 {
@@ -266,6 +273,7 @@ class Settings: ObservableObject {
         
         mapPreference = mapPreferenceStored
         selectedRarity = selectedRarityStored
+        selectedInBetween = selectedInBetweenStored
         
         //
 //        isLocationIDChanged = true

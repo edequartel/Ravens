@@ -173,6 +173,7 @@ struct SplashScreen: View {
                 
                 //iedere keer
                 userViewModel.fetchUserData(
+                    settings: settings,
                     completion: {
                         log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
                         isUserDataLoaded = true

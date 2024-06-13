@@ -42,7 +42,7 @@ class ObservationsLocationViewModel: ObservableObject {
         }
     }
     
-    func fetchData(locationId: Int, limit: Int, offset: Int, settings: Settings, completion: (() -> Void)? = nil) {
+    func fetchData(settings: Settings, locationId: Int, limit: Int, offset: Int, completion: (() -> Void)? = nil) {
         log.info("fetchData ObservationsLocationViewModel locationid: \(locationId) limit:\(limit) offset: \(offset)")
         
         keyChainViewModel.retrieveCredentials()
@@ -59,7 +59,7 @@ class ObservationsLocationViewModel: ObservableObject {
         log.info("date after \(date_after)")
         log.info("date before \(date_before)")
         
-        var url = endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
+        var url = endPoint(value: settings.selectedInBetween) + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
         
         
 //        if !settings.infinity {

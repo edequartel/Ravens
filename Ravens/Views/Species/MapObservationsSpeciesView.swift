@@ -55,7 +55,7 @@ struct MapObservationsSpeciesView: View {
                     HStack {
                         NetworkView()
                         //
-                        Spacer()
+                       
                         Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")
                             .foregroundColor(.obsGreenFlower)
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -67,6 +67,7 @@ struct MapObservationsSpeciesView: View {
                         //
                         Text("\(settings.days)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
+                        Spacer()
                     }
                 }
                 .padding(5)
