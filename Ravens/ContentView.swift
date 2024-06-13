@@ -129,7 +129,7 @@ struct SplashScreen: View {
                 })
                 
                 speciesGroupViewModel.fetchData(
-                    language: settings.selectedLanguage,
+                    settings: settings,
                     completion: {
                         log.info("speciesGroupViewModel group data loaded")
                         isSpeciesGroupDataLoaded = true
@@ -154,8 +154,7 @@ struct SplashScreen: View {
                 
             
                 speciesViewModel.fetchDataFirst(
-                    language: settings.selectedLanguage,
-                    for: settings.selectedRegionListId,
+                    settings: settings,
                     completion: {
                         log.info("speciesViewModel First language data loaded")
                         isFirstLanguageDataLoaded = true
@@ -163,8 +162,7 @@ struct SplashScreen: View {
                     })
                 
                 speciesViewModel.fetchDataSecondLanguage(
-                    language: settings.selectedSecondLanguage,
-                    for: settings.selectedRegionListId,
+                    settings: settings,
                     completion: {
                         log.info("speciesViewModel Second language data loaded")
                         isSecondLanguageDataLoaded = true

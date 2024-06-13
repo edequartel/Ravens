@@ -27,6 +27,12 @@ class ObserversViewModel: ObservableObject {
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         filePath = documentsPath.appendingPathComponent("observers.json")
         
+        // Check if the file exists
+        if !fileManager.fileExists(atPath: filePath.path) {
+            // If the file does not exist, create it
+            fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
+        }
+        
         loadRecords()
     }
     
@@ -36,7 +42,7 @@ class ObserversViewModel: ObservableObject {
             records = try JSONDecoder().decode([Observer].self, from: data)
             log.info("Loaded \(records.count) observers")
         } catch {
-            print("Error loading data: \(error)")
+            log.error("Error loading data observers.json")
         }
     }
     

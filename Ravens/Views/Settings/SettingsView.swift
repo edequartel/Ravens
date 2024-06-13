@@ -77,8 +77,8 @@ struct SettingsView: View {
                         
                         log.info("\(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
                        
-                        speciesViewModel.fetchDataFirst(language: settings.selectedLanguage, for: settings.selectedRegionListId)
-                        speciesViewModel.fetchDataSecondLanguage(language: settings.selectedSecondLanguage, for: settings.selectedRegionListId)
+                        speciesViewModel.fetchDataFirst(settings: settings)
+                        speciesViewModel.fetchDataSecondLanguage(settings: settings)
 
                     }
                 }

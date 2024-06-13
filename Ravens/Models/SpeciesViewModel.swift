@@ -16,14 +16,14 @@ class SpeciesViewModel: ObservableObject {
     @Published var species = [Species]()
     @Published var speciesSecondLanguage = [Species]()
     
-    func fetchDataFirst(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
-        log.info("SpeciesViewModel fetchDataFirst \(language) groupID \(regionListId)")
-        let url = endPoint()+"region-lists/\(regionListId)/species/"
+    func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
+        log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
+        let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
 
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedLanguage
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in
@@ -50,14 +50,14 @@ class SpeciesViewModel: ObservableObject {
         }
     }
     
-    func fetchDataSecondLanguage(language: String, for regionListId: Int, completion: (() -> Void)? = nil) {
-        log.info("SpeciesViewModel fetchDataSecondLanguage \(language) groupID \(regionListId)")
+    func fetchDataSecondLanguage(settings: Settings, completion: (() -> Void)? = nil) {
+        log.info("SpeciesViewModel fetchDataSecondLanguage \(settings.selectedSecondLanguage) groupID \(settings.selectedRegionListId)")
 
-        let url = endPoint()+"region-lists/\(regionListId)/species/"
+        let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
-            "Accept-Language": language
+            "Accept-Language": settings.selectedSecondLanguage
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: [Species].self){ response in

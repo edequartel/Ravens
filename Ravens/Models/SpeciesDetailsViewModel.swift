@@ -17,7 +17,7 @@ class SpeciesDetailsViewModel: ObservableObject {
     func fetchData(language: String, for speciesID: Int, onCompletion: (() -> Void)? = nil) {
         log.error("SpeciesDetailsViewModel speciesID: \(speciesID)")
         
-        let url = endPoint()+"species/\(speciesID)/"
+        let url = endPoint(value: settings.selectedInBetween)+"species/\(speciesID)/"
         log.error("SpeciesDetailsViewModel url: \(url)")
         
         let headers: HTTPHeaders = [

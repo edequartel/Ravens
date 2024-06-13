@@ -23,13 +23,13 @@ class Settings: ObservableObject {
     
     @Published var cameraAreaPosition: MapCameraPosition = .automatic {
         didSet {
-            log.error("!!cameraAreaPosition saving it in cameraPosition: \(cameraAreaPosition)")
+            log.info("!!cameraAreaPosition saving it in cameraPosition: \(cameraAreaPosition)")
         }
     }
     
     @Published var locationCoordinate: CLLocationCoordinate2D? = nil {
         didSet {
-            log.error("!!locationCoordinate saving it in locationCoordinate: \(locationCoordinate?.latitude ?? 0)")
+            log.info("!!locationCoordinate saving it in locationCoordinate: \(locationCoordinate?.latitude ?? 0)")
         }
     }
     

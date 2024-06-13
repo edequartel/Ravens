@@ -41,7 +41,11 @@ func formatCurrentDate(value: Date) -> String {
 
 //var endPoint = "https://waarneming.nl/api/v1/"
 var selectedInBetween = "waarneming.nl"
-func endPoint() -> String {
+func endPoint(value: String = "") -> String {
+//func endPoint() -> String {
+    if value != "" {
+        selectedInBetween = value
+    }
    return "https://"+selectedInBetween+"/api/v1/"
 }
 
