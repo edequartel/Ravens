@@ -9,22 +9,29 @@ import SwiftUI
 
 struct WikipediaView: View {
     @StateObject var viewModel = WikipediaViewModel()
-    @State private var topic = ""
+//    @State private var topic = ""
+    
+    var topic: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Search Wikipedia", text: $topic, onCommit: {
-                    viewModel.fetchDetails(topic: topic)
-                })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .padding(.horizontal, 20)  // Extra horizontal padding for the text field
+//                TextField("Search Wikipedia", text: topic, onCommit: {
+//                    viewModel.fetchDetails(topic: topic)
+//                })
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+//                .padding()
+//                .padding(.horizontal, 20)  // Extra horizontal padding for the text field
                 
                 if viewModel.isLoading {
                     ProgressView()
                 } else {
                     VStack(alignment: .leading, spacing: 20) {  // Increased spacing for elements within the VStack
+                        Text(viewModel.pageDetail.title)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 5)  // Small padding below the title to separate from the text
+                        
                         if let thumbnail = viewModel.pageDetail.thumbnail {
                             AsyncImage(url: URL(string: thumbnail.source)) { image in
                                 image.resizable()
@@ -36,10 +43,6 @@ struct WikipediaView: View {
                             .cornerRadius(8)
                             .padding([.top, .horizontal], 20)  // Padding around the image
                         }
-                        Text(viewModel.pageDetail.title)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 5)  // Small padding below the title to separate from the text
                         
                         ScrollView {
                             Text(viewModel.pageDetail.extract)
@@ -50,7 +53,8 @@ struct WikipediaView: View {
                 }
             }
             .onAppear() {
-                viewModel.fetchDetails(topic: "koolmees")
+                print(topic)
+                viewModel.fetchDetails(topic: topic)
             }
             .navigationTitle("Wikipedia Explorer")
             .navigationBarTitleDisplayMode(.inline)

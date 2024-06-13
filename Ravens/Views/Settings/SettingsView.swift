@@ -130,13 +130,13 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-//                    if !(settings.radiusPreference) {
-//                        Toggle("Infinity (only location)", isOn: $settings.infinity)
-//                            .onChange(of: settings.infinity) {
-//                                //                            settings.isFirstAppear = true
-//                                //                            settings.isFirstAppearObsView = true
-//                            }
-//                    }
+                    if !(settings.radiusPreference) {
+                        Toggle("Infinity (only location)", isOn: $settings.infinity)
+                            .onChange(of: settings.infinity) {
+                                //                            settings.isFirstAppear = true
+                                //                            settings.isFirstAppearObsView = true
+                            }
+                    }
                     
                     
 //                    if !(settings.infinity) {

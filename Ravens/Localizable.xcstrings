@@ -462,7 +462,6 @@
       }
     },
     "Infinity (only location)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1022,6 +1021,7 @@
       }
     },
     "Search Wikipedia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

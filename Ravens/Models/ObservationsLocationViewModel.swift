@@ -62,9 +62,9 @@ class ObservationsLocationViewModel: ObservableObject {
         var url = endPoint(value: settings.selectedInBetween) + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
         
         
-//        if !settings.infinity {
+        if !settings.infinity {
         url = url + "&date_after=\(date_after)&date_before=\(date_before)"
-//        }
+        }
         
         log.info("ObservationsLocationViewModel \(url)")
         

@@ -105,7 +105,7 @@ struct MapObservationsLocationView: View {
                 }
             }
             .onAppear() {
-                print("MapObservationsLocationView onAppear")
+                log.info("MapObservationsLocationView onAppear")
                 getDataAreaModel()
             }
         }
@@ -154,7 +154,7 @@ struct MapObservationsLocationView: View {
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             completion: { fetchedLocations in
-                log.error("locationIdViewModel data loaded")
+                log.info("MaplocationIdViewModel data loaded")
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
                 settings.locationId = fetchedLocations[0].id
@@ -163,7 +163,7 @@ struct MapObservationsLocationView: View {
                     longitude: coordinate.longitude)
                 
                 for location in fetchedLocations {
-                    log.error(location)
+                    log.info("locatiob \(location)")
                 }
                 
                 //1. get the geoJSON for this area / we pick the first one = 0
@@ -180,7 +180,7 @@ struct MapObservationsLocationView: View {
                                 limit: 100,
                                 offset: 0,
                                 completion: {
-                                    log.info("observationsLocationViewModel data loaded")
+                                    log.error("observationsLocationViewModel data loaded")
                                     settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
                                 })
                         }

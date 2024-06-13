@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct LocationView: View {
+    let log = SwiftyBeaver.self
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var areasViewModel: AreasViewModel
     
@@ -71,7 +73,7 @@ struct LocationView: View {
                 
             }
             .onAppear {
-                print("LocationView onAppear")
+                log.info("LocationView onAppear")
             }
             .onAppearOnce {
                 showFirstView = settings.mapPreference

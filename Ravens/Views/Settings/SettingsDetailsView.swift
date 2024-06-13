@@ -30,15 +30,18 @@ struct SettingsDetailsView: View {
                     .foregroundStyle(myColor(value: settings.selectedRarity), .white)
                 Text(settings.selectedSpeciesGroupName)
                     .lineLimit(1)
-                //            if (settings.infinity && showInfinity) {
-                //                Image(systemName: "infinity")
-                //            } else {
-                Spacer()
-                Text("\(results)x")
-                
-                Text("\(settings.days)d")
-                Text("\(settings.selectedDate, formatter: dateFormatter)")
-                //            }
+                if (settings.infinity && showInfinity) {
+                    HStack {
+                        Image(systemName: "infinity")
+                        Spacer()
+                    }
+                } else {
+                    Spacer()
+                    Text("\(results)x")
+                    
+                    Text("\(settings.days)d")
+                    Text("\(settings.selectedDate, formatter: dateFormatter)")
+                }
 
 
             }

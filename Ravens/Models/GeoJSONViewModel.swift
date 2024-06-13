@@ -28,7 +28,7 @@ class GeoJSONViewModel: ObservableObject {
                        let jsonData = try? JSONSerialization.data(withJSONObject: data),
                        let geoJSON = try? MKGeoJSONDecoder().decode(jsonData) {
                         self.polyOverlays =  self.parseGeoJSON(geoJSON)
-                        self.getSpan()
+//                        self.getSpan()
                         completion()
                     }
             case .failure(let error):

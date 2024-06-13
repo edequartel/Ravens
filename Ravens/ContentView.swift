@@ -31,7 +31,7 @@ struct RavensView: View {
     var body: some View {
         TabView {
 //            // Tab 0
-//            LocationListView()
+//            WikipediaView(topic: "bosmuis")
 //                .tabItem {
 //                    Text("Records")
 //                    Image(systemName: "square")

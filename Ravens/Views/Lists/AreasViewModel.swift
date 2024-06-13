@@ -48,7 +48,7 @@ class AreasViewModel: ObservableObject {
             records = try JSONDecoder().decode([Area].self, from: data)
             log.info("Loaded \(records.count) areas")
         } catch {
-            log.error("Error loading data areas.json")
+            log.error("Error loading data areas.json - is empty")
         }
     }
     

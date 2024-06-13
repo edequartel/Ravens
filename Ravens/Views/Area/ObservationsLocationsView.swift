@@ -52,10 +52,10 @@ struct ObservationsLocationView: View {
     }
      
     func getDataAreaModel() {
-        log.error("--> getDataAreaModel")
-        print(settings.initialAreaLoad)
+        log.error("getDataAreaModel")
+        log.info(settings.initialAreaLoad)
         if settings.initialAreaLoad {
-            log.error("--> MapObservationsLocationView onAppear")
+            log.info("MapObservationsLocationView onAppear")
             if locationManagerModel.checkLocation() {
                 let location = locationManagerModel.getCurrentLocation()
                 settings.currentLocation = location
@@ -66,9 +66,9 @@ struct ObservationsLocationView: View {
             settings.initialAreaLoad = false
         }
         
-        print(settings.isAreaChanged)
+        log.info(settings.isAreaChanged)
         if settings.isAreaChanged {
-            log.error("isAreaChanged")
+            log.info("isAreaChanged")
             if locationManagerModel.checkLocation() {
                 let location = settings.currentLocation
                 fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
@@ -78,9 +78,9 @@ struct ObservationsLocationView: View {
             settings.isAreaChanged = false
         }
         
-        print(settings.isLocationIDChanged)
+        log.info(settings.isLocationIDChanged)
         if settings.isLocationIDChanged {
-            log.error("isLocationIDChanged")
+            log.info("isLocationIDChanged")
             if locationManagerModel.checkLocation() {
                 fetchDataLocationID()
             } else {
@@ -92,7 +92,7 @@ struct ObservationsLocationView: View {
     
     
     func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-        log.info("fetchDataLocation")
+        log.error("fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
@@ -102,7 +102,7 @@ struct ObservationsLocationView: View {
                 settings.locationName = fetchedLocations[0].name
                 settings.locationId = fetchedLocations[0].id
                 for location in fetchedLocations {
-                    log.info(location)
+                    log.info("location \(location)")
                 }
                 
                 //1. get the geoJSON for this area / we pick the first one = 0

@@ -68,14 +68,16 @@ class Settings: ObservableObject {
     @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
-//    @AppStorage("infinity") var infinity: Bool = true
+    @AppStorage("infinity") var infinity: Bool = false
     
     @AppStorage("selectedRarity") var selectedRarityStored = 1
     @Published var selectedRarity = 1 {
         didSet {
             log.info("!!saving selectedRarity in storage: \(selectedRarity)")
             selectedRarityStored = selectedRarity
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+            }
         }
     }
     
@@ -184,7 +186,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
     @Published var selectedSpeciesGroupName: String = "" {
         didSet {
-            log.info("!!saving it in storage: \(selectedSpeciesGroupName)")
+            log.error("!!saving it in storage: \(selectedSpeciesGroupName)")
             selectedSpeciesGroupNameStored = selectedSpeciesGroupName
         }
     }
@@ -203,7 +205,10 @@ class Settings: ObservableObject {
         didSet {
             log.error("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
             selectedSpeciesGroupStored = selectedSpeciesGroup
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+            }
         }
     }
     
@@ -212,7 +217,10 @@ class Settings: ObservableObject {
         didSet {
             log.error("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
             selectedSpeciesGroupIdStored = selectedSpeciesGroupId
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+            }
         }
     }
     
@@ -229,7 +237,10 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving it in storage: \(selectedLanguage)")
             selectedLanguageStored = selectedLanguage
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+            }
         }
     }
 
@@ -238,7 +249,10 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving it in storage: \(selectedSecondLanguage)")
             selectedSecondLanguageStored = selectedSecondLanguage
-            if !isInit { isRadiusChanged = true }
+            if !isInit {
+                isRadiusChanged = true
+                isAreaChanged = true
+            }
         }
     }
     
