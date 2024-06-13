@@ -53,7 +53,6 @@ struct ObservationsLocationView: View {
      
     func getDataAreaModel() {
         log.error("--> getDataAreaModel")
-//        print("YYY")
         print(settings.initialAreaLoad)
         if settings.initialAreaLoad {
             log.error("--> MapObservationsLocationView onAppear")
@@ -65,19 +64,16 @@ struct ObservationsLocationView: View {
                 log.info("error observationsLocationsView getDataAreaModel initialAreaLoad")
             }
             settings.initialAreaLoad = false
-//            print("XXXX")
-//            settings.isLocationIDChanged = true
-//            print("XXXX")
         }
         
         print(settings.isAreaChanged)
         if settings.isAreaChanged {
-            log.info("isAreaChanged")
+            log.error("isAreaChanged")
             if locationManagerModel.checkLocation() {
                 let location = settings.currentLocation
                 fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
             } else {
-                log.info("error observationsLocationsView getDataAreaModel isAreaChanged")
+                log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
             }
             settings.isAreaChanged = false
         }
@@ -124,6 +120,7 @@ struct ObservationsLocationView: View {
                                 settings: settings,
                                 completion: {
                                     log.info("observationsLocationViewModel data loaded")
+                                    settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
                                 })
                         }
                 )
@@ -147,6 +144,7 @@ struct ObservationsLocationView: View {
                         settings: settings,
                         completion: {
                             log.error("observationsLocationViewModel data loaded")
+                            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
                         })
                 }
         )

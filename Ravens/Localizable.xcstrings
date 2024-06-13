@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "(%lld)" : {
 
     },
@@ -562,9 +565,6 @@
         }
       }
     },
-    "Loading data..." : {
-
-    },
     "Loading..." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1020,9 +1020,6 @@
           }
         }
       }
-    },
-    "Search" : {
-
     },
     "Search Wikipedia" : {
       "localizations" : {

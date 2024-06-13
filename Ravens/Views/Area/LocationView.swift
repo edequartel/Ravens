@@ -62,12 +62,12 @@ struct LocationView: View {
                     }
                 }
                 
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    NavigationLink(destination: LocationListView()) {
-//                        Image(systemName: "magnifyingglass")
-//                        
-//                    }
-//                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: LocationListView()) {
+                        Image(systemName: "magnifyingglass")
+                        
+                    }
+                }
                 
             }
             .onAppear {

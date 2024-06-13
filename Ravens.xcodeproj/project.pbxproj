@@ -114,6 +114,7 @@
 		47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */; };
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
 		47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */; };
+		47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD0E42C1AE9D8007D0F63 /* dataloading.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,6 +217,7 @@
 		47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsView.swift; sourceTree = "<group>"; };
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLocationsList.swift; sourceTree = "<group>"; };
+		47FAD0E42C1AE9D8007D0F63 /* dataloading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataloading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				47778E362C039D9E00C59A1A /* SonogramView.swift */,
 				478EABE82BED3A2300414431 /* ShareTextView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
+				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
@@ -562,6 +565,7 @@
 				471875412BFD186700EF9F1F /* w_wikipedia.svg in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
 				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
+				47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

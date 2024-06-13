@@ -79,41 +79,37 @@ struct LocationListView: View {
     
     @State private var searchText = ""
     @State private var locationID: Int = 0
+    @State private var isFocused: Bool = true
 
     var body: some View {
-        VStack(alignment: .leading) { // Vertically stack the views with alignment to leading edge
+        NavigationView {
             Form {
-                TextField("Search", text: $searchText)
-                    .onSubmit {
-                        viewModel.fetchLocations(searchString: searchText)
-                    }
-                    .autocapitalization(.none)
-//                    .padding(.horizontal) // Add horizontal padding to TextField
-                
-                Picker("Location", selection: $locationID) {
+                FocusedTextField(text: $searchText, isFirstResponder: isFocused, onCommit: {
+                    viewModel.fetchLocations(searchString: searchText)
+                })
+           
+                Picker("",selection: $locationID) {
                     ForEach(viewModel.locations, id: \.id) { location in
                         Text("\(location.name) \(location.id)")
                     }
                 }
                 .pickerStyle(.inline)
-//                .padding(.horizontal)  Add horizontal padding to Picker
                 .onChange(of: locationID) {
                     settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
                     settings.locationId = locationID
+                    
                     geoJSONViewModel.fetchGeoJsonData(
                         for: locationID,
                         completion: {
-                            print("locationID \(locationID)")
+                            print("locationID \(settings.locationName) \(settings.locationId)")
+                            settings.currentLocation = CLLocation(latitude: geoJSONViewModel.span.latitude, longitude: geoJSONViewModel.span.longitude)
+                            
                             settings.locationCoordinate = CLLocationCoordinate2D(latitude: geoJSONViewModel.span.latitude, longitude: geoJSONViewModel.span.longitude)
-                            settings.isAreaChanged = true
-//                            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
+                            // settings.isAreaChanged = true
+                            settings.isLocationIDChanged = true
+                            print("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+                            self.presentationMode.wrappedValue.dismiss()
                         } )
-                
-                    
-//get the locationSpan and centre point
-
-//                    settings.isLocationIDChanged = true
-                    self.presentationMode.wrappedValue.dismiss()
                 }
             }
         }
@@ -130,4 +126,46 @@ struct LocationListView: View {
 
 extension String: Identifiable {
     public var id: String { self }
+}
+
+struct FocusedTextField: UIViewRepresentable {
+    @Binding var text: String
+    var isFirstResponder: Bool = false
+    var onCommit: () -> Void
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField(frame: .zero)
+//        textField.autocapitalizationType = .none
+        textField.delegate = context.coordinator
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+        if isFirstResponder {
+            uiView.becomeFirstResponder()
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: FocusedTextField
+
+        init(_ parent: FocusedTextField) {
+            self.parent = parent
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            parent.text = textField.text ?? ""
+        }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            parent.onCommit()
+            return true
+        }
+    }
 }

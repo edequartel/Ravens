@@ -115,7 +115,7 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
     {
         didSet {
-            log.info("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
+            log.error("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
         }
     }
     
