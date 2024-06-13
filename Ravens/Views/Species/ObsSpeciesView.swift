@@ -138,7 +138,9 @@ struct ObsSpeciesView: View {
                         print("adding area \(obs.location_detail?.id ?? 0)")
                         areasViewModel.appendRecord(
                             areaName: obs.location_detail?.name ?? "unknown",
-                            areaID: obs.location_detail?.id ?? 0)
+                            areaID: obs.location_detail?.id ?? 0,
+                            latitude: obs.point.coordinates[0],
+                            longitude: obs.point.coordinates[1])
                     }
                 }) {
                     Image(systemName: areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) ? "pentagon" : "pentagon")

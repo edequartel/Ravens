@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Alamofire
 import MapKit
 import SwiftyBeaver
@@ -49,6 +50,7 @@ struct Span {
 class ObservationsRadiusViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var observations: Observations?
+//    @Published var cameraPosition: MapCameraPosition = .automatic
     
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
@@ -70,8 +72,8 @@ class ObservationsRadiusViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.observations = observations
                     self.getLocations()
-                    self.getSpan()
                     self.log.info("observations locations count \(self.locations.count)")
+                    
                     completion()
                 }
             case .failure(let error):
@@ -113,10 +115,30 @@ class ObservationsRadiusViewModel: ObservableObject {
         let maxLongitude = longitudes.max() ?? 0
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
-        let latitudeDelta = (maxLatitude - minLatitude) * 1.7
-        let longitudeDelta = (maxLongitude - minLongitude) * 1.7
+        let latitudeDelta = (maxLatitude - minLatitude) * 3 //1.7
+        let longitudeDelta = (maxLongitude - minLongitude) * 3 //1.7
 
-        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+        span = Span(
+            latitudeDelta: latitudeDelta,
+            longitudeDelta: longitudeDelta,
+            latitude: centreLatitude,
+            longitude: centreLongitude
+        )
+    }
+    
+    func getCameraPosition() -> MapCameraPosition {
+        getSpan()
+        let center = CLLocationCoordinate2D(
+            latitude: span.latitude,
+            longitude: span.longitude)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: span.latitudeDelta,
+            longitudeDelta: span.longitudeDelta)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
     }
 }
 

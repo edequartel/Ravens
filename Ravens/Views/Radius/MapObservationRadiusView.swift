@@ -16,28 +16,33 @@ struct MapObservationRadiusView: View {
 
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var cameraPosition: MapCameraPosition = .automatic
+//    @State private var cameraPosition: MapCameraPosition = .automatic
     
     var body: some View {
 
             VStack {
                 MapReader { proxy in
-                    Map(position: $cameraPosition) { // centre and span for the camera
+                    Map(position: $settings.cameraRadiusPosition) { // centre and span for the camera
                         
                         UserAnnotation() //give dynamically the users position
                         
-                        // POI
+
                         if (settings.poiOn) {
-                            ForEach(POIs, id: \.name) { poi in
-                                Annotation(poi.name, coordinate: poi.coordinate.cllocationCoordinate) {
+                        ForEach(areasViewModel.records, id: \.id) { record in
+                            Annotation(record.name,
+                                       coordinate: CLLocationCoordinate2D(
+                                        latitude: record.latitude,
+                                        longitude: record.longitude)) {
                                     Triangle()
                                         .fill(Color.gray)
-                                        .frame(width: 5, height: 5)
+                                        .frame(width: 10, height: 10)
                                         .overlay(
                                             Triangle()
                                                 .stroke(Color.red, lineWidth: 1)
+                                                .fill(Color.red)// Customize the border color and width
                                         )
                                 }
                             }
@@ -91,7 +96,7 @@ struct MapObservationRadiusView: View {
                                 fetchDataLocation(location: circlePosition)
                             }
                             
-                            cameraPosition = getCameraPosition()
+                            
                         }
                     }
                     .mapControls() {
@@ -101,7 +106,7 @@ struct MapObservationRadiusView: View {
             }
             .onAppear() {
                 setupInitialLocation()
-                cameraPosition = getCameraPosition()
+               
             }
     }
     
@@ -111,20 +116,6 @@ struct MapObservationRadiusView: View {
         } else {
             return Color.white
         }
-    }
-    
-    func getCameraPosition() -> MapCameraPosition {
-        let center = CLLocationCoordinate2D(
-            latitude: settings.currentLocation?.coordinate.latitude ?? 0,
-            longitude: settings.currentLocation?.coordinate.longitude ?? 0)
-        
-        let span = MKCoordinateSpan(
-            latitudeDelta: Double(settings.radius) * 0.00004,
-            longitudeDelta: Double(settings.radius) * 0.00004)
-        
-        
-        let region = MKCoordinateRegion(center: center, span: span)
-        return MapCameraPosition.region(region)
     }
     
     func setupInitialLocation() {
@@ -162,7 +153,10 @@ struct MapObservationRadiusView: View {
             lat: location.latitude,
             long: location.longitude,
             settings: settings,
-            completion: { log.info("MAP observationsViewModel.locations") }
+            completion: {
+                log.info("MAP observationsViewModel.locations")
+                settings.cameraRadiusPosition = observationsRadiusViewModel.getCameraPosition()
+            }
         )
     }
     

@@ -7,6 +7,7 @@
 
 
 import Foundation
+import SwiftUI
 import Alamofire
 import MapKit
 import SwiftyBeaver
@@ -94,30 +95,45 @@ class ObservationsLocationViewModel: ObservableObject {
     
     
     
-        func getSpan() {
-            var latitudes: [Double] = []
-            var longitudes: [Double] = []
-    
-            let max = (observations?.results.count ?? 0)
-            for i in 0 ..< max {
-                let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
-                let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
-                latitudes.append(latitude)
-                longitudes.append(longitude)
-            }
-    
-            let minLatitude = latitudes.min() ?? 0
-            let maxLatitude = latitudes.max() ?? 0
-            let minLongitude = longitudes.min() ?? 0
-            let maxLongitude = longitudes.max() ?? 0
-    
-            let centreLatitude = (minLatitude + maxLatitude) / 2
-            let centreLongitude = (minLongitude + maxLongitude) / 2
-    
-            let latitudeDelta = (maxLatitude - minLatitude) * 1.5
-            let longitudeDelta = (maxLongitude - minLongitude) * 1.5
-    
-            span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+    func getSpan() {
+        var latitudes: [Double] = []
+        var longitudes: [Double] = []
+        
+        let max = (observations?.results.count ?? 0)
+        for i in 0 ..< max {
+            let longitude = observations?.results[i].point.coordinates[0] ?? 52.024052
+            let latitude = observations?.results[i].point.coordinates[1] ?? 5.245350
+            latitudes.append(latitude)
+            longitudes.append(longitude)
         }
+        
+        let minLatitude = latitudes.min() ?? 0
+        let maxLatitude = latitudes.max() ?? 0
+        let minLongitude = longitudes.min() ?? 0
+        let maxLongitude = longitudes.max() ?? 0
+        
+        let centreLatitude = (minLatitude + maxLatitude) / 2
+        let centreLongitude = (minLongitude + maxLongitude) / 2
+        
+        let latitudeDelta = (maxLatitude - minLatitude) * 3// 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 3// 1.5
+        
+        span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
+    }
+    
+    func getCameraPosition() -> MapCameraPosition {
+        getSpan()
+        let center = CLLocationCoordinate2D(
+            latitude: span.latitude,
+            longitude: span.longitude)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: span.latitudeDelta,
+            longitudeDelta: span.longitudeDelta)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
+    }
     
 }

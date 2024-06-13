@@ -91,7 +91,7 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-//                    Toggle("Poi", isOn: $settings.poiOn)
+                    Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
                     
                     Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt

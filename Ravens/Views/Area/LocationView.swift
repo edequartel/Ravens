@@ -25,7 +25,7 @@ struct LocationView: View {
                 }
             }
 //            .navigationTitle(settings.locationName)
-//            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
 
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -41,7 +41,15 @@ struct LocationView: View {
                         if areasViewModel.isIDInRecords(areaID: settings.locationId) {
                             areasViewModel.removeRecord(areaID: settings.locationId)
                         } else {
-                            areasViewModel.appendRecord(areaName: settings.locationName, areaID: settings.locationId)
+                            print("\(settings.locationName) \(settings.locationId) \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
+                            
+                            areasViewModel.appendRecord(
+                                areaName: settings.locationName,
+                                areaID: settings.locationId,
+                                latitude: settings.locationCoordinate?.latitude ?? 0,
+                                longitude: settings.locationCoordinate?.longitude ?? 0
+                            )
+                            
                         }
                     }) {
                         Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? "pentagon.fill" : "pentagon")
@@ -54,11 +62,12 @@ struct LocationView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: LocationListView()) {
-                        Image(systemName: "magnifyingglass")
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    NavigationLink(destination: LocationListView()) {
+//                        Image(systemName: "magnifyingglass")
+//                        
+//                    }
+//                }
                 
             }
             .onAppear {

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 import MapKit
 import SwiftyBeaver
 
@@ -68,9 +69,24 @@ class GeoJSONViewModel: ObservableObject {
                         }
             span.latitude = (maxLat + minLat) / 2
             span.longitude = (maxLon +  minLon) / 2
-            span.latitudeDelta = (maxLat - minLat) * 1.1
-            span.longitudeDelta = (maxLon - minLon) * 1.1
+            span.latitudeDelta = (maxLat - minLat) * 2//1.1
+            span.longitudeDelta = (maxLon - minLon) * 2//1.1
         }
+    }
+    
+    func getCameraPosition() -> MapCameraPosition {
+        getSpan()
+        let center = CLLocationCoordinate2D(
+            latitude: span.latitude,
+            longitude: span.longitude)
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: span.latitudeDelta,
+            longitudeDelta: span.longitudeDelta)
+        
+        
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
     }
 }
 

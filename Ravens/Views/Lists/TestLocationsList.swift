@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Alamofire
+import MapKit
 import Combine
 
 // MARK: - Model
@@ -70,6 +71,8 @@ class LocationXViewModel: ObservableObject {
 struct LocationListView: View {
     @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel = LocationXViewModel()
@@ -89,16 +92,27 @@ struct LocationListView: View {
                 
                 Picker("Location", selection: $locationID) {
                     ForEach(viewModel.locations, id: \.id) { location in
-                        Text("\(location.name)")// \(location.id)")
+                        Text("\(location.name) \(location.id)")
                     }
                 }
                 .pickerStyle(.inline)
 //                .padding(.horizontal)  Add horizontal padding to Picker
                 .onChange(of: locationID) {
-                    print("YYY: \(locationID)")
                     settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
                     settings.locationId = locationID
-                    settings.isLocationIDChanged = true
+                    geoJSONViewModel.fetchGeoJsonData(
+                        for: locationID,
+                        completion: {
+                            print("locationID \(locationID)")
+                            settings.locationCoordinate = CLLocationCoordinate2D(latitude: geoJSONViewModel.span.latitude, longitude: geoJSONViewModel.span.longitude)
+                            settings.isAreaChanged = true
+//                            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
+                        } )
+                
+                    
+//get the locationSpan and centre point
+
+//                    settings.isLocationIDChanged = true
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }

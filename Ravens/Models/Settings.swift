@@ -15,6 +15,24 @@ import SwiftyBeaver
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
     
+    @Published var cameraRadiusPosition: MapCameraPosition = .automatic {
+        didSet {
+            log.info("!!cameraRadiusPosition saving it in cameraPosition: \(cameraRadiusPosition)")
+        }
+    }
+    
+    @Published var cameraAreaPosition: MapCameraPosition = .automatic {
+        didSet {
+            log.error("!!cameraAreaPosition saving it in cameraPosition: \(cameraAreaPosition)")
+        }
+    }
+    
+    @Published var locationCoordinate: CLLocationCoordinate2D? = nil {
+        didSet {
+            log.error("!!locationCoordinate saving it in locationCoordinate: \(locationCoordinate?.latitude ?? 0)")
+        }
+    }
+    
     @AppStorage("tokenKey") var tokenKey = ""
     
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""

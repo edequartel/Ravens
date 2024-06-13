@@ -11,9 +11,9 @@ import SwiftyBeaver
 
 struct MapObservationsLocationView: View {
     let log = SwiftyBeaver.self
-
     
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -21,35 +21,36 @@ struct MapObservationsLocationView: View {
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
     @EnvironmentObject var poiViewModel: POIViewModel
     
-    @State private var cameraPosition: MapCameraPosition = .automatic
-    
     var body: some View {
         ZStack(alignment: .topLeading) {
             VStack {
                 MapReader { proxy in
-                    Map(position: $cameraPosition) {
+                    Map(position: $settings.cameraAreaPosition) {
                         
                         UserAnnotation()
                         
-                        // POI
+//                      POI
                         if (settings.poiOn) {
-                            ForEach(poiViewModel.POIs, id: \.name) { poi in
-                                Annotation(poi.name, coordinate: poi.coordinate.cllocationCoordinate) {
+                        ForEach(areasViewModel.records, id: \.id) { record in
+                            Annotation(record.name, 
+                                       coordinate: CLLocationCoordinate2D(
+                                        latitude: record.latitude,
+                                        longitude: record.longitude)) {
                                     Triangle()
                                         .fill(Color.gray)
-                                        .frame(width: 5, height: 5)
+                                        .frame(width: 10, height: 10)
                                         .overlay(
                                             Triangle()
-                                                .stroke(Color.red, lineWidth: 1) // Customize the border color and width
+                                                .stroke(Color.red, lineWidth: 1) 
+                                                .fill(Color.red)// Customize the border color and width
                                         )
                                 }
                             }
                         }
+                            
                         
                         // location observations
-//                        ForEach(observationsLocationViewModel.locations) { location in
-//                        ForEach(observationsLocationViewModel.locations.sorted { $0.rarity < $1.rarity })
-                        ForEach(observationsLocationViewModel.locations.filter { $0.rarity >= settings.selectedRarity }) 
+                        ForEach(observationsLocationViewModel.locations.filter { $0.rarity >= settings.selectedRarity })
                             { location in
                             
                             Annotation(location.name, coordinate: location.coordinate) {
@@ -157,6 +158,9 @@ struct MapObservationsLocationView: View {
                 // Use fetchedLocations here //actually it is one location
                 settings.locationName = fetchedLocations[0].name
                 settings.locationId = fetchedLocations[0].id
+                settings.locationCoordinate = CLLocationCoordinate2D(
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude)
                 
                 for location in fetchedLocations {
                     log.error(location)
@@ -167,7 +171,7 @@ struct MapObservationsLocationView: View {
                     for: fetchedLocations[0].id,
                     completion:
                         {
-                            log.error("geoJSONViewModel data loaded")
+                            log.info("geoJSONViewModel data loaded")
                             
                             //2. get the observations for this area
                             observationsLocationViewModel.fetchData(
@@ -176,10 +180,8 @@ struct MapObservationsLocationView: View {
                                 offset: 0,
                                 settings: settings,
                                 completion: {
-                                    log.error("observationsLocationViewModel data loaded")
-                                    
-//                                    cameraPosition = getCameraPosition() //automatic of not?
-                                    
+                                    log.info("observationsLocationViewModel data loaded")
+                                    settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
                                 })
                         }
                 )
@@ -202,9 +204,9 @@ struct MapObservationsLocationView: View {
                         offset: 0,
                         settings: settings,
                         completion: {
-                            log.error("observationsLocationViewModel data loaded")
+                            log.error(">>>>observationsLocationViewModel data loaded")
                             
-                            cameraPosition = getCameraPosition() //automatic of not?
+                            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic of not?
                             
                         })
                 }
@@ -234,6 +236,7 @@ struct MapObservationsLocationView: View {
         return MapCameraPosition.region(region)
     }
 }
+
 
 //struct MapObservationLocationView_Previews: PreviewProvider {
 //    static var previews: some View {

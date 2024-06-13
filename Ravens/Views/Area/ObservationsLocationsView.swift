@@ -23,11 +23,15 @@ struct ObservationsLocationView: View {
     var body: some View {
         
             VStack {
-                Text(settings.locationName)
-                    .bold()
-                    .lineLimit(1)
-                    .foregroundColor(.blue)
-//                    .padding()
+                HStack {
+                    Text(settings.locationName)
+                        .bold()
+                        .lineLimit(1)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 16)
+                    Spacer()
+                }
                 List {
                     if let results =  observationsLocationViewModel.observations?.results {
                         ForEach(results
@@ -38,6 +42,9 @@ struct ObservationsLocationView: View {
                         }
                     }
                 }
+                
+
+                
             }
             .onAppear()  {
                 getDataAreaModel()
