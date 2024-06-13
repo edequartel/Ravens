@@ -109,10 +109,11 @@ struct SplashScreen: View {
     
     var body: some View {
         VStack {
+            ProgressView()
 //            Text("Loading data...")
 //            LottieView(lottieFile: "birds.json")
-            LottieView(lottieFile: "dataloading.json")
-                .frame(width: 100, height: 100)
+//            LottieView(lottieFile: "dataloading.json")
+//                .frame(width: 100, height: 100)
         }
             .onAppear {
                 log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
