@@ -333,6 +333,12 @@
         }
       }
     },
+    "Filter obs audio" : {
+
+    },
+    "Filter obs pictures" : {
+
+    },
     "Filter rarity by" : {
       "localizations" : {
         "nl" : {
@@ -390,6 +396,9 @@
       }
     },
     "Hello, World!" : {
+
+    },
+    "Hide pictures" : {
 
     },
     "Hybrid" : {

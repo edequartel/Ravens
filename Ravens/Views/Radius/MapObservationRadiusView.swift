@@ -105,7 +105,9 @@ struct MapObservationRadiusView: View {
                 }
             }
             .onAppear() {
+                print("xxx")
                 setupInitialLocation()
+                print("yyy")
                
             }
     }
@@ -154,8 +156,11 @@ struct MapObservationRadiusView: View {
             lat: location.latitude,
             long: location.longitude,
             completion: {
-                log.info("MAP observationsViewModel.locations")
-                settings.cameraRadiusPosition = observationsRadiusViewModel.getCameraPosition()
+                log.error("MAP observationsViewModel.locations")
+                settings.cameraRadiusPosition = observationsRadiusViewModel.getCameraPosition(
+                    lat: location.latitude,
+                    long: location.longitude,
+                    radius: settings.radius)
             }
         )
     }

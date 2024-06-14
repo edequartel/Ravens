@@ -93,8 +93,13 @@ struct SettingsView: View {
                     
                     Toggle("Poi", isOn: $settings.poiOn)
                     Toggle("Show observer", isOn: $settings.showUser)
+
+                    Toggle("Filter obs pictures", isOn: $settings.showObsPictures)
+                    Toggle("Hide pictures", isOn: $settings.hidePictures)
+
+                    Toggle("Filter obs audio", isOn: $settings.showObsAudio)
                     
-                    Toggle("Radius", isOn: $settings.radiusPreference) //wat als deze wijzigt
+                    Toggle("Radius", isOn: $settings.radiusPreference)
                     
                     Toggle("Map", isOn: $settings.mapPreference)
                     

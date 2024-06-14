@@ -108,8 +108,8 @@ struct ObsUserView: View {
                         areasViewModel.appendRecord(
                             areaName: obs.location_detail?.name ?? "unknown",
                             areaID: obs.location_detail?.id ?? 0,
-                            latitude: obs.point.coordinates[0],
-                            longitude: obs.point.coordinates[1]
+                            latitude: obs.point.coordinates[1], //!!?
+                            longitude: obs.point.coordinates[0]
                         )
                     }
                 }) {

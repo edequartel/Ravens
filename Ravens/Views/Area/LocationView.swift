@@ -43,7 +43,7 @@ struct LocationView: View {
                         if areasViewModel.isIDInRecords(areaID: settings.locationId) {
                             areasViewModel.removeRecord(areaID: settings.locationId)
                         } else {
-                            print("\(settings.locationName) \(settings.locationId) \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
+                            log.error("\(settings.locationName) \(settings.locationId) \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
                             
                             areasViewModel.appendRecord(
                                 areaName: settings.locationName,
@@ -51,6 +51,7 @@ struct LocationView: View {
                                 latitude: settings.locationCoordinate?.latitude ?? 0,
                                 longitude: settings.locationCoordinate?.longitude ?? 0
                             )
+                            //
                             
                         }
                     }) {

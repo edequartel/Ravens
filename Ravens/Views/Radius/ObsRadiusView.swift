@@ -26,15 +26,11 @@ struct ObsRadiusView: View {
     @State private var userId: Int = 0
     @State private var showingDetails = false
     
-    @State private var explorers: [Int] = []
-    
     @State var obs: Observation
     
     var showUsername: Bool = true
-//    var showLocation: Bool = true
     
     var body: some View {
-//        LazyVStack {
             VStack {
                 HStack {
                     VStack {
@@ -65,8 +61,6 @@ struct ObsRadiusView: View {
                                 .lineLimit(1) // Set the maximum number of lines to 1
                                 .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                             Spacer()
-//                            Text("info obs: \(obs.id ?? 0)")
-//                                .footnoteGrayStyle()
                         }
                     }
                 }
@@ -79,7 +73,6 @@ struct ObsRadiusView: View {
                     Spacer()
                 }
                 
-//                if showLocation {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
                             .lineLimit(1) // Set the maximum number of lines to 1
@@ -87,7 +80,7 @@ struct ObsRadiusView: View {
                         if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                             Image(systemName: "pentagon.fill")
                         }
-//                    }
+
                 }
                 
                 if obs.notes?.count ?? 0 > 0 {
@@ -98,8 +91,10 @@ struct ObsRadiusView: View {
                     }
                 }
                 
-                ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
+                if !settings.hidePictures {
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+                        AFImageView(media: imageURLString)
+                    }
                 }
                 
                 if (obs.sounds?.count ?? 0)>0 {
@@ -109,35 +104,29 @@ struct ObsRadiusView: View {
                     }
                 }
             }
-//            .onTapGesture(count: 1) {
-//                if let url = URL(string: obs.permalink) {
-//                    UIApplication.shared.open(url)
-//                }
-//            }
-            
+            .padding(4)
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                
+
 //                Button(action: {
-//                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
 //                    showingDetails = true
 //                }) {
 //                    Image(systemName: "info.circle")
 //                }
 //                .tint(.blue)
-
-                //
+                
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                         log.info("remove areas \(obs.location_detail?.id ?? 0)")
                         areasViewModel.removeRecord(
                             areaID: obs.location_detail?.id ?? 0)
                     } else {
-                        print("adding area \(obs.location_detail?.id ?? 0)")
+                        log.error("adding area \(obs.location_detail?.id ?? 0)")
                         areasViewModel.appendRecord(
                             areaName: obs.location_detail?.name ?? "unknown",
                             areaID: obs.location_detail?.id ?? 0,
-                            latitude: obs.point.coordinates[0],
-                            longitude: obs.point.coordinates[1]
+                            latitude: obs.point.coordinates[1], //!!?
+                            longitude: obs.point.coordinates[0]
                         )
                     }
                 }) {
@@ -160,9 +149,6 @@ struct ObsRadiusView: View {
                 }
                 .tint(.obsStar)
                 
-                
-                //
-                
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
@@ -173,14 +159,20 @@ struct ObsRadiusView: View {
                 .tint(.yellow)
 
             }
-            
-            
-//        }
-        //        .accessibility(hidden: true)
-        //        .accessibility(label: Text("Your Label"))
-//        .sheet(isPresented: $showingDetails) {
-//            SpeciesDetailsView(speciesID: obs.species_detail.id)
-//        }
+        
+//            .sheet(isPresented: $showingDetails) {
+//                SpeciesDetailsView(speciesID: obs.species_detail.id)
+//            }
+
+//            .background(
+//                NavigationLink(
+//                    destination: SpeciesDetailsView(speciesID: obs.species_detail.id),
+//                    isActive: $showingDetails,
+//                    label: {
+//                        EmptyView()
+//                    }
+//                )
+//            )
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

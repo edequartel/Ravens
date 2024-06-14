@@ -20,24 +20,35 @@ struct ObservationsRadiusView: View {
     @State private var speciesID = 58
     
     var body: some View {
-        VStack {
-            if (!keyChainViewModel.token.isEmpty) {
-                if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
-                    List {
-                        ForEach(results.sorted(
-                            by: {
-                                ($1.rarity, $0.species_detail.name, $1.date, $0.time ?? "00:00") <
+//        NavigationStack{
+            VStack {
+                if (!keyChainViewModel.token.isEmpty) {
+                    if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
+                        List {
+                            ForEach(results.sorted(
+                                by: {
+                                    ($1.rarity, $0.species_detail.name, $1.date, $0.time ?? "00:00") <
                                     ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00")
-                            }), id: \.id) {
-                                result in
-                                ObsRadiusView(obs: result, showUsername: false)
-                            }
+                                })
+                                .filter { result in
+                                    // Add your condition here
+                                    // For example, the following line filters `result` to keep only those with a specific `rarity`.
+                                    // You can replace it with your own condition.
+                                    ((!settings.showObsPictures) && (!settings.showObsAudio)) ||                                 
+                                    (
+                                        (result.has_photo ?? false) && (settings.showObsPictures) ||
+                                        (result.has_sound ?? false) && (settings.showObsAudio)
+                                    )
+                                }, id: \.id) { result in
+                                    ObsRadiusView(obs: result, showUsername: false)
+                                }
+                        }
+                    } else {
+                        ProgressView()
                     }
-                } else {
-                    ProgressView()
                 }
             }
-        }
+//        }
 
         .onAppear() {
             getDataRadiusModel()

@@ -126,15 +126,23 @@ class ObservationsRadiusViewModel: ObservableObject {
         )
     }
     
-    func getCameraPosition() -> MapCameraPosition {
+    func getCameraPosition(lat: Double, long: Double, radius: Int) -> MapCameraPosition {
         getSpan()
+//        print(radius)
         let center = CLLocationCoordinate2D(
-            latitude: span.latitude,
-            longitude: span.longitude)
-        
+            latitude: lat,
+            longitude: long)
+//            latitude: span.latitude,
+//            longitude: span.longitude)
+        let zoom = 18000
+        var factor = Double(radius)/Double(zoom)
+        if factor <= 0.027 { factor = 0.027 }
+        print(factor)
         let span = MKCoordinateSpan(
-            latitudeDelta: span.latitudeDelta,
-            longitudeDelta: span.longitudeDelta)
+            latitudeDelta: factor,
+            longitudeDelta: factor)
+//            latitudeDelta: span.latitudeDelta,
+//            longitudeDelta: span.longitudeDelta)
         
         
         let region = MKCoordinateRegion(center: center, span: span)

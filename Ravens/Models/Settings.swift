@@ -15,6 +15,11 @@ import SwiftyBeaver
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
     
+    @AppStorage("showObsPictures") var showObsPictures: Bool = false
+    @AppStorage("showObsAudio") var showObsAudio: Bool = true
+    @AppStorage("hidePictures") var hidePictures: Bool = false
+
+    
     @Published var cameraRadiusPosition: MapCameraPosition = .automatic {
         didSet {
             log.info("!!cameraRadiusPosition saving it in cameraPosition: \(cameraRadiusPosition)")

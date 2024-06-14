@@ -10,6 +10,7 @@ import SwiftUI
 import Alamofire
 import MapKit
 import Combine
+import SwiftyBeaver
 
 // MARK: - Model
 
@@ -69,6 +70,7 @@ class LocationXViewModel: ObservableObject {
 // MARK: - View
 
 struct LocationListView: View {
+    let log = SwiftyBeaver.self
     @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
@@ -101,13 +103,18 @@ struct LocationListView: View {
                     geoJSONViewModel.fetchGeoJsonData(
                         for: locationID,
                         completion: {
-                            print("locationID \(settings.locationName) \(settings.locationId)")
-                            settings.currentLocation = CLLocation(latitude: geoJSONViewModel.span.latitude, longitude: geoJSONViewModel.span.longitude)
+                            log.error("locationID \(settings.locationName) \(settings.locationId)")
+                            settings.currentLocation = CLLocation(
+                                latitude: geoJSONViewModel.span.latitude,
+                                longitude: geoJSONViewModel.span.longitude)
                             
-                            settings.locationCoordinate = CLLocationCoordinate2D(latitude: geoJSONViewModel.span.latitude, longitude: geoJSONViewModel.span.longitude)
+                            settings.locationCoordinate = CLLocationCoordinate2D( //??
+                                latitude: geoJSONViewModel.span.latitude,
+                                longitude: geoJSONViewModel.span.longitude)
+                            log.error("==> locationCoordinate \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
                             // settings.isAreaChanged = true
                             settings.isLocationIDChanged = true
-                            print("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+                            log.info("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
                             self.presentationMode.wrappedValue.dismiss()
                         } )
                 }

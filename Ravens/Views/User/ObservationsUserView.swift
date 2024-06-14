@@ -20,7 +20,18 @@ struct ObservationsUserView: View {
             if let results = observationsUserViewModel.observations?.results, results.count > 0 {
                 List {
                     if let results =  observationsUserViewModel.observations?.results {
-                        ForEach(results.sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } ), id: \.id) { obs in
+                        ForEach(results
+                            .sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } )
+                            .filter { result in
+                                // Add your condition here
+                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
+                                // You can replace it with your own condition.
+                                ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
+                                (
+                                    (result.has_photo ?? false) && (settings.showObsPictures) ||
+                                    (result.has_sound ?? false) && (settings.showObsAudio)
+                                )
+                            }, id: \.id) { obs in
                             ObsUserView(obs: obs)
                         }
                     }
