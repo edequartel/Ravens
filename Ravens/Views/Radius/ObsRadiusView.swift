@@ -24,7 +24,11 @@ struct ObsRadiusView: View {
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     @State private var userId: Int = 0
+    
     @State private var showingDetails = false
+    
+    @State private var showingShareSheet = false
+    @State private var textToShare = "Hello from my SwiftUI App!"
     
     @State var obs: Observation
     
@@ -105,15 +109,24 @@ struct ObsRadiusView: View {
                 }
             }
             .padding(4)
+        
+
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
 
 //                Button(action: {
-//                    showingDetails = true
+//                    self.showingShareSheet = true
+//                    self.textToShare = "hello there"
 //                }) {
-//                    Image(systemName: "info.circle")
+//                    Image(systemName: "square.and.arrow.up")
 //                }
 //                .tint(.blue)
+
+                
+//                Button("Share Text") {
+//                    self.showingShareSheet = true
+//                }
+                
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -173,7 +186,7 @@ struct ObsRadiusView: View {
 //                    }
 //                )
 //            )
-        
+
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {
@@ -184,8 +197,15 @@ struct ObsRadiusView: View {
                 
             }
         }
+        
+//        .sheet(isPresented: $showingShareSheet) {
+//            ShareSheet(items: [self.textToShare])
+//        }
+        
     }
+    
 }
+
 
 //struct ObsRadiusView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -39,7 +39,8 @@ struct ObservationsRadiusView: View {
                                         (result.has_photo ?? false) && (settings.showObsPictures) ||
                                         (result.has_sound ?? false) && (settings.showObsAudio)
                                     )
-                                }, id: \.id) { result in
+                                }
+                                    , id: \.id) { result in
                                     ObsRadiusView(obs: result, showUsername: false)
                                 }
                         }
