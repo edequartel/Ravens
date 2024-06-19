@@ -16,11 +16,10 @@ struct ObservationsRadiusView: View {
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    @State private var showingDetails = false
-    @State private var speciesID = 58
+    @State private var selectedObservation: Observation?
     
     var body: some View {
-//        NavigationStack{
+        NavigationView {
             VStack {
                 if (!keyChainViewModel.token.isEmpty) {
                     if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
@@ -31,26 +30,45 @@ struct ObservationsRadiusView: View {
                                     ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00")
                                 })
                                 .filter { result in
-                                    // Add your condition here
-                                    // For example, the following line filters `result` to keep only those with a specific `rarity`.
-                                    // You can replace it with your own condition.
-                                    ((!settings.showObsPictures) && (!settings.showObsAudio)) ||                                 
+                                    ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
                                     (
                                         (result.has_photo ?? false) && (settings.showObsPictures) ||
                                         (result.has_sound ?? false) && (settings.showObsAudio)
                                     )
                                 }
                                     , id: \.id) { result in
-                                    ObsRadiusView(obs: result, showUsername: false)
-                                }
+                                ObsRadiusView(
+                                    selectedObservation: $selectedObservation,
+                                    obs: result
+                                )
+                            }
                         }
                     } else {
                         ProgressView()
                     }
                 }
             }
-//        }
-
+        }
+        .edgesIgnoringSafeArea(.all)
+        
+        .sheet(item: $selectedObservation) { item in
+            SpeciesDetailsView(speciesID: item.species_detail.id)
+        }
+        
+//        .sheet(isPresented: $activeSharing) {
+////                    if let result = resultToShare {
+////                        ShareLink(
+////                            item: result, // Pass the result or any other data you want to share
+////                            // Other parameters for ShareLink...
+////                        )
+////                    }
+//            ShareLink(
+//                item: url!,
+//                subject: Text("Check out this website"),
+//                message: Text("Here's a website you might like: www.bartimeus.nl")
+//            )
+//                }
+        
         .onAppear() {
             getDataRadiusModel()
         }

@@ -106,13 +106,14 @@ struct AreasView: View {
             List {
                 ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
                     HStack{
-                        Button("\(record.name) \(record.latitude)") {
+                        Button("\(record.name) LT-\(record.latitude) LN-\(record.longitude)") {
                             settings.locationName = record.name
                             settings.locationId = record.areaID
                             settings.isLocationIDChanged = true
                             self.presentationMode.wrappedValue.dismiss()
                             
                         }
+                        .font(.caption2)
                         .lineLimit(1)
                         Spacer()
                     }
@@ -126,6 +127,7 @@ struct AreasView: View {
                         .tint(.red)
                     }
                 }
+                .padding(4)
                 
             }
         }

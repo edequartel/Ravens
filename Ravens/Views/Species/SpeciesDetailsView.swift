@@ -66,7 +66,7 @@ struct SpeciesDetailsView: View {
             }
         }
         .onAppear {
-            log.error("Calling SpeciesDetailsView FetchData \(speciesID)")
+            log.error("-->> Calling SpeciesDetailsView FetchData \(speciesID)")
             viewSpeciesDetailsDModel.fetchData(
                 settings: settings,
                 for: speciesID,

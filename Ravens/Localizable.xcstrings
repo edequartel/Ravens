@@ -27,22 +27,22 @@
         }
       }
     },
-    "%@ %lf" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lf"
-          }
-        }
-      }
-    },
     "%@ %lld" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$lld"
+          }
+        }
+      }
+    },
+    "%@ LT-%lf LN-%lf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ LT-%2$lf LN-%3$lf"
           }
         }
       }
@@ -426,6 +426,9 @@
         }
       }
     },
+    "Image not found" : {
+
+    },
     "Imagery" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -561,6 +564,9 @@
           }
         }
       }
+    },
+    "Load Image" : {
+
     },
     "Loading" : {
       "extractionState" : "stale",
@@ -1076,6 +1082,7 @@
       }
     },
     "Share Text" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

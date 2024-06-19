@@ -194,6 +194,7 @@ struct ObsAreaView: View {
 //                .tint(.blue)
             }
         }
+        .padding(4)
         
 //        .sheet(isPresented: $showingDetails) {
 //            SpeciesDetailsView(speciesID: obs.species_detail.id)

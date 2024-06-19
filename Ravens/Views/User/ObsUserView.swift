@@ -96,6 +96,8 @@ struct ObsUserView: View {
                     }
                 }
             }
+        
+//            .padding(4)
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
                 Button(action: {

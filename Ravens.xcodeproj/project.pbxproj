@@ -108,6 +108,7 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
+		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
@@ -211,6 +212,7 @@
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
+		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
 		47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListObsView.swift; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		4718753D2BFCA7F600EF9F1F /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				47B10CAA2C21BA580092BC66 /* tafeleend.jpg */,
 				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				471875402BFD186700EF9F1F /* w_wikipedia.svg */,
 				4718753E2BFCA81900EF9F1F /* plus-square.svg */,
@@ -562,6 +565,7 @@
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,
 				476843D42BA9D43D004EF208 /* LottieFile.json in Resources */,
 				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
+				47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */,
 				471875412BFD186700EF9F1F /* w_wikipedia.svg in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
 				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,

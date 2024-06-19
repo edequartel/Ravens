@@ -25,14 +25,13 @@ struct ObsRadiusView: View {
     @State private var isShareSheetPresented = false
     @State private var userId: Int = 0
     
-    @State private var showingDetails = false
+    @Binding var selectedObservation: Observation?
+
     
-    @State private var showingShareSheet = false
-    @State private var textToShare = "Hello from my SwiftUI App!"
+    let url = URL(string: "http://www.waarn.nl")
+    private let photo = Image("tafeleend")
     
     @State var obs: Observation
-    
-    var showUsername: Bool = true
     
     var body: some View {
             VStack {
@@ -68,7 +67,6 @@ struct ObsRadiusView: View {
                         }
                     }
                 }
-                
                 
                 
                 HStack {
@@ -110,23 +108,46 @@ struct ObsRadiusView: View {
             }
             .padding(4)
         
-
-
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                if (obs.photos?.isEmpty == false) {
+//                    let fileManager = FileManager.default
+//                    let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+//                    let urlString = obs.photos?.first
+//                    let imageName = urlString.flatMap { URL(string: $0)?.lastPathComponent }
+//                    let imagePath = documentDirectory.appendingPathComponent("images/\(imageName ?? "")")
+//
+//                    if fileManager.fileExists(atPath: imagePath.path) {
+//                        let image = Image(uiImage: UIImage(contentsOfFile: imagePath.path) ?? UIImage())
+//
+                        let speciesName = obs.species_detail.name + " - " + obs.species_detail.scientific_name + " " + obs.number + "x"
+                        let locationName = obs.location_detail?.name ?? " " + obs.date + " " + (obs.time ?? "")
+                        let notes = obs.notes ?? " "
+                        let messageString = speciesName + "\n" + locationName  + "\n" + notes
 
-//                Button(action: {
-//                    self.showingShareSheet = true
-//                    self.textToShare = "hello there"
-//                }) {
-//                    Image(systemName: "square.and.arrow.up")
+                    let url = URL(string: obs.permalink)
+                        ShareLink(
+                            item: url!,
+                            subject: Text("Seen: "+obs.species_detail.name),
+                            message: Text(messageString),
+//                            preview: SharePreview(obs.species_detail.name, image: image)
+                        ) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+//                    } else {
+//                        Text("Image not found")
+//                            .onAppear() {
+//                                print("\(imagePath)")
+//                            }
+//                        
+//                    }
 //                }
-//                .tint(.blue)
-
                 
-//                Button("Share Text") {
-//                    self.showingShareSheet = true
-//                }
-                
+                Button(action: {
+                    selectedObservation = obs
+                }) {
+                    Image(systemName: "info")
+                }
+                .tint(.blue)
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -156,7 +177,7 @@ struct ObsRadiusView: View {
                         bookMarksViewModel.appendRecord(speciesID:  obs.species_detail.id)
                         log.info("bookmarks append")
                     }
-
+                    
                 } ) {
                     Image(systemName: "star")
                 }
@@ -170,23 +191,8 @@ struct ObsRadiusView: View {
                     Image(systemName: "binoculars.fill")
                 }
                 .tint(.yellow)
-
+                
             }
-        
-//            .sheet(isPresented: $showingDetails) {
-//                SpeciesDetailsView(speciesID: obs.species_detail.id)
-//            }
-
-//            .background(
-//                NavigationLink(
-//                    destination: SpeciesDetailsView(speciesID: obs.species_detail.id),
-//                    isActive: $showingDetails,
-//                    label: {
-//                        EmptyView()
-//                    }
-//                )
-//            )
-
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {
@@ -196,14 +202,8 @@ struct ObsRadiusView: View {
                 })
                 
             }
-        }
-        
-//        .sheet(isPresented: $showingShareSheet) {
-//            ShareSheet(items: [self.textToShare])
-//        }
-        
+        }        
     }
-    
 }
 
 
