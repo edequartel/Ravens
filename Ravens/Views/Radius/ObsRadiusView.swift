@@ -28,8 +28,8 @@ struct ObsRadiusView: View {
     @Binding var selectedObservation: Observation?
 
     
-    let url = URL(string: "http://www.waarn.nl")
-    private let photo = Image("tafeleend")
+//    let url = URL(string: "http://www.waarneming.nl")!
+    private let avatar = Image("tafeleend")
     
     @State var obs: Observation
     
@@ -109,38 +109,18 @@ struct ObsRadiusView: View {
             .padding(4)
         
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//                if (obs.photos?.isEmpty == false) {
-//                    let fileManager = FileManager.default
-//                    let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-//                    let urlString = obs.photos?.first
-//                    let imageName = urlString.flatMap { URL(string: $0)?.lastPathComponent }
-//                    let imagePath = documentDirectory.appendingPathComponent("images/\(imageName ?? "")")
-//
-//                    if fileManager.fileExists(atPath: imagePath.path) {
-//                        let image = Image(uiImage: UIImage(contentsOfFile: imagePath.path) ?? UIImage())
-//
-                        let speciesName = obs.species_detail.name + " - " + obs.species_detail.scientific_name + " " + obs.number + "x"
-                        let locationName = obs.location_detail?.name ?? " " + obs.date + " " + (obs.time ?? "")
-                        let notes = obs.notes ?? " "
-                        let messageString = speciesName + "\n" + locationName  + "\n" + notes
-
-                    let url = URL(string: obs.permalink)
-                        ShareLink(
-                            item: url!,
-                            subject: Text("Seen: "+obs.species_detail.name),
-                            message: Text(messageString),
-//                            preview: SharePreview(obs.species_detail.name, image: image)
-                        ) {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-//                    } else {
-//                        Text("Image not found")
-//                            .onAppear() {
-//                                print("\(imagePath)")
-//                            }
-//                        
-//                    }
-//                }
+                
+                let url = URL(string: obs.permalink)!
+                ShareLink(
+                    item: url,
+                    subject: Text("Seen: \(obs.species_detail.name)"),
+                    message: Text(messageString())
+                    // preview: SharePreview(obs.species_detail.name, image: image)
+                ) 
+                {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                
                 
                 Button(action: {
                     selectedObservation = obs
@@ -203,6 +183,14 @@ struct ObsRadiusView: View {
                 
             }
         }        
+    }
+    
+    func messageString() -> String {
+        let speciesName = "\(obs.species_detail.name) - \(obs.species_detail.scientific_name) \(obs.number)x"
+        let locationName = "\(obs.location_detail?.name ?? " ") \(obs.date)"
+        let notes = obs.notes ?? " "
+        let messageString = "\(speciesName)\n\(locationName)\n\(notes)"
+        return messageString
     }
 }
 
