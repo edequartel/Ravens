@@ -100,9 +100,9 @@ struct ObsUserView: View {
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 let url = URL(string: obs.permalink)!
                 ShareLink(
-                    item: url,
-                    message: Text(messageString()),
-                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
+                    item: url
+//                    message: Text(messageString()),
+//                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
                 )
                 {
                     Image(systemName: SFShareLink)
@@ -153,14 +153,6 @@ struct ObsUserView: View {
                 .tint(.obsObservation)
                 
             }
-    }
-    
-    func messageString() -> String {
-        let speciesName = "\(obs.species_detail.name) - \(obs.species_detail.scientific_name) \(obs.number)x"
-        let locationName = "\(obs.location_detail?.name ?? " ") \(obs.date)"
-        let notes = obs.notes ?? " "
-        let messageString = "\(speciesName)\n\(locationName)\n\(notes)"
-        return messageString
     }
 }
 
