@@ -31,6 +31,10 @@ struct ObsAreaView: View {
     @State private var showSelectedSpeciesId = false
     @State private var showingDetails = false
     
+//    @Binding var selectedObservation: Observation?
+    
+    private let appIcon = Image("AppIconShare")
+    
     @State var obs: Observation
     
     var body: some View {
@@ -53,7 +57,7 @@ struct ObsAreaView: View {
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                        Image(systemName: "star.fill")
+                        Image(systemName: SFSpeciesFill)
                     }
                 }
                 
@@ -73,27 +77,14 @@ struct ObsAreaView: View {
                     Spacer()
                 }
                 
-
-//                HStack { //?? deze in de navigationbar zetten
-//                    Text("\(obs.location_detail?.name ?? "name")")
-//                        .lineLimit(1) // Set the maximum number of lines to 1
-//                    Spacer()
-//                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-//                        Image(systemName: "pentagon.fill")
-//                    }
-//                }
-
-                
                 if settings.showUser {
                     VStack {
                         HStack {
                             Text("\(obs.user_detail?.name ?? "noName")")
                                 .footnoteGrayStyle()
                             Spacer()
-//                            Text("\(obs.user_detail?.id ?? 0)")
-//                                .footnoteGrayStyle()
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-                                Image(systemName: "person.fill")
+                                Image(systemName: SFObserverFill)
                                     .foregroundColor(.black)
                             }
                         }
@@ -120,13 +111,20 @@ struct ObsAreaView: View {
                 }
             }
             
-//            .onTapGesture(count: 1) {
-//                if let url = URL(string: obs.permalink) {
-//                    UIApplication.shared.open(url)
-//                }
-//            }
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                let url = URL(string: obs.permalink)!
+                ShareLink(
+                    item: url,
+                    message: Text(messageString()),
+                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
+                )
+                {
+                    Image(systemName: SFShareLink)
+                }
+                .tint(.obsShareLink)
+                
+                
                 Button(action: {
                     if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                         observersViewModel.removeRecord(
@@ -140,9 +138,9 @@ struct ObsAreaView: View {
                     
                     
                 }) {
-                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "person.fill.badge.minus" : "person.fill.badge.plus")
+                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? SFObserverMin : SFObserverPlus)
                 }
-                .tint(.red)
+                .tint(.obsObserver)
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -158,18 +156,18 @@ struct ObsAreaView: View {
                             longitude: obs.point.coordinates[0])
                     }
                 }) {
-                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    Image(systemName: SFArea)
                 }
-                .tint(.green)
+                .tint(.obsArea)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
                     }
                 }) {
-                    Image(systemName: "binoculars")
+                    Image(systemName: SFObservation)
                 }
-                .tint(.yellow)
+                .tint(.obsObservation)
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
@@ -181,25 +179,14 @@ struct ObsAreaView: View {
                     }
 
                 } ) {
-                    Image(systemName: "star")
+                    Image(systemName: SFSpecies)
                 }
-                .tint(.obsStar)
+                .tint(.obsSpecies)
                 
-//                Button(action: {
-//                    log.info("Button tapped + Show Image from URL \(obs.species_detail.id)")
-//                    showingDetails = true
-//                }) {
-//                    Image(systemName: "info.circle")
-//                }
-//                .tint(.blue)
             }
         }
         .padding(4)
         
-//        .sheet(isPresented: $showingDetails) {
-//            SpeciesDetailsView(speciesID: obs.species_detail.id)
-//        }
-
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {
@@ -210,6 +197,14 @@ struct ObsAreaView: View {
                 
             }
         }
+    }
+    
+    func messageString() -> String {
+        let speciesName = "\(obs.species_detail.name) - \(obs.species_detail.scientific_name) \(obs.number)x"
+        let locationName = "\(obs.location_detail?.name ?? " ") \(obs.date)"
+        let notes = obs.notes ?? " "
+        let messageString = "\(speciesName)\n\(locationName)\n\(notes)"
+        return messageString
     }
 }
 

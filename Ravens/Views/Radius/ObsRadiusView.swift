@@ -27,9 +27,7 @@ struct ObsRadiusView: View {
     
     @Binding var selectedObservation: Observation?
 
-    
-//    let url = URL(string: "http://www.waarneming.nl")!
-    private let avatar = Image("tafeleend")
+    private let appIcon = Image("AppIconShare")
     
     @State var obs: Observation
     
@@ -67,7 +65,7 @@ struct ObsRadiusView: View {
                         }
                     }
                 }
-                
+            
                 
                 HStack {
                     Text("\(obs.date) \(obs.time ?? "")")
@@ -113,21 +111,20 @@ struct ObsRadiusView: View {
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url,
-                    subject: Text("Seen: \(obs.species_detail.name)"),
-                    message: Text(messageString())
-                    // preview: SharePreview(obs.species_detail.name, image: image)
-                ) 
+                    message: Text(messageString()),
+                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
+                )
                 {
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: SFShareLink)
                 }
-                
+                .tint(.obsShareLink)
                 
                 Button(action: {
                     selectedObservation = obs
                 }) {
-                    Image(systemName: "info")
+                    Image(systemName: SFInformation)
                 }
-                .tint(.blue)
+                .tint(.obsInformation)
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -144,10 +141,10 @@ struct ObsRadiusView: View {
                         )
                     }
                 }) {
-                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    Image(systemName: SFArea)
                     
                 }
-                .tint(.green)
+                .tint(.obsArea)
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
@@ -159,18 +156,18 @@ struct ObsRadiusView: View {
                     }
                     
                 } ) {
-                    Image(systemName: "star")
+                    Image(systemName: SFSpecies)
                 }
-                .tint(.obsStar)
+                .tint(.obsSpecies)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
                     }
                 }) {
-                    Image(systemName: "binoculars.fill")
+                    Image(systemName: SFObservation)
                 }
-                .tint(.yellow)
+                .tint(.obsObservation)
                 
             }
         .onAppear() {
@@ -198,7 +195,7 @@ struct ObsRadiusView: View {
 //struct ObsRadiusView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        // Initialize your ObsView with appropriate data
-//        ObsView(obs: Observation(from: <#any Decoder#>))
+//        let exampleObservation = Observation()
+//        ObsRadiusView(obs: exampleObservation, selectedObservation: exampleObservation, from: exampleObservation)
 //    }
 //}
-

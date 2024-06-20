@@ -61,18 +61,35 @@ extension Color {
     static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
     static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255) //6AE388
     static let obsStar = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
+    
+    static let obsInformation = Color(red: 0/255, green: 0/255, blue: 255/255) //blue
+    static let obsObserver = Color(red: 255/255, green: 0/255, blue: 0/255) //red
+    static let obsSpecies = Color(red: 29/255, green: 148/255, blue: 49/255) //green
+    static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //orange
+    static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
+    static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
 }
 
-let obsStrGreenSpider = "1F5E25"
-let obsStrGreenFlower = "CBFC45"
-let obsStrGreenEagle = "1D9431"
-let obsStrBackground = "6AE388"
-let obsStrBlueButterfly = "4CFDFB"
-
-let obsStrNorthSeaBlue = "75d0fa"
-let obsStrDutchGreen = "c1e6ae"
+//let obsStrGreenSpider = "1F5E25"
+//let obsStrGreenFlower = "CBFC45"
+//let obsStrGreenEagle = "1D9431"
+//let obsStrBackground = "6AE388"
+//let obsStrBlueButterfly = "4CFDFB"
+//let obsStrNorthSeaBlue = "75d0fa"
+//let obsStrDutchGreen = "c1e6ae"
 let obsStrDutchOrange = "f7b731"
 
+let SFShareLink = "square.and.arrow.up"
+let SFInformation = "info.circle"
+let SFArea = "pentagon"
+let SFAreaFill = "pentagon.fill"
+let SFSpecies = "star"
+let SFSpeciesFill = "star.fill"
+let SFObservation = "binoculars.fill"
+let SFObserver = "person"
+let SFObserverFill = "person.fill"
+let SFObserverPlus = "person.fill.badge.plus"
+let SFObserverMin = "person.fill.badge.minus"
 
 func GroupColor(value: Int) -> Color {
     switch value {

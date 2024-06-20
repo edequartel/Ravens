@@ -36,7 +36,7 @@ struct RadiusView: View {
         .onAppearOnce {
             showFirstView = settings.mapPreference
         }
-        .edgesIgnoringSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -15,9 +15,6 @@ import AVFoundation
 struct ObsUserView: View {
     let log = SwiftyBeaver.self
     
-//    @StateObject var obsViewModel = ObsViewModel()
-    
-//    @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -25,6 +22,8 @@ struct ObsUserView: View {
 //    @State private var selectedImageURL: URL?
 //    @State private var isShareSheetPresented = false
     @State private var showingDetails = false
+    
+    private let appIcon = Image("AppIconShare")
     
     @State var obs: Observation
 
@@ -97,8 +96,18 @@ struct ObsUserView: View {
                 }
             }
         
-//            .padding(4)
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                let url = URL(string: obs.permalink)!
+                ShareLink(
+                    item: url,
+                    message: Text(messageString()),
+                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
+                )
+                {
+                    Image(systemName: SFShareLink)
+                }
+                .tint(.obsShareLink)
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -115,9 +124,9 @@ struct ObsUserView: View {
                         )
                     }
                 }) {
-                    Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? "pentagon" : "pentagon")
+                    Image(systemName: SFArea)
                 }
-                .tint(.green)
+                .tint(.obsArea)
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
@@ -128,9 +137,9 @@ struct ObsUserView: View {
                         print("bookmarks append")
                     }
                 } ) {
-                    Image(systemName: "star.fill")
+                    Image(systemName: SFSpecies)
                 }
-                .tint(.obsStar)
+                .tint(.obsSpecies)
                 
                 
                 Button(action: {
@@ -139,22 +148,19 @@ struct ObsUserView: View {
                     }
                     
                 }) {
-                    Image(systemName: "binoculars")
+                    Image(systemName: SFObservation)
                 }
-                .tint(.yellow)
+                .tint(.obsObservation)
                 
-//                Button(action: {
-//                    print("Button tapped + Show Image from URL \(obs.species_detail.id)")
-//                    showingDetails = true
-//                }) {
-//                    Image(systemName: "info.circle")
-//                }
-//                .tint(.blue)
             }
-//        }
-//        .sheet(isPresented: $showingDetails) {
-//            SpeciesDetailsView(speciesID: obs.species_detail.id)
-//        }
+    }
+    
+    func messageString() -> String {
+        let speciesName = "\(obs.species_detail.name) - \(obs.species_detail.scientific_name) \(obs.number)x"
+        let locationName = "\(obs.location_detail?.name ?? " ") \(obs.date)"
+        let notes = obs.notes ?? " "
+        let messageString = "\(speciesName)\n\(locationName)\n\(notes)"
+        return messageString
     }
 }
 

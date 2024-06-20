@@ -49,7 +49,7 @@ struct ObservationsRadiusView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
         
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)

@@ -32,18 +32,6 @@ struct RavensView: View {
     
     var body: some View {
         TabView {
-//            // Tab 0
-//            ShareTextView(
-//                shareText: "Share Text Check out this amazing picture!",
-//                photo: "85834566.jpg",
-//                subject: "Big Ben Subject",
-//                message: "Big *Ben* is the nickname for the Great Bell of the clock at the north end of the Palace of Westminster in London, England, and the name is frequently extended to refer also to the clock and the clock tower."
-//            )
-//                .tabItem {
-//                    Text("Records")
-//                    Image(systemName: "square")
-//                }
-            
 //            FileListView()
 //                .tabItem {
 //                    Text("Records")
