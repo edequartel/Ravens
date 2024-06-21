@@ -55,20 +55,6 @@ struct ObservationsRadiusView: View {
             SpeciesDetailsView(speciesID: item.species_detail.id)
         }
         
-//        .sheet(isPresented: $activeSharing) {
-////                    if let result = resultToShare {
-////                        ShareLink(
-////                            item: result, // Pass the result or any other data you want to share
-////                            // Other parameters for ShareLink...
-////                        )
-////                    }
-//            ShareLink(
-//                item: url!,
-//                subject: Text("Check out this website"),
-//                message: Text("Here's a website you might like: www.bartimeus.nl")
-//            )
-//                }
-        
         .onAppear() {
             getDataRadiusModel()
         }

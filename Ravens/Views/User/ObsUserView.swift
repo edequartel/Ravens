@@ -21,11 +21,14 @@ struct ObsUserView: View {
     
 //    @State private var selectedImageURL: URL?
 //    @State private var isShareSheetPresented = false
-    @State private var showingDetails = false
+//    @State private var showingDetails = false
+    
+    @Binding var selectedObservation: Observation?
+    @State var obs: Observation
     
     private let appIcon = Image("AppIconShare")
     
-    @State var obs: Observation
+
 
     var body: some View {
 //        LazyVStack {
@@ -108,6 +111,13 @@ struct ObsUserView: View {
                     Image(systemName: SFShareLink)
                 }
                 .tint(.obsShareLink)
+                
+                Button(action: {
+                    selectedObservation = obs
+                }) {
+                    Image(systemName: SFInformation)
+                }
+                .tint(.obsInformation)
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {

@@ -26,10 +26,9 @@ struct ObsRadiusView: View {
     @State private var userId: Int = 0
     
     @Binding var selectedObservation: Observation?
+    @State var obs: Observation
 
     private let appIcon = Image("AppIconShare")
-    
-    @State var obs: Observation
     
     var body: some View {
             VStack {

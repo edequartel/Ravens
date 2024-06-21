@@ -15,6 +15,8 @@ struct ObservationsUserView: View {
     @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var settings: Settings
     
+    @State private var selectedObservation: Observation?
+    
     var body: some View {
         VStack {
             if let results = observationsUserViewModel.observations?.results, results.count > 0 {
@@ -33,7 +35,10 @@ struct ObservationsUserView: View {
 //                                )
 //                            }
                                 , id: \.id) { obs in
-                            ObsUserView(obs: obs)
+                            ObsUserView(
+                                selectedObservation: $selectedObservation,
+                                obs: obs
+                            )
                         }
                     }
                 }
@@ -48,6 +53,11 @@ struct ObservationsUserView: View {
                 ProgressView()
             }
         }
+        
+        .sheet(item: $selectedObservation) { item in
+            SpeciesDetailsView(speciesID: item.species_detail.id)
+        }
+        
         .onAppear {
             if settings.initialUsersLoad {
                 observationsUserViewModel.fetchData(

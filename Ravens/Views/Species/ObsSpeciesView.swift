@@ -30,6 +30,7 @@ struct ObsSpeciesView: View {
     
     private let appIcon = Image("AppIconShare")
     
+    @Binding var selectedObservation: Observation?
     @State var obs: Observation
     
     var showUsername: Bool = true
@@ -109,6 +110,12 @@ struct ObsSpeciesView: View {
                 }
                 .tint(.obsShareLink)
                 
+                Button(action: {
+                    selectedObservation = obs
+                }) {
+                    Image(systemName: SFInformation)
+                }
+                .tint(.obsInformation)
                 
                 
                 Button(action: {

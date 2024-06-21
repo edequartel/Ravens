@@ -31,10 +31,7 @@ struct ObsAreaView: View {
     @State private var showSelectedSpeciesId = false
     @State private var showingDetails = false
     
-//    @Binding var selectedObservation: Observation?
-    
-    private let appIcon = Image("AppIconShare")
-    
+    @Binding var selectedObservation: Observation?
     @State var obs: Observation
     
     var body: some View {
@@ -116,13 +113,18 @@ struct ObsAreaView: View {
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
-//                    message: Text(messageString()),
-//                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
                 )
                 {
                     Image(systemName: SFShareLink)
                 }
                 .tint(.obsShareLink)
+                
+                Button(action: {
+                    selectedObservation = obs
+                }) {
+                    Image(systemName: SFInformation)
+                }
+                .tint(.obsInformation)
                 
                 
                 Button(action: {

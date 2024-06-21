@@ -19,6 +19,8 @@ struct ObservationsLocationView: View {
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 
     @EnvironmentObject var settings: Settings
+    
+    @State private var selectedObservation: Observation?
 
     var body: some View {
         
@@ -51,8 +53,10 @@ struct ObservationsLocationView: View {
 //                            }
                                 , id: \.id) {
                             obs in
-                            ObsAreaView(obs: obs)
-                                
+                            ObsAreaView(
+                                selectedObservation: $selectedObservation,
+                                obs: obs
+                            )
                         }
                     }
                 }
@@ -60,6 +64,11 @@ struct ObservationsLocationView: View {
 
                 
             }
+        
+            .sheet(item: $selectedObservation) { item in
+                SpeciesDetailsView(speciesID: item.species_detail.id)
+            }
+        
             .onAppear()  {
                 getDataAreaModel()
             }

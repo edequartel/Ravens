@@ -22,7 +22,9 @@ struct ObservationsSpeciesView: View {
     var item: Species
     
     @State private var endOfListReached = false
-    @State private var showingDetails = false
+//    @State private var showingDetails = false
+    
+    @State private var selectedObservation: Observation?
     
     
     var body: some View {
@@ -40,18 +42,8 @@ struct ObservationsSpeciesView: View {
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
                     Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
                 }
-                
-                NavigationLink(destination: SpeciesDetailsView(speciesID: item.id)
-                                .navigationBarTitleDisplayMode(.inline)
-                                .navigationBarHidden(true),
-                               label: {
-                    Image(systemName: "info.circle")
-                        .font(.title2)
-                        .foregroundColor(.blue)
-                })
-                
-
             }
+
             VStack {
                 HStack {
                     Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
@@ -81,12 +73,15 @@ struct ObservationsSpeciesView: View {
                 ForEach(sortedResults.indices, id: \.self) { index in
                     let result = sortedResults[index]
                     
-                    ObsSpeciesView(obs: result)
-                        .onAppear {
-                            if index == sortedResults.count - 1 {
-                                endOfListReached = true
-                            }
-                        }
+                    ObsSpeciesView(
+                        selectedObservation: $selectedObservation,
+                        obs: result
+                    )
+//                        .onAppear {
+//                            if index == sortedResults.count - 1 {
+//                                endOfListReached = true
+//                            }
+//                        }
                 }
             }
             
@@ -95,6 +90,10 @@ struct ObservationsSpeciesView: View {
         .refreshable {
             print("refreshing...")
             fetchDataModel()
+        }
+        
+        .sheet(item: $selectedObservation) { item in
+            SpeciesDetailsView(speciesID: item.species_detail.id)
         }
         
         .onAppear() {
