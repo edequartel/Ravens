@@ -74,7 +74,7 @@ struct ObservationsSpeciesView: View {
                     let result = sortedResults[index]
                     
                     ObsSpeciesView(
-                        selectedObservation: $selectedObservation,
+//                        selectedObservation: $selectedObservation,
                         obs: result
                     )
 //                        .onAppear {
