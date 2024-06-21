@@ -25,7 +25,14 @@ struct RadiusView: View {
                     Button(action: {
                         showFirstView.toggle()
                     }) {
-                        Image(systemName: "rectangle.2.swap") 
+                        Image(systemName: "rectangle.2.swap")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.showObsPictures.toggle()
+                    }) {
+                        Image(systemName: "photo")
                     }
                 }
             }
