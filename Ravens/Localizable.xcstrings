@@ -122,6 +122,9 @@
     "Areas" : {
 
     },
+    "BBB" : {
+
+    },
     "Cache Empty" : {
       "localizations" : {
         "nl" : {
@@ -184,6 +187,9 @@
           }
         }
       }
+    },
+    "Date: %@" : {
+
     },
     "days" : {
       "extractionState" : "stale",
@@ -401,6 +407,9 @@
     "Hide pictures" : {
 
     },
+    "HTML Data" : {
+
+    },
     "Hybrid" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -554,6 +563,9 @@
     "Latitude: %lf" : {
 
     },
+    "LinkRarity: %@" : {
+
+    },
     "List" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -599,6 +611,9 @@
           }
         }
       }
+    },
+    "Location: %@" : {
+
     },
     "Login" : {
       "localizations" : {
@@ -815,6 +830,9 @@
         }
       }
     },
+    "Number: %lld" : {
+
+    },
     "Obs" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -944,6 +962,9 @@
           }
         }
       }
+    },
+    "Records" : {
+
     },
     "Region" : {
 
@@ -1165,6 +1186,9 @@
           }
         }
       }
+    },
+    "Speciesnr: %@" : {
+
     },
     "Standard" : {
       "extractionState" : "manual",

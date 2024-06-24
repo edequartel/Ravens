@@ -32,11 +32,11 @@ struct RavensView: View {
     
     var body: some View {
         TabView {
-//            FileListView()
-//                .tabItem {
-//                    Text("Records")
-//                    Image(systemName: "square")
-//                }
+            HTMLView(viewModel: HTMLViewModel())
+                .tabItem {
+                    Text("Records")
+                    Image(systemName: "square")
+                }
             
             // Tab 1
             if settings.radiusPreference {

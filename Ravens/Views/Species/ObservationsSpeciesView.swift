@@ -26,6 +26,9 @@ struct ObservationsSpeciesView: View {
     
     @State private var selectedObservation: Observation?
     
+//    NavigationLink(destination: HTMLView()) {
+//                        Text("Show HTML View")
+//                    }
     
     var body: some View {
         VStack {
@@ -40,12 +43,22 @@ struct ObservationsSpeciesView: View {
                 
                 
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
-                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "star")
+                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "globe")
+//                        .foregroundColor(.yellow)
+                        .onTapGesture {
+//                            bookMarksViewModel.toggleBookMark(speciesID: item.id)
+                        }
                 }
+                
+                
+                
+                
+                
             }
 
             VStack {
                 HStack {
+                    Text("BBB")
                     Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
                         .foregroundColor(.gray)
                         .font(.footnote)
@@ -72,20 +85,16 @@ struct ObservationsSpeciesView: View {
                 let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                 ForEach(sortedResults.indices, id: \.self) { index in
                     let result = sortedResults[index]
-                    
                     ObsSpeciesView(
-//                        selectedObservation: $selectedObservation,
                         obs: result
                     )
-//                        .onAppear {
-//                            if index == sortedResults.count - 1 {
-//                                endOfListReached = true
-//                            }
-//                        }
                 }
             }
             
         }
+        .listStyle(PlainListStyle())
+        
+        //toolbar here???
         
         .refreshable {
             print("refreshing...")

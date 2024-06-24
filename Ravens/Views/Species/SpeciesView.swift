@@ -166,6 +166,14 @@ struct SpeciesView: View {
                         Image(systemName: settings.isBookMarkVisible ? "star.fill" : "star")
                             .foregroundColor(.blue)
                     }
+                    
+//                    Button(action: {
+//                       NavigationLink(destination: HTMLView(), label: "Rarity")
+//                        
+//                    }) {
+//                        Image(systemName: "map")
+//                    }
+                    
                 }
             )
             

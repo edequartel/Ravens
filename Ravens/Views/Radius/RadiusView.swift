@@ -32,9 +32,19 @@ struct RadiusView: View {
                     Button(action: {
                         settings.showObsPictures.toggle()
                     }) {
-                        Image(systemName: "photo")
+                        Image(systemName: settings.showObsPictures ?  "photo" : "rectangle")
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.showObsAudio.toggle()
+                    }) {
+                        Image(systemName: settings.showObsAudio ?  "waveform" : "rectangle")
+                    }
+                }
+                
+                
             }
             .navigationTitle(settings.selectedSpeciesGroupName)
             .navigationBarTitleDisplayMode(.inline)
