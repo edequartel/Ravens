@@ -32,12 +32,6 @@ struct RavensView: View {
     
     var body: some View {
         TabView {
-            HTMLView(viewModel: HTMLViewModel())
-                .tabItem {
-                    Text("Records")
-                    Image(systemName: "square")
-                }
-            
             // Tab 1
             if settings.radiusPreference {
                 RadiusView()
@@ -65,6 +59,12 @@ struct RavensView: View {
                     Image(systemName: "tree")
                 }
             // Tab 4
+//            HTMLView(viewModel: HTMLViewModel())
+//                .tabItem {
+//                    Text("Latest")
+//                    Image(systemName: "clock")
+//                }
+            // Tab 5
             SettingsView()
                 .tabItem {
                     Text("Settings")

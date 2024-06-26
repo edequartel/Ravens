@@ -17,6 +17,16 @@
         }
       }
     },
+    "%@ -  %@ - %lldx" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ -  %2$@ - %3$lldx"
+          }
+        }
+      }
+    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -33,16 +43,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$lld"
-          }
-        }
-      }
-    },
-    "%@ LT-%lf LN-%lf" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ LT-%2$lf LN-%3$lf"
           }
         }
       }
@@ -86,6 +86,9 @@
     "%lldx" : {
 
     },
+    "Accessibility" : {
+
+    },
     "All" : {
       "localizations" : {
         "nl" : {
@@ -120,9 +123,6 @@
       }
     },
     "Areas" : {
-
-    },
-    "BBB" : {
 
     },
     "Cache Empty" : {
@@ -338,12 +338,6 @@
           }
         }
       }
-    },
-    "Filter obs audio" : {
-
-    },
-    "Filter obs pictures" : {
-
     },
     "Filter rarity by" : {
       "localizations" : {
@@ -561,9 +555,6 @@
 
     },
     "Latitude: %lf" : {
-
-    },
-    "LinkRarity: %@" : {
 
     },
     "List" : {
@@ -830,9 +821,6 @@
         }
       }
     },
-    "Number: %lld" : {
-
-    },
     "Obs" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -962,9 +950,6 @@
           }
         }
       }
-    },
-    "Records" : {
-
     },
     "Region" : {
 
@@ -1174,6 +1159,16 @@
         }
       }
     },
+    "Species %@ seen,\n %@,\n date %@ at time %@,\n %lld times." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Species %1$@ seen,\n %2$@,\n date %3$@ at time %4$@,\n %5$lld times."
+          }
+        }
+      }
+    },
     "Species group" : {
 
     },
@@ -1187,7 +1182,7 @@
         }
       }
     },
-    "Speciesnr: %@" : {
+    "Species: %@" : {
 
     },
     "Standard" : {
@@ -1200,6 +1195,9 @@
           }
         }
       }
+    },
+    "this is a hint" : {
+
     },
     "Token: %@" : {
       "localizations" : {

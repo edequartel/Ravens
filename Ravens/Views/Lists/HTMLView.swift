@@ -5,6 +5,7 @@ struct HTMLDocument {
     let id: UUID = UUID()
     let date: String
     let time: String
+    
     let linkRarity: String
     let rarity: Int
     
@@ -27,6 +28,7 @@ class HTMLViewModel: ObservableObject {
     @Published var documents: [HTMLDocument] = []
     @Published var errorMessage: String?
     
+//    var rarity: Int? = nil
 
     func parseHTMLFromURL() {
         let urlString = "https://waarneming.nl/recent-rarities-content/?species_group=1"
@@ -96,17 +98,27 @@ class HTMLViewModel: ObservableObject {
         var parsedDocuments: [HTMLDocument] = []
         
         for row in rows {
+            
+            //rarity-date
             let dateElement = try row.select(".rarity-date")// h4 a")
             let date = try dateElement.text()
 
-                //                        try document.select(".rarity-date h4 a").first()
-            let linkRarityElement = try row.select(".rarity-date h4 a").first()
-            let linkRarity = try linkRarityElement?.attr("href") ?? ""
-            let rarity = "3"
+            let linkRarityElement = try row.select("td.rarity-date h4 a").first()
+            let href = try linkRarityElement?.attr("href") ?? ""
+            let rarity = extractRarity(from: href)
+//            print("\(rarity)")
             
+//            if let linkRarityElement = try row.select("td.rarity-date h4 a").first() {
+//                let href = try linkRarityElement.attr("href")
+//                let rarity = extractRarity(from: href)
+//                print(rarity ?? -12)
+//            }
+            
+            //rarity-time
             let timeElement = try row.select(".rarity-time")
             let time = try timeElement.text()
             
+            //rarity-species
             let speciesCommonNameElement = try row.select(".rarity-species .species-common-name")
             let speciesCommonName = try speciesCommonNameElement.text()
             
@@ -114,26 +126,30 @@ class HTMLViewModel: ObservableObject {
             let speciesScientificName = try speciesScientificNameElement.text()
             
             let linkSpeciesObservations = try row.select(".rarity-species div.truncate span.content a").attr("href")
-            
+
+            //rarity-location
             let locationElement = try row.select(".rarity-location .content")
             let location = try locationElement.text()
-            
             let linkLocations = try row.select(".rarity-location .content a").attr("href")
             
+            //rarity-icons
+            let descriptionElement = try row.select(".rarity-icons .far.fa-comment-alt-lines").first()
+            let description = try descriptionElement?.attr("title")
+            
+            //rarity-num-observations
             let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
             let numObservations = try numObservationsElement.text()
             
             
-            let descriptionElement = try row.select(".rarity-icons .far.fa-comment-alt-lines").first()
-            let description = try descriptionElement?.attr("title")
+  
             
             let numObservationsInt = Int(numObservations) ?? 0
             
             let document = HTMLDocument(
                 date: date,
                 time: time,
-                linkRarity: linkRarity,
-                rarity: Int(rarity) ?? 0,
+                linkRarity: "",
+                rarity: rarity ?? -2,
                 speciesCommonName: speciesCommonName,
                 speciesScientificName: speciesScientificName,
                 location: location,
@@ -159,7 +175,7 @@ import SwiftUI
 
 struct HTMLView: View {
     @ObservedObject var viewModel: HTMLViewModel
-
+    
     var body: some View {
         VStack {
             if let errorMessage = viewModel.errorMessage {
@@ -168,32 +184,34 @@ struct HTMLView: View {
                     .padding()
             } else {
                 List(viewModel.documents, id: \.id) { document in
+                    
                     VStack(alignment: .leading) {
                         if !document.date.isEmpty {
                             Text("Date: \(document.date)")
                                 .font(.headline)
                         } else {
                             
-                            Text("\(document.rarity) \(document.speciesCommonName)")// - \(document.speciesScientificName)")
+                            Text("\(document.speciesCommonName) -  \(document.time) - \(document.numObservations)x")
                                 .font(.subheadline)
                                 .bold()
                             
-                            Text("LinkRarity: \(document.linkRarity)")
+                            Text("\(document.speciesScientificName)")
                                 .font(.subheadline)
+                                .foregroundColor(.gray)
                             
-                            Text("\(document.time)")
+                            Text("\(document.location)")
                                 .font(.subheadline)
+
+                            if !(document.linkSpeciesObservations.isEmpty) {
+                                Text("Species: \(extractSpeciesNumber(from: document.linkSpeciesObservations) ?? "")")
+                                    .font(.subheadline)
+                            }
                             
-                            Text("Speciesnr: \(extractSpeciesNumber(from: document.linkSpeciesObservations) ?? "noSpeciesNumber")")
-                                .font(.subheadline)
-                            //                        Text("Location: \(document.location)")
-                            //                            .font(.subheadline)
-                            Text("Location: \(document.linkLocations)")
-                                .font(.subheadline)
-                            Text("Location: \(extractLocationNumber(from: document.linkLocations) ?? "noLocationNumber")")
-                                .font(.subheadline)
-                            Text("Number: \(document.numObservations)")
-                                .font(.subheadline)
+                            if !document.linkLocations.isEmpty {
+                                Text("Location: \(extractLocationNumber(from: document.linkLocations) ?? "")")
+                                    .font(.subheadline)
+                            }
+                            
                             if let description = document.description {
                                 Text("\(description)")
                                     .font(.subheadline)
@@ -201,9 +219,10 @@ struct HTMLView: View {
                             }
                         }
                     }
+                    
                     .padding()
                 }
-                .listStyle(InsetGroupedListStyle())
+//                .listStyle(InsetGroupedListStyle())
             }
         }
         .onAppear {
@@ -215,61 +234,8 @@ struct HTMLView: View {
         }
         .navigationTitle("HTML Data")
     }
-    
-    // Function to extract the number after "/species/" from a URL string
-    func extractSpeciesNumber(from url: String) -> String? {
-        // Use regex to find the number after "/species/"
-        if let match = url.range(of: "/species/(\\d+)", options: .regularExpression) {
-            // Extract the matched string
-            let speciesNumber = url[match]
-            
-            // Extract the number part from the matched string
-            if let numberRange = speciesNumber.range(of: "\\d+", options: .regularExpression) {
-                return String(speciesNumber[numberRange])
-            }
-        }
-        return nil
-    }
-    
-    func extractLocationNumber(from url: String) -> String? {
-        // Use regex to find the number after "/location/"
-        if let match = url.range(of: "/locations/(\\d+)", options: .regularExpression) {
-            // Extract the matched string
-            let speciesNumber = url[match]
-            
-            // Extract the number part from the matched string
-            if let numberRange = speciesNumber.range(of: "\\d+", options: .regularExpression) {
-                return String(speciesNumber[numberRange])
-            }
-        }
-        return nil
-    }
-    
-    func getRarityValue(from urlString: String) -> String? {
-        // Define the regex pattern to find the 'rarity' parameter
-        let pattern = "rarity=([^&]*)"
-        
-        // Create a regular expression object
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
-            print("Invalid regex pattern")
-            return nil
-        }
-        
-        // Search for matches in the urlString
-        let range = NSRange(location: 0, length: urlString.utf16.count)
-        if let match = regex.firstMatch(in: urlString, options: [], range: range) {
-            // Extract the captured group, which is the value of 'rarity'
-            if let rarityRange = Range(match.range(at: 1), in: urlString) {
-                let rarityValue = String(urlString[rarityRange])
-                return rarityValue
-            }
-        }
-        
-        // If no match is found, return nil
-        return nil
-    }
-
 }
+
 
 struct HTMLView_Previews: PreviewProvider {
     static var previews: some View {
@@ -277,3 +243,52 @@ struct HTMLView_Previews: PreviewProvider {
         HTMLView(viewModel: viewModel)
     }
 }
+// Function to extract the number after "/species/" from a URL string
+func extractSpeciesNumber(from url: String) -> String? {
+    // Use regex to find the number after "/species/"
+    if let match = url.range(of: "/species/(\\d+)", options: .regularExpression) {
+        // Extract the matched string
+        let speciesNumber = url[match]
+        
+        // Extract the number part from the matched string
+        if let numberRange = speciesNumber.range(of: "\\d+", options: .regularExpression) {
+            return String(speciesNumber[numberRange])
+        }
+    }
+    return nil
+}
+
+func extractLocationNumber(from url: String) -> String? {
+    // Use regex to find the number after "/location/"
+    if let match = url.range(of: "/locations/(\\d+)", options: .regularExpression) {
+        // Extract the matched string
+        let speciesNumber = url[match]
+        
+        // Extract the number part from the matched string
+        if let numberRange = speciesNumber.range(of: "\\d+", options: .regularExpression) {
+            return String(speciesNumber[numberRange])
+        }
+    }
+    return nil
+}
+
+
+func extractRarity(from url: String) -> Int? {
+    let pattern = "rarity=(\\d+)"
+    do {
+        let regex = try NSRegularExpression(pattern: pattern, options: [])
+        let nsString = url as NSString
+        let results = regex.matches(in: url, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        if let match = results.first {
+            let rarityRange = match.range(at: 1)
+            let rarityString = nsString.substring(with: rarityRange)
+            return Int(rarityString)
+        }
+    } catch let error {
+        print("Invalid regex: \(error.localizedDescription)")
+    }
+    return nil
+}
+
+

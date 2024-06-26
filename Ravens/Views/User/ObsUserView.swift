@@ -18,10 +18,8 @@ struct ObsUserView: View {
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    @EnvironmentObject var settings: Settings
     
-//    @State private var selectedImageURL: URL?
-//    @State private var isShareSheetPresented = false
-//    @State private var showingDetails = false
     
     @Binding var selectedObservation: Observation?
     @State var obs: Observation
@@ -36,12 +34,15 @@ struct ObsUserView: View {
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundColor(Color(myColor(value: obs.rarity)))
-                    if obs.has_sound ?? false { //for test
+
+                    if obs.photos?.count ?? 0 > 0 {
+                        Image(systemName: "photo")
+                    }
+                    
+                    if obs.sounds?.count ?? 0 > 0 {
                         Image(systemName: "waveform")
                     }
-                    if obs.has_photo ?? false {
-                        Image(systemName: "photo") //for test
-                    }
+
                     Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
@@ -87,8 +88,10 @@ struct ObsUserView: View {
                     }
                 }
                 
-                ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
+                if !settings.hidePictures {
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+                        AFImageView(media: imageURLString)
+                    }
                 }
                 
                 if (obs.sounds?.count ?? 0)>0 {

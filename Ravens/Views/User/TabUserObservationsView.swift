@@ -14,21 +14,30 @@ struct TabUserObservationsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if showFirstView {
+                if showFirstView && !settings.accessibility {
                     MapObservationsUserView()
                 } else {
                     ObservationsUserView()
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        showFirstView.toggle()
-                    }) {
-                        Image(systemName: "rectangle.2.swap") // Replace with your desired image
-//                        Text("\(settings.userName)")
+                if !settings.accessibility {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            showFirstView.toggle()
+                        }) {
+                            Image(systemName: "rectangle.2.swap") // Replace with your desired image
+                            //                        Text("\(settings.userName)")
+                        }
                     }
-
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.hidePictures.toggle()
+                    }) {
+                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                    }
                 }
             }
             .navigationTitle("\(settings.userName)")

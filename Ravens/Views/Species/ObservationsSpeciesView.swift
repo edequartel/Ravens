@@ -41,24 +41,25 @@ struct ObservationsSpeciesView: View {
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                 Spacer()
                 
-                
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
-                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "star.fill" : "globe")
-//                        .foregroundColor(.yellow)
-                        .onTapGesture {
-//                            bookMarksViewModel.toggleBookMark(speciesID: item.id)
-                        }
+                Button(action: {
+                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
+                        print("bookmarks remove")
+                        bookMarksViewModel.removeRecord(speciesID: item.id)
+                    } else {
+                        bookMarksViewModel.appendRecord(speciesID: item.id)
+                        print("bookmarks append")
+                    }
+
+                } ) {
+                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
+                        .foregroundColor(.black)
                 }
-                
-                
-                
-                
+//                .tint(.obsSpecies)
                 
             }
 
             VStack {
                 HStack {
-                    Text("BBB")
                     Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
                         .foregroundColor(.gray)
                         .font(.footnote)

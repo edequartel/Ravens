@@ -11,10 +11,7 @@ import SwiftyBeaver
 struct SettingsView: View {
     let log = SwiftyBeaver.self
     @Environment(\.locale) private var locale
-    
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
-//    @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel   
-    
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var regionsViewModel: RegionsViewModel
@@ -29,7 +26,6 @@ struct SettingsView: View {
     let maximumRadius = 10000.0
     let step = 500.0
     
-//    @State private var selectedSpeciesGroupName: String = ""
     
     var body: some View {
         
@@ -91,17 +87,22 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    Toggle("Poi", isOn: $settings.poiOn)
+                    Toggle("Accessibility", isOn: $settings.accessibility)
+                        .onChange(of: settings.accessibility) {
+                            if $0 {
+                                settings.hidePictures = true
+                            }
+                        }
+                    if !settings.accessibility {
+                        Toggle("Poi", isOn: $settings.poiOn)
+                    }
                     Toggle("Show observer", isOn: $settings.showUser)
-
-                    Toggle("Filter obs pictures", isOn: $settings.showObsPictures)
                     Toggle("Hide pictures", isOn: $settings.hidePictures)
-
-                    Toggle("Filter obs audio", isOn: $settings.showObsAudio)
-                    
                     Toggle("Radius", isOn: $settings.radiusPreference)
                     
-                    Toggle("Map", isOn: $settings.mapPreference)
+                    if !settings.accessibility {
+                        Toggle("Map", isOn: $settings.mapPreference)
+                    }
                     
                     Picker("Rarity", selection: $settings.selectedRarity) {
                         ForEach(0..<5) { index in
@@ -138,13 +139,11 @@ struct SettingsView: View {
                     if !(settings.radiusPreference) {
                         Toggle("Infinity (only location)", isOn: $settings.infinity)
                             .onChange(of: settings.infinity) {
-                                //                            settings.isFirstAppear = true
-                                //                            settings.isFirstAppearObsView = true
+                                settings.isFirstAppearObsView = true
                             }
                     }
                     
                     
-//                    if !(settings.infinity) {
                     Picker("Window", selection: $settings.days) {
                         ForEach(1 ... 14, id: \.self) { day in
                             HStack() {
@@ -156,10 +155,6 @@ struct SettingsView: View {
                     DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                 }
                 
-//                Section("International") {
-//                    LanguageView()
-//                }
-//                
                 
                 Section(header: Text("App details")) {
                     Toggle("Save photos into album", isOn: $settings.savePhotos)
@@ -181,8 +176,11 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Location")) {
-                    LocationManagerView()
+                    VStack {
+                        LocationManagerView()
+                    }
                 }
+                
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -191,28 +189,20 @@ struct SettingsView: View {
                         Label("Manual", systemImage: "info.circle")
                     }
                 }
-                
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    NavigationLink(destination: ObserversView()) {
-//                        Label("Observers", systemImage: "person.3")
-//                    }
-//                }
             }
         }
         .onAppear() {
             storage = calculateLocalStorageSize()
-//            speciesGroupViewModel.fetchData(language: settings.selectedLanguage)
         }
         
     }
-    
     
     
     func getId(region: Int, species_group: Int) -> Int? {
         log.error("getID from regionListViewModel region: \(region) species_group: \(species_group)")
         if let matchingItem = regionListViewModel.regionLists.first(
             where: { $0.region == region && $0.species_group == species_group }) {
-            log.error("---> getId= \(matchingItem)")
+            log.error("getId= \(matchingItem)")
             return matchingItem.id
         }
         log.error("getId: NIL")
@@ -245,7 +235,6 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
             .environmentObject(Settings())
             .environmentObject(ObservationsRadiusViewModel())
-//            .environmentObject(SpeciesGroupViewModel())
     }
 }
 

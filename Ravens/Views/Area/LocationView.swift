@@ -20,7 +20,7 @@ struct LocationView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if showFirstView {
+                if showFirstView && !settings.accessibility {
                     MapObservationsLocationView()
                 } else {
                     ObservationsLocationView()
@@ -30,11 +30,22 @@ struct LocationView: View {
             .navigationBarTitleDisplayMode(.inline)
 
             .toolbar {
+                if !settings.accessibility {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            showFirstView.toggle()
+                        }) {
+                            Image(systemName: "rectangle.2.swap")
+                        }
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        showFirstView.toggle()
+                        settings.hidePictures.toggle()
+//                        print("position: \(settings.position)")
                     }) {
-                        Image(systemName: "rectangle.2.swap")
+                        Image(systemName: "smallcircle.filled.circle")
                     }
                 }
     
@@ -69,6 +80,14 @@ struct LocationView: View {
                     NavigationLink(destination: LocationListView()) {
                         Image(systemName: "magnifyingglass")
                         
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.hidePictures.toggle()
+                    }) {
+                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
                     }
                 }
                 

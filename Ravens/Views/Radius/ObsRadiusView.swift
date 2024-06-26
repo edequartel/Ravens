@@ -96,6 +96,8 @@ struct ObsRadiusView: View {
                     }
                 }
                 
+//                PhotoGridView(photos: obs.photos)
+                
                 if (obs.sounds?.count ?? 0)>0 {
                     HStack {
                         PlayerControlsView(audio: obs.sounds ?? [] )
@@ -103,6 +105,18 @@ struct ObsRadiusView: View {
                     }
                 }
             }
+        
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("""
+                                Species \(obs.species_detail.name) seen,
+                                 \(obs.location_detail?.name ?? ""),
+                                 date \(obs.date) at time \(obs.time ?? ""),
+                                 \(obs.number) times.
+                                """
+            )
+            .accessibilityHint("this is a hint")
+        
+        
             .padding(4)
         
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -110,8 +124,6 @@ struct ObsRadiusView: View {
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
-//                    message: Text(messageString())
-//                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
                 )
                 {
                     Image(systemName: SFShareLink)
@@ -179,6 +191,27 @@ struct ObsRadiusView: View {
                 
             }
         }        
+    }
+}
+
+
+import SwiftUI
+
+struct PhotoGridView: View {
+    var photos: [String]?
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 2) {
+                ForEach(photos ?? [], id: \.self) { imageURLString in
+                    AFImageView(media: imageURLString)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: 200, maxHeight: 200)
+                        .clipped()
+                }
+            }
+            .padding(.all, 10)
+        }
     }
 }
 

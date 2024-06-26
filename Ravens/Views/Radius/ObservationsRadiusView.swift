@@ -11,6 +11,7 @@ import MapKit
 
 struct ObservationsRadiusView: View {
     let log = SwiftyBeaver.self
+    
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -19,27 +20,31 @@ struct ObservationsRadiusView: View {
     @State private var selectedObservation: Observation?
     
     var body: some View {
-        NavigationView {
+//        VStack {
             VStack {
                 if (!keyChainViewModel.token.isEmpty) {
                     if let results = observationsRadiusViewModel.observations?.results, results.count > 0 {
                         List {
-                            ForEach(results.sorted(
+                            ForEach(results
+                                
+                                .sorted(
                                 by: {
                                     ($1.rarity, $0.species_detail.name, $1.date, $0.time ?? "00:00") <
                                     ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00")
                                 })
-                                .filter { result in
-                                    ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
-                                    (
-                                        (result.has_photo ?? false) && (settings.showObsPictures) ||
-                                        (result.has_sound ?? false) && (settings.showObsAudio)
-                                    )
-                                }
-                                    , id: \.id) { result in
+                                    
+//                                .filter { result in
+//                                    ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
+//                                    (
+//                                        (result.has_photo ?? false) && (settings.showObsPictures) ||
+//                                        (result.has_sound ?? false) && (settings.showObsAudio)
+//                                    )
+//                                }
+                                    
+                                    , id: \.id) { obs in
                                 ObsRadiusView(
                                     selectedObservation: $selectedObservation,
-                                    obs: result
+                                    obs: obs
                                 )
                             }
                         }
@@ -48,8 +53,7 @@ struct ObservationsRadiusView: View {
                     }
                 }
             }
-        }
-//        .edgesIgnoringSafeArea(.all)
+//        }
         
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)

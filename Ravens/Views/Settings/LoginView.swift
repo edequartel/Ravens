@@ -160,7 +160,7 @@ struct LoginView: View {
                 InfoObservationView()
             }
             
-            DisplayCredentialsView()
+//            DisplayCredentialsView()
         }
         .navigationTitle("Login \(selectedInBetween)")
     }

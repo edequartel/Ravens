@@ -11,12 +11,26 @@ import SwiftUI
 import SwiftData
 import MapKit
 import SwiftyBeaver
+import Combine
+
+//class AccessibilitySettings: ObservableObject {
+//    @Published var isVoiceOverEnabled: Bool = false
+//    private var cancellable: AnyCancellable?
+//
+//    init() {
+//        self.cancellable = NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+//            .sink { [weak self] _ in
+//                self?.isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
+//            }
+//        self.isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
+//    }
+//}
 
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
     
-    @AppStorage("showObsPictures") var showObsPictures: Bool = false
-    @AppStorage("showObsAudio") var showObsAudio: Bool = true
+//    @AppStorage("showObsPictures") var showObsPictures: Bool = false
+//    @AppStorage("showObsAudio") var showObsAudio: Bool = true
     @AppStorage("hidePictures") var hidePictures: Bool = false
 
     
@@ -48,6 +62,15 @@ class Settings: ObservableObject {
         didSet {
             log.error("!!saving it in selectedInBetween: \(selectedInBetween)")
             selectedInBetweenStored = selectedInBetween
+        }
+    }
+    
+    
+    @AppStorage("accessibility") var accessibilityStored: Bool = false
+    @Published var accessibility: Bool = false {
+        didSet {
+            log.error("!!saving it in storage: \(accessibility)")
+            accessibilityStored = accessibility
         }
     }
     
@@ -288,17 +311,10 @@ class Settings: ObservableObject {
         
         selectedSpeciesGroupName = selectedSpeciesGroupNameStored
         
-
-        
         mapPreference = mapPreferenceStored
         selectedRarity = selectedRarityStored
         selectedInBetween = selectedInBetweenStored
-        
-        //
-//        isLocationIDChanged = true
-//        initialAreaLoad = true
-//        isAreaChanged = true
-        
+        accessibility = accessibilityStored
         
         //for updating published values
         days = daysStored

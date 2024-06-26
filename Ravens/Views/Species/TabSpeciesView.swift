@@ -17,7 +17,7 @@ struct TabSpeciesView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if showFirstView {
+                if showFirstView && !settings.accessibility {
                     MapObservationsSpeciesView(item: item)
                 } else {
                     ObservationsSpeciesView(item: item)
@@ -30,6 +30,14 @@ struct TabSpeciesView: View {
                     showFirstView.toggle()
                 }) {
                     Image(systemName: "rectangle.2.swap") // Replace with your desired image
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    settings.hidePictures.toggle()
+                }) {
+                    ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
                 }
             }
         }

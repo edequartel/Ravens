@@ -1,5 +1,5 @@
 {
-  "originHash" : "61739a03f9ad48e82c1b04a1d5c466043174de206f71462e5ed06068f70fcc29",
+  "originHash" : "98e4fb992353453f9437346294d2dc6a0e7647f0dee36d3339c8f5fea17a3c94",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -29,15 +29,6 @@
       }
     },
     {
-      "identity" : "kingfisher",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher.git",
-      "state" : {
-        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
-        "version" : "7.12.0"
-      }
-    },
-    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
@@ -56,30 +47,12 @@
       }
     },
     {
-      "identity" : "partialsheet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AndreaMiotto/PartialSheet.git",
-      "state" : {
-        "revision" : "6c61890976181274ea7baf6a4c297418346db799",
-        "version" : "3.1.1"
-      }
-    },
-    {
       "identity" : "richtext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/NuPlay/RichText",
       "state" : {
         "revision" : "8abbc59142523ac18f36fcf07414c2f85a2e75ae",
         "version" : "2.4.1"
-      }
-    },
-    {
-      "identity" : "svgview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/SVGView.git",
-      "state" : {
-        "revision" : "6465962facdd25cb96eaebc35603afa2f15d2c0d",
-        "version" : "1.0.6"
       }
     },
     {
@@ -98,24 +71,6 @@
       "state" : {
         "revision" : "7b506bebabd68b542256c0e1e55519fab5f4c092",
         "version" : "1.1.0"
-      }
-    },
-    {
-      "identity" : "swiftsoup",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/scinfu/SwiftSoup.git",
-      "state" : {
-        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
-        "version" : "2.7.2"
-      }
-    },
-    {
-      "identity" : "swiftuipager",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fermoya/SwiftUIPager.git",
-      "state" : {
-        "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb",
-        "version" : "2.5.0"
       }
     },
     {

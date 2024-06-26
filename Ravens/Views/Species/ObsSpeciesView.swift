@@ -39,13 +39,21 @@ struct ObsSpeciesView: View {
     var body: some View {
         LazyVStack {
             VStack {
-                if obs.has_photo ?? false {
-                    Image(systemName: "photo")
-                }
+                HStack {
+                    if obs.photos?.count ?? 0 > 0 {
+                        Image(systemName: "photo")
+                    }
+                    
+                    if obs.sounds?.count ?? 0 > 0 {
+                        Image(systemName: "waveform")
+                    }
+                    
+//                }
                 
-                if showLocation {
+//                if showLocation {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
+                            .bold()
                             .lineLimit(1) // Set the maximum number of lines to 1
                         Spacer()
                         if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -53,6 +61,7 @@ struct ObsSpeciesView: View {
 //                                .foregroundColor(.green)
                         }
                     }
+                    Spacer()
                 }
                 
                 HStack {
@@ -86,8 +95,10 @@ struct ObsSpeciesView: View {
                     }
                 }
                 
-                ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
+                if !settings.hidePictures {
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+                        AFImageView(media: imageURLString)
+                    }
                 }
                 
                 if (obs.sounds?.count ?? 0)>0 {
@@ -132,19 +143,19 @@ struct ObsSpeciesView: View {
                 }
                 .tint(.obsObserver)
                 
-                Button(action: {
-                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-                        print("bookmarks remove")
-                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
-                    } else {
-                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
-                        print("bookmarks append")
-                    }
-
-                } ) {
-                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
-                }
-                .tint(.obsSpecies)
+//                Button(action: {
+//                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+//                        print("bookmarks remove")
+//                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
+//                    } else {
+//                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
+//                        print("bookmarks append")
+//                    }
+//
+//                } ) {
+//                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
+//                }
+//                .tint(.obsSpecies)
 
                 
                 Button(action: {

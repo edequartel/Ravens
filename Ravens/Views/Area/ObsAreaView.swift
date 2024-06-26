@@ -41,13 +41,14 @@ struct ObsAreaView: View {
                     Image(systemName: "circle.fill")
                         .foregroundColor(Color(myColor(value: obs.rarity)))
                     
-                    if obs.has_sound ?? false { //for test
+                    if obs.photos?.count ?? 0 > 0 {
+                        Image(systemName: "photo")
+                    }
+                    
+                    if obs.sounds?.count ?? 0 > 0 {
                         Image(systemName: "waveform")
                     }
                     
-                    if obs.has_photo ?? false {
-                        Image(systemName: "photo") //for test
-                    }
                     Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
@@ -96,8 +97,10 @@ struct ObsAreaView: View {
                     }
                 }
                 
-                ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
+                if !settings.hidePictures {
+                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+                        AFImageView(media: imageURLString)
+                    }
                 }
                 
                 if (obs.sounds?.count ?? 0)>0 {
@@ -144,23 +147,23 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsObserver)
                 
-                Button(action: {
-                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
-                        areasViewModel.removeRecord(
-                            areaID: obs.location_detail?.id ?? 0)
-                    } else {
-                        log.info("adding area \(obs.location_detail?.id ?? 0)")
-                        areasViewModel.appendRecord(
-                            areaName: obs.location_detail?.name ?? "unknown",
-                            areaID: obs.location_detail?.id ?? 0,
-                            latitude: obs.point.coordinates[1], //!!?
-                            longitude: obs.point.coordinates[0])
-                    }
-                }) {
-                    Image(systemName: SFArea)
-                }
-                .tint(.obsArea)
+//                Button(action: {
+//                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+//                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
+//                        areasViewModel.removeRecord(
+//                            areaID: obs.location_detail?.id ?? 0)
+//                    } else {
+//                        log.info("adding area \(obs.location_detail?.id ?? 0)")
+//                        areasViewModel.appendRecord(
+//                            areaName: obs.location_detail?.name ?? "unknown",
+//                            areaID: obs.location_detail?.id ?? 0,
+//                            latitude: obs.point.coordinates[1], //!!?
+//                            longitude: obs.point.coordinates[0])
+//                    }
+//                }) {
+//                    Image(systemName: SFArea)
+//                }
+//                .tint(.obsArea)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {

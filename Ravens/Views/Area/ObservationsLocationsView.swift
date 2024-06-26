@@ -23,7 +23,6 @@ struct ObservationsLocationView: View {
     @State private var selectedObservation: Observation?
 
     var body: some View {
-        
             VStack {
                 HStack {
                     Text(settings.locationName)
