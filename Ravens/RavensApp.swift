@@ -86,6 +86,8 @@ struct RavensApp: App {
     @StateObject var bookMarksViewModel = BookMarksViewModel()
     @StateObject var observersViewModel = ObserversViewModel()
     @StateObject var areasViewModel = AreasViewModel()
+    
+    @StateObject var htmlViewModel = HTMLViewModel()
 
     let urlHandler = URLHandler()
     
@@ -134,12 +136,14 @@ struct RavensApp: App {
                 .environmentObject(bookMarksViewModel)
                 .environmentObject(observersViewModel)
                 .environmentObject(areasViewModel)
+                .environmentObject(htmlViewModel)
 
                 .environmentObject(Player())
             
                 .environmentObject(ObservationsYearViewModel())
 
                 .environmentObject(urlHandler) // use instance
+            
 
                 .onOpenURL { url in
                     // Handle the URL appropriately

@@ -16,6 +16,7 @@ struct ObsSpeciesView: View {
     let log = SwiftyBeaver.self
     
     @StateObject var obsViewModel = ObsViewModel()
+    @EnvironmentObject var speciesViewModel: SpeciesViewModel
     
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
@@ -47,6 +48,8 @@ struct ObsSpeciesView: View {
                     if obs.sounds?.count ?? 0 > 0 {
                         Image(systemName: "waveform")
                     }
+                    
+
                     
 //                }
                 

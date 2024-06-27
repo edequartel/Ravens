@@ -88,10 +88,10 @@ struct SettingsView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                     Toggle("Accessibility", isOn: $settings.accessibility)
-                        .onChange(of: settings.accessibility) { newValue in
-                            if newValue {
+                        .onChange(of: settings.accessibility) {//    newValue in
+//                            if newValue {
                                 settings.hidePictures = true
-                            }
+//                            }
                         }
 
                     
@@ -100,7 +100,9 @@ struct SettingsView: View {
 //                    }
                     
                     Toggle("Show observer", isOn: $settings.showUser)
-                    Toggle("Hide pictures", isOn: $settings.hidePictures)
+                    if !settings.accessibility {
+                        Toggle("Hide pictures", isOn: $settings.hidePictures)
+                    }
                     
 //                    Toggle("Radius", isOn: $settings.radiusPreference)
                     
@@ -112,7 +114,7 @@ struct SettingsView: View {
                         ForEach(0..<5) { index in
                             Image(systemName: "binoculars.fill")
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(myColor(value: index), .clear)
+                                .foregroundStyle(RarityColor(value: index), .clear)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -140,23 +142,24 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                    if !(settings.radiusPreference) {
                         Toggle("Infinity (only location)", isOn: $settings.infinity)
                             .onChange(of: settings.infinity) {
                                 settings.isFirstAppearObsView = true
                             }
-                    }
+
                     
                     
-                    Picker("Window", selection: $settings.days) {
-                        ForEach(1 ... 14, id: \.self) { day in
-                            HStack() {
-                                Text("\(day)")
+                    if !(settings.infinity) {
+                        Picker("Window", selection: $settings.days) {
+                            ForEach(1 ... 14, id: \.self) { day in
+                                HStack() {
+                                    Text("\(day)")
+                                }
                             }
                         }
+                        
+                        DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                     }
-                    
-                    DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
                 }
                 
                 

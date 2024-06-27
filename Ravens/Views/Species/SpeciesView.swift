@@ -18,6 +18,7 @@ struct SpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    @EnvironmentObject var htmlViewModel: HTMLViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var selectedSortOption: SortOption = .name
@@ -34,36 +35,33 @@ struct SpeciesView: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(speciesViewModel.filteredSpecies( //?
-                        by: selectedSortOption,
-                        searchText: searchText,
-                        filterOption: selectedFilterOption,
-                        rarityFilterOption: settings.selectedRarity,
-                        isBookmarked: settings.isBookMarkVisible,
-                        additionalIntArray: bookMarksViewModel)
+                    ForEach(
+                        speciesViewModel.filteredSpecies(
+                            by: selectedSortOption,
+                            searchText: searchText,
+                            filterOption: selectedFilterOption,
                             
-//                        .filter { result in
-//                            ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
-//                            (
-//                                (result.has_photo ?? false) && (settings.showObsPictures) ||
-//                                (result.has_sound ?? false) && (settings.showObsAudio)
-//                            )
-//                        }
+                            rarityFilterOption: settings.selectedRarity,
                             
+//                            isLatest: settings.isLatestVisible,
+//                            htmlViewModel: HTMLViewModel,
                             
-                            
-                            
-                            , id: \.species) { species in
+                            isBookmarked: settings.isBookMarkVisible,
+                            additionalIntArray: bookMarksViewModel)
+                        , id: \.species) { species in
                         
                         NavigationLink(destination: TabSpeciesView(item: species)) {
                             
                             VStack(alignment: .leading) {
                                 
                                 HStack(spacing: 4) {
-                                    Image(systemName: "circle.fill")
+                                    Image(systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill") 
                                         .symbolRenderingMode(.palette)
-                                        .foregroundStyle(myColor(value: species.rarity), .clear)
+                                        .foregroundStyle(RarityColor(value: species.rarity), .clear)
                                     
+//                                    if htmlViewModel.speciesScientificNameExists(species.scientific_name) {
+//                                        Image(systemName: "circle.hexagonpath.fill")
+//                                    }
                                     
                                     Text("\(species.name)")// - \(species.id)") //?
                                         .bold()
@@ -159,7 +157,7 @@ struct SpeciesView: View {
                     
                     //                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
                     //                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .blue)
-                    NetworkView()
+//                    NetworkView()
                     Button(action: {
                         settings.isBookMarkVisible.toggle()
                     }) {
@@ -167,18 +165,23 @@ struct SpeciesView: View {
                             .foregroundColor(.blue)
                     }
                     
-//                    Button(action: {
-//                       NavigationLink(destination: HTMLView(), label: "Rarity")
-//                        
-//                    }) {
-//                        Image(systemName: "map")
-//                    }
+                    Button(action: {
+                        settings.isLatestVisible.toggle()
+                    }) {
+                        Image(systemName: settings.isLatestVisible ? "circle.hexagonpath.fill" : "circle.hexagonpath")
+                    }
                     
                 }
             )
             
         }
         .searchable(text: $searchText)
+        .refreshable {
+            htmlViewModel.parseHTMLFromURL()
+        }
+        .onAppear() {
+            htmlViewModel.parseHTMLFromURL()
+        }
         
         
         .sheet(item: $selectedInfoItem) { item in
@@ -248,7 +251,18 @@ extension SpeciesViewModel {
 }
 
 extension SpeciesViewModel {
-    func filteredSpecies(by sortOption: SortOption, searchText: String, filterOption: FilterOption, rarityFilterOption: Int, isBookmarked: Bool, additionalIntArray: BookMarksViewModel) -> [Species] {
+    func filteredSpecies(
+        by
+        sortOption: SortOption,
+        searchText: String,
+        filterOption: FilterOption,
+        rarityFilterOption: Int,
+//        isLatest: Bool,
+//        htmlViewModel: HTMLViewModel,
+        isBookmarked: Bool,
+        additionalIntArray: BookMarksViewModel
+        
+    ) -> [Species] {
         let sortedSpeciesList = sortedSpecies(by: sortOption)
         
         if searchText.isEmpty {
@@ -301,8 +315,18 @@ extension SpeciesViewModel {
         }
     }
     
+    //    private func applyLatestFilter(to species: [Species], isBookmarked: Bool, additionalHTMLDocArray: [HTMLDocument]) -> [Species] {
+    //        if isBookmarked {
+    //            return species.filter { species in additionalHTMLDocArray. contains(where: { $0.speciesID == species.id }) }
+    //        } else {
+    //            return species
+    //        }
+    //    }
+    
     
 }
+
+//settings.isRartyVisible
 
 //struct SpeciesView_Previews: PreviewProvider {
 //    static var previews: some View {

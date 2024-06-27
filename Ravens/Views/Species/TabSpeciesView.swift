@@ -25,19 +25,23 @@ struct TabSpeciesView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    showFirstView.toggle()
-                }) {
-                    Image(systemName: "rectangle.2.swap") // Replace with your desired image
+            if !settings.accessibility {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showFirstView.toggle()
+                    }) {
+                        Image(systemName: "rectangle.2.swap") // Replace with your desired image
+                    }
                 }
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    settings.hidePictures.toggle()
-                }) {
-                    ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+            if !settings.accessibility {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.hidePictures.toggle()
+                    }) {
+                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                    }
                 }
             }
         }

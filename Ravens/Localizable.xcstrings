@@ -27,12 +27,12 @@
         }
       }
     },
-    "%@ -  %@ - %lldx" : {
+    "%@ - %@ - %lldx" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ -  %2$@ - %3$lldx"
+            "value" : "%1$@ - %2$@ - %3$lldx"
           }
         }
       }
@@ -421,9 +421,6 @@
     "Hide pictures" : {
 
     },
-    "HTML Data" : {
-
-    },
     "Hybrid" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -574,9 +571,6 @@
     "Lat %@" : {
 
     },
-    "Latest" : {
-
-    },
     "Latitude: %lf" : {
 
     },
@@ -625,9 +619,6 @@
           }
         }
       }
-    },
-    "Location: %@" : {
-
     },
     "Login" : {
       "localizations" : {
@@ -979,6 +970,9 @@
         }
       }
     },
+    "Recent" : {
+
+    },
     "Region" : {
 
     },
@@ -1215,9 +1209,6 @@
           }
         }
       }
-    },
-    "Species: %@" : {
-
     },
     "Standard" : {
       "extractionState" : "manual",

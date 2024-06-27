@@ -24,15 +24,17 @@ struct ObservationsLocationView: View {
 
     var body: some View {
             VStack {
-                HStack {
-                    Text(settings.locationName)
-                        .bold()
-                        .lineLimit(1)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 16)
-                    Spacer()
-                }
+//                HStack {
+//                    VStack {
+                        SettingsDetailsView(
+                            count: observationsLocationViewModel.locations.count,
+                            results: observationsLocationViewModel.count)
+//                    }
+                    .padding(.horizontal,10)
+//                    .foregroundColor(.obsGreenFlower)
+//                    .background(Color.obsGreenEagle.opacity(0.5))
+                    .font(.footnote)
+//                }
                 List {
                     if let results =  observationsLocationViewModel.observations?.results {
                         ForEach(results
@@ -59,10 +61,22 @@ struct ObservationsLocationView: View {
                         }
                     }
                 }
-                
+//                .safeAreaInset(edge: .top) {
+//                    VStack {
+//                        SettingsDetailsView(
+//                            count: observationsLocationViewModel.locations.count,
+//                            results: observationsLocationViewModel.count)
+//                    }
+//                    .padding(.horizontal,10)
+////                    .foregroundColor(.obsGreenFlower)
+////                    .background(Color.obsGreenEagle.opacity(0.5))
+//                    .font(.footnote)
+//                }
 
                 
             }
+        
+
         
             .sheet(item: $selectedObservation) { item in
                 SpeciesDetailsView(speciesID: item.species_detail.id)

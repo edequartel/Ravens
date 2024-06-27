@@ -14,6 +14,7 @@ struct ObservationsSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
+    @EnvironmentObject var htmlViewModel: HTMLViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var scale: CGFloat = 1.0
@@ -22,23 +23,22 @@ struct ObservationsSpeciesView: View {
     var item: Species
     
     @State private var endOfListReached = false
-//    @State private var showingDetails = false
-    
     @State private var selectedObservation: Observation?
     
-//    NavigationLink(destination: HTMLView()) {
-//                        Text("Show HTML View")
-//                    }
     
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "circle.fill")
-                    .foregroundColor(Color(myColor(value: item.rarity)))
+                Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
+//                Image(systemName: "circle.fill")
+                    .foregroundColor(RarityColor(value: item.rarity))
                 Text("\(item.name)")// - \(item.id)")
                     .bold()
                     .lineLimit(1) // Set the maximum number of lines to 1
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//                if htmlViewModel.speciesScientificNameExists(item.scientific_name) {
+//                    Image(systemName: "circle")
+//                }
                 Spacer()
                 
                 Button(action: {
@@ -94,12 +94,13 @@ struct ObservationsSpeciesView: View {
             
         }
         .listStyle(PlainListStyle())
-        
-        //toolbar here???
+
         
         .refreshable {
             print("refreshing...")
             fetchDataModel()
+//            htmlViewModel.parseHTMLFromURL()
+            
         }
         
         .sheet(item: $selectedObservation) { item in
@@ -109,8 +110,10 @@ struct ObservationsSpeciesView: View {
         .onAppear() {
             if settings.initialSpeciesLoad {
                 fetchDataModel()
+//                htmlViewModel.parseHTMLFromURL()
                 settings.initialSpeciesLoad = false
             }
+           
         }
     }
     

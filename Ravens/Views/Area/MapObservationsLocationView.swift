@@ -55,7 +55,7 @@ struct MapObservationsLocationView: View {
                             
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
-                                    .fill(Color(myColor(value: location.rarity)))
+                                    .fill(RarityColor(value: location.rarity))
                                     .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
                                     .frame(width: 12, height: 12)
                                     .overlay(
@@ -77,16 +77,16 @@ struct MapObservationsLocationView: View {
                     
                     .mapStyle(settings.mapStyle)
                     
-                    .safeAreaInset(edge: .bottom) {
-                        VStack {
-                            SettingsDetailsView(
-                                count: observationsLocationViewModel.locations.count,
-                                results: observationsLocationViewModel.count)
-                        }
-                        .padding(5)
-                        .foregroundColor(.obsGreenFlower)
-                        .background(Color.obsGreenEagle.opacity(0.5))
-                    }
+//                    .safeAreaInset(edge: .bottom) {
+//                        VStack {
+//                            SettingsDetailsView(
+//                                count: observationsLocationViewModel.locations.count,
+//                                results: observationsLocationViewModel.count)
+//                        }
+//                        .padding(5)
+//                        .foregroundColor(.obsGreenFlower)
+//                        .background(Color.obsGreenEagle.opacity(0.5))
+//                    }
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {

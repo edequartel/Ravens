@@ -20,14 +20,15 @@ struct SettingsDetailsView: View {
         VStack() {
             HStack {
                 Text(settings.locationName)
+                    .bold()
                 Spacer()
 
             }
             HStack {
-                NetworkView()
+//                NetworkView()
                 Image(systemName: "binoculars.circle.fill")
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(myColor(value: settings.selectedRarity), .white)
+                    .foregroundStyle(RarityColor(value: settings.selectedRarity), .white)
                 Text(settings.selectedSpeciesGroupName)
                     .lineLimit(1)
                 if (settings.infinity && showInfinity) {

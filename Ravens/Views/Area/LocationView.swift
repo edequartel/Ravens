@@ -7,11 +7,16 @@
 
 import SwiftUI
 import SwiftyBeaver
+import MapKit
 
 struct LocationView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var areasViewModel: AreasViewModel
+    @EnvironmentObject var locationManager: LocationManagerModel
+    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     
     @State private var searchText: String = ""
     @State private var showFirstView = true
@@ -41,15 +46,34 @@ struct LocationView: View {
                     }
                 }
                 
+                //update my locationData
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        settings.hidePictures.toggle()
+                        log.error("getMyLocation")
+                        if let location = locationManager.location {
+                            log.error("Lat \(location.coordinate.latitude)")
+                            log.error("Long \(location.coordinate.longitude)")
+                            
+                            settings.currentLocation = CLLocation(
+                                latitude: location.coordinate.latitude,
+                                longitude: location.coordinate.longitude
+                            )
+                            
+                            fetchDataLocation(coordinate: location.coordinate)
+                        } else if let errorMessage = locationManager.errorMessage {
+                            log.error("Error: \(errorMessage)")
+                        } else {
+                            log.error("Retrieving location...")
+                        }
+                                                
                     }) {
                         Image(systemName: "smallcircle.filled.circle")
                             .accessibility(label: Text("Update location"))
                     }
                 }
+                //
     
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         if areasViewModel.isIDInRecords(areaID: settings.locationId) {
@@ -87,13 +111,15 @@ struct LocationView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        settings.hidePictures.toggle()
-                    }) {
-                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-                            .accessibilityElement(children: .combine)
-                            .accessibility(label: Text("Hide pictures"))
+                if !settings.accessibility {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            settings.hidePictures.toggle()
+                        }) {
+                            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                                .accessibilityElement(children: .combine)
+                                .accessibility(label: Text("Hide pictures"))
+                        }
                     }
                 }
                 
@@ -102,12 +128,55 @@ struct LocationView: View {
             
             .onAppear {
                 log.info("LocationView onAppear")
+                
             }
             .onAppearOnce {
                 showFirstView = settings.mapPreference
             }
         }
     }
+    
+    
+    func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
+        log.error("MapObservationsLocationView fetchDataLocation")
+        locationIdViewModel.fetchLocations(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude,
+            completion: { fetchedLocations in
+                log.info("MaplocationIdViewModel data loaded")
+                // Use fetchedLocations here //actually it is one location
+                settings.locationName = fetchedLocations[0].name
+                settings.locationId = fetchedLocations[0].id
+                settings.locationCoordinate = CLLocationCoordinate2D(
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude)
+                
+                for location in fetchedLocations {
+                    log.info("locatiob \(location)")
+                }
+                
+                //1. get the geoJSON for this area / we pick the first one = 0
+                geoJSONViewModel.fetchGeoJsonData(
+                    for: fetchedLocations[0].id,
+                    completion:
+                        {
+                            log.info("geoJSONViewModel data loaded")
+                            
+                            //2. get the observations for this area
+                            observationsLocationViewModel.fetchData(
+                                settings: settings,
+                                locationId: fetchedLocations[0].id,
+                                limit: 100,
+                                offset: 0,
+                                completion: {
+                                    log.error("observationsLocationViewModel data loaded")
+                                    settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
+                                })
+                        }
+                )
+            })
+    }
+    
 }
 
 #Preview {

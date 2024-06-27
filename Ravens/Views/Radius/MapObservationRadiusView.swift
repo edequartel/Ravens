@@ -52,7 +52,7 @@ struct MapObservationRadiusView: View {
                         ForEach(observationsRadiusViewModel.locations) { location in
                             Annotation(location.name, coordinate: location.coordinate) {
                                 Circle()
-                                    .fill(Color(myColor(value: location.rarity)))
+                                    .fill(RarityColor(value: location.rarity))
                                     .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
                                     .frame(width: 12, height: 12)
                                 

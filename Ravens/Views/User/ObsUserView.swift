@@ -33,7 +33,7 @@ struct ObsUserView: View {
             VStack {
                 HStack {
                     Image(systemName: "circle.fill")
-                        .foregroundColor(Color(myColor(value: obs.rarity)))
+                        .foregroundColor(RarityColor(value: obs.rarity))
 
                     if obs.photos?.count ?? 0 > 0 {
                         Image(systemName: "photo")

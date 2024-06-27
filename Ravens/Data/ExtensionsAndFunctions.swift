@@ -81,8 +81,8 @@ let obsStrDutchOrange = "f7b731"
 
 let SFShareLink = "square.and.arrow.up"
 let SFInformation = "info.circle"
-let SFArea = "pentagon"
-let SFAreaFill = "pentagon.fill"
+let SFArea = "map"
+let SFAreaFill = "map.fill"
 let SFSpecies = "star"
 let SFSpeciesFill = "star.fill"
 let SFObservation = "binoculars.fill"
@@ -91,35 +91,35 @@ let SFObserverFill = "person.fill"
 let SFObserverPlus = "person.fill.badge.plus"
 let SFObserverMin = "person.fill.badge.minus"
 
-func GroupColor(value: Int) -> Color {
-    switch value {
-    case 0: return .gray   // all
-    case 1: return .green  // birds
-    case 2: return .blue   // mammals
-    case 3: return .orange // reptiles and amfibian
-    case 5: return .yellow    // butterflies
-    case 6: return .pink    // dragonflies
-    case 7: return .purple    // molluscs
-    case 8: return .brown    // moth and micros
-    case 9: return .gray    // fish
-    case 10: return .obsBackground   // plants
-    case 11: return .white   // fungi
-    case 12: return .indigo   // mosses and lichen
-    case 13: return .mint   // geleedpotigen
-    case 14: return .teal   // locusts and crickets
-    case 15: return .cyan   // wantsen cicaden en plantenluizen
-//    case 16: return .olive   // bugs
-//    case 17: return .lavender   // bees wasp ants
-//    case 18: return .amber   // flies and mossies
-//    case 19: return .coral   // algea
-//    case 20: return .peach   // overige invertabrates
-//    case 30: return .red   // verstoringen
-    default:
-        return .gray //You can provide a default color or handle other cases as needed
-    }
-}
+//func GroupColor(value: Int) -> Color {
+//    switch value {
+//    case 0: return .gray   // all
+//    case 1: return .green  // birds
+//    case 2: return .blue   // mammals
+//    case 3: return .orange // reptiles and amfibian
+//    case 5: return .yellow    // butterflies
+//    case 6: return .pink    // dragonflies
+//    case 7: return .purple    // molluscs
+//    case 8: return .brown    // moth and micros
+//    case 9: return .gray    // fish
+//    case 10: return .obsBackground   // plants
+//    case 11: return .white   // fungi
+//    case 12: return .indigo   // mosses and lichen
+//    case 13: return .mint   // geleedpotigen
+//    case 14: return .teal   // locusts and crickets
+//    case 15: return .cyan   // wantsen cicaden en plantenluizen
+////    case 16: return .olive   // bugs
+////    case 17: return .lavender   // bees wasp ants
+////    case 18: return .amber   // flies and mossies
+////    case 19: return .coral   // algea
+////    case 20: return .peach   // overige invertabrates
+////    case 30: return .red   // verstoringen
+//    default:
+//        return .gray //You can provide a default color or handle other cases as needed
+//    }
+//}
 
-func myColor(value: Int) -> Color {
+func RarityColor(value: Int) -> Color {
     switch value {
     case 0:
         return .gray //onbekend
