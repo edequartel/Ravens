@@ -33,19 +33,19 @@ struct RavensView: View {
     var body: some View {
         TabView {
             // Tab 1
-            if settings.radiusPreference {
-                RadiusView()
-                    .tabItem {
-                        Text("Radius")
-                        Image(systemName: "circle")
-                    }
-            } else {
-                LocationView()
-                    .tabItem {
-                        Text("Area")
-                        Image(systemName: "pentagon")
-                    }
-            }
+            //            if settings.radiusPreference {
+            //                RadiusView()
+            //                    .tabItem {
+            //                        Text("Radius")
+            //                        Image(systemName: "circle")
+            //                    }
+            //            } else {
+            LocationView()
+                .tabItem {
+                    Text("Area")
+                    Image(systemName: "map")
+                }
+            //            }
             // Tab 2
             TabUserObservationsView()
                 .tabItem {
@@ -59,11 +59,11 @@ struct RavensView: View {
                     Image(systemName: "tree")
                 }
             // Tab 4
-//            HTMLView(viewModel: HTMLViewModel())
-//                .tabItem {
-//                    Text("Latest")
-//                    Image(systemName: "clock")
-//                }
+                        HTMLView(viewModel: HTMLViewModel())
+                            .tabItem {
+                                Text("Latest")
+                                Image(systemName: "clock")
+                            }
             // Tab 5
             SettingsView()
                 .tabItem {

@@ -36,6 +36,7 @@ struct LocationView: View {
                             showFirstView.toggle()
                         }) {
                             Image(systemName: "rectangle.2.swap")
+                                .accessibility(label: Text("Switch view"))
                         }
                     }
                 }
@@ -43,9 +44,9 @@ struct LocationView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         settings.hidePictures.toggle()
-//                        print("position: \(settings.position)")
                     }) {
                         Image(systemName: "smallcircle.filled.circle")
+                            .accessibility(label: Text("Update location"))
                     }
                 }
     
@@ -67,6 +68,7 @@ struct LocationView: View {
                         }
                     }) {
                         Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? "pentagon.fill" : "pentagon")
+                            .accessibility(label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
                     }
                 }
                 
@@ -74,12 +76,13 @@ struct LocationView: View {
                     NavigationLink(destination: AreasView()) {
                         Label("Areas", systemImage: "list.bullet")
                     }
+                    .accessibility(label: Text("Areas"))
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: LocationListView()) {
                         Image(systemName: "magnifyingglass")
-                        
+                            .accessibility(label: Text("Search"))
                     }
                 }
                 
@@ -88,6 +91,7 @@ struct LocationView: View {
                         settings.hidePictures.toggle()
                     }) {
                         ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                            .accessibility(label: Text("Hide pictures"))
                     }
                 }
                 

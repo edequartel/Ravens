@@ -30,7 +30,7 @@ struct MapObservationRadiusView: View {
                         UserAnnotation() //give dynamically the users position
                         
 
-                        if (settings.poiOn) {
+//                        if (settings.poiOn) {
                         ForEach(areasViewModel.records, id: \.id) { record in
                             Annotation(record.name,
                                        coordinate: CLLocationCoordinate2D(
@@ -46,7 +46,7 @@ struct MapObservationRadiusView: View {
                                         )
                                 }
                             }
-                        }
+//                        }
                         
                         // observations
                         ForEach(observationsRadiusViewModel.locations) { location in

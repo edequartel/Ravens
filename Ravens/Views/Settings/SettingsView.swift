@@ -88,17 +88,21 @@ struct SettingsView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                     Toggle("Accessibility", isOn: $settings.accessibility)
-                        .onChange(of: settings.accessibility) {
-                            if $0 {
+                        .onChange(of: settings.accessibility) { newValue in
+                            if newValue {
                                 settings.hidePictures = true
                             }
                         }
-                    if !settings.accessibility {
-                        Toggle("Poi", isOn: $settings.poiOn)
-                    }
+
+                    
+//                    if !settings.accessibility {
+//                        Toggle("Poi", isOn: $settings.poiOn)
+//                    }
+                    
                     Toggle("Show observer", isOn: $settings.showUser)
                     Toggle("Hide pictures", isOn: $settings.hidePictures)
-                    Toggle("Radius", isOn: $settings.radiusPreference)
+                    
+//                    Toggle("Radius", isOn: $settings.radiusPreference)
                     
                     if !settings.accessibility {
                         Toggle("Map", isOn: $settings.mapPreference)
@@ -116,22 +120,22 @@ struct SettingsView: View {
                         log.info(settings.selectedRarity)
                     }
                     
-                    if (settings.radiusPreference) {
-                        HStack {
-                            Text("Radius")
-                            Spacer()
-                            Text("\(Int(settings.radius)) m")
-                        }
-                    }
-                    
-                    if (settings.radiusPreference) {
-                        Slider(value: Binding(get: {
-                            Double(settings.radius)
-                        }, set: {
-                            settings.radius = Int($0)
-                        }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
-                        .padding()
-                    }
+//                    if (settings.radiusPreference) {
+//                        HStack {
+//                            Text("Radius")
+//                            Spacer()
+//                            Text("\(Int(settings.radius)) m")
+//                        }
+//                    }
+//                    
+//                    if (settings.radiusPreference) {
+//                        Slider(value: Binding(get: {
+//                            Double(settings.radius)
+//                        }, set: {
+//                            settings.radius = Int($0)
+//                        }), in: Double(minimumRadius)...Double(maximumRadius), step: step)
+//                        .padding()
+//                    }
                     
                 }
                 

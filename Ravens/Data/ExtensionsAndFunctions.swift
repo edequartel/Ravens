@@ -39,10 +39,8 @@ func formatCurrentDate(value: Date) -> String {
     return dateFormatter.string(from: currentDate)
 }
 
-//var endPoint = "https://waarneming.nl/api/v1/"
 var selectedInBetween = "waarneming.nl"
 func endPoint(value: String = "") -> String {
-//func endPoint() -> String {
     if value != "" {
         selectedInBetween = value
     }
@@ -51,8 +49,10 @@ func endPoint(value: String = "") -> String {
 
 let bundleIdentifier = "ravens.app.bundle.identifier"
 
+let VOMap = "map"
+let VOMapFavorite = "favorite map"
+let VOAreas = "areas"
 
-//waarneming-test.nl
 
 extension Color {
     static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255) //4CFDFB

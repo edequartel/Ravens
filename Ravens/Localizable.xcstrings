@@ -68,6 +68,7 @@
       }
     },
     "%lld m" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -87,6 +88,15 @@
 
     },
     "Accessibility" : {
+
+    },
+    "Add observer" : {
+
+    },
+    "Add species to bookmarks" : {
+
+    },
+    "Add to areas" : {
 
     },
     "All" : {
@@ -187,9 +197,6 @@
           }
         }
       }
-    },
-    "Date: %@" : {
-
     },
     "days" : {
       "extractionState" : "stale",
@@ -554,6 +561,9 @@
     "Lat %@" : {
 
     },
+    "Latest" : {
+
+    },
     "Latitude: %lf" : {
 
     },
@@ -835,6 +845,9 @@
     "obs 2023" : {
 
     },
+    "Observation" : {
+
+    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -877,6 +890,9 @@
         }
       }
     },
+    "Open observation" : {
+
+    },
     "Password" : {
       "localizations" : {
         "nl" : {
@@ -909,6 +925,7 @@
       }
     },
     "Poi" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -922,6 +939,7 @@
 
     },
     "Radius" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1001,6 +1019,9 @@
     "remove" : {
 
     },
+    "Remove from areas" : {
+
+    },
     "Results %lld/%lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1040,6 +1061,9 @@
           }
         }
       }
+    },
+    "Search" : {
+
     },
     "Search Wikipedia" : {
       "extractionState" : "stale",
@@ -1196,6 +1220,9 @@
         }
       }
     },
+    "Switch view" : {
+
+    },
     "this is a hint" : {
 
     },
@@ -1246,6 +1273,9 @@
           }
         }
       }
+    },
+    "Update location" : {
+
     },
     "Us" : {
       "localizations" : {

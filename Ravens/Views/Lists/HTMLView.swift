@@ -27,9 +27,9 @@ struct HTMLDocument {
 class HTMLViewModel: ObservableObject {
     @Published var documents: [HTMLDocument] = []
     @Published var errorMessage: String?
-    
-//    var rarity: Int? = nil
 
+    var Date: String = ""
+    
     func parseHTMLFromURL() {
         let urlString = "https://waarneming.nl/recent-rarities-content/?species_group=1"
         
@@ -102,6 +102,9 @@ class HTMLViewModel: ObservableObject {
             //rarity-date
             let dateElement = try row.select(".rarity-date")// h4 a")
             let date = try dateElement.text()
+            if !date.isEmpty {
+                Date = date
+            }
 
             let linkRarityElement = try row.select("td.rarity-date h4 a").first()
             let href = try linkRarityElement?.attr("href") ?? ""
@@ -140,13 +143,10 @@ class HTMLViewModel: ObservableObject {
             let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
             let numObservations = try numObservationsElement.text()
             
-            
-  
-            
             let numObservationsInt = Int(numObservations) ?? 0
             
             let document = HTMLDocument(
-                date: date,
+                date: Date,
                 time: time,
                 linkRarity: "",
                 rarity: rarity ?? -2,
@@ -160,7 +160,9 @@ class HTMLViewModel: ObservableObject {
                 linkLocations: linkLocations
             )
             
-            parsedDocuments.append(document)
+            if numObservationsInt > 0 {
+                parsedDocuments.append(document)
+            }
         }
         
         self.documents = parsedDocuments
@@ -186,10 +188,9 @@ struct HTMLView: View {
                 List(viewModel.documents, id: \.id) { document in
                     
                     VStack(alignment: .leading) {
-                        if !document.date.isEmpty {
-                            Text("Date: \(document.date)")
-                                .font(.headline)
-                        } else {
+                            Text("\(document.date)")
+                                .font(.subheadline)
+                                .bold()
                             
                             Text("\(document.speciesCommonName) -  \(document.time) - \(document.numObservations)x")
                                 .font(.subheadline)
@@ -217,12 +218,11 @@ struct HTMLView: View {
                                     .font(.subheadline)
                                     .italic()
                             }
-                        }
                     }
                     
                     .padding()
                 }
-//                .listStyle(InsetGroupedListStyle())
+                .listStyle(InsetGroupedListStyle())
             }
         }
         .onAppear {

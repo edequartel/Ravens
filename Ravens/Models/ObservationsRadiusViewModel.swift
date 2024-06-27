@@ -18,26 +18,6 @@ struct Location: Identifiable {//}, Hashable {
     var rarity: Int
     var hasPhoto: Bool
     var hasSound: Bool
-
-//    static func == (lhs: Location, rhs: Location) -> Bool {
-//        return lhs.id == rhs.id &&
-//               lhs.name == rhs.name &&
-//               lhs.coordinate.latitude == rhs.coordinate.latitude &&
-//               lhs.coordinate.longitude == rhs.coordinate.longitude &&
-//               lhs.rarity == rhs.rarity &&
-//               lhs.hasPhoto == rhs.hasPhoto &&
-//               lhs.hasSound == rhs.hasSound
-//    }
-    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//        hasher.combine(name)
-//        hasher.combine(coordinate.latitude)
-//        hasher.combine(coordinate.longitude)
-//        hasher.combine(rarity)
-//        hasher.combine(hasPhoto)
-//        hasher.combine(hasSound)
-//    }
 }
 
 struct Span {

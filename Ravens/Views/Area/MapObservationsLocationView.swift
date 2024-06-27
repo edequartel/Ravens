@@ -30,7 +30,7 @@ struct MapObservationsLocationView: View {
                         UserAnnotation()
                         
 //                      POI
-                        if (settings.poiOn) {
+//                        if (settings.poiOn) {
                         ForEach(areasViewModel.records, id: \.id) { record in
                             Annotation(record.name, 
                                        coordinate: CLLocationCoordinate2D(
@@ -46,7 +46,7 @@ struct MapObservationsLocationView: View {
                                         )
                                 }
                             }
-                        }
+//                        }
                             
                         
                         // location observations

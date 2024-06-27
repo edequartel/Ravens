@@ -140,30 +140,11 @@ struct ObsAreaView: View {
                             name: obs.user_detail?.name ?? "unknown",
                             userID: obs.user_detail?.id ?? 0)
                     }
-                    
-                    
                 }) {
                     Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? SFObserverMin : SFObserverPlus)
                 }
                 .tint(.obsObserver)
-                
-//                Button(action: {
-//                    if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-//                        log.info("remove areas \(obs.location_detail?.id ?? 0)")
-//                        areasViewModel.removeRecord(
-//                            areaID: obs.location_detail?.id ?? 0)
-//                    } else {
-//                        log.info("adding area \(obs.location_detail?.id ?? 0)")
-//                        areasViewModel.appendRecord(
-//                            areaName: obs.location_detail?.name ?? "unknown",
-//                            areaID: obs.location_detail?.id ?? 0,
-//                            latitude: obs.point.coordinates[1], //!!?
-//                            longitude: obs.point.coordinates[0])
-//                    }
-//                }) {
-//                    Image(systemName: SFArea)
-//                }
-//                .tint(.obsArea)
+                .accessibility(label: Text("Add observer"))
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
@@ -173,6 +154,7 @@ struct ObsAreaView: View {
                     Image(systemName: SFObservation)
                 }
                 .tint(.obsObservation)
+                .accessibility(label: Text("Open observation"))
                 
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
@@ -187,10 +169,12 @@ struct ObsAreaView: View {
                     Image(systemName: SFSpecies)
                 }
                 .tint(.obsSpecies)
+                .accessibility(label: Text("Add species to bookmarks"))
                 
             }
         }
         .padding(4)
+        .accessibilityLabel(Text("Observation"))
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
