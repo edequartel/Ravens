@@ -177,6 +177,7 @@ import SwiftUI
 
 struct HTMLView: View {
     @ObservedObject var viewModel: HTMLViewModel
+
     
     var body: some View {
         VStack {

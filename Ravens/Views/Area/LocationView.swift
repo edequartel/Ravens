@@ -67,8 +67,9 @@ struct LocationView: View {
                             
                         }
                     }) {
-                        Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? "pentagon.fill" : "pentagon")
-                            .accessibility(label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
+                        Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
+                            .accessibility(
+                                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
                     }
                 }
                 

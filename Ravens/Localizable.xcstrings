@@ -4,6 +4,16 @@
     "" : {
 
     },
+    " %@ gezien,\n %@,\n op %@, %@,\n %lld keer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@ gezien,\n %2$@,\n op %3$@, %4$@,\n %5$lld keer."
+          }
+        }
+      }
+    },
     "(%lld)" : {
 
     },
@@ -133,6 +143,9 @@
       }
     },
     "Areas" : {
+
+    },
+    "Areas List" : {
 
     },
     "Cache Empty" : {
@@ -845,9 +858,6 @@
     "obs 2023" : {
 
     },
-    "Observation" : {
-
-    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -1224,6 +1234,9 @@
 
     },
     "this is a hint" : {
+
+    },
+    "this is a hint Dani van Seumeren" : {
 
     },
     "Token: %@" : {

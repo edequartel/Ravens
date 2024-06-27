@@ -176,13 +176,13 @@ struct ObsAreaView: View {
 
         .accessibilityElement(children: .combine)
         .accessibilityLabel("""
-                            Species \(obs.species_detail.name) seen,
+                             \(obs.species_detail.name) gezien,
                              \(obs.location_detail?.name ?? ""),
-                             date \(obs.date) at time \(obs.time ?? ""),
-                             \(obs.number) times.
+                             op \(obs.date), \(obs.time ?? ""),
+                             \(obs.number) keer.
                             """
         )
-        .accessibilityHint("this is a hint")
+        .accessibilityHint("this is a hint Dani van Seumeren")
         
         .padding(4)
         
