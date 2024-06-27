@@ -173,8 +173,18 @@ struct ObsAreaView: View {
                 
             }
         }
+
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("""
+                            Species \(obs.species_detail.name) seen,
+                             \(obs.location_detail?.name ?? ""),
+                             date \(obs.date) at time \(obs.time ?? ""),
+                             \(obs.number) times.
+                            """
+        )
+        .accessibilityHint("this is a hint")
+        
         .padding(4)
-        .accessibilityLabel(Text("Observation"))
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

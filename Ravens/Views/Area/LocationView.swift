@@ -76,7 +76,7 @@ struct LocationView: View {
                     NavigationLink(destination: AreasView()) {
                         Label("Areas", systemImage: "list.bullet")
                     }
-                    .accessibility(label: Text("Areas"))
+                    .accessibility(label: Text("Areas List"))
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -91,11 +91,14 @@ struct LocationView: View {
                         settings.hidePictures.toggle()
                     }) {
                         ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                            .accessibilityElement(children: .combine)
                             .accessibility(label: Text("Hide pictures"))
                     }
                 }
                 
             }
+            
+            
             .onAppear {
                 log.info("LocationView onAppear")
             }
