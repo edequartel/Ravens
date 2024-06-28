@@ -43,8 +43,8 @@ struct SpeciesView: View {
                             
                             rarityFilterOption: settings.selectedRarity,
                             
-//                            isLatest: settings.isLatestVisible,
-//                            htmlViewModel: HTMLViewModel,
+                            isLatest: settings.isLatestVisible,
+                            htmlViewModel: htmlViewModel,
                             
                             isBookmarked: settings.isBookMarkVisible,
                             additionalIntArray: bookMarksViewModel)
@@ -55,13 +55,9 @@ struct SpeciesView: View {
                             VStack(alignment: .leading) {
                                 
                                 HStack(spacing: 4) {
-                                    Image(systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill") 
+                                    Image(systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
                                         .symbolRenderingMode(.palette)
                                         .foregroundStyle(RarityColor(value: species.rarity), .clear)
-                                    
-//                                    if htmlViewModel.speciesScientificNameExists(species.scientific_name) {
-//                                        Image(systemName: "circle.hexagonpath.fill")
-//                                    }
                                     
                                     Text("\(species.name)")// - \(species.id)") //?
                                         .bold()
@@ -154,10 +150,6 @@ struct SpeciesView: View {
             
             .navigationBarItems(
                 leading: HStack {
-                    
-                    //                    Image(systemName: keyChainViewModel.token.isEmpty ? "person.slash" : "person")
-                    //                        .foregroundColor(keyChainViewModel.token.isEmpty ? .red : .blue)
-//                    NetworkView()
                     Button(action: {
                         settings.isBookMarkVisible.toggle()
                     }) {
@@ -177,10 +169,10 @@ struct SpeciesView: View {
         }
         .searchable(text: $searchText)
         .refreshable {
-            htmlViewModel.parseHTMLFromURL()
+            htmlViewModel.parseHTMLFromURL(settings: Settings())
         }
         .onAppear() {
-            htmlViewModel.parseHTMLFromURL()
+            htmlViewModel.parseHTMLFromURL(settings: Settings())
         }
         
         
@@ -252,33 +244,30 @@ extension SpeciesViewModel {
 
 extension SpeciesViewModel {
     func filteredSpecies(
-        by
-        sortOption: SortOption,
+        by sortOption: SortOption,
         searchText: String,
         filterOption: FilterOption,
         rarityFilterOption: Int,
-//        isLatest: Bool,
-//        htmlViewModel: HTMLViewModel,
+        isLatest: Bool,
+        htmlViewModel: HTMLViewModel,
         isBookmarked: Bool,
         additionalIntArray: BookMarksViewModel
-        
     ) -> [Species] {
         let sortedSpeciesList = sortedSpecies(by: sortOption)
         
-        if searchText.isEmpty {
-            var filteredList = applyFilter(to: sortedSpeciesList, with: filterOption)
-            filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
-            return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
-        } else {
-            let filteredList = sortedSpeciesList.filter { species in
-                species.name.lowercased().contains(searchText.lowercased()) ||
-                species.scientific_name.lowercased().contains(searchText.lowercased())
-            }
-            
-            var filtered = applyFilter(to: filteredList, with: filterOption)
-            filtered = applyRarityFilter(to: filtered, with: rarityFilterOption)
-            return applyBookmarkFilter(to: filtered, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
+        // Filter by search text if not empty
+        var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
+            species.name.lowercased().contains(searchText.lowercased()) ||
+            species.scientific_name.lowercased().contains(searchText.lowercased())
         }
+        
+        // Apply other filters
+        filteredList = applyFilter(to: filteredList, with: filterOption)
+        filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
+        filteredList = applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
+        
+        // Apply latest filter
+        return applyLatestFilter(to: filteredList, isLatest: isLatest, additionalHTMLDoc: htmlViewModel)
     }
     
     private func applyFilter(to species: [Species], with filterOption: FilterOption) -> [Species] {
@@ -295,13 +284,13 @@ extension SpeciesViewModel {
         case 0:
             return species
         case 1:
-            return species.filter { $0.rarity == 1 }
+            return species.filter { $0.rarity >= 1 }
         case 2:
-            return species.filter { $0.rarity == 2}
+            return species.filter { $0.rarity >= 2 }
         case 3:
-            return species.filter { $0.rarity == 3 }
+            return species.filter { $0.rarity >= 3 }
         case 4:
-            return species.filter { $0.rarity == 4 }
+            return species.filter { $0.rarity >= 4 }
         default:
             return species
         }
@@ -309,24 +298,24 @@ extension SpeciesViewModel {
     
     private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
         if isBookmarked {
-            return species.filter { species in additionalIntArray.contains(where: { $0.speciesID == species.id }) }
+            return species.filter { species in
+                additionalIntArray.contains(where: { $0.speciesID == species.id })
+            }
         } else {
             return species
         }
     }
     
-    //    private func applyLatestFilter(to species: [Species], isBookmarked: Bool, additionalHTMLDocArray: [HTMLDocument]) -> [Species] {
-    //        if isBookmarked {
-    //            return species.filter { species in additionalHTMLDocArray. contains(where: { $0.speciesID == species.id }) }
-    //        } else {
-    //            return species
-    //        }
-    //    }
-    
-    
+    private func applyLatestFilter(to species: [Species], isLatest: Bool, additionalHTMLDoc: HTMLViewModel) -> [Species] {
+        if isLatest {
+            return species.filter { species in
+                additionalHTMLDoc.documents.contains(where: { $0.speciesScientificName == species.scientific_name })
+            }
+        } else {
+            return species
+        }
+    }
 }
-
-//settings.isRartyVisible
 
 //struct SpeciesView_Previews: PreviewProvider {
 //    static var previews: some View {

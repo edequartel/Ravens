@@ -84,10 +84,10 @@ struct HTMLView: View {
                 }
             }
             .onAppear {
-                viewModel.parseHTMLFromURL()
+                viewModel.parseHTMLFromURL(settings: Settings())
             }
             .refreshable {
-                viewModel.parseHTMLFromURL()
+                viewModel.parseHTMLFromURL(settings: Settings())
             }
             .navigationTitle("Recent")
             .navigationBarTitleDisplayMode(.inline)

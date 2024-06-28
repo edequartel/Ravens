@@ -7,6 +7,11 @@
 
 import SwiftUI
 import SwiftyBeaver
+import AudioToolbox
+
+func vibrate() {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+}
 
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
@@ -24,6 +29,9 @@ struct ObservationsSpeciesView: View {
     
     @State private var endOfListReached = false
     @State private var selectedObservation: Observation?
+    
+    @State private var showAudioPlayer = false
+    @State private var sounds: [String]?
     
     
     var body: some View {
@@ -56,6 +64,7 @@ struct ObservationsSpeciesView: View {
                 }
 //                .tint(.obsSpecies)
                 
+                
             }
 
             VStack {
@@ -75,8 +84,6 @@ struct ObservationsSpeciesView: View {
                     Spacer()
                 }
             }
-            
-            
         }
         
         .padding()
@@ -89,6 +96,13 @@ struct ObservationsSpeciesView: View {
                     ObsSpeciesView(
                         obs: result
                     )
+                    .onTapGesture {
+                        sounds=result.sounds
+                        if (result.sounds?.count ?? 0)>0 {
+                            vibrate()
+                        }
+                        showAudioPlayer = (result.sounds?.count ?? 0) > 0
+                    }
                 }
             }
             
@@ -107,10 +121,13 @@ struct ObservationsSpeciesView: View {
             SpeciesDetailsView(speciesID: item.species_detail.id)
         }
         
+        .sheet(isPresented: $showAudioPlayer) {
+            PlayerControlsView(audio: sounds ?? [] )
+        }
+        
         .onAppear() {
             if settings.initialSpeciesLoad {
                 fetchDataModel()
-//                htmlViewModel.parseHTMLFromURL()
                 settings.initialSpeciesLoad = false
             }
            

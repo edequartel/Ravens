@@ -17,9 +17,12 @@ class HTMLViewModel: ObservableObject {
     func speciesScientificNameExists(_ name: String) -> Bool {
         return documents.contains { $0.speciesScientificName == name }
     }
+
     
-    func parseHTMLFromURL() {
-        let urlString = "https://waarneming.nl/recent-rarities-content/?species_group=1"
+    func parseHTMLFromURL(settings: Settings) {
+        print("-->>\(settings.selectedInBetween)")
+        print("\(settings.selectedSpeciesGroupId)")
+        let urlString = "https://\(settings.selectedInBetween)/recent-rarities-content/?species_group=\(settings.selectedSpeciesGroupId)"
         print("parsing...")
         
         // Ensure the URL is valid
