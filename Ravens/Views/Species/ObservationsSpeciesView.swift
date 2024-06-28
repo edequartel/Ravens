@@ -96,7 +96,8 @@ struct ObservationsSpeciesView: View {
                     ObsSpeciesView(
                         obs: result
                     )
-                    .onTapGesture {
+                    .accessibilityLabel("\(result.species_detail.name) \(result.date) \(result.time ?? "")")
+                    .onTapGesture(count: 2) {
                         sounds=result.sounds
                         if (result.sounds?.count ?? 0)>0 {
                             vibrate()
@@ -123,6 +124,8 @@ struct ObservationsSpeciesView: View {
         
         .sheet(isPresented: $showAudioPlayer) {
             PlayerControlsView(audio: sounds ?? [] )
+                .presentationDetents([.fraction(0.5), .medium, .large])
+                .presentationDragIndicator(.visible)
         }
         
         .onAppear() {
