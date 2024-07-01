@@ -65,10 +65,13 @@ class Player: ObservableObject {
 
 struct PlayerControlsView: View {
     @EnvironmentObject var player: Player
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var audio: [String]
     
     var body: some View {
-        HStack {
+//        HStack {
             VStack {
                 Spacer()
 //                Text("\(player.queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
@@ -80,7 +83,7 @@ struct PlayerControlsView: View {
                             player.play(audio)
                         }) {
                             Image(systemName: "play.fill")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                                 .frame(width: 50)
                         }
                     } else {
@@ -88,7 +91,7 @@ struct PlayerControlsView: View {
                             player.stop()
                         }) {
                             Image(systemName: "stop.fill")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                                 .frame(width: 50)
                         }
                         
@@ -98,7 +101,7 @@ struct PlayerControlsView: View {
                         player.pause()
                     }) {
                         Image(systemName: "pause.fill")
-                            .font(.system(size: 30))
+                            .font(.system(size: 20))
                             .frame(width: 50)
                     }
                     
@@ -107,7 +110,7 @@ struct PlayerControlsView: View {
                             player.previous()
                         }) {
                             Image(systemName: "backward.fill")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                                 .frame(width: 50)
                         }
                         
@@ -115,7 +118,7 @@ struct PlayerControlsView: View {
                             player.next()
                         }) {
                             Image(systemName: "forward.fill")
-                                .font(.system(size: 30))
+                                .font(.system(size: 20))
                                 .frame(width: 50)
                         }
                         
@@ -124,9 +127,26 @@ struct PlayerControlsView: View {
                 }
                 Spacer()
             }
-        }
+//        }
         .padding(5)
+        .overlay(alignment: .topTrailing) {
+                                       closeButton
+                                   }
+
     }
+    
+    
+    private var closeButton: some View {
+             Button {
+                 presentationMode.wrappedValue.dismiss()
+             } label: {
+                 Image(systemName: "xmark")
+                     .font(.headline)
+             }
+             .buttonStyle(.bordered)
+             .clipShape(Circle())
+             .padding()
+         }
 }
 
 struct PlayerControlsView_Previews: PreviewProvider {

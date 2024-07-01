@@ -30,6 +30,9 @@ struct ObservationsLocationView: View {
                     count: observationsLocationViewModel.locations.count,
                     results: observationsLocationViewModel.count
                 )
+
+            
+            
             HorizontalLine()
             List {
                 if let results =  observationsLocationViewModel.observations?.results {

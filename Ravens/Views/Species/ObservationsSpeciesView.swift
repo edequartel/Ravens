@@ -74,6 +74,16 @@ struct ObservationsSpeciesView: View {
             }
         }
         .padding(.horizontal,10)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("""
+                             \(item.name)
+                             \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "favorite": "not favorite")
+                             \(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
+                             \(item.scientific_name)
+                            """
+        )
+        
+        
         HorizontalLine()
         
         //        if !isLoaded { ProgressView()
@@ -87,7 +97,7 @@ struct ObservationsSpeciesView: View {
                     ObsSpeciesView(
                         obs: obs
                     )
-
+                    
                     .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
                     
                     .onTapGesture(count: 2) {
@@ -111,7 +121,7 @@ struct ObservationsSpeciesView: View {
         
         .sheet(item: $soundsWrapper) { wrapper in
             PlayerControlsView(audio: wrapper.sounds)
-                .presentationDetents([.fraction(0.1), .medium, .large])
+                .presentationDetents([.fraction(0.2), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
         

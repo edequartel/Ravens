@@ -31,7 +31,6 @@ struct ObsSpeciesView: View {
     
     private let appIcon = Image("AppIconShare")
     
-//    @Binding var selectedObservation: Observation?
     @State var obs: Observation
     
     var showUsername: Bool = true
@@ -49,11 +48,6 @@ struct ObsSpeciesView: View {
                         Image(systemName: "waveform")
                     }
                     
-
-                    
-//                }
-                
-//                if showLocation {
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
                             .bold()
@@ -61,7 +55,6 @@ struct ObsSpeciesView: View {
                         Spacer()
                         if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                             Image(systemName: SFAreaFill)
-//                                .foregroundColor(.green)
                         }
                     }
                     Spacer()
@@ -78,13 +71,9 @@ struct ObsSpeciesView: View {
                         HStack {
                             Text("\(obs.user_detail?.name ?? "noName")")
                                 .footnoteGrayStyle()
-//                            Spacer()
-//                            Text("\(obs.user_detail?.id ?? 0)")
-//                                .footnoteGrayStyle()
                             Spacer()
                             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                                 Image(systemName: SFObserverFill)
-//                                    .foregroundColor(.black)
                             }
                         }
                     }
@@ -98,47 +87,30 @@ struct ObsSpeciesView: View {
                     }
                 }
                 
-//                if !settings.hidePictures {
-//                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-//                        AFImageView(media: imageURLString)
-//                    }
-//                }
-                
                 if !settings.hidePictures {
                     PhotoGridView(photos: obs.photos)
                 }
                 
-                
-//                if (obs.sounds?.count ?? 0)>0 {
-//                    HStack {
-//                        PlayerControlsView(audio: obs.sounds ?? [] )
-//                        Spacer()
-//                    }
-//                }
             }
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("""
+                                 \(obs.location_detail?.name ?? ""),
+                                 op \(obs.date), \(obs.time ?? "00"),
+                                 \(obs.number) keer.
+                                 \(obs.notes?.count ?? 0 > 0 ? obs.notes ?? "unknown" : "")
+                                """
+            )
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
-//                    message: Text(messageString()),
-//                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
                 )
                 {
                     Image(systemName: SFShareLink)
                 }
                 .tint(.obsShareLink)
-                
-//                Button(action: {
-//                    selectedObservation = obs
-//                }) {
-//                    Image(systemName: SFInformation)
-//                }
-//                .tint(.obsInformation)
-                
                 
                 Button(action: {
                     if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
@@ -153,21 +125,6 @@ struct ObsSpeciesView: View {
                                  
                 }
                 .tint(.obsObserver)
-                
-//                Button(action: {
-//                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-//                        print("bookmarks remove")
-//                        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
-//                    } else {
-//                        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
-//                        print("bookmarks append")
-//                    }
-//
-//                } ) {
-//                    Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
-//                }
-//                .tint(.obsSpecies)
-
                 
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
@@ -184,7 +141,6 @@ struct ObsSpeciesView: View {
                     }
                 }) {
                     Image(systemName: SFArea)
-//                    Image(systemName: areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) ? "pentagon" : "pentagon")
                 }
                 .tint(.obsArea)
                 

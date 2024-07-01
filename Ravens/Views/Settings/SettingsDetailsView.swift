@@ -51,6 +51,8 @@ struct SettingsDetailsView: View {
             .padding(.horizontal,10)
             .font(.footnote)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(settings.locationName) \(settings.selectedSpeciesGroupName) \(results)x \(settings.days)d \(settings.selectedDate, formatter: dateFormatter)")
     }
 
     

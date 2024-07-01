@@ -176,7 +176,6 @@ struct ObsAreaView: View {
         )
         .accessibilityHint("this is a hint Dani van Seumeren")
         
-//        .padding(4)
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

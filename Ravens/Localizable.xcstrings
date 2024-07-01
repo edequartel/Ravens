@@ -4,12 +4,32 @@
     "" : {
 
     },
+    " %@\n %@\n %@\n %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@\n %2$@\n %3$@\n %4$@"
+          }
+        }
+      }
+    },
     " %@ gezien,\n %@,\n op %@, %@,\n %lld keer." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : " %1$@ gezien,\n %2$@,\n op %3$@, %4$@,\n %5$lld keer."
+          }
+        }
+      }
+    },
+    " %@,\n op %@, %@,\n %lld keer.\n %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@,\n op %2$@, %3$@,\n %4$lld keer.\n %5$@"
           }
         }
       }
@@ -53,6 +73,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@ %3$@"
+          }
+        }
+      }
+    },
+    "%@ %@ %lldx %lldd %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
           }
         }
       }

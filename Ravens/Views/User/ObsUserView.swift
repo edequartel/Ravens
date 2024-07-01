@@ -106,6 +106,14 @@ struct ObsUserView: View {
 //                    }
 //                }
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("""
+                                 \(obs.species_detail.name) gezien,
+                                 \(obs.location_detail?.name ?? ""),
+                                 op \(obs.date), \(obs.time ?? ""),
+                                 \(obs.number) keer.
+                                """
+            )
         
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
