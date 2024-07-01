@@ -99,12 +99,12 @@ struct ObsUserView: View {
                 }
 
                 
-                if (obs.sounds?.count ?? 0)>0 {
-                    HStack {
-                        PlayerControlsView(audio: obs.sounds ?? [] )
-                        Spacer()
-                    }
-                }
+//                if (obs.sounds?.count ?? 0)>0 {
+//                    HStack {
+//                        PlayerControlsView(audio: obs.sounds ?? [] )
+//                        Spacer()
+//                    }
+//                }
             }
         
 

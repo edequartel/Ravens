@@ -17,6 +17,8 @@ struct ObservationsUserView: View {
     
     @State private var selectedObservation: Observation?
     
+    @State private var soundsWrapper: SoundArrayWrapper? = nil
+    
     var body: some View {
         VStack {
 
@@ -41,6 +43,15 @@ struct ObservationsUserView: View {
                                 selectedObservation: $selectedObservation,
                                 obs: obs
                             )
+                            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+                            
+                            .onTapGesture(count: 2) {
+                                if let sounds = obs.sounds, !sounds.isEmpty {
+                                    soundsWrapper = SoundArrayWrapper(sounds: sounds)
+                                    vibrate()
+                                }
+                            }
+                            
                         }
                     }
                 }
@@ -70,6 +81,12 @@ struct ObservationsUserView: View {
         
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)
+        }
+        
+        .sheet(item: $soundsWrapper) { wrapper in
+            PlayerControlsView(audio: wrapper.sounds)
+                .presentationDetents([.fraction(0.1), .medium, .large])
+                .presentationDragIndicator(.visible)
         }
         
         .onAppear {

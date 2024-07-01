@@ -97,22 +97,9 @@ struct ObsAreaView: View {
                     }
                 }
                 
-//                if !settings.hidePictures {
-//                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-//                        AFImageView(media: imageURLString)
-//                    }
-//                }
                 
                 if !settings.hidePictures {
                     PhotoGridView(photos: obs.photos)
-                }
-
-                
-                if (obs.sounds?.count ?? 0)>0 {
-                    HStack {
-                        PlayerControlsView(audio: obs.sounds ?? [] )
-                        Spacer()
-                    }
                 }
             }
             
@@ -189,7 +176,7 @@ struct ObsAreaView: View {
         )
         .accessibilityHint("this is a hint Dani van Seumeren")
         
-        .padding(4)
+//        .padding(4)
         
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

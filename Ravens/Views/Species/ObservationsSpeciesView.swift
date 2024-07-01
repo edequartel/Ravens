@@ -7,16 +7,6 @@
 
 import SwiftUI
 import SwiftyBeaver
-import AudioToolbox
-
-func vibrate() {
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-}
-
-struct SoundArrayWrapper: Identifiable {
-    let id = UUID()
-    var sounds: [String]
-}
 
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
@@ -36,9 +26,6 @@ struct ObservationsSpeciesView: View {
     @State private var isLoaded = false
     @State private var selectedObservation: Observation?
     
-    @State private var showAudioPlayer = false
-    
-    //    @State private var sounds: [String]?
     @State private var soundsWrapper: SoundArrayWrapper? = nil
     
     
@@ -96,18 +83,20 @@ struct ObservationsSpeciesView: View {
             if let results = observationsSpeciesViewModel.observationsSpecies?.results {
                 let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
                 ForEach(sortedResults.indices, id: \.self) { index in
-                    let result = sortedResults[index]
+                    let obs = sortedResults[index]
                     ObsSpeciesView(
-                        obs: result
+                        obs: obs
                     )
-                    .accessibilityLabel("\(result.species_detail.name) \(result.date) \(result.time ?? "")")
+
+                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
                     
                     .onTapGesture(count: 2) {
-                        if let sounds = result.sounds, !sounds.isEmpty {
+                        if let sounds = obs.sounds, !sounds.isEmpty {
                             soundsWrapper = SoundArrayWrapper(sounds: sounds)
                             vibrate()
                         }
                     }
+                    
                 }
             }
         }
@@ -119,6 +108,7 @@ struct ObservationsSpeciesView: View {
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)
         }
+        
         .sheet(item: $soundsWrapper) { wrapper in
             PlayerControlsView(audio: wrapper.sounds)
                 .presentationDetents([.fraction(0.1), .medium, .large])

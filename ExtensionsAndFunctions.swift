@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import AudioToolbox
+
 
 ////werkhoven
 //let longitude = 5.243376
@@ -449,4 +451,13 @@ struct HorizontalLine: View {
             .frame(height: 0.4)
             .foregroundColor(.gray)
     }
+}
+
+func vibrate() {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+}
+
+struct SoundArrayWrapper: Identifiable {
+    let id = UUID()
+    var sounds: [String]
 }
