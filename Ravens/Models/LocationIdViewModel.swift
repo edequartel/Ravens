@@ -13,12 +13,11 @@ import SwiftyBeaver
 class LocationIdViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var locations: [LocationJSON] = []
-    @Published var isLoading: Bool = false
     
     private var keyChainViewModel =  KeychainViewModel()
 
     func fetchLocations(latitude: Double, longitude: Double, completion: @escaping ([LocationJSON]) -> Void) {
-        isLoading = true
+        log.info("fetchLocations")
         
         keyChainViewModel.retrieveCredentials()
         
@@ -36,7 +35,6 @@ class LocationIdViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.locations = responseData.results
                 completion(self.locations)
-                self.isLoading = false
             }
         }
     }

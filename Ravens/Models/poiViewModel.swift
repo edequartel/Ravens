@@ -33,14 +33,19 @@ class POIViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
     @Published var POIs = [POI]()
+    
+    init() {
+        fetchPOIs()
+    }
 
-    func fetchPOIs(completion: @escaping () -> Void = {}) {
+//    func fetchPOIs(completion: @escaping () -> Void = {}) {
+    func fetchPOIs() {
         // Try to load from local JSON file
         if let localData = self.loadJsonFromFile() {
             let decoder = JSONDecoder()
             if let POIs = try? decoder.decode(POIList.self, from: localData) {
                 self.POIs = POIs.poi
-                completion()
+//                completion()
         
             }
             return

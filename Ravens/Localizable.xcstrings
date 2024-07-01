@@ -1,7 +1,40 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " %@" : {
+    "" : {
+
+    },
+    " %@\n %@\n %@\n %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@\n %2$@\n %3$@\n %4$@"
+          }
+        }
+      }
+    },
+    " %@ gezien,\n %@,\n op %@, %@,\n %lld keer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@ gezien,\n %2$@,\n op %3$@, %4$@,\n %5$lld keer."
+          }
+        }
+      }
+    },
+    " %@,\n op %@, %@,\n %lld keer.\n %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@,\n op %2$@, %3$@,\n %4$lld keer.\n %5$@"
+          }
+        }
+      }
+    },
+    "(%lld)" : {
 
     },
     "%@" : {
@@ -14,12 +47,12 @@
         }
       }
     },
-    "%@ - %lldx" : {
+    "%@ - %@ - %lldx" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ - %2$lldx"
+            "value" : "%1$@ - %2$@ - %3$lldx"
           }
         }
       }
@@ -34,12 +67,32 @@
         }
       }
     },
-    "%@ %@, %lld" : {
+    "%@ %@ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ %2$@, %3$lld"
+            "value" : "%1$@ %2$@ %3$@"
+          }
+        }
+      }
+    },
+    "%@ %@ %lldx %lldd %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
+          }
+        }
+      }
+    },
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
           }
         }
       }
@@ -54,16 +107,6 @@
         }
       }
     },
-    "%lld - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld - %2$lld"
-          }
-        }
-      }
-    },
     "%lld %@" : {
       "localizations" : {
         "en" : {
@@ -74,17 +117,8 @@
         }
       }
     },
-    "%lld + %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld + %2$lld"
-          }
-        }
-      }
-    },
     "%lld m" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -101,6 +135,18 @@
 
     },
     "%lldx" : {
+
+    },
+    "Accessibility" : {
+
+    },
+    "Add observer" : {
+
+    },
+    "Add species to bookmarks" : {
+
+    },
+    "Add to areas" : {
 
     },
     "All" : {
@@ -123,6 +169,9 @@
         }
       }
     },
+    "Append URL" : {
+
+    },
     "Area" : {
       "localizations" : {
         "nl" : {
@@ -132,6 +181,12 @@
           }
         }
       }
+    },
+    "Areas" : {
+
+    },
+    "Areas List" : {
+
     },
     "Cache Empty" : {
       "localizations" : {
@@ -197,6 +252,7 @@
       }
     },
     "days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -217,6 +273,7 @@
       }
     },
     "days " : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -236,6 +293,9 @@
           }
         }
       }
+    },
+    "Delete" : {
+
     },
     "Destination %lld" : {
       "extractionState" : "stale",
@@ -259,6 +319,37 @@
         }
       }
     },
+    "Do you want to append this %@ %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to append this %1$@ %2$@?"
+          }
+        }
+      }
+    },
+    "Do you want to append this %@ to the database?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wil waarnemer %@ toevoegen?"
+          }
+        }
+      }
+    },
+    "End Of List" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einde van de lijst"
+          }
+        }
+      }
+    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -269,6 +360,9 @@
           }
         }
       }
+    },
+    "Error: %@" : {
+
     },
     "Failed to load image" : {
       "extractionState" : "stale",
@@ -291,6 +385,9 @@
           }
         }
       }
+    },
+    "Files" : {
+
     },
     "Filter by" : {
       "localizations" : {
@@ -334,6 +431,9 @@
         }
       }
     },
+    "GPS " : {
+
+    },
     "Group" : {
       "localizations" : {
         "nl" : {
@@ -345,6 +445,7 @@
       }
     },
     "Group %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -353,6 +454,12 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
+    },
+    "Hide pictures" : {
+
     },
     "Hybrid" : {
       "extractionState" : "manual",
@@ -365,7 +472,11 @@
         }
       }
     },
+    "Id" : {
+
+    },
     "Id %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -374,6 +485,9 @@
           }
         }
       }
+    },
+    "Image not found" : {
+
     },
     "Imagery" : {
       "extractionState" : "manual",
@@ -430,6 +544,7 @@
       }
     },
     "International" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -493,6 +608,9 @@
         }
       }
     },
+    "Lat %@" : {
+
+    },
     "Latitude: %lf" : {
 
     },
@@ -506,6 +624,9 @@
           }
         }
       }
+    },
+    "Load Image" : {
+
     },
     "Loading" : {
       "extractionState" : "stale",
@@ -580,7 +701,6 @@
       }
     },
     "Login waarneming.nl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -599,6 +719,9 @@
           }
         }
       }
+    },
+    "Long %@" : {
+
     },
     "Longitude: %lf" : {
 
@@ -645,6 +768,7 @@
       }
     },
     "Me" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -733,7 +857,14 @@
         }
       }
     },
+    "Next" : {
+
+    },
+    "No" : {
+
+    },
     "nobsavaliable" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -768,6 +899,7 @@
       }
     },
     "Observations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -776,6 +908,30 @@
           }
         }
       }
+    },
+    "Observer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemer"
+          }
+        }
+      }
+    },
+    "Observers" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemers"
+          }
+        }
+      }
+    },
+    "Open observation" : {
+
     },
     "Password" : {
       "localizations" : {
@@ -809,6 +965,7 @@
       }
     },
     "Poi" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -818,7 +975,11 @@
         }
       }
     },
+    "Previous" : {
+
+    },
     "Radius" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -848,6 +1009,12 @@
         }
       }
     },
+    "Recent" : {
+
+    },
+    "Region" : {
+
+    },
     "Region %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -860,6 +1027,7 @@
       }
     },
     "Region %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -870,6 +1038,7 @@
       }
     },
     "Region lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -890,6 +1059,12 @@
         }
       }
     },
+    "remove" : {
+
+    },
+    "Remove from areas" : {
+
+    },
     "Results %lld/%lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -906,6 +1081,9 @@
           }
         }
       }
+    },
+    "Retrieving location..." : {
+
     },
     "Save photos into album" : {
       "localizations" : {
@@ -927,12 +1105,30 @@
         }
       }
     },
-    "Select a Region" : {
+    "Search" : {
+
+    },
+    "Search Wikipedia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selecteer een gebied"
+            "value" : "Zoek"
+          }
+        }
+      }
+    },
+    "Second language" : {
+
+    },
+    "Select a Region" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebied"
           }
         }
       }
@@ -943,6 +1139,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Share" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel"
+          }
+        }
+      }
+    },
+    "Share Text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel text"
           }
         }
       }
@@ -1008,6 +1226,19 @@
         }
       }
     },
+    "Species %@ seen,\n %@,\n date %@ at time %@,\n %lld times." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Species %1$@ seen,\n %2$@,\n date %3$@ at time %4$@,\n %5$lld times."
+          }
+        }
+      }
+    },
+    "Species group" : {
+
+    },
     "Species groups" : {
       "localizations" : {
         "nl" : {
@@ -1028,6 +1259,15 @@
           }
         }
       }
+    },
+    "Switch view" : {
+
+    },
+    "this is a hint" : {
+
+    },
+    "this is a hint Dani van Seumeren" : {
+
     },
     "Token: %@" : {
       "localizations" : {
@@ -1077,6 +1317,19 @@
         }
       }
     },
+    "Update location" : {
+
+    },
+    "Us" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wij"
+          }
+        }
+      }
+    },
     "Username" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1098,6 +1351,9 @@
         }
       }
     },
+    "Value: %lld" : {
+
+    },
     "Very rare" : {
       "localizations" : {
         "nl" : {
@@ -1118,6 +1374,9 @@
         }
       }
     },
+    "Wikipedia Explorer" : {
+
+    },
     "Window" : {
       "localizations" : {
         "nl" : {
@@ -1128,8 +1387,15 @@
         }
       }
     },
-    "Your Label" : {
-
+    "Yes" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -13,6 +13,8 @@ import SwiftyBeaver
 struct YearView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
+    @EnvironmentObject var settings: Settings
+    
     var speciesId: Int
     
     var body: some View {
@@ -39,7 +41,7 @@ struct YearView: View {
         }
         .onAppear() {
             observationsYearViewModel.months = [0,0,0,0, 0,0,0,0 ,0,0,0,0]
-            observationsYearViewModel.fetchMonthData(speciesId: self.speciesId)
+            observationsYearViewModel.fetchMonthData(language: settings.selectedLanguage, speciesId: self.speciesId)
 //            observationsYearViewModel.deleteFilesInFolder() //deze bij legen cache setting zetten !!!
         }
     }

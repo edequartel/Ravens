@@ -9,35 +9,31 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
+
 class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?
-    
-    var settings: Settings
-    init(settings: Settings) {
-        self.settings = settings
-    }
-    
-    func fetchData(for speciesID: Int) {
-        guard let url = URL(string: settings.endPoint()+"species/\(speciesID)/") else {
-            return
-        }
-        log.info("SpeciesDetailsViewModel speciesID: \(speciesID)")
+        
+    func fetchData(settings: Settings, for speciesID: Int, onCompletion: (() -> Void)? = nil) {
+        log.error("SpeciesDetailsViewModel speciesID: \(speciesID)")
+        
+        let url = endPoint(value: settings.selectedInBetween)+"species/\(speciesID)/"
+        log.error("SpeciesDetailsViewModel url: \(url)")
         
         let headers: HTTPHeaders = [
             "Accept-Language": settings.selectedLanguage
         ]
-        log.verbose("SpeciesDetailsViewModel url: \(url)")
         
-    
         AF.request(url, headers: headers).responseDecodable(of: SpeciesDetails.self) { response in
             switch response.result {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.speciesDetails = data
+                     onCompletion?()
                 }
             case .failure(let error):
                 self.log.error("Error SpeciesDetailsViewModel fetching data: \(error)")
+                onCompletion?()
             }
         }
     }

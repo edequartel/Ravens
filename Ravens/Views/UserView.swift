@@ -12,28 +12,24 @@ struct UserView: View {
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
-    
+    @State private var navigateToObservers = false
     var body: some View {
         VStack(alignment: .leading) {
             if (keyChainviewModel.token.count > 0) {
-                Text("\(userViewModel.user?.name ?? "unknown")")
-                    .bold()
-                Text("\(userViewModel.user?.email ?? "unknown")")
-                Text("\(userViewModel.user?.id ?? 0)")
-                
-                let url = userViewModel.user?.url ?? "unknown"
-                Button("\(url)") {
-                    if let validURL = URL(string: url) {
-                        UIApplication.shared.open(validURL)
-                    }
+                HStack {
+                    Spacer()
+                    Text(userViewModel.user?.name ?? "unknown")
+                        .bold()
+                Spacer()
                 }
-                let country = userViewModel.user?.country ?? "unknown"
-                Text(country)                
-                //            Text("Avatar: \(viewModel.user.avatar ?? "?")")
+                HStack {
+                    Spacer()
+                    QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
+                        .frame(width: 100, height: 100)
+                        .padding(10)
+                    Spacer()
+                }
             }
-        }
-        .onAppear {
-            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") })
         }
     }
 }
@@ -49,9 +45,6 @@ struct UserSimpleView: View {
             if (keyChainviewModel.token.count > 0) {
                 Text("\(userViewModel.user?.name ?? "unknown")")
             }
-        }
-        .onAppear {
-            userViewModel.fetchUserData(settings: settings, completion: { print("userViewModel.fetchUserData") } )
         }
     }
 }

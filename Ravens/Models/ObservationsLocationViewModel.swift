@@ -7,13 +7,14 @@
 
 
 import Foundation
+import SwiftUI
 import Alamofire
 import MapKit
 import SwiftyBeaver
 
 class ObservationsLocationViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-
+    
     @Published var observations: Observations?
     
     private var keyChainViewModel =  KeychainViewModel()
@@ -21,13 +22,13 @@ class ObservationsLocationViewModel: ObservableObject {
     var locations = [Location]()
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 0, longitude: 0)
     var count: Int = 0
-
+    
     func getLocations() {
         locations.removeAll()
         
         let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
- 
+            
             let name = observations?.results[i].species_detail.name ?? "Unknown name"
             let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
             let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
@@ -36,10 +37,63 @@ class ObservationsLocationViewModel: ObservableObject {
             let hasSound = (observations?.results[i].sounds?.count ?? 0 > 0)
             
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
-
+            
             locations.append(newLocation)
         }
     }
+    
+    func fetchData(settings: Settings, locationId: Int, limit: Int, offset: Int, completion: (() -> Void)? = nil) {
+        log.info("fetchData ObservationsLocationViewModel locationid: \(locationId) limit:\(limit) offset: \(offset)")
+        
+        keyChainViewModel.retrieveCredentials()
+        
+        // Add the custom header
+        let headers: HTTPHeaders = [
+            "authorization": "Token "+keyChainViewModel.token,
+            "accept-Language": settings.selectedLanguage,
+        ]
+        
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
+        let date_before = formatCurrentDate(value: settings.selectedDate)
+        
+        log.info("date after \(date_after)")
+        log.info("date before \(date_before)")
+        
+        var url = endPoint(value: settings.selectedInBetween) + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedSpeciesGroupId)"
+        
+        
+        if !settings.infinity {
+        url = url + "&date_after=\(date_after)&date_before=\(date_before)"
+        }
+        
+        log.info("ObservationsLocationViewModel \(url)")
+        
+        AF.request(url, headers: headers).responseData { response in
+            
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decoder = JSONDecoder()
+                    let observationsSpecies = try decoder.decode(Observations.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        self.observations = Observations(results: observationsSpecies.results)
+                        self.count = observationsSpecies.count ?? 0
+                        self.getLocations()
+                        self.getSpan()
+                        completion?()
+                    }
+                } catch {
+                    self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
+                    self.log.error("\(url)")
+                }
+            case .failure(let error):
+                self.log.error("Error ObservationsLocationViewModel: \(error)")
+            }
+        }
+    }
+    
+    
     
     func getSpan() {
         var latitudes: [Double] = []
@@ -61,62 +115,25 @@ class ObservationsLocationViewModel: ObservableObject {
         let centreLatitude = (minLatitude + maxLatitude) / 2
         let centreLongitude = (minLongitude + maxLongitude) / 2
         
-        let latitudeDelta = (maxLatitude - minLatitude) * 1.5
-        let longitudeDelta = (maxLongitude - minLongitude) * 1.5
-
+        let latitudeDelta = (maxLatitude - minLatitude) * 3// 1.5
+        let longitudeDelta = (maxLongitude - minLongitude) * 3// 1.5
+        
         span = Span(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta, latitude: centreLatitude, longitude: centreLongitude)
     }
     
-
-    func fetchData(locationId: Int, limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
-        log.info("fetchData ObservationsLocationViewModel limit: \(locationId) \(limit) offset: \(offset)")
+    func getCameraPosition() -> MapCameraPosition {
+        getSpan()
+        let center = CLLocationCoordinate2D(
+            latitude: span.latitude,
+            longitude: span.longitude)
         
-        keyChainViewModel.retrieveCredentials()
+        let span = MKCoordinateSpan(
+            latitudeDelta: span.latitudeDelta,
+            longitudeDelta: span.longitudeDelta)
         
-        // Add the custom header
-        let headers: HTTPHeaders = [
-            "authorization": "Token "+keyChainViewModel.token,
-            "accept-Language": settings.selectedLanguage,
-        ]
         
-        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
-        let date_before = formatCurrentDate(value: settings.selectedDate)
-        
-        log.info("date after \(date_after)")
-        log.info("date before \(date_before)")
-        
-        var url = settings.endPoint() + "locations/\(locationId)/observations/"+"?species_group=\(settings.selectedGroupId)"
-
-        
-        if !settings.infinity {
-            url = url + "&date_after=\(date_after)&date_before=\(date_before)"
-        }
-        
-        log.info("ObservationsLocationViewModel \(url)")
-
-        AF.request(url, headers: headers).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let observationsSpecies = try decoder.decode(Observations.self, from: data)
-
-                    DispatchQueue.main.async {
-                        self.observations = Observations(results: observationsSpecies.results)
-                        self.count = observationsSpecies.count ?? 0
-                        self.getLocations()
-                        self.getSpan()
-                        completion()
-                    }
-                } catch {
-                    self.log.error("Error ObservationsLocationViewModel decoding JSON: \(error)")
-                    self.log.error("\(url)")
-                }
-            case .failure(let error):
-                self.log.error("Error ObservationsLocationViewModel: \(error)")
-            }
-        }
+        let region = MKCoordinateRegion(center: center, span: span)
+        return MapCameraPosition.region(region)
     }
+    
 }
-
-

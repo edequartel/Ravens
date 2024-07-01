@@ -4,27 +4,13 @@ import SwiftyBeaver
 
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    
     @Published var observation: Observation?
-    
-    private var lastRequestTime: Date?
-    
     private var keyChainViewModel =  KeychainViewModel()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.debug("init ObsViewModel")
-        self.settings = settings
-    }
-    
-    func fetchData(for obsID: Int, completion: @escaping () -> Void) {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileURL = documentsDirectory.appendingPathComponent("CachedObs\(obsID).json")
-        log.info("ObsViewModel \(fileURL)")
-        
+    func fetchData(settings: Settings, for obsID: Int, completion: @escaping () -> Void) {
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
-        let url = settings.endPoint()+"observations/\(obsID)/"
+        let url = endPoint(value: settings.selectedInBetween)+"observations/\(obsID)/"
         
         keyChainViewModel.retrieveCredentials()
         
@@ -43,14 +29,9 @@ class ObsViewModel: ObservableObject {
 
                     do {
                         self.observation = try decoder.decode(Observation.self, from: utf8Data)
-
-                        let encoder = JSONEncoder()
-                        if let encodedData = try? encoder.encode(self.observation) {
-                            try? encodedData.write(to: fileURL)
-                        }
                         completion()
                     } catch {
-                        self.log.error("Error ObsVichacheewModel decoding JSON: \(error)")
+                        self.log.error("Error ObsViewModel decoding JSON: \(error)")
                     }
                 }
             case .failure(let error):
@@ -61,3 +42,77 @@ class ObsViewModel: ObservableObject {
     }
 }
 
+
+
+//import Foundation
+//import Alamofire
+//import SwiftyBeaver
+//
+//class ObsViewModel: ObservableObject {
+//    let log = SwiftyBeaver.self
+//    
+//    @Published var observation: Observation?
+//    
+//    private var lastRequestTime: Date?
+//    
+//    private var keyChainViewModel =  KeychainViewModel()
+//    
+////    var settings: Settings
+////    init(settings: Settings) {
+////        log.debug("init ObsViewModel")
+////        self.settings = settings
+////    }
+//    
+//    func fetchData(language: String, for obsID: Int, completion: @escaping () -> Void) {
+////        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//
+//        log.error("!!! fetchData API Call for ObsViewModel \(obsID) at \(Date())")
+//        
+//        let fileManager = FileManager.default
+//        let obsDirectory = getDocumentsDirectory().appendingPathComponent("obs")
+//        if !fileManager.fileExists(atPath: obsDirectory.path) {
+//            try? fileManager.createDirectory(at: obsDirectory, withIntermediateDirectories: true, attributes: nil)
+//        }
+////
+//        let fileURL = obsDirectory.appendingPathComponent("\(obsID).json")
+////        log.error("ObsViewModel \(fileURL)")
+//        
+//        log.error("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
+//        
+//        let url = endPoint()+"observations/\(obsID)/"
+//        
+//        keyChainViewModel.retrieveCredentials()
+//        
+//        let headers: HTTPHeaders = [
+//            "Accept-Language" : language,
+//            "Authorization": "Token " + keyChainViewModel.token
+//        ]
+//        
+//        log.info("ObsViewModel url: \(url) \(headers)")
+//        
+//        AF.request(url, headers: headers).responseData { response in
+//            switch response.result {
+//            case .success(let data):
+//                if let utf8Data = String(data: data, encoding: .isoLatin1)?.data(using: .utf8) {
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        self.observation = try decoder.decode(Observation.self, from: utf8Data)
+//
+//                        let encoder = JSONEncoder()
+//                        if let encodedData = try? encoder.encode(self.observation) {
+//                            try? encodedData.write(to: fileURL)
+//                        }
+//                        completion()
+//                    } catch {
+//                        self.log.error("Error ObsVichacheewModel decoding JSON: \(error)")
+//                    }
+//                }
+//            case .failure(let error):
+//                self.log.error("Error ObsViewModel fetching data: \(url) \(headers) - \(error)")
+//                self.log.error("\(String(describing: response.data))")
+//            }
+//        }
+//    }
+//}
+//

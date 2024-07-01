@@ -9,23 +9,82 @@ import Foundation
 import Alamofire
 import MapKit
 import SwiftyBeaver
+import SwiftUI
+import SVGView
+
+class window: ObservableObject {
+    @Published var maximum = 123
+    @Published var offset = 15
+    @Published var value = 0
+
+    func next() {
+        if value + offset > maximum {
+            value = maximum
+        } else {
+            value = value + offset
+        }
+    }
+    
+    func previous() {
+        let remainder = value % offset
+        if remainder != 0 {
+            value = value - remainder
+        } else if value - offset < 0 {
+            value = 0
+        } else {
+            value = value - offset
+        }
+    }
+}
+//to test
+struct WindowView: View {
+    @ObservedObject var windowObject = window()
+    
+    var body: some View {
+        VStack {
+            Text("Value: \(windowObject.value)")
+            ZStack {
+                SVGView(contentsOf: Bundle.main.url(forResource: "plus-square", withExtension: "svg")!)
+                    .frame(width: 16, height: 16, alignment: .bottomTrailing)
+                    .foregroundColor(.green)
+                
+                SVGView(contentsOf: Bundle.main.url(forResource: "w_wikipedia", withExtension: "svg")!)
+                    .frame(width: 64, height: 64, alignment: .center)
+                    .foregroundColor(.green)
+            }
+            
+            
+            Button(action: {
+                self.windowObject.next()
+            }) {
+                Text("Next")
+            }
+
+            Button(action: {
+                self.windowObject.previous()
+            }) {
+                Text("Previous")
+            }
+        }
+    }
+}
 
 class ObservationsUserViewModel: ObservableObject {
     let log = SwiftyBeaver.self
 
     @Published var observations: Observations?
     
+    @Published var limit = 100
+    @Published var offset = 0
+    @Published var maxOffset = 200 //??
+    @Published var start = 0
+    @Published var end = 100
+    
+    
     private var keyChainViewModel =  KeychainViewModel()
     
     var locations = [Location]()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.info("init ObservationsUserViewModel")
-        self.settings = settings
-
-    }
-
     func getLocations() {
         locations.removeAll()
         
@@ -46,8 +105,8 @@ class ObservationsUserViewModel: ObservableObject {
     }
     
 
-    func fetchData(limit: Int, offset: Int, settings: Settings, completion: @escaping () -> Void) {
-        log.error("fetchData ObservationsUserViewModel limit: \(limit) offset: \(offset)")
+    func fetchData(settings: Settings, userId: Int, completion: @escaping () -> Void) {
+        log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
         // Add the custom header
@@ -56,10 +115,9 @@ class ObservationsUserViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
-        let url = settings.endPoint() + "user/\(settings.userId)/observations/"+"?limit=\(limit)&offset=\(offset)"  //
-        //?date_after=\(date_after)&date_before=\(date_before)&limit=\(limit)"
-        
-        log.error("\(url)")
+        let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+
+        log.error("fetchData ObservationsUserViewModel \(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
@@ -73,10 +131,11 @@ class ObservationsUserViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.observations = observations
                             self.getLocations()
+                            completion() // call the completion handler if it exists
                         }
                         
-                        completion()
                     } catch {
+                        print("\(stringResponse)")
                         self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")
                     }

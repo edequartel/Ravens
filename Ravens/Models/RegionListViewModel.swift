@@ -13,18 +13,22 @@ class RegionListViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
     
-    var settings: Settings
-    init(settings: Settings) {
-        log.verbose("init RegionListViewModel")
-        self.settings = settings
-        fetchData()
+    func getId(region: Int, species_group: Int) -> Int {
+        log.verbose("getID from regionListViewModel region: \(region) species_group: \(species_group)")
+        if let matchingItem = regionLists.first(
+            where: { $0.region == region && $0.species_group == species_group }) {
+            log.verbose("getId= \(matchingItem.id)")
+            return matchingItem.id
+        }
+        log.verbose("getId: not found")
+        return -1
     }
-
-    func fetchData() {
+    
+    func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchData RegionListViewModel")
-        let url = settings.endPoint()+"region-lists"
+        let url = endPoint(value: settings.selectedInBetween)+"region-lists"
         
-        log.info("url = \(url)")
+        log.info("RegionListViewModel url = \(url)")
         
         // Add the custom header 'Accept-Language: nl'
         let headers: HTTPHeaders = [
@@ -40,6 +44,7 @@ class RegionListViewModel: ObservableObject {
                     // Decode the JSON response into an array of Species objects
                     let decoder = JSONDecoder()
                     self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
+                    completion?() // call the completion handler if it exists
                 } catch {
                     self.log.error("Error RegionListViewModel decoding JSON: \(error)")
                 }
