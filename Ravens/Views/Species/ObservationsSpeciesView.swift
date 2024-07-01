@@ -13,6 +13,11 @@ func vibrate() {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 }
 
+struct SoundArrayWrapper: Identifiable {
+    let id = UUID()
+    var sounds: [String]
+}
+
 struct ObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     
@@ -28,25 +33,24 @@ struct ObservationsSpeciesView: View {
     var item: Species
     
     @State private var endOfListReached = false
+    @State private var isLoaded = false
     @State private var selectedObservation: Observation?
     
     @State private var showAudioPlayer = false
-    @State private var sounds: [String]?
+    
+    //    @State private var sounds: [String]?
+    @State private var soundsWrapper: SoundArrayWrapper? = nil
     
     
     var body: some View {
         VStack {
             HStack {
                 Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
-//                Image(systemName: "circle.fill")
                     .foregroundColor(RarityColor(value: item.rarity))
                 Text("\(item.name)")// - \(item.id)")
                     .bold()
                     .lineLimit(1) // Set the maximum number of lines to 1
                     .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//                if htmlViewModel.speciesScientificNameExists(item.scientific_name) {
-//                    Image(systemName: "circle")
-//                }
                 Spacer()
                 
                 Button(action: {
@@ -57,16 +61,13 @@ struct ObservationsSpeciesView: View {
                         bookMarksViewModel.appendRecord(speciesID: item.id)
                         print("bookmarks append")
                     }
-
+                    
                 } ) {
                     Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
                         .foregroundColor(.black)
                 }
-//                .tint(.obsSpecies)
-                
-                
             }
-
+            
             VStack {
                 HStack {
                     Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
@@ -85,9 +86,12 @@ struct ObservationsSpeciesView: View {
                 }
             }
         }
+        .padding(.horizontal,10)
+        HorizontalLine()
         
-        .padding()
-        
+        //        if !isLoaded { ProgressView()
+        //        } else
+        //        VStack {
         List {
             if let results = observationsSpeciesViewModel.observationsSpecies?.results {
                 let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
@@ -97,34 +101,27 @@ struct ObservationsSpeciesView: View {
                         obs: result
                     )
                     .accessibilityLabel("\(result.species_detail.name) \(result.date) \(result.time ?? "")")
+                    
                     .onTapGesture(count: 2) {
-                        sounds=result.sounds
-                        if (result.sounds?.count ?? 0)>0 {
+                        if let sounds = result.sounds, !sounds.isEmpty {
+                            soundsWrapper = SoundArrayWrapper(sounds: sounds)
                             vibrate()
                         }
-                        showAudioPlayer = (result.sounds?.count ?? 0) > 0
                     }
                 }
             }
-            
         }
         .listStyle(PlainListStyle())
-
-        
         .refreshable {
             print("refreshing...")
             fetchDataModel()
-//            htmlViewModel.parseHTMLFromURL()
-            
         }
-        
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)
         }
-        
-        .sheet(isPresented: $showAudioPlayer) {
-            PlayerControlsView(audio: sounds ?? [] )
-                .presentationDetents([.fraction(0.5), .medium, .large])
+        .sheet(item: $soundsWrapper) { wrapper in
+            PlayerControlsView(audio: wrapper.sounds)
+                .presentationDetents([.fraction(0.1), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
         
@@ -133,7 +130,7 @@ struct ObservationsSpeciesView: View {
                 fetchDataModel()
                 settings.initialSpeciesLoad = false
             }
-           
+            
         }
     }
     
@@ -142,7 +139,11 @@ struct ObservationsSpeciesView: View {
             settings: settings,
             speciesId: item.id,
             limit: 100,
-            offset: 0
+            offset: 0,
+            completion: {
+                isLoaded = true
+                log.info("observationsSpeciesViewModel data loaded")
+            }
         )
     }
 }

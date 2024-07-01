@@ -98,11 +98,16 @@ struct ObsSpeciesView: View {
                     }
                 }
                 
+//                if !settings.hidePictures {
+//                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+//                        AFImageView(media: imageURLString)
+//                    }
+//                }
+                
                 if !settings.hidePictures {
-                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                        AFImageView(media: imageURLString)
-                    }
+                    PhotoGridView(photos: obs.photos)
                 }
+                
                 
 //                if (obs.sounds?.count ?? 0)>0 {
 //                    HStack {
@@ -111,6 +116,9 @@ struct ObsSpeciesView: View {
 //                    }
 //                }
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+            
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
                 let url = URL(string: obs.permalink)!

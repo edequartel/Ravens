@@ -31,17 +31,6 @@ struct TabUserObservationsView: View {
                         }
                     }
                 }
-                
-                if !settings.accessibility {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            settings.hidePictures.toggle()
-                        }) {
-                            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-                        }
-                    }
-                }
-                
             }
             .navigationTitle("\(settings.userName)")
             .navigationBarTitleDisplayMode(.inline)

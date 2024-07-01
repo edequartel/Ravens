@@ -10,49 +10,72 @@ import SwiftUI
 import Alamofire
 import SwiftyBeaver
 import Photos
+import SwiftUIImageViewer
 
 struct AFImageView: View {
     let log = SwiftyBeaver.self
     
     @EnvironmentObject var settings: Settings
     @State private var downloadedImage: SwiftUI.Image? = nil
+    @State private var isImagePresented = false
     
-//    @Binding 
     var media: String
-
+    
     var body: some View {
         VStack {
             if let image = downloadedImage {
                 image
                     .resizable()
-                    .aspectRatio(nil, contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                //                    .aspectRatio(nil, contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: 200, maxHeight: 200)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .onTapGesture {
+                        isImagePresented = true
+                    }
+                    .fullScreenCover(isPresented: $isImagePresented) {
+                        SwiftUIImageViewer(image: image)
+                            .overlay(alignment: .topTrailing) {
+                                closeButton
+                            }
+                    }
+                
             } else {
                 ProgressView()
             }
         }
         .onAppear {
-//            print("\(media)")
             loadImageFromURL()
-//            print("path: \(getDocumentsDirectory())")
         }
     }
-
+    
+    private var closeButton: some View {
+        Button {
+            isImagePresented = false
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding()
+    }
+    
     func loadImageFromURL() {
         guard let url = URL(string: media) else {
             return
         }
-
+        
         let fileManager = FileManager.default
         let imagesDirectory = getDocumentsDirectory().appendingPathComponent("images")
         if !fileManager.fileExists(atPath: imagesDirectory.path) {
             try? fileManager.createDirectory(at: imagesDirectory, withIntermediateDirectories: true, attributes: nil)
         }
-
+        
         let path = imagesDirectory.appendingPathComponent(url.lastPathComponent)
         log.info("path: \(path)")
-
+        
         if let imageData = try? Data(contentsOf: path), let uiImage = UIImage(data: imageData) {
             log.info("Loaded image from disk")
             self.downloadedImage = Image(uiImage: uiImage)
@@ -68,7 +91,7 @@ struct AFImageView: View {
                         if settings.savePhotos{
                             saveImageToAlbum(image: uiImage, albumName: "Ravens")
                         }
-
+                        
                     }
                 case .failure(let error):
                     log.error("Error downloading image: \(error)")
@@ -76,7 +99,7 @@ struct AFImageView: View {
             }
         }
     }
-
+    
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -125,7 +148,7 @@ struct AFImageView: View {
             }
         }
     }
-
+    
     func saveImage(image: UIImage, to album: PHAssetCollection) {
         PHPhotoLibrary.shared().performChanges({
             let assetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
@@ -139,6 +162,22 @@ struct AFImageView: View {
                 log.info("Successfully added image to \(album.localizedTitle ?? "")")
             } else {
                 log.error("Error adding image to album: \(String(describing: error))")
+            }
+        }
+    }
+}
+
+import SwiftUI
+
+struct PhotoGridView: View {
+    var photos: [String]?
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack() {
+                ForEach(photos ?? [], id: \.self) { imageURLString in
+                    AFImageView(media: imageURLString)
+                }
             }
         }
     }

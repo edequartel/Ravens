@@ -76,17 +76,17 @@ struct MapObservationsLocationView: View {
                     }
                     
                     .mapStyle(settings.mapStyle)
-                    
-//                    .safeAreaInset(edge: .bottom) {
-//                        VStack {
-//                            SettingsDetailsView(
-//                                count: observationsLocationViewModel.locations.count,
-//                                results: observationsLocationViewModel.count)
-//                        }
-//                        .padding(5)
-//                        .foregroundColor(.obsGreenFlower)
-//                        .background(Color.obsGreenEagle.opacity(0.5))
-//                    }
+       
+                    .safeAreaInset(edge: .bottom) {
+                        VStack {
+                            SettingsDetailsView(
+                                count: observationsLocationViewModel.locations.count,
+                                results: observationsLocationViewModel.count)
+                        }
+                        .padding(5)
+                        .foregroundColor(.obsGreenFlower)
+                        .background(Color.obsGreenEagle.opacity(0.5))
+                    }
                     
                     .onTapGesture() { position in
                         if let coordinate = proxy.convert(position, from: .local) {

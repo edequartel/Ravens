@@ -34,6 +34,7 @@ struct SpeciesView: View {
     var body: some View {
         NavigationView {
             VStack {
+                HorizontalLine()
                 List {
                     ForEach(
                         speciesViewModel.filteredSpecies(
@@ -115,6 +116,8 @@ struct SpeciesView: View {
                         }
                     }
                 }
+                .listStyle(PlainListStyle())
+
             }
             
             

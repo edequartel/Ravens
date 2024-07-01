@@ -101,21 +101,17 @@ struct LoginView: View {
     
     var body: some View {
         Form {
-            Section("Login") {
-                VStack {
-                    //                    Text("Login to \(settings.selectedInBetween)")
-                    TextField("Name", text: $keyChainviewModel.loginName)
-                        .onChange(of: keyChainviewModel.loginName) {
-                            keyChainviewModel.loginName = keyChainviewModel.loginName.lowercased()
-                        }
-                    SecureField("Password", text: $keyChainviewModel.password)
-                }
-            }
-            
-            
+//            Section("Login") {
             VStack {
+                TextField("Name", text: $keyChainviewModel.loginName)
+                    .onChange(of: keyChainviewModel.loginName) {
+                        keyChainviewModel.loginName = keyChainviewModel.loginName.lowercased()
+                    }
+                    .padding(4)
+                SecureField("Password", text: $keyChainviewModel.password)
+                    .padding(4)
+                
                 HStack {
-                    
                     if (keyChainviewModel.token.isEmpty) {
                         Button("Login") {
                             keyChainviewModel.fetchData(
@@ -136,21 +132,22 @@ struct LoginView: View {
                         }
                         .buttonStyle(.bordered)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(.red)
-                    }
                     
+                    }
                 }
+                .padding(10)
                 
                 if (keyChainviewModel.loginFailed) {
                     Text("Login failed")
                 }
+                //            }
             }
             
-            Section {
-                if (keyChainviewModel.token.count>0) {
-                    UserView()
-                }
-            }
+//            Section {
+//                if (keyChainviewModel.token.count>0) {
+//                    UserView()
+//                }
+//            }
             
 //            Section() {
 //                ObserversView()

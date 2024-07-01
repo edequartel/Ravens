@@ -22,7 +22,8 @@ class Player: ObservableObject {
     
     func handleAudioPlayerStateChange(state: AudioPlayerState) {
         // Handle the event
-        log.info("\(state)")
+        log.error(">>> \(state)")
+        log.error(">>> \(queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
         DispatchQueue.main.async {
             self.status = state
         }
@@ -30,9 +31,12 @@ class Player: ObservableObject {
     
     func play(_ audioUrls: [String]) {
 //        queuedAudioPlayer.stop()
-        queuedAudioPlayer.clear()
+//        queuedAudioPlayer.clear()
         for audioUrl in audioUrls {
-            let audioItem = DefaultAudioItem(audioUrl: audioUrl, sourceType: .stream)
+            let audioItem = DefaultAudioItem(
+                audioUrl: audioUrl,
+                sourceType: .stream
+            )
             queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
             log.info("playing \(audioUrl)")
         }
@@ -65,40 +69,61 @@ struct PlayerControlsView: View {
     
     var body: some View {
         HStack {
-            if player.status != .playing {
-                Button(action: {
-                    player.play(audio)
-                }) {
-                    Image(systemName: "play.circle")
-                        .font(.system(size: 30))
-                }
-            } else {
-                HStack {
-                    Button(action: {
-                        player.stop()
-                    }) {
-                        Image(systemName: "stop.circle")
-                            .font(.system(size: 30))
-                    }
-//                    Button(action: {
-//                        player.pause()
-//                    }) {
-//                        Image(systemName: "pause.fill")
-//                            .font(.system(size: 30))
-//                    }
+            VStack {
+                Spacer()
+//                Text("\(player.queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
+                HStack{
+                    Spacer()
                     
+                    if player.status != .playing {
+                        Button(action: {
+                            player.play(audio)
+                        }) {
+                            Image(systemName: "play.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
+                    } else {
+                        Button(action: {
+                            player.stop()
+                        }) {
+                            Image(systemName: "stop.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
+                        
+
+                    }
+                    Button(action: {
+                        player.pause()
+                    }) {
+                        Image(systemName: "pause.fill")
+                            .font(.system(size: 30))
+                            .frame(width: 50)
+                    }
+                    
+                    if (audio.count > 1) {
+                        Button(action: {
+                            player.previous()
+                        }) {
+                            Image(systemName: "backward.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
+                        
+                        Button(action: {
+                            player.next()
+                        }) {
+                            Image(systemName: "forward.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
+                        
+                    }
+                    Spacer()
                 }
+                Spacer()
             }
-            //
-            //
-            //            Button(action: {
-            //                player.stop()
-            //            }) {
-            //                Image(systemName: "stop.circle")
-            //                    .font(.system(size: 30))
-            //            }
-            
-            
         }
         .padding(5)
     }

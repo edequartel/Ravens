@@ -195,25 +195,6 @@ struct ObsRadiusView: View {
 }
 
 
-import SwiftUI
-
-struct PhotoGridView: View {
-    var photos: [String]?
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 2) {
-                ForEach(photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: 200, maxHeight: 200)
-                        .clipped()
-                }
-            }
-            .padding(.all, 10)
-        }
-    }
-}
 
 
 //struct ObsRadiusView_Previews: PreviewProvider {

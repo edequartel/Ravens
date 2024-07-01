@@ -671,7 +671,6 @@
       }
     },
     "Login waarneming.nl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

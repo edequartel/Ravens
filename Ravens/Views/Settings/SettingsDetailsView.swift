@@ -18,36 +18,41 @@ struct SettingsDetailsView: View {
     
     var body: some View {
         VStack() {
-            HStack {
-                Text(settings.locationName)
-                    .bold()
-                Spacer()
-
-            }
-            HStack {
-//                NetworkView()
-                Image(systemName: "binoculars.circle.fill")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(RarityColor(value: settings.selectedRarity), .white)
-                Text(settings.selectedSpeciesGroupName)
-                    .lineLimit(1)
-                if (settings.infinity && showInfinity) {
-                    HStack {
-                        Image(systemName: "infinity")
-                        Spacer()
-                    }
-                } else {
+            VStack {
+                HStack {
+                    Text(settings.locationName)
+                        .bold()
                     Spacer()
-                    Text("\(results)x")
                     
-                    Text("\(settings.days)d")
-                    Text("\(settings.selectedDate, formatter: dateFormatter)")
                 }
-
-
+                HStack {
+                    //                NetworkView()
+                    Image(systemName: "binoculars.circle.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(RarityColor(value: settings.selectedRarity), .white)
+                    Text(settings.selectedSpeciesGroupName)
+                        .lineLimit(1)
+                    if (settings.infinity && showInfinity) {
+                        HStack {
+                            Image(systemName: "infinity")
+                            Spacer()
+                        }
+                    } else {
+                        Spacer()
+                        Text("\(results)x")
+                        
+                        Text("\(settings.days)d")
+                        Text("\(settings.selectedDate, formatter: dateFormatter)")
+                    }
+                    
+                    
+                }
             }
+            .padding(.horizontal,10)
+            .font(.footnote)
         }
     }
+
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()

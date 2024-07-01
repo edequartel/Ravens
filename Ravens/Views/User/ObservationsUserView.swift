@@ -19,7 +19,9 @@ struct ObservationsUserView: View {
     
     var body: some View {
         VStack {
+
             if let results = observationsUserViewModel.observations?.results, results.count > 0 {
+                HorizontalLine()
                 List {
                     if let results =  observationsUserViewModel.observations?.results {
                         ForEach(results
@@ -42,10 +44,22 @@ struct ObservationsUserView: View {
                         }
                     }
                 }
+                .listStyle(PlainListStyle())
+
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination: ObserversView()) {
                             Label("Observers", systemImage: "list.bullet")
+                        }
+                    }
+                    
+                    if (!settings.accessibility) {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                settings.hidePictures.toggle()
+                            }) {
+                                ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                            }
                         }
                     }
                 }

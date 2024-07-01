@@ -68,6 +68,7 @@
 		474C409C2B500AE90038B3A5 /* ObservationsRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C409B2B500AE90038B3A5 /* ObservationsRadiusView.swift */; };
 		4752426F2C2D887900DBBD0B /* HTMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752426E2C2D887900DBBD0B /* HTMLDocument.swift */; };
 		475242712C2D88B900DBBD0B /* HTMLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475242702C2D88B900DBBD0B /* HTMLViewModel.swift */; };
+		475242742C327B4000DBBD0B /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 475242732C327B4000DBBD0B /* SwiftUIImageViewer */; };
 		47568D2D2B59B54500E69B1A /* Observations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* Observations.swift */; };
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
@@ -204,7 +205,7 @@
 		47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaViewModel.swift; sourceTree = "<group>"; };
 		47826CC22BF62DE4003E8F21 /* WikipediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaView.swift; sourceTree = "<group>"; };
 		4784B5412B7BE1040051D03E /* AFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFImageView.swift; sourceTree = "<group>"; };
-		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsAndFunctions.swift; path = Ravens/Data/ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
+		4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsAndFunctions.swift; sourceTree = SOURCE_ROOT; };
 		4785CD162B95C835002F52BE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4785CD182B95C856002F52BE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4785CD1A2B95C87E002F52BE /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 			files = (
 				47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */,
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
+				475242742C327B4000DBBD0B /* SwiftUIImageViewer in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				47778E362C039D9E00C59A1A /* SonogramView.swift */,
+				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				478EABE82BED3A2300414431 /* ShareTextView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
@@ -347,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				472633202BB5981A00CEA05E /* poi.json */,
-				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C403B2B4BC5070038B3A5 /* Species.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
 				474C40522B4BFD090038B3A5 /* RegionList.swift */,
@@ -516,6 +518,7 @@
 				4718753B2BFCA77000EF9F1F /* SVGView */,
 				47FAD0E02C19D25C007D0F63 /* Kingfisher */,
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
+				475242732C327B4000DBBD0B /* SwiftUIImageViewer */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -560,6 +563,7 @@
 				4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */,
 				47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				475242722C327B4000DBBD0B /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -834,8 +838,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -870,8 +874,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -955,6 +959,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.3.0;
+			};
+		};
+		475242722C327B4000DBBD0B /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
@@ -1045,6 +1057,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
+		};
+		475242732C327B4000DBBD0B /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 475242722C327B4000DBBD0B /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

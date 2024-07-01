@@ -12,81 +12,77 @@ import MapKit
 
 struct ObservationsLocationView: View {
     let log = SwiftyBeaver.self
-
+    
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-
+    
     @EnvironmentObject var settings: Settings
     
     @State private var selectedObservation: Observation?
-
+    
     var body: some View {
-            VStack {
-//                HStack {
-//                    VStack {
-                        SettingsDetailsView(
-                            count: observationsLocationViewModel.locations.count,
-                            results: observationsLocationViewModel.count)
-//                    }
-                    .padding(.horizontal,10)
-//                    .foregroundColor(.obsGreenFlower)
-//                    .background(Color.obsGreenEagle.opacity(0.5))
-                    .font(.footnote)
-//                }
-                List {
-                    if let results =  observationsLocationViewModel.observations?.results {
-                        ForEach(results
-                            .filter { $0.rarity >= settings.selectedRarity }
-                                
-                            .sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") })
-                                
-//                            .filter { result in
-//                                // Add your condition here
-//                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
-//                                // You can replace it with your own condition.
-//                                ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
-//                                (
-//                                    (result.has_photo ?? false) && (settings.showObsPictures) ||
-//                                    (result.has_sound ?? false) && (settings.showObsAudio)
-//                                )
-//                            }
-                                , id: \.id) {
-                            obs in
-                            ObsAreaView(
-                                selectedObservation: $selectedObservation,
-                                obs: obs
-                            )
+        VStack {
+                SettingsDetailsView(
+                    count: observationsLocationViewModel.locations.count,
+                    results: observationsLocationViewModel.count
+                )
+            HorizontalLine()
+            List {
+                if let results =  observationsLocationViewModel.observations?.results {
+                    ForEach(results
+                        .filter { $0.rarity >= settings.selectedRarity }
+                            
+                        .sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") })
+                            
+                            //                            .filter { result in
+                            //                                // Add your condition here
+                            //                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
+                            //                                // You can replace it with your own condition.
+                            //                                ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
+                            //                                (
+                            //                                    (result.has_photo ?? false) && (settings.showObsPictures) ||
+                            //                                    (result.has_sound ?? false) && (settings.showObsAudio)
+                            //                                )
+                            //                            }
+                            , id: \.id) {
+                        obs in
+                        ObsAreaView(
+                            selectedObservation: $selectedObservation,
+                            obs: obs
+                        )
+                    }
+                }
+            }
+            .listRowSeparator(.hidden)
+            .listStyle(PlainListStyle())
+            
+            .toolbar {
+                if (!settings.accessibility) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            settings.hidePictures.toggle()
+                        }) {
+                            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                                .accessibilityElement(children: .combine)
+                                .accessibility(label: Text("Hide pictures"))
                         }
                     }
                 }
-//                .safeAreaInset(edge: .top) {
-//                    VStack {
-//                        SettingsDetailsView(
-//                            count: observationsLocationViewModel.locations.count,
-//                            results: observationsLocationViewModel.count)
-//                    }
-//                    .padding(.horizontal,10)
-////                    .foregroundColor(.obsGreenFlower)
-////                    .background(Color.obsGreenEagle.opacity(0.5))
-//                    .font(.footnote)
-//                }
+            }
 
-                
-            }
+        }
         
-
         
-            .sheet(item: $selectedObservation) { item in
-                SpeciesDetailsView(speciesID: item.species_detail.id)
-            }
-        
-            .onAppear()  {
-                getDataAreaModel()
-            }
+        .sheet(item: $selectedObservation) { item in
+            SpeciesDetailsView(speciesID: item.species_detail.id)
+        }
+        .onAppear()  {
+            getDataAreaModel()
+        }
     }
-     
+    
     func getDataAreaModel() {
         log.error("getDataAreaModel")
         log.info(settings.initialAreaLoad)

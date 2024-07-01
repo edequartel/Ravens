@@ -98,33 +98,19 @@ struct LocationView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AreasView()) {
-                        Label("Areas", systemImage: "list.bullet")
-                    }
-                    .accessibility(label: Text("Areas List"))
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: LocationListView()) {
                         Image(systemName: "magnifyingglass")
                             .accessibility(label: Text("Search"))
                     }
                 }
                 
-                if !settings.accessibility {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            settings.hidePictures.toggle()
-                        }) {
-                            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-                                .accessibilityElement(children: .combine)
-                                .accessibility(label: Text("Hide pictures"))
-                        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AreasView()) {
+                        Label("Areas", systemImage: "list.bullet")
                     }
+                    .accessibility(label: Text("Areas List"))
                 }
-                
             }
-            
             
             .onAppear {
                 log.info("LocationView onAppear")

@@ -68,15 +68,10 @@ extension Color {
     static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //orange
     static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
     static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
+    static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
 }
 
-//let obsStrGreenSpider = "1F5E25"
-//let obsStrGreenFlower = "CBFC45"
-//let obsStrGreenEagle = "1D9431"
-//let obsStrBackground = "6AE388"
-//let obsStrBlueButterfly = "4CFDFB"
-//let obsStrNorthSeaBlue = "75d0fa"
-//let obsStrDutchGreen = "c1e6ae"
+
 let obsStrDutchOrange = "f7b731"
 
 let SFShareLink = "square.and.arrow.up"
@@ -448,3 +443,10 @@ extension View {
     }
 }
 
+struct HorizontalLine: View {
+    var body: some View {
+        Rectangle()
+            .frame(height: 0.4)
+            .foregroundColor(.gray)
+    }
+}

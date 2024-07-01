@@ -88,11 +88,16 @@ struct ObsUserView: View {
                     }
                 }
                 
+//                if !settings.hidePictures {
+//                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+//                        AFImageView(media: imageURLString)
+//                    }
+//                }
+                
                 if !settings.hidePictures {
-                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                        AFImageView(media: imageURLString)
-                    }
+                    PhotoGridView(photos: obs.photos)
                 }
+
                 
                 if (obs.sounds?.count ?? 0)>0 {
                     HStack {
