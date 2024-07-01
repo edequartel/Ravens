@@ -94,7 +94,7 @@ struct ObservationsLocationView: View {
         
         .sheet(item: $soundsWrapper) { wrapper in
             PlayerControlsView(audio: wrapper.sounds)
-                .presentationDetents([.fraction(0.1), .medium, .large])
+                .presentationDetents([.fraction(0.2), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
         

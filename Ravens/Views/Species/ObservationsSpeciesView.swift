@@ -103,7 +103,7 @@ struct ObservationsSpeciesView: View {
                     .onTapGesture(count: 2) {
                         if let sounds = obs.sounds, !sounds.isEmpty {
                             soundsWrapper = SoundArrayWrapper(sounds: sounds)
-                            vibrate()
+//                            vibrate()
                         }
                     }
                     
