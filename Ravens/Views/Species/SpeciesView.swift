@@ -31,6 +31,8 @@ struct SpeciesView: View {
     @State private var selectedListMapItem: Species?
     @State private var showFirstView = true
     
+    @State private var isPresented = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -185,7 +187,7 @@ struct SpeciesView: View {
         
         .sheet(item: $selectedMapItem) { item in
             if settings.listPreference {
-                ObservationsSpeciesView(item: item)
+                ObservationsSpeciesView(item: item, isPresented: $isPresented) //??, isPresented: $isPresented
             } else {
                 MapObservationsSpeciesView(item: item)
             }
@@ -193,7 +195,7 @@ struct SpeciesView: View {
         
         .sheet(item: $selectedListMapItem) { item in
             if settings.listPreference {
-                ObservationsSpeciesView(item: item)
+                ObservationsSpeciesView(item: item, isPresented: $isPresented) //??, isPresented: $isPresented
             } else {
                 MapObservationsSpeciesView(item: item)
             }
@@ -204,7 +206,7 @@ struct SpeciesView: View {
         }
         
         .sheet(item: $selectedListItem) { item in
-            ObservationsSpeciesView(item: item)
+            ObservationsSpeciesView(item: item, isPresented: $isPresented) //??, isPresented: $isPresented
         }
     }
     
@@ -286,13 +288,13 @@ extension SpeciesViewModel {
         case 0:
             return species
         case 1:
-            return species.filter { $0.rarity >= 1 }
+            return species.filter { $0.rarity == 1 }
         case 2:
-            return species.filter { $0.rarity >= 2 }
+            return species.filter { $0.rarity == 2 }
         case 3:
-            return species.filter { $0.rarity >= 3 }
+            return species.filter { $0.rarity == 3 }
         case 4:
-            return species.filter { $0.rarity >= 4 }
+            return species.filter { $0.rarity == 4 }
         default:
             return species
         }

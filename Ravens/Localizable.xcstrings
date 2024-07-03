@@ -361,6 +361,9 @@
         }
       }
     },
+    "Error" : {
+
+    },
     "Error: %@" : {
 
     },
@@ -486,6 +489,12 @@
         }
       }
     },
+    "Image is NOT saved to Album Ravens" : {
+
+    },
+    "Image is saved to Album Ravens" : {
+
+    },
     "Image not found" : {
 
     },
@@ -542,6 +551,9 @@
           }
         }
       }
+    },
+    "Information" : {
+
     },
     "International" : {
       "extractionState" : "stale",
@@ -930,6 +942,9 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "Open observation" : {
 
     },
@@ -1086,6 +1101,7 @@
 
     },
     "Save photos into album" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

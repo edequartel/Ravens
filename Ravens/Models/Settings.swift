@@ -94,7 +94,7 @@ class Settings: ObservableObject {
 //    @AppStorage("obsSource") var obsSource: String = "waarneming.nl"
     
 
-    @AppStorage("savePhotos") var savePhotos: Bool = false
+//    @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
     @AppStorage("infinity") var infinity: Bool = false

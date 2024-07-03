@@ -28,6 +28,9 @@ struct ObservationsSpeciesView: View {
     
     @State private var soundsWrapper: SoundArrayWrapper? = nil
     
+    @Binding var isPresented: Bool
+    @State private var sounds: [String] = [] // Assuming that sounds is an array of Strings
+    
     
     var body: some View {
         VStack {
@@ -102,8 +105,8 @@ struct ObservationsSpeciesView: View {
                     
                     .onTapGesture(count: 2) {
                         if let sounds = obs.sounds, !sounds.isEmpty {
-                            soundsWrapper = SoundArrayWrapper(sounds: sounds)
-//                            vibrate()
+                            isPresented = true
+                            self.sounds = sounds
                         }
                     }
                     
@@ -115,15 +118,26 @@ struct ObservationsSpeciesView: View {
             print("refreshing...")
             fetchDataModel()
         }
+        
+        .sheet(isPresented: $isPresented) {
+            PlayerControlsView(audio: sounds)
+                .presentationDetents([.fraction(0.5), .medium, .large])
+                .presentationDragIndicator(.visible)
+//            List(sounds, id: \.self) { sound in
+//                Text(sound)
+//                    .font(.caption)
+//            }
+        }
+        
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)
         }
         
-        .sheet(item: $soundsWrapper) { wrapper in
-            PlayerControlsView(audio: wrapper.sounds)
-                .presentationDetents([.fraction(0.2), .medium, .large])
-                .presentationDragIndicator(.visible)
-        }
+//        .sheet(item: $soundsWrapper) { wrapper in
+//            PlayerControlsView(audio: wrapper.sounds)
+//                .presentationDetents([.fraction(0.2), .medium, .large])
+//                .presentationDragIndicator(.visible)
+//        }
         
         .onAppear() {
             if settings.initialSpeciesLoad {
@@ -152,7 +166,7 @@ struct ObservationsSpeciesView: View {
 struct ObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-        ObservationsSpeciesView(item: testSpecies)
+        ObservationsSpeciesView(item: testSpecies, isPresented: .constant(false))
             .environmentObject(ObservationsSpeciesViewModel())
             .environmentObject(Settings())
     }

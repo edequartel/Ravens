@@ -1,5 +1,5 @@
 {
-  "originHash" : "58b13f90f299c9908b95ce373fe36bb4ec1f372401ddefaed2465f4ffd6167bd",
+  "originHash" : "3bc8b0ddadd71ae489ca01ac27c7f91db7aeaaa36715d3e114e74e1393698ed1",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -56,12 +56,12 @@
       }
     },
     {
-      "identity" : "partialsheet",
+      "identity" : "popupview",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AndreaMiotto/PartialSheet.git",
+      "location" : "https://github.com/exyte/PopupView.git",
       "state" : {
-        "revision" : "6c61890976181274ea7baf6a4c297418346db799",
-        "version" : "3.1.1"
+        "revision" : "af8234cb05aaa4b4a8c0032506f242b89c5f393b",
+        "version" : "3.0.1"
       }
     },
     {
@@ -112,19 +112,19 @@
     {
       "identity" : "swiftui-image-viewer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fuzzzlove/swiftui-image-viewer.git",
+      "location" : "https://github.com/Jake-Short/swiftui-image-viewer.git",
       "state" : {
-        "revision" : "ca77123064ae046eac2be01654ee756085c2b182",
-        "version" : "1.0.0"
+        "revision" : "f61f298c0100c81dfb0c7908091e68aad12a892c",
+        "version" : "2.3.1"
       }
     },
     {
-      "identity" : "swiftuipager",
+      "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fermoya/SwiftUIPager.git",
+      "location" : "https://github.com/siteline/swiftui-introspect",
       "state" : {
-        "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb",
-        "version" : "2.5.0"
+        "revision" : "668a65735751432b640260c56dfa621cec568368",
+        "version" : "1.2.0"
       }
     },
     {
@@ -134,6 +134,15 @@
       "state" : {
         "revision" : "8cba041db09596183331d123f337d0eb2e6e8e91",
         "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "url-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dmytro-anokhin/url-image.git",
+      "state" : {
+        "revision" : "ccab89ad1cedb04f25dd4df1776dd8c8583b914a",
+        "version" : "2.2.5"
       }
     }
   ],

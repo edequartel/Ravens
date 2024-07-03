@@ -28,6 +28,7 @@ struct ContentView: View {
     
     var body: some View {
         if (keyChainviewModel.token.isEmpty) {
+            
             VStack {
                 HStack{
                     Text("Login waarneming.nl")
@@ -38,11 +39,21 @@ struct ContentView: View {
                 }
                 LoginView()
             }
+            .onAppear() {
+                log.error("isEmpty")
+            }
         } else {
+            
             if dataLoaded {
                 RavensView()
+                    .onAppear() {
+                        log.error("dataLoaded")
+                    }
             } else {
                 SplashScreen(dataLoaded: $dataLoaded)
+                    .onAppear() {
+                        log.error("SplashScreen")
+                    }
             }
         }
     }
@@ -57,7 +68,8 @@ struct RavensView: View {
     var body: some View {
         TabView {
             // Tab 1
-            LocationView()
+//            LocationView()
+            PlayerControlsView(audio: [])
                 .tabItem {
                     Text("Area")
                     Image(systemName: SFAreaFill)

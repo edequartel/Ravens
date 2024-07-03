@@ -142,8 +142,7 @@ struct RavensApp: App {
             
                 .environmentObject(ObservationsYearViewModel())
 
-                .environmentObject(urlHandler) // use instance
-            
+                .environmentObject(urlHandler)
 
                 .onOpenURL { url in
                     // Handle the URL appropriately

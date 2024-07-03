@@ -9,8 +9,10 @@ import SwiftUI
 
 struct TabSpeciesView: View {
     @State private var showFirstView = false
+    @State private var isPresented = false
     
     @EnvironmentObject var settings: Settings
+
     
     var item: Species
     
@@ -20,7 +22,7 @@ struct TabSpeciesView: View {
                 if showFirstView && !settings.accessibility {
                     MapObservationsSpeciesView(item: item)
                 } else {
-                    ObservationsSpeciesView(item: item)
+                    ObservationsSpeciesView(item: item, isPresented: $isPresented)
                 }
             }
         }

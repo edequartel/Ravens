@@ -164,7 +164,7 @@ struct SettingsView: View {
                 
                 
                 Section(header: Text("App details")) {
-                    Toggle("Save photos into album", isOn: $settings.savePhotos)
+//                    Toggle("Save photos into album", isOn: $settings.savePhotos)
                     
                     VStack(alignment: .leading) {
                         Text(version())
