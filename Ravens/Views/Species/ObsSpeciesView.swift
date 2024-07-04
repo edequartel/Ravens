@@ -94,12 +94,14 @@ struct ObsSpeciesView: View {
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel("""
-                                 \(obs.location_detail?.name ?? ""),
+                                 \(obs.has_sound ?? false ? "met geluid" : ""),
                                  op \(obs.date), \(obs.time ?? "00"),
                                  \(obs.number) keer.
                                  \(obs.notes?.count ?? 0 > 0 ? obs.notes ?? "unknown" : "")
                                 """
             )
+            
+            //                                 \(obs.location_detail?.name ?? ""),
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 

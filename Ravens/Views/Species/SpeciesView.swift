@@ -58,9 +58,11 @@ struct SpeciesView: View {
                             VStack(alignment: .leading) {
                                 
                                 HStack(spacing: 4) {
-                                    Image(systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
+                                    Image(
+                                        systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
                                         .symbolRenderingMode(.palette)
                                         .foregroundStyle(RarityColor(value: species.rarity), .clear)
+
                                     
                                     Text("\(species.name)")// - \(species.id)") //?
                                         .bold()
@@ -161,12 +163,16 @@ struct SpeciesView: View {
                         Image(systemName: settings.isBookMarkVisible ? "star.fill" : "star")
                             .foregroundColor(.blue)
                     }
+                    .accessibilityLabel(settings.isBookMarkVisible ? "alleen favorieten" : "alles")
+                    .accessibilityHint("soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren.")
                     
                     Button(action: {
                         settings.isLatestVisible.toggle()
                     }) {
                         Image(systemName: settings.isLatestVisible ? "circle.hexagonpath.fill" : "circle.hexagonpath")
                     }
+                    .accessibilityLabel(settings.isLatestVisible ? "alleen zeldzaamheden" : "alles")
+                    .accessibilityHint("je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond.")
                     
                 }
             )

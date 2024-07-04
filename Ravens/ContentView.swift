@@ -19,9 +19,9 @@ struct ContentView: View {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(.clear)
-//        appearance.shadowImage = UIImage() // Removes the horizontal line
+        //        appearance.shadowImage = UIImage() // Removes the horizontal line
         appearance.shadowColor = .clear // Ensures no shadow color is applied
-
+        
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
@@ -66,35 +66,38 @@ struct RavensView: View {
     
     
     var body: some View {
-        TabView {
-            // Tab 1
-//            LocationView()
-            PlayerControlsView(audio: [])
-                .tabItem {
-                    Text("Area")
-                    Image(systemName: SFAreaFill)
-                }
-            // Tab 2
-            TabUserObservationsView()
-                .tabItem {
-                    Text("Us")
-                    Image(systemName: "person.2.fill")
-                }
-            // Tab 3
-            SpeciesView()
-                .tabItem {
-                    Text("Species")
-                    Image(systemName: "tree")
-                }
-            // Tab 4
-            SettingsView()
-                .tabItem {
-                    Text("Settings")
-                    Image(systemName: "gearshape")
-                }
-        }
-        .onAppear() {
-            log.error("*** NEW LAUNCHING RAVENS ***")
+        VStack {
+            //            PlayerControlsView(audio: [])
+            //                .padding(20)
+            TabView {
+                // Tab 1
+                LocationView()
+                    .tabItem {
+                        Text("Area")
+                        Image(systemName: SFAreaFill)
+                    }
+                // Tab 2
+                TabUserObservationsView()
+                    .tabItem {
+                        Text("Us")
+                        Image(systemName: "person.2.fill")
+                    }
+                // Tab 3
+                SpeciesView()
+                    .tabItem {
+                        Text("Species")
+                        Image(systemName: "tree")
+                    }
+                // Tab 4
+                SettingsView()
+                    .tabItem {
+                        Text("Settings")
+                        Image(systemName: "gearshape")
+                    }
+            }
+            .onAppear() {
+                log.error("*** NEW LAUNCHING RAVENS ***")
+            }
         }
     }
 }
@@ -113,7 +116,7 @@ struct SplashScreen: View {
     @EnvironmentObject var regionsViewModel: RegionsViewModel
     @EnvironmentObject var regionListViewModel: RegionListViewModel
     @EnvironmentObject var userViewModel: UserViewModel
-
+    
     @State private var isLanguageDataLoaded = false
     @State private var isFirstLanguageDataLoaded = false
     @State private var isSecondLanguageDataLoaded = false
@@ -128,99 +131,99 @@ struct SplashScreen: View {
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-
+    
     
     var body: some View {
         VStack {
             ProgressView()
-//            Text("Loading data...")
-//            LottieView(lottieFile: "birds.json")
-//            LottieView(lottieFile: "dataloading.json")
-//                .frame(width: 100, height: 100)
+            //            Text("Loading data...")
+            //            LottieView(lottieFile: "birds.json")
+            //            LottieView(lottieFile: "dataloading.json")
+            //                .frame(width: 100, height: 100)
         }
-            .onAppear {
-                log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
-                
-                CLLocationManager().requestWhenInUseAuthorization()
-                
-                //?? deze standaard slechts 1 keer laden,
-                //?? betekend ergens opslaan, todo
-                languagesViewModel.fetchLanguageData(
-                    settings: settings,
-                    completion: {
-                        log.info("languagesViewModel Language data loaded")
-                        isLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
-                speciesGroupViewModel.fetchData(
-                    settings: settings,
-                    completion: {
-                        log.info("speciesGroupViewModel group data loaded")
-                        isSpeciesGroupDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
-                regionsViewModel.fetchData(
-                    settings: settings,
-                    completion: {
-                        log.info("regionsViewModel data loaded")
-                        isRegionDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
-                regionListViewModel.fetchData(
-                    settings: settings,
-                    completion: {
-                        log.info("regionListViewModel data loaded")
-                        isRegionListDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
+        .onAppear {
+            log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
             
-                speciesViewModel.fetchDataFirst(
-                    settings: settings,
-                    completion: {
-                        log.info("speciesViewModel First language data loaded")
-                        isFirstLanguageDataLoaded = true
-                        checkDataLoaded()
+            CLLocationManager().requestWhenInUseAuthorization()
+            
+            //?? deze standaard slechts 1 keer laden,
+            //?? betekend ergens opslaan, todo
+            languagesViewModel.fetchLanguageData(
+                settings: settings,
+                completion: {
+                    log.info("languagesViewModel Language data loaded")
+                    isLanguageDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            speciesGroupViewModel.fetchData(
+                settings: settings,
+                completion: {
+                    log.info("speciesGroupViewModel group data loaded")
+                    isSpeciesGroupDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            regionsViewModel.fetchData(
+                settings: settings,
+                completion: {
+                    log.info("regionsViewModel data loaded")
+                    isRegionDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            regionListViewModel.fetchData(
+                settings: settings,
+                completion: {
+                    log.info("regionListViewModel data loaded")
+                    isRegionListDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            
+            speciesViewModel.fetchDataFirst(
+                settings: settings,
+                completion: {
+                    log.info("speciesViewModel First language data loaded")
+                    isFirstLanguageDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            speciesViewModel.fetchDataSecondLanguage(
+                settings: settings,
+                completion: {
+                    log.info("speciesViewModel Second language data loaded")
+                    isSecondLanguageDataLoaded = true
+                    checkDataLoaded()
+                })
+            
+            //iedere keer
+            userViewModel.fetchUserData(
+                settings: settings,
+                completion: {
+                    log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+                    isUserDataLoaded = true
+                    settings.userId = userViewModel.user?.id ?? 0
+                    settings.userName = userViewModel.user?.name ?? ""
+                })
+            
+            if locationManagerModel.checkLocation() {
+                let location = locationManagerModel.getCurrentLocation()
+                //get the location
+                locationIdViewModel.fetchLocations(
+                    latitude: location?.coordinate.latitude ?? 0,
+                    longitude: location?.coordinate.longitude ?? 0,
+                    completion: { fetchedLocations in
+                        log.info("locationIdViewModel data loaded")
+                        // Use fetchedLocations here //actually it is one location
+                        settings.locationName = fetchedLocations[0].name
+                        for location in fetchedLocations {
+                            log.info(location)
+                        }
+                        isLocationIdDataLoaded = true
                     })
-                
-                speciesViewModel.fetchDataSecondLanguage(
-                    settings: settings,
-                    completion: {
-                        log.info("speciesViewModel Second language data loaded")
-                        isSecondLanguageDataLoaded = true
-                        checkDataLoaded()
-                    })
-                
-                //iedere keer
-                userViewModel.fetchUserData(
-                    settings: settings,
-                    completion: {
-                        log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-                        isUserDataLoaded = true
-                        settings.userId = userViewModel.user?.id ?? 0
-                        settings.userName = userViewModel.user?.name ?? ""
-                    })
-                
-                if locationManagerModel.checkLocation() {
-                    let location = locationManagerModel.getCurrentLocation()
-                    //get the location
-                    locationIdViewModel.fetchLocations(
-                        latitude: location?.coordinate.latitude ?? 0,
-                        longitude: location?.coordinate.longitude ?? 0,
-                        completion: { fetchedLocations in
-                            log.info("locationIdViewModel data loaded")
-                            // Use fetchedLocations here //actually it is one location
-                            settings.locationName = fetchedLocations[0].name
-                            for location in fetchedLocations {
-                                log.info(location)
-                            }
-                            isLocationIdDataLoaded = true
-                        })
-                }
             }
+        }
     }
     
     private func checkDataLoaded() {
@@ -232,7 +235,7 @@ struct SplashScreen: View {
             isRegionListDataLoaded &&
             isUserDataLoaded &&
             isLocationIdDataLoaded
-           {
+        {
             self.dataLoaded = true
         }
     }

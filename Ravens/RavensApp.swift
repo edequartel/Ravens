@@ -87,6 +87,8 @@ struct RavensApp: App {
     @StateObject var observersViewModel = ObserversViewModel()
     @StateObject var areasViewModel = AreasViewModel()
     
+    @StateObject var player = Player()
+    
     @StateObject var htmlViewModel = HTMLViewModel()
 
     let urlHandler = URLHandler()
@@ -138,7 +140,7 @@ struct RavensApp: App {
                 .environmentObject(areasViewModel)
                 .environmentObject(htmlViewModel)
 
-                .environmentObject(Player())
+                .environmentObject(player) //<---
             
                 .environmentObject(ObservationsYearViewModel())
 

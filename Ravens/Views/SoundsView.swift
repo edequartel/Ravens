@@ -10,7 +10,7 @@ import SwiftyBeaver
 
 class Player: ObservableObject {
     let log = SwiftyBeaver.self
-    let queuedAudioPlayer: QueuedAudioPlayer
+    private var queuedAudioPlayer: QueuedAudioPlayer //PRIVATE VAR AND NOT LET
     
     @Published var status: AudioPlayerState = .idle
     
@@ -22,7 +22,7 @@ class Player: ObservableObject {
     func handleAudioPlayerStateChange(state: AudioPlayerState) {
         // Handle the event
         log.error(">>> \(state)")
-        log.error(">>> \(queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
+//        log.error(">>> \(queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
         DispatchQueue.main.async {
             self.status = state
         }
@@ -30,7 +30,7 @@ class Player: ObservableObject {
     
     
     
-    func fill(_ audioUrls: [String]) {
+    func play(_ audioUrls: [String]) {
 //        queuedAudioPlayer.stop()
         queuedAudioPlayer.clear()
         for audioUrl in audioUrls {
@@ -44,10 +44,19 @@ class Player: ObservableObject {
         }
     }
     
-    func play() {
-        queuedAudioPlayer.play()
-        log.error("playing")
-    }
+//    func play() {
+//        //        queuedAudioPlayer.stop()
+//                queuedAudioPlayer.clear()
+//                for audioUrl in audioUrls {
+//                    let audioItem = DefaultAudioItem(
+//                        audioUrl: audioUrl,
+//                        sourceType: .stream
+//                    )
+//                    log.error("fill \(audioUrl)")
+//                    queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
+//        //            log.error("fill)")
+//                }
+//    }
     
     func pause() {
         queuedAudioPlayer.pause()
@@ -55,7 +64,6 @@ class Player: ObservableObject {
     }
     
     func stop() {
-        queuedAudioPlayer.clear()
         queuedAudioPlayer.stop()
         log.error("stopped")
     }
@@ -85,12 +93,13 @@ extension View {
 
 struct PlayerControlsView: View {
     @EnvironmentObject var player: Player
+    
     @Environment(\.presentationMode) var presentationMode
     
     var audio: [String]
-        var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
-                      "https://waarneming.nl/media/sound/235292.mp3",
-                      "https://waarneming.nl/media/sound/235293.mp3"]
+//    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
+//                  "https://waarneming.nl/media/sound/235292.mp3",
+//                  "https://waarneming.nl/media/sound/235293.mp3"]
     
     var body: some View {
         HStack {
@@ -99,22 +108,22 @@ struct PlayerControlsView: View {
                     Spacer()
                     
                     
-                    Button(action: {
-                        player.fill(audio1)
-                    }) {
-                        Image(systemName: "circle")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
-                    }
+//                    Button(action: {
+//                        player.fill(audio)
+//                    }) {
+//                        Image(systemName: "circle")
+//                            .font(.system(size: 30))
+//                            .frame(width: 50)
+//                    }
                     
                     Button(action: {
-                        player.play()
+                        player.play(audio)
                     }) {
                         Image(systemName: "play.fill")
                             .font(.system(size: 30))
                             .frame(width: 50)
                     }
-//                    .hidden(player.status == .playing || player.status == .buffering || player.status == .loading)
+                    //                    .hidden(player.status == .playing || player.status == .buffering || player.status == .loading)
                     
                     Button(action: {
                         player.stop()
@@ -124,7 +133,7 @@ struct PlayerControlsView: View {
                             .frame(width: 50)
                         
                     }
-//                    .hidden(player.status == .idle)
+                    //                    .hidden(player.status == .idle)
                     
                     Button(action: {
                         player.pause()
@@ -134,47 +143,47 @@ struct PlayerControlsView: View {
                             .frame(width: 50)
                     }
                     
-//                    if (audio.count > 1) {
-                        Button(action: {
-                            player.previous()
-                        }) {
-                            Image(systemName: "backward.fill")
-                                .font(.system(size: 30))
-                                .frame(width: 50)
-                        }
-                        
-                        Button(action: {
-                            player.next()
-                        }) {
-                            Image(systemName: "forward.fill")
-                                .font(.system(size: 30))
-                                .frame(width: 50)
-                        }
-//
-//                    }
+                    //                    if (audio.count > 1) {
+                    Button(action: {
+                        player.previous()
+                    }) {
+                        Image(systemName: "backward.fill")
+                            .font(.system(size: 30))
+                            .frame(width: 50)
+                    }
+                    
+                    Button(action: {
+                        player.next()
+                    }) {
+                        Image(systemName: "forward.fill")
+                            .font(.system(size: 30))
+                            .frame(width: 50)
+                    }
+                    //
+                    //                    }
                     Spacer()
                 }
-                .overlay(alignment: .topTrailing) {
-                    closeButton
-                }
+                //                .overlay(alignment: .topTrailing) {
+                //                    closeButton
+                //                }
             }
             .padding(5)
         }
         .padding(20)
     }
-
     
-    private var closeButton: some View {
-         Button {
-            presentationMode.wrappedValue.dismiss()
-         } label: {
-             Image(systemName: "xmark")
-                 .font(.headline)
-         }
-         .buttonStyle(.bordered)
-         .clipShape(Circle())
-         .padding()
-     }
+    
+    //    private var closeButton: some View {
+    //         Button {
+    //            presentationMode.wrappedValue.dismiss()
+    //         } label: {
+    //             Image(systemName: "xmark")
+    //                 .font(.headline)
+    //         }
+    //         .buttonStyle(.bordered)
+    //         .clipShape(Circle())
+    //         .padding()
+    //     }
 }
 
 struct PlayerControlsView_Previews: PreviewProvider {

@@ -159,6 +159,15 @@
         }
       }
     },
+    "alleen favorieten" : {
+
+    },
+    "alleen zeldzaamheden" : {
+
+    },
+    "alles" : {
+
+    },
     "App details" : {
       "localizations" : {
         "nl" : {
@@ -587,6 +596,9 @@
           }
         }
       }
+    },
+    "je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond." : {
+
     },
     "Language" : {
       "localizations" : {
@@ -1190,6 +1202,9 @@
           }
         }
       }
+    },
+    "soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren." : {
+
     },
     "Sort by" : {
       "localizations" : {

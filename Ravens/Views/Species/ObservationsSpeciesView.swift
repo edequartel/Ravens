@@ -37,6 +37,7 @@ struct ObservationsSpeciesView: View {
             HStack {
                 Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
                     .foregroundColor(RarityColor(value: item.rarity))
+                
                 Text("\(item.name)")// - \(item.id)")
                     .bold()
                     .lineLimit(1) // Set the maximum number of lines to 1
@@ -101,9 +102,9 @@ struct ObservationsSpeciesView: View {
                         obs: obs
                     )
                     
-                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+//                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")") //wil ik dit wel?
                     
-                    .onTapGesture(count: 2) {
+                    .onTapGesture() {
                         if let sounds = obs.sounds, !sounds.isEmpty {
                             isPresented = true
                             self.sounds = sounds
