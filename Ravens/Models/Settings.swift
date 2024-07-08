@@ -61,7 +61,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
     @Published var selectedInBetween: String = "waarneming.nl" {
         didSet {
-            log.error("!!saving it in selectedInBetween: \(selectedInBetween)")
+            log.info("!!saving it in selectedInBetween: \(selectedInBetween)")
             selectedInBetweenStored = selectedInBetween
         }
     }
@@ -70,7 +70,7 @@ class Settings: ObservableObject {
     @AppStorage("accessibility") var accessibilityStored: Bool = false
     @Published var accessibility: Bool = false {
         didSet {
-            log.error("!!saving it in storage: \(accessibility)")
+            log.info("!!saving it in storage: \(accessibility)")
             accessibilityStored = accessibility
         }
     }
@@ -141,7 +141,7 @@ class Settings: ObservableObject {
     @AppStorage("isLocationIDChanged") var isLocationIDChangedStored: Bool = false
     @Published var isLocationIDChanged: Bool = false {
         didSet {
-            log.error("!!saving isLocationIDChanged in storage: \(isLocationIDChanged)")
+            log.info("!!saving isLocationIDChanged in storage: \(isLocationIDChanged)")
             isLocationIDChangedStored = isLocationIDChanged
         }
     }
@@ -153,7 +153,7 @@ class Settings: ObservableObject {
     @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
     {
         didSet {
-            log.error("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
+            log.info("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
         }
     }
     
@@ -172,7 +172,7 @@ class Settings: ObservableObject {
     
     @Published var initialAreaLoad = true {
         didSet {
-            log.error("!!initialLoadArea saving it initialLoadArea: \(initialAreaLoad)")
+            log.info("!!initialLoadArea saving it initialLoadArea: \(initialAreaLoad)")
         }
     }
     
@@ -192,7 +192,7 @@ class Settings: ObservableObject {
     @AppStorage("radius") var radiusStored: Int = 500 //init op 500m
     @Published var radius: Int = 500 {
         didSet {
-            log.error("!!radius saving it in storage: \(radius)")
+            log.info("!!radius saving it in storage: \(radius)")
             radiusStored = radius
             if !isInit { isRadiusChanged = true }
         }
@@ -215,7 +215,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
     @Published var selectedSpeciesGroupName: String = "" {
         didSet {
-            log.error("!!saving it in storage: \(selectedSpeciesGroupName)")
+            log.info("!!saving it in storage: \(selectedSpeciesGroupName)")
             selectedSpeciesGroupNameStored = selectedSpeciesGroupName
         }
     }
@@ -232,7 +232,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
     @Published var selectedSpeciesGroup = 1 {
         didSet {
-            log.error("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
+            log.info("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
             selectedSpeciesGroupStored = selectedSpeciesGroup
             if !isInit {
                 isRadiusChanged = true
@@ -244,7 +244,7 @@ class Settings: ObservableObject {
     @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
     @Published var selectedSpeciesGroupId = 1 {
         didSet {
-            log.error("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
+            log.info("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
             selectedSpeciesGroupIdStored = selectedSpeciesGroupId
             if !isInit {
                 isRadiusChanged = true

@@ -50,6 +50,9 @@ struct MapObservationsSpeciesView: View {
                     }
                 }
             }
+            .onAppear() {
+                fetchDataModel()
+            }
             .safeAreaInset(edge: .bottom) {
                 VStack {
                     HStack {

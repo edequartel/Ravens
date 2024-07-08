@@ -275,8 +275,6 @@ struct AFImageView: View {
     
     @State private var downloadedImage: SwiftUI.Image? = nil
     @State private var isImagePresented = false
-//    @State private var showAlert = false
-//    @State private var showError = false
     
     @State private var alertType: AlertType? = nil
 
@@ -370,9 +368,10 @@ struct AFImageView: View {
         Button {
             isImagePresented = false
         } label: {
-            Image(systemName: "xmark")
+            Image(systemName: "xmark.square")
                 .font(.title)
                 .foregroundColor(.white)
+                .frame(width: 44, height: 44)
         }
         .buttonStyle(.bordered)
         .clipShape(Circle())
@@ -403,9 +402,10 @@ struct AFImageView: View {
                 }
             }
         } label: {
-            Image(systemName: "square.and.arrow.down")
+            Image(systemName: "arrow.down.square")
                 .font(.title)
                 .foregroundColor(.white)
+                .frame(width: 44, height: 44)
         }
         .buttonStyle(.bordered)
         .clipShape(Circle())

@@ -124,7 +124,7 @@ struct LocationView: View {
     
     
     func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-        log.error("MapObservationsLocationView fetchDataLocation")
+        log.info("MapObservationsLocationView fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
@@ -155,7 +155,7 @@ struct LocationView: View {
                                 limit: 100,
                                 offset: 0,
                                 completion: {
-                                    log.error("observationsLocationViewModel data loaded")
+                                    log.info("observationsLocationViewModel data loaded")
                                     settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
                                 })
                         }

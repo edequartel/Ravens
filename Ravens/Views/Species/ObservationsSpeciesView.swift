@@ -22,6 +22,8 @@ struct ObservationsSpeciesView: View {
     
     var item: Species
     
+    @State private var offset = 0
+    
     @State private var endOfListReached = false
     @State private var isLoaded = false
     @State private var selectedObservation: Observation?
@@ -87,69 +89,64 @@ struct ObservationsSpeciesView: View {
                             """
         )
         
-        
         HorizontalLine()
         
-        //        if !isLoaded { ProgressView()
-        //        } else
-        //        VStack {
-        List {
-            if let results = observationsSpeciesViewModel.observationsSpecies?.results {
-                let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
-                ForEach(sortedResults.indices, id: \.self) { index in
-                    let obs = sortedResults[index]
-                    ObsSpeciesView(
-                        obs: obs
-                    )
-                    
-//                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")") //wil ik dit wel?
-                    
-                    .onTapGesture() {
-                        if let sounds = obs.sounds, !sounds.isEmpty {
-                            isPresented = true
-                            self.sounds = sounds
+        VStack {
+            List {
+                if let results = observationsSpeciesViewModel.observationsSpecies?.results {
+                    let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
+                    ForEach(sortedResults.indices, id: \.self) { index in
+                        let obs = sortedResults[index]
+                        ObsSpeciesView(
+                            obs: obs
+                        )
+                        
+                        .onTapGesture() {
+                            if let sounds = obs.sounds, !sounds.isEmpty {
+                                isPresented = true
+                                self.sounds = sounds
+                            }
                         }
+                        
                     }
-                    
                 }
             }
-        }
-        .listStyle(PlainListStyle())
-        .refreshable {
-            print("refreshing...")
-            fetchDataModel()
-        }
-        
-        .sheet(isPresented: $isPresented) {
-            PlayerControlsView(audio: sounds)
-                .presentationDetents([.fraction(0.5), .medium, .large])
-                .presentationDragIndicator(.visible)
-//            List(sounds, id: \.self) { sound in
-//                Text(sound)
-//                    .font(.caption)
-//            }
-        }
-        
-        .sheet(item: $selectedObservation) { item in
-            SpeciesDetailsView(speciesID: item.species_detail.id)
-        }
-        
-//        .sheet(item: $soundsWrapper) { wrapper in
-//            PlayerControlsView(audio: wrapper.sounds)
-//                .presentationDetents([.fraction(0.2), .medium, .large])
-//                .presentationDragIndicator(.visible)
-//        }
-        
-        .onAppear() {
-            if settings.initialSpeciesLoad {
-                fetchDataModel()
-                settings.initialSpeciesLoad = false
+            .listStyle(PlainListStyle())
+            .refreshable {
+                print("refreshing...")
+                fetchDataModel(offset: offset)
+            }
+            .sheet(isPresented: $isPresented) {
+                PlayerControlsView(audio: sounds)
+                    .presentationDetents([.fraction(0.25), .medium, .large])
+                    .presentationDragIndicator(.visible)
+                    .presentationCornerRadius(0)
             }
             
-        }
+            .sheet(item: $selectedObservation) { item in
+                SpeciesDetailsView(speciesID: item.species_detail.id)
+            }
+            
+            .onAppear() {
+                if settings.initialSpeciesLoad {
+                    fetchDataModel(offset: offset)
+                    settings.initialSpeciesLoad = false
+                }
+                
+            }
+//            Text("last item in list")
+//            Spacer()
+        } //vstack
+//deze button voor later gebruiken als we door de vele observaties willen gaan
+//        Button(action: {
+//            offset = offset + 100
+//            fetchDataModel(offset: offset)
+//        }) {
+//            Text("Next")
+//        }
     }
     
-    func fetchDataModel() {
+    func fetchDataModel(offset: Int) {
         observationsSpeciesViewModel.fetchData(
             settings: settings,
             speciesId: item.id,
@@ -157,7 +154,7 @@ struct ObservationsSpeciesView: View {
             offset: 0,
             completion: {
                 isLoaded = true
-                log.info("observationsSpeciesViewModel data loaded")
+                log.info(">>>>>observationsSpeciesViewModel data loaded")
             }
         )
     }

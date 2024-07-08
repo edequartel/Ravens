@@ -22,99 +22,101 @@ struct MapObservationsLocationView: View {
     @EnvironmentObject var poiViewModel: POIViewModel
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            VStack {
-                MapReader { proxy in
-                    Map(position: $settings.cameraAreaPosition) {
-                        
-                        UserAnnotation()
-                        
-//                      POI
-//                        if (settings.poiOn) {
-                        ForEach(areasViewModel.records, id: \.id) { record in
-                            Annotation(record.name, 
-                                       coordinate: CLLocationCoordinate2D(
-                                        latitude: record.latitude,
-                                        longitude: record.longitude)) {
-                                    Triangle()
-                                        .fill(Color.gray)
-                                        .frame(width: 10, height: 10)
+//        VStack {
+//            ZStack(alignment: .topLeading) {
+                VStack {
+                    MapReader { proxy in
+                        Map(position: $settings.cameraAreaPosition) {
+                            
+                            UserAnnotation()
+                            
+                            //                      POI
+                            //                        if (settings.poiOn) {
+                            ForEach(areasViewModel.records, id: \.id) { record in
+                                Annotation(record.name,
+                                           coordinate: CLLocationCoordinate2D(
+                                            latitude: record.latitude,
+                                            longitude: record.longitude)) {
+                                                Triangle()
+                                                    .fill(Color.gray)
+                                                    .frame(width: 10, height: 10)
+                                                    .overlay(
+                                                        Triangle()
+                                                            .stroke(Color.red, lineWidth: 1)
+                                                            .fill(Color.red)// Customize the border color and width
+                                                    )
+                                            }
+                            }
+                            //                        }
+                            
+                            
+                            // location observations
+                            ForEach(observationsLocationViewModel.locations.filter { $0.rarity >= settings.selectedRarity })
+                            { location in
+                                
+                                Annotation(location.name, coordinate: location.coordinate) {
+                                    Circle()
+                                        .fill(RarityColor(value: location.rarity))
+                                        .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
+                                        .frame(width: 12, height: 12)
                                         .overlay(
-                                            Triangle()
-                                                .stroke(Color.red, lineWidth: 1) 
-                                                .fill(Color.red)// Customize the border color and width
+                                            Circle()
+                                                .fill(location.hasPhoto ? Color.white : Color.clear)
+                                                .frame(width: 6, height: 6)
                                         )
                                 }
                             }
-//                        }
                             
+                            // geoJSON
+                            ForEach(geoJSONViewModel.polyOverlays, id: \.self) { polyOverlay in
+                                MapPolygon(polyOverlay)
+                                    .stroke(.pink, lineWidth: 1)
+                                    .foregroundStyle(.blue.opacity(0.1))
+                            }
+                            
+                        }
                         
-                        // location observations
-                        ForEach(observationsLocationViewModel.locations.filter { $0.rarity >= settings.selectedRarity })
-                            { location in
-                            
-                            Annotation(location.name, coordinate: location.coordinate) {
-                                Circle()
-                                    .fill(RarityColor(value: location.rarity))
-                                    .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
-                                    .frame(width: 12, height: 12)
-                                    .overlay(
-                                        Circle()
-                                            .fill(location.hasPhoto ? Color.white : Color.clear)
-                                            .frame(width: 6, height: 6)
-                                    )
+                        .mapStyle(settings.mapStyle)
+                        
+                        .safeAreaInset(edge: .bottom) {
+                            VStack {
+                                SettingsDetailsView(
+                                    count: observationsLocationViewModel.locations.count,
+                                    results: observationsLocationViewModel.count)
+                            }
+                            .padding(5)
+                            .foregroundColor(.obsGreenFlower)
+                            .background(Color.obsGreenEagle.opacity(0.5))
+                        }
+                        
+                        .onTapGesture() { position in
+                            if let coordinate = proxy.convert(position, from: .local) {
+                                settings.currentLocation = CLLocation(
+                                    latitude: coordinate.latitude,
+                                    longitude: coordinate.longitude
+                                )
+                                
+                                fetchDataLocation(coordinate: coordinate)
                             }
                         }
                         
-                        // geoJSON
-                        ForEach(geoJSONViewModel.polyOverlays, id: \.self) { polyOverlay in
-                            MapPolygon(polyOverlay)
-                                .stroke(.pink, lineWidth: 1)
-                                .foregroundStyle(.blue.opacity(0.1))
+                        .mapControls() {
+                            MapCompass() //tapping this makes it north
                         }
-                        
-                    }
-                    
-                    .mapStyle(settings.mapStyle)
-       
-                    .safeAreaInset(edge: .bottom) {
-                        VStack {
-                            SettingsDetailsView(
-                                count: observationsLocationViewModel.locations.count,
-                                results: observationsLocationViewModel.count)
-                        }
-                        .padding(5)
-                        .foregroundColor(.obsGreenFlower)
-                        .background(Color.obsGreenEagle.opacity(0.5))
-                    }
-                    
-                    .onTapGesture() { position in
-                        if let coordinate = proxy.convert(position, from: .local) {
-                            settings.currentLocation = CLLocation(
-                                latitude: coordinate.latitude,
-                                longitude: coordinate.longitude
-                            )
-                            
-                            fetchDataLocation(coordinate: coordinate)
-                        }
-                    }
-
-                    .mapControls() {
-                        MapCompass() //tapping this makes it north
                     }
                 }
-            }
-            .onAppear() {
-                log.info("MapObservationsLocationView onAppear")
-                getDataAreaModel()
-            }
-        }
+                .onAppear() {
+                    log.info("MapObservationsLocationView onAppear")
+                    getDataAreaModel()
+                }
+//            }
+//        }
     }
     
     func getDataAreaModel() {
-        log.error("getDataAreaModel")
+        log.info("getDataAreaModel")
         if settings.initialAreaLoad {
-            log.error("MapObservationsLocationView onAppear")
+            log.info("MapObservationsLocationView onAppear")
             if locationManagerModel.checkLocation() {
                 let location = locationManagerModel.getCurrentLocation()
                 settings.currentLocation = location
@@ -149,7 +151,7 @@ struct MapObservationsLocationView: View {
     }
     
     func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-        log.error("MapObservationsLocationView fetchDataLocation")
+        log.info("MapObservationsLocationView fetchDataLocation")
         locationIdViewModel.fetchLocations(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
@@ -180,7 +182,7 @@ struct MapObservationsLocationView: View {
                                 limit: 100,
                                 offset: 0,
                                 completion: {
-                                    log.error("observationsLocationViewModel data loaded")
+                                    log.info("observationsLocationViewModel data loaded")
                                     settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
                                 })
                         }
@@ -204,7 +206,7 @@ struct MapObservationsLocationView: View {
                         limit: 100,
                         offset: 0,
                         completion: {
-                            log.error(">>>>observationsLocationViewModel data loaded")
+                            log.info("observationsLocationViewModel data loaded")
                             
                             settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic of not?
                             

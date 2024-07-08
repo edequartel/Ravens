@@ -7,31 +7,98 @@
 import SwiftUI
 import SwiftAudioEx
 import SwiftyBeaver
+import Foundation
+import MediaPlayer
 
 class Player: ObservableObject {
     let log = SwiftyBeaver.self
     private var queuedAudioPlayer: QueuedAudioPlayer //PRIVATE VAR AND NOT LET
     
     @Published var status: AudioPlayerState = .idle
+    @Published var title: String = "unknown"
+    @Published var artist: String = "unknown"
+    
+    @Published var currentTime: Double = 0
+    @Published var currentIndex: Int = 0
+    @Published var duration: Double = 0
+    //    @Published var isPlaying: Bool = false
+    //    @Published var playBackEnd: String = "unknown"
+    
+    //    @Published var playbackEventData: PlaybackEndedReason = .playedUntilEnd
     
     init() {
         queuedAudioPlayer = QueuedAudioPlayer()
+        queuedAudioPlayer.nowPlayingInfoController.set(keyValue: NowPlayingInfoProperty.isLiveStream(true))
         queuedAudioPlayer.event.stateChange.addListener(self, handleAudioPlayerStateChange)
+        queuedAudioPlayer.event.updateDuration.addListener(self, handleDuration)
+        queuedAudioPlayer.event.secondElapse.addListener(self, handleSecondElapse)
+        queuedAudioPlayer.event.currentItem.addListener(self, handleData)
+        
+        //        queuedAudioPlayer.event.playbackEnd.addListener(self, handlePlayBackEnd)
+        //        queuedAudioPlayer.event.receiveChapterMetadata.addListener(self, handleCommonMetadata)
+        //        queuedAudioPlayer.event.receiveTimedMetadata.addListener(self, handleTimedMetadata)
     }
     
-    func handleAudioPlayerStateChange(state: AudioPlayerState) {
-        // Handle the event
-        log.error(">>> \(state)")
-//        log.error(">>> \(queuedAudioPlayer.currentItem?.getArtist() ?? "0")")
+    //    deinit() {
+    //        queuedAudioPlayer?.event.receiveTimedMetadata.removeListener(self)
+    //    }
+    //
+    private func handleAudioPlayerStateChange(state: AudioPlayerState) {
+        log.error("state change, \(state)")
         DispatchQueue.main.async {
             self.status = state
+            if state == .ended {
+                self.stop()
+            }
+        }
+    }
+    
+    private func handleDuration(duration: Double) {
+        log.error("duration, \(duration)")
+        DispatchQueue.main.async {
+            self.duration = duration
+        }
+    }
+    
+    private func handleSecondElapse(currentTime: Double) {
+        DispatchQueue.main.async {
+            self.currentTime = currentTime
+        }
+    }
+    
+    private func handleData(CurrentItemEventData:
+                            ( item: AudioItem?,
+                              index: Int?,
+                              lastItem: AudioItem?,
+                              lastIndex: Int?,
+                              lastPosition: Double?
+                            )) {
+        DispatchQueue.main.async {
+            self.currentIndex = CurrentItemEventData.index ?? 0
         }
     }
     
     
+    //    private func handlePlayBackEnd(playbackEventData: PlaybackEndedReason) {
+    //        DispatchQueue.main.async {
+    //            self.playbackEventData = playbackEventData
+    //        }
+    //    }
     
-    func play(_ audioUrls: [String]) {
-//        queuedAudioPlayer.stop()
+    //    private func handleTimedMetadata(metadata: [AVTimedMetadataGroup]) {
+    //        DispatchQueue.main.async {
+    //            self.title = metadata.
+    //        }
+    //    }
+    
+    
+    //    private func handleCommonMetadata(metadata: [AVMetadataItem]) {
+    //        DispatchQueue.main.async {
+    //            self.title = metadata[0].
+    //        }
+    //    }
+    
+    func fill(_ audioUrls: [String]) {
         queuedAudioPlayer.clear()
         for audioUrl in audioUrls {
             let audioItem = DefaultAudioItem(
@@ -40,23 +107,13 @@ class Player: ObservableObject {
             )
             log.error("fill \(audioUrl)")
             queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
-//            log.error("fill)")
         }
     }
     
-//    func play() {
-//        //        queuedAudioPlayer.stop()
-//                queuedAudioPlayer.clear()
-//                for audioUrl in audioUrls {
-//                    let audioItem = DefaultAudioItem(
-//                        audioUrl: audioUrl,
-//                        sourceType: .stream
-//                    )
-//                    log.error("fill \(audioUrl)")
-//                    queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
-//        //            log.error("fill)")
-//                }
-//    }
+    func play() {
+        queuedAudioPlayer.play()
+        log.error("playing")
+    }
     
     func pause() {
         queuedAudioPlayer.pause()
@@ -96,94 +153,127 @@ struct PlayerControlsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var sliderValue: Double = 0
+    @State private var nrPlaying = 0
+    
     var audio: [String]
 //    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
 //                  "https://waarneming.nl/media/sound/235292.mp3",
 //                  "https://waarneming.nl/media/sound/235293.mp3"]
     
     var body: some View {
-        HStack {
+//        HStack {
             VStack {
+                
+                VStack {
+                    if audio.count > 1 {
+                        HStack {
+                            Spacer()
+                            Text("\(player.currentIndex+1)-\(audio.count)")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    }
+                    
+                    Slider(value: $player.currentTime, in: 0...player.duration)
+                        .disabled(true)
+                    HStack {
+                        Text(String(format: "%.2f", player.currentTime))
+                        Spacer()
+                        Text(String(format: "%.2f", player.duration))
+                    }
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                }
+                .padding(10)
+                
+
                 HStack{
                     Spacer()
                     
+                    if (audio.count > 1) {
+                        Button(action: {
+                            player.previous()
+                            player.play()
+                        }) {
+                            Image(systemName: "backward.end.circle.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
+                    }
+                    
+                    
+                    if ((player.status != .playing))// && (player.status != .loading) && (player.status != .buffering))
+                    {
+                        Button(action: {
+                            player.play()
+                        }) {
+                            Image(systemName: "play.circle.fill")
+                                .font(.system(size: 50))
+                                .frame(width: 50)
+                        }
+                    } else {
+                        Button(action: {
+                            player.pause()
+                        }) {
+                            Image(systemName: "pause.circle.fill")
+                                .font(.system(size: 50))
+                                .frame(width: 50)
+                        }
+                    }
                     
 //                    Button(action: {
-//                        player.fill(audio)
+//                        player.stop()
 //                    }) {
-//                        Image(systemName: "circle")
+//                        Image(systemName: "stop.circle.fill")
 //                            .font(.system(size: 30))
 //                            .frame(width: 50)
 //                    }
                     
-                    Button(action: {
-                        player.play(audio)
-                    }) {
-                        Image(systemName: "play.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
+                    if (audio.count > 1) {
+                        Button(action: {
+                            player.next()
+                            player.play()
+                        }) {
+                            Image(systemName: "forward.end.circle.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 50)
+                        }
                     }
-                    //                    .hidden(player.status == .playing || player.status == .buffering || player.status == .loading)
-                    
-                    Button(action: {
-                        player.stop()
-                    }) {
-                        Image(systemName: "stop.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
-                        
-                    }
-                    //                    .hidden(player.status == .idle)
-                    
-                    Button(action: {
-                        player.pause()
-                    }) {
-                        Image(systemName: "pause.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
-                    }
-                    
-                    //                    if (audio.count > 1) {
-                    Button(action: {
-                        player.previous()
-                    }) {
-                        Image(systemName: "backward.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
-                    }
-                    
-                    Button(action: {
-                        player.next()
-                    }) {
-                        Image(systemName: "forward.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 50)
-                    }
-                    //
-                    //                    }
                     Spacer()
                 }
-                //                .overlay(alignment: .topTrailing) {
-                //                    closeButton
-                //                }
+                .padding(10)
             }
             .padding(5)
+//        }
+//        .overlay(alignment: .topTrailing) {
+//            closeButton
+//        }
+//        .padding(20)
+        .onAppear {
+            player.fill(audio)
         }
-        .padding(20)
+        .onDisappear {
+            player.stop()
+        }
+//        .overlay(alignment: .topTrailing) {
+//            closeButton
+//        }
     }
     
     
-    //    private var closeButton: some View {
-    //         Button {
-    //            presentationMode.wrappedValue.dismiss()
-    //         } label: {
-    //             Image(systemName: "xmark")
-    //                 .font(.headline)
-    //         }
-    //         .buttonStyle(.bordered)
-    //         .clipShape(Circle())
-    //         .padding()
-    //     }
+    
+    private var closeButton: some View {
+        Button {
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding()
+    }
 }
 
 struct PlayerControlsView_Previews: PreviewProvider {

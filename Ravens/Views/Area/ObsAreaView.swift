@@ -12,6 +12,7 @@ import Alamofire
 import AlamofireImage
 import AVFoundation
 
+
 struct ObsAreaView: View {
     let log = SwiftyBeaver.self
     
@@ -32,6 +33,10 @@ struct ObsAreaView: View {
     @State private var showingDetails = false
     
     @Binding var selectedObservation: Observation?
+    
+    @Binding var showMedia: Bool
+    @Binding var photos: [String]
+    
     @State var obs: Observation
     
     var body: some View {
@@ -101,10 +106,23 @@ struct ObsAreaView: View {
                 if !settings.hidePictures {
                     PhotoGridView(photos: obs.photos)
                 }
+                
             }
             
+//            .onTapGesture {
+//                showMedia.toggle()
+//            }
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                
+                Button(action: {
+//                    print(obs.photos?.count ?? 0)
+                    photos = obs.photos ?? []
+                    showMedia.toggle()
+                }) {
+                    Text("media")
+                }
+                
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
@@ -174,7 +192,7 @@ struct ObsAreaView: View {
                              \(obs.number) keer.
                             """
         )
-        .accessibilityHint("this is a hint Dani van Seumeren")
+        .accessibilityHint("this is a hint")
         
         
         .onAppear() {

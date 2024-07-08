@@ -142,11 +142,11 @@ struct SpeciesView: View {
                     .pickerStyle(.inline)
                     
                     Picker("Filter rarity by", selection: $settings.selectedRarity) {
-                        Text("All").tag(0)
-                        Text("Common").tag(1)
-                        Text("Uncommon").tag(2)
-                        Text("Rare").tag(3)
-                        Text("Very rare").tag(4)
+                        Text(">= All").tag(0)
+                        Text("== Common").tag(1)
+                        Text("== Uncommon").tag(2)
+                        Text(">= Rare").tag(3)
+                        Text("== Very rare").tag(4)
                     }
                     .pickerStyle(.inline)
                 }
@@ -298,7 +298,7 @@ extension SpeciesViewModel {
         case 2:
             return species.filter { $0.rarity == 2 }
         case 3:
-            return species.filter { $0.rarity == 3 }
+            return species.filter { $0.rarity >= 3 }
         case 4:
             return species.filter { $0.rarity == 4 }
         default:

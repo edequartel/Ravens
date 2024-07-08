@@ -22,6 +22,8 @@ struct ObsUserView: View {
     
     
     @Binding var selectedObservation: Observation?
+//    @Binding var showPictureSheet: Bool?
+    
     @State var obs: Observation
     
     private let appIcon = Image("AppIconShare")

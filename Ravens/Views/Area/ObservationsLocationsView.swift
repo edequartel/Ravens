@@ -8,7 +8,15 @@
 import SwiftUI
 import SwiftyBeaver
 import MapKit
+import SwiftUIImageViewer
 
+struct SheetView: View {
+    @Binding var stringArray: [String]
+
+    var body: some View {
+        PhotoGridView(photos: stringArray)
+    }
+}
 
 struct ObservationsLocationView: View {
     let log = SwiftyBeaver.self
@@ -23,6 +31,9 @@ struct ObservationsLocationView: View {
     @State private var selectedObservation: Observation?
     
     @State private var soundsWrapper: SoundArrayWrapper? = nil
+    
+    @State private var showMedia = false
+    @State private var photos: [String] = []
     
     var body: some View {
         VStack {
@@ -55,6 +66,8 @@ struct ObservationsLocationView: View {
                         obs in
                         ObsAreaView(
                             selectedObservation: $selectedObservation,
+                            showMedia: $showMedia,
+                            photos: $photos,
                             obs: obs
                         )
                         .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
@@ -87,6 +100,10 @@ struct ObservationsLocationView: View {
 
         }
         
+        .sheet(isPresented: $showMedia) {
+            SheetView(stringArray: $photos)
+        }        
+        
         
         .sheet(item: $selectedObservation) { item in
             SpeciesDetailsView(speciesID: item.species_detail.id)
@@ -104,7 +121,7 @@ struct ObservationsLocationView: View {
     }
     
     func getDataAreaModel() {
-        log.error("getDataAreaModel")
+        log.info("getDataAreaModel")
         log.info(settings.initialAreaLoad)
         if settings.initialAreaLoad {
             log.info("MapObservationsLocationView onAppear")
@@ -195,7 +212,7 @@ struct ObservationsLocationView: View {
                         limit: 100,
                         offset: 0,
                         completion: {
-                            log.error("observationsLocationViewModel data loaded")
+                            log.info("observationsLocationViewModel data loaded")
                             settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
                         })
                 }

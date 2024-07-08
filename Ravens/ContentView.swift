@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
-import SwiftUIPager
+//import SwiftUIPager
 
 struct ContentView: View {
     let log = SwiftyBeaver.self
@@ -47,17 +47,18 @@ struct ContentView: View {
             if dataLoaded {
                 RavensView()
                     .onAppear() {
-                        log.error("dataLoaded")
+                        log.info("dataLoaded")
                     }
             } else {
                 SplashScreen(dataLoaded: $dataLoaded)
                     .onAppear() {
-                        log.error("SplashScreen")
+                        log.info("SplashScreen")
                     }
             }
         }
     }
 }
+
 
 struct RavensView: View {
     let log = SwiftyBeaver.self
@@ -71,6 +72,7 @@ struct RavensView: View {
             //                .padding(20)
             TabView {
                 // Tab 1
+//                ImageRemoteView()
                 LocationView()
                     .tabItem {
                         Text("Area")
@@ -142,7 +144,7 @@ struct SplashScreen: View {
             //                .frame(width: 100, height: 100)
         }
         .onAppear {
-            log.error("*** NEW LAUNCHING SPLASHSCREEN ***")
+            log.info("*** NEW LAUNCHING SPLASHSCREEN ***")
             
             CLLocationManager().requestWhenInUseAuthorization()
             
@@ -257,3 +259,48 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
+
+//struct ParentView: View {
+//    @State private var showSheet = false
+//    @State private var stringArray: [String] = []
+//
+//    var body: some View {
+//        VStack {
+//            ChildView(showSheet: $showSheet, stringArray: $stringArray)
+//        }
+//        .sheet(isPresented: $showSheet) {
+//                    SheetView(stringArray: $stringArray)
+//                }
+//    }
+//}
+//
+//struct ChildView: View {
+//    @Binding var showSheet: Bool
+//    @Binding var stringArray: [String]
+//
+//    var body: some View {
+//        Button(action: {
+//            self.showSheet.toggle()
+//            self.stringArray.append("New Item")
+//        }) {
+//            Text("Show Sheet")
+//        }
+//    }
+//}
+
+
+//struct SheetView: View {
+//    @Binding var stringArray: [String]
+//
+//    var body: some View {
+//        VStack {
+//            ForEach(stringArray, id: \.self) { item in
+//                Text(item)
+//            }
+//        }
+//        .padding()
+//        .onAppear {
+//            // Ensure the view updates correctly when it appears
+//        }
+//    }
+//}

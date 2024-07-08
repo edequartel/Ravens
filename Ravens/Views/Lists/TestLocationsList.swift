@@ -92,7 +92,7 @@ struct LocationListView: View {
            
                 Picker("",selection: $locationID) {
                     ForEach(viewModel.locations, id: \.id) { location in
-                        Text("\(location.name) \(location.id)")
+                        Text("\(location.name)")// \(location.id)")
                     }
                 }
                 .pickerStyle(.inline)

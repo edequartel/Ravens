@@ -49,7 +49,7 @@ struct SettingsView: View {
                 Section("Species") {
                     //
                     LanguageView()
-                    RegionsView()
+//                    RegionsView() voorlopig uitgeschakeld
                     //
                     Picker("Group", selection: $settings.selectedSpeciesGroupId) {
                         ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
@@ -142,7 +142,7 @@ struct SettingsView: View {
                 }
                 
                 Section("Days") {
-                        Toggle("Infinity (only location)", isOn: $settings.infinity)
+                        Toggle("Infinity", isOn: $settings.infinity)
                             .onChange(of: settings.infinity) {
                                 settings.isFirstAppearObsView = true
                             }

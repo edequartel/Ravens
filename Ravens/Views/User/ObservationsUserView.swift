@@ -16,6 +16,7 @@ struct ObservationsUserView: View {
     @EnvironmentObject var settings: Settings
     
     @State private var selectedObservation: Observation?
+    @State private var showPictureSheet: Bool = false
     
     @State private var soundsWrapper: SoundArrayWrapper? = nil
     
@@ -77,6 +78,11 @@ struct ObservationsUserView: View {
             } else {
                 ProgressView()
             }
+        }
+        
+        .sheet(isPresented: $showPictureSheet) {
+            Text("My observation Picture on a sheet")
+//            PictureSheetView(observation: selectedObservation)
         }
         
         .sheet(item: $selectedObservation) { item in

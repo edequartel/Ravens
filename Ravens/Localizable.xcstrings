@@ -87,16 +87,6 @@
         }
       }
     },
-    "%@ %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld"
-          }
-        }
-      }
-    },
     "%lld" : {
       "localizations" : {
         "nl" : {
@@ -131,10 +121,35 @@
     "%lld x" : {
 
     },
+    "%lld-%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld-%2$lld"
+          }
+        }
+      }
+    },
     "%lldd" : {
 
     },
     "%lldx" : {
+
+    },
+    "== Common" : {
+
+    },
+    "== Uncommon" : {
+
+    },
+    "== Very rare" : {
+
+    },
+    ">= All" : {
+
+    },
+    ">= Rare" : {
 
     },
     "Accessibility" : {
@@ -219,6 +234,7 @@
       }
     },
     "Common" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -519,7 +535,6 @@
       }
     },
     "Infinity" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -552,6 +567,7 @@
       }
     },
     "Infinity (only location)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -802,6 +818,9 @@
         }
       }
     },
+    "media" : {
+
+    },
     "Month" : {
       "localizations" : {
         "nl" : {
@@ -821,6 +840,9 @@
           }
         }
       }
+    },
+    "My observation Picture on a sheet" : {
+
     },
     "Name" : {
       "localizations" : {
@@ -1017,6 +1039,7 @@
       }
     },
     "Rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1297,9 +1320,6 @@
     "this is a hint" : {
 
     },
-    "this is a hint Dani van Seumeren" : {
-
-    },
     "Token: %@" : {
       "localizations" : {
         "nl" : {
@@ -1339,6 +1359,7 @@
       }
     },
     "Uncommon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1386,6 +1407,7 @@
 
     },
     "Very rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
