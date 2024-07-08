@@ -52,7 +52,7 @@ class ObservationsYearViewModel: ObservableObject {
             for m in 1...12 {
                 let monthString = String(format: "%02d", m)
                 let daystring = String(format: "%02d", numberOfDaysInMonth(year: 2023, month: m) ?? 0)
-//                print("\(m) \(daystring)")
+                print("\(m) \(daystring)")
                 fetchData(language: language, speciesId: speciesId, date_after: "2023-\(monthString)-01", date_before: "2023-\(monthString)-\(daystring)") { (value) in
                     count = count + 1
                     self.log.info("count \(count)")

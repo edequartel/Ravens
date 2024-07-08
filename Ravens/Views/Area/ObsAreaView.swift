@@ -115,13 +115,13 @@ struct ObsAreaView: View {
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 
-                Button(action: {
-//                    print(obs.photos?.count ?? 0)
-                    photos = obs.photos ?? []
-                    showMedia.toggle()
-                }) {
-                    Text("media")
-                }
+//                Button(action: {
+////                    print(obs.photos?.count ?? 0)
+//                    photos = obs.photos ?? []
+//                    showMedia.toggle()
+//                }) {
+//                    Text("media")
+//                }
                 
                 let url = URL(string: obs.permalink)!
                 ShareLink(

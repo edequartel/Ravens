@@ -50,11 +50,11 @@ struct SpeciesDetailsView: View {
                                 .opacity(0)
                         }
                         
-                        //                                YearView(speciesId: species.id)
-                        //
-                        //                                Divider()
-                        //                                    .frame(height: 20)
-                        //                                    .opacity(0)
+//                        YearView(speciesId: species.id) //?? deze goed controleren
+//                        //
+//                        Divider()
+//                            .frame(height: 20)
+//                            .opacity(0)
                         
                         RichText(html: species.info_text)
                         Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
@@ -66,12 +66,12 @@ struct SpeciesDetailsView: View {
             }
         }
         .onAppear {
-            log.error("-->> Calling SpeciesDetailsView FetchData \(speciesID)")
+            log.info("-->> Calling SpeciesDetailsView FetchData \(speciesID)")
             viewSpeciesDetailsDModel.fetchData(
                 settings: settings,
                 for: speciesID,
                 onCompletion: {
-                    print("SpeciesDetailsView onAppear \(viewSpeciesDetailsDModel.speciesDetails?.photo ?? "")")
+                    log.info("SpeciesDetailsView onAppear \(viewSpeciesDetailsDModel.speciesDetails?.photo ?? "")")
                     imageURL = viewSpeciesDetailsDModel.speciesDetails?.photo ?? ""
                 } )
         }

@@ -1,5 +1,11 @@
 # Remarks development
 
+## 24
+- are some design issues.
+- The filter here will be adjusted in the future. Not optimal yet.
+- In next version the selected image should be zoomable.
+- The map should not overlap the safe area.
+
 ## 23
 ! cameraposition < span teruggeven naar callers >
 - bug in settings, talen, vreemde response (!.pickerStyle(.navigationLink) changed)
