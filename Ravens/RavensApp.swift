@@ -61,6 +61,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //log.info("my data", context: [1, "a", 2]) // "INFO: my data [1, \"a\", 2]"
 
 @main
+
 struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     

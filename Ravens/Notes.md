@@ -1,6 +1,11 @@
 # Remarks development
 
 ## 24
+- working on YearView
+- working on Picture Zoom
+- working on Find place
+- working on audio plau sometimes stammering
+
 - are some design issues.
 - The filter here will be adjusted in the future. Not optimal yet.
 - In next version the selected image should be zoomable.
