@@ -104,7 +104,7 @@ struct ObsAreaView: View {
                 
                 
                 if !settings.hidePictures {
-                    PhotoGridView(photos: obs.photos)
+                    PhotoGridView(photos: obs.photos ?? [])
                 }
                 
             }

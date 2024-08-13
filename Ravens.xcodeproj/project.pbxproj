@@ -10,6 +10,7 @@
 		4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */; };
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
+		4706B0462C614C980099AA9F /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 4706B0452C614C980099AA9F /* LazyPager */; };
 		47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
 		471438BB2BBFD3AD00DF35DE /* ObsRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsRadiusView.swift */; };
@@ -248,6 +249,7 @@
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
+				4706B0462C614C980099AA9F /* LazyPager in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +518,7 @@
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
 				47B80C172C346C3400E1C803 /* PopupView */,
 				47FA80622C3BC7C300C71C5F /* SwiftUIImageViewer */,
+				4706B0452C614C980099AA9F /* LazyPager */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -560,6 +563,7 @@
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				47B80C162C346C3400E1C803 /* XCRemoteSwiftPackageReference "PopupView" */,
 				47FA80612C3BC7C300C71C5F /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+				4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -911,6 +915,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gh123man/LazyPager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/SVGView.git";
@@ -1018,6 +1030,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4706B0452C614C980099AA9F /* LazyPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */;
+			productName = LazyPager;
+		};
 		4718753B2BFCA77000EF9F1F /* SVGView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */;

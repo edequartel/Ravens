@@ -4,7 +4,7 @@
 - working on YearView
 - working on Picture Zoom
 - working on Find place
-- working on audio plau sometimes stammering
+- working on audio play sometimes stammering
 
 - are some design issues.
 - The filter here will be adjusted in the future. Not optimal yet.

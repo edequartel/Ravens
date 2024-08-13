@@ -12,6 +12,7 @@ import SwiftyBeaver
 import Photos
 import Kingfisher
 import SwiftUIImageViewer
+import LazyPager
 
 
 struct AFImageView: View {
@@ -266,19 +267,126 @@ struct AFImageView: View {
     }
 }
 
+//struct PhotoGridView: View {
+//    var photos: [String]?
+//
+//    var body: some View {
+//        TabView {
+//          ForEach(photos ?? [], id: \.self) { imageURLString in
+//            if let imageURL = URL(string: imageURLString) {
+//              AsyncImage(url: imageURL)
+//                .frame(maxWidth: 200, maxHeight: 200)
+//                .aspectRatio(contentMode: .fill)
+//                .clipShape(RoundedRectangle(cornerRadius: 4))
+//                .padding(.trailing, 4)
+//            }
+//          }
+//        }
+//        .tabViewStyle(PageTabViewStyle())
+//    }
+//}
+
 struct PhotoGridView: View {
     var photos: [String]?
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack {
-                ForEach(photos ?? [], id: \.self) { imageURLString in
-                    AFImageView(media: imageURLString)
-                }
-            }
-        }
-    }
+
+//    var body: some View {
+//        TabView {
+//            ForEach(photos ?? [], id: \.self) { imageURLString in
+//                if let imageURL = URL(string: imageURLString) {
+//                    AsyncImage(url: imageURL)
+//                        .frame(width: 200, height: 200)
+//                        .aspectRatio(contentMode: .fill)
+//                        .clipShape(RoundedRectangle(cornerRadius: 4))
+//                        .padding(.trailing, 4)
+//                }
+//            }
+//        }
+//        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+//        .frame(width: 200, height: 200)
+//    }
+
+  var body: some View {
+      if let photos = photos, !photos.isEmpty {
+          TabView {
+              ForEach(photos, id: \.self) { imageURLString in
+                  if let imageURL = URL(string: imageURLString) {
+                      AsyncImage(url: imageURL)
+                      .frame(width: 400, height: 200)
+                          .aspectRatio(contentMode: .fit)
+                          .clipShape(RoundedRectangle(cornerRadius: 16))
+                          .padding(.trailing, 4)
+                  }
+              }
+          }
+          .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+          .frame(width: 400, height: 200)
+      }
+//    else {
+//          // Replace with the view you want to display when there are no photos
+//          Text("No photos available")
+//      }
+  }
 }
+
+
+
+//struct PhotoGridView: View {
+//    var photos: [String]?
+//    
+//  var body: some View {
+//    ScrollView(.horizontal, showsIndicators: true) {
+//      LazyHStack {
+//        ForEach(photos ?? [], id: \.self) { imageURLString in
+//          if let imageURL = URL(string: imageURLString) {
+//            AsyncImage(url: imageURL)
+//              .frame(width: 200, height: 200)
+//              .aspectRatio(contentMode: .fill)
+//              .clipShape(RoundedRectangle(cornerRadius: 4))
+//              .padding(.trailing, 4)
+//          }
+//        }
+//      }
+//    }
+////    .tabViewStyle(PageTabViewStyle())
+//    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+//  }
+//}
+
+
+//struct PhotoGridView: View {
+//    var photos: [String]
+//  @State var opacity: CGFloat = 1 // The opacity of the background
+//
+//  
+//    var body: some View {
+//      if photos.isEmpty {
+//        EmptyView()
+//      } else {
+//        LazyPager(data: photos) { element in
+//          AFImageView(media: element)
+//        }
+//        .padding()
+//        .frame(width: 200, height: 200)
+//      }
+//    }
+//
+//}
+
+//struct PhotoGridView: View {
+//    var photos: [String]
+//
+//    var body: some View {
+//      LazyPager(data: photos) { element in
+//        // Convert the string to URL
+//        if let url = URL(string: element) {
+//          AsyncImage(url: url)
+//            .frame(width: 100, height: 100)
+//        }
+//      }
+//      .padding()
+//    }
+//
+//}
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
