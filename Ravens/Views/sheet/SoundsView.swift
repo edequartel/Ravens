@@ -21,10 +21,8 @@ class Player: ObservableObject {
     @Published var currentTime: Double = 0
     @Published var currentIndex: Int = 0
     @Published var duration: Double = 0
-    //    @Published var isPlaying: Bool = false
-    //    @Published var playBackEnd: String = "unknown"
-    
-    //    @Published var playbackEventData: PlaybackEndedReason = .playedUntilEnd
+
+//  @Published var audio: [String] = [] //??
     
     init() {
         queuedAudioPlayer = QueuedAudioPlayer()
@@ -33,18 +31,10 @@ class Player: ObservableObject {
         queuedAudioPlayer.event.updateDuration.addListener(self, handleDuration)
         queuedAudioPlayer.event.secondElapse.addListener(self, handleSecondElapse)
         queuedAudioPlayer.event.currentItem.addListener(self, handleData)
-        
-        //        queuedAudioPlayer.event.playbackEnd.addListener(self, handlePlayBackEnd)
-        //        queuedAudioPlayer.event.receiveChapterMetadata.addListener(self, handleCommonMetadata)
-        //        queuedAudioPlayer.event.receiveTimedMetadata.addListener(self, handleTimedMetadata)
     }
-    
-    //    deinit() {
-    //        queuedAudioPlayer?.event.receiveTimedMetadata.removeListener(self)
-    //    }
-    //
+
     private func handleAudioPlayerStateChange(state: AudioPlayerState) {
-        log.error("state change, \(state)")
+        log.info("state change, \(state)")
         DispatchQueue.main.async {
             self.status = state
             if state == .ended {
@@ -54,7 +44,7 @@ class Player: ObservableObject {
     }
     
     private func handleDuration(duration: Double) {
-        log.error("duration, \(duration)")
+        log.info("duration, \(duration)")
         DispatchQueue.main.async {
             self.duration = duration
         }
@@ -77,26 +67,7 @@ class Player: ObservableObject {
             self.currentIndex = CurrentItemEventData.index ?? 0
         }
     }
-    
-    
-    //    private func handlePlayBackEnd(playbackEventData: PlaybackEndedReason) {
-    //        DispatchQueue.main.async {
-    //            self.playbackEventData = playbackEventData
-    //        }
-    //    }
-    
-    //    private func handleTimedMetadata(metadata: [AVTimedMetadataGroup]) {
-    //        DispatchQueue.main.async {
-    //            self.title = metadata.
-    //        }
-    //    }
-    
-    
-    //    private func handleCommonMetadata(metadata: [AVMetadataItem]) {
-    //        DispatchQueue.main.async {
-    //            self.title = metadata[0].
-    //        }
-    //    }
+
     
     func fill(_ audioUrls: [String]) {
         queuedAudioPlayer.clear()
@@ -112,27 +83,27 @@ class Player: ObservableObject {
     
     func play() {
         queuedAudioPlayer.play()
-        log.error("playing")
+        log.info("playing")
     }
     
     func pause() {
         queuedAudioPlayer.pause()
-        log.error("paused")
+        log.info("paused")
     }
     
     func stop() {
         queuedAudioPlayer.stop()
-        log.error("stopped")
+        log.info("stopped")
     }
     
     func previous() {
         queuedAudioPlayer.previous()
-        log.error("previous")
+        log.info("previous")
     }
     
     func next() {
         queuedAudioPlayer.next()
-        log.error("next")
+        log.info("next")
     }
 }
 
@@ -148,6 +119,8 @@ extension View {
     }
 }
 
+
+
 struct PlayerControlsView: View {
     @EnvironmentObject var player: Player
     
@@ -160,16 +133,17 @@ struct PlayerControlsView: View {
 //    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
 //                  "https://waarneming.nl/media/sound/235292.mp3",
 //                  "https://waarneming.nl/media/sound/235293.mp3"]
-    
+
+
     var body: some View {
 //        HStack {
             VStack {
                 
                 VStack {
-                    if audio.count > 1 {
+                  if audio.count > 1 {
                         HStack {
                             Spacer()
-                            Text("\(player.currentIndex+1)-\(audio.count)")
+                          Text("\(player.currentIndex+1)-\(audio.count)")
                         }
                         .font(.caption)
                         .foregroundColor(.gray)
@@ -191,7 +165,7 @@ struct PlayerControlsView: View {
                 HStack{
                     Spacer()
                     
-                    if (audio.count > 1) {
+                  if (audio.count > 1) {
                         Button(action: {
                             player.previous()
                             player.play()
@@ -222,15 +196,7 @@ struct PlayerControlsView: View {
                         }
                     }
                     
-//                    Button(action: {
-//                        player.stop()
-//                    }) {
-//                        Image(systemName: "stop.circle.fill")
-//                            .font(.system(size: 30))
-//                            .frame(width: 50)
-//                    }
-                    
-                    if (audio.count > 1) {
+                  if (audio.count > 1) {
                         Button(action: {
                             player.next()
                             player.play()
@@ -245,20 +211,12 @@ struct PlayerControlsView: View {
                 .padding(10)
             }
             .padding(5)
-//        }
-//        .overlay(alignment: .topTrailing) {
-//            closeButton
-//        }
-//        .padding(20)
         .onAppear {
-            player.fill(audio)
+          player.fill(audio)
         }
         .onDisappear {
             player.stop()
         }
-//        .overlay(alignment: .topTrailing) {
-//            closeButton
-//        }
     }
     
     

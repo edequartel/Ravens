@@ -92,7 +92,13 @@ struct ObsRadiusView: View {
                 
                 if !settings.hidePictures {
                     ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                        AFImageView(media: imageURLString)
+                      AsyncImage(url: URL(string: imageURLString)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                      } placeholder: {
+                        ProgressView()
+                      }
                     }
                 }
                 
@@ -103,7 +109,15 @@ struct ObsRadiusView: View {
                         PlayerControlsView(audio: obs.sounds ?? [] )
                         Spacer()
                     }
-                }
+                }                
+//                if (obs.sounds?.count ?? 0)>0 {
+//                    HStack {
+//                        PlayerControlsView(audio: ["https://waarneming.nl/media/sound/235291.mp3",
+//                                                   "https://waarneming.nl/media/sound/235292.mp3",
+//                                                   "https://waarneming.nl/media/sound/235293.mp3"] )
+//                        Spacer()
+//                    }
+//                }
             }
         
             .accessibilityElement(children: .combine)

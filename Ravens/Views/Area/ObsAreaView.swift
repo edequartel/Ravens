@@ -34,9 +34,6 @@ struct ObsAreaView: View {
     
     @Binding var selectedObservation: Observation?
     
-    @Binding var showMedia: Bool
-    @Binding var photos: [String]
-    
     @State var obs: Observation
     
     var body: some View {
@@ -132,7 +129,9 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsShareLink)
                 
+
                 Button(action: {
+                  print("yyy")
                     selectedObservation = obs
                 }) {
                     Image(systemName: SFInformation)

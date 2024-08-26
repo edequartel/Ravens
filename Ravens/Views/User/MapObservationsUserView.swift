@@ -81,3 +81,12 @@ struct MapObservationsUserView: View {
     }
 }
 
+struct MapObservationsUserView_Previews: PreviewProvider {
+    static var previews: some View {
+      MapObservationsUserView()
+            .environmentObject(ObservationsUserViewModel())
+            .environmentObject(KeychainViewModel())
+            .environmentObject(UserViewModel())
+            .environmentObject(Settings())
+    }
+}

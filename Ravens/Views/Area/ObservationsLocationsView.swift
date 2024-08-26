@@ -10,31 +10,20 @@ import SwiftyBeaver
 import MapKit
 import SwiftUIImageViewer
 
-struct SheetView: View {
-    @Binding var stringArray: [String]
-
-    var body: some View {
-        PhotoGridView(photos: stringArray)
-    }
-}
 
 struct ObservationsLocationView: View {
     let log = SwiftyBeaver.self
-    
+
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
     @EnvironmentObject var locationManagerModel: LocationManagerModel
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-    
+
     @EnvironmentObject var settings: Settings
-    
-    @State private var selectedObservation: Observation?
-    
-    @State private var soundsWrapper: SoundArrayWrapper? = nil
-    
-    @State private var showMedia = false
-    @State private var photos: [String] = []
-    
+
+    @Binding var selectedObservation: Observation?
+    @Binding var selectedObservationSound: Observation?
+
     var body: some View {
         VStack {
                 SettingsDetailsView(
@@ -42,16 +31,15 @@ struct ObservationsLocationView: View {
                     results: observationsLocationViewModel.count
                 )
 
-            
-            
+
             HorizontalLine()
             List {
                 if let results =  observationsLocationViewModel.observations?.results {
                     ForEach(results
                         .filter { $0.rarity >= settings.selectedRarity }
-                            
+
                         .sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") })
-                            
+
                             //                            .filter { result in
                             //                                // Add your condition here
                             //                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
@@ -66,24 +54,22 @@ struct ObservationsLocationView: View {
                         obs in
                         ObsAreaView(
                             selectedObservation: $selectedObservation,
-                            showMedia: $showMedia,
-                            photos: $photos,
                             obs: obs
                         )
                         .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-                        .onTapGesture(count: 2) {
+                        .onTapGesture {
                             if let sounds = obs.sounds, !sounds.isEmpty {
-                                soundsWrapper = SoundArrayWrapper(sounds: sounds)
+                              selectedObservationSound = obs
                                 vibrate()
                             }
                         }
-                        
+
                     }
                 }
             }
             .listRowSeparator(.hidden)
             .listStyle(PlainListStyle())
-            
+
             .toolbar {
                 if (!settings.accessibility) {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -99,27 +85,12 @@ struct ObservationsLocationView: View {
             }
 
         }
-        
-        .sheet(isPresented: $showMedia) {
-            SheetView(stringArray: $photos)
-        }        
-        
-        
-        .sheet(item: $selectedObservation) { item in
-            SpeciesDetailsView(speciesID: item.species_detail.id)
-        }
-        
-        .sheet(item: $soundsWrapper) { wrapper in
-            PlayerControlsView(audio: wrapper.sounds)
-                .presentationDetents([.fraction(0.2), .medium, .large])
-                .presentationDragIndicator(.visible)
-        }
-        
+
         .onAppear()  {
             getDataAreaModel()
         }
     }
-    
+
     func getDataAreaModel() {
         log.info("getDataAreaModel")
         log.info(settings.initialAreaLoad)
@@ -134,7 +105,7 @@ struct ObservationsLocationView: View {
             }
             settings.initialAreaLoad = false
         }
-        
+
         log.info(settings.isAreaChanged)
         if settings.isAreaChanged {
             log.info("isAreaChanged")
@@ -146,7 +117,7 @@ struct ObservationsLocationView: View {
             }
             settings.isAreaChanged = false
         }
-        
+
         log.info(settings.isLocationIDChanged)
         if settings.isLocationIDChanged {
             log.info("isLocationIDChanged")
@@ -158,8 +129,8 @@ struct ObservationsLocationView: View {
             settings.isLocationIDChanged = false
         }
     }
-    
-    
+
+
     func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
         log.error("fetchDataLocation")
         locationIdViewModel.fetchLocations(
@@ -173,14 +144,14 @@ struct ObservationsLocationView: View {
                 for location in fetchedLocations {
                     log.info("location \(location)")
                 }
-                
+
                 //1. get the geoJSON for this area / we pick the first one = 0
                 geoJSONViewModel.fetchGeoJsonData(
                     for: fetchedLocations[0].id,
                     completion:
                         {
                             log.info("geoJSONViewModel data loaded")
-                            
+
                             //2. get the observations for this area
                             observationsLocationViewModel.fetchData(
                                 settings: settings,
@@ -195,7 +166,7 @@ struct ObservationsLocationView: View {
                 )
             })
     }
-    
+
     func fetchDataLocationID() {
         log.error("fetchDataLocationID")
         //1. get the geoJSON for this area / we pick the first one = 0
@@ -204,7 +175,7 @@ struct ObservationsLocationView: View {
             completion:
                 {
                     log.error("geoJSONViewModel data loaded")
-                    
+
                     //2. get the observations for this area
                     observationsLocationViewModel.fetchData(
                         settings: settings,
@@ -220,11 +191,11 @@ struct ObservationsLocationView: View {
     }
 }
 
-struct ObservationsLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ObservationsLocationView()
-            .environmentObject(ObservationsLocationViewModel())
-            .environmentObject(Settings())
-    }
-}
+//struct ObservationsLocationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ObservationsLocationView()
+//            .environmentObject(ObservationsLocationViewModel())
+//            .environmentObject(Settings())
+//    }
+//}
 

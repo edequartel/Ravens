@@ -14,40 +14,35 @@ import AVFoundation
 
 struct ObsSpeciesView: View {
     let log = SwiftyBeaver.self
-    
+
     @StateObject var obsViewModel = ObsViewModel()
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
-    
+
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
-    
-    @State private var selectedImageURL: URL?
-    @State private var isShareSheetPresented = false
-    @State private var userId: Int = 0
-    
-    @State private var explorers: [Int] = []
-    
+
     private let appIcon = Image("AppIconShare")
-    
+
     @State var obs: Observation
-    
+
     var showUsername: Bool = true
     var showLocation: Bool = true
-    
+
     var body: some View {
         LazyVStack {
             VStack {
+//              Text("ObsSpeciesView")
                 HStack {
                     if obs.photos?.count ?? 0 > 0 {
                         Image(systemName: "photo")
                     }
-                    
+
                     if obs.sounds?.count ?? 0 > 0 {
                         Image(systemName: "waveform")
                     }
-                    
+
                     HStack {
                         Text("\(obs.location_detail?.name ?? "name")")
                             .bold()
@@ -59,13 +54,13 @@ struct ObsSpeciesView: View {
                     }
                     Spacer()
                 }
-                
+
                 HStack {
                     Text("\(obs.date) \(obs.time ?? "")")
                     Text("\(obs.number) x")
                     Spacer()
                 }
-                
+
                 if showUsername && settings.showUser {
                     VStack {
                         HStack {
@@ -78,7 +73,7 @@ struct ObsSpeciesView: View {
                         }
                     }
                 }
-                
+
                 if obs.notes?.count ?? 0 > 0 {
                     HStack {
                         Text("\(obs.notes ?? "unknown")")
@@ -86,11 +81,11 @@ struct ObsSpeciesView: View {
                         Spacer()
                     }
                 }
-                
+
                 if !settings.hidePictures {
                     PhotoGridView(photos: obs.photos ?? [])
                 }
-                
+
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel("""
@@ -100,11 +95,11 @@ struct ObsSpeciesView: View {
                                  \(obs.notes?.count ?? 0 > 0 ? obs.notes ?? "unknown" : "")
                                 """
             )
-            
+
             //                                 \(obs.location_detail?.name ?? ""),
-            
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                
+
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
@@ -113,7 +108,7 @@ struct ObsSpeciesView: View {
                     Image(systemName: SFShareLink)
                 }
                 .tint(.obsShareLink)
-                
+
                 Button(action: {
                     if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                         observersViewModel.removeRecord(userID: obs.user_detail?.id ?? 0)
@@ -124,10 +119,10 @@ struct ObsSpeciesView: View {
                     }
                 }) {
                     Image(systemName: observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) ? SFObserverMin : SFObserverPlus)
-                                 
+
                 }
                 .tint(.obsObserver)
-                
+
                 Button(action: {
                     if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
                         print("remove areas \(obs.location_detail?.id ?? 0)")
@@ -145,7 +140,7 @@ struct ObsSpeciesView: View {
                     Image(systemName: SFArea)
                 }
                 .tint(.obsArea)
-                
+
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
@@ -154,9 +149,9 @@ struct ObsSpeciesView: View {
                     Image(systemName: SFObservation)
                 }
                 .tint(.obsObservation)
-                
-                
-                
+
+
+
             }
         }
         .onAppear() { //if the obs has photos or sounds get them
@@ -166,16 +161,33 @@ struct ObsSpeciesView: View {
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
-                
+
             }
         }
     }
 }
 
-//struct ObsView_Previews: PreviewProvider {
+//struct ObsSpeciesView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        // Initialize your ObsView with appropriate data
-//        ObsView(obs: Observation(from: <#any Decoder#>))
+//        ObsSpeciesView(
+//            obs: Observation(
+//                id: 1,
+//                date: "2021-01-01",
+//                time: "12:00",
+//                number: 1,
+//                has_photo: true,
+//                has_sound: true,
+//                notes: "notes",
+//                location_detail: Location(id: 1, name: "location"),
+//                user_detail: User(id: 1, name: "user"),
+//                species_detail: Species(id: 1, name: "species"),
+//                point: Point(coordinates: [0.0, 0.0]),
+//                permalink: "https://www.inaturalist.org/observations/1"
+//            )
+//        )
+//        .environmentObject(Settings())
+//        .environmentObject(ObserversViewModel())
+//        .environmentObject(AreasViewModel())
+//        .environmentObject(BookMarksViewModel())
 //    }
 //}
-

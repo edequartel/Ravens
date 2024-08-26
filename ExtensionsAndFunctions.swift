@@ -459,10 +459,10 @@ func vibrate() {
 
 
 //make identifiable
-struct SoundArrayWrapper: Identifiable {
-    let id = UUID()
-    var sounds: [String]
-}
+//struct SoundArrayWrapper: Identifiable {
+//    let id = UUID()
+//    var sounds: [String]
+//}
 
 
 //struct Identifiable_String: Identifiable {
