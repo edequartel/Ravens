@@ -12,6 +12,7 @@ import SwiftyBeaver
 struct PhotoGridView: View {
   var photos: [String]?
 
+
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       LazyHStack {
@@ -52,6 +53,50 @@ struct PhotoGridView: View {
   }
 }
 
+
+struct PhotoGridViewV2: View {
+  var photos: [String]?
+  @Binding var imageURLStr: String?
+
+  var body: some View {
+    ScrollView(.horizontal, showsIndicators: false) {
+      LazyHStack {
+//        Text(imageURLStr)
+        ForEach(photos ?? [], id: \.self) { imageURLString in
+          if let imageURL = URL(string: imageURLString) {
+            AsyncImage(url: imageURL) { phase in
+              switch phase {
+              case .empty:
+                ProgressView() // Show a progress indicator while loading
+                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+              case .success(let image):
+                image
+                  .resizable()    // Make the image resizable
+                  .frame(width: 160, height: 160)
+                  .aspectRatio(contentMode: .fit)
+                  .clipShape(RoundedRectangle(cornerRadius: 8))
+                  .clipped()
+//                  .padding(.leading, 4)
+//                  .border(Color.gray, width: 1)
+                  .onTapGesture {
+                    print("pressed \(imageURLString)")
+                    imageURLStr = imageURLString
+                  }
+              case .failure:
+                Image(systemName: "xmark.circle") // Show an error image if loading fails
+                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+              @unknown default:
+                EmptyView()
+              }
+            }
+          }
+        }
+      }
+//      .padding(4)
+    }
+//        .tabViewStyle(PageTabViewStyle())
+  }
+}
 
 struct PhotoGridView_Previews: PreviewProvider {
   // Create some static data for the preview

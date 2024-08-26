@@ -69,6 +69,8 @@ struct RavensView: View {
   @State private var selectedObservationSound: Observation?
   @State private var selectedObservation: Observation?
 
+  @State private var imageURLStr: String?
+
   var body: some View {
     VStack {
       TabView {
@@ -123,6 +125,18 @@ struct RavensView: View {
           .presentationDetents([.fraction(0.25), .medium, .large])
           .presentationDragIndicator(.visible)
       }
+
+      .sheet(item: $imageURLStr) { item in
+//        Text("Image: \(item)")
+        AsyncImage(url: URL(string: item)!) { image in
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        } placeholder: {
+          ProgressView()
+        }
+      }
+
       .onAppear() {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }

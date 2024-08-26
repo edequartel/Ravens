@@ -16,9 +16,12 @@ struct ObservationsUserView: View {
   @EnvironmentObject var settings: Settings
 
   @State private var showPictureSheet: Bool = false
+  @State var imageURLStr: String?
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+
+
 
   var body: some View {
     VStack {
@@ -42,6 +45,7 @@ struct ObservationsUserView: View {
                     , id: \.id) { obs in
               ObsUserView(
                 selectedObservation: $selectedObservation,
+                imageURLStr: $imageURLStr,
                 obs: obs
               )
               .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
@@ -77,6 +81,10 @@ struct ObservationsUserView: View {
       } else {
         ProgressView()
       }
+    }
+
+    .sheet(item: $imageURLStr) { imageURLStr in
+      Text(imageURLStr)
     }
 
     .onAppear {

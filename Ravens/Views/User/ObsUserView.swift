@@ -22,6 +22,7 @@ struct ObsUserView: View {
 
 
     @Binding var selectedObservation: Observation?
+    @Binding var imageURLStr: String?
 
     @State var obs: Observation
 
@@ -90,7 +91,7 @@ struct ObsUserView: View {
                 }
 
                 if !settings.hidePictures {
-                    PhotoGridView(photos: obs.photos ?? [])
+                    PhotoGridViewV2(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
                 }
 
             }
