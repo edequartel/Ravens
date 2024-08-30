@@ -15,42 +15,43 @@ import AVFoundation
 
 struct ObsAreaView: View {
     let log = SwiftyBeaver.self
-    
+
     @StateObject var obsViewModel = ObsViewModel()
-    
+
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var observersViewModel: ObserversViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
 
-    
+
     @State private var selectedImageURL: URL?
     @State private var isShareSheetPresented = false
     @State private var userId: Int = 0
-    
+
     @State private var selectedSpecies: Int?
     @State private var showSelectedSpeciesId = false
     @State private var showingDetails = false
-    
+
     @Binding var selectedObservation: Observation?
-    
+    @Binding var imageURLStr: String?
+
     @State var obs: Observation
-    
+
     var body: some View {
         LazyVStack {
             VStack {
                 HStack {
                     Image(systemName: "circle.fill")
                         .foregroundColor(RarityColor(value: obs.rarity))
-                    
+
                     if obs.photos?.count ?? 0 > 0 {
                         Image(systemName: "photo")
                     }
-                    
+
                     if obs.sounds?.count ?? 0 > 0 {
                         Image(systemName: "waveform")
                     }
-                    
+
                     Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
                         .bold()
                         .lineLimit(1) // Set the maximum number of lines to 1
@@ -60,7 +61,7 @@ struct ObsAreaView: View {
                         Image(systemName: SFSpeciesFill)
                     }
                 }
-                
+
                 HStack {
                     Text("\(obs.species_detail.scientific_name)")
                         .foregroundColor(.gray)
@@ -70,13 +71,13 @@ struct ObsAreaView: View {
                         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                     Spacer()
                 }
-                
+
                 HStack {
                     Text("\(obs.date) \(obs.time ?? "")")
                     Text("\(obs.number) x")
                     Spacer()
                 }
-                
+
                 if settings.showUser {
                     VStack {
                         HStack {
@@ -90,7 +91,7 @@ struct ObsAreaView: View {
                         }
                     }
                 }
-                
+
                 if obs.notes?.count ?? 0 > 0 {
                     HStack {
                         Text("\(obs.notes ?? "unknown")")
@@ -98,20 +99,20 @@ struct ObsAreaView: View {
                         Spacer()
                     }
                 }
-                
-                
+
+
                 if !settings.hidePictures {
-                    PhotoGridView(photos: obs.photos ?? [])
+                    PhotoGridViewV2(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
                 }
-                
+
             }
-            
+
 //            .onTapGesture {
 //                showMedia.toggle()
 //            }
-            
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                
+
 //                Button(action: {
 ////                    print(obs.photos?.count ?? 0)
 //                    photos = obs.photos ?? []
@@ -119,7 +120,7 @@ struct ObsAreaView: View {
 //                }) {
 //                    Text("media")
 //                }
-                
+
                 let url = URL(string: obs.permalink)!
                 ShareLink(
                     item: url
@@ -128,7 +129,7 @@ struct ObsAreaView: View {
                     Image(systemName: SFShareLink)
                 }
                 .tint(.obsShareLink)
-                
+
 
                 Button(action: {
                   print("yyy")
@@ -137,14 +138,14 @@ struct ObsAreaView: View {
                     Image(systemName: SFInformation)
                 }
                 .tint(.obsInformation)
-                
-                
+
+
                 Button(action: {
                     if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
                         observersViewModel.removeRecord(
                             userID: obs.user_detail?.id ?? 0)
                     } else {
-                        
+
                         observersViewModel.appendRecord(
                             name: obs.user_detail?.name ?? "unknown",
                             userID: obs.user_detail?.id ?? 0)
@@ -154,7 +155,7 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsObserver)
                 .accessibility(label: Text("Add observer"))
-                
+
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
                         UIApplication.shared.open(url)
@@ -164,7 +165,7 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsObservation)
                 .accessibility(label: Text("Open observation"))
-                
+
                 Button(action: {
                     if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
                         log.info("bookmarks remove")
@@ -179,7 +180,7 @@ struct ObsAreaView: View {
                 }
                 .tint(.obsSpecies)
                 .accessibility(label: Text("Add species to bookmarks"))
-                
+
             }
         }
 
@@ -192,8 +193,8 @@ struct ObsAreaView: View {
                             """
         )
         .accessibilityHint("this is a hint")
-        
-        
+
+
         .onAppear() {
             if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
                 obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {
@@ -201,7 +202,7 @@ struct ObsAreaView: View {
                     obs.photos = obsViewModel.observation?.photos
                     obs.sounds = obsViewModel.observation?.sounds
                 })
-                
+
             }
         }
     }

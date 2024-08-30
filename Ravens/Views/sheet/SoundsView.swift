@@ -130,7 +130,7 @@ struct PlayerControlsView: View {
     @State private var nrPlaying = 0
     
     var audio: [String]
-//    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
+//    var audio1 = ["https://xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC928304-Troglodytes-troglodytes_240819_063924_00.wav",
 //                  "https://waarneming.nl/media/sound/235292.mp3",
 //                  "https://waarneming.nl/media/sound/235293.mp3"]
 

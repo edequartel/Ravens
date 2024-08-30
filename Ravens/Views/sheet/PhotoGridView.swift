@@ -9,49 +9,49 @@
 import SwiftUI
 import SwiftyBeaver
 
-struct PhotoGridView: View {
-  var photos: [String]?
-
-
-  var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      LazyHStack {
-//        Text(imageURLStr)
-        ForEach(photos ?? [], id: \.self) { imageURLString in
-          if let imageURL = URL(string: imageURLString) {
-            AsyncImage(url: imageURL) { phase in
-              switch phase {
-              case .empty:
-                ProgressView() // Show a progress indicator while loading
-                  .frame(maxWidth: .infinity, maxHeight: .infinity)
-              case .success(let image):
-                image
-                  .resizable()    // Make the image resizable
-                  .frame(width: 160, height: 160)
-                  .aspectRatio(contentMode: .fit)
-                  .clipShape(RoundedRectangle(cornerRadius: 8))
-                  .clipped()
-//                  .padding(.leading, 4)
-//                  .border(Color.gray, width: 1)
-                  .onTapGesture {
-                    print("pressed \(imageURLString)")
-//                    imageURLStr = imageURLString
-                  }
-              case .failure:
-                Image(systemName: "xmark.circle") // Show an error image if loading fails
-                  .frame(maxWidth: .infinity, maxHeight: .infinity)
-              @unknown default:
-                EmptyView()
-              }
-            }
-          }
-        }
-      }
-//      .padding(4)
-    }
-//        .tabViewStyle(PageTabViewStyle())
-  }
-}
+//struct PhotoGridView: View {
+//  var photos: [String]?
+//
+//
+//  var body: some View {
+//    ScrollView(.horizontal, showsIndicators: false) {
+//      LazyHStack {
+////        Text(imageURLStr)
+//        ForEach(photos ?? [], id: \.self) { imageURLString in
+//          if let imageURL = URL(string: imageURLString) {
+//            AsyncImage(url: imageURL) { phase in
+//              switch phase {
+//              case .empty:
+//                ProgressView() // Show a progress indicator while loading
+//                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+//              case .success(let image):
+//                image
+//                  .resizable()    // Make the image resizable
+//                  .frame(width: 160, height: 160)
+//                  .aspectRatio(contentMode: .fit)
+//                  .clipShape(RoundedRectangle(cornerRadius: 8))
+//                  .clipped()
+////                  .padding(.leading, 4)
+////                  .border(Color.gray, width: 1)
+//                  .onTapGesture {
+//                    print("pressed \(imageURLString)")
+////                    imageURLStr = imageURLString
+//                  }
+//              case .failure:
+//                Image(systemName: "xmark.circle") // Show an error image if loading fails
+//                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+//              @unknown default:
+//                EmptyView()
+//              }
+//            }
+//          }
+//        }
+//      }
+////      .padding(4)
+//    }
+////        .tabViewStyle(PageTabViewStyle())
+//  }
+//}
 
 
 struct PhotoGridViewV2: View {
@@ -72,12 +72,10 @@ struct PhotoGridViewV2: View {
               case .success(let image):
                 image
                   .resizable()    // Make the image resizable
+                  .aspectRatio(contentMode: .fill)
+
                   .frame(width: 160, height: 160)
-                  .aspectRatio(contentMode: .fit)
                   .clipShape(RoundedRectangle(cornerRadius: 8))
-                  .clipped()
-//                  .padding(.leading, 4)
-//                  .border(Color.gray, width: 1)
                   .onTapGesture {
                     print("pressed \(imageURLString)")
                     imageURLStr = imageURLString
@@ -106,7 +104,7 @@ struct PhotoGridView_Previews: PreviewProvider {
     "https://waarneming.nl/media/photo/84399860.jpg"
   ]
   static var previews: some View {
-    PhotoGridView(photos: photos)
+    PhotoGridViewV2(photos: photos, imageURLStr: .constant(""))
   }
 }
 

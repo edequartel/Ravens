@@ -155,9 +155,6 @@
     "Accessibility" : {
 
     },
-    "Add" : {
-
-    },
     "Add Observation" : {
 
     },
@@ -391,6 +388,9 @@
           }
         }
       }
+    },
+    "Enter number" : {
+
     },
     "Error: %@" : {
 
@@ -674,7 +674,6 @@
       }
     },
     "Loading..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -897,6 +896,9 @@
     "No" : {
 
     },
+    "No recordings available" : {
+
+    },
     "nobsavaliable" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1009,6 +1011,9 @@
         }
       }
     },
+    "Post Observation" : {
+
+    },
     "Previous" : {
 
     },
@@ -1045,6 +1050,12 @@
       }
     },
     "Recent" : {
+
+    },
+    "Recorded at: %@" : {
+
+    },
+    "Recordings" : {
 
     },
     "Region" : {

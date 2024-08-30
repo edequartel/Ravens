@@ -24,6 +24,7 @@ struct TabLocationView: View {
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+  @Binding var imageURLStr: String?
 
   var body: some View {
     NavigationView {
@@ -33,7 +34,8 @@ struct TabLocationView: View {
         } else {
           ObservationsLocationView(
             selectedObservation: $selectedObservation,
-            selectedObservationSound: $selectedObservationSound)
+            selectedObservationSound: $selectedObservationSound,
+            imageURLStr: $imageURLStr)
         }
       }
       //            .navigationTitle(settings.locationName)
@@ -170,7 +172,7 @@ struct TabLocationView: View {
 }
 
 #Preview {
-    TabLocationView(selectedObservation: .constant(nil), selectedObservationSound: .constant(nil))
+    TabLocationView(selectedObservation: .constant(nil), selectedObservationSound: .constant(nil), imageURLStr: .constant(""))
       .environmentObject(Settings())
       .environmentObject(AreasViewModel())
       .environmentObject(LocationManagerModel())

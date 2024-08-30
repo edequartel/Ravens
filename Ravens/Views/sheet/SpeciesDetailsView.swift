@@ -16,10 +16,10 @@ struct SpeciesDetailsView: View {
     @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
     @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
     @EnvironmentObject var settings: Settings
-    
+
     var speciesID: Int
     @State private var imageURL: String = ""
-    
+
     var body: some View {
         NavigationView {
             Form{
@@ -33,10 +33,20 @@ struct SpeciesDetailsView: View {
                                 .italic()
                                 .foregroundColor(.gray)
                                 .font(.footnote)
+                          HStack {
+                            Text("\(species.group_name)")
+                            Spacer()
+                            Text("\(species.status)")
+                            Spacer()
+                            Text("\(species.rarity)")
+                            Spacer()
+                          }
+                          .foregroundColor(.gray)
+                          .font(.footnote)
                         }
                         Divider()
                             .frame(height: 20)
-                        
+
                         if !imageURL.isEmpty {
                             KFImage(URL(string: imageURL))
                                 .resizable()
@@ -49,19 +59,19 @@ struct SpeciesDetailsView: View {
                                 .frame(height: 20)
                                 .opacity(0)
                         }
-                        
+
 //                        YearView(speciesId: species.id) //?? deze goed controleren
 //                        //
 //                        Divider()
 //                            .frame(height: 20)
 //                            .opacity(0)
-                        
+
                         RichText(html: species.info_text)
                         Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                     } else {
                         ProgressView()
                     }
-                    
+
                 }
             }
         }

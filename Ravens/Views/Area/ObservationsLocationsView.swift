@@ -23,6 +23,7 @@ struct ObservationsLocationView: View {
 
     @Binding var selectedObservation: Observation?
     @Binding var selectedObservationSound: Observation?
+    @Binding var imageURLStr: String?
 
     var body: some View {
         VStack {
@@ -54,6 +55,7 @@ struct ObservationsLocationView: View {
                         obs in
                         ObsAreaView(
                             selectedObservation: $selectedObservation,
+                            imageURLStr: $imageURLStr,
                             obs: obs
                         )
                         .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")

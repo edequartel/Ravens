@@ -8,7 +8,6 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
-//import SwiftUIPager
 
 
 struct ContentView: View {
@@ -77,7 +76,8 @@ struct RavensView: View {
         // Tab 1
         TabLocationView(
           selectedObservation: $selectedObservation,
-          selectedObservationSound: $selectedObservationSound)
+          selectedObservationSound: $selectedObservationSound,
+          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Area")
           Image(systemName: SFAreaFill)
@@ -85,7 +85,8 @@ struct RavensView: View {
         // Tab 2
         TabUserObservationsView(
           selectedObservation: $selectedObservation,
-          selectedObservationSound: $selectedObservationSound)
+          selectedObservationSound: $selectedObservationSound,
+          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Us")
           Image(systemName: "person.2.fill")
@@ -93,7 +94,8 @@ struct RavensView: View {
         // Tab 3
         TabSpeciesView(
           selectedSpecies: $selectedSpecies,
-          selectedObservationSound: $selectedObservationSound)
+          selectedObservationSound: $selectedObservationSound,
+          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Species")
           Image(systemName: "tree")
@@ -105,11 +107,13 @@ struct RavensView: View {
             Image(systemName: "gearshape")
           }
         //Tab 5
-        AddObservationView()
-          .tabItem {
-            Text("Add")
-            Image(systemName: "plus.circle")
-          }
+//        CreateView()
+////        SantoView()
+////        AddObservationView()
+//          .tabItem {
+//            Text("Add")
+//            Image(systemName: "plus.circle")
+//          }
       }
 
       .sheet(item: $selectedSpecies) { item in
@@ -126,15 +130,12 @@ struct RavensView: View {
           .presentationDragIndicator(.visible)
       }
 
-      .sheet(item: $imageURLStr) { item in
-//        Text("Image: \(item)")
-        AsyncImage(url: URL(string: item)!) { image in
-          image
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-        } placeholder: {
-          ProgressView()
-        }
+      .fullScreenCover(item: $imageURLStr, onDismiss: {
+          imageURLStr = nil
+      }) { item in
+          ImageView(item: item, dismissAction: {
+              imageURLStr = nil
+          })
       }
 
       .onAppear() {
@@ -143,6 +144,35 @@ struct RavensView: View {
     }
   }
 }
+
+struct ImageView: View {
+    let item: String
+    let dismissAction: () -> Void
+
+    var body: some View {
+      ZStack {
+          AsyncImage(url: URL(string: item)!) { image in
+              image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+          } placeholder: {
+              ProgressView()
+          }
+          .overlay(
+              Button(action: {
+                  dismissAction()
+              }) {
+                  Image(systemName: "xmark.circle.fill")
+                      .font(.largeTitle)
+                      .foregroundColor(.white)
+              }
+              .padding(), // Add padding to move button away from edges
+              alignment: .topTrailing // Position the button at the top right
+          )
+      }
+    }
+}
+
 
 struct SplashScreen: View {
   let log = SwiftyBeaver.self

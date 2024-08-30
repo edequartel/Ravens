@@ -26,6 +26,7 @@ struct ObsSpeciesView: View {
     private let appIcon = Image("AppIconShare")
 
     @State var obs: Observation
+    @Binding var imageURLStr: String?
 
     var showUsername: Bool = true
     var showLocation: Bool = true
@@ -83,7 +84,7 @@ struct ObsSpeciesView: View {
                 }
 
                 if !settings.hidePictures {
-                    PhotoGridView(photos: obs.photos ?? [])
+                    PhotoGridViewV2(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
                 }
 
             }

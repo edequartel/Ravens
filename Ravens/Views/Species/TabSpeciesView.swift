@@ -25,6 +25,7 @@ struct TabSpeciesView: View {
 
     @Binding var selectedSpecies: Species?
     @Binding var selectedObservationSound: Observation?
+    @Binding var imageURLStr: String?
 
 
     var body: some View {
@@ -47,7 +48,14 @@ struct TabSpeciesView: View {
                             additionalIntArray: bookMarksViewModel)
                         , id: \.species) { species in
 
-                          NavigationLink(destination: SpeciesView(item: species, selectedSpecies: $selectedSpecies, selectedObservationSound: $selectedObservationSound)) {
+                          NavigationLink(
+                            destination:
+                              SpeciesView(
+                                item: species,
+                                selectedSpecies: $selectedSpecies,
+                                selectedObservationSound: $selectedObservationSound,
+                                imageURLStr: $imageURLStr)
+                          ) {
 
                             VStack(alignment: .leading) {
 
@@ -297,7 +305,10 @@ struct TabSpeciesView_Previews: PreviewProvider {
     @State static var selectedObservationSound: Observation? = nil
 
     static var previews: some View {
-        TabSpeciesView(selectedSpecies: $selectedSpecies, selectedObservationSound: $selectedObservationSound)
+        TabSpeciesView(
+          selectedSpecies: $selectedSpecies,
+          selectedObservationSound: $selectedObservationSound,
+          imageURLStr: .constant(""))
             .environmentObject(SpeciesViewModel())
             .environmentObject(SpeciesGroupsViewModel())
             .environmentObject(ObservationsSpeciesViewModel())

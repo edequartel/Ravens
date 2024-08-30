@@ -13,6 +13,7 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+  @Binding var imageURLStr: String?
 
   var body: some View {
     NavigationView {
@@ -22,7 +23,8 @@ struct TabUserObservationsView: View {
         } else {
           ObservationsUserView(
             selectedObservation: $selectedObservation,
-            selectedObservationSound: $selectedObservationSound)
+            selectedObservationSound: $selectedObservationSound,
+            imageURLStr: $imageURLStr)
         }
       }
       .toolbar {
@@ -53,7 +55,8 @@ struct TabUserObservationsView_Previews: PreviewProvider {
   static var previews: some View {
     TabUserObservationsView(
       selectedObservation: $selectedObservation,
-      selectedObservationSound: $selectedObservationSound)
+      selectedObservationSound: $selectedObservationSound,
+      imageURLStr: .constant(""))
     .environmentObject(Settings())
     .environmentObject(observationsUserViewModel)
   }

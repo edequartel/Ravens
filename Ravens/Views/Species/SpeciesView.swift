@@ -18,6 +18,7 @@ struct SpeciesView: View {
     var item: Species
     @Binding var selectedSpecies: Species?
     @Binding var selectedObservationSound: Observation?
+    @Binding var imageURLStr: String?
 
 
     var body: some View {
@@ -26,7 +27,11 @@ struct SpeciesView: View {
                 if showFirstView && !settings.accessibility {
                     MapObservationsSpeciesView(item: item)
                 } else {
-                  ObservationsSpeciesView(item: item, selectedSpecies: $selectedSpecies, selectedObservationSound: $selectedObservationSound)//, isPresented: $isPresented, isPresented1: isPresented1)
+                  ObservationsSpeciesView(
+                    item: item,
+                    selectedSpecies: $selectedSpecies,
+                    selectedObservationSound: $selectedObservationSound,
+                    imageURLStr: $imageURLStr)
                 }
             }
         }

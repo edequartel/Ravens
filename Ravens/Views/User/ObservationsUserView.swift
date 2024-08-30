@@ -15,11 +15,12 @@ struct ObservationsUserView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
-  @State private var showPictureSheet: Bool = false
-  @State var imageURLStr: String?
+//  @State private var showPictureSheet: Bool = false
+
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+  @Binding var imageURLStr: String?
 
 
 
@@ -83,9 +84,9 @@ struct ObservationsUserView: View {
       }
     }
 
-    .sheet(item: $imageURLStr) { imageURLStr in
-      Text(imageURLStr)
-    }
+//    .sheet(item: $imageURLStr) { imageURLStr in
+//      Text(imageURLStr)
+//    }
 
     .onAppear {
       if settings.initialUsersLoad {
@@ -114,7 +115,8 @@ struct ObservationsUserView_Previews: PreviewProvider {
   static var previews: some View {
     ObservationsUserView(
       selectedObservation: $selectedObservation,
-      selectedObservationSound: $selectedObservationSound)
+      selectedObservationSound: $selectedObservationSound,
+      imageURLStr: .constant(""))
     .environmentObject(ObservationsUserViewModel())
     .environmentObject(UserViewModel())
     .environmentObject(Settings())
