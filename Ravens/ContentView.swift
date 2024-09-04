@@ -67,6 +67,7 @@ struct RavensView: View {
   @State private var selectedSpecies: Species?
   @State private var selectedObservationSound: Observation?
   @State private var selectedObservation: Observation?
+  @State private var selectedObs: Observation?
 
   @State private var imageURLStr: String?
 
@@ -77,6 +78,7 @@ struct RavensView: View {
         TabLocationView(
           selectedObservation: $selectedObservation,
           selectedObservationSound: $selectedObservationSound,
+          selectedObs: $selectedObs,
           imageURLStr: $imageURLStr)
         .tabItem {
           Text("Area")
@@ -124,11 +126,17 @@ struct RavensView: View {
         SpeciesDetailsView(speciesID: item.species_detail.id)
       }
 
+      .sheet(item: $selectedObs) { item in
+        ObsView(obs: item)
+      }
+
       .sheet(item: $selectedObservationSound) { item in
         PlayerControlsView(audio: item.sounds ?? [])
           .presentationDetents([.fraction(0.25), .medium, .large])
           .presentationDragIndicator(.visible)
       }
+
+
 
       .fullScreenCover(item: $imageURLStr, onDismiss: {
           imageURLStr = nil

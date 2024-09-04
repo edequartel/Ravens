@@ -120,6 +120,8 @@ struct RavensApp: App {
             ContentView()
                 .environmentObject(KeychainViewModel())
 
+//                .environmentObject(LocationManagerModel())
+
                 .environmentObject(locationManager)
                 .environmentObject(settings)
                 .environmentObject(languagesViewModel)

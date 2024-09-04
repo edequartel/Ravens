@@ -23,6 +23,8 @@ struct ObservationsLocationView: View {
 
     @Binding var selectedObservation: Observation?
     @Binding var selectedObservationSound: Observation?
+    @Binding var selectedObs: Observation?
+
     @Binding var imageURLStr: String?
 
     var body: some View {
@@ -55,6 +57,7 @@ struct ObservationsLocationView: View {
                         obs in
                         ObsAreaView(
                             selectedObservation: $selectedObservation,
+                            selectedObs: $selectedObs,
                             imageURLStr: $imageURLStr,
                             obs: obs
                         )

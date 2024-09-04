@@ -58,8 +58,8 @@ struct TabSpeciesView: View {
                           ) {
 
                             VStack(alignment: .leading) {
-
                                 HStack(spacing: 4) {
+
                                     Image(
                                         systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
                                         .symbolRenderingMode(.palette)

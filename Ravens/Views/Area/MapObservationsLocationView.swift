@@ -15,7 +15,9 @@ struct MapObservationsLocationView: View {
     @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
     @EnvironmentObject var areasViewModel: AreasViewModel
     @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+
     @EnvironmentObject var locationManagerModel: LocationManagerModel
+  
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
@@ -27,7 +29,6 @@ struct MapObservationsLocationView: View {
                 VStack {
                     MapReader { proxy in
                         Map(position: $settings.cameraAreaPosition) {
-                            
                             UserAnnotation()
                             
                             //                      POI
@@ -75,7 +76,9 @@ struct MapObservationsLocationView: View {
                             }
                             
                         }
-                        
+//                        .rotationEffect(.degrees(locationManagerModel.heading?.trueHeading ?? 0.0))
+//                        .showsUserHeadingIndicator(true)
+
                         .mapStyle(settings.mapStyle)
                         
                         .safeAreaInset(edge: .bottom) {
