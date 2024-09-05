@@ -13,17 +13,21 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+  @Binding var selectedObs: Observation?
+
   @Binding var imageURLStr: String?
 
   var body: some View {
     NavigationView {
       VStack {
+        if showView { Text("TabUserObservationsView").font(.customTiny) }
         if showFirstView && !settings.accessibility {
           MapObservationsUserView()
         } else {
           ObservationsUserView(
             selectedObservation: $selectedObservation,
             selectedObservationSound: $selectedObservationSound,
+            selectedObs: $selectedObs,
             imageURLStr: $imageURLStr)
         }
       }
@@ -56,6 +60,7 @@ struct TabUserObservationsView_Previews: PreviewProvider {
     TabUserObservationsView(
       selectedObservation: $selectedObservation,
       selectedObservationSound: $selectedObservationSound,
+      selectedObs: .constant(nil),
       imageURLStr: .constant(""))
     .environmentObject(Settings())
     .environmentObject(observationsUserViewModel)

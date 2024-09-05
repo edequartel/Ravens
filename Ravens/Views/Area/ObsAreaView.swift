@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftyBeaver
 import Alamofire
-import AlamofireImage
+//import AlamofireImage
 import AVFoundation
 
 
@@ -40,33 +40,11 @@ struct ObsAreaView: View {
   @State var obs: Observation
 
   var body: some View {
-    LazyVStack {
+//    LazyVStack {
       HStack {
-        if (!settings.hidePictures) && !(obs.photos?.isEmpty ?? false) {
-          PhotoGridViewV2(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
-        }
         VStack {
-          HStack {
-            Image(systemName: "circle.fill")
-              .foregroundColor(RarityColor(value: obs.rarity))
-
-//            if obs.photos?.count ?? 0 > 0 {
-//              Image(systemName: "photo")
-//            }
-
-            if obs.sounds?.count ?? 0 > 0 {
-              Image(systemName: "waveform")
-            }
-
-            Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
-              .bold()
-              .lineLimit(1) // Set the maximum number of lines to 1
-              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-            Spacer()
-            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-              Image(systemName: SFSpeciesFill)
-            }
-          }
+          if showView { Text("ObsAreaView").font(.customTiny) }
+          ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
           HStack {
             Text("\(obs.species_detail.scientific_name)")
@@ -98,19 +76,11 @@ struct ObsAreaView: View {
             }
           }
           Spacer()
-
-          if obs.notes?.count ?? 0 > 0 {
-            HStack {
-              Image(systemName: "list.clipboard")
-                .foregroundColor(.black)
-              Spacer()
-            }
-          }
-
-
+        }
+//        if (!settings.hidePictures) {
+        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
         }
 
-      }
 
       .onTapGesture {
         selectedObs = obs
@@ -186,7 +156,7 @@ struct ObsAreaView: View {
         .tint(.obsSpecies)
         .accessibility(label: Text("Add species to bookmarks"))
 
-      }
+//      }
     }
 
     .accessibilityElement(children: .combine)

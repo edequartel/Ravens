@@ -88,6 +88,7 @@ struct RavensView: View {
         TabUserObservationsView(
           selectedObservation: $selectedObservation,
           selectedObservationSound: $selectedObservationSound,
+          selectedObs: $selectedObs,
           imageURLStr: $imageURLStr)
         .tabItem {
           Text("Us")
@@ -97,6 +98,7 @@ struct RavensView: View {
         TabSpeciesView(
           selectedSpecies: $selectedSpecies,
           selectedObservationSound: $selectedObservationSound,
+          selectedObs: $selectedObs,
           imageURLStr: $imageURLStr)
         .tabItem {
           Text("Species")
@@ -127,14 +129,14 @@ struct RavensView: View {
       }
 
       .sheet(item: $selectedObs) { item in
-        ObsView(obs: item)
+        ObsView(obs: item, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)
       }
 
-      .sheet(item: $selectedObservationSound) { item in
-        PlayerControlsView(audio: item.sounds ?? [])
-          .presentationDetents([.fraction(0.25), .medium, .large])
-          .presentationDragIndicator(.visible)
-      }
+//      .sheet(item: $selectedObservationSound) { item in
+//        PlayerControlsView(audio: item.sounds ?? [])
+//          .presentationDetents([.fraction(0.25), .medium, .large])
+//          .presentationDragIndicator(.visible)
+//      }
 
 
 

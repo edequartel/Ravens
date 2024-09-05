@@ -102,7 +102,6 @@ class SantoViewModel: ObservableObject {
     func loadSantoData(from url: String) {
         isLoading = true
         AF.request(url).responseDecodable(of: Santo.self) { [weak self] response in
-          print(response.data)
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch response.result {

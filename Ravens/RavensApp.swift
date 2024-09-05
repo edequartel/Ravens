@@ -62,7 +62,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 
-struct RavensApp: App {
+  struct RavensApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject var locationManager = LocationManagerModel()
@@ -118,6 +118,8 @@ struct RavensApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            .font(.custom("Avenir", size: 18))
+
                 .environmentObject(KeychainViewModel())
 
 //                .environmentObject(LocationManagerModel())

@@ -924,6 +924,9 @@
     "obs 2023" : {
 
     },
+    "ObsAreaView" : {
+
+    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -945,6 +948,15 @@
         }
       }
     },
+    "ObservationsLocationView" : {
+
+    },
+    "ObservationsSpeciesView" : {
+
+    },
+    "ObservationsUserView" : {
+
+    },
     "Observer" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -965,6 +977,12 @@
           }
         }
       }
+    },
+    "ObsSpeciesView" : {
+
+    },
+    "ObsUserView" : {
+
     },
     "ObsView" : {
 
@@ -1302,6 +1320,9 @@
         }
       }
     },
+    "SpeciesView" : {
+
+    },
     "Standard" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1314,6 +1335,15 @@
       }
     },
     "Switch view" : {
+
+    },
+    "TabLocationView" : {
+
+    },
+    "TabSpeciesView" : {
+
+    },
+    "TabUserObservationsView" : {
 
     },
     "this is a hint" : {
@@ -1438,6 +1468,9 @@
           }
         }
       }
+    },
+    "xxxView" : {
+
     },
     "Yes" : {
       "localizations" : {

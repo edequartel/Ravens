@@ -29,15 +29,18 @@ struct ObservationsSpeciesView: View {
 
   @Binding var selectedSpecies: Species?
   @Binding var selectedObservationSound: Observation?
+  @Binding var selectedObs: Observation?
+  
   @Binding var imageURLStr: String?
 
 
   var body: some View {
     VStack {
+      if showView { Text("ObservationsSpeciesView").font(.customTiny) }
       HStack {
-        Text("\(item.id)")
-          .font(.footnote)
-          .foregroundColor(.gray)
+//        Text("\(item.id)")
+//          .font(.footnote)
+//          .foregroundColor(.gray)
 
         Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
           .foregroundColor(RarityColor(value: item.rarity))
@@ -108,13 +111,14 @@ struct ObservationsSpeciesView: View {
             let obs = sortedResults[index]
             ObsSpeciesView(
               obs: obs,
+              selectedObs: $selectedObs,
               imageURLStr: $imageURLStr
             )
-            .onTapGesture() {
-              if let sounds = obs.sounds, !sounds.isEmpty {
-                selectedObservationSound = obs
-              }
-            }
+//            .onTapGesture() {
+//              if let sounds = obs.sounds, !sounds.isEmpty {
+//                selectedObservationSound = obs
+//              }
+//            }
           }
         }
       }
@@ -168,6 +172,7 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
       item: testSpecies,
       selectedSpecies: .constant(nil),
       selectedObservationSound: .constant(nil),
+      selectedObs: .constant(nil),
       imageURLStr: .constant(""))
       .environmentObject(ObservationsSpeciesViewModel())
       .environmentObject(BookMarksViewModel())

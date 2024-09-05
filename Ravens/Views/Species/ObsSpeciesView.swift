@@ -26,40 +26,18 @@ struct ObsSpeciesView: View {
   private let appIcon = Image("AppIconShare")
 
   @State var obs: Observation
+  @Binding var selectedObs: Observation?
   @Binding var imageURLStr: String?
 
   var showUsername: Bool = true
   var showLocation: Bool = true
 
   var body: some View {
-    LazyVStack {
+//    LazyVStack {
       HStack {
-        if !settings.hidePictures {
-          PhotoGridViewV2(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
-        }
-
         VStack {
-          //              Text("ObsSpeciesView")
-          HStack {
-            if obs.photos?.count ?? 0 > 0 {
-              Image(systemName: "photo")
-            }
-
-            if obs.sounds?.count ?? 0 > 0 {
-              Image(systemName: "waveform")
-            }
-
-            HStack {
-              Text("\(obs.location_detail?.name ?? "name")")
-                .bold()
-                .lineLimit(1) // Set the maximum number of lines to 1
-              Spacer()
-              if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-                Image(systemName: SFAreaFill)
-              }
-            }
-            Spacer()
-          }
+          if showView { Text("ObsSpeciesView").font(.customTiny) }
+          ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
           HStack {
             Text("\(obs.date) \(obs.time ?? "")")
@@ -80,15 +58,11 @@ struct ObsSpeciesView: View {
             }
           }
 
-          if obs.notes?.count ?? 0 > 0 {
-            HStack {
-              Text("\(obs.notes ?? "unknown")")
-                .italic()
-              Spacer()
-            }
-          }
           Spacer()
         }
+
+        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+
 
       }
       .accessibilityElement(children: .combine)
@@ -156,7 +130,10 @@ struct ObsSpeciesView: View {
 
 
 
-      }
+//      }
+    }
+    .onTapGesture {
+      selectedObs = obs
     }
     .onAppear() { //if the obs has photos or sounds get them
       if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {

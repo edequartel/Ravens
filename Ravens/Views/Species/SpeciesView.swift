@@ -18,12 +18,15 @@ struct SpeciesView: View {
     var item: Species
     @Binding var selectedSpecies: Species?
     @Binding var selectedObservationSound: Observation?
+    @Binding var selectedObs: Observation?
+
     @Binding var imageURLStr: String?
 
 
     var body: some View {
         NavigationView {
             VStack {
+                if showView { Text("SpeciesView").font(.customTiny) }
                 if showFirstView && !settings.accessibility {
                     MapObservationsSpeciesView(item: item)
                 } else {
@@ -31,6 +34,7 @@ struct SpeciesView: View {
                     item: item,
                     selectedSpecies: $selectedSpecies,
                     selectedObservationSound: $selectedObservationSound,
+                    selectedObs: $selectedObs,
                     imageURLStr: $imageURLStr)
                 }
             }

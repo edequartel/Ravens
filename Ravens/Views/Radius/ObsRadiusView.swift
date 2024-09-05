@@ -104,12 +104,12 @@ struct ObsRadiusView: View {
                 
 //                PhotoGridView(photos: obs.photos)
                 
-                if (obs.sounds?.count ?? 0)>0 {
-                    HStack {
-                        PlayerControlsView(audio: obs.sounds ?? [] )
-                        Spacer()
-                    }
-                }                
+//                if (obs.sounds?.count ?? 0)>0 {
+//                    HStack {
+                        PlayerControlsView(sounds: obs.sounds ?? [] )
+//                        Spacer()
+//                    }
+//                }                
 //                if (obs.sounds?.count ?? 0)>0 {
 //                    HStack {
 //                        PlayerControlsView(audio: ["https://waarneming.nl/media/sound/235291.mp3",

@@ -20,13 +20,15 @@ struct ObservationsUserView: View {
 
   @Binding var selectedObservation: Observation?
   @Binding var selectedObservationSound: Observation?
+  @Binding var selectedObs: Observation?
+
   @Binding var imageURLStr: String?
 
 
 
   var body: some View {
     VStack {
-
+      if showView { Text("ObservationsUserView").font(.customTiny) }
       if let results = observationsUserViewModel.observations?.results, results.count > 0 {
         HorizontalLine()
         List {
@@ -51,12 +53,13 @@ struct ObservationsUserView: View {
               )
               .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
 
-              .onTapGesture {
-                if let sounds = obs.sounds, !sounds.isEmpty {
-                  selectedObservationSound = obs
-                  vibrate()
-                }
-              }
+//              .onTapGesture {
+//                selectedObs = obs
+////                if let sounds = obs.sounds, !sounds.isEmpty {
+////                  selectedObservationSound = obs
+////                  vibrate()
+////                }
+//              }
             }
           }
         }
@@ -116,6 +119,7 @@ struct ObservationsUserView_Previews: PreviewProvider {
     ObservationsUserView(
       selectedObservation: $selectedObservation,
       selectedObservationSound: $selectedObservationSound,
+      selectedObs: .constant(nil),
       imageURLStr: .constant(""))
     .environmentObject(ObservationsUserViewModel())
     .environmentObject(UserViewModel())

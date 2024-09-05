@@ -457,6 +457,7 @@ func vibrate() {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 }
 
+let showView = false
 
 //make identifiable
 //struct SoundArrayWrapper: Identifiable {

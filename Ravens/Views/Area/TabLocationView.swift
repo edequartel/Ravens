@@ -32,6 +32,7 @@ struct TabLocationView: View {
   var body: some View {
     NavigationView {
       VStack {
+        if showView { Text("TabLocationView").font(.customTiny) }
         if showFirstView && !settings.accessibility {
           MapObservationsLocationView()
         } else {

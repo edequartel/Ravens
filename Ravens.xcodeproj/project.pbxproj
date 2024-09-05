@@ -94,6 +94,8 @@
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4781539C2B57C166005F87CC /* Localizable.xcstrings */; };
 		478262642C88203400DD746C /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262632C88203400DD746C /* ObsView.swift */; };
+		478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262652C897B7000DD746C /* ObsDetailsRowView.swift */; };
+		478262682C89EF7600DD746C /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262672C89EF7600DD746C /* NotesView.swift */; };
 		47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */; };
 		47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */; };
 		47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC22BF62DE4003E8F21 /* WikipediaView.swift */; };
@@ -209,6 +211,8 @@
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4781539C2B57C166005F87CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		478262632C88203400DD746C /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
+		478262652C897B7000DD746C /* ObsDetailsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsRowView.swift; sourceTree = "<group>"; };
+		478262672C89EF7600DD746C /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaPage.swift; sourceTree = "<group>"; };
 		47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaViewModel.swift; sourceTree = "<group>"; };
 		47826CC22BF62DE4003E8F21 /* WikipediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaView.swift; sourceTree = "<group>"; };
@@ -279,7 +283,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				478262632C88203400DD746C /* ObsView.swift */,
+				478262672C89EF7600DD746C /* NotesView.swift */,
 				471A4A6F2C7F3E0E00898AC5 /* create-single.swift */,
 				47778E362C039D9E00C59A1A /* SonogramView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
@@ -380,6 +384,8 @@
 		474C40822B4D17C00038B3A5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				478262632C88203400DD746C /* ObsView.swift */,
+				478262652C897B7000DD746C /* ObsDetailsRowView.swift */,
 				474FA7082C7CB3600064C4C1 /* sheet */,
 				4767F00B2BF3291400BACDC6 /* Lists */,
 				4767F0072BF322E900BACDC6 /* Radius */,
@@ -648,6 +654,7 @@
 				47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
+				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
@@ -695,6 +702,7 @@
 				47778E372C039D9E00C59A1A /* SonogramView.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
+				478262682C89EF7600DD746C /* NotesView.swift in Sources */,
 				47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsRadiusViewModel.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
