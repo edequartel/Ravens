@@ -22,6 +22,8 @@ struct ObsUserView: View {
   
   
   @Binding var selectedObservation: Observation?
+  @Binding var selectedObs: Observation?
+  
   @Binding var imageURLStr: String?
   
   @State var obs: Observation
@@ -32,7 +34,8 @@ struct ObsUserView: View {
   
   var body: some View {
     HStack {
-      
+      PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+
       VStack {
         if showView { Text("ObsUserView").font(.customTiny) }
         ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
@@ -66,10 +69,13 @@ struct ObsUserView: View {
         
       }
 
-      PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+
       
       
     }
+//    .onTapGesture {
+//      selectedObs = obs
+//    }
     .accessibilityElement(children: .combine)
     .accessibilityLabel("""
                                  \(obs.species_detail.name) gezien,

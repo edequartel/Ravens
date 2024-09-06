@@ -693,6 +693,9 @@
         }
       }
     },
+    "Location %lld fetchData" : {
+
+    },
     "Login" : {
       "localizations" : {
         "nl" : {

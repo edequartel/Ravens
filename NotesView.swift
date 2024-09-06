@@ -17,10 +17,10 @@ struct NotesView: View {
 //                    .italic()
 //                    .padding()
             }
-            .frame(maxHeight: 400) // Set the maximum height for the scrollable area
+            .frame(maxWidth: .infinity, maxHeight: 300) // Set the maximum height for the scrollable area
         } else {
             EmptyView()
-            .frame(maxHeight: 400)
+            .frame(maxWidth: .infinity, maxHeight: 300)
         }
     }
 }

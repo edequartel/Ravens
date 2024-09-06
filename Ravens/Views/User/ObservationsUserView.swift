@@ -24,8 +24,6 @@ struct ObservationsUserView: View {
 
   @Binding var imageURLStr: String?
 
-
-
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
@@ -46,20 +44,17 @@ struct ObservationsUserView: View {
                     //                                )
                     //                            }
                     , id: \.id) { obs in
-              ObsUserView(
-                selectedObservation: $selectedObservation,
-                imageURLStr: $imageURLStr,
-                obs: obs
-              )
+              NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+                ObsUserView(
+                  selectedObservation: $selectedObservation,
+                  selectedObs: $selectedObs,
+                  imageURLStr: $imageURLStr,
+                  obs: obs
+                )
+              }
               .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
 
-//              .onTapGesture {
-//                selectedObs = obs
-////                if let sounds = obs.sounds, !sounds.isEmpty {
-////                  selectedObservationSound = obs
-////                  vibrate()
-////                }
-//              }
+
             }
           }
         }
@@ -86,10 +81,6 @@ struct ObservationsUserView: View {
         ProgressView()
       }
     }
-
-//    .sheet(item: $imageURLStr) { imageURLStr in
-//      Text(imageURLStr)
-//    }
 
     .onAppear {
       if settings.initialUsersLoad {

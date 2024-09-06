@@ -115,10 +115,27 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
     }
     
+//    Helvetica
+//    Helvetica Neue
+//    Arial
+//    Courier
+//    Courier New
+//    Georgia no
+//    Times New Roman
+//    Verdana +
+//    Palatino no
+//    Avenir ++
+//    Futura
+//    Menlo (monospaced)
+//    SF Mono (monospaced)
+//    SF Pro Display (default system font, though you typically use .systemFont() for this)
+//    Zapfino no
+//    Chalkduster no
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-            .font(.custom("Avenir", size: 18))
+//            .font(.custom("Roboto", size: 18))
 
                 .environmentObject(KeychainViewModel())
 

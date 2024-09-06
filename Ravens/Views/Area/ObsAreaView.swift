@@ -42,10 +42,14 @@ struct ObsAreaView: View {
   var body: some View {
 //    LazyVStack {
       HStack {
+        
+        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+//          .background(Color.gray)
+
         VStack {
           if showView { Text("ObsAreaView").font(.customTiny) }
-          ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
+          ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
           HStack {
             Text("\(obs.species_detail.scientific_name)")
               .foregroundColor(.gray)
@@ -78,23 +82,16 @@ struct ObsAreaView: View {
           Spacer()
         }
 //        if (!settings.hidePictures) {
-        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+
         }
 
 
-      .onTapGesture {
-        selectedObs = obs
-      }
+//      .onTapGesture {
+//        selectedObs = obs
+//      }
 
       .swipeActions(edge: .trailing, allowsFullSwipe: false) {
 
-        //                Button(action: {
-        ////                    print(obs.photos?.count ?? 0)
-        //                    photos = obs.photos ?? []
-        //                    showMedia.toggle()
-        //                }) {
-        //                    Text("media")
-        //                }
 
         let url = URL(string: obs.permalink)!
         ShareLink(

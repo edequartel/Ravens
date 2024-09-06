@@ -24,7 +24,7 @@ struct SpeciesView: View {
 
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 if showView { Text("SpeciesView").font(.customTiny) }
                 if showFirstView && !settings.accessibility {
@@ -38,7 +38,8 @@ struct SpeciesView: View {
                     imageURLStr: $imageURLStr)
                 }
             }
-        }
+//        }
+
         .toolbar {
             if !settings.accessibility {
                 ToolbarItem(placement: .navigationBarTrailing) {

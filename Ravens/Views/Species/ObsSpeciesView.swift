@@ -35,8 +35,11 @@ struct ObsSpeciesView: View {
   var body: some View {
 //    LazyVStack {
       HStack {
+        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
         VStack {
           if showView { Text("ObsSpeciesView").font(.customTiny) }
+
+
           ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
           HStack {
@@ -61,7 +64,7 @@ struct ObsSpeciesView: View {
           Spacer()
         }
 
-        PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+
 
 
       }
@@ -132,9 +135,9 @@ struct ObsSpeciesView: View {
 
 //      }
     }
-    .onTapGesture {
-      selectedObs = obs
-    }
+//    .onTapGesture {
+//      selectedObs = obs
+//    }
     .onAppear() { //if the obs has photos or sounds get them
       if ((obs.has_photo ?? false) || (obs.has_sound ?? false)) {
         obsViewModel.fetchData(settings: settings, for: obs.id ?? 0, completion: {

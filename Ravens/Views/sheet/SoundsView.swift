@@ -75,7 +75,7 @@ class Player: ObservableObject {
         sourceType: .stream
       )
       log.error("fill \(audioUrl)")
-      queuedAudioPlayer.add(item: audioItem, playWhenReady: false)
+      queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
     }
   }
 

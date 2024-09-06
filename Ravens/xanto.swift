@@ -98,20 +98,20 @@ struct Santo: Codable {
 class SantoViewModel: ObservableObject {
     @Published var santo: Santo?
     @Published var isLoading = false
-
+//
     func loadSantoData(from url: String) {
-        isLoading = true
-        AF.request(url).responseDecodable(of: Santo.self) { [weak self] response in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                switch response.result {
-                case .success(let data):
-                    self?.santo = data
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                }
-            }
-        }
+//        isLoading = true
+//        AF.request(url).responseDecodable(of: Santo.self) { [weak self] response in
+//            DispatchQueue.main.async {
+//                self?.isLoading = false
+//                switch response.result {
+//                case .success(let data):
+//                    self?.santo = data
+//                case .failure(let error):
+//                    print("Error: \(error.localizedDescription)")
+//                }
+//            }
+//        }
     }
 }
 

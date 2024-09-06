@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
+import CachedAsyncImage
 
 
 struct ContentView: View {
@@ -128,17 +129,15 @@ struct RavensView: View {
         SpeciesDetailsView(speciesID: item.species_detail.id)
       }
 
-      .sheet(item: $selectedObs) { item in
-        ObsView(obs: item, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)
-      }
+//      .sheet(item: $selectedObs) { item in
+//        ObsView(obs: item, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)
+//      }
 
 //      .sheet(item: $selectedObservationSound) { item in
-//        PlayerControlsView(audio: item.sounds ?? [])
+//        PlayerControlsView(sounds: item.sounds ?? [])
 //          .presentationDetents([.fraction(0.25), .medium, .large])
 //          .presentationDragIndicator(.visible)
 //      }
-
-
 
       .fullScreenCover(item: $imageURLStr, onDismiss: {
           imageURLStr = nil
@@ -161,7 +160,7 @@ struct ImageView: View {
 
     var body: some View {
       ZStack {
-          AsyncImage(url: URL(string: item)!) { image in
+        CachedAsyncImage(url: URL(string: item)!) { image in
               image
                   .resizable()
                   .aspectRatio(contentMode: .fit)

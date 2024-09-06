@@ -10,6 +10,7 @@ import SwiftyBeaver
 import Alamofire
 import AlamofireImage
 import AVFoundation
+import CachedAsyncImage
 
 struct ObsRadiusView: View {
     let log = SwiftyBeaver.self
@@ -92,7 +93,7 @@ struct ObsRadiusView: View {
                 
                 if !settings.hidePictures {
                     ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                      AsyncImage(url: URL(string: imageURLString)) { image in
+                      CachedAsyncImage(url: URL(string: imageURLString)) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)

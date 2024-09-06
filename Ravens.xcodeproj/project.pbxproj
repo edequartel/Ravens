@@ -96,6 +96,8 @@
 		478262642C88203400DD746C /* ObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262632C88203400DD746C /* ObsView.swift */; };
 		478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262652C897B7000DD746C /* ObsDetailsRowView.swift */; };
 		478262682C89EF7600DD746C /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262672C89EF7600DD746C /* NotesView.swift */; };
+		4782626A2C8A12EE00DD746C /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262692C8A12EE00DD746C /* testView.swift */; };
+		4782626D2C8B248600DD746C /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4782626C2C8B248600DD746C /* CachedAsyncImage */; };
 		47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */; };
 		47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */; };
 		47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826CC22BF62DE4003E8F21 /* WikipediaView.swift */; };
@@ -213,6 +215,7 @@
 		478262632C88203400DD746C /* ObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsView.swift; sourceTree = "<group>"; };
 		478262652C897B7000DD746C /* ObsDetailsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsRowView.swift; sourceTree = "<group>"; };
 		478262672C89EF7600DD746C /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		478262692C8A12EE00DD746C /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaPage.swift; sourceTree = "<group>"; };
 		47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaViewModel.swift; sourceTree = "<group>"; };
 		47826CC22BF62DE4003E8F21 /* WikipediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaView.swift; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
+				4782626D2C8B248600DD746C /* CachedAsyncImage in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				47B80C182C346C3400E1C803 /* PopupView in Frameworks */,
 				47FA80632C3BC7C300C71C5F /* SwiftUIImageViewer in Frameworks */,
@@ -283,6 +287,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				478262692C8A12EE00DD746C /* testView.swift */,
 				478262672C89EF7600DD746C /* NotesView.swift */,
 				471A4A6F2C7F3E0E00898AC5 /* create-single.swift */,
 				47778E362C039D9E00C59A1A /* SonogramView.swift */,
@@ -446,8 +451,8 @@
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
-				4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */,
 				4767F0042BF256B100BACDC6 /* SpeciesView.swift */,
+				4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */,
 			);
 			path = Species;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 				47B80C172C346C3400E1C803 /* PopupView */,
 				47FA80622C3BC7C300C71C5F /* SwiftUIImageViewer */,
 				4706B0452C614C980099AA9F /* LazyPager */,
+				4782626C2C8B248600DD746C /* CachedAsyncImage */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -590,6 +596,7 @@
 				47B80C162C346C3400E1C803 /* XCRemoteSwiftPackageReference "PopupView" */,
 				47FA80612C3BC7C300C71C5F /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 				4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */,
+				4782626B2C8B248600DD746C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -699,6 +706,7 @@
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
 				478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */,
+				4782626A2C8A12EE00DD746C /* testView.swift in Sources */,
 				47778E372C039D9E00C59A1A /* SonogramView.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
@@ -1011,6 +1019,14 @@
 				minimumVersion = 4.4.1;
 			};
 		};
+		4782626B2C8B248600DD746C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 		4784B53E2B7BDAA60051D03E /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
@@ -1101,6 +1117,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 477ED86F2BA9D0AD00B0D73C /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		4782626C2C8B248600DD746C /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4782626B2C8B248600DD746C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 		4784B53F2B7BDAA60051D03E /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;

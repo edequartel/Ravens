@@ -17,6 +17,8 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var htmlViewModel: HTMLViewModel
   @EnvironmentObject var settings: Settings
 
+  @State private var hasAppeared = false
+
   @State private var scale: CGFloat = 1.0
   @State private var lastScale: CGFloat = 1.0
 
@@ -30,7 +32,7 @@ struct ObservationsSpeciesView: View {
   @Binding var selectedSpecies: Species?
   @Binding var selectedObservationSound: Observation?
   @Binding var selectedObs: Observation?
-  
+
   @Binding var imageURLStr: String?
 
 
@@ -38,9 +40,9 @@ struct ObservationsSpeciesView: View {
     VStack {
       if showView { Text("ObservationsSpeciesView").font(.customTiny) }
       HStack {
-//        Text("\(item.id)")
-//          .font(.footnote)
-//          .foregroundColor(.gray)
+        //        Text("\(item.id)")
+        //          .font(.footnote)
+        //          .foregroundColor(.gray)
 
         Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
           .foregroundColor(RarityColor(value: item.rarity))
@@ -88,7 +90,7 @@ struct ObservationsSpeciesView: View {
           Spacer()
         }
       }
-//      Spacer()
+      //      Spacer()
     }
 
     .padding(.horizontal,10)
@@ -109,16 +111,15 @@ struct ObservationsSpeciesView: View {
           let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
           ForEach(sortedResults.indices, id: \.self) { index in
             let obs = sortedResults[index]
-            ObsSpeciesView(
-              obs: obs,
-              selectedObs: $selectedObs,
-              imageURLStr: $imageURLStr
-            )
-//            .onTapGesture() {
-//              if let sounds = obs.sounds, !sounds.isEmpty {
-//                selectedObservationSound = obs
-//              }
-//            }
+
+            NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+
+              ObsSpeciesView(
+                obs: obs,
+                selectedObs: $selectedObs,
+                imageURLStr: $imageURLStr
+              )
+            }
           }
         }
       }
@@ -130,9 +131,12 @@ struct ObservationsSpeciesView: View {
 
 
       .onAppear() {
-        if settings.initialSpeciesLoad {
-          fetchDataModel(offset: offset)
-          settings.initialSpeciesLoad = false
+        if !hasAppeared {
+          if settings.initialSpeciesLoad {
+            fetchDataModel(offset: offset)
+            settings.initialSpeciesLoad = false
+          }
+          hasAppeared = true // Prevent re-execution
         }
 
       }
@@ -174,11 +178,11 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
       selectedObservationSound: .constant(nil),
       selectedObs: .constant(nil),
       imageURLStr: .constant(""))
-      .environmentObject(ObservationsSpeciesViewModel())
-      .environmentObject(BookMarksViewModel())
-      .environmentObject(SpeciesViewModel())
-      .environmentObject(HTMLViewModel())
-      .environmentObject(Settings())
+    .environmentObject(ObservationsSpeciesViewModel())
+    .environmentObject(BookMarksViewModel())
+    .environmentObject(SpeciesViewModel())
+    .environmentObject(HTMLViewModel())
+    .environmentObject(Settings())
   }
 }
 

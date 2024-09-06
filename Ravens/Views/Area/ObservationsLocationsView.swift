@@ -39,37 +39,17 @@ struct ObservationsLocationView: View {
       HorizontalLine()
       List {
         if let results =  observationsLocationViewModel.observations?.results {
-          ForEach(results
-            .filter { $0.rarity >= settings.selectedRarity }
-                  
-            .sorted(by: { ($1.rarity, $0.species_detail.name,  $1.date, $0.time ?? "00:00") < ($0.rarity, $1.species_detail.name, $0.date, $1.time ?? "00:00") })
-                  
-                  //                            .filter { result in
-                  //                                // Add your condition here
-                  //                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
-                  //                                // You can replace it with your own condition.
-                  //                                ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
-                  //                                (
-                  //                                    (result.has_photo ?? false) && (settings.showObsPictures) ||
-                  //                                    (result.has_sound ?? false) && (settings.showObsAudio)
-                  //                                )
-                  //                            }
-                  , id: \.id) {
+          ForEach(results, id: \.id) {
             obs in
-            ObsAreaView(
-              selectedObservation: $selectedObservation,
-              selectedObs: $selectedObs,
-              imageURLStr: $imageURLStr,
-              obs: obs
-            )
-            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-//            .onTapGesture {
-//              if let sounds = obs.sounds, !sounds.isEmpty {
-//                selectedObservationSound = obs
-//                vibrate()
-//              }
-//            }
-            
+            NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+              ObsAreaView(
+                selectedObservation: $selectedObservation,
+                selectedObs: $selectedObs,
+                imageURLStr: $imageURLStr,
+                obs: obs
+              )
+            }
+
           }
         }
       }

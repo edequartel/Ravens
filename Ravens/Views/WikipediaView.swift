@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct WikipediaView: View {
     @StateObject var viewModel = WikipediaViewModel()
@@ -33,7 +34,7 @@ struct WikipediaView: View {
                             .padding(.bottom, 5)  // Small padding below the title to separate from the text
                         
                         if let thumbnail = viewModel.pageDetail.thumbnail {
-                            AsyncImage(url: URL(string: thumbnail.source)) { image in
+                          CachedAsyncImage(url: URL(string: thumbnail.source)) { image in
                                 image.resizable()
                             } placeholder: {
                                 ProgressView()
