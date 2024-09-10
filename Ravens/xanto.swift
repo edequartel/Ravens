@@ -2,286 +2,163 @@
 import SwiftUI
 import Alamofire
 
-// MARK: - Data Model
-
-// Enum definitions, similar to those in your original model
-enum AnimalSeen: String, Codable {
-    case no = "no"
-    case unknown = "unknown"
-    case yes = "yes"
+// Define the structure for the list of recordings with pagination details
+struct RecordingsList: Decodable {
+    var numRecordings: String
+    var numSpecies: String
+    var page: Int
+    var numPages: Int
+    var recordings: [Recording]
 }
 
-enum En: String, Codable {
-    case blackTailedGodwit = "Black-tailed Godwit"
-}
 
-enum Gen: String, Codable {
-    case limosa = "Limosa"
-}
-
-enum Group: String, Codable {
-    case birds = "birds"
-}
-
-enum Lic: String, Codable {
-    case creativecommonsOrgLicensesByNc40 = "//creativecommons.org/licenses/by-nc/4.0/"
-    // Add other cases as required
-}
-
-enum Method: String, Codable {
-    case fieldRecording = "field recording"
-    case inTheHand = "in the hand"
-}
-
-struct Osci: Codable {
-    let small, med, large, full: String?
-}
-
-enum Q: String, Codable {
-    case a = "A"
-    case b = "B"
-    case c = "C"
-}
-
-enum Sex: String, Codable {
-    case empty = ""
-    case female = "female"
-    case male = "male"
-    case uncertain = "uncertain"
-}
-
-enum SP: String, Codable {
-    case limosa = "Limosa"
-}
-
-enum Stage: String, Codable {
-    case adult = "adult"
-    case juvenile = "juvenile"
-    case uncertain = "uncertain"
-}
-
+//Model
+// Define the structure of the JSON data
 struct Recording: Codable {
-    let id: String?
-    let gen: Gen?
-    let sp, ssp: SP?
-    let group: Group?
-    let en: En?
-    let rec, cnt, loc: String?
-    let lat, lng: String?
-    let alt, type: String?
-    let sex: Sex?
-    let stage: Stage?
-    let method: Method?
-    let url: String?
-    let file: String?
-    let fileName: String?
-    let sono, osci: Osci?
-    let lic: Lic?
-    let q: Q?
-    let length, time, date, uploaded: String?
-    let also: [String]?
-    let rmk: String?
-    let birdSeen, animalSeen, playbackUsed: AnimalSeen?
-    let temp, regnr: String?
-    let auto: AnimalSeen?
-    let dvc, mic, smp: String?
-}
+  var also: [String]
+  var alt: Int? //String?
+  var animalSeen: String?
+  var auto: String?
+  var birdSeen: String?
+  var cnt: String
+  var date: String
+  var dvc: String?
+  var en: String
+  var file: URL
+  var fileName: String
+  var gen: String
+  var group: String
+  var id: Int
+  var lat: String
+  var length: String
+  var lic: String //URL
+  var loc: String
+  var lng: String
+  var method: String
+  var mic: String?
+  var osci: Osci
+  var playbackUsed: String?
+  var q: String
+  var rec: String
+  var regnr: String?
+  var rmk: String?
+  var sex: String?
+  var sono: Sono
+  var sp: String
+  var smp: Int? //String?
+  var ssp: String?
+  var stage: String?
+  var temp: String?
+  var time: String
+  var type: String
+  var uploaded: String
+  var url: URL
 
-struct Santo: Codable {
-    let numRecordings, numSpecies: String?
-    let page, numPages: Int?
-    let recordings: [Recording]?
-}
 
-// MARK: - ViewModel
-
-class SantoViewModel: ObservableObject {
-    @Published var santo: Santo?
-    @Published var isLoading = false
+    enum CodingKeys: String, CodingKey {
+        case id, gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file, lic, q, length, time, date, uploaded, also, rmk, temp, regnr, auto, dvc, mic, smp, sono, osci
+        case birdSeen = "bird-seen"
+        case animalSeen = "animal-seen"
+        case playbackUsed = "playback-used"
+        case fileName = "file-name"
+    }
 //
-    func loadSantoData(from url: String) {
-//        isLoading = true
-//        AF.request(url).responseDecodable(of: Santo.self) { [weak self] response in
+  struct Sono: Codable {
+      var small: String?
+      var med: String?
+      var large: String?
+      var full: String?
+  }
+//
+  struct Osci: Codable {
+      var small: String?
+      var med: String?
+      var large: String?
+  }
+}
+
+
+////ViewModel
+///
+class RecordingsListViewModel: ObservableObject {
+  @Published var recordingsList: RecordingsList?
+  @Published var isLoading = false
+  @Published var errorMessage: String?
+
+  func fetchRecordings(from urlString: String) {
+    self.isLoading = true
+    AF.request(urlString).responseJSON { response in
+      DispatchQueue.main.async {
+        self.isLoading = false
+        print("Response: \(response)")
+        switch response.result {
+        case .success(let value):
+          print("JSON Response: \(value)")
+          if let data = response.data {
+            let decoder = JSONDecoder()
+            do {
+              let list = try decoder.decode(RecordingsList.self, from: data)
+              self.recordingsList = list
+            } catch {
+              self.errorMessage = error.localizedDescription
+            }
+          }
+        case .failure(let error):
+          self.errorMessage = error.localizedDescription
+        }
+      }
+    }
+  }
+}
+
+//}//class RecordingsListViewModel: ObservableObject {
+//    @Published var recordingsList: RecordingsList?
+//    @Published var isLoading = false
+//    @Published var errorMessage: String?
+//
+//    func fetchRecordings(from urlString: String) {
+//        self.isLoading = true
+//        AF.request(urlString).responseDecodable(of: RecordingsList.self) { response in
 //            DispatchQueue.main.async {
-//                self?.isLoading = false
+//                self.isLoading = false
 //                switch response.result {
-//                case .success(let data):
-//                    self?.santo = data
+//                case .success(let list):
+//                    self.recordingsList = list
 //                case .failure(let error):
-//                    print("Error: \(error.localizedDescription)")
+//                    self.errorMessage = error.localizedDescription
 //                }
 //            }
 //        }
-    }
-}
+//    }
+//}
 
-// MARK: - SwiftUI View
-
-struct SantoView: View {
-    @StateObject private var viewModel = SantoViewModel()
+//View
+struct XantoView: View {
+    @ObservedObject var viewModel: RecordingsListViewModel
 
     var body: some View {
         NavigationView {
-            if viewModel.isLoading {
-                ProgressView("Loading...")
-            } else {
-                List {
-                    if let santo = viewModel.santo, let recordings = santo.recordings {
-                        ForEach(recordings, id: \.id) { recording in
-                            VStack(alignment: .leading) {
-                                Text(recording.en?.rawValue ?? "Unknown Bird")
-                                    .font(.headline)
-                                Text("Recorded at: \(recording.loc ?? "Unknown location")")
-                                    .font(.subheadline)
-                            }
+            List {
+                if let recordings = viewModel.recordingsList?.recordings {
+                    ForEach(recordings, id: \.id ) { recording in
+                        VStack(alignment: .leading) {
+                          Text(recording.fileName)
+                                .font(.headline)
+                            Text(recording.cnt)
+                                .font(.subheadline)
                         }
-                    } else {
-                        Text("No recordings available")
                     }
+                } else if viewModel.isLoading {
+                    ProgressView("Loading...")
+                } else {
+                    Text("No data available")
                 }
-                .navigationTitle("Recordings")
             }
-
-        }
-        .onAppear {
-            viewModel.loadSantoData(from: "https://xeno-canto.org/api/2/recordings?query=limosa+limosa")
+            .navigationTitle("Recordings")
+            .onAppear {
+                viewModel.fetchRecordings(from: "https://xeno-canto.org/api/2/recordings?query=bluethroat")
+            }
         }
     }
 }
 
-// MARK: - SwiftUI App Entry Point
-
-//@main
-//struct MyApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            SantoView()
-//        }
-//    }
-//}
-
-///
-////  xanto.swift
-////  Ravens
-////
-////  Created by Eric de Quartel on 28/08/2024.
-////
-//
-//import Foundation
-//import SwiftUI
-//import Alamofire
-//import Combine
-//
-//struct ApiResponse1: Decodable {
-//    var numRecordings: String
-//    var numSpecies: String
-//    var page: Int
-//    var numPages: Int
-//    var recordings: [Recording]
-//}
-//
-//struct Recording: Decodable, Identifiable {
-//    var id: String
-//    var gen: String
-//    var sp: String
-//    var ssp: String
-//    var group: String
-//    var en: String
-//    var rec: String
-//    var cnt: String
-//    var loc: String
-//    var lat: String
-//    var lng: String
-//    var alt: String
-//    var type: String
-//    var sex: String
-//    var stage: String
-//    var method: String
-//    var url: String
-//    var file: String
-//    var filename: String?
-//    var sono: SonoImages
-//    var osci: SonoImages
-//    var lic: String
-//    var q: String
-//    var length: String
-//    var time: String
-//    var date: String
-//    var uploaded: String
-//    var also: [String]
-//    var rmk: String
-//    var birdseen: String
-//    var animalseen: String
-//    var playbackused: String
-//    var temp: String
-//    var regnr: String
-//    var auto: String
-//    var dvc: String
-//    var mic: String
-//    var smp: String
-//
-//
-//
-////    enum CodingKeys: String, CodingKey {
-////        case id, gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file, sono, osci, lic, q, length, time, date, uploaded, also, rmk, birdSeen = "bird-seen", animalSeen = "animal-seen", playbackUsed = "playback-used", temp, regnr, auto, dvc, mic, smp
-////        case fileName = "file-name"
-////    }
-//}
-//
-//struct SonoImages: Decodable {
-//    var small: String
-//    var med: String
-//    var large: String
-//    var full: String?
-//}
-//
-//
-//
-//class RecordingsViewModel: ObservableObject {
-//    @Published var recordings = [Recording]()
-//    @Published var isLoading = false
-//
-//    func fetchRecordings(query: String) {
-//        isLoading = true
-//        let urlString = "https://xeno-canto.org/api/2/recordings?query=limosa+limosa"
-//
-//        AF.request(urlString).responseDecodable(of: ApiResponse1.self) { [weak self] response in
-//            self?.isLoading = false
-//          print(response.result)
-////            switch response.result {
-////            case .success(let data):
-////                self?.recordings = data.recordings
-////                print("Recordings: \(data.recordings)")
-////
-////                // Loop through each recording and print its details
-////                for recording in data.recordings {
-////                    print("Recording: \(recording)")
-////                }
-////
-////            case .failure(let error):
-////                print(">>>>"+error.localizedDescription)
-////            }
-//        }
-//    }
-//}
-//
-//
-//struct RecordingsView: View {
-//    @StateObject private var viewModel = RecordingsViewModel()
-//
-//    var body: some View {
-//        NavigationView {
-//            List(viewModel.recordings) { recording in
-//                VStack(alignment: .leading) {
-//                    Text(recording.en)
-//                    Text(recording.loc)
-//                    Text("Date: \(recording.date)")
-//                }
-//            }
-//            .navigationBarTitle("Recordings")
-//            .onAppear {
-//                viewModel.fetchRecordings(query: "buteo+buteo")
-//            }
-//        }
-//    }
-//}

@@ -24,10 +24,10 @@ struct TabSpeciesView: View {
     @State private var searchText = ""
 
     @Binding var selectedSpecies: Species?
-    @Binding var selectedObservationSound: Observation?
-    @Binding var selectedObs: Observation?
+//    @Binding var selectedObservationSound: Observation?
+//    @Binding var selectedObs: Observation?
 
-    @Binding var imageURLStr: String?
+//    @Binding var imageURLStr: String?
 
 
   var body: some View {
@@ -56,10 +56,10 @@ struct TabSpeciesView: View {
                 destination:
                   SpeciesView(
                     item: species,
-                    selectedSpecies: $selectedSpecies,
-                    selectedObservationSound: $selectedObservationSound,
-                    selectedObs: $selectedObs,
-                    imageURLStr: $imageURLStr)
+                    selectedSpecies: $selectedSpecies)
+//                    selectedObservationSound: $selectedObservationSound,
+//                    selectedObs: $selectedObs)
+//                    imageURLStr: $imageURLStr)
               ) {
                 
                 VStack(alignment: .leading) {
@@ -312,10 +312,10 @@ struct TabSpeciesView_Previews: PreviewProvider {
 
     static var previews: some View {
         TabSpeciesView(
-          selectedSpecies: $selectedSpecies,
-          selectedObservationSound: $selectedObservationSound,
-          selectedObs: .constant(nil),
-          imageURLStr: .constant(""))
+          selectedSpecies: $selectedSpecies)
+//          selectedObservationSound: $selectedObservationSound,
+//          selectedObs: .constant(nil))
+//          imageURLStr: .constant(""))
             .environmentObject(SpeciesViewModel())
             .environmentObject(SpeciesGroupsViewModel())
             .environmentObject(ObservationsSpeciesViewModel())

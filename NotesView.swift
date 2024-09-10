@@ -8,21 +8,18 @@
 import SwiftUI
 
 struct NotesView: View {
-    var obs: Observation // Assuming `Observation` has a `notes` property
+  var obs: Observation // Assuming `Observation` has a `notes` property
 
-    var body: some View {
-        if !(obs.notes?.isEmpty ?? true) {
-            ScrollView {
-                Text(obs.notes ?? "unknown")
-//                    .italic()
-//                    .padding()
-            }
-            .frame(maxWidth: .infinity, maxHeight: 300) // Set the maximum height for the scrollable area
-        } else {
-            EmptyView()
-            .frame(maxWidth: .infinity, maxHeight: 300)
-        }
+  var body: some View {
+    if !(obs.notes?.isEmpty ?? true) {
+      Text(obs.notes ?? "unknown")
+        .padding(2)  // Adds padding around the text
+        .frame(maxWidth: .infinity, alignment: .leading)  // Ensures the text aligns to the left
+        .multilineTextAlignment(.leading)  // Aligns text within the Text view
+    } else {
+      EmptyView()
     }
+  }
 }
 
 

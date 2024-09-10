@@ -30,10 +30,10 @@ struct ObservationsSpeciesView: View {
   @State private var isLoaded = false
 
   @Binding var selectedSpecies: Species?
-  @Binding var selectedObservationSound: Observation?
-  @Binding var selectedObs: Observation?
+//  @Binding var selectedObservationSound: Observation?
+//  @Binding var selectedObs: Observation?
 
-  @Binding var imageURLStr: String?
+//  @Binding var imageURLStr: String?
 
 
   var body: some View {
@@ -112,13 +112,12 @@ struct ObservationsSpeciesView: View {
           ForEach(sortedResults.indices, id: \.self) { index in
             let obs = sortedResults[index]
 
-            NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+            NavigationLink(destination: ObsView(obs: obs)) {
 
               ObsSpeciesView(
-                obs: obs,
-                selectedObs: $selectedObs,
-                imageURLStr: $imageURLStr
-              )
+                obs: obs)
+//                selectedObs: $selectedObs
+//              )
             }
           }
         }
@@ -174,10 +173,10 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
     let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
     ObservationsSpeciesView(
       item: testSpecies,
-      selectedSpecies: .constant(nil),
-      selectedObservationSound: .constant(nil),
-      selectedObs: .constant(nil),
-      imageURLStr: .constant(""))
+      selectedSpecies: .constant(nil))
+//      selectedObservationSound: .constant(nil),
+//      selectedObs: .constant(nil))
+//      imageURLStr: .constant(""))
     .environmentObject(ObservationsSpeciesViewModel())
     .environmentObject(BookMarksViewModel())
     .environmentObject(SpeciesViewModel())

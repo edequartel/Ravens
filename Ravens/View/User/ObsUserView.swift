@@ -22,10 +22,10 @@ struct ObsUserView: View {
   
   
   @Binding var selectedObservation: Observation?
-  @Binding var selectedObs: Observation?
+//  @Binding var selectedObs: Observation?
   
-  @Binding var imageURLStr: String?
-  
+  @State var imageURLStr: String?
+
   @State var obs: Observation
   
   private let appIcon = Image("AppIconShare")
@@ -52,7 +52,7 @@ struct ObsUserView: View {
         }
         
         HStack {
-          Text("\(obs.date) \(obs.time ?? "")")
+          DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
           Text("\(obs.number) x")
           Spacer()
         }

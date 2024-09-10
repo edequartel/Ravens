@@ -26,8 +26,9 @@ struct ObsSpeciesView: View {
   private let appIcon = Image("AppIconShare")
 
   @State var obs: Observation
-  @Binding var selectedObs: Observation?
-  @Binding var imageURLStr: String?
+  @State var selectedObs: Observation?
+  @State var imageURLStr: String?
+  @State private var selectedObservation: Observation?
 
   var showUsername: Bool = true
   var showLocation: Bool = true
@@ -43,7 +44,7 @@ struct ObsSpeciesView: View {
           ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
           HStack {
-            Text("\(obs.date) \(obs.time ?? "")")
+            DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
             Text("\(obs.number) x")
             Spacer()
           }

@@ -66,41 +66,43 @@ struct RavensView: View {
 
 
   @State private var selectedSpecies: Species?
-  @State private var selectedObservationSound: Observation?
+//  @State private var selectedObservationSound: Observation?
   @State private var selectedObservation: Observation?
-  @State private var selectedObs: Observation?
+//  @State private var selectedObs: Observation?
 
-  @State private var imageURLStr: String?
+//  @State private var imageURLStr: String?
+
+  let viewModel = RecordingsListViewModel() //later aanpassen??
 
   var body: some View {
     VStack {
       TabView {
         // Tab 1
         TabLocationView(
-          selectedObservation: $selectedObservation,
-          selectedObservationSound: $selectedObservationSound,
-          selectedObs: $selectedObs,
-          imageURLStr: $imageURLStr)
+          selectedObservation: $selectedObservation)
+//          selectedObservationSound: $selectedObservationSound,
+//          selectedObs: $selectedObs)
+//          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Area")
           Image(systemName: SFAreaFill)
         }
         // Tab 2
         TabUserObservationsView(
-          selectedObservation: $selectedObservation,
-          selectedObservationSound: $selectedObservationSound,
-          selectedObs: $selectedObs,
-          imageURLStr: $imageURLStr)
+          selectedObservation: $selectedObservation)
+//          selectedObservationSound: $selectedObservationSound,
+//          selectedObs: $selectedObs)
+//          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Us")
           Image(systemName: "person.2.fill")
         }
         // Tab 3
         TabSpeciesView(
-          selectedSpecies: $selectedSpecies,
-          selectedObservationSound: $selectedObservationSound,
-          selectedObs: $selectedObs,
-          imageURLStr: $imageURLStr)
+          selectedSpecies: $selectedSpecies)
+//          selectedObservationSound: $selectedObservationSound,
+//          selectedObs: $selectedObs)
+//          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Species")
           Image(systemName: "tree")
@@ -112,9 +114,10 @@ struct RavensView: View {
             Image(systemName: "gearshape")
           }
         //Tab 5
-//        CreateView()
-////        SantoView()
-////        AddObservationView()
+//////        CreateView()
+//        PositionOnMapView(lat: 37.7749, long: -122.4194)
+////        XantoView(viewModel: viewModel)
+//////////        AddObservationView()
 //          .tabItem {
 //            Text("Add")
 //            Image(systemName: "plus.circle")
@@ -125,13 +128,17 @@ struct RavensView: View {
         SpeciesDetailsView(speciesID: item.id)
       }
 
-      .sheet(item: $selectedObservation) { item in
-        SpeciesDetailsView(speciesID: item.species_detail.id)
-      }
+//      .sheet(item: $selectedObservation) { item in
+//        SpeciesDetailsView(speciesID: item.species_detail.id)
+//      }
 
 //      .sheet(item: $selectedObs) { item in
 //        ObsView(obs: item, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)
 //      }
+
+
+
+
 
 //      .sheet(item: $selectedObservationSound) { item in
 //        PlayerControlsView(sounds: item.sounds ?? [])
@@ -139,13 +146,13 @@ struct RavensView: View {
 //          .presentationDragIndicator(.visible)
 //      }
 
-      .fullScreenCover(item: $imageURLStr, onDismiss: {
-          imageURLStr = nil
-      }) { item in
-          ImageView(item: item, dismissAction: {
-              imageURLStr = nil
-          })
-      }
+//      .fullScreenCover(item: $imageURLStr, onDismiss: {
+//          imageURLStr = nil
+//      }) { item in
+//          ImageView(item: item, dismissAction: {
+//              imageURLStr = nil
+//          })
+//      }
 
       .onAppear() {
         log.error("*** NEW LAUNCHING RAVENS ***")

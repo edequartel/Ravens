@@ -22,10 +22,10 @@ struct ObservationsLocationView: View {
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedObservation: Observation?
-  @Binding var selectedObservationSound: Observation?
-  @Binding var selectedObs: Observation?
+//  @Binding var selectedObservationSound: Observation?
+//  @Binding var selectedObs: Observation?
   
-  @Binding var imageURLStr: String?
+//  @Binding var imageURLStr: String?
   
   var body: some View {
     VStack {
@@ -41,11 +41,11 @@ struct ObservationsLocationView: View {
         if let results =  observationsLocationViewModel.observations?.results {
           ForEach(results, id: \.id) {
             obs in
-            NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+            NavigationLink(destination: ObsView(obs: obs)) {
               ObsAreaView(
                 selectedObservation: $selectedObservation,
-                selectedObs: $selectedObs,
-                imageURLStr: $imageURLStr,
+//                selectedObs: $selectedObs,
+//                imageURLStr: $imageURLStr,
                 obs: obs
               )
             }

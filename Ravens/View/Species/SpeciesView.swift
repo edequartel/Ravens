@@ -17,10 +17,10 @@ struct SpeciesView: View {
 
     var item: Species
     @Binding var selectedSpecies: Species?
-    @Binding var selectedObservationSound: Observation?
-    @Binding var selectedObs: Observation?
+//    @Binding var selectedObservationSound: Observation?
+//    @Binding var selectedObs: Observation?
 
-    @Binding var imageURLStr: String?
+//    @Binding var imageURLStr: String?
 
 
     var body: some View {
@@ -32,10 +32,10 @@ struct SpeciesView: View {
                 } else {
                   ObservationsSpeciesView(
                     item: item,
-                    selectedSpecies: $selectedSpecies,
-                    selectedObservationSound: $selectedObservationSound,
-                    selectedObs: $selectedObs,
-                    imageURLStr: $imageURLStr)
+                    selectedSpecies: $selectedSpecies)
+//                    selectedObservationSound: $selectedObservationSound,
+//                    selectedObs: $selectedObs)
+//                    imageURLStr: $imageURLStr)
                 }
             }
 //        }

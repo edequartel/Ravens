@@ -693,9 +693,6 @@
         }
       }
     },
-    "Location %lld fetchData" : {
-
-    },
     "Login" : {
       "localizations" : {
         "nl" : {
@@ -899,7 +896,7 @@
     "No" : {
 
     },
-    "No recordings available" : {
+    "No data available" : {
 
     },
     "nobsavaliable" : {
@@ -987,9 +984,6 @@
     "ObsUserView" : {
 
     },
-    "ObsView" : {
-
-    },
     "Open observation" : {
 
     },
@@ -1023,6 +1017,9 @@
           }
         }
       }
+    },
+    "Play Sounds" : {
+
     },
     "Poi" : {
       "extractionState" : "stale",
@@ -1074,9 +1071,6 @@
       }
     },
     "Recent" : {
-
-    },
-    "Recorded at: %@" : {
 
     },
     "Recordings" : {

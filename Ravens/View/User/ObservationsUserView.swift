@@ -19,10 +19,10 @@ struct ObservationsUserView: View {
 
 
   @Binding var selectedObservation: Observation?
-  @Binding var selectedObservationSound: Observation?
-  @Binding var selectedObs: Observation?
+//  @Binding var selectedObservationSound: Observation?
+//  @Binding var selectedObs: Observation?
 
-  @Binding var imageURLStr: String?
+//  @Binding var imageURLStr: String?
 
   var body: some View {
     VStack {
@@ -44,11 +44,11 @@ struct ObservationsUserView: View {
                     //                                )
                     //                            }
                     , id: \.id) { obs in
-              NavigationLink(destination: ObsView(obs: obs, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)) {
+              NavigationLink(destination: ObsView(obs: obs)) {
                 ObsUserView(
                   selectedObservation: $selectedObservation,
-                  selectedObs: $selectedObs,
-                  imageURLStr: $imageURLStr,
+//                  selectedObs: $selectedObs,
+//                  imageURLStr: $imageURLStr,
                   obs: obs
                 )
               }
@@ -108,10 +108,10 @@ struct ObservationsUserView_Previews: PreviewProvider {
 
   static var previews: some View {
     ObservationsUserView(
-      selectedObservation: $selectedObservation,
-      selectedObservationSound: $selectedObservationSound,
-      selectedObs: .constant(nil),
-      imageURLStr: .constant(""))
+      selectedObservation: $selectedObservation)
+//      selectedObservationSound: $selectedObservationSound,
+//      selectedObs: .constant(nil))
+//      imageURLStr: .constant(""))
     .environmentObject(ObservationsUserViewModel())
     .environmentObject(UserViewModel())
     .environmentObject(Settings())
