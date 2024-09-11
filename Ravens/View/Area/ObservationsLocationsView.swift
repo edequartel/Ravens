@@ -41,19 +41,24 @@ struct ObservationsLocationView: View {
         if let results =  observationsLocationViewModel.observations?.results {
           ForEach(results, id: \.id) {
             obs in
-            NavigationLink(destination: ObsView(obs: obs)) {
-              ObsAreaView(
-                selectedObservation: $selectedObservation,
-//                selectedObs: $selectedObs,
-//                imageURLStr: $imageURLStr,
-                obs: obs
-              )
+            VStack {
+              NavigationLink(destination: ObsDetailView(obs: obs)) {
+                ObsView(
+                  showSpecies: true, showObserver: true, showArea: false,
+                  selectedObservation: $selectedObservation,
+                  obs: obs
+                )
+                .padding(8)
+              }
+              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+              Divider()
             }
+            .listRowInsets(EdgeInsets())
+            .listRowSeparator(.hidden)
 
           }
         }
       }
-      .listRowSeparator(.hidden)
       .listStyle(PlainListStyle())
       
       .toolbar {

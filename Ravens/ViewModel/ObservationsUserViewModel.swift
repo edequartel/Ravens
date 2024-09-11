@@ -69,7 +69,7 @@ struct WindowView: View {
     }
 }
 
-class ObservationsUserViewModel: ObservableObject {
+class ObservationsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
 
     @Published var observations: Observations?

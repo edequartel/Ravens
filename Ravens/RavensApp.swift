@@ -75,7 +75,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     @StateObject var regionListViewModel = RegionListViewModel()
     @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
     @StateObject var userViewModel =  UserViewModel()
-    @StateObject var observationsUserViewModel = ObservationsUserViewModel()
+    @StateObject var observationsViewModel = ObservationsViewModel()
     @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
     
     @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
@@ -151,7 +151,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 .environmentObject(observationsSpeciesViewModel)
                 .environmentObject(userViewModel) 
             
-                .environmentObject(observationsUserViewModel)
+                .environmentObject(observationsViewModel)
                 .environmentObject(observationsRadiusViewModel)
                 .environmentObject(observationsLocationViewModel)
                 .environmentObject(locationIdViewModel)

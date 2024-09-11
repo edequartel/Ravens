@@ -14,6 +14,10 @@ import AVFoundation
 
 struct ObsAreaView: View {
     let log = SwiftyBeaver.self
+  var showSpecies = true
+  var showObserver = true
+  var showArea = true
+
 
     @StateObject var obsViewModel = ObsViewModel()
 
@@ -67,7 +71,7 @@ struct ObsAreaView: View {
                 }
 
                 // User Info Section
-                if settings.showUser {
+                if showObserver {
                     HStack {
                         Text("\(obs.user_detail?.name ?? "noName")")
                             .footnoteGrayStyle()

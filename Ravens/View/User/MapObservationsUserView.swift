@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
     let log = SwiftyBeaver.self
-    @EnvironmentObject var observationsUserViewModel: ObservationsUserViewModel
+    @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
@@ -27,7 +27,7 @@ struct MapObservationsUserView: View {
             Map(position: $cameraPosition) {
 //                UserAnnotation()
                 
-                ForEach(observationsUserViewModel.locations) { location in
+                ForEach(observationsViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
                             .fill(RarityColor(value: location.rarity))
@@ -71,7 +71,7 @@ struct MapObservationsUserView: View {
 
         .onAppear {
             if settings.initialUsersLoad {
-                observationsUserViewModel.fetchData(
+                observationsViewModel.fetchData(
                     settings: settings,
                     userId: settings.userId,
                     completion: { log.info("viewModel.fetchData completion") })
@@ -84,7 +84,7 @@ struct MapObservationsUserView: View {
 struct MapObservationsUserView_Previews: PreviewProvider {
     static var previews: some View {
       MapObservationsUserView()
-            .environmentObject(ObservationsUserViewModel())
+            .environmentObject(ObservationsViewModel())
             .environmentObject(KeychainViewModel())
             .environmentObject(UserViewModel())
             .environmentObject(Settings())

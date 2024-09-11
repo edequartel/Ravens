@@ -112,7 +112,8 @@ struct ObservationsSpeciesView: View {
           ForEach(sortedResults.indices, id: \.self) { index in
             let obs = sortedResults[index]
 
-            NavigationLink(destination: ObsView(obs: obs)) {
+            NavigationLink(destination: ObsDetailView(obs: obs)) {
+              
 
               ObsSpeciesView(
                 obs: obs)

@@ -24,7 +24,7 @@ struct TabUserObservationsView: View {
         if showFirstView && !settings.accessibility {
           MapObservationsUserView()
         } else {
-          ObservationsUserView(
+          ObservationsView(
             selectedObservation: $selectedObservation)
 //            selectedObservationSound: $selectedObservationSound,
 //            selectedObs: $selectedObs)
@@ -54,7 +54,7 @@ struct TabUserObservationsView: View {
 struct TabUserObservationsView_Previews: PreviewProvider {
   @State static var selectedObservation: Observation? = nil
   @State static var selectedObservationSound: Observation? = nil
-  @StateObject static var observationsUserViewModel = ObservationsUserViewModel()
+  @StateObject static var observationsUserViewModel = ObservationsViewModel()
 
   static var previews: some View {
     TabUserObservationsView(
