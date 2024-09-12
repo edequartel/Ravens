@@ -22,7 +22,7 @@ struct TabLocationView: View {
   @State private var showFirstView = true
   @State private var isShowingLocationList = false
 
-  @Binding var selectedObservation: Observation?
+//  @Binding var selectedObservation: Observation?
 //  @Binding var selectedObservationSound: Observation?
 //  @Binding var selectedObs: Observation?
 
@@ -36,8 +36,8 @@ struct TabLocationView: View {
         if showFirstView && !settings.accessibility {
           MapObservationsLocationView()
         } else {
-          ObservationsLocationView(
-            selectedObservation: $selectedObservation)
+          ObservationsLocationView()
+//            selectedObservation: $selectedObservation)
 //            selectedObservationSound: $selectedObservationSound,
 //            selectedObs: $selectedObs)
 //            imageURLStr: $imageURLStr)
@@ -177,7 +177,7 @@ struct TabLocationView: View {
 }
 
 #Preview {
-    TabLocationView(selectedObservation: .constant(nil))
+    TabLocationView()
       .environmentObject(Settings())
       .environmentObject(AreasViewModel())
       .environmentObject(LocationManagerModel())

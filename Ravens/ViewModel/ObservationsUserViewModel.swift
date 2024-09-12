@@ -12,6 +12,8 @@ import SwiftyBeaver
 import SwiftUI
 import SVGView
 
+
+
 class window: ObservableObject {
     @Published var maximum = 123
     @Published var offset = 15
@@ -105,7 +107,7 @@ class ObservationsViewModel: ObservableObject {
     }
     
 
-    func fetchData(settings: Settings, userId: Int, completion: @escaping () -> Void) {
+    func fetchData(settings: Settings, entityType: String, userId: Int, completion: @escaping () -> Void) {
         log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
         keyChainViewModel.retrieveCredentials()
         
@@ -115,6 +117,7 @@ class ObservationsViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
 
+      print(entityType)
         let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
         log.error("fetchData ObservationsUserViewModel \(url)")

@@ -78,8 +78,7 @@ struct RavensView: View {
     VStack {
       TabView {
         // Tab 1
-        TabLocationView(
-          selectedObservation: $selectedObservation)
+        TabLocationView()
 //          selectedObservationSound: $selectedObservationSound,
 //          selectedObs: $selectedObs)
 //          imageURLStr: $imageURLStr)

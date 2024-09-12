@@ -11,6 +11,49 @@ import MapKit
 import SwiftUIImageViewer
 
 
+struct ObservationListView: View {
+    var observations: [Observation]
+    @EnvironmentObject var settings: Settings
+
+    var body: some View {
+        List {
+            ForEach(observations, id: \.id) { obs in
+                VStack {
+                    NavigationLink(destination: ObsDetailView(obs: obs)) {
+                        ObsView(
+                            showSpecies: true,
+                            showObserver: true,
+                            showArea: false,
+                            obs: obs
+                        )
+                        .padding(8)
+                    }
+                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+
+                    Divider()
+                }
+                .listRowInsets(EdgeInsets()) // Remove default padding
+                .listRowSeparator(.hidden)  // Remove separator line
+            }
+        }
+        .listStyle(PlainListStyle()) // No additional styling, plain list look
+        .toolbar {
+            if (!settings.accessibility) {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        settings.hidePictures.toggle()
+                    }) {
+                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+                            .accessibilityElement(children: .combine)
+                            .accessibility(label: Text("Hide pictures"))
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
   
@@ -18,62 +61,58 @@ struct ObservationsLocationView: View {
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-  
   @EnvironmentObject var settings: Settings
-  
-  @Binding var selectedObservation: Observation?
-//  @Binding var selectedObservationSound: Observation?
-//  @Binding var selectedObs: Observation?
-  
-//  @Binding var imageURLStr: String?
-  
+
   var body: some View {
     VStack {
-      if showView { Text("ObservationsLocationView").font(.customTiny) }
-      SettingsDetailsView(
-        count: observationsLocationViewModel.locations.count,
-        results: observationsLocationViewModel.count
-      )
-      
-      
-      HorizontalLine()
-      List {
-        if let results =  observationsLocationViewModel.observations?.results {
-          ForEach(results, id: \.id) {
-            obs in
-            VStack {
-              NavigationLink(destination: ObsDetailView(obs: obs)) {
-                ObsView(
-                  showSpecies: true, showObserver: true, showArea: false,
-                  selectedObservation: $selectedObservation,
-                  obs: obs
-                )
-                .padding(8)
-              }
-              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-              Divider()
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowSeparator(.hidden)
 
-          }
-        }
-      }
-      .listStyle(PlainListStyle())
-      
-      .toolbar {
-        if (!settings.accessibility) {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: {
-              settings.hidePictures.toggle()
-            }) {
-              ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-                .accessibilityElement(children: .combine)
-                .accessibility(label: Text("Hide pictures"))
-            }
-          }
-        }
-      }
+      if let observations = observationsLocationViewModel.observations?.results {
+        if showView { Text("ObservationsLocationView").font(.customTiny) }
+        SettingsDetailsView(
+          count: observationsLocationViewModel.locations.count,
+          results: observationsLocationViewModel.count
+        )
+        HorizontalLine()
+                  ObservationListView(observations: observations)
+                      .environmentObject(Settings()) // Pass environment object
+              } else {
+                ProgressView()
+              }
+//      List {
+//        if let results =  observationsLocationViewModel.observations?.results {
+//          ForEach(results, id: \.id) {
+//            obs in
+//            VStack {
+//              NavigationLink(destination: ObsDetailView(obs: obs)) {
+//                ObsView(
+//                  showSpecies: true, showObserver: true, showArea: false,
+//                  obs: obs
+//                )
+//                .padding(8)
+//              }
+//              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+//              Divider()
+//            }
+//            .listRowInsets(EdgeInsets())
+//            .listRowSeparator(.hidden)
+//
+//          }
+//        }
+//      }
+//      .listStyle(PlainListStyle())
+//      .toolbar {
+//        if (!settings.accessibility) {
+//          ToolbarItem(placement: .navigationBarTrailing) {
+//            Button(action: {
+//              settings.hidePictures.toggle()
+//            }) {
+//              ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+//                .accessibilityElement(children: .combine)
+//                .accessibility(label: Text("Hide pictures"))
+//            }
+//          }
+//        }
+//      }
       
     }
     
@@ -182,11 +221,5 @@ struct ObservationsLocationView: View {
   }
 }
 
-//struct ObservationsLocationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ObservationsLocationView()
-//            .environmentObject(ObservationsLocationViewModel())
-//            .environmentObject(Settings())
-//    }
-//}
+
 

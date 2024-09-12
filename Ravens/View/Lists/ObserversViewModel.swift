@@ -114,6 +114,7 @@ struct ObserversView: View {
                         
                         observationsViewModel.fetchData(
                             settings: settings,
+                            entityType: "user",
                             userId: userViewModel.user?.id ?? 0,
                             completion: { log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
                         
@@ -143,6 +144,7 @@ struct ObserversView: View {
                            
                             observationsViewModel.fetchData(
                                 settings: settings,
+                                entityType: "user",
                                 userId: record.userID,
                                 completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
                                 )

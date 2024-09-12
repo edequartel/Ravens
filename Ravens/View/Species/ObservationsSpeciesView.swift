@@ -30,6 +30,8 @@ struct ObservationsSpeciesView: View {
   @State private var isLoaded = false
 
   @Binding var selectedSpecies: Species?
+
+//  @Binding var selectedObservation: Observation?
 //  @Binding var selectedObservationSound: Observation?
 //  @Binding var selectedObs: Observation?
 
@@ -108,18 +110,21 @@ struct ObservationsSpeciesView: View {
     VStack {
       List {
         if let results = observationsSpeciesViewModel.observationsSpecies?.results {
-          let sortedResults = results.sorted(by: { ($1.date, $0.time ?? "" ) < ($0.date, $1.time ?? "") })
-          ForEach(sortedResults.indices, id: \.self) { index in
-            let obs = sortedResults[index]
-
-            NavigationLink(destination: ObsDetailView(obs: obs)) {
-              
-
-              ObsSpeciesView(
-                obs: obs)
-//                selectedObs: $selectedObs
-//              )
+          ForEach(results, id: \.id) { obs in
+            VStack {
+              NavigationLink(destination: ObsDetailView(obs: obs)) {
+                //              ObsSpeciesView(
+                ObsView(
+                  showSpecies: false,
+//                  selectedObservation: $selectedObservation,
+                  obs: obs)
+                .padding(8)
+              }
+              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+              Divider()
             }
+            .listRowInsets(EdgeInsets())
+            .listRowSeparator(.hidden)
           }
         }
       }
@@ -140,18 +145,7 @@ struct ObservationsSpeciesView: View {
         }
 
       }
-      //            Text("last item in list")
-      //            Spacer()
-    } //vstack
-
-
-    //deze button voor later gebruiken als we door de vele observaties willen gaan
-    //        Button(action: {
-    //            offset = offset + 100
-    //            fetchDataModel(offset: offset)
-    //        }) {
-    //            Text("Next")
-    //        }
+    }
   }
 
   func fetchDataModel(offset: Int) {
@@ -175,6 +169,7 @@ struct ObservationsSpeciesView_Previews: PreviewProvider {
     ObservationsSpeciesView(
       item: testSpecies,
       selectedSpecies: .constant(nil))
+//      selectedObservation: .constant(nil))
 //      selectedObservationSound: .constant(nil),
 //      selectedObs: .constant(nil))
 //      imageURLStr: .constant(""))

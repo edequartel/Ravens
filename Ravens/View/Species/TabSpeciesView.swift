@@ -24,10 +24,6 @@ struct TabSpeciesView: View {
     @State private var searchText = ""
 
     @Binding var selectedSpecies: Species?
-//    @Binding var selectedObservationSound: Observation?
-//    @Binding var selectedObs: Observation?
-
-//    @Binding var imageURLStr: String?
 
 
   var body: some View {
@@ -57,9 +53,6 @@ struct TabSpeciesView: View {
                   SpeciesView(
                     item: species,
                     selectedSpecies: $selectedSpecies)
-//                    selectedObservationSound: $selectedObservationSound,
-//                    selectedObs: $selectedObs)
-//                    imageURLStr: $imageURLStr)
               ) {
                 
                 VStack(alignment: .leading) {
@@ -306,22 +299,25 @@ extension SpeciesViewModel {
     }
 }
 
-struct TabSpeciesView_Previews: PreviewProvider {
-    @State static var selectedSpecies: Species? = nil
-    @State static var selectedObservationSound: Observation? = nil
-
-    static var previews: some View {
-        TabSpeciesView(
-          selectedSpecies: $selectedSpecies)
-//          selectedObservationSound: $selectedObservationSound,
-//          selectedObs: .constant(nil))
-//          imageURLStr: .constant(""))
-            .environmentObject(SpeciesViewModel())
-            .environmentObject(SpeciesGroupsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(BookMarksViewModel())
-            .environmentObject(HTMLViewModel())
-            .environmentObject(Settings())
-    }
-}
+//struct TabSpeciesView_Previews: PreviewProvider {
+//    @State static var selectedSpecies: Species? = nil
+////    @State static var selectedObservationSound: Observation? = nil
+//    @State var selectedObservation: Observation?
+//
+//
+//    static var previews: some View {
+//        TabSpeciesView(
+//          selectedSpecies: $selectedSpecies,
+//          selectedObservation: $selectedObservation)
+////          selectedObservationSound: $selectedObservationSound,
+////          selectedObs: .constant(nil))
+////          imageURLStr: .constant(""))
+//            .environmentObject(SpeciesViewModel())
+//            .environmentObject(SpeciesGroupsViewModel())
+//            .environmentObject(ObservationsSpeciesViewModel())
+//            .environmentObject(KeychainViewModel())
+//            .environmentObject(BookMarksViewModel())
+//            .environmentObject(HTMLViewModel())
+//            .environmentObject(Settings())
+//    }
+//}

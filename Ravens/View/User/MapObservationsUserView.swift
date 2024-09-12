@@ -73,6 +73,7 @@ struct MapObservationsUserView: View {
             if settings.initialUsersLoad {
                 observationsViewModel.fetchData(
                     settings: settings,
+                    entityType: "user",
                     userId: settings.userId,
                     completion: { log.info("viewModel.fetchData completion") })
                 settings.initialUsersLoad = false

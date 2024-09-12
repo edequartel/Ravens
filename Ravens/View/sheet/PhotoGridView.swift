@@ -18,8 +18,6 @@ struct PhotoGridView: View {
         GridItem(.flexible()), // First column
         GridItem(.flexible()), // Second column
         GridItem(.flexible()),  // Third column
-        GridItem(.flexible()),  // Third column
-        GridItem(.flexible())  // Third column
     ]
 
     var body: some View {
@@ -50,6 +48,25 @@ struct PhotoGridView: View {
                 }
             }
             .padding(8)
+        }
+        .sheet(item: $imageURLStr) { imageURLStr in
+            if let imageURL = URL(string: imageURLStr) {
+                CachedAsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    case .failure:
+                        Image(systemName: "xmark.circle")
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            }
         }
         .animation(.default, value: photos?.count) // Smooth animation for dynamic changes in grid size
     }

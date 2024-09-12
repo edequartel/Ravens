@@ -24,8 +24,7 @@ struct TabUserObservationsView: View {
         if showFirstView && !settings.accessibility {
           MapObservationsUserView()
         } else {
-          ObservationsView(
-            selectedObservation: $selectedObservation)
+          ObservationsView()
 //            selectedObservationSound: $selectedObservationSound,
 //            selectedObs: $selectedObs)
 //            imageURLStr: $imageURLStr)

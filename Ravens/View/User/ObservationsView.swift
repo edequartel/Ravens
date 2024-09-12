@@ -8,37 +8,6 @@
 import SwiftUI
 import SwiftyBeaver
 
-enum EntityType {
-    case area
-    case user
-    case species
-
-    // Example method to provide a description for each case
-    var description: String {
-        switch self {
-        case .area:
-            return "Area"
-        case .user:
-            return "User"
-        case .species:
-            return "Species"
-        }
-    }
-
-    // Example method for icon names for each case (optional)
-    var iconName: String {
-        switch self {
-        case .area:
-            return "map"
-        case .user:
-            return "person"
-        case .species:
-            return "leaf"
-        }
-    }
-}
-
-
 struct CustomDivider: View {
     var color: Color = .gray
     var width: CGFloat = 1
@@ -50,28 +19,58 @@ struct CustomDivider: View {
     }
 }
 
+enum EntityType: String {
+    case area = "area"
+    case user = "user"
+    case species = "species"
+
+//    // Example method to provide a description for each case
+//    var description: String {
+//        switch self {
+//        case .area:
+//            return "Area"
+//        case .user:
+//            return "User"
+//        case .species:
+//            return "Species"
+//        }
+//    }
+//
+//    // Example method for icon names for each case (optional)
+//    var iconName: String {
+//        switch self {
+//        case .area:
+//            return "map"
+//        case .user:
+//            return "person"
+//        case .species:
+//            return "leaf"
+//        }
+//    }
+}
+
 struct ObservationsView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationsUserViewModel: ObservationsViewModel
+  @EnvironmentObject var observationsViewModel: ObservationsViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
-  @Binding var selectedObservation: Observation?
+//  @Binding var selectedObservation: Observation?
 
   var body: some View {
     VStack {
-      if showView { Text("ObservationsUserView").font(.customTiny) }
-      if let results = observationsUserViewModel.observations?.results, results.count > 0 {
+      if showView { Text("ObservationsView").font(.customTiny) }
+      if let results = observationsViewModel.observations?.results, results.count > 0 {
         HorizontalLine()
         List {
-          if let results =  observationsUserViewModel.observations?.results {
+          if let results =  observationsViewModel.observations?.results {
             ForEach(results, id: \.id) { obs in
               VStack {
                 NavigationLink(destination: ObsDetailView(obs: obs)) {
                   ObsView(
                     showSpecies: true, showObserver: false, showArea: true,
-                    selectedObservation: $selectedObservation,
+//                    selectedObservation: $selectedObservation,
                     obs: obs
                   )
                   .padding(8)
@@ -112,8 +111,9 @@ struct ObservationsView: View {
 
     .onAppear {
       if settings.initialUsersLoad {
-        observationsUserViewModel.fetchData(
+        observationsViewModel.fetchData(
           settings: settings,
+          entityType: "user",
           userId: settings.userId,
           completion: { log.info("viewModel.fetchData completion") })
         settings.initialUsersLoad = false
@@ -121,8 +121,9 @@ struct ObservationsView: View {
     }
     .refreshable {
       log.info("refreshing")
-      observationsUserViewModel.fetchData(
+      observationsViewModel.fetchData(
         settings: settings,
+        entityType: "user",
         userId: settings.userId,
         completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
       )
@@ -135,11 +136,7 @@ struct ObservationsUserView_Previews: PreviewProvider {
   @State static var selectedObservationSound: Observation? = nil
 
   static var previews: some View {
-    ObservationsView(
-      selectedObservation: $selectedObservation)
-//      selectedObservationSound: $selectedObservationSound,
-//      selectedObs: .constant(nil))
-//      imageURLStr: .constant(""))
+    ObservationsView()
     .environmentObject(ObservationsViewModel())
     .environmentObject(UserViewModel())
     .environmentObject(Settings())

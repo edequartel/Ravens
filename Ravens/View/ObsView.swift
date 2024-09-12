@@ -24,7 +24,7 @@ struct ObsView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
   
-  @Binding var selectedObservation: Observation?
+  @State var selectedObservation: Observation?
 
   @State var imageURLStr: String?
   @State var obs: Observation
@@ -37,9 +37,12 @@ struct ObsView: View {
 
       VStack {
         if showView { Text("ObsView").font(.customTiny) }
-        ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
 
         if showSpecies {
+
+        ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
+
+
           HStack {
             Text("\(obs.species_detail.scientific_name)")
               .foregroundColor(.gray)
@@ -79,6 +82,8 @@ struct ObsView: View {
             }
           }
         }
+
+        Spacer()
 
         
       }

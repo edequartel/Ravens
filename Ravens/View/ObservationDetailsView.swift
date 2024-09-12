@@ -25,9 +25,6 @@ struct ObservationDetailsView: View {
                     Image(systemName: "binoculars.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blue, .red)
-//                    Spacer(minLength:2)
-//                    Text("\(count)")
-//                        .foregroundColor(.blue)
                 }
             }
             .onAppear {
