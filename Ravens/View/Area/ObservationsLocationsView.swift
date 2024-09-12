@@ -12,51 +12,50 @@ import SwiftUIImageViewer
 
 
 struct ObservationListView: View {
-    var observations: [Observation]
-    @EnvironmentObject var settings: Settings
+  var observations: [Observation]
+  @EnvironmentObject var settings: Settings
 
-    var body: some View {
-        List {
-            ForEach(observations, id: \.id) { obs in
-                VStack {
-                    NavigationLink(destination: ObsDetailView(obs: obs)) {
-                        ObsView(
-                            showSpecies: true,
-                            showObserver: true,
-                            showArea: false,
-                            obs: obs
-                        )
-                        .padding(8)
-                    }
-                    .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-
-                    Divider()
-                }
-                .listRowInsets(EdgeInsets()) // Remove default padding
-                .listRowSeparator(.hidden)  // Remove separator line
-            }
+  var body: some View {
+    List {
+      ForEach(observations, id: \.id) { obs in
+        VStack {
+          NavigationLink(destination: ObsDetailView(obs: obs)) {
+            ObsView(
+              showSpecies: true,
+              showObserver: true,
+              showArea: false,
+              obs: obs
+            )
+            .padding(8)
+          }
+          .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+          Divider()
         }
-        .listStyle(PlainListStyle()) // No additional styling, plain list look
-        .toolbar {
-            if (!settings.accessibility) {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        settings.hidePictures.toggle()
-                    }) {
-                        ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-                            .accessibilityElement(children: .combine)
-                            .accessibility(label: Text("Hide pictures"))
-                    }
-                }
-            }
-        }
+        .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
+        .listRowSeparator(.hidden)  // Remove separator line
+      }
     }
+    .listStyle(PlainListStyle()) // No additional styling, plain list look
+    .toolbar {
+      if (!settings.accessibility) {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            settings.hidePictures.toggle()
+          }) {
+            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
+              .accessibilityElement(children: .combine)
+              .accessibility(label: Text("Hide pictures"))
+          }
+        }
+      }
+    }
+  }
 }
 
 
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
-  
+
   @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var locationManagerModel: LocationManagerModel
@@ -73,54 +72,18 @@ struct ObservationsLocationView: View {
           results: observationsLocationViewModel.count
         )
         HorizontalLine()
-                  ObservationListView(observations: observations)
-                      .environmentObject(Settings()) // Pass environment object
-              } else {
-                ProgressView()
-              }
-//      List {
-//        if let results =  observationsLocationViewModel.observations?.results {
-//          ForEach(results, id: \.id) {
-//            obs in
-//            VStack {
-//              NavigationLink(destination: ObsDetailView(obs: obs)) {
-//                ObsView(
-//                  showSpecies: true, showObserver: true, showArea: false,
-//                  obs: obs
-//                )
-//                .padding(8)
-//              }
-//              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-//              Divider()
-//            }
-//            .listRowInsets(EdgeInsets())
-//            .listRowSeparator(.hidden)
-//
-//          }
-//        }
-//      }
-//      .listStyle(PlainListStyle())
-//      .toolbar {
-//        if (!settings.accessibility) {
-//          ToolbarItem(placement: .navigationBarTrailing) {
-//            Button(action: {
-//              settings.hidePictures.toggle()
-//            }) {
-//              ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-//                .accessibilityElement(children: .combine)
-//                .accessibility(label: Text("Hide pictures"))
-//            }
-//          }
-//        }
-//      }
-      
+        ObservationListView(observations: observations)
+          .environmentObject(Settings()) // Pass environment object
+      } else {
+        ProgressView()
+      }
     }
-    
+
     .onAppear()  {
       getDataAreaModel()
     }
   }
-  
+
   func getDataAreaModel() {
     log.info("getDataAreaModel")
     log.info(settings.initialAreaLoad)
@@ -135,7 +98,7 @@ struct ObservationsLocationView: View {
       }
       settings.initialAreaLoad = false
     }
-    
+
     log.info(settings.isAreaChanged)
     if settings.isAreaChanged {
       log.info("isAreaChanged")
@@ -147,7 +110,7 @@ struct ObservationsLocationView: View {
       }
       settings.isAreaChanged = false
     }
-    
+
     log.info(settings.isLocationIDChanged)
     if settings.isLocationIDChanged {
       log.info("isLocationIDChanged")
@@ -159,8 +122,8 @@ struct ObservationsLocationView: View {
       settings.isLocationIDChanged = false
     }
   }
-  
-  
+
+
   func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
     log.error("fetchDataLocation")
     locationIdViewModel.fetchLocations(
@@ -174,14 +137,14 @@ struct ObservationsLocationView: View {
         for location in fetchedLocations {
           log.info("location \(location)")
         }
-        
+
         //1. get the geoJSON for this area / we pick the first one = 0
         geoJSONViewModel.fetchGeoJsonData(
           for: fetchedLocations[0].id,
           completion:
             {
               log.info("geoJSONViewModel data loaded")
-              
+
               //2. get the observations for this area
               observationsLocationViewModel.fetchData(
                 settings: settings,
@@ -196,7 +159,7 @@ struct ObservationsLocationView: View {
         )
       })
   }
-  
+
   func fetchDataLocationID() {
     log.error("fetchDataLocationID")
     //1. get the geoJSON for this area / we pick the first one = 0
@@ -205,7 +168,7 @@ struct ObservationsLocationView: View {
       completion:
         {
           log.error("geoJSONViewModel data loaded")
-          
+
           //2. get the observations for this area
           observationsLocationViewModel.fetchData(
             settings: settings,

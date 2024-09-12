@@ -79,19 +79,12 @@ struct RavensView: View {
       TabView {
         // Tab 1
         TabLocationView()
-//          selectedObservationSound: $selectedObservationSound,
-//          selectedObs: $selectedObs)
-//          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Area")
           Image(systemName: SFAreaFill)
         }
         // Tab 2
-        TabUserObservationsView(
-          selectedObservation: $selectedObservation)
-//          selectedObservationSound: $selectedObservationSound,
-//          selectedObs: $selectedObs)
-//          imageURLStr: $imageURLStr)
+        TabUserObservationsView()
         .tabItem {
           Text("Us")
           Image(systemName: "person.2.fill")
@@ -99,9 +92,6 @@ struct RavensView: View {
         // Tab 3
         TabSpeciesView(
           selectedSpecies: $selectedSpecies)
-//          selectedObservationSound: $selectedObservationSound,
-//          selectedObs: $selectedObs)
-//          imageURLStr: $imageURLStr)
         .tabItem {
           Text("Species")
           Image(systemName: "tree")
@@ -126,33 +116,6 @@ struct RavensView: View {
       .sheet(item: $selectedSpecies) { item in
         SpeciesDetailsView(speciesID: item.id)
       }
-
-//      .sheet(item: $selectedObservation) { item in
-//        SpeciesDetailsView(speciesID: item.species_detail.id)
-//      }
-
-//      .sheet(item: $selectedObs) { item in
-//        ObsView(obs: item, imageURLStr: $imageURLStr, selectedObservationSound: $selectedObservationSound)
-//      }
-
-
-
-
-
-//      .sheet(item: $selectedObservationSound) { item in
-//        PlayerControlsView(sounds: item.sounds ?? [])
-//          .presentationDetents([.fraction(0.25), .medium, .large])
-//          .presentationDragIndicator(.visible)
-//      }
-
-//      .fullScreenCover(item: $imageURLStr, onDismiss: {
-//          imageURLStr = nil
-//      }) { item in
-//          ImageView(item: item, dismissAction: {
-//              imageURLStr = nil
-//          })
-//      }
-
       .onAppear() {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }
