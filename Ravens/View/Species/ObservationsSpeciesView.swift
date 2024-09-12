@@ -29,7 +29,8 @@ struct ObservationsSpeciesView: View {
   @State private var endOfListReached = false
   @State private var isLoaded = false
 
-  @Binding var selectedSpecies: Species?
+//  @Binding var selectedSpecies: Species?
+  @Binding var selectedSpeciesID: Int?
 
 //  @Binding var selectedObservation: Observation?
 //  @Binding var selectedObservationSound: Observation?
@@ -56,7 +57,7 @@ struct ObservationsSpeciesView: View {
         Spacer()
 
         Button(action: {
-          selectedSpecies = item
+          selectedSpeciesID = item.id
         }  ) { Image(systemName: "info.circle")
         }
 
@@ -163,21 +164,21 @@ struct ObservationsSpeciesView: View {
 }
 
 
-struct ObservationsSpeciesView_Previews: PreviewProvider {
-  static var previews: some View {
-    let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-    ObservationsSpeciesView(
-      item: testSpecies,
-      selectedSpecies: .constant(nil))
-//      selectedObservation: .constant(nil))
-//      selectedObservationSound: .constant(nil),
-//      selectedObs: .constant(nil))
-//      imageURLStr: .constant(""))
-    .environmentObject(ObservationsSpeciesViewModel())
-    .environmentObject(BookMarksViewModel())
-    .environmentObject(SpeciesViewModel())
-    .environmentObject(HTMLViewModel())
-    .environmentObject(Settings())
-  }
-}
+//struct ObservationsSpeciesView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
+//    ObservationsSpeciesView(
+//      item: testSpecies,
+//      selectedSpeciesID: .constant(nil))
+////      selectedObservation: .constant(nil))
+////      selectedObservationSound: .constant(nil),
+////      selectedObs: .constant(nil))
+////      imageURLStr: .constant(""))
+//    .environmentObject(ObservationsSpeciesViewModel())
+//    .environmentObject(BookMarksViewModel())
+//    .environmentObject(SpeciesViewModel())
+//    .environmentObject(HTMLViewModel())
+//    .environmentObject(Settings())
+//  }
+//}
 

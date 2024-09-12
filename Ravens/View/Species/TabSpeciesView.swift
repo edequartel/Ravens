@@ -23,7 +23,7 @@ struct TabSpeciesView: View {
     @State private var selectedFilterOption: FilterOption = .native
     @State private var searchText = ""
 
-    @Binding var selectedSpecies: Species?
+    @Binding var selectedSpeciesID: Int?
 
 
   var body: some View {
@@ -52,7 +52,7 @@ struct TabSpeciesView: View {
                 destination:
                   SpeciesView(
                     item: species,
-                    selectedSpecies: $selectedSpecies)
+                    selectedSpeciesID: $selectedSpeciesID)
               ) {
                 
                 VStack(alignment: .leading) {
@@ -99,7 +99,7 @@ struct TabSpeciesView: View {
               
               .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button(action: {
-                  selectedSpecies = species
+                  selectedSpeciesID = species.id
                 }) {
                   Image(systemName: "info.circle")
                 }

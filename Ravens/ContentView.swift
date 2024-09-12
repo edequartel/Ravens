@@ -65,7 +65,7 @@ struct RavensView: View {
   @EnvironmentObject var settings: Settings
 
 
-  @State private var selectedSpecies: Species?
+  @State private var selectedSpeciesID: Int?
 //  @State private var selectedObservationSound: Observation?
   @State private var selectedObservation: Observation?
 //  @State private var selectedObs: Observation?
@@ -91,7 +91,7 @@ struct RavensView: View {
         }
         // Tab 3
         TabSpeciesView(
-          selectedSpecies: $selectedSpecies)
+          selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text("Species")
           Image(systemName: "tree")
@@ -113,8 +113,8 @@ struct RavensView: View {
 //          }
       }
 
-      .sheet(item: $selectedSpecies) { item in
-        SpeciesDetailsView(speciesID: item.id)
+      .sheet(item: $selectedSpeciesID) { item in
+        SpeciesDetailsView(speciesID: item)
       }
       .onAppear() {
         log.error("*** NEW LAUNCHING RAVENS ***")

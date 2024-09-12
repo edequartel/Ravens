@@ -15,7 +15,8 @@ struct SpeciesView: View {
   @EnvironmentObject var settings: Settings
 
   var item: Species
-  @Binding var selectedSpecies: Species?
+//  @Binding var selectedSpecies: Species?
+  @Binding var selectedSpeciesID: Int?
 
 //  @Binding var selectedObservation: Observation?
 
@@ -29,7 +30,7 @@ struct SpeciesView: View {
       } else {
         ObservationsSpeciesView(
           item: item,
-          selectedSpecies: $selectedSpecies
+          selectedSpeciesID: $selectedSpeciesID
         )
       }
     }

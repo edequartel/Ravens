@@ -459,3 +459,8 @@ func vibrate() {
 
 let showView = false
 
+//make Int directly Identifiable
+extension Int: Identifiable {
+    public var id: Int { self }
+}
+
