@@ -32,6 +32,7 @@ struct ObservationsUserView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
+  @Binding var selectedSpeciesID: Int?
 //  @Binding var selectedObservation: Observation?
 
   var body: some View {
@@ -40,7 +41,7 @@ struct ObservationsUserView: View {
       if let observations = observationsViewModel.observations?.results, observations.count > 0 {
         HorizontalLine()
 
-        ObservationListView(observations: observations)
+        ObservationListView(observations: observations, entity: .user, selectedSpeciesID: $selectedSpeciesID)
           .environmentObject(Settings()) // Pass environment object
       } else {
         ProgressView()
@@ -74,7 +75,7 @@ struct ObservationsUserView_Previews: PreviewProvider {
   @State static var selectedObservationSound: Observation? = nil
 
   static var previews: some View {
-    ObservationsUserView()
+    ObservationsUserView(selectedSpeciesID: .constant(nil))
     .environmentObject(ObservationsViewModel())
     .environmentObject(UserViewModel())
     .environmentObject(Settings())

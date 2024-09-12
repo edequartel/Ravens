@@ -23,9 +23,10 @@ struct ObsView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
-  
-  @State var selectedObservation: Observation?
 
+  @Binding var selectedSpeciesID: Int?
+
+  @State var selectedObservation: Observation?
   @State var imageURLStr: String?
   @State var obs: Observation
   
@@ -40,7 +41,7 @@ struct ObsView: View {
 
         if showSpecies {
 
-        ObsDetailsRowView(obs: obs, bookMarksViewModel: bookMarksViewModel)
+        ObsDetailsRowView(obs: obs)//, bookMarksViewModel: bookMarksViewModel)
 
 
           HStack {
@@ -84,17 +85,14 @@ struct ObsView: View {
         }
 
         Spacer()
-
-        
       }
-
-
-      
-      
     }
 //    .onTapGesture {
-//      selectedObs = obs
+//      print("xx")
+//      selectedSpeciesID = obs.species_detail.id
 //    }
+
+
     .accessibilityElement(children: .combine)
     .accessibilityLabel("""
                                  \(obs.species_detail.name) gezien,
@@ -103,8 +101,6 @@ struct ObsView: View {
                                  \(obs.number) keer.
                                 """
     )
-    
-    
     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
       let url = URL(string: obs.permalink)!
       ShareLink(
@@ -119,7 +115,9 @@ struct ObsView: View {
       
       Button(action: {
         print("xxx \(obs.species_detail.name) \(obs.species_detail.id)")
-        selectedObservation = obs
+//        selectedObservation = obs
+        selectedSpeciesID = obs.species_detail.id
+        //    }
       }) {
         Image(systemName: SFInformation)
       }

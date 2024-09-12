@@ -11,6 +11,7 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var settings: Settings
   @State private var showFirstView = false
 
+  @Binding var selectedSpeciesID: Int?
 
   var body: some View {
     NavigationView {
@@ -19,7 +20,7 @@ struct TabUserObservationsView: View {
         if showFirstView && !settings.accessibility {
           MapObservationsUserView()
         } else {
-          ObservationsUserView()
+          ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
       .toolbar {
@@ -43,15 +44,10 @@ struct TabUserObservationsView: View {
 }
 
 struct TabUserObservationsView_Previews: PreviewProvider {
-  @State static var selectedObservation: Observation? = nil
-  @State static var selectedObservationSound: Observation? = nil
   @StateObject static var observationsUserViewModel = ObservationsViewModel()
 
   static var previews: some View {
-    TabUserObservationsView()
-//      selectedObservationSound: $selectedObservationSound,
-//      selectedObs: .constant(nil))
-//      imageURLStr: .constant(""))
+    TabUserObservationsView(selectedSpeciesID: .constant(nil))
     .environmentObject(Settings())
     .environmentObject(observationsUserViewModel)
   }

@@ -13,7 +13,10 @@ import SwiftUIImageViewer
 
 struct ObservationListView: View {
   var observations: [Observation]
+  var entity: EntityType
   @EnvironmentObject var settings: Settings
+
+  @Binding var selectedSpeciesID: Int?
 
   var body: some View {
     List {
@@ -21,9 +24,10 @@ struct ObservationListView: View {
         VStack {
           NavigationLink(destination: ObsDetailView(obs: obs)) {
             ObsView(
-              showSpecies: true,
-              showObserver: true,
-              showArea: false,
+              showSpecies: !(entity == .species),  //<--
+              showObserver: !(entity == .user),
+              showArea: !(entity == .area),
+              selectedSpeciesID: $selectedSpeciesID,
               obs: obs
             )
             .padding(8)
@@ -62,6 +66,8 @@ struct ObservationsLocationView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var settings: Settings
 
+  @Binding var selectedSpeciesID: Int?
+
   var body: some View {
     VStack {
 
@@ -72,7 +78,7 @@ struct ObservationsLocationView: View {
           results: observationsLocationViewModel.count
         )
         HorizontalLine()
-        ObservationListView(observations: observations)
+        ObservationListView(observations: observations, entity: .area, selectedSpeciesID: $selectedSpeciesID)
           .environmentObject(Settings()) // Pass environment object
       } else {
         ProgressView()

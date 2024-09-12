@@ -63,14 +63,7 @@ struct ContentView: View {
 struct RavensView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var settings: Settings
-
-
   @State private var selectedSpeciesID: Int?
-//  @State private var selectedObservationSound: Observation?
-  @State private var selectedObservation: Observation?
-//  @State private var selectedObs: Observation?
-
-//  @State private var imageURLStr: String?
 
   let viewModel = RecordingsListViewModel() //later aanpassen??
 
@@ -78,13 +71,13 @@ struct RavensView: View {
     VStack {
       TabView {
         // Tab 1
-        TabLocationView()
+        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text("Area")
           Image(systemName: SFAreaFill)
         }
         // Tab 2
-        TabUserObservationsView()
+        TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text("Us")
           Image(systemName: "person.2.fill")

@@ -117,7 +117,7 @@ struct ObservationsSpeciesView: View {
                 //              ObsSpeciesView(
                 ObsView(
                   showSpecies: false,
-//                  selectedObservation: $selectedObservation,
+                  selectedSpeciesID: $selectedSpeciesID,
                   obs: obs)
                 .padding(8)
               }

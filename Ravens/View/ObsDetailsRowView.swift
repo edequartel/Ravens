@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ObsDetailsRowView: View {
   var obs: Observation
-  var bookMarksViewModel: BookMarksViewModel
-  
+  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+
   var body: some View {
     HStack {
       Image(systemName: "circle.fill")
@@ -21,10 +21,6 @@ struct ObsDetailsRowView: View {
         .lineLimit(1) // Set the maximum number of lines to 1
         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       
-//      if obs.photos?.count ?? 0 > 0 {
-//        Image(systemName: "photo")
-//      }
-      
       if obs.sounds?.count ?? 0 > 0 {
         Image(systemName: "waveform")
       }
@@ -32,10 +28,17 @@ struct ObsDetailsRowView: View {
       if obs.notes?.count ?? 0 > 0 {
         Image(systemName: "list.clipboard")
       }
+      
       Spacer()
+      
       if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
         Image(systemName: SFSpeciesFill)
       }
+
+      
+
+
+
     }
   }
 }

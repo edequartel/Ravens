@@ -18,15 +18,11 @@ struct TabLocationView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
 
+  @Binding var selectedSpeciesID: Int?
+
   @State private var searchText: String = ""
   @State private var showFirstView = true
   @State private var isShowingLocationList = false
-
-//  @Binding var selectedObservation: Observation?
-//  @Binding var selectedObservationSound: Observation?
-//  @Binding var selectedObs: Observation?
-
-//  @Binding var imageURLStr: String?
 
 
   var body: some View {
@@ -36,11 +32,7 @@ struct TabLocationView: View {
         if showFirstView && !settings.accessibility {
           MapObservationsLocationView()
         } else {
-          ObservationsLocationView()
-//            selectedObservation: $selectedObservation)
-//            selectedObservationSound: $selectedObservationSound,
-//            selectedObs: $selectedObs)
-//            imageURLStr: $imageURLStr)
+          ObservationsLocationView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
       //            .navigationTitle(settings.locationName)
@@ -177,7 +169,7 @@ struct TabLocationView: View {
 }
 
 #Preview {
-    TabLocationView()
+  TabLocationView(selectedSpeciesID: .constant(nil))
       .environmentObject(Settings())
       .environmentObject(AreasViewModel())
       .environmentObject(LocationManagerModel())
