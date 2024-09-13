@@ -22,6 +22,7 @@
 		471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875422C00542100EF9F1F /* LocationManagerModel.swift */; };
 		471875452C00546A00EF9F1F /* LocationManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875442C00546A00EF9F1F /* LocationManagerView.swift */; };
 		471875472C022A2C00EF9F1F /* SpeciesGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875462C022A2B00EF9F1F /* SpeciesGroupsView.swift */; };
+		4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719C36B2C944F47000A11D1 /* ObservationListView.swift */; };
 		471A45E92C8F2D4A00433C6B /* PosOnMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */; };
 		471A4A702C7F3E0E00898AC5 /* create-single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A4A6F2C7F3E0E00898AC5 /* create-single.swift */; };
 		471DB65C2C77A643002F6EF5 /* AddObservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471DB65B2C77A643002F6EF5 /* AddObservationView.swift */; };
@@ -148,6 +149,7 @@
 		471875422C00542100EF9F1F /* LocationManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerModel.swift; sourceTree = "<group>"; };
 		471875442C00546A00EF9F1F /* LocationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerView.swift; sourceTree = "<group>"; };
 		471875462C022A2B00EF9F1F /* SpeciesGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGroupsView.swift; sourceTree = "<group>"; };
+		4719C36B2C944F47000A11D1 /* ObservationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationListView.swift; sourceTree = "<group>"; };
 		471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosOnMapView.swift; sourceTree = "<group>"; };
 		471A4A6F2C7F3E0E00898AC5 /* create-single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "create-single.swift"; sourceTree = "<group>"; };
 		471DB65B2C77A643002F6EF5 /* AddObservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObservationView.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				4719C36B2C944F47000A11D1 /* ObservationListView.swift */,
 				4782626E2C8EBEDE00DD746C /* DateConversionView.swift */,
 				478262692C8A12EE00DD746C /* testView.swift */,
 				478262672C89EF7600DD746C /* NotesView.swift */,
@@ -676,6 +679,7 @@
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				4738B63F2BF4E43800BF7557 /* ObsAreaView.swift in Sources */,
+				4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
 				4752426F2C2D887900DBBD0B /* HTMLDocument.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationRadiusView.swift in Sources */,

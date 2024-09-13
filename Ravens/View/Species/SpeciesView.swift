@@ -15,12 +15,7 @@ struct SpeciesView: View {
   @EnvironmentObject var settings: Settings
 
   var item: Species
-//  @Binding var selectedSpecies: Species?
   @Binding var selectedSpeciesID: Int?
-
-//  @Binding var selectedObservation: Observation?
-
-
 
   var body: some View {
     VStack {

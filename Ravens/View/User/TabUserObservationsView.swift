@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TabUserObservationsView: View {
   @EnvironmentObject var settings: Settings
+//  @StateObject var bookMarksViewModel = BookMarksViewModel()
+//  @EnvironmentObject var observersViewModel: ObserversViewModel
+//  @StateObject var areasViewModel = AreasViewModel()
   @State private var showFirstView = false
 
   @Binding var selectedSpeciesID: Int?
@@ -23,6 +26,7 @@ struct TabUserObservationsView: View {
           ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
+
       .toolbar {
         if !settings.accessibility {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -30,10 +34,23 @@ struct TabUserObservationsView: View {
               showFirstView.toggle()
             }) {
               Image(systemName: "rectangle.2.swap")
+                .accessibility(label: Text("Switch view"))
             }
           }
+
+
+          //add a toolbaritem here to the list of users
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(destination: ObserversView()) {
+              Image(systemName: "list.bullet")
+                .accessibility(label: Text("list users"))
+            }
+          }
+
         }
       }
+
+
       .navigationTitle("\(settings.userName)")
       .navigationBarTitleDisplayMode(.inline)
       .onAppearOnce {

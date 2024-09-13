@@ -22,6 +22,7 @@ struct DateConversionView: View {
 
   var body: some View {
     Text("\(formattedDate)")
+      .footnoteGrayStyle()
   }
 
     // Function to convert a string to a Date object

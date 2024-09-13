@@ -25,117 +25,94 @@ struct ObservationsSpeciesView: View {
   var item: Species
 
   @State private var offset = 0
-
   @State private var endOfListReached = false
   @State private var isLoaded = false
 
-//  @Binding var selectedSpecies: Species?
   @Binding var selectedSpeciesID: Int?
-
-//  @Binding var selectedObservation: Observation?
-//  @Binding var selectedObservationSound: Observation?
-//  @Binding var selectedObs: Observation?
-
-//  @Binding var imageURLStr: String?
 
 
   var body: some View {
     VStack {
-      if showView { Text("ObservationsSpeciesView").font(.customTiny) }
-      HStack {
-        //        Text("\(item.id)")
-        //          .font(.footnote)
-        //          .foregroundColor(.gray)
-
-        Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
-          .foregroundColor(RarityColor(value: item.rarity))
-
-        Text("\(item.name)")// - \(item.id)")
-          .bold()
-          .lineLimit(1) // Set the maximum number of lines to 1
-          .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-        Spacer()
-
-        Button(action: {
-          selectedSpeciesID = item.id
-        }  ) { Image(systemName: "info.circle")
-        }
-
-        Button(action: {
-          if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
-            print("bookmarks remove")
-            bookMarksViewModel.removeRecord(speciesID: item.id)
-          } else {
-            bookMarksViewModel.appendRecord(speciesID: item.id)
-            print("bookmarks append")
-          }
-
-        } ) {
-          Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
-            .foregroundColor(.black)
-        }
-      }
-
       VStack {
+        if showView { Text("ObservationsSpeciesView").font(.customTiny) }
+
         HStack {
-          Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
-            .foregroundColor(.gray)
-            .font(.footnote)
-          Spacer()
-        }
-        HStack{
-          Text("\(item.scientific_name)")
-            .foregroundColor(.gray)
-            .font(.footnote)
-            .italic()
+          Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
+            .foregroundColor(RarityColor(value: item.rarity))
+
+          Text("\(item.name)")// - \(item.id)")
+            .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
           Spacer()
+
+          Button(action: {
+            selectedSpeciesID = item.id
+          }  ) { Image(systemName: "info.circle")
+          }
+
+          Button(action: {
+            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
+              print("bookmarks remove")
+              bookMarksViewModel.removeRecord(speciesID: item.id)
+            } else {
+              bookMarksViewModel.appendRecord(speciesID: item.id)
+              print("bookmarks append")
+            }
+
+          } ) {
+            Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
+              .foregroundColor(.black)
+          }
+        }
+
+        VStack {
+          HStack {
+            Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
+              .foregroundColor(.gray)
+              .font(.footnote)
+            Spacer()
+          }
+          HStack{
+            Text("\(item.scientific_name)")
+              .foregroundColor(.gray)
+              .font(.footnote)
+              .italic()
+              .lineLimit(1) // Set the maximum number of lines to 1
+              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+            Spacer()
+          }
         }
       }
-      //      Spacer()
-    }
-
-    .padding(.horizontal,10)
-    .accessibilityElement(children: .combine)
-    .accessibilityLabel("""
+      .padding(.horizontal,10)
+      .accessibilityElement(children: .combine)
+      .accessibilityLabel("""
                              \(item.name)
                              \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "favorite": "not favorite")
                              \(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
                              \(item.scientific_name)
                             """
-    )
+      )
+      Spacer()
 
-    HorizontalLine()
 
-    VStack {
-      List {
-        if let results = observationsSpeciesViewModel.observationsSpecies?.results {
-          ForEach(results, id: \.id) { obs in
-            VStack {
-              NavigationLink(destination: ObsDetailView(obs: obs)) {
-                //              ObsSpeciesView(
-                ObsView(
-                  showSpecies: false,
-                  selectedSpeciesID: $selectedSpeciesID,
-                  obs: obs)
-                .padding(8)
-              }
-              .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-              Divider()
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowSeparator(.hidden)
-          }
+
+
+      VStack {
+        if let observations = observationsSpeciesViewModel.observationsSpecies?.results {
+          if showView { Text("observationsSpeciesViewModel").font(.customTiny) }
+          HorizontalLine()
+          ObservationListView(observations: observations, entity: .area, selectedSpeciesID: $selectedSpeciesID)
+            .environmentObject(Settings()) // Pass environment object
+        } else {
+          ProgressView()
         }
       }
-      .listStyle(PlainListStyle())
+
       .refreshable {
         print("refreshing...")
         fetchDataModel(offset: offset)
       }
-
-
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {
@@ -144,7 +121,6 @@ struct ObservationsSpeciesView: View {
           }
           hasAppeared = true // Prevent re-execution
         }
-
       }
     }
   }

@@ -56,7 +56,9 @@ struct ObsView: View {
         }
         HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+          
           Text("\(obs.number) x")
+            .footnoteGrayStyle()
           Spacer()
         }
         
@@ -75,11 +77,12 @@ struct ObsView: View {
 
         if showArea {
           HStack {
-            Text("\(obs.location_detail?.name ?? "name")")// \(obs.location_detail?.id ?? 0)")
+            Text("\(obs.location_detail?.name ?? "name")")
+              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()
             if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-              Image(systemName: "pentagon.fill")
+              Image(systemName: SFAreaFill)
             }
           }
         }
@@ -87,10 +90,6 @@ struct ObsView: View {
         Spacer()
       }
     }
-//    .onTapGesture {
-//      print("xx")
-//      selectedSpeciesID = obs.species_detail.id
-//    }
 
 
     .accessibilityElement(children: .combine)
@@ -101,29 +100,8 @@ struct ObsView: View {
                                  \(obs.number) keer.
                                 """
     )
-    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-      let url = URL(string: obs.permalink)!
-      ShareLink(
-        item: url
-        //                    message: Text(messageString()),
-        //                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
-      )
-      {
-        Image(systemName: SFShareLink)
-      }
-      .tint(.obsShareLink)
-      
-      Button(action: {
-        print("xxx \(obs.species_detail.name) \(obs.species_detail.id)")
-//        selectedObservation = obs
-        selectedSpeciesID = obs.species_detail.id
-        //    }
-      }) {
-        Image(systemName: SFInformation)
-      }
-      .tint(.obsInformation)
-      
-      
+    //trailing
+    .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       Button(action: {
         if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
           print("remove areas \(obs.location_detail?.id ?? 0)")
@@ -139,10 +117,14 @@ struct ObsView: View {
           )
         }
       }) {
-        Image(systemName: SFArea)
+        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+          Image(systemName: SFAreaFill)
+        } else {
+          Image(systemName: SFArea)
+        }
       }
       .tint(.obsArea)
-      
+
       Button(action: {
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
           print("bookmarks remove")
@@ -152,11 +134,48 @@ struct ObsView: View {
           print("bookmarks append")
         }
       } ) {
-        Image(systemName: SFSpecies)
+        Image(systemName:  SFSpeciesFill)
       }
       .tint(.obsSpecies)
+
+      Button(action: {
+        if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
+          observersViewModel.removeRecord(userID: obs.user_detail?.id ?? 0)
+        } else {
+          observersViewModel.appendRecord(
+            name: obs.user_detail?.name ?? "unknown",
+            userID: obs.user_detail?.id ?? 0)
+        }
+      }) {
+        Image(systemName: SFObserver)
+      }
+      .tint(.obsObserver)
+      .accessibility(label: Text("Add observer"))
+
+
+    }
+    //leading
+    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+      let url = URL(string: obs.permalink)!
+      ShareLink(
+        item: url
+        //                    message: Text(messageString()),
+        //                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
+      )
+      {
+        Image(systemName: SFShareLink)
+      }
+      .tint(.obsShareLink)
       
-      
+      Button(action: {
+        print("Information \(obs.species_detail.name) \(obs.species_detail.id)")
+        selectedSpeciesID = obs.species_detail.id
+        //    }
+      }) {
+        Image(systemName: SFInformation)
+      }
+      .tint(.obsInformation)
+
       Button(action: {
         if let url = URL(string: obs.permalink) {
           UIApplication.shared.open(url)

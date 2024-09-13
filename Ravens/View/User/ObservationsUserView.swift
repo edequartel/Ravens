@@ -33,16 +33,13 @@ struct ObservationsUserView: View {
   @EnvironmentObject var settings: Settings
 
   @Binding var selectedSpeciesID: Int?
-//  @Binding var selectedObservation: Observation?
 
   var body: some View {
     VStack {
       if showView { Text("ObservationsView").font(.customTiny) }
       if let observations = observationsViewModel.observations?.results, observations.count > 0 {
         HorizontalLine()
-
         ObservationListView(observations: observations, entity: .user, selectedSpeciesID: $selectedSpeciesID)
-          .environmentObject(Settings()) // Pass environment object
       } else {
         ProgressView()
       }

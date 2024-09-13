@@ -8,54 +8,6 @@
 import SwiftUI
 import SwiftyBeaver
 import MapKit
-import SwiftUIImageViewer
-
-
-struct ObservationListView: View {
-  var observations: [Observation]
-  var entity: EntityType
-  @EnvironmentObject var settings: Settings
-
-  @Binding var selectedSpeciesID: Int?
-
-  var body: some View {
-    List {
-      ForEach(observations, id: \.id) { obs in
-        VStack {
-          NavigationLink(destination: ObsDetailView(obs: obs)) {
-            ObsView(
-              showSpecies: !(entity == .species),  //<--
-              showObserver: !(entity == .user),
-              showArea: !(entity == .area),
-              selectedSpeciesID: $selectedSpeciesID,
-              obs: obs
-            )
-            .padding(8)
-          }
-          .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-          Divider()
-        }
-        .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
-        .listRowSeparator(.hidden)  // Remove separator line
-      }
-    }
-    .listStyle(PlainListStyle()) // No additional styling, plain list look
-    .toolbar {
-      if (!settings.accessibility) {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            settings.hidePictures.toggle()
-          }) {
-            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-              .accessibilityElement(children: .combine)
-              .accessibility(label: Text("Hide pictures"))
-          }
-        }
-      }
-    }
-  }
-}
-
 
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
@@ -79,7 +31,6 @@ struct ObservationsLocationView: View {
         )
         HorizontalLine()
         ObservationListView(observations: observations, entity: .area, selectedSpeciesID: $selectedSpeciesID)
-          .environmentObject(Settings()) // Pass environment object
       } else {
         ProgressView()
       }
