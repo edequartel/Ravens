@@ -102,7 +102,7 @@ struct ObservationsSpeciesView: View {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results {
           if showView { Text("observationsSpeciesViewModel").font(.customTiny) }
           HorizontalLine()
-          ObservationListView(observations: observations, entity: .area, selectedSpeciesID: $selectedSpeciesID)
+          ObservationListView(observations: observations, entity: .species, selectedSpeciesID: $selectedSpeciesID)
             .environmentObject(Settings()) // Pass environment object
         } else {
           ProgressView()

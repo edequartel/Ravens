@@ -99,7 +99,8 @@ struct ObsDetailView: View {
 
                     // Date and Count Section
                     HStack {
-                        Text("\(obs.date) \(obs.time ?? "")")
+                        DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+//                        Text("\(obs.date) \(obs.time ?? "")")
                         Text("\(obs.number) x")
                         Spacer()
                     }

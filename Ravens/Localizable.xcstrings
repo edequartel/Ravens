@@ -152,9 +152,6 @@
     ">= Rare" : {
 
     },
-    "Accessibility" : {
-
-    },
     "Add Observation" : {
 
     },
@@ -216,6 +213,7 @@
 
     },
     "Cache Empty" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -237,7 +235,6 @@
       }
     },
     "Common" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -291,6 +288,7 @@
       }
     },
     "Days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -440,6 +438,9 @@
         }
       }
     },
+    "Filtering" : {
+
+    },
     "getToken" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -489,9 +490,6 @@
     "Hello, World!" : {
 
     },
-    "Hide pictures" : {
-
-    },
     "Hybrid" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -532,6 +530,7 @@
       }
     },
     "Infinity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1056,7 +1055,6 @@
       }
     },
     "Rare" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1237,6 +1235,7 @@
       }
     },
     "Show observer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1394,7 +1393,6 @@
       }
     },
     "Uncommon" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1442,7 +1440,6 @@
 
     },
     "Very rare" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1466,6 +1463,7 @@
 
     },
     "Window" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

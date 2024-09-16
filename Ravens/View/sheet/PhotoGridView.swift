@@ -18,6 +18,7 @@ struct PhotoGridView: View {
         GridItem(.flexible()), // First column
         GridItem(.flexible()), // Second column
         GridItem(.flexible()),  // Third column
+        GridItem(.flexible())
     ]
 
     var body: some View {

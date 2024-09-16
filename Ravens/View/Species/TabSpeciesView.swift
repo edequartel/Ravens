@@ -19,6 +19,7 @@ struct TabSpeciesView: View {
     @EnvironmentObject var htmlViewModel: HTMLViewModel
     @EnvironmentObject var settings: Settings
 
+//--> these
     @State private var selectedSortOption: SortOption = .name
     @State private var selectedFilterOption: FilterOption = .native
     @State private var searchText = ""
@@ -34,6 +35,8 @@ struct TabSpeciesView: View {
         HorizontalLine()
         List {
           ForEach(
+
+//            --> and here
             speciesViewModel.filteredSpecies(
               by: selectedSortOption,
               searchText: searchText,
@@ -125,7 +128,8 @@ struct TabSpeciesView: View {
         
       }
       
-      
+//      deze overnemen... naar de observationListViewlist
+
       .toolbar{
         Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
           Picker("Sort by", selection: $selectedSortOption) {

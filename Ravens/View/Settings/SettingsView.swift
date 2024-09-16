@@ -87,40 +87,40 @@ struct SettingsView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     
-                    Toggle("Accessibility", isOn: $settings.accessibility)
-                        .onChange(of: settings.accessibility) {//    newValue in
-//                            if newValue {
-                                settings.hidePictures = true
-//                            }
-                        }
+//                    Toggle("Accessibility", isOn: $settings.accessibility)
+//                        .onChange(of: settings.accessibility) {//    newValue in
+////                            if newValue {
+//                                settings.hidePictures = true
+////                            }
+//                        }
 
                     
 //                    if !settings.accessibility {
 //                        Toggle("Poi", isOn: $settings.poiOn)
 //                    }
                     
-                    Toggle("Show observer", isOn: $settings.showUser)
-                    if !settings.accessibility {
-                        Toggle("Hide pictures", isOn: $settings.hidePictures)
-                    }
+//                    Toggle("Show observer", isOn: $settings.showUser)
+//                    if !settings.accessibility {
+//                        Toggle("Hide pictures", isOn: $settings.hidePictures)
+//                    }
                     
 //                    Toggle("Radius", isOn: $settings.radiusPreference)
                     
-                    if !settings.accessibility {
-                        Toggle("Map", isOn: $settings.mapPreference)
-                    }
+//                    if !settings.accessibility {
+//                        Toggle("Map", isOn: $settings.mapPreference)
+//                    }
                     
-                    Picker("Rarity", selection: $settings.selectedRarity) {
-                        ForEach(0..<5) { index in
-                            Image(systemName: "binoculars.fill")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(RarityColor(value: index), .clear)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .onChange(of: settings.selectedRarity) {
-                        log.info(settings.selectedRarity)
-                    }
+//                    Picker("Rarity", selection: $settings.selectedRarity) {
+//                        ForEach(0..<5) { index in
+//                            Image(systemName: "binoculars.fill")
+//                                .symbolRenderingMode(.palette)
+//                                .foregroundStyle(RarityColor(value: index), .clear)
+//                        }
+//                    }
+//                    .pickerStyle(SegmentedPickerStyle())
+//                    .onChange(of: settings.selectedRarity) {
+//                        log.info(settings.selectedRarity)
+//                    }
                     
 //                    if (settings.radiusPreference) {
 //                        HStack {
@@ -141,26 +141,26 @@ struct SettingsView: View {
                     
                 }
                 
-                Section("Days") {
-                        Toggle("Infinity", isOn: $settings.infinity)
-                            .onChange(of: settings.infinity) {
-                                settings.isFirstAppearObsView = true
-                            }
-
-                    
-                    
-                    if !(settings.infinity) {
-                        Picker("Window", selection: $settings.days) {
-                            ForEach(1 ... 14, id: \.self) { day in
-                                HStack() {
-                                    Text("\(day)")
-                                }
-                            }
-                        }
-                        
-                        DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
-                    }
-                }
+//                Section("Days") {
+//                        Toggle("Infinity", isOn: $settings.infinity)
+//                            .onChange(of: settings.infinity) {
+//                                settings.isFirstAppearObsView = true
+//                            }
+//
+//                    
+//                    
+//                    if !(settings.infinity) {
+//                        Picker("Window", selection: $settings.days) {
+//                            ForEach(1 ... 14, id: \.self) { day in
+//                                HStack() {
+//                                    Text("\(day)")
+//                                }
+//                            }
+//                        }
+//                        
+//                        DatePicker("Date", selection: $settings.selectedDate, displayedComponents: [.date])
+//                    }
+//                }
                 
                 
                 Section(header: Text("App details")) {
@@ -169,15 +169,15 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         Text(version())
                         Text(locale.description)
-                        HStack {
-                            Text("\(storage)")
-                            Spacer()
-                            Button("Cache Empty") {
-                                deleteAllFiles()
-                                storage = String(calculateLocalStorageSize())
-                                log.error("cache is emptied")
-                            }
-                        }
+//                        HStack {
+//                            Text("\(storage)")
+//                            Spacer()
+//                            Button("Cache Empty") {
+//                                deleteAllFiles()
+//                                storage = String(calculateLocalStorageSize())
+//                                log.error("cache is emptied")
+//                            }
+//                        }
                     }
                     .font(.footnote)
                 }
