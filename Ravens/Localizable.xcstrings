@@ -24,16 +24,6 @@
         }
       }
     },
-    " %@,\n op %@, %@,\n %lld keer.\n %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : " %1$@,\n op %2$@, %3$@,\n %4$lld keer.\n %5$@"
-          }
-        }
-      }
-    },
     "(%lld)" : {
 
     },
@@ -156,9 +146,6 @@
 
     },
     "Add observer" : {
-
-    },
-    "Add species to bookmarks" : {
 
     },
     "Add to areas" : {
@@ -926,9 +913,6 @@
     "obs 2023" : {
 
     },
-    "ObsAreaView" : {
-
-    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -982,9 +966,6 @@
           }
         }
       }
-    },
-    "ObsSpeciesView" : {
-
     },
     "ObsView" : {
 

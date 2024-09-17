@@ -18,20 +18,20 @@ enum FilteringOption: Int {
 }
 
 struct MapObservationsLocationView: View {
-    let log = SwiftyBeaver.self
-    
-    @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-    @EnvironmentObject var areasViewModel: AreasViewModel
-    @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+  let log = SwiftyBeaver.self
 
-    @EnvironmentObject var locationManagerModel: LocationManagerModel
-  
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
-    @EnvironmentObject var settings: Settings
-    @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-    @EnvironmentObject var poiViewModel: POIViewModel
+  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var areasViewModel: AreasViewModel
+  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
 
-  @State private var currentFilteringOption: FilteringOption = .all
+  @EnvironmentObject var locationManagerModel: LocationManagerModel
+
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
+  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+  @EnvironmentObject var poiViewModel: POIViewModel
+
+//  @State private var currentFilteringOption: FilteringOption = .all
 
   var body: some View {
     VStack {
@@ -60,7 +60,7 @@ struct MapObservationsLocationView: View {
 
 
           // location observations
-          ForEach(observationsLocationViewModel.locations.filter { $0.rarity == $currentFilteringOption.wrappedValue.rawValue})
+          ForEach(observationsLocationViewModel.locations)//.filter { $0.rarity == $currentFilteringOption.wrappedValue.rawValue})
           { location in
 
             Annotation(location.name, coordinate: location.coordinate) {
@@ -114,141 +114,141 @@ struct MapObservationsLocationView: View {
         }
       }
     }
-    .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          FilteringMenu(currentFilteringOption: $currentFilteringOption)
-        }
-    }
+    //    .toolbar {
+    //        ToolbarItem(placement: .navigationBarTrailing) {
+    //          FilteringMenu(currentFilteringOption: $currentFilteringOption)
+    //        }
+    //    }
     .onAppear() {
       log.info("MapObservationsLocationView onAppear")
       getDataAreaModel()
     }
   }
-    
-    func getDataAreaModel() {
-        log.info("getDataAreaModel")
-        if settings.initialAreaLoad {
-            log.info("MapObservationsLocationView onAppear")
-            if locationManagerModel.checkLocation() {
-                let location = locationManagerModel.getCurrentLocation()
-                settings.currentLocation = location
-                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-            } else {
-                log.error("error observationsLocationsView getDataAreaModel initialAreaLoad")
-            }
-            settings.initialAreaLoad = false
-        }
-        
-        if settings.isAreaChanged {
-            log.error("isAreaChanged")
-            if locationManagerModel.checkLocation() {
-                let location = settings.currentLocation
-                fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-            } else {
-                log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
-            }
-            settings.isAreaChanged = false
-        }
-        
-        if settings.isLocationIDChanged {
-            log.error("isAreaChanged")
-            if locationManagerModel.checkLocation() {
-                fetchDataLocationID()
-            } else {
-                log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
-            }
-            settings.isLocationIDChanged = false
-        }
-        
-    }
-    
-    func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-        log.info("MapObservationsLocationView fetchDataLocation")
-        locationIdViewModel.fetchLocations(
-            latitude: coordinate.latitude,
-            longitude: coordinate.longitude,
-            completion: { fetchedLocations in
-                log.info("MaplocationIdViewModel data loaded")
-                // Use fetchedLocations here //actually it is one location
-                settings.locationName = fetchedLocations[0].name
-                settings.locationId = fetchedLocations[0].id
-                settings.locationCoordinate = CLLocationCoordinate2D(
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude)
-                
-                for location in fetchedLocations {
-                    log.info("locatiob \(location)")
-                }
-                
-                //1. get the geoJSON for this area / we pick the first one = 0
-                geoJSONViewModel.fetchGeoJsonData(
-                    for: fetchedLocations[0].id,
-                    completion:
-                        {
-                            log.info("geoJSONViewModel data loaded")
-                            
-                            //2. get the observations for this area
-                            observationsLocationViewModel.fetchData(
-                                settings: settings,
-                                locationId: fetchedLocations[0].id,
-                                limit: 100,
-                                offset: 0,
-                                completion: {
-                                    log.info("observationsLocationViewModel data loaded")
-                                    settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
-                                })
-                        }
-                )
-            })
+
+  func getDataAreaModel() {
+    log.info("getDataAreaModel")
+    if settings.initialAreaLoad {
+      log.info("MapObservationsLocationView onAppear")
+      if locationManagerModel.checkLocation() {
+        let location = locationManagerModel.getCurrentLocation()
+        settings.currentLocation = location
+        fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+      } else {
+        log.error("error observationsLocationsView getDataAreaModel initialAreaLoad")
+      }
+      settings.initialAreaLoad = false
     }
 
-    func fetchDataLocationID() {
-        log.error("fetchDataLocationID")
+    if settings.isAreaChanged {
+      log.error("isAreaChanged")
+      if locationManagerModel.checkLocation() {
+        let location = settings.currentLocation
+        fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+      } else {
+        log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
+      }
+      settings.isAreaChanged = false
+    }
+
+    if settings.isLocationIDChanged {
+      log.error("isAreaChanged")
+      if locationManagerModel.checkLocation() {
+        fetchDataLocationID()
+      } else {
+        log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
+      }
+      settings.isLocationIDChanged = false
+    }
+
+  }
+
+  func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
+    log.info("MapObservationsLocationView fetchDataLocation")
+    locationIdViewModel.fetchLocations(
+      latitude: coordinate.latitude,
+      longitude: coordinate.longitude,
+      completion: { fetchedLocations in
+        log.info("MaplocationIdViewModel data loaded")
+        // Use fetchedLocations here //actually it is one location
+        settings.locationName = fetchedLocations[0].name
+        settings.locationId = fetchedLocations[0].id
+        settings.locationCoordinate = CLLocationCoordinate2D(
+          latitude: coordinate.latitude,
+          longitude: coordinate.longitude)
+
+        for location in fetchedLocations {
+          log.info("locatiob \(location)")
+        }
+
         //1. get the geoJSON for this area / we pick the first one = 0
         geoJSONViewModel.fetchGeoJsonData(
-            for: settings.locationId,
-            completion:
-                {
-                    log.error("geoJSONViewModel data loaded")
-                    
-                    //2. get the observations for this area
-                    observationsLocationViewModel.fetchData(
-                        settings: settings,
-                        locationId: settings.locationId,
-                        limit: 100,
-                        offset: 0,
-                        completion: {
-                            log.info("observationsLocationViewModel data loaded")
-                            
-                            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic of not?
-                            
-                        })
-                }
-        )
-    }
+          for: fetchedLocations[0].id,
+          completion:
+            {
+              log.info("geoJSONViewModel data loaded")
 
-    
-    func colorByMapStyle() -> Color {
-        if settings.mapStyleChoice == .standard {
-            return Color.gray
-        } else {
-            return Color.white
+              //2. get the observations for this area
+              observationsLocationViewModel.fetchData(
+                settings: settings,
+                locationId: fetchedLocations[0].id,
+                limit: 100,
+                offset: 0,
+                completion: {
+                  log.info("observationsLocationViewModel data loaded")
+                  settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
+                })
+            }
+        )
+      })
+  }
+
+  func fetchDataLocationID() {
+    log.error("fetchDataLocationID")
+    //1. get the geoJSON for this area / we pick the first one = 0
+    geoJSONViewModel.fetchGeoJsonData(
+      for: settings.locationId,
+      completion:
+        {
+          log.error("geoJSONViewModel data loaded")
+
+          //2. get the observations for this area
+          observationsLocationViewModel.fetchData(
+            settings: settings,
+            locationId: settings.locationId,
+            limit: 100,
+            offset: 0,
+            completion: {
+              log.info("observationsLocationViewModel data loaded")
+
+              settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic of not?
+
+            })
         }
+    )
+  }
+
+
+  func colorByMapStyle() -> Color {
+    if settings.mapStyleChoice == .standard {
+      return Color.gray
+    } else {
+      return Color.white
     }
-    
-    func getCameraPosition() -> MapCameraPosition {
-        let center = CLLocationCoordinate2D(
-            latitude: geoJSONViewModel.span.latitude,
-            longitude: geoJSONViewModel.span.longitude)
-        
-        let span = MKCoordinateSpan(
-            latitudeDelta: geoJSONViewModel.span.latitudeDelta,
-            longitudeDelta: geoJSONViewModel.span.longitudeDelta)
-        
-        
-        let region = MKCoordinateRegion(center: center, span: span)
-        return MapCameraPosition.region(region)
-    }
+  }
+
+  func getCameraPosition() -> MapCameraPosition {
+    let center = CLLocationCoordinate2D(
+      latitude: geoJSONViewModel.span.latitude,
+      longitude: geoJSONViewModel.span.longitude)
+
+    let span = MKCoordinateSpan(
+      latitudeDelta: geoJSONViewModel.span.latitudeDelta,
+      longitudeDelta: geoJSONViewModel.span.longitudeDelta)
+
+
+    let region = MKCoordinateRegion(center: center, span: span)
+    return MapCameraPosition.region(region)
+  }
 }
 
 

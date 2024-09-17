@@ -1,5 +1,5 @@
 {
-  "originHash" : "849f359c561c90df7a8716e26d9612e4f5576a8da124e7c30cb9aff3d94f2bf2",
+  "originHash" : "f62d860f77e638f91eb2fbfb0bf278205acdbe5039febc5af195ff015468b166",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -38,15 +38,6 @@
       }
     },
     {
-      "identity" : "lazypager",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gh123man/LazyPager",
-      "state" : {
-        "revision" : "9dadeab5a66e7c4bff97b1e363f791b4ebfca1f6",
-        "version" : "1.0.6"
-      }
-    },
-    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
@@ -62,15 +53,6 @@
       "state" : {
         "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
         "version" : "6.0.0"
-      }
-    },
-    {
-      "identity" : "popupview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/PopupView.git",
-      "state" : {
-        "revision" : "af8234cb05aaa4b4a8c0032506f242b89c5f393b",
-        "version" : "3.0.1"
       }
     },
     {
@@ -125,24 +107,6 @@
       "state" : {
         "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
         "version" : "2.1.1"
-      }
-    },
-    {
-      "identity" : "swiftui-image-viewer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fuzzzlove/swiftui-image-viewer.git",
-      "state" : {
-        "revision" : "ca77123064ae046eac2be01654ee756085c2b182",
-        "version" : "1.0.0"
-      }
-    },
-    {
-      "identity" : "swiftui-introspect",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/siteline/swiftui-introspect",
-      "state" : {
-        "revision" : "668a65735751432b640260c56dfa621cec568368",
-        "version" : "1.2.0"
       }
     },
     {

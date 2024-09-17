@@ -10,7 +10,6 @@
 		4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */; };
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
-		4706B0462C614C980099AA9F /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 4706B0452C614C980099AA9F /* LazyPager */; };
 		47079EBE2BB9D81F003D2E11 /* ObsExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
 		471438BB2BBFD3AD00DF35DE /* ObsRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471438BA2BBFD3AD00DF35DE /* ObsRadiusView.swift */; };
@@ -124,12 +123,10 @@
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
 		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
-		47B80C182C346C3400E1C803 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 47B80C172C346C3400E1C803 /* PopupView */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
 		47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */; };
-		47FA80632C3BC7C300C71C5F /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47FA80622C3BC7C300C71C5F /* SwiftUIImageViewer */; };
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
 		47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */; };
 		47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD0E42C1AE9D8007D0F63 /* dataloading.json */; };
@@ -266,12 +263,9 @@
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				4782626D2C8B248600DD746C /* CachedAsyncImage in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
-				47B80C182C346C3400E1C803 /* PopupView in Frameworks */,
-				47FA80632C3BC7C300C71C5F /* SwiftUIImageViewer in Frameworks */,
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
-				4706B0462C614C980099AA9F /* LazyPager in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,9 +550,6 @@
 				4718753B2BFCA77000EF9F1F /* SVGView */,
 				47FAD0E02C19D25C007D0F63 /* Kingfisher */,
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
-				47B80C172C346C3400E1C803 /* PopupView */,
-				47FA80622C3BC7C300C71C5F /* SwiftUIImageViewer */,
-				4706B0452C614C980099AA9F /* LazyPager */,
 				4782626C2C8B248600DD746C /* CachedAsyncImage */,
 			);
 			productName = Ravens;
@@ -602,9 +593,6 @@
 				4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */,
 				47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				47B80C162C346C3400E1C803 /* XCRemoteSwiftPackageReference "PopupView" */,
-				47FA80612C3BC7C300C71C5F /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
-				4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */,
 				4782626B2C8B248600DD746C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
@@ -876,7 +864,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -913,7 +901,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -967,14 +955,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gh123man/LazyPager";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
-			};
-		};
 		4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/SVGView.git";
@@ -1055,25 +1035,9 @@
 				minimumVersion = 2.7.2;
 			};
 		};
-		47B80C162C346C3400E1C803 /* XCRemoteSwiftPackageReference "PopupView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/PopupView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.1;
-			};
-		};
 		47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/doublesymmetry/SwiftAudioEx";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		47FA80612C3BC7C300C71C5F /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
@@ -1090,11 +1054,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4706B0452C614C980099AA9F /* LazyPager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4706B0442C614C980099AA9F /* XCRemoteSwiftPackageReference "LazyPager" */;
-			productName = LazyPager;
-		};
 		4718753B2BFCA77000EF9F1F /* SVGView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4718753A2BFCA77000EF9F1F /* XCRemoteSwiftPackageReference "SVGView" */;
@@ -1145,20 +1104,10 @@
 			package = 4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
-		47B80C172C346C3400E1C803 /* PopupView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47B80C162C346C3400E1C803 /* XCRemoteSwiftPackageReference "PopupView" */;
-			productName = PopupView;
-		};
 		47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */;
 			productName = SwiftAudioEx;
-		};
-		47FA80622C3BC7C300C71C5F /* SwiftUIImageViewer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47FA80612C3BC7C300C71C5F /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = SwiftUIImageViewer;
 		};
 		47FAD0E02C19D25C007D0F63 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
