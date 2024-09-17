@@ -33,10 +33,29 @@ struct PlayButtonView: View {
     }
 }
 
+struct BookmarkButtonView: View {
+  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    var speciesID: Int
+
+    var body: some View {
+        Button(action: {
+            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) {
+                bookMarksViewModel.removeRecord(speciesID: speciesID)
+            } else {
+                bookMarksViewModel.appendRecord(speciesID: speciesID)
+            }
+        }) {
+            Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
+        }
+//        .tint(.obsSpecies)
+    }
+}
+
 struct ObsDetailView: View {
     var obs: Observation
 
-    @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+    @Binding var selectedSpeciesID: Int?
+
     @State var imageURLStr: String?
     @State var selectedObservationSound: Observation?
     @State private var selectedObservationXX: Observation?
@@ -51,6 +70,19 @@ struct ObsDetailView: View {
                 VStack(spacing: 16) {
                     // Header Section: Species Name & Rarity
                     HStack {
+
+                      Button(action: {
+                        print("Information \(obs.species_detail.name) \(obs.species_detail.id)")
+                        selectedSpeciesID = obs.species_detail.id
+                        //    }
+                      }) {
+                        Image(systemName: SFInformation)
+                      }
+//                      .tint(.obsInformation)
+
+                      BookmarkButtonView(speciesID: obs.species_detail.id)
+
+
                         Image(systemName: "circle.fill")
                             .foregroundColor(RarityColor(value: obs.rarity))
                         Text("\(obs.species_detail.name)")
@@ -100,10 +132,11 @@ struct ObsDetailView: View {
                     // Date and Count Section
                     HStack {
                         DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-//                        Text("\(obs.date) \(obs.time ?? "")")
                         Text("\(obs.number) x")
+                        .footnoteGrayStyle()
                         Spacer()
                     }
+
                     .padding(.horizontal)
 
                     // User Info Section
@@ -147,132 +180,6 @@ struct ObsDetailView: View {
 
 
 
-//struct ObsView: View {
-//  var obs: Observation
-//
-//  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
-//  @State var imageURLStr: String?
-//  //  @Binding var selectedObservationSound: Observation?
-//  @State var selectedObservationSound: Observation?
-//  @State private var selectedObservationXX: Observation?
-//
-//  var body: some View {
-//    VStack {
-//      if showView {
-//        Text("ObsView").font(.customTiny)
-//      }
-//
-//      HStack {
-//        Image(systemName: "circle.fill")
-//          .foregroundColor(RarityColor(value: obs.rarity))
-//        Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
-//          .font(.title)
-//          .bold()
-//          .lineLimit(1) // Set the maximum number of lines to 1
-//          .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//        Spacer()
-//      }
-////      .padding(8)
-//
-////      VStack { //make sheet?
-//        if obs.photos?.count ?? 0 > 0 {
-//          NavigationLink(destination: PhotoGridView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)) {
-//            Text("Photo(s)")
-//              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//            Spacer()
-//          }
-////          .padding(8)
-//        }
-//
-//
-//        if obs.sounds?.count ?? 0 > 0 {
-//          Button(action: {
-//            // Add your play audio action here
-//            selectedObservationSound = obs
-//            print("Play button pressed")
-//          }) {
-//            Image(systemName: "play.fill") // SF Symbol for play button
-//
-//          }
-////          .padding(8)
-//          .buttonStyle(PlainButtonStyle()) // Remove default button styling
-//          .frame(maxWidth: .infinity, alignment: .leading)
-//
-//          .background(Color(UIColor.systemGray6))
-//        }
-//
-//        //        VStack {÷
-//        HStack {
-//          Text("\(obs.species_detail.scientific_name)")
-////            .padding(8)
-//            .foregroundColor(.gray)
-//            .font(.footnote)
-//            .italic()
-//            .lineLimit(1) // Set the maximum number of lines to 1
-//            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//          Spacer()
-//        }
-//
-//        HStack {
-//          Text("\(obs.date) \(obs.time ?? "")")
-//          Text("\(obs.number) x")
-//          Spacer()
-//        }
-//        //
-//        //          VStack {
-//        HStack {
-//          Text("\(obs.user_detail?.name ?? "noName")")
-//            .footnoteGrayStyle()
-//          Spacer()
-//          Image(systemName: SFObserverFill)
-//            .foregroundColor(.black)
-//        }
-//        //          }
-//      PositionOnMapView(lat: obs.point.coordinates[1], long: obs.point.coordinates[0])
-////        .padding(8)
-//        .frame(height: 200)
-//
-//
-//      NotesView(obs: obs)
-//        .padding(8)
-//        .background(Color(UIColor.systemGray6))
-//
-//      Spacer()
-//      }
-//      .padding(8)
-//
-//
-//
-//
-//      //      PlayerControlsView(sounds: obs.sounds ?? [])
-////    }
-//
-//
-//
-//    .sheet(item: $selectedObservationSound) { item in
-//      PlayerControlsView(sounds: item.sounds ?? [])
-//        .presentationDetents([.fraction(0.25), .medium, .large])
-//        .presentationDragIndicator(.visible)
-//    }
-//
-//    .sheet(item: $selectedObservationXX) { item in
-//      SpeciesDetailsView(speciesID: item.species_detail.id)
-//    }
-//  }
-//}
-
-//      VStack {
-//        Text("sex \(obs.sex)")
-//        Text("accuracy \(String(describing: obs.accuracy))")
-//        Text("escape \(obs.is_escape)")
-//        Text("certain \(obs.is_certain)")
-//        Text("life stage \(obs.life_stage)")
-//        Text("method \(String(describing: obs.method))")
-//        Text("substrate \(obs.substrate)")
-//        Text("related species \(obs.related_species)")
-//        Text("obscurity \(obs.obscurity)")
-//      }
-//      .font(.customTiny)
 
 //#Preview {
 //  ObsView(obs: .constant(nil))

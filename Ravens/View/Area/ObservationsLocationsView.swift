@@ -30,7 +30,7 @@ struct ObservationsLocationView: View {
           results: observationsLocationViewModel.count
         )
         HorizontalLine()
-        ObservationListView(observations: observations, entity: .area, selectedSpeciesID: $selectedSpeciesID)
+        ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
       } else {
         ProgressView()
       }

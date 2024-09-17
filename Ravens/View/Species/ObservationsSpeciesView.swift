@@ -64,6 +64,7 @@ struct ObservationsSpeciesView: View {
             Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
               .foregroundColor(.black)
           }
+
         }
 
         VStack {
@@ -102,7 +103,7 @@ struct ObservationsSpeciesView: View {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results {
           if showView { Text("observationsSpeciesViewModel").font(.customTiny) }
           HorizontalLine()
-          ObservationListView(observations: observations, entity: .species, selectedSpeciesID: $selectedSpeciesID)
+          ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
             .environmentObject(Settings()) // Pass environment object
         } else {
           ProgressView()

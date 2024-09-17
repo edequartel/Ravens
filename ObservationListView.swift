@@ -23,45 +23,31 @@ enum FilteringOption {
 
 struct ObservationListView: View {
   var observations: [Observation]
-  var entity: EntityType
+//  var entity: EntityType
   @EnvironmentObject var settings: Settings
 
   @Binding var selectedSpeciesID: Int?
-
+  @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringOption: FilteringOption = .all
 
   var body: some View {
     List {
-      ForEach(observations
-                  .filter(meetsCondition)
-                  .sorted(by: compareObservations), id: \.id) { obs in
-        VStack {
-          NavigationLink(destination: ObsDetailView(obs: obs)) {
-            ObsView(
-              showSpecies: !(entity == .species),  //<--
-              showObserver: !(entity == .user),
-              showArea: !(entity == .area),
-              selectedSpeciesID: $selectedSpeciesID,
-              obs: obs
-            )
-            .padding(8)
-          }
-          .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
-          Divider()
+        ForEach(observations
+                    .filter(meetsCondition)
+                    .sorted(by: compareObservations), id: \.id) { obs in
+            ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
         }
-        .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
-        .listRowSeparator(.hidden)  // Remove separator line
-      }
     }
     .listStyle(PlainListStyle()) // No additional styling, plain list look
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        SortingMenu(currentSortingOption: $currentSortingOption)
-      }
-
-      ToolbarItem(placement: .navigationBarTrailing) {
-        FilteringMenu(currentFilteringOption: $currentFilteringOption)
+      if entity != .species {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          SortingMenu(currentSortingOption: $currentSortingOption)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          FilteringMenu(currentFilteringOption: $currentFilteringOption)
+        }
       }
     }
   }
@@ -106,36 +92,36 @@ struct ObservationListView: View {
           return lhs.rarity > rhs.rarity
       }
   }
-//  func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
-//      let dateFormatter = DateFormatter()
-//      let timeFormatter = DateFormatter()
-//      dateFormatter.dateFormat = "yyyy-MM-dd"
-//      timeFormatter.dateFormat = "HH:mm"
-//
-//
-//      switch currentSortingOption {
-//      case .date:
-//
-//          let lhsDateTimeString = "\(lhs.date) \(lhs.time ?? "")"
-//          let rhsDateTimeString = "\(rhs.date) \(rhs.time ?? "")"
-//
-//          let lhsDateTime = dateFormatter.date(from: lhsDateTimeString) ?? Date.distantPast
-//          let rhsDateTime = dateFormatter.date(from: rhsDateTimeString) ?? Date.distantPast
-//
-//          return lhsDateTime < rhsDateTime
-//
-//      case .name:
-//          return lhs.species_detail.name < rhs.species_detail.name
-//      case .rarity:
-//          return lhs.rarity > rhs.rarity
-//      }
-//  }
 }
 
+struct ObservationRowView: View {
+    var obs: Observation
+    @Binding var selectedSpeciesID: Int?
+    var entity: EntityType
 
+    var body: some View {
+        VStack {
+            NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
+                ObsView(
+                    showSpecies: !(entity == .species),
+                    showObserver: !(entity == .user),
+                    showArea: !(entity == .area),
+                    selectedSpeciesID: $selectedSpeciesID,
+                    obs: obs
+                )
+                .padding(8)
+            }
+            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+            Divider()
+        }
+        .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
+        .listRowSeparator(.hidden)  // Remove separator line
+    }
+}
 
 struct FilteringMenu: View {
     @Binding var currentFilteringOption: FilteringOption
+
 
     var body: some View {
         Menu {
