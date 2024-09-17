@@ -13,17 +13,9 @@ enum SortingOption {
     case rarity
 }
 
-enum FilteringOption {
-    case all
-    case common
-    case uncommon
-    case rare
-    case veryRare
-}
-
 struct ObservationListView: View {
   var observations: [Observation]
-//  var entity: EntityType
+
   @EnvironmentObject var settings: Settings
 
   @Binding var selectedSpeciesID: Int?
