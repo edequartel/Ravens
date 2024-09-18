@@ -207,7 +207,7 @@
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		47714FD02BD15A2600361C55 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
-		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinspingdoorvoer.mp3; path = Audio/perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
+		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
 		47778E362C039D9E00C59A1A /* SonogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonogramView.swift; sourceTree = "<group>"; };
 		477ECF132B98897100D96BE9 /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 		4793A5842C286A76002739B6 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
 		4793A5892C29334E002739B6 /* waarneming-rarities.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "waarneming-rarities.html"; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = perkinsping.mp3; path = Audio/perkinsping.mp3; sourceTree = "<group>"; };
+		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
 		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
@@ -273,32 +273,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4718753D2BFCA7F600EF9F1F /* Graphics */ = {
+		4718753D2BFCA7F600EF9F1F /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
+				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
+				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				47B10CAA2C21BA580092BC66 /* tafeleend.jpg */,
 				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 				471875402BFD186700EF9F1F /* w_wikipedia.svg */,
 				4718753E2BFCA81900EF9F1F /* plus-square.svg */,
 			);
-			path = Graphics;
+			path = Media;
 			sourceTree = "<group>";
 		};
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				4719C36B2C944F47000A11D1 /* ObservationListView.swift */,
-				4782626E2C8EBEDE00DD746C /* DateConversionView.swift */,
-				478262692C8A12EE00DD746C /* testView.swift */,
-				478262672C89EF7600DD746C /* NotesView.swift */,
-				471A4A6F2C7F3E0E00898AC5 /* create-single.swift */,
-				47778E362C039D9E00C59A1A /* SonogramView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
-				471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */,
-				478EABE82BED3A2300414431 /* ShareTextView.swift */,
-				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
-				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
-				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -325,8 +317,6 @@
 				474C40802B4D17AA0038B3A5 /* ViewModel */,
 				474C40822B4D17C00038B3A5 /* View */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
-				474FA7092C7EE4B50064C4C1 /* xanto.swift */,
-				471DB65B2C77A643002F6EF5 /* AddObservationView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
 				4781539C2B57C166005F87CC /* Localizable.xcstrings */,
@@ -392,26 +382,20 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				478262632C88203400DD746C /* ObsDetailView.swift */,
-				478262652C897B7000DD746C /* ObsDetailsRowView.swift */,
-				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
-				4738B6402BF4E7C900BF7557 /* ObsView.swift */,
+				478EABE82BED3A2300414431 /* ShareTextView.swift */,
+				471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */,
+				471A4A6F2C7F3E0E00898AC5 /* create-single.swift */,
+				478262672C89EF7600DD746C /* NotesView.swift */,
+				4782626E2C8EBEDE00DD746C /* DateConversionView.swift */,
+				4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */,
 				474FA7082C7CB3600064C4C1 /* sheet */,
+				476AC6E82C9A930000DB8CA8 /* Obs */,
 				4767F00B2BF3291400BACDC6 /* Lists */,
 				4767F0062BF27F2C00BACDC6 /* Area */,
 				4767F0092BF3230400BACDC6 /* User */,
 				4767F0082BF322F000BACDC6 /* Species */,
 				4767F00A2BF3230C00BACDC6 /* Settings */,
-				47714FD02BD15A2600361C55 /* CircleButton.swift */,
-				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
-				472633242BB5998400CEA05E /* POIsView.swift */,
-				477ECF132B98897100D96BE9 /* NetworkView.swift */,
-				4785CD1A2B95C87E002F52BE /* UserView.swift */,
-				4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */,
-				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
-				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
-				47826CC22BF62DE4003E8F21 /* WikipediaView.swift */,
-				4718753D2BFCA7F600EF9F1F /* Graphics */,
+				4718753D2BFCA7F600EF9F1F /* Media */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,6 +434,7 @@
 		4767F0082BF322F000BACDC6 /* Species */ = {
 			isa = PBXGroup;
 			children = (
+				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
@@ -461,6 +446,7 @@
 		4767F0092BF3230400BACDC6 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				4785CD1A2B95C87E002F52BE /* UserView.swift */,
 				4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
@@ -471,6 +457,7 @@
 		4767F00A2BF3230C00BACDC6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				474C408D2B4DB2850038B3A5 /* RegionsView.swift */,
 				471875442C00546A00EF9F1F /* LocationManagerView.swift */,
 				474C40622B4C091F0038B3A5 /* LanguageView.swift */,
 				478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */,
@@ -506,9 +493,30 @@
 			path = StartUp;
 			sourceTree = "<group>";
 		};
+		476AC6E82C9A930000DB8CA8 /* Obs */ = {
+			isa = PBXGroup;
+			children = (
+				4719C36B2C944F47000A11D1 /* ObservationListView.swift */,
+				478262632C88203400DD746C /* ObsDetailView.swift */,
+				478262652C897B7000DD746C /* ObsDetailsRowView.swift */,
+				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
+				4738B6402BF4E7C900BF7557 /* ObsView.swift */,
+				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
+			);
+			path = Obs;
+			sourceTree = "<group>";
+		};
 		47CF61DD2B60EDCD00709CE3 /* NotUsed */ = {
 			isa = PBXGroup;
 			children = (
+				478262692C8A12EE00DD746C /* testView.swift */,
+				471DB65B2C77A643002F6EF5 /* AddObservationView.swift */,
+				47778E362C039D9E00C59A1A /* SonogramView.swift */,
+				474FA7092C7EE4B50064C4C1 /* xanto.swift */,
+				47826CC22BF62DE4003E8F21 /* WikipediaView.swift */,
+				477ECF132B98897100D96BE9 /* NetworkView.swift */,
+				472633242BB5998400CEA05E /* POIsView.swift */,
+				47714FD02BD15A2600361C55 /* CircleButton.swift */,
 				4767F0072BF322E900BACDC6 /* Radius */,
 				4738B63E2BF4E43800BF7557 /* ObsAreaView.swift */,
 				4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */,
@@ -864,7 +872,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -888,6 +896,10 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -901,7 +913,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -925,6 +937,10 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

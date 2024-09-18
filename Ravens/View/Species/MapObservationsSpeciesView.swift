@@ -56,7 +56,7 @@ struct MapObservationsSpeciesView: View {
             .safeAreaInset(edge: .bottom) {
                 VStack {
                     HStack {
-                        NetworkView()
+//                        NetworkView()
                         //
                        
                         Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")

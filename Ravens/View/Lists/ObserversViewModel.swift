@@ -106,6 +106,7 @@ struct ObserversView: View {
     
     var body: some View {
         VStack {
+          if showView { Text("ObserversView").font(.customTiny) }
             List {
                 HStack {
                     Button(userViewModel.user?.name ?? "") {
@@ -131,6 +132,15 @@ struct ObserversView: View {
                         }) {
                             Image(systemName: "qrcode")
                         }
+
+                      Button(action: {
+                        if let url = URL(string: "https://waarneming.nl/users/\(userViewModel.user?.id ?? 0)/") {
+                          UIApplication.shared.open(url)
+                        }
+                      }) {
+                        Image(systemName: SFObservation)
+                      }
+                      .tint(.obsObservation)
                     }
                     Spacer()
                 }
@@ -153,13 +163,23 @@ struct ObserversView: View {
                         }
                         Spacer()
                     }
+
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                        Button(action: {
-                            observersViewModel.removeRecord(userID: record.userID)
-                        }) {
-                            Label("remove", systemImage: "person.fill.badge.minus")
+                      Button(action: {
+                        observersViewModel.removeRecord(userID: record.userID)
+                      }) {
+                        Label("remove", systemImage: "person.fill.badge.minus")
+                      }
+                      .tint(.red)
+
+                      Button(action: {
+                        if let url = URL(string: "https://waarneming.nl/users/\(record.userID)/") {
+                          UIApplication.shared.open(url)
                         }
-                        .tint(.red)
+                      }) {
+                        Image(systemName: SFObservation)
+                      }
+                      .tint(.obsObservation)
                     }
                 }
             }
@@ -169,6 +189,16 @@ struct ObserversView: View {
                         .font(.title)
                     QRCodeView(input: item.value)
                         .frame(width: 200, height: 200)
+                }
+            }
+        }
+
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    // Define your action here
+                }) {
+                    Image(systemName: "plus")
                 }
             }
         }

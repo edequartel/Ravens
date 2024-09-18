@@ -631,9 +631,6 @@
     "Lat %@" : {
 
     },
-    "Latitude: %lf" : {
-
-    },
     "List" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -743,9 +740,6 @@
       }
     },
     "Long %@" : {
-
-    },
-    "Longitude: %lf" : {
 
     },
     "Main View" : {
@@ -966,6 +960,9 @@
           }
         }
       }
+    },
+    "ObserversView" : {
+
     },
     "ObsView" : {
 
