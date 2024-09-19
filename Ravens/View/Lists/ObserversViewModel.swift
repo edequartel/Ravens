@@ -193,15 +193,15 @@ struct ObserversView: View {
             }
         }
 
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    // Define your action here
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                    // Define your action here
+//                }) {
+//                    Image(systemName: "plus")
+//                }
+//            }
+//        }
 
         .onAppear {
             observersViewModel.loadRecords()

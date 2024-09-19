@@ -14,16 +14,6 @@
         }
       }
     },
-    " %@ gezien,\n %@,\n op %@, %@,\n %lld keer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : " %1$@ gezien,\n %2$@,\n op %3$@, %4$@,\n %5$lld keer."
-          }
-        }
-      }
-    },
     "(%lld)" : {
 
     },
@@ -140,6 +130,12 @@
 
     },
     ">= Rare" : {
+
+    },
+    "Add area" : {
+
+    },
+    "Add bookmark" : {
 
     },
     "Add Observation" : {
@@ -560,6 +556,9 @@
         }
       }
     },
+    "Information species" : {
+
+    },
     "International" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -629,6 +628,9 @@
       }
     },
     "Lat %@" : {
+
+    },
+    "Link to waarneming observation" : {
 
     },
     "List" : {
@@ -793,6 +795,12 @@
           }
         }
       }
+    },
+    "Menu filter" : {
+
+    },
+    "Menu sorting" : {
+
     },
     "Month" : {
       "localizations" : {
@@ -1200,6 +1208,9 @@
           }
         }
       }
+    },
+    "Share observation" : {
+
     },
     "Share Text" : {
       "extractionState" : "stale",

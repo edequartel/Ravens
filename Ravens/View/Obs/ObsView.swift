@@ -41,7 +41,7 @@ struct ObsView: View {
 
         if showSpecies {
 
-        ObsDetailsRowView(obs: obs)//, bookMarksViewModel: bookMarksViewModel)
+          ObsDetailsRowView(obs: obs)//, bookMarksViewModel: bookMarksViewModel)
 
 
           HStack {
@@ -56,23 +56,23 @@ struct ObsView: View {
         }
         HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-          
+
           Text("\(obs.number) x")
             .footnoteGrayStyle()
           Spacer()
         }
-        
+
         // User Info Section
         if showObserver {
-            HStack {
-                Text("\(obs.user_detail?.name ?? "noName")")
-                    .footnoteGrayStyle()
-                Spacer()
-                if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-                    Image(systemName: SFObserverFill)
-                        .foregroundColor(.black)
-                }
+          HStack {
+            Text("\(obs.user_detail?.name ?? "noName")")
+              .footnoteGrayStyle()
+            Spacer()
+            if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
+              Image(systemName: SFObserverFill)
+                .foregroundColor(.black)
             }
+          }
         }
 
         if showArea {
@@ -91,15 +91,11 @@ struct ObsView: View {
       }
     }
 
-
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("""
-                                 \(obs.species_detail.name) gezien,
-                                 \(obs.location_detail?.name ?? ""),
-                                 op \(obs.date), \(obs.time ?? ""),
-                                 \(obs.number) keer.
-                                """
+    .accessibilityLabel(accessibilityObsDetail(obs: obs)
     )
+
+
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       Button(action: {
@@ -124,6 +120,7 @@ struct ObsView: View {
         }
       }
       .tint(.obsArea)
+      .accessibility(label: Text("Add area"))
 
       Button(action: {
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
@@ -137,6 +134,7 @@ struct ObsView: View {
         Image(systemName:  SFSpeciesFill)
       }
       .tint(.obsSpecies)
+      .accessibility(label: Text("Add bookmark"))
 
       Button(action: {
         if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
@@ -151,9 +149,10 @@ struct ObsView: View {
       }
       .tint(.obsObserver)
       .accessibility(label: Text("Add observer"))
-
-
     }
+
+
+
     //leading
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       let url = URL(string: obs.permalink)!
@@ -166,7 +165,8 @@ struct ObsView: View {
         Image(systemName: SFShareLink)
       }
       .tint(.obsShareLink)
-      
+      .accessibility(label: Text("Share observation"))
+
       Button(action: {
         print("Information \(obs.species_detail.name) \(obs.species_detail.id)")
         selectedSpeciesID = obs.species_detail.id
@@ -175,6 +175,7 @@ struct ObsView: View {
         Image(systemName: SFInformation)
       }
       .tint(.obsInformation)
+      .accessibility(label: Text("Information species"))
 
       Button(action: {
         if let url = URL(string: obs.permalink) {
@@ -185,8 +186,20 @@ struct ObsView: View {
         Image(systemName: SFObservation)
       }
       .tint(.obsObservation)
-      
+      .accessibility(label: Text("Link to waarneming observation"))
     }
+  }
+
+  func accessibilityObsDetail(obs: Observation) -> String {
+      let formattedDate = formatDateWithDayOfWeek(Date(), "12:34")
+      let speciesName = obs.species_detail.name
+      let locationName = obs.location_detail?.name ?? ""
+      let number = obs.number
+      let userName = obs.user_detail?.name ?? ""
+
+      let formattedString = "\(speciesName), \(locationName), \(formattedDate), \(number) keer. door \(userName)"
+
+      return formattedString
   }
 }
 

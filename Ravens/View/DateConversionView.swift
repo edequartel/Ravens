@@ -14,7 +14,9 @@ struct DateConversionView: View {
 
     var formattedDate: String {
         if let date = convertStringToDate(dateString) {
-            return formatDateWithDayOfWeek(date)
+          let date = Date()
+          let timeString = "12:34"
+          return formatDateWithDayOfWeek(date, timeString)
         } else {
             return "Invalid date"
         }
@@ -24,20 +26,6 @@ struct DateConversionView: View {
     Text("\(formattedDate)")
       .footnoteGrayStyle()
   }
-
-    // Function to convert a string to a Date object
-    func convertStringToDate(_ dateString: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: dateString)
-    }
-
-    // Function to format the Date with day of the week
-    func formatDateWithDayOfWeek(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EE d MMM yy" // "EEEE" for full day of the week
-        return dateFormatter.string(from: date)+" "+timeString
-    }
 }
 
 struct DateConversionView_Previews: PreviewProvider {
@@ -46,4 +34,19 @@ struct DateConversionView_Previews: PreviewProvider {
           dateString: "2024-12-23", 
           timeString: "12:34")
     }
+}
+
+// Function to convert a string to a Date object
+func convertStringToDate(_ dateString: String) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter.date(from: dateString)
+}
+
+// Function to format the Date with day of the week
+// Function to format the Date with day of the week
+func formatDateWithDayOfWeek(_ date: Date, _ timeString: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EE d MMM yy" // "EEEE" for full day of the week
+    return dateFormatter.string(from: date)+" "+timeString
 }

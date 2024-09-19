@@ -129,7 +129,9 @@ struct FilteringMenu: View {
                 .accessibilityElement(children: .combine)
                 .accessibility(label: Text("Filtering"))
         }
+        .accessibility(label: Text("Menu filter"))
     }
+
 }
 
 
@@ -148,7 +150,9 @@ struct SortingMenu: View {
                 .accessibilityElement(children: .combine)
                 .accessibility(label: Text("Sorting"))
         }
+        .accessibility(label: Text("Menu sorting"))
     }
+
 }
 
 
