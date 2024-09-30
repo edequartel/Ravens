@@ -32,10 +32,14 @@ struct ObservationsLocationView: View {
         HorizontalLine()
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
       } else {
-        ProgressView()
+//        ProgressView()
+        LottieView(lottieFile: "dataloading.json")
+          .frame(width: 100, height: 100)
       }
     }
-
+    .refreshable {
+      getDataAreaModel()
+    }
     .onAppear()  {
       getDataAreaModel()
     }

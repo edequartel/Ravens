@@ -9,13 +9,6 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
-enum FilteringOption: Int {
-    case all = 0
-    case common = 1
-    case uncommon = 2
-    case rare = 3
-    case veryRare = 4
-}
 
 struct MapObservationsLocationView: View {
   let log = SwiftyBeaver.self

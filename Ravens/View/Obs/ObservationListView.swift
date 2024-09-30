@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum SortingOption {
-    case date
-    case name
-    case rarity
-}
-
 struct ObservationListView: View {
   var observations: [Observation]
 
@@ -21,7 +15,7 @@ struct ObservationListView: View {
   @Binding var selectedSpeciesID: Int?
   @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringOption: FilteringOption = .all
+  @State private var currentFilteringOption: FilteringRarityOption = .all
 
   var body: some View {
     List {
@@ -82,6 +76,8 @@ struct ObservationListView: View {
           return lhs.species_detail.name < rhs.species_detail.name
       case .rarity:
           return lhs.rarity > rhs.rarity
+      case .scientificName:
+            return lhs.species_detail.scientific_name < rhs.species_detail.scientific_name
       }
   }
 }
@@ -93,7 +89,8 @@ struct ObservationRowView: View {
 
     var body: some View {
         VStack {
-            NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
+          if showView { Text("ObservationRowView").font(.customTiny) }
+          NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
                 ObsView(
                     showSpecies: !(entity == .species),
                     showObserver: !(entity == .user),
@@ -101,9 +98,9 @@ struct ObservationRowView: View {
                     selectedSpeciesID: $selectedSpeciesID,
                     obs: obs
                 )
-                .padding(8)
+                .padding(4)
             }
-            .accessibilityLabel("\(obs.species_detail.name) \(obs.date) \(obs.time ?? "")")
+//            .buttonStyle(PlainButtonStyle()) // Remove default button styling ???
             Divider()
         }
         .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
@@ -111,51 +108,92 @@ struct ObservationRowView: View {
     }
 }
 
-struct FilteringMenu: View {
-    @Binding var currentFilteringOption: FilteringOption
+//>>
+enum FilteringRarityOption: String, CaseIterable {
+    case all = "All"
+    case common = "Common"
+    case uncommon = "Uncommon"
+    case rare = "Rare"
+    case veryRare = "Very rare"
+}
 
+struct FilteringMenu: View {
+    @Binding var currentFilteringOption: FilteringRarityOption
 
     var body: some View {
-        Menu {
-          Picker(selection: $currentFilteringOption, label: Text("Filtering")) {
-            Text("All").tag(FilteringOption.all)
-            Text("Common").tag(FilteringOption.common)
-            Text("Uncommon").tag(FilteringOption.uncommon)
-            Text("Rare").tag(FilteringOption.rare)
-            Text("Very rare").tag(FilteringOption.veryRare)
-          }
-        } label: {
+        NavigationLink(destination: FilterOptionsView(currentFilteringOption: $currentFilteringOption)) {
             Image(systemName: "line.3.horizontal.decrease")
                 .accessibilityElement(children: .combine)
                 .accessibility(label: Text("Filtering"))
         }
         .accessibility(label: Text("Menu filter"))
     }
-
 }
 
+struct FilterOptionsView: View {
+    @Binding var currentFilteringOption: FilteringRarityOption
+
+    var body: some View {
+        List(FilteringRarityOption.allCases, id: \.self) { option in
+            Button(action: {
+                currentFilteringOption = option
+            }) {
+                HStack {
+                    Text(option.rawValue)
+                    Spacer()
+                    if currentFilteringOption == option {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+        }
+        .navigationTitle("Filtering")
+    }
+}
+
+//<<
+
+//enum
+enum SortingOption: String, CaseIterable {
+  case date = "Date"
+  case rarity = "Rarity"
+  case name = "Name"
+  case scientificName = "Scientific Name"
+}
 
 struct SortingMenu: View {
     @Binding var currentSortingOption: SortingOption
 
     var body: some View {
-        Menu {
-            Picker(selection: $currentSortingOption, label: Text("Sorting")) {
-                Text("Date").tag(SortingOption.date)
-                Text("Rarity").tag(SortingOption.rarity)
-                Text("Name").tag(SortingOption.name)
-            }
-        } label: {
+        NavigationLink(destination: SortOptionsView(currentSortingOption: $currentSortingOption)) {
             Image(systemName: "arrow.up.arrow.down")
                 .accessibilityElement(children: .combine)
                 .accessibility(label: Text("Sorting"))
         }
         .accessibility(label: Text("Menu sorting"))
     }
-
 }
 
+struct SortOptionsView: View {
+    @Binding var currentSortingOption: SortingOption
 
+    var body: some View {
+        List(SortingOption.allCases, id: \.self) { option in
+            Button(action: {
+                currentSortingOption = option
+            }) {
+                HStack {
+                    Text(option.rawValue)
+                    Spacer()
+                    if currentSortingOption == option {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+        }
+        .navigationTitle("Sorting")
+    }
+}
 
 //#Preview {
 //  @State static var selectedObservation: Observation? = nil

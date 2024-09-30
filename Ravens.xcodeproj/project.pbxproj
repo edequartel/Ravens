@@ -120,9 +120,11 @@
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		4793A58A2C29334E002739B6 /* waarneming-rarities.html in Resources */ = {isa = PBXBuildFile; fileRef = 4793A5892C29334E002739B6 /* waarneming-rarities.html */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
+		47AD97692CAAD0D500A4B510 /* BookmarkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* BookmarkButtonView.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
 		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
+		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
@@ -238,6 +240,7 @@
 		4793A5892C29334E002739B6 /* waarneming-rarities.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "waarneming-rarities.html"; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
+		47AD97682CAAD0D500A4B510 /* BookmarkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButtonView.swift; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
 		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
 				4782626D2C8B248600DD746C /* CachedAsyncImage in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
+				47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */,
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
@@ -290,6 +294,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47AD97682CAAD0D500A4B510 /* BookmarkButtonView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
@@ -559,6 +564,7 @@
 				47FAD0E02C19D25C007D0F63 /* Kingfisher */,
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
 				4782626C2C8B248600DD746C /* CachedAsyncImage */,
+				47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -602,6 +608,7 @@
 				47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				4782626B2C8B248600DD746C /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -642,6 +649,7 @@
 			files = (
 				4785CD1D2B964C0E002F52BE /* ObservationsUserViewModel.swift in Sources */,
 				4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */,
+				47AD97692CAAD0D500A4B510 /* BookmarkButtonView.swift in Sources */,
 				47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */,
 				4785CD192B95C856002F52BE /* UserViewModel.swift in Sources */,
 				47714FD12BD15A2600361C55 /* CircleButton.swift in Sources */,
@@ -1051,6 +1059,14 @@
 				minimumVersion = 2.7.2;
 			};
 		};
+		47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		47D99A3C2B9ED73A0012F0DE /* XCRemoteSwiftPackageReference "SwiftAudioEx" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/doublesymmetry/SwiftAudioEx";
@@ -1119,6 +1135,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
 		};
 		47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */ = {
 			isa = XCSwiftPackageProductDependency;

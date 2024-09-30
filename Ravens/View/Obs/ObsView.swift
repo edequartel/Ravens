@@ -34,16 +34,18 @@ struct ObsView: View {
 
   var body: some View {
     HStack {
-      PhotoView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+      PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
 
       VStack {
         if showView { Text("ObsView").font(.customTiny) }
 
+//        HStack {
+//          Text("---")
+//          Spacer()
+//        }
+
         if showSpecies {
-
-          ObsDetailsRowView(obs: obs)//, bookMarksViewModel: bookMarksViewModel)
-
-
+          ObsDetailsRowView(obs: obs)
           HStack {
             Text("\(obs.species_detail.scientific_name)")
               .foregroundColor(.gray)
@@ -54,6 +56,28 @@ struct ObsView: View {
             Spacer()
           }
         }
+
+//        if !showSpecies {
+//
+//          HStack {
+//            if obs.sounds?.count ?? 0 > 0 {
+//              Image(systemName: "waveform")
+//            }
+//            else { Text("") }
+//
+//            if obs.notes?.count ?? 0 > 0 {
+//              Image(systemName: "list.clipboard")
+//            }
+//            Spacer()
+//          }
+//        }
+//        HStack {
+//          Text("---")
+//          Spacer()
+//        }
+        //<<
+
+
         HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
 
@@ -62,11 +86,12 @@ struct ObsView: View {
           Spacer()
         }
 
+
         // User Info Section
         if showObserver {
           HStack {
             Text("\(obs.user_detail?.name ?? "noName")")
-              .footnoteGrayStyle()
+//              .footnoteGrayStyle()
             Spacer()
             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
               Image(systemName: SFObserverFill)
@@ -92,8 +117,9 @@ struct ObsView: View {
     }
 
     .accessibilityElement(children: .combine)
-    .accessibilityLabel(accessibilityObsDetail(obs: obs)
-    )
+    .accessibilityLabel(accessibilityObsDetail(obs: obs))
+    .accessibilityHint("Tap voor meer details over Informatie over de waarneming.")
+
 
 
     //trailing

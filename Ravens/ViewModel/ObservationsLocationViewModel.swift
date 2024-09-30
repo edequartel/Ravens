@@ -53,7 +53,7 @@ class ObservationsLocationViewModel: ObservableObject {
             "accept-Language": settings.selectedLanguage,
         ]
         
-        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate)!)
+        let date_after = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -14, to: settings.selectedDate)!)
         let date_before = formatCurrentDate(value: settings.selectedDate)
         
         log.info("date after \(date_after)")

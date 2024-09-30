@@ -62,156 +62,156 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 
-  struct RavensApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    @StateObject var locationManager = LocationManagerModel()
-    
-    @StateObject var settings = Settings()
-    @StateObject var languagesViewModel = LanguagesViewModel()
-    @StateObject var speciesViewModel = SpeciesViewModel()
-    @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
-    @StateObject var regionsViewModel = RegionsViewModel()
-    @StateObject var regionListViewModel = RegionListViewModel()
-    @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-    @StateObject var userViewModel =  UserViewModel()
-    @StateObject var observationsViewModel = ObservationsViewModel()
-    @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
-    
-    @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
-    @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
-    @StateObject var locationIdViewModel = LocationIdViewModel()
-    @StateObject var poiViewModel = POIViewModel()
-    @StateObject var geoJSONViewModel = GeoJSONViewModel()
-    
-    @StateObject var bookMarksViewModel = BookMarksViewModel()
-    @StateObject var observersViewModel = ObserversViewModel()
-    @StateObject var areasViewModel = AreasViewModel()
-    
-    @StateObject var player = Player()
-    
-    @StateObject var htmlViewModel = HTMLViewModel()
-    
-    @StateObject var observationsYearViewModel = ObservationsYearViewModel()
+struct RavensApp: App {
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    let urlHandler = URLHandler()
-    
-    //
+  @StateObject var locationManager = LocationManagerModel()
+
+  @StateObject var settings = Settings()
+  @StateObject var languagesViewModel = LanguagesViewModel()
+  @StateObject var speciesViewModel = SpeciesViewModel()
+  @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
+  @StateObject var regionsViewModel = RegionsViewModel()
+  @StateObject var regionListViewModel = RegionListViewModel()
+  @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+  @StateObject var userViewModel =  UserViewModel()
+  @StateObject var observationsViewModel = ObservationsViewModel()
+  @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
+
+  @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
+  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
+  @StateObject var locationIdViewModel = LocationIdViewModel()
+  @StateObject var poiViewModel = POIViewModel()
+  @StateObject var geoJSONViewModel = GeoJSONViewModel()
+
+  @StateObject var bookMarksViewModel = BookMarksViewModel()
+  @StateObject var observersViewModel = ObserversViewModel()
+  @StateObject var areasViewModel = AreasViewModel()
+
+  @StateObject var player = Player()
+
+  @StateObject var htmlViewModel = HTMLViewModel()
+
+  @StateObject var observationsYearViewModel = ObservationsYearViewModel()
+
+  let urlHandler = URLHandler()
+
+  //
+  let center = UNUserNotificationCenter.current()
+
+
+  @State private var showingAlert = false
+  @State private var parts: [String] = []
+  @State private var badgeCount: Int = 0
+
+  init() { //get permissions notifications
     let center = UNUserNotificationCenter.current()
-    
-    
-    @State private var showingAlert = false
-    @State private var parts: [String] = []
-    @State private var badgeCount: Int = 0
-    
-    init() { //get permissions notifications
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+    center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+      if let error = error {
+        // Handle the error here.
+        print(error.localizedDescription)
+      }
+      // Enable or disable features based on the authorization.
+    }
+  }
+
+  //    Helvetica
+  //    Helvetica Neue
+  //    Arial
+  //    Courier
+  //    Courier New
+  //    Georgia no
+  //    Times New Roman
+  //    Verdana +
+  //    Palatino no
+  //    Avenir ++
+  //    Futura
+  //    Menlo (monospaced)
+  //    SF Mono (monospaced)
+  //    SF Pro Display (default system font, though you typically use .systemFont() for this)
+  //    Zapfino no
+  //    Chalkduster no
+
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+      //            .font(.custom("Roboto", size: 18))
+
+        .environmentObject(KeychainViewModel())
+
+      //                .environmentObject(LocationManagerModel())
+
+        .environmentObject(locationManager)
+        .environmentObject(settings)
+        .environmentObject(languagesViewModel)
+        .environmentObject(speciesViewModel)
+        .environmentObject(speciesGroupViewModel)
+        .environmentObject(regionsViewModel)
+        .environmentObject(regionListViewModel)
+        .environmentObject(observationsSpeciesViewModel)
+        .environmentObject(userViewModel)
+
+        .environmentObject(observationsViewModel)
+        .environmentObject(observationsRadiusViewModel)
+        .environmentObject(observationsLocationViewModel)
+        .environmentObject(locationIdViewModel)
+        .environmentObject(geoJSONViewModel)
+        .environmentObject(poiViewModel)
+        .environmentObject(speciesDetailsViewModel)
+
+        .environmentObject(bookMarksViewModel)
+        .environmentObject(observersViewModel)
+        .environmentObject(areasViewModel)
+        .environmentObject(htmlViewModel)
+
+        .environmentObject(player)
+
+        .environmentObject(observationsYearViewModel)
+
+        .environmentObject(urlHandler)
+
+        .onOpenURL { url in
+          // Handle the URL appropriately
+          let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
+          self.parts = urlString.split(separator: "/").map(String.init)
+          showingAlert = true
+
+          // Add the observer
+          observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
+
+          // Create the notification content
+          let content = UNMutableNotificationContent()
+          content.title = "URL Opened"
+          content.body = "The app opened a URL: \(url)"
+
+          // Create the trigger
+          let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+          // Create the request
+          let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+          // Schedule the request with the system.
+          let notificationCenter = UNUserNotificationCenter.current()
+          notificationCenter.add(request) { (error) in
             if let error = error {
-                // Handle the error here.
-                print(error.localizedDescription)
+              // Handle any errors.
+              print(error.localizedDescription)
             }
-            // Enable or disable features based on the authorization.
+          }
         }
-    }
-    
-//    Helvetica
-//    Helvetica Neue
-//    Arial
-//    Courier
-//    Courier New
-//    Georgia no
-//    Times New Roman
-//    Verdana +
-//    Palatino no
-//    Avenir ++
-//    Futura
-//    Menlo (monospaced)
-//    SF Mono (monospaced)
-//    SF Pro Display (default system font, though you typically use .systemFont() for this)
-//    Zapfino no
-//    Chalkduster no
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-//            .font(.custom("Roboto", size: 18))
-
-                .environmentObject(KeychainViewModel())
-
-//                .environmentObject(LocationManagerModel())
-
-                .environmentObject(locationManager)
-                .environmentObject(settings)
-                .environmentObject(languagesViewModel)
-                .environmentObject(speciesViewModel)
-                .environmentObject(speciesGroupViewModel)
-                .environmentObject(regionsViewModel) 
-                .environmentObject(regionListViewModel)
-                .environmentObject(observationsSpeciesViewModel)
-                .environmentObject(userViewModel) 
-            
-                .environmentObject(observationsViewModel)
-                .environmentObject(observationsRadiusViewModel)
-                .environmentObject(observationsLocationViewModel)
-                .environmentObject(locationIdViewModel)
-                .environmentObject(geoJSONViewModel)
-                .environmentObject(poiViewModel)
-                .environmentObject(speciesDetailsViewModel)
-                    
-                .environmentObject(bookMarksViewModel)
-                .environmentObject(observersViewModel)
-                .environmentObject(areasViewModel)
-                .environmentObject(htmlViewModel)
-
-                .environmentObject(player) 
-            
-                .environmentObject(observationsYearViewModel)
-
-                .environmentObject(urlHandler)
-
-                .onOpenURL { url in
-                    // Handle the URL appropriately
-                    let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
-                    self.parts = urlString.split(separator: "/").map(String.init)
-                    showingAlert = true
-                    
-                    // Add the observer
-                    observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-                    
-                    // Create the notification content
-                    let content = UNMutableNotificationContent()
-                    content.title = "URL Opened"
-                    content.body = "The app opened a URL: \(url)"
-                    
-                    // Create the trigger
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                    
-                    // Create the request
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                    
-                    // Schedule the request with the system.
-                    let notificationCenter = UNUserNotificationCenter.current()
-                    notificationCenter.add(request) { (error) in
-                        if let error = error {
-                            // Handle any errors.
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
-                
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Append URL"),
-                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
-                          primaryButton: .default(Text("Yes")) {
-                        print("Appending \(parts[0]) \(parts[1])")
-                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-                    },
-                          secondaryButton: .cancel(Text("No")))
-                }
-            
+        .alert(isPresented: $showingAlert) {
+          Alert(title: Text("Append URL"),
+                message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
+                primaryButton: .default(Text("Yes")) {
+            print("Appending \(parts[0]) \(parts[1])")
+            observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
+          },
+                secondaryButton: .cancel(Text("No")))
         }
+
     }
+  }
 }
 
 

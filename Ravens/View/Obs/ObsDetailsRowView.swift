@@ -20,7 +20,7 @@ struct ObsDetailsRowView: View {
         .bold()
         .lineLimit(1) // Set the maximum number of lines to 1
         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-      
+
       if obs.sounds?.count ?? 0 > 0 {
         Image(systemName: "waveform")
       }
@@ -34,11 +34,6 @@ struct ObsDetailsRowView: View {
       if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
         Image(systemName: SFSpeciesFill)
       }
-
-      
-
-
-
     }
   }
 }

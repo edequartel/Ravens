@@ -13,6 +13,53 @@ struct Observations: Codable {
     var results: [Observation]
 }
 
+let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
+let mockSpeciesDetail = SpeciesDetail(id: 1, scientific_name: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
+let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
+let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", country_code: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
+
+let mockObservation = Observation(
+    id: 1,
+    species: 2,
+    date: "2023-01-01",
+    time: "12:00",
+    number: 15,
+    sex: "male",
+    point: mockPoint,
+    accuracy: 1,
+    notes: "Test notes",
+    is_certain: true,
+    is_escape: false,
+    activity: 1,
+    life_stage: 1,
+    method: 1,
+    substrate: 1,
+    related_species: 1,
+    obscurity: 1,
+    has_photo: true,
+    has_sound: false,
+    counting_method: 1,
+    embargo_date: "2023-01-01",
+    uuid: "1234567890",
+    externalReference: ["external1", "external2"],
+    observer_location: mockPoint,
+    transect_uuid: URL(string: "https://example.com"),
+    species_detail: mockSpeciesDetail,
+    rarity: 1,
+    user: 1,
+    user_detail: mockUserDetail,
+    modified: "2023-01-01",
+    species_group: 1,
+    validation_status: "validated",
+    location: 1,
+    location_detail: mockLocationDetail,
+    photos: ["https://waarneming.nl/media/photo/84399858.jpg", "https://waarneming.nl/media/photo/84399859.jpg"],
+    sounds: ["sound1", "sound2"],
+    permalink: "https://example.com",
+    detail: "Test detail",
+    code: "Test code"
+)
+
 // MARK: - Result
 struct Observation: Codable, Identifiable {
     var id: Int?
@@ -57,48 +104,7 @@ struct Observation: Codable, Identifiable {
     
     var detail: String?
     var code: String?
-    
-    init(id: Int? = nil, species: Int? = nil, date: String, time: String? = nil, number: Int, sex: String, point: Point, accuracy: Int? = nil, notes: String? = nil, is_certain: Bool, is_escape: Bool, activity: Int, life_stage: Int, method: Int? = nil, substrate: Int? = nil, related_species: Int? = nil, obscurity: Int? = nil, has_photo: Bool? = nil, has_sound: Bool? = nil, counting_method: Int? = nil, embargo_date: String? = nil, uuid: String? = nil, externalReference: [String]?, observer_location: Point? = nil, transect_uuid: URL? = nil, species_detail: SpeciesDetail, rarity: Int, user: Int, user_detail: UserDetail? = nil, modified: String? = nil, species_group: Int? = nil, validation_status: String, location: Int? = nil, location_detail: LocationDetail? = nil, photos: [String]? = nil, sounds: [String]? = nil, permalink: String, detail: String? = nil, code: String? = nil) {
-        self.id = id
-        self.species = species
-        self.date = date
-        self.time = time
-        self.number = number
-        self.sex = sex
-        self.point = point
-        self.accuracy = accuracy
-        self.notes = notes
-        self.is_certain = is_certain
-        self.is_escape = is_escape
-        self.activity = activity
-        self.life_stage = life_stage
-        self.method = method
-        self.substrate = substrate
-        self.related_species = related_species
-        self.obscurity = obscurity
-        self.has_photo = has_photo
-        self.has_sound = has_sound
-        self.counting_method = counting_method
-        self.embargo_date = embargo_date
-        self.uuid = uuid
-        self.externalReference = externalReference
-        self.observer_location = observer_location
-        self.transect_uuid = transect_uuid
-        self.species_detail = species_detail
-        self.rarity = rarity
-        self.user = user
-        self.user_detail = user_detail
-        self.modified = modified
-        self.species_group = species_group
-        self.validation_status = validation_status
-        self.location = location
-        self.location_detail = location_detail
-        self.photos = photos
-        self.sounds = sounds
-        self.permalink = permalink
-        self.detail = detail
-        self.code = code
-    }
+
 }
 
 // MARK: - UserDetail
@@ -107,44 +113,6 @@ struct UserDetail: Codable {
     var name: String = ""
     var avatar: URL?
 }
-
-// MARK: - Obs
-//struct Obs: Codable, Identifiable {
-//    let accuracy: Int?
-//    let activity, lifeStage: Int?
-//    let code: String?
-//    let counting_method: Int?
-//    let date: String
-//    let detail: String?
-//    let embargo_date: String?
-//    let externalReference: String?
-//    let is_certain, is_escape: Bool?
-//    var id: Int
-//    let location: Int?
-//    let location_detail: LocationDetail?
-//    let method: Int?
-//    let modified: String?
-//    var number: Int
-//    let notes: String?
-//    let obscurity, related_species, substrate: Int?
-//    let permalink: String
-//    let photos: [String]
-//    let point: Point
-//    let rarity, user: Int?
-//    let sex: String
-//    var species: Int = 0
-//    let species_detail: SpeciesDetail
-//    let species_group: Int?
-//    let sounds: [String]
-//    var time: String?
-//    let transectUUID: String?
-//    let user_detail: UserDetail?
-//    let uuid: String?
-//    let validation_status: String?
-//    // let links, details: [String]
-//    // let observer_location: String? is a geoJSON
-//}
-
 
 struct SpeciesDetail: Codable, Identifiable {
     var id: Int = 0
@@ -181,3 +149,46 @@ struct Species: Codable, Identifiable {
         self.native = native
     }
 }
+
+
+//    init(id: Int? = nil, species: Int? = nil, date: String, time: String? = nil, number: Int, sex: String, point: Point, accuracy: Int? = nil, notes: String? = nil, is_certain: Bool, is_escape: Bool, activity: Int, life_stage: Int, method: Int? = nil, substrate: Int? = nil, related_species: Int? = nil, obscurity: Int? = nil, has_photo: Bool? = nil, has_sound: Bool? = nil, counting_method: Int? = nil, embargo_date: String? = nil, uuid: String? = nil, externalReference: [String]?, observer_location: Point? = nil, transect_uuid: URL? = nil, species_detail: SpeciesDetail, rarity: Int, user: Int, user_detail: UserDetail? = nil, modified: String? = nil, species_group: Int? = nil, validation_status: String, location: Int? = nil, location_detail: LocationDetail? = nil, photos: [String]? = nil, sounds: [String]? = nil, permalink: String, detail: String? = nil, code: String? = nil) {
+//        self.id = id
+//        self.species = species
+//        self.date = date
+//        self.time = time
+//        self.number = number
+//        self.sex = sex
+//        self.point = point
+//        self.accuracy = accuracy
+//        self.notes = notes
+//        self.is_certain = is_certain
+//        self.is_escape = is_escape
+//        self.activity = activity
+//        self.life_stage = life_stage
+//        self.method = method
+//        self.substrate = substrate
+//        self.related_species = related_species
+//        self.obscurity = obscurity
+//        self.has_photo = has_photo
+//        self.has_sound = has_sound
+//        self.counting_method = counting_method
+//        self.embargo_date = embargo_date
+//        self.uuid = uuid
+//        self.externalReference = externalReference
+//        self.observer_location = observer_location
+//        self.transect_uuid = transect_uuid
+//        self.species_detail = species_detail
+//        self.rarity = rarity
+//        self.user = user
+//        self.user_detail = user_detail
+//        self.modified = modified
+//        self.species_group = species_group
+//        self.validation_status = validation_status
+//        self.location = location
+//        self.location_detail = location_detail
+//        self.photos = photos
+//        self.sounds = sounds
+//        self.permalink = permalink
+//        self.detail = detail
+//        self.code = code
+//    }

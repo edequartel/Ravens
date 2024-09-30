@@ -26,6 +26,7 @@ struct TabUserObservationsView: View {
           ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
+//      .navigationBarTitleDisplayMode(.inline)
 
       .toolbar {
         if !settings.accessibility {

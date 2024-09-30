@@ -52,7 +52,7 @@ struct SettingsDetailsView: View {
 //            .font(.footnote)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(settings.locationName) \(settings.selectedSpeciesGroupName) \(results)x \(settings.days)d \(settings.selectedDate, formatter: dateFormatter)")
+        .accessibilityLabel("\(settings.locationName) \(settings.selectedSpeciesGroupName) \(results)x \(14)d \(settings.selectedDate, formatter: dateFormatter)")
     }
 
     

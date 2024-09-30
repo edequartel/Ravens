@@ -76,18 +76,18 @@ class Settings: ObservableObject {
     }
     
     
-    @AppStorage("days") var daysStored: Int = 5
-    @Published var days: Int = 5 {
-        didSet {
-            log.info("!!saving it in storage: \(days)")
-            daysStored = days
-            if !isInit {
-                isRadiusChanged = true
-                isAreaChanged = true
-                initialSpeciesLoad = true
-            }
-        }
-    }
+//    @AppStorage("days") var daysStored: Int = 5
+//    @Published var days: Int = 5 {
+//        didSet {
+//            log.info("!!saving it in storage: \(days)")
+//            daysStored = days
+//            if !isInit {
+//                isRadiusChanged = true
+//                isAreaChanged = true
+//                initialSpeciesLoad = true
+//            }
+//        }
+//    }
     
     @AppStorage("listpreference") var listPreference: Bool = false
     
@@ -318,7 +318,7 @@ class Settings: ObservableObject {
         accessibility = accessibilityStored
         
         //for updating published values
-        days = daysStored
+//        days = daysStored
         radius = radiusStored //haal de radius op uit de storage
         isInit = false
     }

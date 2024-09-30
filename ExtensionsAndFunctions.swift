@@ -378,10 +378,21 @@ struct TopRightModifier: ViewModifier {
     }
 }
 
-extension Text {
+extension VStack {
     func footnoteGrayStyle() -> some View {
         self
             .foregroundColor(.gray)
+            .font(.footnote)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+    }
+}
+
+extension Text {
+    func footnoteGrayStyle() -> some View {
+        self
+            .foregroundColor(.black)
             .font(.footnote)
             .italic()
             .lineLimit(1)

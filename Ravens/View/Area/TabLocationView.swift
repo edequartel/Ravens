@@ -36,7 +36,7 @@ struct TabLocationView: View {
         }
       }
       //            .navigationTitle(settings.locationName)
-      .navigationBarTitleDisplayMode(.inline)
+//      .navigationBarTitleDisplayMode(.inline)
 
       .toolbar {
         if !settings.accessibility {

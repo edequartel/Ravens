@@ -20,9 +20,12 @@ struct TabSpeciesView: View {
     @EnvironmentObject var settings: Settings
 
 //--> these
-    @State private var selectedSortOption: SortOption = .name
-    @State private var selectedFilterOption: FilterOption = .native
+    @State private var selectedSortOption: SortNameOption = .name
+    @State private var selectedFilterOption: FilterAllOption = .all
+    @State private var selectedRarityOption: FilteringRarityOption = .all
     @State private var searchText = ""
+
+
 
     @Binding var selectedSpeciesID: Int?
 
@@ -34,129 +37,74 @@ struct TabSpeciesView: View {
         if showView { Text("TabSpeciesView").font(.customTiny) }
         HorizontalLine()
         List {
-          ForEach(
+          ForEach(speciesViewModel.filteredSpecies(
+                    by: selectedSortOption,
+                    searchText: searchText,
+                    filterOption: selectedFilterOption,
+                    rarityFilterOption: selectedRarityOption,
+                    isLatest: settings.isLatestVisible,
+                    htmlViewModel: htmlViewModel,
+                    isBookmarked: settings.isBookMarkVisible,
+                    additionalIntArray: bookMarksViewModel
+                  ), id: \.id) { species in
+//          ForEach(speciesViewModel.species.filter { species in
+//            searchText.isEmpty || species.name.lowercased().contains(searchText.lowercased())
+//          } , id: \.species) { species in
 
-//            --> and here
-            speciesViewModel.filteredSpecies(
-              by: selectedSortOption,
-              searchText: searchText,
-              filterOption: selectedFilterOption,
-              
-              rarityFilterOption: settings.selectedRarity,
-              
-              isLatest: settings.isLatestVisible,
-              htmlViewModel: htmlViewModel,
-              
-              isBookmarked: settings.isBookMarkVisible,
-              additionalIntArray: bookMarksViewModel)
-            , id: \.species) { species in
-              
-              NavigationLink(
-                destination:
-                  SpeciesView(
-                    item: species,
-                    selectedSpeciesID: $selectedSpeciesID)
-              ) {
-                
-                VStack(alignment: .leading) {
-                  if showView { Text("xxxView").font(.customTiny) }
-                  HStack(spacing: 4) {
-                    
-                    Image(
-                      systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(RarityColor(value: species.rarity), .clear)
-                    
-                    
-                    Text("\(species.name)")// - \(species.id)") //?
-                      .bold()
-                      .lineLimit(1) // Set the maximum number of lines to 1
-                      .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    
-                    Spacer()
-                    if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-                      //                                        if isNumberInBookMarks(number: species.id) {
-                      Image(systemName: "star.fill")
-                    }
-                  }
-                  HStack {
-                    Text("\(species.scientific_name)")
-                      .italic()
-                      .lineLimit(1) // Set the maximum number of lines to 1
-                      .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                  }
-                  HStack{
-                    let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
-                      speciesID: species.id)//
-                    //                                                                            if speciesLang != species.name {
-                    Text("\(speciesLang ?? "placeholder")") //?
-                      .bold()
-                      .font(.caption)
-                      .lineLimit(1) // Set the maximum number of lines to 1
-                      .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                    Spacer()
-                    //                                                                            }
-                  }
-                }
+
+            NavigationLink(
+              destination:
+                SpeciesView(
+                  item: species,
+                  selectedSpeciesID: $selectedSpeciesID)
+            ) {SpeciesInfoView(species: species,
+                               showView: showView,
+                               htmlViewModel: htmlViewModel,
+                               bookMarksViewModel: bookMarksViewModel,
+                               speciesSecondLangViewModel: speciesSecondLangViewModel)}
+
+
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              Button(action: {
+                selectedSpeciesID = species.id
+              }) {
+                Image(systemName: "info.circle")
               }
-              
-              .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                Button(action: {
-                  selectedSpeciesID = species.id
-                }) {
-                  Image(systemName: "info.circle")
+              .tint(.blue)
+
+              Button(action: {
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                  print("bookmarks remove")
+                  bookMarksViewModel.removeRecord(speciesID: species.id)
+                } else {
+                  bookMarksViewModel.appendRecord(speciesID: species.id)
+                  print("bookmarks append")
                 }
-                .tint(.blue)
-                
-                Button(action: {
-                  if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-                    print("bookmarks remove")
-                    bookMarksViewModel.removeRecord(speciesID: species.id)
-                  } else {
-                    bookMarksViewModel.appendRecord(speciesID: species.id)
-                    print("bookmarks append")
-                  }
-                  
-                } ) {
-                  Image(systemName: "star")
-                }
-                .tint(.obsStar)
+
+              } ) {
+                Image(systemName: "star")
               }
+              .tint(.obsStar)
             }
+          }
         }
         .listStyle(PlainListStyle())
-        
-      }
-      
-//      deze overnemen... naar de observationListViewlist
 
-      .toolbar{
-        Menu("Sort/filter", systemImage: "arrow.up.arrow.down") {
-          Picker("Sort by", selection: $selectedSortOption) {
-            Text("Name").tag(SortOption.name)
-            Text("Scientific name").tag(SortOption.scientific_name)
-            // Add more sorting options if needed
-          }
-          .pickerStyle(.inline)
-          
-          Picker("Filter by", selection: $selectedFilterOption) {
-            Text("All").tag(FilterOption.all)
-            Text("Native").tag(FilterOption.native)
-            // Add more filter options if needed
-          }
-          .pickerStyle(.inline)
-          
-          Picker("Filter rarity by", selection: $settings.selectedRarity) {
-            Text(">= All").tag(0)
-            Text("== Common").tag(1)
-            Text("== Uncommon").tag(2)
-            Text(">= Rare").tag(3)
-            Text("== Very rare").tag(4)
-          }
-          .pickerStyle(.inline)
-        }
       }
-      
+      .toolbar {
+        // First Menu for Sorting
+        ToolbarItem(placement: .navigationBarTrailing) {
+          SortNameMenu(currentFilteringNameOption: $selectedSortOption)
+        }
+        // Second Menu for Filtering
+        ToolbarItem(placement: .navigationBarTrailing) {
+          FilteringAllMenu(currentFilteringAllOption: $selectedFilterOption)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          FilteringMenu(currentFilteringOption: $selectedRarityOption)
+        }
+    }
+
       .navigationBarTitle(settings.selectedSpeciesGroupName)
       .navigationBarTitleDisplayMode(.inline)
       
@@ -204,20 +152,89 @@ struct TabSpeciesView: View {
 
 }
 
-enum SortOption: String, CaseIterable {
-    case name
-    case scientific_name
+enum SortNameOption: String, CaseIterable {
+    case name = "Name"
+    case scientific_name = "Scientific name"
     // Add more sorting options if needed
 }
 
-enum FilterOption: String, CaseIterable {
-    case all
-    case native
+struct SortNameMenu: View {
+    @Binding var currentFilteringNameOption: SortNameOption
+
+    var body: some View {
+        NavigationLink(destination: SortNameOptionsView(currentFilteringNameOption: $currentFilteringNameOption)) {
+            Image(systemName: "arrow.up.arrow.down")
+                .accessibilityElement(children: .combine)
+                .accessibility(label: Text("Filtering"))
+        }
+        .accessibility(label: Text("Menu Sort"))
+    }
+}
+
+struct SortNameOptionsView: View {
+  @Binding var currentFilteringNameOption: SortNameOption
+
+  var body: some View {
+    List(SortNameOption.allCases, id: \.self) { option in
+      Button(action: {
+        currentFilteringNameOption = option
+      }) {
+        HStack {
+          Text(option.rawValue)
+          Spacer()
+          if currentFilteringNameOption == option {
+            Image(systemName: "checkmark")
+          }
+        }
+      }
+    }
+    .navigationTitle("Sorting")
+  }
+}
+
+
+enum FilterAllOption: String, CaseIterable {
+    case all = "All"
+    case native = "Native"
     // Add more filter options if needed
 }
 
+struct FilteringAllMenu: View {
+    @Binding var currentFilteringAllOption: FilterAllOption
+
+    var body: some View {
+        NavigationLink(destination: FilteringAllOptionsView(currentFilteringAllOption: $currentFilteringAllOption)) {
+            Image(systemName: "line.3.horizontal.decrease")
+                .accessibilityElement(children: .combine)
+                .accessibility(label: Text("Filtering"))
+        }
+        .accessibility(label: Text("Menu filter"))
+    }
+}
+
+struct FilteringAllOptionsView: View {
+  @Binding var currentFilteringAllOption: FilterAllOption
+
+  var body: some View {
+    List(FilterAllOption.allCases, id: \.self) { option in
+      Button(action: {
+        currentFilteringAllOption = option
+      }) {
+        HStack {
+          Text(option.rawValue)
+          Spacer()
+          if currentFilteringAllOption == option {
+            Image(systemName: "checkmark")
+          }
+        }
+      }
+    }
+    .navigationTitle("Filtering")
+  }
+}
+
 extension SpeciesViewModel {
-    func sortedSpecies(by sortOption: SortOption) -> [Species] {
+    func sortedSpecies(by sortOption: SortNameOption) -> [Species] {
         switch sortOption {
         case .name:
             return species.sorted { ($0.name < $1.name) }
@@ -230,10 +247,10 @@ extension SpeciesViewModel {
 
 extension SpeciesViewModel {
     func filteredSpecies(
-        by sortOption: SortOption,
+        by sortOption: SortNameOption,
         searchText: String,
-        filterOption: FilterOption,
-        rarityFilterOption: Int,
+        filterOption: FilterAllOption,
+        rarityFilterOption: FilteringRarityOption,
         isLatest: Bool,
         htmlViewModel: HTMLViewModel,
         isBookmarked: Bool,
@@ -256,7 +273,7 @@ extension SpeciesViewModel {
         return applyLatestFilter(to: filteredList, isLatest: isLatest, additionalHTMLDoc: htmlViewModel)
     }
 
-    private func applyFilter(to species: [Species], with filterOption: FilterOption) -> [Species] {
+    private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
         switch filterOption {
         case .all:
             return species
@@ -265,20 +282,20 @@ extension SpeciesViewModel {
         }
     }
 
-    private func applyRarityFilter(to species: [Species], with filterOption: Int) -> [Species] {
+    private func applyRarityFilter(to species: [Species], with filterOption: FilteringRarityOption) -> [Species] {
         switch filterOption {
-        case 0:
+        case .all:
             return species
-        case 1:
+        case .common:
             return species.filter { $0.rarity == 1 }
-        case 2:
+        case .uncommon:
             return species.filter { $0.rarity == 2 }
-        case 3:
+        case .rare:
             return species.filter { $0.rarity >= 3 }
-        case 4:
+        case .veryRare:
             return species.filter { $0.rarity == 4 }
-        default:
-            return species
+//        default:
+//            return species
         }
     }
 
@@ -303,25 +320,48 @@ extension SpeciesViewModel {
     }
 }
 
-//struct TabSpeciesView_Previews: PreviewProvider {
-//    @State static var selectedSpecies: Species? = nil
-////    @State static var selectedObservationSound: Observation? = nil
-//    @State var selectedObservation: Observation?
-//
-//
-//    static var previews: some View {
-//        TabSpeciesView(
-//          selectedSpecies: $selectedSpecies,
-//          selectedObservation: $selectedObservation)
-////          selectedObservationSound: $selectedObservationSound,
-////          selectedObs: .constant(nil))
-////          imageURLStr: .constant(""))
-//            .environmentObject(SpeciesViewModel())
-//            .environmentObject(SpeciesGroupsViewModel())
-//            .environmentObject(ObservationsSpeciesViewModel())
-//            .environmentObject(KeychainViewModel())
-//            .environmentObject(BookMarksViewModel())
-//            .environmentObject(HTMLViewModel())
-//            .environmentObject(Settings())
-//    }
-//}
+struct SpeciesInfoView: View {
+    var species: Species // Assuming Species is your data model
+    var showView: Bool
+    var htmlViewModel: HTMLViewModel // Assuming HTMLViewModel is your ViewModel
+    var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel
+    var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            if showView { Text("xxxView").font(.customTiny) }
+            HStack(spacing: 4) {
+                Image(
+                    systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(RarityColor(value: species.rarity), .clear)
+
+                Text("\(species.name)")
+                .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
+
+                Spacer()
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+                    Image(systemName: "star.fill")
+                }
+            }
+            HStack {
+                Text("\(species.scientific_name)")
+                .italic()
+                .lineLimit(1)
+                .truncationMode(.tail)
+            }
+            HStack{
+                let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
+                    speciesID: species.id)
+                Text("\(speciesLang ?? "placeholder")")
+                .bold()
+                .font(.caption)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                Spacer()
+            }
+        }
+    }
+}

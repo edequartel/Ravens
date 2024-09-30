@@ -68,7 +68,7 @@ struct MapObservationsSpeciesView: View {
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
                         //
-                        Text("\(settings.days)d")
+                        Text("\(14)d")
                         Text("\(settings.selectedDate, formatter: dateFormatter)")
                         Spacer()
                     }

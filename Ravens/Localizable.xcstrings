@@ -47,16 +47,6 @@
         }
       }
     },
-    "%@ %@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@ %3$@"
-          }
-        }
-      }
-    },
     "%@ %@ %lldx %lldd %@" : {
       "localizations" : {
         "en" : {
@@ -117,21 +107,6 @@
     "%lldx" : {
 
     },
-    "== Common" : {
-
-    },
-    "== Uncommon" : {
-
-    },
-    "== Very rare" : {
-
-    },
-    ">= All" : {
-
-    },
-    ">= Rare" : {
-
-    },
     "Add area" : {
 
     },
@@ -148,6 +123,7 @@
 
     },
     "All" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -218,6 +194,7 @@
       }
     },
     "Common" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -250,6 +227,7 @@
       }
     },
     "Date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -402,6 +380,7 @@
 
     },
     "Filter by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -412,6 +391,7 @@
       }
     },
     "Filter rarity by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -799,6 +779,9 @@
     "Menu filter" : {
 
     },
+    "Menu Sort" : {
+
+    },
     "Menu sorting" : {
 
     },
@@ -861,6 +844,7 @@
       }
     },
     "Native" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -915,6 +899,9 @@
     "obs 2023" : {
 
     },
+    "ObsDetailView" : {
+
+    },
     "observation.org" : {
       "localizations" : {
         "nl" : {
@@ -924,6 +911,9 @@
           }
         }
       }
+    },
+    "ObservationRowView" : {
+
     },
     "Observations" : {
       "extractionState" : "stale",
@@ -1041,6 +1031,7 @@
       }
     },
     "Rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1051,6 +1042,7 @@
       }
     },
     "Rarity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1151,6 +1143,7 @@
       }
     },
     "Scientific name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1238,6 +1231,7 @@
 
     },
     "Sort by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1248,6 +1242,7 @@
       }
     },
     "Sort/filter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1314,6 +1309,9 @@
         }
       }
     },
+    "SpeciesDetailsView" : {
+
+    },
     "SpeciesView" : {
 
     },
@@ -1338,6 +1336,9 @@
 
     },
     "TabUserObservationsView" : {
+
+    },
+    "Tap voor meer details over Informatie over de waarneming." : {
 
     },
     "this is a hint" : {
@@ -1382,6 +1383,7 @@
       }
     },
     "Uncommon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1429,6 +1431,7 @@
 
     },
     "Very rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

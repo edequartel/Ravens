@@ -166,6 +166,17 @@ struct ObserversView: View {
 
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                       Button(action: {
+                        QRCode = IdentifiableString(
+                          value: "ravens://\(cleanName(record.name))/\(record.userID)",
+                          name: record.name)
+                        showingQRCodeSheet = true
+                      }) {
+                          Image(systemName: "qrcode")
+                      }
+
+
+
+                      Button(action: {
                         observersViewModel.removeRecord(userID: record.userID)
                       }) {
                         Label("remove", systemImage: "person.fill.badge.minus")

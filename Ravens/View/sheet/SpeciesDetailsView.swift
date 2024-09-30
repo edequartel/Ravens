@@ -24,6 +24,8 @@ struct SpeciesDetailsView: View {
         NavigationView {
             Form{
                 VStack(alignment: .leading) {
+                  if showView { Text("SpeciesDetailsView").font(.customTiny) }
+                  
                     if let species = viewSpeciesDetailsDModel.speciesDetails {
                         VStack(alignment: .leading) {
                             Text(species.name)
@@ -35,9 +37,9 @@ struct SpeciesDetailsView: View {
                                 .font(.footnote)
                           HStack {
                             Text("\(species.group_name)")
-                            Spacer()
+//                            Spacer()
                             Text("\(species.status)")
-                            Spacer()
+//                            Spacer()
                             Text("\(species.rarity)")
                             Spacer()
                           }
@@ -73,10 +75,13 @@ struct SpeciesDetailsView: View {
                     }
 
                 }
+
             }
+
         }
+        .presentationDragIndicator(.visible)
         .onAppear {
-            log.info("-->> Calling SpeciesDetailsView FetchData \(speciesID)")
+            log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
             viewSpeciesDetailsDModel.fetchData(
                 settings: settings,
                 for: speciesID,
