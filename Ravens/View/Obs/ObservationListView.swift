@@ -13,6 +13,7 @@ struct ObservationListView: View {
   @EnvironmentObject var settings: Settings
 
   @Binding var selectedSpeciesID: Int?
+
   @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringOption: FilteringRarityOption = .all
@@ -29,10 +30,17 @@ struct ObservationListView: View {
     .toolbar {
       if entity != .species {
         ToolbarItem(placement: .navigationBarTrailing) {
-          SortingMenu(currentSortingOption: $currentSortingOption)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          FilteringMenu(currentFilteringOption: $currentFilteringOption)
+
+            Menu {
+              CombinedOptionsMenuView(
+                currentSortingOption: $currentSortingOption,
+                currentFilteringOption: $currentFilteringOption )
+            } label: {
+                Button(action: {}) {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+
         }
       }
     }
@@ -100,7 +108,6 @@ struct ObservationRowView: View {
                 )
                 .padding(4)
             }
-//            .buttonStyle(PlainButtonStyle()) // Remove default button styling ???
             Divider()
         }
         .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
@@ -108,7 +115,6 @@ struct ObservationRowView: View {
     }
 }
 
-//>>
 enum FilteringRarityOption: String, CaseIterable {
     case all = "All"
     case common = "Common"
@@ -151,8 +157,6 @@ struct FilterOptionsView: View {
     }
 }
 
-//<<
-
 //enum
 enum SortingOption: String, CaseIterable {
   case date = "Date"
@@ -161,37 +165,92 @@ enum SortingOption: String, CaseIterable {
   case scientificName = "Scientific Name"
 }
 
-struct SortingMenu: View {
+struct CombinedOptionsMenuView: View {
     @Binding var currentSortingOption: SortingOption
+    @Binding var currentFilteringOption: FilteringRarityOption
 
     var body: some View {
-        NavigationLink(destination: SortOptionsView(currentSortingOption: $currentSortingOption)) {
-            Image(systemName: "arrow.up.arrow.down")
-                .accessibilityElement(children: .combine)
-                .accessibility(label: Text("Sorting"))
-        }
-        .accessibility(label: Text("Menu sorting"))
-    }
-}
-
-struct SortOptionsView: View {
-    @Binding var currentSortingOption: SortingOption
-
-    var body: some View {
-        List(SortingOption.allCases, id: \.self) { option in
-            Button(action: {
-                currentSortingOption = option
-            }) {
-                HStack {
-                    Text(option.rawValue)
-                    Spacer()
-                    if currentSortingOption == option {
-                        Image(systemName: "checkmark")
+        Menu {
+            ForEach(SortingOption.allCases, id: \.self) { option in
+                Button(action: {
+                    currentSortingOption = option
+                }) {
+                    HStack {
+                        Text(option.rawValue)
+                        Spacer()
+                        if currentSortingOption == option {
+                            Image(systemName: "checkmark")
+                        }
                     }
                 }
             }
+
+            Divider()
+
+            ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+                Button(action: {
+                    currentFilteringOption = option
+                }) {
+                    HStack {
+                        Text(option.rawValue)
+                        Spacer()
+                        if currentFilteringOption == option {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            Text("Options")
         }
-        .navigationTitle("Sorting")
+    }
+}
+
+struct _SortOptionsMenuView: View {
+    @Binding var currentSortingOption: SortingOption
+
+    var body: some View {
+        Menu {
+            ForEach(SortingOption.allCases, id: \.self) { option in
+                Button(action: {
+                    currentSortingOption = option
+                }) {
+                    HStack {
+                        Text(option.rawValue)
+                        Spacer()
+                        if currentSortingOption == option {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            Text("Sort Options")
+        }
+    }
+}
+
+struct _FilterOptionsMenuView: View {
+    @Binding var currentFilteringOption: FilteringRarityOption
+
+    var body: some View {
+        Menu {
+            ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+                Button(action: {
+                    currentFilteringOption = option
+                }) {
+                    HStack {
+                        Text(option.rawValue)
+                        Spacer()
+                        if currentFilteringOption == option {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+        } label: {
+            Text("Filter Options")
+        }
     }
 }
 

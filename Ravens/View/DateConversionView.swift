@@ -22,7 +22,7 @@ struct DateConversionView: View {
 
   var body: some View {
     Text("\(formattedDate)")
-      .footnoteGrayStyle()
+//      .footnoteGrayStyle()
   }
 }
 

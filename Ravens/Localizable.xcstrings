@@ -390,6 +390,9 @@
         }
       }
     },
+    "Filter Options" : {
+
+    },
     "Filter rarity by" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -782,9 +785,6 @@
     "Menu Sort" : {
 
     },
-    "Menu sorting" : {
-
-    },
     "Month" : {
       "localizations" : {
         "nl" : {
@@ -966,6 +966,9 @@
 
     },
     "Open observation" : {
+
+    },
+    "Options" : {
 
     },
     "Password" : {
@@ -1241,6 +1244,9 @@
         }
       }
     },
+    "Sort Options" : {
+
+    },
     "Sort/filter" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1308,9 +1314,6 @@
           }
         }
       }
-    },
-    "SpeciesDetailsView" : {
-
     },
     "SpeciesView" : {
 

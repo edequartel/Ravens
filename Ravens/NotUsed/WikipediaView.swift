@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CachedAsyncImage
+import Kingfisher
 
 struct WikipediaView: View {
     @StateObject var viewModel = WikipediaViewModel()
@@ -34,15 +34,21 @@ struct WikipediaView: View {
                             .padding(.bottom, 5)  // Small padding below the title to separate from the text
                         
                         if let thumbnail = viewModel.pageDetail.thumbnail {
-                          CachedAsyncImage(url: URL(string: thumbnail.source)) { image in
-                                image.resizable()
-                            } placeholder: {
-                                ProgressView()
-                            }
+                          KFImage(URL(string: thumbnail.source))
+                            .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 100, height: 100)
                             .cornerRadius(8)
                             .padding([.top, .horizontal], 20)  // Padding around the image
+//                          CachedAsyncImage(url: URL(string: thumbnail.source)) { image in
+//                                image.resizable()
+//                            } placeholder: {
+//                                ProgressView()
+//                            }
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 100, height: 100)
+//                            .cornerRadius(8)
+//                            .padding([.top, .horizontal], 20)  // Padding around the image
                         }
                         
                         ScrollView {

@@ -21,13 +21,13 @@ struct ObsDetailsRowView: View {
         .lineLimit(1) // Set the maximum number of lines to 1
         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
 
-      if obs.sounds?.count ?? 0 > 0 {
-        Image(systemName: "waveform")
-      }
-      
-      if obs.notes?.count ?? 0 > 0 {
-        Image(systemName: "list.clipboard")
-      }
+//      if obs.sounds?.count ?? 0 > 0 {
+//        Image(systemName: "waveform")
+//      }
+//      
+//      if obs.notes?.count ?? 0 > 0 {
+//        Image(systemName: "list.clipboard")
+//      }
       
       Spacer()
       

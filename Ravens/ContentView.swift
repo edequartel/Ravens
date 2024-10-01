@@ -8,8 +8,6 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
-import CachedAsyncImage
-
 
 struct ContentView: View {
   let log = SwiftyBeaver.self
@@ -115,34 +113,6 @@ struct RavensView: View {
       }
     }
   }
-}
-
-struct ImageView: View {
-    let item: String
-    let dismissAction: () -> Void
-
-    var body: some View {
-      ZStack {
-        CachedAsyncImage(url: URL(string: item)!) { image in
-              image
-                  .resizable()
-                  .aspectRatio(contentMode: .fit)
-          } placeholder: {
-              ProgressView()
-          }
-          .overlay(
-              Button(action: {
-                  dismissAction()
-              }) {
-                  Image(systemName: "xmark.circle.fill")
-                      .font(.largeTitle)
-                      .foregroundColor(.white)
-              }
-              .padding(), // Add padding to move button away from edges
-              alignment: .topTrailing // Position the button at the top right
-          )
-      }
-    }
 }
 
 

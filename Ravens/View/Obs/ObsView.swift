@@ -36,62 +36,39 @@ struct ObsView: View {
     HStack {
       PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
 
-      VStack {
+      VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
-
-//        HStack {
-//          Text("---")
-//          Spacer()
-//        }
 
         if showSpecies {
           ObsDetailsRowView(obs: obs)
-          HStack {
-            Text("\(obs.species_detail.scientific_name)")
-              .foregroundColor(.gray)
-              .font(.footnote)
-              .italic()
-              .lineLimit(1) // Set the maximum number of lines to 1
-              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-            Spacer()
+          Text("\(obs.species_detail.scientific_name)")
+            .footnoteGrayStyle()
+        }
+
+        HStack {
+          if obs.sounds?.count ?? 0 > 0 {
+            Image(systemName: "waveform")
+          }
+
+
+          if obs.notes?.count ?? 0 > 0 {
+            Image(systemName: "list.clipboard")
           }
         }
 
-//        if !showSpecies {
-//
-//          HStack {
-//            if obs.sounds?.count ?? 0 > 0 {
-//              Image(systemName: "waveform")
-//            }
-//            else { Text("") }
-//
-//            if obs.notes?.count ?? 0 > 0 {
-//              Image(systemName: "list.clipboard")
-//            }
-//            Spacer()
-//          }
-//        }
-//        HStack {
-//          Text("---")
-//          Spacer()
-//        }
-        //<<
 
-
-        HStack {
+      HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-
           Text("\(obs.number) x")
             .footnoteGrayStyle()
-          Spacer()
-        }
+       }
 
 
         // User Info Section
         if showObserver {
           HStack {
             Text("\(obs.user_detail?.name ?? "noName")")
-//              .footnoteGrayStyle()
+              .footnoteGrayStyle()
             Spacer()
             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
               Image(systemName: SFObserverFill)
@@ -114,6 +91,7 @@ struct ObsView: View {
 
         Spacer()
       }
+      .padding(2)
     }
 
     .accessibilityElement(children: .combine)
@@ -121,98 +99,18 @@ struct ObsView: View {
     .accessibilityHint("Tap voor meer details over Informatie over de waarneming.")
 
 
-
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      Button(action: {
-        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-          print("remove areas \(obs.location_detail?.id ?? 0)")
-          areasViewModel.removeRecord(
-            areaID: obs.location_detail?.id ?? 0)
-        } else {
-          print("adding area \(obs.location_detail?.id ?? 0)")
-          areasViewModel.appendRecord(
-            areaName: obs.location_detail?.name ?? "unknown",
-            areaID: obs.location_detail?.id ?? 0,
-            latitude: obs.point.coordinates[1], //!!?
-            longitude: obs.point.coordinates[0]
-          )
-        }
-      }) {
-        if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-          Image(systemName: SFAreaFill)
-        } else {
-          Image(systemName: SFArea)
-        }
-      }
-      .tint(.obsArea)
-      .accessibility(label: Text("Add area"))
-
-      Button(action: {
-        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-          print("bookmarks remove")
-          bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
-        } else {
-          bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
-          print("bookmarks append")
-        }
-      } ) {
-        Image(systemName:  SFSpeciesFill)
-      }
-      .tint(.obsSpecies)
-      .accessibility(label: Text("Add bookmark"))
-
-      Button(action: {
-        if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-          observersViewModel.removeRecord(userID: obs.user_detail?.id ?? 0)
-        } else {
-          observersViewModel.appendRecord(
-            name: obs.user_detail?.name ?? "unknown",
-            userID: obs.user_detail?.id ?? 0)
-        }
-      }) {
-        Image(systemName: SFObserver)
-      }
-      .tint(.obsObserver)
-      .accessibility(label: Text("Add observer"))
+      AreaButtonView(obs: obs)
+      BookmarkButtonView(obs: obs)
+      ObserversButtonView(obs: obs)
     }
-
-
 
     //leading
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-      let url = URL(string: obs.permalink)!
-      ShareLink(
-        item: url
-        //                    message: Text(messageString()),
-        //                    preview: SharePreview("Observation"+" \(obs.species_detail.name)", image: appIcon)
-      )
-      {
-        Image(systemName: SFShareLink)
-      }
-      .tint(.obsShareLink)
-      .accessibility(label: Text("Share observation"))
-
-      Button(action: {
-        print("Information \(obs.species_detail.name) \(obs.species_detail.id)")
-        selectedSpeciesID = obs.species_detail.id
-        //    }
-      }) {
-        Image(systemName: SFInformation)
-      }
-      .tint(.obsInformation)
-      .accessibility(label: Text("Information species"))
-
-      Button(action: {
-        if let url = URL(string: obs.permalink) {
-          UIApplication.shared.open(url)
-        }
-        
-      }) {
-        Image(systemName: SFObservation)
-      }
-      .tint(.obsObservation)
-      .accessibility(label: Text("Link to waarneming observation"))
+      ShareLinkButtonView(obs: obs)
+      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+      LinkButtonView(obs: obs)
     }
   }
 

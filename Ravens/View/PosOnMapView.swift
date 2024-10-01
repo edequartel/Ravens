@@ -35,6 +35,7 @@ struct PositionOnMapView: View {
         Map(coordinateRegion: $region, annotationItems: [LocationXX(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))]) { location in
             MapMarker(coordinate: location.coordinate)
         }
+        .cornerRadius(10)
     }
 }
 

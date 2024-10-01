@@ -66,7 +66,7 @@ extension Color {
     
     static let obsInformation = Color(red: 0/255, green: 0/255, blue: 255/255) //blue
     static let obsObserver = Color(red: 255/255, green: 0/255, blue: 0/255) //red
-    static let obsSpecies = Color(red: 29/255, green: 148/255, blue: 49/255) //green
+    static let obsBookmark = Color(red: 29/255, green: 148/255, blue: 49/255) //green
     static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //orange
     static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
     static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
@@ -472,6 +472,16 @@ let showView = false
 
 //make Int directly Identifiable
 extension Int: Identifiable {
-    public var id: Int { self }
+  public var id: Int { self }
 }
 
+extension View {
+  func islandBackground(cornerRadius: CGFloat = 10, shadowRadius: CGFloat = 5) -> some View {
+    self
+      .background(
+        RoundedRectangle(cornerRadius: cornerRadius)
+          .fill(Color(.systemBackground))
+          .shadow(radius: shadowRadius)
+      )
+  }
+}

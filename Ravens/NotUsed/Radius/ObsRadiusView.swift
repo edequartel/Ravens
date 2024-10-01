@@ -10,7 +10,7 @@ import SwiftyBeaver
 import Alamofire
 import AlamofireImage
 import AVFoundation
-import CachedAsyncImage
+import Kingfisher
 
 struct ObsRadiusView: View {
     let log = SwiftyBeaver.self
@@ -91,17 +91,17 @@ struct ObsRadiusView: View {
                     }
                 }
                 
-                if !settings.hidePictures {
-                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
-                      CachedAsyncImage(url: URL(string: imageURLString)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                      } placeholder: {
-                        ProgressView()
-                      }
-                    }
-                }
+//                if !settings.hidePictures {
+//                    ForEach(obs.photos ?? [], id: \.self) { imageURLString in
+//                      KFImage(url: URL(string: imageURLString)) { image in
+//                        image
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                      } placeholder: {
+//                        ProgressView()
+//                      }
+//                    }
+//                }
                 
 //                PhotoGridView(photos: obs.photos)
                 
@@ -184,7 +184,7 @@ struct ObsRadiusView: View {
                 } ) {
                     Image(systemName: SFSpecies)
                 }
-                .tint(.obsSpecies)
+                .tint(.obsBookmark)
                 
                 Button(action: {
                     if let url = URL(string: obs.permalink) {
