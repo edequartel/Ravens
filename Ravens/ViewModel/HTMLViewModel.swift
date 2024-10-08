@@ -18,13 +18,12 @@ class HTMLViewModel: ObservableObject {
         return documents.contains { $0.speciesScientificName == name }
     }
 
-    
     func parseHTMLFromURL(settings: Settings) {
-        print("-->>\(settings.selectedInBetween)")
+        print("(settings.selectedInBetween)")
         print("\(settings.selectedSpeciesGroupId)")
         let urlString = "https://\(settings.selectedInBetween)/recent-rarities-content/?species_group=\(settings.selectedSpeciesGroupId)"
-        print("parsing...")
-        
+        print("parsing...urlString: \(urlString)")
+
         // Ensure the URL is valid
         guard let url = URL(string: urlString) else {
             DispatchQueue.main.async {

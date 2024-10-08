@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " %@\n %@\n %@\n %@" : {
       "localizations" : {
         "en" : {
@@ -681,6 +678,7 @@
       }
     },
     "Login %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -979,6 +977,7 @@
 
     },
     "Password" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

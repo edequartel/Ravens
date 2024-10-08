@@ -119,6 +119,7 @@
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		4793A58A2C29334E002739B6 /* waarneming-rarities.html in Resources */ = {isa = PBXBuildFile; fileRef = 4793A5892C29334E002739B6 /* waarneming-rarities.html */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
+		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -131,7 +132,7 @@
 		47EE131E2CABBE1C007305E1 /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE131D2CABBE1C007305E1 /* PlayButtonView.swift */; };
 		47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */; };
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
-		47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */; };
+		47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */; };
 		47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD0E42C1AE9D8007D0F63 /* dataloading.json */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +242,7 @@
 		4793A5892C29334E002739B6 /* waarneming-rarities.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "waarneming-rarities.html"; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
+		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
@@ -252,7 +254,7 @@
 		47EE131D2CABBE1C007305E1 /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
 		47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
-		47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLocationsList.swift; sourceTree = "<group>"; };
+		47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		47FAD0E42C1AE9D8007D0F63 /* dataloading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataloading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -420,6 +422,7 @@
 		4767F0062BF27F2C00BACDC6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */,
 				4767F0002BF251C200BACDC6 /* TabLocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
@@ -472,6 +475,7 @@
 				474093832B55B5DE004F10C5 /* ManualView.swift */,
 				474C407E2B4D15610038B3A5 /* SettingsView.swift */,
 				471875462C022A2B00EF9F1F /* SpeciesGroupsView.swift */,
+				47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -485,7 +489,6 @@
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 				471875382BFB938500EF9F1F /* AreasViewModel.swift */,
-				47FAD0E22C19DB56007D0F63 /* TestLocationsList.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				4752426F2C2D887900DBBD0B /* HTMLDocument.swift in Sources */,
 				474C40842B4D189F0038B3A5 /* MapObservationRadiusView.swift in Sources */,
 				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
+				47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				4738B63D2BF4DEA400BF7557 /* ObsSpeciesView.swift in Sources */,
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
@@ -744,7 +748,7 @@
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
 				4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
-				47FAD0E32C19DB56007D0F63 /* TestLocationsList.swift in Sources */,
+				47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */,
 				4767F0052BF256B100BACDC6 /* SpeciesView.swift in Sources */,
 				474C409C2B500AE90038B3A5 /* ObservationsRadiusView.swift in Sources */,
 				4784B5422B7BE1040051D03E /* PhotoThumbnailView.swift in Sources */,

@@ -127,11 +127,13 @@ struct ObsDetailView: View {
                     .padding()
                     .islandBackground()
 
-                // Map View Section
-                PositionOnMapView(lat: obs.point.coordinates[1], long: obs.point.coordinates[0])
-                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
-                    .padding(6)
-                    .islandBackground()
+              NavigationLink(destination: PositonFullView(obs: obs)) {
+                PositionOnMapView(obs: obs)
+                      .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
+                      .padding(6)
+                      .islandBackground()
+              }
+
             }
             .padding(.horizontal, 20)
         }

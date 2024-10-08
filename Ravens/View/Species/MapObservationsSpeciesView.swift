@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
-//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
@@ -21,15 +21,8 @@ struct MapObservationsSpeciesView: View {
     @State private var limit = 100
     @State private var offset = 0
     @State private var showFullScreenMap = false
-    
     @State private var cameraPosition: MapCameraPosition = .automatic
-//    @State private var cameraPosition = MapCameraPosition.region(
-//        MKCoordinateRegion(
-//            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-//            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-//        )
-//    )
-    
+
     var body: some View {
         ZStack(alignment: .leading) {
             Map(position: $cameraPosition) {

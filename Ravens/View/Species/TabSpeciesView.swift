@@ -19,38 +19,32 @@ struct TabSpeciesView: View {
     @EnvironmentObject var htmlViewModel: HTMLViewModel
     @EnvironmentObject var settings: Settings
 
-//--> these
+
     @State private var selectedSortOption: SortNameOption = .name
     @State private var selectedFilterOption: FilterAllOption = .all
     @State private var selectedRarityOption: FilteringRarityOption = .all
     @State private var searchText = ""
-
-
 
     @Binding var selectedSpeciesID: Int?
 
 
   var body: some View {
     NavigationView {
-      
+
       VStack {
         if showView { Text("TabSpeciesView").font(.customTiny) }
         HorizontalLine()
         List {
           ForEach(speciesViewModel.filteredSpecies(
-                    by: selectedSortOption,
-                    searchText: searchText,
-                    filterOption: selectedFilterOption,
-                    rarityFilterOption: selectedRarityOption,
-                    isLatest: settings.isLatestVisible,
-                    htmlViewModel: htmlViewModel,
-                    isBookmarked: settings.isBookMarkVisible,
-                    additionalIntArray: bookMarksViewModel
-                  ), id: \.id) { species in
-//          ForEach(speciesViewModel.species.filter { species in
-//            searchText.isEmpty || species.name.lowercased().contains(searchText.lowercased())
-//          } , id: \.species) { species in
-
+            by: selectedSortOption,
+            searchText: searchText,
+            filterOption: selectedFilterOption,
+            rarityFilterOption: selectedRarityOption,
+            isLatest: settings.isLatestVisible,
+            htmlViewModel: htmlViewModel,
+            isBookmarked: settings.isBookMarkVisible,
+            additionalIntArray: bookMarksViewModel
+          ), id: \.id) { species in
 
             NavigationLink(
               destination:
@@ -91,6 +85,7 @@ struct TabSpeciesView: View {
         .listStyle(PlainListStyle())
 
       }
+      
       .toolbar {
         // First Menu for Sorting
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -103,11 +98,11 @@ struct TabSpeciesView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           FilteringMenu(currentFilteringOption: $selectedRarityOption)
         }
-    }
+      }
 
       .navigationBarTitle(settings.selectedSpeciesGroupName)
       .navigationBarTitleDisplayMode(.inline)
-      
+
       .navigationBarItems(
         leading: HStack {
           Button(action: {
@@ -118,7 +113,7 @@ struct TabSpeciesView: View {
           }
           .accessibilityLabel(settings.isBookMarkVisible ? "alleen favorieten" : "alles")
           .accessibilityHint("soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren.")
-          
+
           Button(action: {
             settings.isLatestVisible.toggle()
           }) {
@@ -126,16 +121,18 @@ struct TabSpeciesView: View {
           }
           .accessibilityLabel(settings.isLatestVisible ? "alleen zeldzaamheden" : "alles")
           .accessibilityHint("je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond.")
-          
+
         }
       )
-      
+
     }
     .searchable(text: $searchText)
     .refreshable {
       htmlViewModel.parseHTMLFromURL(settings: Settings())
+      print("yyyyy")
     }
     .onAppear() {
+      print("xxxx")
       htmlViewModel.parseHTMLFromURL(settings: Settings())
     }
   }

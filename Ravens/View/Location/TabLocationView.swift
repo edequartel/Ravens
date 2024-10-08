@@ -102,7 +102,7 @@ struct TabLocationView: View {
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: LocationListView()) {
+          NavigationLink(destination: SearchLocationView()) {
             Image(systemName: "magnifyingglass")
               .accessibility(label: Text("Search"))
           }

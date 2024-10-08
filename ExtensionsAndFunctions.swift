@@ -475,6 +475,10 @@ extension Int: Identifiable {
   public var id: Int { self }
 }
 
+extension String: Identifiable {
+    public var id: String { self }
+}
+
 extension View {
   func islandBackground(cornerRadius: CGFloat = 10, shadowRadius: CGFloat = 5) -> some View {
     self
