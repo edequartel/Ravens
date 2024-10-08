@@ -86,6 +86,9 @@ struct LocationListView: View {
     var body: some View {
         NavigationView {
             Form {
+
+
+
                 FocusedTextField(text: $searchText, isFirstResponder: isFocused, onCommit: {
                     viewModel.fetchLocations(searchString: searchText)
                 })

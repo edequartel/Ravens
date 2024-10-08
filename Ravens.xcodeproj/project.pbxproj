@@ -399,7 +399,7 @@
 				474FA7082C7CB3600064C4C1 /* Sheet */,
 				476AC6E82C9A930000DB8CA8 /* Obs */,
 				4767F00B2BF3291400BACDC6 /* Lists */,
-				4767F0062BF27F2C00BACDC6 /* Area */,
+				4767F0062BF27F2C00BACDC6 /* Location */,
 				4767F0092BF3230400BACDC6 /* User */,
 				4767F0082BF322F000BACDC6 /* Species */,
 				4767F00A2BF3230C00BACDC6 /* Settings */,
@@ -417,14 +417,14 @@
 			path = Sheet;
 			sourceTree = "<group>";
 		};
-		4767F0062BF27F2C00BACDC6 /* Area */ = {
+		4767F0062BF27F2C00BACDC6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
 				4767F0002BF251C200BACDC6 /* TabLocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
 			);
-			path = Area;
+			path = Location;
 			sourceTree = "<group>";
 		};
 		4767F0072BF322E900BACDC6 /* Radius */ = {

@@ -47,7 +47,7 @@ struct SpeciesDetailsView: View {
                             .foregroundColor(.gray)
                         }
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 16).fill(Color(.systemBackground)).shadow(radius: 5))
+                        .islandBackground()
 
                         // Image Display
                         if !imageURL.isEmpty {
@@ -56,14 +56,16 @@ struct SpeciesDetailsView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .padding(.horizontal)
-                                .frame(maxWidth: .infinity)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding()
+                                .islandBackground()
                         }
 
                         // Information Text
                       if species.info_text != "" {
                         RichText(html: species.info_text)
                           .padding()
-                          .background(RoundedRectangle(cornerRadius: 16).fill(Color(.systemBackground)).shadow(radius: 5))
+                          .islandBackground()
                       }
 
                         // More Information Link
@@ -72,7 +74,7 @@ struct SpeciesDetailsView: View {
                         Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
                           .font(.headline)
                           .padding()
-                          .background(RoundedRectangle(cornerRadius: 16).fill(Color.blue.opacity(0.1)).shadow(radius: 5))
+                          .islandBackground()
                         Spacer()
                       }
 

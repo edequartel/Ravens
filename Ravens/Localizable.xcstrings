@@ -327,6 +327,12 @@
         }
       }
     },
+    "email" : {
+
+    },
+    "emailadres" : {
+
+    },
     "End Of List" : {
       "localizations" : {
         "nl" : {
@@ -739,6 +745,7 @@
       }
     },
     "Manual" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -968,7 +975,7 @@
     "Open observation" : {
 
     },
-    "Options" : {
+    "password" : {
 
     },
     "Password" : {
