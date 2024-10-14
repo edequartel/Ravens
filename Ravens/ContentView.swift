@@ -117,6 +117,7 @@ struct RavensView: View {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }
     }
+    
   }
 }
 

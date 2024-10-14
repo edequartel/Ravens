@@ -224,9 +224,6 @@
         }
       }
     },
-    "Date: %@" : {
-
-    },
     "days" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -827,9 +824,6 @@
         }
       }
     },
-    "Name: %@" : {
-
-    },
     "Name: %@ %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -889,9 +883,6 @@
         }
       }
     },
-    "Num: %lldx" : {
-
-    },
     "Obs" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -918,9 +909,6 @@
           }
         }
       }
-    },
-    "ObservationNr / Species Nr: %lld" : {
-
     },
     "ObservationRowView" : {
 
@@ -1066,9 +1054,6 @@
         }
       }
     },
-    "Rarity: %lld" : {
-
-    },
     "Recent" : {
 
     },
@@ -1158,9 +1143,6 @@
           }
         }
       }
-    },
-    "Scientfic: %@" : {
-
     },
     "Scientific name" : {
       "extractionState" : "stale",
@@ -1365,9 +1347,6 @@
 
     },
     "this is a hint" : {
-
-    },
-    "Time: %@" : {
 
     },
     "Token: %@" : {

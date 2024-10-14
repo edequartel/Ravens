@@ -5,52 +5,49 @@ struct HTMLView: View {
   
   @State private var selectedSpeciesID: Int?
 
-    var body: some View {
-        NavigationView{
-            VStack {
-                if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
-                  List {
-                    // Group the documents by date
-                    ForEach(groupedDocuments, id: \.key) { date, documents in
-                      Section(header: Text(date)) {
-                        ForEach(documents) { document in
-                          NavigationLink(
-                            destination:
-                              //                                  SpeciesView(item:)
-                            //                                ObservationsSpeciesView(
-                            //                                  item: document.observationNr,
-                            //                                  selectedSpeciesID: $selectedSpeciesID))
-                            Text("\(String(describing: document.observationNr))"))
-                          {
-                            DocumentView(document: document)
-                          }
+  var body: some View {
+    NavigationView{
+      VStack {
+        if let errorMessage = viewModel.errorMessage {
+          Text(errorMessage)
+            .foregroundColor(.red)
+            .padding()
+        } else {
+          List {
+            // Group the documents by date
+            ForEach(groupedDocuments, id: \.key) { date, documents in
+              Section(header: Text(date)) {
+                ForEach(documents) { document in
+//                  NavigationLink(
+//                    destination:
+//                      ObservationSpeciesByIDView(speciesId: document.observationNr))
+//                  {
+                    DocumentView(document: document)
+//                  }
 
-                          .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            OpenObservationButton(linkSpeciesObservations: document.linkSpeciesObservations)
-                          }
-                        }
-                      }
-                      .font(.headline)
-                    }
+                  .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    OpenObservationButton(linkSpeciesObservations: document.linkSpeciesObservations)
                   }
-//                    .listStyle(InsetGroupedListStyle())
-                  .listStyle(PlainListStyle())
                 }
+              }
+              .font(.headline)
             }
-            .onAppear {
-                viewModel.parseHTMLFromURL(settings: Settings())
-            }
-            .refreshable {
-                viewModel.parseHTMLFromURL(settings: Settings())
-            }
-            .navigationTitle("Recent")
-            .navigationBarTitleDisplayMode(.inline)
+          }
+          //                    .listStyle(InsetGroupedListStyle())
+          .listStyle(PlainListStyle())
         }
+      }
+      .onAppear {
+        viewModel.parseHTMLFromURL(settings: Settings())
+      }
+      .refreshable {
+        print("refreshed")
+        viewModel.parseHTMLFromURL(settings: Settings())
+      }
+      .navigationTitle("Recent")
+      .navigationBarTitleDisplayMode(.inline)
     }
+  }
 
     // Computed property to group documents by date
     private var groupedDocuments: [(key: String, value: [HTMLDocument])] {
@@ -64,17 +61,24 @@ struct DocumentView: View {
 
     var body: some View {
           VStack(alignment: .leading) {
-            Text("Rarity: \(document.rarity)")
-            Text("Name: \(document.speciesCommonName)")
-              .bold()
-            Text("Scientfic: \(document.speciesScientificName)")
-            Text("Time: \(document.time)")
-            Text("Date: \(document.date)")
-            Text("Num: \(document.numObservations)x")
-            Text("ObservationNr / Species Nr: \(document.observationNr)")
+            HStack {Image(systemName: "circle.fill")
+                .foregroundColor(RarityColor(value: document.rarity))
+              Text("\(document.speciesCommonName)")
+                .bold()
+              Text("\(document.numObservations)x")
+                .bold()
+              Spacer()
+              Text("\(document.time)")
+                .bold()
+            }
+            Text("\(document.speciesScientificName)")
+              .italic()
+//            HStack {
+////              Text("\(document.date)")
+//              Text("\(document.time)")
+//            }
           }
           .font(.subheadline)
-//          .background(Color(document.numObservations==1 ? .systemBackground : .red))
     }
 }
 
