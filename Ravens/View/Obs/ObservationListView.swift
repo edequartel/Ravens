@@ -20,6 +20,7 @@ struct ObservationListView: View {
   @State private var currentFilteringOption: FilteringRarityOption = .all
 
   var body: some View {
+
     List {
       ForEach(observations
         .filter(meetsCondition)
@@ -31,7 +32,6 @@ struct ObservationListView: View {
     .toolbar {
       if entity != .species {
         ToolbarItem(placement: .navigationBarTrailing) {
-
           Menu {
             CombinedOptionsMenuView(
               currentSortingOption: $currentSortingOption,
@@ -42,7 +42,6 @@ struct ObservationListView: View {
               Image(systemName: "ellipsis.circle")
             }
           }
-
         }
       }
     }

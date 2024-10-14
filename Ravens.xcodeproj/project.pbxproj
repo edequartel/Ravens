@@ -120,6 +120,7 @@
 		4793A58A2C29334E002739B6 /* waarneming-rarities.html in Resources */ = {isa = PBXBuildFile; fileRef = 4793A5892C29334E002739B6 /* waarneming-rarities.html */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
+		47AC7D692CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -243,6 +244,7 @@
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
+		47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationSpeciesByIDView.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
+				47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */,
 				4767F0042BF256B100BACDC6 /* SpeciesView.swift */,
 			);
 			path = Species;
@@ -724,6 +727,7 @@
 				47DB89B82B7A3AB20093C1ED /* ObsDetailsView.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
+				47AC7D692CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift in Sources */,
 				471875472C022A2C00EF9F1F /* SpeciesGroupsView.swift in Sources */,
 				474C40592B4C047B0038B3A5 /* SpeciesGroup.swift in Sources */,
 				476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */,

@@ -24,16 +24,6 @@
         }
       }
     },
-    "%@ - %@ - %lldx" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$@ - %3$lldx"
-          }
-        }
-      }
-    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -234,6 +224,9 @@
         }
       }
     },
+    "Date: %@" : {
+
+    },
     "days" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -408,6 +401,9 @@
       }
     },
     "Filtering" : {
+
+    },
+    "Full Map" : {
 
     },
     "getToken" : {
@@ -831,6 +827,9 @@
         }
       }
     },
+    "Name: %@" : {
+
+    },
     "Name: %@ %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -890,6 +889,9 @@
         }
       }
     },
+    "Num: %lldx" : {
+
+    },
     "Obs" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -916,6 +918,9 @@
           }
         }
       }
+    },
+    "ObservationNr / Species Nr: %lld" : {
+
     },
     "ObservationRowView" : {
 
@@ -1061,6 +1066,9 @@
         }
       }
     },
+    "Rarity: %lld" : {
+
+    },
     "Recent" : {
 
     },
@@ -1150,6 +1158,9 @@
           }
         }
       }
+    },
+    "Scientfic: %@" : {
+
     },
     "Scientific name" : {
       "extractionState" : "stale",
@@ -1321,6 +1332,9 @@
         }
       }
     },
+    "SpeciesInfoView" : {
+
+    },
     "SpeciesView" : {
 
     },
@@ -1351,6 +1365,9 @@
 
     },
     "this is a hint" : {
+
+    },
+    "Time: %@" : {
 
     },
     "Token: %@" : {
@@ -1473,9 +1490,6 @@
           }
         }
       }
-    },
-    "xxxView" : {
-
     },
     "Yes" : {
       "localizations" : {

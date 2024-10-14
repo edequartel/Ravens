@@ -89,6 +89,11 @@ struct RavensView: View {
         }
         // Tab 4
 //        myImageView()
+        HTMLView()
+          .tabItem {
+            Text("Recent")
+            Image(systemName: "timer")
+          }
         SettingsView()
           .tabItem {
             Text("Settings")

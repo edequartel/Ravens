@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HTMLView: View {
     @EnvironmentObject var viewModel: HTMLViewModel
+  
+  @State private var selectedSpeciesID: Int?
 
     var body: some View {
         NavigationView{
@@ -11,76 +13,32 @@ struct HTMLView: View {
                         .foregroundColor(.red)
                         .padding()
                 } else {
-                    List {
-                        // Group the documents by date
-                        ForEach(groupedDocuments, id: \.key) { date, documents in
-                            Section(header: Text(date)) {
-                                ForEach(documents) { document in
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            if !(document.linkSpeciesObservations.isEmpty) {
-                                                Image(systemName: SFObservation)
-                                                    .foregroundColor(.obsObservation)
-                                            }
-                                            Text("\(document.speciesCommonName) - \(document.time) - \(document.numObservations)x")
-                                                .font(.subheadline)
-                                                .bold()
-                                            Spacer()
-                                        }
-                                        
-                                        //                                    Text("\(document.speciesScientificName)")
-                                        //                                        .font(.subheadline)
-                                        //                                        .foregroundColor(.gray)
-                                        
-                                        Text("\(document.location)")
-                                            .font(.subheadline)
-                                        
-                                        //                                    if !(document.linkSpeciesObservations.isEmpty) {
-                                        //                                        Text("Species: \(extractSpeciesNumber(from: document.linkSpeciesObservations) ?? "")")
-                                        //                                            .font(.subheadline)
-                                        //                                    }
-                                        ////
-                                        //                                    if !document.linkLocations.isEmpty {
-                                        //                                        Text("Location: \(extractLocationNumber(from: document.linkLocations) ?? "")")
-                                        //                                            .font(.subheadline)
-                                        //                                    }
-                                        ////
-                                        //                                    if let description = document.description {
-                                        //                                        Text("\(description)")
-                                        //                                            .font(.subheadline)
-                                        //                                            .italic()
-                                        //                                    }
-                                    }
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        
-                                        if !(document.linkSpeciesObservations.isEmpty) {
-                                            Button(action: {
-                                                if let url = URL(string: "https://waarneming.nl/" + document.linkSpeciesObservations) {
-                                                    // Use the URL here
-                                                    print(url)
-                                                    UIApplication.shared.open(url)
-                                                } else {
-                                                    // Handle the invalid URL case here
-                                                    print("Invalid URL")
-                                                }
-                                            }) {
-                                                Image(systemName: SFObservation)
-                                            }
-                                            .tint(.obsObservation)
-                                            .accessibility(label: Text("Open observation"))
-                                        }
-                                        
-                                    }
-                                    
-                                    //                                .padding()
-                                }
-                            }
-                            .font(.headline)
-//                            .foregroundColor(color: .obsArea)
+                  List {
+                    // Group the documents by date
+                    ForEach(groupedDocuments, id: \.key) { date, documents in
+                      Section(header: Text(date)) {
+                        ForEach(documents) { document in
+                          NavigationLink(
+                            destination:
+                              //                                  SpeciesView(item:)
+                            //                                ObservationsSpeciesView(
+                            //                                  item: document.observationNr,
+                            //                                  selectedSpeciesID: $selectedSpeciesID))
+                            Text("\(String(describing: document.observationNr))"))
+                          {
+                            DocumentView(document: document)
+                          }
+
+                          .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            OpenObservationButton(linkSpeciesObservations: document.linkSpeciesObservations)
+                          }
                         }
+                      }
+                      .font(.headline)
                     }
+                  }
 //                    .listStyle(InsetGroupedListStyle())
-                    .listStyle(PlainListStyle())
+                  .listStyle(PlainListStyle())
                 }
             }
             .onAppear {
@@ -91,10 +49,7 @@ struct HTMLView: View {
             }
             .navigationTitle("Recent")
             .navigationBarTitleDisplayMode(.inline)
-            
         }
-
-            
     }
 
     // Computed property to group documents by date
@@ -104,8 +59,110 @@ struct HTMLView: View {
     }
 }
 
+struct DocumentView: View {
+    var document: HTMLDocument // Replace DocumentType with the actual type of your document
+
+    var body: some View {
+          VStack(alignment: .leading) {
+            Text("Rarity: \(document.rarity)")
+            Text("Name: \(document.speciesCommonName)")
+              .bold()
+            Text("Scientfic: \(document.speciesScientificName)")
+            Text("Time: \(document.time)")
+            Text("Date: \(document.date)")
+            Text("Num: \(document.numObservations)x")
+            Text("ObservationNr / Species Nr: \(document.observationNr)")
+          }
+          .font(.subheadline)
+//          .background(Color(document.numObservations==1 ? .systemBackground : .red))
+    }
+}
+
+struct OpenObservationButton: View {
+    // Input property to accept the species observation link
+    let linkSpeciesObservations: String
+
+    var body: some View {
+        Button(action: openObservationLink) {
+            Image(systemName: SFObservation)
+        }
+        .tint(.obsObservation)
+        .accessibility(label: Text("Open observation"))
+    }
+
+    // Function to handle URL opening
+    private func openObservationLink() {
+        let baseURL = "https://waarneming.nl/"
+        if let url = URL(string: baseURL + linkSpeciesObservations) {
+            print("Opening URL: \(url)")
+            UIApplication.shared.open(url)
+        } else {
+            print("Invalid URL")
+        }
+    }
+}
+
 struct HTMLView_Previews: PreviewProvider {
     static var previews: some View {
         HTMLView()
     }
 }
+
+
+
+
+//{ document in
+//  VStack(alignment: .leading) {
+//    Text("Name: \(document.speciesCommonName)" )
+//    Text("Scientfic: \(document.speciesScientificName)")
+//    Text("Time: \(document.time)")
+//    Text("Date: \(document.date)")
+//    Text("Num: \(document.numObservations)x")
+//    Text("Location: \(document.location)")
+//    Text("LocationId: \(document.locationId)")
+//    Divider()
+//    Text("Descr: \(document.description ?? "")")
+//    Text("Rarity: \(document.rarity)?")
+//    Text("LinkObs: \(document.linkSpeciesObservations)?")
+////                                  .Color(.blue)
+//    Text("LinkLoc: \(document.linkLocations)")
+////                                  .Color(.gray)
+//    Text("Linkrarity: \(document.linkRarity)?")
+//  }
+//
+//  .font(.subheadline)
+//
+//
+//  .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//
+//    if !(document.linkSpeciesObservations.isEmpty) {
+//      Button(action: {
+//        if let url = URL(string: "https://waarneming.nl/" + document.linkSpeciesObservations) {
+//          // Use the URL here
+//          print(url)
+//          UIApplication.shared.open(url)
+//        } else {
+//          // Handle the invalid URL case here
+//          print("Invalid URL")
+//        }
+//      }) {
+//        Image(systemName: SFObservation)
+//      }
+//      .tint(.obsObservation)
+//      .accessibility(label: Text("Open observation"))
+//    }
+//
+//  }
+//}
+
+//            Text("Location: \(document.location)")
+//            Text("LocationId: \(document.locationId)")
+//            Text("Descr: \(document.description ?? "")")
+
+//            Text("LinkObs/Species: \(document.linkSpeciesObservations)")
+//            Text("Species: \(extractSpeciesNumber(from: document.linkSpeciesObservations) ?? "")")
+//              .foregroundColor(.blue)
+//            Text("LinkLoc: \(document.linkLocations)")
+//              .foregroundColor(.gray)
+//            Text("Linkrarity: \(document.linkRarity)")
+//              .foregroundColor(.green)

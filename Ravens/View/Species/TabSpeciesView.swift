@@ -51,6 +51,7 @@ struct TabSpeciesView: View {
                 SpeciesView(
                   item: species,
                   selectedSpeciesID: $selectedSpeciesID)
+
             ) {SpeciesInfoView(species: species,
                                showView: showView,
                                htmlViewModel: htmlViewModel,
@@ -326,7 +327,7 @@ struct SpeciesInfoView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if showView { Text("xxxView").font(.customTiny) }
+            if showView { Text("SpeciesInfoView").font(.customTiny) }
             HStack(spacing: 4) {
                 Image(
                     systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct HTMLDocument: Identifiable {
     let id: UUID = UUID()
@@ -26,4 +27,8 @@ struct HTMLDocument: Identifiable {
     
     let linkSpeciesObservations: String
     let linkLocations: String
+
+    let observationNr: Int
+  
 }
+

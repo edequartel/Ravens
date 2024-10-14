@@ -39,13 +39,11 @@ struct ObsView: View {
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
-        if showSpecies {
-          ObsDetailsRowView(obs: obs)
-          Text("\(obs.species_detail.scientific_name)")
-            .footnoteGrayStyle()
-        }
-
         HStack {
+          if showSpecies {
+            ObsDetailsRowView(obs: obs)
+          }
+
           if obs.sounds?.count ?? 0 > 0 {
             Image(systemName: "waveform")
           }
@@ -54,8 +52,13 @@ struct ObsView: View {
           if obs.notes?.count ?? 0 > 0 {
             Image(systemName: "list.clipboard")
           }
+          Spacer()
         }
 
+        if showSpecies {
+          Text("\(obs.species_detail.scientific_name)")
+            .footnoteGrayStyle()
+        }
 
       HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")

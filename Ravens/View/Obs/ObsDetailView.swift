@@ -102,12 +102,12 @@ struct ObsDetailView: View {
                 HStack {
                   DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
                   Text("\(obs.number) x")
-//                    .footnoteGrayStyle()
+                    .footnoteGrayStyle()
                 }
 
                 HStack {
                   Text("\(obs.user_detail?.name ?? "noName")")
-//                    .footnoteGrayStyle()
+                    .footnoteGrayStyle()
                   Spacer()
                   Image(systemName: SFObserverFill)
                     .foregroundColor(.black)
@@ -116,22 +116,19 @@ struct ObsDetailView: View {
               .padding()
               .islandBackground()
 
-              // Notes Section
-//              if (obs.notes != "") || (obs.notes != nil) {
-//                Text("bbbb")
-//                RichText(html: obs.notes ?? "niets")
-//                  .padding()
-//                  .islandBackground()
-//              }
-                NotesView(obs: obs)
-                    .padding()
-                    .islandBackground()
+              NotesView(obs: obs)
+                .padding()
+                .islandBackground()
 
-              NavigationLink(destination: PositonFullView(obs: obs)) {
+              VStack {
                 PositionOnMapView(obs: obs)
-                      .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
-                      .padding(6)
-                      .islandBackground()
+                  .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
+                  .padding(6)
+                  .islandBackground()
+
+                NavigationLink(destination: PositonFullView(obs: obs)) {
+                  Text("Full Map")
+                }
               }
 
             }
