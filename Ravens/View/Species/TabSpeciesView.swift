@@ -16,11 +16,10 @@ struct TabSpeciesView: View {
     @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
-    @EnvironmentObject var htmlViewModel: HTMLViewModel
     @EnvironmentObject var settings: Settings
 
 
-    @State private var selectedSortOption: SortNameOption = .name
+    @State private var selectedSortOption: SortNameOption = .lastSeen
     @State private var selectedFilterOption: FilterAllOption = .all
     @State private var selectedRarityOption: FilteringRarityOption = .all
     @State private var searchText = ""
@@ -40,8 +39,7 @@ struct TabSpeciesView: View {
             searchText: searchText,
             filterOption: selectedFilterOption,
             rarityFilterOption: selectedRarityOption,
-            isLatest: settings.isLatestVisible,
-            htmlViewModel: htmlViewModel,
+            isLatest: false, //settings.isLatestVisible,
             isBookmarked: settings.isBookMarkVisible,
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
@@ -52,11 +50,11 @@ struct TabSpeciesView: View {
                   item: species,
                   selectedSpeciesID: $selectedSpeciesID)
 
-            ) {SpeciesInfoView(species: species,
-                               showView: showView,
-                               htmlViewModel: htmlViewModel,
-                               bookMarksViewModel: bookMarksViewModel,
-                               speciesSecondLangViewModel: speciesSecondLangViewModel)}
+            ) { SpeciesInfoView(
+              species: species,
+              showView: showView,
+              bookMarksViewModel: bookMarksViewModel,
+              speciesSecondLangViewModel: speciesSecondLangViewModel)}
 
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -93,9 +91,9 @@ struct TabSpeciesView: View {
           SortNameMenu(currentFilteringNameOption: $selectedSortOption)
         }
         // Second Menu for Filtering
-        ToolbarItem(placement: .navigationBarTrailing) {
-          FilteringAllMenu(currentFilteringAllOption: $selectedFilterOption)
-        }
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          FilteringAllMenu(currentFilteringAllOption: $selectedFilterOption)
+//        }
         ToolbarItem(placement: .navigationBarTrailing) {
           FilteringMenu(currentFilteringOption: $selectedRarityOption)
         }
@@ -115,13 +113,13 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? "alleen favorieten" : "alles")
           .accessibilityHint("soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren.")
 
-          Button(action: {
-            settings.isLatestVisible.toggle()
-          }) {
-            Image(systemName: settings.isLatestVisible ? "circle.hexagonpath.fill" : "circle.hexagonpath")
-          }
-          .accessibilityLabel(settings.isLatestVisible ? "alleen zeldzaamheden" : "alles")
-          .accessibilityHint("je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond.")
+//          Button(action: {
+//            settings.isLatestVisible.toggle()
+//          }) {
+//            Image(systemName: settings.isLatestVisible ? "circle.hexagonpath.fill" : "circle.hexagonpath")
+//          }
+//          .accessibilityLabel(settings.isLatestVisible ? "alleen zeldzaamheden" : "alles")
+//          .accessibilityHint("je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond.")
 
         }
       )
@@ -129,12 +127,10 @@ struct TabSpeciesView: View {
     }
     .searchable(text: $searchText)
     .refreshable {
-      htmlViewModel.parseHTMLFromURL(settings: Settings())
-      print("yyyyy")
+//      htmlViewModel.parseHTMLFromURL(settings: Settings(), completion: {speciesViewModel.populateDocuments(with: htmlViewModel.documents)})
     }
     .onAppear() {
-      print("xxxx")
-      htmlViewModel.parseHTMLFromURL(settings: Settings())
+//      htmlViewModel.parseHTMLFromURL(settings: Settings(), completion: {speciesViewModel.populateDocuments(with: htmlViewModel.documents)})
     }
   }
 
@@ -154,6 +150,7 @@ enum SortNameOption: String, CaseIterable {
     case name = "Name"
     case scientific_name = "Scientific name"
     // Add more sorting options if needed
+  case lastSeen = "Last seen"
 }
 
 struct SortNameMenu: View {
@@ -232,25 +229,12 @@ struct FilteringAllOptionsView: View {
 }
 
 extension SpeciesViewModel {
-    func sortedSpecies(by sortOption: SortNameOption) -> [Species] {
-        switch sortOption {
-        case .name:
-            return species.sorted { ($0.name < $1.name) }
-        case .scientific_name:
-            return species.sorted { ($0.scientific_name < $1.scientific_name) }
-            // Add more sorting options if needed
-        }
-    }
-}
-
-extension SpeciesViewModel {
     func filteredSpecies(
         by sortOption: SortNameOption,
         searchText: String,
         filterOption: FilterAllOption,
         rarityFilterOption: FilteringRarityOption,
         isLatest: Bool,
-        htmlViewModel: HTMLViewModel,
         isBookmarked: Bool,
         additionalIntArray: BookMarksViewModel
     ) -> [Species] {
@@ -265,10 +249,11 @@ extension SpeciesViewModel {
         // Apply other filters
         filteredList = applyFilter(to: filteredList, with: filterOption)
         filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
-        filteredList = applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
+//        filteredList = applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
+        return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
 
         // Apply latest filter
-        return applyLatestFilter(to: filteredList, isLatest: isLatest, additionalHTMLDoc: htmlViewModel)
+//        return applyLatestFilter(to: filteredList, isLatest: isLatest, additionalHTMLDoc: htmlViewModel)
     }
 
     private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
@@ -289,7 +274,7 @@ extension SpeciesViewModel {
         case .uncommon:
             return species.filter { $0.rarity == 2 }
         case .rare:
-            return species.filter { $0.rarity >= 3 }
+            return species.filter { $0.rarity == 3 }
         case .veryRare:
             return species.filter { $0.rarity == 4 }
 //        default:
@@ -307,59 +292,67 @@ extension SpeciesViewModel {
         }
     }
 
-    private func applyLatestFilter(to species: [Species], isLatest: Bool, additionalHTMLDoc: HTMLViewModel) -> [Species] {
-        if isLatest {
-            return species.filter { species in
-                additionalHTMLDoc.documents.contains(where: { $0.speciesScientificName == species.scientific_name })
-            }
-        } else {
-            return species
-        }
-    }
+//    private func applyLatestFilter(to species: [Species], isLatest: Bool) -> [Species] {
+//        if isLatest {
+//            return species.filter { species in
+//                additionalHTMLDoc.documents.contains(where: { $0.speciesScientificName == species.scientific_name })
+//            }
+//        } else {
+//            return species
+//        }
+//    }
 }
 
 struct SpeciesInfoView: View {
     var species: Species // Assuming Species is your data model
     var showView: Bool
-    var htmlViewModel: HTMLViewModel // Assuming HTMLViewModel is your ViewModel
+//    var htmlViewModel: HTMLViewModel // Assuming HTMLViewModel is your ViewModel
     var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel
     var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            if showView { Text("SpeciesInfoView").font(.customTiny) }
-            HStack(spacing: 4) {
-                Image(
-                    systemName: htmlViewModel.speciesScientificNameExists(species.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(RarityColor(value: species.rarity), .clear)
+  var body: some View {
+    VStack(alignment: .leading) {
+      if showView { Text("SpeciesInfoView").font(.customTiny) }
+      HStack(spacing: 4) {
+        Image(
+          systemName: "circle.fill")
+        .symbolRenderingMode(.palette)
+        .foregroundStyle(RarityColor(value: species.rarity), .clear)
 
-                Text("\(species.name)")
-                .bold()
-                .lineLimit(1)
-                .truncationMode(.tail)
+        Text("\(species.name)")
+          .bold()
+          .lineLimit(1)
+          .truncationMode(.tail)
 
-                Spacer()
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-                    Image(systemName: "star.fill")
-                }
-            }
-            HStack {
-                Text("\(species.scientific_name)")
-                .italic()
-                .lineLimit(1)
-                .truncationMode(.tail)
-            }
-            HStack{
-                let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
-                    speciesID: species.id)
-                Text("\(speciesLang ?? "placeholder")")
-                .bold()
-                .font(.caption)
-                .lineLimit(1)
-                .truncationMode(.tail)
-                Spacer()
-            }
+        Spacer()
+        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+          Image(systemName: "star.fill")
         }
+      }
+      
+      HStack {
+        Text("\(species.date ?? "noDate")")
+        Text("\(species.time ?? "noTime")")
+        Text("\(species.nrof ?? 0)")
+      }
+
+      HStack {
+        Text("\(species.scientific_name)")
+          .font(.caption)
+          .italic()
+          .lineLimit(1)
+          .truncationMode(.tail)
+      }
+      HStack{
+        let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
+          speciesID: species.id)
+        Text("\(speciesLang ?? "placeholder")")
+//          .bold()
+          .font(.caption)
+          .lineLimit(1)
+          .truncationMode(.tail)
+        Spacer()
+      }
     }
+  }
 }

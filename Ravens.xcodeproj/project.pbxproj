@@ -121,6 +121,7 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AC7D692CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */; };
+		47AC7D6B2CBE30EB00B1E929 /* TestDateCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -245,6 +246,7 @@
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationSpeciesByIDView.swift; sourceTree = "<group>"; };
+		47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateCompare.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */,
 				47AD97682CAAD0D500A4B510 /* ButtonViews.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
@@ -676,6 +679,7 @@
 				474C40572B4BFE950038B3A5 /* RegionListsView.swift in Sources */,
 				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
 				4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */,
+				47AC7D6B2CBE30EB00B1E929 /* TestDateCompare.swift in Sources */,
 				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,

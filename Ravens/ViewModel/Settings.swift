@@ -56,7 +56,7 @@ class Settings: ObservableObject {
     
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
-    @AppStorage("isLatestVisible") var isLatestVisible: Bool = false
+//    @AppStorage("isLatestVisible") var isLatestVisible: Bool = false
     
     @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
     @Published var selectedInBetween: String = "waarneming.nl" {

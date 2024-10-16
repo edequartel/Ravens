@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SpeciesView: View {
   @State private var showFirstView = false
-  @State private var isPresented = false
-  @State private var isPresented1 = false
 
   @EnvironmentObject var settings: Settings
 

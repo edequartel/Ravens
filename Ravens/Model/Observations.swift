@@ -134,20 +134,27 @@ struct LocationDetail: Codable {
 }
 
 struct Species: Codable, Identifiable {
-    var id: Int { species }
-    let species: Int
-    let name: String
-    let scientific_name: String
-    let rarity: Int
-    let native: Bool
+  var id: Int { species }
+  let species: Int
+  let name: String
+  let scientific_name: String
+  let rarity: Int
+  let native: Bool
 
-    init(species: Int, name: String, scientific_name: String, rarity: Int, native: Bool) {
-        self.species = species
-        self.name = name
-        self.scientific_name = scientific_name
-        self.rarity = rarity
-        self.native = native
-    }
+  //adding recent observations
+  var time: String?
+  var date: String?
+  var nrof: Int?
+
+  init(species: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String, date: String) {
+    self.species = species
+    self.name = name
+    self.scientific_name = scientific_name
+    self.rarity = rarity
+    self.native = native
+    self.time = time
+    self.date = date
+  }
 }
 
 

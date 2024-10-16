@@ -123,9 +123,6 @@
     "alleen favorieten" : {
 
     },
-    "alleen zeldzaamheden" : {
-
-    },
     "alles" : {
 
     },
@@ -190,6 +187,9 @@
           }
         }
       }
+    },
+    "Compare" : {
+
     },
     "Continent %@" : {
       "extractionState" : "stale",
@@ -341,7 +341,13 @@
         }
       }
     },
+    "Enter Date (yyyy-MM-dd)" : {
+
+    },
     "Enter number" : {
+
+    },
+    "Enter Time (HH:mm)" : {
 
     },
     "Error: %@" : {
@@ -398,6 +404,9 @@
       }
     },
     "Filtering" : {
+
+    },
+    "First Date and Time" : {
 
     },
     "Full Map" : {
@@ -570,9 +579,6 @@
           }
         }
       }
-    },
-    "je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond." : {
-
     },
     "Language" : {
       "localizations" : {
@@ -1168,6 +1174,9 @@
           }
         }
       }
+    },
+    "Second Date and Time" : {
+
     },
     "Second language" : {
 

@@ -18,7 +18,7 @@ struct ContentView: View {
     let appearance = UINavigationBarAppearance()
     appearance.configureWithOpaqueBackground()
     appearance.backgroundColor = UIColor(.clear)
-    appearance.shadowColor = .clear // Ensures no shadow color is applied
+    appearance.shadowColor = .clear
 
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -63,7 +63,7 @@ struct RavensView: View {
   @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
-  let viewModel = RecordingsListViewModel() //later aanpassen??
+//  let viewModel = RecordingsListViewModel()
 
   var body: some View {
     VStack {
@@ -88,12 +88,6 @@ struct RavensView: View {
           Image(systemName: "tree")
         }
         // Tab 4
-//        myImageView()
-        HTMLView()
-          .tabItem {
-            Text("Recent")
-            Image(systemName: "timer")
-          }
         SettingsView()
           .tabItem {
             Text("Settings")
@@ -201,12 +195,15 @@ struct SplashScreen: View {
         })
 
 
-      speciesViewModel.fetchDataFirst(
+      speciesViewModel.fetchDataFirst( //contatenate fetching
         settings: settings,
         completion: {
-          log.info("speciesViewModel First language data loaded")
-          isFirstLanguageDataLoaded = true
-          checkDataLoaded()
+          print("speciesViewModel First language data loaded")
+          speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
+            print("html is parsed")
+            isFirstLanguageDataLoaded = true
+            checkDataLoaded()
+          })
         })
 
       speciesViewModel.fetchDataSecondLanguage(

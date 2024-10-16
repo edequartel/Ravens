@@ -14,7 +14,7 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-  @EnvironmentObject var htmlViewModel: HTMLViewModel
+//  @EnvironmentObject var htmlViewModel: HTMLViewModel
   @EnvironmentObject var settings: Settings
 
   @State private var hasAppeared = false
@@ -37,7 +37,7 @@ struct ObservationsSpeciesView: View {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
 
         HStack {
-          Image(systemName: htmlViewModel.speciesScientificNameExists(item.scientific_name) ? "circle.hexagonpath.fill" : "circle.fill")
+          Image(systemName: "circle.fill")//false ? "circle.hexagonpath.fill" : 
             .foregroundColor(RarityColor(value: item.rarity))
 
           Text("\(item.name)")// - \(item.id)")
