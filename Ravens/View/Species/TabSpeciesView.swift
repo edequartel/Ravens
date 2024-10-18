@@ -84,7 +84,7 @@ struct TabSpeciesView: View {
         .listStyle(PlainListStyle())
 
       }
-      
+
       .toolbar {
         // First Menu for Sorting
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -127,10 +127,8 @@ struct TabSpeciesView: View {
     }
     .searchable(text: $searchText)
     .refreshable {
-//      htmlViewModel.parseHTMLFromURL(settings: Settings(), completion: {speciesViewModel.populateDocuments(with: htmlViewModel.documents)})
-    }
-    .onAppear() {
-//      htmlViewModel.parseHTMLFromURL(settings: Settings(), completion: {speciesViewModel.populateDocuments(with: htmlViewModel.documents)})
+      print("refresh")
+      speciesViewModel.parseHTMLFromURL(settings: settings)
     }
   }
 
@@ -249,11 +247,8 @@ extension SpeciesViewModel {
         // Apply other filters
         filteredList = applyFilter(to: filteredList, with: filterOption)
         filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
-//        filteredList = applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
-        return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
-
         // Apply latest filter
-//        return applyLatestFilter(to: filteredList, isLatest: isLatest, additionalHTMLDoc: htmlViewModel)
+        return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
     }
 
     private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
@@ -291,16 +286,6 @@ extension SpeciesViewModel {
             return species
         }
     }
-
-//    private func applyLatestFilter(to species: [Species], isLatest: Bool) -> [Species] {
-//        if isLatest {
-//            return species.filter { species in
-//                additionalHTMLDoc.documents.contains(where: { $0.speciesScientificName == species.scientific_name })
-//            }
-//        } else {
-//            return species
-//        }
-//    }
 }
 
 struct SpeciesInfoView: View {
@@ -329,11 +314,15 @@ struct SpeciesInfoView: View {
           Image(systemName: "star.fill")
         }
       }
-      
-      HStack {
-        Text("\(species.date ?? "noDate")")
-        Text("\(species.time ?? "noTime")")
-        Text("\(species.nrof ?? 0)")
+
+      if let date = species.date {
+          HStack {
+              Text("\(date)") // Date exists
+              Text("\(species.time ?? "noTime")")
+              Text("\(species.nrof ?? 0)x")
+              Spacer()
+          }
+          .font(.caption)
       }
 
       HStack {

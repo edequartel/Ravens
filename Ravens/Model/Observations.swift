@@ -145,6 +145,7 @@ struct Species: Codable, Identifiable {
   var time: String?
   var date: String?
   var nrof: Int?
+  var dateTime : Date?
 
   init(species: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String, date: String) {
     self.species = species

@@ -58,6 +58,7 @@ struct ObsView: View {
         if showSpecies {
           Text("\(obs.species_detail.scientific_name)")
             .footnoteGrayStyle()
+            .italic()
         }
 
       HStack {

@@ -392,9 +392,9 @@ extension VStack {
 extension Text {
     func footnoteGrayStyle() -> some View {
         self
-            .foregroundColor(.black)
+//            .foregroundColor(.black)
             .font(.footnote)
-            .italic()
+//            .italic()
             .lineLimit(1)
             .truncationMode(.tail)
     }

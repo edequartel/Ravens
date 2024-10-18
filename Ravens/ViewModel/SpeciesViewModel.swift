@@ -68,18 +68,19 @@ class SpeciesViewModel: ObservableObject {
       let time = try timeElement.text()
       let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
       let speciesScientificName = try speciesScientificNameElement.text()
-      let linkSpeciesObservations = try row.select(".rarity-species div.truncate span.content a").attr("href")
+//      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
       let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
       let numObservations = try numObservationsElement.text()
       let numObservationsInt = Int(numObservations) ?? 0
       let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
 
       if let index = index {
-        print("found \(speciesScientificName) at index \(index)")
-        print("date \(Date) time \(time) numObservations \(numObservationsInt)")
-        species[index].date = Date
-        species[index].time = time
-        species[index].nrof = numObservationsInt
+        if species[index].date?.isEmpty ?? true {
+          species[index].date = Date
+          species[index].time = time
+          species[index].nrof = numObservationsInt
+          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
+        }
       }
     }
   }
@@ -181,53 +182,55 @@ class SpeciesViewModel: ObservableObject {
   }
 
 
-//  func convertToDate(dateString: String, timeString: String) -> Date? {
-//    let formatter = DateFormatter()
-//    formatter.timeZone = TimeZone.current
-//
-//    // Check if timeString is empty
-//    if timeString.isEmpty {
-//      // Use only the date format if time is missing
-//      formatter.dateFormat = "yyyy-MM-dd"
-//      return formatter.date(from: dateString)
-//    } else {
-//      // Use date and time format if both are provided
-//      formatter.dateFormat = "yyyy-MM-dd HH:mm"
-//      let combinedString = "\(dateString) \(timeString)"
-//      return formatter.date(from: combinedString)
-//    }
-//  }
+  // Function to convert date and time strings to a Date object
+  func convertToDate(dateString: String?, timeString: String?) -> Date? {
+      let formatter = DateFormatter()
+      formatter.timeZone = TimeZone.current
 
-  func sortedSpecies(by sortOption: SortNameOption) -> [Species] {
-    switch sortOption {
-    case .name:
-      return species.sorted { $0.name < $1.name }
-    case .scientific_name:
-      return species.sorted { $0.scientific_name < $1.scientific_name }
-    case .lastSeen:
-      return species.sorted { (species1, species2) -> Bool in
-
-//        let doc1 = documents.first { $0.speciesScientificName == species1.scientific_name }
-//        let doc2 = documents.first { $0.speciesScientificName == species2.scientific_name }
-//
-//        if let doc1 = doc1, let doc2 = doc2 {
-//          // Convert date and time to Date objects for both documents
-//          if let date1 = convertToDate(dateString: doc1.date, timeString: doc1.time),
-//             let date2 = convertToDate(dateString: doc2.date, timeString: doc2.time) {
-//            // Compare based on the converted Date objects
-//            return date1 > date2
-//          }
-//        } else if doc1 != nil {
-//          // Only species1 is in the documents, it should appear before species2
-//          return true
-//        } else if doc2 != nil {
-//          // Only species2 is in the documents, it should appear before species1
-//          return false
-//        }
-//
-//        // Neither species is in the documents, fall back to rarity sorting
-        return species1.rarity > species2.rarity
+      // Check if dateString is nil or empty
+      guard let dateString = dateString else {
+          return nil
       }
-    }
+
+      // Check if timeString is available and not empty
+      if let timeString = timeString, !timeString.isEmpty {
+          formatter.dateFormat = "yyyy-MM-dd HH:mm"
+          let combinedString = "\(dateString) \(timeString)"
+          return formatter.date(from: combinedString)
+      } else {
+          // Only date is provided
+          formatter.dateFormat = "yyyy-MM-dd"
+          return formatter.date(from: dateString)
+      }
+  }
+
+  // Function to sort species based on the selected sort option
+  func sortedSpecies(by sortOption: SortNameOption) -> [Species] {
+      switch sortOption {
+      case .name:
+          return species.sorted { $0.name < $1.name }
+      case .scientific_name:
+          return species.sorted { $0.scientific_name < $1.scientific_name }
+      case .lastSeen:
+          return species.sorted { (species1, species2) -> Bool in
+              // Convert date and time to Date objects for both species
+              let date1 = species1.dateTime
+              let date2 = species2.dateTime
+
+              // Sort based on date first (latest at the top)
+              if let date1 = date1, let date2 = date2 {
+                  return date1 > date2
+              } else if date1 != nil {
+                  // If only species1 has a date, it comes first
+                  return true
+              } else if date2 != nil {
+                  // If only species2 has a date, it comes first
+                  return false
+              }
+
+              // If both dates are nil, sort based on rarity
+              return species1.rarity > species2.rarity
+          }
+      }
   }
 }
