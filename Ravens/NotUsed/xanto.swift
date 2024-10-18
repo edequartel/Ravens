@@ -11,12 +11,11 @@ struct RecordingsList: Decodable {
     var recordings: [Recording]
 }
 
-
-//Model
+// Model
 // Define the structure of the JSON data
 struct Recording: Codable {
   var also: [String]
-  var alt: Int? //String?
+  var alt: Int? // String?
   var animalSeen: String?
   var auto: String?
   var birdSeen: String?
@@ -31,7 +30,7 @@ struct Recording: Codable {
   var id: Int
   var lat: String
   var length: String
-  var lic: String //URL
+  var lic: String // URL
   var loc: String
   var lng: String
   var method: String
@@ -45,7 +44,7 @@ struct Recording: Codable {
   var sex: String?
   var sono: Sono
   var sp: String
-  var smp: Int? //String?
+  var smp: Int? // String?
   var ssp: String?
   var stage: String?
   var temp: String?
@@ -53,33 +52,30 @@ struct Recording: Codable {
   var type: String
   var uploaded: String
   var url: URL
-
-
-    enum CodingKeys: String, CodingKey {
-        case id, gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file, lic, q, length, time, date, uploaded, also, rmk, temp, regnr, auto, dvc, mic, smp, sono, osci
-        case birdSeen = "bird-seen"
-        case animalSeen = "animal-seen"
-        case playbackUsed = "playback-used"
-        case fileName = "file-name"
-    }
-//
-  struct Sono: Codable {
-      var small: String?
-      var med: String?
-      var large: String?
-      var full: String?
+  enum CodingKeys: String, CodingKey {
+    case id, gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type,
+         sex, stage, method, url, file, lic, q, length, time, date, uploaded, also,
+         rmk, temp, regnr, auto, dvc, mic, smp, sono, osci
+    case birdSeen = "bird-seen"
+    case animalSeen = "animal-seen"
+    case playbackUsed = "playback-used"
+    case fileName = "file-name"
   }
-//
+  //
+  struct Sono: Codable {
+    var small: String?
+    var med: String?
+    var large: String?
+    var full: String?
+  }
+  //
   struct Osci: Codable {
-      var small: String?
-      var med: String?
-      var large: String?
+    var small: String?
+    var med: String?
+    var large: String?
   }
 }
 
-
-////ViewModel
-///
 class RecordingsListViewModel: ObservableObject {
   @Published var recordingsList: RecordingsList?
   @Published var isLoading = false
@@ -111,28 +107,6 @@ class RecordingsListViewModel: ObservableObject {
   }
 }
 
-//}//class RecordingsListViewModel: ObservableObject {
-//    @Published var recordingsList: RecordingsList?
-//    @Published var isLoading = false
-//    @Published var errorMessage: String?
-//
-//    func fetchRecordings(from urlString: String) {
-//        self.isLoading = true
-//        AF.request(urlString).responseDecodable(of: RecordingsList.self) { response in
-//            DispatchQueue.main.async {
-//                self.isLoading = false
-//                switch response.result {
-//                case .success(let list):
-//                    self.recordingsList = list
-//                case .failure(let error):
-//                    self.errorMessage = error.localizedDescription
-//                }
-//            }
-//        }
-//    }
-//}
-
-//View
 struct XantoView: View {
     @ObservedObject var viewModel: RecordingsListViewModel
 
@@ -161,4 +135,3 @@ struct XantoView: View {
         }
     }
 }
-

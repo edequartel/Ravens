@@ -892,7 +892,7 @@
         }
       }
     },
-    "Notify in %lf Seconds" : {
+    "Notify in 5 Seconds" : {
 
     },
     "Obs" : {
@@ -1390,9 +1390,6 @@
           }
         }
       }
-    },
-    "Trigger Notification" : {
-
     },
     "Type %lld" : {
       "extractionState" : "stale",

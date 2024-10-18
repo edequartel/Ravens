@@ -26,6 +26,9 @@ class TimerManager: ObservableObject {
         // Code to run every 15 seconds
         print("Task executed at \(Date())")
         // Access notificationsManager to schedule notifications
+        //this not clear how to work with this
+        //want to get the latest observation and check if there is a new in de list if so
+        //notify the user
     }
 
     deinit {

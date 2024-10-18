@@ -37,13 +37,16 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
             if let error = error {
                 print("Error scheduling notification: \(error.localizedDescription)")
             } else {
-                print("Notification scheduled to fire in \(Int(seconds)) seconds.")
+                print("Notification scheduled \(title) to fire in \(Int(seconds)) seconds.")
             }
         }
     }
 
     // This function ensures that notifications are shown as banners when the app is in the foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+      _ center: UNUserNotificationCenter,
+      willPresent notification: UNNotification,
+      withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound, .badge]) // Display as a banner with sound and badge
     }
 }
@@ -52,21 +55,17 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
 struct StartNotificationView: View {
     @EnvironmentObject var notificationsManager: NotificationsManager
   
-    let delay: Double = 1
     var body: some View {
         VStack {
-            Text("Trigger Notification")
-                .font(.title)
-                .padding()
-
             Button(action: {
                 // Call the function to schedule a notification with a 5-second delay
                 notificationsManager.scheduleNotificationWithDelay(
-                  after: delay,
+                  after: 5,
                   title: "Wilde eend",
                   body: "Houten Rietplas")
             }) {
-                Text("Notify in \(delay) Seconds")
+                Text("Notify in 5 Seconds")
+                .font(.caption)
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)
