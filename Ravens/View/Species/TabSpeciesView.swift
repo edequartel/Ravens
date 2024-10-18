@@ -18,14 +18,12 @@ struct TabSpeciesView: View {
     @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
     @EnvironmentObject var settings: Settings
 
-
     @State private var selectedSortOption: SortNameOption = .lastSeen
     @State private var selectedFilterOption: FilterAllOption = .all
     @State private var selectedRarityOption: FilteringRarityOption = .all
     @State private var searchText = ""
 
     @Binding var selectedSpeciesID: Int?
-
 
   var body: some View {
     NavigationView {
