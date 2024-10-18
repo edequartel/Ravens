@@ -16,6 +16,7 @@ struct SpeciesDetailsView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
     @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     @EnvironmentObject var settings: Settings
 
     var speciesID: Int
@@ -48,6 +49,10 @@ struct SpeciesDetailsView: View {
                         }
                         .padding()
                         .islandBackground()
+
+
+                      StartNotificationView()
+
 
                         // Image Display
                         if !imageURL.isEmpty {

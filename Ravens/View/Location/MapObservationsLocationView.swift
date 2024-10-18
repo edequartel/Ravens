@@ -58,7 +58,7 @@ struct MapObservationsLocationView: View {
 
             Annotation(location.name, coordinate: location.coordinate) {
               Circle()
-                .fill(RarityColor(value: location.rarity))
+                .fill(rarityColor(value: location.rarity))
                 .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
                 .frame(width: 12, height: 12)
                 .overlay(

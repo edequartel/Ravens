@@ -38,7 +38,7 @@ struct ObservationsSpeciesView: View {
 
         HStack {
           Image(systemName: "circle.fill")//false ? "circle.hexagonpath.fill" : 
-            .foregroundColor(RarityColor(value: item.rarity))
+            .foregroundColor(rarityColor(value: item.rarity))
 
           Text("\(item.name)")// - \(item.id)")
             .bold()

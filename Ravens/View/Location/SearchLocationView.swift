@@ -70,7 +70,6 @@ class LocationXViewModel: ObservableObject {
 }
 
 // MARK: - View
-
 struct SearchLocationView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject private var areasViewModel: AreasViewModel
@@ -86,59 +85,48 @@ struct SearchLocationView: View {
   @State private var isFocused: Bool = true
 
   var body: some View {
-//    NavigationView {
       Form {
         VStack {
-          TextField("Search", text: $searchText)
-//
-//          }, onCommit: {
-//            print("onCommit")
-//            viewModel.fetchLocations(searchString: searchText)
-//          })
-//          .autocapitalization(.none)
-//          .disableAutocorrection(true)
-          //          .textFieldStyle(RoundedBorderTextFieldStyle())
-//          .textFieldStyle(SearchTextFieldStyle())
-          Button(action: {
-            print("search")
-            viewModel.fetchLocations(searchString: searchText)
-          }) {
-            Text("Search")
-          }
-
-          Text("\(viewModel.locations.count)")
+          TextField("Search", text: $searchText, onCommit: {
+              // This action will be triggered when the Enter key is pressed
+              print("search")
+              viewModel.fetchLocations(searchString: searchText)
+          })
+          .autocapitalization(.none)
+          .disableAutocorrection(true)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
         }
 
-//        Picker("",selection: $locationID) {
-//          ForEach(viewModel.locations, id: \.id) { location in
-//            Text("\(location.name)")// \(location.id)")
-//          }
-//        }
-//        .pickerStyle(.inline)
-//        .onChange(of: locationID) {
-//          settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
-//          settings.locationId = locationID
-//
-//          geoJSONViewModel.fetchGeoJsonData(
-//            for: locationID,
-//            completion: {
-//              log.error("locationID \(settings.locationName) \(settings.locationId)")
-//              settings.currentLocation = CLLocation(
-//                latitude: geoJSONViewModel.span.latitude,
-//                longitude: geoJSONViewModel.span.longitude)
-//
-//              settings.locationCoordinate = CLLocationCoordinate2D( //??
-//                latitude: geoJSONViewModel.span.latitude,
-//                longitude: geoJSONViewModel.span.longitude)
-//              log.error("==> locationCoordinate \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-//              // settings.isAreaChanged = true
-//              settings.isLocationIDChanged = true
-//              log.info("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
-//              self.presentationMode.wrappedValue.dismiss()
-//            } )
-//        }
-//      }
-    }
+        Picker("",selection: $locationID) {
+          ForEach(viewModel.locations, id: \.id) { location in
+            Text("\(location.name)")// \(location.id)")
+          }
+        }
+        .pickerStyle(.inline)
+        .onChange(of: locationID) {
+          settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
+          settings.locationId = locationID
+
+          geoJSONViewModel.fetchGeoJsonData(
+            for: locationID,
+            completion: {
+              log.error("locationID \(settings.locationName) \(settings.locationId)")
+              settings.currentLocation = CLLocation(
+                latitude: geoJSONViewModel.span.latitude,
+                longitude: geoJSONViewModel.span.longitude)
+
+              settings.locationCoordinate = CLLocationCoordinate2D( //??
+                latitude: geoJSONViewModel.span.latitude,
+                longitude: geoJSONViewModel.span.longitude)
+              log.error("==> locationCoordinate \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
+              // settings.isAreaChanged = true
+              settings.isLocationIDChanged = true
+              log.info("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+              self.presentationMode.wrappedValue.dismiss()
+            } )
+        }
+      }
+//    }
   }
 }
 

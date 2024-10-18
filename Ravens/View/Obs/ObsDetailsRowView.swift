@@ -14,7 +14,7 @@ struct ObsDetailsRowView: View {
   var body: some View {
     HStack {
       Image(systemName: "circle.fill")
-        .foregroundColor(RarityColor(value: obs.rarity))
+        .foregroundColor(rarityColor(value: obs.rarity))
       
       Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
         .bold()

@@ -37,7 +37,7 @@ struct ObsRadiusView: View {
                     VStack {
                         HStack {
                             Image(systemName: "circle.fill")
-                                .foregroundColor(RarityColor(value: obs.rarity))
+                                .foregroundColor(rarityColor(value: obs.rarity))
                             if obs.has_sound ?? false { //for test
                                 Image(systemName: "waveform")
                             }

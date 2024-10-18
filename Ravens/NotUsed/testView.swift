@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct testView: View {
+struct TestView: View {
   var body: some View {
       ScrollView {
           VStack {
@@ -29,6 +29,6 @@ struct testView: View {
   }
 }
 
-#Preview {
-    testView()
-}
+// #Preview {
+//     TestView()
+// }

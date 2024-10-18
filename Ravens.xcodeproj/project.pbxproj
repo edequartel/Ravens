@@ -24,6 +24,8 @@
 		4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719C36B2C944F47000A11D1 /* ObservationListView.swift */; };
 		471A45E92C8F2D4A00433C6B /* PosOnMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */; };
 		471A4A702C7F3E0E00898AC5 /* create-single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A4A6F2C7F3E0E00898AC5 /* create-single.swift */; };
+		471B4FBC2CC268F7001302A9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471B4FBB2CC268F7001302A9 /* NotificationManager.swift */; };
+		471B4FBE2CC27FDC001302A9 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471B4FBD2CC27FDC001302A9 /* TimeManager.swift */; };
 		471DB65C2C77A643002F6EF5 /* AddObservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471DB65B2C77A643002F6EF5 /* AddObservationView.swift */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
@@ -155,6 +157,8 @@
 		4719C36B2C944F47000A11D1 /* ObservationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationListView.swift; sourceTree = "<group>"; };
 		471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosOnMapView.swift; sourceTree = "<group>"; };
 		471A4A6F2C7F3E0E00898AC5 /* create-single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "create-single.swift"; sourceTree = "<group>"; };
+		471B4FBB2CC268F7001302A9 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		471B4FBD2CC27FDC001302A9 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		471DB65B2C77A643002F6EF5 /* AddObservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObservationView.swift; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				471B4FBD2CC27FDC001302A9 /* TimeManager.swift */,
+				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
 				47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */,
 				47AD97682CAAD0D500A4B510 /* ButtonViews.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
@@ -628,6 +634,7 @@
 				47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+				471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -752,7 +759,9 @@
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				478262682C89EF7600DD746C /* NotesView.swift in Sources */,
 				47826CC32BF62DE4003E8F21 /* WikipediaView.swift in Sources */,
+				471B4FBE2CC27FDC001302A9 /* TimeManager.swift in Sources */,
 				474C409A2B50073C0038B3A5 /* ObservationsRadiusViewModel.swift in Sources */,
+				471B4FBC2CC268F7001302A9 /* NotificationManager.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
 				4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */,
 				474C405D2B4C05980038B3A5 /* SpeciesGroupView.swift in Sources */,
@@ -915,6 +924,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ravens would like to access Photos";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -956,6 +966,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ravens would like to access Photos";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1009,6 +1020,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.6;
+			};
+		};
+		471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
 			};
 		};
 		474093852B55B7AC004F10C5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {

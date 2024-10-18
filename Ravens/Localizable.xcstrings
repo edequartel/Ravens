@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " %@\n %@\n %@\n %@" : {
       "localizations" : {
         "en" : {
@@ -106,6 +109,9 @@
     "Add observer" : {
 
     },
+    "Add Observer" : {
+
+    },
     "Add to areas" : {
 
     },
@@ -135,9 +141,6 @@
           }
         }
       }
-    },
-    "Append URL" : {
-
     },
     "Area" : {
       "localizations" : {
@@ -889,6 +892,9 @@
         }
       }
     },
+    "Notify in %lf Seconds" : {
+
+    },
     "Obs" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1384,6 +1390,9 @@
           }
         }
       }
+    },
+    "Trigger Notification" : {
+
     },
     "Type %lld" : {
       "extractionState" : "stale",

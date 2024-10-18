@@ -26,7 +26,6 @@ struct ContentView: View {
 
   var body: some View {
     if (keyChainviewModel.token.isEmpty) {
-
       VStack {
         HStack{
           Text("Login waarneming.nl")
@@ -63,7 +62,7 @@ struct RavensView: View {
   @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
-//  let viewModel = RecordingsListViewModel()
+  @EnvironmentObject var notificationsManager: NotificationsManager
 
   var body: some View {
     VStack {
@@ -93,15 +92,6 @@ struct RavensView: View {
             Text("Settings")
             Image(systemName: "gearshape")
           }
-        //Tab 5
-//////        CreateView()
-//        PositionOnMapView(lat: 37.7749, long: -122.4194)
-////        XantoView(viewModel: viewModel)
-//////////        AddObservationView()
-//          .tabItem {
-//            Text("Add")
-//            Image(systemName: "plus.circle")
-//          }
       }
 
       .sheet(item: $selectedSpeciesID) { item in

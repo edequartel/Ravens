@@ -88,9 +88,10 @@ struct RavensApp: App {
   @StateObject var observersViewModel = ObserversViewModel()
   @StateObject var areasViewModel = AreasViewModel()
 
-  @StateObject var player = Player()
+  @StateObject var notificationsManager = NotificationsManager()
+  @StateObject var timerManager = TimerManager()
 
-//  @StateObject var htmlViewModel = HTMLViewModel()
+  @StateObject var player = Player()
 
   @StateObject var observationsYearViewModel = ObservationsYearViewModel()
 
@@ -104,43 +105,10 @@ struct RavensApp: App {
   @State private var parts: [String] = []
   @State private var badgeCount: Int = 0
 
-  init() { //get permissions notifications
-    let center = UNUserNotificationCenter.current()
-    center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-      if let error = error {
-        // Handle the error here.
-        print(error.localizedDescription)
-      }
-      // Enable or disable features based on the authorization.
-    }
-  }
-
-  //    Helvetica
-  //    Helvetica Neue
-  //    Arial
-  //    Courier
-  //    Courier New
-  //    Georgia no
-  //    Times New Roman
-  //    Verdana +
-  //    Palatino no
-  //    Avenir ++
-  //    Futura
-  //    Menlo (monospaced)
-  //    SF Mono (monospaced)
-  //    SF Pro Display (default system font, though you typically use .systemFont() for this)
-  //    Zapfino no
-  //    Chalkduster no
-
   var body: some Scene {
     WindowGroup {
       ContentView()
-      //            .font(.custom("Roboto", size: 18))
-
         .environmentObject(KeychainViewModel())
-
-      //                .environmentObject(LocationManagerModel())
-
         .environmentObject(locationManager)
         .environmentObject(settings)
         .environmentObject(languagesViewModel)
@@ -162,46 +130,24 @@ struct RavensApp: App {
         .environmentObject(bookMarksViewModel)
         .environmentObject(observersViewModel)
         .environmentObject(areasViewModel)
-//        .environmentObject(htmlViewModel)
 
         .environmentObject(player)
-
         .environmentObject(observationsYearViewModel)
-
         .environmentObject(urlHandler)
+
+        .environmentObject(notificationsManager)
+        .environmentObject(timerManager) //make it globally available
+
 
         .onOpenURL { url in
           // Handle the URL appropriately
           let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
           self.parts = urlString.split(separator: "/").map(String.init)
           showingAlert = true
-
-          // Add the observer
-          observersViewModel.appendRecord(name: parts[0], userID:  Int(parts[1]) ?? 0)
-
-          // Create the notification content
-          let content = UNMutableNotificationContent()
-          content.title = "URL Opened"
-          content.body = "The app opened a URL: \(url)"
-
-          // Create the trigger
-          let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
-          // Create the request
-          let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-          // Schedule the request with the system.
-          let notificationCenter = UNUserNotificationCenter.current()
-          notificationCenter.add(request) { (error) in
-            if let error = error {
-              // Handle any errors.
-              print(error.localizedDescription)
-            }
-          }
         }
 
         .alert(isPresented: $showingAlert) {
-          Alert(title: Text("Append URL"),
+          Alert(title: Text("Add Observer"),
                 message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
                 primaryButton: .default(Text("Yes")) {
             print("Appending \(parts[0]) \(parts[1])")
@@ -210,28 +156,9 @@ struct RavensApp: App {
                 secondaryButton: .cancel(Text("No")))
         }
 
+        .onAppear {
+          notificationsManager.requestNotificationPermission()
+        }
     }
   }
 }
-
-
-//Update badge number
-// Then in the function where you want to increase the badge count
-//center.setBadgeCount(0)
-//                    center.setBadgeCount(badgeCount + 1) { error in
-//                        if let error = error {
-//                            print("Error setting badge count: \(error)")
-//                        } else {
-//                            badgeCount += 1
-//                        }
-//                    }
-
-//                .alert(isPresented: $showingAlert) {
-//                    Alert(title: Text("Append URL"),
-//                          message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
-//                          primaryButton: .default(Text("Yes")) {
-//                        print("Appending \(parts[0]) \(parts[1])")
-//                        observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-//                    },
-//                          secondaryButton: .cancel(Text("No")))
-//                }

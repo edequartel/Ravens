@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ShareLinkButtonView: View {
-    var obs: Observation 
-
+    var obs: Observation
     var body: some View {
         let url = URL(string: obs.permalink)!
         ShareLink(item: url) {

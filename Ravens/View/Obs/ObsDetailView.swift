@@ -29,7 +29,7 @@ struct ObsDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         Image(systemName: "circle.fill")
-                            .foregroundColor(RarityColor(value: obs.rarity))
+                            .foregroundColor(rarityColor(value: obs.rarity))
                         Text("\(obs.species_detail.name)")
                             .bold()
                             .lineLimit(1)

@@ -300,7 +300,7 @@ struct SpeciesInfoView: View {
         Image(
           systemName: "circle.fill")
         .symbolRenderingMode(.palette)
-        .foregroundStyle(RarityColor(value: species.rarity), .clear)
+        .foregroundStyle(rarityColor(value: species.rarity), .clear)
 
         Text("\(species.name)")
           .bold()

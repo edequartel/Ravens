@@ -19,7 +19,7 @@ struct PositionOnMapView: View {
     Map(position: $cameraPosition) {
       Annotation(obs.species_detail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
-          .fill(RarityColor(value: obs.rarity))
+          .fill(rarityColor(value: obs.rarity))
           .stroke(obs.has_sound ?? false ? Color.white : Color.clear,lineWidth: 1)
           .frame(width: 12, height: 12)
 
@@ -49,7 +49,7 @@ struct PositonFullView: View {
     Map(position: $cameraPosition) {
       Annotation(obs.species_detail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
-          .fill(RarityColor(value: obs.rarity))
+          .fill(rarityColor(value: obs.rarity))
           .stroke(obs.has_sound ?? false ? Color.white : Color.clear,lineWidth: 1)
           .frame(width: 12, height: 12)
 
