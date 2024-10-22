@@ -10,32 +10,31 @@ import Alamofire
 import SwiftSoup
 import UserNotifications
 
-class TimerManager: ObservableObject {
-    static let shared = TimerManager()  // Singleton instance
+//class TimerManager: ObservableObject {
+//    static let shared = TimerManager()  // Singleton instance
+//
+//    private var notificationsManager: NotificationsManager!
+//    private var lastItemCount = 0
+//
+//    @Published var items: [String] = []
+//
+//    init() {
+//        UIApplication.shared.applicationIconBadgeNumber = 0
+//    }
+//
+//    func setNotificationsManager(_ manager: NotificationsManager) {
+//        self.notificationsManager = manager
+//    }
+//
+//    // Start your task: triggered both in the foreground and via background tasks
+//    func startYourTask() {
+//        print("-->> Running background task (foreground or background)")
+//    }
+//
+//    // Fetch data or perform task
+//}
 
-    private var notificationsManager: NotificationsManager!
-    private var lastItemCount = 0
 
-    @Published var items: [String] = []
-
-    init() {
-        UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-
-    func setNotificationsManager(_ manager: NotificationsManager) {
-        self.notificationsManager = manager
-    }
-
-    // Start your task: triggered both in the foreground and via background tasks
-    func startYourTask() {
-        print("-->> Running background task (foreground or background)")
-    }
-
-
-
-}
-
-// Fetch data or perform task
 //func parseHTMLFromURL() {
 //    lastItemCount += 1
 //    notificationsManager.scheduleNotificationWithDelay(after: 1, title: "New Notification", body: "Update \(Date())", nr: NSNumber(value: lastItemCount))
