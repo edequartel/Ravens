@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftyBeaver
 import SwiftData
-
+import BackgroundTasks
 import UserNotifications
 
 class URLHandler: ObservableObject {
@@ -21,7 +21,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         let file = FileDestination()
-        //        file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
         file.minLevel = .warning
         file.levelString.error = "Ravens"
@@ -30,14 +29,47 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let console = ConsoleDestination()  // log to Xcode Console
         console.levelString.error = "Ravens"
         console.format = ">> $DHH:mm:ss.SSS$d $C$L$c: $M"
-        //        console.format = "EDQ: $Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
         console.minLevel = .error
         
         log.addDestination(console)
 //        log.addDestination(file)
-        
+
+      // Register background task
+      BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.example.app.refresh", using: nil) { task in
+          self.handleAppRefresh(task: task as! BGAppRefreshTask)
+      }
+
         return true
     }
+
+  func handleAppRefresh(task: BGAppRefreshTask) {
+      // Schedule the next background refresh task
+      scheduleAppRefresh()
+
+      // Execute your task (e.g., data fetching or notifications)
+      TimerManager.shared.startYourTask()
+
+      // Notify the system that the task is complete
+      task.setTaskCompleted(success: true)
+  }
+
+  // Schedule background task
+  func scheduleAppRefresh() {
+      let request = BGAppRefreshTaskRequest(identifier: "com.example.app.refresh")
+      request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60) // Schedule after 15 minutes
+
+      do {
+          try BGTaskScheduler.shared.submit(request)
+      } catch {
+          print("Failed to schedule background refresh: \(error.localizedDescription)")
+      }
+  }
+
+  func applicationDidEnterBackground(_ application: UIApplication) {
+      // Schedule the background task when the app enters the background
+      scheduleAppRefresh()
+  }
+
 }
 
 //// Now let’s log!
@@ -61,7 +93,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //log.info("my data", context: [1, "a", 2]) // "INFO: my data [1, \"a\", 2]"
 
 @main
-
 struct RavensApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -135,8 +166,9 @@ struct RavensApp: App {
         .environmentObject(observationsYearViewModel)
         .environmentObject(urlHandler)
 
-        .environmentObject(notificationsManager)
+
         .environmentObject(timerManager) //make it globally available
+        .environmentObject(notificationsManager)
 
 
         .onOpenURL { url in
@@ -156,8 +188,12 @@ struct RavensApp: App {
                 secondaryButton: .cancel(Text("No")))
         }
 
+
+
+
         .onAppear {
           notificationsManager.requestNotificationPermission()
+          timerManager.setNotificationsManager(notificationsManager)
         }
     }
   }

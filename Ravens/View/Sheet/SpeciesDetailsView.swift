@@ -50,10 +50,6 @@ struct SpeciesDetailsView: View {
                         .padding()
                         .islandBackground()
 
-
-                      StartNotificationView()
-
-
                         // Image Display
                         if !imageURL.isEmpty {
                             KFImage(URL(string: imageURL))

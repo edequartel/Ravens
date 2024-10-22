@@ -23,11 +23,12 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
     }
 
     // Function to schedule a notification with a custom delay
-    func scheduleNotificationWithDelay(after seconds: TimeInterval, title: String, body: String) {
+  func scheduleNotificationWithDelay(after seconds: TimeInterval, title: String, body: String, nr: NSNumber) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
         content.sound = UNNotificationSound.default
+        content.badge = nr
 
         // Set the trigger to fire after a custom time interval
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
@@ -52,30 +53,30 @@ class NotificationsManager: NSObject, ObservableObject, UNUserNotificationCenter
 }
 
 // SwiftUI view to test trigger notifications
-struct StartNotificationView: View {
-    @EnvironmentObject var notificationsManager: NotificationsManager
-  
-    var body: some View {
-        VStack {
-            Button(action: {
-                // Call the function to schedule a notification with a 5-second delay
-                notificationsManager.scheduleNotificationWithDelay(
-                  after: 5,
-                  title: "Wilde eend",
-                  body: "Houten Rietplas")
-            }) {
-                Text("Notify in 5 Seconds")
-                .font(.caption)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-        }
-        .onAppear {
-            // Request notification permissions when the view appears
-            notificationsManager.requestNotificationPermission()
-        }
-        .padding()
-    }
-}
+//struct StartNotificationView: View {
+//    @EnvironmentObject var notificationsManager: NotificationsManager
+//    var body: some View {
+//      VStack {
+//          Button(action: {
+//              // Call the function to schedule a notification with a 5-second delay
+//              notificationsManager.scheduleNotificationWithDelay(
+//                  after: 5,
+//                  title: "Wilde eend",
+//                  body: "Houten Rietplas"
+//              )
+//          }) {
+//              Text("Notify in 5 Seconds")
+//                  .font(.caption)
+//                  .padding()
+//                  .background(Color.blue)
+//                  .foregroundColor(.white)
+//                  .cornerRadius(8)
+//          }
+//      }
+//        .onAppear {
+//            // Request notification permissions when the view appears
+//            notificationsManager.requestNotificationPermission()
+//        }
+//        .padding()
+//    }
+//}

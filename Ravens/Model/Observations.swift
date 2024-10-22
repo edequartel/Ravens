@@ -105,6 +105,7 @@ struct Observation: Codable, Identifiable {
     var detail: String?
     var code: String?
 
+    var timeDate: Date?
 }
 
 // MARK: - UserDetail
@@ -157,46 +158,3 @@ struct Species: Codable, Identifiable {
     self.date = date
   }
 }
-
-
-//    init(id: Int? = nil, species: Int? = nil, date: String, time: String? = nil, number: Int, sex: String, point: Point, accuracy: Int? = nil, notes: String? = nil, is_certain: Bool, is_escape: Bool, activity: Int, life_stage: Int, method: Int? = nil, substrate: Int? = nil, related_species: Int? = nil, obscurity: Int? = nil, has_photo: Bool? = nil, has_sound: Bool? = nil, counting_method: Int? = nil, embargo_date: String? = nil, uuid: String? = nil, externalReference: [String]?, observer_location: Point? = nil, transect_uuid: URL? = nil, species_detail: SpeciesDetail, rarity: Int, user: Int, user_detail: UserDetail? = nil, modified: String? = nil, species_group: Int? = nil, validation_status: String, location: Int? = nil, location_detail: LocationDetail? = nil, photos: [String]? = nil, sounds: [String]? = nil, permalink: String, detail: String? = nil, code: String? = nil) {
-//        self.id = id
-//        self.species = species
-//        self.date = date
-//        self.time = time
-//        self.number = number
-//        self.sex = sex
-//        self.point = point
-//        self.accuracy = accuracy
-//        self.notes = notes
-//        self.is_certain = is_certain
-//        self.is_escape = is_escape
-//        self.activity = activity
-//        self.life_stage = life_stage
-//        self.method = method
-//        self.substrate = substrate
-//        self.related_species = related_species
-//        self.obscurity = obscurity
-//        self.has_photo = has_photo
-//        self.has_sound = has_sound
-//        self.counting_method = counting_method
-//        self.embargo_date = embargo_date
-//        self.uuid = uuid
-//        self.externalReference = externalReference
-//        self.observer_location = observer_location
-//        self.transect_uuid = transect_uuid
-//        self.species_detail = species_detail
-//        self.rarity = rarity
-//        self.user = user
-//        self.user_detail = user_detail
-//        self.modified = modified
-//        self.species_group = species_group
-//        self.validation_status = validation_status
-//        self.location = location
-//        self.location_detail = location_detail
-//        self.photos = photos
-//        self.sounds = sounds
-//        self.permalink = permalink
-//        self.detail = detail
-//        self.code = code
-//    }

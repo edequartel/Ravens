@@ -467,3 +467,31 @@ extension View {
       )
   }
 }
+
+struct ImageWithOverlay: View {
+    var systemName: String
+    var value: Bool
+
+    var body: some View {
+        ZStack {
+            Image(systemName: systemName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+
+            if !value {
+                Image(systemName: "line.diagonal")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+            }
+        }
+    }
+}
+
+struct ImageWithOverlay_Previews: PreviewProvider {
+    static var previews: some View {
+        ImageWithOverlay(systemName: "star", value: false)
+    }
+}
+

@@ -24,7 +24,6 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     self.locationManager.requestWhenInUseAuthorization()
     self.locationManager.startUpdatingLocation()
-
     self.locationManager.startUpdatingHeading()
   }
 

@@ -74,27 +74,9 @@ class Settings: ObservableObject {
             accessibilityStored = accessibility
         }
     }
-    
-    
-//    @AppStorage("days") var daysStored: Int = 5
-//    @Published var days: Int = 5 {
-//        didSet {
-//            log.info("!!saving it in storage: \(days)")
-//            daysStored = days
-//            if !isInit {
-//                isRadiusChanged = true
-//                isAreaChanged = true
-//                initialSpeciesLoad = true
-//            }
-//        }
-//    }
+
     
     @AppStorage("listpreference") var listPreference: Bool = false
-    
-//    @AppStorage("obsSource") var obsSource: String = "waarneming.nl"
-    
-
-//    @AppStorage("savePhotos") var savePhotos: Bool = false
     @AppStorage("showUser") var showUser: Bool = false
     @AppStorage("poiOn") var poiOn: Bool = true
     @AppStorage("infinity") var infinity: Bool = false

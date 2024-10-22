@@ -191,9 +191,6 @@
         }
       }
     },
-    "Compare" : {
-
-    },
     "Continent %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -344,13 +341,7 @@
         }
       }
     },
-    "Enter Date (yyyy-MM-dd)" : {
-
-    },
     "Enter number" : {
-
-    },
-    "Enter Time (HH:mm)" : {
 
     },
     "Error: %@" : {
@@ -407,9 +398,6 @@
       }
     },
     "Filtering" : {
-
-    },
-    "First Date and Time" : {
 
     },
     "Full Map" : {
@@ -632,6 +620,9 @@
         }
       }
     },
+    "List species" : {
+
+    },
     "list users" : {
 
     },
@@ -851,7 +842,6 @@
       }
     },
     "Native" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -891,9 +881,6 @@
           }
         }
       }
-    },
-    "Notify in 5 Seconds" : {
-
     },
     "Obs" : {
       "extractionState" : "stale",
@@ -1056,7 +1043,6 @@
       }
     },
     "Rarity" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1181,9 +1167,6 @@
         }
       }
     },
-    "Second Date and Time" : {
-
-    },
     "Second language" : {
 
     },
@@ -1245,6 +1228,9 @@
       }
     },
     "soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren." : {
+
+    },
+    "Sort" : {
 
     },
     "Sort by" : {

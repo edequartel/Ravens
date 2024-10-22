@@ -52,7 +52,9 @@ struct TabSpeciesView: View {
               species: species,
               showView: showView,
               bookMarksViewModel: bookMarksViewModel,
-              speciesSecondLangViewModel: speciesSecondLangViewModel)}
+              speciesSecondLangViewModel: speciesSecondLangViewModel)
+
+            }
 
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -125,8 +127,18 @@ struct TabSpeciesView: View {
     }
     .searchable(text: $searchText)
     .refreshable {
-      print("refresh")
-      speciesViewModel.parseHTMLFromURL(settings: settings)
+      print("refresh deze in realtime laten uitvoeren")
+//      speciesViewModel.parseHTMLFromURL(settings: settings) //liever deze immers een extra data flow
+//      speciesViewModel.fetchDataFirst( //contatenate fetching
+//        settings: settings,
+//        completion: {
+//          print("speciesViewModel First language data loaded")
+//          speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
+//            print("html is parsed from start")
+////            isFirstLanguageDataLoaded = true
+////            checkDataLoaded()
+//          })
+//        })
     }
   }
 
@@ -297,16 +309,23 @@ struct SpeciesInfoView: View {
     VStack(alignment: .leading) {
       if showView { Text("SpeciesInfoView").font(.customTiny) }
       HStack(spacing: 4) {
-        Image(
-          systemName: "circle.fill")
-        .symbolRenderingMode(.palette)
-        .foregroundStyle(rarityColor(value: species.rarity), .clear)
+        if let date = species.date {
+          Image(
+            systemName: "eye")
+          .symbolRenderingMode(.palette)
+          .foregroundStyle(rarityColor(value: species.rarity), .clear)
+        } else {
+          Image(
+            systemName: "circle.fill")
+          .symbolRenderingMode(.palette)
+          .foregroundStyle(rarityColor(value: species.rarity), .clear)
+
+        }
 
         Text("\(species.name)")
           .bold()
           .lineLimit(1)
           .truncationMode(.tail)
-
         Spacer()
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
           Image(systemName: "star.fill")

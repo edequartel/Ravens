@@ -32,16 +32,23 @@ struct ObservationListView: View {
     .toolbar {
       if entity != .species {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Menu {
-            CombinedOptionsMenuView(
-              currentSortingOption: $currentSortingOption,
-              currentFilteringAllOption: $currentFilteringAllOption,
-              currentFilteringOption: $currentFilteringOption )
-          } label: {
-            Button(action: {}) {
-              Image(systemName: "ellipsis.circle")
-            }
+          NavigationLink(destination: CombinedOptionsMenuView(
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption )) {
+            Image(systemName: "ellipsis.circle")
+              .accessibility(label: Text("List species"))
           }
+//          Menu {
+//            CombinedOptionsMenuView(
+//              currentSortingOption: $currentSortingOption,
+//              currentFilteringAllOption: $currentFilteringAllOption,
+//              currentFilteringOption: $currentFilteringOption )
+//          } label: {
+//            Button(action: {}) {
+//              Image(systemName: "ellipsis.circle")
+//            }
+//          }
         }
       }
     }
@@ -70,16 +77,17 @@ struct ObservationListView: View {
 
     switch currentSortingOption {
     case .date:
-      let lhsDate = dateFormatter.date(from: lhs.date) ?? Date.distantPast
-      let rhsDate = dateFormatter.date(from: rhs.date) ?? Date.distantPast
-
-      if lhsDate != rhsDate {
-        return lhsDate > rhsDate
-      } else {
-        let lhsTime = timeFormatter.date(from: lhs.time ?? "") ?? Date.distantPast
-        let rhsTime = timeFormatter.date(from: rhs.time ?? "") ?? Date.distantPast
-        return lhsTime < rhsTime
-      }
+//      let lhsDate = dateFormatter.date(from: lhs.date) ?? Date.distantPast
+//      let rhsDate = dateFormatter.date(from: rhs.date) ?? Date.distantPast
+//
+//      if lhsDate != rhsDate {
+//        return lhsDate > rhsDate
+//      } else {
+//        let lhsTime = timeFormatter.date(from: lhs.time ?? "") ?? Date.distantPast
+//        let rhsTime = timeFormatter.date(from: rhs.time ?? "") ?? Date.distantPast
+//        return lhsTime < rhsTime
+//      }
+      return lhs.rarity > rhs.rarity
 
     case .name:
       return lhs.species_detail.name < rhs.species_detail.name
@@ -172,51 +180,57 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
 
   var body: some View {
-
-    ForEach(SortingOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentSortingOption = option
-      }) {
-        HStack {
-          Text(option.rawValue)
-          Spacer()
-          if currentSortingOption == option {
-            Image(systemName: "checkmark")
+    Form {
+      Section("Sort") {
+        ForEach(SortingOption.allCases, id: \.self) { option in
+          Button(action: {
+            currentSortingOption = option
+          }) {
+            HStack {
+              Text(option.rawValue)
+              Spacer()
+              if currentSortingOption == option {
+                Image(systemName: "checkmark")
+              }
+            }
+          }
+        }
+      }
+      //      Divider()
+      Section("Native") {
+        ForEach(FilterAllOption.allCases, id: \.self) { option in
+          Button(action: {
+            currentFilteringAllOption = option
+          }) {
+            HStack {
+              Text(option.rawValue)
+              Spacer()
+              if currentFilteringAllOption == option {
+                Image(systemName: "checkmark")
+              }
+            }
+          }
+        }
+      }
+      
+      //      Divider()
+      Section("Rarity") {
+        ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+          Button(action: {
+            currentFilteringOption = option
+          }) {
+            HStack {
+              Text(option.rawValue)
+              Spacer()
+              if currentFilteringOption == option {
+                Image(systemName: "checkmark")
+              }
+            }
           }
         }
       }
     }
-    Divider()
-
-    ForEach(FilterAllOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringAllOption = option
-      }) {
-        HStack {
-          Text(option.rawValue)
-          Spacer()
-          if currentFilteringAllOption == option {
-            Image(systemName: "checkmark")
-          }
-        }
-      }
-    }
-
-    Divider()
-
-    ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringOption = option
-      }) {
-        HStack {
-          Text(option.rawValue)
-          Spacer()
-          if currentFilteringOption == option {
-            Image(systemName: "checkmark")
-          }
-        }
-      }
-    }
+//    Spacer()
   }
 }
 

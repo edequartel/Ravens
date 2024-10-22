@@ -22,34 +22,10 @@ struct SettingsDetailsView: View {
                 HStack {
                     Text(settings.locationName)
                         .bold()
-//                    Spacer()
-                    
-                }
-//                HStack {
-//                    //                NetworkView()
-//                    Image(systemName: "binoculars.circle.fill")
-//                        .symbolRenderingMode(.palette)
-//                        .foregroundStyle(RarityColor(value: settings.selectedRarity), .white)
-//                    Text(settings.selectedSpeciesGroupName)
-//                        .lineLimit(1)
-//                    if (settings.infinity && showInfinity) {
-//                        HStack {
-//                            Image(systemName: "infinity")
-//                            Spacer()
-//                        }
-//                    } else {
-//                        Spacer()
-//                        Text("\(results)x")
-//                        
-//                        Text("\(settings.days)d")
-//                        Text("\(settings.selectedDate, formatter: dateFormatter)")
-//                    }
-//                    
-//                    
-//                }
+               }
             }
             .padding(.horizontal,10)
-//            .font(.footnote)
+
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(settings.locationName) \(settings.selectedSpeciesGroupName) \(results)x \(14)d \(settings.selectedDate, formatter: dateFormatter)")

@@ -21,7 +21,6 @@ class SpeciesViewModel: ObservableObject {
   var Date: String = ""
 
 //=================================================
-//this one on timer...
   func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
     print("(settings.parseHTMLFromURL)")
     print("groupID \(settings.selectedSpeciesGroupId)")
@@ -57,32 +56,68 @@ class SpeciesViewModel: ObservableObject {
     let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
     let rows = try doc.select("tbody tr")
 
+    // Create a copy of the species array to modify
+    var updatedSpecies = species
+
+//    for row in rows {
+//      let dateElement = try row.select(".rarity-date")
+//      let date = try dateElement.text()
+//      if !date.isEmpty {
+//        Date = date
+//      }
+//
+//      let timeElement = try row.select(".rarity-time")
+//      let time = try timeElement.text()
+//      let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
+//      let speciesScientificName = try speciesScientificNameElement.text()      
+////      let speciesNameElement = try row.select(".rarity-species .species-common-name")
+////      let speciesName = try speciesScientificNameElement.text()
+////      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
+//      let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
+//      let numObservations = try numObservationsElement.text()
+//      let numObservationsInt = Int(numObservations) ?? 0
+//
+//      let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
+//      if let index = index {
+//        if species[index].date?.isEmpty ?? true {
+//          species[index].date = Date
+//          species[index].time = time
+//          species[index].nrof = numObservationsInt
+//          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
+//        }
+//      }
+//    }
+
     for row in rows {
-      let dateElement = try row.select(".rarity-date")
-      let date = try dateElement.text()
-      if !date.isEmpty {
-        Date = date
-      }
-
-      let timeElement = try row.select(".rarity-time")
-      let time = try timeElement.text()
-      let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
-      let speciesScientificName = try speciesScientificNameElement.text()
-//      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
-      let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
-      let numObservations = try numObservationsElement.text()
-      let numObservationsInt = Int(numObservations) ?? 0
-      let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
-
-      if let index = index {
-        if species[index].date?.isEmpty ?? true {
-          species[index].date = Date
-          species[index].time = time
-          species[index].nrof = numObservationsInt
-          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
+        let dateElement = try row.select(".rarity-date")
+        let date = try dateElement.text()
+        if !date.isEmpty {
+            Date = date
         }
-      }
+
+        let timeElement = try row.select(".rarity-time")
+        let time = try timeElement.text()
+        let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
+        let speciesScientificName = try speciesScientificNameElement.text()
+        let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
+        let numObservations = try numObservationsElement.text()
+        let numObservationsInt = Int(numObservations) ?? 0
+
+        let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
+        if let index = index {
+            if updatedSpecies[index].date?.isEmpty ?? true {
+                updatedSpecies[index].date = Date
+                updatedSpecies[index].time = time
+                updatedSpecies[index].nrof = numObservationsInt
+                updatedSpecies[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
+            }
+        }
     }
+
+    DispatchQueue.main.async {
+        self.species = updatedSpecies
+    }
+
   }
   //===================================================
 

@@ -190,7 +190,7 @@ struct SplashScreen: View {
         completion: {
           print("speciesViewModel First language data loaded")
           speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-            print("html is parsed")
+            print("html is parsed from start")
             isFirstLanguageDataLoaded = true
             checkDataLoaded()
           })

@@ -123,7 +123,6 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AC7D692CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */; };
-		47AC7D6B2CBE30EB00B1E929 /* TestDateCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47AFF6E32B7C8C70004868D0 /* LookUpsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */; };
 		47AFF6E52B7CAC71004868D0 /* SingersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AFF6E42B7CAC71004868D0 /* SingersView.swift */; };
@@ -250,7 +249,6 @@
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationSpeciesByIDView.swift; sourceTree = "<group>"; };
-		47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDateCompare.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpsView.swift; sourceTree = "<group>"; };
 		47AFF6E42B7CAC71004868D0 /* SingersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingersView.swift; sourceTree = "<group>"; };
@@ -303,14 +301,21 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
+		471B4FC12CC291BD001302A9 /* Notifications and TimerManager */ = {
+			isa = PBXGroup;
+			children = (
+				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
+				471B4FBD2CC27FDC001302A9 /* TimerManager.swift */,
+			);
+			path = "Notifications and TimerManager";
+			sourceTree = "<group>";
+		};
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				471B4FBD2CC27FDC001302A9 /* TimerManager.swift */,
-				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
-				47AC7D6A2CBE30EB00B1E929 /* TestDateCompare.swift */,
 				47AD97682CAAD0D500A4B510 /* ButtonViews.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
+				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -327,12 +332,12 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
+				471B4FC12CC291BD001302A9 /* Notifications and TimerManager */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
 				476843D22BA9D333004EF208 /* StartUp */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				47F5D2F02BADDB9F0071BB6E /* Notes.md */,
-				47CF61DD2B60EDCD00709CE3 /* NotUsed */,
 				474C40812B4D17B40038B3A5 /* Model */,
 				474C40802B4D17AA0038B3A5 /* ViewModel */,
 				474C40822B4D17C00038B3A5 /* View */,
@@ -374,8 +379,6 @@
 				4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */,
 				472633222BB598E600CEA05E /* PoiViewModel.swift */,
 				4738B6382BF380B500BF7557 /* LocationViewModel.swift */,
-				47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */,
-				475242702C2D88B900DBBD0B /* HTMLViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -384,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				472633202BB5981A00CEA05E /* poi.json */,
-				474C403B2B4BC5070038B3A5 /* Species.swift */,
 				474C40472B4BCC6B0038B3A5 /* SpeciesDetails.swift */,
 				474C40522B4BFD090038B3A5 /* RegionList.swift */,
 				474C40582B4C047B0038B3A5 /* SpeciesGroup.swift */,
@@ -394,7 +396,6 @@
 				4785CD162B95C835002F52BE /* User.swift */,
 				4725B9622BB14C2C00F6F137 /* LocationJSON.swift */,
 				47826CBE2BF62D96003E8F21 /* WikipediaPage.swift */,
-				4752426E2C2D887900DBBD0B /* HTMLDocument.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -455,11 +456,9 @@
 		4767F0082BF322F000BACDC6 /* Species */ = {
 			isa = PBXGroup;
 			children = (
-				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
-				47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */,
 				4767F0042BF256B100BACDC6 /* SpeciesView.swift */,
 			);
 			path = Species;
@@ -495,8 +494,6 @@
 		4767F00B2BF3291400BACDC6 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				4793A5892C29334E002739B6 /* waarneming-rarities.html */,
-				4793A5842C286A76002739B6 /* HTMLView.swift */,
 				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
@@ -531,6 +528,12 @@
 		47CF61DD2B60EDCD00709CE3 /* NotUsed */ = {
 			isa = PBXGroup;
 			children = (
+				4717C0BE2B9CC41400B570D0 /* YearView.swift */,
+				47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */,
+				475242702C2D88B900DBBD0B /* HTMLViewModel.swift */,
+				4767F0072BF322E900BACDC6 /* Radius */,
+				474C403B2B4BC5070038B3A5 /* Species.swift */,
+				4752426E2C2D887900DBBD0B /* HTMLDocument.swift */,
 				47EE131D2CABBE1C007305E1 /* PlayButtonView.swift */,
 				478262692C8A12EE00DD746C /* testView.swift */,
 				471DB65B2C77A643002F6EF5 /* AddObservationView.swift */,
@@ -540,15 +543,17 @@
 				477ECF132B98897100D96BE9 /* NetworkView.swift */,
 				472633242BB5998400CEA05E /* POIsView.swift */,
 				47714FD02BD15A2600361C55 /* CircleButton.swift */,
-				4767F0072BF322E900BACDC6 /* Radius */,
 				4738B63E2BF4E43800BF7557 /* ObsAreaView.swift */,
 				4738B63C2BF4DEA400BF7557 /* ObsSpeciesView.swift */,
+				4793A5892C29334E002739B6 /* waarneming-rarities.html */,
 				47AFF6E42B7CAC71004868D0 /* SingersView.swift */,
 				47AFF6E22B7C8C70004868D0 /* LookUpsView.swift */,
 				474C40562B4BFE950038B3A5 /* RegionListsView.swift */,
 				474C405C2B4C05980038B3A5 /* SpeciesGroupView.swift */,
 				47DB89B72B7A3AB20093C1ED /* ObsDetailsView.swift */,
+				4793A5842C286A76002739B6 /* HTMLView.swift */,
 				47079EBD2BB9D81F003D2E11 /* ObsExtendedView.swift */,
+				47826CC02BF62DBB003E8F21 /* WikipediaViewModel.swift */,
 			);
 			path = NotUsed;
 			sourceTree = "<group>";
@@ -686,7 +691,6 @@
 				474C40572B4BFE950038B3A5 /* RegionListsView.swift in Sources */,
 				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
 				4767EFFF2BF2389000BACDC6 /* RadiusView.swift in Sources */,
-				47AC7D6B2CBE30EB00B1E929 /* TestDateCompare.swift in Sources */,
 				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
