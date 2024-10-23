@@ -84,6 +84,7 @@ struct ObservationsLocationView: View {
     }
   }
 
+  
 
   func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
     log.error("fetchDataLocation")

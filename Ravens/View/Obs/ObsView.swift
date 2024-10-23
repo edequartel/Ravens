@@ -63,6 +63,7 @@ struct ObsView: View {
 
       HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+//        Text("\(String(describing: obs.timeDate))")
           Text("\(obs.number) x")
             .footnoteGrayStyle()
        }

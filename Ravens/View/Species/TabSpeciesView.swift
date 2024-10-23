@@ -128,7 +128,7 @@ struct TabSpeciesView: View {
     .searchable(text: $searchText)
     .refreshable {
       print("refresh deze in realtime laten uitvoeren")
-//      speciesViewModel.parseHTMLFromURL(settings: settings) //liever deze immers een extra data flow
+      speciesViewModel.parseHTMLFromURL(settings: settings) //liever deze immers een extra data flow
 //      speciesViewModel.fetchDataFirst( //contatenate fetching
 //        settings: settings,
 //        completion: {

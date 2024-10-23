@@ -70,25 +70,9 @@ struct ObservationListView: View {
   }
 
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
-    let dateFormatter = DateFormatter()
-    let timeFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    timeFormatter.dateFormat = "HH:mm"
-
     switch currentSortingOption {
     case .date:
-//      let lhsDate = dateFormatter.date(from: lhs.date) ?? Date.distantPast
-//      let rhsDate = dateFormatter.date(from: rhs.date) ?? Date.distantPast
-//
-//      if lhsDate != rhsDate {
-//        return lhsDate > rhsDate
-//      } else {
-//        let lhsTime = timeFormatter.date(from: lhs.time ?? "") ?? Date.distantPast
-//        let rhsTime = timeFormatter.date(from: rhs.time ?? "") ?? Date.distantPast
-//        return lhsTime < rhsTime
-//      }
-      return lhs.rarity > rhs.rarity
-
+      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)
     case .name:
       return lhs.species_detail.name < rhs.species_detail.name
     case .rarity:

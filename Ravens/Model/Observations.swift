@@ -105,7 +105,9 @@ struct Observation: Codable, Identifiable {
     var detail: String?
     var code: String?
 
-    var timeDate: Date?
+    var timeDate: Date? //computed value in fetchdata
+//    var timeDate: String? //computed value in fetchdata
+
 }
 
 // MARK: - UserDetail
