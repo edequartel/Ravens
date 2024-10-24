@@ -128,17 +128,13 @@ struct TabSpeciesView: View {
     .searchable(text: $searchText)
     .refreshable {
       print("refresh deze in realtime laten uitvoeren")
-      speciesViewModel.parseHTMLFromURL(settings: settings) //liever deze immers een extra data flow
-//      speciesViewModel.fetchDataFirst( //contatenate fetching
-//        settings: settings,
-//        completion: {
-//          print("speciesViewModel First language data loaded")
-//          speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-//            print("html is parsed from start")
-////            isFirstLanguageDataLoaded = true
-////            checkDataLoaded()
-//          })
-//        })
+      speciesViewModel.parseHTMLFromURL(
+        settings: settings,
+        completion: {
+          print("parsed from html")
+          //update the view
+//          speciesViewModel.objectWillChange.send()
+        })
     }
   }
 

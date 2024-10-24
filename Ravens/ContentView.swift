@@ -195,6 +195,9 @@ struct SplashScreen: View {
             isFirstLanguageDataLoaded = true
             checkDataLoaded()
           })
+//just to test the initial view
+//  isFirstLanguageDataLoaded = true
+//  checkDataLoaded()
         })
 
       speciesViewModel.fetchDataSecondLanguage(

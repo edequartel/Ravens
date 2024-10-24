@@ -40,6 +40,7 @@ class SpeciesViewModel: ObservableObject {
         // Parse the HTML content
         do {
           try self.parseHTML(html: html)
+//          self.objectWillChange.send()
           completion?()
         } catch {
           print("Error parsing HTML: \(error.localizedDescription)")
@@ -53,42 +54,78 @@ class SpeciesViewModel: ObservableObject {
   }
 
   private func parseHTML(html: String) throws {
-    let parseDoc = "<html><body><table>" + html + "</table></body></html>"
-    let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
-    let rows = try doc.select("tbody tr")
+      let parseDoc = "<html><body><table>" + html + "</table></body></html>"
+      let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
+      let rows = try doc.select("tbody tr")
 
-    for row in rows {
-      let dateElement = try row.select(".rarity-date")
-      let date = try dateElement.text()
-      if !date.isEmpty {
-        Date = date
+      var updatedSpecies = species // Create a copy for efficient updates
+
+      for row in rows {
+          let dateElement = try row.select(".rarity-date")
+          let date = try dateElement.text()
+          if !date.isEmpty {
+              Date = date
+          }
+
+          let timeElement = try row.select(".rarity-time")
+          let time = try timeElement.text()
+          let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
+          let speciesScientificName = try speciesScientificNameElement.text()
+          let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
+          let numObservations = try numObservationsElement.text()
+          let numObservationsInt = Int(numObservations) ?? 0
+
+          let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
+
+          if let index = index, (updatedSpecies[index].date?.isEmpty ?? true) {
+              updatedSpecies[index].date = Date
+              updatedSpecies[index].time = time
+              updatedSpecies[index].nrof = numObservationsInt
+              updatedSpecies[index].dateTime = convertToDate(dateString: Date, timeString: time)
+          }
       }
 
-      let timeElement = try row.select(".rarity-time")
-      let time = try timeElement.text()
-      let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
-      let speciesScientificName = try speciesScientificNameElement.text()      
-//      let speciesNameElement = try row.select(".rarity-species .species-common-name")
-//      let speciesName = try speciesScientificNameElement.text()
-//      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
-      let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
-      let numObservations = try numObservationsElement.text()
-      let numObservationsInt = Int(numObservations) ?? 0
-
-      let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
-//      species[index ?? 0].nrof = update
-      if let index = index {
-        if species[index].date?.isEmpty ?? true {
-          species[index].date = Date
-          species[index].time = time
-          species[index].nrof = numObservationsInt
-          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
-        }
-      }
-    }
-    //update the view
-    objectWillChange.send()
+      // Re-assign the updated array to trigger automatic updates
+      species = updatedSpecies
   }
+
+//  private func parseHTML(html: String) throws {
+//    let parseDoc = "<html><body><table>" + html + "</table></body></html>"
+//    let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
+//    let rows = try doc.select("tbody tr")
+//
+//    for row in rows {
+//      let dateElement = try row.select(".rarity-date")
+//      let date = try dateElement.text()
+//      if !date.isEmpty {
+//        Date = date
+//      }
+//
+//      let timeElement = try row.select(".rarity-time")
+//      let time = try timeElement.text()
+//      let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
+//      let speciesScientificName = try speciesScientificNameElement.text()      
+////      let speciesNameElement = try row.select(".rarity-species .species-common-name")
+////      let speciesName = try speciesScientificNameElement.text()
+////      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
+//      let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
+//      let numObservations = try numObservationsElement.text()
+//      let numObservationsInt = Int(numObservations) ?? 0
+//
+//      let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
+////      species[index ?? 0].nrof = update
+//      if let index = index {
+//        if species[index].date?.isEmpty ?? true {
+//          species[index].date = Date
+//          species[index].time = time
+//          species[index].nrof = numObservationsInt
+//          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
+//        }
+//      }
+//    }
+//    //update the view
+////    objectWillChange.send()
+//  }
 
 
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
