@@ -136,27 +136,41 @@ struct LocationDetail: Codable {
     var permalink: String = ""
 }
 
-struct Species: Codable, Identifiable {
-  var id: Int { species }
-  let species: Int
-  let name: String
-  let scientific_name: String
-  let rarity: Int
-  let native: Bool
 
-  //adding recent observations
-  var time: String?
-  var date: String?
-  var nrof: Int?
-  var dateTime : Date?
+struct Species: Codable, Identifiable, Equatable { //equatable
+    var id = UUID()  // Unique identifier for SwiftUI
+    let species_id: Int  // Maps to JSON `id`
+    let name: String
+    let scientific_name: String
+    let rarity: Int
+    let native: Bool
 
-  init(species: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String, date: String) {
-    self.species = species
-    self.name = name
-    self.scientific_name = scientific_name
-    self.rarity = rarity
-    self.native = native
-    self.time = time
-    self.date = date
-  }
+    // Adding recent observations
+    var time: String?
+    var date: String?
+    var nrof: Int?
+    var dateTime: Date?
+
+    // Map JSON keys
+    private enum CodingKeys: String, CodingKey {
+        case species_id = "species" // Maps JSON `species` to `species_id`
+        case name
+        case scientific_name
+        case rarity
+        case native
+        case time
+        case date
+        case nrof
+        case dateTime
+    }
+
+    init(species_id: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String?, date: String?) {
+        self.species_id = species_id
+        self.name = name
+        self.scientific_name = scientific_name
+        self.rarity = rarity
+        self.native = native
+        self.time = time
+        self.date = date
+    }
 }

@@ -4,12 +4,12 @@
     "" : {
 
     },
-    " %@\n %@\n %@\n %@" : {
+    " %@\n %@ //changed id in species_id\n %@\n %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : " %1$@\n %2$@\n %3$@\n %4$@"
+            "value" : " %1$@\n %2$@ //changed id in species_id\n %3$@\n %4$@"
           }
         }
       }

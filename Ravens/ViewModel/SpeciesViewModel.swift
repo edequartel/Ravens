@@ -86,7 +86,9 @@ class SpeciesViewModel: ObservableObject {
       }
 
       // Re-assign the updated array to trigger automatic updates
+print("xxxxx")
       species = updatedSpecies
+    objectWillChange.send()
   }
 
 //  private func parseHTML(html: String) throws {
@@ -209,7 +211,7 @@ class SpeciesViewModel: ObservableObject {
 
   //    func findSpeciesByID(speciesID: Int) -> Species? {
   func findSpeciesByID(speciesID: Int) -> String? {
-    guard let index = species.firstIndex(where: { $0.id == speciesID }) else {
+    guard let index = species.firstIndex(where: { $0.species_id == speciesID }) else {
       return nil
     }
 

@@ -59,18 +59,27 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
-                selectedSpeciesID = species.id
+//                selectedSpeciesID = species.id
+                selectedSpeciesID = species.species_id
               }) {
                 Image(systemName: "info.circle")
               }
               .tint(.blue)
 
               Button(action: {
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+//                  print("bookmarks remove")
+//                  bookMarksViewModel.removeRecord(speciesID: species.id)
+//                } else {
+//                  bookMarksViewModel.appendRecord(speciesID: species.id)
+//                  print("bookmarks append")
+//                }
+
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
                   print("bookmarks remove")
-                  bookMarksViewModel.removeRecord(speciesID: species.id)
+                  bookMarksViewModel.removeRecord(speciesID: species.species_id)
                 } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.id)
+                  bookMarksViewModel.appendRecord(speciesID: species.species_id)
                   print("bookmarks append")
                 }
 
@@ -286,7 +295,8 @@ extension SpeciesViewModel {
     private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
         if isBookmarked {
             return species.filter { species in
-                additionalIntArray.contains(where: { $0.speciesID == species.id })
+//                additionalIntArray.contains(where: { $0.speciesID == species.id })
+                additionalIntArray.contains(where: { $0.speciesID == species.species_id })
             }
         } else {
             return species
@@ -323,7 +333,8 @@ struct SpeciesInfoView: View {
           .lineLimit(1)
           .truncationMode(.tail)
         Spacer()
-        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+//        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
           Image(systemName: "star.fill")
         }
       }
@@ -347,7 +358,8 @@ struct SpeciesInfoView: View {
       }
       HStack{
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
-          speciesID: species.id)
+//          speciesID: species.id)
+          speciesID: species.species_id)
         Text("\(speciesLang ?? "placeholder")")
 //          .bold()
           .font(.caption)

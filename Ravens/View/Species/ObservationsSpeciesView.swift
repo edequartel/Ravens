@@ -47,21 +47,22 @@ struct ObservationsSpeciesView: View {
           Spacer()
 
           Button(action: {
-            selectedSpeciesID = item.id
+//            selectedSpeciesID = item.id
+            selectedSpeciesID = item.species_id
           }  ) { Image(systemName: "info.circle")
           }
 
           Button(action: {
-            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) {
+            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) {
               print("bookmarks remove")
-              bookMarksViewModel.removeRecord(speciesID: item.id)
+              bookMarksViewModel.removeRecord(speciesID: item.species_id)
             } else {
-              bookMarksViewModel.appendRecord(speciesID: item.id)
+              bookMarksViewModel.appendRecord(speciesID: item.species_id)
               print("bookmarks append")
             }
 
           } ) {
-            Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? SFSpeciesFill : SFSpecies)
+            Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? SFSpeciesFill : SFSpecies)
               .foregroundColor(.black)
           }
 
@@ -69,7 +70,7 @@ struct ObservationsSpeciesView: View {
 
         VStack {
           HStack {
-            Text(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
+            Text(speciesViewModel.findSpeciesByID(speciesID: item.species_id) ?? "noName")
               .foregroundColor(.gray)
               .font(.footnote)
             Spacer()
@@ -89,8 +90,8 @@ struct ObservationsSpeciesView: View {
       .accessibilityElement(children: .combine)
       .accessibilityLabel("""
                              \(item.name)
-                             \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.id) ? "favorite": "not favorite")
-                             \(speciesViewModel.findSpeciesByID(speciesID: item.id) ?? "noName")
+                             \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? "favorite": "not favorite") //changed id in species_id
+                             \(speciesViewModel.findSpeciesByID(speciesID: item.species_id) ?? "noName")
                              \(item.scientific_name)
                             """
       )
@@ -129,7 +130,7 @@ struct ObservationsSpeciesView: View {
   func fetchDataModel(offset: Int) {
     observationsSpeciesViewModel.fetchData(
       settings: settings,
-      speciesId: item.id,
+      speciesId: item.species_id,
       limit: 100,
       offset: 0,
       completion: {
