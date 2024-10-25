@@ -27,16 +27,6 @@
         }
       }
     },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
     "%@ %@ %lldx %lldd %@" : {
       "localizations" : {
         "en" : {
@@ -53,16 +43,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%11d"
-          }
-        }
-      }
-    },
-    "%lld %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$@"
           }
         }
       }
@@ -101,9 +81,6 @@
 
     },
     "Add bookmark" : {
-
-    },
-    "Add Observation" : {
 
     },
     "Add observer" : {
@@ -449,9 +426,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "Hybrid" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -641,6 +615,7 @@
       }
     },
     "Loading..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -784,6 +759,7 @@
 
     },
     "Month" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -868,9 +844,6 @@
     "No" : {
 
     },
-    "No data available" : {
-
-    },
     "nobsavaliable" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -892,9 +865,6 @@
           }
         }
       }
-    },
-    "obs 2023" : {
-
     },
     "ObsDetailView" : {
 
@@ -960,9 +930,6 @@
 
     },
     "ObsView" : {
-
-    },
-    "Open observation" : {
 
     },
     "password" : {
@@ -1051,12 +1018,6 @@
           }
         }
       }
-    },
-    "Recent" : {
-
-    },
-    "Recordings" : {
-
     },
     "Region" : {
 
@@ -1292,20 +1253,8 @@
         }
       }
     },
-    "Species %@ seen,\n %@,\n date %@ at time %@,\n %lld times." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Species %1$@ seen,\n %2$@,\n date %3$@ at time %4$@,\n %5$lld times."
-          }
-        }
-      }
-    },
-    "Species group" : {
-
-    },
     "Species groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1345,9 +1294,6 @@
 
     },
     "Tap voor meer details over Informatie over de waarneming." : {
-
-    },
-    "this is a hint" : {
 
     },
     "Token: %@" : {
@@ -1424,6 +1370,7 @@
       }
     },
     "Value" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1456,9 +1403,6 @@
           }
         }
       }
-    },
-    "Wikipedia Explorer" : {
-
     },
     "Window" : {
       "extractionState" : "stale",
