@@ -36,7 +36,8 @@ struct ObservationListView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption )) {
-            Image(systemName: "ellipsis.circle")
+              Image(systemSymbol: .ellipsisCircle)
+                .uniformSize()
               .accessibility(label: Text("List species"))
           }
 //          Menu {

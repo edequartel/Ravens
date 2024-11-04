@@ -159,6 +159,7 @@ struct TabSpeciesView: View {
 
 }
 
+
 enum SortNameOption: String, CaseIterable {
     case name = "Name"
     case scientific_name = "Scientific name"
@@ -183,20 +184,24 @@ struct SortNameOptionsView: View {
   @Binding var currentFilteringNameOption: SortNameOption
 
   var body: some View {
-    List(SortNameOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringNameOption = option
-      }) {
-        HStack {
-          Text(option.rawValue)
-          Spacer()
-          if currentFilteringNameOption == option {
-            Image(systemName: "checkmark")
+    if showView { Text("SortNameOptionsView").font(.customTiny) }
+    Form {
+      Section("Sort") {
+        List(SortNameOption.allCases, id: \.self) { option in
+          Button(action: {
+            currentFilteringNameOption = option
+          }) {
+            HStack {
+              Text(option.rawValue)
+              Spacer()
+              if currentFilteringNameOption == option {
+                Image(systemName: "checkmark")
+              }
+            }
           }
         }
       }
     }
-    .navigationTitle("Sorting")
   }
 }
 
@@ -211,7 +216,8 @@ struct FilteringAllMenu: View {
     @Binding var currentFilteringAllOption: FilterAllOption
 
     var body: some View {
-        NavigationLink(destination: FilteringAllOptionsView(currentFilteringAllOption: $currentFilteringAllOption)) {
+
+      NavigationLink(destination: FilteringAllOptionsView(currentFilteringAllOption: $currentFilteringAllOption)) {
             Image(systemName: "line.3.horizontal.decrease")
                 .accessibilityElement(children: .combine)
                 .accessibility(label: Text("Filtering"))
@@ -224,20 +230,24 @@ struct FilteringAllOptionsView: View {
   @Binding var currentFilteringAllOption: FilterAllOption
 
   var body: some View {
-    List(FilterAllOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringAllOption = option
-      }) {
-        HStack {
-          Text(option.rawValue)
-          Spacer()
-          if currentFilteringAllOption == option {
-            Image(systemName: "checkmark")
+    if showView { Text("FilteringAllOptionsView").font(.customTiny) }
+    Form {
+      Section("Filter") {
+        List(FilterAllOption.allCases, id: \.self) { option in
+          Button(action: {
+            currentFilteringAllOption = option
+          }) {
+            HStack {
+              Text(option.rawValue)
+              Spacer()
+              if currentFilteringAllOption == option {
+                Image(systemName: "checkmark")
+              }
+            }
           }
         }
       }
     }
-    .navigationTitle("Filtering")
   }
 }
 

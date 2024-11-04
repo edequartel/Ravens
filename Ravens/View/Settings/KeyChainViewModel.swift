@@ -30,7 +30,7 @@ class KeychainViewModel: ObservableObject {
       try keychain.set(loginName, key: "loginName")
       try keychain.set(password, key: "password")
       try keychain.set(token, key: "token")
-      log.error("saved credentials are: \(loginName) \(password) \(token)")
+      log.error("saved credentials are: \(loginName) \(password)")
     } catch {
       // Handle errors
       log.error("Error saving credentials: \(error)")
@@ -49,47 +49,54 @@ class KeychainViewModel: ObservableObject {
     }
   }
 
-  func fetchData(username: String, password: String, settings: Settings) {
-    log.info("KeychainViewModel fetchdata()")
 
-    self.token = "" // empty token at login (and logout)
+  func fetchData(username: String, password: String, settings: Settings, completion: ((Bool) -> Void)? = nil) {
+      log.info("KeychainViewModel fetchData()")
 
-    let parameters: [String: String] = ["username": username, "password": password]
+      self.token = "" // Clear token at the start of login (and logout)
 
-    let headers: HTTPHeaders = [
-      "Content-Type": "application/x-www-form-urlencoded",
-    ]
+      let parameters: [String: String] = ["username": username, "password": password]
+      let headers: HTTPHeaders = [
+          "Content-Type": "application/x-www-form-urlencoded",
+      ]
 
-    AF.request(endPoint()+"auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
-      .validate()
-      .responseData { response in
-        // debugPrint(response)
-        switch response.result {
-        case .success(let value):
-          do {
-            let asJSON = try JSONSerialization.jsonObject(with: value)
-            // Handle as previously success
-            if let token = (asJSON as? [String: Any])?["key"] as? String {
-              // Save token to Keychain
-              do {
-                try Keychain(service: bundleIdentifier).set(token, key: "AuthToken")
-                self.log.error("103 token \(token)")
-                self.token = token
-                self.saveCredentials()
-                self.loginFailed = false
-              } catch {
-                self.log.info("Error saving token to Keychain: \(error.localizedDescription)")
-                self.loginFailed = true
+      AF.request(endPoint() + "auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+          .validate()
+          .responseData { response in
+              switch response.result {
+              case .success(let value):
+                  do {
+                      let asJSON = try JSONSerialization.jsonObject(with: value)
+                      if let token = (asJSON as? [String: Any])?["key"] as? String {
+                          // Save token to Keychain
+                          do {
+                              try Keychain(service: bundleIdentifier).set(token, key: "AuthToken")
+                              self.log.info("Token saved successfully: \(token)")
+                              self.token = token
+//                              self.saveCredentials()
+                              self.loginFailed = false
+                              completion?(true) // Call completion with success if provided
+                          } catch {
+                              self.log.info("Error saving token to Keychain: \(error.localizedDescription)")
+                              self.loginFailed = true
+                              completion?(false) // Call completion with failure if provided
+                          }
+                      } else {
+                          self.loginFailed = true
+                          completion?(false) // Call completion if token is missing, if provided
+                      }
+                  } catch {
+                      self.log.error("Error while decoding response: \(error) from: \(String(describing: String(data: value, encoding: .utf8)))")
+                      self.loginFailed = true
+                      completion?(false) // Call completion with failure if provided
+                  }
+              case .failure(let error):
+                  self.loginFailed = true
+                  self.log.error("Login failed: \(error.localizedDescription)")
+                  completion?(false) // Call completion with failure if provided
               }
-            }
-          } catch {
-            self.log.error("Error while decoding response: \(error) from: \(String(describing: String(data: value, encoding: .utf8)))")
-            self.loginFailed = true
           }
-        case .failure(let error):
-          self.loginFailed = true
-          self.log.error("Login failed: \(error.localizedDescription)")
-        }
-      }
   }
+
+
 }

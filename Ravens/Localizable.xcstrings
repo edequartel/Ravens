@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     " %@\n %@ //changed id in species_id\n %@\n %@" : {
       "localizations" : {
         "en" : {
@@ -33,6 +30,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
+          }
+        }
+      }
+    },
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
           }
         }
       }
@@ -349,6 +356,9 @@
     "Files" : {
 
     },
+    "Filter" : {
+
+    },
     "Filter by" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -375,6 +385,9 @@
       }
     },
     "Filtering" : {
+
+    },
+    "FilteringAllOptionsView" : {
 
     },
     "Full Map" : {
@@ -508,6 +521,9 @@
           }
         }
       }
+    },
+    "Information" : {
+
     },
     "Information species" : {
 
@@ -1117,6 +1133,9 @@
     "Search" : {
 
     },
+    "Search results" : {
+
+    },
     "Search Wikipedia" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1127,6 +1146,9 @@
           }
         }
       }
+    },
+    "SearchLocationView" : {
+
     },
     "Second language" : {
 
@@ -1219,7 +1241,7 @@
         }
       }
     },
-    "Sorting" : {
+    "SortNameOptionsView" : {
 
     },
     "Sounds: %@" : {
@@ -1357,6 +1379,9 @@
           }
         }
       }
+    },
+    "User" : {
+
     },
     "Username" : {
       "extractionState" : "stale",

@@ -449,13 +449,40 @@ func vibrate() {
 let showView = false
 
 // make Int directly Identifiable
-extension Int: Identifiable {
+extension Int: @retroactive Identifiable {
   public var id: Int { self }
 }
 
-extension String: Identifiable {
+extension String: @retroactive Identifiable {
   public var id: String { self }
 }
+
+
+extension Image {
+    func uniformSize() -> some View {
+        self
+            .resizable() // Makes the image resizable
+            .aspectRatio(contentMode: .fit) // Maintains aspect ratio
+            .frame(width: 24, height: 24) // Sets the uniform size
+            .padding(4) // Adds padding around the image
+            .overlay(
+                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
+                  .stroke(.gray, lineWidth: 2)
+            )
+//            .clipShape() // Clips the image to a rectangle shape (optional)
+    }
+}
+
+
+
+//extension Image {
+//    func uniformSize(width: CGFloat, height: CGFloat) -> some View {
+//        self
+//            .resizable()
+//            .aspectRatio(contentMode: .fit)
+//            .frame(width: width, height: height)
+//    }
+//}
 
 extension View {
   func islandBackground(cornerRadius: CGFloat = 10, shadowRadius: CGFloat = 5) -> some View {

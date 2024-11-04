@@ -16,7 +16,7 @@ struct LoginView: View {
   @State private var myInlogName = ""    
   @State private var myPassword = ""
   
-  var firstTime = true
+//  var firstTime = true
   
   var body: some View {
     Form {
@@ -51,8 +51,11 @@ struct LoginView: View {
                 keyChainviewModel.fetchData(
                   username: keyChainviewModel.loginName,
                   password: keyChainviewModel.password,
-                  settings: settings)
-                keyChainviewModel.saveCredentials()
+                  settings: settings,
+                  completion: {
+                    _ in print("got the creditionals")
+                    keyChainviewModel.saveCredentials()
+                  } )
               }
               .buttonStyle(.borderedProminent)
               .frame(maxWidth: .infinity)
@@ -61,6 +64,7 @@ struct LoginView: View {
             else {
               Button("Logout") {
                 keyChainviewModel.token = ""
+                keyChainviewModel.password = ""
                 keyChainviewModel.saveCredentials()
                 keyChainviewModel.retrieveCredentials()
               }
@@ -93,19 +97,20 @@ struct LoginView: View {
         //            DisplayCredentialsView()
 
       
-      Section() {
+      Section("Information") {
         InfoObservationView()
       }
 
-      Section {
+
+      Section("User") {
         if (keyChainviewModel.token.count>0) {
           UserView()
         }
       }
+
       //
 //      DisplayCredentialsView()
       //        }
-//      .navigationTitle("Login \(settings.selectedInBetween)")
     }
   }
 }
@@ -117,6 +122,10 @@ struct InfoObservationView: View {
     Markdown(
             """
 Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
+
+De website van Ravens kun je vinden op [Ravens](https://edequartel.github.io/Ravens/).
+
+De handleiding van Ravens kun je vinden op [Handleiding](https://edequartel.github.io/Ravens/images/manual.pdf).
 
 Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
 """)

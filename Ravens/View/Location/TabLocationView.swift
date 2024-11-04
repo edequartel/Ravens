@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftyBeaver
 import MapKit
+import SFSafeSymbols
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
@@ -45,6 +46,7 @@ struct TabLocationView: View {
               showFirstView.toggle()
             }) {
               Image(systemName: "rectangle.2.swap")
+                .uniformSize()
                 .accessibility(label: Text("Switch view"))
             }
           }
@@ -72,6 +74,7 @@ struct TabLocationView: View {
 
           }) {
             Image(systemName: "smallcircle.filled.circle")
+              .uniformSize()
               .accessibility(label: Text("Update location"))
           }
         }
@@ -96,6 +99,7 @@ struct TabLocationView: View {
             }
           }) {
             Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
+              .uniformSize()
               .accessibility(
                 label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
           }
@@ -103,14 +107,17 @@ struct TabLocationView: View {
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SearchLocationView()) {
-            Image(systemName: "magnifyingglass")
+            Image(systemSymbol: .magnifyingglass)
+              .uniformSize()
               .accessibility(label: Text("Search"))
           }
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: AreasView()) {
-            Label("Areas", systemImage: "list.bullet")
+            Image(systemName: "list.bullet")
+              .uniformSize()
+              .accessibility(label: Text("Areas"))
           }
           .accessibility(label: Text("Areas List"))
         }

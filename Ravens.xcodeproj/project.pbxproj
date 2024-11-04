@@ -73,6 +73,7 @@
 		474FA70A2C7EE4B50064C4C1 /* xanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474FA7092C7EE4B50064C4C1 /* xanto.swift */; };
 		4752426F2C2D887900DBBD0B /* HTMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4752426E2C2D887900DBBD0B /* HTMLDocument.swift */; };
 		475242712C2D88B900DBBD0B /* HTMLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475242702C2D88B900DBBD0B /* HTMLViewModel.swift */; };
+		475628DD2CD8F29F00B0CF2B /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */; };
 		47568D2D2B59B54500E69B1A /* Observations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* Observations.swift */; };
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
@@ -276,6 +277,7 @@
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
+				475628DD2CD8F29F00B0CF2B /* SFSafeSymbols in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */,
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
@@ -598,6 +600,7 @@
 				47FAD0E02C19D25C007D0F63 /* Kingfisher */,
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
 				47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */,
+				475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -642,6 +645,7 @@
 				4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 				471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -1060,6 +1064,14 @@
 				minimumVersion = 2.3.0;
 			};
 		};
+		475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
 		477075492B711681002D2DD8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -1146,6 +1158,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474C404D2B4BD24F0038B3A5 /* XCRemoteSwiftPackageReference "RichText" */;
 			productName = RichText;
+		};
+		475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
 		};
 		4770754A2B711681002D2DD8 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

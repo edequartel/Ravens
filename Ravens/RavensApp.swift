@@ -66,6 +66,8 @@ struct RavensApp: App {
   @StateObject var bookMarksViewModel = BookMarksViewModel()
   @StateObject var observersViewModel = ObserversViewModel()
   @StateObject var areasViewModel = AreasViewModel()
+  @StateObject var locationViewModel = SearchLocationViewModel()
+
 
 //  @StateObject var notificationsManager = NotificationsManager()
 //  @StateObject var timerManager = TimerManager()
@@ -109,6 +111,8 @@ struct RavensApp: App {
 
         .environmentObject(player)
         .environmentObject(observationsYearViewModel)
+
+        .environmentObject(locationViewModel)
 
 //        .environmentObject(timerManager) //make it globally available
 //        .environmentObject(notificationsManager)

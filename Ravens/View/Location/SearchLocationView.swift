@@ -11,6 +11,7 @@ import Alamofire
 import MapKit
 import Combine
 import SwiftyBeaver
+import SFSafeSymbols
 
 // MARK: - Model
 
@@ -18,51 +19,58 @@ struct LocationResponse: Codable {
   let count: Int
   let next: String?
   let previous: String?
-  let results: [LocationX]
+  let results: [SearchLocation]
 }
 
-struct LocationX: Codable, Identifiable {
-  let id: Int
+struct SearchLocation: Codable, Identifiable {
+  var id = UUID()
+  //  let id: Int
+  let location_id: Int
   let name: String
   let countryCode: String
   let permalink: String
 
   enum CodingKeys: String, CodingKey {
-    case id, name, permalink
+    case name, permalink
     case countryCode = "country_code"
+    case location_id = "id"
   }
 }
 
 // MARK: - ViewModel
 
-class LocationXViewModel: ObservableObject {
-  @Published var locations: [LocationX] = []
+class SearchLocationViewModel: ObservableObject {
+  @Published var locations: [SearchLocation] = []
   @Published var errorMessage: String?
 
-  private var keyChainViewModel =  KeychainViewModel()
-
+  private var keyChainViewModel = KeychainViewModel()
   private var cancellables = Set<AnyCancellable>()
 
-  func fetchLocations(searchString: String) {
+  func fetchLocations(searchString: String, completion: ((Bool) -> Void)? = nil) {
     let url = "https://waarneming.nl/api/v1/locations/?name=\(searchString)"
     let headers: HTTPHeaders = [
-      "Authorization": "Token "+keyChainViewModel.token
+      "Authorization": "Token " + keyChainViewModel.token
     ]
 
-    print("getlocations")
+    print("Fetching locations from: \(url)")
 
     AF.request(url, headers: headers)
       .validate()
       .publishDecodable(type: LocationResponse.self)
-      .sink { completion in
-        if case .failure(let error) = completion {
-          self.errorMessage = error.localizedDescription
+      .receive(on: DispatchQueue.main) // Ensure UI updates on the main thread
+      .sink { completionEvent in
+        if case .failure(let error) = completionEvent {
+          self.errorMessage = "Network error: \(error.localizedDescription)"
+          completion?(false) // Call completion with failure
         }
       } receiveValue: { response in
         if let locationResponse = response.value {
           self.locations = locationResponse.results
+          self.errorMessage = nil
+          completion?(true) // Call completion with success
         } else {
-          self.errorMessage = "Failed to fetch locations"
+          self.errorMessage = "Failed to decode location response"
+          completion?(false) // Call completion with failure
         }
       }
       .store(in: &self.cancellables)
@@ -70,92 +78,115 @@ class LocationXViewModel: ObservableObject {
 }
 
 // MARK: - View
+
 struct SearchLocationView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject private var areasViewModel: AreasViewModel
   @EnvironmentObject private var settings: Settings
   @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
+  @EnvironmentObject private var viewModel: SearchLocationViewModel
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-  @ObservedObject var viewModel = LocationXViewModel()
 
   @State private var searchText = ""
   @State private var locationID: Int = 0
   @State private var isFocused: Bool = true
+  @State private var isLoading = false // Loading indicator
 
   var body: some View {
-      Form {
-        VStack {
+    if showView { Text("SearchLocationView").font(.customTiny) }
+    Form {
+
+      //      VStack {
+//      Section(header: Text("Search for a location")) {
+        HStack {
           TextField("Search", text: $searchText, onCommit: {
-              // This action will be triggered when the Enter key is pressed
-              print("search")
-              viewModel.fetchLocations(searchString: searchText)
+            print("Searching for locations with: \(searchText)")
+            isLoading = true
+            viewModel.fetchLocations(searchString: searchText) { success in
+              isLoading = false
+              if success {
+                print("Location fetch completed successfully")
+              } else {
+                print("Location fetch failed")
+              }
+            }
           })
           .autocapitalization(.none)
           .disableAutocorrection(true)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-        }
+          .textFieldStyle(SearchTextFieldStyle())
 
-        Picker("",selection: $locationID) {
-          ForEach(viewModel.locations, id: \.id) { location in
-            Text("\(location.name)")// \(location.id)")
+          if isLoading {
+            ProgressView().padding(.leading, 5) // Visual loading indicator
           }
         }
-        .pickerStyle(.inline)
-        .onChange(of: locationID) {
-          settings.locationName = viewModel.locations.first(where: { $0.id == locationID })?.name ?? ""
-          settings.locationId = locationID
+//      }
 
-          geoJSONViewModel.fetchGeoJsonData(
-            for: locationID,
-            completion: {
-              log.error("locationID \(settings.locationName) \(settings.locationId)")
+      Section(header: Text("Search results")) {
+
+
+        List(viewModel.locations, id: \.id) { location in
+          Button(action: {
+            print("Location ID set to: \(locationID)")
+            print("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
+
+            locationID = location.location_id
+            settings.locationName = location.name
+            settings.locationId = locationID
+
+            //             Trigger geoJSON data fetching and update settings
+            geoJSONViewModel.fetchGeoJsonData(for: locationID) {
+              log.error("Selected locationID: \(settings.locationName) \(settings.locationId)")
               settings.currentLocation = CLLocation(
                 latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude)
-
-              settings.locationCoordinate = CLLocationCoordinate2D( //??
+                longitude: geoJSONViewModel.span.longitude
+              )
+              settings.locationCoordinate = CLLocationCoordinate2D(
                 latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude)
-              log.error("==> locationCoordinate \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-              // settings.isAreaChanged = true
+                longitude: geoJSONViewModel.span.longitude
+              )
+              log.error("==> locationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
               settings.isLocationIDChanged = true
-              log.info("\(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+              log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
               self.presentationMode.wrappedValue.dismiss()
-            } )
+            }
+          }) {
+            Text("\(location.name) \(location.location_id)")
+              .frame(maxWidth: .infinity, alignment: .leading)
+          }
         }
       }
-//    }
+    }
   }
 }
 
 
-//struct SearchTextFieldStyle: TextFieldStyle {
-//  func _body(configuration: TextField<Self._Label>) -> some View {
-//    HStack {
-//      // Add the image inside the TextField
-//      Image(systemName: "magnifyingglass")
-//        .foregroundColor(.gray)
-//        .padding(.leading, 8)
-//      // Apply the configuration (actual TextField)
-//      configuration
-//        .padding(8)
-//    }
-//    .background(
-//      RoundedRectangle(cornerRadius: 8)
-//        .stroke(Color.gray, lineWidth: 1)
-//    )
-//    //.frame(height: 40) // Ensures the height of the custom TextField
-//  }
-//}
 
 
 // MARK: - Preview
 struct SearchLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-      SearchLocationView()
-    }
+  static var previews: some View {
+    SearchLocationView()
+  }
 }
 
 
+struct SearchTextFieldStyle: TextFieldStyle {
+  func _body(configuration: TextField<Self._Label>) -> some View {
+    HStack {
+      // Add the image inside the TextField
+      Image(systemName: "magnifyingglass")
+        .foregroundColor(.gray)
+        .padding(.leading, 8)
+      // Apply the configuration (actual TextField)
+      configuration
+        .padding(8)
+    }
+    .background(
+      RoundedRectangle(cornerRadius: 8)
+        .stroke(Color.gray, lineWidth: 1)
+    )
+    //.frame(height: 40) // Ensures the height of the custom TextField
+  }
+}
