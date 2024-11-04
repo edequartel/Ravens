@@ -34,7 +34,8 @@ struct TabUserObservationsView: View {
             Button(action: {
               showFirstView.toggle()
             }) {
-              Image(systemName: "rectangle.2.swap")
+              Image(systemSymbol: .rectangle2Swap)
+                .uniformSize()
                 .accessibility(label: Text("Switch view"))
             }
           }
@@ -43,7 +44,8 @@ struct TabUserObservationsView: View {
           //add a toolbaritem here to the list of users
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(destination: ObserversView()) {
-              Image(systemName: "list.bullet")
+              Image(systemSymbol: .listBullet)
+                .uniformSize()
                 .accessibility(label: Text("list users"))
             }
           }

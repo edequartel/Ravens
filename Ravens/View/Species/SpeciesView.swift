@@ -34,7 +34,8 @@ struct SpeciesView: View {
           Button(action: {
             showFirstView.toggle()
           }) {
-            Image(systemName: "rectangle.2.swap") // Replace with your desired image
+            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
+              .uniformSize()
           }
         }
       }

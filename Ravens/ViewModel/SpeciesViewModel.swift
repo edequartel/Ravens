@@ -86,7 +86,7 @@ class SpeciesViewModel: ObservableObject {
       }
 
       // Re-assign the updated array to trigger automatic updates
-print("xxxxx")
+print("Re-assign the updated array to trigger automatic updates")
       species = updatedSpecies
     objectWillChange.send()
   }

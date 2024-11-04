@@ -25,7 +25,7 @@ struct SpeciesDetailsView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+              VStack(alignment: .leading, spacing: 16) {
                     // Species Details Header
                     if let species = viewSpeciesDetailsDModel.speciesDetails {
                         VStack(alignment: .leading, spacing: 8) {
@@ -86,7 +86,6 @@ struct SpeciesDetailsView: View {
                 }
                 .padding()
             }
-//            .navigationBarTitle("Species Details", displayMode: .inline)
         }
         .presentationDragIndicator(.visible)
         .onAppear {

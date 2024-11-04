@@ -37,19 +37,9 @@ struct ObservationListView: View {
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption )) {
               Image(systemSymbol: .ellipsisCircle)
-                .uniformSize()
+                .uniformSize(color: .red)
               .accessibility(label: Text("List species"))
           }
-//          Menu {
-//            CombinedOptionsMenuView(
-//              currentSortingOption: $currentSortingOption,
-//              currentFilteringAllOption: $currentFilteringAllOption,
-//              currentFilteringOption: $currentFilteringOption )
-//          } label: {
-//            Button(action: {}) {
-//              Image(systemName: "ellipsis.circle")
-//            }
-//          }
         }
       }
     }
@@ -117,23 +107,24 @@ enum FilteringRarityOption: String, CaseIterable {
   case veryRare = "Very rare"
 }
 
-struct FilteringMenu: View {
-  @Binding var currentFilteringOption: FilteringRarityOption
-
-  var body: some View {
-    NavigationLink(destination: FilterOptionsView(currentFilteringOption: $currentFilteringOption)) {
-      Image(systemName: "line.3.horizontal.decrease")
-        .accessibilityElement(children: .combine)
-        .accessibility(label: Text("Filtering"))
-    }
-    .accessibility(label: Text("Menu filter"))
-  }
-}
+//struct FilteringMenu: View {
+//  @Binding var currentFilteringOption: FilteringRarityOption
+//
+//  var body: some View {
+//    NavigationLink(destination: FilterOptionsView(currentFilteringOption: $currentFilteringOption)) {
+//      Image(systemName: "line.3.horizontal.decrease")
+//        .accessibilityElement(children: .combine)
+//        .accessibility(label: Text("Filtering"))
+//    }
+//    .accessibility(label: Text("Menu filter"))
+//  }
+//}
 
 struct FilterOptionsView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
 
   var body: some View {
+    if showView { Text("FilterOptionsView").font(.customTiny) }
     List(FilteringRarityOption.allCases, id: \.self) { option in
       Button(action: {
         currentFilteringOption = option

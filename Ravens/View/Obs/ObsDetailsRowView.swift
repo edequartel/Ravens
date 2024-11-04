@@ -24,7 +24,7 @@ struct ObsDetailsRowView: View {
       Spacer()
       
       if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-        Image(systemName: SFSpeciesFill)
+        Image(systemSymbol: SFSpeciesFill)
       }
     }
   }

@@ -98,7 +98,7 @@ struct TabLocationView: View {
 
             }
           }) {
-            Image(systemName: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
+            Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
               .uniformSize()
               .accessibility(
                 label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))

@@ -36,9 +36,10 @@ struct ObservationsUserView: View {
 
   var body: some View {
     VStack {
-      if showView { Text("ObservationsView").font(.customTiny) }
+      if showView { Text("ObservationsUserView").font(.customTiny) }
       if let observations = observationsViewModel.observations?.results, observations.count > 0 {
         HorizontalLine()
+        ///yyy
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .user)
       } else {
         ProgressView()
@@ -79,14 +80,3 @@ struct ObservationsUserView_Previews: PreviewProvider {
   }
 }
 
-//  .sorted(by: { ($1.date, $1.time ?? "" ) < ($0.date, $0.time ?? "") } )
-        //                            .filter { result in
-        //                                // Add your condition here
-        //                                // For example, the following line filters `result` to keep only those with a specific `rarity`.
-        //                                // You can replace it with your own condition.
-        //                                ((!settings.showObsPictures) && (!settings.showObsAudio)) ||
-        //                                (
-        //                                    (result.has_photo ?? false) && (settings.showObsPictures) ||
-        //                                    (result.has_sound ?? false) && (settings.showObsAudio)
-        //                                )
-        //                            }

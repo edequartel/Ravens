@@ -59,21 +59,13 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
-//                selectedSpeciesID = species.id
                 selectedSpeciesID = species.species_id
               }) {
-                Image(systemName: "info.circle")
+                Image(systemSymbol: .infoCircle)
               }
               .tint(.blue)
 
               Button(action: {
-//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-//                  print("bookmarks remove")
-//                  bookMarksViewModel.removeRecord(speciesID: species.id)
-//                } else {
-//                  bookMarksViewModel.appendRecord(speciesID: species.id)
-//                  print("bookmarks append")
-//                }
 
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
                   print("bookmarks remove")
@@ -84,7 +76,7 @@ struct TabSpeciesView: View {
                 }
 
               } ) {
-                Image(systemName: "star")
+                Image(systemSymbol: .star)
               }
               .tint(.obsStar)
             }
@@ -92,20 +84,22 @@ struct TabSpeciesView: View {
         }
         .listStyle(PlainListStyle())
 
+        .searchable(text: $searchText) //een niveau lager geplaatst
+
       }
 
       .toolbar {
-        // First Menu for Sorting
-        ToolbarItem(placement: .navigationBarTrailing) {
-          SortNameMenu(currentFilteringNameOption: $selectedSortOption)
-        }
-        // Second Menu for Filtering
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          FilteringAllMenu(currentFilteringAllOption: $selectedFilterOption)
-//        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          FilteringMenu(currentFilteringOption: $selectedRarityOption)
-        }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                  NavigationLink(destination: SortFilterSpeciesView(
+                    selectedSortOption: $selectedSortOption,
+                    selectedFilterAllOption: $selectedFilterOption,
+                    selectedRarityOption: $selectedRarityOption
+                  )) {
+                    Image(systemSymbol: .ellipsisCircle)
+                      .uniformSize(color: .orange)
+                      .accessibility(label: Text("Sort and filter"))
+                  }
+                }
       }
 
       .navigationBarTitle(settings.selectedSpeciesGroupName)
@@ -116,25 +110,17 @@ struct TabSpeciesView: View {
           Button(action: {
             settings.isBookMarkVisible.toggle()
           }) {
-            Image(systemName: settings.isBookMarkVisible ? "star.fill" : "star")
-              .foregroundColor(.blue)
+            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
+              .uniformSize(color: .cyan)
+//              .accessibilityLabel(settings.isBookMarkVisible ? "bookmarks visible" : "all visisble")
           }
           .accessibilityLabel(settings.isBookMarkVisible ? "alleen favorieten" : "alles")
           .accessibilityHint("soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren.")
-
-//          Button(action: {
-//            settings.isLatestVisible.toggle()
-//          }) {
-//            Image(systemName: settings.isLatestVisible ? "circle.hexagonpath.fill" : "circle.hexagonpath")
-//          }
-//          .accessibilityLabel(settings.isLatestVisible ? "alleen zeldzaamheden" : "alles")
-//          .accessibilityHint("je kunt filteren op zeldzaamheden, wanneer deze actief is worden alleen de zeldzaamheden in de lijst getoond.")
-
         }
       )
 
     }
-    .searchable(text: $searchText)
+//    .searchable(text: $searchText)  // een niveau te hoog
     .refreshable {
       print("refresh deze in realtime laten uitvoeren")
       speciesViewModel.parseHTMLFromURL(
@@ -159,6 +145,29 @@ struct TabSpeciesView: View {
 
 }
 
+struct SortFilterSpeciesView: View {
+  @Binding var selectedSortOption: SortNameOption
+  @Binding var selectedFilterAllOption: FilterAllOption
+  @Binding var selectedRarityOption: FilteringRarityOption
+
+  var body: some View {
+    Form {
+      // First Menu for Sorting
+      Section("Sort") {
+        SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
+      }
+
+      // Second Menu for Filtering
+      Section("Inheems") {
+        FilteringAllOptionsView(currentFilteringAllOption: $selectedFilterAllOption)
+      }
+
+      Section("Rarity") {
+        FilterOptionsView(currentFilteringOption: $selectedRarityOption)
+      }
+    }
+  }
+}
 
 enum SortNameOption: String, CaseIterable {
     case name = "Name"
@@ -185,19 +194,15 @@ struct SortNameOptionsView: View {
 
   var body: some View {
     if showView { Text("SortNameOptionsView").font(.customTiny) }
-    Form {
-      Section("Sort") {
-        List(SortNameOption.allCases, id: \.self) { option in
-          Button(action: {
-            currentFilteringNameOption = option
-          }) {
-            HStack {
-              Text(option.rawValue)
-              Spacer()
-              if currentFilteringNameOption == option {
-                Image(systemName: "checkmark")
-              }
-            }
+    List(SortNameOption.allCases, id: \.self) { option in
+      Button(action: {
+        currentFilteringNameOption = option
+      }) {
+        HStack {
+          Text(option.rawValue)
+          Spacer()
+          if currentFilteringNameOption == option {
+            Image(systemName: "checkmark")
           }
         }
       }
@@ -231,8 +236,6 @@ struct FilteringAllOptionsView: View {
 
   var body: some View {
     if showView { Text("FilteringAllOptionsView").font(.customTiny) }
-    Form {
-      Section("Filter") {
         List(FilterAllOption.allCases, id: \.self) { option in
           Button(action: {
             currentFilteringAllOption = option
@@ -245,8 +248,6 @@ struct FilteringAllOptionsView: View {
               }
             }
           }
-        }
-      }
     }
   }
 }

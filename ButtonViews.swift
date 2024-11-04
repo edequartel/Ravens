@@ -12,7 +12,7 @@ struct ShareLinkButtonView: View {
     var body: some View {
         let url = URL(string: obs.permalink)!
         ShareLink(item: url) {
-            Image(systemName: SFShareLink)
+            Image(systemSymbol: SFShareLink)
         }
         .tint(.obsShareLink)
         .accessibility(label: Text("Share observation"))
@@ -28,7 +28,7 @@ struct LinkButtonView: View {
               UIApplication.shared.open(url)
             }
         }) {
-            Image(systemName: SFObservation)
+            Image(systemSymbol: SFObservation)
         }
         .tint(.obsObservation)
         .accessibility(label: Text("Link to waarneming observation"))
@@ -43,7 +43,7 @@ struct InformationSpeciesButtonView: View {
         Button(action: {
             selectedSpeciesID = obs.species_detail.id
         }) {
-            Image(systemName: SFInformation)
+            Image(systemSymbol: SFInformation)
         }
         .tint(.obsInformation)
         .accessibility(label: Text("Information species"))
@@ -71,9 +71,11 @@ struct AreaButtonView: View {
       }
     }) {
       if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-        Image(systemName: SFAreaFill)
+        Image(systemSymbol: SFAreaFill)
+          .uniformSize()
       } else {
-        Image(systemName: SFArea)
+        Image(systemSymbol: SFArea)
+          .uniformSize()
       }
     }
     .tint(.obsArea)
@@ -96,9 +98,11 @@ struct ObserversButtonView: View {
       }
     }) {
       if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-        Image(systemName: SFObserverFill)
+        Image(systemSymbol: SFObserverFill)
+          .uniformSize()
       } else {
-        Image(systemName: SFObserver)
+        Image(systemSymbol: SFObserver)
+          .uniformSize()
       }
     }
     .tint(.obsObserver)
@@ -118,7 +122,8 @@ struct BookmarkButtonView: View {
         bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
       }
     }) {
-      Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
+      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
+        .uniformSize()
     }
     .tint(.obsBookmark)
     .accessibility(label: Text("Add bookmark"))

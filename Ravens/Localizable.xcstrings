@@ -356,9 +356,6 @@
     "Files" : {
 
     },
-    "Filter" : {
-
-    },
     "Filter by" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -390,7 +387,7 @@
     "FilteringAllOptionsView" : {
 
     },
-    "Full Map" : {
+    "FilterOptionsView" : {
 
     },
     "getToken" : {
@@ -526,6 +523,9 @@
 
     },
     "Information species" : {
+
+    },
+    "Inheems" : {
 
     },
     "International" : {
@@ -918,7 +918,7 @@
     "observationsSpeciesViewModel" : {
 
     },
-    "ObservationsView" : {
+    "ObservationsUserView" : {
 
     },
     "Observer" : {
@@ -1214,6 +1214,9 @@
 
     },
     "Sort" : {
+
+    },
+    "Sort and filter" : {
 
     },
     "Sort by" : {

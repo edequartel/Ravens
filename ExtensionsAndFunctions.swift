@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import AudioToolbox
+import SFSafeSymbols
 
 // werkhoven
 // let longitude = 5.243376
@@ -71,17 +72,17 @@ extension Color {
 
 let obsStrDutchOrange = "f7b731"
 
-let SFShareLink = "square.and.arrow.up"
-let SFInformation = "info.circle"
-let SFArea = "map"
-let SFAreaFill = "map.fill"
-let SFSpecies = "star"
-let SFSpeciesFill = "star.fill"
-let SFObservation = "binoculars.fill"
-let SFObserver = "person"
-let SFObserverFill = "person.fill"
-let SFObserverPlus = "person.fill.badge.plus"
-let SFObserverMin = "person.fill.badge.minus"
+let SFShareLink = SFSymbol.squareAndArrowUp
+let SFInformation = SFSymbol.infoCircle
+let SFArea = SFSymbol.map
+let SFAreaFill = SFSymbol.mapFill
+let SFSpecies = SFSymbol.star
+let SFSpeciesFill = SFSymbol.starFill
+let SFObservation = SFSymbol.binocularsFill
+let SFObserver = SFSymbol.person
+let SFObserverFill = SFSymbol.personFill
+let SFObserverPlus = SFSymbol.personFillBadgePlus
+let SFObserverMin = SFSymbol.personFillBadgeMinus
 
 // func GroupColor(value: Int) -> Color {
 //    switch value {
@@ -459,7 +460,7 @@ extension String: @retroactive Identifiable {
 
 
 extension Image {
-    func uniformSize() -> some View {
+  func uniformSize(color: Color? = nil) -> some View {
         self
             .resizable() // Makes the image resizable
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
@@ -467,9 +468,9 @@ extension Image {
             .padding(4) // Adds padding around the image
             .overlay(
                 RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
-                  .stroke(.gray, lineWidth: 2)
+                  .stroke(Color.gray, lineWidth: 1)
+//                  .stroke(color ?? Color.blue, lineWidth: 2)
             )
-//            .clipShape() // Clips the image to a rectangle shape (optional)
     }
 }
 
@@ -485,7 +486,7 @@ extension Image {
 //}
 
 extension View {
-  func islandBackground(cornerRadius: CGFloat = 10, shadowRadius: CGFloat = 5) -> some View {
+  func islandBackground(cornerRadius: CGFloat = 4, shadowRadius: CGFloat = 2) -> some View {
     self
       .background(
         RoundedRectangle(cornerRadius: cornerRadius)

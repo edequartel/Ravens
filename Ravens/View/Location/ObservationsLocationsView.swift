@@ -22,14 +22,15 @@ struct ObservationsLocationView: View {
 
   var body: some View {
     VStack {
+      if showView { Text("ObservationsLocationView").font(.customTiny) }
+      if let observations = observationsLocationViewModel.observations?.results, observations.count > 0 {
 
-      if let observations = observationsLocationViewModel.observations?.results {
-        if showView { Text("ObservationsLocationView").font(.customTiny) }
         SettingsDetailsView(
           count: observationsLocationViewModel.locations.count,
           results: observationsLocationViewModel.count
         )
         HorizontalLine()
+        ///xxx
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
       } else {
 //        ProgressView()

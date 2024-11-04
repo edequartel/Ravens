@@ -37,10 +37,11 @@ struct ObservationsSpeciesView: View {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
 
         HStack {
-          Image(systemName: "circle.fill")//false ? "circle.hexagonpath.fill" : 
+          Image(systemSymbol: .circleFill)
+            .uniformSize()
             .foregroundColor(rarityColor(value: item.rarity))
 
-          Text("\(item.name)")// - \(item.id)")
+          Text("\(item.name)")
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -49,7 +50,8 @@ struct ObservationsSpeciesView: View {
           Button(action: {
 //            selectedSpeciesID = item.id
             selectedSpeciesID = item.species_id
-          }  ) { Image(systemName: "info.circle")
+          }  ) { Image(systemSymbol: .infoCircle)
+              .uniformSize()
           }
 
           Button(action: {
@@ -62,8 +64,9 @@ struct ObservationsSpeciesView: View {
             }
 
           } ) {
-            Image(systemName: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? SFSpeciesFill : SFSpecies)
-              .foregroundColor(.black)
+            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? SFSpeciesFill : SFSpecies)
+              .uniformSize()
+//              .foregroundColor(.black)
           }
 
         }
@@ -99,9 +102,9 @@ struct ObservationsSpeciesView: View {
 
 
 
-
+//xxx
       VStack {
-        if let observations = observationsSpeciesViewModel.observationsSpecies?.results {
+        if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
           if showView { Text("observationsSpeciesViewModel").font(.customTiny) }
           HorizontalLine()
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)

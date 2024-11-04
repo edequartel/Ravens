@@ -138,7 +138,7 @@ struct ObserversView: View {
                           UIApplication.shared.open(url)
                         }
                       }) {
-                        Image(systemName: SFObservation)
+                        Image(systemSymbol: SFObservation)
                       }
                       .tint(.obsObservation)
                     }
@@ -188,7 +188,7 @@ struct ObserversView: View {
                           UIApplication.shared.open(url)
                         }
                       }) {
-                        Image(systemName: SFObservation)
+                        Image(systemSymbol: SFObservation)
                       }
                       .tint(.obsObservation)
                     }

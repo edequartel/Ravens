@@ -65,10 +65,12 @@ struct PhotoThumbnailView: View {
             .foregroundColor(.gray) // You can change the color if needed
         }
       }
-      Text("\(photos?.count ?? 0)")
-        .font(.caption)
-        .foregroundColor(.white)
-        .padding([.trailing, .bottom],8)
+      if photos?.count ?? 0 > 0 {
+        Text("\(photos?.count ?? 0)")
+          .font(.caption)
+          .foregroundColor(.white)
+          .padding([.trailing, .bottom],8)
+      }
     }
   }
 }

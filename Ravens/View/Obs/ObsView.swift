@@ -76,7 +76,7 @@ struct ObsView: View {
               .footnoteGrayStyle()
             Spacer()
             if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-              Image(systemName: SFObserverFill)
+              Image(systemSymbol: SFObserverFill)
                 .foregroundColor(.black)
             }
           }
@@ -89,7 +89,7 @@ struct ObsView: View {
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()
             if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-              Image(systemName: SFAreaFill)
+              Image(systemSymbol: SFAreaFill)
             }
           }
         }
