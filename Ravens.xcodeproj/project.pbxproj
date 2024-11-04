@@ -293,6 +293,7 @@
 		4718753D2BFCA7F600EF9F1F /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				476FA8A52B9B031B00665613 /* SoundsView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
@@ -430,7 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				474C404B2B4BCE340038B3A5 /* SpeciesDetailsView.swift */,
-				476FA8A52B9B031B00665613 /* SoundsView.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -923,7 +923,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -965,7 +965,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
