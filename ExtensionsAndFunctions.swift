@@ -468,22 +468,11 @@ extension Image {
             .padding(4) // Adds padding around the image
             .overlay(
                 RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
-                  .stroke(Color.gray, lineWidth: 1)
-//                  .stroke(color ?? Color.blue, lineWidth: 2)
+                  .stroke(Color.blue, lineWidth: 1)
             )
     }
 }
 
-
-
-//extension Image {
-//    func uniformSize(width: CGFloat, height: CGFloat) -> some View {
-//        self
-//            .resizable()
-//            .aspectRatio(contentMode: .fit)
-//            .frame(width: width, height: height)
-//    }
-//}
 
 extension View {
   func islandBackground(cornerRadius: CGFloat = 4, shadowRadius: CGFloat = 2) -> some View {
@@ -508,7 +497,7 @@ struct ImageWithOverlay: View {
                 .frame(width: 24, height: 24)
 
             if !value {
-                Image(systemName: "line.diagonal")
+              Image(systemSymbol: .lineDiagonal)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)

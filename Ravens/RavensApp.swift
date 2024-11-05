@@ -67,6 +67,7 @@ struct RavensApp: App {
   @StateObject var observersViewModel = ObserversViewModel()
   @StateObject var areasViewModel = AreasViewModel()
   @StateObject var locationViewModel = SearchLocationViewModel()
+  @StateObject var keychainViewModel = KeychainViewModel()
 
 
 //  @StateObject var notificationsManager = NotificationsManager()
@@ -86,7 +87,7 @@ struct RavensApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .environmentObject(KeychainViewModel())
+        .environmentObject(keychainViewModel)
         .environmentObject(locationManager)
         .environmentObject(settings)
         .environmentObject(languagesViewModel)

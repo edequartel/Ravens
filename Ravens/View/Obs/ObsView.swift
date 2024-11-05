@@ -106,9 +106,9 @@ struct ObsView: View {
 
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      AreaButtonView(obs: obs)
-      BookmarkButtonView(obs: obs)
-      ObserversButtonView(obs: obs)
+      AreaButtonView(obs: obs, colorOn: true)
+      BookmarkButtonView(obs: obs, colorOn: true)
+      ObserversButtonView(obs: obs, colorOn: true)
     }
 
     //leading

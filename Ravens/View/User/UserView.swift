@@ -31,6 +31,9 @@ struct UserView: View {
                 }
             }
         }
+        .onAppear {
+          userViewModel.fetchUserData(settings: settings, completion: { print("UserView onAppear")})
+        }
     }
 }
 

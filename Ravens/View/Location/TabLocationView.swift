@@ -115,7 +115,7 @@ struct TabLocationView: View {
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: AreasView()) {
-            Image(systemName: "list.bullet")
+            Image(systemSymbol: .listBullet)
               .uniformSize()
               .accessibility(label: Text("Areas"))
           }

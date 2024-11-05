@@ -50,13 +50,9 @@ struct ObsDetailView: View {
               VStack {
                     HStack {
 
-
-                      BookmarkButtonView(obs: obs)
-
-                      ObserversButtonView(obs: obs)
-
-                      AreaButtonView(obs: obs)
-
+                      BookmarkButtonView(obs: obs, colorOn: false)
+                      ObserversButtonView(obs: obs, colorOn: false)
+                      AreaButtonView(obs: obs, colorOn: false)
 
                       Spacer()
 
@@ -151,7 +147,7 @@ struct ObsDetailView: View {
                       }
 
             }
-            .padding(.horizontal, 20)
+            .padding()
         }
         .sheet(item: $selectedObservationSound) { item in
             PlayerControlsView(sounds: item.sounds ?? [])

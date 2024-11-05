@@ -53,6 +53,7 @@ struct InformationSpeciesButtonView: View {
 struct AreaButtonView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   var obs: Observation
+  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -78,7 +79,7 @@ struct AreaButtonView: View {
           .uniformSize()
       }
     }
-    .tint(.obsArea)
+    .tint(colorOn ? .obsArea : nil)
     .accessibility(label: Text("Add area"))
   }
 }
@@ -86,6 +87,7 @@ struct AreaButtonView: View {
 struct ObserversButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   var obs: Observation
+  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -105,14 +107,16 @@ struct ObserversButtonView: View {
           .uniformSize()
       }
     }
-    .tint(.obsObserver)
+    .tint(colorOn ? .obsObserver : nil)
     .accessibility(label: Text("Add observer"))
   }
 }
 
 struct BookmarkButtonView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+
   var obs: Observation
+  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -125,7 +129,7 @@ struct BookmarkButtonView: View {
       Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
         .uniformSize()
     }
-    .tint(.obsBookmark)
+    .tint(colorOn ? .obsBookmark : nil)
     .accessibility(label: Text("Add bookmark"))
   }
 }
@@ -136,7 +140,7 @@ struct BookmarkButtonView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel()
 
     // Return the BookmarkButtonView with the mock data
-    BookmarkButtonView(obs: mockObservation)
+    BookmarkButtonView(obs: mockObservation, colorOn: true)
       .environmentObject(mockBookMarksViewModel)
   }
 }

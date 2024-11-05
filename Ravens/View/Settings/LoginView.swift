@@ -9,27 +9,27 @@ import SwiftUI
 
 struct LoginView: View {
   let log = SwiftyBeaver.self
-  
+
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
-  
-  @State private var myInlogName = ""    
+
+  @State private var myInlogName = ""
   @State private var myPassword = ""
-  
-//  var firstTime = true
-  
+
   var body: some View {
     Form {
       Section("Login") {
         VStack {
 
           TextField("email", text: $myInlogName, prompt: Text("emailadres"))
-            .onChange(of: myInlogName) { oldState, newState  in
+            .onChange(of: myInlogName) { oldState, newState in
+              myInlogName = newState.lowercased()
               let lowercasedName = newState.lowercased()
               if lowercasedName != keyChainviewModel.loginName {
                 keyChainviewModel.loginName = lowercasedName
               }
             }
+            .textContentType(.emailAddress)
             .disableAutocorrection(true)
             .textFieldStyle(.roundedBorder)
 
@@ -46,76 +46,69 @@ struct LoginView: View {
           .textFieldStyle(.roundedBorder)
 
           HStack {
-            if (keyChainviewModel.token.isEmpty) {
+            if keyChainviewModel.token.isEmpty {
               Button("Login") {
                 keyChainviewModel.fetchData(
                   username: keyChainviewModel.loginName,
                   password: keyChainviewModel.password,
                   settings: settings,
-                  completion: {
-                    _ in print("got the creditionals")
-                    keyChainviewModel.saveCredentials()
-                  } )
+                  completion: { success in
+                    if success {
+                      log.error("Credentials successfully fetched.")
+                      keyChainviewModel.saveCredentials()
+                    } else {
+                      log.error("Failed to fetch credentials.")
+                    }
+                  }
+                )
               }
               .buttonStyle(.borderedProminent)
               .frame(maxWidth: .infinity)
-
-            }
-            else {
+            } else {
               Button("Logout") {
                 keyChainviewModel.token = ""
-                keyChainviewModel.password = ""
+//                keyChainviewModel.loginName = ""
+//                keyChainviewModel.password = ""
                 keyChainviewModel.saveCredentials()
                 keyChainviewModel.retrieveCredentials()
               }
               .buttonStyle(.bordered)
               .frame(maxWidth: .infinity)
-
             }
           }
           .padding(10)
 
-          if (keyChainviewModel.loginFailed) {
+          if keyChainviewModel.loginFailed {
             Text("Login failed")
+              .foregroundColor(.red)
           }
-          //            }
         }
-        .onAppear() {
+        .onAppear {
           myInlogName = keyChainviewModel.loginName
           myPassword = keyChainviewModel.password
+          log.error("Login Name onAppear: \(myInlogName)")
+          log.error("Password onAppear: \(myPassword)")
         }
       }
 
-
-        
-//      Section() {
-//        ObserversView()
-//      }
-        
-        
-        
-        //            DisplayCredentialsView()
-
-      
       Section("Information") {
         InfoObservationView()
       }
 
-
       Section("User") {
-        if (keyChainviewModel.token.count>0) {
+        if keyChainviewModel.token.count > 0 {
           UserView()
         }
       }
 
-      //
-//      DisplayCredentialsView()
-      //        }
+//      Section("Credentials") {
+//        DisplayCredentialsView()
+//      }
     }
   }
 }
 
-//**\(selectedInBetween)**
+
 struct InfoObservationView: View {
   @EnvironmentObject var settings: Settings
   var body: some View {

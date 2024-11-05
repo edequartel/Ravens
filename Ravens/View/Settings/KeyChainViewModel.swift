@@ -42,7 +42,7 @@ class KeychainViewModel: ObservableObject {
       loginName = try keychain.getString("loginName") ?? ""
       password = try keychain.getString("password") ?? ""
       token = try keychain.getString("token") ?? ""
-      log.info("retrieved credentials are: \(loginName) \(password) \(token)")
+      log.error("retrieved credentials are: \(loginName) \(password) \(token)")
     } catch {
       // Handle errors
       log.error("Error retrieving credentials: \(error)")
@@ -73,7 +73,6 @@ class KeychainViewModel: ObservableObject {
                               try Keychain(service: bundleIdentifier).set(token, key: "AuthToken")
                               self.log.info("Token saved successfully: \(token)")
                               self.token = token
-//                              self.saveCredentials()
                               self.loginFailed = false
                               completion?(true) // Call completion with success if provided
                           } catch {
@@ -97,6 +96,4 @@ class KeychainViewModel: ObservableObject {
               }
           }
   }
-
-
 }
