@@ -8,156 +8,272 @@
 import SwiftUI
 import MapKit
 import SwiftyBeaver
-
+import BackgroundTasks
+import UserNotifications
 
 struct ContentView: View {
-    let log = SwiftyBeaver.self
-    
-    
-    @StateObject private var keyChainviewModel = KeychainViewModel()
-    @StateObject private var observationsViewModel = ObservationsViewModel()
-    @StateObject private var observationsSpeciesViewModel =  ObservationsSpeciesViewModel(settings: Settings())
+  let log = SwiftyBeaver.self
+  @State private var dataLoaded = false
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
-    
-    @State private var locationId: Int?
-    
-    var body: some View {
-        TabView {
-            // Tab 1
-            MapObservationView()
-                .tabItem {
-                    Text("Radius")
-                    Image(systemName: "circle")
-                }
+  init() {
+    let appearance = UINavigationBarAppearance()
+    appearance.configureWithOpaqueBackground()
+    appearance.backgroundColor = UIColor(.clear)
+    appearance.shadowColor = .clear
 
-            // Tab 2
-//            if !(keyChainviewModel.token.isEmpty) {
-                MapObservationsLocationView()
-                    .tabItem {
-                        Text("Location")
-                        Image(systemName: "location")
-                    }
-                    .tabItem {
-                        Text("Area")
-                        Image(systemName: "pentagon")
-                    }
-//            }
-            
-            // Tab 2
-            SpeciesView()
-                .tabItem {
-                    Text("Species")
-                    Image(systemName: "tree")
-                }
-            
-            // Tab 4
-//            if !(keyChainviewModel.token.isEmpty) {
-                MapObservationsUserView()
-                    .tabItem {
-                        Text("Me")
-                        Image(systemName: "person.fill")
-                    }
-//            }
+    UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+  }
 
-            
-            // Tab 5
-            SettingsView()
-                .tabItem {
-                    Text("Settings")
-                    Image(systemName: "gearshape")
-                }
+  var body: some View {
+    if (keyChainviewModel.token.isEmpty) {
+      VStack {
+        HStack{
+          Text("Login waarneming.nl")
+            .bold()
+            .font(.title)
+            .padding()
+          Spacer()
         }
-        .onAppear() {
-            log.warning("*** NEW LAUNCHING ***")
-            CLLocationManager().requestWhenInUseAuthorization()
-        }
+        LoginView()
+      }
+      .onAppear() {
+        log.error("isEmpty")
+      }
+    } else {
+
+      if dataLoaded {
+        RavensView()
+          .onAppear() {
+            log.info("dataLoaded")
+          }
+      } else {
+        SplashScreen(dataLoaded: $dataLoaded)
+          .onAppear() {
+            log.info("SplashScreen")
+          }
+      }
     }
+  }
+}
+
+
+struct RavensView: View {
+  let log = SwiftyBeaver.self
+  @EnvironmentObject var settings: Settings
+  @State private var selectedSpeciesID: Int?
+
+  @EnvironmentObject var notificationsManager: NotificationsManager
+
+  var body: some View {
+    VStack {
+      TabView {
+        // Tab 1
+        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text("Area")
+          Image(systemSymbol: SFAreaFill)
+        }
+        // Tab 2
+        TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text("Us")
+          Image(systemSymbol: .person2Fill)
+        }
+        // Tab 3
+        TabSpeciesView(
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text("Species")
+          Image(systemSymbol: .tree)
+        }
+        // Tab 4
+        SettingsView()
+          .tabItem {
+            Text("Settings")
+            Image(systemSymbol: .gearshape)
+          }
+      }
+
+      .sheet(item: $selectedSpeciesID) { item in
+        SpeciesDetailsView(speciesID: item)
+      }
+      .onAppear() {
+        log.error("*** NEW LAUNCHING RAVENS ***")
+      }
+    }
+  }
+}
+
+
+struct SplashScreen: View {
+  let log = SwiftyBeaver.self
+
+  @Binding var dataLoaded: Bool
+
+  @EnvironmentObject var locationManagerModel: LocationManagerModel
+
+  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var languagesViewModel: LanguagesViewModel
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
+  @EnvironmentObject var regionsViewModel: RegionsViewModel
+  @EnvironmentObject var regionListViewModel: RegionListViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
+
+  @EnvironmentObject var keychainViewModel: KeychainViewModel
+
+  @State private var isLanguageDataLoaded = false
+  @State private var isFirstLanguageDataLoaded = false
+  @State private var isSecondLanguageDataLoaded = false
+  @State private var isSpeciesGroupDataLoaded = false
+  @State private var isRegionDataLoaded = false
+  @State private var isRegionListDataLoaded = false
+  @State private var isUserDataLoaded = false
+
+  @State private var isObservationsLocationDataLoaded = false
+  @State private var isLocationIdDataLoaded = false
+  @State private var isGeoJSONDataLoaded = false
+  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+
+
+  var body: some View {
+    VStack {
+      //      ProgressView()
+      //            Text("Loading data...")
+      //                  LottieView(lottieFile: "birds.json")
+      LottieView(lottieFile: "dataloading.json")
+        .frame(width: 100, height: 100)
+    }
+    .onAppear {
+      log.info("*** NEW LAUNCHING SPLASHSCREEN ***")
+
+      CLLocationManager().requestWhenInUseAuthorization()
+
+      //?? deze standaard slechts 1 keer laden,
+      //?? betekend ergens opslaan, todo
+      languagesViewModel.fetchLanguageData(
+        settings: settings,
+        completion: {
+          log.info("languagesViewModel Language data loaded")
+          isLanguageDataLoaded = true
+          checkDataLoaded()
+        })
+
+      speciesGroupViewModel.fetchData(
+        settings: settings,
+        completion: {
+          log.info("speciesGroupViewModel group data loaded")
+          isSpeciesGroupDataLoaded = true
+          checkDataLoaded()
+        })
+
+      regionsViewModel.fetchData(
+        settings: settings,
+        completion: {
+          log.info("regionsViewModel data loaded")
+          isRegionDataLoaded = true
+          checkDataLoaded()
+        })
+
+      regionListViewModel.fetchData(
+        settings: settings,
+        completion: {
+          log.info("regionListViewModel data loaded")
+          isRegionListDataLoaded = true
+          checkDataLoaded()
+        })
+
+
+//      keychainViewModel.fetchToken(
+//        settings: settings,
+//        completion: {
+//          log.info("keychainViewModel token data loaded")
+//        })
+
+      speciesViewModel.fetchDataFirst( //contatenate fetching
+        settings: settings,
+        completion: {
+          print("speciesViewModel First language data loaded")
+          speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
+            print("html is parsed from start")
+            isFirstLanguageDataLoaded = true
+            checkDataLoaded()
+          })
+//just to test the initial view
+//  isFirstLanguageDataLoaded = true
+//  checkDataLoaded()
+        })
+
+      speciesViewModel.fetchDataSecondLanguage(
+        settings: settings,
+        completion: {
+          log.info("speciesViewModel Second language data loaded")
+          isSecondLanguageDataLoaded = true
+          checkDataLoaded()
+        })
+
+      //iedere keer
+      userViewModel.fetchUserData(
+        settings: settings,
+        completion: {
+          log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+          isUserDataLoaded = true
+          settings.userId = userViewModel.user?.id ?? 0
+          settings.userName = userViewModel.user?.name ?? ""
+        })
+
+      if locationManagerModel.checkLocation() {
+        let location = locationManagerModel.getCurrentLocation()
+        //get the location
+        locationIdViewModel.fetchLocations(
+          latitude: location?.coordinate.latitude ?? 0,
+          longitude: location?.coordinate.longitude ?? 0,
+          completion: { fetchedLocations in
+            log.info("locationIdViewModel data loaded")
+            // Use fetchedLocations here //actually it is one location
+            settings.locationName = fetchedLocations[0].name
+            for location in fetchedLocations {
+              log.info(location)
+            }
+            isLocationIdDataLoaded = true
+          })
+      }
+    }
+  }
+
+  private func checkDataLoaded() {
+    if isFirstLanguageDataLoaded &&
+        isSecondLanguageDataLoaded &&
+        isSpeciesGroupDataLoaded &&
+        isLanguageDataLoaded &&
+        isRegionDataLoaded &&
+        isRegionListDataLoaded &&
+        isUserDataLoaded &&
+        isLocationIdDataLoaded
+    {
+      self.dataLoaded = true
+    }
+  }
 }
 
 struct AnotherView: View {
-    @ObservedObject var viewModel: KeychainViewModel
+  @ObservedObject var viewModel: KeychainViewModel
 
-    var body: some View {
-        Text("Token: \(viewModel.token)")
-    }
+  var body: some View {
+    Text("Token: \(viewModel.token)")
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Setting up the environment objects for the preview
-        ContentView()
-            .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(ObservationsSpeciesViewModel(settings: Settings()))
-            .environmentObject(Settings())
-    }
+  static var previews: some View {
+    ContentView()
+      .environmentObject(Settings())
+  }
 }
 
-//            RegionListView()
-//                .tabItem {
-//                    Text("Species")
-//                    Image(systemName: "tree")
-//                }
-////
-//            SpeciesGroupView()
-////                LoginView(loginViewModel: loginViewModel)
-//                    .tabItem {
-//                        Text("Species")
-//                        Image(systemName: "tree")
-//                    }
-//
-//            LanguageView()
-//                .tabItem {
-//                    Text("Language")
-//                    Image(systemName: "book")
-//                }
-//            ObsView(obsID: 123629598)
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
-//            ObsView(obsID: 123629598)
-//            LookUpsView()
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
-            
-//            PassportView()
-//                .tabItem {
-//                    Text("Book")
-//                    Image(systemName: "book")
-//                }
 
-//Tab 0
-//            LottieView(lottieFile: "LottieFile")
-//                .tabItem {
-//                    Text("Lottie")
-//                    Image(systemName: "globe")
-//                }
-//
-//            Tab 0
-//            AudioView()
-//                .tabItem {
-//                    Text("weather")
-//                    Image(systemName: "globe")
-//                }
-//            Tab 0
-//            LookUpsView()
-//                .tabItem {
-//                    Text("weather")
-//                    Image(systemName: "globe")
-//                }
-//            Tab 0
-//            LocationLatLongView()
-//                .tabItem {
-//                    Text("weather")
-//                    Image(systemName: "globe")
-//                }
-//            Tab 0
-//            POIsView()
-//                .tabItem {
-//                    Text("weather")
-//                    Image(systemName: "globe")
-//                }
-            
+

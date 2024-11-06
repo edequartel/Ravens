@@ -1,7 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " %@" : {
+    " %@\n %@ //changed id in species_id\n %@\n %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " %1$@\n %2$@ //changed id in species_id\n %3$@\n %4$@"
+          }
+        }
+      }
+    },
+    "(%lld)" : {
 
     },
     "%@" : {
@@ -14,32 +24,22 @@
         }
       }
     },
-    "%@ - %lldx" : {
+    "%@ %@ %lldx %lldd %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ - %2$lldx"
+            "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
           }
         }
       }
     },
-    "%@ %@" : {
+    "%@ %lld" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
-    "%@ %@, %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@, %3$lld"
+            "value" : "%1$@ %2$lld"
           }
         }
       }
@@ -54,37 +54,8 @@
         }
       }
     },
-    "%lld - %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld - %2$lld"
-          }
-        }
-      }
-    },
-    "%lld %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$@"
-          }
-        }
-      }
-    },
-    "%lld + %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld + %2$lld"
-          }
-        }
-      }
-    },
     "%lld m" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -97,13 +68,39 @@
     "%lld x" : {
 
     },
+    "%lld-%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld-%2$lld"
+          }
+        }
+      }
+    },
     "%lldd" : {
 
     },
     "%lldx" : {
 
     },
+    "Add area" : {
+
+    },
+    "Add bookmark" : {
+
+    },
+    "Add observer" : {
+
+    },
+    "Add Observer" : {
+
+    },
+    "Add to areas" : {
+
+    },
     "All" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -112,6 +109,12 @@
           }
         }
       }
+    },
+    "alleen favorieten" : {
+
+    },
+    "alles" : {
+
     },
     "App details" : {
       "localizations" : {
@@ -133,7 +136,14 @@
         }
       }
     },
+    "Areas" : {
+
+    },
+    "Areas List" : {
+
+    },
     "Cache Empty" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -155,6 +165,7 @@
       }
     },
     "Common" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -187,6 +198,7 @@
       }
     },
     "Date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -197,6 +209,7 @@
       }
     },
     "days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -207,6 +220,7 @@
       }
     },
     "Days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -217,6 +231,7 @@
       }
     },
     "days " : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -236,6 +251,9 @@
           }
         }
       }
+    },
+    "Delete" : {
+
     },
     "Destination %lld" : {
       "extractionState" : "stale",
@@ -259,6 +277,43 @@
         }
       }
     },
+    "Do you want to append this %@ %@?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to append this %1$@ %2$@?"
+          }
+        }
+      }
+    },
+    "Do you want to append this %@ to the database?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wil waarnemer %@ toevoegen?"
+          }
+        }
+      }
+    },
+    "email" : {
+
+    },
+    "emailadres" : {
+
+    },
+    "End Of List" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einde van de lijst"
+          }
+        }
+      }
+    },
     "English %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -269,6 +324,12 @@
           }
         }
       }
+    },
+    "Enter number" : {
+
+    },
+    "Error: %@" : {
+
     },
     "Failed to load image" : {
       "extractionState" : "stale",
@@ -292,7 +353,11 @@
         }
       }
     },
+    "Files" : {
+
+    },
     "Filter by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -302,7 +367,11 @@
         }
       }
     },
+    "Filter Options" : {
+
+    },
     "Filter rarity by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -311,6 +380,15 @@
           }
         }
       }
+    },
+    "Filtering" : {
+
+    },
+    "FilteringAllOptionsView" : {
+
+    },
+    "FilterOptionsView" : {
+
     },
     "getToken" : {
       "extractionState" : "stale",
@@ -334,6 +412,9 @@
         }
       }
     },
+    "GPS " : {
+
+    },
     "Group" : {
       "localizations" : {
         "nl" : {
@@ -345,6 +426,7 @@
       }
     },
     "Group %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -365,7 +447,11 @@
         }
       }
     },
+    "Id" : {
+
+    },
     "Id %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -374,6 +460,9 @@
           }
         }
       }
+    },
+    "Image not found" : {
+
     },
     "Imagery" : {
       "extractionState" : "manual",
@@ -420,6 +509,7 @@
       }
     },
     "Infinity (only location)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -429,7 +519,17 @@
         }
       }
     },
+    "Information" : {
+
+    },
+    "Information species" : {
+
+    },
+    "Inheems" : {
+
+    },
     "International" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -493,7 +593,10 @@
         }
       }
     },
-    "Latitude: %lf" : {
+    "Lat %@" : {
+
+    },
+    "Link to waarneming observation" : {
 
     },
     "List" : {
@@ -506,6 +609,15 @@
           }
         }
       }
+    },
+    "List species" : {
+
+    },
+    "list users" : {
+
+    },
+    "Load Image" : {
+
     },
     "Loading" : {
       "extractionState" : "stale",
@@ -550,6 +662,7 @@
       }
     },
     "Login %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -580,7 +693,6 @@
       }
     },
     "Login waarneming.nl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -600,7 +712,7 @@
         }
       }
     },
-    "Longitude: %lf" : {
+    "Long %@" : {
 
     },
     "Main View" : {
@@ -615,6 +727,7 @@
       }
     },
     "Manual" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -645,6 +758,7 @@
       }
     },
     "Me" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -654,7 +768,14 @@
         }
       }
     },
+    "Menu filter" : {
+
+    },
+    "Menu Sort" : {
+
+    },
     "Month" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -733,7 +854,14 @@
         }
       }
     },
+    "Next" : {
+
+    },
+    "No" : {
+
+    },
     "nobsavaliable" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -754,7 +882,7 @@
         }
       }
     },
-    "obs 2023" : {
+    "ObsDetailView" : {
 
     },
     "observation.org" : {
@@ -767,7 +895,11 @@
         }
       }
     },
+    "ObservationRowView" : {
+
+    },
     "Observations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -777,7 +909,50 @@
         }
       }
     },
+    "ObservationsLocationView" : {
+
+    },
+    "ObservationsSpeciesView" : {
+
+    },
+    "observationsSpeciesViewModel" : {
+
+    },
+    "ObservationsUserView" : {
+
+    },
+    "Observer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemer"
+          }
+        }
+      }
+    },
+    "Observers" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemers"
+          }
+        }
+      }
+    },
+    "ObserversView" : {
+
+    },
+    "ObsView" : {
+
+    },
+    "password" : {
+
+    },
     "Password" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -808,7 +983,11 @@
         }
       }
     },
+    "Play Sounds" : {
+
+    },
     "Poi" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -818,7 +997,14 @@
         }
       }
     },
+    "Post Observation" : {
+
+    },
+    "Previous" : {
+
+    },
     "Radius" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -829,6 +1015,7 @@
       }
     },
     "Rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -848,6 +1035,9 @@
         }
       }
     },
+    "Region" : {
+
+    },
     "Region %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -860,6 +1050,7 @@
       }
     },
     "Region %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -870,6 +1061,7 @@
       }
     },
     "Region lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -890,6 +1082,12 @@
         }
       }
     },
+    "remove" : {
+
+    },
+    "Remove from areas" : {
+
+    },
     "Results %lld/%lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -907,7 +1105,11 @@
         }
       }
     },
+    "Retrieving location..." : {
+
+    },
     "Save photos into album" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -918,6 +1120,7 @@
       }
     },
     "Scientific name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -927,12 +1130,36 @@
         }
       }
     },
-    "Select a Region" : {
+    "Search" : {
+
+    },
+    "Search results" : {
+
+    },
+    "Search Wikipedia" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selecteer een gebied"
+            "value" : "Zoek"
+          }
+        }
+      }
+    },
+    "SearchLocationView" : {
+
+    },
+    "Second language" : {
+
+    },
+    "Select a Region" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebied"
           }
         }
       }
@@ -947,7 +1174,33 @@
         }
       }
     },
+    "Share" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel"
+          }
+        }
+      }
+    },
+    "Share observation" : {
+
+    },
+    "Share Text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel text"
+          }
+        }
+      }
+    },
     "Show observer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -957,7 +1210,17 @@
         }
       }
     },
+    "soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren." : {
+
+    },
+    "Sort" : {
+
+    },
+    "Sort and filter" : {
+
+    },
     "Sort by" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -967,7 +1230,11 @@
         }
       }
     },
+    "Sort Options" : {
+
+    },
     "Sort/filter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -976,6 +1243,9 @@
           }
         }
       }
+    },
+    "SortNameOptionsView" : {
+
     },
     "Sounds: %@" : {
       "extractionState" : "stale",
@@ -1009,6 +1279,7 @@
       }
     },
     "Species groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1017,6 +1288,12 @@
           }
         }
       }
+    },
+    "SpeciesInfoView" : {
+
+    },
+    "SpeciesView" : {
+
     },
     "Standard" : {
       "extractionState" : "manual",
@@ -1028,6 +1305,21 @@
           }
         }
       }
+    },
+    "Switch view" : {
+
+    },
+    "TabLocationView" : {
+
+    },
+    "TabSpeciesView" : {
+
+    },
+    "TabUserObservationsView" : {
+
+    },
+    "Tap voor meer details over Informatie over de waarneming." : {
+
     },
     "Token: %@" : {
       "localizations" : {
@@ -1068,6 +1360,7 @@
       }
     },
     "Uncommon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1076,6 +1369,22 @@
           }
         }
       }
+    },
+    "Update location" : {
+
+    },
+    "Us" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wij"
+          }
+        }
+      }
+    },
+    "User" : {
+
     },
     "Username" : {
       "extractionState" : "stale",
@@ -1089,6 +1398,7 @@
       }
     },
     "Value" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1098,7 +1408,11 @@
         }
       }
     },
+    "Value: %lld" : {
+
+    },
     "Very rare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1119,6 +1433,7 @@
       }
     },
     "Window" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1128,8 +1443,15 @@
         }
       }
     },
-    "Your Label" : {
-
+    "Yes" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
