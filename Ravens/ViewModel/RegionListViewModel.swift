@@ -16,7 +16,7 @@ class RegionListViewModel: ObservableObject {
     func getId(region: Int, species_group: Int) -> Int {
         log.verbose("getID from regionListViewModel region: \(region) species_group: \(species_group)")
         if let matchingItem = regionLists.first(
-            where: { $0.region == region && $0.species_group == species_group }) {
+            where: { $0.region == region && $0.speciesGroup == species_group }) {
             log.verbose("getId= \(matchingItem.id)")
             return matchingItem.id
         }

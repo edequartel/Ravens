@@ -14,7 +14,7 @@ struct Observations: Codable {
 }
 
 let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
-let mockSpeciesDetail = SpeciesDetail(id: 1, scientific_name: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
+let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
 let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
 let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", country_code: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
 
@@ -85,8 +85,6 @@ struct Observation: Codable, Identifiable {
     var embargo_date: String?
     var uuid: String?
     let externalReference: [String]?
-//    var links: [String?]
-//    var details: [String?]
     var observer_location: Point?
     var transect_uuid: URL?
     var species_detail: SpeciesDetail
@@ -106,8 +104,6 @@ struct Observation: Codable, Identifiable {
     var code: String?
 
     var timeDate: Date? //computed value in fetchdata
-//    var timeDate: String? //computed value in fetchdata
-
 }
 
 // MARK: - UserDetail
@@ -119,10 +115,18 @@ struct UserDetail: Codable {
 
 struct SpeciesDetail: Codable, Identifiable {
     var id: Int = 0
-    var scientific_name: String = ""
+    var scientificName: String = ""
     var name: String = ""
     var group: Int = 0
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case scientificName = "scientific_name"
+        case name
+        case group
+    }
 }
+
 
 struct Point: Codable {
     var type: String = ""
@@ -139,7 +143,7 @@ struct LocationDetail: Codable {
 
 struct Species: Codable, Identifiable, Equatable { //equatable
     var id = UUID()  // Unique identifier for SwiftUI
-    let species_id: Int  // Maps to JSON `id`
+    let speciesId: Int  // Maps to JSON `id`
     let name: String
     let scientific_name: String
     let rarity: Int
@@ -153,7 +157,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
 
     // Map JSON keys
     private enum CodingKeys: String, CodingKey {
-        case species_id = "species" // Maps JSON `species` to `species_id`
+        case speciesId = "species" // Maps JSON `species` to `species_id`
         case name
         case scientific_name
         case rarity
@@ -165,7 +169,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
     }
 
     init(species_id: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String?, date: String?) {
-        self.species_id = species_id
+        self.speciesId = species_id
         self.name = name
         self.scientific_name = scientific_name
         self.rarity = rarity

@@ -33,12 +33,12 @@ struct SpeciesDetailsView: View {
                                 .font(.title)
                                 .bold()
 
-                            Text(species.scientific_name)
+                            Text(species.scientificName)
                                 .italic()
                                 .foregroundColor(.gray)
 
                             HStack {
-                                Text("\(species.group_name)")
+                                Text("\(species.groupName)")
                                 Spacer()
                                 Text("\(species.status)")
                                 Spacer()
@@ -63,8 +63,8 @@ struct SpeciesDetailsView: View {
                         }
 
                         // Information Text
-                      if species.info_text != "" {
-                        RichText(html: species.info_text)
+                      if species.infoText != "" {
+                        RichText(html: species.infoText)
                           .padding()
                           .islandBackground()
                       }

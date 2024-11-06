@@ -101,7 +101,7 @@ struct MapObservationsSpeciesView: View {
     func fetchDataModel() {
         observationsSpeciesViewModel.fetchData(
             settings: settings,
-            speciesId: item.species_id,
+            speciesId: item.speciesId,
             limit: 100,
             offset: 0
         )

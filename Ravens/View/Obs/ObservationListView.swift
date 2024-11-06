@@ -69,7 +69,7 @@ struct ObservationListView: View {
     case .rarity:
       return lhs.rarity > rhs.rarity
     case .scientificName:
-      return lhs.species_detail.scientific_name < rhs.species_detail.scientific_name
+      return lhs.species_detail.scientificName < rhs.species_detail.scientificName
     }
   }
 }

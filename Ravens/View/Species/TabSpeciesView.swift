@@ -59,7 +59,7 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
-                selectedSpeciesID = species.species_id
+                selectedSpeciesID = species.speciesId
               }) {
                 Image(systemSymbol: .infoCircle)
               }
@@ -67,11 +67,11 @@ struct TabSpeciesView: View {
 
               Button(action: {
 
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
                   print("bookmarks remove")
-                  bookMarksViewModel.removeRecord(speciesID: species.species_id)
+                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
                 } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.species_id)
+                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
                   print("bookmarks append")
                 }
 
@@ -307,7 +307,7 @@ extension SpeciesViewModel {
         if isBookmarked {
             return species.filter { species in
 //                additionalIntArray.contains(where: { $0.speciesID == species.id })
-                additionalIntArray.contains(where: { $0.speciesID == species.species_id })
+                additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
             }
         } else {
             return species
@@ -345,7 +345,7 @@ struct SpeciesInfoView: View {
           .truncationMode(.tail)
         Spacer()
 //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
+        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
           Image(systemName: "star.fill")
         }
       }
@@ -370,7 +370,7 @@ struct SpeciesInfoView: View {
       HStack{
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
 //          speciesID: species.id)
-          speciesID: species.species_id)
+          speciesID: species.speciesId)
         Text("\(speciesLang ?? "placeholder")")
 //          .bold()
           .font(.caption)

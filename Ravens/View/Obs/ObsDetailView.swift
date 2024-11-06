@@ -37,7 +37,7 @@ struct ObsDetailView: View {
                   Spacer()
                 }
                 HStack {
-                  Text("\(obs.species_detail.scientific_name)")
+                  Text("\(obs.species_detail.scientificName)")
                     .italic()
                     .lineLimit(1)
                     .truncationMode(.tail)

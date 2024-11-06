@@ -42,7 +42,7 @@ class KeychainViewModel: ObservableObject {
       loginName = try keychain.getString("loginName") ?? ""
       password = try keychain.getString("password") ?? ""
       token = try keychain.getString("token") ?? ""
-      log.error("retrieved credentials are: \(loginName) \(password) \(token)")
+      log.info("retrieved credentials are: \(loginName) \(password) \(token)")
     } catch {
       // Handle errors
       log.error("Error retrieving credentials: \(error)")

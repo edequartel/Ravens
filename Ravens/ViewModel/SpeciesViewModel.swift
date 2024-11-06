@@ -211,7 +211,7 @@ print("Re-assign the updated array to trigger automatic updates")
 
   //    func findSpeciesByID(speciesID: Int) -> Species? {
   func findSpeciesByID(speciesID: Int) -> String? {
-    guard let index = species.firstIndex(where: { $0.species_id == speciesID }) else {
+    guard let index = species.firstIndex(where: { $0.speciesId == speciesID }) else {
       return nil
     }
 
