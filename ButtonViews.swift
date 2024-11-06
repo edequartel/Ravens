@@ -79,6 +79,7 @@ struct AreaButtonView: View {
           .uniformSize()
       }
     }
+//    .buttonStyle(ClearButtonStyle())
     .tint(colorOn ? .obsArea : nil)
     .accessibility(label: Text("Add area"))
   }
@@ -107,6 +108,8 @@ struct ObserversButtonView: View {
           .uniformSize()
       }
     }
+//    .buttonStyle(ClearButtonStyle())
+    
     .tint(colorOn ? .obsObserver : nil)
     .accessibility(label: Text("Add observer"))
   }
@@ -131,6 +134,7 @@ struct BookmarkButtonView: View {
     }
     .tint(colorOn ? .obsBookmark : nil)
     .accessibility(label: Text("Add bookmark"))
+//    .buttonStyle(ClearButtonStyle())
   }
 }
 

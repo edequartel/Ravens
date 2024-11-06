@@ -95,8 +95,8 @@ struct LoginView: View {
         InfoObservationView()
       }
 
+      if keyChainviewModel.token.count > 0 {
       Section("User") {
-        if keyChainviewModel.token.count > 0 {
           UserView()
         }
       }

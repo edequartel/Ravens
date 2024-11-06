@@ -122,6 +122,8 @@ struct SplashScreen: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
 
+  @EnvironmentObject var keychainViewModel: KeychainViewModel
+
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -185,6 +187,12 @@ struct SplashScreen: View {
           checkDataLoaded()
         })
 
+
+//      keychainViewModel.fetchToken(
+//        settings: settings,
+//        completion: {
+//          log.info("keychainViewModel token data loaded")
+//        })
 
       speciesViewModel.fetchDataFirst( //contatenate fetching
         settings: settings,

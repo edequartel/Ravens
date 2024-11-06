@@ -99,58 +99,65 @@ struct SearchLocationView: View {
     Form {
 
       //      VStack {
-//      Section(header: Text("Search for a location")) {
-        HStack {
-          TextField("Search", text: $searchText, onCommit: {
-            print("Searching for locations with: \(searchText)")
-            isLoading = true
-            viewModel.fetchLocations(searchString: searchText) { success in
-              isLoading = false
-              if success {
-                print("Location fetch completed successfully")
-              } else {
-                print("Location fetch failed")
-              }
+      //      Section(header: Text("Search for a location")) {
+      HStack {
+        TextField("Search", text: $searchText, onCommit: {
+          print("Searching for locations with: \(searchText)")
+          isLoading = true
+          viewModel.fetchLocations(searchString: searchText) { success in
+            isLoading = false
+            if success {
+              print("Location fetch completed successfully")
+            } else {
+              print("Location fetch failed")
             }
-          })
-          .autocapitalization(.none)
-          .disableAutocorrection(true)
-          .textFieldStyle(SearchTextFieldStyle())
-
-          if isLoading {
-            ProgressView().padding(.leading, 5) // Visual loading indicator
           }
+        })
+        .autocapitalization(.none)
+        .disableAutocorrection(true)
+        .textFieldStyle(SearchTextFieldStyle())
+
+        if isLoading {
+          ProgressView().padding(.leading, 5) // Visual loading indicator
         }
-//      }
+      }
+      //      }
 
       Section(header: Text("Search results")) {
 
 
         List(viewModel.locations, id: \.id) { location in
           Button(action: {
-            print("Location ID set to: \(locationID)")
-            print("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
+
+            print("-------------------------")
+            log.info("Location ID set to: \(locationID)")
+            log.info("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
 
             locationID = location.location_id
             settings.locationName = location.name
             settings.locationId = locationID
 
-            //             Trigger geoJSON data fetching and update settings
-            geoJSONViewModel.fetchGeoJsonData(for: locationID) {
-              log.error("Selected locationID: \(settings.locationName) \(settings.locationId)")
-              settings.currentLocation = CLLocation(
-                latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude
-              )
-              settings.locationCoordinate = CLLocationCoordinate2D(
-                latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude
-              )
-              log.error("==> locationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-              settings.isLocationIDChanged = true
-              log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
-              self.presentationMode.wrappedValue.dismiss()
-            }
+            // Trigger geoJSON data fetching and update settings
+            // check this
+            geoJSONViewModel.fetchGeoJsonData(
+              for: locationID,
+              completion: {
+                log.info("Selected locationID: \(settings.locationName) \(settings.locationId)")
+                log.info("Span: \(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+                settings.currentLocation = CLLocation(
+                  latitude: geoJSONViewModel.span.latitude,
+                  longitude: geoJSONViewModel.span.longitude
+                )
+                settings.locationCoordinate = CLLocationCoordinate2D(
+                  latitude: geoJSONViewModel.span.latitude,
+                  longitude: geoJSONViewModel.span.longitude
+                )
+                log.info("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
+                settings.isLocationIDChanged = true
+                log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
+                self.presentationMode.wrappedValue.dismiss()
+              }
+            )
           }) {
             Text("\(location.name) \(location.location_id)")
               .frame(maxWidth: .infinity, alignment: .leading)

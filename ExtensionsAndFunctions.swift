@@ -512,3 +512,11 @@ struct ImageWithOverlay_Previews: PreviewProvider {
     }
 }
 
+//struct ClearButtonStyle: ButtonStyle {
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+////            .padding()
+//            .background(Color.clear) // Clear background
+//            .foregroundColor(.blue)  // Customize text color
+//    }
+//}

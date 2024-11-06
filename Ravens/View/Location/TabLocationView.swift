@@ -102,6 +102,7 @@ struct TabLocationView: View {
               .uniformSize()
               .accessibility(
                 label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
+//              .buttonStyle(ClearButtonStyle())
           }
         }
 
@@ -111,7 +112,9 @@ struct TabLocationView: View {
               .uniformSize()
               .accessibility(label: Text("Search"))
           }
+//          .buttonStyle(ClearButtonStyle())
         }
+
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: AreasView()) {
@@ -120,7 +123,9 @@ struct TabLocationView: View {
               .accessibility(label: Text("Areas"))
           }
           .accessibility(label: Text("Areas List"))
+//          .buttonStyle(ClearButtonStyle())
         }
+
       }
 
       .onAppear {
