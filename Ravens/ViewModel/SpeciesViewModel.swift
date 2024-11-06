@@ -201,12 +201,12 @@ print("Re-assign the updated array to trigger automatic updates")
 
 
   func findSpeciesByScientificName(scientificName: String) -> Species? {
-    return species.first { $0.scientific_name == scientificName }
+    return species.first { $0.scientificName == scientificName }
   }
 
 
   func findSpeciesIndexByScientificName(scientificName: String) -> Int? {
-      return species.firstIndex { $0.scientific_name == scientificName }
+      return species.firstIndex { $0.scientificName == scientificName }
   }
 
   //    func findSpeciesByID(speciesID: Int) -> Species? {
@@ -253,7 +253,7 @@ print("Re-assign the updated array to trigger automatic updates")
       case .name:
           return species.sorted { $0.name < $1.name }
       case .scientific_name:
-          return species.sorted { $0.scientific_name < $1.scientific_name }
+          return species.sorted { $0.scientificName < $1.scientificName }
       case .lastSeen:
           return species.sorted { (species1, species2) -> Bool in
               // Convert date and time to Date objects for both species

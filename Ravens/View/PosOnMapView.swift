@@ -17,15 +17,15 @@ struct PositionOnMapView: View {
 
   var body: some View {
     Map(position: $cameraPosition) {
-      Annotation(obs.species_detail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
+      Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.has_sound ?? false ? Color.white : Color.clear,lineWidth: 1)
+          .stroke(obs.hasSound ?? false ? Color.white : Color.clear,lineWidth: 1)
           .frame(width: 12, height: 12)
 
           .overlay(
             Circle()
-              .fill(obs.has_photo ?? false ? Color.white : Color.clear)
+              .fill(obs.hasPhoto ?? false ? Color.white : Color.clear)
               .frame(width: 6, height: 6)
           )
       }
@@ -47,15 +47,15 @@ struct PositonFullView: View {
   
     var body: some View {
     Map(position: $cameraPosition) {
-      Annotation(obs.species_detail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
+      Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.has_sound ?? false ? Color.white : Color.clear,lineWidth: 1)
+          .stroke(obs.hasSound ?? false ? Color.white : Color.clear,lineWidth: 1)
           .frame(width: 12, height: 12)
 
           .overlay(
             Circle()
-              .fill(obs.has_photo ?? false ? Color.white : Color.clear)
+              .fill(obs.hasPhoto ?? false ? Color.white : Color.clear)
               .frame(width: 6, height: 6)
           )
       }

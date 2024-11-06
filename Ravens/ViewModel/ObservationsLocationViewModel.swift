@@ -29,7 +29,7 @@ class ObservationsLocationViewModel: ObservableObject {
     let max = (observations?.results.count ?? 0)
     for i in 0 ..< max {
       
-      let name = observations?.results[i].species_detail.name ?? "Unknown name"
+      let name = observations?.results[i].speciesDetail.name ?? "Unknown name"
       let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
       let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
       let rarity = observations?.results[i].rarity ?? 0

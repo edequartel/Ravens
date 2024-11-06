@@ -67,12 +67,12 @@ class ObservationsRadiusViewModel: ObservableObject {
         let max = (observations?.results.count ?? 0)
         for i in 0 ..< max {
  
-            let name = observations?.results[i].species_detail.name ?? "Unknown name"
+            let name = observations?.results[i].speciesDetail.name ?? "Unknown name"
             let latitude = observations?.results[i].point.coordinates[1] ?? 0
             let longitude = observations?.results[i].point.coordinates[0] ?? 0
             let rarity = observations?.results[i].rarity ?? 0
-            let hasPhoto = observations?.results[i].has_photo ?? false
-            let hasSound = observations?.results[i].has_sound ?? false
+            let hasPhoto = observations?.results[i].hasPhoto ?? false
+            let hasSound = observations?.results[i].hasSound ?? false
             let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
             locations.append(newLocation)
         }

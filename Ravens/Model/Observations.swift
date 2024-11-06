@@ -13,54 +13,6 @@ struct Observations: Codable {
     var results: [Observation]
 }
 
-let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
-let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
-let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
-let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", country_code: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
-
-let mockObservation = Observation(
-    id: 1,
-    species: 2,
-    date: "2023-01-01",
-    time: "12:00",
-    number: 15,
-    sex: "male",
-    point: mockPoint,
-    accuracy: 1,
-    notes: "Test notes",
-    is_certain: true,
-    is_escape: false,
-    activity: 1,
-    life_stage: 1,
-    method: 1,
-    substrate: 1,
-    related_species: 1,
-    obscurity: 1,
-    has_photo: true,
-    has_sound: false,
-    counting_method: 1,
-    embargo_date: "2023-01-01",
-    uuid: "1234567890",
-    externalReference: ["external1", "external2"],
-    observer_location: mockPoint,
-    transect_uuid: URL(string: "https://example.com"),
-    species_detail: mockSpeciesDetail,
-    rarity: 1,
-    user: 1,
-    user_detail: mockUserDetail,
-    modified: "2023-01-01",
-    species_group: 1,
-    validation_status: "validated",
-    location: 1,
-    location_detail: mockLocationDetail,
-    photos: ["https://waarneming.nl/media/photo/84399858.jpg", "https://waarneming.nl/media/photo/84399859.jpg"],
-    sounds: ["sound1", "sound2"],
-    permalink: "https://example.com",
-    detail: "Test detail",
-    code: "Test code"
-)
-
-// MARK: - Result
 struct Observation: Codable, Identifiable {
     var id: Int?
     var species: Int?
@@ -71,40 +23,83 @@ struct Observation: Codable, Identifiable {
     var point: Point
     var accuracy: Int?
     var notes: String?
-    var is_certain: Bool = false
-    var is_escape: Bool = false
+    var isCertain: Bool = false
+    var isEscape: Bool = false
     var activity: Int = 0
-    var life_stage: Int = 0
+    var lifeStage: Int = 0
     var method: Int?
     var substrate: Int?
-    var related_species: Int?
+    var relatedSpecies: Int?
     var obscurity: Int?
-    var has_photo: Bool?
-    var has_sound: Bool?
-    var counting_method: Int?
-    var embargo_date: String?
+    var hasPhoto: Bool?
+    var hasSound: Bool?
+    var countingMethod: Int?
+    var embargoDate: String?
     var uuid: String?
-    let externalReference: [String]?
-    var observer_location: Point?
-    var transect_uuid: URL?
-    var species_detail: SpeciesDetail
+    var externalReference: String?
+    var observerLocation: Point?
+    var transectUUID: URL?
+    var speciesDetail: SpeciesDetail
     var rarity: Int = 0
     var user: Int = 0
-    var user_detail: UserDetail?
+    var userDetail: UserDetail?
     var modified: String?
-    var species_group: Int?
-    var validation_status: String = ""
+    var speciesGroup: Int?
+    var validationStatus: String = ""
     var location: Int?
-    var location_detail: LocationDetail?
+    var locationDetail: LocationDetail?
     var photos: [String]?
     var sounds: [String]?
     var permalink: String = ""
-    
+
     var detail: String?
     var code: String?
 
-    var timeDate: Date? //computed value in fetchdata
+    var timeDate: Date?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case species
+        case date
+        case time
+        case number
+        case sex
+        case point
+        case accuracy
+        case notes
+        case isCertain = "is_certain"
+        case isEscape = "is_escape"
+        case activity
+        case lifeStage = "life_stage"
+        case method
+        case substrate
+        case relatedSpecies = "related_species"
+        case obscurity
+        case hasPhoto = "has_photo"
+        case hasSound = "has_sound"
+        case countingMethod = "counting_method"
+        case embargoDate = "embargo_date"
+        case uuid
+        case externalReference = "external_reference"
+        case observerLocation = "observer_location"
+        case transectUUID = "transect_uuid"
+        case speciesDetail = "species_detail"
+        case rarity
+        case user
+        case userDetail = "user_detail"
+        case modified
+        case speciesGroup = "species_group"
+        case validationStatus = "validation_status"
+        case location
+        case locationDetail = "location_detail"
+        case photos
+        case sounds
+        case permalink
+        case detail
+        case code
+    }
 }
+
 
 // MARK: - UserDetail
 struct UserDetail: Codable {
@@ -145,7 +140,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
     var id = UUID()  // Unique identifier for SwiftUI
     let speciesId: Int  // Maps to JSON `id`
     let name: String
-    let scientific_name: String
+    let scientificName: String
     let rarity: Int
     let native: Bool
 
@@ -159,7 +154,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
     private enum CodingKeys: String, CodingKey {
         case speciesId = "species" // Maps JSON `species` to `species_id`
         case name
-        case scientific_name
+        case scientificName = "scientific_name"
         case rarity
         case native
         case time
@@ -171,10 +166,57 @@ struct Species: Codable, Identifiable, Equatable { //equatable
     init(species_id: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String?, date: String?) {
         self.speciesId = species_id
         self.name = name
-        self.scientific_name = scientific_name
+        self.scientificName = scientific_name
         self.rarity = rarity
         self.native = native
         self.time = time
         self.date = date
     }
 }
+
+let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
+let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
+let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
+let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", country_code: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
+
+let mockObservation = Observation(
+    id: 1,
+    species: 2,
+    date: "2023-01-01",
+    time: "12:00",
+    number: 15,
+    sex: "male",
+    point: mockPoint,
+    accuracy: 1,
+    notes: "Test notes",
+    isCertain: true,
+    isEscape: false,
+    activity: 1,
+    lifeStage: 1,
+    method: 1,
+    substrate: 1,
+    relatedSpecies: 1,
+    obscurity: 1,
+    hasPhoto: true,
+    hasSound: false,
+    countingMethod: 1,
+    embargoDate: "2023-01-01",
+    uuid: "1234567890",
+    externalReference: "external1",
+    observerLocation: mockPoint,
+    transectUUID: URL(string: "https://example.com"),
+    speciesDetail: mockSpeciesDetail,
+    rarity: 1,
+    user: 1,
+    userDetail: mockUserDetail,
+    modified: "2023-01-01",
+    speciesGroup: 1,
+    validationStatus: "validated",
+    location: 1,
+    locationDetail: mockLocationDetail,
+    photos: ["https://waarneming.nl/media/photo/84399858.jpg", "https://waarneming.nl/media/photo/84399859.jpg"],
+    sounds: ["sound1", "sound2"],
+    permalink: "https://example.com",
+    detail: "Test detail",
+    code: "Test code"
+)

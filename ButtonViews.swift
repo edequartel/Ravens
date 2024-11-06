@@ -41,7 +41,7 @@ struct InformationSpeciesButtonView: View {
 
     var body: some View {
         Button(action: {
-            selectedSpeciesID = obs.species_detail.id
+            selectedSpeciesID = obs.speciesDetail.id
         }) {
             Image(systemSymbol: SFInformation)
         }
@@ -57,21 +57,21 @@ struct AreaButtonView: View {
 
   var body: some View {
     Button(action: {
-      if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
-        print("remove areas \(obs.location_detail?.id ?? 0)")
+      if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+        print("remove areas \(obs.locationDetail?.id ?? 0)")
         areasViewModel.removeRecord(
-          areaID: obs.location_detail?.id ?? 0)
+          areaID: obs.locationDetail?.id ?? 0)
       } else {
-        print("adding area \(obs.location_detail?.id ?? 0)")
+        print("adding area \(obs.locationDetail?.id ?? 0)")
         areasViewModel.appendRecord(
-          areaName: obs.location_detail?.name ?? "unknown",
-          areaID: obs.location_detail?.id ?? 0,
+          areaName: obs.locationDetail?.name ?? "unknown",
+          areaID: obs.locationDetail?.id ?? 0,
           latitude: obs.point.coordinates[1], //!!?
           longitude: obs.point.coordinates[0]
         )
       }
     }) {
-      if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+      if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
         Image(systemSymbol: SFAreaFill)
           .uniformSize()
       } else {
@@ -92,15 +92,15 @@ struct ObserversButtonView: View {
 
   var body: some View {
     Button(action: {
-      if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
-        observersViewModel.removeRecord(userID: obs.user_detail?.id ?? 0)
+      if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
+        observersViewModel.removeRecord(userID: obs.userDetail?.id ?? 0)
       } else {
         observersViewModel.appendRecord(
-          name: obs.user_detail?.name ?? "unknown",
-          userID: obs.user_detail?.id ?? 0)
+          name: obs.userDetail?.name ?? "unknown",
+          userID: obs.userDetail?.id ?? 0)
       }
     }) {
-      if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
+      if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
         Image(systemSymbol: SFObserverFill)
           .uniformSize()
       } else {
@@ -123,13 +123,13 @@ struct BookmarkButtonView: View {
 
   var body: some View {
     Button(action: {
-      if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
-        bookMarksViewModel.removeRecord(speciesID: obs.species_detail.id)
+      if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) {
+        bookMarksViewModel.removeRecord(speciesID: obs.speciesDetail.id)
       } else {
-        bookMarksViewModel.appendRecord(speciesID: obs.species_detail.id)
+        bookMarksViewModel.appendRecord(speciesID: obs.speciesDetail.id)
       }
     }) {
-      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) ? SFSpeciesFill : SFSpecies)
+      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) ? SFSpeciesFill : SFSpecies)
         .uniformSize()
     }
     .tint(colorOn ? .obsBookmark : nil)

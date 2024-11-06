@@ -79,7 +79,7 @@ struct ObservationsSpeciesView: View {
             Spacer()
           }
           HStack{
-            Text("\(item.scientific_name)")
+            Text("\(item.scientificName)")
               .foregroundColor(.gray)
               .font(.footnote)
               .italic()
@@ -95,7 +95,7 @@ struct ObservationsSpeciesView: View {
                              \(item.name)
                              \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? "favorite": "not favorite") //changed id in species_id
                              \(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
-                             \(item.scientific_name)
+                             \(item.scientificName)
                             """
       )
       Spacer()

@@ -16,14 +16,14 @@ struct ObsDetailsRowView: View {
       Image(systemName: "circle.fill")
         .foregroundColor(rarityColor(value: obs.rarity))
       
-      Text("\(obs.species_detail.name)")// \(obs.species_detail.id)")
+      Text("\(obs.speciesDetail.name)")// \(obs.species_detail.id)")
         .bold()
         .lineLimit(1) // Set the maximum number of lines to 1
         .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       
       Spacer()
       
-      if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.species_detail.id) {
+      if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) {
         Image(systemSymbol: SFSpeciesFill)
       }
     }

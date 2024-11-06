@@ -65,11 +65,11 @@ struct ObservationListView: View {
     case .date:
       return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)
     case .name:
-      return lhs.species_detail.name < rhs.species_detail.name
+      return lhs.speciesDetail.name < rhs.speciesDetail.name
     case .rarity:
       return lhs.rarity > rhs.rarity
     case .scientificName:
-      return lhs.species_detail.scientificName < rhs.species_detail.scientificName
+      return lhs.speciesDetail.scientificName < rhs.speciesDetail.scientificName
     }
   }
 }

@@ -138,7 +138,7 @@ struct TabSpeciesView: View {
             return speciesViewModel.sortedSpecies(by: selectedSortOption)
         } else {
             return speciesViewModel.sortedSpecies(by: selectedSortOption).filter {
-                $0.name.contains(searchText) || $0.scientific_name.contains(searchText)
+                $0.name.contains(searchText) || $0.scientificName.contains(searchText)
             }
         }
     }
@@ -267,7 +267,7 @@ extension SpeciesViewModel {
         // Filter by search text if not empty
         var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
             species.name.lowercased().contains(searchText.lowercased()) ||
-            species.scientific_name.lowercased().contains(searchText.lowercased())
+            species.scientificName.lowercased().contains(searchText.lowercased())
         }
 
         // Apply other filters
@@ -361,7 +361,7 @@ struct SpeciesInfoView: View {
       }
 
       HStack {
-        Text("\(species.scientific_name)")
+        Text("\(species.scientificName)")
           .font(.caption)
           .italic()
           .lineLimit(1)
