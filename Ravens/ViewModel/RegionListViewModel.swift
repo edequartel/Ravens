@@ -9,21 +9,19 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-class RegionListViewModel: ObservableObject { 
+class RegionListViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var regionLists = [RegionList]()
-    
-    func getId(region: Int, species_group: Int) -> Int {
-        log.verbose("getID from regionListViewModel region: \(region) species_group: \(species_group)")
+    func getId(region: Int, speciesGroup: Int) -> Int {
+        log.verbose("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
         if let matchingItem = regionLists.first(
-            where: { $0.region == region && $0.speciesGroup == species_group }) {
+            where: { $0.region == region && $0.speciesGroup == speciesGroup }) {
             log.verbose("getId= \(matchingItem.id)")
             return matchingItem.id
         }
         log.verbose("getId: not found")
         return -1
     }
-    
     func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchData RegionListViewModel")
         let url = endPoint(value: settings.selectedInBetween)+"region-lists"

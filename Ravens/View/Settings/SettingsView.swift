@@ -48,7 +48,7 @@ struct SettingsView: View {
         //edit: 27052024
         Section("Species") {
           //
-          LanguageView()
+//          LanguageView()
           
           Picker("Group", selection: $settings.selectedSpeciesGroupId) {
             ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
@@ -62,8 +62,8 @@ struct SettingsView: View {
             log.error("\(settings.selectedSpeciesGroupId)")
             settings.selectedRegionListId = regionListViewModel.getId(
               region: settings.selectedRegionId,
-              species_group: settings.selectedSpeciesGroupId)
-            
+              speciesGroup: settings.selectedSpeciesGroupId)
+
             if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: {$0.id == settings.selectedSpeciesGroupId }) {
               settings.selectedSpeciesGroupName = selectedGroup.name
             }

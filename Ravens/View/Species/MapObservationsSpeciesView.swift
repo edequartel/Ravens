@@ -112,7 +112,7 @@ struct MapObservationsSpeciesView: View {
 struct MapObservationsSpeciesView_Previews: PreviewProvider {
     static var previews: some View {
         // Setting up the environment objects for the preview
-      let testSpecies = Species(species_id: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
+      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
         MapObservationsSpeciesView(item: testSpecies)
             .environmentObject(Settings())
             .environmentObject(KeychainViewModel())

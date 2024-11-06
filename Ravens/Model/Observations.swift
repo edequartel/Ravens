@@ -131,10 +131,16 @@ struct Point: Codable {
 struct LocationDetail: Codable {
     var id: Int = 0
     var name: String = ""
-    var country_code: String = ""
+    var countryCode: String = ""
     var permalink: String = ""
-}
 
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case countryCode = "country_code"
+        case permalink
+    }
+}
 
 struct Species: Codable, Identifiable, Equatable { //equatable
     var id = UUID()  // Unique identifier for SwiftUI
@@ -163,10 +169,10 @@ struct Species: Codable, Identifiable, Equatable { //equatable
         case dateTime
     }
 
-    init(species_id: Int, name: String, scientific_name: String, rarity: Int, native: Bool, time: String?, date: String?) {
-        self.speciesId = species_id
+    init(speciesId: Int, name: String, scientificName: String, rarity: Int, native: Bool, time: String?, date: String?) {
+        self.speciesId = speciesId
         self.name = name
-        self.scientificName = scientific_name
+        self.scientificName = scientificName
         self.rarity = rarity
         self.native = native
         self.time = time
@@ -177,7 +183,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
 let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
 let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data
 let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
-let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", country_code: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
+let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", countryCode: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
 
 let mockObservation = Observation(
     id: 1,

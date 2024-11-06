@@ -18,7 +18,7 @@ class SpeciesViewModel: ObservableObject {
   @Published var speciesSecondLanguage = [Species]()
 
   @Published var errorMessage: String?
-  var Date: String = ""
+  var date: String = ""
 
 //  var update: Int = 0
 
@@ -62,9 +62,9 @@ class SpeciesViewModel: ObservableObject {
 
       for row in rows {
           let dateElement = try row.select(".rarity-date")
-          let date = try dateElement.text()
+          let dateText = try dateElement.text()
           if !date.isEmpty {
-              Date = date
+              date = dateText
           }
 
           let timeElement = try row.select(".rarity-time")
@@ -78,10 +78,10 @@ class SpeciesViewModel: ObservableObject {
           let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
 
           if let index = index, (updatedSpecies[index].date?.isEmpty ?? true) {
-              updatedSpecies[index].date = Date
+              updatedSpecies[index].date = date
               updatedSpecies[index].time = time
               updatedSpecies[index].nrof = numObservationsInt
-              updatedSpecies[index].dateTime = convertToDate(dateString: Date, timeString: time)
+              updatedSpecies[index].dateTime = convertToDate(dateString: date, timeString: time)
           }
       }
 

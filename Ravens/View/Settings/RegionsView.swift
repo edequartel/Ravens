@@ -34,7 +34,7 @@ struct RegionsView: View {
             var indicesToRemove = [Int]()
 
             for i in 0..<speciesGroupsViewModel.speciesGroupsByRegion.count {
-                if regionListViewModel.getId(region: settings.selectedRegionId, species_group: speciesGroupsViewModel.speciesGroups[i].id) == -1 {
+                if regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroupsViewModel.speciesGroups[i].id) == -1 {
                     indicesToRemove.append(speciesGroupsViewModel.speciesGroups[i].id)
                 }
             }            
@@ -51,7 +51,7 @@ struct RegionsView: View {
             // and save this
             settings.selectedRegionListId = regionListViewModel.getId(
                 region: settings.selectedRegionId,
-                species_group: settings.selectedSpeciesGroupId)
+                speciesGroup: settings.selectedSpeciesGroupId)
             print(">>selectedRegionListId: \(settings.selectedRegionListId)")
         }
     }
