@@ -63,7 +63,7 @@ struct ObservationListView: View {
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
     switch currentSortingOption {
     case .date:
-      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)
+      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast) //@@@
     case .name:
       return lhs.speciesDetail.name < rhs.speciesDetail.name
     case .rarity:

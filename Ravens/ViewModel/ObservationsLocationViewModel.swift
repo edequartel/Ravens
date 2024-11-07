@@ -106,7 +106,7 @@ class ObservationsLocationViewModel: ObservableObject {
           DispatchQueue.main.async {
             self.observations = Observations(results: observationsSpecies.results)
             self.count = observationsSpecies.count ?? 0
-            self.getTimeData()
+            self.getTimeData() //@@@
             self.getLocations()
             self.getSpan()
             completion?()

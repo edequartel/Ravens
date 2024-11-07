@@ -158,7 +158,7 @@ class ObservationsViewModel: ObservableObject {
             DispatchQueue.main.async {
               self.observations = observations
               self.getLocations()
-              self.getTimeData()
+              self.getTimeData() //??
 
               completion() // call the completion handler if it exists
             }

@@ -26,6 +26,7 @@ struct ContentView: View {
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
   }
 
+  //@@@
   var body: some View {
     if (keyChainviewModel.token.isEmpty) {
       VStack {
@@ -149,12 +150,20 @@ struct SplashScreen: View {
         .frame(width: 100, height: 100)
     }
     .onAppear {
+
+
+
       log.info("*** NEW LAUNCHING SPLASHSCREEN ***")
+
+//            keychainViewModel.fetchToken(
+//              settings: settings,
+//              completion: {
+//                log.info("keychainViewModel token data loaded")
+//              })
+
 
       CLLocationManager().requestWhenInUseAuthorization()
 
-      //?? deze standaard slechts 1 keer laden,
-      //?? betekend ergens opslaan, todo
       languagesViewModel.fetchLanguageData(
         settings: settings,
         completion: {
@@ -187,13 +196,6 @@ struct SplashScreen: View {
           checkDataLoaded()
         })
 
-
-//      keychainViewModel.fetchToken(
-//        settings: settings,
-//        completion: {
-//          log.info("keychainViewModel token data loaded")
-//        })
-
       speciesViewModel.fetchDataFirst( //contatenate fetching
         settings: settings,
         completion: {
@@ -203,9 +205,6 @@ struct SplashScreen: View {
             isFirstLanguageDataLoaded = true
             checkDataLoaded()
           })
-//just to test the initial view
-//  isFirstLanguageDataLoaded = true
-//  checkDataLoaded()
         })
 
       speciesViewModel.fetchDataSecondLanguage(
@@ -216,7 +215,6 @@ struct SplashScreen: View {
           checkDataLoaded()
         })
 
-      //iedere keer
       userViewModel.fetchUserData(
         settings: settings,
         completion: {
@@ -242,6 +240,9 @@ struct SplashScreen: View {
             isLocationIdDataLoaded = true
           })
       }
+
+
+
     }
   }
 

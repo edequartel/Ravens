@@ -69,6 +69,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
+                            self.getTimeData() //@@@
                             self.getLocations()
                             completion?() // call the completion handler if it exists
                         }
@@ -84,4 +85,31 @@ class ObservationsSpeciesViewModel: ObservableObject {
         }
     }
 
+
+  func getTimeData() {
+    let max = (observationsSpecies?.results.count ?? 0)
+    for i in 0..<max {
+      if let date = observationsSpecies?.results[i].date,
+         let time = observationsSpecies?.results[i].time {
+
+        // Concatenate date and time strings
+        let timeDateStr = date + " " + time
+
+        // Date formatter to parse the concatenated date and time string
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        // Convert the concatenated string back to a Date
+        if let formattedDate = dateFormatter.date(from: timeDateStr) {
+          observationsSpecies?.results[i].timeDate = formattedDate
+        } else {
+          // Handle error if the date string could not be parsed
+          print("Error: Could not parse date string \(timeDateStr)")
+        }
+      } else {
+        // Handle the case where either the date or time is nil
+        print("Error: Missing date or time for index \(i)")
+      }
+    }
+  }
 }
