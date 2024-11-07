@@ -48,7 +48,6 @@ struct ObservationsSpeciesView: View {
           Spacer()
 
           Button(action: {
-//            selectedSpeciesID = item.id
             selectedSpeciesID = item.speciesId
           }  ) { Image(systemSymbol: .infoCircle)
               .uniformSize()
@@ -66,7 +65,6 @@ struct ObservationsSpeciesView: View {
           } ) {
             Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
               .uniformSize()
-//              .foregroundColor(.black)
           }
 
         }
@@ -101,8 +99,6 @@ struct ObservationsSpeciesView: View {
       Spacer()
 
 
-
-//xxx
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
           if showView { Text("observationsSpeciesViewModel").font(.customTiny) }

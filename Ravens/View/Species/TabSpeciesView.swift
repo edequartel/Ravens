@@ -172,21 +172,7 @@ struct SortFilterSpeciesView: View {
 enum SortNameOption: String, CaseIterable {
     case name = "Name"
     case scientific_name = "Scientific name"
-    // Add more sorting options if needed
-  case lastSeen = "Last seen"
-}
-
-struct SortNameMenu: View {
-    @Binding var currentFilteringNameOption: SortNameOption
-
-    var body: some View {
-        NavigationLink(destination: SortNameOptionsView(currentFilteringNameOption: $currentFilteringNameOption)) {
-            Image(systemName: "arrow.up.arrow.down")
-                .accessibilityElement(children: .combine)
-                .accessibility(label: Text("Filtering"))
-        }
-        .accessibility(label: Text("Menu Sort"))
-    }
+    case lastSeen = "Last seen"
 }
 
 struct SortNameOptionsView: View {
