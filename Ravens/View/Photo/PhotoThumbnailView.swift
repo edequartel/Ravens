@@ -9,15 +9,15 @@ import SwiftUI
 import SwiftyBeaver
 import Kingfisher
 
-struct myImageView: View {
-  var StringURL: String = "https://waarneming.nl/media/photo/84399858.jpg"
+struct MyImageView: View {
+  var stringURL: String = "https://waarneming.nl/media/photo/84399858.jpg"
 
   @State private var currentAmount: CGFloat = 1
   @State private var currentPosition: CGSize = .zero
   @State private var newPosition: CGSize = .zero
 
   var body: some View {
-    KFImage(URL(string: StringURL))
+    KFImage(URL(string: stringURL))
         .resizable()
         .aspectRatio(contentMode: .fit)
         .scaleEffect(currentAmount)

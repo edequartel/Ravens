@@ -24,8 +24,7 @@ struct LocationResponse: Codable {
 
 struct SearchLocation: Codable, Identifiable {
   var id = UUID()
-  //  let id: Int
-  let location_id: Int
+  let locationId: Int
   let name: String
   let countryCode: String
   let permalink: String
@@ -33,7 +32,7 @@ struct SearchLocation: Codable, Identifiable {
   enum CodingKeys: String, CodingKey {
     case name, permalink
     case countryCode = "country_code"
-    case location_id = "id"
+    case locationId = "id"
   }
 }
 
@@ -121,47 +120,42 @@ struct SearchLocationView: View {
           ProgressView().padding(.leading, 5) // Visual loading indicator
         }
       }
-      //      }
 
       Section(header: Text("Search results")) {
-
-
+        // SwiftUI List
         List(viewModel.locations, id: \.id) { location in
-          Button(action: {
+            Button(action: {
+                log.info("Location ID set to: \(locationID)")
+                log.info("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
 
-            print("-------------------------")
-            log.info("Location ID set to: \(locationID)")
-            log.info("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
+                locationID = location.locationId
+                settings.locationName = location.name
+                settings.locationId = locationID
 
-            locationID = location.location_id
-            settings.locationName = location.name
-            settings.locationId = locationID
-
-            // Trigger geoJSON data fetching and update settings
-            // check this
-            geoJSONViewModel.fetchGeoJsonData(
-              for: locationID,
-              completion: {
-                log.info("Selected locationID: \(settings.locationName) \(settings.locationId)")
-                log.info("Span: \(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
-                settings.currentLocation = CLLocation(
-                  latitude: geoJSONViewModel.span.latitude,
-                  longitude: geoJSONViewModel.span.longitude
+                // Trigger geoJSON data fetching and update settings
+                geoJSONViewModel.fetchGeoJsonData(
+                    for: locationID,
+                    completion: {
+                        log.info("Selected locationID: \(settings.locationName) \(settings.locationId)")
+                        log.info("Span: \(geoJSONViewModel.span.latitude) \(geoJSONViewModel.span.longitude)")
+                        settings.currentLocation = CLLocation(
+                            latitude: geoJSONViewModel.span.latitude,
+                            longitude: geoJSONViewModel.span.longitude
+                        )
+                        settings.locationCoordinate = CLLocationCoordinate2D(
+                            latitude: geoJSONViewModel.span.latitude,
+                            longitude: geoJSONViewModel.span.longitude
+                        )
+                        log.info("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
+                        settings.isLocationIDChanged = true
+                        log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 )
-                settings.locationCoordinate = CLLocationCoordinate2D(
-                  latitude: geoJSONViewModel.span.latitude,
-                  longitude: geoJSONViewModel.span.longitude
-                )
-                log.info("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-                settings.isLocationIDChanged = true
-                log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
-                self.presentationMode.wrappedValue.dismiss()
-              }
-            )
-          }) {
-            Text("\(location.name) \(location.location_id)")
-              .frame(maxWidth: .infinity, alignment: .leading)
-          }
+            }) {
+                Text("\(location.name) \(location.locationId)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
       }
     }

@@ -210,7 +210,7 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-struct _SortOptionsMenuView: View {
+struct _SortingOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption
 
   var body: some View {

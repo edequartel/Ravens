@@ -17,7 +17,7 @@ class GeoJSONViewModel: ObservableObject {
     
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
 
-    func fetchGeoJsonData(for locationID: Int,  completion: @escaping() -> Void ) {
+    func fetchGeoJsonData(for locationID: Int, completion: @escaping () -> Void ) {
         let apiUrl = "https://waarneming.nl/api/v1/locations/geojson/?id=\(locationID)"
         log.info("fetchGeoJsonData url \(apiUrl)")
         
@@ -52,7 +52,7 @@ class GeoJSONViewModel: ObservableObject {
         return overlays
     }
     
-    //span
+    // span
     func getSpan() {
         var minLat = CLLocationDegrees(MAXFLOAT)
         var maxLat = -CLLocationDegrees(MAXFLOAT)
@@ -60,8 +60,8 @@ class GeoJSONViewModel: ObservableObject {
         var maxLon = -CLLocationDegrees(MAXFLOAT)
         for polygon in polyOverlays {
             let points = polygon.points()
-            for i in 0..<polygon.pointCount {
-                let coordinate = points[i].coordinate
+            for index in 0..<polygon.pointCount {
+                let coordinate = points[index].coordinate
                             minLat = min(minLat, coordinate.latitude)
                             maxLat = max(maxLat, coordinate.latitude)
                             minLon = min(minLon, coordinate.longitude)
@@ -69,8 +69,8 @@ class GeoJSONViewModel: ObservableObject {
                         }
             span.latitude = (maxLat + minLat) / 2
             span.longitude = (maxLon +  minLon) / 2
-            span.latitudeDelta = (maxLat - minLat) * 2//1.1
-            span.longitudeDelta = (maxLon - minLon) * 2//1.1
+            span.latitudeDelta = (maxLat - minLat) * 2 // 1.1
+            span.longitudeDelta = (maxLon - minLon) * 2 // 1.1
         }
     }
     
