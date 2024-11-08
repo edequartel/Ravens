@@ -312,7 +312,7 @@ struct SpeciesInfoView: View {
     VStack(alignment: .leading) {
       if showView { Text("SpeciesInfoView").font(.customTiny) }
       HStack(spacing: 4) {
-        if let date = species.date {
+        if species.date != nil {
           Image(
             systemName: "eye")
           .symbolRenderingMode(.palette)

@@ -125,6 +125,7 @@ struct SplashScreen: View {
 
   @EnvironmentObject var keychainViewModel: KeychainViewModel
 
+//  @State private var isLocationDataLoaded = false
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -235,8 +236,9 @@ struct SplashScreen: View {
             // Use fetchedLocations here //actually it is one location
             settings.locationName = fetchedLocations[0].name
             for location in fetchedLocations {
-              log.info(location)
+              log.error("location \(location)")
             }
+            print("locationIdViewModel data loaded")
             isLocationIdDataLoaded = true
           })
       }
