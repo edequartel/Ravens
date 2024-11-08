@@ -63,13 +63,13 @@ struct ObservationListView: View {
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
     switch currentSortingOption {
     case .date:
-      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)
+      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast) //@@@
     case .name:
-      return lhs.species_detail.name < rhs.species_detail.name
+      return lhs.speciesDetail.name < rhs.speciesDetail.name
     case .rarity:
       return lhs.rarity > rhs.rarity
     case .scientificName:
-      return lhs.species_detail.scientific_name < rhs.species_detail.scientific_name
+      return lhs.speciesDetail.scientificName < rhs.speciesDetail.scientificName
     }
   }
 }
@@ -210,53 +210,53 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-struct _SortOptionsMenuView: View {
-  @Binding var currentSortingOption: SortingOption
+//struct _SortingOptionsMenuView: View {
+//  @Binding var currentSortingOption: SortingOption
+//
+//  var body: some View {
+//    Menu {
+//      ForEach(SortingOption.allCases, id: \.self) { option in
+//        Button(action: {
+//          currentSortingOption = option
+//        }) {
+//          HStack {
+//            Text(option.rawValue)
+//            Spacer()
+//            if currentSortingOption == option {
+//              Image(systemName: "checkmark")
+//            }
+//          }
+//        }
+//      }
+//    } label: {
+//      Text("Sort Options")
+//    }
+//  }
+//}
 
-  var body: some View {
-    Menu {
-      ForEach(SortingOption.allCases, id: \.self) { option in
-        Button(action: {
-          currentSortingOption = option
-        }) {
-          HStack {
-            Text(option.rawValue)
-            Spacer()
-            if currentSortingOption == option {
-              Image(systemName: "checkmark")
-            }
-          }
-        }
-      }
-    } label: {
-      Text("Sort Options")
-    }
-  }
-}
-
-struct _FilterOptionsMenuView: View {
-  @Binding var currentFilteringOption: FilteringRarityOption
-
-  var body: some View {
-    Menu {
-      ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-        Button(action: {
-          currentFilteringOption = option
-        }) {
-          HStack {
-            Text(option.rawValue)
-            Spacer()
-            if currentFilteringOption == option {
-              Image(systemName: "checkmark")
-            }
-          }
-        }
-      }
-    } label: {
-      Text("Filter Options")
-    }
-  }
-}
+//struct _FilterOptionsMenuView: View {
+//  @Binding var currentFilteringOption: FilteringRarityOption
+//
+//  var body: some View {
+//    Menu {
+//      ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+//        Button(action: {
+//          currentFilteringOption = option
+//        }) {
+//          HStack {
+//            Text(option.rawValue)
+//            Spacer()
+//            if currentFilteringOption == option {
+//              Image(systemName: "checkmark")
+//            }
+//          }
+//        }
+//      }
+//    } label: {
+//      Text("Filter Options")
+//    }
+//  }
+//}
 
 //#Preview {
 //  @State static var selectedObservation: Observation? = nil

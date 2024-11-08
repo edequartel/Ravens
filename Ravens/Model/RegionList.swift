@@ -10,5 +10,12 @@ import Foundation
 struct RegionList: Codable, Identifiable {
     var id: Int
     let region: Int
-    let species_group: Int
+    let speciesGroup: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case region
+        case speciesGroup = "species_group"
+    }
 }
+

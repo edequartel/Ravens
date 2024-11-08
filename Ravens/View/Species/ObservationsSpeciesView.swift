@@ -48,38 +48,36 @@ struct ObservationsSpeciesView: View {
           Spacer()
 
           Button(action: {
-//            selectedSpeciesID = item.id
-            selectedSpeciesID = item.species_id
+            selectedSpeciesID = item.speciesId
           }  ) { Image(systemSymbol: .infoCircle)
               .uniformSize()
           }
 
           Button(action: {
-            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) {
+            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
               print("bookmarks remove")
-              bookMarksViewModel.removeRecord(speciesID: item.species_id)
+              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
             } else {
-              bookMarksViewModel.appendRecord(speciesID: item.species_id)
+              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
               print("bookmarks append")
             }
 
           } ) {
-            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? SFSpeciesFill : SFSpecies)
+            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
               .uniformSize()
-//              .foregroundColor(.black)
           }
 
         }
 
         VStack {
           HStack {
-            Text(speciesViewModel.findSpeciesByID(speciesID: item.species_id) ?? "noName")
+            Text(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
               .foregroundColor(.gray)
               .font(.footnote)
             Spacer()
           }
           HStack{
-            Text("\(item.scientific_name)")
+            Text("\(item.scientificName)")
               .foregroundColor(.gray)
               .font(.footnote)
               .italic()
@@ -93,20 +91,18 @@ struct ObservationsSpeciesView: View {
       .accessibilityElement(children: .combine)
       .accessibilityLabel("""
                              \(item.name)
-                             \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.species_id) ? "favorite": "not favorite") //changed id in species_id
-                             \(speciesViewModel.findSpeciesByID(speciesID: item.species_id) ?? "noName")
-                             \(item.scientific_name)
+                             \(bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? "favorite": "not favorite") //changed id in species_id
+                             \(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
+                             \(item.scientificName)
                             """
       )
       Spacer()
 
 
-
-//xxx
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
-          if showView { Text("observationsSpeciesViewModel").font(.customTiny) }
-          HorizontalLine()
+          if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
+          HorizontalLine() //@@@
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
             .environmentObject(Settings()) // Pass environment object
         } else {
@@ -133,7 +129,7 @@ struct ObservationsSpeciesView: View {
   func fetchDataModel(offset: Int) {
     observationsSpeciesViewModel.fetchData(
       settings: settings,
-      speciesId: item.species_id,
+      speciesId: item.speciesId,
       limit: 100,
       offset: 0,
       completion: {

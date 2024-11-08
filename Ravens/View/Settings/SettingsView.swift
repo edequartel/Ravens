@@ -48,7 +48,7 @@ struct SettingsView: View {
         //edit: 27052024
         Section("Species") {
           //
-          LanguageView()
+//          LanguageView()
           
           Picker("Group", selection: $settings.selectedSpeciesGroupId) {
             ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
@@ -62,8 +62,8 @@ struct SettingsView: View {
             log.error("\(settings.selectedSpeciesGroupId)")
             settings.selectedRegionListId = regionListViewModel.getId(
               region: settings.selectedRegionId,
-              species_group: settings.selectedSpeciesGroupId)
-            
+              speciesGroup: settings.selectedSpeciesGroupId)
+
             if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: {$0.id == settings.selectedSpeciesGroupId }) {
               settings.selectedSpeciesGroupName = selectedGroup.name
             }
@@ -102,11 +102,10 @@ struct SettingsView: View {
     }
   }
 
-
-  func getId(region: Int, species_group: Int) -> Int? {
-    log.error("getID from regionListViewModel region: \(region) species_group: \(species_group)")
+  func getId(region: Int, speciesGroup: Int) -> Int? {
+    log.error("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
     if let matchingItem = regionListViewModel.regionLists.first(
-      where: { $0.region == region && $0.species_group == species_group }) {
+      where: { $0.region == region && $0.speciesGroup == speciesGroup }) {
       log.error("getId= \(matchingItem)")
       return matchingItem.id
     }
@@ -117,7 +116,7 @@ struct SettingsView: View {
   func getGroup(id: Int) -> String? {
     log.error("getGroup: \(id)")
     if let matchingItem = speciesGroupsViewModel.speciesGroups.first(
-      where: { $0.id == id } ) {
+      where: { $0.id==id }) {
       log.error("getGroup= \(matchingItem)")
       return matchingItem.name
     }
@@ -126,12 +125,13 @@ struct SettingsView: View {
   }
 
   func version() -> String {
-    let dictionary = Bundle.main.infoDictionary!
-    let version = dictionary["CFBundleShortVersionString"] as! String
-    let build = dictionary["CFBundleVersion"] as! String
-    return "Version \(version) build \(build)"
+      guard let dictionary = Bundle.main.infoDictionary,
+            let version = dictionary["CFBundleShortVersionString"] as? String,
+            let build = dictionary["CFBundleVersion"] as? String else {
+          return "Version information not available"
+      }
+      return "Version \(version) build \(build)"
   }
-
 }
 
 struct SettingsView_Previews: PreviewProvider {

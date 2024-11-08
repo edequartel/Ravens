@@ -33,9 +33,9 @@ struct RegionsView: View {
             // see which are not present in the selectedregion and prepare to remove
             var indicesToRemove = [Int]()
 
-            for i in 0..<speciesGroupsViewModel.speciesGroupsByRegion.count {
-                if regionListViewModel.getId(region: settings.selectedRegionId, species_group: speciesGroupsViewModel.speciesGroups[i].id) == -1 {
-                    indicesToRemove.append(speciesGroupsViewModel.speciesGroups[i].id)
+            for index in 0..<speciesGroupsViewModel.speciesGroupsByRegion.count {
+                if regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroupsViewModel.speciesGroups[index].id) == -1 {
+                    indicesToRemove.append(speciesGroupsViewModel.speciesGroups[index].id)
                 }
             }            
             // remove them so the are edited in the picker
@@ -51,7 +51,7 @@ struct RegionsView: View {
             // and save this
             settings.selectedRegionListId = regionListViewModel.getId(
                 region: settings.selectedRegionId,
-                species_group: settings.selectedSpeciesGroupId)
+                speciesGroup: settings.selectedSpeciesGroupId)
             print(">>selectedRegionListId: \(settings.selectedRegionListId)")
         }
     }

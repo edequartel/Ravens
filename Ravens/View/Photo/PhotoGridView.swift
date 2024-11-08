@@ -39,7 +39,7 @@ struct PhotoGridView: View {
             }
             .padding(4)
             .sheet(item: $imageURLStr) { imageURLStr in
-              myImageView(StringURL: imageURLStr)
+              MyImageView(stringURL: imageURLStr)
                 .presentationDragIndicator(.visible)
             }
         }

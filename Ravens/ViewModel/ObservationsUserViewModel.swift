@@ -12,9 +12,7 @@ import SwiftyBeaver
 import SwiftUI
 import SVGView
 
-
-
-class window: ObservableObject {
+class Window: ObservableObject {
   @Published var maximum = 123
   @Published var offset = 15
   @Published var value = 0
@@ -23,24 +21,24 @@ class window: ObservableObject {
     if value + offset > maximum {
       value = maximum
     } else {
-      value = value + offset
+      value += offset
     }
   }
 
   func previous() {
     let remainder = value % offset
     if remainder != 0 {
-      value = value - remainder
+      value -= remainder
     } else if value - offset < 0 {
       value = 0
     } else {
-      value = value - offset
+      value -= offset
     }
   }
 }
-//to test
+
 struct WindowView: View {
-  @ObservedObject var windowObject = window()
+  @ObservedObject var windowObject = Window()
 
   var body: some View {
     VStack {
@@ -54,7 +52,6 @@ struct WindowView: View {
           .frame(width: 64, height: 64, alignment: .center)
           .foregroundColor(.green)
       }
-
 
       Button(action: {
         self.windowObject.next()
@@ -75,39 +72,42 @@ class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
   @Published var observations: Observations?
-
   @Published var limit = 100
   @Published var offset = 0
-  @Published var maxOffset = 200 //??
+  @Published var maxOffset = 200
   @Published var start = 0
   @Published var end = 100
 
-
   private var keyChainViewModel =  KeychainViewModel()
-
   var locations = [Location]()
 
   func getLocations() {
     locations.removeAll()
     let max = (observations?.results.count ?? 0)
-    for i in 0 ..< max {
-      let name = observations?.results[i].species_detail.name ?? "Unknown name"
-      let latitude = observations?.results[i].point.coordinates[1] ?? 52.024052
-      let longitude = observations?.results[i].point.coordinates[0] ?? 5.245350
-      let rarity = observations?.results[i].rarity ?? 0
-      let hasPhoto = (observations?.results[i].photos?.count ?? 0 > 0)
-      let hasSound = (observations?.results[i].sounds?.count ?? 0 > 0)
-      let newLocation = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), rarity: rarity, hasPhoto: hasPhoto, hasSound: hasSound)
+    for index in 0 ..< max {
+      let name = observations?.results[index].speciesDetail.name ?? "Unknown name"
+      let latitude = observations?.results[index].point.coordinates[1] ?? 52.024052
+      let longitude = observations?.results[index].point.coordinates[0] ?? 5.245350
+      let rarity = observations?.results[index].rarity ?? 0
+      let hasPhoto = (observations?.results[index].photos?.count ?? 0 > 0)
+      let hasSound = (observations?.results[index].sounds?.count ?? 0 > 0)
+      let newLocation = Location(
+        name: name,
+        coordinate: CLLocationCoordinate2D(
+          latitude: latitude,
+          longitude: longitude),
+        rarity: rarity,
+        hasPhoto: hasPhoto,
+        hasSound: hasSound)
       locations.append(newLocation)
     }
   }
 
-
   func getTimeData() {
     let max = (observations?.results.count ?? 0)
-    for i in 0..<max {
-      if let date = observations?.results[i].date,
-         let time = observations?.results[i].time {
+    for index in 0..<max {
+      if let date = observations?.results[index].date,
+         let time = observations?.results[index].time {
 
         // Concatenate date and time strings
         let timeDateStr = date + " " + time
@@ -118,14 +118,14 @@ class ObservationsViewModel: ObservableObject {
 
         // Convert the concatenated string back to a Date
         if let formattedDate = dateFormatter.date(from: timeDateStr) {
-          observations?.results[i].timeDate = formattedDate
+          observations?.results[index].timeDate = formattedDate
         } else {
           // Handle error if the date string could not be parsed
           print("Error: Could not parse date string \(timeDateStr)")
         }
       } else {
         // Handle the case where either the date or time is nil
-        print("Error: Missing date or time for index \(i)")
+        print("Error: Missing date or time for index \(index)")
       }
     }
   }
@@ -158,7 +158,7 @@ class ObservationsViewModel: ObservableObject {
             DispatchQueue.main.async {
               self.observations = observations
               self.getLocations()
-              self.getTimeData()
+              self.getTimeData() //??
 
               completion() // call the completion handler if it exists
             }

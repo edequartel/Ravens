@@ -18,9 +18,8 @@ class SpeciesViewModel: ObservableObject {
   @Published var speciesSecondLanguage = [Species]()
 
   @Published var errorMessage: String?
-  var Date: String = ""
 
-//  var update: Int = 0
+  var datum: String = ""
 
   func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
     print("(settings.parseHTMLFromURL)")
@@ -40,7 +39,6 @@ class SpeciesViewModel: ObservableObject {
         // Parse the HTML content
         do {
           try self.parseHTML(html: html)
-//          self.objectWillChange.send()
           completion?()
         } catch {
           print("Error parsing HTML: \(error.localizedDescription)")
@@ -52,7 +50,7 @@ class SpeciesViewModel: ObservableObject {
       }
     }
   }
-
+//@@@
   private func parseHTML(html: String) throws {
       let parseDoc = "<html><body><table>" + html + "</table></body></html>"
       let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
@@ -64,11 +62,12 @@ class SpeciesViewModel: ObservableObject {
           let dateElement = try row.select(".rarity-date")
           let date = try dateElement.text()
           if !date.isEmpty {
-              Date = date
+            datum = date
           }
 
           let timeElement = try row.select(".rarity-time")
           let time = try timeElement.text()
+
           let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
           let speciesScientificName = try speciesScientificNameElement.text()
           let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
@@ -78,10 +77,10 @@ class SpeciesViewModel: ObservableObject {
           let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
 
           if let index = index, (updatedSpecies[index].date?.isEmpty ?? true) {
-              updatedSpecies[index].date = Date
+              updatedSpecies[index].date = datum
               updatedSpecies[index].time = time
               updatedSpecies[index].nrof = numObservationsInt
-              updatedSpecies[index].dateTime = convertToDate(dateString: Date, timeString: time)
+              updatedSpecies[index].dateTime = convertToDate(dateString: datum, timeString: time)
           }
       }
 
@@ -90,44 +89,6 @@ print("Re-assign the updated array to trigger automatic updates")
       species = updatedSpecies
     objectWillChange.send()
   }
-
-//  private func parseHTML(html: String) throws {
-//    let parseDoc = "<html><body><table>" + html + "</table></body></html>"
-//    let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)
-//    let rows = try doc.select("tbody tr")
-//
-//    for row in rows {
-//      let dateElement = try row.select(".rarity-date")
-//      let date = try dateElement.text()
-//      if !date.isEmpty {
-//        Date = date
-//      }
-//
-//      let timeElement = try row.select(".rarity-time")
-//      let time = try timeElement.text()
-//      let speciesScientificNameElement = try row.select(".rarity-species .species-scientific-name")
-//      let speciesScientificName = try speciesScientificNameElement.text()      
-////      let speciesNameElement = try row.select(".rarity-species .species-common-name")
-////      let speciesName = try speciesScientificNameElement.text()
-////      _ = try row.select(".rarity-species div.truncate span.content a").attr("href")
-//      let numObservationsElement = try row.select(".rarity-num-observations .badge-primary")
-//      let numObservations = try numObservationsElement.text()
-//      let numObservationsInt = Int(numObservations) ?? 0
-//
-//      let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
-////      species[index ?? 0].nrof = update
-//      if let index = index {
-//        if species[index].date?.isEmpty ?? true {
-//          species[index].date = Date
-//          species[index].time = time
-//          species[index].nrof = numObservationsInt
-//          species[index].dateTime = convertToDate(dateString: Date, timeString: time) //better sorting
-//        }
-//      }
-//    }
-//    //update the view
-////    objectWillChange.send()
-//  }
 
 
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
@@ -155,7 +116,7 @@ print("Re-assign the updated array to trigger automatic updates")
           let decoder = JSONDecoder()
           self.species = try decoder.decode([Species].self, from: response.data!)
           completion?() // call the completion handler if it exists
-//          self.parseHTMLFromURL(settings: settings, completion: {print("parseHTMLFromURL done")})
+//          self.parseHTMLFromURL(settings: settings, completion: {print("parseHTMLFromURL done")})xxz
         } catch {
           self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
         }
@@ -201,17 +162,17 @@ print("Re-assign the updated array to trigger automatic updates")
 
 
   func findSpeciesByScientificName(scientificName: String) -> Species? {
-    return species.first { $0.scientific_name == scientificName }
+    return species.first { $0.scientificName == scientificName }
   }
 
 
   func findSpeciesIndexByScientificName(scientificName: String) -> Int? {
-      return species.firstIndex { $0.scientific_name == scientificName }
+      return species.firstIndex { $0.scientificName == scientificName }
   }
 
   //    func findSpeciesByID(speciesID: Int) -> Species? {
   func findSpeciesByID(speciesID: Int) -> String? {
-    guard let index = species.firstIndex(where: { $0.species_id == speciesID }) else {
+    guard let index = species.firstIndex(where: { $0.speciesId == speciesID }) else {
       return nil
     }
 
@@ -252,8 +213,8 @@ print("Re-assign the updated array to trigger automatic updates")
       switch sortOption {
       case .name:
           return species.sorted { $0.name < $1.name }
-      case .scientific_name:
-          return species.sorted { $0.scientific_name < $1.scientific_name }
+      case .scientificName:
+          return species.sorted { $0.scientificName < $1.scientificName }
       case .lastSeen:
           return species.sorted { (species1, species2) -> Bool in
               // Convert date and time to Date objects for both species

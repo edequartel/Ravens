@@ -17,6 +17,13 @@ struct ApiResponse: Decodable {
 struct LocationJSON: Decodable {
     let id: Int
     let name: String
-    let country_code: String
+    let countryCode: String
     let permalink: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case countryCode = "country_code"
+        case permalink
+    }
 }

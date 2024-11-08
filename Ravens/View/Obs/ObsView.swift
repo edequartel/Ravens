@@ -56,7 +56,7 @@ struct ObsView: View {
         }
 
         if showSpecies {
-          Text("\(obs.species_detail.scientific_name)")
+          Text("\(obs.speciesDetail.scientificName)")
             .footnoteGrayStyle()
             .italic()
         }
@@ -72,10 +72,10 @@ struct ObsView: View {
         // User Info Section
         if showObserver {
           HStack {
-            Text("\(obs.user_detail?.name ?? "noName")")
+            Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
             Spacer()
-            if observersViewModel.isObserverInRecords(userID: obs.user_detail?.id ?? 0) {
+            if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
               Image(systemSymbol: SFObserverFill)
                 .foregroundColor(.black)
             }
@@ -84,11 +84,11 @@ struct ObsView: View {
 
         if showArea {
           HStack {
-            Text("\(obs.location_detail?.name ?? "name")")
+            Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()
-            if areasViewModel.isIDInRecords(areaID: obs.location_detail?.id ?? 0) {
+            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
               Image(systemSymbol: SFAreaFill)
             }
           }
@@ -121,10 +121,10 @@ struct ObsView: View {
 
   func accessibilityObsDetail(obs: Observation) -> String {
       let formattedDate = formatDateWithDayOfWeek(Date(), "12:34")
-      let speciesName = obs.species_detail.name
-      let locationName = obs.location_detail?.name ?? ""
+      let speciesName = obs.speciesDetail.name
+      let locationName = obs.locationDetail?.name ?? ""
       let number = obs.number
-      let userName = obs.user_detail?.name ?? ""
+      let userName = obs.userDetail?.name ?? ""
 
       let formattedString = "\(speciesName), \(locationName), \(formattedDate), \(number) keer. door \(userName)"
 

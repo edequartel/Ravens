@@ -23,7 +23,7 @@ struct LanguageView: View {
     var body: some View {
             Picker("Language", selection: $settings.selectedLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
-                    Text(language.name_native).tag(language.code)
+                    Text(language.nameNative).tag(language.code)
                 }
             }
             .pickerStyle(.navigationLink)
@@ -41,7 +41,7 @@ struct LanguageView: View {
             
             Picker("Second language", selection: $settings.selectedSecondLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
-                    Text(language.name_native).tag(language.code)
+                    Text(language.nameNative).tag(language.code)
                 }
             }
             .pickerStyle(.navigationLink)

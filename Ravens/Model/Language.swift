@@ -9,10 +9,20 @@ import Foundation
 
 struct Language: Codable, Hashable {
     let count: Int
-    let next, previous: URL? //?? naar kijken
+    let next, previous: URL?
     let results: [Result]
 }
 
 struct Result: Codable, Hashable {
-    let code, name_en, name_native: String
+    let code: String
+    let nameEn: String
+    let nameNative: String
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case nameEn = "name_en"
+        case nameNative = "name_native"
+    }
 }
+
+

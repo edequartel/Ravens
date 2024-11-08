@@ -367,9 +367,6 @@
         }
       }
     },
-    "Filter Options" : {
-
-    },
     "Filter rarity by" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -771,9 +768,6 @@
     "Menu filter" : {
 
     },
-    "Menu Sort" : {
-
-    },
     "Month" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -915,7 +909,7 @@
     "ObservationsSpeciesView" : {
 
     },
-    "observationsSpeciesViewModel" : {
+    "ObservationsSpeciesViewIn2" : {
 
     },
     "ObservationsUserView" : {
@@ -1229,9 +1223,6 @@
           }
         }
       }
-    },
-    "Sort Options" : {
-
     },
     "Sort/filter" : {
       "extractionState" : "stale",

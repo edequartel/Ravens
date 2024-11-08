@@ -59,7 +59,7 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
-                selectedSpeciesID = species.species_id
+                selectedSpeciesID = species.speciesId
               }) {
                 Image(systemSymbol: .infoCircle)
               }
@@ -67,11 +67,11 @@ struct TabSpeciesView: View {
 
               Button(action: {
 
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
                   print("bookmarks remove")
-                  bookMarksViewModel.removeRecord(speciesID: species.species_id)
+                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
                 } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.species_id)
+                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
                   print("bookmarks append")
                 }
 
@@ -138,7 +138,7 @@ struct TabSpeciesView: View {
             return speciesViewModel.sortedSpecies(by: selectedSortOption)
         } else {
             return speciesViewModel.sortedSpecies(by: selectedSortOption).filter {
-                $0.name.contains(searchText) || $0.scientific_name.contains(searchText)
+                $0.name.contains(searchText) || $0.scientificName.contains(searchText)
             }
         }
     }
@@ -171,22 +171,8 @@ struct SortFilterSpeciesView: View {
 
 enum SortNameOption: String, CaseIterable {
     case name = "Name"
-    case scientific_name = "Scientific name"
-    // Add more sorting options if needed
-  case lastSeen = "Last seen"
-}
-
-struct SortNameMenu: View {
-    @Binding var currentFilteringNameOption: SortNameOption
-
-    var body: some View {
-        NavigationLink(destination: SortNameOptionsView(currentFilteringNameOption: $currentFilteringNameOption)) {
-            Image(systemName: "arrow.up.arrow.down")
-                .accessibilityElement(children: .combine)
-                .accessibility(label: Text("Filtering"))
-        }
-        .accessibility(label: Text("Menu Sort"))
-    }
+    case scientificName = "Scientific name"
+    case lastSeen = "Last seen"
 }
 
 struct SortNameOptionsView: View {
@@ -267,7 +253,7 @@ extension SpeciesViewModel {
         // Filter by search text if not empty
         var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
             species.name.lowercased().contains(searchText.lowercased()) ||
-            species.scientific_name.lowercased().contains(searchText.lowercased())
+            species.scientificName.lowercased().contains(searchText.lowercased())
         }
 
         // Apply other filters
@@ -307,7 +293,7 @@ extension SpeciesViewModel {
         if isBookmarked {
             return species.filter { species in
 //                additionalIntArray.contains(where: { $0.speciesID == species.id })
-                additionalIntArray.contains(where: { $0.speciesID == species.species_id })
+                additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
             }
         } else {
             return species
@@ -326,7 +312,7 @@ struct SpeciesInfoView: View {
     VStack(alignment: .leading) {
       if showView { Text("SpeciesInfoView").font(.customTiny) }
       HStack(spacing: 4) {
-        if let date = species.date {
+        if species.date != nil {
           Image(
             systemName: "eye")
           .symbolRenderingMode(.palette)
@@ -345,7 +331,7 @@ struct SpeciesInfoView: View {
           .truncationMode(.tail)
         Spacer()
 //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.species_id) {
+        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
           Image(systemName: "star.fill")
         }
       }
@@ -361,7 +347,7 @@ struct SpeciesInfoView: View {
       }
 
       HStack {
-        Text("\(species.scientific_name)")
+        Text("\(species.scientificName)")
           .font(.caption)
           .italic()
           .lineLimit(1)
@@ -370,7 +356,7 @@ struct SpeciesInfoView: View {
       HStack{
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
 //          speciesID: species.id)
-          speciesID: species.species_id)
+          speciesID: species.speciesId)
         Text("\(speciesLang ?? "placeholder")")
 //          .bold()
           .font(.caption)

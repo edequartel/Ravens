@@ -30,14 +30,14 @@ struct ObsDetailView: View {
                 HStack {
                   Image(systemName: "circle.fill")
                     .foregroundColor(rarityColor(value: obs.rarity))
-                  Text("\(obs.species_detail.name)")
+                  Text("\(obs.speciesDetail.name)")
                     .bold()
                     .lineLimit(1)
                     .truncationMode(.tail)
                   Spacer()
                 }
                 HStack {
-                  Text("\(obs.species_detail.scientific_name)")
+                  Text("\(obs.speciesDetail.scientificName)")
                     .italic()
                     .lineLimit(1)
                     .truncationMode(.tail)
@@ -57,8 +57,8 @@ struct ObsDetailView: View {
                       Spacer()
 
                       Button(action: {
-                          print("Information \(obs.species_detail.name) \(obs.species_detail.id)")
-                          selectedSpeciesID = obs.species_detail.id
+                          print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
+                          selectedSpeciesID = obs.speciesDetail.id
                       }) {
                           Image(systemSymbol: SFInformation)
                           .uniformSize()
@@ -121,7 +121,7 @@ struct ObsDetailView: View {
                 }
 
                 HStack {
-                  Text("\(obs.user_detail?.name ?? "noName")")
+                  Text("\(obs.userDetail?.name ?? "noName")")
                     .footnoteGrayStyle()
                   Spacer()
 //                  Image(systemSymbol: SFObserverFill)
@@ -155,7 +155,7 @@ struct ObsDetailView: View {
                 .presentationDragIndicator(.visible)
         }
         .sheet(item: $selectedObservationXX) { item in
-            SpeciesDetailsView(speciesID: item.species_detail.id)
+            SpeciesDetailsView(speciesID: item.speciesDetail.id)
         }
     }
 }
