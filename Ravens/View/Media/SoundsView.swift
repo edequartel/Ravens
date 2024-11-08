@@ -12,7 +12,7 @@ import MediaPlayer
 
 class Player: ObservableObject {
   let log = SwiftyBeaver.self
-  private var queuedAudioPlayer: QueuedAudioPlayer //PRIVATE VAR AND NOT LET
+  private var queuedAudioPlayer: QueuedAudioPlayer
 
   @Published var status: AudioPlayerState = .idle
   @Published var title: String = "unknown"
@@ -29,6 +29,19 @@ class Player: ObservableObject {
     queuedAudioPlayer.event.updateDuration.addListener(self, handleDuration)
     queuedAudioPlayer.event.secondElapse.addListener(self, handleSecondElapse)
     queuedAudioPlayer.event.currentItem.addListener(self, handleData)
+  }
+
+  private func handleData(
+    currentItemEventData:
+    ( item: AudioItem?,
+      index: Int?,
+      lastItem: AudioItem?,
+      lastIndex: Int?,
+      lastPosition: Double?
+    )) {
+    DispatchQueue.main.async {
+      self.currentIndex = currentItemEventData.index ?? 0
+    }
   }
 
   private func handleAudioPlayerStateChange(state: AudioPlayerState) {
@@ -53,19 +66,6 @@ class Player: ObservableObject {
       self.currentTime = currentTime
     }
   }
-
-  private func handleData(CurrentItemEventData:
-                          ( item: AudioItem?,
-                            index: Int?,
-                            lastItem: AudioItem?,
-                            lastIndex: Int?,
-                            lastPosition: Double?
-                          )) {
-    DispatchQueue.main.async {
-      self.currentIndex = CurrentItemEventData.index ?? 0
-    }
-  }
-
 
   func fill(_ audioUrls: [String]) {
     queuedAudioPlayer.clear()
@@ -117,8 +117,6 @@ extension View {
   }
 }
 
-
-
 struct PlayerControlsView: View {
   @EnvironmentObject var player: Player
 
@@ -131,7 +129,6 @@ struct PlayerControlsView: View {
   //    var audio1 = ["https://xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC928304-Troglodytes-troglodytes_240819_063924_00.wav",
   //                  "https://waarneming.nl/media/sound/235292.mp3",
   //                  "https://waarneming.nl/media/sound/235293.mp3"]
-
 
   var body: some View {
     if !(sounds.isEmpty) {
@@ -159,11 +156,10 @@ struct PlayerControlsView: View {
         }
         .padding(10)
 
-
-        HStack{
+        HStack {
           Spacer()
 
-          if (sounds.count > 1) {
+          if sounds.count > 1 {
             Button(action: {
               player.previous()
               player.play()
@@ -174,8 +170,7 @@ struct PlayerControlsView: View {
             }
           }
 
-
-          if ((player.status != .playing))// && (player.status != .loading) && (player.status != .buffering))
+          if player.status != .playing // && (player.status != .loading) && (player.status != .buffering))
           {
             Button(action: {
               player.play()

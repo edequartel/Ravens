@@ -171,7 +171,7 @@ struct SortFilterSpeciesView: View {
 
 enum SortNameOption: String, CaseIterable {
     case name = "Name"
-    case scientific_name = "Scientific name"
+    case scientificName = "Scientific name"
     case lastSeen = "Last seen"
 }
 

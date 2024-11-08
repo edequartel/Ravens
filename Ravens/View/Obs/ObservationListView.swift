@@ -210,53 +210,53 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-struct _SortingOptionsMenuView: View {
-  @Binding var currentSortingOption: SortingOption
+//struct _SortingOptionsMenuView: View {
+//  @Binding var currentSortingOption: SortingOption
+//
+//  var body: some View {
+//    Menu {
+//      ForEach(SortingOption.allCases, id: \.self) { option in
+//        Button(action: {
+//          currentSortingOption = option
+//        }) {
+//          HStack {
+//            Text(option.rawValue)
+//            Spacer()
+//            if currentSortingOption == option {
+//              Image(systemName: "checkmark")
+//            }
+//          }
+//        }
+//      }
+//    } label: {
+//      Text("Sort Options")
+//    }
+//  }
+//}
 
-  var body: some View {
-    Menu {
-      ForEach(SortingOption.allCases, id: \.self) { option in
-        Button(action: {
-          currentSortingOption = option
-        }) {
-          HStack {
-            Text(option.rawValue)
-            Spacer()
-            if currentSortingOption == option {
-              Image(systemName: "checkmark")
-            }
-          }
-        }
-      }
-    } label: {
-      Text("Sort Options")
-    }
-  }
-}
-
-struct _FilterOptionsMenuView: View {
-  @Binding var currentFilteringOption: FilteringRarityOption
-
-  var body: some View {
-    Menu {
-      ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-        Button(action: {
-          currentFilteringOption = option
-        }) {
-          HStack {
-            Text(option.rawValue)
-            Spacer()
-            if currentFilteringOption == option {
-              Image(systemName: "checkmark")
-            }
-          }
-        }
-      }
-    } label: {
-      Text("Filter Options")
-    }
-  }
-}
+//struct _FilterOptionsMenuView: View {
+//  @Binding var currentFilteringOption: FilteringRarityOption
+//
+//  var body: some View {
+//    Menu {
+//      ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+//        Button(action: {
+//          currentFilteringOption = option
+//        }) {
+//          HStack {
+//            Text(option.rawValue)
+//            Spacer()
+//            if currentFilteringOption == option {
+//              Image(systemName: "checkmark")
+//            }
+//          }
+//        }
+//      }
+//    } label: {
+//      Text("Filter Options")
+//    }
+//  }
+//}
 
 //#Preview {
 //  @State static var selectedObservation: Observation? = nil

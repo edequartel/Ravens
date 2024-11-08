@@ -367,9 +367,6 @@
         }
       }
     },
-    "Filter Options" : {
-
-    },
     "Filter rarity by" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1226,9 +1223,6 @@
           }
         }
       }
-    },
-    "Sort Options" : {
-
     },
     "Sort/filter" : {
       "extractionState" : "stale",

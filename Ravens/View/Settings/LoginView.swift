@@ -108,20 +108,22 @@ struct LoginView: View {
   }
 }
 
-
 struct InfoObservationView: View {
   @EnvironmentObject var settings: Settings
   var body: some View {
     Markdown(
-            """
-Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen die door heel Nederland en België worden doorgegeven.
+        """
+        Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij \
+        [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen \
+        die door heel Nederland en België worden doorgegeven.
 
-De website van Ravens kun je vinden op [Ravens](https://edequartel.github.io/Ravens/).
+        De website van Ravens kun je vinden op [Ravens](https://edequartel.github.io/Ravens/). \
+        De handleiding van Ravens kun je vinden op [Handleiding](https://edequartel.github.io/Ravens/images/manual.pdf).
 
-De handleiding van Ravens kun je vinden op [Handleiding](https://edequartel.github.io/Ravens/images/manual.pdf).
+        Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
+        """
+    )
 
-Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
-""")
   }
 }
 

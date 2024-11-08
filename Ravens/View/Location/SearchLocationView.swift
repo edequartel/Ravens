@@ -114,7 +114,7 @@ struct SearchLocationView: View {
         })
         .autocapitalization(.none)
         .disableAutocorrection(true)
-        .textFieldStyle(SearchTextFieldStyle())
+//        .textFieldStyle(SearchTextFieldStyle())
 
         if isLoading {
           ProgressView().padding(.leading, 5) // Visual loading indicator
@@ -162,9 +162,6 @@ struct SearchLocationView: View {
   }
 }
 
-
-
-
 // MARK: - Preview
 struct SearchLocationView_Previews: PreviewProvider {
   static var previews: some View {
@@ -172,22 +169,21 @@ struct SearchLocationView_Previews: PreviewProvider {
   }
 }
 
-
-struct SearchTextFieldStyle: TextFieldStyle {
-  func _body(configuration: TextField<Self._Label>) -> some View {
-    HStack {
-      // Add the image inside the TextField
-      Image(systemName: "magnifyingglass")
-        .foregroundColor(.gray)
-        .padding(.leading, 8)
-      // Apply the configuration (actual TextField)
-      configuration
-        .padding(8)
-    }
-    .background(
-      RoundedRectangle(cornerRadius: 8)
-        .stroke(Color.gray, lineWidth: 1)
-    )
-    //.frame(height: 40) // Ensures the height of the custom TextField
-  }
-}
+//struct SearchATextFieldStyle: TextFieldStyle {
+//  func _body(configuration: TextField<Self._Label>) -> some View {
+//    HStack {
+//      // Add the image inside the TextField
+//      Image(systemName: "magnifyingglass")
+//        .foregroundColor(.gray)
+//        .padding(.leading, 8)
+//      // Apply the configuration (actual TextField)
+//      configuration
+//        .padding(8)
+//    }
+//    .background(
+//      RoundedRectangle(cornerRadius: 8)
+//        .stroke(Color.gray, lineWidth: 1)
+//    )
+//    // .frame(height: 40) // Ensures the height of the custom TextField
+//  }
+//}

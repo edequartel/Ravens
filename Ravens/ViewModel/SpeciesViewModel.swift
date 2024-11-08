@@ -213,7 +213,7 @@ print("Re-assign the updated array to trigger automatic updates")
       switch sortOption {
       case .name:
           return species.sorted { $0.name < $1.name }
-      case .scientific_name:
+      case .scientificName:
           return species.sorted { $0.scientificName < $1.scientificName }
       case .lastSeen:
           return species.sorted { (species1, species2) -> Bool in
