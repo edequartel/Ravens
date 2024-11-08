@@ -53,6 +53,7 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
   func checkLocation() -> Bool {
     if let _ = self.errorMessage {
       log.error("Location error.")
+      log.error("If in the simulator, make sure to set a location.")
       return false
     } else if let location = self.location {
       log.info("Location is available.")
