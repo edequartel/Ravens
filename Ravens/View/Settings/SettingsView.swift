@@ -44,12 +44,12 @@ struct SettingsView: View {
         .pickerStyle(.inline)
         .onChange(of: settings.selectedInBetween) {
         }
-        
-        //edit: 27052024
+
+        Section("Language") {
+          LanguageView()
+        }
+
         Section("Species") {
-          //
-//          LanguageView()
-          
           Picker("Group", selection: $settings.selectedSpeciesGroupId) {
             ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
               Text("\(speciesGroup.name)").tag(speciesGroup.id)

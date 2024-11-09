@@ -70,17 +70,17 @@ struct RavensView: View {
   var body: some View {
     VStack {
       TabView {
-        // Tab 1
-        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text("Area")
-          Image(systemSymbol: SFAreaFill)
-        }
         // Tab 2
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text("Us")
           Image(systemSymbol: .person2Fill)
+        }
+        // Tab 1
+        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text("Area")
+          Image(systemSymbol: SFAreaFill)
         }
         // Tab 3
         TabSpeciesView(
