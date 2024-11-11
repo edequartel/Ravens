@@ -134,7 +134,7 @@ struct BookmarkButtonView: View {
     }
     .tint(colorOn ? .obsBookmark : nil)
     .accessibility(label: Text("Add bookmark"))
-//    .buttonStyle(ClearButtonStyle())
+    .background(Color.clear)
   }
 }
 

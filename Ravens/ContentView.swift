@@ -26,7 +26,6 @@ struct ContentView: View {
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
   }
 
-  //@@@
   var body: some View {
     if (keyChainviewModel.token.isEmpty) {
       VStack {
@@ -43,7 +42,6 @@ struct ContentView: View {
         log.error("isEmpty")
       }
     } else {
-
       if dataLoaded {
         RavensView()
           .onAppear() {
@@ -114,7 +112,6 @@ struct SplashScreen: View {
   @Binding var dataLoaded: Bool
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
-
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var languagesViewModel: LanguagesViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -122,10 +119,11 @@ struct SplashScreen: View {
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
-
   @EnvironmentObject var keychainViewModel: KeychainViewModel
+  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 
-//  @State private var isLocationDataLoaded = false
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -133,27 +131,16 @@ struct SplashScreen: View {
   @State private var isRegionDataLoaded = false
   @State private var isRegionListDataLoaded = false
   @State private var isUserDataLoaded = false
-
   @State private var isObservationsLocationDataLoaded = false
   @State private var isLocationIdDataLoaded = false
   @State private var isGeoJSONDataLoaded = false
-  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
-  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-
 
   var body: some View {
     VStack {
-      //      ProgressView()
-      //            Text("Loading data...")
-      //                  LottieView(lottieFile: "birds.json")
       LottieView(lottieFile: "dataloading.json")
         .frame(width: 100, height: 100)
     }
     .onAppear {
-
-
-
       log.info("*** NEW LAUNCHING SPLASHSCREEN ***")
 
 //            keychainViewModel.fetchToken(
@@ -161,7 +148,6 @@ struct SplashScreen: View {
 //              completion: {
 //                log.info("keychainViewModel token data loaded")
 //              })
-
 
       CLLocationManager().requestWhenInUseAuthorization()
 
@@ -197,7 +183,7 @@ struct SplashScreen: View {
           checkDataLoaded()
         })
 
-      speciesViewModel.fetchDataFirst( //contatenate fetching
+      speciesViewModel.fetchDataFirst(
         settings: settings,
         completion: {
           print("speciesViewModel First language data loaded")
@@ -219,7 +205,7 @@ struct SplashScreen: View {
       userViewModel.fetchUserData(
         settings: settings,
         completion: {
-          log.info("1. userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+          log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
           isUserDataLoaded = true
           settings.userId = userViewModel.user?.id ?? 0
           settings.userName = userViewModel.user?.name ?? ""
@@ -242,9 +228,6 @@ struct SplashScreen: View {
             isLocationIdDataLoaded = true
           })
       }
-
-
-
     }
   }
 

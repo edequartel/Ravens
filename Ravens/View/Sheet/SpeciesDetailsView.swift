@@ -81,7 +81,6 @@ struct SpeciesDetailsView: View {
 
                     } else {
                         ProgressView()
-                            .padding()
                     }
                 }
                 .padding()

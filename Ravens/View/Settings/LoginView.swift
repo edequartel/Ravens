@@ -78,6 +78,15 @@ struct LoginView: View {
           }
           .padding(10)
 
+//          Button("Reset") {
+//            keyChainviewModel.token = ""
+//            keyChainviewModel.loginName = ""
+//            keyChainviewModel.password = ""
+//            keyChainviewModel.saveCredentials()
+//            keyChainviewModel.retrieveCredentials()
+//          }
+//          .buttonStyle(.bordered)
+
           if keyChainviewModel.loginFailed {
             Text("Login failed")
               .foregroundColor(.red)

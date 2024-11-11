@@ -39,7 +39,6 @@ struct ObservationsUserView: View {
       if showView { Text("ObservationsUserView").font(.customTiny) }
       if let observations = observationsViewModel.observations?.results, observations.count > 0 {
         HorizontalLine()
-        ///yyy
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .user)
       } else {
         ProgressView()

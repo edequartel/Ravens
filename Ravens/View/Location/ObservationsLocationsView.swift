@@ -33,8 +33,7 @@ struct ObservationsLocationView: View {
         ///xxx
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
       } else {
-//        ProgressView()
-        LottieView(lottieFile: "dataloading.json")
+        ProgressView()
           .frame(width: 100, height: 100)
       }
     }

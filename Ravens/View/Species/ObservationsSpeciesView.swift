@@ -102,7 +102,7 @@ struct ObservationsSpeciesView: View {
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
           if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
-          HorizontalLine() //@@@
+          HorizontalLine() 
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
             .environmentObject(Settings()) // Pass environment object
         } else {
