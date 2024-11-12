@@ -106,8 +106,6 @@ struct ObsDetailView: View {
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
           PhotoGridView(photos: photos, imageURLStr: $imageURLStr)
-          //                        .padding()
-          //                        .islandBackground()
         }
 
         // Sounds Section
@@ -120,9 +118,9 @@ struct ObsDetailView: View {
               Text("Play Sounds")
               Spacer()
             }
-            //                        .padding()
-            .islandBackground()
           }
+          .padding()
+          .islandBackground()
         }
 
         NotesView(obs: obs)

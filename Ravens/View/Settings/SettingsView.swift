@@ -30,8 +30,10 @@ struct SettingsView: View {
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink(destination: LoginView()) {
-          Text("Login")
+        Section(header: Text("Ravens")) {
+          NavigationLink(destination: LoginView()) {
+            Text("Login")
+          }
         }
         //      LoginView()
         

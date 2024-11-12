@@ -50,36 +50,36 @@ struct ObservationsLocationView: View {
     log.info(settings.initialAreaLoad)
     if settings.initialAreaLoad {
       log.info("MapObservationsLocationView onAppear")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         let location = locationManagerModel.getCurrentLocation()
         settings.currentLocation = location
         fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      } else {
-        log.info("error observationsLocationsView getDataAreaModel initialAreaLoad")
-      }
+//      } else {
+//        log.info("error observationsLocationsView getDataAreaModel initialAreaLoad")
+//      }
       settings.initialAreaLoad = false
     }
 
     log.info(settings.isAreaChanged)
     if settings.isAreaChanged {
       log.info("isAreaChanged")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         let location = settings.currentLocation
         fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      } else {
-        log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
-      }
+//      } else {
+//        log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
+//      }
       settings.isAreaChanged = false
     }
 
     log.info(settings.isLocationIDChanged)
     if settings.isLocationIDChanged {
       log.info("isLocationIDChanged")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         fetchDataLocationID()
-      } else {
-        log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
-      }
+//      } else {
+//        log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
+//      }
       settings.isLocationIDChanged = false
     }
   }

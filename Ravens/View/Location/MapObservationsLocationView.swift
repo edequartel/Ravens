@@ -122,34 +122,34 @@ struct MapObservationsLocationView: View {
     log.info("getDataAreaModel")
     if settings.initialAreaLoad {
       log.info("MapObservationsLocationView onAppear")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         let location = locationManagerModel.getCurrentLocation()
         settings.currentLocation = location
         fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      } else {
-        log.error("error observationsLocationsView getDataAreaModel initialAreaLoad")
-      }
+//      } else {
+//        log.error("error observationsLocationsView getDataAreaModel initialAreaLoad")
+//      }
       settings.initialAreaLoad = false
     }
 
     if settings.isAreaChanged {
       log.error("isAreaChanged")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         let location = settings.currentLocation
         fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      } else {
-        log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
-      }
+//      } else {
+//        log.error("error observationsLocationsView getDataAreaModel isAreaChanged")
+//      }
       settings.isAreaChanged = false
     }
 
     if settings.isLocationIDChanged {
       log.error("isAreaChanged")
-      if locationManagerModel.checkLocation() {
+//      if locationManagerModel.checkLocation() {
         fetchDataLocationID()
-      } else {
-        log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
-      }
+//      } else {
+//        log.error("error observationsLocationsView getDataAreaModel isLocationIDChanged")
+//      }
       settings.isLocationIDChanged = false
     }
 

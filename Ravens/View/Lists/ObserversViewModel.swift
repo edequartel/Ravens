@@ -42,7 +42,7 @@ class ObserversViewModel: ObservableObject {
             records = try JSONDecoder().decode([Observer].self, from: data)
             log.info("Loaded \(records.count) observers")
         } catch {
-            log.error("Error loading data observers.json - is empty")
+            log.info("Error loading data observers.json - is empty")
         }
     }
     

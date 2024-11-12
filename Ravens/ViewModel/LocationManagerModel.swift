@@ -11,11 +11,15 @@ import SwiftyBeaver
 
 class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegate {
   let log = SwiftyBeaver.self
+
   private let locationManager = CLLocationManager()
+
   @Published var location: CLLocation? = nil
   @Published var errorMessage: String? = nil
 
   @Published var heading: CLHeading? = nil
+
+  private var locationCompletion: ((CLLocation) -> Void)? = nil
 
   override init() {
     super.init()
@@ -27,43 +31,10 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
     self.locationManager.startUpdatingHeading()
   }
 
-  //?
-  func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-    self.heading = newHeading
-  }
-  
-  //?
-  func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
-    return true
-  }
-
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let latestLocation = locations.first else { return }
-    self.location = latestLocation
-  }
-
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    self.errorMessage = error.localizedDescription
-  }
-
   func getCurrentLocation() -> CLLocation? {
-    return self.location
+    return locationManager.location
   }
 
-  func checkLocation() -> Bool {
-    if let _ = self.errorMessage {
-      log.error("Location error.")
-      log.error("If in the simulator, make sure to set a location.")
-      return false
-    } else if let location = self.location {
-      log.info("Location is available.")
-      log.info("Location accuracy: \(location.horizontalAccuracy) meters")
-      let accuracyThreshold = 100.0 // Define your own accuracy threshold
-      return location.horizontalAccuracy < accuracyThreshold
-    } else {
-      log.error("Location is not available.")
-      return false
-    }
-  }
 }
+
 

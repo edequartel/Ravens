@@ -78,14 +78,14 @@ struct LoginView: View {
           }
           .padding(10)
 
-//          Button("Reset") {
-//            keyChainviewModel.token = ""
+          Button("Reset token") {
+            keyChainviewModel.token = ""
 //            keyChainviewModel.loginName = ""
 //            keyChainviewModel.password = ""
-//            keyChainviewModel.saveCredentials()
-//            keyChainviewModel.retrieveCredentials()
-//          }
-//          .buttonStyle(.bordered)
+            keyChainviewModel.saveCredentials()
+            keyChainviewModel.retrieveCredentials()
+          }
+          .buttonStyle(.bordered)
 
           if keyChainviewModel.loginFailed {
             Text("Login failed")
@@ -113,6 +113,9 @@ struct LoginView: View {
 //      Section("Credentials") {
 //        DisplayCredentialsView()
 //      }
+    }
+    .onAppear {
+      log.error("LoginView appeared")
     }
   }
 }

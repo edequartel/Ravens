@@ -125,7 +125,7 @@ class ObservationsViewModel: ObservableObject {
         }
       } else {
         // Handle the case where either the date or time is nil
-        print("Error: Missing date or time for index \(index)")
+        log.error("Error: Missing date or time for index \(index)")
       }
     }
   }

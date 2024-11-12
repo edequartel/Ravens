@@ -48,16 +48,30 @@ struct SplashView: View {
         .frame(width: 100, height: 100)
     }
 
-
-    .onChange(of: keyChainviewModel.token.isEmpty) { _ in
-      log.info("--------->>token changed")
-      loadData() //laadqData When token is not empty
+    .onChange(of: keyChainviewModel.token.isEmpty) { oldValue, newValue in
+        if !newValue { // `newValue` is false when the token is not empty
+            log.error("Token detected, loading data")
+            loadData()
+        } else {
+            log.error("Token not found, waiting for login")
+        }
     }
 
+//    .onChange(of: keyChainviewModel.token.isEmpty) { isTokenEmpty in
+//      if !isTokenEmpty {
+//        log.error("Token detected, loading data")
+//        loadData()
+//      } else {
+//        log.error("Token not found, waiting for login")
+//      }
+//    }
+
     .onAppear {
-      log.info("*** NEW LAUNCHING SPLASHVIEW ***")
-      CLLocationManager().requestWhenInUseAuthorization()
-      loadData()
+      log.error("*** NEW LAUNCHING SPLASHVIEW ***")
+
+      if !keyChainviewModel.token.isEmpty {
+        loadData()
+      }
     }
   }
 
@@ -111,9 +125,9 @@ struct SplashView: View {
     speciesViewModel.fetchDataFirst(
       settings: settings,
       completion: {
-        print("speciesViewModel First language data loaded")
+        log.info("speciesViewModel First language data loaded")
         speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-          print("html is parsed from start")
+          log.info("html is parsed from start")
           isFirstLanguageDataLoaded = true
           checkDataLoaded()
         })
@@ -136,28 +150,25 @@ struct SplashView: View {
         settings.userName = userViewModel.user?.name ?? ""
       })
 
-    if locationManagerModel.checkLocation() {
-      let location = locationManagerModel.getCurrentLocation()
-      //get the location
-      locationIdViewModel.fetchLocations(
-        latitude: location?.coordinate.latitude ?? 0,
-        longitude: location?.coordinate.longitude ?? 0,
-        completion: { fetchedLocations in
-          log.info("locationIdViewModel data loaded")
-          // Use fetchedLocations here //actually it is one location
-          settings.locationName = fetchedLocations[0].name
-          for location in fetchedLocations {
-            log.error("location \(location)")
-          }
-          print("locationIdViewModel data loaded")
-          isLocationIdDataLoaded = true
-          checkDataLoaded()
-        })
-    }
-
+    let location = locationManagerModel.getCurrentLocation()
+    //get the location
+    locationIdViewModel.fetchLocations(
+      latitude: location?.coordinate.latitude ?? 0,
+      longitude: location?.coordinate.longitude ?? 0,
+      completion: { fetchedLocations in
+        log.error("locationIdViewModel data loaded")
+        // Use fetchedLocations here //actually it is one location
+        settings.locationName = fetchedLocations[0].name
+        for location in fetchedLocations {
+          log.error("location \(location)")
+        }
+        log.error("locationIdViewModel data loaded")
+        isLocationIdDataLoaded = true
+        checkDataLoaded()
+      })
   }
-
 }
+
 
 struct AnotherView: View {
   @ObservedObject var viewModel: KeychainViewModel

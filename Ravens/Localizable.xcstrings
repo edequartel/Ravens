@@ -690,6 +690,7 @@
       }
     },
     "Login waarneming.nl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1030,6 +1031,9 @@
         }
       }
     },
+    "Ravens" : {
+
+    },
     "Region" : {
 
     },
@@ -1081,6 +1085,9 @@
 
     },
     "Remove from areas" : {
+
+    },
+    "Reset token" : {
 
     },
     "Results %lld/%lld" : {
