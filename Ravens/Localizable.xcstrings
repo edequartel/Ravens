@@ -927,6 +927,7 @@
       }
     },
     "Observers" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

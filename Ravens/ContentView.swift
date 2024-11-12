@@ -14,6 +14,7 @@ import UserNotifications
 struct ContentView: View {
   let log = SwiftyBeaver.self
   @State private var dataLoaded = false
+
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   init() {
@@ -48,7 +49,7 @@ struct ContentView: View {
             log.info("dataLoaded")
           }
       } else {
-        SplashScreen(dataLoaded: $dataLoaded)
+        SplashView(dataLoaded: $dataLoaded)
           .onAppear() {
             log.info("SplashScreen")
           }
@@ -58,201 +59,6 @@ struct ContentView: View {
 }
 
 
-struct RavensView: View {
-  let log = SwiftyBeaver.self
-  @EnvironmentObject var settings: Settings
-  @State private var selectedSpeciesID: Int?
-
-  @EnvironmentObject var notificationsManager: NotificationsManager
-
-  var body: some View {
-    VStack {
-      TabView {
-        // Tab 2
-        TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text("Us")
-          Image(systemSymbol: .person2Fill)
-        }
-        // Tab 1
-        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text("Area")
-          Image(systemSymbol: SFAreaFill)
-        }
-        // Tab 3
-        TabSpeciesView(
-          selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text("Species")
-          Image(systemSymbol: .tree)
-        }
-        // Tab 4
-        SettingsView()
-          .tabItem {
-            Text("Settings")
-            Image(systemSymbol: .gearshape)
-          }
-      }
-
-      .sheet(item: $selectedSpeciesID) { item in
-        SpeciesDetailsView(speciesID: item)
-      }
-      .onAppear() {
-        log.error("*** NEW LAUNCHING RAVENS ***")
-      }
-    }
-  }
-}
-
-
-struct SplashScreen: View {
-  let log = SwiftyBeaver.self
-
-  @Binding var dataLoaded: Bool
-
-  @EnvironmentObject var locationManagerModel: LocationManagerModel
-  @EnvironmentObject var settings: Settings
-  @EnvironmentObject var languagesViewModel: LanguagesViewModel
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel
-  @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
-  @EnvironmentObject var regionsViewModel: RegionsViewModel
-  @EnvironmentObject var regionListViewModel: RegionListViewModel
-  @EnvironmentObject var userViewModel: UserViewModel
-  @EnvironmentObject var keychainViewModel: KeychainViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
-  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-
-  @State private var isLanguageDataLoaded = false
-  @State private var isFirstLanguageDataLoaded = false
-  @State private var isSecondLanguageDataLoaded = false
-  @State private var isSpeciesGroupDataLoaded = false
-  @State private var isRegionDataLoaded = false
-  @State private var isRegionListDataLoaded = false
-  @State private var isUserDataLoaded = false
-  @State private var isObservationsLocationDataLoaded = false
-  @State private var isLocationIdDataLoaded = false
-  @State private var isGeoJSONDataLoaded = false
-
-  var body: some View {
-    VStack {
-      LottieView(lottieFile: "dataloading.json")
-        .frame(width: 100, height: 100)
-    }
-    .onAppear {
-      log.info("*** NEW LAUNCHING SPLASHSCREEN ***")
-
-//            keychainViewModel.fetchToken(
-//              settings: settings,
-//              completion: {
-//                log.info("keychainViewModel token data loaded")
-//              })
-
-      CLLocationManager().requestWhenInUseAuthorization()
-
-      languagesViewModel.fetchLanguageData(
-        settings: settings,
-        completion: {
-          log.info("languagesViewModel Language data loaded")
-          isLanguageDataLoaded = true
-          checkDataLoaded()
-        })
-
-      speciesGroupViewModel.fetchData(
-        settings: settings,
-        completion: {
-          log.info("speciesGroupViewModel group data loaded")
-          isSpeciesGroupDataLoaded = true
-          checkDataLoaded()
-        })
-
-      regionsViewModel.fetchData(
-        settings: settings,
-        completion: {
-          log.info("regionsViewModel data loaded")
-          isRegionDataLoaded = true
-          checkDataLoaded()
-        })
-
-      regionListViewModel.fetchData(
-        settings: settings,
-        completion: {
-          log.info("regionListViewModel data loaded")
-          isRegionListDataLoaded = true
-          checkDataLoaded()
-        })
-
-      speciesViewModel.fetchDataFirst(
-        settings: settings,
-        completion: {
-          print("speciesViewModel First language data loaded")
-          speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-            print("html is parsed from start")
-            isFirstLanguageDataLoaded = true
-            checkDataLoaded()
-          })
-        })
-
-      speciesViewModel.fetchDataSecondLanguage(
-        settings: settings,
-        completion: {
-          log.info("speciesViewModel Second language data loaded")
-          isSecondLanguageDataLoaded = true
-          checkDataLoaded()
-        })
-
-      userViewModel.fetchUserData(
-        settings: settings,
-        completion: {
-          log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-          isUserDataLoaded = true
-          settings.userId = userViewModel.user?.id ?? 0
-          settings.userName = userViewModel.user?.name ?? ""
-        })
-
-      if locationManagerModel.checkLocation() {
-        let location = locationManagerModel.getCurrentLocation()
-        //get the location
-        locationIdViewModel.fetchLocations(
-          latitude: location?.coordinate.latitude ?? 0,
-          longitude: location?.coordinate.longitude ?? 0,
-          completion: { fetchedLocations in
-            log.info("locationIdViewModel data loaded")
-            // Use fetchedLocations here //actually it is one location
-            settings.locationName = fetchedLocations[0].name
-            for location in fetchedLocations {
-              log.error("location \(location)")
-            }
-            print("locationIdViewModel data loaded")
-            isLocationIdDataLoaded = true
-          })
-      }
-    }
-  }
-
-  private func checkDataLoaded() {
-    if isFirstLanguageDataLoaded &&
-        isSecondLanguageDataLoaded &&
-        isSpeciesGroupDataLoaded &&
-        isLanguageDataLoaded &&
-        isRegionDataLoaded &&
-        isRegionListDataLoaded &&
-        isUserDataLoaded &&
-        isLocationIdDataLoaded
-    {
-      self.dataLoaded = true
-    }
-  }
-}
-
-struct AnotherView: View {
-  @ObservedObject var viewModel: KeychainViewModel
-
-  var body: some View {
-    Text("Token: \(viewModel.token)")
-  }
-}
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
@@ -260,6 +66,4 @@ struct ContentView_Previews: PreviewProvider {
       .environmentObject(Settings())
   }
 }
-
-
 

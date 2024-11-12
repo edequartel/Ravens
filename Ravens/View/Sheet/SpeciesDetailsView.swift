@@ -56,9 +56,9 @@ struct SpeciesDetailsView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .padding(.horizontal)
+//                                .padding(.horizontal)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding()
+//                                .padding()
                                 .islandBackground()
                         }
 

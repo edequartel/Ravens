@@ -8,6 +8,24 @@
 import SwiftUI
 import SwiftyBeaver
 import Kingfisher
+//import LazyPager
+
+
+//struct PhotoGridView: View {
+//  @State var photos: [String] = []
+//  var body: some View {
+////    LazyPager(pageSize: CGSize(width: 100, height: 100)) { page in
+//      ForEach(photos, id: \.self) { photo in
+//        KFImage(URL(string: photo))
+//          .resizable()    // Make the image resizable
+//          .aspectRatio(contentMode: .fill)
+//          .frame(width: 100, height: 100)
+//          .clipShape(RoundedRectangle(cornerRadius: 8))
+//          .padding(4)
+////      }
+//    }
+//  }
+//}
 
 struct PhotoGridView: View {
   @State var photos: [String] = []
@@ -39,7 +57,7 @@ struct PhotoGridView: View {
             }
             .padding(4)
             .sheet(item: $imageURLStr) { imageURLStr in
-              MyImageView(stringURL: imageURLStr)
+              MyImageView(stringURL: imageURLStr) //<< to a lazypager!!!
                 .presentationDragIndicator(.visible)
             }
         }
@@ -47,6 +65,21 @@ struct PhotoGridView: View {
     }
   }
 }
+
+//struct PhotosView: View {
+//  @State var photos: [String] = []
+//  @Binding var imageURLStr: String?
+//
+//  var body: some View {
+//    VStack {
+////      LazyVGrid(columns: columns, spacing: 16) {
+//        ForEach(photos, id: \.self) { photo in
+//          Text(URL(string: photo)
+////        }
+//      }
+//    }
+//  }
+//}
 
 
 struct PhotoGridView_Previews: PreviewProvider {

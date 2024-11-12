@@ -126,6 +126,9 @@
 		47AB45982CE2040700842877 /* user.json in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45972CE2040400842877 /* user.json */; };
 		47AB459A2CE2042100842877 /* species.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45992CE2042100842877 /* species.json */; };
 		47AB459C2CE2055A00842877 /* observation.json in Sources */ = {isa = PBXBuildFile; fileRef = 47AB459B2CE2055A00842877 /* observation.json */; };
+		47AB459F2CE262C900842877 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 47AB459E2CE262C900842877 /* LazyPager */; };
+		47AB45A12CE3276500842877 /* RavensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A02CE3276000842877 /* RavensView.swift */; };
+		47AB45A32CE327AD00842877 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A22CE327A300842877 /* SplashView.swift */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AC7D692CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
@@ -256,6 +259,8 @@
 		47AB45972CE2040400842877 /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		47AB45992CE2042100842877 /* species.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = species.json; sourceTree = "<group>"; };
 		47AB459B2CE2055A00842877 /* observation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = observation.json; sourceTree = "<group>"; };
+		47AB45A02CE3276000842877 /* RavensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensView.swift; sourceTree = "<group>"; };
+		47AB45A22CE327A300842877 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AC7D682CBCEF1800B1E929 /* ObservationSpeciesByIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationSpeciesByIDView.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
@@ -291,6 +296,7 @@
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
+				47AB459F2CE262C900842877 /* LazyPager in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +361,8 @@
 				474C40802B4D17AA0038B3A5 /* ViewModel */,
 				474C40822B4D17C00038B3A5 /* View */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
+				47AB45A22CE327A300842877 /* SplashView.swift */,
+				47AB45A02CE3276000842877 /* RavensView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
 				4781539C2B57C166005F87CC /* Localizable.xcstrings */,
@@ -531,8 +539,8 @@
 		476AC6E82C9A930000DB8CA8 /* Obs */ = {
 			isa = PBXGroup;
 			children = (
-				4719C36B2C944F47000A11D1 /* ObservationListView.swift */,
 				478262632C88203400DD746C /* ObsDetailView.swift */,
+				4719C36B2C944F47000A11D1 /* ObservationListView.swift */,
 				478262652C897B7000DD746C /* ObsDetailsRowView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4738B6402BF4E7C900BF7557 /* ObsView.swift */,
@@ -613,6 +621,7 @@
 				4793A5872C286AF0002739B6 /* SwiftSoup */,
 				47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */,
 				475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */,
+				47AB459E2CE262C900842877 /* LazyPager */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -658,6 +667,7 @@
 				47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 				471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				47AB459D2CE262C900842877 /* XCRemoteSwiftPackageReference "LazyPager" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -731,6 +741,7 @@
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				47826CC12BF62DBB003E8F21 /* WikipediaViewModel.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
+				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
@@ -801,6 +812,7 @@
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
 				4767F0012BF251C200BACDC6 /* TabLocationView.swift in Sources */,
+				47AB45A32CE327AD00842877 /* SplashView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 				475242712C2D88B900DBBD0B /* HTMLViewModel.swift in Sources */,
@@ -1128,6 +1140,14 @@
 				minimumVersion = 2.7.2;
 			};
 		};
+		47AB459D2CE262C900842877 /* XCRemoteSwiftPackageReference "LazyPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gh123man/LazyPager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 		47C620CD2CA6758C007241F4 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer.git";
@@ -1204,6 +1224,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4793A5862C286AF0002739B6 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		47AB459E2CE262C900842877 /* LazyPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47AB459D2CE262C900842877 /* XCRemoteSwiftPackageReference "LazyPager" */;
+			productName = LazyPager;
 		};
 		47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */ = {
 			isa = XCSwiftPackageProductDependency;

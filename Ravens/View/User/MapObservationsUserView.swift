@@ -50,13 +50,13 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: ObserversView()) {
-                    Label("Observers", systemImage: "list.bullet")
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                NavigationLink(destination: ObserversView()) {
+//                    Label("Observers", systemImage: "list.bullet")
+//                }
+//            }
+//        }
 
         .onAppear {
             if settings.initialUsersLoad {

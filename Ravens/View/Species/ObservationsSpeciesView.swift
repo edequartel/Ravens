@@ -38,7 +38,7 @@ struct ObservationsSpeciesView: View {
 
         HStack {
           Image(systemSymbol: .circleFill)
-            .uniformSize()
+//            .uniformSize()
             .foregroundColor(rarityColor(value: item.rarity))
 
           Text("\(item.name)")
