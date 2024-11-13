@@ -24,7 +24,6 @@ struct MapObservationsLocationView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var poiViewModel: POIViewModel
 
-//  @State private var currentFilteringOption: FilteringOption = .all
 
   var body: some View {
     VStack {
@@ -32,8 +31,6 @@ struct MapObservationsLocationView: View {
         Map(position: $settings.cameraAreaPosition) {
           UserAnnotation()
 
-          //                      POI
-          //                        if (settings.poiOn) {
           ForEach(areasViewModel.records, id: \.id) { record in
             Annotation(record.name,
                        coordinate: CLLocationCoordinate2D(
@@ -49,8 +46,6 @@ struct MapObservationsLocationView: View {
                             )
                         }
           }
-          //                        }
-
 
           // location observations
           ForEach(observationsLocationViewModel.locations)//.filter { $0.rarity == $currentFilteringOption.wrappedValue.rawValue})
@@ -86,7 +81,9 @@ struct MapObservationsLocationView: View {
               count: observationsLocationViewModel.locations.count,
               results: observationsLocationViewModel.count)
           }
+
           .padding(5)
+          .frame(maxWidth: .infinity)
           .foregroundColor(.obsGreenFlower)
           .background(Color.obsGreenEagle.opacity(0.5))
         }

@@ -92,16 +92,14 @@ struct SearchLocationView: View {
   @State private var locationID: Int = 0
   @State private var isFocused: Bool = true
   @State private var isLoading = false // Loading indicator
+  @FocusState private var isSearchFieldFocused: Bool
+
 
   var body: some View {
     if showView { Text("SearchLocationView").font(.customTiny) }
     Form {
-
-      //      VStack {
-      //      Section(header: Text("Search for a location")) {
       HStack {
         TextField("Search", text: $searchText, onCommit: {
-          print("Searching for locations with: \(searchText)")
           isLoading = true
           viewModel.fetchLocations(searchString: searchText) { success in
             isLoading = false
@@ -114,11 +112,21 @@ struct SearchLocationView: View {
         })
         .autocapitalization(.none)
         .disableAutocorrection(true)
-//        .textFieldStyle(SearchTextFieldStyle())
+        .focused($isSearchFieldFocused) // Bind the focus state here
+        .padding(.leading, 30) // Space for the image
+            .overlay(
+              Image(systemSymbol: .magnifyingglass)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 5),
+                alignment: .leading
+            )
 
         if isLoading {
           ProgressView().padding(.leading, 5) // Visual loading indicator
         }
+      }
+      .onAppear {
+        isSearchFieldFocused = true // Set the focus state on appear
       }
 
       Section(header: Text("Search results")) {
@@ -169,21 +177,3 @@ struct SearchLocationView_Previews: PreviewProvider {
   }
 }
 
-//struct SearchATextFieldStyle: TextFieldStyle {
-//  func _body(configuration: TextField<Self._Label>) -> some View {
-//    HStack {
-//      // Add the image inside the TextField
-//      Image(systemName: "magnifyingglass")
-//        .foregroundColor(.gray)
-//        .padding(.leading, 8)
-//      // Apply the configuration (actual TextField)
-//      configuration
-//        .padding(8)
-//    }
-//    .background(
-//      RoundedRectangle(cornerRadius: 8)
-//        .stroke(Color.gray, lineWidth: 1)
-//    )
-//    // .frame(height: 40) // Ensures the height of the custom TextField
-//  }
-//}

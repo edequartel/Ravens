@@ -474,17 +474,6 @@ extension Image {
 }
 
 
-//extension View {
-//  func islandBackground(cornerRadius: CGFloat = 4, shadowRadius: CGFloat = 2) -> some View {
-//    self
-//      .background(
-//        RoundedRectangle(cornerRadius: cornerRadius)
-//          .fill(Color(.systemBackground))
-//          .shadow(radius: shadowRadius)
-//      )
-//  }
-//}
-
 extension View {
     func islandBackground(cornerRadius: CGFloat = 8, shadowRadius: CGFloat = 2) -> some View {
         self

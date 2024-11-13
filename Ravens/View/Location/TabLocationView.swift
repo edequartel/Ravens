@@ -36,8 +36,6 @@ struct TabLocationView: View {
           ObservationsLocationView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
-      //            .navigationTitle(settings.locationName)
-//      .navigationBarTitleDisplayMode(.inline)
 
       .toolbar {
         if !settings.accessibility {
@@ -56,7 +54,8 @@ struct TabLocationView: View {
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
             log.error("getMyLocation")
-            if let location = locationManager.location {
+
+            if let location = locationManager.getCurrentLocation() {
               log.error("Lat \(location.coordinate.latitude)")
               log.error("Long \(location.coordinate.longitude)")
 
@@ -71,7 +70,6 @@ struct TabLocationView: View {
             } else {
               log.error("Retrieving location...")
             }
-
           }) {
             Image(systemName: "smallcircle.filled.circle")
               .uniformSize()
@@ -102,7 +100,6 @@ struct TabLocationView: View {
               .uniformSize()
               .accessibility(
                 label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
-//              .buttonStyle(ClearButtonStyle())
           }
         }
 
@@ -112,7 +109,6 @@ struct TabLocationView: View {
               .uniformSize()
               .accessibility(label: Text("Search"))
           }
-//          .buttonStyle(ClearButtonStyle())
         }
 
 
@@ -123,7 +119,6 @@ struct TabLocationView: View {
               .accessibility(label: Text("Areas"))
           }
           .accessibility(label: Text("Areas List"))
-//          .buttonStyle(ClearButtonStyle())
         }
 
       }
