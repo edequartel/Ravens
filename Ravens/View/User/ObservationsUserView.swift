@@ -41,7 +41,7 @@ struct ObservationsUserView: View {
         HorizontalLine()
         ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .user)
       } else {
-        ProgressView()
+        NoObservationsView()
       }
     }
 

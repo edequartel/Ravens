@@ -12,7 +12,7 @@ struct LocationManagerView: View {
 
     var body: some View {
         VStack {
-            if let location = locationManager.location {
+            if let location = locationManager.getCurrentLocation() {
                 HStack() {
                     Text("GPS ")
                         .bold()
@@ -25,16 +25,6 @@ struct LocationManagerView: View {
             } else {
                 Text("Retrieving location...")
             }
-            
-//            Button(action: {
-//                if let currentLocation = locationManager.getCurrentLocation() {
-//                    print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
-//                } else {
-//                    print("Location not available")
-//                }
-//            }) {
-//                Text("Get Current Location")
-//            }
         }
         .font(.caption2)
     }

@@ -106,7 +106,7 @@ struct ObservationsSpeciesView: View {
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
             .environmentObject(Settings()) // Pass environment object
         } else {
-          ProgressView()
+          NoObservationsView()
         }
       }
 

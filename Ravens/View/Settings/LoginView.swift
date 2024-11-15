@@ -78,14 +78,14 @@ struct LoginView: View {
           }
           .padding(10)
 
-          Button("Reset token") {
-            keyChainviewModel.token = ""
+//          Button("Reset token") {
+//            keyChainviewModel.token = ""
 //            keyChainviewModel.loginName = ""
 //            keyChainviewModel.password = ""
-            keyChainviewModel.saveCredentials()
-            keyChainviewModel.retrieveCredentials()
-          }
-          .buttonStyle(.bordered)
+//            keyChainviewModel.saveCredentials()
+//            keyChainviewModel.retrieveCredentials()
+//          }
+//          .buttonStyle(.bordered)
 
           if keyChainviewModel.loginFailed {
             Text("Login failed")
@@ -129,8 +129,7 @@ struct InfoObservationView: View {
         [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen \
         die door heel Nederland en België worden doorgegeven.
 
-        De website van Ravens kun je vinden op [Ravens](https://edequartel.github.io/Ravens/). \
-        De handleiding van Ravens kun je vinden op [Handleiding](https://edequartel.github.io/Ravens/images/manual.pdf).
+        Meer informatie over Ravens kun je vinden op [github](https://edequartel.github.io/Ravens/).
 
         Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
         """

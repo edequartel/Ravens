@@ -77,6 +77,7 @@ struct SettingsView: View {
             
           }
         }
+
         Section("Map") {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
@@ -84,14 +85,19 @@ struct SettingsView: View {
             }
           }
           .pickerStyle(SegmentedPickerStyle())
+          .padding(0)
         }
+
+
         Section(header: Text("App details")) {
           VStack(alignment: .leading) {
             Text(version())
             Text(locale.description)
           }
           .font(.footnote)
+          .padding(4)
         }
+
         Section(header: Text("Location")) {
           VStack {
             LocationManagerView()
