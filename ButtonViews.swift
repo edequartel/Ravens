@@ -66,7 +66,7 @@ struct AreaButtonView: View {
         areasViewModel.appendRecord(
           areaName: obs.locationDetail?.name ?? "unknown",
           areaID: obs.locationDetail?.id ?? 0,
-          latitude: obs.point.coordinates[1], //!!?
+          latitude: obs.point.coordinates[1], 
           longitude: obs.point.coordinates[0]
         )
       }

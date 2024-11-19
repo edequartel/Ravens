@@ -154,8 +154,8 @@ struct NoObservationsView: View {
         .padding() // Adds padding around VStack content
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Expands VStack to fill parent
         .background(Color(.systemBackground)) // Optional: Sets background color
-        .cornerRadius(12) // Optional: Adds rounded corners
-        .shadow(radius: 5) // Optional: Adds shadow for depth
+//        .cornerRadius(12) // Optional: Adds rounded corners
+//        .shadow(radius: 5) // Optional: Adds shadow for depth
         .multilineTextAlignment(.center) // Centers text within Text view
     }
 }

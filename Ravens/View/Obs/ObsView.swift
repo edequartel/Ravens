@@ -120,7 +120,8 @@ struct ObsView: View {
   }
 
   func accessibilityObsDetail(obs: Observation) -> String {
-      let formattedDate = formatDateWithDayOfWeek(Date(), "12:34")
+//      let formattedDate = formatDateWithDayOfWeek(Date(), "12:34")
+      let formattedDate = convertStringToDate(obs.date)
       let speciesName = obs.speciesDetail.name
       let locationName = obs.locationDetail?.name ?? ""
       let number = obs.number

@@ -103,13 +103,13 @@ struct TabLocationView: View {
           }
         }
 
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: SearchLocationView()) {
-            Image(systemSymbol: .magnifyingglass)
-              .uniformSize()
-              .accessibility(label: Text("Search"))
-          }
-        }
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          NavigationLink(destination: SearchLocationView()) {
+//            Image(systemSymbol: .magnifyingglass)
+//              .uniformSize()
+//              .accessibility(label: Text("Search"))
+//          }
+//        }
 
 
         ToolbarItem(placement: .navigationBarTrailing) {
