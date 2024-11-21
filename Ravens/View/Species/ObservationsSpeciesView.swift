@@ -38,54 +38,54 @@ struct ObservationsSpeciesView: View {
 
         HStack {
           Image(systemSymbol: .circleFill)
-            .uniformSize()
+//            .uniformSize()
             .foregroundColor(rarityColor(value: item.rarity))
 
           Text("\(item.name)")
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-          Spacer()
+//          Spacer()
 
           Button(action: {
             selectedSpeciesID = item.speciesId
           }  ) { Image(systemSymbol: .infoCircle)
-              .uniformSize()
+//              .uniformSize()
           }
-
-          Button(action: {
-            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-              print("bookmarks remove")
-              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-            } else {
-              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-              print("bookmarks append")
-            }
-
-          } ) {
-            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-              .uniformSize()
-          }
+          Spacer()
+//          Button(action: {
+//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+//              print("bookmarks remove")
+//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
+//            } else {
+//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
+//              print("bookmarks append")
+//            }
+//
+//          } ) {
+//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
+//              .uniformSize()
+//          }
 
         }
 
-        VStack {
-          HStack {
-            Text(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
-              .foregroundColor(.gray)
-              .font(.footnote)
-            Spacer()
-          }
-          HStack{
-            Text("\(item.scientificName)")
-              .foregroundColor(.gray)
-              .font(.footnote)
-              .italic()
-              .lineLimit(1) // Set the maximum number of lines to 1
-              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-            Spacer()
-          }
-        }
+//        VStack {
+//          HStack {
+//            Text(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
+//              .foregroundColor(.gray)
+//              .font(.footnote)
+//            Spacer()
+//          }
+//          HStack{
+//            Text("\(item.scientificName)")
+//              .foregroundColor(.gray)
+//              .font(.footnote)
+//              .italic()
+//              .lineLimit(1) // Set the maximum number of lines to 1
+//              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+//            Spacer()
+//          }
+//        }
       }
       .padding(.horizontal,10)
       .accessibilityElement(children: .combine)
@@ -102,11 +102,11 @@ struct ObservationsSpeciesView: View {
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
           if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
-          HorizontalLine() //@@@
+          HorizontalLine() 
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
             .environmentObject(Settings()) // Pass environment object
         } else {
-          ProgressView()
+          NoObservationsView()
         }
       }
 

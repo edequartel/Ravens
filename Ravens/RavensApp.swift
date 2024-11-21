@@ -88,7 +88,7 @@ struct RavensApp: App {
     WindowGroup {
       ContentView()
         .environmentObject(keychainViewModel)
-        .environmentObject(locationManager)
+        .environmentObject(locationManager) //<<location
         .environmentObject(settings)
         .environmentObject(languagesViewModel)
         .environmentObject(speciesViewModel)
@@ -136,9 +136,12 @@ struct RavensApp: App {
         }
         .onAppear {
 //          notificationsManager.requestNotificationPermission()
-//          timerManager.setNotificationsManager(notificationsManager)
+//          timerManager.setNotificationsManager(notificationsManager)  
+//          print("\(String(describing: locationManager.getCurrentLocation()))")
         }
     }
   }
 
 }
+
+

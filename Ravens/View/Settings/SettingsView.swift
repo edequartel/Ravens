@@ -30,8 +30,10 @@ struct SettingsView: View {
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink(destination: LoginView()) {
-          Text("Login")
+        Section(header: Text("Ravens")) {
+          NavigationLink(destination: LoginView()) {
+            Text("Login")
+          }
         }
         //      LoginView()
         
@@ -44,12 +46,12 @@ struct SettingsView: View {
         .pickerStyle(.inline)
         .onChange(of: settings.selectedInBetween) {
         }
-        
-        //edit: 27052024
+
+        Section("Language") {
+          LanguageView()
+        }
+
         Section("Species") {
-          //
-//          LanguageView()
-          
           Picker("Group", selection: $settings.selectedSpeciesGroupId) {
             ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
               Text("\(speciesGroup.name)").tag(speciesGroup.id)
@@ -75,6 +77,7 @@ struct SettingsView: View {
             
           }
         }
+
         Section("Map") {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
@@ -82,14 +85,19 @@ struct SettingsView: View {
             }
           }
           .pickerStyle(SegmentedPickerStyle())
+          .padding(0)
         }
+
+
         Section(header: Text("App details")) {
           VStack(alignment: .leading) {
             Text(version())
             Text(locale.description)
           }
           .font(.footnote)
+          .padding(4)
         }
+
         Section(header: Text("Location")) {
           VStack {
             LocationManagerView()

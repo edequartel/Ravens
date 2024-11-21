@@ -34,16 +34,6 @@
         }
       }
     },
-    "%@ %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld"
-          }
-        }
-      }
-    },
     "%lld" : {
       "localizations" : {
         "nl" : {
@@ -690,6 +680,7 @@
       }
     },
     "Login waarneming.nl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -927,6 +918,7 @@
       }
     },
     "Observers" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1029,6 +1021,9 @@
         }
       }
     },
+    "Ravens" : {
+
+    },
     "Region" : {
 
     },
@@ -1125,9 +1120,6 @@
       }
     },
     "Search" : {
-
-    },
-    "Search results" : {
 
     },
     "Search Wikipedia" : {

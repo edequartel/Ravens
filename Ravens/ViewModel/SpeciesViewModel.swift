@@ -22,11 +22,11 @@ class SpeciesViewModel: ObservableObject {
   var datum: String = ""
 
   func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
-    print("(settings.parseHTMLFromURL)")
-    print("groupID \(settings.selectedSpeciesGroupId)")
+    log.info("(settings.parseHTMLFromURL)")
+    log.info("groupID \(settings.selectedSpeciesGroupId)")
 
     let urlString = "https://waarneming.nl/recent-species/?species_group=\(settings.selectedSpeciesGroupId)"
-    print("parsing... urlString: \(urlString)")
+    log.info("parsing... urlString: \(urlString)")
 
     // Continue with your URL session or network request setup here
     let headers: HTTPHeaders = [
@@ -85,7 +85,7 @@ class SpeciesViewModel: ObservableObject {
       }
 
       // Re-assign the updated array to trigger automatic updates
-print("Re-assign the updated array to trigger automatic updates")
+    log.info("Re-assign the updated array to trigger automatic updates")
       species = updatedSpecies
     objectWillChange.send()
   }

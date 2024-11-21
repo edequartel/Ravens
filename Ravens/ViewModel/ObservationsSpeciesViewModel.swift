@@ -86,7 +86,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
                     }
                 }
             case .failure(let error):
-                self.log.error("Error ObservationsSpeciesViewModel: \(error)")
+                self.log.info("Error ObservationsSpeciesViewModel: \(error)")
             }
         }
     }
@@ -110,11 +110,11 @@ class ObservationsSpeciesViewModel: ObservableObject {
           observationsSpecies?.results[index].timeDate = formattedDate
         } else {
           // Handle error if the date string could not be parsed
-          print("Error: Could not parse date string \(timeDateStr)")
+          log.info("Error: Could not parse date string \(timeDateStr)")
         }
       } else {
         // Handle the case where either the date or time is nil
-        print("Error: Missing date or time for index \(index)")
+        log.info("Error: Missing date or time for index \(index)")
       }
     }
   }

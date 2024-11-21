@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct UserView: View {
+    let log = SwiftyBeaver.self
+
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
@@ -32,7 +35,7 @@ struct UserView: View {
             }
         }
         .onAppear {
-          userViewModel.fetchUserData(settings: settings, completion: { print("UserView onAppear")})
+          userViewModel.fetchUserData(settings: settings, completion: { log.info("UserView onAppear")})
         }
     }
 }

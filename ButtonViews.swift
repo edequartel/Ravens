@@ -66,7 +66,7 @@ struct AreaButtonView: View {
         areasViewModel.appendRecord(
           areaName: obs.locationDetail?.name ?? "unknown",
           areaID: obs.locationDetail?.id ?? 0,
-          latitude: obs.point.coordinates[1], //!!?
+          latitude: obs.point.coordinates[1], 
           longitude: obs.point.coordinates[0]
         )
       }
@@ -134,7 +134,7 @@ struct BookmarkButtonView: View {
     }
     .tint(colorOn ? .obsBookmark : nil)
     .accessibility(label: Text("Add bookmark"))
-//    .buttonStyle(ClearButtonStyle())
+    .background(Color.clear)
   }
 }
 

@@ -28,7 +28,7 @@ class GeoJSONViewModel: ObservableObject {
                        let jsonData = try? JSONSerialization.data(withJSONObject: data),
                        let geoJSON = try? MKGeoJSONDecoder().decode(jsonData) {
                         self.polyOverlays =  self.parseGeoJSON(geoJSON)
-//                        self.getSpan()
+                        self.getSpan() //deze vergeten 19nov24
                         completion()
                     }
             case .failure(let error):
@@ -84,7 +84,7 @@ class GeoJSONViewModel: ObservableObject {
             latitudeDelta: span.latitudeDelta,
             longitudeDelta: span.longitudeDelta)
         
-        
+//        print("")
         let region = MKCoordinateRegion(center: center, span: span)
         return MapCameraPosition.region(region)
     }

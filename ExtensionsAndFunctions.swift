@@ -475,15 +475,17 @@ extension Image {
 
 
 extension View {
-  func islandBackground(cornerRadius: CGFloat = 4, shadowRadius: CGFloat = 2) -> some View {
-    self
-      .background(
-        RoundedRectangle(cornerRadius: cornerRadius)
-          .fill(Color(.systemBackground))
-          .shadow(radius: shadowRadius)
-      )
-  }
+    func islandBackground(cornerRadius: CGFloat = 8, shadowRadius: CGFloat = 2) -> some View {
+        self
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.gray.opacity(0.1)) // Light gray background with opacity
+                    .shadow(radius: shadowRadius)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+    }
 }
+
 
 struct ImageWithOverlay: View {
     var systemName: String

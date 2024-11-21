@@ -8,53 +8,64 @@
 import SwiftUI
 import SwiftyBeaver
 import Kingfisher
+import LazyPager
 
 struct PhotoGridView: View {
   @State var photos: [String] = []
-  @Binding var imageURLStr: String?
-
-  @State private var zoomScale: CGFloat = 1.0
-  @State private var dragOffset: CGSize = .zero
-  @State private var finalOffset: CGSize = .zero
-
   @State private var isImagePresented = false
 
-  let columns = [
-    GridItem(.flexible()), // First column
-    GridItem(.flexible()), // Second column
-    GridItem(.flexible())  // Third column
+  let adaptiveColumns = [
+    GridItem(.adaptive(minimum: 100, maximum: 120), spacing: 16)
   ]
 
   var body: some View {
     ScrollView {
-      LazyVGrid(columns: columns, spacing: 16) {
+      LazyVGrid(columns: adaptiveColumns, spacing: 16) {
         ForEach(photos, id: \.self) { photo in
           KFImage(URL(string: photo))
-            .resizable()    // Make the image resizable
-            .aspectRatio(contentMode: .fill)
+            .resizable()
+            .scaledToFill()
             .frame(width: 100, height: 100)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .onTapGesture {
-              imageURLStr = photo
+              isImagePresented = true
             }
             .padding(4)
-            .sheet(item: $imageURLStr) { imageURLStr in
-              MyImageView(stringURL: imageURLStr)
-                .presentationDragIndicator(.visible)
-            }
         }
       }
+      .padding(.horizontal, 8)
+    }
+    .sheet(isPresented: $isImagePresented) {
+      PhotoGridViewLP(photos: photos)
+        .presentationDragIndicator(.visible)
     }
   }
 }
 
 
+struct PhotoGridViewLP: View {
+  @State var photos: [String] = []
+  var body: some View {
+    VStack {
+      LazyPager(data: photos) { photo in
+          KFImage(URL(string: photo))
+              .resizable()
+              .scaledToFit()
+      }
+      .zoomable(min: 1, max: 5)
+    }
+  }
+}
+
 struct PhotoGridView_Previews: PreviewProvider {
-    static var previews: some View {
-      PhotoGridView(photos: [
+  static var previews: some View {
+    PhotoGridView(
+      photos: [
         "https://waarneming.nl/media/photo/84399858.jpg",
         "https://waarneming.nl/media/photo/84399859.jpg",
-        "https://waarneming.nl/media/photo/84399860.jpg"],
-                    imageURLStr: .constant(""))
-    }
+        "https://waarneming.nl/media/photo/84399860.jpg"
+      ]
+    )
+  }
 }
+
