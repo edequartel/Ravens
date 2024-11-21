@@ -136,7 +136,7 @@ struct RavensApp: App {
         }
         .onAppear {
 //          notificationsManager.requestNotificationPermission()
-//          timerManager.setNotificationsManager(notificationsManager)
+//          timerManager.setNotificationsManager(notificationsManager)  
 //          print("\(String(describing: locationManager.getCurrentLocation()))")
         }
     }
