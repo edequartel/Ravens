@@ -36,6 +36,10 @@ struct ObsView: View {
     HStack {
       PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
 
+//      Text("\(obs.date) \(obs.time ?? "00:00")")
+//      Text("\(convertStringToFormattedDate(dateString: obs.date, timeString: obs.time ?? "") ?? "")")
+
+
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
@@ -101,7 +105,7 @@ struct ObsView: View {
 
     .accessibilityElement(children: .combine)
     .accessibilityLabel(accessibilityObsDetail(obs: obs))
-    .accessibilityHint("Tap voor meer details over Informatie over de waarneming.")
+    .accessibilityHint("Tap for more details about the observation information.")
 
 
     //trailing
@@ -120,19 +124,17 @@ struct ObsView: View {
   }
 
   func accessibilityObsDetail(obs: Observation) -> String {
-//      let formattedDate = formatDateWithDayOfWeek(Date(), "12:34")
-      let formattedDate = convertStringToDate(obs.date)
-      let speciesName = obs.speciesDetail.name
-      let locationName = obs.locationDetail?.name ?? ""
-      let number = obs.number
-      let userName = obs.userDetail?.name ?? ""
+    let formattedDate = convertStringToFormattedDate(dateString: obs.date, timeString: obs.time ?? "") ?? ""
+    let speciesName = obs.speciesDetail.name
+    let locationName = obs.locationDetail?.name ?? ""
+    let number = obs.number
+    let userName = obs.userDetail?.name ?? ""
 
-      let formattedString = "\(speciesName), \(locationName), \(formattedDate), \(number) keer. door \(userName)"
+    let formattedString = "\(speciesName), \(locationName), \(String(describing: formattedDate)), \(number) keer. door \(userName)"
 
-      return formattedString
+    return formattedString
   }
 }
-
 
 //struct ObsView_Previews: PreviewProvider {
 //    static var previews: some View {
@@ -140,4 +142,3 @@ struct ObsView: View {
 //        ObsView(obs: Observation(from: <#any Decoder#>))
 //    }
 //}
-

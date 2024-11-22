@@ -52,30 +52,60 @@ struct TabLocationView: View {
 
         //update my locationData
         ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            log.error("getMyLocation")
+            Button(action: {
+                log.info("getMyLocation")
 
-            if let location = locationManager.getCurrentLocation() {
-              log.error("Lat \(location.coordinate.latitude)")
-              log.error("Long \(location.coordinate.longitude)")
+                if let location = locationManager.getCurrentLocation() {
+                    log.info("Lat \(location.coordinate.latitude)")
+                    log.info("Long \(location.coordinate.longitude)")
 
-              settings.currentLocation = CLLocation(
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude
-              )
+                    settings.currentLocation = CLLocation(
+                        latitude: location.coordinate.latitude,
+                        longitude: location.coordinate.longitude
+                    )
 
-              fetchDataLocation(coordinate: location.coordinate)
-            } else if let errorMessage = locationManager.errorMessage {
-              log.error("Error: \(errorMessage)")
-            } else {
-              log.error("Retrieving location...")
+                    fetchDataLocation(coordinate: location.coordinate)
+                } else if let errorMessage = locationManager.errorMessage {
+                    log.error("Error: \(errorMessage)")
+                } else {
+                    log.error("Retrieving location...")
+                }
+            }) {
+                Image(systemName: "smallcircle.filled.circle")
+                    .uniformSize()
+                    .accessibilityLabel("Retrieve current location") // Accessibility label added here
+                    .accessibilityHint("Tap to fetch your current location")
             }
-          }) {
-            Image(systemName: "smallcircle.filled.circle")
-              .uniformSize()
-              .accessibility(label: Text("Update location"))
-          }
         }
+
+//        ToolbarItem(placement: .navigationBarLeading) {
+//          Button(action: {
+//            log.info("getMyLocation")
+//
+//            if let location = locationManager.getCurrentLocation() {
+//              log.info("Lat \(location.coordinate.latitude)")
+//              log.info("Long \(location.coordinate.longitude)")
+//
+//              settings.currentLocation = CLLocation(
+//                latitude: location.coordinate.latitude,
+//                longitude: location.coordinate.longitude
+//              )
+//
+//              fetchDataLocation(coordinate: location.coordinate)
+//            } else if let errorMessage = locationManager.errorMessage {
+//              log.error("Error: \(errorMessage)")
+//            } else {
+//              log.error("Retrieving location...")
+//            }
+//          }) {
+//            Image(systemName: "smallcircle.filled.circle")
+//              .uniformSize()
+//          }
+//        }
+
+
+
+
         //
 
 

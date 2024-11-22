@@ -96,14 +96,17 @@ struct SettingsView: View {
           }
           .font(.footnote)
           .padding(4)
+          .accessibilityElement(children: .combine)
         }
 
         Section(header: Text("Location")) {
           VStack {
             LocationManagerView()
           }
+          .accessibilityElement(children: .combine)
         }
-        
+
+
       }
       .navigationTitle("Settings")
       .navigationBarTitleDisplayMode(.inline)

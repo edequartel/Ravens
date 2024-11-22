@@ -81,7 +81,7 @@ struct AreaButtonView: View {
     }
 //    .buttonStyle(ClearButtonStyle())
     .tint(colorOn ? .obsArea : nil)
-    .accessibility(label: Text("Add area"))
+    .accessibility(label: Text("Add location"))
   }
 }
 

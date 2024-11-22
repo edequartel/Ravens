@@ -42,19 +42,24 @@ struct TabSpeciesView: View {
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
 
+
             NavigationLink(
-              destination:
-                SpeciesView(
-                  item: species,
-                  selectedSpeciesID: $selectedSpeciesID)
-
-            ) { SpeciesInfoView(
-              species: species,
-              showView: showView,
-              bookMarksViewModel: bookMarksViewModel,
-              speciesSecondLangViewModel: speciesSecondLangViewModel)
-
+                destination: SpeciesView(
+                    item: species,
+                    selectedSpeciesID: $selectedSpeciesID)
+            ) {
+                SpeciesInfoView(
+                    species: species,
+                    showView: showView,
+                    bookMarksViewModel: bookMarksViewModel,
+                    speciesSecondLangViewModel: speciesSecondLangViewModel)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(Text("Navigate to \(species.name) details"))
+//            .accessibilityHint(Text("Double-tap to view details about \(species.name)"))
+
+
+
 
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -112,23 +117,19 @@ struct TabSpeciesView: View {
           }) {
             Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
               .uniformSize(color: .cyan)
-//              .accessibilityLabel(settings.isBookMarkVisible ? "bookmarks visible" : "all visisble")
           }
-          .accessibilityLabel(settings.isBookMarkVisible ? "alleen favorieten" : "alles")
-          .accessibilityHint("soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren.")
+          .accessibilityLabel(settings.isBookMarkVisible ? "favorites visible" : "all visible")
+          .accessibilityHint("You can mark species as favorites through an action, and then you can filter based on this.")
         }
       )
 
     }
 //    .searchable(text: $searchText)  // een niveau te hoog
     .refreshable {
-      print("refresh deze in realtime laten uitvoeren")
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
           print("parsed from html")
-          //update the view
-//          speciesViewModel.objectWillChange.send()
         })
     }
   }
@@ -158,7 +159,7 @@ struct SortFilterSpeciesView: View {
       }
 
       // Second Menu for Filtering
-      Section("Inheems") {
+      Section("Native") {
         FilteringAllOptionsView(currentFilteringAllOption: $selectedFilterAllOption)
       }
 

@@ -38,7 +38,7 @@ struct ObservationListView: View {
             currentFilteringOption: $currentFilteringOption )) {
               Image(systemSymbol: .ellipsisCircle)
                 .uniformSize(color: .red)
-              .accessibility(label: Text("List species"))
+              .accessibility(label: Text("Sort en filter"))
           }
         }
       }
