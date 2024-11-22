@@ -37,6 +37,7 @@ struct SpeciesView: View {
             Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
               .uniformSize()
           }
+          .accessibility(label: Text("Switch view"))
         }
       }
 

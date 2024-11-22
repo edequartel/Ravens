@@ -9,9 +9,6 @@ import SwiftUI
 
 struct TabUserObservationsView: View {
   @EnvironmentObject var settings: Settings
-//  @StateObject var bookMarksViewModel = BookMarksViewModel()
-//  @EnvironmentObject var observersViewModel: ObserversViewModel
-//  @StateObject var areasViewModel = AreasViewModel()
   @State private var showFirstView = false
 
   @Binding var selectedSpeciesID: Int?
@@ -26,7 +23,6 @@ struct TabUserObservationsView: View {
           ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
         }
       }
-//      .navigationBarTitleDisplayMode(.inline)
 
       .toolbar {
         if !settings.accessibility {
@@ -49,10 +45,8 @@ struct TabUserObservationsView: View {
                 .accessibility(label: Text("list users"))
             }
           }
-
         }
       }
-
 
       .navigationTitle("\(settings.userName)")
       .navigationBarTitleDisplayMode(.inline)
@@ -68,7 +62,7 @@ struct TabUserObservationsView_Previews: PreviewProvider {
 
   static var previews: some View {
     TabUserObservationsView(selectedSpeciesID: .constant(nil))
-    .environmentObject(Settings())
-    .environmentObject(observationsUserViewModel)
+      .environmentObject(Settings())
+      .environmentObject(observationsUserViewModel)
   }
 }

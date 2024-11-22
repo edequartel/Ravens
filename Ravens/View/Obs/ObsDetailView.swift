@@ -48,6 +48,8 @@ struct ObsDetailView: View {
         }
         .padding()
         .islandBackground()
+        .accessibilityElement(children: .combine)
+//        .accessibility(value: Text("\(obs.speciesDetail.name) \(obs.speciesDetail.scientificName)"))
 
         VStack {
           HStack {
@@ -65,6 +67,7 @@ struct ObsDetailView: View {
               Image(systemSymbol: SFInformation)
                 .uniformSize()
             }
+            .accessibility(label: Text("Information species"))
 
             let url = URL(string: obs.permalink)!
             ShareLink(item: url) {
@@ -95,17 +98,19 @@ struct ObsDetailView: View {
           }
 
           HStack {
-            Text("\(obs.userDetail?.name ?? "noName")")
+            Text("\(obs.userDetail?.name ?? "")")
               .footnoteGrayStyle()
             Spacer()
           }
         }
         .padding()
         .islandBackground()
+        .accessibilityElement(children: .combine)
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
           PhotoGridView(photos: photos)
+            .accessibilityHidden(true)
         }
 
         // Sounds Section
@@ -121,11 +126,14 @@ struct ObsDetailView: View {
           }
           .padding()
           .islandBackground()
+          .accessibilityLabel("Play Sounds")
         }
 
         NotesView(obs: obs)
           .padding()
           .islandBackground()
+          .accessibility(label: Text("Notes about the observation"))
+
 
         NavigationLink(destination: PositonFullView(obs: obs)) {
           PositionOnMapView(obs: obs) // Replace with your view's content
@@ -134,6 +142,7 @@ struct ObsDetailView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(PlainButtonStyle())
+        .accessibilityHidden(true)
 
       }
       .padding()

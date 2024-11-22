@@ -107,12 +107,9 @@ struct LoginView: View {
       if keyChainviewModel.token.count > 0 {
       Section("User") {
           UserView()
+          .accessibilityElement(children: .combine)
         }
       }
-
-//      Section("Credentials") {
-//        DisplayCredentialsView()
-//      }
     }
     .onAppear {
       log.error("LoginView appeared")

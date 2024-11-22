@@ -38,17 +38,19 @@ struct SpeciesDetailsView: View {
                                 .foregroundColor(.gray)
 
                             HStack {
-                                Text("\(species.groupName)")
-                                Spacer()
-                                Text("\(species.status)")
-                                Spacer()
+                                Text("\(species.groupName) - ")
+//                                Spacer()
+                                Text("\(species.status) - ")
+//                                Spacer()
                                 Text("\(species.rarity)")
+                              Spacer()
                             }
                             .font(.footnote)
                             .foregroundColor(.gray)
                         }
                         .padding()
                         .islandBackground()
+                        .accessibilityElement(children: .combine)
 
                         // Image Display
                         if !imageURL.isEmpty {
@@ -60,6 +62,7 @@ struct SpeciesDetailsView: View {
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 //                                .padding()
                                 .islandBackground()
+                                .accessibility(hidden: true)
                         }
 
                         // Information Text

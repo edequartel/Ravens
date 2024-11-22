@@ -1,15 +1,8 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " %@\n %@ //changed id in species_id\n %@\n %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : " %1$@\n %2$@ //changed id in species_id\n %3$@\n %4$@"
-          }
-        }
-      }
+    " " : {
+
     },
     "(%lld)" : {
 
@@ -24,6 +17,9 @@
         }
       }
     },
+    "%@ - " : {
+
+    },
     "%@ %@ %lldx %lldd %@" : {
       "localizations" : {
         "en" : {
@@ -34,23 +30,22 @@
         }
       }
     },
+    "%@, %lld information" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$lld information"
+          }
+        }
+      }
+    },
     "%lld" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%11d"
-          }
-        }
-      }
-    },
-    "%lld m" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%11d m"
+            "value" : "%lld"
           }
         }
       }
@@ -74,37 +69,65 @@
     "%lldx" : {
 
     },
-    "Add area" : {
-
-    },
     "Add bookmark" : {
-
-    },
-    "Add observer" : {
-
-    },
-    "Add Observer" : {
-
-    },
-    "Add to areas" : {
-
-    },
-    "All" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alle"
+            "value" : "Maak favoriet"
           }
         }
       }
     },
-    "alleen favorieten" : {
-
+    "Add location" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locatie toevoegen"
+          }
+        }
+      }
     },
-    "alles" : {
-
+    "Add observer" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemer toevoegen"
+          }
+        }
+      }
+    },
+    "Add Observer" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemen toevoegen"
+          }
+        }
+      }
+    },
+    "Add to areas" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locatie toevoegen"
+          }
+        }
+      }
+    },
+    "all visible" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle waarnemingen "
+          }
+        }
+      }
     },
     "App details" : {
       "localizations" : {
@@ -127,142 +150,31 @@
       }
     },
     "Areas" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locaties"
+          }
+        }
+      }
     },
     "Areas List" : {
-
-    },
-    "Cache Empty" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cache legen"
-          }
-        }
-      }
-    },
-    "Code %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Code %@"
-          }
-        }
-      }
-    },
-    "Common" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algemeen"
-          }
-        }
-      }
-    },
-    "Continent %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continent %@"
-          }
-        }
-      }
-    },
-    "count " : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aantal"
-          }
-        }
-      }
-    },
-    "Date" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Datum"
-          }
-        }
-      }
-    },
-    "days" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dagen"
-          }
-        }
-      }
-    },
-    "Days" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dagen"
-          }
-        }
-      }
-    },
-    "days " : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dagen"
-          }
-        }
-      }
-    },
-    "Default Name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
+            "value" : "Lijst met locaties"
           }
         }
       }
     },
     "Delete" : {
-
-    },
-    "Destination %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bestemming %11d"
-          }
-        }
-      }
-    },
-    "Details" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Details"
+            "value" : "Wis"
           }
         }
       }
@@ -274,25 +186,34 @@
             "state" : "new",
             "value" : "Do you want to append this %1$@ %2$@?"
           }
-        }
-      }
-    },
-    "Do you want to append this %@ to the database?" : {
-      "extractionState" : "stale",
-      "localizations" : {
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wil waarnemer %@ toevoegen?"
+            "value" : "Wil je dit toevoegen %1$@ %2$@?"
           }
         }
       }
     },
     "email" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "email"
+          }
+        }
+      }
     },
     "emailadres" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "emailadres"
+          }
+        }
+      }
     },
     "End Of List" : {
       "localizations" : {
@@ -304,100 +225,54 @@
         }
       }
     },
-    "English %@" : {
-      "extractionState" : "stale",
+    "Enter number" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Engels %@"
+            "value" : "Nummer invoeren"
           }
         }
       }
-    },
-    "Enter number" : {
-
     },
     "Error: %@" : {
 
     },
-    "Failed to load image" : {
-      "extractionState" : "stale",
+    "favorites visible" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afbeelding fout bij laden"
-          }
-        }
-      }
-    },
-    "Fetching Observation..." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarneming ophalen..."
+            "value" : "Favorieten zichtbaar"
           }
         }
       }
     },
     "Files" : {
-
-    },
-    "Filter by" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter op"
-          }
-        }
-      }
-    },
-    "Filter rarity by" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filter op zeldzaamheid"
+            "value" : "Bestanden"
           }
         }
       }
     },
     "Filtering" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filteren"
+          }
+        }
+      }
     },
     "FilteringAllOptionsView" : {
 
     },
     "FilterOptionsView" : {
 
-    },
-    "getToken" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "getToken"
-          }
-        }
-      }
-    },
-    "Go to Destination %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ga naar bestemming %11d"
-          }
-        }
-      }
     },
     "GPS " : {
 
@@ -408,17 +283,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Groep"
-          }
-        }
-      }
-    },
-    "Group %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Groep %11d"
           }
         }
       }
@@ -437,19 +301,15 @@
     "Id" : {
 
     },
-    "Id %lld" : {
-      "extractionState" : "stale",
+    "Image not found" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Id %11d"
+            "value" : "Afbeelding niet gevonden"
           }
         }
       }
-    },
-    "Image not found" : {
-
     },
     "Imagery" : {
       "extractionState" : "manual",
@@ -462,88 +322,22 @@
         }
       }
     },
-    "Infinity" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oneindig"
-          }
-        }
-      }
-    },
-    "Infinity (Area)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oneindig (locatie)"
-          }
-        }
-      }
-    },
-    "Infinity (Location)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oneindig (locatie)"
-          }
-        }
-      }
-    },
-    "Infinity (only location)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oneindig (alleen locatie)"
-          }
-        }
-      }
-    },
     "Information" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie"
+          }
+        }
+      }
     },
     "Information species" : {
-
-    },
-    "Inheems" : {
-
-    },
-    "International" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Internationaal"
-          }
-        }
-      }
-    },
-    "Invalid URL" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invalide URL"
-          }
-        }
-      }
-    },
-    "ISO %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ISIO %@"
+            "value" : "Informatie over de soort"
           }
         }
       }
@@ -558,75 +352,24 @@
         }
       }
     },
-    "languagedataisnil" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "languagedetailsnil"
-          }
-        }
-      }
-    },
-    "Languages" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Talen"
-          }
-        }
-      }
-    },
     "Lat %@" : {
 
     },
     "Link to waarneming observation" : {
 
     },
-    "List" : {
-      "extractionState" : "stale",
+    "list users" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lijst"
+            "value" : "Waarnemerslijst"
           }
         }
       }
-    },
-    "List species" : {
-
-    },
-    "list users" : {
-
     },
     "Load Image" : {
 
-    },
-    "Loading" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Laden"
-          }
-        }
-      }
-    },
-    "Loading..." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Laden..."
-          }
-        }
-      }
     },
     "Location" : {
       "localizations" : {
@@ -644,17 +387,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Login"
-          }
-        }
-      }
-    },
-    "Login %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login %@"
           }
         }
       }
@@ -679,17 +411,6 @@
         }
       }
     },
-    "Login waarneming.nl" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login waarneming.nl"
-          }
-        }
-      }
-    },
     "Logout" : {
       "localizations" : {
         "nl" : {
@@ -702,28 +423,6 @@
     },
     "Long %@" : {
 
-    },
-    "Main View" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Main View"
-          }
-        }
-      }
-    },
-    "Manual" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Handleidng"
-          }
-        }
-      }
     },
     "Map" : {
       "localizations" : {
@@ -745,30 +444,8 @@
         }
       }
     },
-    "Me" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ik"
-          }
-        }
-      }
-    },
     "Menu filter" : {
 
-    },
-    "Month" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mand"
-          }
-        }
-      }
     },
     "More at waarneming.nl" : {
       "localizations" : {
@@ -790,34 +467,6 @@
         }
       }
     },
-    "Name %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Naam %@"
-          }
-        }
-      }
-    },
-    "Name: %@ %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Name: %1$@ %2$@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Naam %1$@ %2$@"
-          }
-        }
-      }
-    },
     "Native" : {
       "localizations" : {
         "nl" : {
@@ -828,44 +477,31 @@
         }
       }
     },
-    "Native %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inheems %@"
-          }
-        }
-      }
+    "Navigate to %@ details" : {
+
     },
     "Next" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volgende"
+          }
+        }
+      }
     },
     "No" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nee"
+          }
+        }
+      }
+    },
+    "Notes about the observation" : {
 
-    },
-    "nobsavaliable" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nobsavailable"
-          }
-        }
-      }
-    },
-    "Obs" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarneming"
-          }
-        }
-      }
     },
     "ObsDetailView" : {
 
@@ -883,17 +519,6 @@
     "ObservationRowView" : {
 
     },
-    "Observations" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarnemingen"
-          }
-        }
-      }
-    },
     "ObservationsLocationView" : {
 
     },
@@ -906,28 +531,6 @@
     "ObservationsUserView" : {
 
     },
-    "Observer" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarnemer"
-          }
-        }
-      }
-    },
-    "Observers" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarnemers"
-          }
-        }
-      }
-    },
     "ObserversView" : {
 
     },
@@ -935,15 +538,11 @@
 
     },
     "password" : {
-
-    },
-    "Password" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wachtwoord"
+            "value" : "wachtwoord"
           }
         }
       }
@@ -958,55 +557,32 @@
         }
       }
     },
-    "Plaats: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats: %@"
-          }
-        }
-      }
-    },
     "Play Sounds" : {
-
-    },
-    "Poi" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vogelplek"
+            "value" : "Audio afspelen"
           }
         }
       }
     },
     "Post Observation" : {
-
-    },
-    "Previous" : {
-
-    },
-    "Radius" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Straal"
+            "value" : "Zend waarneming"
           }
         }
       }
     },
-    "Rare" : {
-      "extractionState" : "stale",
+    "Previous" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zeldzaam"
+            "value" : "Vorige"
           }
         }
       }
@@ -1025,105 +601,56 @@
 
     },
     "Region" : {
-
-    },
-    "Region %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regio %@"
-          }
-        }
-      }
-    },
-    "Region %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regio %11d"
-          }
-        }
-      }
-    },
-    "Region lists" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regiolijsten"
-          }
-        }
-      }
-    },
-    "Regions" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regio"
+            "value" : "Gebied"
           }
         }
       }
     },
     "remove" : {
-
-    },
-    "Remove from areas" : {
-
-    },
-    "Results %lld/%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Results %1$lld/%2$lld"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resultaten %1$lld/%2$lld"
+            "value" : "Verwijder"
+          }
+        }
+      }
+    },
+    "Remove from areas" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwijder locatie"
+          }
+        }
+      }
+    },
+    "Retrieve current location" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Huidige locatie ophalen"
           }
         }
       }
     },
     "Retrieving location..." : {
-
-    },
-    "Save photos into album" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sla afbeelding op in album"
-          }
-        }
-      }
-    },
-    "Scientific name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wetenschappelijke naam"
+            "value" : "Ophalen locaties"
           }
         }
       }
     },
     "Search" : {
-
-    },
-    "Search Wikipedia" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -1137,15 +664,11 @@
 
     },
     "Second language" : {
-
-    },
-    "Select a Region" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gebied"
+            "value" : "Tweede taal"
           }
         }
       }
@@ -1160,86 +683,48 @@
         }
       }
     },
-    "Share" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deel"
-          }
-        }
-      }
-    },
     "Share observation" : {
-
-    },
-    "Share Text" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deel text"
+            "value" : "Deel waarneming"
           }
         }
       }
-    },
-    "Show observer" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toon waarnemer"
-          }
-        }
-      }
-    },
-    "soorten kun je favoriet maken, door een actie, en hier kun je dan op filteren." : {
-
     },
     "Sort" : {
-
-    },
-    "Sort and filter" : {
-
-    },
-    "Sort by" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sorteer op"
+            "value" : "Sorteer"
           }
         }
       }
     },
-    "Sort/filter" : {
-      "extractionState" : "stale",
+    "Sort and filter" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sorteer/Filter"
+            "value" : "Sorteer en filter"
+          }
+        }
+      }
+    },
+    "Sort en filter" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorteer en filter"
           }
         }
       }
     },
     "SortNameOptionsView" : {
 
-    },
-    "Sounds: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geluid %@"
-          }
-        }
-      }
     },
     "Source" : {
       "localizations" : {
@@ -1257,17 +742,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soorten"
-          }
-        }
-      }
-    },
-    "Species groups" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Soortgroepen"
           }
         }
       }
@@ -1290,7 +764,14 @@
       }
     },
     "Switch view" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wissel weergave"
+          }
+        }
+      }
     },
     "TabLocationView" : {
 
@@ -1301,7 +782,10 @@
     "TabUserObservationsView" : {
 
     },
-    "Tap voor meer details over Informatie over de waarneming." : {
+    "Tap for more details about the observation information." : {
+
+    },
+    "Tap to fetch your current location" : {
 
     },
     "Token: %@" : {
@@ -1314,48 +798,6 @@
         }
       }
     },
-    "Total %lld/%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Total %1$lld/%2$lld"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Totaal %1$11d/%2$11d"
-          }
-        }
-      }
-    },
-    "Type %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type %11d"
-          }
-        }
-      }
-    },
-    "Uncommon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vrij algemeen"
-          }
-        }
-      }
-    },
-    "Update location" : {
-
-    },
     "Us" : {
       "localizations" : {
         "nl" : {
@@ -1367,43 +809,17 @@
       }
     },
     "User" : {
-
-    },
-    "Username" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gebrukersnaam"
-          }
-        }
-      }
-    },
-    "Value" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarde"
+            "value" : "Gebruiker"
           }
         }
       }
     },
     "Value: %lld" : {
 
-    },
-    "Very rare" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeer zeldzaam"
-          }
-        }
-      }
     },
     "waarneming.nl" : {
       "localizations" : {
@@ -1415,23 +831,22 @@
         }
       }
     },
-    "Window" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tijdspanne"
-          }
-        }
-      }
-    },
     "Yes" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja"
+          }
+        }
+      }
+    },
+    "You can mark species as favorites through an action, and then you can filter based on this." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je kunt soorten als favoriet markeren via een actie, en hier kun je vervolgens op filteren."
           }
         }
       }

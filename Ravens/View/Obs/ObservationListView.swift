@@ -38,7 +38,7 @@ struct ObservationListView: View {
             currentFilteringOption: $currentFilteringOption )) {
               Image(systemSymbol: .ellipsisCircle)
                 .uniformSize(color: .red)
-              .accessibility(label: Text("List species"))
+              .accessibility(label: Text("Sort en filter"))
           }
         }
       }
@@ -107,18 +107,6 @@ enum FilteringRarityOption: String, CaseIterable {
   case veryRare = "Very rare"
 }
 
-//struct FilteringMenu: View {
-//  @Binding var currentFilteringOption: FilteringRarityOption
-//
-//  var body: some View {
-//    NavigationLink(destination: FilterOptionsView(currentFilteringOption: $currentFilteringOption)) {
-//      Image(systemName: "line.3.horizontal.decrease")
-//        .accessibilityElement(children: .combine)
-//        .accessibility(label: Text("Filtering"))
-//    }
-//    .accessibility(label: Text("Menu filter"))
-//  }
-//}
 
 struct FilterOptionsView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
@@ -209,59 +197,3 @@ struct CombinedOptionsMenuView: View {
 //    Spacer()
   }
 }
-
-//struct _SortingOptionsMenuView: View {
-//  @Binding var currentSortingOption: SortingOption
-//
-//  var body: some View {
-//    Menu {
-//      ForEach(SortingOption.allCases, id: \.self) { option in
-//        Button(action: {
-//          currentSortingOption = option
-//        }) {
-//          HStack {
-//            Text(option.rawValue)
-//            Spacer()
-//            if currentSortingOption == option {
-//              Image(systemName: "checkmark")
-//            }
-//          }
-//        }
-//      }
-//    } label: {
-//      Text("Sort Options")
-//    }
-//  }
-//}
-
-//struct _FilterOptionsMenuView: View {
-//  @Binding var currentFilteringOption: FilteringRarityOption
-//
-//  var body: some View {
-//    Menu {
-//      ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-//        Button(action: {
-//          currentFilteringOption = option
-//        }) {
-//          HStack {
-//            Text(option.rawValue)
-//            Spacer()
-//            if currentFilteringOption == option {
-//              Image(systemName: "checkmark")
-//            }
-//          }
-//        }
-//      }
-//    } label: {
-//      Text("Filter Options")
-//    }
-//  }
-//}
-
-//#Preview {
-//  @State static var selectedObservation: Observation? = nil
-//    ObservationListView(
-//      observations: [selectedObservation],
-//      entity: .area,
-//      selectedSpeciesID: .constant(nil))
-//}
