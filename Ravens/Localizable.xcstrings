@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " " : {
+
+    },
     "(%lld)" : {
 
     },
@@ -791,17 +794,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Token: %@"
-          }
-        }
-      }
-    },
-    "Update location" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "U"
           }
         }
       }

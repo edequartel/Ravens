@@ -115,7 +115,7 @@ struct ObsView: View {
       ObserversButtonView(obs: obs, colorOn: true)
     }
 
-    //leading
+    //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
       InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)

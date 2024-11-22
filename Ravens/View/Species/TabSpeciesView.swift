@@ -48,11 +48,11 @@ struct TabSpeciesView: View {
                     item: species,
                     selectedSpeciesID: $selectedSpeciesID)
             ) {
-                SpeciesInfoView(
+                SpeciesInfoView( //@@@
                     species: species,
-                    showView: showView,
-                    bookMarksViewModel: bookMarksViewModel,
-                    speciesSecondLangViewModel: speciesSecondLangViewModel)
+                    showView: showView)
+//                    bookMarksViewModel: bookMarksViewModel,
+//                    speciesSecondLangViewModel: speciesSecondLangViewModel)
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel(Text("Navigate to \(species.name) details"))
@@ -70,8 +70,8 @@ struct TabSpeciesView: View {
               }
               .tint(.blue)
 
+              //deze wordt niet in realtime geupdate!!!
               Button(action: {
-
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
                   print("bookmarks remove")
                   bookMarksViewModel.removeRecord(speciesID: species.speciesId)
@@ -305,9 +305,8 @@ extension SpeciesViewModel {
 struct SpeciesInfoView: View {
     var species: Species // Assuming Species is your data model
     var showView: Bool
-//    var htmlViewModel: HTMLViewModel // Assuming HTMLViewModel is your ViewModel
-    var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel
-    var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
+  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel @@@
+  @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -337,6 +336,7 @@ struct SpeciesInfoView: View {
         }
       }
 
+//      if let date = species.date {
       if let date = species.date {
         HStack {
           DateConversionView(dateString: species.date ?? "", timeString: species.time ?? "")
@@ -356,14 +356,16 @@ struct SpeciesInfoView: View {
       }
       HStack{
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
-//          speciesID: species.id)
           speciesID: species.speciesId)
-        Text("\(speciesLang ?? "placeholder")")
-//          .bold()
-          .font(.caption)
-          .lineLimit(1)
-          .truncationMode(.tail)
-        Spacer()
+        if speciesLang?.lowercased() != species.scientificName.lowercased() {
+          Text("\(speciesLang ?? "placeholder")")
+            .font(.caption)
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        } else {
+          Text(" ")
+        }
       }
     }
   }

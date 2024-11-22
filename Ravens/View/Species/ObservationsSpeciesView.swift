@@ -14,7 +14,6 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-//  @EnvironmentObject var htmlViewModel: HTMLViewModel
   @EnvironmentObject var settings: Settings
 
   @State private var hasAppeared = false
