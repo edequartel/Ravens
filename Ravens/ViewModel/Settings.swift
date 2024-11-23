@@ -67,13 +67,13 @@ class Settings: ObservableObject {
     }
     
     
-    @AppStorage("accessibility") var accessibilityStored: Bool = false
-    @Published var accessibility: Bool = false {
-        didSet {
-            log.info("!!saving it in storage: \(accessibility)")
-            accessibilityStored = accessibility
-        }
-    }
+//    @AppStorage("accessibility") var accessibilityStored: Bool = false
+//    @Published var accessibility: Bool = false {
+//        didSet {
+//            log.info("!!saving it in storage: \(accessibility)")
+//            accessibilityStored = accessibility
+//        }
+//    }
 
     
     @AppStorage("listpreference") var listPreference: Bool = false
@@ -297,7 +297,7 @@ class Settings: ObservableObject {
         mapPreference = mapPreferenceStored
         selectedRarity = selectedRarityStored
         selectedInBetween = selectedInBetweenStored
-        accessibility = accessibilityStored
+//        accessibility = accessibilityStored
         
         //for updating published values
 //        days = daysStored

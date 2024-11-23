@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TabUserObservationsView: View {
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
+
   @State private var showFirstView = false
 
   @Binding var selectedSpeciesID: Int?
@@ -17,7 +19,7 @@ struct TabUserObservationsView: View {
     NavigationView {
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
-        if showFirstView && !settings.accessibility {
+        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsUserView()
         } else {
           ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
@@ -25,7 +27,7 @@ struct TabUserObservationsView: View {
       }
 
       .toolbar {
-        if !settings.accessibility {
+        if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
               showFirstView.toggle()

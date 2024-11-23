@@ -16,6 +16,7 @@ struct SettingsView: View {
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var settings: Settings
 
   @State private var storage: String = ""
@@ -93,6 +94,7 @@ struct SettingsView: View {
           VStack(alignment: .leading) {
             Text(version())
             Text(locale.description)
+            Text(accessibilityManager.isVoiceOverEnabled ? "VoiceOver is ON" : "VoiceOver is OFF")
           }
           .font(.footnote)
           .padding(4)
@@ -105,7 +107,6 @@ struct SettingsView: View {
           }
           .accessibilityElement(children: .combine)
         }
-
 
       }
       .navigationTitle("Settings")
