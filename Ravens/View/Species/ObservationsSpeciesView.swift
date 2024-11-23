@@ -51,7 +51,16 @@ struct ObservationsSpeciesView: View {
                 selectedSpeciesID = item.speciesId
             }) {
                 Image(systemSymbol: .infoCircle)
+                .foregroundColor(Color.gray.opacity(0.8))
             }
+
+            //
+          if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+            Image(systemSymbol: SFSpeciesFill)
+              .foregroundColor(Color.gray.opacity(0.8))
+          }
+
+
             Spacer()
         }
       }

@@ -50,13 +50,15 @@ struct ObsView: View {
 
           if obs.sounds?.count ?? 0 > 0 {
             Image(systemName: "waveform")
+              .foregroundColor(Color.gray.opacity(0.8))
           }
 
 
           if obs.notes?.count ?? 0 > 0 {
             Image(systemName: "list.clipboard")
+              .foregroundColor(Color.gray.opacity(0.8))
           }
-          Spacer()
+//          Spacer()
         }
 
         if showSpecies {
@@ -81,7 +83,7 @@ struct ObsView: View {
             Spacer()
             if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
               Image(systemSymbol: SFObserverFill)
-                .foregroundColor(.black)
+                .foregroundColor(Color.gray.opacity(0.8))
             }
           }
         }
@@ -94,6 +96,7 @@ struct ObsView: View {
             Spacer()
             if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
               Image(systemSymbol: SFAreaFill)
+                .foregroundColor(Color.gray.opacity(0.8))
             }
           }
         }

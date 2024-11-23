@@ -85,7 +85,7 @@ struct MapObservationsLocationView: View {
           .padding(5)
           .frame(maxWidth: .infinity)
           .foregroundColor(.obsGreenFlower)
-          .background(Color.obsGreenEagle.opacity(0.5))
+          .background(Color.obsGreenEagle.opacity(0.8))
         }
 
         .onTapGesture() { position in

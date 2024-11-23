@@ -69,7 +69,7 @@ struct MapObservationsSpeciesView: View {
                 .padding(5)
                 .bold()
                 .foregroundColor(.obsGreenFlower)
-                .background(Color.obsGreenEagle.opacity(0.5))
+                .background(Color.obsGreenEagle.opacity(0.8))
             }
             .mapStyle(settings.mapStyle)
             .mapControls() {
