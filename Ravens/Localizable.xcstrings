@@ -821,6 +821,12 @@
     "Value: %lld" : {
 
     },
+    "VoiceOver is OFF" : {
+
+    },
+    "VoiceOver is ON" : {
+
+    },
     "waarneming.nl" : {
       "localizations" : {
         "nl" : {

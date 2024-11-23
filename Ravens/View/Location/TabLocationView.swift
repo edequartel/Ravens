@@ -18,6 +18,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
 
   @Binding var selectedSpeciesID: Int?
 
@@ -30,7 +31,7 @@ struct TabLocationView: View {
     NavigationView {
       VStack {
         if showView { Text("TabLocationView").font(.customTiny) }
-        if showFirstView && !settings.accessibility {
+        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsLocationView()
         } else {
           ObservationsLocationView(selectedSpeciesID: $selectedSpeciesID)
@@ -38,7 +39,7 @@ struct TabLocationView: View {
       }
 
       .toolbar {
-        if !settings.accessibility {
+        if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
               showFirstView.toggle()

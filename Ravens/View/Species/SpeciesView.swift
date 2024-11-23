@@ -11,6 +11,7 @@ struct SpeciesView: View {
   @State private var showFirstView = false
 
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
 
   var item: Species
   @Binding var selectedSpeciesID: Int?
@@ -18,7 +19,7 @@ struct SpeciesView: View {
   var body: some View {
     VStack {
       if showView { Text("SpeciesView").font(.customTiny) }
-      if showFirstView && !settings.accessibility {
+      if showFirstView && !accessibilityManager.isVoiceOverEnabled {
         MapObservationsSpeciesView(item: item)
       } else {
         ObservationsSpeciesView(
@@ -29,7 +30,7 @@ struct SpeciesView: View {
     }
 
     .toolbar {
-      if !settings.accessibility {
+      if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
             showFirstView.toggle()
