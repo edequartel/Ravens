@@ -8,7 +8,7 @@
 //import MapKit
 //import SwiftyBeaver
 //
-//struct MapObservationRadiusView: View {
+//struct MapOb/Users/ericdequartel/Developer/_myApps/Ravens/Ravens/View/Radius/MapObservationRadiusView.swift://                        .background(Color.obsGreenEagle.opacity(0.5))servationRadiusView: View {
 //    let log = SwiftyBeaver.self
 //    
 //    @State private var POIs: [POI] = []

@@ -10,6 +10,7 @@ import SwiftUI
 struct TabUserObservationsView: View {
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
+  @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
   @State private var showFirstView = false
 
@@ -56,6 +57,14 @@ struct TabUserObservationsView: View {
         showFirstView = settings.mapPreference
       }
     }
+  }
+
+  func imageForUser(userId: Int) -> String {
+      return isUserInRecords(userId: userId) ? "star.fill" : "star"
+  }
+
+  func isUserInRecords(userId: Int) -> Bool {
+      return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
 }
 

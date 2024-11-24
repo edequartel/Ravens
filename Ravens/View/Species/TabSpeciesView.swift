@@ -70,7 +70,6 @@ struct TabSpeciesView: View {
               }
               .tint(.blue)
 
-              //deze wordt niet in realtime geupdate!!!
               Button(action: {
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
                   print("bookmarks remove")
@@ -333,6 +332,7 @@ struct SpeciesInfoView: View {
 //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
           Image(systemName: "star.fill")
+            .foregroundColor(Color.gray.opacity(0.8))
         }
       }
 
@@ -340,7 +340,7 @@ struct SpeciesInfoView: View {
       if let date = species.date {
         HStack {
           DateConversionView(dateString: species.date ?? "", timeString: species.time ?? "")
-            Text("\(species.nrof ?? 0) x")
+            Text("\(species.nrof ?? 0) x observations")
               .footnoteGrayStyle()
          }
           .font(.caption)

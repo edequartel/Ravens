@@ -6,43 +6,59 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct ObservationListView: View {
   var observations: [Observation]
-
   @EnvironmentObject var settings: Settings
-
   @Binding var selectedSpeciesID: Int?
-
   @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
+  @AccessibilityFocusState private var focusedItemID: Int?
 
   var body: some View {
 
     List {
-      ForEach(observations
-        .filter(meetsCondition)
-        .sorted(by: compareObservations), id: \.id) { obs in
+      // Precompute the filtered and sorted list
+      let filteredAndSortedObservations = observations
+          .filter(meetsCondition)
+          .sorted(by: compareObservations)
+
+      ForEach(filteredAndSortedObservations,
+              id: \.id) { obs in
           ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
-        }
-    }
-    .listStyle(PlainListStyle()) // No additional styling, plain list look
-    .toolbar {
-      if entity != .species {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: CombinedOptionsMenuView(
-            currentSortingOption: $currentSortingOption,
-            currentFilteringAllOption: $currentFilteringAllOption,
-            currentFilteringOption: $currentFilteringOption )) {
-              Image(systemSymbol: .ellipsisCircle)
-                .uniformSize(color: .red)
-              .accessibility(label: Text("Sort en filter"))
+          .accessibilityFocused($focusedItemID, equals: obs.id)
+          .onChange(of: focusedItemID) { newFocusID in
+              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
           }
         }
-      }
     }
+
+    .listStyle(PlainListStyle()) // No additional styling, plain list look
+    .modifier(ObservationToolbarModifier(
+                   entity: entity,
+                   currentSortingOption: $currentSortingOption,
+                   currentFilteringAllOption: $currentFilteringAllOption,
+                   currentFilteringOption: $currentFilteringOption
+               ))
+
+  }
+
+  private func handleFocusChange(_ newFocusID: Int?, from observations: [Observation]) {
+    print("focus change")
+      guard let newFocusID = newFocusID else { return }
+      if let focusedObservation = observations.first(where: { $0.id == newFocusID }) {
+        print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
+        if focusedObservation.sounds?.count ?? 0 > 0 {
+              print("vibrate")
+            vibrate()
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+//            AudioServicesPlaySystemSound(1057)
+          }
+          print("focus changed")
+      }
   }
 
   func meetsCondition(observation: Observation) -> Bool {
@@ -72,6 +88,34 @@ struct ObservationListView: View {
       return lhs.speciesDetail.scientificName < rhs.speciesDetail.scientificName
     }
   }
+}
+
+struct ObservationToolbarModifier: ViewModifier {
+    var entity: EntityType
+    @Binding var currentSortingOption: SortingOption
+    @Binding var currentFilteringAllOption: FilterAllOption
+    @Binding var currentFilteringOption: FilteringRarityOption
+
+    func body(content: Content) -> some View {
+        content
+            .toolbar {
+                if entity != .species {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(
+                            destination: CombinedOptionsMenuView(
+                                currentSortingOption: $currentSortingOption,
+                                currentFilteringAllOption: $currentFilteringAllOption,
+                                currentFilteringOption: $currentFilteringOption
+                            )
+                        ) {
+                            Image(systemName: "ellipsis.circle")
+                            .uniformSize(color: .red)
+                            .accessibility(label: Text("Sort and Filter"))
+                        }
+                    }
+                }
+            }
+    }
 }
 
 struct ObservationRowView: View {
@@ -194,6 +238,21 @@ struct CombinedOptionsMenuView: View {
         }
       }
     }
-//    Spacer()
   }
 }
+
+
+//    .toolbar {
+//      if entity != .species {
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          NavigationLink(destination: CombinedOptionsMenuView(
+//            currentSortingOption: $currentSortingOption,
+//            currentFilteringAllOption: $currentFilteringAllOption,
+//            currentFilteringOption: $currentFilteringOption )) {
+//              Image(systemSymbol: .ellipsisCircle)
+//                .uniformSize(color: .red)
+//              .accessibility(label: Text("Sort en filter"))
+//          }
+//        }
+//      }
+//    }

@@ -22,6 +22,7 @@ class RegionListViewModel: ObservableObject {
         log.verbose("getId: not found")
         return -1
     }
+
     func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchData RegionListViewModel")
         let url = endPoint(value: settings.selectedInBetween)+"region-lists"
