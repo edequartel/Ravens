@@ -53,6 +53,9 @@
     "%lld x" : {
 
     },
+    "%lld x observations" : {
+
+    },
     "%lld-%lld" : {
       "localizations" : {
         "en" : {
@@ -67,7 +70,7 @@
 
     },
     "%lldx" : {
-
+      "shouldTranslate" : false
     },
     "Add bookmark" : {
       "localizations" : {
@@ -715,17 +718,6 @@
     },
     "Sort and Filter" : {
 
-    },
-    "Sort en filter" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sorteer en filter"
-          }
-        }
-      }
     },
     "SortNameOptionsView" : {
 

@@ -21,31 +21,18 @@ struct ObservationListView: View {
   var body: some View {
 
     List {
-//      let filterCondition = meetsCondition
-//      let sortCondition = compareObservations
-
       // Precompute the filtered and sorted list
       let filteredAndSortedObservations = observations
           .filter(meetsCondition)
           .sorted(by: compareObservations)
 
       ForEach(filteredAndSortedObservations,
-//        .filter(filterCondition)
-//        .sorted(by: sortCondition),
               id: \.id) { obs in
           ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
           .accessibilityFocused($focusedItemID, equals: obs.id)
           .onChange(of: focusedItemID) { newFocusID in
               handleFocusChange(newFocusID, from: filteredAndSortedObservations)
           }
-//          .onChange(of: focusedItemID) { newFocusID, _ in
-//            if let focusedObservation = observations.first(where: { $0.id == newFocusID }) {
-//              if focusedObservation.hasSound {
-//                print("vibrate")
-//              }
-//              print("focus changed")
-//            }
-//          }
         }
     }
 
@@ -67,8 +54,8 @@ struct ObservationListView: View {
         if focusedObservation.sounds?.count ?? 0 > 0 {
               print("vibrate")
             vibrate()
-//            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-            AudioServicesPlaySystemSound(1057)
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+//            AudioServicesPlaySystemSound(1057)
           }
           print("focus changed")
       }
