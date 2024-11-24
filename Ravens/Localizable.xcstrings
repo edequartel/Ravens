@@ -713,7 +713,11 @@
         }
       }
     },
+    "Sort and Filter" : {
+
+    },
     "Sort en filter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
