@@ -103,6 +103,7 @@
 		478EABE92BED3A2300414431 /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE82BED3A2300414431 /* ShareTextView.swift */; };
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
+		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
 		47AB45982CE2040700842877 /* user.json in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45972CE2040400842877 /* user.json */; };
 		47AB459A2CE2042100842877 /* species.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45992CE2042100842877 /* species.json */; };
@@ -214,6 +215,7 @@
 		478EABE82BED3A2300414431 /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
+		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
 		47AB45952CE2030100842877 /* location.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = location.json; sourceTree = "<group>"; };
 		47AB45972CE2040400842877 /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		47AB45992CE2042100842877 /* species.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = species.json; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				476FA8A52B9B031B00665613 /* SoundsView.swift */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				473F14A22CF49FEB004A9DE4 /* ravens.json */,
+				47A862572CF4DC2F0016BB04 /* ravenssun.json */,
 				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				47B10CAA2C21BA580092BC66 /* tafeleend.jpg */,
@@ -620,6 +623,7 @@
 				472633212BB5981A00CEA05E /* poi.json in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
 				473F14A32CF49FEB004A9DE4 /* ravens.json in Resources */,
+				47A862582CF4DC300016BB04 /* ravenssun.json in Resources */,
 				4718753F2BFCA81900EF9F1F /* plus-square.svg in Resources */,
 				47AB459A2CE2042100842877 /* species.json in Resources */,
 				4781539D2B57C166005F87CC /* Localizable.xcstrings in Resources */,

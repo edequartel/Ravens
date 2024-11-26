@@ -7,7 +7,7 @@
 import SwiftUI
 import SwiftAudioEx
 import SwiftyBeaver
-import Foundation
+import Foundation       
 import MediaPlayer
 
 class Player: ObservableObject {
