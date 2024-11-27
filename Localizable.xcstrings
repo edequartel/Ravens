@@ -82,56 +82,12 @@
     "%lldx" : {
       "shouldTranslate" : false
     },
-    "Add bookmark" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maak favoriet"
-          }
-        }
-      }
-    },
-    "Add location" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locatie toevoegen"
-          }
-        }
-      }
-    },
-    "Add observer" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waarnemer toevoegen"
-          }
-        }
-      }
-    },
     "Add Observer" : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarnemen toevoegen"
-          }
-        }
-      }
-    },
-    "Add to areas" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locatie toevoegen"
           }
         }
       }
@@ -162,28 +118,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Locatie"
-          }
-        }
-      }
-    },
-    "Areas" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locaties"
-          }
-        }
-      }
-    },
-    "Areas List" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lijst met locaties"
           }
         }
       }
@@ -240,17 +174,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einde van de lijst"
-          }
-        }
-      }
-    },
-    "Enter number" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nummer invoeren"
           }
         }
       }
@@ -321,17 +244,6 @@
     "Id" : {
 
     },
-    "Image not found" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afbeelding niet gevonden"
-          }
-        }
-      }
-    },
     "Imagery" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -377,7 +289,14 @@
 
     },
     "Link to waarneming observation" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link naar de observatie op waarneming.nl"
+          }
+        }
+      }
     },
     "list users" : {
       "localizations" : {
@@ -585,17 +504,6 @@
         }
       }
     },
-    "Post Observation" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zend waarneming"
-          }
-        }
-      }
-    },
     "Previous" : {
       "localizations" : {
         "nl" : {
@@ -639,45 +547,12 @@
         }
       }
     },
-    "Remove from areas" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verwijder locatie"
-          }
-        }
-      }
-    },
-    "Retrieve current location" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Huidige locatie ophalen"
-          }
-        }
-      }
-    },
     "Retrieving location..." : {
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ophalen locaties"
-          }
-        }
-      }
-    },
-    "Search" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zoek"
           }
         }
       }
