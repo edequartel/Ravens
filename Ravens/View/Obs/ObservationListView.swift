@@ -110,7 +110,7 @@ struct ObservationToolbarModifier: ViewModifier {
                         ) {
                             Image(systemName: "ellipsis.circle")
                             .uniformSize(color: .red)
-                            .accessibility(label: Text("Sort and Filter"))
+                            .accessibilityLabel(AccessibilityConstants.Buttons.sortAndFilterObservationList)
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-//
+//  Accessible
 //  ContentView.swift
 //  TestSoundableStream
 //
@@ -10,113 +10,6 @@ import SwiftyBeaver
 import Foundation       
 import MediaPlayer
 
-class Player: ObservableObject {
-  let log = SwiftyBeaver.self
-  private var queuedAudioPlayer: QueuedAudioPlayer
-
-  @Published var status: AudioPlayerState = .idle
-  @Published var title: String = "unknown"
-  @Published var artist: String = "unknown"
-
-  @Published var currentTime: Double = 0
-  @Published var currentIndex: Int = 0
-  @Published var duration: Double = 0
-
-  init() {
-    queuedAudioPlayer = QueuedAudioPlayer()
-    queuedAudioPlayer.nowPlayingInfoController.set(keyValue: NowPlayingInfoProperty.isLiveStream(true))
-    queuedAudioPlayer.event.stateChange.addListener(self, handleAudioPlayerStateChange)
-    queuedAudioPlayer.event.updateDuration.addListener(self, handleDuration)
-    queuedAudioPlayer.event.secondElapse.addListener(self, handleSecondElapse)
-    queuedAudioPlayer.event.currentItem.addListener(self, handleData)
-  }
-
-  private func handleData(
-    currentItemEventData:
-    ( item: AudioItem?,
-      index: Int?,
-      lastItem: AudioItem?,
-      lastIndex: Int?,
-      lastPosition: Double?
-    )) {
-    DispatchQueue.main.async {
-      self.currentIndex = currentItemEventData.index ?? 0
-    }
-  }
-
-  private func handleAudioPlayerStateChange(state: AudioPlayerState) {
-    log.info("state change, \(state)")
-    DispatchQueue.main.async {
-      self.status = state
-      if state == .ended {
-        self.stop()
-      }
-    }
-  }
-
-  private func handleDuration(duration: Double) {
-    log.info("duration, \(duration)")
-    DispatchQueue.main.async {
-      self.duration = duration
-    }
-  }
-
-  private func handleSecondElapse(currentTime: Double) {
-    DispatchQueue.main.async {
-      self.currentTime = currentTime
-    }
-  }
-
-  func fill(_ audioUrls: [String]) {
-    queuedAudioPlayer.clear()
-    for audioUrl in audioUrls {
-      let audioItem = DefaultAudioItem(
-        audioUrl: audioUrl,
-        sourceType: .stream
-      )
-      log.error("fill \(audioUrl)")
-      queuedAudioPlayer.add(item: audioItem, playWhenReady: true)
-    }
-  }
-
-  func play() {
-    queuedAudioPlayer.play()
-    log.info("playing")
-  }
-
-  func pause() {
-    queuedAudioPlayer.pause()
-    log.info("paused")
-  }
-
-  func stop() {
-    queuedAudioPlayer.stop()
-    log.info("stopped")
-  }
-
-  func previous() {
-    queuedAudioPlayer.previous()
-    log.info("previous")
-  }
-
-  func next() {
-    queuedAudioPlayer.next()
-    log.info("next")
-  }
-}
-
-extension View {
-  @ViewBuilder
-  func hidden(_ shouldHide: Bool) -> some View {
-    switch shouldHide {
-    case true:
-      self.hidden()
-    case false:
-      self
-    }
-  }
-}
-
 struct PlayerControlsView: View {
   @EnvironmentObject var player: Player
 
@@ -126,8 +19,7 @@ struct PlayerControlsView: View {
   @State private var nrPlaying = 0
 
   var sounds: [String]
-  //    var audio1 = ["https://xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC928304-Troglodytes-troglodytes_240819_063924_00.wav",
-  //                  "https://waarneming.nl/media/sound/235292.mp3",
+  //    var audio1 = ["https://waarneming.nl/media/sound/235292.mp3",
   //                  "https://waarneming.nl/media/sound/235293.mp3"]
 
   var body: some View {
@@ -146,6 +38,8 @@ struct PlayerControlsView: View {
 
           Slider(value: $player.currentTime, in: 0...player.duration)
             .disabled(true)
+            .accessibilityHidden(true)
+
           HStack {
             Text(String(format: "%.2f", player.currentTime))
             Spacer()
@@ -153,6 +47,7 @@ struct PlayerControlsView: View {
           }
           .font(.caption)
           .foregroundColor(.gray)
+          .accessibilityLabel("\(player.currentTime) of \(player.duration)")
         }
         .padding(10)
 
@@ -168,6 +63,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 30))
                 .frame(width: 50)
             }
+            .accessibilityLabel(AccessibilityConstants.Buttons.next)
           }
 
           if player.status != .playing // && (player.status != .loading) && (player.status != .buffering))
@@ -179,6 +75,8 @@ struct PlayerControlsView: View {
                 .font(.system(size: 50))
                 .frame(width: 50)
             }
+            .accessibilityLabel(AccessibilityConstants.Buttons.play)
+
           } else {
             Button(action: {
               player.pause()
@@ -187,6 +85,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 50))
                 .frame(width: 50)
             }
+            .accessibilityLabel(AccessibilityConstants.Buttons.pause)
           }
 
           if (sounds.count > 1) {
@@ -198,6 +97,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 30))
                 .frame(width: 50)
             }
+            .accessibilityLabel(AccessibilityConstants.Buttons.next)
           }
           Spacer()
         }

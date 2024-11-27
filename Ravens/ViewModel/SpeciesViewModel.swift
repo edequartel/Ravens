@@ -95,7 +95,8 @@ class SpeciesViewModel: ObservableObject {
     log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
 
-
+print(url)
+    
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedLanguage

@@ -1,3 +1,0 @@
-                .onChange(of: focusedItemID) { newFocusID in
-                    handleFocusChange(newFocusID, from: filteredAndSortedObservations)
-                }

@@ -40,6 +40,16 @@
         }
       }
     },
+    "%lf of %lf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lf of %2$lf"
+          }
+        }
+      }
+    },
     "%lld" : {
       "localizations" : {
         "nl" : {
@@ -73,6 +83,7 @@
       "shouldTranslate" : false
     },
     "Add bookmark" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -83,6 +94,7 @@
       }
     },
     "Add location" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -93,6 +105,7 @@
       }
     },
     "Add observer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -113,6 +126,7 @@
       }
     },
     "Add to areas" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -153,6 +167,7 @@
       }
     },
     "Areas" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -163,6 +178,7 @@
       }
     },
     "Areas List" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -229,6 +245,7 @@
       }
     },
     "Enter number" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -305,6 +322,7 @@
 
     },
     "Image not found" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -370,9 +388,6 @@
           }
         }
       }
-    },
-    "Load Image" : {
-
     },
     "Location" : {
       "localizations" : {
@@ -571,6 +586,7 @@
       }
     },
     "Post Observation" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -624,6 +640,7 @@
       }
     },
     "Remove from areas" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -634,6 +651,7 @@
       }
     },
     "Retrieve current location" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -654,6 +672,7 @@
       }
     },
     "Search" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -716,9 +735,6 @@
         }
       }
     },
-    "Sort and Filter" : {
-
-    },
     "SortNameOptionsView" : {
 
     },
@@ -779,9 +795,6 @@
 
     },
     "Tap for more details about the observation information." : {
-
-    },
-    "Tap to fetch your current location" : {
 
     },
     "Token: %@" : {
