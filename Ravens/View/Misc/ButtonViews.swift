@@ -1,4 +1,4 @@
-//
+//  Accessible
 //  SwiftUIView.swift
 //  Ravens
 //
@@ -15,7 +15,7 @@ struct ShareLinkButtonView: View {
             Image(systemSymbol: SFShareLink)
         }
         .tint(.obsShareLink)
-        .accessibility(label: Text("Share observation"))
+        .accessibilityLabel(AccessibilityConstants.Buttons.share)
     }
 }
 
@@ -31,7 +31,7 @@ struct LinkButtonView: View {
             Image(systemSymbol: SFObservation)
         }
         .tint(.obsObservation)
-        .accessibility(label: Text("Link to waarneming observation"))
+        .accessibilityLabel(AccessibilityConstants.Buttons.linkObservation)
     }
 }
 
@@ -46,7 +46,7 @@ struct InformationSpeciesButtonView: View {
             Image(systemSymbol: SFInformation)
         }
         .tint(.obsInformation)
-        .accessibility(label: Text("Information species"))
+        .accessibilityLabel(AccessibilityConstants.Buttons.information)
     }
 }
 
@@ -79,9 +79,8 @@ struct AreaButtonView: View {
           .uniformSize()
       }
     }
-//    .buttonStyle(ClearButtonStyle())
     .tint(colorOn ? .obsArea : nil)
-    .accessibility(label: Text("Add location"))
+    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteLocation)
   }
 }
 
@@ -108,10 +107,8 @@ struct ObserversButtonView: View {
           .uniformSize()
       }
     }
-//    .buttonStyle(ClearButtonStyle())
-    
     .tint(colorOn ? .obsObserver : nil)
-    .accessibility(label: Text("Add observer"))
+    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteObserver)
   }
 }
 
@@ -133,7 +130,7 @@ struct BookmarkButtonView: View {
         .uniformSize()
     }
     .tint(colorOn ? .obsBookmark : nil)
-    .accessibility(label: Text("Add bookmark"))
+    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteObserver)
     .background(Color.clear)
   }
 }

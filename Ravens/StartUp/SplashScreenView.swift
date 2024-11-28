@@ -5,11 +5,6 @@
 //  Created by Eric de Quartel on 03/06/2022.
 //
 
-
-//let player = AudioPlayer()
-//let audioItem = DefaultAudioItem(audioUrl: "someUrl", sourceType: .stream)
-//player.load(item: audioItem, playWhenReady: true) // Load the item and start playing when the player is ready.
-
 import SwiftUI
 import Alamofire
 import SwiftyBeaver

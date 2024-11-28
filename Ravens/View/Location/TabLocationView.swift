@@ -46,7 +46,7 @@ struct TabLocationView: View {
             }) {
               Image(systemName: "rectangle.2.swap")
                 .uniformSize()
-                .accessibility(label: Text("Switch view"))
+                .accessibilityLabel(AccessibilityConstants.Buttons.toggleViewMapList)
             }
           }
         }
@@ -74,41 +74,9 @@ struct TabLocationView: View {
             }) {
                 Image(systemName: "smallcircle.filled.circle")
                     .uniformSize()
-                    .accessibilityLabel("Retrieve current location") // Accessibility label added here
-                    .accessibilityHint("Tap to fetch your current location")
+                    .accessibilityLabel(AccessibilityConstants.Buttons.updateLocation)
             }
         }
-
-//        ToolbarItem(placement: .navigationBarLeading) {
-//          Button(action: {
-//            log.info("getMyLocation")
-//
-//            if let location = locationManager.getCurrentLocation() {
-//              log.info("Lat \(location.coordinate.latitude)")
-//              log.info("Long \(location.coordinate.longitude)")
-//
-//              settings.currentLocation = CLLocation(
-//                latitude: location.coordinate.latitude,
-//                longitude: location.coordinate.longitude
-//              )
-//
-//              fetchDataLocation(coordinate: location.coordinate)
-//            } else if let errorMessage = locationManager.errorMessage {
-//              log.error("Error: \(errorMessage)")
-//            } else {
-//              log.error("Retrieving location...")
-//            }
-//          }) {
-//            Image(systemName: "smallcircle.filled.circle")
-//              .uniformSize()
-//          }
-//        }
-
-
-
-
-        //
-
 
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
@@ -130,7 +98,7 @@ struct TabLocationView: View {
             Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
               .uniformSize()
               .accessibility(
-                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? "Remove from areas" : "Add to areas"))
+                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? AccessibilityConstants.Buttons.removeLocationFromFavorite : AccessibilityConstants.Buttons.addLocationToFavorite))
           }
         }
 
@@ -138,9 +106,8 @@ struct TabLocationView: View {
           NavigationLink(destination: AreasView()) {
             Image(systemSymbol: .listBullet)
               .uniformSize()
-              .accessibility(label: Text("Areas"))
           }
-          .accessibility(label: Text("Areas List"))
+          .accessibilityLabel(AccessibilityConstants.Buttons.listWithFavoriteLocation)
         }
 
       }

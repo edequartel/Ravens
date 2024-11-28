@@ -21,7 +21,6 @@
 ! folders obs /check these
 ! folder for data ones like regions (welke weg worden gehaald wanneer cache wordt geleegd)
 ! filemanager uitbreiden en in login setten als easter eggs (alleen onder mijn naam, if user is)
-!! player in view no obs
 
 ? graphs
 - second language

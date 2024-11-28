@@ -26,9 +26,13 @@ struct ObservationsLocationView: View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
 
-//      if let observations = observationsLocationViewModel.observations?.results, observations.count == 0 {
-//        Text("No observations")
-//      } else {
+      if let observations = observationsLocationViewModel.observations?.results, observations.count == 0 {
+        Text("No observations for the last 14 days at this location")
+            .font(.headline) // Set font style
+            .foregroundColor(.secondary) // Adjust text color
+            .multilineTextAlignment(.center) // Align text to the center
+            .padding() // Add padding around the text
+      } else {
         if let observations = observationsLocationViewModel.observations?.results, observations.count > 0 {
           SettingsDetailsView(
             count: observationsLocationViewModel.locations.count,
@@ -39,7 +43,7 @@ struct ObservationsLocationView: View {
         } else {
           NoObservationsView()
         }
-//      }
+      }
 
     }
     .refreshable {
