@@ -36,32 +36,30 @@ struct ObservationsSpeciesView: View {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
 
         HStack {
-            // Image with accessibility label
-            Image(systemSymbol: .circleFill)
-                .foregroundColor(rarityColor(value: item.rarity))
+          // Image with accessibility label
+          Image(systemSymbol: .circleFill)
+            .foregroundColor(rarityColor(value: item.rarity))
 
-            // Text with accessibility label
-            Text("\(item.name)")
-                .bold()
-                .lineLimit(1) // Set the maximum number of lines to 1
-                .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+          // Text with accessibility label
+          Text("\(item.name)")
+            .bold()
+            .lineLimit(1) // Set the maximum number of lines to 1
+            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
 
-            // Button with accessibility label and hint
-            Button(action: {
-                selectedSpeciesID = item.speciesId
-            }) {
-                Image(systemSymbol: .infoCircle)
-                .foregroundColor(Color.gray.opacity(0.8))
-            }
+          // Button with accessibility label and hint
+          Button(action: {
+            selectedSpeciesID = item.speciesId
+          }) {
+            Image(systemSymbol: .infoCircle)
+              .foregroundColor(Color.gray.opacity(0.8))
+          }
 
-            //
+          //
           if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
             Image(systemSymbol: SFSpeciesFill)
               .foregroundColor(Color.gray.opacity(0.8))
           }
-
-
-            Spacer()
+          Spacer()
         }
       }
       .padding(.horizontal,10)
@@ -69,15 +67,24 @@ struct ObservationsSpeciesView: View {
       .accessibilityLabel(Text("\(item.name), \(item.rarity) information"))
       Spacer()
 
-
       VStack {
-        if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
-          if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
-          HorizontalLine() 
-          ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
-            .environmentObject(Settings()) // Pass environment object
+        if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count == 0 {
+          Text("No observations for the last 14 days for \(item.name)")
+            .font(.headline) // Set font style
+            .foregroundColor(.secondary) // Adjust text color
+            .multilineTextAlignment(.center) // Align text to the center
+            .padding() // Add padding around the text
+          Spacer()
         } else {
-          NoObservationsView()
+
+          if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
+            if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
+            HorizontalLine()
+            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
+              .environmentObject(Settings()) // Pass environment object
+          } else {
+            NoObservationsView()
+          }
         }
       }
 

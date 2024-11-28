@@ -2,13 +2,51 @@
   "sourceLanguage" : "en",
   "strings" : {
     " " : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "(%lld)" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "%@" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18,40 +56,87 @@
       }
     },
     "%@ - " : {
-
-    },
-    "%@ %@ %lldx %lldd %@" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%@ %@ %lldx %lldd %@" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
           }
         }
       }
     },
     "%@, %lld information" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@, %2$lld information"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
           }
         }
       }
     },
     "%lf of %lf" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$lf of %2$lf"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
           }
         }
       }
     },
     "%lld" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -61,29 +146,105 @@
       }
     },
     "%lld x" : {
-
-    },
-    "%lld x observations" : {
-
-    },
-    "%lld-%lld" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%lld x observations" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%lld-%lld" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$lld-%2$lld"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
           }
         }
       }
     },
     "%lldd" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "%lldx" : {
-      "shouldTranslate" : false
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Add Observer" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -93,7 +254,15 @@
       }
     },
     "all visible" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -103,7 +272,15 @@
       }
     },
     "App details" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -113,7 +290,15 @@
       }
     },
     "Area" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -123,7 +308,15 @@
       }
     },
     "Delete" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,10 +326,12 @@
       }
     },
     "Do you want to append this %@ %@?" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Do you want to append this %1$@ %2$@?"
           }
         },
@@ -149,7 +344,15 @@
       }
     },
     "email" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -159,7 +362,15 @@
       }
     },
     "emailadres" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -169,7 +380,15 @@
       }
     },
     "End Of List" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -179,10 +398,33 @@
       }
     },
     "Error: %@" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "favorites visible" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -192,7 +434,15 @@
       }
     },
     "Files" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -202,7 +452,15 @@
       }
     },
     "Filtering" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -212,16 +470,69 @@
       }
     },
     "FilteringAllOptionsView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "FilterOptionsView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "GPS " : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Group" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -231,8 +542,15 @@
       }
     },
     "Hybrid" : {
+      "comment" : "",
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -242,11 +560,33 @@
       }
     },
     "Id" : {
-
-    },
-    "Imagery" : {
+      "comment" : "",
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Imagery" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -256,7 +596,15 @@
       }
     },
     "Information" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -266,7 +614,15 @@
       }
     },
     "Information species" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -275,8 +631,34 @@
         }
       }
     },
-    "Language" : {
+    "Key" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Language" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -286,10 +668,33 @@
       }
     },
     "Lat %@" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Link to waarneming observation" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -299,7 +704,15 @@
       }
     },
     "list users" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -309,7 +722,15 @@
       }
     },
     "Location" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -319,7 +740,15 @@
       }
     },
     "Login" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -329,7 +758,15 @@
       }
     },
     "Login failed" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -339,7 +776,15 @@
       }
     },
     "Login Name: %@" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -349,7 +794,15 @@
       }
     },
     "Logout" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -359,10 +812,33 @@
       }
     },
     "Long %@" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Map" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -372,7 +848,15 @@
       }
     },
     "Map Style" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -382,10 +866,33 @@
       }
     },
     "Menu filter" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "More at waarneming.nl" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -395,7 +902,15 @@
       }
     },
     "Name" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -405,7 +920,15 @@
       }
     },
     "Native" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -415,10 +938,33 @@
       }
     },
     "Navigate to %@ details" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Next" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -428,7 +974,15 @@
       }
     },
     "No" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -437,14 +991,58 @@
         }
       }
     },
-    "Notes about the observation" : {
+    "No observations for the last 14 days at this location" : {
 
+    },
+    "No observations for the last 14 days for %@" : {
+
+    },
+    "Notes about the observation" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObsDetailView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "observation.org" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -454,28 +1052,141 @@
       }
     },
     "ObservationRowView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObservationsLocationView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObservationsSpeciesView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObservationsSpeciesViewIn2" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObservationsUserView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObserversView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "ObsView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "password" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -485,7 +1196,15 @@
       }
     },
     "Password: %@" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -495,7 +1214,15 @@
       }
     },
     "Play Sounds" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -505,7 +1232,15 @@
       }
     },
     "Previous" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -515,7 +1250,15 @@
       }
     },
     "Rarity" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -525,10 +1268,33 @@
       }
     },
     "Ravens" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Region" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -538,7 +1304,15 @@
       }
     },
     "remove" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -548,7 +1322,15 @@
       }
     },
     "Retrieving location..." : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -558,10 +1340,33 @@
       }
     },
     "SearchLocationView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Second language" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -571,7 +1376,15 @@
       }
     },
     "Settings" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -581,7 +1394,15 @@
       }
     },
     "Share observation" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -591,7 +1412,15 @@
       }
     },
     "Sort" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -601,7 +1430,15 @@
       }
     },
     "Sort and filter" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -611,10 +1448,33 @@
       }
     },
     "SortNameOptionsView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Source" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -624,7 +1484,15 @@
       }
     },
     "Species" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -634,14 +1502,51 @@
       }
     },
     "SpeciesInfoView" : {
-
-    },
-    "SpeciesView" : {
-
-    },
-    "Standard" : {
+      "comment" : "",
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "SpeciesView" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Standard" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -650,8 +1555,34 @@
         }
       }
     },
-    "Switch view" : {
+    "SubmitButton" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit button"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zend knop"
+          }
+        }
+      }
+    },
+    "Switch view" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -661,19 +1592,87 @@
       }
     },
     "TabLocationView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "TabSpeciesView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "TabUserObservationsView" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Tap for more details about the observation information." : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "Token: %@" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -683,7 +1682,15 @@
       }
     },
     "Us" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -693,7 +1700,15 @@
       }
     },
     "User" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -703,16 +1718,69 @@
       }
     },
     "Value: %lld" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "VoiceOver is OFF" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "VoiceOver is ON" : {
-
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        }
+      }
     },
     "waarneming.nl" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -722,7 +1790,15 @@
       }
     },
     "Yes" : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -732,7 +1808,15 @@
       }
     },
     "You can mark species as favorites through an action, and then you can filter based on this." : {
+      "comment" : "",
+      "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
