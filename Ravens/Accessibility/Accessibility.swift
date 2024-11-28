@@ -40,18 +40,18 @@ struct AccessibilityConstants {
   }
 
   struct Labels {
-    static let userName = "User Name label"
-    static let password = "Password label"
+//    static let userName = "User Name label"
+//    static let password = "Password label"
     static let searchForLocation = "Search for a location"
   }
 
   struct Hints {
     static let submitHint = "Double-tap to submit the form"
-    static let cancelHint = "Double-tap to cancel and go back"
+//    static let cancelHint = "Double-tap to cancel and go back"
   }
 
   struct Images {
     static let logo = "App logo"
-    static let profilePicture = "User profile picture"
+//    static let profilePicture = "User profile picture"
   }
 }

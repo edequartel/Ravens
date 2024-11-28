@@ -32,6 +32,7 @@ struct ObservationsLocationView: View {
             .foregroundColor(.secondary) // Adjust text color
             .multilineTextAlignment(.center) // Align text to the center
             .padding() // Add padding around the text
+            Spacer()
       } else {
         if let observations = observationsLocationViewModel.observations?.results, observations.count > 0 {
           SettingsDetailsView(
