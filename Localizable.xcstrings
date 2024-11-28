@@ -2,238 +2,71 @@
   "sourceLanguage" : "en",
   "strings" : {
     " " : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "(%lld)" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "%@" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        }
-      }
+
     },
     "%@ - " : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "%@ %@ %lldx %lldd %@" : {
-      "comment" : "",
-      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "%1$@ %2$@ %3$lldx %4$lldd %5$@"
           }
         }
       }
     },
     "%@, %lld information" : {
-      "comment" : "",
-      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@, %2$lld information"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "%1$@, %2$lld information"
           }
         }
       }
     },
     "%lf of %lf" : {
-      "comment" : "",
-      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lf of %2$lf"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "%1$lf of %2$lf"
           }
         }
       }
     },
     "%lld" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
+
     },
     "%lld x" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "%lld x observations" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "%lld-%lld" : {
-      "comment" : "",
-      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld-%2$lld"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "%1$lld-%2$lld"
           }
         }
       }
     },
     "%lldd" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "%lldx" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Add Observer" : {
       "comment" : "",
@@ -249,6 +82,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarnemen toevoegen"
+          }
+        }
+      }
+    },
+    "Add or remove observer to favorites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waarnemer toevoegen of verwijderen"
+          }
+        }
+      }
+    },
+    "Add this location to favorites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voe deze locatie doe aan favorieten"
           }
         }
       }
@@ -329,16 +184,10 @@
       "comment" : "",
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do you want to append this %1$@ %2$@?"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wil je dit toevoegen %1$@ %2$@?"
+            "value" : "Wil dit toevoegen %@ %@?"
           }
         }
       }
@@ -398,22 +247,7 @@
       }
     },
     "Error: %@" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "favorites visible" : {
       "comment" : "",
@@ -470,58 +304,35 @@
       }
     },
     "FilteringAllOptionsView" : {
-      "comment" : "",
+
+    },
+    "FilterOptionsView" : {
+
+    },
+    "Get information about the species" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Verkrijg alle informatie over deze soort"
           }
         }
       }
     },
-    "FilterOptionsView" : {
-      "comment" : "",
+    "Go to the observation at waarneming.nl" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Gaan naar de waarneming op de website van waarneming.nl"
           }
         }
       }
     },
     "GPS " : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Group" : {
       "comment" : "",
@@ -560,22 +371,7 @@
       }
     },
     "Id" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Imagery" : {
       "comment" : "",
@@ -631,24 +427,6 @@
         }
       }
     },
-    "Key" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
-    },
     "Language" : {
       "comment" : "",
       "extractionState" : "manual",
@@ -668,22 +446,7 @@
       }
     },
     "Lat %@" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Link to waarneming observation" : {
       "comment" : "",
@@ -717,6 +480,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarnemerslijst"
+          }
+        }
+      }
+    },
+    "List with favorite locations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lijst met favoriete locaties"
           }
         }
       }
@@ -812,22 +586,7 @@
       }
     },
     "Long %@" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Map" : {
       "comment" : "",
@@ -866,22 +625,7 @@
       }
     },
     "Menu filter" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "More at waarneming.nl" : {
       "comment" : "",
@@ -938,22 +682,7 @@
       }
     },
     "Navigate to %@ details" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Next" : {
       "comment" : "",
@@ -992,10 +721,24 @@
       }
     },
     "No observations for the last 14 days at this location" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen waarneming voor de laatste 14 dagen op deze locatie."
+          }
+        }
+      }
     },
     "No observations for the last 14 days for %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen waarnemingen voor de laatste 14 dagen voor %@"
+          }
+        }
+      }
     },
     "Notes about the observation" : {
       "comment" : "",
@@ -1009,29 +752,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Notities van de waarneming"
           }
         }
       }
     },
     "ObsDetailView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "observation.org" : {
       "comment" : "",
@@ -1052,130 +780,25 @@
       }
     },
     "ObservationRowView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObservationsLocationView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObservationsSpeciesView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObservationsSpeciesViewIn2" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObservationsUserView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObserversView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "ObsView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "password" : {
       "comment" : "",
@@ -1213,6 +836,17 @@
         }
       }
     },
+    "pause the sound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pauzeer het geluid"
+          }
+        }
+      }
+    },
     "Play Sounds" : {
       "comment" : "",
       "extractionState" : "manual",
@@ -1227,6 +861,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio afspelen"
+          }
+        }
+      }
+    },
+    "play the next sound" : {
+      "comment" : "",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : ""
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speel het volgende geluid"
+          }
+        }
+      }
+    },
+    "play the previous sound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speel het vorige geluid af"
+          }
+        }
+      }
+    },
+    "play the sound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speel het geluid af"
           }
         }
       }
@@ -1268,22 +942,7 @@
       }
     },
     "Ravens" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Region" : {
       "comment" : "",
@@ -1321,6 +980,17 @@
         }
       }
     },
+    "Remove this location from favorites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwijder deze locatie uit de favorieten"
+          }
+        }
+      }
+    },
     "Retrieving location..." : {
       "comment" : "",
       "extractionState" : "manual",
@@ -1339,23 +1009,19 @@
         }
       }
     },
-    "SearchLocationView" : {
-      "comment" : "",
+    "Search for a location" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Zoek naar de locatie"
           }
         }
       }
+    },
+    "SearchLocationView" : {
+
     },
     "Second language" : {
       "comment" : "",
@@ -1411,6 +1077,17 @@
         }
       }
     },
+    "Share this observation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel deze waarneming"
+          }
+        }
+      }
+    },
     "Sort" : {
       "comment" : "",
       "extractionState" : "manual",
@@ -1447,23 +1124,19 @@
         }
       }
     },
-    "SortNameOptionsView" : {
-      "comment" : "",
+    "Sort and filter the list with observations" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Sorteer en filter de lijst met waarnemingen"
           }
         }
       }
+    },
+    "SortNameOptionsView" : {
+
     },
     "Source" : {
       "comment" : "",
@@ -1502,40 +1175,10 @@
       }
     },
     "SpeciesInfoView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "SpeciesView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Standard" : {
       "comment" : "",
@@ -1551,24 +1194,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard"
-          }
-        }
-      }
-    },
-    "SubmitButton" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Submit button"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zend knop"
           }
         }
       }
@@ -1592,73 +1217,24 @@
       }
     },
     "TabLocationView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "TabSpeciesView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "TabUserObservationsView" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "Tap for more details about the observation information." : {
-      "comment" : "",
+
+    },
+    "Toggle between map or list view" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Wissel tussen kaart en lijst"
           }
         }
       }
@@ -1677,6 +1253,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Token: %@"
+          }
+        }
+      }
+    },
+    "Update the location of the observations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernieuw de huidige locatie voor waarnemingen"
           }
         }
       }
@@ -1718,22 +1305,7 @@
       }
     },
     "Value: %lld" : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        }
-      }
+
     },
     "VoiceOver is OFF" : {
       "comment" : "",
@@ -1747,8 +1319,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Voiceover staat uit"
           }
         }
       }
@@ -1765,8 +1337,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Voiceover staat aan"
           }
         }
       }
@@ -1808,22 +1380,7 @@
       }
     },
     "You can mark species as favorites through an action, and then you can filter based on this." : {
-      "comment" : "",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : ""
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Je kunt soorten als favoriet markeren via een actie, en hier kun je vervolgens op filteren."
-          }
-        }
-      }
+
     }
   },
   "version" : "1.0"

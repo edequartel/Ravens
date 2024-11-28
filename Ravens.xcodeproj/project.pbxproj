@@ -100,9 +100,7 @@
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
-		47AB45982CE2040700842877 /* user.json in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45972CE2040400842877 /* user.json */; };
 		47AB459A2CE2042100842877 /* species.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45992CE2042100842877 /* species.json */; };
-		47AB459C2CE2055A00842877 /* observation.json in Sources */ = {isa = PBXBuildFile; fileRef = 47AB459B2CE2055A00842877 /* observation.json */; };
 		47AB459F2CE262C900842877 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 47AB459E2CE262C900842877 /* LazyPager */; };
 		47AB45A12CE3276500842877 /* RavensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A02CE3276000842877 /* RavensView.swift */; };
 		47AB45A32CE327AD00842877 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A22CE327A300842877 /* SplashView.swift */; };
@@ -206,9 +204,7 @@
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
 		47AB45952CE2030100842877 /* location.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = location.json; sourceTree = "<group>"; };
-		47AB45972CE2040400842877 /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		47AB45992CE2042100842877 /* species.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = species.json; sourceTree = "<group>"; };
-		47AB459B2CE2055A00842877 /* observation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = observation.json; sourceTree = "<group>"; };
 		47AB45A02CE3276000842877 /* RavensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensView.swift; sourceTree = "<group>"; };
 		47AB45A22CE327A300842877 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
@@ -496,8 +492,6 @@
 				476843D32BA9D43D004EF208 /* LottieFile.json */,
 				47AB45952CE2030100842877 /* location.json */,
 				47AB45992CE2042100842877 /* species.json */,
-				47AB45972CE2040400842877 /* user.json */,
-				47AB459B2CE2055A00842877 /* observation.json */,
 			);
 			path = StartUp;
 			sourceTree = "<group>";
@@ -664,7 +658,6 @@
 				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
-				47AB459C2CE2055A00842877 /* observation.json in Sources */,
 				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,
 				470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */,
 				4782626F2C8EBEDE00DD746C /* DateConversionView.swift in Sources */,
@@ -712,7 +705,6 @@
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
 				474C404A2B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift in Sources */,
 				478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */,
-				47AB45982CE2040700842877 /* user.json in Sources */,
 				47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */,
 				474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */,
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
@@ -867,7 +859,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -909,7 +901,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
