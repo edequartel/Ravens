@@ -21,26 +21,26 @@ struct RavensView: View {
         // Tab 2
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
-          Text("Us")
+          Text(us)
           Image(systemSymbol: .person2Fill)
         }
         // Tab 1
         TabLocationView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
-          Text("Area")
+          Text(location)
           Image(systemSymbol: SFAreaFill)
         }
         // Tab 3
         TabSpeciesView(
           selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
-          Text("Species")
+          Text(species)
           Image(systemSymbol: .tree)
         }
         // Tab 4
         SettingsView()
           .tabItem {
-            Text("Settings")
+            Text(settings_)
             Image(systemSymbol: .gearshape)
           }
       }

@@ -15,7 +15,7 @@ struct ShareLinkButtonView: View {
             Image(systemSymbol: SFShareLink)
         }
         .tint(.obsShareLink)
-        .accessibilityLabel(AccessibilityConstants.Buttons.share)
+        .accessibilityLabel(shareThisObservation)
     }
 }
 
@@ -31,7 +31,7 @@ struct LinkButtonView: View {
             Image(systemSymbol: SFObservation)
         }
         .tint(.obsObservation)
-        .accessibilityLabel(AccessibilityConstants.Buttons.linkObservation)
+        .accessibilityLabel(linkObservation)
     }
 }
 
@@ -46,7 +46,7 @@ struct InformationSpeciesButtonView: View {
             Image(systemSymbol: SFInformation)
         }
         .tint(.obsInformation)
-        .accessibilityLabel(AccessibilityConstants.Buttons.information)
+        .accessibilityLabel(informationSpecies)
     }
 }
 
@@ -80,7 +80,7 @@ struct AreaButtonView: View {
       }
     }
     .tint(colorOn ? .obsArea : nil)
-    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteLocation)
+    .accessibilityLabel(favoriteLocation)
   }
 }
 
@@ -108,7 +108,7 @@ struct ObserversButtonView: View {
       }
     }
     .tint(colorOn ? .obsObserver : nil)
-    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteObserver)
+    .accessibilityLabel(favoriteObserver)
   }
 }
 
@@ -130,7 +130,7 @@ struct BookmarkButtonView: View {
         .uniformSize()
     }
     .tint(colorOn ? .obsBookmark : nil)
-    .accessibilityLabel(AccessibilityConstants.Buttons.favoriteObserver)
+    .accessibilityLabel(favoriteObserver)
     .background(Color.clear)
   }
 }

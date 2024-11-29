@@ -46,7 +46,7 @@ struct TabLocationView: View {
             }) {
               Image(systemName: "rectangle.2.swap")
                 .uniformSize()
-                .accessibilityLabel(AccessibilityConstants.Buttons.toggleViewMapList)
+                .accessibilityLabel(toggleViewMapList)
             }
           }
         }
@@ -74,7 +74,7 @@ struct TabLocationView: View {
             }) {
                 Image(systemName: "smallcircle.filled.circle")
                     .uniformSize()
-                    .accessibilityLabel(AccessibilityConstants.Buttons.updateLocation)
+                    .accessibilityLabel(updateLocation)
             }
         }
 
@@ -98,7 +98,7 @@ struct TabLocationView: View {
             Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
               .uniformSize()
               .accessibility(
-                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? AccessibilityConstants.Buttons.removeLocationFromFavorite : AccessibilityConstants.Buttons.addLocationToFavorite))
+                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? removeLocationFromFavorite : addLocationToFavorite))
           }
         }
 
@@ -107,7 +107,7 @@ struct TabLocationView: View {
             Image(systemSymbol: .listBullet)
               .uniformSize()
           }
-          .accessibilityLabel(AccessibilityConstants.Buttons.listWithFavoriteLocation)
+          .accessibilityLabel(listWithFavoriteLocation)
         }
 
       }

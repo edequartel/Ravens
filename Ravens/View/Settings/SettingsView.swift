@@ -38,7 +38,7 @@ struct SettingsView: View {
         }
         //      LoginView()
         
-        Picker("Source", selection: $settings.selectedInBetween) {
+        Picker(source, selection: $settings.selectedInBetween) {
           Text("waarneming.nl")
             .tag("waarneming.nl")
           Text("observation.org")
@@ -48,12 +48,12 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-        Section("Language") {
+        Section(language) {
           LanguageView()
         }
 
-        Section("Species") {
-          Picker("Group", selection: $settings.selectedSpeciesGroupId) {
+        Section(species) {
+          Picker(group, selection: $settings.selectedSpeciesGroupId) {
             ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
               Text("\(speciesGroup.name)").tag(speciesGroup.id)
                 .lineLimit(1)
@@ -79,7 +79,7 @@ struct SettingsView: View {
           }
         }
 
-        Section("Map") {
+        Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
               Text(choice.rawValue.capitalized).tag(choice)
@@ -90,7 +90,7 @@ struct SettingsView: View {
         }
 
 
-        Section(header: Text("App details")) {
+        Section(header: Text(appDetails)) {
           VStack(alignment: .leading) {
             Text(version())
             Text(locale.description)
@@ -101,7 +101,7 @@ struct SettingsView: View {
           .accessibilityElement(children: .combine)
         }
 
-        Section(header: Text("Location")) {
+        Section(header: Text(location)) {
           VStack {
             LocationManagerView()
           }
@@ -109,7 +109,7 @@ struct SettingsView: View {
         }
 
       }
-      .navigationTitle("Settings")
+      .navigationTitle(settings_)
       .navigationBarTitleDisplayMode(.inline)
     }
   }

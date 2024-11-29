@@ -30,9 +30,12 @@ struct ObservationListView: View {
               id: \.id) { obs in
           ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
           .accessibilityFocused($focusedItemID, equals: obs.id)
-          .onChange(of: focusedItemID) { newFocusID in
+          .onChange(of: focusedItemID) { newFocusID, oldFocusID in
               handleFocusChange(newFocusID, from: filteredAndSortedObservations)
           }
+//          .onChange(of: focusedItemID) { newFocusID in
+//              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
+//          }
         }
     }
 
@@ -47,7 +50,6 @@ struct ObservationListView: View {
   }
 
   private func handleFocusChange(_ newFocusID: Int?, from observations: [Observation]) {
-    print("focus change")
       guard let newFocusID = newFocusID else { return }
       if let focusedObservation = observations.first(where: { $0.id == newFocusID }) {
         print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
@@ -57,7 +59,6 @@ struct ObservationListView: View {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 //            AudioServicesPlaySystemSound(1057)
           }
-          print("focus changed")
       }
   }
 
@@ -110,7 +111,7 @@ struct ObservationToolbarModifier: ViewModifier {
                         ) {
                             Image(systemName: "ellipsis.circle")
                             .uniformSize(color: .red)
-                            .accessibilityLabel(AccessibilityConstants.Buttons.sortAndFilterObservationList)
+                            .accessibilityLabel(sortAndFilterObservationList)
                         }
                     }
                 }

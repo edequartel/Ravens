@@ -98,7 +98,7 @@ struct SearchLocationView: View {
   var body: some View {
     if showView { Text("SearchLocationView").font(.customTiny) }
     HStack {
-      TextField(AccessibilityConstants.Labels.searchForLocation, text: $searchText, onCommit: {
+      TextField(searchForLocation, text: $searchText, onCommit: {
         isLoading = true
         viewModel.fetchLocations(searchString: searchText) { success in
           isLoading = false

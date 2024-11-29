@@ -64,12 +64,12 @@ struct ObservationsSpeciesView: View {
       }
       .padding(.horizontal,10)
       .accessibilityElement(children: .combine)
-      .accessibilityLabel(Text("\(item.name), \(item.rarity) information"))
+      .accessibilityLabel(Text("\(item.name), \(item.rarity) \(information)"))
       Spacer()
 
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count == 0 {
-          Text("No observations for the last 14 days for \(item.name)")
+          Text("\(noObsLastPeriod) \(item.name)")
             .font(.headline) // Set font style
             .foregroundColor(.secondary) // Adjust text color
             .multilineTextAlignment(.center) // Align text to the center

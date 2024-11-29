@@ -63,7 +63,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 30))
                 .frame(width: 50)
             }
-            .accessibilityLabel(AccessibilityConstants.Buttons.next)
+            .accessibilityLabel(next)
           }
 
           if player.status != .playing // && (player.status != .loading) && (player.status != .buffering))
@@ -75,7 +75,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 50))
                 .frame(width: 50)
             }
-            .accessibilityLabel(AccessibilityConstants.Buttons.play)
+            .accessibilityLabel(play)
 
           } else {
             Button(action: {
@@ -85,7 +85,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 50))
                 .frame(width: 50)
             }
-            .accessibilityLabel(AccessibilityConstants.Buttons.pause)
+            .accessibilityLabel(pause)
           }
 
           if (sounds.count > 1) {
@@ -97,7 +97,7 @@ struct PlayerControlsView: View {
                 .font(.system(size: 30))
                 .frame(width: 50)
             }
-            .accessibilityLabel(AccessibilityConstants.Buttons.next)
+            .accessibilityLabel(next)
           }
           Spacer()
         }

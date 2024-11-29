@@ -67,14 +67,14 @@ struct ObsDetailView: View {
               Image(systemSymbol: SFInformation)
                 .uniformSize()
             }
-            .accessibility(label: Text("Information species"))
+            .accessibility(label: Text(informationSpecies))
 
             let url = URL(string: obs.permalink)!
             ShareLink(item: url) {
               Image(systemSymbol: SFShareLink)
                 .uniformSize()
             }
-            .accessibility(label: Text("Share observation"))
+            .accessibility(label: Text(shareThisObservation))
 
             Button(action: {
               if let url = URL(string: obs.permalink) {
@@ -84,7 +84,7 @@ struct ObsDetailView: View {
               Image(systemSymbol: SFObservation)
                 .uniformSize()
             }
-            .accessibility(label: Text("Link to waarneming observation"))
+            .accessibility(label: Text(linkObservation))
           }
         }
 
@@ -120,19 +120,19 @@ struct ObsDetailView: View {
           }) {
             HStack {
               Image(systemName: "play.fill")
-              Text("Play Sounds")
+              Text(play)
               Spacer()
             }
           }
           .padding()
           .islandBackground()
-          .accessibilityLabel("Play Sounds")
+          .accessibilityLabel(play)
         }
 
         NotesView(obs: obs)
           .padding()
           .islandBackground()
-          .accessibility(label: Text("Notes about the observation"))
+          .accessibility(label: Text(notesAboutObservation))
 
 
         NavigationLink(destination: PositonFullView(obs: obs)) {
