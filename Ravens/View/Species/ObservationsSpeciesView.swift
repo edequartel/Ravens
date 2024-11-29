@@ -69,7 +69,7 @@ struct ObservationsSpeciesView: View {
 
       VStack {
         if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count == 0 {
-          Text("\(noObsLastPeriod) \(item.name)")
+          Text(noObsLastPeriod)// \(item.name)")
             .font(.headline) // Set font style
             .foregroundColor(.secondary) // Adjust text color
             .multilineTextAlignment(.center) // Align text to the center
