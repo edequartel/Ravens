@@ -20,6 +20,8 @@ struct TabUserObservationsView: View {
     NavigationView {
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
+//        Text(noObsLastPeriod) // test localisation
+//Text(play)
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsUserView()
         } else {
@@ -35,7 +37,7 @@ struct TabUserObservationsView: View {
             }) {
               Image(systemSymbol: .rectangle2Swap)
                 .uniformSize()
-                .accessibility(label: Text("Switch view"))
+                .accessibility(label: Text(swap))
             }
           }
 
@@ -45,7 +47,7 @@ struct TabUserObservationsView: View {
             NavigationLink(destination: ObserversView()) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
-                .accessibility(label: Text("list users"))
+                .accessibility(label: Text(observersList))
             }
           }
         }

@@ -131,7 +131,7 @@ struct AreasView: View {
                 NavigationLink(destination: SearchLocationView()) {
                   Image(systemSymbol: .magnifyingglass)
                     .uniformSize()
-                    .accessibilityLabel(AccessibilityConstants.Buttons.searchForLocation)
+                    .accessibilityLabel(searchForLocation)
                 }
               }
             }

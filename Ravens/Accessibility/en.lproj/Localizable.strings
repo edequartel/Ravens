@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  Ravens
+
+  Created by Eric de Quartel on 29/11/2024.
+  
+
+
+
+ */
+"play" = "play the sound";
+"pause" = "pause the sound";
+"next" = "play the next sound";
+"previous" = "play the previous sound";
+"shareThisObservation" = "Share this observation";
+"informationSpecies" = "Get information about the species";
+"linkObservation" = "Go to the observation at waarneming.nl";
+"favoriteSpecies" = "Add or remove species to favorites";
+"favoriteObserver" = "Add or remove observer to favorites";
+"favoriteLocation" = "Add or Remove location to favorites";
+"sortAndFilterObservationList" = "Sort and filter the list with observations";
+"updateLocation" = "Update the location of the observations";
+"listWithFavoriteLocation" = "List with favorite locations";
+"searchForLocation" = "Search for a location";
+"addLocationToFavorite" = "Add this location to favorites";
+"removeLocationFromFavorite" = "Remove this location from favorites";
+"toggleViewMapList" = "Toggle between map or list view";
+"noObsLastPeriod" = "No observations found for the last 14 days";
+"allVisible" = "all species in list";
+"favoriteVisible" ="favorite species in list";
+"notesAboutObservation" = "notes about observation";
+"navigateTo" = "navigate to";
+
+// user
+"us" = "We";
+"location" = "Location";
+"species" = "Species";
+"observation" = "Observation";
+"settings" = "Settings";
+
+//icons
+"swap" = "change between list and map view";
+"observerList" = "list with favorite observers";
+"sortAndFilterObs" = "Sort or filter the list with observations";
+"sortAndFilterSpecies" = "Sort or filter the list with species";
+
+// settings
+"language" = "Language";
+"source" = "Source";
+"group" = "Group";
+"map" = "Kaart";
+"appDetails" = "App details";
+
+//login
+"email" = "email";
+"password" = "Password";
+"login" = "Login";
+"loginFailed" = "Login failed";
+"emailAddress" = "email Address";
+"logOut" = "log out";
+"information" = "Information";
+"user" = "Observer";
+

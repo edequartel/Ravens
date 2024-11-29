@@ -21,7 +21,7 @@ struct LoginView: View {
       Section("Login") {
         VStack {
 
-          TextField("email", text: $myInlogName, prompt: Text("emailadres"))
+          TextField(email, text: $myInlogName, prompt: Text(emailAddress))
             .onChange(of: myInlogName) { oldState, newState in
               myInlogName = newState.lowercased()
               let lowercasedName = newState.lowercased()
@@ -35,8 +35,8 @@ struct LoginView: View {
 
           Divider()
 
-          SecureField(text: $myPassword, prompt: Text("password")) {
-            Text("password")
+          SecureField(text: $myPassword, prompt: Text(password)) {
+            Text(password)
           }
           .onChange(of: myPassword) { oldState, newState in
             keyChainviewModel.password = newState
@@ -47,7 +47,7 @@ struct LoginView: View {
 
           HStack {
             if keyChainviewModel.token.isEmpty {
-              Button("Login") {
+              Button(logIn) {
                 keyChainviewModel.fetchData(
                   username: keyChainviewModel.loginName,
                   password: keyChainviewModel.password,
@@ -65,7 +65,7 @@ struct LoginView: View {
               .buttonStyle(.borderedProminent)
               .frame(maxWidth: .infinity)
             } else {
-              Button("Logout") {
+              Button(logOut) {
                 keyChainviewModel.token = ""
 //                keyChainviewModel.loginName = ""
 //                keyChainviewModel.password = ""
@@ -88,7 +88,7 @@ struct LoginView: View {
 //          .buttonStyle(.bordered)
 
           if keyChainviewModel.loginFailed {
-            Text("Login failed")
+            Text(logInFailed)
               .foregroundColor(.red)
           }
         }
@@ -100,12 +100,12 @@ struct LoginView: View {
         }
       }
 
-      Section("Information") {
+      Section(information) {
         InfoObservationView()
       }
 
       if keyChainviewModel.token.count > 0 {
-      Section("User") {
+      Section(user) {
           UserView()
           .accessibilityElement(children: .combine)
         }

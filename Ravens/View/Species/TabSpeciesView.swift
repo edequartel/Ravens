@@ -55,12 +55,7 @@ struct TabSpeciesView: View {
               //                    speciesSecondLangViewModel: speciesSecondLangViewModel)
             }
             .accessibilityElement(children: .combine)
-            .accessibilityLabel(Text("Navigate to \(species.name) details"))
-            //            .accessibilityHint(Text("Double-tap to view details about \(species.name)"))
-            
-            
-            
-            
+            .accessibilityLabel(Text("\(navigateTo) \(species.name)"))
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
@@ -72,11 +67,9 @@ struct TabSpeciesView: View {
               
               Button(action: {
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-                  print("bookmarks remove")
                   bookMarksViewModel.removeRecord(speciesID: species.speciesId)
                 } else {
                   bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-                  print("bookmarks append")
                 }
                 
               } ) {
@@ -101,7 +94,7 @@ struct TabSpeciesView: View {
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize(color: .orange)
-              .accessibility(label: Text("Sort and filter"))
+              .accessibility(label: Text(sortAndFilterSpecies))
           }
         }
       }
@@ -117,8 +110,8 @@ struct TabSpeciesView: View {
             Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
               .uniformSize(color: .cyan)
           }
-          .accessibilityLabel(settings.isBookMarkVisible ? "favorites visible" : "all visible")
-          .accessibilityHint("You can mark species as favorites through an action, and then you can filter based on this.")
+          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
+//          .accessibilityHint("You can mark species as favorites through an action, and then you can filter based on this.")
         }
       )
       

@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Ravens
+
+  Created by Eric de Quartel on 29/11/2024.
+  
+
+
+
+ */
+"play" = "speel het geluid af";
+"pause" = "pauzeer het geluid";
+"next" = "speel het volgende geluid af";
+"previous" = "speel het vorige geluid af";
+"shareThisObservation" = "Deel deze waarneming";
+"informationSpecies" = "Bekijk informatie over de soort";
+"linkObservation" = "Ga naar de waarneming op waarneming.nl";
+"favoriteSpecies" = "Voeg soort toe aan favorieten of verwijder deze";
+"favoriteObserver" = "Voeg waarnemer toe aan favorieten of verwijder deze";
+"favoriteLocation" = "Voeg locatie toe aan favorieten of verwijder deze";
+"sortAndFilterObservationList" = "Sorteer en filter de lijst met waarnemingen";
+"updateLocation" = "Werk de locatie van de waarnemingen bij";
+"listWithFavoriteLocation" = "Lijst met favoriete locaties";
+"searchForLocation" = "Zoek naar een locatie";
+"addLocationToFavorite" = "Voeg deze locatie toe aan favorieten";
+"removeLocationFromFavorite" = "Verwijder deze locatie uit favorieten";
+"toggleViewMapList" = "Schakel tussen kaart- en lijstweergave";
+"noObsLastPeriod" = "Geen waarnemingen gevonden voor de laatste 14 dagen";
+"allVisible" = "alle soorten in lijst";
+"favoriteVisible" ="favoriete soorten in lijst";
+"notesAboutObservation" = "aantekening over waarneming";
+"navigateTo" = "navigeer naar";
+
+// user
+"us" = "Wij";
+"location" = "Locatie";
+"species" = "Soorten";
+"observation" = "Waarneming";
+"settings" = "Instellingen";
+
+//icons
+"swap" = "Wissel tussen lijst en kaart weergave";
+"observerList" = "lijst met favoriete waarnemers";
+"sortAndFilterObs" = "Sorteer of filter de lijst met waarnemingen";
+"sortAndFilterSpecies" = "Sorteer of filter de lijst met soorten";
+
+//setting
+"language" = "Taal";
+"source" = "Bron";
+"group" = "Groep";
+"map" = "Kaart";
+"appDetails" = "App gegevens";
+
+//login
+"email" = "email";
+"password" = "Wachtwoord";
+"login" = "Login";
+"loginFailed" = "Inloggen mislukt";
+"emailAddress" = "Email adres";
+"logOut" = "Log uit";
+"information" = "Informatie";
+"user" = "Waarnemer";
