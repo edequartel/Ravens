@@ -181,6 +181,10 @@ enum SortingOption: String, CaseIterable {
   case rarity = "Rarity"
   case name = "Name"
   case scientificName = "Scientific Name"
+
+//  var localized: String {
+//          NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
+//      }
 }
 
 struct CombinedOptionsMenuView: View {
