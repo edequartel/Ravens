@@ -60,3 +60,17 @@
 "logOut" = "Log uit";
 "information" = "Informatie";
 "user" = "Waarnemer";
+
+//filter and sort
+"Date" = "Datum";
+"Rarity" = "Zeldzaamheid";
+"Name" = "Naam";
+"Scientific Name" = "Wetenschappelijke Naam";
+
+"All" = "Alle";
+"Common" = "Algemeen";
+"Uncommon" = "Ongewoon";
+"Rare" = "Zeldzaam";
+"Very rare" = "Zeer zeldzaam";
+
+"moreAtWaarneming" = "Meer op waarneming.nl";

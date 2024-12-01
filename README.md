@@ -19,7 +19,7 @@ Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://edequartel.github.io/Ravens)
 
-## Koffie?
+<!--## Koffie?
 Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een [**kopje koffie**](https://www.buymeacoffee.com/4f4r4t6ytba) .
 
-[![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)
+[![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)-->

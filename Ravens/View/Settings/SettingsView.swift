@@ -111,6 +111,19 @@ struct SettingsView: View {
       }
       .navigationTitle(settings_)
       .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: { //xxxx
+            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
+              UIApplication.shared.open(url)
+            }
+          }) {
+            Image(systemName: "info.circle") // Example: a "plus" icon
+              .uniformSize(color: .red)
+              .accessibilityLabel(information)
+          }
+        }
+      }
     }
   }
 

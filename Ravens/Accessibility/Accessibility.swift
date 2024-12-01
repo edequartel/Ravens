@@ -67,10 +67,13 @@ let rarity = LocalizedStringKey("Rarity")
 let name = LocalizedStringKey("Name")
 let scientificName = LocalizedStringKey("Scientific Name")
 
-//case all = "All"
-//case common = "Common"
-//case uncommon = "Uncommon"
-//case rare = "Rare"
-//case veryRare = "Very rare"
+let all = LocalizedStringKey("All")
+let common = LocalizedStringKey("Common")
+let uncommon = LocalizedStringKey("Uncommon")
+let rare = LocalizedStringKey("Rare")
+let veryRare = LocalizedStringKey("Very rare")
+
+let moreAtWaarneming = LocalizedStringKey("moreAtWaarneming")
+
 
 
