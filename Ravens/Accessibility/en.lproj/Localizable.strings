@@ -62,15 +62,15 @@
 "user" = "Observer";
 
 // filter and sort
-"Date" = "Date";
-"Rarity" = "Rarity";
-"Name" = "Name";
-"Scientific Name" = "Scientific name";
+"date" = "Date";
+"rarity" = "Rarity";
+"name" = "Name";
+"scientificName" = "Scientific name";
 
-"All" = "All";
-"Common" = "Common";
-"Uncommon" = "Uncommon";
-"Rare" = "Rare";
-"Very rare" = "Very rare";
+"all" = "All";
+"common" = "Common";
+"uncommon" = "Uncommon";
+"rare" = "Rare";
+"veryRare" = "Very rare";
 
 "moreAtWaarneming" = "More at waarneming.nl";

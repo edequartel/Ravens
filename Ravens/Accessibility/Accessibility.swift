@@ -62,16 +62,16 @@ let information = LocalizedStringKey("information")
 let user = LocalizedStringKey("user")
 
 // sortAndFilter
-let date_ = LocalizedStringKey("Date")
-let rarity = LocalizedStringKey("Rarity")
-let name = LocalizedStringKey("Name")
-let scientificName = LocalizedStringKey("Scientific Name")
+let date_ = LocalizedStringKey("date")
+let rarity = LocalizedStringKey("rarity")
+let name = LocalizedStringKey("name")
+let scientificName = LocalizedStringKey("scientificName")
 
-let all = LocalizedStringKey("All")
-let common = LocalizedStringKey("Common")
-let uncommon = LocalizedStringKey("Uncommon")
-let rare = LocalizedStringKey("Rare")
-let veryRare = LocalizedStringKey("Very rare")
+let all = LocalizedStringKey("all")
+let common = LocalizedStringKey("common")
+let uncommon = LocalizedStringKey("uncommon")
+let rare = LocalizedStringKey("rare")
+let veryRare = LocalizedStringKey("veryRare")
 
 let moreAtWaarneming = LocalizedStringKey("moreAtWaarneming")
 

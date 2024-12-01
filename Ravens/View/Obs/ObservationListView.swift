@@ -177,15 +177,75 @@ struct FilterOptionsView: View {
 
 //enum
 enum SortingOption: String, CaseIterable {
-  case date = "Date"
-  case rarity = "Rarity"
-  case name = "Name"
-  case scientificName = "Scientific Name"
+  case date = "date"
+  case rarity = "rarity"
+  case name = "name"
+  case scientificName = "scientificName"
 
-//  var localized: String {
-//          NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
-//      }
+  var localized: String {
+    NSLocalizedString("\(self.rawValue)", comment: "")
+  }
+
+  //  var localized: String {
+  //          NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
+  //      }
 }
+//----------------------------------------------------
+
+//To localize the `SortingOption` enum in Swift, you can use the `LocalizedStringKey` or a localization function to map the cases to localized strings. Here’s how you can do it step by step:
+//
+//### Steps to Localize the Enum
+//1. **Define the Localized Strings**:
+//   Add the localized strings for each case in your `Localizable.strings` file.
+//
+//   Example `Localizable.strings` content for English:
+//   ```plaintext
+//   "SortingOption.date" = "Date";
+//   "SortingOption.rarity" = "Rarity";
+//   "SortingOption.name" = "Name";
+//   "SortingOption.scientificName" = "Scientific Name";
+//   ```
+//
+//2. **Extend the Enum to Provide Localized Strings**:
+//   Use a computed property in the `SortingOption` enum to return the localized string.
+//
+//3. **Implement the Enum with Localization**:
+//   Here's the updated code:
+//
+//   ```swift
+//   import Foundation
+//
+//   enum SortingOption: String, CaseIterable {
+//       case date = "date"
+//       case rarity = "rarity"
+//       case name = "name"
+//       case scientificName = "scientificName"
+//
+//       var localized: String {
+//           NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
+//       }
+//   }
+//   ```
+//
+//4. **Use the Localized Strings in Your View**:
+//   When you display the options in your UI, call the `.localized` property.
+//
+//   ```swift
+//   ForEach(SortingOption.allCases, id: \.self) { option in
+//       Text(option.localized)
+//   }
+//   ```
+//
+//### Benefits of This Approach
+//- **Separation of Concerns**: Keeps the enum values distinct from their localized representations.
+//- **Scalable**: Adding more cases or languages only requires updating the `Localizable.strings` file.
+//
+//### Suggestions for Iteration
+//**a.** Add test cases to ensure all enum values are correctly localized.
+//**b.** Use `LocalizationCatalog` or a similar Swift package for more robust localization management.
+//
+
+//----------------------------------------------------
 
 struct CombinedOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption
