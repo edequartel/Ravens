@@ -303,6 +303,11 @@ struct SpeciesInfoView: View {
   var body: some View {
     VStack(alignment: .leading) {
       if showView { Text("SpeciesInfoView").font(.customTiny) }
+
+
+//      Text("\(species.speciesId)")
+
+
       HStack(spacing: 4) {
         if species.date != nil {
           Image(

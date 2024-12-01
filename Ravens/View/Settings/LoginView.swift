@@ -100,9 +100,9 @@ struct LoginView: View {
         }
       }
 
-      Section(information) {
-        InfoObservationView()
-      }
+//      Section(information) {
+//        InfoObservationView()
+//      }
 
       if keyChainviewModel.token.count > 0 {
       Section(user) {

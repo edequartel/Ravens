@@ -75,7 +75,7 @@ struct SpeciesDetailsView: View {
                         // More Information Link
                       HStack {
                         Spacer()
-                        Link("More at waarneming.nl", destination: URL(string: species.permalink)!)
+                        Link(moreAtWaarneming, destination: URL(string: species.permalink)!)
                           .font(.headline)
                           .padding()
                           .islandBackground()

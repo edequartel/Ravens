@@ -447,7 +447,7 @@ func vibrate() {
   AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 }
 
-let showView = false
+let showView = true
 
 // make Int directly Identifiable
 extension Int: @retroactive Identifiable {

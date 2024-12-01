@@ -61,4 +61,19 @@ let logOut = LocalizedStringKey("logOut")
 let information = LocalizedStringKey("information")
 let user = LocalizedStringKey("user")
 
+// sortAndFilter
+let date_ = LocalizedStringKey("Date")
+let rarity = LocalizedStringKey("Rarity")
+let name = LocalizedStringKey("Name")
+let scientificName = LocalizedStringKey("Scientific Name")
+
+let all = LocalizedStringKey("All")
+let common = LocalizedStringKey("Common")
+let uncommon = LocalizedStringKey("Uncommon")
+let rare = LocalizedStringKey("Rare")
+let veryRare = LocalizedStringKey("Very rare")
+
+let moreAtWaarneming = LocalizedStringKey("moreAtWaarneming")
+
+
 
