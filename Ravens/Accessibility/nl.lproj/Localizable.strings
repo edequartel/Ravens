@@ -82,3 +82,6 @@
 "status" = "Status";
 "native" = "Inheems";
 "rarity" = "Zeldzaamheid";
+
+"standard" = "Standaard";
+"hybrid" = "Hibride";

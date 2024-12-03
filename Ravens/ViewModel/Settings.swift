@@ -306,10 +306,15 @@ class Settings: ObservableObject {
     }
 }
 
+//@@@
 enum MapStyleChoice: String, CaseIterable {
-    case standard = "Standard"
-    case hybrid = "Hibrid"
-    //case imagery = "Imagery"
+    case standard
+    case hybrid
+//    case imagery
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 

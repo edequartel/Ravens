@@ -82,3 +82,6 @@
 "status" = "Status";
 "native" = "native";
 "rarirty" =  "Rarity";
+
+"standard" = "Standard";
+"hybrid" = "Hibrid";
