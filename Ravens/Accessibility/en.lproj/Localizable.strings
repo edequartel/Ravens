@@ -36,6 +36,7 @@
 "location" = "Location";
 "species" = "Species";
 "observation" = "Observation";
+"observations" = "observations";
 "settings" = "Settings";
 
 //icons
@@ -66,6 +67,7 @@
 "rarity" = "Rarity";
 "name" = "Name";
 "scientificName" = "Scientific name";
+"lastSeen" = "Recent";
 
 "all" = "All";
 "common" = "Common";
@@ -74,3 +76,9 @@
 "veryRare" = "Very rare";
 
 "moreAtWaarneming" = "More at waarneming.nl";
+
+"sort" = "Sort";
+"filter" = "Filter";
+"status" = "Status";
+"native" = "native";
+"rarirty" =  "Rarity";

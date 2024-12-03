@@ -464,7 +464,7 @@ extension Image {
         self
             .resizable() // Makes the image resizable
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
-            .frame(width: 24, height: 24) // Sets the uniform size
+            .frame(width: 24, height: 24) // Sets the uniform siz#
             .padding(4) // Adds padding around the image
             .overlay(
                 RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border

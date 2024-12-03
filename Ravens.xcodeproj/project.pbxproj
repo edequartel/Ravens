@@ -24,6 +24,7 @@
 		471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7A5F2CF7917700BF529C /* PositonFullView.swift */; };
 		471F7A642CF793C400BF529C /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7A632CF793BE00BF529C /* PlayerModel.swift */; };
 		471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 471F7AF22CF9E90A00BF529C /* Localizable.strings */; };
+		471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -136,6 +137,7 @@
 		471F7A632CF793BE00BF529C /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		471F7AF32CF9E90A00BF529C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		471F7AF52CF9E91E00BF529C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesInfoView.swift; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		4767F0082BF322F000BACDC6 /* Species */ = {
 			isa = PBXGroup;
 			children = (
+				471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */,
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
@@ -674,6 +677,7 @@
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
+				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,

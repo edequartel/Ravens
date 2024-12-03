@@ -36,6 +36,7 @@ let us = LocalizedStringKey("us")
 let location = LocalizedStringKey("location")
 let species = LocalizedStringKey("species")
 let observation = LocalizedStringKey("observation")
+let observations = LocalizedStringKey("observations")
 let settings_ = LocalizedStringKey("settings")
 
 // icons
@@ -61,19 +62,13 @@ let logOut = LocalizedStringKey("logOut")
 let information = LocalizedStringKey("information")
 let user = LocalizedStringKey("user")
 
-// sortAndFilter
-let date_ = LocalizedStringKey("date")
-let rarity = LocalizedStringKey("rarity")
-let name = LocalizedStringKey("name")
-let scientificName = LocalizedStringKey("scientificName")
-
-let all = LocalizedStringKey("all")
-let common = LocalizedStringKey("common")
-let uncommon = LocalizedStringKey("uncommon")
-let rare = LocalizedStringKey("rare")
-let veryRare = LocalizedStringKey("veryRare")
-
 let moreAtWaarneming = LocalizedStringKey("moreAtWaarneming")
+
+let sort = LocalizedStringKey("sort")
+let filter = LocalizedStringKey("filter")
+let status = LocalizedStringKey("status")
+let native = LocalizedStringKey("native")
+let rarity = LocalizedStringKey("rarity")
 
 
 

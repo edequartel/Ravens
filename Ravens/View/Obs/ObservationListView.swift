@@ -12,7 +12,7 @@ struct ObservationListView: View {
   var observations: [Observation]
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
-  @State var entity: EntityType
+  @State var entity: EntityType //@@@
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
@@ -62,6 +62,7 @@ struct ObservationListView: View {
       }
   }
 
+  //@@@
   func meetsCondition(observation: Observation) -> Bool {
     switch currentFilteringOption {
     case .all:
@@ -145,11 +146,15 @@ struct ObservationRowView: View {
 }
 
 enum FilteringRarityOption: String, CaseIterable {
-  case all = "All"
-  case common = "Common"
-  case uncommon = "Uncommon"
-  case rare = "Rare"
-  case veryRare = "Very rare"
+  case all
+  case common
+  case uncommon
+  case rare
+  case veryRare
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 
@@ -163,7 +168,7 @@ struct FilterOptionsView: View {
         currentFilteringOption = option
       }) {
         HStack {
-          Text(option.rawValue)
+          Text(option.localized)
           Spacer()
           if currentFilteringOption == option {
             Image(systemName: "checkmark")
@@ -175,77 +180,17 @@ struct FilterOptionsView: View {
   }
 }
 
-//enum
+//enum @@@
 enum SortingOption: String, CaseIterable {
-  case date = "date"
-  case rarity = "rarity"
-  case name = "name"
-  case scientificName = "scientificName"
+  case date
+  case rarity
+  case name
+  case scientificName
 
-  var localized: String {
-    NSLocalizedString("\(self.rawValue)", comment: "")
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
   }
-
-  //  var localized: String {
-  //          NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
-  //      }
 }
-//----------------------------------------------------
-
-//To localize the `SortingOption` enum in Swift, you can use the `LocalizedStringKey` or a localization function to map the cases to localized strings. Here’s how you can do it step by step:
-//
-//### Steps to Localize the Enum
-//1. **Define the Localized Strings**:
-//   Add the localized strings for each case in your `Localizable.strings` file.
-//
-//   Example `Localizable.strings` content for English:
-//   ```plaintext
-//   "SortingOption.date" = "Date";
-//   "SortingOption.rarity" = "Rarity";
-//   "SortingOption.name" = "Name";
-//   "SortingOption.scientificName" = "Scientific Name";
-//   ```
-//
-//2. **Extend the Enum to Provide Localized Strings**:
-//   Use a computed property in the `SortingOption` enum to return the localized string.
-//
-//3. **Implement the Enum with Localization**:
-//   Here's the updated code:
-//
-//   ```swift
-//   import Foundation
-//
-//   enum SortingOption: String, CaseIterable {
-//       case date = "date"
-//       case rarity = "rarity"
-//       case name = "name"
-//       case scientificName = "scientificName"
-//
-//       var localized: String {
-//           NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
-//       }
-//   }
-//   ```
-//
-//4. **Use the Localized Strings in Your View**:
-//   When you display the options in your UI, call the `.localized` property.
-//
-//   ```swift
-//   ForEach(SortingOption.allCases, id: \.self) { option in
-//       Text(option.localized)
-//   }
-//   ```
-//
-//### Benefits of This Approach
-//- **Separation of Concerns**: Keeps the enum values distinct from their localized representations.
-//- **Scalable**: Adding more cases or languages only requires updating the `Localizable.strings` file.
-//
-//### Suggestions for Iteration
-//**a.** Add test cases to ensure all enum values are correctly localized.
-//**b.** Use `LocalizationCatalog` or a similar Swift package for more robust localization management.
-//
-
-//----------------------------------------------------
 
 struct CombinedOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption
@@ -254,13 +199,13 @@ struct CombinedOptionsMenuView: View {
 
   var body: some View {
     Form {
-      Section("Sort") {
+      Section(sort) {
         ForEach(SortingOption.allCases, id: \.self) { option in
           Button(action: {
             currentSortingOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentSortingOption == option {
                 Image(systemName: "checkmark")
@@ -270,13 +215,13 @@ struct CombinedOptionsMenuView: View {
         }
       }
       //      Divider()
-      Section("Native") {
+      Section(status) {
         ForEach(FilterAllOption.allCases, id: \.self) { option in
           Button(action: {
             currentFilteringAllOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentFilteringAllOption == option {
                 Image(systemName: "checkmark")
@@ -287,13 +232,13 @@ struct CombinedOptionsMenuView: View {
       }
       
       //      Divider()
-      Section("Rarity") {
+      Section(rarity) {
         ForEach(FilteringRarityOption.allCases, id: \.self) { option in
           Button(action: {
             currentFilteringOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentFilteringOption == option {
                 Image(systemName: "checkmark")
@@ -306,18 +251,3 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-
-//    .toolbar {
-//      if entity != .species {
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          NavigationLink(destination: CombinedOptionsMenuView(
-//            currentSortingOption: $currentSortingOption,
-//            currentFilteringAllOption: $currentFilteringAllOption,
-//            currentFilteringOption: $currentFilteringOption )) {
-//              Image(systemSymbol: .ellipsisCircle)
-//                .uniformSize(color: .red)
-//              .accessibility(label: Text("Sort en filter"))
-//          }
-//        }
-//      }
-//    }

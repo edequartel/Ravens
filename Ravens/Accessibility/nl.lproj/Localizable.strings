@@ -36,6 +36,7 @@
 "location" = "Locatie";
 "species" = "Soorten";
 "observation" = "Waarneming";
+"observations" = "waarnemingen";
 "settings" = "Instellingen";
 
 //icons
@@ -65,12 +66,19 @@
 "date" = "Datum";
 "rarity" = "Zeldzaamheid";
 "name" = "Naam";
-"scientificName" = "Wetenschappelijke Naam";
+"scientificName" = "Wetenschappelijke naam";
+"lastSeen" = "Recent";
 
 "all" = "Alle";
 "common" = "Algemeen";
-"uncommon" = "Ongewoon";
+"uncommon" = "Vrij algemeen";
 "rare" = "Zeldzaam";
 "veryRare" = "Zeer zeldzaam";
 
 "moreAtWaarneming" = "Meer op waarneming.nl";
+
+"sort" = "Sorteer";
+"filter" = "Filter";
+"status" = "Status";
+"native" = "Inheems";
+"rarity" = "Zeldzaamheid";
