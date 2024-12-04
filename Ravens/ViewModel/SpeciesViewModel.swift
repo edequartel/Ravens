@@ -50,7 +50,7 @@ class SpeciesViewModel: ObservableObject {
       }
     }
   }
-//@@@
+
   private func parseHTML(html: String) throws {
       let parseDoc = "<html><body><table>" + html + "</table></body></html>"
       let doc: Document = try SwiftSoup.parseBodyFragment(parseDoc)

@@ -37,9 +37,23 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      if let observations = observationsViewModel.observations?.results, observations.count > 0 {
+      if let observations = observationsViewModel.resObservations, !observations.isEmpty {
         HorizontalLine()
-        ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .user)
+        ObservationListView(
+          observations: observations,
+          selectedSpeciesID: $selectedSpeciesID,
+          entity: .user) {
+          // Handle end of list event
+          print("End of list reached in ParentView")
+          // For example, load more data or perform some action
+//            log.info("refreshing")
+            observationsViewModel.fetchData(
+              settings: settings,
+      //        entityType: "user",
+              userId: settings.userId,
+              completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
+            )
+        }
       } else {
         NoObservationsView()
       }
@@ -49,7 +63,7 @@ struct ObservationsUserView: View {
       if settings.initialUsersLoad {
         observationsViewModel.fetchData(
           settings: settings,
-          entityType: "user",
+//          entityType: "user",
           userId: settings.userId,
           completion: { log.info("viewModel.fetchData completion") })
         settings.initialUsersLoad = false
@@ -57,9 +71,11 @@ struct ObservationsUserView: View {
     }
     .refreshable {
       log.info("refreshing")
+//      observationsViewModel.offset = 0
+//      observationsViewModel.limit = 0
       observationsViewModel.fetchData(
         settings: settings,
-        entityType: "user",
+//        entityType: "user",
         userId: settings.userId,
         completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
       )

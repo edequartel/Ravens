@@ -13,7 +13,7 @@ struct Observations: Codable {
     var results: [Observation]
 }
 
-struct Observation: Codable, Identifiable {
+struct Observation: Codable, Identifiable, Equatable {
     var id: Int?
     var species: Int?
     var date: String = "2023-01-01"
@@ -102,13 +102,13 @@ struct Observation: Codable, Identifiable {
 
 
 // MARK: - UserDetail
-struct UserDetail: Codable {
+struct UserDetail: Codable, Equatable {
     var id: Int = 0
     var name: String = ""
     var avatar: URL?
 }
 
-struct SpeciesDetail: Codable, Identifiable {
+struct SpeciesDetail: Codable, Identifiable, Equatable {
     var id: Int = 0
     var scientificName: String = ""
     var name: String = ""
@@ -123,12 +123,12 @@ struct SpeciesDetail: Codable, Identifiable {
 }
 
 
-struct Point: Codable {
+struct Point: Codable, Equatable {
     var type: String = ""
     var coordinates: [Double] = [0]
 }
 
-struct LocationDetail: Codable {
+struct LocationDetail: Codable, Equatable {
     var id: Int = 0
     var name: String = ""
     var countryCode: String = ""

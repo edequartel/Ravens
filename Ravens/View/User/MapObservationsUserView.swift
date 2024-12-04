@@ -11,13 +11,20 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
     let log = SwiftyBeaver.self
+//  @StateObject private var locationManager = LocationManagerModel()
+
     @EnvironmentObject var observationsViewModel: ObservationsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var userViewModel:  UserViewModel
     @EnvironmentObject var settings: Settings
     
     @State private var cameraPosition: MapCameraPosition = .automatic
-    
+
+  @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+      center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+      span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
+  )
+
     @State private var showObservers: Bool = false
     @State private var showListView: Bool = false
     
@@ -25,8 +32,8 @@ struct MapObservationsUserView: View {
         
         ZStack(alignment: .topLeading) {
             Map(position: $cameraPosition) {
-//                UserAnnotation()
-                
+                UserAnnotation() ///@@@
+
                 ForEach(observationsViewModel.locations) { location in
                     Annotation(location.name, coordinate: location.coordinate) {
                         Circle()
@@ -50,25 +57,26 @@ struct MapObservationsUserView: View {
                 MapCompass() //tapping this makes it north
             }
         }
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                NavigationLink(destination: ObserversView()) {
-//                    Label("Observers", systemImage: "list.bullet")
-//                }
-//            }
-//        }
 
         .onAppear {
             if settings.initialUsersLoad {
                 observationsViewModel.fetchData(
                     settings: settings,
-                    entityType: "user",
+//                    entityType: "user",
                     userId: settings.userId,
                     completion: { log.info("viewModel.fetchData completion") })
                 settings.initialUsersLoad = false
             }
         }
     }
+
+//  private func updateRegion() {
+//      guard let userLocation = locationManager.userLocation else { return }
+//      region = MKCoordinateRegion(
+//          center: userLocation.coordinate,
+//          span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Adjust for 5km span
+//      )
+//  }
 }
 
 struct MapObservationsUserView_Previews: PreviewProvider {
@@ -80,3 +88,13 @@ struct MapObservationsUserView_Previews: PreviewProvider {
             .environmentObject(Settings())
     }
 }
+
+//var body: some View {
+//    Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .follow)
+//        .onAppear {
+//            updateRegion()
+//        }
+//        .onChange(of: locationManager.userLocation) { _ in
+//            updateRegion()
+//        }
+//}

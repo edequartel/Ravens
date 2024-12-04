@@ -61,7 +61,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
         let dateBefore = formatCurrentDate(value: settings.selectedDate)
 
         let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?date_after=\(dateAfter)&date_before=\(dateBefore)&limit=\(limit)&offset=\(offset)"        
-//@@@       let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?limit=\(limit)&offset=\(offset)"
+//      let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?limit=\(limit)&offset=\(offset)"
 
         log.error("\(url)")
 

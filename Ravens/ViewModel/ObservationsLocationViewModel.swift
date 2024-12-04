@@ -91,7 +91,7 @@ class ObservationsLocationViewModel: ObservableObject {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
     }
 
-//    @@@    
+
 //    url = "https://waarneming.nl/api/v1/locations/17861/observations/?limit=100&offset=5100&species_group=1"
 
 //    log.error("ObservationsLocationViewModel \(url)")

@@ -12,85 +12,29 @@ import SwiftyBeaver
 import SwiftUI
 import SVGView
 
-class Window: ObservableObject {
-  @Published var maximum = 123
-  @Published var offset = 15
-  @Published var value = 0
-
-  func next() {
-    if value + offset > maximum {
-      value = maximum
-    } else {
-      value += offset
-    }
-  }
-
-  func previous() {
-    let remainder = value % offset
-    if remainder != 0 {
-      value -= remainder
-    } else if value - offset < 0 {
-      value = 0
-    } else {
-      value -= offset
-    }
-  }
-}
-
-struct WindowView: View {
-  @ObservedObject var windowObject = Window()
-
-  var body: some View {
-    VStack {
-      Text("Value: \(windowObject.value)")
-      ZStack {
-        SVGView(contentsOf: Bundle.main.url(forResource: "plus-square", withExtension: "svg")!)
-          .frame(width: 16, height: 16, alignment: .bottomTrailing)
-          .foregroundColor(.green)
-
-        SVGView(contentsOf: Bundle.main.url(forResource: "w_wikipedia", withExtension: "svg")!)
-          .frame(width: 64, height: 64, alignment: .center)
-          .foregroundColor(.green)
-      }
-
-      Button(action: {
-        self.windowObject.next()
-      }) {
-        Text("Next")
-      }
-
-      Button(action: {
-        self.windowObject.previous()
-      }) {
-        Text("Previous")
-      }
-    }
-  }
-}
-
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
-  @Published var observations: Observations?
-  @Published var limit = 100
+//  @Published var observations: [Observations]?
+  @Published var resObservations: [Observation]? //@@@
+
+  @Published var limit = 0
   @Published var offset = 0
-  @Published var maxOffset = 200
-  @Published var start = 0
-  @Published var end = 100
+
 
   private var keyChainViewModel =  KeychainViewModel()
   var locations = [Location]()
 
   func getLocations() {
-    locations.removeAll()
-    let max = (observations?.results.count ?? 0)
+    locations.removeAll() //@@@
+    let max = (resObservations?.count ?? 0)
     for index in 0 ..< max {
-      let name = observations?.results[index].speciesDetail.name ?? "Unknown name"
-      let latitude = observations?.results[index].point.coordinates[1] ?? 52.024052
-      let longitude = observations?.results[index].point.coordinates[0] ?? 5.245350
-      let rarity = observations?.results[index].rarity ?? 0
-      let hasPhoto = (observations?.results[index].photos?.count ?? 0 > 0)
-      let hasSound = (observations?.results[index].sounds?.count ?? 0 > 0)
+      let name = resObservations?[index].speciesDetail.name ?? "Unknown name"
+      let latitude = resObservations?[index].point.coordinates[1] ?? 52.024052
+      let longitude = resObservations?[index].point.coordinates[0] ?? 5.245350
+      let rarity = resObservations?[index].rarity ?? 0
+      let hasPhoto = (resObservations?[index].photos?.count ?? 0 > 0)
+      let hasSound = (resObservations?[index].sounds?.count ?? 0 > 0)
       let newLocation = Location(
         name: name,
         coordinate: CLLocationCoordinate2D(
@@ -104,10 +48,10 @@ class ObservationsViewModel: ObservableObject {
   }
 
   func getTimeData() {
-    let max = (observations?.results.count ?? 0)
+    let max = (resObservations?.count ?? 0)
     for index in 0..<max {
-      if let date = observations?.results[index].date,
-         let time = observations?.results[index].time {
+      if let date = resObservations?[index].date,
+         let time = resObservations?[index].time {
 
         // Concatenate date and time strings
         let timeDateStr = date + " " + time
@@ -118,7 +62,7 @@ class ObservationsViewModel: ObservableObject {
 
         // Convert the concatenated string back to a Date
         if let formattedDate = dateFormatter.date(from: timeDateStr) {
-          observations?.results[index].timeDate = formattedDate
+          resObservations?[index].timeDate = formattedDate
         } else {
           // Handle error if the date string could not be parsed
           print("Error: Could not parse date string \(timeDateStr)")
@@ -131,7 +75,7 @@ class ObservationsViewModel: ObservableObject {
   }
 
 
-  func fetchData(settings: Settings, entityType: String, userId: Int, completion: @escaping () -> Void) {
+  func fetchData(settings: Settings, userId: Int, completion: @escaping () -> Void) {
     log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
     keyChainViewModel.retrieveCredentials()
 
@@ -141,7 +85,7 @@ class ObservationsViewModel: ObservableObject {
       "Accept-Language": settings.selectedLanguage
     ]
 
-    print(entityType)
+//    print(entityType)
     let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
     log.error("fetchData ObservationsUserViewModel \(url)")
@@ -156,10 +100,16 @@ class ObservationsViewModel: ObservableObject {
             let observations = try decoder.decode(Observations.self, from: data)
 
             DispatchQueue.main.async {
-              self.observations = observations
-              self.getLocations()
-              self.getTimeData() //??
+//              self.observations = observations
 
+//              self.resObservations = observations.results
+              self.resObservations = (self.resObservations ?? []) + observations.results
+
+              self.getLocations()
+              print(">> \(self.resObservations?.count ?? 0)")
+              let result = extractLimitAndOffset(from: observations.next?.absoluteString ?? "")
+              self.limit = result.limit ?? 100
+              self.offset = result.offset ?? 0
               completion() // call the completion handler if it exists
             }
 
@@ -176,3 +126,30 @@ class ObservationsViewModel: ObservableObject {
   }
 }
 
+
+
+
+func extractLimitAndOffset(from url: String) -> (limit: Int?, offset: Int?) {
+    // Regular expression to match 'limit' and 'offset'
+    let pattern = #"[\?&]limit=(\d+)&offset=(\d+)"#
+
+    do {
+        let regex = try NSRegularExpression(pattern: pattern)
+        let nsRange = NSRange(url.startIndex..<url.endIndex, in: url)
+
+        if let match = regex.firstMatch(in: url, options: [], range: nsRange) {
+            // Extracting 'limit' and 'offset' from the capture groups
+            let limitRange = Range(match.range(at: 1), in: url)
+            let offsetRange = Range(match.range(at: 2), in: url)
+
+            let limit = limitRange.flatMap { Int(url[$0]) }
+            let offset = offsetRange.flatMap { Int(url[$0]) }
+
+            return (limit, offset)
+        }
+    } catch {
+        print("Invalid regular expression: \(error)")
+    }
+
+    return (nil, nil)
+}

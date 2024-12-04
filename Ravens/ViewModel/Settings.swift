@@ -306,7 +306,7 @@ class Settings: ObservableObject {
     }
 }
 
-//@@@
+
 enum MapStyleChoice: String, CaseIterable {
     case standard
     case hybrid

@@ -112,6 +112,8 @@
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
 		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D4B76F2D00241F00D46050 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */; };
+		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
+		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
 		47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */; };
@@ -218,6 +220,8 @@
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
 		47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListObsView.swift; sourceTree = "<group>"; };
 		47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
+		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
+		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RavensRelease.entitlements; sourceTree = "<group>"; };
@@ -315,6 +319,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
 				47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				47AB45A22CE327A300842877 /* SplashView.swift */,
@@ -408,15 +413,16 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47D4B7722D00546300D46050 /* ObserversView.swift */,
 				471F7A612CF792A500BF529C /* Misc */,
 				471F7A5E2CF7915200BF529C /* Map */,
 				4718753D2BFCA7F600EF9F1F /* Audio */,
 				47EE13212CAC365B007305E1 /* Photo */,
 				474FA7082C7CB3600064C4C1 /* Sheet */,
 				476AC6E82C9A930000DB8CA8 /* Obs */,
+				4767F0092BF3230400BACDC6 /* User */,
 				4767F00B2BF3291400BACDC6 /* Lists */,
 				4767F0062BF27F2C00BACDC6 /* Location */,
-				4767F0092BF3230400BACDC6 /* User */,
 				4767F0082BF322F000BACDC6 /* Species */,
 				4767F00A2BF3230C00BACDC6 /* Settings */,
 			);
@@ -667,6 +673,7 @@
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
 				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,
 				470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */,
+				47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */,
 				4782626F2C8EBEDE00DD746C /* DateConversionView.swift in Sources */,
 				47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */,
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
@@ -675,6 +682,7 @@
 				471875452C00546A00EF9F1F /* LocationManagerView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
+				47D4B7732D00546800D46050 /* ObserversView.swift in Sources */,
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
@@ -880,7 +888,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -922,7 +930,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
