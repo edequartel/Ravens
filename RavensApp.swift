@@ -63,9 +63,13 @@ struct RavensApp: App {
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var poiViewModel = POIViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
-  @StateObject var bookMarksViewModel = BookMarksViewModel()
-  @StateObject var observersViewModel = ObserversViewModel()
-  @StateObject var areasViewModel = AreasViewModel()
+  @StateObject var bookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
+//  @StateObject var observersViewModel = BookMarksViewModel(fileName: "observers.json")
+//  @StateObject var observersViewModel = BookMarksViewModel(fileName: "observers.json")
+
+  @StateObject var observersViewModel = ObserversViewModel() //??
+  @StateObject var areasViewModel = AreasViewModel() //??
+  
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()

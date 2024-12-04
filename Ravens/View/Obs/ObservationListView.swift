@@ -27,16 +27,28 @@ struct ObservationListView: View {
           .sorted(by: compareObservations)
 
       ForEach(filteredAndSortedObservations,
-              id: \.id) { obs in
-          ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
-          .accessibilityFocused($focusedItemID, equals: obs.id)
-          .onChange(of: focusedItemID) { newFocusID, oldFocusID in
-              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
-          }
-//          .onChange(of: focusedItemID) { newFocusID in
+                 id: \.id) { obs in
+             ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
+                 .accessibilityFocused($focusedItemID, equals: obs.id)
+                 .onChange(of: focusedItemID) { newFocusID, oldFocusID in
+                     handleFocusChange(newFocusID, from: filteredAndSortedObservations)
+                 }
+//                 .onAppear {
+//                     if obs == filteredAndSortedObservations.last {
+//                         print("end of list reached")
+//                     }
+//                 }
+         }
+
+
+//      ForEach(filteredAndSortedObservations,
+//              id: \.id) { obs in
+//          ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
+//          .accessibilityFocused($focusedItemID, equals: obs.id)
+//          .onChange(of: focusedItemID) { newFocusID, oldFocusID in
 //              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
 //          }
-        }
+//        }
     }
 
     .listStyle(PlainListStyle()) // No additional styling, plain list look

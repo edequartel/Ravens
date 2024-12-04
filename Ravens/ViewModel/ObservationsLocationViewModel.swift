@@ -57,11 +57,11 @@ class ObservationsLocationViewModel: ObservableObject {
           observations?.results[index].timeDate = formattedDate
         } else {
           // Handle error if the date string could not be parsed
-          print("Error: Could not parse date string \(timeDateStr)")
+          log.info("Error: Could not parse date string \(timeDateStr)")
         }
       } else {
         // Handle the case where either the date or time is nil
-        print("Error: Missing date or time for index \(index)")
+        log.info("info: Missing date or time for index \(index)")
       }
     }
   }
@@ -90,7 +90,11 @@ class ObservationsLocationViewModel: ObservableObject {
     if !settings.infinity {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
     }
-    log.info("ObservationsLocationViewModel \(url)")
+
+//    @@@    
+//    url = "https://waarneming.nl/api/v1/locations/17861/observations/?limit=100&offset=5100&species_group=1"
+
+//    log.error("ObservationsLocationViewModel \(url)")
     //
     AF.request(url, headers: headers).responseData { response in
       switch response.result {
@@ -104,6 +108,9 @@ class ObservationsLocationViewModel: ObservableObject {
             self.getTimeData()
             self.getLocations()
             self.getSpan()
+//            self.log.error("count: \(observationsSpecies.count!)")
+//            self.log.error("next: \(observationsSpecies.next!)")
+//            self.log.error("prev: \(observationsSpecies.previous!)")
             completion?()
           }
         } catch {

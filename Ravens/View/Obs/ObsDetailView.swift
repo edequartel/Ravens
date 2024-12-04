@@ -165,7 +165,7 @@ struct ObsDetailView: View {
 
 struct ObsDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    let mockBookMarksViewModel = BookMarksViewModel()
+    let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
     ObsDetailView(
       obs: mockObservation,
       selectedSpeciesID: .constant(nil)
