@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftyBeaver
 
+
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -48,14 +49,10 @@ struct TabSpeciesView: View {
                 item: species,
                 selectedSpeciesID: $selectedSpeciesID)
             ) {
-              SpeciesInfoView( //@@@
+              SpeciesInfoView(
                 species: species,
                 showView: showView)
-              //                    bookMarksViewModel: bookMarksViewModel,
-              //                    speciesSecondLangViewModel: speciesSecondLangViewModel)
             }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(Text("\(navigateTo) \(species.name)"))
             
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
@@ -77,6 +74,7 @@ struct TabSpeciesView: View {
               }
               .tint(.obsStar)
             }
+            .accessibilityLabel(species.name)
           }
         }
         .listStyle(PlainListStyle())
@@ -111,12 +109,10 @@ struct TabSpeciesView: View {
               .uniformSize(color: .cyan)
           }
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
-//          .accessibilityHint("You can mark species as favorites through an action, and then you can filter based on this.")
         }
       )
       
     }
-    //    .searchable(text: $searchText)  // een niveau te hoog
     .refreshable {
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
@@ -146,16 +142,16 @@ struct SortFilterSpeciesView: View {
   var body: some View {
     Form {
       // First Menu for Sorting
-      Section("Sort") {
+      Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
       }
       
       // Second Menu for Filtering
-      Section("Native") {
+      Section(status) {
         FilteringAllOptionsView(currentFilteringAllOption: $selectedFilterAllOption)
       }
       
-      Section("Rarity") {
+      Section(rarity) {
         FilterOptionsView(currentFilteringOption: $selectedRarityOption)
       }
     }
@@ -163,9 +159,13 @@ struct SortFilterSpeciesView: View {
 }
 
 enum SortNameOption: String, CaseIterable {
-  case name = "Name"
-  case scientificName = "Scientific name"
-  case lastSeen = "Last seen"
+  case name
+  case scientificName
+  case lastSeen
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 struct SortNameOptionsView: View {
@@ -178,7 +178,7 @@ struct SortNameOptionsView: View {
         currentFilteringNameOption = option
       }) {
         HStack {
-          Text(option.rawValue)
+          Text(option.localized)
           Spacer()
           if currentFilteringNameOption == option {
             Image(systemName: "checkmark")
@@ -191,9 +191,12 @@ struct SortNameOptionsView: View {
 
 
 enum FilterAllOption: String, CaseIterable {
-  case all = "All"
-  case native = "Native"
+  case all
+  case native
   // Add more filter options if needed
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 struct FilteringAllMenu: View {
@@ -220,7 +223,7 @@ struct FilteringAllOptionsView: View {
         currentFilteringAllOption = option
       }) {
         HStack {
-          Text(option.rawValue)
+          Text(option.localized)
           Spacer()
           if currentFilteringAllOption == option {
             Image(systemName: "checkmark")
@@ -294,77 +297,3 @@ extension SpeciesViewModel {
   }
 }
 
-struct SpeciesInfoView: View {
-  var species: Species // Assuming Species is your data model
-  var showView: Bool
-  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel @@@
-  @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
-  
-  var body: some View {
-    VStack(alignment: .leading) {
-      if showView { Text("SpeciesInfoView").font(.customTiny) }
-
-
-//      Text("\(species.speciesId)")
-
-
-      HStack(spacing: 4) {
-        if species.date != nil {
-          Image(
-            systemName: "eye")
-          .symbolRenderingMode(.palette)
-          .foregroundStyle(rarityColor(value: species.rarity), .clear)
-        } else {
-          Image(
-            systemName: "circle.fill")
-          .symbolRenderingMode(.palette)
-          .foregroundStyle(rarityColor(value: species.rarity), .clear)
-          
-        }
-        
-        Text("\(species.name)")
-          .bold()
-          .lineLimit(1)
-          .truncationMode(.tail)
-        Spacer()
-        //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
-        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-          Image(systemName: "star.fill")
-            .foregroundColor(Color.gray.opacity(0.8))
-        }
-      }
-      
-      //      if let date = species.date {
-      if let date = species.date {
-        HStack {
-          DateConversionView(dateString: species.date ?? "", timeString: species.time ?? "")
-          Text("\(species.nrof ?? 0) x observations")
-            .footnoteGrayStyle()
-        }
-        .font(.caption)
-      }
-      
-      
-      HStack {
-        Text("\(species.scientificName)")
-          .font(.caption)
-          .italic()
-          .lineLimit(1)
-          .truncationMode(.tail)
-      }
-      HStack{
-        let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
-          speciesID: species.speciesId)
-        if speciesLang?.lowercased() != species.scientificName.lowercased() {
-          Text("\(speciesLang ?? "placeholder")")
-            .font(.caption)
-            .lineLimit(1)
-            .truncationMode(.tail)
-          Spacer()
-        } else {
-          Text(" ")
-        }
-      }
-    }
-  }
-}

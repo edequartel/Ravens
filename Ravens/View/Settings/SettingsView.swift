@@ -82,11 +82,12 @@ struct SettingsView: View {
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
-              Text(choice.rawValue.capitalized).tag(choice)
+//              Text(choice.rawValue.capitalized).tag(choice)
+              Text(choice.localized).tag(choice)
             }
           }
           .pickerStyle(SegmentedPickerStyle())
-          .padding(0)
+//          .padding(0)
         }
 
 
@@ -101,12 +102,12 @@ struct SettingsView: View {
           .accessibilityElement(children: .combine)
         }
 
-        Section(header: Text(location)) {
-          VStack {
-            LocationManagerView()
-          }
-          .accessibilityElement(children: .combine)
-        }
+//        Section(header: Text(location)) {
+//          VStack {
+//            LocationManagerView()
+//          }
+//          .accessibilityElement(children: .combine)
+//        }
 
       }
       .navigationTitle(settings_)

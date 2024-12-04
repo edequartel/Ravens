@@ -138,7 +138,7 @@ struct BookmarkButtonView: View {
 struct BookmarkButtonView_Previews: PreviewProvider {
   static var previews: some View {
     // Create a mock BookMarksViewModel
-    let mockBookMarksViewModel = BookMarksViewModel()
+    let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
 
     // Return the BookmarkButtonView with the mock data
     BookmarkButtonView(obs: mockObservation, colorOn: true)

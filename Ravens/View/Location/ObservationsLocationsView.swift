@@ -109,7 +109,7 @@ struct ObservationsLocationView: View {
               observationsLocationViewModel.fetchData(
                 settings: settings,
                 locationId: fetchedLocations[0].id,
-                limit: 100,
+                limit: 100, //@@@@
                 offset: 0,
                 completion: {
                   log.info("observationsLocationViewModel data loaded")

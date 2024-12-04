@@ -36,6 +36,7 @@
 "location" = "Location";
 "species" = "Species";
 "observation" = "Observation";
+"observations" = "observations";
 "settings" = "Settings";
 
 //icons
@@ -62,15 +63,25 @@
 "user" = "Observer";
 
 // filter and sort
-"Date" = "Date";
-"Rarity" = "Rarity";
-"Name" = "Name";
-"Scientific Name" = "Scientific name";
+"date" = "Date";
+"rarity" = "Rarity";
+"name" = "Name";
+"scientificName" = "Scientific name";
+"lastSeen" = "Recent";
 
-"All" = "All";
-"Common" = "Common";
-"Uncommon" = "Uncommon";
-"Rare" = "Rare";
-"Very rare" = "Very rare";
+"all" = "All";
+"common" = "Common";
+"uncommon" = "Uncommon";
+"rare" = "Rare";
+"veryRare" = "Very rare";
 
 "moreAtWaarneming" = "More at waarneming.nl";
+
+"sort" = "Sort";
+"filter" = "Filter";
+"status" = "Status";
+"native" = "native";
+"rarirty" =  "Rarity";
+
+"standard" = "Standard";
+"hybrid" = "Hibrid";

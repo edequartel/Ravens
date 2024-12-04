@@ -12,7 +12,7 @@ struct ObservationListView: View {
   var observations: [Observation]
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
-  @State var entity: EntityType
+  @State var entity: EntityType //@@@
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
@@ -27,16 +27,28 @@ struct ObservationListView: View {
           .sorted(by: compareObservations)
 
       ForEach(filteredAndSortedObservations,
-              id: \.id) { obs in
-          ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
-          .accessibilityFocused($focusedItemID, equals: obs.id)
-          .onChange(of: focusedItemID) { newFocusID, oldFocusID in
-              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
-          }
-//          .onChange(of: focusedItemID) { newFocusID in
+                 id: \.id) { obs in
+             ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
+                 .accessibilityFocused($focusedItemID, equals: obs.id)
+                 .onChange(of: focusedItemID) { newFocusID, oldFocusID in
+                     handleFocusChange(newFocusID, from: filteredAndSortedObservations)
+                 }
+//                 .onAppear {
+//                     if obs == filteredAndSortedObservations.last {
+//                         print("end of list reached")
+//                     }
+//                 }
+         }
+
+
+//      ForEach(filteredAndSortedObservations,
+//              id: \.id) { obs in
+//          ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
+//          .accessibilityFocused($focusedItemID, equals: obs.id)
+//          .onChange(of: focusedItemID) { newFocusID, oldFocusID in
 //              handleFocusChange(newFocusID, from: filteredAndSortedObservations)
 //          }
-        }
+//        }
     }
 
     .listStyle(PlainListStyle()) // No additional styling, plain list look
@@ -62,6 +74,7 @@ struct ObservationListView: View {
       }
   }
 
+  //@@@
   func meetsCondition(observation: Observation) -> Bool {
     switch currentFilteringOption {
     case .all:
@@ -145,11 +158,15 @@ struct ObservationRowView: View {
 }
 
 enum FilteringRarityOption: String, CaseIterable {
-  case all = "All"
-  case common = "Common"
-  case uncommon = "Uncommon"
-  case rare = "Rare"
-  case veryRare = "Very rare"
+  case all
+  case common
+  case uncommon
+  case rare
+  case veryRare
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 
@@ -163,7 +180,7 @@ struct FilterOptionsView: View {
         currentFilteringOption = option
       }) {
         HStack {
-          Text(option.rawValue)
+          Text(option.localized)
           Spacer()
           if currentFilteringOption == option {
             Image(systemName: "checkmark")
@@ -175,16 +192,16 @@ struct FilterOptionsView: View {
   }
 }
 
-//enum
+//enum @@@
 enum SortingOption: String, CaseIterable {
-  case date = "Date"
-  case rarity = "Rarity"
-  case name = "Name"
-  case scientificName = "Scientific Name"
+  case date
+  case rarity
+  case name
+  case scientificName
 
-//  var localized: String {
-//          NSLocalizedString("SortingOption.\(self.rawValue)", comment: "")
-//      }
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 struct CombinedOptionsMenuView: View {
@@ -194,13 +211,13 @@ struct CombinedOptionsMenuView: View {
 
   var body: some View {
     Form {
-      Section("Sort") {
+      Section(sort) {
         ForEach(SortingOption.allCases, id: \.self) { option in
           Button(action: {
             currentSortingOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentSortingOption == option {
                 Image(systemName: "checkmark")
@@ -210,13 +227,13 @@ struct CombinedOptionsMenuView: View {
         }
       }
       //      Divider()
-      Section("Native") {
+      Section(status) {
         ForEach(FilterAllOption.allCases, id: \.self) { option in
           Button(action: {
             currentFilteringAllOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentFilteringAllOption == option {
                 Image(systemName: "checkmark")
@@ -227,13 +244,13 @@ struct CombinedOptionsMenuView: View {
       }
       
       //      Divider()
-      Section("Rarity") {
+      Section(rarity) {
         ForEach(FilteringRarityOption.allCases, id: \.self) { option in
           Button(action: {
             currentFilteringOption = option
           }) {
             HStack {
-              Text(option.rawValue)
+              Text(option.localized)
               Spacer()
               if currentFilteringOption == option {
                 Image(systemName: "checkmark")
@@ -246,18 +263,3 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-
-//    .toolbar {
-//      if entity != .species {
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          NavigationLink(destination: CombinedOptionsMenuView(
-//            currentSortingOption: $currentSortingOption,
-//            currentFilteringAllOption: $currentFilteringAllOption,
-//            currentFilteringOption: $currentFilteringOption )) {
-//              Image(systemSymbol: .ellipsisCircle)
-//                .uniformSize(color: .red)
-//              .accessibility(label: Text("Sort en filter"))
-//          }
-//        }
-//      }
-//    }

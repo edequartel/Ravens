@@ -60,9 +60,10 @@ class ObservationsSpeciesViewModel: ObservableObject {
           value: Calendar.current.date(byAdding: .day, value: -14, to: settings.selectedDate)!)
         let dateBefore = formatCurrentDate(value: settings.selectedDate)
 
-        let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?date_after=\(dateAfter)&date_before=\(dateBefore)&limit=\(limit)&offset=\(offset)"
+        let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?date_after=\(dateAfter)&date_before=\(dateBefore)&limit=\(limit)&offset=\(offset)"        
+//@@@       let url = endPoint(value: settings.selectedInBetween) + "species/\(speciesId)/observations/?limit=\(limit)&offset=\(offset)"
 
-        log.info("\(url)")
+        log.error("\(url)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
@@ -77,6 +78,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
                             self.observationsSpecies = observationsSpecies
                             self.getTimeData() //@@@
                             self.getLocations()
+                          
                             completion?() // call the completion handler if it exists
                         }
 
