@@ -39,10 +39,10 @@ struct ObserversView: View {
                         settings.userId = userViewModel.user?.id ?? 0
                         settings.userName =  userViewModel.user?.name ?? ""
 
-                        observationsViewModel.fetchData(
+                      observationsViewModel.fetchData(
                             settings: settings,
-//                            entityType: "user",
-                            userId: userViewModel.user?.id ?? 0,
+                            entity: .user,
+                            id: userViewModel.user?.id ?? 0,
                             completion: { log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
 
                         self.presentationMode.wrappedValue.dismiss()
@@ -77,11 +77,11 @@ struct ObserversView: View {
                         Button(record.name) {
                             settings.userId = record.userID
                             settings.userName =  record.name
-
+                          observationsViewModel.reset()
                             observationsViewModel.fetchData(
                                 settings: settings,
-//                                entityType: "user",
-                                userId: record.userID,
+                                entity: .user,
+                                id: record.userID,
                                 completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
                                 )
 

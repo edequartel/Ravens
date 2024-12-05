@@ -12,6 +12,7 @@ struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
@@ -115,7 +116,21 @@ struct ObservationsSpeciesView: View {
         log.info("observationsSpeciesViewModel data loaded")
       }
     )
+
+//    observationsSpeciesViewModel.fetchData(
+//      settings: settings,
+//      entity: .species,
+//      id: item.speciesId,
+//      completion: {
+//        isLoaded = true
+//        log.info("observationsSpeciesViewModel data loaded")
+//      })
+
+
   }
+
+
+
 }
 
 

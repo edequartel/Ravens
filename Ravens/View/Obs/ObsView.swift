@@ -61,6 +61,10 @@ struct ObsView: View {
 //          Spacer()
         }
 
+//        let defaultDate = Date(timeIntervalSince1970: 0)
+//        Text(formatDate(obs.timeDate ?? defaultDate))
+//          .font(.caption)
+
         if showSpecies {
           Text("\(obs.speciesDetail.scientificName)")
             .footnoteGrayStyle()
@@ -145,3 +149,9 @@ struct ObsView: View {
 //        ObsView(obs: Observation(from: <#any Decoder#>))
 //    }
 //}
+func formatDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium // Customize the style: .short, .medium, .long, etc.
+    formatter.timeStyle = .short // Customize the style: .none, .short, .medium, .long
+    return formatter.string(from: date)
+}

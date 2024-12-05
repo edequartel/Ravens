@@ -37,7 +37,7 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      if let observations = observationsViewModel.resObservations, !observations.isEmpty {
+      if let observations = observationsViewModel.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
           observations: observations,
@@ -49,8 +49,8 @@ struct ObservationsUserView: View {
 //            log.info("refreshing")
             observationsViewModel.fetchData(
               settings: settings,
-      //        entityType: "user",
-              userId: settings.userId,
+              entity: .user,
+              id: settings.userId,
               completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
             )
         }
@@ -63,20 +63,18 @@ struct ObservationsUserView: View {
       if settings.initialUsersLoad {
         observationsViewModel.fetchData(
           settings: settings,
-//          entityType: "user",
-          userId: settings.userId,
+          entity: .user,
+          id: settings.userId,
           completion: { log.info("viewModel.fetchData completion") })
         settings.initialUsersLoad = false
       }
     }
     .refreshable {
       log.info("refreshing")
-//      observationsViewModel.offset = 0
-//      observationsViewModel.limit = 0
       observationsViewModel.fetchData(
         settings: settings,
-//        entityType: "user",
-        userId: settings.userId,
+        entity: .user,
+        id: settings.userId,
         completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
       )
     }

@@ -15,26 +15,23 @@ import SVGView
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
-//  @Published var observations: [Observations]?
-  @Published var resObservations: [Observation]? //@@@
-
+  @Published var observations: [Observation]?
   @Published var limit = 0
   @Published var offset = 0
-
 
   private var keyChainViewModel =  KeychainViewModel()
   var locations = [Location]()
 
   func getLocations() {
     locations.removeAll() //@@@
-    let max = (resObservations?.count ?? 0)
+    let max = (observations?.count ?? 0)
     for index in 0 ..< max {
-      let name = resObservations?[index].speciesDetail.name ?? "Unknown name"
-      let latitude = resObservations?[index].point.coordinates[1] ?? 52.024052
-      let longitude = resObservations?[index].point.coordinates[0] ?? 5.245350
-      let rarity = resObservations?[index].rarity ?? 0
-      let hasPhoto = (resObservations?[index].photos?.count ?? 0 > 0)
-      let hasSound = (resObservations?[index].sounds?.count ?? 0 > 0)
+      let name = observations?[index].speciesDetail.name ?? "Unknown name"
+      let latitude = observations?[index].point.coordinates[1] ?? 52.024052
+      let longitude = observations?[index].point.coordinates[0] ?? 5.245350
+      let rarity = observations?[index].rarity ?? 0
+      let hasPhoto = (observations?[index].photos?.count ?? 0 > 0)
+      let hasSound = (observations?[index].sounds?.count ?? 0 > 0)
       let newLocation = Location(
         name: name,
         coordinate: CLLocationCoordinate2D(
@@ -48,10 +45,10 @@ class ObservationsViewModel: ObservableObject {
   }
 
   func getTimeData() {
-    let max = (resObservations?.count ?? 0)
+    let max = (observations?.count ?? 0)
     for index in 0..<max {
-      if let date = resObservations?[index].date,
-         let time = resObservations?[index].time {
+      if let date = observations?[index].date,
+         let time = observations?[index].time {
 
         // Concatenate date and time strings
         let timeDateStr = date + " " + time
@@ -62,7 +59,7 @@ class ObservationsViewModel: ObservableObject {
 
         // Convert the concatenated string back to a Date
         if let formattedDate = dateFormatter.date(from: timeDateStr) {
-          resObservations?[index].timeDate = formattedDate
+          observations?[index].timeDate = formattedDate
         } else {
           // Handle error if the date string could not be parsed
           print("Error: Could not parse date string \(timeDateStr)")
@@ -75,8 +72,8 @@ class ObservationsViewModel: ObservableObject {
   }
 
 
-  func fetchData(settings: Settings, userId: Int, completion: @escaping () -> Void) {
-    log.info("fetchData ObservationsUserViewModel userId: \(userId) limit: \(limit) offset: \(offset)")
+  func fetchData(settings: Settings, entity: EntityType , id: Int, completion: @escaping () -> Void) {
+    log.info("fetchData ObservationsUserViewModel userId: \(id) limit: \(limit) offset: \(offset)")
     keyChainViewModel.retrieveCredentials()
 
     // Add the custom header
@@ -85,8 +82,9 @@ class ObservationsViewModel: ObservableObject {
       "Accept-Language": settings.selectedLanguage
     ]
 
-//    print(entityType)
-    let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+    print(entity)
+    let url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+//    let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=1600" //\(self.offset)"
 
     log.error("fetchData ObservationsUserViewModel \(url)")
 
@@ -100,13 +98,12 @@ class ObservationsViewModel: ObservableObject {
             let observations = try decoder.decode(Observations.self, from: data)
 
             DispatchQueue.main.async {
-//              self.observations = observations
-
 //              self.resObservations = observations.results
-              self.resObservations = (self.resObservations ?? []) + observations.results
+              print(">> observations:\(observations.count ?? 0)")
+              self.observations = (self.observations ?? []) + observations.results
 
+              self.getTimeData()
               self.getLocations()
-              print(">> \(self.resObservations?.count ?? 0)")
               let result = extractLimitAndOffset(from: observations.next?.absoluteString ?? "")
               self.limit = result.limit ?? 100
               self.offset = result.offset ?? 0
@@ -123,6 +120,14 @@ class ObservationsViewModel: ObservableObject {
         self.log.error("Error ObservationsUserViewModel: \(error)")
       }
     }
+  }
+
+
+  func reset() {
+    limit = 0
+    offset = 0
+    observations = []
+    locations = []
   }
 }
 

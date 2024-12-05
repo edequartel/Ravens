@@ -10,83 +10,86 @@ import MapKit
 import SwiftyBeaver
 
 struct MapObservationsUserView: View {
-    let log = SwiftyBeaver.self
-//  @StateObject private var locationManager = LocationManagerModel()
+  let log = SwiftyBeaver.self
+//  @EnvironmentObject var locationManager: LocationManagerModel
 
-    @EnvironmentObject var observationsViewModel: ObservationsViewModel
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
-    @EnvironmentObject var userViewModel:  UserViewModel
-    @EnvironmentObject var settings: Settings
-    
-    @State private var cameraPosition: MapCameraPosition = .automatic
+  @EnvironmentObject var observationsViewModel: ObservationsViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
+  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var settings: Settings
+
+  @State private var cameraPosition: MapCameraPosition = .automatic
 
   @State private var region: MKCoordinateRegion = MKCoordinateRegion(
-      center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-      span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
+    center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+    span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
   )
 
-    @State private var showObservers: Bool = false
-    @State private var showListView: Bool = false
-    
-    var body: some View {
-        
-        ZStack(alignment: .topLeading) {
-            Map(position: $cameraPosition) {
-                UserAnnotation() ///@@@
+  @State private var showObservers: Bool = false
+  @State private var showListView: Bool = false
 
-                ForEach(observationsViewModel.locations) { location in
-                    Annotation(location.name, coordinate: location.coordinate) {
-                        Circle()
-                            .fill(rarityColor(value: location.rarity))
-                            .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
-                            .frame(width: 12, height: 12)
-                        
-                            .overlay(
-                                Circle()
-                                    .fill(location.hasPhoto ? Color.white : Color.clear)
-                                    .frame(width: 6, height: 6)
-                            )
-                    }
-                }
-            }
-            .mapStyle(settings.mapStyle)
+  var body: some View {
 
-            .mapControls() {
-                MapUserLocationButton()
-                MapPitchToggle()
-                MapCompass() //tapping this makes it north
-            }
+    ZStack(alignment: .topLeading) {
+      Map(position: $cameraPosition) {
+//      Map(coordinateRegion: $region) {
+        UserAnnotation() ///@@@
+
+        ForEach(observationsViewModel.locations) { location in
+          Annotation(location.name, coordinate: location.coordinate) {
+            Circle()
+              .fill(rarityColor(value: location.rarity))
+              .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
+              .frame(width: 12, height: 12)
+
+              .overlay(
+                Circle()
+                  .fill(location.hasPhoto ? Color.white : Color.clear)
+                  .frame(width: 6, height: 6)
+              )
+          }
         }
+      }
+      .mapStyle(settings.mapStyle)
 
-        .onAppear {
-            if settings.initialUsersLoad {
-                observationsViewModel.fetchData(
-                    settings: settings,
-//                    entityType: "user",
-                    userId: settings.userId,
-                    completion: { log.info("viewModel.fetchData completion") })
-                settings.initialUsersLoad = false
-            }
-        }
+      .mapControls() {
+        MapUserLocationButton()
+        MapPitchToggle()
+        MapCompass() //tapping this makes it north
+      }
     }
+//    .onChange(of: locationManager.getCurrentLocation() ) { _ in
+//                    updateRegion()
+//                }
+    .onAppear {
+      if settings.initialUsersLoad {
+        observationsViewModel.fetchData(
+          settings: settings,
+          entity: .user,
+          id: settings.userId,
+          completion: { log.info("viewModel.fetchData completion") })
+        settings.initialUsersLoad = false
+      }
+    }
+  }
 
 //  private func updateRegion() {
-//      guard let userLocation = locationManager.userLocation else { return }
-//      region = MKCoordinateRegion(
-//          center: userLocation.coordinate,
-//          span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Adjust for 5km span
-//      )
+//    guard let userLocation = locationManager.getCurrentLocation() else { return }
+//    region = MKCoordinateRegion(
+//      center: userLocation.coordinate,
+//      span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Adjust for 5km span
+//    )
 //  }
 }
 
 struct MapObservationsUserView_Previews: PreviewProvider {
-    static var previews: some View {
-      MapObservationsUserView()
-            .environmentObject(ObservationsViewModel())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(UserViewModel())
-            .environmentObject(Settings())
-    }
+  static var previews: some View {
+    MapObservationsUserView()
+      .environmentObject(ObservationsViewModel())
+      .environmentObject(KeychainViewModel())
+      .environmentObject(UserViewModel())
+      .environmentObject(Settings())
+  }
 }
 
 //var body: some View {
