@@ -66,8 +66,8 @@ class ObservationsLocationViewModel: ObservableObject {
     }
   }
 
-  func fetchData(settings: Settings, locationId: Int, limit: Int, offset: Int, completion: (() -> Void)? = nil) {
-    log.info("fetchData ObservationsLocationViewModel locationid: \(locationId) limit:\(limit) offset: \(offset)")
+  func fetchData(settings: Settings, locationId: Int, completion: (() -> Void)? = nil) {
+    log.info("fetchData ObservationsLocationViewModel locationid: \(locationId)")
     keyChainViewModel.retrieveCredentials()
     // Add the custom header
     let headers: HTTPHeaders = [

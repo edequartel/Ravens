@@ -20,29 +20,6 @@ class ObservationsViewModel: ObservableObject {
   @Published var offset = 0
 
   private var keyChainViewModel =  KeychainViewModel()
-  var locations = [Location]()
-
-  func getLocations() {
-    locations.removeAll() //@@@
-    let max = (observations?.count ?? 0)
-    for index in 0 ..< max {
-      let name = observations?[index].speciesDetail.name ?? "Unknown name"
-      let latitude = observations?[index].point.coordinates[1] ?? 52.024052
-      let longitude = observations?[index].point.coordinates[0] ?? 5.245350
-      let rarity = observations?[index].rarity ?? 0
-      let hasPhoto = (observations?[index].photos?.count ?? 0 > 0)
-      let hasSound = (observations?[index].sounds?.count ?? 0 > 0)
-      let newLocation = Location(
-        name: name,
-        coordinate: CLLocationCoordinate2D(
-          latitude: latitude,
-          longitude: longitude),
-        rarity: rarity,
-        hasPhoto: hasPhoto,
-        hasSound: hasSound)
-      locations.append(newLocation)
-    }
-  }
 
   func getTimeData() {
     let max = (observations?.count ?? 0)
@@ -84,7 +61,6 @@ class ObservationsViewModel: ObservableObject {
 
     print(entity)
     let url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-//    let url = endPoint(value: settings.selectedInBetween) + "user/\(userId)/observations/"+"?limit=\(self.limit)&offset=1600" //\(self.offset)"
 
     log.error("fetchData ObservationsUserViewModel \(url)")
 
@@ -103,7 +79,6 @@ class ObservationsViewModel: ObservableObject {
               self.observations = (self.observations ?? []) + observations.results
 
               self.getTimeData()
-              self.getLocations()
               let result = extractLimitAndOffset(from: observations.next?.absoluteString ?? "")
               self.limit = result.limit ?? 100
               self.offset = result.offset ?? 0
@@ -127,7 +102,6 @@ class ObservationsViewModel: ObservableObject {
     limit = 0
     offset = 0
     observations = []
-    locations = []
   }
 }
 

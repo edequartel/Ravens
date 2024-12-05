@@ -109,8 +109,6 @@ struct ObservationsLocationView: View {
               observationsLocationViewModel.fetchData(
                 settings: settings,
                 locationId: fetchedLocations[0].id,
-                limit: 100, 
-                offset: 0,
                 completion: {
                   log.info("observationsLocationViewModel data loaded")
                   settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
@@ -133,8 +131,6 @@ struct ObservationsLocationView: View {
           observationsLocationViewModel.fetchData(
             settings: settings,
             locationId: settings.locationId,
-            limit: 100,
-            offset: 0,
             completion: {
               log.info("observationsLocationViewModel data loaded")
               settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()

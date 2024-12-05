@@ -44,9 +44,7 @@ struct ObservationsUserView: View {
           selectedSpeciesID: $selectedSpeciesID,
           entity: .user) {
           // Handle end of list event
-          print("End of list reached in ParentView")
-          // For example, load more data or perform some action
-//            log.info("refreshing")
+            print("End of list reached in ParentView")
             observationsViewModel.fetchData(
               settings: settings,
               entity: .user,

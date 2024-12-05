@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
   let log = SwiftyBeaver.self
-//  @EnvironmentObject var locationManager: LocationManagerModel
+  @EnvironmentObject var locationManager: LocationManagerModel
 
   @EnvironmentObject var observationsViewModel: ObservationsViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -32,19 +32,22 @@ struct MapObservationsUserView: View {
 
     ZStack(alignment: .topLeading) {
       Map(position: $cameraPosition) {
-//      Map(coordinateRegion: $region) {
-        UserAnnotation() ///@@@
-
-        ForEach(observationsViewModel.locations) { location in
-          Annotation(location.name, coordinate: location.coordinate) {
+        UserAnnotation()
+        ForEach(observationsViewModel.observations ?? []) { observation in
+          Annotation(observation.speciesDetail.name,
+                     coordinate:  CLLocationCoordinate2D(
+                      latitude: observation.point.coordinates[1],
+                      longitude: observation.point.coordinates[0]))
+          {
             Circle()
-              .fill(rarityColor(value: location.rarity))
-              .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
+              .fill(rarityColor(value: observation.rarity))
+//              .stroke(observation.hasSound ?? true ? Color.white : Color.clear, lineWidth: 1)
+              .stroke(observation.sounds?.isEmpty ?? true ? Color.white : Color.clear, lineWidth: 1)
               .frame(width: 12, height: 12)
 
               .overlay(
                 Circle()
-                  .fill(location.hasPhoto ? Color.white : Color.clear)
+                  .fill(observation.photos?.isEmpty ?? true ? Color.white : Color.clear)
                   .frame(width: 6, height: 6)
               )
           }
@@ -58,10 +61,8 @@ struct MapObservationsUserView: View {
         MapCompass() //tapping this makes it north
       }
     }
-//    .onChange(of: locationManager.getCurrentLocation() ) { _ in
-//                    updateRegion()
-//                }
     .onAppear {
+      updateRegionToUserLocation() //@@@
       if settings.initialUsersLoad {
         observationsViewModel.fetchData(
           settings: settings,
@@ -73,13 +74,22 @@ struct MapObservationsUserView: View {
     }
   }
 
-//  private func updateRegion() {
-//    guard let userLocation = locationManager.getCurrentLocation() else { return }
-//    region = MKCoordinateRegion(
-//      center: userLocation.coordinate,
-//      span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Adjust for 5km span
-//    )
-//  }
+  private func updateRegionToUserLocation() {
+    guard let userLocation = locationManager.getCurrentLocation() else {
+      log.warning("User location not available")
+      return
+    }
+
+    // Define 5x5 km span (latitudeDelta and longitudeDelta)
+    let kilometersToDegrees = 255.0 / 111.0
+    let updatedRegion = MKCoordinateRegion(
+      center: userLocation.coordinate,
+      span: MKCoordinateSpan(latitudeDelta: kilometersToDegrees, longitudeDelta: kilometersToDegrees)
+    )
+
+    region = updatedRegion
+    cameraPosition = .region(updatedRegion) // Update camera to this region
+  }
 }
 
 struct MapObservationsUserView_Previews: PreviewProvider {
@@ -91,13 +101,3 @@ struct MapObservationsUserView_Previews: PreviewProvider {
       .environmentObject(Settings())
   }
 }
-
-//var body: some View {
-//    Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .follow)
-//        .onAppear {
-//            updateRegion()
-//        }
-//        .onChange(of: locationManager.userLocation) { _ in
-//            updateRegion()
-//        }
-//}
