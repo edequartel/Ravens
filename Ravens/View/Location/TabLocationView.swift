@@ -17,7 +17,8 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+//  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
 
   @Binding var selectedSpeciesID: Int?
@@ -151,7 +152,8 @@ struct TabLocationView: View {
               //2. get the observations for this area
               observationsLocationViewModel.fetchData(
                 settings: settings,
-                locationId: fetchedLocations[0].id,
+                entity: .area,
+                id: fetchedLocations[0].id,
                 completion: {
                   log.info("observationsLocationViewModel data loaded")
                   settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition() //automatic
@@ -169,6 +171,6 @@ struct TabLocationView: View {
       .environmentObject(LocationManagerModel())
       .environmentObject(LocationIdViewModel())
       .environmentObject(GeoJSONViewModel())
-      .environmentObject(ObservationsLocationViewModel())
+      .environmentObject(ObservationsViewModel())
 }
 

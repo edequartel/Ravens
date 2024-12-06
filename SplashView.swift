@@ -25,7 +25,7 @@ struct SplashView: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keychainViewModel: KeychainViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
+  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 

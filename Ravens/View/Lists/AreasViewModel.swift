@@ -94,7 +94,7 @@ struct AreasView: View {
     let log = SwiftyBeaver.self
     @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var observationsLocationViewModel: ObservationsLocationViewModel
+    @EnvironmentObject private var observationsLocationViewModel: ObservationsViewModel
     @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

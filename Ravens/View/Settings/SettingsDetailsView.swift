@@ -12,8 +12,8 @@ struct SettingsDetailsView: View {
     @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     
-    var count: Int = 0
-    var results: Int = 0
+//    var count: Int = 0
+//    var results: Int = 0
     var showInfinity: Bool = true
     
     var body: some View {
@@ -28,7 +28,7 @@ struct SettingsDetailsView: View {
 
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(settings.locationName) \(settings.selectedSpeciesGroupName) \(results)x \(14)d \(settings.selectedDate, formatter: dateFormatter)")
+        .accessibilityLabel("\(settings.locationName)")
     }
 
     

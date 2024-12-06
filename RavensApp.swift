@@ -59,7 +59,10 @@ struct RavensApp: App {
   @StateObject var observationsViewModel = ObservationsViewModel()
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
   @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
-  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
+
+//  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
+  @StateObject var observationsLocationViewModel = ObservationsViewModel()
+
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var poiViewModel = POIViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()

@@ -49,10 +49,10 @@ class ObservationsViewModel: ObservableObject {
   }
 
 
-  func fetchData(settings: Settings, entity: EntityType , id: Int, completion: @escaping () -> Void) {
+  func fetchData(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
     log.info("fetchData ObservationsUserViewModel userId: \(id) limit: \(limit) offset: \(offset)")
     keyChainViewModel.retrieveCredentials()
-
+    if (entity == .area) { self.reset() }
     // Add the custom header
     let headers: HTTPHeaders = [
       "Authorization": "Token "+keyChainViewModel.token,
