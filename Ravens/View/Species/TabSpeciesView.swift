@@ -14,7 +14,7 @@ struct TabSpeciesView: View {
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
-  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings

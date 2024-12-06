@@ -11,8 +11,8 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
+//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
@@ -69,7 +69,7 @@ struct ObservationsSpeciesView: View {
       Spacer()
 
       VStack {
-        if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count == 0 {
+        if let observations = observationsSpeciesViewModel.observations, observations.count == 0 {
           Text(noObsLastPeriod)// \(item.name)")
             .font(.headline) // Set font style
             .foregroundColor(.secondary) // Adjust text color
@@ -78,7 +78,7 @@ struct ObservationsSpeciesView: View {
           Spacer()
         } else {
 
-          if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
+          if let observations = observationsSpeciesViewModel.observations, observations.count > 0 {
             if showView { Text("ObservationListView").font(.customTiny) }
             HorizontalLine()
             ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
@@ -91,12 +91,12 @@ struct ObservationsSpeciesView: View {
 
       .refreshable {
         print("refreshing...")
-        fetchDataModel(offset: offset)
+        fetchDataModel()
       }
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {
-            fetchDataModel(offset: offset)
+            fetchDataModel()
             settings.initialSpeciesLoad = false
           }
           hasAppeared = true // Prevent re-execution
@@ -105,12 +105,11 @@ struct ObservationsSpeciesView: View {
     }
   }
 
-  func fetchDataModel(offset: Int) {
+  func fetchDataModel() {
     observationsSpeciesViewModel.fetchData(
       settings: settings,
-      speciesId: item.speciesId,
-      limit: 100,
-      offset: 0,
+      entity: .species,
+      id: item.speciesId,
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")

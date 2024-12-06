@@ -54,6 +54,7 @@ class ObservationsViewModel: ObservableObject {
     keyChainViewModel.retrieveCredentials()
 
     if (entity == .area) { self.reset() } //@@@
+    self.reset() //???
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -79,7 +80,7 @@ class ObservationsViewModel: ObservableObject {
 
             DispatchQueue.main.async {
 //              self.resObservations = observations.results
-              print(">> observations:\(observations.count ?? 0)")
+              print(">> observations.count:\(observations.count ?? 0)")
               self.observations = (self.observations ?? []) + observations.results
 
               self.getTimeData()
@@ -106,6 +107,7 @@ class ObservationsViewModel: ObservableObject {
     limit = 0
     offset = 0
     observations = []
+    print("reset the limit and the observations")
   }
 }
 

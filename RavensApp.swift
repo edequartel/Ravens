@@ -55,7 +55,8 @@ struct RavensApp: App {
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
 
-  @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+  @StateObject var observationsSpeciesViewModel = ObservationsViewModel()
+//  @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
 
   @StateObject var userViewModel =  UserViewModel()
   @StateObject var observationsViewModel = ObservationsViewModel()

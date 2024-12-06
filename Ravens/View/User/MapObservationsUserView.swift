@@ -96,22 +96,70 @@ struct MapObservationsUserView_Previews: PreviewProvider {
 import SwiftUI
 import MapKit
 
+//struct ObservationAnnotationView: View {
+//  let observation: Observation
+//
+//  var body: some View {
+//    Circle()
+//      .fill(rarityColor(value: observation.rarity))
+//      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+//      .frame(width: 12, height: 12)
+//      .overlay(
+//        Circle()
+//          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+//          .frame(width: 6, height: 6)
+//      )
+//      .onTapGesture {
+//        print("Tapped observation \(observation.speciesDetail.name)")
+//      }
+//  }
+//}
+
 struct ObservationAnnotationView: View {
-  let observation: Observation
+    let observation: Observation
+    @State private var showPopup = false // Tracks the visibility of the popup
 
-  var body: some View {
-    Circle()
-      .fill(rarityColor(value: observation.rarity))
-      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
-      .frame(width: 12, height: 12)
-      .overlay(
-        Circle()
-          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
-          .frame(width: 6, height: 6)
-      )
-      .onTapGesture {
-        print("Tapped observation \(observation.speciesDetail.name)")
-      }
-  }
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(rarityColor(value: observation.rarity))
+                .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+                .frame(width: 12, height: 12)
+                .overlay(
+                    Circle()
+                        .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+                        .frame(width: 6, height: 6)
+                )
+                .onTapGesture {
+                    showPopup.toggle() // Toggles the popup visibility
+                }
+
+            // Popup View
+            if showPopup {
+                VStack {
+                    Text("\(observation.speciesDetail.name)")
+                        .font(.headline)
+
+                    Button(action: {
+                        showPopup = false // Dismiss the popup
+                    }) {
+                        Text("Close")
+                            .font(.subheadline)
+                            .foregroundColor(.blue)
+                    }
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                .frame(width: 300)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .offset(y: -60) // Adjust the position of the popup
+                .transition(.opacity) // Optional animation
+            }
+        }
+    }
 }
-
