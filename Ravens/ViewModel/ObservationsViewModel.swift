@@ -1,5 +1,5 @@
 //
-//  ObservationsUserViewModel.swift
+//  ObservationsViewModel.swift
 //  Ravens
 //
 //  Created by Eric de Quartel on 04/03/2024.
@@ -61,6 +61,7 @@ class ObservationsViewModel: ObservableObject {
 
     print(entity)
     let url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+//    let url = endPoint(value: settings.selectedInBetween) + "locations/17861/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
     log.error("fetchData ObservationsUserViewModel \(url)")
 

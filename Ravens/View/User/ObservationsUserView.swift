@@ -20,7 +20,7 @@ struct CustomDivider: View {
 }
 
 enum EntityType: String {
-    case area = "area"
+    case area = "locations"
     case user = "user"
     case species = "species"
 }

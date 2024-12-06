@@ -86,6 +86,7 @@ class ObservationsLocationViewModel: ObservableObject {
     let baseURL = endPoint(value: settings.selectedInBetween) + "locations/\(locationId)/observations/"
     let speciesGroupParam = "?species_group=\(settings.selectedSpeciesGroupId)"
     var url = baseURL + speciesGroupParam
+    log.error("url \(url)")
 //
     if !settings.infinity {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"

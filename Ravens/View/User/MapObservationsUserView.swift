@@ -39,17 +39,7 @@ struct MapObservationsUserView: View {
                       latitude: observation.point.coordinates[1],
                       longitude: observation.point.coordinates[0]))
           {
-            Circle()
-              .fill(rarityColor(value: observation.rarity))
-//              .stroke(observation.hasSound ?? true ? Color.white : Color.clear, lineWidth: 1)
-              .stroke(observation.sounds?.isEmpty ?? true ? Color.white : Color.clear, lineWidth: 1)
-              .frame(width: 12, height: 12)
-
-              .overlay(
-                Circle()
-                  .fill(observation.photos?.isEmpty ?? true ? Color.white : Color.clear)
-                  .frame(width: 6, height: 6)
-              )
+            ObservationAnnotationView(observation: observation)
           }
         }
       }
@@ -101,3 +91,27 @@ struct MapObservationsUserView_Previews: PreviewProvider {
       .environmentObject(Settings())
   }
 }
+
+
+import SwiftUI
+import MapKit
+
+struct ObservationAnnotationView: View {
+  let observation: Observation
+
+  var body: some View {
+    Circle()
+      .fill(rarityColor(value: observation.rarity))
+      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+      .frame(width: 12, height: 12)
+      .overlay(
+        Circle()
+          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+          .frame(width: 6, height: 6)
+      )
+      .onTapGesture {
+        print("Tapped observation \(observation.speciesDetail.name)")
+      }
+  }
+}
+
