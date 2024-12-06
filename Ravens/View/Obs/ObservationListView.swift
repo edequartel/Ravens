@@ -12,7 +12,7 @@ struct ObservationListView: View {
   var observations: [Observation]
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
-  @State var entity: EntityType //@@@
+  @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
@@ -34,7 +34,7 @@ struct ObservationListView: View {
                  .onChange(of: focusedItemID) { newFocusID, oldFocusID in
                      handleFocusChange(newFocusID, from: filteredAndSortedObservations)
                  }
-                 .onAppear { //@@@
+                 .onAppear {
                      if obs == filteredAndSortedObservations.last {
                          print("end of list reached")
                          onEndOfList?()
@@ -83,7 +83,7 @@ struct ObservationListView: View {
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
     switch currentSortingOption {
     case .date:
-      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast) //@@@
+      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast) 
     case .name:
       return lhs.speciesDetail.name < rhs.speciesDetail.name
     case .rarity:

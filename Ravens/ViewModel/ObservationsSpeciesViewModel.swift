@@ -76,7 +76,7 @@ class ObservationsSpeciesViewModel: ObservableObject {
 
                         DispatchQueue.main.async {
                             self.observationsSpecies = observationsSpecies
-                            self.getTimeData() //@@@
+                            self.getTimeData() 
                             self.getLocations()
                           
                             completion?() // call the completion handler if it exists

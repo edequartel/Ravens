@@ -52,7 +52,7 @@ struct MapObservationsUserView: View {
       }
     }
     .onAppear {
-      updateRegionToUserLocation() //@@@
+      updateRegionToUserLocation()
       if settings.initialUsersLoad {
         observationsViewModel.fetchData(
           settings: settings,

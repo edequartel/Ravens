@@ -54,11 +54,13 @@ struct RavensApp: App {
   @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
+
   @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
+
   @StateObject var userViewModel =  UserViewModel()
   @StateObject var observationsViewModel = ObservationsViewModel()
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
-  @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
+//  @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
 
 //  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
   @StateObject var observationsLocationViewModel = ObservationsViewModel()
@@ -107,7 +109,7 @@ struct RavensApp: App {
         .environmentObject(userViewModel)
 
         .environmentObject(observationsViewModel)
-        .environmentObject(observationsRadiusViewModel)
+//        .environmentObject(observationsRadiusViewModel)
         .environmentObject(observationsLocationViewModel)
         .environmentObject(locationIdViewModel)
         .environmentObject(geoJSONViewModel)

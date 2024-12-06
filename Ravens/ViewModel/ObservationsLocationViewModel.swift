@@ -1,4 +1,5 @@
-////
+////DEPRICATED
+///
 ////  ObservationsLocationViewModel.swift
 ////  Ravens
 ////

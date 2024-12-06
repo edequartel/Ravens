@@ -116,21 +116,7 @@ struct ObservationsSpeciesView: View {
         log.info("observationsSpeciesViewModel data loaded")
       }
     )
-
-//    observationsSpeciesViewModel.fetchData(
-//      settings: settings,
-//      entity: .species,
-//      id: item.speciesId,
-//      completion: {
-//        isLoaded = true
-//        log.info("observationsSpeciesViewModel data loaded")
-//      })
-
-
   }
-
-
-
 }
 
 
@@ -152,34 +138,3 @@ struct ObservationsSpeciesView: View {
 //  }
 //}
 
-//          Button(action: {
-//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-//              print("bookmarks remove")
-//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-//            } else {
-//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-//              print("bookmarks append")
-//            }
-//
-//          } ) {
-//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-//              .uniformSize()
-//          }
-//        }
-//        VStack {
-//          HStack {
-//            Text(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
-//              .foregroundColor(.gray)
-//              .font(.footnote)
-//            Spacer()
-//          }
-//          HStack{
-//            Text("\(item.scientificName)")
-//              .foregroundColor(.gray)
-//              .font(.footnote)
-//              .italic()
-//              .lineLimit(1) // Set the maximum number of lines to 1
-//              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//            Spacer()
-//          }
-//        }

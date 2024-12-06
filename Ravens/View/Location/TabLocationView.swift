@@ -17,7 +17,6 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-//  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
   @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
 

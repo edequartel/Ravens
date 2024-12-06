@@ -52,7 +52,9 @@ class ObservationsViewModel: ObservableObject {
   func fetchData(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
     log.info("fetchData ObservationsUserViewModel userId: \(id) limit: \(limit) offset: \(offset)")
     keyChainViewModel.retrieveCredentials()
-    if (entity == .area) { self.reset() }
+
+    if (entity == .area) { self.reset() } //@@@
+
     // Add the custom header
     let headers: HTTPHeaders = [
       "Authorization": "Token "+keyChainViewModel.token,
@@ -60,6 +62,7 @@ class ObservationsViewModel: ObservableObject {
     ]
 
     print(entity)
+//    let url = endPoint(value: settings.selectedInBetween) + "species/785/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
     let url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 //    let url = endPoint(value: settings.selectedInBetween) + "locations/17861/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 

@@ -12,7 +12,7 @@ struct SettingsView: View {
   let log = SwiftyBeaver.self
   @Environment(\.locale) private var locale
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-  @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+//  @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
@@ -165,7 +165,7 @@ struct SettingsView_Previews: PreviewProvider {
     // Setting up the environment objects for the preview
     SettingsView()
       .environmentObject(Settings())
-      .environmentObject(ObservationsRadiusViewModel())
+//      .environmentObject(ObservationsRadiusViewModel())
   }
 }
 
