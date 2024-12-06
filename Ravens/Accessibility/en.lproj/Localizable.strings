@@ -25,7 +25,7 @@
 "addLocationToFavorite" = "Add this location to favorites";
 "removeLocationFromFavorite" = "Remove this location from favorites";
 "toggleViewMapList" = "Toggle between map or list view";
-"noObsLastPeriod" = "No observations found for the last 14 days";
+"noObsLastPeriod" = "No observations found for the last period.";
 "allVisible" = "all species in list";
 "favoriteVisible" ="favorite species in list";
 "notesAboutObservation" = "notes about observation";

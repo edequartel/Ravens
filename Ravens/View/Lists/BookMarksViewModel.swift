@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyBeaver
 
 struct BookMark: Codable, Identifiable {
   var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
@@ -18,6 +19,7 @@ struct BookMark: Codable, Identifiable {
 import SwiftUI
 
 class BookMarksViewModel: ObservableObject {
+  let log = SwiftyBeaver.self
   @Published var records: [BookMark] = []
 
   let fileManager = FileManager.default
@@ -30,18 +32,18 @@ class BookMarksViewModel: ObservableObject {
 
       // Check if the file exists
       if fileManager.fileExists(atPath: filePath.path) {
-          print("File exists at path: \(filePath.path)")
+        log.info("File exists at path: \(filePath.path)")
           loadRecords()
       } else {
-          print("File does not exist at path: \(filePath.path). Creating file...")
+        log.info("File does not exist at path: \(filePath.path). Creating file...")
           let initialContent = "[]" // Default empty JSON content
 
           // Attempt to create the file
           do {
               try initialContent.write(to: filePath, atomically: true, encoding: .utf8)
-              print("File created successfully at path: \(filePath.path)")
+            log.info("File created successfully at path: \(filePath.path)")
           } catch {
-              print("Failed to create file. Error: \(error.localizedDescription)")
+            log.info("Failed to create file. Error: \(error.localizedDescription)")
           }
       }
   }
@@ -51,7 +53,7 @@ class BookMarksViewModel: ObservableObject {
       let data = try Data(contentsOf: filePath)
       records = try JSONDecoder().decode([BookMark].self, from: data)
     } catch {
-      print("BookMarksViewModel Error loading data: \(error)")
+      log.info("BookMarksViewModel Error loading data: \(error)")
     }
   }
 
@@ -60,7 +62,7 @@ class BookMarksViewModel: ObservableObject {
       let data = try JSONEncoder().encode(records)
       try data.write(to: filePath, options: .atomicWrite)
     } catch {
-      print("BookMarksViewModel Error saving data: \(error)")
+      log.info("BookMarksViewModel Error saving data: \(error)")
     }
   }
 
@@ -85,7 +87,7 @@ class BookMarksViewModel: ObservableObject {
       records.remove(at: index)
       saveRecords()
     } else {
-      print("BookMarksViewModel Record with speciesID \(speciesID) does not exist.")
+      log.info("BookMarksViewModel Record with speciesID \(speciesID) does not exist.")
     }
   }
 }

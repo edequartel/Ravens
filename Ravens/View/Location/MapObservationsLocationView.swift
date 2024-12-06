@@ -26,7 +26,6 @@ struct MapObservationsLocationView: View {
 
   var body: some View {
     VStack {
-      Text("yyy")
       MapReader { proxy in
         Map(position: $settings.cameraAreaPosition) {
           UserAnnotation()
