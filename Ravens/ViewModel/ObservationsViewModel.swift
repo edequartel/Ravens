@@ -16,6 +16,8 @@ class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
   @Published var observations: [Observation]?
+//  @Published var observations: [Observation] = []
+
   @Published var limit = 0
   @Published var offset = 0
 
@@ -50,11 +52,12 @@ class ObservationsViewModel: ObservableObject {
 
 
   func fetchData(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
-    log.info("fetchData ObservationsUserViewModel userId: \(id) limit: \(limit) offset: \(offset)")
+    log.info("fetchData ObservationsViewModel userId: \(id) limit: \(limit) offset: \(offset)")
     keyChainViewModel.retrieveCredentials()
 
-    if (entity == .area) { self.reset() } //@@@
+//    if (entity == .area) { self.reset() } //@@@
     self.reset() //???
+    print("@@@@@@@@")
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -76,17 +79,18 @@ class ObservationsViewModel: ObservableObject {
         if let data = stringResponse.data(using: .utf8) {
           do {
             let decoder = JSONDecoder()
-            let observations = try decoder.decode(Observations.self, from: data)
+            let observationsX = try decoder.decode(Observations.self, from: data)
 
             DispatchQueue.main.async {
 //              self.resObservations = observations.results
-              print(">> observations.count:\(observations.count ?? 0)")
-              self.observations = (self.observations ?? []) + observations.results
+              print(">> observations.count:\(observationsX.count ?? 0)")
+              self.observations = (self.observations ?? []) + observationsX.results
 
               self.getTimeData()
-              let result = extractLimitAndOffset(from: observations.next?.absoluteString ?? "")
+              let result = extractLimitAndOffset(from: observationsX.next?.absoluteString ?? "")
               self.limit = result.limit ?? 100
               self.offset = result.offset ?? 0
+              print("xxxx")
               completion() // call the completion handler if it exists
             }
 
@@ -106,13 +110,10 @@ class ObservationsViewModel: ObservableObject {
   func reset() {
     limit = 0
     offset = 0
-    observations = []
+    self.observations = []
     print("reset the limit and the observations")
   }
 }
-
-
-
 
 func extractLimitAndOffset(from url: String) -> (limit: Int?, offset: Int?) {
     // Regular expression to match 'limit' and 'offset'

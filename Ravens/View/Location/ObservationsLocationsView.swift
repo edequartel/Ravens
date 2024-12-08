@@ -11,9 +11,10 @@ import MapKit
 
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
-  
+  @ObservedObject var observationsLocation: ObservationsViewModel
+
   //  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
+//  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
@@ -27,7 +28,7 @@ struct ObservationsLocationView: View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
       
-      if let observations = observationsLocationViewModel.observations, observations.count == 0 {
+      if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
           .font(.headline) // Set font style
           .foregroundColor(.secondary) // Adjust text color
@@ -35,7 +36,7 @@ struct ObservationsLocationView: View {
           .padding() // Add padding around the text
         Spacer()
       } else {
-        if let observations = observationsLocationViewModel.observations, observations.count > 0 {
+        if let observations = observationsLocation.observations, observations.count > 0 {
           SettingsDetailsView()
           HorizontalLine()
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
@@ -104,7 +105,7 @@ struct ObservationsLocationView: View {
               log.info("geoJSONViewModel data loaded")
               
               //2. get the observations for this area
-              observationsLocationViewModel.fetchData(
+              observationsLocation.fetchData(
                 settings: settings,
                 entity: .area,
                 id: fetchedLocations[0].id,
@@ -127,7 +128,7 @@ struct ObservationsLocationView: View {
           log.error("geoJSONViewModel data loaded")
           
           //2. get the observations for this area
-          observationsLocationViewModel.fetchData(
+          observationsLocation.fetchData(
             settings: settings,
             entity: .area,
             id: settings.locationId,

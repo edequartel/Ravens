@@ -10,6 +10,8 @@ import SwiftUI
 struct SpeciesView: View {
   @State private var showFirstView = false
 
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
 
@@ -20,9 +22,12 @@ struct SpeciesView: View {
     VStack {
       if showView { Text("SpeciesView").font(.customTiny) }
       if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-        MapObservationsSpeciesView(item: item)
+        MapObservationsSpeciesView(
+          observationsSpecies: observationsSpecies,
+          item: item)
       } else {
         ObservationsSpeciesView(
+          observationsSpecies: observationsSpecies,
           item: item,
           selectedSpeciesID: $selectedSpeciesID
         )

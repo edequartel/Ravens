@@ -11,14 +11,15 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
-//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
+//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
+  
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
 
   @State private var hasAppeared = false
-
   @State private var scale: CGFloat = 1.0
   @State private var lastScale: CGFloat = 1.0
 
@@ -69,7 +70,7 @@ struct ObservationsSpeciesView: View {
       Spacer()
 
       VStack {
-        if let observations = observationsSpeciesViewModel.observations, observations.count == 0 {
+        if let observations = observationsSpecies.observations, observations.count == 0 {
           Text(noObsLastPeriod)// \(item.name)")
             .font(.headline) // Set font style
             .foregroundColor(.secondary) // Adjust text color
@@ -78,7 +79,7 @@ struct ObservationsSpeciesView: View {
           Spacer()
         } else {
 
-          if let observations = observationsSpeciesViewModel.observations, observations.count > 0 {
+          if let observations = observationsSpecies.observations, observations.count > 0 {
             if showView { Text("ObservationListView").font(.customTiny) }
             HorizontalLine()
             ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
@@ -106,7 +107,7 @@ struct ObservationsSpeciesView: View {
   }
 
   func fetchDataModel() {
-    observationsSpeciesViewModel.fetchData(
+    observationsSpecies.fetchData(
       settings: settings,
       entity: .species,
       id: item.speciesId,

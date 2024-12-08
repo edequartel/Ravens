@@ -19,7 +19,7 @@ struct ObserversView: View {
 
     @EnvironmentObject private var observersViewModel: ObserversViewModel
     @EnvironmentObject private var userViewModel:  UserViewModel
-    @EnvironmentObject private var observationsViewModel: ObservationsViewModel
+    @EnvironmentObject private var observationsUserViewModel: ObservationsViewModel
     @EnvironmentObject private var settings: Settings
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -39,7 +39,7 @@ struct ObserversView: View {
                         settings.userId = userViewModel.user?.id ?? 0
                         settings.userName =  userViewModel.user?.name ?? ""
 
-                      observationsViewModel.fetchData(
+                      observationsUserViewModel.fetchData(
                             settings: settings,
                             entity: .user,
                             id: userViewModel.user?.id ?? 0,
@@ -77,8 +77,8 @@ struct ObserversView: View {
                         Button(record.name) {
                             settings.userId = record.userID
                             settings.userName =  record.name
-                          observationsViewModel.reset()
-                            observationsViewModel.fetchData(
+                          observationsUserViewModel.reset()
+                            observationsUserViewModel.fetchData(
                                 settings: settings,
                                 entity: .user,
                                 id: record.userID,

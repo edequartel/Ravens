@@ -28,7 +28,8 @@ enum EntityType: String {
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationsViewModel: ObservationsViewModel
+  @ObservedObject var observationUser : ObservationsViewModel
+
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
@@ -37,7 +38,8 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      if let observations = observationsViewModel.observations, !observations.isEmpty {
+//      Text("\(observationUser.observations?.count ?? 0)")
+      if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
           observations: observations,
@@ -45,7 +47,7 @@ struct ObservationsUserView: View {
           entity: .user) {
           // Handle end of list event
             print("End of list reached in ParentView")
-            observationsViewModel.fetchData(
+            observationUser.fetchData(
               settings: settings,
               entity: .user,
               id: settings.userId,
@@ -59,17 +61,18 @@ struct ObservationsUserView: View {
 
     .onAppear {
       if settings.initialUsersLoad {
-        observationsViewModel.fetchData(
+        observationUser.fetchData(
           settings: settings,
           entity: .user,
           id: settings.userId,
-          completion: { log.info("viewModel.fetchData completion") })
+          completion: { log.error("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)") })
         settings.initialUsersLoad = false
+        print("ONAPPEAR")
       }
     }
     .refreshable {
       log.info("refreshing")
-      observationsViewModel.fetchData(
+      observationUser.fetchData(
         settings: settings,
         entity: .user,
         id: settings.userId,
@@ -79,15 +82,15 @@ struct ObservationsUserView: View {
   }
 }
 
-struct ObservationsUserView_Previews: PreviewProvider {
-  @State static var selectedObservation: Observation? = nil
-  @State static var selectedObservationSound: Observation? = nil
-
-  static var previews: some View {
-    ObservationsUserView(selectedSpeciesID: .constant(nil))
-    .environmentObject(ObservationsViewModel())
-    .environmentObject(UserViewModel())
-    .environmentObject(Settings())
-  }
-}
+//struct ObservationsUserView_Previews: PreviewProvider {
+//  @State static var selectedObservation: Observation? = nil
+//  @State static var selectedObservationSound: Observation? = nil
+//
+//  static var previews: some View {
+//    ObservationsUserView(selectedSpeciesID: .constant(nil))
+//    .environmentObject(ObservationsViewModel())
+//    .environmentObject(UserViewModel())
+//    .environmentObject(Settings())
+//  }
+//}
 

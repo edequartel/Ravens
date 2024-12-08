@@ -12,6 +12,8 @@ import SFSafeSymbols
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
+  @ObservedObject var observationsLocation: ObservationsViewModel
+  
   @EnvironmentObject private var settings: Settings
   @EnvironmentObject private var areasViewModel: AreasViewModel
   @EnvironmentObject var locationManager: LocationManagerModel
@@ -32,9 +34,12 @@ struct TabLocationView: View {
       VStack {
         if showView { Text("TabLocationView").font(.customTiny) }
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-          MapObservationsLocationView()
+          MapObservationsLocationView(
+            observationsLocation: observationsLocation)
         } else {
-          ObservationsLocationView(selectedSpeciesID: $selectedSpeciesID)
+          ObservationsLocationView(
+            observationsLocation: observationsLocation,
+            selectedSpeciesID:  $selectedSpeciesID)
         }
       }
 
@@ -163,13 +168,13 @@ struct TabLocationView: View {
   }
 }
 
-#Preview {
-  TabLocationView(selectedSpeciesID: .constant(nil))
-      .environmentObject(Settings())
-      .environmentObject(AreasViewModel())
-      .environmentObject(LocationManagerModel())
-      .environmentObject(LocationIdViewModel())
-      .environmentObject(GeoJSONViewModel())
-      .environmentObject(ObservationsViewModel())
-}
+//#Preview {
+//  TabLocationView(selectedSpeciesID: .constant(nil))
+//      .environmentObject(Settings())
+//      .environmentObject(AreasViewModel())
+//      .environmentObject(LocationManagerModel())
+//      .environmentObject(LocationIdViewModel())
+//      .environmentObject(GeoJSONViewModel())
+//      .environmentObject(ObservationsViewModel())
+//}
 

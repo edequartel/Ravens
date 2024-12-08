@@ -11,8 +11,9 @@ import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
+    @ObservedObject var observationsSpecies: ObservationsViewModel
 
-    @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
+//    @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
     @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
@@ -28,7 +29,7 @@ struct MapObservationsSpeciesView: View {
             Map(position: $cameraPosition) {
                 UserAnnotation()
 
-                ForEach(observationsSpeciesViewModel.observations ?? []) { observation in
+                ForEach(observationsSpecies.observations ?? []) { observation in
                     Annotation("", coordinate:  CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
                       longitude: observation.point.coordinates[0])) {
@@ -45,7 +46,7 @@ struct MapObservationsSpeciesView: View {
 //                        NetworkView()
                         //
                        
-                      Text("\((observationsSpeciesViewModel.observations?.count ?? 0))x")
+                      Text("\((observationsSpecies.observations?.count ?? 0))x")
                             .foregroundColor(.obsGreenFlower)
                             .lineLimit(1) // Set the maximum number of lines to 1
                             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -86,7 +87,7 @@ struct MapObservationsSpeciesView: View {
     }
     
     func fetchDataModel() {
-        observationsSpeciesViewModel.fetchData(
+      observationsSpecies.fetchData(
             settings: settings,
             entity: .species,
             id: item.speciesId,
@@ -98,13 +99,13 @@ struct MapObservationsSpeciesView: View {
 }
 
 
-struct MapObservationsSpeciesView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Setting up the environment objects for the preview
-      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
-        MapObservationsSpeciesView(item: testSpecies)
-            .environmentObject(Settings())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsViewModel())
-    }
-}
+//struct MapObservationsSpeciesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Setting up the environment objects for the preview
+//      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
+//        MapObservationsSpeciesView(item: testSpecies)
+//            .environmentObject(Settings())
+//            .environmentObject(KeychainViewModel())
+//            .environmentObject(ObservationsViewModel())
+//    }
+//}

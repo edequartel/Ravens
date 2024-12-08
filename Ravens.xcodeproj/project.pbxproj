@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */; };
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
@@ -60,7 +59,6 @@
 		474C408A2B4DAA110038B3A5 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40892B4DAA110038B3A5 /* Region.swift */; };
 		474C408C2B4DAC590038B3A5 /* RegionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408B2B4DAC590038B3A5 /* RegionsViewModel.swift */; };
 		474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C408D2B4DB2850038B3A5 /* RegionsView.swift */; };
-		474C409A2B50073C0038B3A5 /* ObservationsRadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C40992B50073C0038B3A5 /* ObservationsRadiusViewModel.swift */; };
 		475628DD2CD8F29F00B0CF2B /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */; };
 		47568D2D2B59B54500E69B1A /* Observations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2C2B59B54500E69B1A /* Observations.swift */; };
 		47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */; };
@@ -123,7 +121,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationViewModel.swift; sourceTree = "<group>"; };
 		4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationsView.swift; sourceTree = "<group>"; };
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
@@ -174,7 +171,6 @@
 		474C40892B4DAA110038B3A5 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		474C408B2B4DAC590038B3A5 /* RegionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsViewModel.swift; sourceTree = "<group>"; };
 		474C408D2B4DB2850038B3A5 /* RegionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsView.swift; sourceTree = "<group>"; };
-		474C40992B50073C0038B3A5 /* ObservationsRadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsRadiusViewModel.swift; sourceTree = "<group>"; };
 		47568D2C2B59B54500E69B1A /* Observations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observations.swift; sourceTree = "<group>"; };
 		47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesViewModel.swift; sourceTree = "<group>"; };
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
@@ -380,9 +376,7 @@
 				474C408B2B4DAC590038B3A5 /* RegionsViewModel.swift */,
 				47568D2E2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift */,
 				47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */,
-				474C40992B50073C0038B3A5 /* ObservationsRadiusViewModel.swift */,
 				4785CD1C2B964C0E002F52BE /* ObservationsViewModel.swift */,
-				4704110C2BB1C82000A498F5 /* ObservationsLocationViewModel.swift */,
 				4785CD182B95C856002F52BE /* UserViewModel.swift */,
 				4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */,
 				470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */,
@@ -658,7 +652,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4785CD1D2B964C0E002F52BE /* ObservationsViewModel.swift in Sources */,
-				4704110D2BB1C82000A498F5 /* ObservationsLocationViewModel.swift in Sources */,
 				47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */,
 				47568D2F2B59BA1300E69B1A /* ObservationsSpeciesViewModel.swift in Sources */,
 				4785CD192B95C856002F52BE /* UserViewModel.swift in Sources */,
@@ -727,7 +720,6 @@
 				4757E0762B7F3426003F148E /* LoginView.swift in Sources */,
 				478262682C89EF7600DD746C /* NotesView.swift in Sources */,
 				471B4FBE2CC27FDC001302A9 /* TimerManager.swift in Sources */,
-				474C409A2B50073C0038B3A5 /* ObservationsRadiusViewModel.swift in Sources */,
 				471B4FBC2CC268F7001302A9 /* NotificationManager.swift in Sources */,
 				474C40482B4BCC6B0038B3A5 /* SpeciesDetails.swift in Sources */,
 				4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */,

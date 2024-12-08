@@ -31,14 +31,14 @@ class Settings: ObservableObject {
     
 //    @AppStorage("showObsPictures") var showObsPictures: Bool = false
 //    @AppStorage("showObsAudio") var showObsAudio: Bool = true
-    @AppStorage("hidePictures") var hidePictures: Bool = false
+//    @AppStorage("hidePictures") var hidePictures: Bool = false
 
     
-    @Published var cameraRadiusPosition: MapCameraPosition = .automatic {
-        didSet {
-            log.info("!!cameraRadiusPosition saving it in cameraPosition: \(cameraRadiusPosition)")
-        }
-    }
+//    @Published var cameraRadiusPosition: MapCameraPosition = .automatic {
+//        didSet {
+//            log.info("!!cameraRadiusPosition saving it in cameraPosition: \(cameraRadiusPosition)")
+//        }
+//    }
     
     @Published var cameraAreaPosition: MapCameraPosition = .automatic {
         didSet {
@@ -76,10 +76,10 @@ class Settings: ObservableObject {
 //    }
 
     
-    @AppStorage("listpreference") var listPreference: Bool = false
-    @AppStorage("showUser") var showUser: Bool = false
-    @AppStorage("poiOn") var poiOn: Bool = true
-    @AppStorage("infinity") var infinity: Bool = false
+//    @AppStorage("listpreference") var listPreference: Bool = false
+//    @AppStorage("showUser") var showUser: Bool = false
+//    @AppStorage("poiOn") var poiOn: Bool = true
+//    @AppStorage("infinity") var infinity: Bool = false
     
     @AppStorage("selectedRarity") var selectedRarityStored = 1
     @Published var selectedRarity = 1 {
@@ -94,7 +94,7 @@ class Settings: ObservableObject {
     
     
     
-    @AppStorage("radiusPreference") var radiusPreference = true
+//    @AppStorage("radiusPreference") var radiusPreference = true
     
     @AppStorage("mapPreference") var mapPreferenceStored = false //VIP
     @Published var mapPreference = false {
@@ -107,7 +107,7 @@ class Settings: ObservableObject {
     
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
 
-    @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
+//    @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
 
     @Published var selectedDate: Date = Date() {
         didSet {

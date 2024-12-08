@@ -25,7 +25,6 @@ struct SplashView: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keychainViewModel: KeychainViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 
@@ -56,15 +55,6 @@ struct SplashView: View {
             log.error("Token not found, waiting for login")
         }
     }
-
-//    .onChange(of: keyChainviewModel.token.isEmpty) { isTokenEmpty in
-//      if !isTokenEmpty {
-//        log.error("Token detected, loading data")
-//        loadData()
-//      } else {
-//        log.error("Token not found, waiting for login")
-//      }
-//    }
 
     .onAppear {
       log.error("*** NEW LAUNCHING SPLASHVIEW ***")

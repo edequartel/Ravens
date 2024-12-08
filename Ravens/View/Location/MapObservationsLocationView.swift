@@ -12,6 +12,7 @@ import SwiftyBeaver
 
 struct MapObservationsLocationView: View {
   let log = SwiftyBeaver.self
+  @ObservedObject var observationsLocation: ObservationsViewModel
 
   @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
@@ -91,7 +92,7 @@ struct MapObservationsLocationView: View {
       }
       .onAppear() {
         log.info("MapObservationsLocationView onAppear")
-        getDataAreaModel()
+//        getDataAreaModel() //@@@
       }
     }
   }

@@ -11,9 +11,13 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
   let log = SwiftyBeaver.self
+  @ObservedObject var observationUser : ObservationsViewModel
+
   @EnvironmentObject var locationManager: LocationManagerModel
 
-  @EnvironmentObject var observationsViewModel: ObservationsViewModel
+  @EnvironmentObject var observationsUserViewModel: ObservationsViewModel
+
+
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var userViewModel:  UserViewModel
   @EnvironmentObject var settings: Settings
@@ -33,7 +37,7 @@ struct MapObservationsUserView: View {
     ZStack(alignment: .topLeading) {
       Map(position: $cameraPosition) {
         UserAnnotation()
-        ForEach(observationsViewModel.observations ?? []) { observation in
+        ForEach(observationsUserViewModel.observations ?? []) { observation in
           Annotation(observation.speciesDetail.name,
                      coordinate:  CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
@@ -53,14 +57,6 @@ struct MapObservationsUserView: View {
     }
     .onAppear {
       updateRegionToUserLocation()
-      if settings.initialUsersLoad {
-        observationsViewModel.fetchData(
-          settings: settings,
-          entity: .user,
-          id: settings.userId,
-          completion: { log.info("viewModel.fetchData completion") })
-        settings.initialUsersLoad = false
-      }
     }
   }
 
@@ -82,84 +78,84 @@ struct MapObservationsUserView: View {
   }
 }
 
-struct MapObservationsUserView_Previews: PreviewProvider {
-  static var previews: some View {
-    MapObservationsUserView()
-      .environmentObject(ObservationsViewModel())
-      .environmentObject(KeychainViewModel())
-      .environmentObject(UserViewModel())
-      .environmentObject(Settings())
-  }
-}
+//struct MapObservationsUserView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    MapObservationsUserView()
+//      .environmentObject(ObservationsViewModel())
+//      .environmentObject(KeychainViewModel())
+//      .environmentObject(UserViewModel())
+//      .environmentObject(Settings())
+//  }
+//}
 
 
 import SwiftUI
 import MapKit
 
-//struct ObservationAnnotationView: View {
-//  let observation: Observation
-//
-//  var body: some View {
-//    Circle()
-//      .fill(rarityColor(value: observation.rarity))
-//      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
-//      .frame(width: 12, height: 12)
-//      .overlay(
-//        Circle()
-//          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
-//          .frame(width: 6, height: 6)
-//      )
-//      .onTapGesture {
-//        print("Tapped observation \(observation.speciesDetail.name)")
-//      }
-//  }
-//}
-
 struct ObservationAnnotationView: View {
-    let observation: Observation
-    @State private var showPopup = false // Tracks the visibility of the popup
+  let observation: Observation
 
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(rarityColor(value: observation.rarity))
-                .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
-                .frame(width: 12, height: 12)
-                .overlay(
-                    Circle()
-                        .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
-                        .frame(width: 6, height: 6)
-                )
-                .onTapGesture {
-                    showPopup.toggle() // Toggles the popup visibility
-                }
-
-            // Popup View
-            if showPopup {
-                VStack {
-                    Text("\(observation.speciesDetail.name)")
-                        .font(.headline)
-
-                    Button(action: {
-                        showPopup = false // Dismiss the popup
-                    }) {
-                        Text("Close")
-                            .font(.subheadline)
-                            .foregroundColor(.blue)
-                    }
-                }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                .frame(width: 300)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-                .offset(y: -60) // Adjust the position of the popup
-                .transition(.opacity) // Optional animation
-            }
-        }
-    }
+  var body: some View {
+    Circle()
+      .fill(rarityColor(value: observation.rarity))
+      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+      .frame(width: 12, height: 12)
+      .overlay(
+        Circle()
+          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+          .frame(width: 6, height: 6)
+      )
+      .onTapGesture {
+        print("Tapped observation \(observation.speciesDetail.name)")
+      }
+  }
 }
+
+//struct ObservationAnnotationView: View {
+//    let observation: Observation
+//    @State private var showPopup = false // Tracks the visibility of the popup
+//
+//    var body: some View {
+//        ZStack {
+//            Circle()
+//                .fill(rarityColor(value: observation.rarity))
+//                .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+//                .frame(width: 12, height: 12)
+//                .overlay(
+//                    Circle()
+//                        .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+//                        .frame(width: 6, height: 6)
+//                )
+//                .onTapGesture {
+//                    showPopup.toggle() // Toggles the popup visibility
+//                }
+//
+//            // Popup View
+//            if showPopup {
+//                VStack {
+//                    Text("\(observation.speciesDetail.name)")
+//                        .font(.headline)
+//
+//                    Button(action: {
+//                        showPopup = false // Dismiss the popup
+//                    }) {
+//                        Text("Close")
+//                            .font(.subheadline)
+//                            .foregroundColor(.blue)
+//                    }
+//                }
+//                .padding()
+//                .background(Color.white)
+//                .cornerRadius(10)
+//                .shadow(radius: 10)
+//                .frame(width: 300)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .stroke(Color.gray, lineWidth: 1)
+//                )
+//                .offset(y: -60) // Adjust the position of the popup
+//                .transition(.opacity) // Optional animation
+//            }
+//        }
+//    }
+//}

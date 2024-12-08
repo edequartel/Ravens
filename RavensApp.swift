@@ -55,16 +55,26 @@ struct RavensApp: App {
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
 
-  @StateObject var observationsSpeciesViewModel = ObservationsViewModel()
+//  @StateObject private var observationsUserViewModel = ObservationsViewModel()
+//  @StateObject private var observationsLocationViewModel = ObservationsViewModel()
+  @StateObject private var observationsLocation = ObservationsViewModel()
+  @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
+//???
+  @StateObject private var observationsSpecies = ObservationsViewModel()
+
+  @StateObject private var observationsViewModel = ObservationsViewModel()
+
 //  @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
 
+  @StateObject private var observationsUser = ObservationsViewModel()
+
   @StateObject var userViewModel =  UserViewModel()
-  @StateObject var observationsViewModel = ObservationsViewModel()
+
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
 //  @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
 
 //  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
-  @StateObject var observationsLocationViewModel = ObservationsViewModel()
+
 
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var poiViewModel = POIViewModel()
@@ -85,7 +95,7 @@ struct RavensApp: App {
 //  @StateObject var timerManager = TimerManager()
 
   @StateObject var player = Player()
-  @StateObject var observationsYearViewModel = ObservationsYearViewModel()
+//  @StateObject var observationsYearViewModel = ObservationsYearViewModel()
 
   @State private var showingAlert = false
   @State private var parts: [String] = []
@@ -97,7 +107,11 @@ struct RavensApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ContentView(
+        observationUser: observationsUser,
+        observationsLocation : observationsLocation,
+        observationsSpecies: observationsSpecies
+      )
         .environmentObject(keychainViewModel)
         .environmentObject(locationManager) //<<location
         .environmentObject(settings)
@@ -106,12 +120,13 @@ struct RavensApp: App {
         .environmentObject(speciesGroupViewModel)
         .environmentObject(regionsViewModel)
         .environmentObject(regionListViewModel)
-        .environmentObject(observationsSpeciesViewModel)
+
         .environmentObject(userViewModel)
 
-        .environmentObject(observationsViewModel)
-//        .environmentObject(observationsRadiusViewModel)
-        .environmentObject(observationsLocationViewModel)
+//        .environmentObject(observationsUserViewModel)
+//        .environmentObject(observationsLocationViewModel)
+        .environmentObject(observationsSpeciesViewModel)
+
         .environmentObject(locationIdViewModel)
         .environmentObject(geoJSONViewModel)
         .environmentObject(poiViewModel)
@@ -122,7 +137,7 @@ struct RavensApp: App {
         .environmentObject(areasViewModel)
 
         .environmentObject(player)
-        .environmentObject(observationsYearViewModel)
+//        .environmentObject(observationsYearViewModel)
 
         .environmentObject(locationViewModel)
 
