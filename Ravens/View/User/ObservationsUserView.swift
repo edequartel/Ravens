@@ -46,12 +46,12 @@ struct ObservationsUserView: View {
           selectedSpeciesID: $selectedSpeciesID,
           entity: .user) {
           // Handle end of list event
-            print("End of list reached in ParentView")
+            print("End of list reached in ParentView observationUser")
             observationUser.fetchData(
               settings: settings,
               entity: .user,
               id: settings.userId,
-              completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
+              completion: { log.info("observationUser.fetchdata \( settings.userId)") }
             )
         }
       } else {

@@ -39,7 +39,16 @@ struct ObservationsLocationView: View {
         if let observations = observationsLocation.observations, observations.count > 0 {
           SettingsDetailsView()
           HorizontalLine()
-          ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area)
+          ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area) {
+            // Handle end of list event
+              print("End of list reached in ParentView observationsLocation")
+            observationsLocation.fetchData(
+                settings: settings,
+                entity: .user,
+                id: settings.userId,
+                completion: { log.info("observationsLocation.fetchdata \( settings.userId)") }
+              )
+          }
         } else {
           NoObservationsView()
         }

@@ -82,8 +82,20 @@ struct ObservationsSpeciesView: View {
           if let observations = observationsSpecies.observations, observations.count > 0 {
             if showView { Text("ObservationListView").font(.customTiny) }
             HorizontalLine()
-            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
+            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
+
+              // Handle end of list event
+                print("End of list reached in ParentView observationUser")
+              observationsSpecies.fetchData(
+                  settings: settings,
+                  entity: .user,
+                  id: settings.userId,
+                  completion: { log.info("observationsSpecies.fetchdata \( settings.userId)") }
+                )
+
+            }
               .environmentObject(Settings()) // Pass environment object
+
           } else {
             NoObservationsView()
           }
