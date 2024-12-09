@@ -20,9 +20,11 @@ class ObservationsViewModel: ObservableObject {
 
   @Published var limit = 0
   @Published var offset = 0
+  @Published var count = 0
 
   private var keyChainViewModel =  KeychainViewModel()
 
+  //to make sorting easier, get the datetime in a seperate field
   func getTimeData() {
     let max = (observations?.count ?? 0)
     for index in 0..<max {
@@ -56,8 +58,19 @@ class ObservationsViewModel: ObservableObject {
     keyChainViewModel.retrieveCredentials()
 
 //    if (entity == .area) { self.reset() } //@@@
-    self.reset() //???
+//    self.reset() //???
     print("@@@@@@@@")
+
+    //datetime
+    let dateAfter = formatCurrentDate(
+      value: Calendar.current.date(
+        byAdding: .day,
+        value: -14,
+        to: settings.selectedDate)!)
+    let dateBefore = formatCurrentDate(value: settings.selectedDate)
+    log.error("date after \(dateAfter)")
+    log.error("date before \(dateBefore)")
+
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -67,8 +80,11 @@ class ObservationsViewModel: ObservableObject {
 
     print(entity)
 //    let url = endPoint(value: settings.selectedInBetween) + "species/785/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-    let url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 //    let url = endPoint(value: settings.selectedInBetween) + "locations/17861/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+
+//    url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+
 
     log.error("fetchData ObservationsUserViewModel \(url)")
 
@@ -85,7 +101,7 @@ class ObservationsViewModel: ObservableObject {
 //              self.resObservations = observations.results
               print(">> observations.count:\(observationsX.count ?? 0)")
               self.observations = (self.observations ?? []) + observationsX.results
-
+              self.count = observationsX.count ?? 0
               self.getTimeData()
               let result = extractLimitAndOffset(from: observationsX.next?.absoluteString ?? "")
               self.limit = result.limit ?? 100

@@ -38,7 +38,7 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-//      Text("\(observationUser.observations?.count ?? 0)")
+      Text("\(observationUser.count) \(observationUser.offset)")
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
