@@ -27,7 +27,14 @@ struct ObservationsLocationView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
-      
+      VStack{
+      Text("cnt: \(observationsLocation.count) limit:\(observationsLocation.limit) offset: \(observationsLocation.offset)")
+        Text("prv: \(observationsLocation.previous)")
+          .font(.caption)
+        Text("nxt: \(observationsLocation.next)")
+          .font(.caption)
+    }
+
       if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
           .font(.headline) // Set font style
@@ -44,8 +51,8 @@ struct ObservationsLocationView: View {
               print("End of list reached in ParentView observationsLocation")
             observationsLocation.fetchData(
                 settings: settings,
-                entity: .user,
-                id: settings.userId,
+                entity: .area,
+                id: settings.locationId,
                 completion: { log.info("observationsLocation.fetchdata \( settings.userId)") }
               )
           }

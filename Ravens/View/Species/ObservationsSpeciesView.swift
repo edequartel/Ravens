@@ -36,6 +36,7 @@ struct ObservationsSpeciesView: View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
+        Text("\(observationsSpecies.count) \(observationsSpecies.offset)")
 
         HStack {
           // Image with accessibility label
@@ -81,15 +82,16 @@ struct ObservationsSpeciesView: View {
 
           if let observations = observationsSpecies.observations, observations.count > 0 {
             if showView { Text("ObservationListView").font(.customTiny) }
+
             HorizontalLine()
             ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
 
               // Handle end of list event
-                print("End of list reached in ParentView observationUser")
+                print("End of list reached in ParentView observationsSpecies")
               observationsSpecies.fetchData(
                   settings: settings,
-                  entity: .user,
-                  id: settings.userId,
+                  entity: .species,
+                  id: item.speciesId,
                   completion: { log.info("observationsSpecies.fetchdata \( settings.userId)") }
                 )
 
