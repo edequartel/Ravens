@@ -92,13 +92,16 @@ import SwiftyBeaver
 
 struct AreasView: View {
     let log = SwiftyBeaver.self
+
     @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var observationsLocationViewModel: ObservationsViewModel
-    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
+
+    @ObservedObject var observationsLocation: ObservationsViewModel
+
+//    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var newAreaID = 0
+//    @State private var newAreaID = 0
 
     var body: some View {
             VStack {
@@ -108,7 +111,18 @@ struct AreasView: View {
                             Button(action: {
                                 settings.locationName = record.name
                                 settings.locationId = record.areaID
-                                settings.isLocationIDChanged = true
+//                                settings.isLocationIDChanged = true //@@@
+//                              observationsLocation.fetchdataInit(settings: settings, entity: .area, completion: { print("xxx") })
+
+                              print("xxxxxxxxxxxxx")
+                              observationsLocation.fetchDataInit(
+                                settings: settings,
+                                entity: .area,
+                                id: record.areaID,
+                                completion: {
+                                  log.error("observationsLocationViewModel data loaded")
+                                })
+
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text(record.name)

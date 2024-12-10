@@ -19,11 +19,6 @@ struct CustomDivider: View {
     }
 }
 
-enum EntityType: String {
-    case area = "locations"
-    case user = "user"
-    case species = "species"
-}
 
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
@@ -38,46 +33,43 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      Text("\(observationUser.count) \(observationUser.offset)")
+      Text("\(observationUser.count)")
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
           entity: .user) {
-          // Handle end of list event
-            print("End of list reached in ParentView observationUser")
-            observationUser.fetchData(
-              settings: settings,
-              entity: .user,
-              id: settings.userId,
-              completion: { log.info("observationUser.fetchdata \( settings.userId)") }
-            )
-        }
+            // Handle end of list event
+            observationUser.fetchData(settings: settings, url: observationUser.next, completion: { log.error("observationUser.fetchData") })
+          }
       } else {
         NoObservationsView()
       }
     }
 
     .onAppear {
-      if settings.initialUsersLoad {
-        observationUser.fetchData(
+      if !settings.hasUserLoaded {
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           id: settings.userId,
-          completion: { log.error("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)") })
-        settings.initialUsersLoad = false
-        print("ONAPPEAR")
+          completion: {
+            log.error("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
+            log.error("prv: \(observationUser.previous)")
+            log.error("nxt: \(observationUser.next)")
+          })
+        settings.hasUserLoaded = true
       }
     }
     .refreshable {
       log.info("refreshing")
-      observationUser.fetchData(
-        settings: settings,
-        entity: .user,
-        id: settings.userId,
-        completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
-      )
+//      observationUser.fetchData(
+//        settings: settings,
+//        entity: .user,
+//        id: settings.userId,
+//        completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
+//      )
     }
   }
 }

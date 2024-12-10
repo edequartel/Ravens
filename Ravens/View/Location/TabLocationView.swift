@@ -19,7 +19,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
+//  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
 
   @Binding var selectedSpeciesID: Int?
@@ -57,19 +57,19 @@ struct TabLocationView: View {
         }
 
         //update my locationData
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .navigationBarLeading) { //@@@
             Button(action: {
                 log.info("getMyLocation")
 
                 if let location = locationManager.getCurrentLocation() {
-                    log.info("Lat \(location.coordinate.latitude)")
-                    log.info("Long \(location.coordinate.longitude)")
 
-                    settings.currentLocation = CLLocation(
-                        latitude: location.coordinate.latitude,
-                        longitude: location.coordinate.longitude
-                    )
+//                    settings.currentLocation = CLLocation(
+//                        latitude: location.coordinate.latitude,
+//                        longitude: location.coordinate.longitude
+//                    )
 
+                    //here getting the data for the location
+                  
                     fetchDataLocation(coordinate: location.coordinate)
                 } else if let errorMessage = locationManager.errorMessage {
                     log.error("Error: \(errorMessage)")
@@ -108,7 +108,7 @@ struct TabLocationView: View {
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: AreasView()) {
+          NavigationLink(destination: AreasView(observationsLocation: observationsLocation)) {
             Image(systemSymbol: .listBullet)
               .uniformSize()
           }
@@ -138,13 +138,13 @@ struct TabLocationView: View {
         // Use fetchedLocations here //actually it is one location
         settings.locationName = fetchedLocations[0].name
         settings.locationId = fetchedLocations[0].id
-        settings.locationCoordinate = CLLocationCoordinate2D(
-          latitude: coordinate.latitude,
-          longitude: coordinate.longitude)
-
-        for location in fetchedLocations {
-          log.info("locatiob \(location)")
-        }
+//        settings.locationCoordinate = CLLocationCoordinate2D(
+//          latitude: coordinate.latitude,
+//          longitude: coordinate.longitude)
+//
+//        for location in fetchedLocations {
+//          log.info("location \(location)")
+//        }
 
         //1. get the geoJSON for this area / we pick the first one = 0
         geoJSONViewModel.fetchGeoJsonData(
@@ -154,7 +154,7 @@ struct TabLocationView: View {
               log.info("geoJSONViewModel data loaded")
 
               //2. get the observations for this area
-              observationsLocationViewModel.fetchData(
+              observationsLocation.fetchDataInit(
                 settings: settings,
                 entity: .area,
                 id: fetchedLocations[0].id,
@@ -168,13 +168,5 @@ struct TabLocationView: View {
   }
 }
 
-//#Preview {
-//  TabLocationView(selectedSpeciesID: .constant(nil))
-//      .environmentObject(Settings())
-//      .environmentObject(AreasViewModel())
-//      .environmentObject(LocationManagerModel())
-//      .environmentObject(LocationIdViewModel())
-//      .environmentObject(GeoJSONViewModel())
-//      .environmentObject(ObservationsViewModel())
-//}
+
 

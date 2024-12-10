@@ -13,8 +13,6 @@ struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsLocation: ObservationsViewModel
 
-  //  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
-//  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
@@ -22,18 +20,13 @@ struct ObservationsLocationView: View {
   
   @Binding var selectedSpeciesID: Int?
   
-  @State private var retrieveData = false
-  
+  @State private var retrievedData = false
+
   var body: some View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
-      VStack{
-      Text("cnt: \(observationsLocation.count) limit:\(observationsLocation.limit) offset: \(observationsLocation.offset)")
-        Text("prv: \(observationsLocation.previous)")
-          .font(.caption)
-        Text("nxt: \(observationsLocation.next)")
-          .font(.caption)
-    }
+
+      Text("cnt: \(observationsLocation.count)")
 
       if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
@@ -48,13 +41,9 @@ struct ObservationsLocationView: View {
           HorizontalLine()
           ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area) {
             // Handle end of list event
-              print("End of list reached in ParentView observationsLocation")
-            observationsLocation.fetchData(
-                settings: settings,
-                entity: .area,
-                id: settings.locationId,
-                completion: { log.info("observationsLocation.fetchdata \( settings.userId)") }
-              )
+             print("End of list reached in ParentView observationsLocation")
+            observationsLocation.fetchData(settings: settings, url: observationsLocation.next, completion: { log.error("observationsLocation.fetchData") })
+
           }
         } else {
           NoObservationsView()
@@ -63,42 +52,18 @@ struct ObservationsLocationView: View {
       
     }
     .refreshable {
-      getDataAreaModel()
+//      getDataAreaModel()
     }
     .onAppear()  {
-      getDataAreaModel()
-    }
-  }
-  
-  func getDataAreaModel() { //Dit moet een state variable of zoiets gaan worden.
-    
-    log.info("getDataAreaModel")
-    log.info(settings.initialAreaLoad)
-    if settings.initialAreaLoad {
       log.info("MapObservationsLocationView onAppear")
       let location = locationManagerModel.getCurrentLocation()
-      settings.currentLocation = location
+//      settings.currentLocation = location //@@@
       fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      settings.initialAreaLoad = false
-    }
-    
-    log.info(settings.isAreaChanged)
-    if settings.isAreaChanged {
-      log.info("isAreaChanged")
-      let location = settings.currentLocation
-      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      settings.isAreaChanged = false
-    }
-    
-    log.info(settings.isLocationIDChanged)
-    if settings.isLocationIDChanged {
-      log.info("isLocationIDChanged")
-      fetchDataLocationID()
-      settings.isLocationIDChanged = false
+        
     }
   }
   
-  
+
   func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
     log.error("fetchDataLocation")
     locationIdViewModel.fetchLocations(
@@ -121,7 +86,7 @@ struct ObservationsLocationView: View {
               log.info("geoJSONViewModel data loaded")
               
               //2. get the observations for this area
-              observationsLocation.fetchData(
+              observationsLocation.fetchDataInit(
                 settings: settings,
                 entity: .area,
                 id: fetchedLocations[0].id,
@@ -134,27 +99,26 @@ struct ObservationsLocationView: View {
       })
   }
   
-  func fetchDataLocationID() {
-    log.error("fetchDataLocationID")
-    //1. get the geoJSON for this area / we pick the first one = 0
-    geoJSONViewModel.fetchGeoJsonData(
-      for: settings.locationId,
-      completion:
-        {
-          log.error("geoJSONViewModel data loaded")
-          
-          //2. get the observations for this area
-          observationsLocation.fetchData(
-            settings: settings,
-            entity: .area,
-            id: settings.locationId,
-            completion: {
-              log.info("observationsLocationViewModel data loaded")
-              settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
-            })
-        }
-    )
-  }
+//  func fetchDataLocationID() {
+//    log.error("fetchDataLocationID by Point")
+//    //1. get the geoJSON for this area / we pick the first one = 0
+//    geoJSONViewModel.fetchGeoJsonData(
+//      for: settings.locationId,
+//      completion:
+//        {
+//          log.error("geoJSONViewModel data loaded")
+//          //2. get the observations for this area
+//          observationsLocation.fetchDataInit(
+//            settings: settings,
+//            entity: .area,
+//            id: settings.locationId,
+//            completion: {
+//              log.info("observationsLocationViewModel data loaded")
+//              settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
+//            })
+//        }
+//    )
+//  }
 }
 
 

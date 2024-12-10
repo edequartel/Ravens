@@ -48,7 +48,7 @@ struct TabUserObservationsView: View {
 
           //add a toolbaritem here to the list of users
           ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination: ObserversView()) {
+            NavigationLink(destination: ObserversView(observationUser: observationUser)) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
                 .accessibility(label: Text(observersList))

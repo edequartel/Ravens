@@ -13,8 +13,6 @@ struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
     @ObservedObject var observationsSpecies: ObservationsViewModel
 
-//    @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     var item: Species
@@ -37,45 +35,22 @@ struct MapObservationsSpeciesView: View {
                     }
                 }
             }
-            .onAppear() {
-                fetchDataModel()
-            }
             .safeAreaInset(edge: .bottom) {
-                VStack {
-                    HStack {
-//                        NetworkView()
-                        //
-                       
-                      Text("\((observationsSpecies.observations?.count ?? 0))x")
-                            .foregroundColor(.obsGreenFlower)
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        //
-                        Text("\(item.name)")
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        //
-                        Text("\(14)d")
-                        Text("\(settings.selectedDate, formatter: dateFormatter)")
-                        Spacer()
-                    }
-                }
-                .padding(5)
-                .bold()
-                .foregroundColor(.obsGreenFlower)
-                .background(Color.obsGreenEagle.opacity(0.8))
+              VStack {
+                Text("\(item.name)")
+                  .lineLimit(1) // Set the maximum number of lines to 1
+                  .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+              }
+              .padding(5)
+              .frame(maxWidth: .infinity)
+              .foregroundColor(.obsGreenFlower)
+              .background(Color.obsGreenEagle.opacity(0.8))
             }
             .mapStyle(settings.mapStyle)
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
-            }
-        }
-        .onAppear {
-            if settings.initialSpeciesLoad {
-                fetchDataModel()
-                settings.initialSpeciesLoad = false
             }
         }
     }
@@ -85,17 +60,7 @@ struct MapObservationsSpeciesView: View {
         formatter.dateFormat = "EE dd-MM"
         return formatter
     }
-    
-    func fetchDataModel() {
-      observationsSpecies.fetchData(
-            settings: settings,
-            entity: .species,
-            id: item.speciesId,
-            completion: {
-              log.info("MAPobservationsSpeciesView data loaded")
-            }
-        )
-    }
+
 }
 
 

@@ -14,7 +14,7 @@ struct MapObservationsLocationView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsLocation: ObservationsViewModel
 
-  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
+//  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
 
@@ -48,7 +48,7 @@ struct MapObservationsLocationView: View {
           }
           //
           // location observations
-          ForEach(observationsLocationViewModel.observations ?? []) { observation in
+          ForEach(observationsLocation.observations ?? []) { observation in
             Annotation(observation.speciesDetail.name,
                        coordinate:  CLLocationCoordinate2D(
                         latitude: observation.point.coordinates[1],
@@ -73,7 +73,6 @@ struct MapObservationsLocationView: View {
           VStack {
             SettingsDetailsView()
           }
-
           .padding(5)
           .frame(maxWidth: .infinity)
           .foregroundColor(.obsGreenFlower)
@@ -85,7 +84,6 @@ struct MapObservationsLocationView: View {
               latitude: coordinate.latitude,
               longitude: coordinate.longitude
             )
-
             fetchDataLocation(coordinate: coordinate)
           }
         }
@@ -97,33 +95,33 @@ struct MapObservationsLocationView: View {
     }
   }
 
-  func getDataAreaModel() {
-    log.info("getDataAreaModel")
-    if settings.initialAreaLoad {
-      log.info("MapObservationsLocationView onAppear")
-      let location = locationManagerModel.getCurrentLocation()
-      settings.currentLocation = location
-      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      settings.initialAreaLoad = false
-    }
-
-    if settings.isAreaChanged {
-      log.error("isAreaChanged")
-      let location = settings.currentLocation
-      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-      settings.isAreaChanged = false
-    }
-
-    if settings.isLocationIDChanged {
-      log.error("isAreaChanged")
-      fetchDataLocationID()
-      settings.isLocationIDChanged = false
-    }
-
-  }
+//  func getDataAreaModel() {
+//    log.info("getDataAreaModel")
+//    if settings.initialAreaLoad {
+//      log.info("MapObservationsLocationView onAppear")
+//      let location = locationManagerModel.getCurrentLocation()
+//      settings.currentLocation = location
+//      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+//      settings.initialAreaLoad = false
+//    }
+//
+//    if settings.isAreaChanged {
+//      log.error("isAreaChanged")
+//      let location = settings.currentLocation
+//      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+//      settings.isAreaChanged = false
+//    }
+//
+//    if settings.isLocationIDChanged {
+//      log.error("isAreaChanged")
+//      fetchDataLocationID()
+//      settings.isLocationIDChanged = false
+//    }
+//
+//  }
 
   func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-    log.info("MapObservationsLocationView fetchDataLocation")
+    log.error("MapObservationsLocationView fetchDataLocation from tap")
     locationIdViewModel.fetchLocations(
       latitude: coordinate.latitude,
       longitude: coordinate.longitude,
@@ -148,7 +146,7 @@ struct MapObservationsLocationView: View {
               log.info("geoJSONViewModel data loaded")
 
               //2. get the observations for this area
-              observationsLocationViewModel.fetchData(
+              observationsLocation.fetchDataInit(
                 settings: settings,
                 entity: .area,
                 id: fetchedLocations[0].id,
@@ -171,7 +169,7 @@ struct MapObservationsLocationView: View {
           log.error("geoJSONViewModel data loaded")
 
           //2. get the observations for this area
-          observationsLocationViewModel.fetchData(
+          observationsLocation.fetchDataInit(
             settings: settings,
             entity: .area,
             id: settings.locationId,

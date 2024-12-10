@@ -101,9 +101,6 @@ struct RavensApp: App {
   @State private var parts: [String] = []
   @State private var badgeCount: Int = 0
 
-  init() {
-
-  }
 
   var body: some Scene {
     WindowGroup {

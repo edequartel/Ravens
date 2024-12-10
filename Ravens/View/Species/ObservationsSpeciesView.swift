@@ -36,7 +36,7 @@ struct ObservationsSpeciesView: View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
-        Text("\(observationsSpecies.count) \(observationsSpecies.offset)")
+        Text("\(observationsSpecies.count)")
 
         HStack {
           // Image with accessibility label
@@ -88,13 +88,7 @@ struct ObservationsSpeciesView: View {
 
               // Handle end of list event
                 print("End of list reached in ParentView observationsSpecies")
-              observationsSpecies.fetchData(
-                  settings: settings,
-                  entity: .species,
-                  id: item.speciesId,
-                  completion: { log.info("observationsSpecies.fetchdata \( settings.userId)") }
-                )
-
+              observationsSpecies.fetchData(settings: settings, url: observationsSpecies.next, completion: { log.error("observationUser.fetchData") })
             }
               .environmentObject(Settings()) // Pass environment object
 
@@ -106,7 +100,7 @@ struct ObservationsSpeciesView: View {
 
       .refreshable {
         print("refreshing...")
-        fetchDataModel()
+//        fetchDataModel()
       }
       .onAppear() {
         if !hasAppeared {
@@ -121,7 +115,7 @@ struct ObservationsSpeciesView: View {
   }
 
   func fetchDataModel() {
-    observationsSpecies.fetchData(
+    observationsSpecies.fetchDataInit(
       settings: settings,
       entity: .species,
       id: item.speciesId,

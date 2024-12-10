@@ -13,33 +13,15 @@ import MapKit
 import SwiftyBeaver
 import Combine
 
-//class AccessibilitySettings: ObservableObject {
-//    @Published var isVoiceOverEnabled: Bool = false
-//    private var cancellable: AnyCancellable?
-//
-//    init() {
-//        self.cancellable = NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
-//            .sink { [weak self] _ in
-//                self?.isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
-//            }
-//        self.isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
-//    }
-//}
+
 
 class Settings: ObservableObject {
     let log = SwiftyBeaver.self
-    
-//    @AppStorage("showObsPictures") var showObsPictures: Bool = false
-//    @AppStorage("showObsAudio") var showObsAudio: Bool = true
-//    @AppStorage("hidePictures") var hidePictures: Bool = false
+  
+    @AppStorage("hasLoadedObservationsUserView") var hasUserLoaded = false
+    @AppStorage("hasLoadedObservationsLocationView") var hasLocationLoaded = false
+    @AppStorage("hasLoadedObservationsSpeciesView") var hasSpeciesLoaded = false
 
-    
-//    @Published var cameraRadiusPosition: MapCameraPosition = .automatic {
-//        didSet {
-//            log.info("!!cameraRadiusPosition saving it in cameraPosition: \(cameraRadiusPosition)")
-//        }
-//    }
-    
     @Published var cameraAreaPosition: MapCameraPosition = .automatic {
         didSet {
             log.info("!!cameraAreaPosition saving it in cameraPosition: \(cameraAreaPosition)")
@@ -56,7 +38,6 @@ class Settings: ObservableObject {
     
     @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
     @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
-//    @AppStorage("isLatestVisible") var isLatestVisible: Bool = false
     
     @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
     @Published var selectedInBetween: String = "waarneming.nl" {
@@ -65,21 +46,6 @@ class Settings: ObservableObject {
             selectedInBetweenStored = selectedInBetween
         }
     }
-    
-    
-//    @AppStorage("accessibility") var accessibilityStored: Bool = false
-//    @Published var accessibility: Bool = false {
-//        didSet {
-//            log.info("!!saving it in storage: \(accessibility)")
-//            accessibilityStored = accessibility
-//        }
-//    }
-
-    
-//    @AppStorage("listpreference") var listPreference: Bool = false
-//    @AppStorage("showUser") var showUser: Bool = false
-//    @AppStorage("poiOn") var poiOn: Bool = true
-//    @AppStorage("infinity") var infinity: Bool = false
     
     @AppStorage("selectedRarity") var selectedRarityStored = 1
     @Published var selectedRarity = 1 {
@@ -92,10 +58,6 @@ class Settings: ObservableObject {
         }
     }
     
-    
-    
-//    @AppStorage("radiusPreference") var radiusPreference = true
-    
     @AppStorage("mapPreference") var mapPreferenceStored = false //VIP
     @Published var mapPreference = false {
         didSet {
@@ -107,19 +69,7 @@ class Settings: ObservableObject {
     
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
 
-//    @AppStorage("Explorers") var explorers: Data? //changed to Data to handle jsonData
 
-    @Published var selectedDate: Date = Date() {
-        didSet {
-            log.info("!!saving selectedDate it in storage: \(selectedDate)")
-            if !isInit {
-                isRadiusChanged = true
-                isAreaChanged = true
-                initialSpeciesLoad = true
-            }
-        }
-    }
-    
     @AppStorage("isLocationIDChanged") var isLocationIDChangedStored: Bool = false
     @Published var isLocationIDChanged: Bool = false {
         didSet {
@@ -127,11 +77,7 @@ class Settings: ObservableObject {
             isLocationIDChangedStored = isLocationIDChanged
         }
     }
-    
-    @Published var isConnected: Bool = false
-    @Published var isFirstAppear: Bool = true
-    @Published var isFirstAppearObsView: Bool = true
-    
+
     @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
     {
         didSet {
@@ -139,12 +85,6 @@ class Settings: ObservableObject {
         }
     }
     
-    
-    @Published var initialRadiusLoad = true {
-        didSet {
-            log.info("!!initialRadiusLoad saving it initialRadiusLoad: \(initialRadiusLoad)")
-        }
-    }
     
     @Published var isRadiusChanged = false {
         didSet {
@@ -169,30 +109,13 @@ class Settings: ObservableObject {
             log.error("!!initialSpeciesLoad saving it to speciesLoad: \(initialSpeciesLoad)")
         }
     }
-    
-    
-    @AppStorage("radius") var radiusStored: Int = 500 //init op 500m
-    @Published var radius: Int = 500 {
-        didSet {
-            log.info("!!radius saving it in storage: \(radius)")
-            radiusStored = radius
-            if !isInit { isRadiusChanged = true }
-        }
-    }
-    
-    
-    @Published var initialUsersLoad = true
-    @Published var initialLoadLocation = true
-
-    
 
     @Published var userId: Int = 0
     @Published var userName = "unknown"
     
     @Published var locationId: Int = 0
     @Published var locationName: String = "Unknown Location"
-    
-    @Published var tappedCoordinate: CLLocationCoordinate2D?
+
     
     @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
     @Published var selectedSpeciesGroupName: String = "" {
@@ -276,12 +199,6 @@ class Settings: ObservableObject {
         }
     }
     
-    @Published var circlePos: CLLocationCoordinate2D? = nil {
-        didSet {
-            log.info("!!circlePos saving it in circlePos: \(circlePos?.latitude ?? 0)")
-        }
-    }
-    
     var isInit: Bool = true
     init() {
         log.info("** init Settings **")
@@ -297,12 +214,12 @@ class Settings: ObservableObject {
         mapPreference = mapPreferenceStored
         selectedRarity = selectedRarityStored
         selectedInBetween = selectedInBetweenStored
-//        accessibility = accessibilityStored
-        
-        //for updating published values
-//        days = daysStored
-        radius = radiusStored //haal de radius op uit de storage
+
         isInit = false
+
+        hasUserLoaded = false
+        hasLocationLoaded = false
+        hasSpeciesLoaded = false
     }
 }
 

@@ -14,30 +14,19 @@ struct MapObservationsUserView: View {
   @ObservedObject var observationUser : ObservationsViewModel
 
   @EnvironmentObject var locationManager: LocationManagerModel
-
-  @EnvironmentObject var observationsUserViewModel: ObservationsViewModel
-
-
-  @EnvironmentObject var keyChainViewModel: KeychainViewModel
-  @EnvironmentObject var userViewModel:  UserViewModel
-  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var settings: Settings //for the mapStyle
 
   @State private var cameraPosition: MapCameraPosition = .automatic
-
   @State private var region: MKCoordinateRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
     span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
   )
 
-  @State private var showObservers: Bool = false
-  @State private var showListView: Bool = false
-
   var body: some View {
-
     ZStack(alignment: .topLeading) {
       Map(position: $cameraPosition) {
         UserAnnotation()
-        ForEach(observationsUserViewModel.observations ?? []) { observation in
+        ForEach(observationUser.observations ?? []) { observation in
           Annotation(observation.speciesDetail.name,
                      coordinate:  CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
@@ -48,7 +37,6 @@ struct MapObservationsUserView: View {
         }
       }
       .mapStyle(settings.mapStyle)
-
       .mapControls() {
         MapUserLocationButton()
         MapPitchToggle()
@@ -56,7 +44,7 @@ struct MapObservationsUserView: View {
       }
     }
     .onAppear {
-      updateRegionToUserLocation()
+      updateRegionToUserLocation() //just around the userlocation
     }
   }
 
@@ -66,7 +54,7 @@ struct MapObservationsUserView: View {
       return
     }
 
-    // Define 5x5 km span (latitudeDelta and longitudeDelta)
+    // Define area span (latitudeDelta and longitudeDelta)
     let kilometersToDegrees = 255.0 / 111.0
     let updatedRegion = MKCoordinateRegion(
       center: userLocation.coordinate,
@@ -78,15 +66,6 @@ struct MapObservationsUserView: View {
   }
 }
 
-//struct MapObservationsUserView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    MapObservationsUserView()
-//      .environmentObject(ObservationsViewModel())
-//      .environmentObject(KeychainViewModel())
-//      .environmentObject(UserViewModel())
-//      .environmentObject(Settings())
-//  }
-//}
 
 
 import SwiftUI
@@ -111,51 +90,3 @@ struct ObservationAnnotationView: View {
   }
 }
 
-//struct ObservationAnnotationView: View {
-//    let observation: Observation
-//    @State private var showPopup = false // Tracks the visibility of the popup
-//
-//    var body: some View {
-//        ZStack {
-//            Circle()
-//                .fill(rarityColor(value: observation.rarity))
-//                .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
-//                .frame(width: 12, height: 12)
-//                .overlay(
-//                    Circle()
-//                        .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
-//                        .frame(width: 6, height: 6)
-//                )
-//                .onTapGesture {
-//                    showPopup.toggle() // Toggles the popup visibility
-//                }
-//
-//            // Popup View
-//            if showPopup {
-//                VStack {
-//                    Text("\(observation.speciesDetail.name)")
-//                        .font(.headline)
-//
-//                    Button(action: {
-//                        showPopup = false // Dismiss the popup
-//                    }) {
-//                        Text("Close")
-//                            .font(.subheadline)
-//                            .foregroundColor(.blue)
-//                    }
-//                }
-//                .padding()
-//                .background(Color.white)
-//                .cornerRadius(10)
-//                .shadow(radius: 10)
-//                .frame(width: 300)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .stroke(Color.gray, lineWidth: 1)
-//                )
-//                .offset(y: -60) // Adjust the position of the popup
-//                .transition(.opacity) // Optional animation
-//            }
-//        }
-//    }
-//}
