@@ -84,7 +84,6 @@ class GeoJSONViewModel: ObservableObject {
             latitudeDelta: span.latitudeDelta,
             longitudeDelta: span.longitudeDelta)
         
-//        print("")
         let region = MKCoordinateRegion(center: center, span: span)
         return MapCameraPosition.region(region)
     }

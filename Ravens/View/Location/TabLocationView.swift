@@ -13,19 +13,23 @@ import SFSafeSymbols
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsLocation: ObservationsViewModel
-  
+
+  @StateObject var locationIdViewModel = LocationIdViewModel()
+  @StateObject var geoJSONViewModel = GeoJSONViewModel()
+
   @EnvironmentObject private var settings: Settings
   @EnvironmentObject private var areasViewModel: AreasViewModel
   @EnvironmentObject var locationManager: LocationManagerModel
-  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
-  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+
+//  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
+//  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 //  @EnvironmentObject var observationsLocationViewModel: ObservationsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
 
   @Binding var selectedSpeciesID: Int?
 
   @State private var searchText: String = ""
-  @State private var showFirstView = true
+  @State private var showFirstView = false
   @State private var isShowingLocationList = false
 
 
@@ -35,10 +39,14 @@ struct TabLocationView: View {
         if showView { Text("TabLocationView").font(.customTiny) }
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsLocationView(
-            observationsLocation: observationsLocation)
+            observationsLocation: observationsLocation,
+            locationIdViewModel: locationIdViewModel,
+            geoJSONViewModel: geoJSONViewModel)
         } else {
           ObservationsLocationView(
             observationsLocation: observationsLocation,
+            locationIdViewModel: locationIdViewModel,
+            geoJSONViewModel: geoJSONViewModel,
             selectedSpeciesID:  $selectedSpeciesID)
         }
       }
@@ -70,7 +78,8 @@ struct TabLocationView: View {
 
                     //here getting the data for the location
                   
-                    fetchDataLocation(coordinate: location.coordinate)
+                   fetchDataLocation(coordinate: location.coordinate)
+                  
                 } else if let errorMessage = locationManager.errorMessage {
                     log.error("Error: \(errorMessage)")
                 } else {
@@ -108,22 +117,25 @@ struct TabLocationView: View {
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: AreasView(observationsLocation: observationsLocation)) {
-            Image(systemSymbol: .listBullet)
-              .uniformSize()
-          }
-          .accessibilityLabel(listWithFavoriteLocation)
+          NavigationLink(
+            destination: LocationListView(
+              observationsLocation: observationsLocation,
+              locationIdViewModel: locationIdViewModel,
+              geoJSONViewModel: geoJSONViewModel)) {
+                Image(systemSymbol: .listBullet)
+                  .uniformSize()
+              }
+              .accessibilityLabel(listWithFavoriteLocation)
         }
 
       }
-
       .onAppear {
         log.info("LocationView onAppear")
 
       }
-      .onAppearOnce {
-        showFirstView = settings.mapPreference
-      }
+//      .onAppearOnce {
+//        showFirstView = settings.mapPreference
+//      }
     }
   }
 

@@ -54,53 +54,26 @@ struct RavensApp: App {
   @StateObject var speciesGroupViewModel = SpeciesGroupsViewModel()
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
-
-//  @StateObject private var observationsUserViewModel = ObservationsViewModel()
-//  @StateObject private var observationsLocationViewModel = ObservationsViewModel()
   @StateObject private var observationsLocation = ObservationsViewModel()
   @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
-//???
   @StateObject private var observationsSpecies = ObservationsViewModel()
-
   @StateObject private var observationsViewModel = ObservationsViewModel()
-
-//  @StateObject var observationsSpeciesViewModel = ObservationsSpeciesViewModel()
-
   @StateObject private var observationsUser = ObservationsViewModel()
-
   @StateObject var userViewModel =  UserViewModel()
-
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
-//  @StateObject var observationsRadiusViewModel = ObservationsRadiusViewModel()
-
-//  @StateObject var observationsLocationViewModel = ObservationsLocationViewModel()
-
-
-  @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var poiViewModel = POIViewModel()
-  @StateObject var geoJSONViewModel = GeoJSONViewModel()
   @StateObject var bookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
-//  @StateObject var observersViewModel = BookMarksViewModel(fileName: "observers.json")
-//  @StateObject var observersViewModel = BookMarksViewModel(fileName: "observers.json")
-
   @StateObject var observersViewModel = ObserversViewModel() //??
   @StateObject var areasViewModel = AreasViewModel() //??
   
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
-
-
-//  @StateObject var notificationsManager = NotificationsManager()
-//  @StateObject var timerManager = TimerManager()
-
   @StateObject var player = Player()
-//  @StateObject var observationsYearViewModel = ObservationsYearViewModel()
 
   @State private var showingAlert = false
   @State private var parts: [String] = []
   @State private var badgeCount: Int = 0
-
 
   var body: some Scene {
     WindowGroup {
@@ -110,38 +83,23 @@ struct RavensApp: App {
         observationsSpecies: observationsSpecies
       )
         .environmentObject(keychainViewModel)
-        .environmentObject(locationManager) //<<location
+        .environmentObject(locationManager)
         .environmentObject(settings)
         .environmentObject(languagesViewModel)
         .environmentObject(speciesViewModel)
         .environmentObject(speciesGroupViewModel)
         .environmentObject(regionsViewModel)
         .environmentObject(regionListViewModel)
-
         .environmentObject(userViewModel)
-
-//        .environmentObject(observationsUserViewModel)
-//        .environmentObject(observationsLocationViewModel)
         .environmentObject(observationsSpeciesViewModel)
-
-        .environmentObject(locationIdViewModel)
-        .environmentObject(geoJSONViewModel)
         .environmentObject(poiViewModel)
         .environmentObject(speciesDetailsViewModel)
-
         .environmentObject(bookMarksViewModel)
         .environmentObject(observersViewModel)
         .environmentObject(areasViewModel)
-
         .environmentObject(player)
-//        .environmentObject(observationsYearViewModel)
-
         .environmentObject(locationViewModel)
-
         .environmentObject(accessibilityManager)
-
-//        .environmentObject(timerManager) //make it globally available
-//        .environmentObject(notificationsManager)
 
         .onOpenURL { url in
           // Handle the URL appropriately

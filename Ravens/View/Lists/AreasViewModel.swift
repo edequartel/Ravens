@@ -90,13 +90,18 @@ class AreasViewModel: ObservableObject {
 import SwiftUI
 import SwiftyBeaver
 
-struct AreasView: View {
+struct LocationListView: View {
     let log = SwiftyBeaver.self
+
+  @ObservedObject var observationsLocation: ObservationsViewModel
+  @ObservedObject var locationIdViewModel: LocationIdViewModel
+  @ObservedObject var geoJSONViewModel: GeoJSONViewModel
+
 
     @EnvironmentObject private var areasViewModel: AreasViewModel
     @EnvironmentObject private var settings: Settings
 
-    @ObservedObject var observationsLocation: ObservationsViewModel
+
 
 //    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
 
@@ -111,17 +116,13 @@ struct AreasView: View {
                             Button(action: {
                                 settings.locationName = record.name
                                 settings.locationId = record.areaID
-//                                settings.isLocationIDChanged = true //@@@
-//                              observationsLocation.fetchdataInit(settings: settings, entity: .area, completion: { print("xxx") })
 
-                              print("xxxxxxxxxxxxx")
-                              observationsLocation.fetchDataInit(
+                              fetchDataLocation(
                                 settings: settings,
-                                entity: .area,
-                                id: record.areaID,
-                                completion: {
-                                  log.error("observationsLocationViewModel data loaded")
-                                })
+                                observationsLocation: observationsLocation,
+                                locationIdViewModel: locationIdViewModel,
+                                geoJSONViewModel: geoJSONViewModel,
+                                coordinate: CLLocationCoordinate2D(latitude: record.latitude, longitude: record.longitude))
 
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {

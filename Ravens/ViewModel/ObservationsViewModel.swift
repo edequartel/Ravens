@@ -44,10 +44,10 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-  func PreviousFourteenDays(to date: Date) -> Date {
-    let daysToAdd = 14
-    return Calendar.current.date(byAdding: .day, value: -daysToAdd, to: date) ?? date
-  }
+//  func PreviousFourteenDays(to date: Date) -> Date {
+//    let daysToAdd = 14
+//    return Calendar.current.date(byAdding: .day, value: -daysToAdd, to: date) ?? date
+//  }
 
   func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
     log.error("FetchDataInit")
@@ -60,7 +60,9 @@ class ObservationsViewModel: ObservableObject {
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-    url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+    url += "&date_after=\(dateAfter)&date_before=\(dateBefore)" //hasPhoto
+    url += "&has_photo=true"
+    url += "&ordering=datetime"
 
     fetchData(settings: settings, url: url, completion: completion)
   }

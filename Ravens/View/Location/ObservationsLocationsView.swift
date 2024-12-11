@@ -12,14 +12,14 @@ import MapKit
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsLocation: ObservationsViewModel
+  @ObservedObject var locationIdViewModel: LocationIdViewModel
+  @ObservedObject var geoJSONViewModel: GeoJSONViewModel
 
-  @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var locationManagerModel: LocationManagerModel
-  @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedSpeciesID: Int?
-  
+
   @State private var retrievedData = false
 
   var body: some View {
@@ -55,70 +55,55 @@ struct ObservationsLocationView: View {
 //      getDataAreaModel()
     }
     .onAppear()  {
-      log.info("MapObservationsLocationView onAppear")
-      let location = locationManagerModel.getCurrentLocation()
-//      settings.currentLocation = location //@@@
-      fetchDataLocation(coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-        
+      if !settings.hasLocationLoaded {
+        log.info("MapObservationsLocationView onAppear")
+        let location = locationManagerModel.getCurrentLocation()
+        fetchDataLocation(
+          settings: settings,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+          settings.hasLocationLoaded = true
+      }
     }
   }
-  
+}
 
-  func fetchDataLocation(coordinate: CLLocationCoordinate2D) {
-    log.error("fetchDataLocation")
-    locationIdViewModel.fetchLocations(
-      latitude: coordinate.latitude,
-      longitude: coordinate.longitude,
-      completion: { fetchedLocations in
-        log.info("locationIdViewModel data loaded")
-        // Use fetchedLocations here //actually it is one location
-        settings.locationName = fetchedLocations[0].name
-        settings.locationId = fetchedLocations[0].id
-        for location in fetchedLocations {
-          log.info("location \(location)")
-        }
-        
-        //1. get the geoJSON for this area / we pick the first one = 0
-        geoJSONViewModel.fetchGeoJsonData(
-          for: fetchedLocations[0].id,
-          completion:
-            {
-              log.info("geoJSONViewModel data loaded")
-              
-              //2. get the observations for this area
-              observationsLocation.fetchDataInit(
-                settings: settings,
-                entity: .area,
-                id: fetchedLocations[0].id,
-                completion: {
-                  log.info("observationsLocationViewModel data loaded")
-                  settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
-                })
-            }
-        )
-      })
-  }
-  
-//  func fetchDataLocationID() {
-//    log.error("fetchDataLocationID by Point")
-//    //1. get the geoJSON for this area / we pick the first one = 0
-//    geoJSONViewModel.fetchGeoJsonData(
-//      for: settings.locationId,
-//      completion:
-//        {
-//          log.error("geoJSONViewModel data loaded")
-//          //2. get the observations for this area
-//          observationsLocation.fetchDataInit(
-//            settings: settings,
-//            entity: .area,
-//            id: settings.locationId,
-//            completion: {
-//              log.info("observationsLocationViewModel data loaded")
-//              settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
-//            })
-//        }
-//    )
-//  }
+
+func fetchDataLocation(settings: Settings, observationsLocation: ObservationsViewModel, locationIdViewModel: LocationIdViewModel, geoJSONViewModel: GeoJSONViewModel, coordinate: CLLocationCoordinate2D) {
+  print("fetchDataLocation")
+  //1. get the id from the location
+  locationIdViewModel.fetchLocations(
+    latitude: coordinate.latitude,
+    longitude: coordinate.longitude,
+    completion: { fetchedLocations in
+      print("locationIdViewModel data loaded")
+      // Use fetchedLocations here, actually it is one location,. the first
+      settings.locationName = fetchedLocations[0].name
+      settings.locationId = fetchedLocations[0].id
+      settings.locationCoordinate = coordinate //<<
+
+
+      //2a. get the geoJSON for this area, and we pick the first one = 0
+      geoJSONViewModel.fetchGeoJsonData(
+        for: fetchedLocations[0].id,
+        completion:
+          {
+            print("geoJSONViewModel data loaded")
+          }
+      )
+
+      //2b. get the observations for this area
+      observationsLocation.fetchDataInit(
+        settings: settings,
+        entity: .area,
+        id: fetchedLocations[0].id,
+        completion: {
+          print("observationsLocationViewModel data loaded")
+          settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
+        })
+    })
 }
 
 
