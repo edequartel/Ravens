@@ -13,17 +13,17 @@ import SwiftUI
 import SVGView
 
 enum EntityType: String {
-  case area = "locations"
+  case location = "locations"
   case user = "user"
   case species = "species"
 
   // Computed property to return an associated integer value
   var days: Int {
     switch self {
-    case .area:
+    case .location:
       return 28
     case .user:
-      return 28
+      return 100
     case .species:
       return 28
     }
@@ -50,7 +50,7 @@ class ObservationsViewModel: ObservableObject {
 //  }
 
   func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
-    log.error("FetchDataInit")
+    log.info("FetchDataInit")
     //reset
     self.observations = []
 
@@ -61,7 +61,7 @@ class ObservationsViewModel: ObservableObject {
     //add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
     url += "&date_after=\(dateAfter)&date_before=\(dateBefore)" //hasPhoto
-    url += "&has_photo=true"
+//    url += "&has_photo=true"
     url += "&ordering=datetime"
 
     fetchData(settings: settings, url: url, completion: completion)
@@ -69,7 +69,7 @@ class ObservationsViewModel: ObservableObject {
 
 
   func fetchData(settings: Settings, url: String, completion: @escaping () -> Void) {
-    print("fetchData url: [\(url)]")
+    log.info("fetchData url: [\(url)]")
     if url.isEmpty { return }
     //
     log.info("fetchData ObservationsViewModel userId: \(url)")
@@ -82,7 +82,7 @@ class ObservationsViewModel: ObservableObject {
       "Accept-Language": settings.selectedLanguage
     ]
 
-    log.error("fetchData ObservationsUserViewModel \(url)")
+    log.info("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in
       switch response.result {
@@ -103,8 +103,8 @@ class ObservationsViewModel: ObservableObject {
               self.next = observations.next?.absoluteString ?? ""
               self.previous = observations.previous?.absoluteString ?? ""
 
-              print("prv: \(self.previous)")
-              print("nxt: \(self.next)")
+//              print("prv: \(self.previous)")
+//              print("nxt: \(self.next)")
 
               completion() // call the completion handler if it exists
             }

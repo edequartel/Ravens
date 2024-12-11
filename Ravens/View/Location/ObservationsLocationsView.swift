@@ -26,7 +26,7 @@ struct ObservationsLocationView: View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
 
-      Text("cnt: \(observationsLocation.count)")
+//      Text("cnt: \(observationsLocation.count)")
 
       if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
@@ -39,7 +39,10 @@ struct ObservationsLocationView: View {
         if let observations = observationsLocation.observations, observations.count > 0 {
           SettingsDetailsView()
           HorizontalLine()
-          ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .area) {
+          ObservationListView(
+            observations: observations,
+            selectedSpeciesID: $selectedSpeciesID,
+            entity: .location) {
             // Handle end of list event
              print("End of list reached in ParentView observationsLocation")
             observationsLocation.fetchData(settings: settings, url: observationsLocation.next, completion: { log.error("observationsLocation.fetchData") })
@@ -97,7 +100,7 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
       //2b. get the observations for this area
       observationsLocation.fetchDataInit(
         settings: settings,
-        entity: .area,
+        entity: .location,
         id: fetchedLocations[0].id,
         completion: {
           print("observationsLocationViewModel data loaded")

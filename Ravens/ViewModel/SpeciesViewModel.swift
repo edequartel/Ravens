@@ -14,6 +14,7 @@ import SwiftSoup
 
 class SpeciesViewModel: ObservableObject {
   let log = SwiftyBeaver.self
+  
   @Published var species = [Species]()
   @Published var speciesSecondLanguage = [Species]()
 
@@ -21,12 +22,13 @@ class SpeciesViewModel: ObservableObject {
 
   var datum: String = ""
 
-  func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("(settings.parseHTMLFromURL)")
+  func parseHTMLFromURL(settings: Settings, completion: @escaping () -> Void) {
+//  func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
+    log.error("(settings.parseHTMLFromURL)")
     log.info("groupID \(settings.selectedSpeciesGroupId)")
 
     let urlString = "https://waarneming.nl/recent-species/?species_group=\(settings.selectedSpeciesGroupId)"
-    log.info("parsing... urlString: \(urlString)")
+    log.error("parsing... urlString: \(urlString)")
 
     // Continue with your URL session or network request setup here
     let headers: HTTPHeaders = [
@@ -39,7 +41,7 @@ class SpeciesViewModel: ObservableObject {
         // Parse the HTML content
         do {
           try self.parseHTML(html: html)
-          completion?()
+          completion()
         } catch {
           print("Error parsing HTML: \(error.localizedDescription)")
         }
@@ -77,6 +79,7 @@ class SpeciesViewModel: ObservableObject {
           let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
 
           if let index = index, (updatedSpecies[index].date?.isEmpty ?? true) {
+            print(">>> \(updatedSpecies[index].name) \(updatedSpecies[index].scientificName)")
               updatedSpecies[index].date = datum
               updatedSpecies[index].time = time
               updatedSpecies[index].nrof = numObservationsInt
@@ -85,9 +88,10 @@ class SpeciesViewModel: ObservableObject {
       }
 
       // Re-assign the updated array to trigger automatic updates
-    log.info("Re-assign the updated array to trigger automatic updates")
+      log.error("Re-assign the updated array to trigger automatic updates")
       species = updatedSpecies
-    objectWillChange.send()
+
+    //objectWillChange.send()
   }
 
 
@@ -95,8 +99,8 @@ class SpeciesViewModel: ObservableObject {
     log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
 
-print(url)
-    
+    log.info("url: \(url)")
+
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedLanguage
@@ -171,7 +175,6 @@ print(url)
       return species.firstIndex { $0.scientificName == scientificName }
   }
 
-  //    func findSpeciesByID(speciesID: Int) -> Species? {
   func findSpeciesByID(speciesID: Int) -> String? {
     guard let index = species.firstIndex(where: { $0.speciesId == speciesID }) else {
       return nil

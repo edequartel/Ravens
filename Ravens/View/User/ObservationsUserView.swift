@@ -33,7 +33,7 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      Text("\(observationUser.count)")
+//      Text("nr: \(observationUser.count)")
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
@@ -55,21 +55,15 @@ struct ObservationsUserView: View {
           entity: .user,
           id: settings.userId,
           completion: {
-            log.error("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
-            log.error("prv: \(observationUser.previous)")
-            log.error("nxt: \(observationUser.next)")
+            log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
+            log.info("prv: \(observationUser.previous)")
+            log.info("nxt: \(observationUser.next)")
           })
         settings.hasUserLoaded = true
       }
     }
     .refreshable {
       log.info("refreshing")
-//      observationUser.fetchData(
-//        settings: settings,
-//        entity: .user,
-//        id: settings.userId,
-//        completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
-//      )
     }
   }
 }

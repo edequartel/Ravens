@@ -17,7 +17,7 @@ struct ObsView: View {
   let log = SwiftyBeaver.self
   var showSpecies = true
   var showObserver = true
-  var showArea = true
+  var showLocation = true
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
@@ -92,7 +92,7 @@ struct ObsView: View {
           }
         }
 
-        if showArea {
+        if showLocation {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")

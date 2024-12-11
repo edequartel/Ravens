@@ -18,9 +18,6 @@ struct Area: Codable, Identifiable {
     var longitude: CLLocationDegrees = 0
 }
 
-
-import SwiftUI
-
 class AreasViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     
@@ -87,73 +84,5 @@ class AreasViewModel: ObservableObject {
     }
 }
 
-import SwiftUI
-import SwiftyBeaver
-
-struct LocationListView: View {
-    let log = SwiftyBeaver.self
-
-  @ObservedObject var observationsLocation: ObservationsViewModel
-  @ObservedObject var locationIdViewModel: LocationIdViewModel
-  @ObservedObject var geoJSONViewModel: GeoJSONViewModel
-
-
-    @EnvironmentObject private var areasViewModel: AreasViewModel
-    @EnvironmentObject private var settings: Settings
-
-
-
-//    @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
-
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-//    @State private var newAreaID = 0
-
-    var body: some View {
-            VStack {
-                List {
-                    ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
-                        HStack {
-                            Button(action: {
-                                settings.locationName = record.name
-                                settings.locationId = record.areaID
-
-                              fetchDataLocation(
-                                settings: settings,
-                                observationsLocation: observationsLocation,
-                                locationIdViewModel: locationIdViewModel,
-                                geoJSONViewModel: geoJSONViewModel,
-                                coordinate: CLLocationCoordinate2D(latitude: record.latitude, longitude: record.longitude))
-
-                                self.presentationMode.wrappedValue.dismiss()
-                            }) {
-                                Text(record.name)
-                                    .lineLimit(1)
-                            }
-                            Spacer()
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button(role: .destructive) {
-                                areasViewModel.removeRecord(areaID: record.areaID)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                    }
-                }
-            }
-            .toolbar {
-              ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: SearchLocationView()) {
-                  Image(systemSymbol: .magnifyingglass)
-                    .uniformSize()
-                    .accessibilityLabel(searchForLocation)
-                }
-              }
-            }
-            .onAppear {
-                areasViewModel.loadRecords()
-            }
-    }
-}
 
 

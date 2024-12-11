@@ -12,9 +12,10 @@ import SwiftyBeaver
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationsSpecies: ObservationsViewModel
-  
+  @ObservedObject var observationsSpecies: ObservationsViewModel //???
+
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
+
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
 
@@ -29,7 +30,9 @@ struct TabSpeciesView: View {
   @State private var searchText = ""
   
   @Binding var selectedSpeciesID: Int?
-  
+
+  @State private var refreshTrigger = false //forcing refresh
+
   var body: some View {
     NavigationView {
       
@@ -59,28 +62,30 @@ struct TabSpeciesView: View {
                 showView: showView)
             }
             
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              Button(action: {
-                selectedSpeciesID = species.speciesId
-              }) {
-                Image(systemSymbol: .infoCircle)
-              }
-              .tint(.blue)
-              
-              Button(action: {
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-                } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-                }
-                
-              } ) {
-                Image(systemSymbol: .star)
-              }
-              .tint(.obsStar)
-            }
+//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//              Button(action: {
+//                selectedSpeciesID = species.speciesId
+//              }) {
+//                Image(systemSymbol: .infoCircle)
+//              }
+//              .tint(.blue)
+//              
+//              Button(action: {
+//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+//                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
+//                } else {
+//                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
+//                }
+//                
+//              } ) {
+//                Image(systemSymbol: .star)
+//              }
+//              .tint(.obsStar)
+//            }
+
             .accessibilityLabel(species.name)
           }
+          .id(refreshTrigger)
         }
         .listStyle(PlainListStyle())
         
@@ -122,7 +127,8 @@ struct TabSpeciesView: View {
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
-          print("parsed from html")
+          log.error("from refreshable... parsed from html")
+          refreshTrigger.toggle() // Trigger view update
         })
     }
   }

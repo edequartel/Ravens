@@ -75,7 +75,6 @@
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED86D2BA9CFE900B0D73C /* LottieView.swift */; };
 		477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 477ED8702BA9D0AD00B0D73C /* Lottie */; };
-		477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
 		478262642C88203400DD746C /* ObsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262632C88203400DD746C /* ObsDetailView.swift */; };
 		478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262652C897B7000DD746C /* ObsDetailsRowView.swift */; };
@@ -93,8 +92,8 @@
 		4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4785CD222B965237002F52BE /* ObservationsUserView.swift */; };
 		478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */; };
 		478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */; };
-		478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE62BEB8B8600414431 /* FileListViewModel.swift */; };
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
+		479C352B2D09A224002F1C2A /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479C352A2D09A220002F1C2A /* LocationListView.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
@@ -107,7 +106,6 @@
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
-		47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */; };
 		47D4B76F2D00241F00D46050 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */; };
 		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
@@ -182,7 +180,6 @@
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		478262632C88203400DD746C /* ObsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailView.swift; sourceTree = "<group>"; };
 		478262652C897B7000DD746C /* ObsDetailsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsRowView.swift; sourceTree = "<group>"; };
@@ -199,7 +196,7 @@
 		4785CD222B965237002F52BE /* ObservationsUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsUserView.swift; sourceTree = "<group>"; };
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversViewModel.swift; sourceTree = "<group>"; };
-		478EABE62BEB8B8600414431 /* FileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewModel.swift; sourceTree = "<group>"; };
+		479C352A2D09A220002F1C2A /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
@@ -212,7 +209,6 @@
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
-		47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListObsView.swift; sourceTree = "<group>"; };
 		47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
@@ -280,7 +276,6 @@
 			children = (
 				471A45E82C8F2D4A00433C6B /* PosOnMapView.swift */,
 				471F7A5F2CF7917700BF529C /* PositonFullView.swift */,
-				471875442C00546A00EF9F1F /* LocationManagerView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -316,9 +311,9 @@
 				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
 				47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
+				47AB45A02CE3276000842877 /* RavensView.swift */,
 				47AB45A22CE327A300842877 /* SplashView.swift */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
-				47AB45A02CE3276000842877 /* RavensView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
@@ -434,6 +429,7 @@
 				47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */,
 				4767F0002BF251C200BACDC6 /* TabLocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
+				479C352A2D09A220002F1C2A /* LocationListView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
 			);
 			path = Location;
@@ -480,7 +476,6 @@
 		4767F00B2BF3291400BACDC6 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				478EABE62BEB8B8600414431 /* FileListViewModel.swift */,
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 				471875382BFB938500EF9F1F /* AreasViewModel.swift */,
@@ -491,7 +486,6 @@
 		476843D22BA9D333004EF208 /* StartUp */ = {
 			isa = PBXGroup;
 			children = (
-				477ED8722BA9D0C800B0D73C /* SplashScreenView.swift */,
 				477ED86D2BA9CFE900B0D73C /* LottieView.swift */,
 				476843D32BA9D43D004EF208 /* LottieFile.json */,
 				47AB45952CE2030100842877 /* location.json */,
@@ -508,7 +502,6 @@
 				478262652C897B7000DD746C /* ObsDetailsRowView.swift */,
 				474093812B558F82004F10C5 /* ObservationDetailsView.swift */,
 				4738B6402BF4E7C900BF7557 /* ObsView.swift */,
-				47D159DD2BC3CCB300F7CD23 /* EndOfListObsView.swift */,
 			);
 			path = Obs;
 			sourceTree = "<group>";
@@ -516,6 +509,7 @@
 		47AD8FC72CF1BF02007155A4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				471875442C00546A00EF9F1F /* LocationManagerView.swift */,
 				47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */,
 				471B4FBD2CC27FDC001302A9 /* TimerManager.swift */,
 				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
@@ -656,7 +650,6 @@
 				474C40632B4C091F0038B3A5 /* LanguageView.swift in Sources */,
 				4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */,
 				4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */,
-				477ED8732BA9D0C800B0D73C /* SplashScreenView.swift in Sources */,
 				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
@@ -671,6 +664,7 @@
 				471875452C00546A00EF9F1F /* LocationManagerView.swift in Sources */,
 				474C40612B4C08FB0038B3A5 /* LanguageViewModel.swift in Sources */,
 				474C408E2B4DB2850038B3A5 /* RegionsView.swift in Sources */,
+				479C352B2D09A224002F1C2A /* LocationListView.swift in Sources */,
 				47D4B7732D00546800D46050 /* ObserversView.swift in Sources */,
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
@@ -684,14 +678,12 @@
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
-				478EABE72BEB8B8600414431 /* FileListViewModel.swift in Sources */,
 				47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
 				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* TabSpeciesView.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
-				47D159DE2BC3CCB300F7CD23 /* EndOfListObsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,

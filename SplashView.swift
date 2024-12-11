@@ -103,6 +103,7 @@ struct SplashView: View {
         checkDataLoaded()
       })
 
+
     regionListViewModel.fetchData(
       settings: settings,
       completion: {
@@ -116,7 +117,7 @@ struct SplashView: View {
       completion: {
         log.info("speciesViewModel First language data loaded")
         speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-          log.info("html is parsed from start")
+          log.error("html is parsed from start")
           isFirstLanguageDataLoaded = true
           checkDataLoaded()
         })
@@ -139,7 +140,8 @@ struct SplashView: View {
         settings.userName = userViewModel.user?.name ?? ""
       })
 
-    let location = locationManagerModel.getCurrentLocation() //@@
+//    let location = locationManagerModel.getCurrentLocation()
+
     //get the location
 //    locationIdViewModel.fetchLocations(
 //      latitude: location?.coordinate.latitude ?? 0,
