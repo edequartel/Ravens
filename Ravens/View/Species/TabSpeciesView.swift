@@ -31,8 +31,6 @@ struct TabSpeciesView: View {
   
   @Binding var selectedSpeciesID: Int?
 
-  @State private var refreshTrigger = false //forcing refresh
-
   var body: some View {
     NavigationView {
       
@@ -60,8 +58,9 @@ struct TabSpeciesView: View {
               SpeciesInfoView(
                 species: species,
                 showView: showView)
+
             }
-            
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
                 selectedSpeciesID = species.speciesId
@@ -82,17 +81,13 @@ struct TabSpeciesView: View {
               }
               .tint(.obsStar)
             }
-
+            .background(Color.gray.opacity(0.1))
             .accessibilityLabel(species.name)
           }
-          .id(refreshTrigger)
         }
         .listStyle(PlainListStyle())
-        
         .searchable(text: $searchText) //een niveau lager geplaatst
-        
       }
-      
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
@@ -124,11 +119,11 @@ struct TabSpeciesView: View {
       
     }
     .refreshable {
+//      speciesViewModel.fillSpecies()
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
           log.error("from refreshable... parsed from html")
-          refreshTrigger.toggle() // Trigger view update
         })
     }
   }
