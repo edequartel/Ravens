@@ -79,7 +79,7 @@ class SpeciesViewModel: ObservableObject {
           let index = findSpeciesIndexByScientificName(scientificName: speciesScientificName)
 
           if let index = index, (updatedSpecies[index].date?.isEmpty ?? true) {
-            print(">>> \(updatedSpecies[index].name) \(updatedSpecies[index].scientificName)")
+            print(">>> updating species[index] \(updatedSpecies[index].name) - \(updatedSpecies[index].scientificName)")
               updatedSpecies[index].date = datum
               updatedSpecies[index].time = time
               updatedSpecies[index].nrof = numObservationsInt
@@ -90,8 +90,6 @@ class SpeciesViewModel: ObservableObject {
       // Re-assign the updated array to trigger automatic updates
       log.error("Re-assign the updated array to trigger automatic updates")
       species = updatedSpecies
-
-    //objectWillChange.send()
   }
 
 

@@ -12,9 +12,9 @@ import SwiftyBeaver
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationsSpecies: ObservationsViewModel //???
+  @ObservedObject var observationsSpecies: ObservationsViewModel
 
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel 
 
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -51,7 +51,7 @@ struct TabSpeciesView: View {
           ), id: \.id) { species in
             
             
-            NavigationLink(//???
+            NavigationLink( //???
               destination: SpeciesView(
                 observationsSpecies: observationsSpecies,
                 item: species,
@@ -142,7 +142,7 @@ struct TabSpeciesView: View {
       }
     }
   }
-  
+
 }
 
 struct SortFilterSpeciesView: View {
