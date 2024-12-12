@@ -21,11 +21,11 @@ enum EntityType: String {
   var days: Int {
     switch self {
     case .location:
-      return 28
+      return 14
     case .user:
-      return 100
+      return 100 //infinity
     case .species:
-      return 28
+      return 14
     }
   }
 }
@@ -60,9 +60,12 @@ class ObservationsViewModel: ObservableObject {
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-    url += "&date_after=\(dateAfter)&date_before=\(dateBefore)" //hasPhoto
+
+    if (entity != .user) {//} && (settings.selectedRarity != 3) {
+      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+    }
 //    url += "&has_photo=true"
-    url += "&ordering=datetime"
+    url += "&ordering=-datetime"
 
     fetchData(settings: settings, url: url, completion: completion)
   }

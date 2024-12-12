@@ -62,26 +62,26 @@ struct TabSpeciesView: View {
                 showView: showView)
             }
             
-//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//              Button(action: {
-//                selectedSpeciesID = species.speciesId
-//              }) {
-//                Image(systemSymbol: .infoCircle)
-//              }
-//              .tint(.blue)
-//              
-//              Button(action: {
-//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-//                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-//                } else {
-//                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-//                }
-//                
-//              } ) {
-//                Image(systemSymbol: .star)
-//              }
-//              .tint(.obsStar)
-//            }
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              Button(action: {
+                selectedSpeciesID = species.speciesId
+              }) {
+                Image(systemSymbol: .infoCircle)
+              }
+              .tint(.blue)
+              
+              Button(action: {
+                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
+                } else {
+                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
+                }
+                
+              } ) {
+                Image(systemSymbol: .star)
+              }
+              .tint(.obsStar)
+            }
 
             .accessibilityLabel(species.name)
           }

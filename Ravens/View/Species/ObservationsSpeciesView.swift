@@ -36,7 +36,7 @@ struct ObservationsSpeciesView: View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
-        Text("\(observationsSpecies.count)")
+//        Text("\(observationsSpecies.count)")
 
         HStack {
           // Image with accessibility label
@@ -87,7 +87,7 @@ struct ObservationsSpeciesView: View {
             ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
 
               // Handle end of list event
-                print("End of list reached in ParentView observationsSpecies")
+              print("End of list reached in ParentView observationsSpecies")
               observationsSpecies.fetchData(settings: settings, url: observationsSpecies.next, completion: { log.error("observationUser.fetchData") })
             }
               .environmentObject(Settings()) // Pass environment object
@@ -99,8 +99,8 @@ struct ObservationsSpeciesView: View {
       }
 
       .refreshable {
-        print("refreshing...")
-//        fetchDataModel()
+        log.error("refreshing... observation species")
+        fetchDataModel()
       }
       .onAppear() {
         if !hasAppeared {

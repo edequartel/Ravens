@@ -55,11 +55,18 @@ struct ObservationsLocationView: View {
       
     }
     .refreshable {
-//      getDataAreaModel()
+      log.error("refreshing... ObservationsLocationsView")
+      let location = locationManagerModel.getCurrentLocation()
+      fetchDataLocation(
+        settings: settings,
+        observationsLocation: observationsLocation,
+        locationIdViewModel: locationIdViewModel,
+        geoJSONViewModel: geoJSONViewModel,
+        coordinate: location?.coordinate ?? CLLocationCoordinate2D())
     }
     .onAppear()  {
       if !settings.hasLocationLoaded {
-        log.info("MapObservationsLocationView onAppear")
+        log.info("ObservationsLocationsView onAppear")
         let location = locationManagerModel.getCurrentLocation()
         fetchDataLocation(
           settings: settings,

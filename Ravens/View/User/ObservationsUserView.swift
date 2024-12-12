@@ -63,7 +63,16 @@ struct ObservationsUserView: View {
       }
     }
     .refreshable {
-      log.info("refreshing")
+      log.error("refreshing observation user")
+      observationUser.fetchDataInit(
+        settings: settings,
+        entity: .user,
+        id: settings.userId,
+        completion: {
+          log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
+          log.info("prv: \(observationUser.previous)")
+          log.info("nxt: \(observationUser.next)")
+        })
     }
   }
 }

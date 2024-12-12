@@ -24,7 +24,7 @@ struct ObservationListView: View {
   var body: some View {
     List {
       let filteredAndSortedObservations = observations
-//          .filter(meetsCondition)
+          .filter(meetsCondition)
           .sorted(by: compareObservations)
 
       ForEach(filteredAndSortedObservations,
