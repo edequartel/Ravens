@@ -81,7 +81,7 @@ struct TabSpeciesView: View {
               }
               .tint(.obsStar)
             }
-            .background(Color.gray.opacity(0.1))
+//            .background(Color.gray.opacity(0.1))
             .accessibilityLabel(species.name)
           }
         }
