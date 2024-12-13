@@ -358,6 +358,7 @@
 		474C40802B4D17AA0038B3A5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4785CD1C2B964C0E002F52BE /* ObservationsViewModel.swift */,
 				471F7A632CF793BE00BF529C /* PlayerModel.swift */,
 				474C40852B4D84030038B3A5 /* Settings.swift */,
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
@@ -368,7 +369,6 @@
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
 				474C408B2B4DAC590038B3A5 /* RegionsViewModel.swift */,
 				47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */,
-				4785CD1C2B964C0E002F52BE /* ObservationsViewModel.swift */,
 				4785CD182B95C856002F52BE /* UserViewModel.swift */,
 				4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */,
 				470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */,
@@ -868,7 +868,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -910,7 +910,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;

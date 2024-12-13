@@ -21,11 +21,11 @@ enum EntityType: String {
   var days: Int {
     switch self {
     case .location:
-      return 14
+      return 7 //could also be infinity if chosen?
     case .user:
       return 100 //infinity
     case .species:
-      return 14
+      return 7 //the last days
     }
   }
 }
