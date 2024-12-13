@@ -25,7 +25,6 @@ struct SplashView: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keychainViewModel: KeychainViewModel
-  @EnvironmentObject var observationsLocationViewModel: ObservationsLocationViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 
@@ -39,7 +38,7 @@ struct SplashView: View {
   @State private var isRegionListDataLoaded = false
   @State private var isUserDataLoaded = false
   @State private var isObservationsLocationDataLoaded = false
-  @State private var isLocationIdDataLoaded = false
+//  @State private var isLocationIdDataLoaded = false
   @State private var isGeoJSONDataLoaded = false
 
   var body: some View {
@@ -57,15 +56,6 @@ struct SplashView: View {
         }
     }
 
-//    .onChange(of: keyChainviewModel.token.isEmpty) { isTokenEmpty in
-//      if !isTokenEmpty {
-//        log.error("Token detected, loading data")
-//        loadData()
-//      } else {
-//        log.error("Token not found, waiting for login")
-//      }
-//    }
-
     .onAppear {
       log.error("*** NEW LAUNCHING SPLASHVIEW ***")
 
@@ -82,8 +72,7 @@ struct SplashView: View {
         isLanguageDataLoaded &&
         isRegionDataLoaded &&
         isRegionListDataLoaded &&
-        isUserDataLoaded &&
-        isLocationIdDataLoaded
+        isUserDataLoaded 
     {
       self.dataLoaded = true
     }
@@ -114,6 +103,7 @@ struct SplashView: View {
         checkDataLoaded()
       })
 
+
     regionListViewModel.fetchData(
       settings: settings,
       completion: {
@@ -127,7 +117,7 @@ struct SplashView: View {
       completion: {
         log.info("speciesViewModel First language data loaded")
         speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-          log.info("html is parsed from start")
+          log.error("html is parsed from start")
           isFirstLanguageDataLoaded = true
           checkDataLoaded()
         })
@@ -150,22 +140,24 @@ struct SplashView: View {
         settings.userName = userViewModel.user?.name ?? ""
       })
 
-    let location = locationManagerModel.getCurrentLocation()
+//    let location = locationManagerModel.getCurrentLocation()
+
     //get the location
-    locationIdViewModel.fetchLocations(
-      latitude: location?.coordinate.latitude ?? 0,
-      longitude: location?.coordinate.longitude ?? 0,
-      completion: { fetchedLocations in
-        log.error("locationIdViewModel data loaded")
-        // Use fetchedLocations here //actually it is one location
-        settings.locationName = fetchedLocations[0].name
-        for location in fetchedLocations {
-          log.error("location \(location)")
-        }
-        log.error("locationIdViewModel data loaded")
-        isLocationIdDataLoaded = true
-        checkDataLoaded()
-      })
+//    locationIdViewModel.fetchLocations(
+//      latitude: location?.coordinate.latitude ?? 0,
+//      longitude: location?.coordinate.longitude ?? 0,
+//      completion: { fetchedLocations in
+//        log.error("locationIdViewModel data loaded")
+//        // Use fetchedLocations here //actually it is one location
+//        settings.locationName = fetchedLocations[0].name
+//        for location in fetchedLocations {
+//          log.error("location \(location)")
+//        }
+//        log.error("locationIdViewModel data loaded")
+//        isLocationIdDataLoaded = true
+//        checkDataLoaded()
+//      })
+//    isLocationIdDataLoaded = true
   }
 }
 

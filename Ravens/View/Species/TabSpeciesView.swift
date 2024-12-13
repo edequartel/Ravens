@@ -11,10 +11,15 @@ import SwiftyBeaver
 
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel 
+
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
-  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+
+
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
@@ -25,7 +30,7 @@ struct TabSpeciesView: View {
   @State private var searchText = ""
   
   @Binding var selectedSpeciesID: Int?
-  
+
   var body: some View {
     NavigationView {
       
@@ -44,16 +49,18 @@ struct TabSpeciesView: View {
           ), id: \.id) { species in
             
             
-            NavigationLink(
+            NavigationLink( //???
               destination: SpeciesView(
+                observationsSpecies: observationsSpecies,
                 item: species,
                 selectedSpeciesID: $selectedSpeciesID)
             ) {
               SpeciesInfoView(
                 species: species,
                 showView: showView)
+
             }
-            
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
                 selectedSpeciesID = species.speciesId
@@ -74,15 +81,13 @@ struct TabSpeciesView: View {
               }
               .tint(.obsStar)
             }
+//            .background(Color.gray.opacity(0.1))
             .accessibilityLabel(species.name)
           }
         }
         .listStyle(PlainListStyle())
-        
         .searchable(text: $searchText) //een niveau lager geplaatst
-        
       }
-      
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
@@ -114,10 +119,11 @@ struct TabSpeciesView: View {
       
     }
     .refreshable {
+//      speciesViewModel.fillSpecies()
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
-          print("parsed from html")
+          log.error("from refreshable... parsed from html")
         })
     }
   }
@@ -131,7 +137,7 @@ struct TabSpeciesView: View {
       }
     }
   }
-  
+
 }
 
 struct SortFilterSpeciesView: View {

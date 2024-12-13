@@ -27,3 +27,26 @@ struct LocationJSON: Decodable {
         case permalink
     }
 }
+
+
+import Foundation
+import SwiftUI
+import Alamofire
+import MapKit
+import SwiftyBeaver
+
+struct Location: Identifiable {//}, Hashable {
+  let id = UUID()
+  var name: String
+  var coordinate: CLLocationCoordinate2D
+  var rarity: Int
+  var hasPhoto: Bool
+  var hasSound: Bool
+}
+
+struct Span {
+  var latitudeDelta: Double
+  var longitudeDelta: Double
+  var latitude: Double
+  var longitude: Double
+}

@@ -13,38 +13,46 @@ import UserNotifications
 
 struct ContentView: View {
   let log = SwiftyBeaver.self
-    @EnvironmentObject var locationManagerModel: LocationManagerModel
-    @EnvironmentObject var keyChainviewModel: KeychainViewModel
-    @State private var dataLoaded = false
 
-    var body: some View {
-        Group {
-            if keyChainviewModel.token.isEmpty {
-                // Login View
-                LoginView()
-                    .onAppear {
-                        log.info("No token, displaying login")
-                    }
-            } else {
-                if dataLoaded {
-                    RavensView()
-                        .onAppear {
-                            log.info("Data loaded, navigating to main content")
-                        }
-                } else {
-                    SplashView(dataLoaded: $dataLoaded)
-                        .onAppear {
-                            log.info("Loading data in SplashView")
-                            if let location = locationManagerModel.location {
-                                log.error("Current Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                            } else {
-                                log.error("Location not available yet")
-                            }
-                        }
-                }
+  @ObservedObject var observationUser : ObservationsViewModel
+  @ObservedObject var observationsLocation: ObservationsViewModel
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
+  @EnvironmentObject var locationManagerModel: LocationManagerModel
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @State private var dataLoaded = false
+
+  var body: some View {
+    Group {
+      if keyChainviewModel.token.isEmpty {
+        // Login View
+        LoginView()
+          .onAppear {
+            log.info("No token, displaying login")
+          }
+      } else {
+        if dataLoaded {
+          RavensView(
+            observationUser: observationUser,
+            observationsLocation: observationsLocation,
+            observationsSpecies: observationsSpecies)
+            .onAppear {
+              log.info("Data loaded, navigating to main content")
+            }
+        } else {
+          SplashView(dataLoaded: $dataLoaded)
+            .onAppear {
+              log.info("Loading data in SplashView")
+              if let location = locationManagerModel.location {
+                log.error("Current Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+              } else {
+                log.error("Location not available yet")
+              }
             }
         }
+      }
     }
+  }
 }
 
 
@@ -93,10 +101,10 @@ struct ContentView: View {
 //}
 
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-      .environmentObject(Settings())
-  }
-}
+//struct ContentView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    ContentView()
+//      .environmentObject(Settings())
+//  }
+//}
 

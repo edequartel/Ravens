@@ -19,16 +19,12 @@ struct CustomDivider: View {
     }
 }
 
-enum EntityType: String {
-    case area = "area"
-    case user = "user"
-    case species = "species"
-}
 
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationsViewModel: ObservationsViewModel
+  @ObservedObject var observationUser : ObservationsViewModel
+
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
@@ -37,45 +33,59 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-      if let observations = observationsViewModel.observations?.results, observations.count > 0 {
+//      Text("nr: \(observationUser.count)")
+      if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
-        ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .user)
+        ObservationListView(
+          observations: observations,
+          selectedSpeciesID: $selectedSpeciesID,
+          entity: .user) {
+            // Handle end of list event
+            observationUser.fetchData(settings: settings, url: observationUser.next, completion: { log.error("observationUser.fetchData") })
+          }
       } else {
         NoObservationsView()
       }
     }
 
     .onAppear {
-      if settings.initialUsersLoad {
-        observationsViewModel.fetchData(
+      if !settings.hasUserLoaded {
+        observationUser.fetchDataInit(
           settings: settings,
-          entityType: "user",
-          userId: settings.userId,
-          completion: { log.info("viewModel.fetchData completion") })
-        settings.initialUsersLoad = false
+          entity: .user,
+          id: settings.userId,
+          completion: {
+            log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
+            log.info("prv: \(observationUser.previous)")
+            log.info("nxt: \(observationUser.next)")
+          })
+        settings.hasUserLoaded = true
       }
     }
     .refreshable {
-      log.info("refreshing")
-      observationsViewModel.fetchData(
+      log.error("refreshing observation user")
+      observationUser.fetchDataInit(
         settings: settings,
-        entityType: "user",
-        userId: settings.userId,
-        completion: { log.info("observationsUserViewModel.fetchdata \( settings.userId)") }
-      )
+        entity: .user,
+        id: settings.userId,
+        completion: {
+          log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
+          log.info("prv: \(observationUser.previous)")
+          log.info("nxt: \(observationUser.next)")
+        })
     }
   }
 }
 
-struct ObservationsUserView_Previews: PreviewProvider {
-  @State static var selectedObservation: Observation? = nil
-  @State static var selectedObservationSound: Observation? = nil
-
-  static var previews: some View {
-    ObservationsUserView(selectedSpeciesID: .constant(nil))
-    .environmentObject(ObservationsViewModel())
-    .environmentObject(UserViewModel())
-    .environmentObject(Settings())
-  }
-}
+//struct ObservationsUserView_Previews: PreviewProvider {
+//  @State static var selectedObservation: Observation? = nil
+//  @State static var selectedObservationSound: Observation? = nil
+//
+//  static var previews: some View {
+//    ObservationsUserView(selectedSpeciesID: .constant(nil))
+//    .environmentObject(ObservationsViewModel())
+//    .environmentObject(UserViewModel())
+//    .environmentObject(Settings())
+//  }
+//}
 

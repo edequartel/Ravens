@@ -11,13 +11,15 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
+//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
+  
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
 
   @State private var hasAppeared = false
-
   @State private var scale: CGFloat = 1.0
   @State private var lastScale: CGFloat = 1.0
 
@@ -34,6 +36,7 @@ struct ObservationsSpeciesView: View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
+//        Text("\(observationsSpecies.count)")
 
         HStack {
           // Image with accessibility label
@@ -68,7 +71,7 @@ struct ObservationsSpeciesView: View {
       Spacer()
 
       VStack {
-        if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count == 0 {
+        if let observations = observationsSpecies.observations, observations.count == 0 {
           Text(noObsLastPeriod)// \(item.name)")
             .font(.headline) // Set font style
             .foregroundColor(.secondary) // Adjust text color
@@ -77,11 +80,18 @@ struct ObservationsSpeciesView: View {
           Spacer()
         } else {
 
-          if let observations = observationsSpeciesViewModel.observationsSpecies?.results, observations.count > 0 {
-            if showView { Text("ObservationsSpeciesViewIn2").font(.customTiny) }
+          if let observations = observationsSpecies.observations, observations.count > 0 {
+            if showView { Text("ObservationListView").font(.customTiny) }
+
             HorizontalLine()
-            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species)
+            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
+
+              // Handle end of list event
+              print("End of list reached in ParentView observationsSpecies")
+              observationsSpecies.fetchData(settings: settings, url: observationsSpecies.next, completion: { log.error("observationUser.fetchData") })
+            }
               .environmentObject(Settings()) // Pass environment object
+
           } else {
             NoObservationsView()
           }
@@ -89,13 +99,13 @@ struct ObservationsSpeciesView: View {
       }
 
       .refreshable {
-        print("refreshing...")
-        fetchDataModel(offset: offset)
+        log.error("refreshing... observation species")
+        fetchDataModel()
       }
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {
-            fetchDataModel(offset: offset)
+            fetchDataModel()
             settings.initialSpeciesLoad = false
           }
           hasAppeared = true // Prevent re-execution
@@ -104,12 +114,11 @@ struct ObservationsSpeciesView: View {
     }
   }
 
-  func fetchDataModel(offset: Int) {
-    observationsSpeciesViewModel.fetchData(
+  func fetchDataModel() {
+    observationsSpecies.fetchDataInit(
       settings: settings,
-      speciesId: item.speciesId,
-      limit: 100,
-      offset: 0,
+      entity: .species,
+      id: item.speciesId,
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")
@@ -137,34 +146,3 @@ struct ObservationsSpeciesView: View {
 //  }
 //}
 
-//          Button(action: {
-//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-//              print("bookmarks remove")
-//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-//            } else {
-//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-//              print("bookmarks append")
-//            }
-//
-//          } ) {
-//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-//              .uniformSize()
-//          }
-//        }
-//        VStack {
-//          HStack {
-//            Text(speciesViewModel.findSpeciesByID(speciesID: item.speciesId) ?? "noName")
-//              .foregroundColor(.gray)
-//              .font(.footnote)
-//            Spacer()
-//          }
-//          HStack{
-//            Text("\(item.scientificName)")
-//              .foregroundColor(.gray)
-//              .font(.footnote)
-//              .italic()
-//              .lineLimit(1) // Set the maximum number of lines to 1
-//              .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-//            Spacer()
-//          }
-//        }

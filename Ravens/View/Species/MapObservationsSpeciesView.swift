@@ -11,9 +11,8 @@ import SwiftyBeaver
 
 struct MapObservationsSpeciesView: View {
     let log = SwiftyBeaver.self
+    @ObservedObject var observationsSpecies: ObservationsViewModel
 
-    @EnvironmentObject var observationsSpeciesViewModel: ObservationsSpeciesViewModel
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
     @EnvironmentObject var settings: Settings
     
     var item: Species
@@ -26,68 +25,32 @@ struct MapObservationsSpeciesView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             Map(position: $cameraPosition) {
-//                UserAnnotation()
-                
-                ForEach(observationsSpeciesViewModel.locations) { location in
-                    Annotation("", coordinate: location.coordinate) {
-                        Circle()
-                            .fill(rarityColor(value: location.rarity))
-                            .stroke(location.hasSound ? Color.white : Color.clear,lineWidth: 1)
-                            .frame(width: 12, height: 12)
-                        
-                            .overlay(
-                                Circle()
-                                    .fill(location.hasPhoto ? Color.white : Color.clear)
-                                    .frame(width: 6, height: 6)
-                            )
+                UserAnnotation()
+
+                ForEach(observationsSpecies.observations ?? []) { observation in
+                    Annotation("", coordinate:  CLLocationCoordinate2D(
+                      latitude: observation.point.coordinates[1],
+                      longitude: observation.point.coordinates[0])) {
+                        ObservationAnnotationView(observation: observation)
                     }
                 }
-            }
-            .onAppear() {
-                fetchDataModel()
             }
             .safeAreaInset(edge: .bottom) {
-                VStack {
-                    HStack {
-//                        NetworkView()
-                        //
-                       
-                        Text("\((observationsSpeciesViewModel.observationsSpecies?.count ?? 0))x")
-                            .foregroundColor(.obsGreenFlower)
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        //
-                        Text("\(item.name)")
-                            .lineLimit(1) // Set the maximum number of lines to 1
-                            .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-                        //
-                        Text("\(14)d")
-                        Text("\(settings.selectedDate, formatter: dateFormatter)")
-                        Spacer()
-                    }
-                }
-                .padding(5)
-                .bold()
-                .foregroundColor(.obsGreenFlower)
-                .background(Color.obsGreenEagle.opacity(0.8))
+              VStack {
+                Text("\(item.name)")
+                  .lineLimit(1) // Set the maximum number of lines to 1
+                  .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
+              }
+              .padding(5)
+              .frame(maxWidth: .infinity)
+              .foregroundColor(.obsGreenFlower)
+              .background(Color.obsGreenEagle.opacity(0.8))
             }
             .mapStyle(settings.mapStyle)
             .mapControls() {
                 MapUserLocationButton()
                 MapPitchToggle()
                 MapCompass() //tapping this makes it north
-            }
-            
-//            Button("Dismiss") {
-//                self.presentationMode.wrappedValue.dismiss()
-//            }
-//            .topLeft()
-            
-        }
-        .onAppear {
-            if settings.initialSpeciesLoad {
-                fetchDataModel()
-                settings.initialSpeciesLoad = false
             }
         }
     }
@@ -97,57 +60,17 @@ struct MapObservationsSpeciesView: View {
         formatter.dateFormat = "EE dd-MM"
         return formatter
     }
-    
-    func fetchDataModel() {
-        observationsSpeciesViewModel.fetchData(
-            settings: settings,
-            speciesId: item.speciesId,
-            limit: 100,
-            offset: 0
-        )
-    }
+
 }
 
 
-struct MapObservationsSpeciesView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Setting up the environment objects for the preview
-      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
-        MapObservationsSpeciesView(item: testSpecies)
-            .environmentObject(Settings())
-            .environmentObject(KeychainViewModel())
-            .environmentObject(ObservationsSpeciesViewModel())
-    }
-}
-
-//HStack {
-//    Spacer()
-//    Text("days")
-//        .bold()
-//    Button(action: {
-//        if let newDate = Calendar.current.date(byAdding: .day, value: -settings.days, to: settings.selectedDate) {
-//            settings.selectedDate = min(newDate, Date())
-//        }
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "backward.fill")
-//    }
-//    
-//    Button(action: {
-//        if let newDate = Calendar.current.date(byAdding: .day, value: settings.days, to: settings.selectedDate) {
-//            settings.selectedDate = min(newDate, Date())
-//        }
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "forward.fill")
-//    }
-//    
-//    Button(action: {
-//        settings.selectedDate = Date()
-//        log.info("Date updated to \(settings.selectedDate)")
-//        fetchDataModel()
-//    }) {
-//        Image(systemName: "square.fill")
+//struct MapObservationsSpeciesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Setting up the environment objects for the preview
+//      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
+//        MapObservationsSpeciesView(item: testSpecies)
+//            .environmentObject(Settings())
+//            .environmentObject(KeychainViewModel())
+//            .environmentObject(ObservationsViewModel())
 //    }
 //}
-//.frame(maxHeight: 30)

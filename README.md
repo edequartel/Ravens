@@ -8,6 +8,7 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 - Deze app maakt gebruik van de gegevens die zijn ingevoerd door vrijwilligers op [www.waarneming.nl](https://www.waarneming.nl). 
 - Deze app is compatibel met een iPhone met iOS 17. 
 - Je gebruikt **Ravens** met je waarneming.nl account.
+- Ravens is toegankelijk en kan worden gebruikt met VoiceOver.
 
 Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://github.com/edequartel/Ravens). Met Ravens krijg je snel en eenvoudig toegang tot recente waarnemingen in jouw gekozen gebied, inclusief waarnemingen van verschillende soorten en je eigen observaties. Veel plezier met het ontdekken van de natuur om je heen!
 

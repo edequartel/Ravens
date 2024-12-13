@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TabUserObservationsView: View {
+  @ObservedObject var observationUser : ObservationsViewModel
+
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
@@ -20,12 +22,14 @@ struct TabUserObservationsView: View {
     NavigationView {
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
-//        Text(noObsLastPeriod) // test localisation
-//Text(play)
+
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-          MapObservationsUserView()
+          MapObservationsUserView(
+            observationUser: observationUser)
         } else {
-          ObservationsUserView(selectedSpeciesID: $selectedSpeciesID)
+          ObservationsUserView(
+            observationUser: observationUser,
+            selectedSpeciesID: $selectedSpeciesID)
         }
       }
 
@@ -44,7 +48,7 @@ struct TabUserObservationsView: View {
 
           //add a toolbaritem here to the list of users
           ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination: ObserversView()) {
+            NavigationLink(destination: ObserversView(observationUser: observationUser)) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
                 .accessibility(label: Text(observersList))
@@ -70,12 +74,4 @@ struct TabUserObservationsView: View {
   }
 }
 
-struct TabUserObservationsView_Previews: PreviewProvider {
-  @StateObject static var observationsUserViewModel = ObservationsViewModel()
 
-  static var previews: some View {
-    TabUserObservationsView(selectedSpeciesID: .constant(nil))
-      .environmentObject(Settings())
-      .environmentObject(observationsUserViewModel)
-  }
-}

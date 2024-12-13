@@ -25,7 +25,7 @@
 "addLocationToFavorite" = "Voeg deze locatie toe aan favorieten";
 "removeLocationFromFavorite" = "Verwijder deze locatie uit favorieten";
 "toggleViewMapList" = "Schakel tussen kaart- en lijstweergave";
-"noObsLastPeriod" = "Geen waarnemingen gevonden voor de laatste 14 dagen";
+"noObsLastPeriod" = "Geen waarnemingen gevonden voor de laatste periode";
 "allVisible" = "alle soorten in lijst";
 "favoriteVisible" ="favoriete soorten in lijst";
 "notesAboutObservation" = "aantekening over waarneming";

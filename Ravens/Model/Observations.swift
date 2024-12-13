@@ -13,7 +13,7 @@ struct Observations: Codable {
     var results: [Observation]
 }
 
-struct Observation: Codable, Identifiable {
+struct Observation: Codable, Identifiable, Equatable {
     var id: Int?
     var species: Int?
     var date: String = "2023-01-01"
@@ -102,13 +102,13 @@ struct Observation: Codable, Identifiable {
 
 
 // MARK: - UserDetail
-struct UserDetail: Codable {
+struct UserDetail: Codable, Equatable {
     var id: Int = 0
     var name: String = ""
     var avatar: URL?
 }
 
-struct SpeciesDetail: Codable, Identifiable {
+struct SpeciesDetail: Codable, Identifiable, Equatable {
     var id: Int = 0
     var scientificName: String = ""
     var name: String = ""
@@ -123,12 +123,12 @@ struct SpeciesDetail: Codable, Identifiable {
 }
 
 
-struct Point: Codable {
+struct Point: Codable, Equatable {
     var type: String = ""
     var coordinates: [Double] = [0]
 }
 
-struct LocationDetail: Codable {
+struct LocationDetail: Codable, Equatable {
     var id: Int = 0
     var name: String = ""
     var countryCode: String = ""
@@ -179,6 +179,44 @@ struct Species: Codable, Identifiable, Equatable { //equatable
         self.date = date
     }
 }
+
+//{ //equatable
+//    var id = UUID()  // Unique identifier for SwiftUI
+//    let speciesId: Int  // Maps to JSON `id`
+//    let name: String
+//    let scientificName: String
+//    let rarity: Int
+//    let native: Bool
+//
+//    // Adding recent observations
+//    var time: String?
+//    var date: String?
+//    var nrof: Int?
+//    var dateTime: Date?
+//
+//    // Map JSON keys
+//    private enum CodingKeys: String, CodingKey {
+//        case speciesId = "species" // Maps JSON `species` to `species_id`
+//        case name
+//        case scientificName = "scientific_name"
+//        case rarity
+//        case native
+//        case time
+//        case date
+//        case nrof
+//        case dateTime
+//    }
+//
+//    init(speciesId: Int, name: String, scientificName: String, rarity: Int, native: Bool, time: String?, date: String?) {
+//        self.speciesId = speciesId
+//        self.name = name
+//        self.scientificName = scientificName
+//        self.rarity = rarity
+//        self.native = native
+//        self.time = time
+//        self.date = date
+//    }
+//}
 
 let mockPoint = Point(type: "Point", coordinates: [52.013077-0.2, 4.713450+0.1]) // replace with mock Point data
 let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", name: "Grutto", group: 1) // replace with mock SpeciesDetail data

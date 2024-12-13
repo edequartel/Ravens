@@ -10,6 +10,11 @@ import SwiftyBeaver
 
 struct RavensView: View {
   let log = SwiftyBeaver.self
+
+  @ObservedObject var observationUser : ObservationsViewModel
+  @ObservedObject var observationsLocation: ObservationsViewModel
+  @ObservedObject var observationsSpecies: ObservationsViewModel
+
   @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
@@ -19,19 +24,24 @@ struct RavensView: View {
     VStack {
       TabView {
         // Tab 2
-        TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
+        TabUserObservationsView(
+          observationUser : observationUser,
+          selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(us)
           Image(systemSymbol: .person2Fill)
         }
         // Tab 1
-        TabLocationView(selectedSpeciesID: $selectedSpeciesID)
+        TabLocationView(
+          observationsLocation: observationsLocation,
+          selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(location)
           Image(systemSymbol: SFAreaFill)
         }
         // Tab 3
         TabSpeciesView(
+          observationsSpecies: observationsSpecies,
           selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(species)

@@ -47,8 +47,8 @@ struct SpeciesInfoView: View {
       if let date = species.date {
         HStack {
           DateConversionView(dateString: species.date ?? "", timeString: species.time ?? "")
-          Text("\(species.nrof ?? 0) x \(NSLocalizedString("observations", comment: ""))")
-                      .footnoteGrayStyle()
+//          Text("\(species.nrof ?? 0) x \(NSLocalizedString("observations", comment: ""))")
+//                      .footnoteGrayStyle()
         }
         .font(.caption)
       }
