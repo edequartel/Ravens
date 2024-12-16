@@ -43,8 +43,14 @@ struct SplashView: View {
 
   var body: some View {
     VStack {
+      Text("Ravens")
+          .font(.system(size: 48))
+          .foregroundColor(.gray)
+          .bold()
+
+
       LottieView(lottieFile: "ravenssun.json")
-        .frame(width: 100, height: 100)
+        .frame(width: 200, height: 200)
     }
 
     .onChange(of: keyChainviewModel.token.isEmpty) { oldValue, newValue in

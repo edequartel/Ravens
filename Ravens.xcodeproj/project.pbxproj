@@ -38,7 +38,6 @@
 		4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
-		474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C402F2B4BC4080038B3A5 /* Assets.xcassets */; };
 		474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */; };
 		474C403E2B4BC5400038B3A5 /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */; };
 		474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 474C40402B4BC5780038B3A5 /* Alamofire */; };
@@ -64,6 +63,7 @@
 		47568D312B59BABB00E69B1A /* ObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */; };
 		47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */; };
 		4757E0762B7F3426003F148E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757E0752B7F3426003F148E /* LoginView.swift */; };
+		4759E7822D1059E100B60472 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4759E7812D1059E100B60472 /* Assets.xcassets */; };
 		4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */; };
 		4767F0012BF251C200BACDC6 /* TabLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0002BF251C200BACDC6 /* TabLocationView.swift */; };
 		4767F0032BF2529000BACDC6 /* TabUserObservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */; };
@@ -94,6 +94,7 @@
 		478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */; };
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		479C352B2D09A224002F1C2A /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479C352A2D09A220002F1C2A /* LocationListView.swift */; };
+		47A588522D1018CF00D9CFE1 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A588512D1018C700D9CFE1 /* Period.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
@@ -149,7 +150,6 @@
 		474C40282B4BC4040038B3A5 /* Ravens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ravens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		474C402B2B4BC4040038B3A5 /* RavensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensApp.swift; sourceTree = "<group>"; };
 		474C402D2B4BC4040038B3A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		474C402F2B4BC4080038B3A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		474C40322B4BC4080038B3A5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModel.swift; sourceTree = "<group>"; };
 		474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSpeciesView.swift; sourceTree = "<group>"; };
@@ -172,6 +172,7 @@
 		47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsSpeciesView.swift; sourceTree = "<group>"; };
 		4757E0752B7F3426003F148E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4759E7812D1059E100B60472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		4767F0002BF251C200BACDC6 /* TabLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLocationView.swift; sourceTree = "<group>"; };
 		4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUserObservationsView.swift; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversViewModel.swift; sourceTree = "<group>"; };
 		479C352A2D09A220002F1C2A /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
+		47A588512D1018C700D9CFE1 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
@@ -294,13 +296,13 @@
 		471F7A622CF7930D00BF529C /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				4759E7812D1059E100B60472 /* Assets.xcassets */,
 				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				473F14A22CF49FEB004A9DE4 /* ravens.json */,
 				47A862572CF4DC2F0016BB04 /* ravenssun.json */,
 				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
 				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
 				47B10CAA2C21BA580092BC66 /* tafeleend.jpg */,
-				474C402F2B4BC4080038B3A5 /* Assets.xcassets */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -364,6 +366,7 @@
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				471875422C00542100EF9F1F /* LocationManagerModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
+				47A588512D1018C700D9CFE1 /* Period.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
 				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
@@ -622,10 +625,10 @@
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
 				473F14A32CF49FEB004A9DE4 /* ravens.json in Resources */,
 				471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */,
+				4759E7822D1059E100B60472 /* Assets.xcassets in Resources */,
 				47A862582CF4DC300016BB04 /* ravenssun.json in Resources */,
 				47AB459A2CE2042100842877 /* species.json in Resources */,
 				476843D42BA9D43D004EF208 /* LottieFile.json in Resources */,
-				474C40302B4BC4080038B3A5 /* Assets.xcassets in Resources */,
 				47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */,
 				47AB45962CE2030E00842877 /* location.json in Resources */,
 				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
@@ -718,6 +721,7 @@
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
 				4767F0012BF251C200BACDC6 /* TabLocationView.swift in Sources */,
+				47A588522D1018CF00D9CFE1 /* Period.swift in Sources */,
 				47AB45A32CE327AD00842877 /* SplashView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
