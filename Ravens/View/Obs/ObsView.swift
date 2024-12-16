@@ -82,8 +82,8 @@ struct ObsView: View {
         // User Info Section
         if showObserver {
           HStack {
-            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
-//            Text("\(obs.userDetail?.name ?? "noName")")
+//            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
+            Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
             Spacer()
             if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {

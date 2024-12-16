@@ -18,7 +18,7 @@ struct LoginView: View {
 
   var body: some View {
     Form {
-      Section("Login") {
+      Section("Login \(settings.selectedInBetween)") {
         VStack {
 
           TextField(email, text: $myInlogName, prompt: Text(emailAddress))

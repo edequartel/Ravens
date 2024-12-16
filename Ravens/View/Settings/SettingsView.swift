@@ -33,7 +33,7 @@ struct SettingsView: View {
       List {
         Section(header: Text("Ravens")) {
           NavigationLink(destination: LoginView()) {
-            Text("Login")
+            Text("Login \(settings.selectedInBetween)")
           }
         }
         //      LoginView()
