@@ -52,9 +52,9 @@ class Settings: ObservableObject {
         didSet {
             log.info("!!saving selectedRarity in storage: \(selectedRarity)")
             selectedRarityStored = selectedRarity
-            if !isInit {
-                isRadiusChanged = true
-            }
+//            if !isInit {
+//                isRadiusChanged = true
+//            }
         }
     }
     
@@ -70,13 +70,13 @@ class Settings: ObservableObject {
     @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
 
 
-    @AppStorage("isLocationIDChanged") var isLocationIDChangedStored: Bool = false
-    @Published var isLocationIDChanged: Bool = false {
-        didSet {
-            log.info("!!saving isLocationIDChanged in storage: \(isLocationIDChanged)")
-            isLocationIDChangedStored = isLocationIDChanged
-        }
-    }
+//    @AppStorage("isLocationIDChanged") var isLocationIDChangedStored: Bool = false
+//    @Published var isLocationIDChanged: Bool = false {
+//        didSet {
+//            log.info("!!saving isLocationIDChanged in storage: \(isLocationIDChanged)")
+//            isLocationIDChangedStored = isLocationIDChanged
+//        }
+//    }
 
     @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
     {
@@ -86,11 +86,11 @@ class Settings: ObservableObject {
     }
     
     
-    @Published var isRadiusChanged = false {
-        didSet {
-            log.info("!!isRadiusChanged saving it radiusChanged: \(isRadiusChanged)")
-        }
-    }
+//    @Published var isRadiusChanged = false {
+//        didSet {
+//            log.info("!!isRadiusChanged saving it radiusChanged: \(isRadiusChanged)")
+//        }
+//    }
     
     @Published var initialAreaLoad = true {
         didSet {
@@ -140,7 +140,7 @@ class Settings: ObservableObject {
             log.info("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
             selectedSpeciesGroupStored = selectedSpeciesGroup
             if !isInit {
-                isRadiusChanged = true
+//                isRadiusChanged = true
                 isAreaChanged = true
             }
         }
@@ -152,7 +152,7 @@ class Settings: ObservableObject {
             log.info("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
             selectedSpeciesGroupIdStored = selectedSpeciesGroupId
             if !isInit {
-                isRadiusChanged = true
+//                isRadiusChanged = true
                 isAreaChanged = true
             }
         }
@@ -172,7 +172,7 @@ class Settings: ObservableObject {
             log.info("!!saving it in storage: \(selectedLanguage)")
             selectedLanguageStored = selectedLanguage
             if !isInit {
-                isRadiusChanged = true
+//                isRadiusChanged = true
                 isAreaChanged = true
             }
         }
@@ -184,7 +184,7 @@ class Settings: ObservableObject {
             log.info("!!saving it in storage: \(selectedSecondLanguage)")
             selectedSecondLanguageStored = selectedSecondLanguage
             if !isInit {
-                isRadiusChanged = true
+//                isRadiusChanged = true
                 isAreaChanged = true
             }
         }

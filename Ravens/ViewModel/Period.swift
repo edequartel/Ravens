@@ -13,12 +13,12 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
     // Computed property for description
     var description: String {
         switch self {
-        case .twoDays: return "Two Days"
-        case .week: return "One Week"
-        case .twoWeeks: return "Two Weeks"
-        case .fourWeeks: return "Four Weeks"
+        case .twoDays: return "2 Days"
+        case .week: return "1 Week"
+        case .twoWeeks: return "2 Weeks"
+        case .fourWeeks: return "4 Weeks"
         case .halfYear: return "Half a Year"
-        case .year: return "One Year"
+        case .year: return "1 Year"
         case .infinite: return "Infinite"
         }
     }
@@ -35,24 +35,26 @@ struct PeriodView: View {
     @State private var selectedTimePeriod: TimePeriod = .week
 
     var body: some View {
-        VStack {
+        HStack {
             Text("Select a Time Period")
                 .font(.headline)
                 .padding()
+
+          Spacer()
 
             Picker("Time Period", selection: $selectedTimePeriod) {
                 ForEach(TimePeriod.allCases) { period in
                     Text(period.description).tag(period)
                 }
             }
-            .pickerStyle(.wheel) // You can change this to .menu or .segmented if preferred
+            .pickerStyle(.menu) // You can change this to .menu or .segmented if preferred
             .padding()
             .onChange(of: selectedTimePeriod) {
                             selectedTimePeriodRawValue = selectedTimePeriod.rawValue
                         }
 
-            Text("You selected: \(selectedTimePeriod.description) (\(selectedTimePeriod.rawValue) days)")
-                .padding()
+//            Text("You selected: \(selectedTimePeriod.description) (\(selectedTimePeriod.rawValue) days)")
+//                .padding()
         }
         .onAppear {
             selectedTimePeriod = TimePeriod(rawValue: selectedTimePeriodRawValue) ?? .week
