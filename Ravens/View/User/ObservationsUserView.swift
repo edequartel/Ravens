@@ -30,9 +30,9 @@ struct ObservationsUserView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-    @State private var currentSortingOption: SortingOption = .date
-    @State private var currentFilteringAllOption: FilterAllOption = .native
-    @State private var currentFilteringOption: FilteringRarityOption = .all
+//    @State private var currentSortingOption: SortingOption = .date
+//    @State private var currentFilteringAllOption: FilterAllOption = .native
+//    @State private var currentFilteringOption: FilteringRarityOption = .all
 
   var body: some View {
     VStack {

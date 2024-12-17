@@ -17,9 +17,9 @@ struct TabUserObservationsView: View {
   @State private var showFirstView = false
 
 //  @State var Xentity: EntityType
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+//  @State private var currentSortingOption: SortingOption = .date
+//  @State private var currentFilteringAllOption: FilterAllOption = .native
+//  @State private var currentFilteringOption: FilteringRarityOption = .all
 //  @State private var timePeriod: TimePeriod = .fourWeeks
 
   @Binding var selectedSpeciesID: Int?
@@ -39,12 +39,12 @@ struct TabUserObservationsView: View {
         }
       }
 
-      .modifier(ObservationToolbarModifierExtended(
-                     currentSortingOption: $currentSortingOption,
-                     currentFilteringAllOption: $currentFilteringAllOption,
-                     currentFilteringOption: $currentFilteringOption,
-                     timePeriod: $settings.timePeriodUser
-                 ))
+//      .modifier(ObservationToolbarModifierExtended(
+//                     currentSortingOption: $currentSortingOption,
+//                     currentFilteringAllOption: $currentFilteringAllOption,
+//                     currentFilteringOption: $currentFilteringOption,
+//                     timePeriod: $settings.timePeriodUser
+//                 ))
 
       .toolbar {
         if !accessibilityManager.isVoiceOverEnabled {
