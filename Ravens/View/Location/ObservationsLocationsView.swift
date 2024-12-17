@@ -22,6 +22,10 @@ struct ObservationsLocationView: View {
 
   @State private var retrievedData = false
 
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
+
   var body: some View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
@@ -42,6 +46,7 @@ struct ObservationsLocationView: View {
           ObservationListView(
             observations: observations,
             selectedSpeciesID: $selectedSpeciesID,
+            timePeriod: $settings.timePeriodLocation,
             entity: .location) {
             // Handle end of list event
              print("End of list reached in ParentView observationsLocation")

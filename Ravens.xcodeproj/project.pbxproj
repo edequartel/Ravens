@@ -94,7 +94,7 @@
 		478EABE52BEB8A3E00414431 /* ObserversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */; };
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		479C352B2D09A224002F1C2A /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479C352A2D09A220002F1C2A /* LocationListView.swift */; };
-		47A588522D1018CF00D9CFE1 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A588512D1018C700D9CFE1 /* Period.swift */; };
+		47A588522D1018CF00D9CFE1 /* PeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A588512D1018C700D9CFE1 /* PeriodView.swift */; };
 		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
@@ -198,7 +198,7 @@
 		478DE5452B6554E600FF7737 /* SettingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailsView.swift; sourceTree = "<group>"; };
 		478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversViewModel.swift; sourceTree = "<group>"; };
 		479C352A2D09A220002F1C2A /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
-		47A588512D1018C700D9CFE1 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		47A588512D1018C700D9CFE1 /* PeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
@@ -366,7 +366,6 @@
 				474C405A2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift */,
 				471875422C00542100EF9F1F /* LocationManagerModel.swift */,
 				474C403D2B4BC5400038B3A5 /* SpeciesViewModel.swift */,
-				47A588512D1018C700D9CFE1 /* Period.swift */,
 				474C40492B4BCC920038B3A5 /* SpeciesDetailsViewModel.swift */,
 				474C40542B4BFDC90038B3A5 /* RegionListViewModel.swift */,
 				474C40602B4C08FB0038B3A5 /* LanguageViewModel.swift */,
@@ -402,6 +401,7 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47A588512D1018C700D9CFE1 /* PeriodView.swift */,
 				47D4B7722D00546300D46050 /* ObserversView.swift */,
 				471F7A612CF792A500BF529C /* Misc */,
 				471F7A5E2CF7915200BF529C /* Map */,
@@ -721,7 +721,7 @@
 				4785CD172B95C835002F52BE /* User.swift in Sources */,
 				4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */,
 				4767F0012BF251C200BACDC6 /* TabLocationView.swift in Sources */,
-				47A588522D1018CF00D9CFE1 /* Period.swift in Sources */,
+				47A588522D1018CF00D9CFE1 /* PeriodView.swift in Sources */,
 				47AB45A32CE327AD00842877 /* SplashView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,

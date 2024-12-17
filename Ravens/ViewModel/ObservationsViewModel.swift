@@ -16,18 +16,6 @@ enum EntityType: String {
   case location = "locations"
   case user = "user"
   case species = "species"
-
-  // Computed property to return an associated integer value
-  var days: Int {
-    switch self {
-    case .location:
-      return 7 //could also be infinity if chosen?
-    case .user:
-      return 100 //infinity
-    case .species:
-      return 7 //the last days
-    }
-  }
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -54,17 +42,29 @@ class ObservationsViewModel: ObservableObject {
     //reset
     self.observations = []
 
+    var days: Int = 14
+    switch entity {
+    case .user:
+        days = settings.timePeriodUser.rawValue
+    case .location:
+        days = settings.timePeriodLocation.rawValue
+    case .species:
+        days = settings.timePeriodSpecies.rawValue
+    }
+
     //datetime
     let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -entity.days, to: date)!)
+    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
-    if (entity != .user) {//} && (settings.selectedRarity != 3) {
+    if ((settings.timePeriodUser != .infinite) && ( entity == .user)) ||
+        ((settings.timePeriodLocation != .infinite) && ( entity == .location)) ||
+        ((settings.timePeriodSpecies != .infinite) && ( entity == .species)) {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
     }
-//    url += "&has_photo=true"
+
     url += "&ordering=-datetime"
 
     fetchData(settings: settings, url: url, completion: completion)
@@ -85,7 +85,7 @@ class ObservationsViewModel: ObservableObject {
       "Accept-Language": settings.selectedLanguage
     ]
 
-    log.info("fetchData ObservationsUserViewModel \(url)")
+    log.error("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in
       switch response.result {

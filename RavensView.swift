@@ -24,11 +24,6 @@ struct RavensView: View {
     VStack {
       TabView {
         // Tab 2
-        PeriodView()
-        .tabItem {
-          Text(us)
-          Image(systemSymbol: .person2Fill)
-        }
         TabUserObservationsView(
           observationUser : observationUser,
           selectedSpeciesID: $selectedSpeciesID)

@@ -85,3 +85,14 @@
 
 "standard" = "Standaard";
 "hybrid" = "Hibride";
+
+//period
+"period" = "Periode";
+"timePeriodlabel" = "Tijdspanne";
+"twodays" = "2 dagen";
+"sevendays" = "7 dagen";
+"fourteendays" = "14 dagen";
+"fourweeks" = "4 weken";
+"halfayear" = "Halfjaar";
+"oneyear" = "1 jaar";
+"infinite" = "Oneindig";

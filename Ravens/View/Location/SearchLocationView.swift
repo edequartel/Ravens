@@ -171,7 +171,6 @@ struct SearchLocationView: View {
 
               log.error("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
 
-              settings.isLocationIDChanged = true
               log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
 
               areasViewModel.appendRecord(

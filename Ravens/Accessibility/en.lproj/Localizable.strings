@@ -85,3 +85,14 @@
 
 "standard" = "Standard";
 "hybrid" = "Hibrid";
+
+//period
+"period" = "Period";
+"timePeriodlabel" = "Time span";
+"twodays" = "2 days";
+"sevendays" = "7 days";
+"fourteendays" = "14 days";
+"fourweeks" = "4 weeks";
+"halfayear" = "Half a year";
+"oneyear" = "1 year";
+"infinite" = "Infinite";

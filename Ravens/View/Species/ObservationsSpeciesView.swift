@@ -84,7 +84,12 @@ struct ObservationsSpeciesView: View {
             if showView { Text("ObservationListView").font(.customTiny) }
 
             HorizontalLine()
-            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
+            ObservationListView(
+              observations: observations,
+              selectedSpeciesID: $selectedSpeciesID,
+              timePeriod: $settings.timePeriodSpecies,
+              entity: .species
+            ) {
 
               // Handle end of list event
               print("End of list reached in ParentView observationsSpecies")

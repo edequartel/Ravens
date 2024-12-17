@@ -10,12 +10,20 @@ import AudioToolbox
 
 struct ObservationListView: View {
   var observations: [Observation]
+
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
+  @Binding var timePeriod: TimePeriod
+
   @State var entity: EntityType
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
+
+//  @Binding var currentSortingOption: SortingOption
+//  @Binding var currentFilteringAllOption: FilterAllOption
+//  @Binding var currentFilteringOption: FilteringRarityOption
+
   @AccessibilityFocusState private var focusedItemID: Int?
 
   /// Closure to notify parent view that the end of the list is reached
@@ -29,7 +37,10 @@ struct ObservationListView: View {
 
       ForEach(filteredAndSortedObservations,
                  id: \.id) { obs in
-             ObservationRowView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)
+             ObservationRowView(
+              obs: obs,
+              selectedSpeciesID: $selectedSpeciesID,
+              entity: entity)
                  .accessibilityFocused($focusedItemID, equals: obs.id)
                  .onChange(of: focusedItemID) { newFocusID, oldFocusID in
                      handleFocusChange(newFocusID, from: filteredAndSortedObservations)
@@ -44,11 +55,13 @@ struct ObservationListView: View {
     }
 
     .listStyle(PlainListStyle()) // No additional styling, plain list look
+
     .modifier(ObservationToolbarModifier(
                    entity: entity,
                    currentSortingOption: $currentSortingOption,
                    currentFilteringAllOption: $currentFilteringAllOption,
-                   currentFilteringOption: $currentFilteringOption
+                   currentFilteringOption: $currentFilteringOption,
+                   timePeriod: $timePeriod
                ))
 
   }
@@ -100,25 +113,61 @@ struct ObservationToolbarModifier: ViewModifier {
     @Binding var currentFilteringAllOption: FilterAllOption
     @Binding var currentFilteringOption: FilteringRarityOption
 
-    func body(content: Content) -> some View {
-        content
-            .toolbar {
-                if entity != .species {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(
-                            destination: CombinedOptionsMenuView(
-                                currentSortingOption: $currentSortingOption,
-                                currentFilteringAllOption: $currentFilteringAllOption,
-                                currentFilteringOption: $currentFilteringOption
-                            )
-                        ) {
-                            Image(systemName: "ellipsis.circle")
-                            .uniformSize(color: .red)
-                            .accessibilityLabel(sortAndFilterObservationList)
-                        }
-                    }
-                }
+    @Binding var timePeriod: TimePeriod
+
+  func body(content: Content) -> some View {
+    content
+      .toolbar {
+        if entity != .species {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(
+              destination: CombinedOptionsMenuView(
+                currentSortingOption: $currentSortingOption,
+                currentFilteringAllOption: $currentFilteringAllOption,
+                currentFilteringOption: $currentFilteringOption,
+                timePeriod: $timePeriod
+              )
+            ) {
+              Image(systemName: "ellipsis.circle")
+                .uniformSize(color: .red)
+                .accessibilityLabel(sortAndFilterObservationList)
             }
-    }
+          }
+        }
+      }
+  }
 }
 
+struct ObservationToolbarModifierExtended: ViewModifier {
+  
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption
+  @Binding var currentFilteringOption: FilteringRarityOption
+
+//
+//  @State private var currentSortingOption: SortingOption = .date
+//  @State private var currentFilteringAllOption: FilterAllOption = .native
+//  @State private var currentFilteringOption: FilteringRarityOption = .all
+
+  @Binding var timePeriod: TimePeriod
+  
+  func body(content: Content) -> some View {
+    content
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(
+            destination: CombinedOptionsMenuView(
+              currentSortingOption: $currentSortingOption,
+              currentFilteringAllOption: $currentFilteringAllOption,
+              currentFilteringOption: $currentFilteringOption,
+              timePeriod: $timePeriod
+            )
+          ) {
+            Image(systemName: "ellipsis.circle")
+              .uniformSize(color: .red)
+              .accessibilityLabel(sortAndFilterObservationList)
+          }
+        }
+      }
+  }
+}

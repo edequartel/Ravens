@@ -30,6 +30,10 @@ struct ObservationsUserView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+    @State private var currentSortingOption: SortingOption = .date
+    @State private var currentFilteringAllOption: FilterAllOption = .native
+    @State private var currentFilteringOption: FilteringRarityOption = .all
+
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
@@ -39,9 +43,15 @@ struct ObservationsUserView: View {
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
-          entity: .user) {
+          timePeriod: $settings.timePeriodUser,
+          entity: .user
+        ) {
             // Handle end of list event
-            observationUser.fetchData(settings: settings, url: observationUser.next, completion: { log.error("observationUser.fetchData") })
+            observationUser.fetchData(
+              settings: settings,
+              url: observationUser.next,
+              completion: { log.error("observationUser.fetchData")
+              })
           }
       } else {
         NoObservationsView()

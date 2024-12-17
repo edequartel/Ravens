@@ -85,8 +85,16 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringAllOption: FilterAllOption
   @Binding var currentFilteringOption: FilteringRarityOption
 
+  @Binding var timePeriod: TimePeriod
+
   var body: some View {
     Form {
+      Section(period) {
+        VStack {
+          PeriodView(timePeriod: $timePeriod)
+        }
+      }
+
       Section(sort) {
         ForEach(SortingOption.allCases, id: \.self) { option in
           Button(action: {
@@ -135,6 +143,7 @@ struct CombinedOptionsMenuView: View {
           }
         }
       }
+
     }
   }
 }

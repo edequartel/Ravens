@@ -70,5 +70,15 @@ let status = LocalizedStringKey("status")
 let native = LocalizedStringKey("native")
 let rarity = LocalizedStringKey("rarity")
 
+let period = LocalizedStringKey("period")
+let timePeriodlabel = LocalizedStringKey("timePeriodlabel")
+let twoDays = LocalizedStringKey("twodays")
+let sevenDays = LocalizedStringKey("sevendays")
+let fourteenDays = LocalizedStringKey("fourteendays")
+let fourWeeks = LocalizedStringKey("fourweeks")
+let halfAYear = LocalizedStringKey("halfayear")
+let oneYear = LocalizedStringKey("oneyear")
+let infinite = LocalizedStringKey("infinite")
+
 
 
