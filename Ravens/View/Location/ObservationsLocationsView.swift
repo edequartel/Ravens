@@ -126,7 +126,8 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
 struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
-      Text(noObservations)
+      EmptyView()
+//      Text(noObservations)
 //      ProgressView()
 //        .frame(width: 100, height: 100)
     }

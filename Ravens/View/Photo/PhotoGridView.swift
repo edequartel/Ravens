@@ -39,11 +39,7 @@ struct PhotoGridView: View {
       PhotoGridViewLP(photos: photos)
         .presentationDragIndicator(.visible)
     }
-    .padding(8) // Add padding to avoid clipping the border
-            .background(
-                RoundedRectangle(cornerRadius: 12) // Rounded border shape
-                    .stroke(Color.gray, lineWidth: 1)
-            )
+    .padding(8) 
   }
 }
 
