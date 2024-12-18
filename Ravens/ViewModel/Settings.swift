@@ -13,8 +13,6 @@ import MapKit
 import SwiftyBeaver
 import Combine
 
-
-
 class Settings: ObservableObject {
   let log = SwiftyBeaver.self
 
@@ -181,7 +179,7 @@ class Settings: ObservableObject {
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
 
     mapPreference = mapPreferenceStored
-    //        selectedRarity = selectedRarityStored
+
     selectedInBetween = selectedInBetweenStored
 
     isInit = false
