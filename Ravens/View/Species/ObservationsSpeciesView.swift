@@ -12,8 +12,6 @@ struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-
-//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
   
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -30,6 +28,10 @@ struct ObservationsSpeciesView: View {
   @State private var isLoaded = false
 
   @Binding var selectedSpeciesID: Int?
+
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
 
 
   var body: some View {
@@ -88,7 +90,10 @@ struct ObservationsSpeciesView: View {
               observations: observations,
               selectedSpeciesID: $selectedSpeciesID,
               timePeriod: $settings.timePeriodSpecies,
-              entity: .species
+              entity: .species,
+              currentSortingOption: $currentSortingOption,
+              currentFilteringAllOption: $currentFilteringAllOption,
+              currentFilteringOption: $currentFilteringOption
             ) {
 
               // Handle end of list event

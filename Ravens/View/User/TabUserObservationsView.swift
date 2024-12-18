@@ -6,21 +6,24 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct TabUserObservationsView: View {
+  let log = SwiftyBeaver.self
   @ObservedObject var observationUser : ObservationsViewModel
 
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
+  @EnvironmentObject private var userViewModel:  UserViewModel
+
+
   @State private var showFirstView = false
 
-//  @State var Xentity: EntityType
-//  @State private var currentSortingOption: SortingOption = .date
-//  @State private var currentFilteringAllOption: FilterAllOption = .native
-//  @State private var currentFilteringOption: FilteringRarityOption = .all
-//  @State private var timePeriod: TimePeriod = .fourWeeks
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
 
   @Binding var selectedSpeciesID: Int?
 
@@ -35,16 +38,25 @@ struct TabUserObservationsView: View {
         } else {
           ObservationsUserView(
             observationUser: observationUser,
-            selectedSpeciesID: $selectedSpeciesID)
+            selectedSpeciesID: $selectedSpeciesID,
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption)
         }
       }
+      
+      .onChange(of: settings.timePeriodUser) {
+        log.info("update timePeriodUser so new data fetch for this period")
+        observationUser.fetchDataInit(settings: settings, entity: .user, id: userViewModel.user?.id ?? 0, completion: { log.info("fetch data complete") } )
+      }
 
-//      .modifier(ObservationToolbarModifierExtended(
-//                     currentSortingOption: $currentSortingOption,
-//                     currentFilteringAllOption: $currentFilteringAllOption,
-//                     currentFilteringOption: $currentFilteringOption,
-//                     timePeriod: $settings.timePeriodUser
-//                 ))
+
+      .modifier(ObservationToolbarModifier(
+                     currentSortingOption: $currentSortingOption,
+                     currentFilteringAllOption: $currentFilteringAllOption,
+                     currentFilteringOption: $currentFilteringOption,
+                     timePeriod: $settings.timePeriodUser
+                 ))
 
       .toolbar {
         if !accessibilityManager.isVoiceOverEnabled {

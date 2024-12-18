@@ -20,17 +20,15 @@ struct ObservationsLocationView: View {
   
   @Binding var selectedSpeciesID: Int?
 
-  @State private var retrievedData = false
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption 
+  @Binding var currentFilteringOption: FilteringRarityOption
 
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @State private var retrievedData = false
 
   var body: some View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
-
-//      Text("cnt: \(observationsLocation.count)")
 
       if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
@@ -47,7 +45,10 @@ struct ObservationsLocationView: View {
             observations: observations,
             selectedSpeciesID: $selectedSpeciesID,
             timePeriod: $settings.timePeriodLocation,
-            entity: .location) {
+            entity: .location,
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption) {
             // Handle end of list event
              print("End of list reached in ParentView observationsLocation")
             observationsLocation.fetchData(settings: settings, url: observationsLocation.next, completion: { log.error("observationsLocation.fetchData") })
@@ -125,8 +126,9 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
 struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
-      ProgressView()
-        .frame(width: 100, height: 100)
+      Text(noObservations)
+//      ProgressView()
+//        .frame(width: 100, height: 100)
     }
     .padding() // Adds padding around VStack content
     .frame(maxWidth: .infinity, maxHeight: .infinity) // Expands VStack to fill parent

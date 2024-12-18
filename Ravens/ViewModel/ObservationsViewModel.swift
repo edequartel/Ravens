@@ -38,6 +38,7 @@ class ObservationsViewModel: ObservableObject {
 //  }
 
   func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
+//    func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: (() -> Void)? = nil) {
     log.info("FetchDataInit")
     //reset
     self.observations = []
@@ -51,7 +52,8 @@ class ObservationsViewModel: ObservableObject {
     case .species:
         days = settings.timePeriodSpecies.rawValue
     }
-
+    days = days-1 //today is also also a day
+    
     //datetime
     let date: Date = Date.now
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
@@ -105,9 +107,6 @@ class ObservationsViewModel: ObservableObject {
 
               self.next = observations.next?.absoluteString ?? ""
               self.previous = observations.previous?.absoluteString ?? ""
-
-//              print("prv: \(self.previous)")
-//              print("nxt: \(self.next)")
 
               completion() // call the completion handler if it exists
             }

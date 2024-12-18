@@ -18,7 +18,6 @@ import Combine
 class Settings: ObservableObject {
   let log = SwiftyBeaver.self
 
-
   //timePeriod are retrieved in init()
   @AppStorage("timePeriodUser") var timePeriodUserStored: TimePeriod = .infinite
   @Published var timePeriodUser: TimePeriod = .infinite {
@@ -191,7 +190,7 @@ class Settings: ObservableObject {
 //    hasLocationLoaded = false
 //    hasSpeciesLoaded = false
 
-    timePeriodUser = .halfYear//timePeriodUserStored
+    timePeriodUser = timePeriodUserStored
     timePeriodLocation = timePeriodLocationStored
     timePeriodSpecies = timePeriodSpeciesStored
   }

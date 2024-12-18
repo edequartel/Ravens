@@ -75,7 +75,7 @@ struct FilterOptionsView: View {
         }
       }
     }
-    .navigationTitle("Filtering")
+//    .navigationTitle("Filtering")
   }
 }
 

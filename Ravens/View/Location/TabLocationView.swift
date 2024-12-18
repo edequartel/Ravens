@@ -21,6 +21,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
 
   @EnvironmentObject var accessibilityManager: AccessibilityManager
+  @EnvironmentObject var userViewModel:  UserViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -28,6 +29,13 @@ struct TabLocationView: View {
   @State private var showFirstView = false
   @State private var isShowingLocationList = false
 
+
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
+
+
+  @EnvironmentObject var locationManagerModel: LocationManagerModel
 
   var body: some View {
     NavigationView {
@@ -43,9 +51,32 @@ struct TabLocationView: View {
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
-            selectedSpeciesID:  $selectedSpeciesID)
+            selectedSpeciesID:  $selectedSpeciesID,
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption
+          )
         }
       }
+
+      .onChange(of: settings.timePeriodLocation) {
+        log.info("update timePeriodLocation so new data fetch for this period")
+        let location = locationManagerModel.getCurrentLocation()
+        fetchDataLocation(
+          settings: settings,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+        settings.hasLocationLoaded = true //??? wat doet dit
+      }
+
+      .modifier(ObservationToolbarModifier(
+        currentSortingOption: $currentSortingOption,
+        currentFilteringAllOption: $currentFilteringAllOption,
+        currentFilteringOption: $currentFilteringOption,
+        timePeriod: $settings.timePeriodLocation
+      ))
 
       .toolbar {
         if !accessibilityManager.isVoiceOverEnabled {
@@ -62,29 +93,29 @@ struct TabLocationView: View {
 
         //update my locationData
         ToolbarItem(placement: .navigationBarLeading) { //@@@
-            Button(action: {
-                log.info("getMyLocation")
+          Button(action: {
+            log.info("getMyLocation")
 
-                if let location = locationManager.getCurrentLocation() {
-                  //here getting the data for the location
-                  fetchDataLocation(
-                    settings: settings,
-                    observationsLocation: observationsLocation,
-                    locationIdViewModel: locationIdViewModel,
-                    geoJSONViewModel: geoJSONViewModel,
-                    coordinate: CLLocationCoordinate2D(
-                      latitude: location.coordinate.latitude,
-                      longitude: location.coordinate.longitude))
-                } else if let errorMessage = locationManager.errorMessage {
-                    log.error("Error: \(errorMessage)")
-                } else {
-                    log.error("Retrieving location...")
-                }
-            }) {
-                Image(systemName: "smallcircle.filled.circle")
-                    .uniformSize()
-                    .accessibilityLabel(updateLocation)
+            if let location = locationManager.getCurrentLocation() {
+              //here getting the data for the location
+              fetchDataLocation(
+                settings: settings,
+                observationsLocation: observationsLocation,
+                locationIdViewModel: locationIdViewModel,
+                geoJSONViewModel: geoJSONViewModel,
+                coordinate: CLLocationCoordinate2D(
+                  latitude: location.coordinate.latitude,
+                  longitude: location.coordinate.longitude))
+            } else if let errorMessage = locationManager.errorMessage {
+              log.error("Error: \(errorMessage)")
+            } else {
+              log.error("Retrieving location...")
             }
+          }) {
+            Image(systemName: "smallcircle.filled.circle")
+              .uniformSize()
+              .accessibilityLabel(updateLocation)
+          }
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {

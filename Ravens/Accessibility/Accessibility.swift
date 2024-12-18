@@ -80,5 +80,7 @@ let halfAYear = LocalizedStringKey("halfayear")
 let oneYear = LocalizedStringKey("oneyear")
 let infinite = LocalizedStringKey("infinite")
 
+let noObservations = LocalizedStringKey("noObservations")
+
 
 

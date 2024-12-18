@@ -16,13 +16,16 @@ struct ObservationListView: View {
   @Binding var timePeriod: TimePeriod
 
   @State var entity: EntityType
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
 
-//  @Binding var currentSortingOption: SortingOption
-//  @Binding var currentFilteringAllOption: FilterAllOption
-//  @Binding var currentFilteringOption: FilteringRarityOption
+  @Binding var currentSortingOption: SortingOption // = .date
+  @Binding var currentFilteringAllOption: FilterAllOption //= .native
+  @Binding var currentFilteringOption: FilteringRarityOption //= .all
+
+//  @State private var currentSortingOption: SortingOption = .date
+//  @State private var currentFilteringAllOption: FilterAllOption = .native
+//  @State private var currentFilteringOption: FilteringRarityOption = .all
+
+
 
   @AccessibilityFocusState private var focusedItemID: Int?
 
@@ -41,7 +44,7 @@ struct ObservationListView: View {
               obs: obs,
               selectedSpeciesID: $selectedSpeciesID,
               entity: entity)
-                 .accessibilityFocused($focusedItemID, equals: obs.id)
+                 .accessibilityFocused($focusedItemID, equals: obs.idObs)
                  .onChange(of: focusedItemID) { newFocusID, oldFocusID in
                      handleFocusChange(newFocusID, from: filteredAndSortedObservations)
                  }
@@ -53,22 +56,12 @@ struct ObservationListView: View {
                  }
          }
     }
-
     .listStyle(PlainListStyle()) // No additional styling, plain list look
-
-    .modifier(ObservationToolbarModifier(
-                   entity: entity,
-                   currentSortingOption: $currentSortingOption,
-                   currentFilteringAllOption: $currentFilteringAllOption,
-                   currentFilteringOption: $currentFilteringOption,
-                   timePeriod: $timePeriod
-               ))
-
   }
 
   private func handleFocusChange(_ newFocusID: Int?, from observations: [Observation]) {
       guard let newFocusID = newFocusID else { return }
-      if let focusedObservation = observations.first(where: { $0.id == newFocusID }) {
+      if let focusedObservation = observations.first(where: { $0.idObs == newFocusID }) {
         print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
         if focusedObservation.sounds?.count ?? 0 > 0 {
               print("vibrate")
@@ -107,48 +100,10 @@ struct ObservationListView: View {
   }
 }
 
-struct ObservationToolbarModifier: ViewModifier {
-    var entity: EntityType
-    @Binding var currentSortingOption: SortingOption
-    @Binding var currentFilteringAllOption: FilterAllOption
-    @Binding var currentFilteringOption: FilteringRarityOption
-
-    @Binding var timePeriod: TimePeriod
-
-  func body(content: Content) -> some View {
-    content
-      .toolbar {
-        if entity != .species {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(
-              destination: CombinedOptionsMenuView(
-                currentSortingOption: $currentSortingOption,
-                currentFilteringAllOption: $currentFilteringAllOption,
-                currentFilteringOption: $currentFilteringOption,
-                timePeriod: $timePeriod
-              )
-            ) {
-              Image(systemName: "ellipsis.circle")
-                .uniformSize(color: .red)
-                .accessibilityLabel(sortAndFilterObservationList)
-            }
-          }
-        }
-      }
-  }
-}
-
-struct ObservationToolbarModifierExtended: ViewModifier {
-  
+struct ObservationToolbarModifier: ViewModifier {  
   @Binding var currentSortingOption: SortingOption
   @Binding var currentFilteringAllOption: FilterAllOption
   @Binding var currentFilteringOption: FilteringRarityOption
-
-//
-//  @State private var currentSortingOption: SortingOption = .date
-//  @State private var currentFilteringAllOption: FilterAllOption = .native
-//  @State private var currentFilteringOption: FilteringRarityOption = .all
-
   @Binding var timePeriod: TimePeriod
   
   func body(content: Content) -> some View {

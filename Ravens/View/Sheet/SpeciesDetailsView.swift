@@ -13,94 +13,108 @@ import Kingfisher
 
 
 struct SpeciesDetailsView: View {
-    let log = SwiftyBeaver.self
-    @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
-//    @EnvironmentObject var observationsYearViewModel: ObservationsYearViewModel
-    @EnvironmentObject var notificationsManager: NotificationsManager
-    @EnvironmentObject var settings: Settings
+  let log = SwiftyBeaver.self
+  @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
+  @EnvironmentObject var notificationsManager: NotificationsManager
+  @EnvironmentObject var settings: Settings
 
-    var speciesID: Int
-    @State private var imageURL: String = ""
+  var speciesID: Int
+  @State private var imageURL: String = ""
 
-    var body: some View {
-        NavigationView {
-            ScrollView {
-              VStack(alignment: .leading, spacing: 16) {
-                    // Species Details Header
-                    if let species = viewSpeciesDetailsDModel.speciesDetails {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(species.name)
-                                .font(.title)
-                                .bold()
-
-                            Text(species.scientificName)
-                                .italic()
-                                .foregroundColor(.gray)
-
-                            HStack {
-                                Text("\(species.groupName) - ")
-//                                Spacer()
-                                Text("\(species.status) - ")
-//                                Spacer()
-                                Text("\(species.rarity)")
-                              Spacer()
-                            }
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                        }
-                        .padding()
-                        .islandBackground()
-                        .accessibilityElement(children: .combine)
-
-                        // Image Display
-                        if !imageURL.isEmpty {
-                            KFImage(URL(string: imageURL))
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-//                                .padding(.horizontal)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                                .padding()
-                                .islandBackground()
-                                .accessibility(hidden: true)
-                        }
-
-                        // Information Text
-                      if species.infoText != "" {
-                        RichText(html: species.infoText)
-                          .padding()
-                          .islandBackground()
-                      }
-
-                        // More Information Link
-                      HStack {
-                        Spacer()
-                        Link(moreAtWaarneming, destination: URL(string: species.permalink)!)
-                          .font(.headline)
-                          .padding()
-                          .islandBackground()
-                        Spacer()
-                      }
-
-                    } else {
-                        ProgressView()
-                    }
-                }
-                .padding()
+  var body: some View {
+    NavigationView {
+      ScrollView {
+        VStack(alignment: .leading, spacing: 16) {
+          // Species Details Header
+          if let species = viewSpeciesDetailsDModel.speciesDetails {
+            HStack {
+              Link(destination: URL(string: species.permalink)!) {
+                Label("More Info", systemImage: "arrow.up.right.square")
+                  .font(.headline)
+                  .padding()
+                  .foregroundColor(.blue)
+                  .islandBackground() // Assuming this is a custom modifier
+              }
+              Spacer()
+              Button(action: {
+                openWikipediaPage(for: species.scientificName)
+              }) {
+                Label("Wikipedia", systemImage: "book.fill")
+                  .font(.headline)
+                  .padding()
+                  .foregroundColor(.blue)
+                  .islandBackground() // Assuming this is a custom modifier
+              }
             }
+            VStack(alignment: .leading, spacing: 8) {
+              Text(species.name)
+                .font(.title)
+                .bold()
+
+              Text(species.scientificName)
+                .italic()
+                .foregroundColor(.gray)
+
+              HStack {
+                Text("\(species.groupName) - ")
+                //                                Spacer()
+                Text("\(species.status) - ")
+                //                                Spacer()
+                Text("\(species.rarity)")
+                Spacer()
+              }
+              .font(.footnote)
+              .foregroundColor(.gray)
+            }
+            .padding()
+            .islandBackground()
+            .accessibilityElement(children: .combine)
+
+            // Image Display
+            if !imageURL.isEmpty {
+              KFImage(URL(string: imageURL))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .islandBackground()
+                .accessibility(hidden: true)
+            }
+
+            // Information Text
+            if species.infoText != "" {
+              RichText(html: species.infoText)
+                .padding()
+                .islandBackground()
+            }
+
+          } else {
+            ProgressView()
+          }
         }
-        .presentationDragIndicator(.visible)
-        .onAppear {
-            log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
-            viewSpeciesDetailsDModel.fetchData(
-                settings: settings,
-                for: speciesID,
-                onCompletion: {
-                    imageURL = viewSpeciesDetailsDModel.speciesDetails?.photo ?? ""
-                }
-            )
-        }
+        .padding()
+      }
     }
+    .presentationDragIndicator(.visible)
+    .onAppear {
+      log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
+      viewSpeciesDetailsDModel.fetchData(
+        settings: settings,
+        for: speciesID,
+        onCompletion: {
+          imageURL = viewSpeciesDetailsDModel.speciesDetails?.photo ?? ""
+        }
+      )
+    }
+  }
+
+
+  func openWikipediaPage(for searchTerm: String) {
+    let formattedTerm = searchTerm.lowercased().replacingOccurrences(of: " ", with: "_")
+    if let url = URL(string: "https://\(settings.selectedLanguage).m.wikipedia.org/wiki/\(formattedTerm)") {
+      UIApplication.shared.open(url)
+    }
+  }
 }
 
 //}
@@ -109,3 +123,8 @@ struct SpeciesDetailsView: View {
 //    SpeciesDetailsView(item: Species())
 //        .environmentObject(Settings())
 //}
+
+
+
+
+

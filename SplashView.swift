@@ -50,7 +50,7 @@ struct SplashView: View {
 
 
       LottieView(lottieFile: "ravenssun.json")
-        .frame(width: 200, height: 200)
+        .frame(width: 150, height: 150)
     }
 
     .onChange(of: keyChainviewModel.token.isEmpty) { oldValue, newValue in

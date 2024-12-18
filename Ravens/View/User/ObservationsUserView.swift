@@ -30,21 +30,25 @@ struct ObservationsUserView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-//    @State private var currentSortingOption: SortingOption = .date
-//    @State private var currentFilteringAllOption: FilterAllOption = .native
-//    @State private var currentFilteringOption: FilteringRarityOption = .all
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption
+  @Binding var currentFilteringOption: FilteringRarityOption 
 
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-//      Text("nr: \(observationUser.count)")
+
+
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
           timePeriod: $settings.timePeriodUser,
-          entity: .user
+          entity: .user,
+          currentSortingOption: $currentSortingOption,
+          currentFilteringAllOption: $currentFilteringAllOption,
+          currentFilteringOption: $currentFilteringOption
         ) {
             // Handle end of list event
             observationUser.fetchData(
@@ -54,8 +58,13 @@ struct ObservationsUserView: View {
               })
           }
       } else {
+        
         NoObservationsView()
       }
+
+
+
+
     }
 
     .onAppear {

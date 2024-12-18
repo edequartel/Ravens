@@ -15,12 +15,12 @@ struct PhotoGridView: View {
   @State private var isImagePresented = false
 
   let adaptiveColumns = [
-    GridItem(.adaptive(minimum: 100, maximum: 120), spacing: 16)
+    GridItem(.adaptive(minimum: 100, maximum: 120), spacing: 8)
   ]
 
   var body: some View {
     ScrollView {
-      LazyVGrid(columns: adaptiveColumns, spacing: 16) {
+      LazyVGrid(columns: adaptiveColumns, spacing: 8) {
         ForEach(photos, id: \.self) { photo in
           KFImage(URL(string: photo))
             .resizable()
@@ -39,6 +39,11 @@ struct PhotoGridView: View {
       PhotoGridViewLP(photos: photos)
         .presentationDragIndicator(.visible)
     }
+    .padding(8) // Add padding to avoid clipping the border
+            .background(
+                RoundedRectangle(cornerRadius: 12) // Rounded border shape
+                    .stroke(Color.gray, lineWidth: 1)
+            )
   }
 }
 
