@@ -27,6 +27,8 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+  @State private var setObserver: Int = 0
+
   var body: some View {
     NavigationView {
       VStack {
@@ -44,21 +46,28 @@ struct TabUserObservationsView: View {
             currentFilteringOption: $currentFilteringOption)
         }
       }
-      
+
       .onChange(of: settings.timePeriodUser) {
         log.info("update timePeriodUser so new data fetch for this period")
-        observationUser.fetchDataInit(settings: settings, entity: .user, id: userViewModel.user?.id ?? 0, completion: { log.info("fetch data complete") } )
+
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+//          id: userViewModel.user?.id ?? 0,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
       }
 
-
+      //sort filter and periodTime
       .modifier(ObservationToolbarModifier(
-                     currentSortingOption: $currentSortingOption,
-                     currentFilteringAllOption: $currentFilteringAllOption,
-                     currentFilteringOption: $currentFilteringOption,
-                     timePeriod: $settings.timePeriodUser
-                 ))
+        currentSortingOption: $currentSortingOption,
+        currentFilteringAllOption: $currentFilteringAllOption,
+        currentFilteringOption: $currentFilteringOption,
+        timePeriod: $settings.timePeriodUser
+      ))
 
       .toolbar {
+        //set map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -71,9 +80,13 @@ struct TabUserObservationsView: View {
           }
 
 
-          //add a toolbaritem here to the list of users
+          //add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination: ObserversView(observationUser: observationUser)) {
+            NavigationLink(
+              destination: ObserversView(
+                observationUser: observationUser,
+                setObserver: $setObserver)
+            ) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
                 .accessibility(label: Text(observersList))
@@ -92,11 +105,11 @@ struct TabUserObservationsView: View {
   }
 
   func imageForUser(userId: Int) -> String {
-      return isUserInRecords(userId: userId) ? "star.fill" : "star"
+    return isUserInRecords(userId: userId) ? "star.fill" : "star"
   }
 
   func isUserInRecords(userId: Int) -> Bool {
-      return obsObserversViewModel.isObserverInRecords(userID: userId)
+    return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
 }
 

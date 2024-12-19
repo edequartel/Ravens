@@ -12,7 +12,8 @@ import SFSafeSymbols
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationsLocation: ObservationsViewModel
+  @ObservedObject var observationsLocation: ObservationsViewModel //???
+
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
 
@@ -34,6 +35,8 @@ struct TabLocationView: View {
   @State private var currentFilteringAllOption: FilterAllOption = .native
   @State private var currentFilteringOption: FilteringRarityOption = .all
 
+
+  @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
 
@@ -61,16 +64,18 @@ struct TabLocationView: View {
 
       .onChange(of: settings.timePeriodLocation) {
         log.info("update timePeriodLocation so new data fetch for this period")
-        let location = locationManagerModel.getCurrentLocation()
+//        let location = locationManagerModel.getCurrentLocation()
         fetchDataLocation(
           settings: settings,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+//          coordinate: location?.coordinate ?? CLLocationCoordinate2D())  //here it goes wrong wrong coordinate
+          coordinate: setLocation) //location?.coordinate ?? CLLocationCoordinate2D())  //here it goes wrong wrong coordinate
         settings.hasLocationLoaded = true //??? wat doet dit
       }
 
+      //set sort, filter and timePeriod
       .modifier(ObservationToolbarModifier(
         currentSortingOption: $currentSortingOption,
         currentFilteringAllOption: $currentFilteringAllOption,
@@ -79,6 +84,7 @@ struct TabLocationView: View {
       ))
 
       .toolbar {
+        //map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -92,7 +98,7 @@ struct TabLocationView: View {
         }
 
         //update my locationData
-        ToolbarItem(placement: .navigationBarLeading) { //@@@
+        ToolbarItem(placement: .navigationBarLeading) { 
           Button(action: {
             log.info("getMyLocation")
 
@@ -118,6 +124,7 @@ struct TabLocationView: View {
           }
         }
 
+        //favo location
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
             if areasViewModel.isIDInRecords(areaID: settings.locationId) {
@@ -142,12 +149,14 @@ struct TabLocationView: View {
           }
         }
 
+        //choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
             destination: LocationListView(
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
-              geoJSONViewModel: geoJSONViewModel)) {
+              geoJSONViewModel: geoJSONViewModel,
+              setLocation: $setLocation)) {
                 Image(systemSymbol: .listBullet)
                   .uniformSize()
               }
