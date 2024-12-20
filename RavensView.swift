@@ -24,13 +24,13 @@ struct RavensView: View {
     VStack {
       TabView {
         // Tab 2
-        TabUserObservationsView(
-          observationUser : observationUser,
-          selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text(us)
-          Image(systemSymbol: .person2Fill)
-        }
+//        TabUserObservationsView(
+//          observationUser : observationUser,
+//          selectedSpeciesID: $selectedSpeciesID)
+//        .tabItem {
+//          Text(us)
+//          Image(systemSymbol: .person2Fill)
+//        }
         // Tab 1
         TabLocationView(
           observationsLocation: observationsLocation,

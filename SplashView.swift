@@ -38,7 +38,6 @@ struct SplashView: View {
   @State private var isRegionListDataLoaded = false
   @State private var isUserDataLoaded = false
   @State private var isObservationsLocationDataLoaded = false
-//  @State private var isLocationIdDataLoaded = false
   @State private var isGeoJSONDataLoaded = false
 
   var body: some View {
@@ -109,7 +108,6 @@ struct SplashView: View {
         checkDataLoaded()
       })
 
-
     regionListViewModel.fetchData(
       settings: settings,
       completion: {
@@ -145,25 +143,6 @@ struct SplashView: View {
         settings.userId = userViewModel.user?.id ?? 0
         settings.userName = userViewModel.user?.name ?? ""
       })
-
-//    let location = locationManagerModel.getCurrentLocation()
-
-    //get the location
-//    locationIdViewModel.fetchLocations(
-//      latitude: location?.coordinate.latitude ?? 0,
-//      longitude: location?.coordinate.longitude ?? 0,
-//      completion: { fetchedLocations in
-//        log.error("locationIdViewModel data loaded")
-//        // Use fetchedLocations here //actually it is one location
-//        settings.locationName = fetchedLocations[0].name
-//        for location in fetchedLocations {
-//          log.error("location \(location)")
-//        }
-//        log.error("locationIdViewModel data loaded")
-//        isLocationIdDataLoaded = true
-//        checkDataLoaded()
-//      })
-//    isLocationIdDataLoaded = true
   }
 }
 

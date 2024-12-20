@@ -9,6 +9,17 @@ import SwiftUI
 import SwiftyBeaver
 import MapKit
 import SFSafeSymbols
+import CoreLocation
+
+import SwiftUI
+import CoreLocation
+
+// Add Equatable conformance for CLLocationCoordinate2D
+extension CLLocationCoordinate2D: @retroactive Equatable {
+  public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+    lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+  }
+}
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
@@ -37,6 +48,7 @@ struct TabLocationView: View {
 
 
   @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
+  @State private var setRefresh: Bool = false
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
 
@@ -57,24 +69,50 @@ struct TabLocationView: View {
             selectedSpeciesID:  $selectedSpeciesID,
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
-            currentFilteringOption: $currentFilteringOption
+            currentFilteringOption: $currentFilteringOption,
+            setLocation: $setLocation,
+            setRefresh: $setRefresh
           )
         }
       }
 
       .onChange(of: settings.timePeriodLocation) {
         log.info("update timePeriodLocation so new data fetch for this period")
-//        let location = locationManagerModel.getCurrentLocation()
         fetchDataLocation(
           settings: settings,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-//          coordinate: location?.coordinate ?? CLLocationCoordinate2D())  //here it goes wrong wrong coordinate
-          coordinate: setLocation) //location?.coordinate ?? CLLocationCoordinate2D())  //here it goes wrong wrong coordinate
-        settings.hasLocationLoaded = true //??? wat doet dit
+          coordinate: setLocation)
+        settings.hasLocationLoaded = true 
       }
 
+      .onChange(of: setLocation) {
+        log.error("update setLocation so new data fetch for this period")
+        fetchDataLocation(
+          settings: settings,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: setLocation
+        )
+        settings.hasLocationLoaded = true
+      }
+
+
+      .onChange(of: setRefresh) {
+        log.error("update setRefresh so new data fetch for this period")
+        fetchDataLocation(
+          settings: settings,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: setLocation
+        )
+        settings.hasLocationLoaded = true
+      }
+
+      
       //set sort, filter and timePeriod
       .modifier(ObservationToolbarModifier(
         currentSortingOption: $currentSortingOption,
@@ -98,20 +136,13 @@ struct TabLocationView: View {
         }
 
         //update my locationData
-        ToolbarItem(placement: .navigationBarLeading) { 
+        ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
             log.info("getMyLocation")
 
             if let location = locationManager.getCurrentLocation() {
               //here getting the data for the location
-              fetchDataLocation(
-                settings: settings,
-                observationsLocation: observationsLocation,
-                locationIdViewModel: locationIdViewModel,
-                geoJSONViewModel: geoJSONViewModel,
-                coordinate: CLLocationCoordinate2D(
-                  latitude: location.coordinate.latitude,
-                  longitude: location.coordinate.longitude))
+              setLocation = location.coordinate
             } else if let errorMessage = locationManager.errorMessage {
               log.error("Error: \(errorMessage)")
             } else {
@@ -165,7 +196,7 @@ struct TabLocationView: View {
 
       }
       .onAppear {
-        log.info("LocationView onAppear")
+        log.error("LocationView onAppear")
       }
     }
   }

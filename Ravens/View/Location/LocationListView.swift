@@ -35,13 +35,6 @@ struct LocationListView: View {
               setLocation.latitude = record.latitude
               setLocation.longitude = record.longitude
 
-              fetchDataLocation(
-                settings: settings,
-                observationsLocation: observationsLocation,
-                locationIdViewModel: locationIdViewModel,
-                geoJSONViewModel: geoJSONViewModel,
-                coordinate: CLLocationCoordinate2D(latitude: record.latitude, longitude: record.longitude))
-
               self.presentationMode.wrappedValue.dismiss()
             }) {
               Text(record.name)

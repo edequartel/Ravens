@@ -16,6 +16,8 @@ struct ObservationsLocationView: View {
   @ObservedObject var geoJSONViewModel: GeoJSONViewModel
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
+  @EnvironmentObject var locationManager: LocationManagerModel
+  
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedSpeciesID: Int?
@@ -25,6 +27,14 @@ struct ObservationsLocationView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
 
   @State private var retrievedData = false
+
+  @Binding var setLocation: CLLocationCoordinate2D
+  @Binding var setRefresh: Bool
+
+
+  func forceUpdateLocation(_ coordinate: CLLocationCoordinate2D) {
+      setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude) // Force reassign
+  }
 
   var body: some View {
     VStack {
@@ -61,26 +71,20 @@ struct ObservationsLocationView: View {
       
     }
     .refreshable {
-      log.error("refreshing... ObservationsLocationsView")
-      let location = locationManagerModel.getCurrentLocation()
-      fetchDataLocation(
-        settings: settings,
-        observationsLocation: observationsLocation,
-        locationIdViewModel: locationIdViewModel,
-        geoJSONViewModel: geoJSONViewModel,
-        coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+      log.error("refreshing... ObservationsLocationsView")  //?? de vraag is of setLocation wel echt in the onchange of the TabListView wordt aangeroepen want de waarde veranderd niet
+//      if let location = locationManager.getCurrentLocation() {
+        //here getting the data for the location forced
+//        forceUpdateLocation(location.coordinate)
+        setRefresh.toggle()
+//      }
     }
     .onAppear()  {
       if !settings.hasLocationLoaded {
-        log.info("ObservationsLocationsView onAppear")
-        let location = locationManagerModel.getCurrentLocation()
-        fetchDataLocation(
-          settings: settings,
-          observationsLocation: observationsLocation,
-          locationIdViewModel: locationIdViewModel,
-          geoJSONViewModel: geoJSONViewModel,
-          coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-          settings.hasLocationLoaded = true
+        log.error("ObservationsLocationsView onAppear")
+        if let location = locationManager.getCurrentLocation() {
+          //here getting the data for the location
+          setLocation = location.coordinate
+        }
       }
     }
   }
@@ -98,7 +102,7 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
       // Use fetchedLocations here, actually it is one location,. the first
       settings.locationName = fetchedLocations[0].name
       settings.locationId = fetchedLocations[0].id
-      settings.locationCoordinate = coordinate //<<
+      settings.locationCoordinate = coordinate 
 
 
       //2a. get the geoJSON for this area, and we pick the first one = 0
@@ -120,6 +124,8 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
           settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
         })
     })
+
+  
 }
 
 
