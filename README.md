@@ -15,9 +15,11 @@ Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je
 <!--
 ## TestFlight
 Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren.
--->
+
 
 ![QR-code](./images/QRCode.png)
+
+-->
 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://www.ravensobs.com)
