@@ -31,10 +31,16 @@ struct SpeciesInfoView: View {
 
         }
 
+//        if species.recent ?? false {
+//          Text("!")
+//        }
+
         Text("\(species.name)")
           .bold()
           .lineLimit(1)
           .truncationMode(.tail)
+          .foregroundColor(species.recent ?? false ? .red : .primary)
+
         Spacer()
         //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {

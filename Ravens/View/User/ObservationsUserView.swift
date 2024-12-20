@@ -32,7 +32,9 @@ struct ObservationsUserView: View {
 
   @Binding var currentSortingOption: SortingOption
   @Binding var currentFilteringAllOption: FilterAllOption
-  @Binding var currentFilteringOption: FilteringRarityOption 
+  @Binding var currentFilteringOption: FilteringRarityOption
+
+  @Binding var setRefresh: Bool
 
   var body: some View {
     VStack {
@@ -68,30 +70,11 @@ struct ObservationsUserView: View {
     }
 
     .onAppear {
-      if !settings.hasUserLoaded {
-        observationUser.fetchDataInit(
-          settings: settings,
-          entity: .user,
-          id: settings.userId,
-          completion: {
-            log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
-            log.info("prv: \(observationUser.previous)")
-            log.info("nxt: \(observationUser.next)")
-          })
-        settings.hasUserLoaded = true
-      }
+      log.error("onappear observation user")
     }
     .refreshable {
-      log.error("refreshing observation user")
-      observationUser.fetchDataInit(
-        settings: settings,
-        entity: .user,
-        id: settings.userId,
-        completion: {
-          log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
-          log.info("prv: \(observationUser.previous)")
-          log.info("nxt: \(observationUser.next)")
-        })
+      log.error("refresh onappear observation user")
+      setRefresh.toggle()
     }
   }
 }

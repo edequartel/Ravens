@@ -10,6 +10,9 @@ import SwiftUI
 import AudioToolbox
 import SFSafeSymbols
 
+let showView = false
+//let showView = true
+
 // werkhoven
 // let longitude = 5.243376
 // let latitude = 52.023861
@@ -446,9 +449,6 @@ struct HorizontalLine: View {
 func vibrate() {
   AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 }
-
-let showView = false
-//let showView = true
 
 // make Int directly Identifiable
 extension Int: @retroactive Identifiable {

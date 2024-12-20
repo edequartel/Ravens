@@ -65,7 +65,7 @@ struct PhotoThumbnailView: View {
             .foregroundColor(.gray) // You can change the color if needed
         }
       }
-      if photos?.count ?? 0 > 0 {
+      if photos?.count ?? 0 > 1 {
         Text("\(photos?.count ?? 0)")
           .font(.caption)
           .foregroundColor(.white)

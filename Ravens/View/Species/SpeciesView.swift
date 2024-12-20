@@ -47,15 +47,6 @@ struct SpeciesView: View {
         }
       }
 
-//      if !settings.accessibility {
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          Button(action: {
-//            settings.hidePictures.toggle()
-//          }) {
-//            ImageWithOverlay(systemName: "photo", value: !settings.hidePictures)
-//          }
-//        }
-//      }
     }
     .onAppear() {
       settings.initialSpeciesLoad = true

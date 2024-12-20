@@ -38,7 +38,6 @@ struct ObservationsSpeciesView: View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
-//        Text("\(observationsSpecies.count)")
 
         HStack {
           // Image with accessibility label
@@ -136,23 +135,4 @@ struct ObservationsSpeciesView: View {
     )
   }
 }
-
-
-//struct ObservationsSpeciesView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-//    ObservationsSpeciesView(
-//      item: testSpecies,
-//      selectedSpeciesID: .constant(nil))
-////      selectedObservation: .constant(nil))
-////      selectedObservationSound: .constant(nil),
-////      selectedObs: .constant(nil))
-////      imageURLStr: .constant(""))
-//    .environmentObject(ObservationsSpeciesViewModel())
-//    .environmentObject(BookMarksViewModel())
-//    .environmentObject(SpeciesViewModel())
-//    .environmentObject(HTMLViewModel())
-//    .environmentObject(Settings())
-//  }
-//}
 

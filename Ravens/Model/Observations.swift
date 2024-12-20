@@ -13,8 +13,10 @@ struct Observations: Codable {
   var results: [Observation]
 }
 
+//let id: UUID = UUID()
+
 struct Observation: Codable, Identifiable, Equatable {
-  let id = UUID()
+  let id: UUID = UUID()
 //  let id: UUID
   var idObs: Int?
   var species: Int?
@@ -157,6 +159,7 @@ struct Species: Codable, Identifiable, Equatable { //equatable
   var date: String?
   var nrof: Int?
   var dateTime: Date?
+  var recent: Bool?
 
   // Map JSON keys
   private enum CodingKeys: String, CodingKey {

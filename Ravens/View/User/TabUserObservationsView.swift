@@ -28,6 +28,7 @@ struct TabUserObservationsView: View {
   @Binding var selectedSpeciesID: Int?
 
   @State private var setObserver: Int = 0
+  @State private var setRefresh: Bool = false
 
   var body: some View {
     NavigationView {
@@ -43,7 +44,8 @@ struct TabUserObservationsView: View {
             selectedSpeciesID: $selectedSpeciesID,
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
-            currentFilteringOption: $currentFilteringOption)
+            currentFilteringOption: $currentFilteringOption,
+            setRefresh: $setRefresh)
         }
       }
       
@@ -58,13 +60,23 @@ struct TabUserObservationsView: View {
           completion: { log.info("fetch data complete") } )
       }
 
+      
       .onChange(of: setObserver) {
         log.error("update setObserver so new data fetch for this period")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
-//          id: userViewModel.user?.id ?? 0,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
+      }
+
+      .onChange(of: setRefresh) {
+        log.error("update setRefresh so new data fetch for this period")
+
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
           id: setObserver,
           completion: { log.info("fetch data complete") } )
       }

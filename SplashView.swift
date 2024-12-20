@@ -108,6 +108,7 @@ struct SplashView: View {
         checkDataLoaded()
       })
 
+
     regionListViewModel.fetchData(
       settings: settings,
       completion: {
