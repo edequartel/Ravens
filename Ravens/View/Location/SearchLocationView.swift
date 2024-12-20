@@ -82,7 +82,9 @@ struct SearchLocationView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject private var areasViewModel: AreasViewModel
   @EnvironmentObject private var settings: Settings
+
   @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
+
   @EnvironmentObject private var viewModel: SearchLocationViewModel
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -169,7 +171,6 @@ struct SearchLocationView: View {
 
               log.error("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
 
-              settings.isLocationIDChanged = true
               log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
 
               areasViewModel.appendRecord(

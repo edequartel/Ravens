@@ -21,6 +21,8 @@ struct LocationListView: View {
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
+  @Binding var setLocation: CLLocationCoordinate2D
+
   var body: some View {
     VStack {
       List {
@@ -30,12 +32,8 @@ struct LocationListView: View {
               settings.locationName = record.name
               settings.locationId = record.areaID
 
-              fetchDataLocation(
-                settings: settings,
-                observationsLocation: observationsLocation,
-                locationIdViewModel: locationIdViewModel,
-                geoJSONViewModel: geoJSONViewModel,
-                coordinate: CLLocationCoordinate2D(latitude: record.latitude, longitude: record.longitude))
+              setLocation.latitude = record.latitude
+              setLocation.longitude = record.longitude
 
               self.presentationMode.wrappedValue.dismiss()
             }) {

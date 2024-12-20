@@ -16,17 +16,29 @@ struct ObservationsLocationView: View {
   @ObservedObject var geoJSONViewModel: GeoJSONViewModel
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
+  @EnvironmentObject var locationManager: LocationManagerModel
+  
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedSpeciesID: Int?
 
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption 
+  @Binding var currentFilteringOption: FilteringRarityOption
+
   @State private var retrievedData = false
+
+  @Binding var setLocation: CLLocationCoordinate2D
+  @Binding var setRefresh: Bool
+
+
+  func forceUpdateLocation(_ coordinate: CLLocationCoordinate2D) {
+      setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude) // Force reassign
+  }
 
   var body: some View {
     VStack {
       if showView { Text("ObservationsLocationView").font(.customTiny) }
-
-//      Text("cnt: \(observationsLocation.count)")
 
       if let observations = observationsLocation.observations, observations.count == 0 {
         Text(noObsLastPeriod)
@@ -42,7 +54,11 @@ struct ObservationsLocationView: View {
           ObservationListView(
             observations: observations,
             selectedSpeciesID: $selectedSpeciesID,
-            entity: .location) {
+            timePeriod: $settings.timePeriodLocation,
+            entity: .location,
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption) {
             // Handle end of list event
              print("End of list reached in ParentView observationsLocation")
             observationsLocation.fetchData(settings: settings, url: observationsLocation.next, completion: { log.error("observationsLocation.fetchData") })
@@ -55,26 +71,20 @@ struct ObservationsLocationView: View {
       
     }
     .refreshable {
-      log.error("refreshing... ObservationsLocationsView")
-      let location = locationManagerModel.getCurrentLocation()
-      fetchDataLocation(
-        settings: settings,
-        observationsLocation: observationsLocation,
-        locationIdViewModel: locationIdViewModel,
-        geoJSONViewModel: geoJSONViewModel,
-        coordinate: location?.coordinate ?? CLLocationCoordinate2D())
+      log.error("refreshing... ObservationsLocationsView")  //?? de vraag is of setLocation wel echt in the onchange of the TabListView wordt aangeroepen want de waarde veranderd niet
+//      if let location = locationManager.getCurrentLocation() {
+        //here getting the data for the location forced
+//        forceUpdateLocation(location.coordinate)
+        setRefresh.toggle()
+//      }
     }
     .onAppear()  {
       if !settings.hasLocationLoaded {
-        log.info("ObservationsLocationsView onAppear")
-        let location = locationManagerModel.getCurrentLocation()
-        fetchDataLocation(
-          settings: settings,
-          observationsLocation: observationsLocation,
-          locationIdViewModel: locationIdViewModel,
-          geoJSONViewModel: geoJSONViewModel,
-          coordinate: location?.coordinate ?? CLLocationCoordinate2D())
-          settings.hasLocationLoaded = true
+        log.error("ObservationsLocationsView onAppear")
+        if let location = locationManager.getCurrentLocation() {
+          //here getting the data for the location
+          setLocation = location.coordinate
+        }
       }
     }
   }
@@ -92,7 +102,7 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
       // Use fetchedLocations here, actually it is one location,. the first
       settings.locationName = fetchedLocations[0].name
       settings.locationId = fetchedLocations[0].id
-      settings.locationCoordinate = coordinate //<<
+      settings.locationCoordinate = coordinate 
 
 
       //2a. get the geoJSON for this area, and we pick the first one = 0
@@ -114,14 +124,19 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
           settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
         })
     })
+
+  
 }
 
 
 struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
-      ProgressView()
-        .frame(width: 100, height: 100)
+      EmptyView()
+      Text(noObservations)
+        .foregroundColor(.secondary)
+//      ProgressView()
+//        .frame(width: 100, height: 100)
     }
     .padding() // Adds padding around VStack content
     .frame(maxWidth: .infinity, maxHeight: .infinity) // Expands VStack to fill parent

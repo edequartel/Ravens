@@ -25,7 +25,7 @@
 "addLocationToFavorite" = "Add this location to favorites";
 "removeLocationFromFavorite" = "Remove this location from favorites";
 "toggleViewMapList" = "Toggle between map or list view";
-"noObsLastPeriod" = "No observations found for the last period";
+"noObsLastPeriod" = "Getting observations";
 "allVisible" = "all species in list";
 "favoriteVisible" ="favorite species in list";
 "notesAboutObservation" = "notes about observation";
@@ -75,13 +75,26 @@
 "rare" = "Rare";
 "veryRare" = "Very rare";
 
-"moreAtWaarneming" = "More at waarneming.nl";
+"moreAtWaarneming" = "waarneming.nl";
 
 "sort" = "Sort";
 "filter" = "Filter";
 "status" = "Status";
-"native" = "native";
+"native" = "Native";
 "rarirty" =  "Rarity";
 
 "standard" = "Standard";
 "hybrid" = "Hibrid";
+
+//period
+"period" = "Period";
+"timePeriodlabel" = "Last";
+"twodays" = "2 days";
+"sevendays" = "7 days";
+"fourteendays" = "14 days";
+"fourweeks" = "4 weeks";
+"halfayear" = "half a year";
+"oneyear" = "year";
+"infinite" = "years";
+
+"noObservations" = "If no observations appear, \nwider your scope.";

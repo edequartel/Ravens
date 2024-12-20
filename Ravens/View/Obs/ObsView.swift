@@ -82,6 +82,7 @@ struct ObsView: View {
         // User Info Section
         if showObserver {
           HStack {
+//            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
             Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
             Spacer()
@@ -141,6 +142,7 @@ struct ObsView: View {
 
     return formattedString
   }
+  
 }
 
 //struct ObsView_Previews: PreviewProvider {

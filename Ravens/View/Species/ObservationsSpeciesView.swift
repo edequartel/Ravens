@@ -12,8 +12,6 @@ struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-
-//  @EnvironmentObject var observationsSpeciesViewModel: ObservationsViewModel
   
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -31,12 +29,15 @@ struct ObservationsSpeciesView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
+
 
   var body: some View {
     VStack {
       VStack {
         if showView { Text("ObservationsSpeciesView").font(.customTiny) }
-//        Text("\(observationsSpecies.count)")
 
         HStack {
           // Image with accessibility label
@@ -84,7 +85,15 @@ struct ObservationsSpeciesView: View {
             if showView { Text("ObservationListView").font(.customTiny) }
 
             HorizontalLine()
-            ObservationListView(observations: observations, selectedSpeciesID: $selectedSpeciesID, entity: .species) {
+            ObservationListView(
+              observations: observations,
+              selectedSpeciesID: $selectedSpeciesID,
+              timePeriod: $settings.timePeriodSpecies,
+              entity: .species,
+              currentSortingOption: $currentSortingOption,
+              currentFilteringAllOption: $currentFilteringAllOption,
+              currentFilteringOption: $currentFilteringOption
+            ) {
 
               // Handle end of list event
               print("End of list reached in ParentView observationsSpecies")
@@ -126,23 +135,4 @@ struct ObservationsSpeciesView: View {
     )
   }
 }
-
-
-//struct ObservationsSpeciesView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    let testSpecies = Species(species: 62, name: "Unknown", scientific_name: "Scientific name", rarity: 1, native: true)
-//    ObservationsSpeciesView(
-//      item: testSpecies,
-//      selectedSpeciesID: .constant(nil))
-////      selectedObservation: .constant(nil))
-////      selectedObservationSound: .constant(nil),
-////      selectedObs: .constant(nil))
-////      imageURLStr: .constant(""))
-//    .environmentObject(ObservationsSpeciesViewModel())
-//    .environmentObject(BookMarksViewModel())
-//    .environmentObject(SpeciesViewModel())
-//    .environmentObject(HTMLViewModel())
-//    .environmentObject(Settings())
-//  }
-//}
 

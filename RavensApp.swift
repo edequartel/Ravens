@@ -65,7 +65,8 @@ struct RavensApp: App {
   @StateObject var bookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
   @StateObject var observersViewModel = ObserversViewModel() //??
   @StateObject var areasViewModel = AreasViewModel() //??
-  
+  @StateObject var geoJSONViewModel = GeoJSONViewModel()
+
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
@@ -100,6 +101,7 @@ struct RavensApp: App {
         .environmentObject(player)
         .environmentObject(locationViewModel)
         .environmentObject(accessibilityManager)
+        .environmentObject(geoJSONViewModel)
 
         .onOpenURL { url in
           // Handle the URL appropriately

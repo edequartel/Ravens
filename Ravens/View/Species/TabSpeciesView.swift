@@ -93,7 +93,8 @@ struct TabSpeciesView: View {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption
+            selectedRarityOption: $selectedRarityOption,
+            timePeriod: $settings.timePeriodSpecies
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize(color: .orange)
@@ -144,9 +145,15 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-  
+  @Binding var timePeriod: TimePeriod
+
   var body: some View {
     Form {
+      Section(period) {
+        VStack {
+          PeriodView(timePeriod: $timePeriod)
+        }
+      }
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)

@@ -3,10 +3,6 @@
   Ravens
 
   Created by Eric de Quartel on 29/11/2024.
-  
-
-
-
  */
 "play" = "speel het geluid af";
 "pause" = "pauzeer het geluid";
@@ -25,7 +21,7 @@
 "addLocationToFavorite" = "Voeg deze locatie toe aan favorieten";
 "removeLocationFromFavorite" = "Verwijder deze locatie uit favorieten";
 "toggleViewMapList" = "Schakel tussen kaart- en lijstweergave";
-"noObsLastPeriod" = "Geen waarnemingen gevonden voor de laatste periode";
+"noObsLastPeriod" = "Ophalen van waarnemingen";
 "allVisible" = "alle soorten in lijst";
 "favoriteVisible" ="favoriete soorten in lijst";
 "notesAboutObservation" = "aantekening over waarneming";
@@ -75,7 +71,7 @@
 "rare" = "Zeldzaam";
 "veryRare" = "Zeer zeldzaam";
 
-"moreAtWaarneming" = "Meer op waarneming.nl";
+"moreAtWaarneming" = "waarneming.nl";
 
 "sort" = "Sorteer";
 "filter" = "Filter";
@@ -85,3 +81,16 @@
 
 "standard" = "Standaard";
 "hybrid" = "Hibride";
+
+//period
+"period" = "Periode";
+"timePeriodlabel" = "Laatste";
+"twodays" = "2 dagen";
+"sevendays" = "7 dagen";
+"fourteendays" = "14 dagen";
+"fourweeks" = "4 weken";
+"halfayear" = "halfjaar";
+"oneyear" = "1 jaar";
+"infinite" = "jaren";
+
+"noObservations" = "Wanneer er \ngeen waarnemingen verschijnen,\nvergroot dan de periode.";

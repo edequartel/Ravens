@@ -33,6 +33,7 @@ struct ObserversView: View {
   @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheet gelijk geopend
   @State private var userName: String = "unknown"
 
+  @Binding var setObserver: Int
 
   var body: some View {
     VStack {
@@ -40,14 +41,9 @@ struct ObserversView: View {
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {
-            settings.userId = userViewModel.user?.id ?? 0
+            settings.userId = userViewModel.user?.id ?? 0 //??? kan vervallen wanner de setObserver zelfde type maken
             settings.userName =  userViewModel.user?.name ?? ""
-
-            observationUser.fetchDataInit(
-              settings: settings,
-              entity: .user,
-              id: userViewModel.user?.id ?? 0,
-              completion: { log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)") })
+            setObserver = userViewModel.user?.id ?? 0
 
             self.presentationMode.wrappedValue.dismiss()
           }
@@ -79,16 +75,10 @@ struct ObserversView: View {
         ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
           HStack{
             Button(record.name) {
-              settings.userId = record.userID
+              settings.userId = record.userID //??? kan vervallen wanner de setObserver zelfde type maken
               settings.userName =  record.name
-
-              observationUser.fetchDataInit(
-                settings: settings,
-                entity: .user,
-                id: record.userID,
-                completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
-              )
-
+              setObserver = record.userID
+              
               self.presentationMode.wrappedValue.dismiss()
             }
             Spacer()

@@ -30,49 +30,51 @@ struct ObservationsUserView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption
+  @Binding var currentFilteringOption: FilteringRarityOption
+
+  @Binding var setRefresh: Bool
+
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-//      Text("nr: \(observationUser.count)")
+
+
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
-          entity: .user) {
+          timePeriod: $settings.timePeriodUser,
+          entity: .user,
+          currentSortingOption: $currentSortingOption,
+          currentFilteringAllOption: $currentFilteringAllOption,
+          currentFilteringOption: $currentFilteringOption
+        ) {
             // Handle end of list event
-            observationUser.fetchData(settings: settings, url: observationUser.next, completion: { log.error("observationUser.fetchData") })
+            observationUser.fetchData(
+              settings: settings,
+              url: observationUser.next,
+              completion: { log.error("observationUser.fetchData")
+              })
           }
       } else {
+        
         NoObservationsView()
       }
+
+
+
+
     }
 
     .onAppear {
-      if !settings.hasUserLoaded {
-        observationUser.fetchDataInit(
-          settings: settings,
-          entity: .user,
-          id: settings.userId,
-          completion: {
-            log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
-            log.info("prv: \(observationUser.previous)")
-            log.info("nxt: \(observationUser.next)")
-          })
-        settings.hasUserLoaded = true
-      }
+      log.error("onappear observation user")
     }
     .refreshable {
-      log.error("refreshing observation user")
-      observationUser.fetchDataInit(
-        settings: settings,
-        entity: .user,
-        id: settings.userId,
-        completion: {
-          log.info("observationsUser.fetchData completion \(observationUser.observations?.count ?? 0)")
-          log.info("prv: \(observationUser.previous)")
-          log.info("nxt: \(observationUser.next)")
-        })
+      log.error("refresh onappear observation user")
+      setRefresh.toggle()
     }
   }
 }
