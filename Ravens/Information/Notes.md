@@ -1,26 +1,9 @@
 # Remarks development
 
-## 24
-- working on YearView
-- working on Picture Zoom
-- working on Find place
-- working on audio play sometimes stammering
-
-- are some design issues.
-- The filter here will be adjusted in the future. Not optimal yet.
-- In next version the selected image should be zoomable.
-- The map should not overlap the safe area.
-
-## 23
-! cameraposition < span teruggeven naar callers >
-- bug in settings, talen, vreemde response (!.pickerStyle(.navigationLink) changed)
-! door de dagen en de waarneming gaan, kind of sheetview met instellingen
-! opstarten met te veel fetches, fetches verspreiden over app (visie), 
-    ! SpeciesViewModel, observationsSpeciesViewModel
-    ! check how this is done with obs (is een system daar)
-! folders obs /check these
-! folder for data ones like regions (welke weg worden gehaald wanneer cache wordt geleegd)
-! filemanager uitbreiden en in login setten als easter eggs (alleen onder mijn naam, if user is)
+## 52
+- goDaddy www.ravensobs.com
+- time periode
+- html scraper 
 
 ? graphs
 - second language
