@@ -41,17 +41,9 @@ struct ObserversView: View {
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {
-            settings.userId = userViewModel.user?.id ?? 0
+            settings.userId = userViewModel.user?.id ?? 0 //??? kan vervallen wanner de setObserver zelfde type maken
             settings.userName =  userViewModel.user?.name ?? ""
             setObserver = userViewModel.user?.id ?? 0
-
-            observationUser.fetchDataInit(
-              settings: settings,
-              entity: .user,
-              id: userViewModel.user?.id ?? 0,
-              completion: {
-                log.info("observationsUserViewModel.fetchdata \(userViewModel.user?.id ?? 0)")
-              })
 
             self.presentationMode.wrappedValue.dismiss()
           }
@@ -83,17 +75,10 @@ struct ObserversView: View {
         ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
           HStack{
             Button(record.name) {
-              settings.userId = record.userID
+              settings.userId = record.userID //??? kan vervallen wanner de setObserver zelfde type maken
               settings.userName =  record.name
               setObserver = record.userID
-
-              observationUser.fetchDataInit(
-                settings: settings,
-                entity: .user,
-                id: record.userID,
-                completion: { log.info("observationsUserViewModel.fetchdata \(record.userID)") }
-              )
-
+              
               self.presentationMode.wrappedValue.dismiss()
             }
             Spacer()

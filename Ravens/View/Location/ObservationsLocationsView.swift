@@ -127,7 +127,8 @@ struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
       EmptyView()
-//      Text(noObservations)
+      Text(noObservations)
+        .foregroundColor(.secondary)
 //      ProgressView()
 //        .frame(width: 100, height: 100)
     }

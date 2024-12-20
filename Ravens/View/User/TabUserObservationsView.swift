@@ -46,9 +46,20 @@ struct TabUserObservationsView: View {
             currentFilteringOption: $currentFilteringOption)
         }
       }
-
+      
       .onChange(of: settings.timePeriodUser) {
-        log.info("update timePeriodUser so new data fetch for this period")
+        log.error("update timePeriodUser so new data fetch for this period")
+
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+//          id: userViewModel.user?.id ?? 0,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
+      }
+
+      .onChange(of: setObserver) {
+        log.error("update setObserver so new data fetch for this period")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -99,6 +110,7 @@ struct TabUserObservationsView: View {
       .navigationTitle("\(settings.userName)")
       .navigationBarTitleDisplayMode(.inline)
       .onAppearOnce {
+        setObserver =  userViewModel.user?.id ?? 0 //??? may be use published all the time userViewModel.user?.id instead of setObserver
         showFirstView = settings.mapPreference
       }
     }
