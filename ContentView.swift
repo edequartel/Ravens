@@ -24,13 +24,14 @@ struct ContentView: View {
 
   var body: some View {
     Group {
-      if keyChainviewModel.token.isEmpty {
+      if keyChainviewModel.token.isEmpty { //oops when it is not empty CHRIS
         // Login View
         LoginView()
           .onAppear {
             log.info("No token, displaying login")
           }
-      } else {
+      }
+      else {
         if dataLoaded {
           RavensView(
             observationUser: observationUser,
