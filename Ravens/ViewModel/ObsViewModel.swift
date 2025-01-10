@@ -12,8 +12,6 @@ class ObsViewModel: ObservableObject {
         
         let url = endPoint(value: settings.selectedInBetween)+"observations/\(obsID)/"
         
-        keyChainViewModel.retrieveCredentials()
-        
         let headers: HTTPHeaders = [
             "Accept-Language" : settings.selectedLanguage,
             "Authorization": "Token " + keyChainViewModel.token

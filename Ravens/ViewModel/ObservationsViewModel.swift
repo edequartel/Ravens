@@ -78,8 +78,6 @@ class ObservationsViewModel: ObservableObject {
     if url.isEmpty { return }
     //
     log.info("fetchData ObservationsViewModel userId: \(url)")
-    keyChainViewModel.retrieveCredentials()
-
 
     // Add the custom header
     let headers: HTTPHeaders = [

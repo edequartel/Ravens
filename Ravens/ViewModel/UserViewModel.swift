@@ -15,18 +15,18 @@ class UserViewModel: ObservableObject {
     @Published var user: UserData?
     
     private var keyChainViewModel =  KeychainViewModel()
-    
+
+//  @EnvironmentObject var keyChainViewModel: KeychainViewModel //???
+
     func fetchUserData(settings: Settings, completion: (() -> Void)? = nil) {
         log.info("fetchUserData")
-        
-        keyChainViewModel.retrieveCredentials()
         
         // Api Logic
         let headers: HTTPHeaders = [
             "Authorization": "Token "+keyChainViewModel.token
         ]
         let url = endPoint(value: settings.selectedInBetween) + "user/info/"
-        log.info("UserViewModel \(url)")
+        log.error("UserViewModel \(url) + \(keyChainViewModel.token)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

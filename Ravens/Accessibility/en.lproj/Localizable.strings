@@ -56,7 +56,7 @@
 "email" = "email";
 "password" = "Password";
 "login" = "Login";
-"loginFailed" = "Login failed";
+"logInFailed" = "Login failed";
 "emailAddress" = "email Address";
 "logOut" = "log out";
 "information" = "Information";

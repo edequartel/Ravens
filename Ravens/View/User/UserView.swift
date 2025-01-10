@@ -18,9 +18,12 @@ struct UserView: View {
     @State private var navigateToObservers = false
     var body: some View {
         VStack(alignment: .leading) {
+          Text("Token: \(keyChainviewModel.token)")
+            .font(.caption)
             if (keyChainviewModel.token.count > 0) {
                 HStack {
                     Spacer()
+                  Text("\(userViewModel.user?.id ?? 0)")// \(userViewModel.user?.id ?? 0)")
                   Text("\(userViewModel.user?.name ?? "unknown")")// \(userViewModel.user?.id ?? 0)")
                         .bold()
                 Spacer()
@@ -34,6 +37,12 @@ struct UserView: View {
                 }
             }
         }
+        .onChange(of: keyChainviewModel.token) { oldToken, newToken in
+          log.error("token changed \(keyChainviewModel.token)")
+                   if !newToken.isEmpty {
+                     userViewModel.fetchUserData(settings: settings, completion: { log.info("UserView onAppear")})
+                   }
+               }
         .onAppear {
           userViewModel.fetchUserData(settings: settings, completion: { log.info("UserView onAppear")})
         }
