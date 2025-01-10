@@ -62,7 +62,7 @@ struct TabUserObservationsView: View {
 
       
       .onChange(of: setObserver) {
-        log.error("update setObserver so new data fetch for this period")
+        log.info("update setObserver so new data fetch for this period")
 
         observationUser.fetchDataInit(
           settings: settings,

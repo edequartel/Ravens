@@ -68,12 +68,11 @@ struct ObservationsUserView: View {
 
 
     }
-
     .onAppear {
-      log.error("onappear observation user")
+      log.info("onappear observation user")
     }
     .refreshable {
-      log.error("refresh onappear observation user")
+      log.info("refresh onappear observation user")
       setRefresh.toggle()
     }
   }

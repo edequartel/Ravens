@@ -27,7 +27,7 @@ class UserViewModel: ObservableObject {
         ]
         let url = endPoint(value: settings.selectedInBetween) + "user/info/"
         log.info("UserViewModel \(url)")
-        
+
         AF.request(url, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringResponse):
@@ -35,10 +35,10 @@ class UserViewModel: ObservableObject {
                 if let data = stringResponse.data(using: .utf8) {
                     do {
                       
-                        self.log.debug("stringResponse: \(stringResponse)")
+                        self.log.info("stringResponse: \(stringResponse)")
                         self.user = try JSONDecoder().decode(UserData.self, from: data)
                         completion?() // call the completion handler if it exists
-                        
+
                     } catch {
                         self.log.error("Error UserViewModel decoding JSON: \(error)")
                         self.log.error("\(url)")

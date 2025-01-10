@@ -67,8 +67,8 @@ struct LoginView: View {
             } else {
               Button(logOut) {
                 keyChainviewModel.token = ""
-//                keyChainviewModel.loginName = ""
-//                keyChainviewModel.password = ""
+                keyChainviewModel.loginName = ""
+                keyChainviewModel.password = ""
                 keyChainviewModel.saveCredentials()
                 keyChainviewModel.retrieveCredentials()
               }
@@ -77,15 +77,6 @@ struct LoginView: View {
             }
           }
           .padding(10)
-
-//          Button("Reset token") {
-//            keyChainviewModel.token = ""
-//            keyChainviewModel.loginName = ""
-//            keyChainviewModel.password = ""
-//            keyChainviewModel.saveCredentials()
-//            keyChainviewModel.retrieveCredentials()
-//          }
-//          .buttonStyle(.bordered)
 
           if keyChainviewModel.loginFailed {
             Text(logInFailed)

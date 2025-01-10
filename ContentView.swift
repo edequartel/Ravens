@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-import MapKit
 import SwiftyBeaver
-import BackgroundTasks
-import UserNotifications
 
 struct ContentView: View {
   let log = SwiftyBeaver.self
@@ -26,86 +23,47 @@ struct ContentView: View {
     Group {
       if keyChainviewModel.token.isEmpty { //oops when it is not empty CHRIS
         // Login View
+        Text("LOGIN")
         LoginView()
           .onAppear {
-            log.info("No token, displaying login")
+            log.error("No token, displaying login")
           }
       }
-      else {
+      else { //token is not empty and is okay
         if dataLoaded {
           RavensView(
             observationUser: observationUser,
             observationsLocation: observationsLocation,
             observationsSpecies: observationsSpecies)
-            .onAppear {
-              log.info("Data loaded, navigating to main content")
-            }
+          .onAppear {
+            log.info("RavensView, Data loaded, navigating to main content")
+          }
         } else {
           SplashView(dataLoaded: $dataLoaded)
             .onAppear {
-              log.info("Loading data in SplashView")
-              if let location = locationManagerModel.location {
-                log.error("Current Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+              log.error("SplashView appeared, checking if data is loaded")
+              if dataLoaded {
+                log.error("Data already loaded")
               } else {
-                log.error("Location not available yet")
+                log.error("Data not loaded yet, triggering load process")
               }
+//              log.error("SplashView: Loading data")
+//              guard let location = locationManagerModel.location else {
+//                log.error("Location not available yet")
+//                return
+//              }
+//
+//              log.info("Current Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
             }
         }
       }
     }
+    .onAppear() {
+      log.error(keyChainviewModel.loginName)
+      log.error(keyChainviewModel.password)
+      log.error(keyChainviewModel.token)
+    }
   }
 }
 
-
-//struct ContentView: View {
-//    let log = SwiftyBeaver.self
-//    @EnvironmentObject var locationManagerModel: LocationManagerModel
-//    @EnvironmentObject var keyChainviewModel: KeychainViewModel
-//
-//    @State private var dataLoaded = false
-//
-//    var body: some View {
-//        Group {
-//            if keyChainviewModel.token.isEmpty {
-//                // Show login screen if the token is missing
-//                VStack {
-//                    HStack {
-//                        Text("Login waarneming.nl")
-//                            .bold()
-//                            .font(.title)
-//                            .padding()
-//                        Spacer()
-//                    }
-//                    LoginView()
-//                }
-//                .onAppear {
-////                    CLLocationManager().requestWhenInUseAuthorization()
-//                    log.error("Token is empty, showing login screen")
-//                }
-//            } else {
-//                if dataLoaded {
-//                    // Show the main content if data is loaded
-//                    RavensView()
-//                        .onAppear {
-//                            log.error("Data loaded, navigating to main content")
-//                        }
-//                } else {
-//                    // Show splash view to load data
-//                    SplashView(dataLoaded: $dataLoaded)
-//                        .onAppear {
-//                            log.error("Loading data via SplashView")
-//                        }
-//                }
-//            }
-//        }
-//    }
-//}
-
-
-//struct ContentView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    ContentView()
-//      .environmentObject(Settings())
-//  }
-//}
 

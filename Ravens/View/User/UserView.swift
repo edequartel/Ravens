@@ -21,7 +21,7 @@ struct UserView: View {
             if (keyChainviewModel.token.count > 0) {
                 HStack {
                     Spacer()
-                    Text(userViewModel.user?.name ?? "unknown")
+                  Text("\(userViewModel.user?.name ?? "unknown")")// \(userViewModel.user?.id ?? 0)")
                         .bold()
                 Spacer()
                 }
