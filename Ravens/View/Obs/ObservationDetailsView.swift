@@ -15,7 +15,8 @@ struct ObservationDetailsView: View {
 //    @EnvironmentObject var viewModel: ObservationsViewModel
     @ObservedObject var observationsSpecies: ObservationsViewModel
     @EnvironmentObject var settings: Settings
-    
+    @EnvironmentObject var keyChainviewModel: KeychainViewModel
+
     @State private var isViewActive = false
     
     var speciesID: Int
@@ -33,6 +34,7 @@ struct ObservationDetailsView: View {
               observationsSpecies.fetchDataInit(
                     settings: settings,
                     entity: .species,
+                    token: keyChainviewModel.token,
                     id: speciesID,
                     completion: {
 //                      isLoaded = true

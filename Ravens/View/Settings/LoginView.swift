@@ -13,18 +13,41 @@ struct LoginView: View {
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
 
-//  @State private var myInlogName = ""
-//  @State private var myPassword = ""
+  @State private var myInlogName = ""
+  @State private var myPassword = ""
 
 //  @State private var myInlogName = "lesdequartel@yahoo.com "
 //  @State private var myPassword = "Zeemeeuw2015!"
 
-  @State private var myInlogName = "edequartel@protonmail.com "
-  @State private var myPassword = "fyrta5-pIdtow-gawpys"
+//  @State private var myInlogName = "edequartel@protonmail.com "
+//  @State private var myPassword = "fyrta5-pIdtow-gawpys"
 
   var body: some View {
     Form {
       Section("Login \(settings.selectedInBetween)") {
+//        HStack {
+          Button("edq") {
+            myInlogName = "edequartel@protonmail.com"
+            myPassword = "fyrta5-pIdtow-gawpys"
+          }
+          Button("ldq") {
+            myInlogName = "lesdequartel@yahoo.com "
+            myPassword = "Zeemeeuw2015!"
+          }
+          Button("hdj") {
+            myInlogName = "Heikodejonge@cetera.nu"
+            myPassword = "Simca25-an-58"
+          }
+          Button("bdq") {
+            myInlogName = "bramdeq@live.nl"
+            myPassword = "7mRv6!JZaV!JJb3"
+          }
+          Button("!") {
+            myInlogName = ""
+            myPassword = ""
+          }
+
+//        }
         VStack {
           if keyChainviewModel.token.isEmpty {
             TextField("Email", text: $myInlogName, prompt: Text("Enter your email address"))
@@ -84,18 +107,18 @@ struct LoginView: View {
 
       DisplayCredentialsView()
 
-//      if keyChainviewModel.token.count > 0 {
+      if !keyChainviewModel.token.isEmpty { 
         Section(user) {
           UserView()
             .accessibilityElement(children: .combine)
         }
-//      }
+      }
 
-//      if keyChainviewModel.token.count <= 0 {
-//        Section(information) {
-//          InfoObservationView()
-//        }
-//      }
+      if keyChainviewModel.token.isEmpty {
+        Section(information) {
+          InfoObservationView()
+        }
+      }
     }
   }
 }

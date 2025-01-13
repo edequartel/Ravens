@@ -17,7 +17,7 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
   @EnvironmentObject private var userViewModel:  UserViewModel
-
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
 
@@ -48,25 +48,37 @@ struct TabUserObservationsView: View {
             setRefresh: $setRefresh)
         }
       }
-      
+
+      .onChange(of: keyChainviewModel.token) { //???
+        log.error("update timePeriodUser so new data fetch for this period")
+
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+          token: keyChainviewModel.token,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
+      }
+
       .onChange(of: settings.timePeriodUser) {
         log.error("update timePeriodUser so new data fetch for this period")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
-//          id: userViewModel.user?.id ?? 0,
+          token: keyChainviewModel.token,
           id: setObserver,
           completion: { log.info("fetch data complete") } )
       }
 
-      
-      .onChange(of: setObserver) {
-        log.info("update setObserver so new data fetch for this period")
+
+      .onChange(of: setObserver) { //***
+        log.info("====>>>> update setObserver so new data fetch for this period")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
+          token: keyChainviewModel.token,
           id: setObserver,
           completion: { log.info("fetch data complete") } )
       }
@@ -77,6 +89,7 @@ struct TabUserObservationsView: View {
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
+          token: keyChainviewModel.token,
           id: setObserver,
           completion: { log.info("fetch data complete") } )
       }

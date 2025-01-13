@@ -79,6 +79,7 @@ struct MapObservationsLocationView: View {
           if let coordinate = proxy.convert(position, from: .local) {
             fetchDataLocation(
               settings: settings,
+              token: keyChainViewModel.token,
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,

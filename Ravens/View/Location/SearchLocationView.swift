@@ -45,10 +45,10 @@ class SearchLocationViewModel: ObservableObject {
   private var keyChainViewModel = KeychainViewModel()
   private var cancellables = Set<AnyCancellable>()
 
-  func fetchLocations(searchString: String, completion: ((Bool) -> Void)? = nil) {
+  func fetchLocations(searchString: String, token: String, completion: ((Bool) -> Void)? = nil) {
     let url = "https://waarneming.nl/api/v1/locations/?name=\(searchString)"
     let headers: HTTPHeaders = [
-      "Authorization": "Token " + keyChainViewModel.token
+      "Authorization": "Token " + token
     ]
 
     print("Fetching locations from: \(url)")
@@ -95,14 +95,16 @@ struct SearchLocationView: View {
   @State private var isFocused: Bool = true
   @State private var isLoading = false // Loading indicator
   @FocusState private var isSearchFieldFocused: Bool
-
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   var body: some View {
     if showView { Text("SearchLocationView").font(.customTiny) }
     HStack {
       TextField(searchForLocation, text: $searchText, onCommit: {
         isLoading = true
-        viewModel.fetchLocations(searchString: searchText) { success in
+        viewModel.fetchLocations(
+          searchString: searchText,
+          token: keyChainviewModel.token ) { success in
           isLoading = false
           if success {
             print("Location fetch completed successfully")

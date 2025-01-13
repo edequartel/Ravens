@@ -23,12 +23,10 @@ class UserViewModel: ObservableObject {
         
         // Api Logic
         let headers: HTTPHeaders = [
-//            "Authorization": "Token "+keyChainViewModel.token
             "Authorization": "Token " + token
         ]
         let url = endPoint(value: settings.selectedInBetween) + "user/info/"
         log.error("UserViewModel \(url) + \(token)")
-//        log.error("UserViewModel \(url) + \(keyChainViewModel.token)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

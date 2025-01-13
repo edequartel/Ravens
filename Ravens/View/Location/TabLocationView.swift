@@ -51,6 +51,7 @@ struct TabLocationView: View {
   @State private var setRefresh: Bool = false
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   var body: some View {
     NavigationView {
@@ -80,6 +81,7 @@ struct TabLocationView: View {
         log.info("update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
+          token: keyChainviewModel.token,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
@@ -91,6 +93,7 @@ struct TabLocationView: View {
         log.error("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
+          token: keyChainviewModel.token,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
@@ -104,6 +107,7 @@ struct TabLocationView: View {
         log.error("update setRefresh so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
+          token: keyChainviewModel.token,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,

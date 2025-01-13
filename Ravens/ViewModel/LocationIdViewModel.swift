@@ -16,12 +16,12 @@ class LocationIdViewModel: ObservableObject {
     
     private var keyChainViewModel =  KeychainViewModel()
 
-    func fetchLocations(latitude: Double, longitude: Double, completion: @escaping ([LocationJSON]) -> Void) {
+  func fetchLocations(latitude: Double, longitude: Double, token: String, completion: @escaping ([LocationJSON]) -> Void) {
         log.info("fetchLocations")
         
         // Add the custom header
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+keyChainViewModel.token,
+            "Authorization": "Token "+token,
             "Accept": "application/json"
         ]
         

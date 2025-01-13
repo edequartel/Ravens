@@ -10,7 +10,7 @@ import Foundation
 struct Observations: Codable {
   var count: Int?
   var next, previous: URL?
-  var results: [Observation]
+  var results: [Observation]? //?? madeoptional
 }
 
 //let id: UUID = UUID()
