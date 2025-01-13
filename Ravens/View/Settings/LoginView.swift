@@ -16,11 +16,11 @@ struct LoginView: View {
 //  @State private var myInlogName = ""
 //  @State private var myPassword = ""
 
-  @State private var myInlogName = "lesdequartel@yahoo.com "
-  @State private var myPassword = "Zeemeeuw2015!"
+//  @State private var myInlogName = "lesdequartel@yahoo.com "
+//  @State private var myPassword = "Zeemeeuw2015!"
 
-//  @State private var myInlogName = "edequartel@protonmail.com "
-//  @State private var myPassword = "fyrta5-pIdtow-gawpys"
+  @State private var myInlogName = "edequartel@protonmail.com "
+  @State private var myPassword = "fyrta5-pIdtow-gawpys"
 
   var body: some View {
     Form {

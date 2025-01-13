@@ -20,7 +20,7 @@ struct UserView: View {
         VStack(alignment: .leading) {
           Text("Token: \(keyChainviewModel.token)")
             .font(.caption)
-            if (keyChainviewModel.token.count > 0) {
+          if (!keyChainviewModel.token.count.words.isEmpty) {
                 HStack {
                     Spacer()
                   Text("\(userViewModel.user?.id ?? 0)")// \(userViewModel.user?.id ?? 0)")
@@ -40,11 +40,11 @@ struct UserView: View {
         .onChange(of: keyChainviewModel.token) { oldToken, newToken in
           log.error("token changed \(keyChainviewModel.token)")
                    if !newToken.isEmpty {
-                     userViewModel.fetchUserData(settings: settings, completion: { log.info("UserView onAppear")})
+                     userViewModel.fetchUserData(settings: settings, token: keyChainviewModel.token ,completion: { log.info("UserView onAppear")})
                    }
                }
         .onAppear {
-          userViewModel.fetchUserData(settings: settings, completion: { log.info("UserView onAppear")})
+          userViewModel.fetchUserData(settings: settings,token: keyChainviewModel.token, completion: { log.info("UserView onAppear")})
         }
     }
 }

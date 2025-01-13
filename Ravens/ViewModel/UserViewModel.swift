@@ -14,19 +14,21 @@ class UserViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var user: UserData?
     
-    private var keyChainViewModel =  KeychainViewModel()
+//    private var keyChainViewModel =  KeychainViewModel()
 
-//  @EnvironmentObject var keyChainViewModel: KeychainViewModel //???
+//     @EnvironmentObject var keyChainViewModel: KeychainViewModel   
 
-    func fetchUserData(settings: Settings, completion: (() -> Void)? = nil) {
+  func fetchUserData(settings: Settings, token: String, completion: (() -> Void)? = nil) {
         log.info("fetchUserData")
         
         // Api Logic
         let headers: HTTPHeaders = [
-            "Authorization": "Token "+keyChainViewModel.token
+//            "Authorization": "Token "+keyChainViewModel.token
+            "Authorization": "Token " + token
         ]
         let url = endPoint(value: settings.selectedInBetween) + "user/info/"
-        log.error("UserViewModel \(url) + \(keyChainViewModel.token)")
+        log.error("UserViewModel \(url) + \(token)")
+//        log.error("UserViewModel \(url) + \(keyChainViewModel.token)")
 
         AF.request(url, headers: headers).responseString { response in
             switch response.result {

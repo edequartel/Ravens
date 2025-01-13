@@ -15,6 +15,8 @@ struct SplashView: View {
 
   @Binding var dataLoaded: Bool
 
+
+
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var languagesViewModel: LanguagesViewModel
@@ -27,7 +29,7 @@ struct SplashView: View {
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
 
-  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
@@ -49,7 +51,7 @@ struct SplashView: View {
       LottieView(lottieFile: "ravenssun.json")
         .frame(width: 150, height: 150)
     }
-    .onChange(of: keyChainviewModel.token.isEmpty) { oldValue, newValue in
+    .onChange(of: keyChainViewModel.token.isEmpty) { oldValue, newValue in
       log.error("**NEW TOKEN** \(newValue)")
       handleTokenChange(newValue)
     }
@@ -74,7 +76,7 @@ struct SplashView: View {
 
   private func handleOnAppear() {
     log.error("**handle onAppear**")
-    if !keyChainviewModel.token.isEmpty {
+    if !keyChainViewModel.token.isEmpty {
       log.error("SPLASHVIEW onAppear loaddata")
       Task {
         await loadData()
@@ -161,7 +163,7 @@ struct SplashView: View {
   }
 
   private func loadUserData() async {
-    userViewModel.fetchUserData(settings: settings) {
+    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
       log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
       isUserDataLoaded = true
       settings.userId = userViewModel.user?.id ?? 0
