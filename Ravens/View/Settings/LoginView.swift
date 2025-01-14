@@ -82,7 +82,11 @@ struct LoginView: View {
                   userViewModel.fetchUserData(
                     settings: settings,
                     token: keyChainviewModel.token ,
-                    completion: { log.error("userViewModel fethData")})
+                    completion:
+                      {
+                        log.error("userViewModel fethData")
+                        userViewModel.loginSuccess = true
+                    })
                   //
                 } else {
                   log.error("Failed to fetch credentials.")
@@ -104,6 +108,8 @@ struct LoginView: View {
             HStack {
               Button(logOut) {
                 keyChainviewModel.token = ""
+                userViewModel.loginSuccess = false
+                //  @Published var loginSuccess = false
               }
               .buttonStyle(.bordered)
               .frame(maxWidth: .infinity)
@@ -115,12 +121,12 @@ struct LoginView: View {
 
       DisplayCredentialsView()
 
-      if !keyChainviewModel.token.isEmpty {
+//      if !keyChainviewModel.token.isEmpty {
         Section(user) {
           UserView()
             .accessibilityElement(children: .combine)
         }
-      }
+//      }
 
       if keyChainviewModel.token.isEmpty {
         Section(information) {

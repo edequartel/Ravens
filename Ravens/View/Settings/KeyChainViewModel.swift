@@ -15,13 +15,12 @@ class KeychainViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   private let keychain = Keychain(service: bundleIdentifier)
 
-  //  @Published var token: String = ""
   @Published var token: String = "" {
     didSet {
       saveCredentials()
     }
   }
-
+  
   @Published var loginFailed = false
 
   init(){

@@ -14,6 +14,8 @@ class UserViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   @Published var user: UserData?
 
+  @Published var loginSuccess: Bool = false
+
   func fetchUserData(settings: Settings, token: String, completion: (() -> Void)? = nil) {
     log.info("fetchUserData")
 

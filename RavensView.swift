@@ -31,22 +31,22 @@ struct RavensView: View {
           Text(us)
           Image(systemSymbol: .person2Fill)
         }
-//        // Tab 1
-//        TabLocationView(
-//          observationsLocation: observationsLocation,
-//          selectedSpeciesID: $selectedSpeciesID)
-//        .tabItem {
-//          Text(location)
-//          Image(systemSymbol: SFAreaFill)
-//        }
-//        // Tab 3
-//        TabSpeciesView(
-//          observationsSpecies: observationsSpecies,
-//          selectedSpeciesID: $selectedSpeciesID)
-//        .tabItem {
-//          Text(species)
-//          Image(systemSymbol: .tree)
-//        }
+        // Tab 1
+        TabLocationView(
+          observationsLocation: observationsLocation,
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text(location)
+          Image(systemSymbol: SFAreaFill)
+        }
+        // Tab 3
+        TabSpeciesView(
+          observationsSpecies: observationsSpecies,
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text(species)
+          Image(systemSymbol: .tree)
+        }
         // Tab 4
         SettingsView()
           .tabItem {

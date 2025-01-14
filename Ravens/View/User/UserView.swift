@@ -18,7 +18,8 @@ struct UserView: View {
     @State private var navigateToObservers = false
     var body: some View {
         VStack(alignment: .leading) {
-//          Text("Token: \(keyChainviewModel.token)")
+          Text("Token: \(keyChainviewModel.token)")
+          Text("\(userViewModel.user?.id ?? 0)")
 //            .font(.caption)
           if (!keyChainviewModel.token.count.words.isEmpty) {
                 HStack {

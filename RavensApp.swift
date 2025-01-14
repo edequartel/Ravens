@@ -119,11 +119,11 @@ struct RavensApp: App {
           },
                 secondaryButton: .cancel(Text("No")))
         }
-        .onAppear {
-//          notificationsManager.requestNotificationPermission()
-//          timerManager.setNotificationsManager(notificationsManager)  
-//          print("\(String(describing: locationManager.getCurrentLocation()))")
-        }
+//        .onAppear {
+////          notificationsManager.requestNotificationPermission()
+////          timerManager.setNotificationsManager(notificationsManager)  
+////          print("\(String(describing: locationManager.getCurrentLocation()))")
+//        }
     }
   }
 

@@ -14,6 +14,7 @@ struct TabUserObservationsView: View {
 
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
+
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
   @EnvironmentObject var userViewModel:  UserViewModel
@@ -27,11 +28,17 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+  @State private var setObserver: Int = 0
+
   @State private var setRefresh: Bool = false
 
   var body: some View {
     NavigationView {
       VStack {
+        Button("Refresh") {setRefresh.toggle()}
+        
+        Text("\(setObserver)")
+
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
@@ -70,31 +77,41 @@ struct TabUserObservationsView: View {
           completion: { log.info("fetch data complete") } )
       }
 
+      .onChange(of: setObserver) {
+        log.error("update timePeriodUser so new data fetch for this period")
 
-//      .onChange(of: userViewModel.user) { newUserID in
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+          token: keyChainviewModel.token,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
+      }
+
+
+      .onChange(of: userViewModel.user?.id) { newUserID in
+                  //if let id = newUserID {
+                    //  userViewModel.log.info("User ID changed to: \(id)")
+                      setObserver = userViewModel.user?.id ?? 0
+                  //} else {
+                      userViewModel.log.warning("User ID is nil")
+                  //}
+              }
+
+//      .onChange(of: userViewModel.user?.id) { newUserID in
 //        log.error("XXXXXX")
 //      }
 
-//      .onChange(of: setObserver) { //***
-//        log.info("====>>>> update setObserver so new data fetch for this period")
-//
-//        observationUser.fetchDataInit(
-//          settings: settings,
-//          entity: .user,
-//          token: keyChainviewModel.token,
-//          id: setObserver,
-//          completion: { log.info("fetch data complete") } )
-//      }
+      .onChange(of: setObserver) { //***
+        log.info("====>>>> update setObserver so new data fetch for this period")
 
-//      .onChange(of: keyChainviewModel.token) { oldToken, newToken in
-//        log.error("token changed \(keyChainviewModel.token)")
-//                 if !newToken.isEmpty {
-//                   userViewModel.fetchUserData(
-//                    settings: settings,
-//                    token: keyChainviewModel.token ,
-//                    completion: { log.info("UserView onAppear")})
-//                 }
-//             }
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+          token: keyChainviewModel.token,
+          id: setObserver,
+          completion: { log.info("fetch data complete") } )
+      }
 
       .onChange(of: setRefresh) {
         log.error("update setRefresh so new data fetch for this period")
@@ -130,17 +147,17 @@ struct TabUserObservationsView: View {
 
 
           //add choose observers
-//          ToolbarItem(placement: .navigationBarTrailing) {
-//            NavigationLink(
-//              destination: ObserversView(
-//                observationUser: observationUser,
-//                setObserver: $setObserver)
-//            ) {
-//              Image(systemSymbol: .listBullet)
-//                .uniformSize()
-//                .accessibility(label: Text(observersList))
-//            }
-//          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(
+              destination: ObserversView(
+                observationUser: observationUser,
+                setObserver: $setObserver)
+            ) {
+              Image(systemSymbol: .listBullet)
+                .uniformSize()
+                .accessibility(label: Text(observersList))
+            }
+          }
         }
       }
 

@@ -15,13 +15,20 @@ struct ContentView: View {
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
+  @EnvironmentObject var userViewModel:  UserViewModel
+
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @State private var dataLoaded = false
 
+  @State private var setObserver: Int = 0
+
+
   var body: some View {
     Group {
-      if keyChainviewModel.token.isEmpty { //oops when it is not empty CHRIS
+      if !keyChainviewModel.token.isEmpty {
+//      if !userViewModel.loginSuccess || keyChainviewModel.token.isEmpty {
+//      if !userViewModel.loginSuccess {
         // Login View
         Text("LOGIN")
         LoginView()
@@ -40,25 +47,13 @@ struct ContentView: View {
           }
         } else {
           SplashView(dataLoaded: $dataLoaded)
-            .onAppear {
-              log.error("SplashView appeared, checking if data is loaded")
-              if dataLoaded {
-                log.error("Data already loaded")
-              } else {
-                log.error("Data not loaded yet, triggering load process")
-              }
-//              log.error("SplashView: Loading data")
-//              guard let location = locationManagerModel.location else {
-//                log.error("Location not available yet")
-//                return
-//              }
-//
-//              log.info("Current Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-            }
         }
       }
     }
-//    .onAppear() {
+//    .onAppear() { //?? how does this works
+//      if !keyChainviewModel.token.isEmpty {
+//        userViewModel.loginSuccess = true
+//      }
 //      log.error(keyChainviewModel.token)
 //    }
   }

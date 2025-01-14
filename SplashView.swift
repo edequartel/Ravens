@@ -164,11 +164,12 @@ struct SplashView: View {
 
   private func loadUserData() async {
     userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-      log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
       isUserDataLoaded = true
       settings.userId = userViewModel.user?.id ?? 0
       settings.userName = userViewModel.user?.name ?? ""
       checkDataLoaded()
+//      userViewModel.loginSuccess = true
     }
   }
 }
