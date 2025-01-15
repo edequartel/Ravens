@@ -28,16 +28,19 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-  @State private var setObserver: Int = 0
+  @State private var observerId: Int = 0
+  @State private var observerName: String = ""
 
-  @State private var setRefresh: Bool = false
+  @State private var refresh: Bool = false
 
   var body: some View {
     NavigationView {
       VStack {
-        Button("Refresh") {setRefresh.toggle()}
-        
-        Text("\(setObserver)")
+//        Button("Refresh") {refresh.toggle()}
+//        Text("id \(userViewModel.user?.id ?? 0)")
+//        Text("name \(userViewModel.user?.name ?? "noName")")
+//        Text("setObserver \(observerId)")
+//        Text("setObserverString \(observerName)")
 
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
@@ -51,23 +54,25 @@ struct TabUserObservationsView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
-            setRefresh: $setRefresh)
+            setRefresh: $refresh)
         }
       }
 
-      .onChange(of: keyChainviewModel.token) { //???
-        log.error("update timePeriodUser so new data fetch for this period")
+      .onChange(of: userViewModel.loginSuccess) {
+        log.error("update userViewModel.loginSuccess")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: userViewModel.user?.id ?? 0,
-          completion: { log.info("fetch data complete") } )
+          completion: { log.info("fetch data complete")
+            observerId =  userViewModel.user?.id ?? 0
+            observerName = userViewModel.user?.name ?? ""} )
       }
 
       .onChange(of: settings.timePeriodUser) {
-        log.error("update timePeriodUser so new data fetch for this period")
+        log.error("update timePeriodUser")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -77,50 +82,25 @@ struct TabUserObservationsView: View {
           completion: { log.info("fetch data complete") } )
       }
 
-      .onChange(of: setObserver) {
-        log.error("update timePeriodUser so new data fetch for this period")
+      .onChange(of: observerName) {
+        log.error("update setObserver")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
-          id: setObserver,
+          id: observerId,
           completion: { log.info("fetch data complete") } )
       }
 
-
-      .onChange(of: userViewModel.user?.id) { newUserID in
-                  //if let id = newUserID {
-                    //  userViewModel.log.info("User ID changed to: \(id)")
-                      setObserver = userViewModel.user?.id ?? 0
-                  //} else {
-                      userViewModel.log.warning("User ID is nil")
-                  //}
-              }
-
-//      .onChange(of: userViewModel.user?.id) { newUserID in
-//        log.error("XXXXXX")
-//      }
-
-      .onChange(of: setObserver) { //***
-        log.info("====>>>> update setObserver so new data fetch for this period")
+      .onChange(of: refresh) {
+        log.error("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
-          id: setObserver,
-          completion: { log.info("fetch data complete") } )
-      }
-
-      .onChange(of: setRefresh) {
-        log.error("update setRefresh so new data fetch for this period")
-
-        observationUser.fetchDataInit(
-          settings: settings,
-          entity: .user,
-          token: keyChainviewModel.token,
-          id: userViewModel.user?.id ?? 0,
+          id: observerId,
           completion: { log.info("fetch data complete") } )
       }
 
@@ -151,7 +131,8 @@ struct TabUserObservationsView: View {
             NavigationLink(
               destination: ObserversView(
                 observationUser: observationUser,
-                setObserver: $setObserver)
+                observerId: $observerId,
+                observerName: $observerName)
             ) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
@@ -161,35 +142,19 @@ struct TabUserObservationsView: View {
         }
       }
 
-      .navigationTitle("\(userViewModel.user?.name ?? "unknown")")
+      .navigationTitle("\(observerName)")
       .navigationBarTitleDisplayMode(.inline)
 
 
-      .onAppear {
+      .onAppearOnce {
+        log.error("ONAPPEAROnce TABUSERS")
+        observerId = userViewModel.user?.id ?? 0
+        observerName = userViewModel.user?.name ?? ""
 
-        log.error("ONAPPEAR TABUSERS")
-
-        observationUser.fetchDataInit(
-          settings: settings,
-          entity: .user,
-          token: keyChainviewModel.token,
-          id: userViewModel.user?.id ?? 0,
-          completion: { log.info("fetch data complete") } )
         showFirstView = settings.mapPreference
-
       }
-//      .onAppearOnce {
-////        setObserver =  userViewModel.user?.id ?? 0 //??? may be use published all the time userViewModel.user?.id instead of setObserver
-//
-//        observationUser.fetchDataInit(
-//          settings: settings,
-//          entity: .user,
-//          token: keyChainviewModel.token,
-//          id: userViewModel.user?.id ?? 0,
-////          id: setObserver,
-//          completion: { log.info("fetch data complete") } )
-//
-//        showFirstView = settings.mapPreference
+//      .onAppear {
+//        log.error("ONAPPEAR TABUSERS")
 //      }
     }
   }

@@ -18,7 +18,7 @@ struct ContentView: View {
   @EnvironmentObject var userViewModel:  UserViewModel
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
-  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @State private var dataLoaded = false
 
   @State private var setObserver: Int = 0
@@ -26,11 +26,8 @@ struct ContentView: View {
 
   var body: some View {
     Group {
-      if !keyChainviewModel.token.isEmpty {
-//      if !userViewModel.loginSuccess || keyChainviewModel.token.isEmpty {
-//      if !userViewModel.loginSuccess {
+      if keyChainViewModel.token.isEmpty {
         // Login View
-        Text("LOGIN")
         LoginView()
           .onAppear {
             log.error("No token, displaying login")
@@ -50,12 +47,6 @@ struct ContentView: View {
         }
       }
     }
-//    .onAppear() { //?? how does this works
-//      if !keyChainviewModel.token.isEmpty {
-//        userViewModel.loginSuccess = true
-//      }
-//      log.error(keyChainviewModel.token)
-//    }
   }
 }
 

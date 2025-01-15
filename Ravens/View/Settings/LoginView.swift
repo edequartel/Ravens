@@ -27,27 +27,39 @@ struct LoginView: View {
   var body: some View {
     Form {
       Section("Login \(settings.selectedInBetween)") {
-        //        HStack {
-        Button("edq") {
-          myInlogName = "edequartel@protonmail.com"
-          myPassword = "fyrta5-pIdtow-gawpys"
-        }
-        Button("ldq") {
-          myInlogName = "lesdequartel@yahoo.com "
-          myPassword = "Zeemeeuw2015!"
-        }
-        Button("hdj") {
-          myInlogName = "Heikodejonge@cetera.nu"
-          myPassword = "Simca25-an-58"
-        }
-        Button("bdq") {
-          myInlogName = "bramdeq@live.nl"
-          myPassword = "7mRv6!JZaV!JJb3"
-        }
-        Button("!") {
-          myInlogName = ""
-          myPassword = ""
-        }
+        // Horizontal buttons
+                    HStack {
+                        Button("edq") {
+                            myInlogName = "edequartel@protonmail.com"
+                            myPassword = "fyrta5-pIdtow-gawpys"
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+
+                        Button("ldq") {
+                            myInlogName = "lesdequartel@yahoo.com"
+                            myPassword = "Zeemeeuw2015!"
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+
+                        Button("hdj") {
+                            myInlogName = "Heikodejonge@cetera.nu"
+                            myPassword = "Simca25-an-58"
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+
+                        Button("bdq") {
+                            myInlogName = "bramdeq@live.nl"
+                            myPassword = "7mRv6!JZaV!JJb3"
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+
+                        Button("!") {
+                            myInlogName = ""
+                            myPassword = ""
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                    }
+                    .padding()
 
         //        }
         VStack {
@@ -109,7 +121,7 @@ struct LoginView: View {
               Button(logOut) {
                 keyChainviewModel.token = ""
                 userViewModel.loginSuccess = false
-                //  @Published var loginSuccess = false
+
               }
               .buttonStyle(.bordered)
               .frame(maxWidth: .infinity)
@@ -119,7 +131,7 @@ struct LoginView: View {
         }
       }
 
-      DisplayCredentialsView()
+//      DisplayCredentialsView()
 
 //      if !keyChainviewModel.token.isEmpty {
         Section(user) {
