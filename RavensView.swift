@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct RavensView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser : ObservationsViewModel
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
@@ -25,7 +25,7 @@ struct RavensView: View {
       TabView {
         // Tab 2
         TabUserObservationsView(
-          observationUser : observationUser,
+//          observationUser : $observationUser,
           selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(us)

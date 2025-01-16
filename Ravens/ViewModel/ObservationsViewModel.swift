@@ -86,7 +86,7 @@ class ObservationsViewModel: ObservableObject {
       "Accept-Language": settings.selectedLanguage
     ]
 
-    log.error("fetchData ObservationsUserViewModel token \(token)")
+    log.info("fetchData ObservationsUserViewModel token \(token)")
     log.error("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in

@@ -9,43 +9,25 @@ import SwiftUI
 import SwiftyBeaver
 
 struct UserView: View {
-  let log = SwiftyBeaver.self
+    let log = SwiftyBeaver.self
 
-  @EnvironmentObject var userViewModel:  UserViewModel
-  @EnvironmentObject var keyChainviewModel: KeychainViewModel
-  @EnvironmentObject var settings: Settings
+    @EnvironmentObject var userViewModel: UserViewModel
 
-  @State private var navigateToObservers = false
-  var body: some View {
-    VStack(alignment: .leading) {
-      //          Text("Token: \(keyChainviewModel.token)")
-      //          Text("\(userViewModel.user?.id ?? 0)")
-      //            .font(.caption)
-      if (!keyChainviewModel.token.count.words.isEmpty) {
-        HStack {
-          Spacer()
-          Text("\(userViewModel.user?.id ?? 0)")
-          Text("\(userViewModel.user?.name ?? "unknown")")
-          Spacer()
+    var body: some View {
+        VStack {
+            Text("\(userViewModel.user?.name ?? "unknown")")// - \(userViewModel.user?.id ?? 0)")
+                .bold()
+
+            QRCodeView(
+                input: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)"
+            )
+            .frame(width: 150, height: 150)
         }
-        .bold()
-
-        HStack {
-          Spacer()
-          QRCodeView(input: "ravens://"+String(userViewModel.user?.name ?? "unknown")+"/"+String(userViewModel.user?.id ?? 0))
-            .frame(width: 100, height: 100)
-            .padding(10)
-          Spacer()
-        }
-      }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill available space
     }
-  }
 }
 
 #Preview {
   UserView()
-    .environmentObject(KeychainViewModel())
     .environmentObject(UserViewModel())
-    .environmentObject(Settings())
-
 }

@@ -18,48 +18,31 @@ struct LoginView: View {
   @State private var myInlogName = ""
   @State private var myPassword = ""
 
-  //  @State private var myInlogName = "lesdequartel@yahoo.com "
-  //  @State private var myPassword = "Zeemeeuw2015!"
-
-  //  @State private var myInlogName = "edequartel@protonmail.com "
-  //  @State private var myPassword = "fyrta5-pIdtow-gawpys"
-
   var body: some View {
     Form {
       Section("Login \(settings.selectedInBetween)") {
         // Horizontal buttons
-                    HStack {
-                        Button("edq") {
-                            myInlogName = "edequartel@protonmail.com"
-                            myPassword = "fyrta5-pIdtow-gawpys"
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
+        HStack {
+          Button("edq") {
+            myInlogName = "edequartel@protonmail.com"
+            myPassword = "fyrta5-pIdtow-gawpys"
+          }
+          .buttonStyle(BorderlessButtonStyle())
 
-                        Button("ldq") {
-                            myInlogName = "lesdequartel@yahoo.com"
-                            myPassword = "Zeemeeuw2015!"
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
+          Button("ldq") {
+            myInlogName = "lesdequartel@yahoo.com"
+            myPassword = "Zeemeeuw2015!"
+          }
+          .buttonStyle(BorderlessButtonStyle())
 
-                        Button("hdj") {
-                            myInlogName = "Heikodejonge@cetera.nu"
-                            myPassword = "Simca25-an-58"
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
+          Button("bdq") {
+            myInlogName = "bramdeq@live.nl"
+            myPassword = "7mRv6!JZaV!JJb3"
+          }
+          .buttonStyle(BorderlessButtonStyle())
 
-                        Button("bdq") {
-                            myInlogName = "bramdeq@live.nl"
-                            myPassword = "7mRv6!JZaV!JJb3"
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-
-                        Button("!") {
-                            myInlogName = ""
-                            myPassword = ""
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                    }
-                    .padding()
+        }
+        .padding()
 
         //        }
         VStack {
@@ -89,14 +72,14 @@ struct LoginView: View {
                 settings: settings
               ) { success in
                 if success {
-                  log.info("Credentials successfully fetched.")
+                  log.info("token successfully fetched.")
                   //so we get the user details and use these
                   userViewModel.fetchUserData(
                     settings: settings,
                     token: keyChainviewModel.token ,
                     completion:
                       {
-                        log.error("userViewModel fethData")
+                        log.info("-->>>userViewModel fethData")
                         userViewModel.loginSuccess = true
                     })
                   //
@@ -121,7 +104,6 @@ struct LoginView: View {
               Button(logOut) {
                 keyChainviewModel.token = ""
                 userViewModel.loginSuccess = false
-
               }
               .buttonStyle(.bordered)
               .frame(maxWidth: .infinity)
@@ -133,12 +115,12 @@ struct LoginView: View {
 
 //      DisplayCredentialsView()
 
-//      if !keyChainviewModel.token.isEmpty {
+      if !keyChainviewModel.token.isEmpty {
         Section(user) {
           UserView()
             .accessibilityElement(children: .combine)
         }
-//      }
+      }
 
       if keyChainviewModel.token.isEmpty {
         Section(information) {

@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct ContentView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser : ObservationsViewModel
+  @EnvironmentObject  var observationUser : ObservationsViewModel
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
@@ -36,7 +36,7 @@ struct ContentView: View {
       else { //token is not empty and is okay
         if dataLoaded {
           RavensView(
-            observationUser: observationUser,
+//            observationUser: observationUser,
             observationsLocation: observationsLocation,
             observationsSpecies: observationsSpecies)
           .onAppear {

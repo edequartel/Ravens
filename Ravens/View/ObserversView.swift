@@ -19,10 +19,8 @@ struct ObserversView: View {
 
   @ObservedObject var observationUser : ObservationsViewModel
 
-
   @EnvironmentObject private var observersViewModel: ObserversViewModel
   @EnvironmentObject private var userViewModel:  UserViewModel
-
 
   @EnvironmentObject private var settings: Settings
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -39,6 +37,8 @@ struct ObserversView: View {
   var body: some View {
     VStack {
       if showView { Text("ObserversView").font(.customTiny) }
+      Text("\(observerId)")
+      Text("\(observerName)")
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {

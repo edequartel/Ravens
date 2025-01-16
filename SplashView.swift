@@ -27,6 +27,9 @@ struct SplashView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
+  @EnvironmentObject var obsObserversViewModel: ObserversViewModel
+  @EnvironmentObject var observationUser : ObservationsViewModel
+
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -36,38 +39,21 @@ struct SplashView: View {
   @State private var isUserDataLoaded = false
   @State private var isObservationsLocationDataLoaded = false
   @State private var isGeoJSONDataLoaded = false
+  @State private var isObservationLoaded = false
 
   var body: some View {
     VStack {
-
       Text("Ravens")
-          .font(.system(size: 48))
-          .foregroundColor(.gray)
-          .bold()
+        .font(.system(size: 48))
+        .foregroundColor(.gray)
+        .bold()
 
       LottieView(lottieFile: "ravenssun.json")
         .frame(width: 150, height: 150)
     }
-    .onChange(of: keyChainViewModel.token.isEmpty) { oldValue, newValue in
-      log.error("**NEW TOKEN** \(newValue)")
-      handleTokenChange(newValue)
-    }
     .onAppear {
       log.error("*** NEW LAUNCHING SPLASHVIEW ***")
-      isUserDataLoaded = true
       handleOnAppear()
-    }
-  }
-
-  private func handleTokenChange(_ isTokenEmpty: Bool) {
-    if !isTokenEmpty {
-      log.error("Token detected, loading data")
-      Task {
-        log.error("SPLASHVIEW change loaddata")
-        await loadData()
-      }
-    } else {
-      log.error("Token not found, waiting for login")
     }
   }
 
@@ -83,12 +69,12 @@ struct SplashView: View {
 
   private func checkDataLoaded() {
     let allDataLoaded = isFirstLanguageDataLoaded &&
-                        isSecondLanguageDataLoaded &&
-                        isSpeciesGroupDataLoaded &&
-                        isLanguageDataLoaded &&
-                        isRegionDataLoaded &&
-                        isRegionListDataLoaded &&
-                        isUserDataLoaded
+    isSecondLanguageDataLoaded &&
+    isSpeciesGroupDataLoaded &&
+    isLanguageDataLoaded &&
+    isRegionDataLoaded &&
+    isRegionListDataLoaded &&
+    isUserDataLoaded
 
     if allDataLoaded {
       self.dataLoaded = true
@@ -162,10 +148,34 @@ struct SplashView: View {
   private func loadUserData() async {
     userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
       log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-      isUserDataLoaded = true
-      settings.userId = userViewModel.user?.id ?? 0
-      settings.userName = userViewModel.user?.name ?? ""
-      checkDataLoaded()
+      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+
+      observationUser.fetchDataInit(
+        settings: settings,
+        entity: .user,
+        token: keyChainViewModel.token,
+        id: obsObserversViewModel.observerId,
+        completion: {
+          log.error("fetch observationUser.fetchDataInit complete")
+          isUserDataLoaded = true
+          checkDataLoaded()
+        }
+      )
     }
   }
+
+
+
+
 }
+
+
+//log.error("-update refresh")
+//
+//observationUser.fetchDataInit(
+//  settings: settings,
+//  entity: .user,
+//  token: keyChainviewModel.token,
+//  id: observerId,
+//  completion: { log.info("fetch data complete") } )
