@@ -72,12 +72,11 @@ struct TabUserObservationsView: View {
         }
       }
 
-//      .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
-//        log.error("----------> update userViewModel.loginSuccess")
-////        observerId = userViewModel.user?.id ?? 0
-//        obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-//        obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-//      }
+      .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
+        log.error("update userViewModel.loginSuccess")
+        obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+        obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      }
 
       .onChange(of: settings.timePeriodUser) {
         log.error("-update timePeriodUser")
@@ -89,20 +88,6 @@ struct TabUserObservationsView: View {
           id: userViewModel.user?.id ?? 0,
           completion: { log.info("fetch data complete") } )
       }
-
-//      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-//      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-
-//      .onChange(of: obsObserversViewModel.observerId) {
-//        log.error("---->update setObserver \(obsObserversViewModel.observerId)")
-//
-//        observationUser.fetchDataInit(
-//          settings: settings,
-//          entity: .user,
-//          token: keyChainviewModel.token,
-//          id: obsObserversViewModel.observerId,
-//          completion: { log.info("fetch data complete") } )
-//      }
 
       .onChange(of: refresh) {
         log.error("-update refresh")

@@ -164,18 +164,4 @@ struct SplashView: View {
       )
     }
   }
-
-
-
-
 }
-
-
-//log.error("-update refresh")
-//
-//observationUser.fetchDataInit(
-//  settings: settings,
-//  entity: .user,
-//  token: keyChainviewModel.token,
-//  id: observerId,
-//  completion: { log.info("fetch data complete") } )

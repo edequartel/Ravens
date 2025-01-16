@@ -36,7 +36,6 @@ struct ContentView: View {
       else { //token is not empty and is okay
         if dataLoaded {
           RavensView(
-//            observationUser: observationUser,
             observationsLocation: observationsLocation,
             observationsSpecies: observationsSpecies)
           .onAppear {

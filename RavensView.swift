@@ -15,7 +15,7 @@ struct RavensView: View {
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
-  @EnvironmentObject var settings: Settings
+//  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
   @EnvironmentObject var notificationsManager: NotificationsManager
@@ -25,7 +25,6 @@ struct RavensView: View {
       TabView {
         // Tab 2
         TabUserObservationsView(
-//          observationUser : $observationUser,
           selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(us)
