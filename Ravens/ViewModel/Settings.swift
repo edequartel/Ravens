@@ -93,8 +93,8 @@ class Settings: ObservableObject {
     }
   }
 
-  @Published var userId: Int = 0
-  @Published var userName = "unknown"
+//  @Published var userId: Int = 0
+//  @Published var userName = "unknown"
 
   @Published var locationId: Int = 0
   @Published var locationName: String = "Unknown Location"

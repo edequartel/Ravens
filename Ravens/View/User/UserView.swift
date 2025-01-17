@@ -15,8 +15,14 @@ struct UserView: View {
 
     var body: some View {
         VStack {
-            Text("\(userViewModel.user?.name ?? "unknown")")// - \(userViewModel.user?.id ?? 0)")
+
+
+          Text("\(userViewModel.user?.name ?? "unknown")")// - \(userViewModel.user?.id ?? 0)")
                 .bold()
+
+          Text("ravens://\(cleanName(userViewModel.user?.name ?? "unknown"))/\(userViewModel.user?.id ?? 0)")
+            .font(.caption)
+            .foregroundColor(.secondary)
 
             QRCodeView(
                 input: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)"

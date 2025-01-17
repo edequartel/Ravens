@@ -37,19 +37,19 @@ struct ObserversView: View {
   var body: some View {
     VStack {
       if showView { Text("ObserversView").font(.customTiny) }
-      Text("\(observerId)")
       Text("\(observerName)")
+        .bold()
+      Text("\(observerId)")
+        .font(.caption)
+        .foregroundColor(.secondary)
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {
-            settings.userId = userViewModel.user?.id ?? 0 //??? kan vervallen wanner de setObserver zelfde type maken
-            settings.userName =  userViewModel.user?.name ?? ""
             observerId = userViewModel.user?.id ?? 0
             observerName = userViewModel.user?.name ?? ""
-
             self.presentationMode.wrappedValue.dismiss()
           }
-          .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.blue : Color.primary)
+          .foregroundColor(Color.black)
           .bold()
           .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(action: {
@@ -77,8 +77,6 @@ struct ObserversView: View {
         ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
           HStack{
             Button(record.name) {
-              settings.userId = record.userID //??? kan vervallen wanner de setObserver zelfde type maken
-              settings.userName =  record.name
               observerId = record.userID
               observerName = record.name
 
@@ -121,6 +119,20 @@ struct ObserversView: View {
         VStack{
           Text(item.name)
             .font(.title)
+
+//          Text(item.id)
+//              .font(.caption)
+//              .contextMenu {
+//                  Button(action: {
+//                      UIPasteboard.general.string = item.id
+//                  }) {
+//                      Label("Copy", systemImage: "doc.on.doc")
+//                  }
+//              }
+
+          Text(item.id)
+            .font(.caption)
+            .foregroundColor(.secondary)
           QRCodeView(input: item.value)
             .frame(width: 200, height: 200)
         }
