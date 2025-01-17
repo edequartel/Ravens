@@ -61,6 +61,7 @@
 "logOut" = "log out";
 "information" = "Information";
 "user" = "Observer";
+"enterEmail" = "Enter your email address";
 
 // filter and sort
 "date" = "Date";

@@ -22,32 +22,11 @@ struct LoginView: View {
     Form {
       Section("Login \(settings.selectedInBetween)") {
         // Horizontal buttons
-        HStack {
-          Button("edq") {
-            myInlogName = "edequartel@protonmail.com"
-            myPassword = "fyrta5-pIdtow-gawpys"
-          }
-          .buttonStyle(BorderlessButtonStyle())
-
-          Button("ldq") {
-            myInlogName = "lesdequartel@yahoo.com"
-            myPassword = "Zeemeeuw2015!"
-          }
-          .buttonStyle(BorderlessButtonStyle())
-
-          Button("bdq") {
-            myInlogName = "bramdeq@live.nl"
-            myPassword = "7mRv6!JZaV!JJb3"
-          }
-          .buttonStyle(BorderlessButtonStyle())
-
-        }
-        .padding()
 
         //        }
         VStack {
           if keyChainviewModel.token.isEmpty {
-            TextField("Email", text: $myInlogName, prompt: Text("Enter your email address"))
+            TextField("Email", text: $myInlogName, prompt: Text(enterEmail))
               .textContentType(.emailAddress)
               .autocapitalization(.none)
               .disableAutocorrection(true)
@@ -79,8 +58,8 @@ struct LoginView: View {
                     token: keyChainviewModel.token ,
                     completion:
                       {
-                        log.info("-->>>userViewModel fethData")
-                        userViewModel.loginSuccess = true
+                        log.info(">userViewModel fethData")
+                        userViewModel.loginSuccess.toggle()
                     })
                   //
                 } else {

@@ -29,29 +29,17 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-//  @State private var observerId: Int = 0
-//  @State private var observerName: String = ""
-
-//  @Binding var observerId: Int
-//  @Binding var observerName: String
-
   @State private var refresh: Bool = false
-
   @State private var firstTime: Bool = true
 
   var body: some View {
     NavigationView {
       VStack {
-        Button("Refresh") {refresh.toggle()}
-        //        Text("id \(userViewModel.user?.id ?? 0)")
-        Text("observerId \(obsObserversViewModel.observerId)")
-
-
-
-        Text("ownr \(userViewModel.user?.name ?? "noName")")
-
-        Text("--> observerName:\(obsObserversViewModel.observerName)")
-        Text("--> observerId:\(obsObserversViewModel.observerId)")
+//        Button("Refresh") {refresh.toggle()}
+//        //        Text("id \(userViewModel.user?.id ?? 0)")
+//        Text("ownr \(userViewModel.user?.name ?? "noName")")
+//        Text("--> observerName:\(obsObserversViewModel.observerName)")
+//        Text("--> observerId:\(obsObserversViewModel.observerId)")
 
 
         //        Text("setObserverString \(observerName)")
@@ -73,13 +61,13 @@ struct TabUserObservationsView: View {
       }
 
       .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
-        log.error("update userViewModel.loginSuccess")
+        log.info("update userViewModel.loginSuccess")
         obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
       .onChange(of: settings.timePeriodUser) {
-        log.error("-update timePeriodUser")
+        log.info("update timePeriodUser")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -90,7 +78,7 @@ struct TabUserObservationsView: View {
       }
 
       .onChange(of: refresh) {
-        log.error("-update refresh")
+        log.info("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -101,7 +89,7 @@ struct TabUserObservationsView: View {
       }
 
       .onChange(of: obsObserversViewModel.observerId) {
-        log.error("-update refresh")
+        log.info("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -149,15 +137,12 @@ struct TabUserObservationsView: View {
         }
       }
 
-      .navigationTitle("obsr: \(obsObserversViewModel.observerName)")
+      .navigationTitle("\(obsObserversViewModel.observerName)")
       .navigationBarTitleDisplayMode(.inline)
 
       .onAppear {
-        log.error("ONAPPEAR TABUSERS")
         if firstTime {
-          log.error("ONAPPEAR TABUSERS FIRSTTIME")
-          //          observerId = userViewModel.user?.id ?? 0
-          //          observerName = userViewModel.user?.name ?? ""
+          log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
         }

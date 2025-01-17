@@ -60,7 +60,7 @@ struct SplashView: View {
   private func handleOnAppear() {
     log.error("**handle onAppear**")
     if !keyChainViewModel.token.isEmpty {
-      log.error("SPLASHVIEW onAppear loaddata")
+      log.info("** SPLASHVIEW onAppear loaddata **")
       Task {
         await loadData()
       }
@@ -147,7 +147,7 @@ struct SplashView: View {
 
   private func loadUserData() async {
     userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
       obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
 
@@ -157,7 +157,7 @@ struct SplashView: View {
         token: keyChainViewModel.token,
         id: obsObserversViewModel.observerId,
         completion: {
-          log.error("fetch observationUser.fetchDataInit complete")
+          log.info("fetch loadUserData observationUser.fetchDataInit complete")
           isUserDataLoaded = true
           checkDataLoaded()
         }

@@ -57,6 +57,7 @@
 "logOut" = "Log uit";
 "information" = "Informatie";
 "user" = "Waarnemer";
+"enterEmail" = "Vul hier je email in";
 
 //filter and sort
 "date" = "Datum";

@@ -61,6 +61,7 @@ let emailAddress = LocalizedStringKey("emailAddress")
 let logOut = LocalizedStringKey("logOut")
 let information = LocalizedStringKey("information")
 let user = LocalizedStringKey("user")
+let enterEmail = LocalizedStringKey("enterEmail")
 
 let moreAtWaarneming = LocalizedStringKey("moreAtWaarneming")
 
