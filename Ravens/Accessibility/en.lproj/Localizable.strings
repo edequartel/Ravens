@@ -56,11 +56,12 @@
 "email" = "email";
 "password" = "Password";
 "login" = "Login";
-"loginFailed" = "Login failed";
+"logInFailed" = "Login failed";
 "emailAddress" = "email Address";
 "logOut" = "log out";
 "information" = "Information";
 "user" = "Observer";
+"enterEmail" = "Enter your email address";
 
 // filter and sort
 "date" = "Date";

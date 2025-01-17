@@ -17,7 +17,9 @@ struct ObservationsLocationView: View {
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var locationManager: LocationManagerModel
-  
+
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedSpeciesID: Int?
@@ -61,7 +63,10 @@ struct ObservationsLocationView: View {
             currentFilteringOption: $currentFilteringOption) {
             // Handle end of list event
              print("End of list reached in ParentView observationsLocation")
-            observationsLocation.fetchData(settings: settings, url: observationsLocation.next, completion: { log.error("observationsLocation.fetchData") })
+              observationsLocation.fetchData(
+                settings: settings, url: observationsLocation.next,
+                token: keyChainviewModel.token,
+                completion: { log.error("observationsLocation.fetchData") })
 
           }
         } else {
@@ -91,12 +96,13 @@ struct ObservationsLocationView: View {
 }
 
 
-func fetchDataLocation(settings: Settings, observationsLocation: ObservationsViewModel, locationIdViewModel: LocationIdViewModel, geoJSONViewModel: GeoJSONViewModel, coordinate: CLLocationCoordinate2D) {
+func fetchDataLocation(settings: Settings, token: String, observationsLocation: ObservationsViewModel, locationIdViewModel: LocationIdViewModel, geoJSONViewModel: GeoJSONViewModel, coordinate: CLLocationCoordinate2D) {
   print("fetchDataLocation")
   //1. get the id from the location
   locationIdViewModel.fetchLocations(
     latitude: coordinate.latitude,
     longitude: coordinate.longitude,
+    token: token,
     completion: { fetchedLocations in
       print("locationIdViewModel data loaded")
       // Use fetchedLocations here, actually it is one location,. the first
@@ -118,6 +124,7 @@ func fetchDataLocation(settings: Settings, observationsLocation: ObservationsVie
       observationsLocation.fetchDataInit(
         settings: settings,
         entity: .location,
+        token: token,
         id: fetchedLocations[0].id,
         completion: {
           print("observationsLocationViewModel data loaded")

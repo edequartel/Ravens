@@ -7,16 +7,14 @@ class ObsViewModel: ObservableObject {
     @Published var observation: Observation?
     private var keyChainViewModel =  KeychainViewModel()
     
-    func fetchData(settings: Settings, for obsID: Int, completion: @escaping () -> Void) {
+  func fetchData(settings: Settings, for obsID: Int, token: String, completion: @escaping () -> Void) {
         log.info("fetchData API Call for ObsViewModel \(obsID) at \(Date())")
         
         let url = endPoint(value: settings.selectedInBetween)+"observations/\(obsID)/"
         
-        keyChainViewModel.retrieveCredentials()
-        
         let headers: HTTPHeaders = [
             "Accept-Language" : settings.selectedLanguage,
-            "Authorization": "Token " + keyChainViewModel.token
+            "Authorization": "Token " + token
         ]
         
         log.info("ObsViewModel url: \(url) \(headers)")

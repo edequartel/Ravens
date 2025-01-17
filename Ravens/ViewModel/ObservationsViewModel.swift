@@ -20,7 +20,8 @@ enum EntityType: String {
 
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
-
+//  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  
   @Published var observations: [Observation]?
 
   private var limit = 100
@@ -37,7 +38,7 @@ class ObservationsViewModel: ObservableObject {
 //    return Calendar.current.date(byAdding: .day, value: -daysToAdd, to: date) ?? date
 //  }
 
-  func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: @escaping () -> Void) {
+  func fetchDataInit(settings: Settings, entity: EntityType, token: String, id: Int, completion: @escaping () -> Void) {
 //    func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: (() -> Void)? = nil) {
     log.info("FetchDataInit")
     //reset
@@ -69,25 +70,24 @@ class ObservationsViewModel: ObservableObject {
 
     url += "&ordering=-datetime"
 
-    fetchData(settings: settings, url: url, completion: completion)
+    fetchData(settings: settings, url: url, token: token, completion: completion)
   }
 
 
-  func fetchData(settings: Settings, url: String, completion: @escaping () -> Void) {
+  func fetchData(settings: Settings, url: String, token: String, completion: @escaping () -> Void) {
     log.info("fetchData url: [\(url)]")
     if url.isEmpty { return }
     //
     log.info("fetchData ObservationsViewModel userId: \(url)")
-    keyChainViewModel.retrieveCredentials()
-
 
     // Add the custom header
     let headers: HTTPHeaders = [
-      "Authorization": "Token "+keyChainViewModel.token,
+      "Authorization": "Token " + token,
       "Accept-Language": settings.selectedLanguage
     ]
 
-    log.error("fetchData ObservationsUserViewModel \(url)")
+    log.info("fetchData ObservationsUserViewModel token \(token)")
+    log.info("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in
       switch response.result {
@@ -99,7 +99,7 @@ class ObservationsViewModel: ObservableObject {
             let observations = try decoder.decode(Observations.self, from: data)
 
             DispatchQueue.main.async {
-              self.observations = (self.observations ?? []) + observations.results
+              self.observations = (self.observations ?? []) + (observations.results ?? [])
               //              self.observations = observations.results
               self.count = observations.count ?? 0
 

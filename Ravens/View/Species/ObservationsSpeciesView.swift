@@ -17,6 +17,8 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
 
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+
   @State private var hasAppeared = false
   @State private var scale: CGFloat = 1.0
   @State private var lastScale: CGFloat = 1.0
@@ -97,7 +99,13 @@ struct ObservationsSpeciesView: View {
 
               // Handle end of list event
               print("End of list reached in ParentView observationsSpecies")
-              observationsSpecies.fetchData(settings: settings, url: observationsSpecies.next, completion: { log.error("observationUser.fetchData") })
+              observationsSpecies.fetchData(
+                settings: settings,
+                url: observationsSpecies.next,
+                token: keyChainviewModel.token,
+                completion: {
+                  log.error("observationUser.fetchData")
+                })
             }
               .environmentObject(Settings()) // Pass environment object
 
@@ -127,6 +135,7 @@ struct ObservationsSpeciesView: View {
     observationsSpecies.fetchDataInit(
       settings: settings,
       entity: .species,
+      token: keyChainviewModel.token,
       id: item.speciesId,
       completion: {
         isLoaded = true

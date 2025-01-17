@@ -52,11 +52,12 @@
 "email" = "email";
 "password" = "Wachtwoord";
 "login" = "Login";
-"loginFailed" = "Inloggen mislukt";
+"logInFailed" = "Inloggen mislukt";
 "emailAddress" = "Email adres";
 "logOut" = "Log uit";
 "information" = "Informatie";
 "user" = "Waarnemer";
+"enterEmail" = "Vul hier je email in";
 
 //filter and sort
 "date" = "Datum";

@@ -70,6 +70,10 @@ struct RavensApp: App {
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
+
+  @StateObject var observationUser = ObservationsViewModel()
+
+
   @StateObject var player = Player()
 
   @State private var showingAlert = false
@@ -79,7 +83,7 @@ struct RavensApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView(
-        observationUser: observationsUser,
+//        observationUser: observationsUser,
         observationsLocation : observationsLocation,
         observationsSpecies: observationsSpecies
       )
@@ -102,6 +106,7 @@ struct RavensApp: App {
         .environmentObject(locationViewModel)
         .environmentObject(accessibilityManager)
         .environmentObject(geoJSONViewModel)
+        .environmentObject(observationUser)
 
         .onOpenURL { url in
           // Handle the URL appropriately
@@ -119,11 +124,11 @@ struct RavensApp: App {
           },
                 secondaryButton: .cancel(Text("No")))
         }
-        .onAppear {
-//          notificationsManager.requestNotificationPermission()
-//          timerManager.setNotificationsManager(notificationsManager)  
-//          print("\(String(describing: locationManager.getCurrentLocation()))")
-        }
+//        .onAppear {
+////          notificationsManager.requestNotificationPermission()
+////          timerManager.setNotificationsManager(notificationsManager)  
+////          print("\(String(describing: locationManager.getCurrentLocation()))")
+//        }
     }
   }
 

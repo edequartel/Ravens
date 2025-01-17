@@ -13,7 +13,7 @@ struct UserData: Codable {
     let email: String
     let isMailAllowed: Bool
     let url: String
-    let country: String
+    let country: String?
     let considerEmailConfirmed: Bool
     let avatar: String?
 

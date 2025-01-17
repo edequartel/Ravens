@@ -28,6 +28,8 @@ struct ObservationsUserView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
 
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+
   @Binding var selectedSpeciesID: Int?
 
   @Binding var currentSortingOption: SortingOption
@@ -56,6 +58,7 @@ struct ObservationsUserView: View {
             observationUser.fetchData(
               settings: settings,
               url: observationUser.next,
+              token: keyChainviewModel.token,
               completion: { log.error("observationUser.fetchData")
               })
           }
@@ -64,16 +67,12 @@ struct ObservationsUserView: View {
         NoObservationsView()
       }
 
-
-
-
     }
-
     .onAppear {
-      log.error("onappear observation user")
+      log.info("onappear observation user")
     }
     .refreshable {
-      log.error("refresh onappear observation user")
+      log.info("refresh onappear observation user")
       setRefresh.toggle()
     }
   }

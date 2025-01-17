@@ -1,4 +1,3 @@
-//
 //  SplashView.swift
 //  Ravens
 //
@@ -24,11 +23,12 @@ struct SplashView: View {
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var userViewModel: UserViewModel
-  @EnvironmentObject var keychainViewModel: KeychainViewModel
   @EnvironmentObject var locationIdViewModel: LocationIdViewModel
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
-  @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @EnvironmentObject var obsObserversViewModel: ObserversViewModel
+  @EnvironmentObject var observationUser : ObservationsViewModel
 
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
@@ -39,119 +39,129 @@ struct SplashView: View {
   @State private var isUserDataLoaded = false
   @State private var isObservationsLocationDataLoaded = false
   @State private var isGeoJSONDataLoaded = false
+  @State private var isObservationLoaded = false
 
   var body: some View {
     VStack {
       Text("Ravens")
-          .font(.system(size: 48))
-          .foregroundColor(.gray)
-          .bold()
-
+        .font(.system(size: 48))
+        .foregroundColor(.gray)
+        .bold()
 
       LottieView(lottieFile: "ravenssun.json")
         .frame(width: 150, height: 150)
     }
-
-    .onChange(of: keyChainviewModel.token.isEmpty) { oldValue, newValue in
-        if !newValue { // `newValue` is false when the token is not empty
-            log.error("Token detected, loading data")
-            loadData()
-        } else {
-            log.error("Token not found, waiting for login")
-        }
-    }
-
     .onAppear {
       log.error("*** NEW LAUNCHING SPLASHVIEW ***")
+      handleOnAppear()
+    }
+  }
 
-      if !keyChainviewModel.token.isEmpty {
-        loadData()
+  private func handleOnAppear() {
+    log.error("**handle onAppear**")
+    if !keyChainViewModel.token.isEmpty {
+      log.info("** SPLASHVIEW onAppear loaddata **")
+      Task {
+        await loadData()
       }
     }
   }
 
   private func checkDataLoaded() {
-    if isFirstLanguageDataLoaded &&
-        isSecondLanguageDataLoaded &&
-        isSpeciesGroupDataLoaded &&
-        isLanguageDataLoaded &&
-        isRegionDataLoaded &&
-        isRegionListDataLoaded &&
-        isUserDataLoaded 
-    {
+    let allDataLoaded = isFirstLanguageDataLoaded &&
+    isSecondLanguageDataLoaded &&
+    isSpeciesGroupDataLoaded &&
+    isLanguageDataLoaded &&
+    isRegionDataLoaded &&
+    isRegionListDataLoaded &&
+    isUserDataLoaded
+
+    if allDataLoaded {
       self.dataLoaded = true
+      log.info("All required data loaded. Setting dataLoaded to true.")
     }
   }
 
-  private func loadData() {
-    languagesViewModel.fetchLanguageData(
-      settings: settings,
-      completion: {
-        log.info("languagesViewModel Language data loaded")
-        isLanguageDataLoaded = true
-        checkDataLoaded()
-      })
-
-    speciesGroupViewModel.fetchData(
-      settings: settings,
-      completion: {
-        log.info("speciesGroupViewModel group data loaded")
-        isSpeciesGroupDataLoaded = true
-        checkDataLoaded()
-      })
-
-    regionsViewModel.fetchData(
-      settings: settings,
-      completion: {
-        log.info("regionsViewModel data loaded")
-        isRegionDataLoaded = true
-        checkDataLoaded()
-      })
-
-
-    regionListViewModel.fetchData(
-      settings: settings,
-      completion: {
-        log.info("regionListViewModel data loaded")
-        isRegionListDataLoaded = true
-        checkDataLoaded()
-      })
-
-    speciesViewModel.fetchDataFirst(
-      settings: settings,
-      completion: {
-        log.info("speciesViewModel First language data loaded")
-        speciesViewModel.parseHTMLFromURL(settings: settings, completion: {
-          log.error("html is parsed from start")
-          isFirstLanguageDataLoaded = true
-          checkDataLoaded()
-        })
-      })
-
-    speciesViewModel.fetchDataSecondLanguage(
-      settings: settings,
-      completion: {
-        log.info("speciesViewModel Second language data loaded")
-        isSecondLanguageDataLoaded = true
-        checkDataLoaded()
-      })
-
-    userViewModel.fetchUserData(
-      settings: settings,
-      completion: {
-        log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-        isUserDataLoaded = true
-        settings.userId = userViewModel.user?.id ?? 0
-        settings.userName = userViewModel.user?.name ?? ""
-      })
+  func loadData() async {
+    await withTaskGroup(of: Void.self) { group in
+      group.addTask { await loadLanguagesData() }
+      group.addTask { await loadSpeciesGroupData() }
+      group.addTask { await loadRegionsData() }
+      group.addTask { await loadRegionListData() }
+      group.addTask { await loadSpeciesFirstLanguageData() }
+      group.addTask { await loadSpeciesSecondLanguageData() }
+      group.addTask { await loadUserData() }
+    }
   }
-}
 
+  private func loadLanguagesData() async {
+    languagesViewModel.fetchLanguageData(settings: settings) {
+      log.info("languagesViewModel Language data loaded")
+      isLanguageDataLoaded = true
+      checkDataLoaded()
+    }
+  }
 
-struct AnotherView: View {
-  @ObservedObject var viewModel: KeychainViewModel
+  private func loadSpeciesGroupData() async {
+    speciesGroupViewModel.fetchData(settings: settings) {
+      log.info("speciesGroupViewModel group data loaded")
+      isSpeciesGroupDataLoaded = true
+      checkDataLoaded()
+    }
+  }
 
-  var body: some View {
-    Text("Token: \(viewModel.token)")
+  private func loadRegionsData() async {
+    regionsViewModel.fetchData(settings: settings) {
+      log.info("regionsViewModel data loaded")
+      isRegionDataLoaded = true
+      checkDataLoaded()
+    }
+  }
+
+  private func loadRegionListData() async {
+    regionListViewModel.fetchData(settings: settings) {
+      log.info("regionListViewModel data loaded")
+      isRegionListDataLoaded = true
+      checkDataLoaded()
+    }
+  }
+
+  private func loadSpeciesFirstLanguageData() async {
+    speciesViewModel.fetchDataFirst(settings: settings) {
+      log.info("speciesViewModel First language data loaded")
+      speciesViewModel.parseHTMLFromURL(settings: settings) {
+        log.info("HTML parsed from start")
+        isFirstLanguageDataLoaded = true
+        checkDataLoaded()
+      }
+    }
+  }
+
+  private func loadSpeciesSecondLanguageData() async {
+    speciesViewModel.fetchDataSecondLanguage(settings: settings) {
+      log.info("speciesViewModel Second language data loaded")
+      isSecondLanguageDataLoaded = true
+      checkDataLoaded()
+    }
+  }
+
+  private func loadUserData() async {
+    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+      log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+
+      observationUser.fetchDataInit(
+        settings: settings,
+        entity: .user,
+        token: keyChainViewModel.token,
+        id: obsObserversViewModel.observerId,
+        completion: {
+          log.info("fetch loadUserData observationUser.fetchDataInit complete")
+          isUserDataLoaded = true
+          checkDataLoaded()
+        }
+      )
+    }
   }
 }

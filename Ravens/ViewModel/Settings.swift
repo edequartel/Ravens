@@ -53,7 +53,7 @@ class Settings: ObservableObject {
     }
   }
 
-  @AppStorage("tokenKey") var tokenKey = ""
+//  @AppStorage("tokenKey") var tokenKey = ""
 
   @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
   @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false

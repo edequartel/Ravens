@@ -24,12 +24,12 @@ class SpeciesViewModel: ObservableObject {
   
   func parseHTMLFromURL(settings: Settings, completion: @escaping () -> Void) {
     //  func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("(settings.parseHTMLFromURL)")
+    log.info("(settings.parseHTMLFromURL)")
     log.info("groupID \(settings.selectedSpeciesGroupId)")
     
     let urlString = "https://waarneming.nl/recent-species/?species_group=\(settings.selectedSpeciesGroupId)"
-    log.error("parsing... urlString: \(urlString)")
-    
+    log.info("parsing... urlString: \(urlString)")
+
     // Continue with your URL session or network request setup here
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedLanguage

@@ -19,10 +19,8 @@ struct ObserversView: View {
 
   @ObservedObject var observationUser : ObservationsViewModel
 
-
   @EnvironmentObject private var observersViewModel: ObserversViewModel
   @EnvironmentObject private var userViewModel:  UserViewModel
-
 
   @EnvironmentObject private var settings: Settings
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -33,17 +31,21 @@ struct ObserversView: View {
   @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheet gelijk geopend
   @State private var userName: String = "unknown"
 
-  @Binding var setObserver: Int
+  @Binding var observerId: Int
+  @Binding var observerName: String
 
   var body: some View {
     VStack {
       if showView { Text("ObserversView").font(.customTiny) }
+      Text("\(observerId)")
+      Text("\(observerName)")
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {
             settings.userId = userViewModel.user?.id ?? 0 //??? kan vervallen wanner de setObserver zelfde type maken
             settings.userName =  userViewModel.user?.name ?? ""
-            setObserver = userViewModel.user?.id ?? 0
+            observerId = userViewModel.user?.id ?? 0
+            observerName = userViewModel.user?.name ?? ""
 
             self.presentationMode.wrappedValue.dismiss()
           }
@@ -77,8 +79,9 @@ struct ObserversView: View {
             Button(record.name) {
               settings.userId = record.userID //??? kan vervallen wanner de setObserver zelfde type maken
               settings.userName =  record.name
-              setObserver = record.userID
-              
+              observerId = record.userID
+              observerName = record.name
+
               self.presentationMode.wrappedValue.dismiss()
             }
             Spacer()

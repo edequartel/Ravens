@@ -13,106 +13,99 @@ struct LoginView: View {
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
 
+  @EnvironmentObject var userViewModel:  UserViewModel
+
   @State private var myInlogName = ""
   @State private var myPassword = ""
 
   var body: some View {
     Form {
       Section("Login \(settings.selectedInBetween)") {
-        VStack {
+        // Horizontal buttons
 
-          TextField(email, text: $myInlogName, prompt: Text(emailAddress))
-            .onChange(of: myInlogName) { oldState, newState in
-              myInlogName = newState.lowercased()
-              let lowercasedName = newState.lowercased()
-              if lowercasedName != keyChainviewModel.loginName {
-                keyChainviewModel.loginName = lowercasedName
-              }
+        //        }
+        VStack {
+          if keyChainviewModel.token.isEmpty {
+            TextField("Email", text: $myInlogName, prompt: Text(enterEmail))
+              .textContentType(.emailAddress)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+              .textFieldStyle(.roundedBorder)
+
+            Divider()
+
+            SecureField(text: $myPassword, prompt: Text(password)) {
+              Text(password)
             }
-            .textContentType(.emailAddress)
-            .disableAutocorrection(true)
+            .textContentType(.password)
             .textFieldStyle(.roundedBorder)
 
-          Divider()
-
-          SecureField(text: $myPassword, prompt: Text(password)) {
-            Text(password)
-          }
-          .onChange(of: myPassword) { oldState, newState in
-            keyChainviewModel.password = newState
-          }
-          .textContentType(.password)
-          .disableAutocorrection(true)
-          .textFieldStyle(.roundedBorder)
-
-          HStack {
-            if keyChainviewModel.token.isEmpty {
-              Button(logIn) {
-                keyChainviewModel.fetchData(
-                  username: keyChainviewModel.loginName,
-                  password: keyChainviewModel.password,
-                  settings: settings,
-                  completion: { success in
-                    if success {
-                      log.error("Credentials successfully fetched.")
-                      keyChainviewModel.saveCredentials()
-                    } else {
-                      log.error("Failed to fetch credentials.")
-                    }
-                  }
-                )
+            Button("Log In") {
+              guard !myInlogName.isEmpty, !myPassword.isEmpty else {
+                log.error("Email or password is empty.")
+                return
               }
-              .buttonStyle(.borderedProminent)
-              .frame(maxWidth: .infinity)
-            } else {
+              keyChainviewModel.fetchData(
+                username: myInlogName,
+                password: myPassword,
+                settings: settings
+              ) { success in
+                if success {
+                  log.info("token successfully fetched.")
+                  //so we get the user details and use these
+                  userViewModel.fetchUserData(
+                    settings: settings,
+                    token: keyChainviewModel.token ,
+                    completion:
+                      {
+                        log.info(">userViewModel fethData")
+                        userViewModel.loginSuccess.toggle()
+                    })
+                  //
+                } else {
+                  log.error("Failed to fetch credentials.")
+                }
+              }
+            }
+            .buttonStyle(.borderedProminent)
+            .frame(maxWidth: .infinity)
+
+            if keyChainviewModel.loginFailed {
+              Text(logInFailed)
+                .foregroundColor(.red)
+                .padding()
+            }
+
+
+          } else {
+
+            HStack {
               Button(logOut) {
                 keyChainviewModel.token = ""
-//                keyChainviewModel.loginName = ""
-//                keyChainviewModel.password = ""
-                keyChainviewModel.saveCredentials()
-                keyChainviewModel.retrieveCredentials()
+                userViewModel.loginSuccess = false
               }
               .buttonStyle(.bordered)
               .frame(maxWidth: .infinity)
             }
+            .padding(10)
           }
-          .padding(10)
-
-//          Button("Reset token") {
-//            keyChainviewModel.token = ""
-//            keyChainviewModel.loginName = ""
-//            keyChainviewModel.password = ""
-//            keyChainviewModel.saveCredentials()
-//            keyChainviewModel.retrieveCredentials()
-//          }
-//          .buttonStyle(.bordered)
-
-          if keyChainviewModel.loginFailed {
-            Text(logInFailed)
-              .foregroundColor(.red)
-          }
-        }
-        .onAppear {
-          myInlogName = keyChainviewModel.loginName
-          myPassword = keyChainviewModel.password
-          log.error("Login Name onAppear: \(myInlogName)")
-          log.error("Password onAppear: \(myPassword)")
         }
       }
 
-//      Section(information) {
-//        InfoObservationView()
-//      }
+//      DisplayCredentialsView()
 
-      if keyChainviewModel.token.count > 0 {
-      Section(user) {
+      if !keyChainviewModel.token.isEmpty {
+        Section(user) {
           UserView()
-          .accessibilityElement(children: .combine)
+            .accessibilityElement(children: .combine)
         }
       }
-    }
-    .onAppear {
-      log.error("LoginView appeared")
+
+      if keyChainviewModel.token.isEmpty {
+        Section(information) {
+          InfoObservationView()
+        }
+      }
     }
   }
 }
@@ -123,26 +116,17 @@ struct InfoObservationView: View {
     Markdown(
         """
         Voor optimaal gebruik van Ravens is het vereist om een account te hebben bij \
-        [www.waarneming.nl](https://www.waarneming.nl). De Ravens-app maakt gebruik van waarnemingen \
-        die door heel Nederland en België worden doorgegeven.
-
-        Meer informatie over Ravens kun je vinden op [github](https://edequartel.github.io/Ravens/).
-
-        Voor het invoeren van waarnemingen kun je gebruikmaken van de apps **iObs** en **Obsidentify**.
+        [www.waarneming.nl](https://www.waarneming.nl).
         """
     )
-
   }
 }
 
 struct DisplayCredentialsView: View {
   @EnvironmentObject var viewModel: KeychainViewModel
-  @EnvironmentObject var settings: Settings
-  
+
   var body: some View {
     VStack(alignment: .leading) {
-      Text("Login Name: \(viewModel.loginName)")
-      Text("Password: \(viewModel.password)")
       Text("Token: \(viewModel.token)")
     }
     .font(.caption)

@@ -10,14 +10,16 @@ import SwiftyBeaver
 
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser : ObservationsViewModel
 
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
+
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
-  @EnvironmentObject private var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel:  UserViewModel
 
+  @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
 
@@ -27,12 +29,21 @@ struct TabUserObservationsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-  @State private var setObserver: Int = 0
-  @State private var setRefresh: Bool = false
+  @State private var refresh: Bool = false
+  @State private var firstTime: Bool = true
 
   var body: some View {
     NavigationView {
       VStack {
+//        Button("Refresh") {refresh.toggle()}
+//        //        Text("id \(userViewModel.user?.id ?? 0)")
+//        Text("ownr \(userViewModel.user?.name ?? "noName")")
+//        Text("--> observerName:\(obsObserversViewModel.observerName)")
+//        Text("--> observerId:\(obsObserversViewModel.observerId)")
+
+
+        //        Text("setObserverString \(observerName)")
+
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
@@ -45,39 +56,46 @@ struct TabUserObservationsView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
-            setRefresh: $setRefresh)
+            setRefresh: $refresh)
         }
       }
-      
+
+      .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
+        log.info("update userViewModel.loginSuccess")
+        obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+        obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      }
+
       .onChange(of: settings.timePeriodUser) {
-        log.error("update timePeriodUser so new data fetch for this period")
+        log.info("update timePeriodUser")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
-//          id: userViewModel.user?.id ?? 0,
-          id: setObserver,
+          token: keyChainviewModel.token,
+          id: userViewModel.user?.id ?? 0,
           completion: { log.info("fetch data complete") } )
       }
 
-      
-      .onChange(of: setObserver) {
-        log.error("update setObserver so new data fetch for this period")
+      .onChange(of: refresh) {
+        log.info("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
-          id: setObserver,
+          token: keyChainviewModel.token,
+          id: obsObserversViewModel.observerId,
           completion: { log.info("fetch data complete") } )
       }
 
-      .onChange(of: setRefresh) {
-        log.error("update setRefresh so new data fetch for this period")
+      .onChange(of: obsObserversViewModel.observerId) {
+        log.info("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
-          id: setObserver,
+          token: keyChainviewModel.token,
+          id: obsObserversViewModel.observerId,
           completion: { log.info("fetch data complete") } )
       }
 
@@ -108,7 +126,8 @@ struct TabUserObservationsView: View {
             NavigationLink(
               destination: ObserversView(
                 observationUser: observationUser,
-                setObserver: $setObserver)
+                observerId: $obsObserversViewModel.observerId,
+                observerName: $obsObserversViewModel.observerName)
             ) {
               Image(systemSymbol: .listBullet)
                 .uniformSize()
@@ -118,12 +137,15 @@ struct TabUserObservationsView: View {
         }
       }
 
-
-      .navigationTitle("\(settings.userName)")
+      .navigationTitle("\(obsObserversViewModel.observerName)")
       .navigationBarTitleDisplayMode(.inline)
-      .onAppearOnce {
-        setObserver =  userViewModel.user?.id ?? 0 //??? may be use published all the time userViewModel.user?.id instead of setObserver
-        showFirstView = settings.mapPreference
+
+      .onAppear {
+        if firstTime {
+          log.info("Onappear first time")
+          firstTime = false
+          showFirstView = settings.mapPreference
+        }
       }
     }
   }
