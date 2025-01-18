@@ -73,7 +73,7 @@ struct TabUserObservationsView: View {
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
-          id: userViewModel.user?.id ?? 0,
+          id: obsObserversViewModel.observerId,
           completion: { log.info("fetch data complete") } )
       }
 

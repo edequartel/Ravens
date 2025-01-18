@@ -34,22 +34,24 @@ struct ObserversView: View {
   @Binding var observerId: Int
   @Binding var observerName: String
 
+  @State var addObserver: Bool = false
+
   var body: some View {
     VStack {
       if showView { Text("ObserversView").font(.customTiny) }
-      Text("\(observerId)")
       Text("\(observerName)")
+        .bold()
+      Text("\(observerId)")
+        .font(.caption)
+        .foregroundColor(.secondary)
       List {
         HStack {
           Button(userViewModel.user?.name ?? "") {
-            settings.userId = userViewModel.user?.id ?? 0 //??? kan vervallen wanner de setObserver zelfde type maken
-            settings.userName =  userViewModel.user?.name ?? ""
             observerId = userViewModel.user?.id ?? 0
             observerName = userViewModel.user?.name ?? ""
-
             self.presentationMode.wrappedValue.dismiss()
           }
-          .foregroundColor(userViewModel.user?.id ?? 0 == settings.userId ? Color.blue : Color.primary)
+//          .foregroundColor(Color.blue)
           .bold()
           .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(action: {
@@ -77,8 +79,6 @@ struct ObserversView: View {
         ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
           HStack{
             Button(record.name) {
-              settings.userId = record.userID //??? kan vervallen wanner de setObserver zelfde type maken
-              settings.userName =  record.name
               observerId = record.userID
               observerName = record.name
 
@@ -117,19 +117,187 @@ struct ObserversView: View {
           }
         }
       }
+//      .toolbar {
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          Button("Add") {
+//            addObserver.toggle()
+//
+////            self.presentationMode.wrappedValue.dismiss()
+//          }
+//        }
+//      }
       .sheet(item: $QRCode) { item in
         VStack{
           Text(item.name)
             .font(.title)
+          Text(item.id)
+            .font(.caption)
+            .foregroundColor(.secondary)
           QRCodeView(input: item.value)
             .frame(width: 200, height: 200)
         }
       }
     }
+    .sheet(isPresented: $addObserver) {AddObserverView()}
+//    .sheet(isPresented: $addObserver) {URLCheckerView()}
     .onAppear {
       observersViewModel.loadRecords()
     }
   }
 }
 
+import SwiftUI
 
+struct AddObserverView: View {
+    @EnvironmentObject private var observersViewModel: ObserversViewModel
+    @State private var name: String = ""
+    @State private var userID: String = ""
+    @State private var errorMessage: String = ""
+
+    var body: some View {
+        VStack(spacing: 20) {
+            TextField("Name", text: $name)
+                .textFieldStyle(.roundedBorder)
+                .textContentType(.name)
+                .autocorrectionDisabled(true)
+                .submitLabel(.next)
+
+            TextField("ID", text: $userID)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.numberPad)
+                .submitLabel(.done)
+
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                    .bold()
+            }
+
+            Button("Add") {
+                if validateInputs() {
+                    if let id = Int(userID) {
+                        observersViewModel.appendRecord(name: name, userID: id)
+                        clearInputs()
+                    }
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(name.isEmpty || userID.isEmpty)
+        }
+        .padding()
+        .navigationTitle("Add Observer")
+        .navigationBarTitleDisplayMode(.inline)
+        .onSubmit {
+            // Automatically validate on keyboard "Return" action
+            if validateInputs() {
+                if let id = Int(userID) {
+                    observersViewModel.appendRecord(name: name, userID: id)
+                    clearInputs()
+                }
+            }
+        }
+    }
+
+    private func validateInputs() -> Bool {
+        errorMessage = ""
+
+        // Check if name is non-empty and alphanumeric
+        if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            errorMessage = "Name cannot be empty."
+            return false
+        }
+
+        if !name.isAlphanumeric {
+            errorMessage = "Name must be alphanumeric."
+            return false
+        }
+
+        // Check if userID is non-empty and numeric
+        if userID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            errorMessage = "ID cannot be empty."
+            return false
+        }
+
+        if Int(userID) == nil {
+            errorMessage = "ID must be a numeric value."
+            return false
+        }
+
+        return true
+    }
+
+    private func clearInputs() {
+        name = ""
+        userID = ""
+    }
+}
+
+extension String {
+    var isAlphanumeric: Bool {
+        !isEmpty && range(of: "^[a-zA-Z0-9 ]+$", options: .regularExpression) != nil
+    }
+}
+
+
+import Alamofire
+
+/// Checks if a URL exists by performing a HEAD request.
+/// - Parameters:
+///   - urlString: The URL string to check.
+///   - completion: A closure that returns `true` if the URL exists, `false` otherwise.
+func checkIfURLExists(urlString: String, completion: @escaping (Bool) -> Void) {
+    guard let url = URL(string: urlString) else {
+        completion(false)
+        return
+    }
+
+    // Perform a HEAD request using Alamofire
+    AF.request(url, method: .head).validate().response { response in
+        if let httpResponse = response.response {
+            // Return true if the status code is in the 200-299 range
+            completion((200...299).contains(httpResponse.statusCode))
+        } else {
+            // Return false for any error or invalid response
+            completion(false)
+        }
+    }
+}
+
+
+import SwiftUI
+
+struct URLCheckerView: View {
+    @State private var urlToCheck: String = ""
+    @State private var resultText: String = ""
+    @State private var isLoading: Bool = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+            TextField("Enter URL", text: $urlToCheck)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            Button("Check URL") {
+                isLoading = true
+                resultText = ""
+                checkIfURLExists(urlString: urlToCheck) { exists in
+                    isLoading = false
+                    resultText = exists ? "URL exists!" : "URL does not exist!"
+                }
+            }
+            .disabled(urlToCheck.isEmpty)
+            .padding()
+
+            if isLoading {
+                ProgressView()
+            } else {
+                Text(resultText)
+                    .foregroundColor(resultText == "URL exists!" ? .green : .red)
+            }
+        }
+        .padding()
+    }
+}
+
+//https://waarneming.nl/users/135496/
