@@ -336,7 +336,6 @@
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
-				471F7A5D2CF790CB00BF529C /* Information */,
 				471F7A622CF7930D00BF529C /* Media */,
 				471F7A5B2CF7905C00BF529C /* Accessibility */,
 				47AD8FC72CF1BF02007155A4 /* Managers */,
@@ -360,6 +359,7 @@
 		474C40802B4D17AA0038B3A5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				471F7A5D2CF790CB00BF529C /* Information */,
 				4785CD1C2B964C0E002F52BE /* ObservationsViewModel.swift */,
 				471F7A632CF793BE00BF529C /* PlayerModel.swift */,
 				474C40852B4D84030038B3A5 /* Settings.swift */,
@@ -872,7 +872,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -914,7 +914,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
