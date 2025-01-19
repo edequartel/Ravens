@@ -3,6 +3,7 @@
 The Ravens app allows users to view observations both on a map and in a list. This app retrieves the most recent data from www.waarneming.nl and presents it in a clear and organized way.
 
 Good to Know
+
 	•	This app uses data submitted by volunteers on www.waarneming.nl.
 	•	This app is compatible with iPhones running iOS 17.
 	•	You use Ravens with your waarneming.nl account.
