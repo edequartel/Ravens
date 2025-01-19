@@ -10,10 +10,6 @@ Good to Know
 
 This app is designed to make exploring nature even more enjoyable. If you have feedback to improve the app, send an email to edequartel@protonmail or visit GitHub Ravens. With Ravens, you get quick and easy access to recent observations in your selected area, including observations of various species and your own records. Enjoy discovering the nature around you!
 
-TestFlight
-
-Use the link Ravens TestFlight or scan the QR code to test the app on TestFlight on your iPhone. You will then receive instructions on how to install the app.
-
 	•	Wikipedia - Ravens
 	•	Website Ravens
 
