@@ -12,14 +12,16 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 
 Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://www.ravensobs.com). Met Ravens krijg je snel en eenvoudig toegang tot recente waarnemingen in jouw gekozen gebied, inclusief waarnemingen van verschillende soorten en je eigen observaties. Veel plezier met het ontdekken van de natuur om je heen!
 
-## TestFlight
-Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren
-![QR-code](./images/QRCode.png)
 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
 * [Website Ravens](https://www.ravensobs.com)
 
 <!--## Koffie?
+
+## TestFlight
+Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren
+![QR-code](./images/QRCode.png)
+
 Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een [**kopje koffie**](https://www.buymeacoffee.com/4f4r4t6ytba) .
 
 [![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)-->
