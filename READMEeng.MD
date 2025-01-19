@@ -1,5 +1,7 @@
 # Ravens
 
+[Nederlands](README.MD)
+
 The Ravens app allows users to view observations both on a map and in a list. This app retrieves the most recent data from www.waarneming.nl and presents it in a clear and organized way.
 
 ![Ravens](./images/02ravens.png)
