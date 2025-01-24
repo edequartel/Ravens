@@ -15,7 +15,7 @@ struct SplashView: View {
 
   @Binding var dataLoaded: Bool
 
-  @EnvironmentObject var locationManagerModel: LocationManagerModel
+  @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var languagesViewModel: LanguagesViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -60,7 +60,7 @@ struct SplashView: View {
   private func handleOnAppear() {
     log.error("**handle onAppear**")
     if !keyChainViewModel.token.isEmpty {
-      log.info("** SPLASHVIEW onAppear loaddata **")
+      log.error("** SPLASHVIEW onAppear loaddata **")
       Task {
         await loadData()
       }
@@ -78,7 +78,7 @@ struct SplashView: View {
 
     if allDataLoaded {
       self.dataLoaded = true
-      log.info("All required data loaded. Setting dataLoaded to true.")
+      log.error("All required data loaded. Setting dataLoaded to true.")
     }
   }
 
@@ -96,7 +96,7 @@ struct SplashView: View {
 
   private func loadLanguagesData() async {
     languagesViewModel.fetchLanguageData(settings: settings) {
-      log.info("languagesViewModel Language data loaded")
+      log.error("languagesViewModel Language data loaded")
       isLanguageDataLoaded = true
       checkDataLoaded()
     }
@@ -104,7 +104,7 @@ struct SplashView: View {
 
   private func loadSpeciesGroupData() async {
     speciesGroupViewModel.fetchData(settings: settings) {
-      log.info("speciesGroupViewModel group data loaded")
+      log.error("speciesGroupViewModel group data loaded")
       isSpeciesGroupDataLoaded = true
       checkDataLoaded()
     }
@@ -112,7 +112,7 @@ struct SplashView: View {
 
   private func loadRegionsData() async {
     regionsViewModel.fetchData(settings: settings) {
-      log.info("regionsViewModel data loaded")
+      log.error("regionsViewModel data loaded")
       isRegionDataLoaded = true
       checkDataLoaded()
     }
@@ -128,9 +128,9 @@ struct SplashView: View {
 
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
-      log.info("speciesViewModel First language data loaded")
+      log.error("speciesViewModel First language data loaded")
       speciesViewModel.parseHTMLFromURL(settings: settings) {
-        log.info("HTML parsed from start")
+        log.error("HTML parsed from start")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()
       }
@@ -139,7 +139,7 @@ struct SplashView: View {
 
   private func loadSpeciesSecondLanguageData() async {
     speciesViewModel.fetchDataSecondLanguage(settings: settings) {
-      log.info("speciesViewModel Second language data loaded")
+      log.error("speciesViewModel Second language data loaded")
       isSecondLanguageDataLoaded = true
       checkDataLoaded()
     }
@@ -147,7 +147,7 @@ struct SplashView: View {
 
   private func loadUserData() async {
     userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-      log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
       obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
 
@@ -157,7 +157,7 @@ struct SplashView: View {
         token: keyChainViewModel.token,
         id: obsObserversViewModel.observerId,
         completion: {
-          log.info("fetch loadUserData observationUser.fetchDataInit complete")
+          log.error("fetch loadUserData observationUser.fetchDataInit complete")
           isUserDataLoaded = true
           checkDataLoaded()
         }

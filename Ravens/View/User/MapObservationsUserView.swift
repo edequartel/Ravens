@@ -77,11 +77,11 @@ struct ObservationAnnotationView: View {
   var body: some View {
     Circle()
       .fill(rarityColor(value: observation.rarity))
-      .stroke(!(observation.sounds?.isEmpty ?? false) ? Color.white : Color.clear, lineWidth: 1)
+      .stroke(!(observation.sounds?.isEmpty ?? true) ? Color.white : Color.clear, lineWidth: 1)
       .frame(width: 12, height: 12)
       .overlay(
         Circle()
-          .fill(!(observation.photos?.isEmpty ?? false) ? Color.white : Color.clear)
+          .fill(!(observation.photos?.isEmpty ?? true) ? Color.white : Color.clear)
           .frame(width: 6, height: 6)
       )
       .onTapGesture {

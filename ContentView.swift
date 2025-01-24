@@ -12,12 +12,16 @@ struct ContentView: View {
   let log = SwiftyBeaver.self
 
   @EnvironmentObject  var observationUser : ObservationsViewModel
+
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
+  @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+
   @EnvironmentObject var userViewModel:  UserViewModel
 
-  @EnvironmentObject var locationManagerModel: LocationManagerModel
+//  @EnvironmentObject var locationManagerModel: LocationManagerModel
+
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @State private var dataLoaded = false
 
@@ -37,7 +41,8 @@ struct ContentView: View {
         if dataLoaded {
           RavensView(
             observationsLocation: observationsLocation,
-            observationsSpecies: observationsSpecies)
+            observationsSpecies: observationsSpecies,
+            observationsRadiusViewModel: observationsRadiusViewModel)
           .onAppear {
             log.info("RavensView, Data loaded, navigating to main content")
           }

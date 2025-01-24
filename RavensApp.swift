@@ -55,6 +55,9 @@ struct RavensApp: App {
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
   @StateObject private var observationsLocation = ObservationsViewModel()
+
+  @StateObject private var observationsRadiusViewModel = ObservationsRadiusViewModel()
+
   @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
   @StateObject private var observationsSpecies = ObservationsViewModel()
   @StateObject private var observationsViewModel = ObservationsViewModel()
@@ -85,7 +88,8 @@ struct RavensApp: App {
       ContentView(
 //        observationUser: observationsUser,
         observationsLocation : observationsLocation,
-        observationsSpecies: observationsSpecies
+        observationsSpecies: observationsSpecies,
+        observationsRadiusViewModel: observationsRadiusViewModel
       )
         .environmentObject(keychainViewModel)
         .environmentObject(locationManager)

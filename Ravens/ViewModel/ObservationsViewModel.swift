@@ -20,7 +20,6 @@ enum EntityType: String {
 
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
-//  @EnvironmentObject var keyChainviewModel: KeychainViewModel
   
   @Published var observations: [Observation]?
 
@@ -39,7 +38,6 @@ class ObservationsViewModel: ObservableObject {
 //  }
 
   func fetchDataInit(settings: Settings, entity: EntityType, token: String, id: Int, completion: @escaping () -> Void) {
-//    func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: (() -> Void)? = nil) {
     log.info("FetchDataInit")
     //reset
     self.observations = []

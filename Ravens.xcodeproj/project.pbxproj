@@ -107,6 +107,8 @@
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
+		47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* RadiusView.swift */; };
+		47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942D2D3F7247009D734F /* RadiusViewModel.swift */; };
 		47D4B76F2D00241F00D46050 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */; };
 		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
@@ -211,6 +213,8 @@
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
+		47CF942B2D3EEDD2009D734F /* RadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusView.swift; sourceTree = "<group>"; };
+		47CF942D2D3F7247009D734F /* RadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusViewModel.swift; sourceTree = "<group>"; };
 		47D4B76E2D00241800D46050 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				47AD8FC72CF1BF02007155A4 /* Managers */,
 				476843D22BA9D333004EF208 /* StartUp */,
 				474C40812B4D17B40038B3A5 /* Model */,
+				471F7A5D2CF790CB00BF529C /* Information */,
 				474C40802B4D17AA0038B3A5 /* ViewModel */,
 				474C40822B4D17C00038B3A5 /* View */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
@@ -359,7 +364,7 @@
 		474C40802B4D17AA0038B3A5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				471F7A5D2CF790CB00BF529C /* Information */,
+				47CF942D2D3F7247009D734F /* RadiusViewModel.swift */,
 				4785CD1C2B964C0E002F52BE /* ObservationsViewModel.swift */,
 				471F7A632CF793BE00BF529C /* PlayerModel.swift */,
 				474C40852B4D84030038B3A5 /* Settings.swift */,
@@ -411,6 +416,7 @@
 				476AC6E82C9A930000DB8CA8 /* Obs */,
 				4767F00B2BF3291400BACDC6 /* Lists */,
 				4767F0092BF3230400BACDC6 /* User */,
+				47CF942A2D3EEDC1009D734F /* Radius */,
 				4767F0062BF27F2C00BACDC6 /* Location */,
 				4767F0082BF322F000BACDC6 /* Species */,
 				4767F00A2BF3230C00BACDC6 /* Settings */,
@@ -518,6 +524,14 @@
 				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		47CF942A2D3EEDC1009D734F /* Radius */ = {
+			isa = PBXGroup;
+			children = (
+				47CF942B2D3EEDD2009D734F /* RadiusView.swift */,
+			);
+			path = Radius;
 			sourceTree = "<group>";
 		};
 		47EE13212CAC365B007305E1 /* Photo */ = {
@@ -648,6 +662,7 @@
 				4785CD1D2B964C0E002F52BE /* ObservationsViewModel.swift in Sources */,
 				47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */,
 				4785CD192B95C856002F52BE /* UserViewModel.swift in Sources */,
+				47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */,
 				474093842B55B5DE004F10C5 /* ManualView.swift in Sources */,
 				471F7A642CF793C400BF529C /* PlayerModel.swift in Sources */,
 				474C40632B4C091F0038B3A5 /* LanguageView.swift in Sources */,
@@ -671,6 +686,7 @@
 				47D4B7732D00546800D46050 /* ObserversView.swift in Sources */,
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
+				47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47D4B76F2D00241F00D46050 /* BookmarkViewModel.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,

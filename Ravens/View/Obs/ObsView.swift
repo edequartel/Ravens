@@ -66,7 +66,7 @@ struct ObsView: View {
 //          .font(.caption)
 
         if showSpecies {
-          Text("\(obs.speciesDetail.scientificName)")
+          Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
         }

@@ -12,8 +12,12 @@ struct RavensView: View {
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
+
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
+  @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+
 
 //  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
@@ -23,29 +27,47 @@ struct RavensView: View {
   var body: some View {
     VStack {
       TabView {
-        // Tab 2
-        TabUserObservationsView(
-          selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text(us)
-          Image(systemSymbol: .person2Fill)
-        }
         // Tab 1
-        TabLocationView(
-          observationsLocation: observationsLocation,
-          selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text(location)
-          Image(systemSymbol: SFAreaFill)
+//        if  keyChainViewModel.token.isEmpty {
+          TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel)
+            .tabItem {
+              Text("Radius")
+              Image(systemSymbol: .circle)
+            }
+//        }
+
+        // Tab 2
+        if !keyChainViewModel.token.isEmpty {
+          TabUserObservationsView(
+            selectedSpeciesID: $selectedSpeciesID)
+          .tabItem {
+            Text(us)
+            Image(systemSymbol: .person2Fill)
+          }
         }
+
+        // Tab 1
+        if !keyChainViewModel.token.isEmpty {
+          TabLocationView(
+            observationsLocation: observationsLocation,
+            selectedSpeciesID: $selectedSpeciesID)
+          .tabItem {
+            Text(location)
+            Image(systemSymbol: SFAreaFill)
+          }
+        }
+
         // Tab 3
-        TabSpeciesView(
-          observationsSpecies: observationsSpecies,
-          selectedSpeciesID: $selectedSpeciesID)
-        .tabItem {
-          Text(species)
-          Image(systemSymbol: .tree)
+        if !keyChainViewModel.token.isEmpty {
+          TabSpeciesView(
+            observationsSpecies: observationsSpecies,
+            selectedSpeciesID: $selectedSpeciesID)
+          .tabItem {
+            Text(species)
+            Image(systemSymbol: .tree)
+          }
         }
+        
         // Tab 4
         SettingsView()
           .tabItem {

@@ -47,42 +47,44 @@ struct TabSpeciesView: View {
             isBookmarked: settings.isBookMarkVisible,
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
-            
-            
-            NavigationLink( //???
-              destination: SpeciesView(
-                observationsSpecies: observationsSpecies,
-                item: species,
-                selectedSpeciesID: $selectedSpeciesID)
-            ) {
-              SpeciesInfoView(
-                species: species,
-                showView: showView)
 
-            }
 
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              Button(action: {
-                selectedSpeciesID = species.speciesId
-              }) {
-                Image(systemSymbol: .infoCircle)
+              NavigationLink( //???
+                destination: SpeciesView(
+                  observationsSpecies: observationsSpecies,
+                  item: species,
+                  selectedSpeciesID: $selectedSpeciesID)
+              ) {
+
+                SpeciesInfoView(
+                  species: species,
+                  showView: showView)
+
               }
-              .tint(.blue)
-              
-              Button(action: {
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-                } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
+            
+
+              .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button(action: {
+                  selectedSpeciesID = species.speciesId
+                }) {
+                  Image(systemSymbol: .infoCircle)
                 }
-                
-              } ) {
-                Image(systemSymbol: .star)
-              }
-              .tint(.obsStar)
+                .tint(.blue)
+
+                Button(action: {
+                  if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+                    bookMarksViewModel.removeRecord(speciesID: species.speciesId)
+                  } else {
+                    bookMarksViewModel.appendRecord(speciesID: species.speciesId)
+                  }
+
+                } ) {
+                  Image(systemSymbol: .star)
+                }
+                .tint(.obsStar)
+              //            .background(Color.gray.opacity(0.1))
+              .accessibilityLabel(species.name)
             }
-//            .background(Color.gray.opacity(0.1))
-            .accessibilityLabel(species.name)
           }
         }
         .listStyle(PlainListStyle())

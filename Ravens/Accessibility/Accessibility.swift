@@ -52,6 +52,9 @@ let group = LocalizedStringKey("group")
 let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
 
+//radius
+let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
+
 // login
 let email = LocalizedStringKey("email")
 let password = LocalizedStringKey("password")
