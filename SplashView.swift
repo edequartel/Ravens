@@ -73,8 +73,8 @@ struct SplashView: View {
     isSpeciesGroupDataLoaded &&
     isLanguageDataLoaded &&
     isRegionDataLoaded &&
-    isRegionListDataLoaded &&
-    isUserDataLoaded
+    isRegionListDataLoaded //&&
+    //isUserDataLoaded
 
     if allDataLoaded {
       self.dataLoaded = true
@@ -90,7 +90,7 @@ struct SplashView: View {
       group.addTask { await loadRegionListData() }
       group.addTask { await loadSpeciesFirstLanguageData() }
       group.addTask { await loadSpeciesSecondLanguageData() }
-      group.addTask { await loadUserData() }
+//      group.addTask { await loadUserData() }
     }
   }
 

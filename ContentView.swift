@@ -29,15 +29,15 @@ struct ContentView: View {
 
 
   var body: some View {
-    Group {
-      if keyChainViewModel.token.isEmpty {
-        // Login View
-        LoginView()
-          .onAppear {
-            log.error("No token, displaying login")
-          }
-      }
-      else { //token is not empty and is okay
+//    Group {
+//      if keyChainViewModel.token.isEmpty {
+//        // Login View
+//        LoginView()
+//          .onAppear {
+//            log.error("No token, displaying login")
+//          }
+//      }
+//      else { //token is not empty and is okay
         if dataLoaded {
           RavensView(
             observationsLocation: observationsLocation,
@@ -49,8 +49,8 @@ struct ContentView: View {
         } else {
           SplashView(dataLoaded: $dataLoaded)
         }
-      }
-    }
+//      }
+//    }
   }
 }
 

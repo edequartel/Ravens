@@ -17,6 +17,8 @@ struct TabUserObservationsView: View {
 
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
 
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
+
   @EnvironmentObject var userViewModel:  UserViewModel
 
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
@@ -145,6 +147,10 @@ struct TabUserObservationsView: View {
           log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
+loadUserData()
+
+
+
         }
       }
     }
@@ -157,6 +163,28 @@ struct TabUserObservationsView: View {
   func isUserInRecords(userId: Int) -> Bool {
     return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
+
+
+  private func loadUserData() { //async {
+    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+
+      observationUser.fetchDataInit(
+        settings: settings,
+        entity: .user,
+        token: keyChainViewModel.token,
+        id: obsObserversViewModel.observerId,
+        completion: {
+          log.error("fetch loadUserData observationUser.fetchDataInit complete")
+//          isUserDataLoaded = true
+//          checkDataLoaded()
+        }
+      )
+    }
+  }
+
 }
 
 
