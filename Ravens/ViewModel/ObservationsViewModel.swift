@@ -16,6 +16,7 @@ enum EntityType: String {
   case location = "locations"
   case user = "user"
   case species = "species"
+  case radius = "radius"
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -49,6 +50,8 @@ class ObservationsViewModel: ObservableObject {
     case .location:
         days = settings.timePeriodLocation.rawValue
     case .species:
+        days = settings.timePeriodSpecies.rawValue
+    case .radius:
         days = settings.timePeriodSpecies.rawValue
     }
     days = days-1 //today is also also a day

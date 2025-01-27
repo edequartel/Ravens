@@ -15,95 +15,99 @@ struct LoginView: View {
 
   @EnvironmentObject var userViewModel:  UserViewModel
 
-  @State private var myInlogName = ""
-  @State private var myPassword = ""
+  @State private var myInlogName = "edequartel@protonmail.com"
+  @State private var myPassword = "fyrta5-pIdtow-gawpys"
 
   var body: some View {
-    Form {
-      Section("Login \(settings.selectedInBetween)") {
-        // Horizontal buttons
+    NavigationStack {
+      Form {
+        Section("Login \(settings.selectedInBetween)") {
+          VStack {
+            if keyChainviewModel.token.isEmpty {
+              TextField("Email", text: $myInlogName, prompt: Text(enterEmail))
+                .textContentType(.emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .textFieldStyle(.roundedBorder)
 
-        //        }
-        VStack {
-          if keyChainviewModel.token.isEmpty {
-            TextField("Email", text: $myInlogName, prompt: Text(enterEmail))
-              .textContentType(.emailAddress)
-              .autocapitalization(.none)
-              .disableAutocorrection(true)
+              Divider()
+
+              SecureField(text: $myPassword, prompt: Text(password)) {
+                Text(password)
+              }
+              .textContentType(.password)
               .textFieldStyle(.roundedBorder)
 
-            Divider()
-
-            SecureField(text: $myPassword, prompt: Text(password)) {
-              Text(password)
-            }
-            .textContentType(.password)
-            .textFieldStyle(.roundedBorder)
-
-            Button("Log In") {
-              guard !myInlogName.isEmpty, !myPassword.isEmpty else {
-                log.error("Email or password is empty.")
-                return
-              }
-              keyChainviewModel.fetchData(
-                username: myInlogName,
-                password: myPassword,
-                settings: settings
-              ) { success in
-                if success {
-                  log.info("token successfully fetched.")
-                  //so we get the user details and use these
-                  userViewModel.fetchUserData(
-                    settings: settings,
-                    token: keyChainviewModel.token ,
-                    completion:
-                      {
-                        log.info(">userViewModel fethData")
-                        userViewModel.loginSuccess.toggle()
-                    })
-                  //
-                } else {
-                  log.error("Failed to fetch credentials.")
+              Button("Log In") {
+                guard !myInlogName.isEmpty, !myPassword.isEmpty else {
+                  log.error("Email or password is empty.")
+                  return
+                }
+                keyChainviewModel.fetchData(
+                  username: myInlogName,
+                  password: myPassword,
+                  settings: settings
+                ) { success in
+                  if success {
+                    log.info("token successfully fetched.")
+                    //so we get the user details and use these
+                    userViewModel.fetchUserData(
+                      settings: settings,
+                      token: keyChainviewModel.token ,
+                      completion:
+                        {
+                          log.info(">userViewModel fethData")
+                          userViewModel.loginSuccess.toggle()
+                        })
+                    //
+                  } else {
+                    log.error("Failed to fetch credentials.")
+                  }
                 }
               }
-            }
-            .buttonStyle(.borderedProminent)
-            .frame(maxWidth: .infinity)
-
-            if keyChainviewModel.loginFailed {
-              Text(logInFailed)
-                .foregroundColor(.red)
-                .padding()
-            }
-
-
-          } else {
-
-            HStack {
-              Button(logOut) {
-                keyChainviewModel.token = ""
-                userViewModel.loginSuccess = false
-              }
-              .buttonStyle(.bordered)
+              .buttonStyle(.borderedProminent)
               .frame(maxWidth: .infinity)
+
+//              Button("toggle") {
+//                keyChainviewModel.show.toggle()
+//              }
+
+              if keyChainviewModel.loginFailed {
+                Text(logInFailed)
+                  .foregroundColor(.red)
+                  .padding()
+              }
+
+
+            } else {
+
+              HStack {
+                Button(logOut) {
+                  print("logout")
+                  keyChainviewModel.token = ""
+                  userViewModel.loginSuccess = false
+                }
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
+              }
+              .padding(10)
             }
-            .padding(10)
           }
         }
-      }
 
-//      DisplayCredentialsView()
+//        DisplayCredentialsView()
 
-      if !keyChainviewModel.token.isEmpty {
-        Section(user) {
-          UserView()
-            .accessibilityElement(children: .combine)
+        if !keyChainviewModel.token.isEmpty {
+          Section(user) {
+            UserView()
+              .accessibilityElement(children: .combine)
+          }
         }
-      }
 
-      if keyChainviewModel.token.isEmpty {
-        Section(information) {
-          InfoObservationView()
+        if keyChainviewModel.token.isEmpty {
+          Section(information) {
+            InfoObservationView()
+          }
         }
       }
     }

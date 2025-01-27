@@ -44,6 +44,7 @@ struct ObservationRowView: View {
           showSpecies: !(entity == .species),
           showObserver: !(entity == .user),
           showLocation: !(entity == .location),
+          showRadius: !(entity == .radius),
           selectedSpeciesID: $selectedSpeciesID,
           obs: obs
         )

@@ -18,6 +18,7 @@ struct ObsView: View {
   var showSpecies = true
   var showObserver = true
   var showLocation = true
+  var showRadius = true
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
@@ -95,7 +96,21 @@ struct ObsView: View {
 
         if showLocation {
           HStack {
-            Text("\(obs.locationDetail?.name ?? "name")")
+            Text("=\(obs.locationDetail?.name ?? "name")")
+              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
+              .lineLimit(1) // Set the maximum number of lines to 1
+            Spacer()
+            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+              Image(systemSymbol: SFAreaFill)
+                .foregroundColor(Color.gray.opacity(0.8))
+            }
+          }
+        }
+
+        if showRadius {
+          HStack {
+            Text("Radius")
+            Text(">\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()
@@ -120,7 +135,7 @@ struct ObsView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       AreaButtonView(obs: obs, colorOn: true)
       BookmarkButtonView(obs: obs, colorOn: true)
-      ObserversButtonView(obs: obs, colorOn: true)
+    if !showRadius { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS

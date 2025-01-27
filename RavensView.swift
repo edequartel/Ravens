@@ -19,55 +19,46 @@ struct RavensView: View {
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
 
-//  @EnvironmentObject var settings: Settings
+  //  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
   @EnvironmentObject var notificationsManager: NotificationsManager
 
   var body: some View {
-    VStack {
+    if  !keyChainViewModel.token.isEmpty {
       TabView {
-        // Tab 1
-//        if  keyChainViewModel.token.isEmpty {
-          TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel)
-            .tabItem {
-              Text("Radius")
-              Image(systemSymbol: .circle)
-            }
-//        }
-
         // Tab 2
-        if !keyChainViewModel.token.isEmpty {
-          TabUserObservationsView(
-            selectedSpeciesID: $selectedSpeciesID)
-          .tabItem {
-            Text(us)
-            Image(systemSymbol: .person2Fill)
-          }
+        TabUserObservationsView(
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text(us)
+          Image(systemSymbol: .person2Fill)
         }
 
         // Tab 1
-        if !keyChainViewModel.token.isEmpty {
-          TabLocationView(
-            observationsLocation: observationsLocation,
-            selectedSpeciesID: $selectedSpeciesID)
+        TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel,
+                      selectedSpeciesID: $selectedSpeciesID)
           .tabItem {
-            Text(location)
-            Image(systemSymbol: SFAreaFill)
+            Text("Radius")
+            Image(systemSymbol: .circle)
           }
-        }
 
-        // Tab 3
-        if !keyChainViewModel.token.isEmpty {
-          TabSpeciesView(
-            observationsSpecies: observationsSpecies,
-            selectedSpeciesID: $selectedSpeciesID)
-          .tabItem {
-            Text(species)
-            Image(systemSymbol: .tree)
-          }
+        // Tab 1
+        TabLocationView(
+          observationsLocation: observationsLocation,
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text(location)
+          Image(systemSymbol: SFAreaFill)
         }
-        
+        // Tab 3
+        TabSpeciesView(
+          observationsSpecies: observationsSpecies,
+          selectedSpeciesID: $selectedSpeciesID)
+        .tabItem {
+          Text(species)
+          Image(systemSymbol: .tree)
+        }
         // Tab 4
         SettingsView()
           .tabItem {
@@ -75,13 +66,36 @@ struct RavensView: View {
             Image(systemSymbol: .gearshape)
           }
       }
-
       .sheet(item: $selectedSpeciesID) { item in
         SpeciesDetailsView(speciesID: item)
       }
       .onAppear() {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }
+    } else {
+      TabView {
+        // Tab 1
+        TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel,
+                      selectedSpeciesID: $selectedSpeciesID)
+          .tabItem {
+            Text("Radius")
+            Image(systemSymbol: .circle)
+
+          }
+        // Tab 4
+        SettingsView()
+          .tabItem {
+            Text(settings_)
+            Image(systemSymbol: .gearshape)
+          }
+      }
+      .sheet(item: $selectedSpeciesID) { item in
+        SpeciesDetailsView(speciesID: item)
+      }
+      .onAppear() {
+        log.error("*** NEW LAUNCHING RAVENS ***")
+      }
+
     }
   }
 }

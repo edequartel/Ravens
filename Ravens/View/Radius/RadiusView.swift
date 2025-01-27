@@ -19,6 +19,10 @@ struct RadiusListView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var settings: Settings
 
+  @Binding var selectedSpeciesID: Int?
+
+  @State var entity: EntityType = .radius
+
   let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
   @State private var once: Bool = false
@@ -26,14 +30,20 @@ struct RadiusListView: View {
   var body: some View {
     NavigationView {
       List(observationsRadiusViewModel.observations ?? [], id: \.id) { observation in
-        VStack(alignment: .leading) {
-          ObsDetailsRowView(obs: observation)
-          Text(observation.speciesDetail.scientificName)
-            .footnoteGrayStyle()
-            .italic()
-          Text(observation.locationDetail?.name ?? "unknown")
-            .font(.caption)
-        }
+        ObservationRowView(
+         obs: observation,
+         selectedSpeciesID: $selectedSpeciesID,
+         entity: entity)
+//            .accessibilityFocused($focusedItemID, equals: obs.idObs)
+//            .onChange(of: focusedItemID) { newFocusID, oldFocusID in
+//                handleFocusChange(newFocusID, from: filteredAndSortedObservations)
+//            }
+//            .onAppear {
+//                if obs == filteredAndSortedObservations.last {
+//                    print("end of list reached")
+//                    onEndOfList?()
+//                }
+//            }
       }
       .listStyle(PlainListStyle()) // No additional styling, plain list look
       .navigationTitle(obsAroundPoint)
@@ -170,6 +180,7 @@ struct RadiusMapView: View {
 struct TabRadiusView: View {
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
   @State private var showFirstView = false
+  @Binding var selectedSpeciesID: Int?
 
   var body: some View {
     NavigationView {
@@ -177,7 +188,8 @@ struct TabRadiusView: View {
         if showFirstView {
           RadiusMapView(observationsRadiusViewModel: observationsRadiusViewModel)
         } else {
-          RadiusListView(observationsRadiusViewModel: observationsRadiusViewModel)
+          RadiusListView(observationsRadiusViewModel: observationsRadiusViewModel,
+          selectedSpeciesID: $selectedSpeciesID)
         }
       }
 

@@ -30,8 +30,10 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationStack {
+//      LoginView()
       List {
         Section(header: Text("Ravens")) {
+//          LoginView()
           NavigationLink(destination: LoginView()) {
             Text("Login \(settings.selectedInBetween)")
           }

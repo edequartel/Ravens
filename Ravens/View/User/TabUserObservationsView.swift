@@ -147,10 +147,7 @@ struct TabUserObservationsView: View {
           log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
-loadUserData()
-
-
-
+          loadUserData() //make asynchronous , check accessibility and settinsgView/loginview
         }
       }
     }
@@ -164,27 +161,37 @@ loadUserData()
     return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
 
-
-  private func loadUserData() { //async {
-    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-
-      observationUser.fetchDataInit(
-        settings: settings,
-        entity: .user,
-        token: keyChainViewModel.token,
-        id: obsObserversViewModel.observerId,
-        completion: {
-          log.error("fetch loadUserData observationUser.fetchDataInit complete")
-//          isUserDataLoaded = true
-//          checkDataLoaded()
+  private func loadUserData() {
+    observationUser.fetchDataInit(
+      settings: settings,
+      entity: .user,
+      token: keyChainViewModel.token,
+      id: obsObserversViewModel.observerId,
+      completion: {
+        log.error("fetch loadUserData observationUser.fetchDataInit complete")
+        userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+          log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+          obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+          obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
         }
-      )
-    }
+      }
+    )
   }
-
 }
 
-
+//userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+//  log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+//  obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+//  obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+//
+//  observationUser.fetchDataInit(
+//    settings: settings,
+//    entity: .user,
+//    token: keyChainViewModel.token,
+//    id: obsObserversViewModel.observerId,
+//    completion: {
+//      log.error("fetch loadUserData observationUser.fetchDataInit complete")
+//    }
+//
+//  )
+//}

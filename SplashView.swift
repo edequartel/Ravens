@@ -59,12 +59,10 @@ struct SplashView: View {
 
   private func handleOnAppear() {
     log.error("**handle onAppear**")
-    if !keyChainViewModel.token.isEmpty {
       log.error("** SPLASHVIEW onAppear loaddata **")
       Task {
         await loadData()
       }
-    }
   }
 
   private func checkDataLoaded() {
@@ -73,8 +71,7 @@ struct SplashView: View {
     isSpeciesGroupDataLoaded &&
     isLanguageDataLoaded &&
     isRegionDataLoaded &&
-    isRegionListDataLoaded //&&
-    //isUserDataLoaded
+    isRegionListDataLoaded
 
     if allDataLoaded {
       self.dataLoaded = true
@@ -90,7 +87,6 @@ struct SplashView: View {
       group.addTask { await loadRegionListData() }
       group.addTask { await loadSpeciesFirstLanguageData() }
       group.addTask { await loadSpeciesSecondLanguageData() }
-//      group.addTask { await loadUserData() }
     }
   }
 
@@ -145,23 +141,4 @@ struct SplashView: View {
     }
   }
 
-  private func loadUserData() async {
-    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-      log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-
-      observationUser.fetchDataInit(
-        settings: settings,
-        entity: .user,
-        token: keyChainViewModel.token,
-        id: obsObserversViewModel.observerId,
-        completion: {
-          log.error("fetch loadUserData observationUser.fetchDataInit complete")
-          isUserDataLoaded = true
-          checkDataLoaded()
-        }
-      )
-    }
-  }
 }
