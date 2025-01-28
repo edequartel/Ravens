@@ -15,16 +15,14 @@ import AVFoundation
 
 struct ObsView: View {
   let log = SwiftyBeaver.self
-  var showSpecies = true
-  var showObserver = true
-  var showLocation = true
-  var showRadius = true
-//  var entity: EntityType = .location
+
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
+
+  var entity: EntityType
 
   @Binding var selectedSpeciesID: Int?
 
@@ -40,13 +38,16 @@ struct ObsView: View {
 
 //      Text("\(obs.date) \(obs.time ?? "00:00")")
 //      Text("\(convertStringToFormattedDate(dateString: obs.date, timeString: obs.time ?? "") ?? "")")
-
+//
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
-          if showSpecies {
+          //          Text("\(entity.rawValue)")
+          //            .font(.caption)
+
+          if entity != .species {
             ObsDetailsRowView(obs: obs)
           }
 
@@ -60,70 +61,72 @@ struct ObsView: View {
             Image(systemName: "list.clipboard")
               .foregroundColor(Color.gray.opacity(0.8))
           }
-//          Spacer()
+          Spacer()
         }
 
 //        let defaultDate = Date(timeIntervalSince1970: 0)
 //        Text(formatDate(obs.timeDate ?? defaultDate))
 //          .font(.caption)
 
-        if showSpecies {
+        if entity != .species {
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
         }
 
-      HStack {
+        //      }
+        //
+        HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-//        Text("\(String(describing: obs.timeDate))")
+          //        Text("\(String(describing: obs.timeDate))")
           Text("\(obs.number) x")
             .footnoteGrayStyle()
-       }
-
-
-        // User Info Section
-        if showObserver {
-          HStack {
-//            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
-            Text("\(obs.userDetail?.name ?? "noName")")
-              .footnoteGrayStyle()
-            Spacer()
-            if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
-              Image(systemSymbol: SFObserverFill)
-                .foregroundColor(Color.gray.opacity(0.8))
-            }
-          }
         }
-
-        if showLocation {
-          HStack {
-            Text("L=\(obs.locationDetail?.name ?? "name")")
-              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
-              .lineLimit(1) // Set the maximum number of lines to 1
-            Spacer()
-            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
-              Image(systemSymbol: SFAreaFill)
-                .foregroundColor(Color.gray.opacity(0.8))
-            }
-          }
-        }
-
-        if showRadius {
-          HStack {
-//            Text("Radius")
-            Text("R>\(obs.locationDetail?.name ?? "name")")
-              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
-              .lineLimit(1) // Set the maximum number of lines to 1
-            Spacer()
-            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
-              Image(systemSymbol: SFAreaFill)
-                .foregroundColor(Color.gray.opacity(0.8))
-            }
-          }
-        }
-
-        Spacer()
       }
+//
+//        // User Info Section
+//        if showObserver {
+//          HStack {
+////            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
+//            Text("\(obs.userDetail?.name ?? "noName")")
+//              .footnoteGrayStyle()
+//            Spacer()
+//            if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
+//              Image(systemSymbol: SFObserverFill)
+//                .foregroundColor(Color.gray.opacity(0.8))
+//            }
+//          }
+//        }
+//
+//        if showLocation {
+//          HStack {
+//            Text("L=\(obs.locationDetail?.name ?? "name")")
+//              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
+//              .lineLimit(1) // Set the maximum number of lines to 1
+//            Spacer()
+//            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+//              Image(systemSymbol: SFAreaFill)
+//                .foregroundColor(Color.gray.opacity(0.8))
+//            }
+//          }
+//        }
+//
+//        if showRadius {
+//          HStack {
+////            Text("Radius")
+//            Text("R>\(obs.locationDetail?.name ?? "name")")
+//              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
+//              .lineLimit(1) // Set the maximum number of lines to 1
+//            Spacer()
+//            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+//              Image(systemSymbol: SFAreaFill)
+//                .foregroundColor(Color.gray.opacity(0.8))
+//            }
+//          }
+//        }
+//
+//        Spacer()
+//      }
       .padding(2)
     }
 
@@ -136,7 +139,7 @@ struct ObsView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       AreaButtonView(obs: obs, colorOn: true)
       BookmarkButtonView(obs: obs, colorOn: true)
-    if !showRadius { ObserversButtonView(obs: obs, colorOn: true) }
+//    if !showRadius { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS

@@ -34,17 +34,15 @@ enum FilteringRarityOption: String, CaseIterable {
 struct ObservationRowView: View {
   var obs: Observation
   @Binding var selectedSpeciesID: Int?
-  @State private var entity: EntityType = .location
+
+  var entity: EntityType
 
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
       NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
         ObsView(
-          showSpecies: !(entity == .species),
-          showObserver: !(entity == .user),
-          showLocation: !(entity == .location),
-          showRadius: !(entity == .radius),
+          entity: entity,
           selectedSpeciesID: $selectedSpeciesID,
           obs: obs
         )

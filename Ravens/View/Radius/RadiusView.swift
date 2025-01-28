@@ -21,9 +21,6 @@ struct RadiusListView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-//  @State var entity: EntityType = .radius
-//  private var enti
-
   let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
   @State private var once: Bool = false
@@ -33,9 +30,9 @@ struct RadiusListView: View {
       List(observationsRadiusViewModel.observations ?? [], id: \.id) { observation in
         ObservationRowView(
          obs: observation,
-         selectedSpeciesID: $selectedSpeciesID)
+         selectedSpeciesID: $selectedSpeciesID,
+         entity: .radius)
 
-//         entity: .radius)
 //            .accessibilityFocused($focusedItemID, equals: obs.idObs)
 //            .onChange(of: focusedItemID) { newFocusID, oldFocusID in
 //                handleFocusChange(newFocusID, from: filteredAndSortedObservations)

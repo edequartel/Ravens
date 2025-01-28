@@ -15,7 +15,7 @@ struct ObservationListView: View {
   @Binding var selectedSpeciesID: Int?
   @Binding var timePeriod: TimePeriod
 
-  @State var entity: EntityType
+  var entity: EntityType
 
   @Binding var currentSortingOption: SortingOption // = .date
   @Binding var currentFilteringAllOption: FilterAllOption //= .native
@@ -42,7 +42,8 @@ struct ObservationListView: View {
                  id: \.id) { obs in
              ObservationRowView(
               obs: obs,
-              selectedSpeciesID: $selectedSpeciesID)
+              selectedSpeciesID: $selectedSpeciesID,
+              entity: entity)
                  .accessibilityFocused($focusedItemID, equals: obs.idObs)
                  .onChange(of: focusedItemID) { newFocusID, oldFocusID in
                      handleFocusChange(newFocusID, from: filteredAndSortedObservations)
