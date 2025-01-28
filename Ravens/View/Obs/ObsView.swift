@@ -19,6 +19,7 @@ struct ObsView: View {
   var showObserver = true
   var showLocation = true
   var showRadius = true
+//  var entity: EntityType = .location
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
@@ -96,7 +97,7 @@ struct ObsView: View {
 
         if showLocation {
           HStack {
-            Text("=\(obs.locationDetail?.name ?? "name")")
+            Text("L=\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()
@@ -109,8 +110,8 @@ struct ObsView: View {
 
         if showRadius {
           HStack {
-            Text("Radius")
-            Text(">\(obs.locationDetail?.name ?? "name")")
+//            Text("Radius")
+            Text("R>\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
               .lineLimit(1) // Set the maximum number of lines to 1
             Spacer()

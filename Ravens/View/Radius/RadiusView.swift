@@ -21,7 +21,8 @@ struct RadiusListView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-  @State var entity: EntityType = .radius
+//  @State var entity: EntityType = .radius
+//  private var enti
 
   let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
@@ -32,8 +33,9 @@ struct RadiusListView: View {
       List(observationsRadiusViewModel.observations ?? [], id: \.id) { observation in
         ObservationRowView(
          obs: observation,
-         selectedSpeciesID: $selectedSpeciesID,
-         entity: entity)
+         selectedSpeciesID: $selectedSpeciesID)
+
+//         entity: .radius)
 //            .accessibilityFocused($focusedItemID, equals: obs.idObs)
 //            .onChange(of: focusedItemID) { newFocusID, oldFocusID in
 //                handleFocusChange(newFocusID, from: filteredAndSortedObservations)
@@ -46,7 +48,7 @@ struct RadiusListView: View {
 //            }
       }
       .listStyle(PlainListStyle()) // No additional styling, plain list look
-      .navigationTitle(obsAroundPoint)
+//      .navigationTitle(obsAroundPoint)
       .navigationBarTitleDisplayMode(.inline)
 
       .onAppear {
@@ -181,6 +183,7 @@ struct TabRadiusView: View {
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
   @State private var showFirstView = false
   @Binding var selectedSpeciesID: Int?
+
 
   var body: some View {
     NavigationView {

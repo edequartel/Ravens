@@ -11,6 +11,8 @@ import MapKit
 
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
+
+  
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var locationIdViewModel: LocationIdViewModel
   @ObservedObject var geoJSONViewModel: GeoJSONViewModel

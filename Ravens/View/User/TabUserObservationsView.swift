@@ -55,6 +55,7 @@ struct TabUserObservationsView: View {
           ObservationsUserView(
             observationUser: observationUser,
             selectedSpeciesID: $selectedSpeciesID,
+
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,

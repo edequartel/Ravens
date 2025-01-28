@@ -22,6 +22,7 @@ struct ContentView: View {
   @State private var dataLoaded = false
   @State private var setObserver: Int = 0
 
+
   var body: some View {
     if dataLoaded {
       RavensView(

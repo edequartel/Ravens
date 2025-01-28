@@ -34,7 +34,7 @@ enum FilteringRarityOption: String, CaseIterable {
 struct ObservationRowView: View {
   var obs: Observation
   @Binding var selectedSpeciesID: Int?
-  var entity: EntityType
+  @State private var entity: EntityType = .location
 
   var body: some View {
     VStack {

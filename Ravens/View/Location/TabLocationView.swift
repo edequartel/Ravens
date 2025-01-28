@@ -72,6 +72,7 @@ struct TabLocationView: View {
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
             setLocation: $setLocation,
+
             setRefresh: $setRefresh
           )
         }

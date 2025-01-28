@@ -11,6 +11,7 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
+
   @ObservedObject var observationsSpecies: ObservationsViewModel
   
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -30,6 +31,7 @@ struct ObservationsSpeciesView: View {
   @State private var isLoaded = false
 
   @Binding var selectedSpeciesID: Int?
+
 
   @State private var currentSortingOption: SortingOption = .date
   @State private var currentFilteringAllOption: FilterAllOption = .native

@@ -42,8 +42,7 @@ struct ObservationListView: View {
                  id: \.id) { obs in
              ObservationRowView(
               obs: obs,
-              selectedSpeciesID: $selectedSpeciesID,
-              entity: entity)
+              selectedSpeciesID: $selectedSpeciesID)
                  .accessibilityFocused($focusedItemID, equals: obs.idObs)
                  .onChange(of: focusedItemID) { newFocusID, oldFocusID in
                      handleFocusChange(newFocusID, from: filteredAndSortedObservations)
