@@ -42,8 +42,8 @@ struct ObservationRowView: View {
       if showView { Text("ObservationRowView").font(.customTiny) }
       NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
         ObsView(
-          entity: entity,
           selectedSpeciesID: $selectedSpeciesID,
+          entity: entity,
           obs: obs
         )
         .padding(4)

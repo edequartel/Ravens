@@ -53,6 +53,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
+
   var body: some View {
     NavigationView {
       VStack {
@@ -141,24 +142,38 @@ struct TabLocationView: View {
         }
 
         //update my locationData
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            log.info("getMyLocation")
+//        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button(action: {
+              log.info("getMyLocation")
 
-            if let location = locationManager.getCurrentLocation() {
-              //here getting the data for the location
-              setLocation = location.coordinate
-            } else if let errorMessage = locationManager.errorMessage {
-              log.error("Error: \(errorMessage)")
-            } else {
-              log.error("Retrieving location...")
+              if let location = locationManager.getCurrentLocation() {
+
+                //?? missing to retrieve locatiosn details
+                fetchDataLocation(
+                  settings: settings,
+                  token: keyChainviewModel.token,
+                  observationsLocation: observationsLocation,
+                  locationIdViewModel: locationIdViewModel,
+                  geoJSONViewModel: geoJSONViewModel,
+                  coordinate: CLLocationCoordinate2D(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude))
+                //              }
+
+              } else if let errorMessage = locationManager.errorMessage {
+                log.error("Error: \(errorMessage)")
+              } else {
+                log.error("Retrieving location...")
+              }
+            }) {
+              Image(systemName: "smallcircle.filled.circle")
+                .uniformSize()
+                .accessibilityLabel(updateLocation)
             }
-          }) {
-            Image(systemName: "smallcircle.filled.circle")
-              .uniformSize()
-              .accessibilityLabel(updateLocation)
           }
-        }
+//        }
+        //-----
 
         //favo location
         ToolbarItem(placement: .navigationBarTrailing) {

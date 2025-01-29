@@ -25,6 +25,11 @@ struct RadiusListView: View {
 
   @State private var once: Bool = false
 
+//  @EnvironmentObject private var settings: Settings
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
+
   var body: some View {
     NavigationView {
       List(observationsRadiusViewModel.observations ?? [], id: \.id) { observation in
@@ -33,7 +38,7 @@ struct RadiusListView: View {
          selectedSpeciesID: $selectedSpeciesID,
          entity: .radius)
 
-//            .accessibilityFocused($focusedItemID, equals: obs.idObs)
+//            .accessibilityFocused($focusedItemID, equals: observation.idObs)
 //            .onChange(of: focusedItemID) { newFocusID, oldFocusID in
 //                handleFocusChange(newFocusID, from: filteredAndSortedObservations)
 //            }
@@ -47,6 +52,13 @@ struct RadiusListView: View {
       .listStyle(PlainListStyle()) // No additional styling, plain list look
 //      .navigationTitle(obsAroundPoint)
       .navigationBarTitleDisplayMode(.inline)
+
+      .modifier(ObservationToolbarModifier(
+        currentSortingOption: $currentSortingOption,
+        currentFilteringAllOption: $currentFilteringAllOption,
+        currentFilteringOption: $currentFilteringOption,
+        timePeriod: $settings.timePeriodLocation
+      ))
 
       .onAppear {
         if !observationsRadiusViewModel.hasLoadedData {
@@ -177,10 +189,17 @@ struct RadiusMapView: View {
 
 
 struct TabRadiusView: View {
+  let log = SwiftyBeaver.self
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+  @EnvironmentObject var locationManager: LocationManagerModel
+
   @State private var showFirstView = false
   @Binding var selectedSpeciesID: Int?
 
+//  @EnvironmentObject private var settings: Settings
+//  @State private var currentSortingOption: SortingOption = .date
+//  @State private var currentFilteringAllOption: FilterAllOption = .native
+//  @State private var currentFilteringOption: FilteringRarityOption = .all
 
   var body: some View {
     NavigationView {
@@ -193,6 +212,14 @@ struct TabRadiusView: View {
         }
       }
 
+      //set sort, filter and timePeriod
+//      .modifier(ObservationToolbarModifier(
+//        currentSortingOption: $currentSortingOption,
+//        currentFilteringAllOption: $currentFilteringAllOption,
+//        currentFilteringOption: $currentFilteringOption,
+//        timePeriod: $settings.timePeriodLocation
+//      ))
+
       .toolbar {
         //map or list
         //      if !accessibilityManager.isVoiceOverEnabled {
@@ -204,7 +231,28 @@ struct TabRadiusView: View {
               .uniformSize()
               .accessibilityLabel(toggleViewMapList)
           }
-          //        }
+
+
+        }
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            log.error("getMyLocation Radius")
+            if let location = locationManager.getCurrentLocation() {
+              observationsRadiusViewModel.fetchData(
+                latitude: location.coordinate.latitude,
+                longitude: location.coordinate.longitude,
+                radius: 1000, //circleRadius,
+                completion: {
+                  log.error("yyy")
+//                  updateRegionToUserLocation(coordinate: coordinate) //?? hier de map aanpassen
+                })
+            }
+
+          }) {
+            Image(systemName: "smallcircle.filled.circle")
+              .uniformSize()
+              .accessibilityLabel(updateLocation)
+          }
         }
       }
     }

@@ -22,9 +22,9 @@ struct ObsView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
 
-  var entity: EntityType
-
   @Binding var selectedSpeciesID: Int?
+
+  var entity: EntityType
 
   @State var selectedObservation: Observation?
   @State var imageURLStr: String?
@@ -36,17 +36,13 @@ struct ObsView: View {
     HStack {
       PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
 
-//      Text("\(obs.date) \(obs.time ?? "00:00")")
-//      Text("\(convertStringToFormattedDate(dateString: obs.date, timeString: obs.time ?? "") ?? "")")
-//
+
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
-          //          Text("\(entity.rawValue)")
-          //            .font(.caption)
-
+//          Text("\(entity.rawValue)")
           if entity != .species {
             ObsDetailsRowView(obs: obs)
           }
@@ -61,12 +57,9 @@ struct ObsView: View {
             Image(systemName: "list.clipboard")
               .foregroundColor(Color.gray.opacity(0.8))
           }
-          Spacer()
+//          Spacer()
         }
 
-//        let defaultDate = Date(timeIntervalSince1970: 0)
-//        Text(formatDate(obs.timeDate ?? defaultDate))
-//          .font(.caption)
 
         if entity != .species {
           Text(obs.speciesDetail.scientificName)
@@ -74,46 +67,44 @@ struct ObsView: View {
             .italic()
         }
 
-        //      }
-        //
-        HStack {
+      HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-          //        Text("\(String(describing: obs.timeDate))")
+//        Text("\(String(describing: obs.timeDate))")
           Text("\(obs.number) x")
             .footnoteGrayStyle()
+       }
+
+
+        // User Info Section
+        if entity != .user && entity != .radius {
+          HStack {
+//            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
+            Text("\(obs.userDetail?.name ?? "noName")")
+              .footnoteGrayStyle()
+            Spacer()
+            if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
+              Image(systemSymbol: SFObserverFill)
+                .foregroundColor(Color.gray.opacity(0.8))
+            }
+          }
         }
-      }
-//
-//        // User Info Section
-//        if showObserver {
-//          HStack {
-////            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
-//            Text("\(obs.userDetail?.name ?? "noName")")
-//              .footnoteGrayStyle()
-//            Spacer()
-//            if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
-//              Image(systemSymbol: SFObserverFill)
-//                .foregroundColor(Color.gray.opacity(0.8))
-//            }
-//          }
+
+//        if entity != .location {
+          HStack {
+            Text("\(obs.locationDetail?.name ?? "name")")
+              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
+              .lineLimit(1) // Set the maximum number of lines to 1
+            Spacer()
+            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+              Image(systemSymbol: SFAreaFill)
+                .foregroundColor(Color.gray.opacity(0.8))
+            }
+          }
 //        }
-//
-//        if showLocation {
+
+//        if entity != .radius {
 //          HStack {
-//            Text("L=\(obs.locationDetail?.name ?? "name")")
-//              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
-//              .lineLimit(1) // Set the maximum number of lines to 1
-//            Spacer()
-//            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
-//              Image(systemSymbol: SFAreaFill)
-//                .foregroundColor(Color.gray.opacity(0.8))
-//            }
-//          }
-//        }
-//
-//        if showRadius {
-//          HStack {
-////            Text("Radius")
+//            Text("Radius")
 //            Text("R>\(obs.locationDetail?.name ?? "name")")
 //              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
 //              .lineLimit(1) // Set the maximum number of lines to 1
@@ -124,9 +115,9 @@ struct ObsView: View {
 //            }
 //          }
 //        }
-//
-//        Spacer()
-//      }
+
+        Spacer()
+      }
       .padding(2)
     }
 

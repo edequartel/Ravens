@@ -109,20 +109,23 @@ struct ObservationToolbarModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(
-            destination: CombinedOptionsMenuView(
-              currentSortingOption: $currentSortingOption,
-              currentFilteringAllOption: $currentFilteringAllOption,
-              currentFilteringOption: $currentFilteringOption,
-              timePeriod: $timePeriod
-            )
-          ) {
-            Image(systemName: "ellipsis.circle")
-              .uniformSize(color: .red)
-              .accessibilityLabel(sortAndFilterObservationList)
+        if false {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(
+              destination: CombinedOptionsMenuView(
+                currentSortingOption: $currentSortingOption,
+                currentFilteringAllOption: $currentFilteringAllOption,
+                currentFilteringOption: $currentFilteringOption,
+                timePeriod: $timePeriod
+              )
+            ) {
+              Image(systemName: "ellipsis.circle")
+                .uniformSize(color: .red)
+                .accessibilityLabel(sortAndFilterObservationList)
+            }
           }
         }
+        
       }
   }
 }
