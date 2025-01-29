@@ -59,6 +59,7 @@ struct TabUserObservationsView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
+
             setRefresh: $refresh)
         }
       }

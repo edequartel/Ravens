@@ -109,7 +109,7 @@ struct ObservationToolbarModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .toolbar {
-        if false {
+//        if false {
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(
               destination: CombinedOptionsMenuView(
@@ -124,7 +124,7 @@ struct ObservationToolbarModifier: ViewModifier {
                 .accessibilityLabel(sortAndFilterObservationList)
             }
           }
-        }
+//        }
         
       }
   }

@@ -21,6 +21,7 @@ struct MapObservationsLocationView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var poiViewModel: POIViewModel
+  
 
   var body: some View {
     VStack {
@@ -45,6 +46,8 @@ struct MapObservationsLocationView: View {
           }
           //
           // location observations
+          //sort the observations
+
           ForEach(observationsLocation.observations ?? []) { observation in
             Annotation(observation.speciesDetail.name,
                        coordinate:  CLLocationCoordinate2D(
@@ -54,6 +57,8 @@ struct MapObservationsLocationView: View {
               ObservationAnnotationView(observation: observation)
             }
           }
+
+
           // geoJSON
           ForEach(geoJSONViewModel.polyOverlays, id: \.self) { polyOverlay in
             MapPolygon(polyOverlay)

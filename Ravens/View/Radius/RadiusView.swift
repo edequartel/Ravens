@@ -25,41 +25,33 @@ struct RadiusListView: View {
 
   @State private var once: Bool = false
 
-//  @EnvironmentObject private var settings: Settings
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @Binding var currentSortingOption: SortingOption
+  @Binding var currentFilteringAllOption: FilterAllOption
+  @Binding var currentFilteringOption: FilteringRarityOption
+
 
   var body: some View {
     NavigationView {
-      List(observationsRadiusViewModel.observations ?? [], id: \.id) { observation in
-        ObservationRowView(
-         obs: observation,
-         selectedSpeciesID: $selectedSpeciesID,
-         entity: .radius)
+      VStack {
+        if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
+          HorizontalLine()
+          ObservationListView(
+            observations: observations,
+            selectedSpeciesID: $selectedSpeciesID,
+            timePeriod: $settings.timePeriodUser,
+            entity: .user,
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption
+          )
+        } else {
 
-//            .accessibilityFocused($focusedItemID, equals: observation.idObs)
-//            .onChange(of: focusedItemID) { newFocusID, oldFocusID in
-//                handleFocusChange(newFocusID, from: filteredAndSortedObservations)
-//            }
-//            .onAppear {
-//                if obs == filteredAndSortedObservations.last {
-//                    print("end of list reached")
-//                    onEndOfList?()
-//                }
-//            }
+          NoObservationsView()
+        }
+
+
+
       }
-      .listStyle(PlainListStyle()) // No additional styling, plain list look
-//      .navigationTitle(obsAroundPoint)
-      .navigationBarTitleDisplayMode(.inline)
-
-      .modifier(ObservationToolbarModifier(
-        currentSortingOption: $currentSortingOption,
-        currentFilteringAllOption: $currentFilteringAllOption,
-        currentFilteringOption: $currentFilteringOption,
-        timePeriod: $settings.timePeriodLocation
-      ))
-
       .onAppear {
         if !observationsRadiusViewModel.hasLoadedData {
           print("radiusView onAppearOnce")
@@ -196,29 +188,33 @@ struct TabRadiusView: View {
   @State private var showFirstView = false
   @Binding var selectedSpeciesID: Int?
 
-//  @EnvironmentObject private var settings: Settings
-//  @State private var currentSortingOption: SortingOption = .date
-//  @State private var currentFilteringAllOption: FilterAllOption = .native
-//  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
+  @EnvironmentObject private var settings: Settings
+  @State private var currentSortingOption: SortingOption = .date
+  @State private var currentFilteringAllOption: FilterAllOption = .native
+  @State private var currentFilteringOption: FilteringRarityOption = .all
 
   var body: some View {
     NavigationView {
       VStack {
-        if showFirstView {
+        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           RadiusMapView(observationsRadiusViewModel: observationsRadiusViewModel)
         } else {
           RadiusListView(observationsRadiusViewModel: observationsRadiusViewModel,
-          selectedSpeciesID: $selectedSpeciesID)
+                         selectedSpeciesID: $selectedSpeciesID,
+                         currentSortingOption: $currentSortingOption,
+                         currentFilteringAllOption: $currentFilteringAllOption,
+                         currentFilteringOption: $currentFilteringOption)
         }
       }
 
       //set sort, filter and timePeriod
-//      .modifier(ObservationToolbarModifier(
-//        currentSortingOption: $currentSortingOption,
-//        currentFilteringAllOption: $currentFilteringAllOption,
-//        currentFilteringOption: $currentFilteringOption,
-//        timePeriod: $settings.timePeriodLocation
-//      ))
+      .modifier(ObservationToolbarModifier(
+        currentSortingOption: $currentSortingOption,
+        currentFilteringAllOption: $currentFilteringAllOption,
+        currentFilteringOption: $currentFilteringOption,
+        timePeriod: $settings.timePeriodLocation
+      ))
 
       .toolbar {
         //map or list
