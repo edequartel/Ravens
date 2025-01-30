@@ -25,9 +25,9 @@ struct RadiusListView: View {
 
   @State private var once: Bool = false
 
-  @Binding var currentSortingOption: SortingOption
-  @Binding var currentFilteringAllOption: FilterAllOption
-  @Binding var currentFilteringOption: FilteringRarityOption
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
 
   var body: some View {
@@ -190,9 +190,10 @@ struct TabRadiusView: View {
 
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject private var settings: Settings
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @State private var currentSortingOption: SortingOption? = .date
+  @State private var currentFilteringAllOption: FilterAllOption? = .native
+  @State private var currentFilteringOption: FilteringRarityOption? = .all
+  @State private var timePeriod: TimePeriod? = .allCases.first
 
   var body: some View {
     NavigationView {
@@ -209,11 +210,11 @@ struct TabRadiusView: View {
       }
 
       //set sort, filter and timePeriod
-      .modifier(ObservationToolbarModifier(
+      .modifier(observationToolbarModifier(
         currentSortingOption: $currentSortingOption,
         currentFilteringAllOption: $currentFilteringAllOption,
         currentFilteringOption: $currentFilteringOption,
-        timePeriod: $settings.timePeriodLocation
+        timePeriod: $timePeriod
       ))
 
       .toolbar {

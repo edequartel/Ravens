@@ -11,23 +11,19 @@ import SwiftyBeaver
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var observationUser : ObservationsViewModel
-
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
-
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
-
   @EnvironmentObject var userViewModel:  UserViewModel
-
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
 
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @State private var currentSortingOption: SortingOption? = .date
+  @State private var currentFilteringAllOption: FilterAllOption? = .native
+  @State private var currentFilteringOption: FilteringRarityOption? = .all
+  @State private var timePeriod: TimePeriod? = .allCases.first
 
   @Binding var selectedSpeciesID: Int?
 
@@ -37,20 +33,17 @@ struct TabUserObservationsView: View {
   var body: some View {
     NavigationView {
       VStack {
-//        Button("Refresh") {refresh.toggle()}
-//        //        Text("id \(userViewModel.user?.id ?? 0)")
-//        Text("ownr \(userViewModel.user?.name ?? "noName")")
-//        Text("--> observerName:\(obsObserversViewModel.observerName)")
-//        Text("--> observerId:\(obsObserversViewModel.observerId)")
-
-
-        //        Text("setObserverString \(observerName)")
-
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsUserView(
-            observationUser: observationUser)
+            observationUser: observationUser,
+
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption
+
+          )
         } else {
           ObservationsUserView(
             observationUser: observationUser,
@@ -70,15 +63,15 @@ struct TabUserObservationsView: View {
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
-      .onChange(of: settings.timePeriodUser) {
-        log.info("update timePeriodUser")
+      .onChange(of: timePeriod) {
+        log.error("update timePeriodUser")
 
         observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          completion: { log.info("fetch data complete") } )
+          completion: { log.error("fetch data complete") } )
       }
 
       .onChange(of: refresh) {
@@ -104,12 +97,18 @@ struct TabUserObservationsView: View {
       }
 
       //sort filter and periodTime
-      .modifier(ObservationToolbarModifier(
-        currentSortingOption: $currentSortingOption,
-        currentFilteringAllOption: $currentFilteringAllOption,
-        currentFilteringOption: $currentFilteringOption,
-        timePeriod: $settings.timePeriodUser
-      ))
+      .modifier(
+        showFirstView ?
+        observationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $timePeriod)
+        :
+          observationToolbarModifier(
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption,
+            timePeriod: $timePeriod)
+      )
 
       .toolbar {
         //set map or list
@@ -170,9 +169,9 @@ struct TabUserObservationsView: View {
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
       completion: {
-        log.error("fetch loadUserData observationUser.fetchDataInit complete")
+        log.info("fetch loadUserData observationUser.fetchDataInit complete")
         userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-          log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+          log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
           obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
           obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
         }

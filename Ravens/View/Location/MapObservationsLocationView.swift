@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 import SwiftyBeaver
 
-
 struct MapObservationsLocationView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsLocation: ObservationsViewModel
@@ -21,7 +20,9 @@ struct MapObservationsLocationView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var poiViewModel: POIViewModel
-  
+
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   var body: some View {
     VStack {
@@ -44,19 +45,19 @@ struct MapObservationsLocationView: View {
                             )
                         }
           }
-          //
-          // location observations
-          //sort the observations
 
-          ForEach(observationsLocation.observations ?? []) { observation in
-            Annotation(observation.speciesDetail.name,
-                       coordinate:  CLLocationCoordinate2D(
-                        latitude: observation.point.coordinates[1],
-                        longitude: observation.point.coordinates[0]))
-            {
-              ObservationAnnotationView(observation: observation)
-            }
-          }
+          // location observations
+          // filter the observations
+//          ForEach(observationsLocation.observations?.filter { ($0.rarity == currentFilteringOption.intValue) } ?? [])
+//          { observation in
+//            Annotation(observation.speciesDetail.name,
+//                       coordinate:  CLLocationCoordinate2D(
+//                        latitude: observation.point.coordinates[1],
+//                        longitude: observation.point.coordinates[0]))
+//            {
+//              ObservationAnnotationView(observation: observation)
+//            }
+//          }
 
 
           // geoJSON
@@ -94,6 +95,7 @@ struct MapObservationsLocationView: View {
       }
       .onAppear() {
         log.info("MapObservationsLocationView onAppear")
+
       }
     }
   }
@@ -121,17 +123,5 @@ struct MapObservationsLocationView: View {
   }
 }
 
-
-//struct MapObservationLocationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Setting up the environment objects for the preview
-//        MapObservationsLocationView()
-//            .environmentObject(Settings())
-//            .environmentObject(ObservationsRadiusViewModel())
-////            .environmentObject(SpeciesGroupViewModel())
-//            .environmentObject(KeychainViewModel())
-//
-//    }
-//}
 
 

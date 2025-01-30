@@ -32,16 +32,15 @@ struct ObservationsUserView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-  @Binding var currentSortingOption: SortingOption
-  @Binding var currentFilteringAllOption: FilterAllOption
-  @Binding var currentFilteringOption: FilteringRarityOption
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   @Binding var setRefresh: Bool
 
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
-
 
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()

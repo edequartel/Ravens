@@ -151,11 +151,11 @@ struct SortFilterSpeciesView: View {
 
   var body: some View {
     Form {
-      Section(period) {
-        VStack {
-          PeriodView(timePeriod: $timePeriod)
-        }
-      }
+//      Section(period) {
+//        VStack {
+//          PeriodView(timePeriod: $timePeriod)
+//        }
+//      }
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
@@ -204,15 +204,6 @@ struct SortNameOptionsView: View {
   }
 }
 
-
-enum FilterAllOption: String, CaseIterable {
-  case all
-  case native
-  // Add more filter options if needed
-  var localized: LocalizedStringKey {
-    LocalizedStringKey(self.rawValue)
-  }
-}
 
 struct FilteringAllMenu: View {
   @Binding var currentFilteringAllOption: FilterAllOption

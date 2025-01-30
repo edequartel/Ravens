@@ -22,11 +22,19 @@ struct MapObservationsUserView: View {
     span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
   )
 
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
+
   var body: some View {
     ZStack(alignment: .topLeading) {
       Map(position: $cameraPosition) {
         UserAnnotation()
-        ForEach(observationUser.observations ?? []) { observation in
+
+        let obs = observationUser.observations ?? []
+        let filteredObs = obs.filter { $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0 }
+
+        ForEach(filteredObs) { observation in
           Annotation(observation.speciesDetail.name,
                      coordinate:  CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],

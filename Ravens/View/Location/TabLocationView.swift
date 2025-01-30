@@ -42,9 +42,10 @@ struct TabLocationView: View {
   @State private var isShowingLocationList = false
 
 
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @State private var currentSortingOption: SortingOption? = .date
+  @State private var currentFilteringAllOption: FilterAllOption? = .native
+  @State private var currentFilteringOption: FilteringRarityOption? = .all
+  @State private var timePeriod: TimePeriod? = .allCases.first
 
 
   @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -62,13 +63,16 @@ struct TabLocationView: View {
           MapObservationsLocationView(
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
-            geoJSONViewModel: geoJSONViewModel)
+            geoJSONViewModel: geoJSONViewModel,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption)
         } else {
           ObservationsLocationView(
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
             selectedSpeciesID:  $selectedSpeciesID,
+
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
@@ -120,11 +124,11 @@ struct TabLocationView: View {
 
       
       //set sort, filter and timePeriod
-      .modifier(ObservationToolbarModifier(
+      .modifier(observationToolbarModifier(
         currentSortingOption: $currentSortingOption,
         currentFilteringAllOption: $currentFilteringAllOption,
         currentFilteringOption: $currentFilteringOption,
-        timePeriod: $settings.timePeriodLocation
+        timePeriod: $timePeriod
       ))
 
       .toolbar {

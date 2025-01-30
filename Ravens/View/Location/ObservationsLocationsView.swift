@@ -26,9 +26,9 @@ struct ObservationsLocationView: View {
   
   @Binding var selectedSpeciesID: Int?
 
-  @Binding var currentSortingOption: SortingOption
-  @Binding var currentFilteringAllOption: FilterAllOption 
-  @Binding var currentFilteringOption: FilteringRarityOption
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   @State private var retrievedData = false
 
