@@ -37,7 +37,7 @@ struct RadiusListView: View {
 
 
   var body: some View {
-    NavigationView {
+//    NavigationView {!!
       VStack {
         if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
           HorizontalLine()
@@ -80,7 +80,7 @@ struct RadiusListView: View {
         )
       }
     }
-  }
+//  }
   
 }
 
@@ -218,8 +218,10 @@ struct TabRadiusView: View {
   @State private var cameraPosition: MapCameraPosition = .automatic
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
+        if showView { Text("TabRadiusView").font(.customTiny) }
+        
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           RadiusMapView(observationsRadiusViewModel: observationsRadiusViewModel,
                         currentSortingOption: $currentSortingOption,
@@ -245,12 +247,33 @@ struct TabRadiusView: View {
       .modifier(
         showFirstView ?
         observationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption)
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $timePeriod)
         :
           observationToolbarModifier(
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
       )
+
+      .onChange(of: timePeriod) {
+        log.error("update timePeriod \(String(describing: timePeriod))")
+        observationsRadiusViewModel.observations = []
+
+        if let location = locationManager.getCurrentLocation() {
+          observationsRadiusViewModel.circleCenter = location.coordinate
+
+          observationsRadiusViewModel.fetchData(
+            settings: settings,
+            latitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude,
+            radius: circleRadius, //circleRadius,
+            timePeriod: timePeriod ?? .fourWeeks,
+            completion: {
+              log.error("update timePeriod")
+//              updateRegionToUserLocation(coordinate: location.coordinate)
+            })
+        }
+      }
 
       .toolbar {
         //map or list
@@ -266,6 +289,8 @@ struct TabRadiusView: View {
 
 
         }
+
+        
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
             observationsRadiusViewModel.observations = []
@@ -277,7 +302,7 @@ struct TabRadiusView: View {
                 settings: settings,
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
-                radius: 1000, //circleRadius,
+                radius: circleRadius, //circleRadius,
                 timePeriod: timePeriod ?? .fourWeeks,
                 completion: {
                   log.error("tapgesture update userlocation")
@@ -297,8 +322,6 @@ struct TabRadiusView: View {
   }
 
   private func updateRegionToUserLocation(coordinate: CLLocationCoordinate2D) {
-
-
     log.error("User location IS available")
     // Define area span (latitudeDelta and longitudeDelta)
     let updatedRegion = MKCoordinateRegion(
@@ -311,6 +334,8 @@ struct TabRadiusView: View {
     region = updatedRegion
     cameraPosition = .region(updatedRegion) // Update camera to this region
   }
+
+  
 }
 //
 //#Preview {

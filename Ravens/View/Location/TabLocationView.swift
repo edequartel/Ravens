@@ -56,7 +56,7 @@ struct TabLocationView: View {
 
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         if showView { Text("TabLocationView").font(.customTiny) }
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {

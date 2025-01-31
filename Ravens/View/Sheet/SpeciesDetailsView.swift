@@ -22,7 +22,7 @@ struct SpeciesDetailsView: View {
   @State private var imageURL: String = ""
 
   var body: some View {
-    NavigationView {
+//    NavigationView {//!!
       ScrollView {
         VStack(alignment: .leading, spacing: 16) {
           // Species Details Header
@@ -94,7 +94,7 @@ struct SpeciesDetailsView: View {
         }
         .padding()
       }
-    }
+//    }
     .presentationDragIndicator(.visible)
     .onAppear {
       log.info("Calling SpeciesDetailsView FetchData \(speciesID)")

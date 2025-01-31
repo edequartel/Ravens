@@ -31,7 +31,7 @@ struct TabUserObservationsView: View {
   @State private var firstTime: Bool = true
 
   var body: some View {
-    NavigationView{ //<==
+    NavigationStack{
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 

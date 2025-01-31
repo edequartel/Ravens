@@ -27,22 +27,21 @@ struct RavensView: View {
   var body: some View {
     if  !keyChainViewModel.token.isEmpty {
       TabView {
-        // Tab 2
+        // Tab 1
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text(us)
           Image(systemSymbol: .person2Fill)
         }
 
-        // Tab 1
+        // Tab 2
         TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel,
                       selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
           Text("Radius")
           Image(systemSymbol: .circle)
         }
-
-        // Tab 1
+        // Tab 3
         TabLocationView(
           observationsLocation: observationsLocation,
           selectedSpeciesID: $selectedSpeciesID)

@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+
 // Define the TimePeriod enum
 enum TimePeriod: Int, CaseIterable, Identifiable {
   case twoDays = 2
@@ -30,6 +32,39 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
     LocalizedStringKey(self.description)
   }
 }
+
+
+// Define the TimePeriod enum
+enum TimePeriodRadius: Int, CaseIterable, Identifiable {
+  case twoDays = 2
+  case week = 7
+  case twoWeeks = 14
+//  case fourWeeks = 28
+//  case halfYear = 182
+//  case year = 365
+//  case infinite = 1024
+
+  // Computed property for description
+  var description: String {
+    switch self {
+    case .twoDays: return "twodays"
+    case .week: return "sevendays"
+    case .twoWeeks: return "fourteendays"
+//    case .fourWeeks: return "fourweeks"
+//    case .halfYear: return "halfayear"
+//    case .year: return "oneyear"
+//    case .infinite: return "infinite"
+    }
+  }
+
+  // Conform to Identifiable for use in ForEach
+  var id: Int { self.rawValue }
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.description)
+  }
+}
+
 
 import SwiftUI
 

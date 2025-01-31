@@ -11,7 +11,7 @@ struct SpeciesGroupsView: View {
     @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
     
     var body: some View {
-        NavigationView {
+//        NavigationView {//!!
             List {
                 HStack() {
                     Text("Id")
@@ -29,7 +29,7 @@ struct SpeciesGroupsView: View {
                     .font(.caption)
                 }
             }
-        }
+//        }
     }
 }
 
