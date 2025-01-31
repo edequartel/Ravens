@@ -90,6 +90,7 @@ struct TabSpeciesView: View {
         .listStyle(PlainListStyle())
         .searchable(text: $searchText) //een niveau lager geplaatst
       }
+      
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
@@ -122,7 +123,6 @@ struct TabSpeciesView: View {
       
     }
     .refreshable {
-//      speciesViewModel.fillSpecies()
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
@@ -151,11 +151,6 @@ struct SortFilterSpeciesView: View {
 
   var body: some View {
     Form {
-//      Section(period) {
-//        VStack {
-//          PeriodView(timePeriod: $timePeriod)
-//        }
-//      }
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
@@ -219,26 +214,6 @@ struct FilteringAllMenu: View {
   }
 }
 
-struct FilteringAllOptionsView: View {
-  @Binding var currentFilteringAllOption: FilterAllOption
-  
-  var body: some View {
-    if showView { Text("FilteringAllOptionsView").font(.customTiny) }
-    List(FilterAllOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringAllOption = option
-      }) {
-        HStack {
-          Text(option.localized)
-          Spacer()
-          if currentFilteringAllOption == option {
-            Image(systemName: "checkmark")
-          }
-        }
-      }
-    }
-  }
-}
 
 extension SpeciesViewModel {
   func filteredSpecies(

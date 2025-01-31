@@ -23,7 +23,7 @@ struct TabUserObservationsView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .allCases.first
+  @State private var timePeriod: TimePeriod? = .halfYear
 
   @Binding var selectedSpeciesID: Int?
 
@@ -31,7 +31,7 @@ struct TabUserObservationsView: View {
   @State private var firstTime: Bool = true
 
   var body: some View {
-    NavigationView {
+    NavigationView{ //<==
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
@@ -66,46 +66,47 @@ struct TabUserObservationsView: View {
       .onChange(of: timePeriod) {
         log.error("update timePeriodUser")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          timePeriod: timePeriod ?? .fourWeeks,
           completion: { log.error("fetch data complete") } )
       }
 
       .onChange(of: refresh) {
         log.info("update refresh")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          timePeriod: timePeriod ?? .fourWeeks,
           completion: { log.info("fetch data complete") } )
       }
 
       .onChange(of: obsObserversViewModel.observerId) {
-        log.info("update refresh")
+        log.info("update obsObserversViewModel.observerId")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          timePeriod: timePeriod ?? .fourWeeks,
           completion: { log.info("fetch data complete") } )
-      }
+      } 
 
       //sort filter and periodTime
       .modifier(
         showFirstView ?
         observationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption,
-          timePeriod: $timePeriod)
+          currentFilteringOption: $currentFilteringOption)
         :
           observationToolbarModifier(
             currentSortingOption: $currentSortingOption,
-            currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
       )
@@ -148,7 +149,11 @@ struct TabUserObservationsView: View {
           log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
-          loadUserData() //make asynchronous , check accessibility and settinsgView/loginview
+          // Run loadUserData asynchronously
+                  Task {
+                      await loadUserData()
+                  }
+
         }
       }
     }
@@ -162,12 +167,13 @@ struct TabUserObservationsView: View {
     return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
 
-  private func loadUserData() {
-    observationUser.fetchDataInit(
+  private func loadUserData() async {
+    observationUser.fetchDataInitXXX(
       settings: settings,
       entity: .user,
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
+      timePeriod: timePeriod ?? .fourWeeks,
       completion: {
         log.info("fetch loadUserData observationUser.fetchDataInit complete")
         userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
@@ -180,19 +186,3 @@ struct TabUserObservationsView: View {
   }
 }
 
-//userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-//  log.error("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-//  obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-//  obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-//
-//  observationUser.fetchDataInit(
-//    settings: settings,
-//    entity: .user,
-//    token: keyChainViewModel.token,
-//    id: obsObserversViewModel.observerId,
-//    completion: {
-//      log.error("fetch loadUserData observationUser.fetchDataInit complete")
-//    }
-//
-//  )
-//}

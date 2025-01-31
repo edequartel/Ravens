@@ -65,7 +65,8 @@ struct TabLocationView: View {
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
             currentFilteringAllOption: $currentFilteringAllOption,
-            currentFilteringOption: $currentFilteringOption)
+            currentFilteringOption: $currentFilteringOption,
+            timePeriod: $timePeriod)
         } else {
           ObservationsLocationView(
             observationsLocation: observationsLocation,
@@ -83,7 +84,7 @@ struct TabLocationView: View {
         }
       }
 
-      .onChange(of: settings.timePeriodLocation) {
+      .onChange(of: timePeriod) {
         log.info("update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -91,8 +92,9 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation)
-        settings.hasLocationLoaded = true 
+          coordinate: setLocation,
+          timePeriod: timePeriod ?? .week)
+        settings.hasLocationLoaded = true
       }
 
       .onChange(of: setLocation) {
@@ -103,8 +105,8 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation
-        )
+          coordinate: setLocation,
+          timePeriod: timePeriod ?? .week)
         settings.hasLocationLoaded = true
       }
 
@@ -117,19 +119,24 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation
+          coordinate: setLocation,
+          timePeriod: timePeriod ?? .week
         )
         settings.hasLocationLoaded = true
       }
 
-      
       //set sort, filter and timePeriod
-      .modifier(observationToolbarModifier(
-        currentSortingOption: $currentSortingOption,
-        currentFilteringAllOption: $currentFilteringAllOption,
-        currentFilteringOption: $currentFilteringOption,
-        timePeriod: $timePeriod
-      ))
+      .modifier(
+        showFirstView ?
+        observationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption)
+        :
+          observationToolbarModifier(
+            currentSortingOption: $currentSortingOption,
+            currentFilteringOption: $currentFilteringOption,
+            timePeriod: $timePeriod
+          )
+      )
 
       .toolbar {
         //map or list
@@ -153,7 +160,6 @@ struct TabLocationView: View {
 
               if let location = locationManager.getCurrentLocation() {
 
-                //?? missing to retrieve locatiosn details
                 fetchDataLocation(
                   settings: settings,
                   token: keyChainviewModel.token,
@@ -162,7 +168,8 @@ struct TabLocationView: View {
                   geoJSONViewModel: geoJSONViewModel,
                   coordinate: CLLocationCoordinate2D(
                     latitude: location.coordinate.latitude,
-                    longitude: location.coordinate.longitude))
+                    longitude: location.coordinate.longitude),
+                  timePeriod: timePeriod ?? .week)
                 //              }
 
               } else if let errorMessage = locationManager.errorMessage {
@@ -176,8 +183,7 @@ struct TabLocationView: View {
                 .accessibilityLabel(updateLocation)
             }
           }
-//        }
-        //-----
+
 
         //favo location
         ToolbarItem(placement: .navigationBarTrailing) {

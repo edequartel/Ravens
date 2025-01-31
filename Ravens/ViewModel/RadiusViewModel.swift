@@ -8,30 +8,32 @@
 import SwiftUI
 import Alamofire
 import MapKit
+import SwiftyBeaver
 
 // MARK: - ViewModel
 class ObservationsRadiusViewModel: ObservableObject {
+  let log = SwiftyBeaver.self
   @Published var observations: [Observation]?
   @Published var errorMessage: String? = nil
   @Published var hasLoadedData = false
   
   @Published var circleCenter = CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
   
-  func fetchData(latitude: Double, longitude: Double, radius: Double, completion: (() -> Void)? = nil) {
-    
+  func fetchData(latitude: Double, longitude: Double, radius: Double,timePeriod: TimePeriod, completion: (() -> Void)? = nil) {
+
     let url = "https://waarnemingen.be/api/v1/observations/around-point/"
     let date = Date()
     let dateFormatted = formatDate(date: date)
     let parameters: [String: Any] = [
-      "days": 2,
+      "days": timePeriod,
       "end_date": dateFormatted,
       "radius": radius,
       "lat": latitude,
       "lng": longitude
     ]
     
-    print("Fetching data from: \(url)")
-    
+    log.error("Fetching data from: \(url)")
+
     AF.request(url, parameters: parameters).responseString { response in
       switch response.result {
       case .success(let stringResponse):

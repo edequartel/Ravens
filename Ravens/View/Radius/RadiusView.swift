@@ -14,6 +14,7 @@ import SwiftyBeaver
 import MapKit
 
 struct RadiusListView: View {
+  let log = SwiftyBeaver.self
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
   @EnvironmentObject var locationManager: LocationManagerModel
@@ -28,6 +29,7 @@ struct RadiusListView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var timePeriod: TimePeriod?
 
 
   var body: some View {
@@ -54,12 +56,13 @@ struct RadiusListView: View {
       }
       .onAppear {
         if !observationsRadiusViewModel.hasLoadedData {
-          print("radiusView onAppearOnce")
+          log.error("radiusView onAppearOnce")
           observationsRadiusViewModel.circleCenter = locationManager.getCurrentLocation()?.coordinate ?? CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
           observationsRadiusViewModel.fetchData(
             latitude: observationsRadiusViewModel.circleCenter.latitude,
             longitude: observationsRadiusViewModel.circleCenter.longitude,
-            radius: circleRadius)
+            radius: circleRadius,
+            timePeriod: timePeriod ?? .fourWeeks)
           observationsRadiusViewModel.hasLoadedData = true
         }
       }
@@ -82,6 +85,11 @@ struct RadiusMapView: View {
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var locationManager: LocationManagerModel
 
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var timePeriod: TimePeriod?
+
   @State private var cameraPosition: MapCameraPosition = .automatic
   @State private var region: MKCoordinateRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
@@ -96,7 +104,13 @@ struct RadiusMapView: View {
         Map(position: $cameraPosition) {
           UserAnnotation()
 
-          ForEach(observationsRadiusViewModel.observations ?? []) { observation in
+          let obs = observationsRadiusViewModel.observations ?? []
+          let filteredObs = obs.filter { $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0 }
+
+//          ForEach(observationsLocation.observations?.filter { ($0.rarity == currentFilteringOption.intValue) } ?? [])
+          ForEach(filteredObs) { observation in
+
+//          ForEach(observationsRadiusViewModel.observations ?? []) { observation in
             Annotation("", coordinate:  CLLocationCoordinate2D(
               latitude: observation.point.coordinates[1],
               longitude: observation.point.coordinates[0])) {
@@ -143,6 +157,7 @@ struct RadiusMapView: View {
               latitude: coordinate.latitude,
               longitude: coordinate.longitude,
               radius: circleRadius,
+              timePeriod: timePeriod ?? .fourWeeks,
               completion: {
                 print("yyy")
                 updateRegionToUserLocation(coordinate: coordinate)
@@ -188,34 +203,53 @@ struct TabRadiusView: View {
   @State private var showFirstView = false
   @Binding var selectedSpeciesID: Int?
 
+  
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject private var settings: Settings
+
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .allCases.first
+
+  @State private var timePeriod: TimePeriod? = .fourWeeks
 
   var body: some View {
     NavigationView {
       VStack {
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-          RadiusMapView(observationsRadiusViewModel: observationsRadiusViewModel)
+          RadiusMapView(observationsRadiusViewModel: observationsRadiusViewModel,
+                        currentSortingOption: $currentSortingOption,
+                        currentFilteringAllOption: $currentFilteringAllOption,
+                        currentFilteringOption: $currentFilteringOption,
+                        timePeriod: $timePeriod)
         } else {
           RadiusListView(observationsRadiusViewModel: observationsRadiusViewModel,
                          selectedSpeciesID: $selectedSpeciesID,
                          currentSortingOption: $currentSortingOption,
                          currentFilteringAllOption: $currentFilteringAllOption,
-                         currentFilteringOption: $currentFilteringOption)
+                         currentFilteringOption: $currentFilteringOption,
+                         timePeriod: $timePeriod)
         }
       }
 
       //set sort, filter and timePeriod
-      .modifier(observationToolbarModifier(
-        currentSortingOption: $currentSortingOption,
-        currentFilteringAllOption: $currentFilteringAllOption,
-        currentFilteringOption: $currentFilteringOption,
-        timePeriod: $timePeriod
-      ))
+//      .modifier(observationToolbarModifier(
+//        currentSortingOption: $currentSortingOption,
+//        currentFilteringAllOption: $currentFilteringAllOption,
+//        currentFilteringOption: $currentFilteringOption,
+//        timePeriod: $timePeriod
+//      ))
+
+      .modifier(
+        showFirstView ?
+        observationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption)
+        :
+          observationToolbarModifier(
+//            currentSortingOption: $currentSortingOption,
+            currentFilteringOption: $currentFilteringOption,
+            timePeriod: $timePeriod)
+      )
 
       .toolbar {
         //map or list
@@ -239,8 +273,9 @@ struct TabRadiusView: View {
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 radius: 1000, //circleRadius,
+                timePeriod: timePeriod ?? .fourWeeks,
                 completion: {
-                  log.error("yyy")
+                  log.error("getMyLocation Radius")
 //                  updateRegionToUserLocation(coordinate: coordinate) //?? hier de map aanpassen
                 })
             }

@@ -69,6 +69,28 @@ enum FilterAllOption: String, CaseIterable {
   }
 }
 
+struct FilteringAllOptionsView: View {
+  @Binding var currentFilteringAllOption: FilterAllOption
+
+  var body: some View {
+    if showView { Text("FilteringAllOptionsView").font(.customTiny) }
+    List(FilterAllOption.allCases, id: \.self) { option in
+      Button(action: {
+        currentFilteringAllOption = option
+      }) {
+        HStack {
+          Text(option.localized)
+          Spacer()
+          if currentFilteringAllOption == option {
+            Image(systemName: "checkmark")
+          }
+        }
+      }
+    }
+  }
+}
+
+//==========================================================================================
 struct ObservationRowView: View {
   var obs: Observation
   @Binding var selectedSpeciesID: Int?
@@ -94,6 +116,7 @@ struct ObservationRowView: View {
 }
 
 
+//==========================================================================================
 struct FilterOptionsView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
 
@@ -104,6 +127,8 @@ struct FilterOptionsView: View {
         currentFilteringOption = option
       }) {
         HStack {
+          Image(systemName: "circle.fill")
+              .foregroundColor(rarityColor(value: option.intValue ?? 0))
           Text(option.localized)
           Spacer()
           if currentFilteringOption == option {
@@ -112,34 +137,34 @@ struct FilterOptionsView: View {
         }
       }
     }
-//    .navigationTitle("Filtering")
   }
 }
 
 
-struct ContentXView: View {
-  @State private var currentSortingOption: SortingOption? = .rarity
-  @State private var currentFilteringAllOption: FilterAllOption? = .native
-  @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .fourWeeks
-
-  private var atStart = true
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Main Content")
-              Text("\(currentSortingOption?.intValue ?? 0)")
-            }
-            .navigationTitle("Observations")
-            .modifier(observationToolbarModifier(
-              currentSortingOption: $currentSortingOption,
-              currentFilteringAllOption: $currentFilteringAllOption,
-              currentFilteringOption: $currentFilteringOption,
-              timePeriod: $timePeriod))
-        }
-    }
-}
+//==========================================================================================
+//struct ContentXView: View {
+//  @State private var currentSortingOption: SortingOption? = .rarity
+//  @State private var currentFilteringAllOption: FilterAllOption? = .native
+//  @State private var currentFilteringOption: FilteringRarityOption? = .all
+//  @State private var timePeriod: TimePeriod? = .fourWeeks
+//
+//  private var atStart = true
+//
+//    var body: some View {
+//        NavigationView {
+//            VStack {
+//                Text("Main Content")
+//              Text("\(currentSortingOption?.intValue ?? 0)")
+//            }
+//            .navigationTitle("Observations")
+//            .modifier(observationToolbarModifier(
+//              currentSortingOption: $currentSortingOption,
+//              currentFilteringAllOption: $currentFilteringAllOption,
+//              currentFilteringOption: $currentFilteringOption,
+//              timePeriod: $timePeriod))
+//        }
+//    }
+//}
 
 
 struct observationToolbarModifier: ViewModifier {
@@ -173,9 +198,6 @@ struct observationToolbarModifier: ViewModifier {
 
                         )
                     ) {
-//                        Image(systemName: "ellipsis.circle")
-//                            .foregroundColor(.red)
-//                            .accessibilityLabel("Sort and Filter Observations")
                       Image(systemName: "ellipsis.circle")
                                       .uniformSize()
                                       .accessibilityLabel(sortAndFilterObservationList)
@@ -186,191 +208,95 @@ struct observationToolbarModifier: ViewModifier {
 }
 
 struct CombinedOptionsMenuView: View {
-  @Binding var currentSortingOption: SortingOption?
-  @Binding var currentFilteringAllOption: FilterAllOption?
-  @Binding var currentFilteringOption: FilteringRarityOption?
-  @Binding var timePeriod: TimePeriod?
+    @Binding var currentSortingOption: SortingOption?
+    @Binding var currentFilteringAllOption: FilterAllOption?
+    @Binding var currentFilteringOption: FilteringRarityOption?
+    @Binding var timePeriod: TimePeriod?
 
-  var body: some View {
-    Form {
-      //period
-      if timePeriod != nil {
-        Section(period) {
-          VStack {
-            PeriodView(timePeriod: $timePeriod)
-          }
-        }
-      }
-      //sort
-      if currentSortingOption != nil {
-        Section(sort) {
-          ForEach(SortingOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentSortingOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentSortingOption == option {
-                  Image(systemName: "checkmark")
+    var body: some View {
+        NavigationStack {
+            Form {
+                // Period Filter
+                if timePeriod != nil {
+                    Section(header: Text("Time Period")) {
+                        PeriodView(timePeriod: $timePeriod)
+                    }
                 }
-              }
-            }
-          }
-        }
-      }
-      //filter all/native
-      if currentFilteringAllOption != nil {
-        Section(status) {
-          ForEach(FilterAllOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringAllOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentFilteringAllOption == option {
-                  Image(systemName: "checkmark")
+
+                // Sorting Option
+                if currentSortingOption != nil {
+                    Section(header: Text("Sort By")) {
+                        ForEach(SortingOption.allCases, id: \.self) { option in
+                            Button(action: {
+                                currentSortingOption = option
+                            }) {
+                                HStack {
+                                    Text(option.localized)
+                                    Spacer()
+                                    if currentSortingOption == option {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
-            }
-          }
-        }
-      }
-      //filter rarity
-      if currentFilteringOption != nil {
-        Section(rarity) {
-          ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringOption = option
-            }) {
-              HStack {
-                Image(systemName: "circle.fill")
-                  .foregroundColor(rarityColor(value: option.intValue ?? 0))
-                Text(option.localized)
-                Spacer()
-                if currentFilteringOption == option {
-                  Image(systemName: "checkmark")
+
+                // Filter All/Native
+                if currentFilteringAllOption != nil {
+                    Section(header: Text("Filter Status")) {
+                        ForEach(FilterAllOption.allCases, id: \.self) { option in
+                            Button(action: {
+                                currentFilteringAllOption = option
+                            }) {
+                                HStack {
+                                    Text(option.localized)
+                                    Spacer()
+                                    if currentFilteringAllOption == option {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
+
+                // Rarity Filter
+                if currentFilteringOption != nil {
+                    Section(header: Text("Filter by Rarity")) {
+                        ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+                            Button(action: {
+                                currentFilteringOption = option
+                            }) {
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(rarityColor(value: option.intValue ?? 0))
+                                    Text(option.localized)
+                                    Spacer()
+                                    if currentFilteringOption == option {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
+            .navigationBarHidden(true) // ✅ Hide default nav bar
         }
-      }
     }
-  }
 }
 
 struct PeriodView: View {
     @Binding var timePeriod: TimePeriod?
 
     var body: some View {
-        HStack {
             Picker(timePeriodlabel, selection: $timePeriod) {
                 ForEach(TimePeriod.allCases, id: \.self) { period in
                     Text(period.localized).tag(period)
                 }
             }
             .pickerStyle(.menu)
-        }
     }
 }
 
-//======================================================
-
-//struct CombinedOptionsMenuViewXXX: View {
-//  @Binding var currentSortingOption: SortingOption
-//  @Binding var currentFilteringAllOption: FilterAllOption
-//  @Binding var currentFilteringOption: FilteringRarityOption
-//  @Binding var timePeriod: TimePeriod
-//
-//  var body: some View {
-//    Form {
-////      Section(period) {
-////        VStack {
-////          PeriodView(timePeriod: $timePeriod)
-////        }
-////      }
-//
-//      Section(sort) {
-//        ForEach(SortingOption.allCases, id: \.self) { option in
-//          Button(action: {
-//            currentSortingOption = option
-//          }) {
-//            HStack {
-//              Text(option.localized)
-//              Spacer()
-//              if currentSortingOption == option {
-//                Image(systemName: "checkmark")
-//              }
-//            }
-//          }
-//        }
-//      }
-//      //      Divider()
-//      Section(status) {
-//        ForEach(FilterAllOption.allCases, id: \.self) { option in
-//          Button(action: {
-//            currentFilteringAllOption = option
-//          }) {
-//            HStack {
-//              Text(option.localized)
-//              Spacer()
-//              if currentFilteringAllOption == option {
-//                Image(systemName: "checkmark")
-//              }
-//            }
-//          }
-//        }
-//      }
-//
-//      //      Divider()
-//      Section(rarity) {
-//        ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-//          Button(action: {
-//            currentFilteringOption = option
-//          }) {
-//            HStack {
-//              Text(option.localized)
-//              Spacer()
-//              if currentFilteringOption == option {
-//                Image(systemName: "checkmark")
-//              }
-//            }
-//          }
-//        }
-//      }
-//
-//    }
-//  }
-//}
-
-//struct ObservationToolbarModifierXX: ViewModifier {
-//  @Binding var currentSortingOption: SortingOption
-//  @Binding var currentFilteringAllOption: FilterAllOption
-//  @Binding var currentFilteringOption: FilteringRarityOption
-//  @Binding var timePeriod: TimePeriod
-//
-//  func body(content: Content) -> some View {
-//    content
-//      .toolbar {
-////        if false {
-//          ToolbarItem(placement: .navigationBarTrailing) {
-//            NavigationLink(
-//              destination: CombinedOptionsMenuViewXXX(
-//                currentSortingOption: $currentSortingOption,
-//                currentFilteringAllOption: $currentFilteringAllOption,
-//                currentFilteringOption: $currentFilteringOption,
-//                timePeriod: $timePeriod
-//              )
-//            ) {
-//              Image(systemName: "ellipsis.circle")
-//                .uniformSize(color: .red)
-//                .accessibilityLabel(sortAndFilterObservationList)
-//            }
-//          }
-////        }
-//
-//      }
-//  }
-//}

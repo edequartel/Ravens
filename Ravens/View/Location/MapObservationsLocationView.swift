@@ -23,6 +23,7 @@ struct MapObservationsLocationView: View {
 
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var timePeriod: TimePeriod? 
 
   var body: some View {
     VStack {
@@ -48,16 +49,20 @@ struct MapObservationsLocationView: View {
 
           // location observations
           // filter the observations
+          let obs = observationsLocation.observations ?? []
+          let filteredObs = obs.filter { $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0 }
+
 //          ForEach(observationsLocation.observations?.filter { ($0.rarity == currentFilteringOption.intValue) } ?? [])
+          ForEach(filteredObs) { observation in
 //          { observation in
-//            Annotation(observation.speciesDetail.name,
-//                       coordinate:  CLLocationCoordinate2D(
-//                        latitude: observation.point.coordinates[1],
-//                        longitude: observation.point.coordinates[0]))
-//            {
-//              ObservationAnnotationView(observation: observation)
-//            }
-//          }
+            Annotation(observation.speciesDetail.name,
+                       coordinate:  CLLocationCoordinate2D(
+                        latitude: observation.point.coordinates[1],
+                        longitude: observation.point.coordinates[0]))
+            {
+              ObservationAnnotationView(observation: observation)
+            }
+          }
 
 
           // geoJSON
@@ -89,7 +94,8 @@ struct MapObservationsLocationView: View {
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,
-              coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+              coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
+              timePeriod: timePeriod ?? .week)
           }
         }
       }

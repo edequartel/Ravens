@@ -33,12 +33,35 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-//  func PreviousFourteenDays(to date: Date) -> Date {
-//    let daysToAdd = 14
-//    return Calendar.current.date(byAdding: .day, value: -daysToAdd, to: date) ?? date
-//  }
+  func fetchDataInitXXX(settings: Settings, entity: EntityType, token: String, id: Int, timePeriod: TimePeriod, completion: @escaping () -> Void) {
+    log.info("FetchDataInit")
+    //reset
+    self.observations = []
 
-  func fetchDataInit(settings: Settings, entity: EntityType, token: String, id: Int, completion: @escaping () -> Void) {
+    var days = timePeriod.rawValue
+    days = days-1 //today is also also a day
+
+    //datetime
+    let date: Date = Date.now
+    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
+    let dateBefore = formatCurrentDate(value: date)
+    //add the periode to the url
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+
+    if (timePeriod != .infinite) {
+      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+    }
+
+    url += "&ordering=-datetime"
+
+    fetchData(settings: settings, url: url, token: token, completion: completion)
+  }
+
+  func fetchDataInit(
+    settings: Settings,
+    entity: EntityType,
+    token: String,
+    id: Int, completion: @escaping () -> Void) {
     log.info("FetchDataInit")
     //reset
     self.observations = []
