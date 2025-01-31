@@ -8,35 +8,28 @@
 import SwiftUI
 
 struct SpeciesGroupsView: View {
-    @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
-    
-    var body: some View {
-//        NavigationView {//!!
-            List {
-                HStack() {
-                    Text("Id")
-                    Text("Name")
-                    Spacer()
-                }
-                .font(.caption)
-                ForEach(speciesGroupsViewModel.speciesGroups, id:\.id) { speciesGroup in
-                    HStack() {
-                        Text("\(speciesGroup.id)")
-                        Text("\(speciesGroup.name)")
-//                        Text("\(speciesGroup.species_group)")
-                        Spacer()
-                    }
-                    .font(.caption)
-                }
-            }
-//        }
+  @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
+
+  var body: some View {
+    List {
+      HStack() {
+        Text("Id")
+        Text("Name")
+        Spacer()
+      }
+      .font(.caption)
+      ForEach(speciesGroupsViewModel.speciesGroups, id:\.id) { speciesGroup in
+        HStack() {
+          Text("\(speciesGroup.id)")
+          Text("\(speciesGroup.name)")
+          Spacer()
+        }
+        .font(.caption)
+      }
     }
+  }
 }
 
-
-
-
-
 #Preview {
-    SpeciesGroupsView()
+  SpeciesGroupsView()
 }

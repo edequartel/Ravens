@@ -33,11 +33,17 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-  func fetchDataInitXXX(settings: Settings, entity: EntityType, token: String, id: Int, timePeriod: TimePeriod, completion: @escaping () -> Void) {
+  func fetchDataInitXXX(
+    settings: Settings,
+    entity: EntityType,
+    token: String,
+    id: Int,
+    timePeriod: TimePeriod,
+    completion: @escaping () -> Void) {
     log.info("FetchDataInit")
-    //reset
-    self.observations = []
 
+    // reset
+    self.observations = []
     var days = timePeriod.rawValue
     days = days-1 //today is also also a day
 

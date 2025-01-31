@@ -100,7 +100,7 @@ struct ObservationRowView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
-      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID)) {
+      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID,  entity: entity)) {
         ObsView(
           selectedSpeciesID: $selectedSpeciesID,
           entity: entity,
@@ -110,13 +110,12 @@ struct ObservationRowView: View {
       }
       Divider()
     }
-    .listRowInsets(EdgeInsets(top:0, leading:16, bottom:0, trailing:16)) // Remove default padding
+    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)) // Remove default padding
     .listRowSeparator(.hidden)  // Remove separator line
   }
 }
 
-
-//==========================================================================================
+// swiftlint:disable multiple_closures_with_trailing_closure
 struct FilterOptionsView: View {
   @Binding var currentFilteringOption: FilteringRarityOption
   
@@ -139,23 +138,29 @@ struct FilterOptionsView: View {
     }
   }
 }
+// swiftlint:enable multiple_closures_with_trailing_closure
 
-struct observationToolbarModifier: ViewModifier {
+struct ObservationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
-  
+
+  var entity: EntityType
+
   init(
     currentSortingOption: Binding<SortingOption?> = .constant(nil),
     currentFilteringAllOption: Binding<FilterAllOption?> = .constant(nil),
     currentFilteringOption: Binding<FilteringRarityOption?> = .constant(nil),
-    timePeriod: Binding<TimePeriod?> = .constant(nil)
+    timePeriod: Binding<TimePeriod?> = .constant(nil),
+    entity: EntityType = .user // ✅ Added entity as a parameter with a default
+
   ) {
-    self._currentSortingOption = currentSortingOption;
-    self._currentFilteringAllOption = currentFilteringAllOption;
-    self._currentFilteringOption = currentFilteringOption;
+    self._currentSortingOption = currentSortingOption
+    self._currentFilteringAllOption = currentFilteringAllOption
+    self._currentFilteringOption = currentFilteringOption
     self._timePeriod = timePeriod
+    self.entity = entity
   }
   
   func body(content: Content) -> some View {
@@ -167,8 +172,8 @@ struct observationToolbarModifier: ViewModifier {
               currentSortingOption: $currentSortingOption,
               currentFilteringAllOption: $currentFilteringAllOption,
               currentFilteringOption: $currentFilteringOption,
-              timePeriod: $timePeriod
-              
+              timePeriod: $timePeriod,
+              entity: entity
             )
           ) {
             Image(systemName: "ellipsis.circle")
@@ -185,13 +190,15 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
-  
+
+  var entity: EntityType
+
   var body: some View {
     Form {
       // Period Filter
       if timePeriod != nil {
         Section(header: Text("Time Period")) {
-          PeriodView(timePeriod: $timePeriod)
+          PeriodView(timePeriod: $timePeriod, entity: entity)
         }
       }
       
@@ -259,14 +266,19 @@ struct CombinedOptionsMenuView: View {
 
 struct PeriodView: View {
   @Binding var timePeriod: TimePeriod?
-  
+  var entity: EntityType
+
   var body: some View {
     Picker(timePeriodlabel, selection: $timePeriod) {
-      ForEach(TimePeriod.allCases, id: \.self) { period in
+      ForEach(filteredTimePeriods, id: \.self) { period in
         Text(period.localized).tag(period)
       }
     }
     .pickerStyle(.menu)
   }
-}
 
+  /// Filters `TimePeriod.allCases` based on entity
+  private var filteredTimePeriods: [TimePeriod] {
+    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
+  }
+}

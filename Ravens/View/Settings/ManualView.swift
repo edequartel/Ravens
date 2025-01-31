@@ -38,11 +38,9 @@ struct WebViewContainer: UIViewRepresentable {
 }
 
 struct ManualView: View {
-    var body: some View {
-//        NavigationView {//!!
-            WebViewContainer(urlString: "https://edequartel.github.io/Ravens/")
-//        }
-    }
+  var body: some View {
+    WebViewContainer(urlString: "https://edequartel.github.io/Ravens/")
+  }
 }
 
 #Preview {

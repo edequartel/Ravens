@@ -15,8 +15,8 @@ struct LoginView: View {
 
   @EnvironmentObject var userViewModel:  UserViewModel
 
-  @State private var myInlogName = "edequartel@protonmail.com"
-  @State private var myPassword = "fyrta5-pIdtow-gawpys"
+  @State private var myInlogName = ""
+  @State private var myPassword = ""
 
   var body: some View {
     NavigationStack {

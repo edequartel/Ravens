@@ -33,8 +33,7 @@ class Player: ObservableObject {
   }
 
   private func handleData(
-    currentItemEventData:
-    ( item: AudioItem?,
+    currentItemEventData: (item: AudioItem?,
       index: Int?,
       lastItem: AudioItem?,
       lastIndex: Int?,

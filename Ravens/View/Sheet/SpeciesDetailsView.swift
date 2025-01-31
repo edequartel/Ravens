@@ -22,7 +22,6 @@ struct SpeciesDetailsView: View {
   @State private var imageURL: String = ""
 
   var body: some View {
-//    NavigationView {//!!
       ScrollView {
         VStack(alignment: .leading, spacing: 16) {
           // Species Details Header
@@ -119,10 +118,10 @@ struct SpeciesDetailsView: View {
 
 //}
 
-//#Preview {
-//    SpeciesDetailsView(item: Species())
-//        .environmentObject(Settings())
-//}
+#Preview {
+  SpeciesDetailsView(speciesID: 58)
+        .environmentObject(Settings())
+}
 
 
 

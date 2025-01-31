@@ -45,7 +45,7 @@ struct TabLocationView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .allCases.first
+  @State private var timePeriod: TimePeriod? = .week
 
 
   @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -128,10 +128,10 @@ struct TabLocationView: View {
       //set sort, filter and timePeriod
       .modifier(
         showFirstView ?
-        observationToolbarModifier(
+       ObservationToolbarModifier(
           currentFilteringOption: $currentFilteringOption)
         :
-          observationToolbarModifier(
+          ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod

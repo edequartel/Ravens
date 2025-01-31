@@ -112,7 +112,7 @@ struct SettingsView: View {
 //        }
 
       }
-      .navigationTitle(settings_)
+      .navigationTitle(settingsName)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {

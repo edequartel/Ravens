@@ -23,7 +23,7 @@ struct TabUserObservationsView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .halfYear
+  @State private var timePeriod: TimePeriod? = .fourWeeks
 
   @Binding var selectedSpeciesID: Int?
 
@@ -102,10 +102,10 @@ struct TabUserObservationsView: View {
       //sort filter and periodTime
       .modifier(
         showFirstView ?
-        observationToolbarModifier(
+        ObservationToolbarModifier(
           currentFilteringOption: $currentFilteringOption)
         :
-          observationToolbarModifier(
+          ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)

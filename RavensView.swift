@@ -30,7 +30,7 @@ struct RavensView: View {
         // Tab 1
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
-          Text(us)
+          Text(usName)
           Image(systemSymbol: .person2Fill)
         }
 
@@ -60,7 +60,7 @@ struct RavensView: View {
         // Tab 4
         SettingsView()
           .tabItem {
-            Text(settings_)
+            Text(settingsName)
             Image(systemSymbol: .gearshape)
           }
       }
@@ -83,7 +83,7 @@ struct RavensView: View {
         // Tab 4
         SettingsView()
           .tabItem {
-            Text(settings_)
+            Text(settingsName)
             Image(systemSymbol: .gearshape)
           }
       }
