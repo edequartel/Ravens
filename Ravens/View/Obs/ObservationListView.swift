@@ -15,17 +15,11 @@ struct ObservationListView: View {
   @Binding var selectedSpeciesID: Int?
   @Binding var timePeriod: TimePeriod
 
-  @State var entity: EntityType
+  var entity: EntityType
 
-  @Binding var currentSortingOption: SortingOption // = .date
-  @Binding var currentFilteringAllOption: FilterAllOption //= .native
-  @Binding var currentFilteringOption: FilteringRarityOption //= .all
-
-//  @State private var currentSortingOption: SortingOption = .date
-//  @State private var currentFilteringAllOption: FilterAllOption = .native
-//  @State private var currentFilteringOption: FilteringRarityOption = .all
-
-
+  @Binding var currentSortingOption: SortingOption? // = .date
+  @Binding var currentFilteringAllOption: FilterAllOption? //= .native
+  @Binding var currentFilteringOption: FilteringRarityOption? //= .all
 
   @AccessibilityFocusState private var focusedItemID: Int?
 
@@ -83,6 +77,8 @@ struct ObservationListView: View {
       return observation.rarity == 3
     case .veryRare:
       return observation.rarity == 4
+    case .none:
+      return true
     }
   }
 
@@ -96,33 +92,10 @@ struct ObservationListView: View {
       return lhs.rarity > rhs.rarity
     case .scientificName:
       return lhs.speciesDetail.scientificName < rhs.speciesDetail.scientificName
+    case .none:
+      return false
     }
   }
 }
 
-struct ObservationToolbarModifier: ViewModifier {  
-  @Binding var currentSortingOption: SortingOption
-  @Binding var currentFilteringAllOption: FilterAllOption
-  @Binding var currentFilteringOption: FilteringRarityOption
-  @Binding var timePeriod: TimePeriod
-  
-  func body(content: Content) -> some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(
-            destination: CombinedOptionsMenuView(
-              currentSortingOption: $currentSortingOption,
-              currentFilteringAllOption: $currentFilteringAllOption,
-              currentFilteringOption: $currentFilteringOption,
-              timePeriod: $timePeriod
-            )
-          ) {
-            Image(systemName: "ellipsis.circle")
-              .uniformSize(color: .red)
-              .accessibilityLabel(sortAndFilterObservationList)
-          }
-        }
-      }
-  }
-}
+

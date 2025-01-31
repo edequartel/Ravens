@@ -48,6 +48,9 @@
 "map" = "Kaart";
 "appDetails" = "App gegevens";
 
+//radius
+"obsAroundPoint" = "Waarnemingen rond een punt";
+
 //login
 "email" = "email";
 "password" = "Wachtwoord";

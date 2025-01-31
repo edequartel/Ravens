@@ -32,12 +32,12 @@ let notesAboutObservation = LocalizedStringKey("notesAboutObservation")
 let navigateTo = LocalizedStringKey("navigateTo")
 
 // user
-let us = LocalizedStringKey("us")
+let usName = LocalizedStringKey("us")
 let location = LocalizedStringKey("location")
 let species = LocalizedStringKey("species")
 let observation = LocalizedStringKey("observation")
 let observations = LocalizedStringKey("observations")
-let settings_ = LocalizedStringKey("settings")
+let settingsName = LocalizedStringKey("settings")
 
 // icons
 let swap = LocalizedStringKey("swap")
@@ -51,6 +51,9 @@ let source = LocalizedStringKey("source")
 let group = LocalizedStringKey("group")
 let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
+
+//radius
+let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
 
 // login
 let email = LocalizedStringKey("email")

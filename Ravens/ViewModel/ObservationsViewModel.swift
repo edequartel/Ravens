@@ -16,11 +16,11 @@ enum EntityType: String {
   case location = "locations"
   case user = "user"
   case species = "species"
+  case radius = "radius"
 }
 
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
-//  @EnvironmentObject var keyChainviewModel: KeychainViewModel
   
   @Published var observations: [Observation]?
 
@@ -33,13 +33,41 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-//  func PreviousFourteenDays(to date: Date) -> Date {
-//    let daysToAdd = 14
-//    return Calendar.current.date(byAdding: .day, value: -daysToAdd, to: date) ?? date
-//  }
+  func fetchDataInitXXX(
+    settings: Settings,
+    entity: EntityType,
+    token: String,
+    id: Int,
+    timePeriod: TimePeriod,
+    completion: @escaping () -> Void) {
+    log.info("FetchDataInit")
 
-  func fetchDataInit(settings: Settings, entity: EntityType, token: String, id: Int, completion: @escaping () -> Void) {
-//    func fetchDataInit(settings: Settings, entity: EntityType, id: Int, completion: (() -> Void)? = nil) {
+    // reset
+    self.observations = []
+    var days = timePeriod.rawValue
+    days = days-1 //today is also also a day
+
+    //datetime
+    let date: Date = Date.now
+    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
+    let dateBefore = formatCurrentDate(value: date)
+    //add the periode to the url
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+
+    if (timePeriod != .infinite) {
+      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+    }
+
+    url += "&ordering=-datetime"
+
+    fetchData(settings: settings, url: url, token: token, completion: completion)
+  }
+
+  func fetchDataInit(
+    settings: Settings,
+    entity: EntityType,
+    token: String,
+    id: Int, completion: @escaping () -> Void) {
     log.info("FetchDataInit")
     //reset
     self.observations = []
@@ -51,6 +79,8 @@ class ObservationsViewModel: ObservableObject {
     case .location:
         days = settings.timePeriodLocation.rawValue
     case .species:
+        days = settings.timePeriodSpecies.rawValue
+    case .radius:
         days = settings.timePeriodSpecies.rawValue
     }
     days = days-1 //today is also also a day

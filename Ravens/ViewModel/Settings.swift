@@ -76,7 +76,7 @@ class Settings: ObservableObject {
   }
 
 
-  @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
+  @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard //should be published??
 
 
   @Published var currentLocation: CLLocation? = nil //CLLocationManager().location

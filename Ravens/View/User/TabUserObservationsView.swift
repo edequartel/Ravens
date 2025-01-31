@@ -11,21 +11,19 @@ import SwiftyBeaver
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var observationUser : ObservationsViewModel
-
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
-
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var userViewModel:  UserViewModel
-
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
 
-  @State private var currentSortingOption: SortingOption = .date
-  @State private var currentFilteringAllOption: FilterAllOption = .native
-  @State private var currentFilteringOption: FilteringRarityOption = .all
+  @State private var currentSortingOption: SortingOption? = .date
+  @State private var currentFilteringAllOption: FilterAllOption? = .native
+  @State private var currentFilteringOption: FilteringRarityOption? = .all
+  @State private var timePeriod: TimePeriod? = .fourWeeks
 
   @Binding var selectedSpeciesID: Int?
 
@@ -33,29 +31,28 @@ struct TabUserObservationsView: View {
   @State private var firstTime: Bool = true
 
   var body: some View {
-    NavigationView {
+    NavigationStack{
       VStack {
-//        Button("Refresh") {refresh.toggle()}
-//        //        Text("id \(userViewModel.user?.id ?? 0)")
-//        Text("ownr \(userViewModel.user?.name ?? "noName")")
-//        Text("--> observerName:\(obsObserversViewModel.observerName)")
-//        Text("--> observerId:\(obsObserversViewModel.observerId)")
-
-
-        //        Text("setObserverString \(observerName)")
-
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsUserView(
-            observationUser: observationUser)
+            observationUser: observationUser,
+
+            currentSortingOption: $currentSortingOption,
+            currentFilteringAllOption: $currentFilteringAllOption,
+            currentFilteringOption: $currentFilteringOption
+
+          )
         } else {
           ObservationsUserView(
             observationUser: observationUser,
             selectedSpeciesID: $selectedSpeciesID,
+
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
+
             setRefresh: $refresh)
         }
       }
@@ -66,46 +63,53 @@ struct TabUserObservationsView: View {
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
-      .onChange(of: settings.timePeriodUser) {
-        log.info("update timePeriodUser")
+      .onChange(of: timePeriod) {
+        log.error("update timePeriodUser")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          completion: { log.info("fetch data complete") } )
+          timePeriod: timePeriod ?? .fourWeeks,
+          completion: { log.error("fetch data complete") } )
       }
 
       .onChange(of: refresh) {
         log.info("update refresh")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          timePeriod: timePeriod ?? .fourWeeks,
           completion: { log.info("fetch data complete") } )
       }
 
       .onChange(of: obsObserversViewModel.observerId) {
-        log.info("update refresh")
+        log.info("update obsObserversViewModel.observerId")
 
-        observationUser.fetchDataInit(
+        observationUser.fetchDataInitXXX(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          timePeriod: timePeriod ?? .fourWeeks,
           completion: { log.info("fetch data complete") } )
-      }
+      } 
 
       //sort filter and periodTime
-      .modifier(ObservationToolbarModifier(
-        currentSortingOption: $currentSortingOption,
-        currentFilteringAllOption: $currentFilteringAllOption,
-        currentFilteringOption: $currentFilteringOption,
-        timePeriod: $settings.timePeriodUser
-      ))
+      .modifier(
+        showFirstView ?
+        ObservationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption)
+        :
+          ObservationToolbarModifier(
+            currentSortingOption: $currentSortingOption,
+            currentFilteringOption: $currentFilteringOption,
+            timePeriod: $timePeriod)
+      )
 
       .toolbar {
         //set map or list
@@ -145,6 +149,11 @@ struct TabUserObservationsView: View {
           log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
+          // Run loadUserData asynchronously
+                  Task {
+                      await loadUserData()
+                  }
+
         }
       }
     }
@@ -157,6 +166,23 @@ struct TabUserObservationsView: View {
   func isUserInRecords(userId: Int) -> Bool {
     return obsObserversViewModel.isObserverInRecords(userID: userId)
   }
-}
 
+  private func loadUserData() async {
+    observationUser.fetchDataInitXXX(
+      settings: settings,
+      entity: .user,
+      token: keyChainViewModel.token,
+      id: obsObserversViewModel.observerId,
+      timePeriod: timePeriod ?? .fourWeeks,
+      completion: {
+        log.info("fetch loadUserData observationUser.fetchDataInit complete")
+        userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+          log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+          obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+          obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+        }
+      }
+    )
+  }
+}
 

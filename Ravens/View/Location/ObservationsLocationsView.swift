@@ -11,6 +11,8 @@ import MapKit
 
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
+
+  
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var locationIdViewModel: LocationIdViewModel
   @ObservedObject var geoJSONViewModel: GeoJSONViewModel
@@ -24,9 +26,9 @@ struct ObservationsLocationView: View {
   
   @Binding var selectedSpeciesID: Int?
 
-  @Binding var currentSortingOption: SortingOption
-  @Binding var currentFilteringAllOption: FilterAllOption 
-  @Binding var currentFilteringOption: FilteringRarityOption
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   @State private var retrievedData = false
 
@@ -96,7 +98,15 @@ struct ObservationsLocationView: View {
 }
 
 
-func fetchDataLocation(settings: Settings, token: String, observationsLocation: ObservationsViewModel, locationIdViewModel: LocationIdViewModel, geoJSONViewModel: GeoJSONViewModel, coordinate: CLLocationCoordinate2D) {
+func fetchDataLocation(
+  settings: Settings,
+  token: String,
+  observationsLocation: ObservationsViewModel,
+  locationIdViewModel: LocationIdViewModel,
+  geoJSONViewModel: GeoJSONViewModel,
+  coordinate: CLLocationCoordinate2D,
+  timePeriod: TimePeriod
+) {
   print("fetchDataLocation")
   //1. get the id from the location
   locationIdViewModel.fetchLocations(
@@ -121,11 +131,12 @@ func fetchDataLocation(settings: Settings, token: String, observationsLocation: 
       )
 
       //2b. get the observations for this area
-      observationsLocation.fetchDataInit(
+      observationsLocation.fetchDataInitXXX(
         settings: settings,
         entity: .location,
         token: token,
         id: fetchedLocations[0].id,
+        timePeriod: timePeriod,
         completion: {
           print("observationsLocationViewModel data loaded")
           settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()

@@ -52,6 +52,9 @@
 "map" = "Kaart";
 "appDetails" = "App details";
 
+//radius
+"obsAroundPoint" = "Observations round point";
+
 //login
 "email" = "email";
 "password" = "Password";

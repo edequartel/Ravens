@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import AudioToolbox
 import SFSafeSymbols
+import MapKit
 
 let showView = false
 //let showView = true
@@ -23,6 +24,8 @@ let longitude = 4.713450+0.1
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
+
+let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
 func cleanName(_ name: String) -> String {
   var cleanName = name.replacingOccurrences(of: " ", with: "_")

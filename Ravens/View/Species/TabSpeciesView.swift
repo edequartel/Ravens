@@ -14,7 +14,7 @@ struct TabSpeciesView: View {
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel 
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -23,17 +23,17 @@ struct TabSpeciesView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
-  
+
   @State private var selectedSortOption: SortNameOption = .lastSeen
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
-  
+
   @Binding var selectedSpeciesID: Int?
 
   var body: some View {
-    NavigationView {
-      
+    NavigationStack {
+
       VStack {
         if showView { Text("TabSpeciesView").font(.customTiny) }
         HorizontalLine()
@@ -47,19 +47,21 @@ struct TabSpeciesView: View {
             isBookmarked: settings.isBookMarkVisible,
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
-            
-            
+
+
             NavigationLink( //???
               destination: SpeciesView(
                 observationsSpecies: observationsSpecies,
                 item: species,
                 selectedSpeciesID: $selectedSpeciesID)
             ) {
+
               SpeciesInfoView(
                 species: species,
                 showView: showView)
 
             }
+
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               Button(action: {
@@ -68,26 +70,27 @@ struct TabSpeciesView: View {
                 Image(systemSymbol: .infoCircle)
               }
               .tint(.blue)
-              
+
               Button(action: {
                 if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
                   bookMarksViewModel.removeRecord(speciesID: species.speciesId)
                 } else {
                   bookMarksViewModel.appendRecord(speciesID: species.speciesId)
                 }
-                
+
               } ) {
                 Image(systemSymbol: .star)
               }
               .tint(.obsStar)
+              //            .background(Color.gray.opacity(0.1))
+              .accessibilityLabel(species.name)
             }
-//            .background(Color.gray.opacity(0.1))
-            .accessibilityLabel(species.name)
           }
         }
         .listStyle(PlainListStyle())
         .searchable(text: $searchText) //een niveau lager geplaatst
       }
+
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
@@ -102,10 +105,10 @@ struct TabSpeciesView: View {
           }
         }
       }
-      
+
       .navigationBarTitle(settings.selectedSpeciesGroupName)
       .navigationBarTitleDisplayMode(.inline)
-      
+
       .navigationBarItems(
         leading: HStack {
           Button(action: {
@@ -117,10 +120,9 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
       )
-      
-    }
+
+//    }
     .refreshable {
-//      speciesViewModel.fillSpecies()
       speciesViewModel.parseHTMLFromURL(
         settings: settings,
         completion: {
@@ -128,7 +130,8 @@ struct TabSpeciesView: View {
         })
     }
   }
-  
+  }
+
   var searchResults: [Species] {
     if searchText.isEmpty {
       return speciesViewModel.sortedSpecies(by: selectedSortOption)
@@ -149,21 +152,16 @@ struct SortFilterSpeciesView: View {
 
   var body: some View {
     Form {
-      Section(period) {
-        VStack {
-          PeriodView(timePeriod: $timePeriod)
-        }
-      }
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
       }
-      
+
       // Second Menu for Filtering
       Section(status) {
         FilteringAllOptionsView(currentFilteringAllOption: $selectedFilterAllOption)
       }
-      
+
       Section(rarity) {
         FilterOptionsView(currentFilteringOption: $selectedRarityOption)
       }
@@ -183,7 +181,7 @@ enum SortNameOption: String, CaseIterable {
 
 struct SortNameOptionsView: View {
   @Binding var currentFilteringNameOption: SortNameOption
-  
+
   var body: some View {
     if showView { Text("SortNameOptionsView").font(.customTiny) }
     List(SortNameOption.allCases, id: \.self) { option in
@@ -203,20 +201,11 @@ struct SortNameOptionsView: View {
 }
 
 
-enum FilterAllOption: String, CaseIterable {
-  case all
-  case native
-  // Add more filter options if needed
-  var localized: LocalizedStringKey {
-    LocalizedStringKey(self.rawValue)
-  }
-}
-
 struct FilteringAllMenu: View {
   @Binding var currentFilteringAllOption: FilterAllOption
-  
+
   var body: some View {
-    
+
     NavigationLink(destination: FilteringAllOptionsView(currentFilteringAllOption: $currentFilteringAllOption)) {
       Image(systemName: "line.3.horizontal.decrease")
         .accessibilityElement(children: .combine)
@@ -226,26 +215,6 @@ struct FilteringAllMenu: View {
   }
 }
 
-struct FilteringAllOptionsView: View {
-  @Binding var currentFilteringAllOption: FilterAllOption
-  
-  var body: some View {
-    if showView { Text("FilteringAllOptionsView").font(.customTiny) }
-    List(FilterAllOption.allCases, id: \.self) { option in
-      Button(action: {
-        currentFilteringAllOption = option
-      }) {
-        HStack {
-          Text(option.localized)
-          Spacer()
-          if currentFilteringAllOption == option {
-            Image(systemName: "checkmark")
-          }
-        }
-      }
-    }
-  }
-}
 
 extension SpeciesViewModel {
   func filteredSpecies(
@@ -258,20 +227,20 @@ extension SpeciesViewModel {
     additionalIntArray: BookMarksViewModel
   ) -> [Species] {
     let sortedSpeciesList = sortedSpecies(by: sortOption)
-    
+
     // Filter by search text if not empty
     var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
       species.name.lowercased().contains(searchText.lowercased()) ||
       species.scientificName.lowercased().contains(searchText.lowercased())
     }
-    
+
     // Apply other filters
     filteredList = applyFilter(to: filteredList, with: filterOption)
     filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
     // Apply latest filter
     return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
   }
-  
+
   private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
     switch filterOption {
     case .all:
@@ -280,7 +249,7 @@ extension SpeciesViewModel {
       return species.filter { $0.native }
     }
   }
-  
+
   private func applyRarityFilter(to species: [Species], with filterOption: FilteringRarityOption) -> [Species] {
     switch filterOption {
     case .all:
@@ -297,7 +266,7 @@ extension SpeciesViewModel {
       //            return species
     }
   }
-  
+
   private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
     if isBookmarked {
       return species.filter { species in

@@ -18,15 +18,56 @@ struct ObsDetailView: View {
 
   @State private var showPositionFullView = false
 
+  var entity: EntityType
+
   var body: some View {
     ScrollView {
+
+      VStack() {
+        HStack {
+
+          BookmarkButtonView(obs: obs, colorOn: false)
+          if (entity != .radius) {ObserversButtonView(obs: obs, colorOn: false) }
+          AreaButtonView(obs: obs, colorOn: false)
+
+          Spacer()
+
+          Button(action: {
+            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
+            selectedSpeciesID = obs.speciesDetail.id
+          }) {
+            Image(systemSymbol: SFInformation)
+              .uniformSize()
+          }
+          .accessibility(label: Text(informationSpecies))
+
+          let url = URL(string: obs.permalink)!
+          ShareLink(item: url) {
+            Image(systemSymbol: SFShareLink)
+              .uniformSize()
+          }
+          .accessibility(label: Text(shareThisObservation))
+
+          Button(action: {
+            if let url = URL(string: obs.permalink) {
+              UIApplication.shared.open(url)
+            }
+          }) {
+            Image(systemSymbol: SFObservation)
+              .uniformSize()
+          }
+          .accessibility(label: Text(linkObservation))
+        }
+      }
+      .padding([.leading, .trailing, .top])
+
+
       VStack(alignment: .leading, spacing: 20) {
         if showView {
           Text("ObsDetailView")
             .font(.customTiny)
             .padding(.bottom, 10)
         }
-
         // Header Section: Species Name & Rarity
         VStack(alignment: .leading, spacing: 10) {
           HStack {
@@ -51,42 +92,6 @@ struct ObsDetailView: View {
         .accessibilityElement(children: .combine)
 //        .accessibility(value: Text("\(obs.speciesDetail.name) \(obs.speciesDetail.scientificName)"))
 
-        VStack {
-          HStack {
-
-            BookmarkButtonView(obs: obs, colorOn: false)
-            ObserversButtonView(obs: obs, colorOn: false)
-            AreaButtonView(obs: obs, colorOn: false)
-
-            Spacer()
-
-            Button(action: {
-              print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
-              selectedSpeciesID = obs.speciesDetail.id
-            }) {
-              Image(systemSymbol: SFInformation)
-                .uniformSize()
-            }
-            .accessibility(label: Text(informationSpecies))
-
-            let url = URL(string: obs.permalink)!
-            ShareLink(item: url) {
-              Image(systemSymbol: SFShareLink)
-                .uniformSize()
-            }
-            .accessibility(label: Text(shareThisObservation))
-
-            Button(action: {
-              if let url = URL(string: obs.permalink) {
-                UIApplication.shared.open(url)
-              }
-            }) {
-              Image(systemSymbol: SFObservation)
-                .uniformSize()
-            }
-            .accessibility(label: Text(linkObservation))
-          }
-        }
 
         // Scientific Name Section
         VStack(alignment: .leading, spacing: 10) {
@@ -96,16 +101,73 @@ struct ObsDetailView: View {
             Text("\(obs.number) x")
               .footnoteGrayStyle()
           }
-
-          HStack {
-            Text("\(obs.userDetail?.name ?? "")")
-              .footnoteGrayStyle()
-            Spacer()
+          if (entity != .radius) {
+            HStack {
+              Text("\(obs.userDetail?.name ?? "")")
+                .footnoteGrayStyle()
+              Spacer()
+            }
           }
         }
         .padding()
         .islandBackground()
         .accessibilityElement(children: .combine)
+
+//        VStack {
+//          HStack {
+//
+//            BookmarkButtonView(obs: obs, colorOn: false)
+//            if (entity != .radius) {ObserversButtonView(obs: obs, colorOn: false) }
+//            AreaButtonView(obs: obs, colorOn: false)
+//
+//            Spacer()
+//
+//            Button(action: {
+//              print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
+//              selectedSpeciesID = obs.speciesDetail.id
+//            }) {
+//              Image(systemSymbol: SFInformation)
+//                .uniformSize()
+//            }
+//            .accessibility(label: Text(informationSpecies))
+//
+//            let url = URL(string: obs.permalink)!
+//            ShareLink(item: url) {
+//              Image(systemSymbol: SFShareLink)
+//                .uniformSize()
+//            }
+//            .accessibility(label: Text(shareThisObservation))
+//
+//            Button(action: {
+//              if let url = URL(string: obs.permalink) {
+//                UIApplication.shared.open(url)
+//              }
+//            }) {
+//              Image(systemSymbol: SFObservation)
+//                .uniformSize()
+//            }
+//            .accessibility(label: Text(linkObservation))
+//          }
+//        }
+
+//        // Scientific Name Section
+//        VStack(alignment: .leading, spacing: 10) {
+//
+//          HStack {
+//            DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+//            Text("\(obs.number) x")
+//              .footnoteGrayStyle()
+//          }
+//
+//          HStack {
+//            Text("\(obs.userDetail?.name ?? "")")
+//              .footnoteGrayStyle()
+//            Spacer()
+//          }
+//        }
+//        .padding()
+//        .islandBackground()
+//        .accessibilityElement(children: .combine)
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
@@ -169,7 +231,8 @@ struct ObsDetailView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
     ObsDetailView(
       obs: mockObservation,
-      selectedSpeciesID: .constant(nil)
+      selectedSpeciesID: .constant(nil),
+      entity: .radius
     )
     .environmentObject(mockBookMarksViewModel)
   }

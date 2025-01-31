@@ -21,7 +21,7 @@ class ObserversViewModel: ObservableObject {
   @Published var records: [Observer] = []
 
   @Published var observerId: Int = 1111
-  @Published var observerName: String = "deze gebruiken want deze is published"
+  @Published var observerName: String = ""
 
     let filePath: URL
     
