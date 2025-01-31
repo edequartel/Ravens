@@ -140,33 +140,6 @@ struct FilterOptionsView: View {
   }
 }
 
-
-//==========================================================================================
-//struct ContentXView: View {
-//  @State private var currentSortingOption: SortingOption? = .rarity
-//  @State private var currentFilteringAllOption: FilterAllOption? = .native
-//  @State private var currentFilteringOption: FilteringRarityOption? = .all
-//  @State private var timePeriod: TimePeriod? = .fourWeeks
-//
-//  private var atStart = true
-//
-//    var body: some View {
-//        NavigationView {
-//            VStack {
-//                Text("Main Content")
-//              Text("\(currentSortingOption?.intValue ?? 0)")
-//            }
-//            .navigationTitle("Observations")
-//            .modifier(observationToolbarModifier(
-//              currentSortingOption: $currentSortingOption,
-//              currentFilteringAllOption: $currentFilteringAllOption,
-//              currentFilteringOption: $currentFilteringOption,
-//              timePeriod: $timePeriod))
-//        }
-//    }
-//}
-
-
 struct observationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?

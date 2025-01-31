@@ -31,6 +31,10 @@ struct RadiusListView: View {
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
 
+  @Binding var region: MKCoordinateRegion
+  @Binding var cameraPosition: MapCameraPosition
+
+
 
   var body: some View {
     NavigationView {
@@ -41,7 +45,7 @@ struct RadiusListView: View {
             observations: observations,
             selectedSpeciesID: $selectedSpeciesID,
             timePeriod: $settings.timePeriodUser,
-            entity: .user,
+            entity: .radius,
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption
@@ -59,6 +63,7 @@ struct RadiusListView: View {
           log.error("radiusView onAppearOnce")
           observationsRadiusViewModel.circleCenter = locationManager.getCurrentLocation()?.coordinate ?? CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
           observationsRadiusViewModel.fetchData(
+            settings: settings,
             latitude: observationsRadiusViewModel.circleCenter.latitude,
             longitude: observationsRadiusViewModel.circleCenter.longitude,
             radius: circleRadius,
@@ -76,6 +81,7 @@ struct RadiusListView: View {
       }
     }
   }
+  
 }
 
 struct RadiusMapView: View {
@@ -89,12 +95,11 @@ struct RadiusMapView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
+  @Binding var region: MKCoordinateRegion
+  @Binding var cameraPosition: MapCameraPosition
+//  @State private var cameraPosition: MapCameraPosition = .automatic
 
-  @State private var cameraPosition: MapCameraPosition = .automatic
-  @State private var region: MKCoordinateRegion = MKCoordinateRegion(
-    center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-    span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
-  )
+
 
   let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
@@ -104,30 +109,19 @@ struct RadiusMapView: View {
         Map(position: $cameraPosition) {
           UserAnnotation()
 
+          //observations
           let obs = observationsRadiusViewModel.observations ?? []
-          let filteredObs = obs.filter { $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0 }
-
-//          ForEach(observationsLocation.observations?.filter { ($0.rarity == currentFilteringOption.intValue) } ?? [])
+          let filteredObs = obs.filter {
+            $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0
+          }
           ForEach(filteredObs) { observation in
-
-//          ForEach(observationsRadiusViewModel.observations ?? []) { observation in
-            Annotation("", coordinate:  CLLocationCoordinate2D(
+            Annotation(observation.speciesDetail.name, coordinate:  CLLocationCoordinate2D(
               latitude: observation.point.coordinates[1],
               longitude: observation.point.coordinates[0])) {
                 ObservationAnnotationView(observation: observation)
               }
           }
 
-          // location observations
-          ForEach(observationsRadiusViewModel.observations ?? []) { observation in
-            Annotation(observation.speciesDetail.name,
-                       coordinate:  CLLocationCoordinate2D(
-                        latitude: observation.point.coordinates[1],
-                        longitude: observation.point.coordinates[0]))
-            {
-              ObservationAnnotationView(observation: observation)
-            }
-          }
 
           MapCircle(
             center: CLLocationCoordinate2D(
@@ -154,19 +148,20 @@ struct RadiusMapView: View {
             observationsRadiusViewModel.circleCenter = coordinate
 
             observationsRadiusViewModel.fetchData(
+              settings: settings,
               latitude: coordinate.latitude,
               longitude: coordinate.longitude,
               radius: circleRadius,
               timePeriod: timePeriod ?? .fourWeeks,
               completion: {
-                print("yyy")
+                log.error("tapgesture update userlocation")
                 updateRegionToUserLocation(coordinate: coordinate)
               })
           }
         }
       }
           .onAppear {
-            print("radiusMapView onAppear")
+            log.error("radiusMapView onAppear")
             updateRegionToUserLocation(coordinate: observationsRadiusViewModel.circleCenter)
           }
     }
@@ -211,7 +206,16 @@ struct TabRadiusView: View {
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
 
+  let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
+
   @State private var timePeriod: TimePeriod? = .fourWeeks
+
+  @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+    center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+    span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
+  )
+
+  @State private var cameraPosition: MapCameraPosition = .automatic
 
   var body: some View {
     NavigationView {
@@ -221,24 +225,22 @@ struct TabRadiusView: View {
                         currentSortingOption: $currentSortingOption,
                         currentFilteringAllOption: $currentFilteringAllOption,
                         currentFilteringOption: $currentFilteringOption,
-                        timePeriod: $timePeriod)
+                        timePeriod: $timePeriod,
+                        region: $region,
+                        cameraPosition: $cameraPosition)
         } else {
           RadiusListView(observationsRadiusViewModel: observationsRadiusViewModel,
                          selectedSpeciesID: $selectedSpeciesID,
                          currentSortingOption: $currentSortingOption,
                          currentFilteringAllOption: $currentFilteringAllOption,
                          currentFilteringOption: $currentFilteringOption,
-                         timePeriod: $timePeriod)
+                         timePeriod: $timePeriod,
+                         region: $region,
+                         cameraPosition: $cameraPosition
+          )
         }
       }
 
-      //set sort, filter and timePeriod
-//      .modifier(observationToolbarModifier(
-//        currentSortingOption: $currentSortingOption,
-//        currentFilteringAllOption: $currentFilteringAllOption,
-//        currentFilteringOption: $currentFilteringOption,
-//        timePeriod: $timePeriod
-//      ))
 
       .modifier(
         showFirstView ?
@@ -246,7 +248,6 @@ struct TabRadiusView: View {
           currentFilteringOption: $currentFilteringOption)
         :
           observationToolbarModifier(
-//            currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
       )
@@ -267,18 +268,23 @@ struct TabRadiusView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
-            log.error("getMyLocation Radius")
+            observationsRadiusViewModel.observations = []
+
             if let location = locationManager.getCurrentLocation() {
+              observationsRadiusViewModel.circleCenter = location.coordinate
+
               observationsRadiusViewModel.fetchData(
+                settings: settings,
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 radius: 1000, //circleRadius,
                 timePeriod: timePeriod ?? .fourWeeks,
                 completion: {
-                  log.error("getMyLocation Radius")
-//                  updateRegionToUserLocation(coordinate: coordinate) //?? hier de map aanpassen
+                  log.error("tapgesture update userlocation")
+                  updateRegionToUserLocation(coordinate: location.coordinate)
                 })
             }
+
 
           }) {
             Image(systemName: "smallcircle.filled.circle")
@@ -288,6 +294,22 @@ struct TabRadiusView: View {
         }
       }
     }
+  }
+
+  private func updateRegionToUserLocation(coordinate: CLLocationCoordinate2D) {
+
+
+    log.error("User location IS available")
+    // Define area span (latitudeDelta and longitudeDelta)
+    let updatedRegion = MKCoordinateRegion(
+      center: coordinate,
+      span: MKCoordinateSpan(
+        latitudeDelta: circleRadius / 20000,
+        longitudeDelta: circleRadius / 20000)
+    )
+
+    region = updatedRegion
+    cameraPosition = .region(updatedRegion) // Update camera to this region
   }
 }
 //

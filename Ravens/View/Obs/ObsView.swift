@@ -16,7 +16,6 @@ import AVFoundation
 struct ObsView: View {
   let log = SwiftyBeaver.self
 
-
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -34,15 +33,15 @@ struct ObsView: View {
 
   var body: some View {
     HStack {
-      PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
-
+      if (entity != .radius) {
+        PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
+      }
 
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
-//          Text("\(entity.rawValue)")
           if entity != .species {
             ObsDetailsRowView(obs: obs)
           }
@@ -57,7 +56,6 @@ struct ObsView: View {
             Image(systemName: "list.clipboard")
               .foregroundColor(Color.gray.opacity(0.8))
           }
-//          Spacer()
         }
 
 
@@ -69,7 +67,6 @@ struct ObsView: View {
 
       HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-//        Text("\(String(describing: obs.timeDate))")
           Text("\(obs.number) x")
             .footnoteGrayStyle()
        }
@@ -88,8 +85,6 @@ struct ObsView: View {
             }
           }
         }
-
-//        if entity != .location {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
@@ -100,22 +95,6 @@ struct ObsView: View {
                 .foregroundColor(Color.gray.opacity(0.8))
             }
           }
-//        }
-
-//        if entity != .radius {
-//          HStack {
-//            Text("Radius")
-//            Text("R>\(obs.locationDetail?.name ?? "name")")
-//              .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
-//              .lineLimit(1) // Set the maximum number of lines to 1
-//            Spacer()
-//            if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
-//              Image(systemSymbol: SFAreaFill)
-//                .foregroundColor(Color.gray.opacity(0.8))
-//            }
-//          }
-//        }
-
         Spacer()
       }
       .padding(2)
@@ -155,12 +134,6 @@ struct ObsView: View {
   
 }
 
-//struct ObsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Initialize your ObsView with appropriate data
-//        ObsView(obs: Observation(from: <#any Decoder#>))
-//    }
-//}
 func formatDate(_ date: Date) -> String {
     let formatter = DateFormatter()
     formatter.dateStyle = .medium // Customize the style: .short, .medium, .long, etc.

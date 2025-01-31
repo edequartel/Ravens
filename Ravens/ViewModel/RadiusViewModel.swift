@@ -19,7 +19,7 @@ class ObservationsRadiusViewModel: ObservableObject {
   
   @Published var circleCenter = CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
   
-  func fetchData(latitude: Double, longitude: Double, radius: Double,timePeriod: TimePeriod, completion: (() -> Void)? = nil) {
+  func fetchData(settings: Settings, latitude: Double, longitude: Double, radius: Double,timePeriod: TimePeriod, completion: (() -> Void)? = nil) {
 
     let url = "https://waarnemingen.be/api/v1/observations/around-point/"
     let date = Date()
@@ -27,12 +27,13 @@ class ObservationsRadiusViewModel: ObservableObject {
     let parameters: [String: Any] = [
       "days": timePeriod,
       "end_date": dateFormatted,
+      "species_group": settings.selectedSpeciesGroup,
       "radius": radius,
       "lat": latitude,
       "lng": longitude
     ]
     
-    log.error("Fetching data from: \(url)")
+    log.error("Fetching data from: \(url) +\(parameters)")
 
     AF.request(url, parameters: parameters).responseString { response in
       switch response.result {
