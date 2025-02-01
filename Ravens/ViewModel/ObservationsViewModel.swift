@@ -53,6 +53,7 @@ class ObservationsViewModel: ObservableObject {
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
 
     if (timePeriod != .infinite) {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
@@ -90,12 +91,14 @@ class ObservationsViewModel: ObservableObject {
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"//+
+      //"&species_group=\(settings.selectedSpeciesGroupId)"
 
     if ((settings.timePeriodUser != .infinite) && ( entity == .user)) ||
         ((settings.timePeriodLocation != .infinite) && ( entity == .location)) ||
         ((settings.timePeriodSpecies != .infinite) && ( entity == .species)) {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
     }
 
     url += "&ordering=-datetime"

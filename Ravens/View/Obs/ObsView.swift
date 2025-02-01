@@ -59,7 +59,7 @@ struct ObsView: View {
         }
 
 
-        if entity != .species {
+        if (entity != .species) && (obs.speciesDetail.name.isEmpty) { //?!
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
@@ -73,7 +73,7 @@ struct ObsView: View {
 
 
         // User Info Section
-        if entity != .user && entity != .radius {
+        if (entity != .user) && (entity != .radius) {
           HStack {
 //            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
             Text("\(obs.userDetail?.name ?? "noName")")
@@ -85,6 +85,8 @@ struct ObsView: View {
             }
           }
         }
+
+        if (entity != .location) {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
@@ -95,6 +97,7 @@ struct ObsView: View {
                 .foregroundColor(Color.gray.opacity(0.8))
             }
           }
+        }
         Spacer()
       }
       .padding(2)
@@ -109,7 +112,7 @@ struct ObsView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       AreaButtonView(obs: obs, colorOn: true)
       BookmarkButtonView(obs: obs, colorOn: true)
-//    if !showRadius { ObserversButtonView(obs: obs, colorOn: true) }
+      if (entity != .radius) { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS
