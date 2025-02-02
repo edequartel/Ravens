@@ -152,6 +152,9 @@ struct SortFilterSpeciesView: View {
 
   var body: some View {
     Form {
+//      Section(species) {
+        SpeciesPickerView()
+//      }
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)

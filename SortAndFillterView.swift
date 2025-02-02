@@ -197,14 +197,14 @@ struct CombinedOptionsMenuView: View {
     Form {
       // Period Filter
       if timePeriod != nil {
-        Section(header: Text("Time Period")) {
+        Section(header: Text(period)) {
           PeriodView(timePeriod: $timePeriod, entity: entity)
         }
       }
       
       // Sorting Option
       if currentSortingOption != nil {
-        Section(header: Text("Sort By")) {
+        Section(header: Text(sort)) {
           ForEach(SortingOption.allCases, id: \.self) { option in
             Button(action: {
               currentSortingOption = option
@@ -223,7 +223,7 @@ struct CombinedOptionsMenuView: View {
       
       // Filter All/Native
       if currentFilteringAllOption != nil {
-        Section(header: Text("Filter Status")) {
+        Section(header: Text(filter)) {
           ForEach(FilterAllOption.allCases, id: \.self) { option in
             Button(action: {
               currentFilteringAllOption = option
