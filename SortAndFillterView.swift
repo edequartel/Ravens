@@ -242,7 +242,7 @@ struct CombinedOptionsMenuView: View {
       
       // Rarity Filter
       if currentFilteringOption != nil {
-        Section(header: Text("Filter by Rarity")) {
+        Section(header: Text(rarity)) {
           ForEach(FilteringRarityOption.allCases, id: \.self) { option in
             Button(action: {
               currentFilteringOption = option

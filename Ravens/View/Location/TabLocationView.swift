@@ -85,7 +85,7 @@ struct TabLocationView: View {
       }
 
       .onChange(of: timePeriod) {
-        log.info("update timePeriodLocation so new data fetch for this period")
+        log.error("-->> update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,

@@ -152,9 +152,17 @@ struct SortFilterSpeciesView: View {
 
   var body: some View {
     Form {
-//      Section(species) {
-        SpeciesPickerView()
-//      }
+      Section(period) {
+        Picker(timePeriodlabel, selection: $timePeriod) {
+          ForEach(TimePeriod.allCases, id: \.self) { period in
+            Text(period.localized).tag(period)
+          }
+        }
+        .pickerStyle(.menu)
+      }
+
+      SpeciesPickerView()
+
       // First Menu for Sorting
       Section(sort) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
@@ -170,6 +178,11 @@ struct SortFilterSpeciesView: View {
       }
     }
   }
+
+//  /// Filters `TimePeriod.allCases` based on entity
+//  private var filteredTimePeriods: [TimePeriod] {
+//    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
+//  }
 }
 
 enum SortNameOption: String, CaseIterable {

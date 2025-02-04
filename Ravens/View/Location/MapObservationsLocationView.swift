@@ -87,7 +87,13 @@ struct MapObservationsLocationView: View {
           .background(Color.obsGreenEagle.opacity(0.8))
         }
         .onTapGesture() { position in
+
           if let coordinate = proxy.convert(position, from: .local) {
+
+//            setLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+//            settings.currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+//            settings.locationId =
+
             fetchDataLocation(
               settings: settings,
               token: keyChainViewModel.token,
