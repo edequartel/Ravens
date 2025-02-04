@@ -231,24 +231,32 @@ struct TabRadiusView: View {
             entity: .radius)
       )
 
-      .onChange(of: timePeriod) {
+      .onChange(of: timePeriod) {//!!
         log.error("update timePeriod \(String(describing: timePeriod))")
         observationsRadiusViewModel.observations = []
 
-        if let location = locationManager.getCurrentLocation() {
-          observationsRadiusViewModel.circleCenter = location.coordinate
+
+        //get the location which is onTappedbefore!!
+//        observationsRadiusViewModel.circleCenter
+
+//        if let location = locationManager.getCurrentLocation() {
+//          observationsRadiusViewModel.circleCenter = location.coordinate
 
           observationsRadiusViewModel.fetchData(
             settings: settings,
-            latitude: location.coordinate.latitude,
-            longitude: location.coordinate.longitude,
+
+            latitude: observationsRadiusViewModel.circleCenter.latitude,
+            longitude: observationsRadiusViewModel.circleCenter.longitude,
+
+//            latitude: location.coordinate.latitude,
+//            longitude: location.coordinate.longitude,
+
             radius: circleRadius, //circleRadius,
             timePeriod: timePeriod ?? .fourWeeks,
             completion: {
               log.error("update timePeriod")
-              //              updateRegionToUserLocation(coordinate: location.coordinate)
             })
-        }
+//        }
       }
 
       .toolbar {

@@ -64,6 +64,7 @@ struct TabLocationView: View {
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
+            setLocation: $setLocation,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
@@ -92,7 +93,7 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation,
+          coordinate: setLocation, //!!
           timePeriod: timePeriod ?? .week)
         settings.hasLocationLoaded = true
       }

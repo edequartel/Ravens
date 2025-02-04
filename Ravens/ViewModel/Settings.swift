@@ -55,8 +55,8 @@ class Settings: ObservableObject {
 
 //  @AppStorage("tokenKey") var tokenKey = ""
 
-  @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
-  @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
+//  @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
+//  @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
 
   @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
   @Published var selectedInBetween: String = "waarneming.nl" {

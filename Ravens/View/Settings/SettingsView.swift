@@ -54,43 +54,13 @@ struct SettingsView: View {
           LanguageView()
         }
 
-//        SpeciesPickerView()
-//        Section(species) {
-//          Picker(group, selection: $settings.selectedSpeciesGroupId) {
-//            ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
-//              Text("\(speciesGroup.name)").tag(speciesGroup.id)
-//                .lineLimit(1)
-//                .truncationMode(.tail)
-//            }
-//          }
-//          .pickerStyle(.navigationLink)
-//          .onChange(of: settings.selectedSpeciesGroupId) {
-//            log.error("\(settings.selectedSpeciesGroupId)")
-//            settings.selectedRegionListId = regionListViewModel.getId(
-//              region: settings.selectedRegionId,
-//              speciesGroup: settings.selectedSpeciesGroupId)
-//
-//            if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: {$0.id == settings.selectedSpeciesGroupId }) {
-//              settings.selectedSpeciesGroupName = selectedGroup.name
-//            }
-//            
-//            log.info("\(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
-//            
-//            speciesViewModel.fetchDataFirst(settings: settings)
-//            speciesViewModel.fetchDataSecondLanguage(settings: settings)
-//            
-//          }
-//        }
-
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
-//              Text(choice.rawValue.capitalized).tag(choice)
               Text(choice.localized).tag(choice)
             }
           }
           .pickerStyle(SegmentedPickerStyle())
-//          .padding(0)
         }
 
 
@@ -104,13 +74,6 @@ struct SettingsView: View {
           .padding(4)
           .accessibilityElement(children: .combine)
         }
-
-//        Section(header: Text(location)) {
-//          VStack {
-//            LocationManagerView()
-//          }
-//          .accessibilityElement(children: .combine)
-//        }
 
       }
       .navigationTitle(settingsName)
