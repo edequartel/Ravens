@@ -27,11 +27,9 @@ struct ObservationsUserView: View {
 
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
-
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @Binding var selectedSpeciesID: Int?
-
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
@@ -62,7 +60,6 @@ struct ObservationsUserView: View {
               })
           }
       } else {
-        
         NoObservationsView()
       }
 

@@ -45,22 +45,21 @@ class ObservationsViewModel: ObservableObject {
     // reset
     self.observations = []
     var days = timePeriod.rawValue
-    days = days-1 //today is also also a day
+    days -= 1 //today is also also a day
 
-    //datetime
+    // datetime
     let date: Date = Date.now
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
-    //add the periode to the url
+    // add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
 
     if (timePeriod != .infinite) {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
     }
 
     url += "&ordering=-datetime"
-      print("====>\(url)")
+//      print("====>\(url)")
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }

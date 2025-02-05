@@ -20,6 +20,7 @@ struct ObsView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var userViewModel:  UserViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -37,7 +38,6 @@ struct ObsView: View {
         PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
       }
 
-
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
@@ -51,13 +51,11 @@ struct ObsView: View {
               .foregroundColor(Color.gray.opacity(0.8))
           }
 
-
           if obs.notes?.count ?? 0 > 0 {
             Image(systemName: "list.clipboard")
               .foregroundColor(Color.gray.opacity(0.8))
           }
         }
-
 
         if (entity != .species) && (obs.speciesDetail.name.isEmpty) { //?!
           Text(obs.speciesDetail.scientificName)
@@ -70,7 +68,6 @@ struct ObsView: View {
           Text("\(obs.number) x")
             .footnoteGrayStyle()
        }
-
 
         // User Info Section
         if (entity != .user) && (entity != .radius) {
@@ -107,12 +104,14 @@ struct ObsView: View {
     .accessibilityLabel(accessibilityObsDetail(obs: obs))
     .accessibilityHint("Tap for more details about the observation information.")
 
-
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       AreaButtonView(obs: obs, colorOn: true)
-      BookmarkButtonView(obs: obs, colorOn: true)
-      if (entity != .radius) { ObserversButtonView(obs: obs, colorOn: true) }
+      BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs.
+      if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+        ObserversButtonView(obs: obs, colorOn: true)
+      }
+//      if (obs.userDetail?.id != 77083) { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS

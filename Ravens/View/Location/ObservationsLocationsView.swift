@@ -114,7 +114,7 @@ func fetchDataLocation(
     longitude: coordinate.longitude,
     token: token,
     completion: { fetchedLocations in
-      print("locationIdViewModel data loaded")
+//      log.info("locationIdViewModel data loaded")
       // Use fetchedLocations here, actually it is one location,. the first
       settings.locationName = fetchedLocations[0].name
       settings.locationId = fetchedLocations[0].id

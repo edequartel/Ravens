@@ -39,107 +39,112 @@ struct ObserversView: View {
   var body: some View {
     VStack {
       if showView { Text("ObserversView").font(.customTiny) }
-      Text("\(observerName)")
-        .bold()
-      Text("\(observerId)")
-        .font(.caption)
-        .foregroundColor(.secondary)
-      List {
-        HStack {
-          Button(userViewModel.user?.name ?? "") {
-            observerId = userViewModel.user?.id ?? 0
-            observerName = userViewModel.user?.name ?? ""
-            self.presentationMode.wrappedValue.dismiss()
-          }
-//          .foregroundColor(Color.blue)
-          .bold()
-          .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(action: {
-              QRCode = IdentifiableString(
-                value: "ravens://\(cleanName(userViewModel.user?.name ?? ""))/\(userViewModel.user?.id ?? 0)",
-                name: userViewModel.user?.name ?? "")
-              showingQRCodeSheet = true
-            }) {
-              Image(systemName: "qrcode")
-            }
+//      Text("\(userViewModel.user?.name ?? "")")
+//        .bold()
+//      Text("\(userViewModel.user?.id ?? 0)")
+//        .font(.caption)
+//        .foregroundColor(.secondary)
 
-            Button(action: {
-              if let url = URL(string: "https://waarneming.nl/users/\(userViewModel.user?.id ?? 0)/") {
-                UIApplication.shared.open(url)
-              }
-            }) {
-              Image(systemSymbol: SFObservation)
-            }
-            .tint(.obsObservation)
-          }
-          Spacer()
-        }
-
-        //all other saved observers
-        ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
-          HStack{
-            Button(record.name) {
-              observerId = record.userID
-              observerName = record.name
-
+      Form {
+        Section() {
+          HStack {
+            Button(userViewModel.user?.name ?? "") {
+              observerId = userViewModel.user?.id ?? 0
+              observerName = userViewModel.user?.name ?? ""
               self.presentationMode.wrappedValue.dismiss()
             }
-            Spacer()
-          }
-
-          .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(action: {
-              QRCode = IdentifiableString(
-                value: "ravens://\(cleanName(record.name))/\(record.userID)",
-                name: record.name)
-              showingQRCodeSheet = true
-            }) {
-              Image(systemName: "qrcode")
-            }
-
-
-
-            Button(action: {
-              observersViewModel.removeRecord(userID: record.userID)
-            }) {
-              Label("remove", systemImage: "person.fill.badge.minus")
-            }
-            .tint(.red)
-
-            Button(action: {
-              if let url = URL(string: "https://waarneming.nl/users/\(record.userID)/") {
-                UIApplication.shared.open(url)
+            
+//            .bold()
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              Button(action: {
+                QRCode = IdentifiableString(
+                  value: "ravens://\(cleanName(userViewModel.user?.name ?? ""))/\(userViewModel.user?.id ?? 0)",
+                  name: userViewModel.user?.name ?? "")
+                showingQRCodeSheet = true
+              }) {
+                Image(systemName: "qrcode")
               }
-            }) {
-              Image(systemSymbol: SFObservation)
+
+              Button(action: {
+                if let url = URL(string: "https://waarneming.nl/users/\(userViewModel.user?.id ?? 0)/") {
+                  UIApplication.shared.open(url)
+                }
+              }) {
+                Image(systemSymbol: SFObservation)
+              }
+              .tint(.obsObservation)
             }
-            .tint(.obsObservation)
+
+            Spacer()
+            if (observerId) == (userViewModel.user?.id ?? 0) {
+              Image(systemName: "checkmark").foregroundColor(.blue) }
+
+
+          }
+        }
+
+
+        Section () {
+          List {
+            //all other saved observers
+            ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
+              HStack{
+                Button("\(record.name)") {
+                  observerId = record.userID
+                  observerName = record.name
+                  self.presentationMode.wrappedValue.dismiss()
+                }
+                Spacer()
+                if (observerId) == (record.userID) {
+                  Image(systemName: "checkmark").foregroundColor(.blue) }
+              }
+              .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button(action: {
+                  QRCode = IdentifiableString(
+                    value: "ravens://\(cleanName(record.name))/\(record.userID)",
+                    name: record.name)
+                  showingQRCodeSheet = true
+                }) {
+                  Image(systemName: "qrcode")
+                }
+
+                  Button(action: {
+                    observersViewModel.removeRecord(userID: record.userID)
+                    observerId = userViewModel.user?.id ?? 0
+                    observerName = userViewModel.user?.name ?? ""
+
+                  }) {
+                    Label("remove", systemImage: "person.fill.badge.minus")
+                  }
+                  .tint(.red)
+
+                Button(action: {
+                  if let url = URL(string: "https://waarneming.nl/users/\(record.userID)/") {
+                    UIApplication.shared.open(url)
+                  }
+                }) {
+                  Image(systemSymbol: SFObservation)
+                }
+                .tint(.obsObservation)
+              }
+            }
+          }
+          .sheet(item: $QRCode) { item in
+            VStack{
+              Text(item.name)
+                .font(.title)
+              Text(item.id)
+                .font(.caption)
+                .foregroundColor(.secondary)
+              QRCodeView(input: item.value)
+                .frame(width: 200, height: 200)
+            }
           }
         }
       }
-//      .toolbar {
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          Button("Add") {
-//            addObserver.toggle()
-//
-////            self.presentationMode.wrappedValue.dismiss()
-//          }
-//        }
-//      }
-      .sheet(item: $QRCode) { item in
-        VStack{
-          Text(item.name)
-            .font(.title)
-          Text(item.id)
-            .font(.caption)
-            .foregroundColor(.secondary)
-          QRCodeView(input: item.value)
-            .frame(width: 200, height: 200)
-        }
-      }
+      
     }
     .sheet(isPresented: $addObserver) {AddObserverView()}
-//    .sheet(isPresented: $addObserver) {URLCheckerView()}
     .onAppear {
       observersViewModel.loadRecords()
     }
