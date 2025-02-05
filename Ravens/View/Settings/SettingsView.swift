@@ -30,15 +30,12 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationStack {
-//      LoginView()
       List {
         Section(header: Text("Ravens")) {
-//          LoginView()
           NavigationLink(destination: LoginView()) {
             Text("Login \(settings.selectedInBetween)")
           }
         }
-        //      LoginView()
         
         Picker(source, selection: $settings.selectedInBetween) {
           Text("waarneming.nl")
@@ -54,42 +51,13 @@ struct SettingsView: View {
           LanguageView()
         }
 
-        Section(species) {
-          Picker(group, selection: $settings.selectedSpeciesGroupId) {
-            ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \.id) { speciesGroup in
-              Text("\(speciesGroup.name)").tag(speciesGroup.id)
-                .lineLimit(1)
-                .truncationMode(.tail)
-            }
-          }
-          .pickerStyle(.navigationLink)
-          .onChange(of: settings.selectedSpeciesGroupId) {
-            log.error("\(settings.selectedSpeciesGroupId)")
-            settings.selectedRegionListId = regionListViewModel.getId(
-              region: settings.selectedRegionId,
-              speciesGroup: settings.selectedSpeciesGroupId)
-
-            if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: {$0.id == settings.selectedSpeciesGroupId }) {
-              settings.selectedSpeciesGroupName = selectedGroup.name
-            }
-            
-            log.info("\(settings.selectedRegionListId) \(settings.selectedRegionId) \(settings.selectedSpeciesGroupId)")
-            
-            speciesViewModel.fetchDataFirst(settings: settings)
-            speciesViewModel.fetchDataSecondLanguage(settings: settings)
-            
-          }
-        }
-
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
-//              Text(choice.rawValue.capitalized).tag(choice)
               Text(choice.localized).tag(choice)
             }
           }
           .pickerStyle(SegmentedPickerStyle())
-//          .padding(0)
         }
 
 
@@ -103,14 +71,6 @@ struct SettingsView: View {
           .padding(4)
           .accessibilityElement(children: .combine)
         }
-
-//        Section(header: Text(location)) {
-//          VStack {
-//            LocationManagerView()
-//          }
-//          .accessibilityElement(children: .combine)
-//        }
-
       }
       .navigationTitle(settingsName)
       .navigationBarTitleDisplayMode(.inline)
@@ -171,3 +131,47 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
+import SwiftUI
+
+struct SpeciesPickerView: View {
+  let log = SwiftyBeaver.self
+//    @ObservedObject var settings: Settings
+//    @ObservedObject var speciesGroupsViewModel: SpeciesGroupsViewModel
+//    @ObservedObject var regionListViewModel: RegionListViewModel
+    @EnvironmentObject var speciesViewModel: SpeciesViewModel
+
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
+  @EnvironmentObject var regionsViewModel: RegionsViewModel
+  @EnvironmentObject var regionListViewModel: RegionListViewModel
+//  @EnvironmentObject var accessibilityManager: AccessibilityManager
+  @EnvironmentObject var settings: Settings
+
+    var body: some View {
+        Section(header: Text(species)) {
+            Picker(group, selection: $settings.selectedSpeciesGroupId) {
+                ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
+                    Text(speciesGroup.name)
+                        .tag(speciesGroup.id)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }
+            }
+            .pickerStyle(.navigationLink)
+            .onChange(of: settings.selectedSpeciesGroupId) { _ in
+                log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
+                settings.selectedRegionListId = regionListViewModel.getId(
+                    region: settings.selectedRegionId,
+                    speciesGroup: settings.selectedSpeciesGroupId)
+
+                if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
+                    settings.selectedSpeciesGroupName = selectedGroup.name
+                }
+
+                log.info("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
+
+                speciesViewModel.fetchDataFirst(settings: settings)
+                speciesViewModel.fetchDataSecondLanguage(settings: settings)
+            }
+        }
+    }
+}

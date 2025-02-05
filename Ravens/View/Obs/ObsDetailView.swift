@@ -16,6 +16,8 @@ struct ObsDetailView: View {
   @State var selectedObservationSound: Observation?
   @State private var selectedObservationXX: Observation?
 
+  @EnvironmentObject var userViewModel: UserViewModel
+
   @State private var showPositionFullView = false
 
   var entity: EntityType
@@ -26,8 +28,13 @@ struct ObsDetailView: View {
       VStack() {
         HStack {
 
+//          (obs.userDetail?.id != (userViewModel.user?.id ?? 0))
+
           BookmarkButtonView(obs: obs, colorOn: false)
-          if (entity != .radius) {ObserversButtonView(obs: obs, colorOn: false) }
+          if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+            ObserversButtonView(obs: obs, colorOn: false)
+          }
+
           AreaButtonView(obs: obs, colorOn: false)
 
           Spacer()

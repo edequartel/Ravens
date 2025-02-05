@@ -45,13 +45,13 @@ class ObservationsViewModel: ObservableObject {
     // reset
     self.observations = []
     var days = timePeriod.rawValue
-    days = days-1 //today is also also a day
+    days -= 1 //today is also also a day
 
-    //datetime
+    // datetime
     let date: Date = Date.now
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
-    //add the periode to the url
+    // add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
     if (timePeriod != .infinite) {
@@ -59,6 +59,7 @@ class ObservationsViewModel: ObservableObject {
     }
 
     url += "&ordering=-datetime"
+//      print("====>\(url)")
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }
@@ -90,14 +91,17 @@ class ObservationsViewModel: ObservableObject {
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
     //add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"//+
+      //"&species_group=\(settings.selectedSpeciesGroupId)"
 
     if ((settings.timePeriodUser != .infinite) && ( entity == .user)) ||
         ((settings.timePeriodLocation != .infinite) && ( entity == .location)) ||
         ((settings.timePeriodSpecies != .infinite) && ( entity == .species)) {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
     }
 
+//      print("----->\(url)")
     url += "&ordering=-datetime"
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
@@ -142,7 +146,7 @@ class ObservationsViewModel: ObservableObject {
             }
 
           } catch {
-            print("\(stringResponse)")
+            self.log.info("\(stringResponse)")
             self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
             self.log.error("\(url)")
           }

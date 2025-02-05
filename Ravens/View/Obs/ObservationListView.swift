@@ -7,8 +7,11 @@
 
 import SwiftUI
 import AudioToolbox
+import SwiftyBeaver
 
 struct ObservationListView: View {
+  let log = SwiftyBeaver.self
+  
   var observations: [Observation]
 
   @EnvironmentObject var settings: Settings
@@ -44,7 +47,7 @@ struct ObservationListView: View {
                  }
                  .onAppear {
                      if obs == filteredAndSortedObservations.last {
-                         print("end of list reached")
+                       log.info("end of list reached")
                          onEndOfList?()
                      }
                  }

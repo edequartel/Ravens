@@ -21,6 +21,8 @@ struct MapObservationsLocationView: View {
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var poiViewModel: POIViewModel
 
+  @Binding var setLocation: CLLocationCoordinate2D
+
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod? 
@@ -52,9 +54,7 @@ struct MapObservationsLocationView: View {
           let obs = observationsLocation.observations ?? []
           let filteredObs = obs.filter { $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0 }
 
-//          ForEach(observationsLocation.observations?.filter { ($0.rarity == currentFilteringOption.intValue) } ?? [])
           ForEach(filteredObs) { observation in
-//          { observation in
             Annotation(observation.speciesDetail.name,
                        coordinate:  CLLocationCoordinate2D(
                         latitude: observation.point.coordinates[1],
@@ -88,14 +88,16 @@ struct MapObservationsLocationView: View {
         }
         .onTapGesture() { position in
           if let coordinate = proxy.convert(position, from: .local) {
-            fetchDataLocation(
-              settings: settings,
-              token: keyChainViewModel.token,
-              observationsLocation: observationsLocation,
-              locationIdViewModel: locationIdViewModel,
-              geoJSONViewModel: geoJSONViewModel,
-              coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
-              timePeriod: timePeriod ?? .week)
+            setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+
+//            fetchDataLocation(
+//              settings: settings,
+//              token: keyChainViewModel.token,
+//              observationsLocation: observationsLocation,
+//              locationIdViewModel: locationIdViewModel,
+//              geoJSONViewModel: geoJSONViewModel,
+//              coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
+//              timePeriod: timePeriod ?? .week)
           }
         }
       }

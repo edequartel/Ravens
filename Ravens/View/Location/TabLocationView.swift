@@ -64,6 +64,7 @@ struct TabLocationView: View {
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
+            setLocation: $setLocation,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
@@ -85,20 +86,20 @@ struct TabLocationView: View {
       }
 
       .onChange(of: timePeriod) {
-        log.info("update timePeriodLocation so new data fetch for this period")
+        log.error("-->> update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation,
+          coordinate: setLocation, //!!
           timePeriod: timePeriod ?? .week)
         settings.hasLocationLoaded = true
       }
 
       .onChange(of: setLocation) {
-        log.error("update setLocation so new data fetch for this period")
+        log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
@@ -112,7 +113,7 @@ struct TabLocationView: View {
 
 
       .onChange(of: setRefresh) {
-        log.error("update setRefresh so new data fetch for this period")
+        log.info("update setRefresh so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
@@ -226,7 +227,7 @@ struct TabLocationView: View {
 
       }
       .onAppear {
-        log.error("LocationView onAppear")
+        log.info("LocationView onAppear")
       }
     }
   }

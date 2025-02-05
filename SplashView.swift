@@ -58,11 +58,10 @@ struct SplashView: View {
   }
 
   private func handleOnAppear() {
-    log.error("**handle onAppear**")
-      log.error("** SPLASHVIEW onAppear loaddata **")
-      Task {
-        await loadData()
-      }
+    log.info("** SPLASHVIEW onAppear loaddata **")
+    Task {
+      await loadData()
+    }
   }
 
   private func checkDataLoaded() {
@@ -75,7 +74,7 @@ struct SplashView: View {
 
     if allDataLoaded {
       self.dataLoaded = true
-      log.error("All required data loaded. Setting dataLoaded to true.")
+      log.info("All required data loaded. Setting dataLoaded to true.")
     }
   }
 
@@ -92,7 +91,7 @@ struct SplashView: View {
 
   private func loadLanguagesData() async {
     languagesViewModel.fetchLanguageData(settings: settings) {
-      log.error("languagesViewModel Language data loaded")
+      log.info("languagesViewModel Language data loaded")
       isLanguageDataLoaded = true
       checkDataLoaded()
     }
@@ -100,7 +99,7 @@ struct SplashView: View {
 
   private func loadSpeciesGroupData() async {
     speciesGroupViewModel.fetchData(settings: settings) {
-      log.error("speciesGroupViewModel group data loaded")
+      log.info("speciesGroupViewModel group data loaded")
       isSpeciesGroupDataLoaded = true
       checkDataLoaded()
     }
@@ -108,7 +107,7 @@ struct SplashView: View {
 
   private func loadRegionsData() async {
     regionsViewModel.fetchData(settings: settings) {
-      log.error("regionsViewModel data loaded")
+      log.info("regionsViewModel data loaded")
       isRegionDataLoaded = true
       checkDataLoaded()
     }
@@ -124,9 +123,9 @@ struct SplashView: View {
 
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
-      log.error("speciesViewModel First language data loaded")
+      log.info("speciesViewModel First language data loaded")
       speciesViewModel.parseHTMLFromURL(settings: settings) {
-        log.error("HTML parsed from start")
+        log.info("HTML parsed from start")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()
       }
@@ -135,7 +134,7 @@ struct SplashView: View {
 
   private func loadSpeciesSecondLanguageData() async {
     speciesViewModel.fetchDataSecondLanguage(settings: settings) {
-      log.error("speciesViewModel Second language data loaded")
+      log.info("speciesViewModel Second language data loaded")
       isSecondLanguageDataLoaded = true
       checkDataLoaded()
     }

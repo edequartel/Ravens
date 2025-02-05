@@ -35,11 +35,19 @@ struct SpeciesInfoView: View {
 //          Text("!")
 //        }
 
-        Text("\(species.name)")
-          .bold()
-          .lineLimit(1)
-          .truncationMode(.tail)
-          .foregroundColor(species.recent ?? false ? .red : .primary)
+        if !(species.name.isEmpty) {
+          Text("\(species.name)")
+            .bold()
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .foregroundColor(species.recent ?? false ? .red : .primary)
+        } else {
+          Text("\(species.scientificName)")
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+            .foregroundColor(species.recent ?? false ? .red : .primary)
+        }
 
         Spacer()
         //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
@@ -59,14 +67,16 @@ struct SpeciesInfoView: View {
         .font(.caption)
       }
 
-
-      HStack {
-        Text("\(species.scientificName)")
-          .font(.caption)
-          .italic()
-          .lineLimit(1)
-          .truncationMode(.tail)
+      if (species.name) != (species.scientificName) {
+        HStack {
+          Text("\(species.scientificName)")
+            .font(.caption)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+        }
       }
+
       HStack{
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
           speciesID: species.speciesId)

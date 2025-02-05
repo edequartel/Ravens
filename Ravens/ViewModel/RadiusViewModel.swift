@@ -33,7 +33,7 @@ class ObservationsRadiusViewModel: ObservableObject {
       "lng": longitude
     ]
     
-    log.error("Fetching data from: \(url) +\(parameters)")
+    log.info("Fetching data from: \(url) +\(parameters)")
 
     AF.request(url, parameters: parameters).responseString { response in
       switch response.result {
@@ -50,7 +50,7 @@ class ObservationsRadiusViewModel: ObservableObject {
             }
             
           } catch {
-            print("\(stringResponse)")
+//            print("\(stringResponse)")
           }
         }
       case .failure(let error):

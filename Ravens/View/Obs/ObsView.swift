@@ -20,6 +20,7 @@ struct ObsView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var userViewModel:  UserViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -37,7 +38,6 @@ struct ObsView: View {
         PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
       }
 
-
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
 
@@ -51,15 +51,13 @@ struct ObsView: View {
               .foregroundColor(Color.gray.opacity(0.8))
           }
 
-
           if obs.notes?.count ?? 0 > 0 {
             Image(systemName: "list.clipboard")
               .foregroundColor(Color.gray.opacity(0.8))
           }
         }
 
-
-        if entity != .species {
+        if (entity != .species) && (obs.speciesDetail.name.isEmpty) { //?!
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
@@ -71,9 +69,8 @@ struct ObsView: View {
             .footnoteGrayStyle()
        }
 
-
         // User Info Section
-        if entity != .user && entity != .radius {
+        if (entity != .user) && (entity != .radius) {
           HStack {
 //            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
             Text("\(obs.userDetail?.name ?? "noName")")
@@ -85,6 +82,8 @@ struct ObsView: View {
             }
           }
         }
+
+        if (entity != .location) {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
@@ -95,6 +94,7 @@ struct ObsView: View {
                 .foregroundColor(Color.gray.opacity(0.8))
             }
           }
+        }
         Spacer()
       }
       .padding(2)
@@ -104,12 +104,14 @@ struct ObsView: View {
     .accessibilityLabel(accessibilityObsDetail(obs: obs))
     .accessibilityHint("Tap for more details about the observation information.")
 
-
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       AreaButtonView(obs: obs, colorOn: true)
-      BookmarkButtonView(obs: obs, colorOn: true)
-//    if !showRadius { ObserversButtonView(obs: obs, colorOn: true) }
+      BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs.
+      if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+        ObserversButtonView(obs: obs, colorOn: true)
+      }
+//      if (obs.userDetail?.id != 77083) { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS

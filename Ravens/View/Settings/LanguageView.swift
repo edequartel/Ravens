@@ -21,7 +21,7 @@ struct LanguageView: View {
     @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
     var body: some View {
-            Picker("Language", selection: $settings.selectedLanguage) {
+            Picker(language, selection: $settings.selectedLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
                     Text(language.nameNative).tag(language.code)
                 }

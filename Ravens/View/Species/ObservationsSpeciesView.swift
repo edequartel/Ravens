@@ -100,7 +100,7 @@ struct ObservationsSpeciesView: View {
             ) {
 
               // Handle end of list event
-              print("End of list reached in ParentView observationsSpecies")
+              log.info("End of list reached in ParentView observationsSpecies")
               observationsSpecies.fetchData(
                 settings: settings,
                 url: observationsSpecies.next,
