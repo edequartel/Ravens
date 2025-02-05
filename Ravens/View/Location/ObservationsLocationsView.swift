@@ -87,7 +87,7 @@ struct ObservationsLocationView: View {
     }
     .onAppear()  {
       if !settings.hasLocationLoaded {
-        log.error("ObservationsLocationsView onAppear")
+        log.info("ObservationsLocationsView onAppear")
         if let location = locationManager.getCurrentLocation() {
           //here getting the data for the location
           setLocation = location.coordinate
@@ -107,7 +107,7 @@ func fetchDataLocation(
   coordinate: CLLocationCoordinate2D,
   timePeriod: TimePeriod
 ) {
-  print("fetchDataLocation")
+//  log.info("fetchDataLocation")
   //1. get the id from the location
   locationIdViewModel.fetchLocations(
     latitude: coordinate.latitude,
@@ -126,7 +126,7 @@ func fetchDataLocation(
         for: fetchedLocations[0].id,
         completion:
           {
-            print("geoJSONViewModel data loaded")
+//            log.info("geoJSONViewModel data loaded")
           }
       )
 
@@ -138,7 +138,7 @@ func fetchDataLocation(
         id: fetchedLocations[0].id,
         timePeriod: timePeriod,
         completion: {
-          print("observationsLocationViewModel data loaded")
+//          log.info("observationsLocationViewModel data loaded")
           settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
         })
     })

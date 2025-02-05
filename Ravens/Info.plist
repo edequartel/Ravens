@@ -6,6 +6,8 @@
 	<array>
 		<string>www.tastenbraille.com.Ravens.background</string>
 	</array>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -21,11 +23,6 @@
 	</array>
 	<key>LSMinimumSystemVersion</key>
 	<string>14.4</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>processing</string>
-	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 </dict>

@@ -30,15 +30,12 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationStack {
-//      LoginView()
       List {
         Section(header: Text("Ravens")) {
-//          LoginView()
           NavigationLink(destination: LoginView()) {
             Text("Login \(settings.selectedInBetween)")
           }
         }
-        //      LoginView()
         
         Picker(source, selection: $settings.selectedInBetween) {
           Text("waarneming.nl")
@@ -74,7 +71,6 @@ struct SettingsView: View {
           .padding(4)
           .accessibilityElement(children: .combine)
         }
-
       }
       .navigationTitle(settingsName)
       .navigationBarTitleDisplayMode(.inline)

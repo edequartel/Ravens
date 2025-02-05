@@ -99,7 +99,7 @@ struct TabLocationView: View {
       }
 
       .onChange(of: setLocation) {
-        log.error("update setLocation so new data fetch for this period")
+        log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
@@ -113,7 +113,7 @@ struct TabLocationView: View {
 
 
       .onChange(of: setRefresh) {
-        log.error("update setRefresh so new data fetch for this period")
+        log.info("update setRefresh so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
@@ -227,7 +227,7 @@ struct TabLocationView: View {
 
       }
       .onAppear {
-        log.error("LocationView onAppear")
+        log.info("LocationView onAppear")
       }
     }
   }

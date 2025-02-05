@@ -146,7 +146,7 @@ class ObservationsViewModel: ObservableObject {
             }
 
           } catch {
-            print("\(stringResponse)")
+            self.log.info("\(stringResponse)")
             self.log.error("Error ObservationsUserViewModel decoding JSON: \(error)")
             self.log.error("\(url)")
           }

@@ -12,7 +12,7 @@ import BackgroundTasks
 import UserNotifications
 
 class URLHandler: ObservableObject {
-    @Published var urlString: String = ""
+  @Published var urlString: String = ""
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -86,56 +86,49 @@ struct RavensApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView(
-//        observationUser: observationsUser,
         observationsLocation : observationsLocation,
         observationsSpecies: observationsSpecies,
         observationsRadiusViewModel: observationsRadiusViewModel
       )
-        .environmentObject(keychainViewModel)
-        .environmentObject(locationManager)
-        .environmentObject(settings)
-        .environmentObject(languagesViewModel)
-        .environmentObject(speciesViewModel)
-        .environmentObject(speciesGroupViewModel)
-        .environmentObject(regionsViewModel)
-        .environmentObject(regionListViewModel)
-        .environmentObject(userViewModel)
-        .environmentObject(observationsSpeciesViewModel)
-        .environmentObject(poiViewModel)
-        .environmentObject(speciesDetailsViewModel)
-        .environmentObject(bookMarksViewModel)
-        .environmentObject(observersViewModel)
-        .environmentObject(areasViewModel)
-        .environmentObject(player)
-        .environmentObject(locationViewModel)
-        .environmentObject(accessibilityManager)
-        .environmentObject(geoJSONViewModel)
-        .environmentObject(observationUser)
+      .environmentObject(keychainViewModel)
+      .environmentObject(locationManager)
+      .environmentObject(settings)
+      .environmentObject(languagesViewModel)
+      .environmentObject(speciesViewModel)
+      .environmentObject(speciesGroupViewModel)
+      .environmentObject(regionsViewModel)
+      .environmentObject(regionListViewModel)
+      .environmentObject(userViewModel)
+      .environmentObject(observationsSpeciesViewModel)
+      .environmentObject(poiViewModel)
+      .environmentObject(speciesDetailsViewModel)
+      .environmentObject(bookMarksViewModel)
+      .environmentObject(observersViewModel)
+      .environmentObject(areasViewModel)
+      .environmentObject(player)
+      .environmentObject(locationViewModel)
+      .environmentObject(accessibilityManager)
+      .environmentObject(geoJSONViewModel)
+      .environmentObject(observationUser)
 
-        .onOpenURL { url in
-          // Handle the URL appropriately
-          let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
-          self.parts = urlString.split(separator: "/").map(String.init)
-          showingAlert = true
-        }
+      .onOpenURL { url in
+        // Handle the URL appropriately
+        let urlString = url.absoluteString.replacingOccurrences(of: "ravens://", with: "")
+        self.parts = urlString.split(separator: "/").map(String.init)
+        showingAlert = true
+      }
 
-        .alert(isPresented: $showingAlert) {
-          Alert(title: Text("Add Observer"),
-                message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
-                primaryButton: .default(Text("Yes")) {
-            print("Appending \(parts[0]) \(parts[1])")
-            observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-          },
-                secondaryButton: .cancel(Text("No")))
-        }
-//        .onAppear {
-////          notificationsManager.requestNotificationPermission()
-////          timerManager.setNotificationsManager(notificationsManager)  
-////          print("\(String(describing: locationManager.getCurrentLocation()))")
-//        }
+      .alert(isPresented: $showingAlert) {
+        Alert(title: Text("Add Observer"),
+              message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " ")) \(parts[1])?"),
+              primaryButton: .default(Text("Yes")) {
+          print("Appending \(parts[0]) \(parts[1])")
+          observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
+        },
+              secondaryButton: .cancel(Text("No")))
+      }
     }
   }
-
 }
 
 

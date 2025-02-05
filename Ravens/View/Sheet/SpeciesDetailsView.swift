@@ -15,7 +15,7 @@ import Kingfisher
 struct SpeciesDetailsView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
-  @EnvironmentObject var notificationsManager: NotificationsManager
+//  @EnvironmentObject var notificationsManager: NotificationsManager
   @EnvironmentObject var settings: Settings
 
   var speciesID: Int

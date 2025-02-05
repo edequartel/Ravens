@@ -254,7 +254,7 @@ class SpeciesViewModel: ObservableObject {
     
     // Check if index is within the range of speciesSecondLanguage array
     guard index < speciesSecondLanguage.count else {
-      print("Index is out of range")
+      log.info("Index is out of range")
       return nil
     }
     

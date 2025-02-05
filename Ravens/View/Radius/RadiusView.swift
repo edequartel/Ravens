@@ -49,7 +49,7 @@ struct RadiusListView: View {
     }
     .onAppear {
       if !observationsRadiusViewModel.hasLoadedData {
-        log.error("radiusView onAppearOnce")
+        log.info("radiusView onAppearOnce")
         observationsRadiusViewModel.circleCenter = locationManager.getCurrentLocation()?.coordinate ?? CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
         observationsRadiusViewModel.fetchData(
           settings: settings,

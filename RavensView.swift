@@ -22,7 +22,7 @@ struct RavensView: View {
   //  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
-  @EnvironmentObject var notificationsManager: NotificationsManager
+//  @EnvironmentObject var notificationsManager: NotificationsManager
 
   var body: some View {
     if  !keyChainViewModel.token.isEmpty {
