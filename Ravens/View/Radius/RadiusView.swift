@@ -261,17 +261,16 @@ struct TabRadiusView: View {
 
       .toolbar {
         //map or list
-        //      if !accessibilityManager.isVoiceOverEnabled {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            showFirstView.toggle()
-          }) {
-            Image(systemName: "rectangle.2.swap")
-              .uniformSize()
-              .accessibilityLabel(toggleViewMapList)
+        if !accessibilityManager.isVoiceOverEnabled {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button(action: {
+              showFirstView.toggle()
+            }) {
+              Image(systemName: "rectangle.2.swap")
+                .uniformSize()
+                .accessibilityLabel(toggleViewMapList)
+            }
           }
-
-
         }
 
 
