@@ -4,6 +4,9 @@
 
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. 
 
+## Appstore
+Gebruik de volgende link voor Ravens in de [[Appstore](https://apps.apple.com/nl/app/ravens/id6475675260)]
+
 ![Ravens](./images/02ravens.png)
 
 ## Goed om te weten
@@ -12,7 +15,7 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 - Je gebruikt **Ravens** met je waarneming.nl account.
 - Ravens is toegankelijk en kan worden gebruikt met VoiceOver.
 
-Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Als je opmerkingen hebt om de app te verbeteren, stuur dan een e-mail naar [edequartel@protonmail](mailto:edequartel@protonmail) of ga naar [gitHub Ravens](https://www.ravensobs.com). Met Ravens krijg je snel en eenvoudig toegang tot recente waarnemingen in jouw gekozen gebied, inclusief waarnemingen van verschillende soorten en je eigen observaties. Veel plezier met het ontdekken van de natuur om je heen!
+Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Met Ravens krijg je snel en eenvoudig toegang tot recente waarnemingen in jouw gekozen gebied, inclusief waarnemingen van verschillende soorten en je eigen observaties. Veel plezier met het ontdekken van de natuur om je heen!
 
 
 * [Wikipedia - Ravens](https://en.wikipedia.org/wiki/Huginn_and_Muninn)
