@@ -2,6 +2,12 @@
 
 [Nederlands](README.md)
 
+Follow Ravens on 
+
+* [Instagram](https://www.instagram.com/ravensobs?igsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qrigsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qr)  
+* [Blyesky](https://bsky.app/profile/ravenscorvus.bsky.social)
+
+
 The Ravens app allows users to view observations both on a map and in a list. This app retrieves the most recent data from www.waarneming.nl and presents it in a clear and organized way.
 
 ![Ravens](./images/02ravens.png)
