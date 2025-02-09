@@ -4,7 +4,7 @@ Volg Ravens op
 
 * [Instagram](https://www.instagram.com/ravensobs?igsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qrigsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qr)  
 * [Blyesky](https://bsky.app/profile/ravenscorvus.bsky.social)
-* [Linkedin](https://www.linkedin.com/public-profile/settings)
+* [Linkedin](https://www.linkedin.com/in/ericdequartel)
 
 [English](READMEeng.MD)
 
