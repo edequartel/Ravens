@@ -17,6 +17,7 @@ struct ObsDetailView: View {
   @State private var selectedObservationXX: Observation?
 
   @EnvironmentObject var userViewModel: UserViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @State private var showPositionFullView = false
 
@@ -27,17 +28,6 @@ struct ObsDetailView: View {
 
       VStack() {
         HStack {
-
-//          (obs.userDetail?.id != (userViewModel.user?.id ?? 0))
-
-          BookmarkButtonView(obs: obs, colorOn: false)
-          if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-            ObserversButtonView(obs: obs, colorOn: false)
-          }
-
-          AreaButtonView(obs: obs, colorOn: false)
-
-          Spacer()
 
           Button(action: {
             print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
@@ -64,6 +54,17 @@ struct ObsDetailView: View {
               .uniformSize()
           }
           .accessibility(label: Text(linkObservation))
+
+          Spacer()
+          //          (obs.userDetail?.id != (userViewModel.user?.id ?? 0))
+          if !keyChainViewModel.token.isEmpty { //??
+            BookmarkButtonView(obs: obs, colorOn: false)
+            if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+              ObserversButtonView(obs: obs, colorOn: false)
+            }
+
+            AreaButtonView(obs: obs, colorOn: false)
+          }
         }
       }
       .padding([.leading, .trailing, .top])
@@ -108,6 +109,13 @@ struct ObsDetailView: View {
             Text("\(obs.number) x")
               .footnoteGrayStyle()
           }
+//          if (entity != .radius) {
+            HStack {
+              Text("\(obs.locationDetail?.name ?? "")")
+                .footnoteGrayStyle()
+              Spacer()
+            }
+//          }
           if (entity != .radius) {
             HStack {
               Text("\(obs.userDetail?.name ?? "")")
