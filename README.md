@@ -1,5 +1,13 @@
 # Ravens
 
+[English](READMEeng.MD)
+
+Volg Ravens op 
+
+* [Instagram](https://www.instagram.com/ravensobs?igsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qrigsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qr)  
+* [Blyesky](https://bsky.app/profile/ravenscorvus.bsky.social)
+* [Linkedin](https://www.linkedin.com/in/ericdequartel)
+
 De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaart als in een lijst te bekijken. Deze app haalt de meest recente informatie op van [www.waarneming.nl](https://www.waarneming.nl) en presenteert deze gegevens op een overzichtelijke manier. 
 
 ## Appstore
@@ -20,6 +28,11 @@ Deze app is ontworpen om het verkennen van de natuur nog leuker te maken. Met Ra
 * [Website Ravens](https://www.ravensobs.com)
 
 <!--## Koffie?
+
+## TestFlight
+Gebruik de link [Ravens TestFlight](https://testflight.apple.com/join/TzVrvU1x) of scan de QR-code en je kunt de app testen via TestFlight op je iPhone. Je krijgt dan instructies over hoe je de app moet installeren
+![QR-code](./images/QRCode.png)
+
 Het ontwikkelen van de app doe ik geheel vrijwillig, iedereen kan hier gebruik van maken. Om de kosten een beetje te dekken en je beleeft plezier aan **Ravens** tracteer me dan op een [**kopje koffie**](https://www.buymeacoffee.com/4f4r4t6ytba) .
 
 [![Kopje koffie](./images/bmc-button.png)](https://www.buymeacoffee.com/4f4r4t6ytba)-->
