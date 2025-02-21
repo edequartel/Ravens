@@ -282,3 +282,5 @@ struct PeriodView: View {
     entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
   }
 }
+
+

@@ -17,6 +17,7 @@ struct RavensView: View {
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var observationsSpecies: ObservationsViewModel
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+  
 
 
   //  @EnvironmentObject var settings: Settings

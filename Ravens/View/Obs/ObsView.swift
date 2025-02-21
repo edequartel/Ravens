@@ -21,6 +21,7 @@ struct ObsView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -72,7 +73,7 @@ struct ObsView: View {
         // User Info Section
         if (entity != .user) && (entity != .radius) {
           HStack {
-//            Text("\(obs.userDetail?.name.components(separatedBy: " ").first ?? "name")")
+//            RandomTextView()
             Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
             Spacer()
@@ -82,6 +83,12 @@ struct ObsView: View {
             }
           }
         }
+
+        //
+        //(obs.userDetail?.id != (userViewModel.user?.id ?? 0)
+//        Text("\(obs.userDetail?.id ?? -1)")
+//        Text("\(userViewModel.user?.id ?? -1)")
+        //
 
         if (entity != .location) {
           HStack {
@@ -106,12 +113,15 @@ struct ObsView: View {
 
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      AreaButtonView(obs: obs, colorOn: true)
-      BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs.
-      if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-        ObserversButtonView(obs: obs, colorOn: true)
+      if !keyChainViewModel.token.isEmpty { //??
+        AreaButtonView(obs: obs, colorOn: true)
+        BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs. //???
+
+        if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+          ObserversButtonView(obs: obs, colorOn: true)
+        }
+
       }
-//      if (obs.userDetail?.id != 77083) { ObserversButtonView(obs: obs, colorOn: true) }
     }
 
     //leading SWIPE ACTIONS
@@ -141,4 +151,24 @@ func formatDate(_ date: Date) -> String {
     formatter.dateStyle = .medium // Customize the style: .short, .medium, .long, etc.
     formatter.timeStyle = .short // Customize the style: .none, .short, .medium, .long
     return formatter.string(from: date)
+}
+
+
+import SwiftUI
+
+struct RandomTextView: View {
+    let names = ["Loof de Bos", "Storm Vogelaar", "Flora Fauna", "Henk de Uitzicht", "Bart Kikker",
+                 "Madelief Kijkers", "Oogje Bladgroen", "Frits de Horizon",
+                 "Tina Terras", "Woody Kijkboom", "Lente Zicht", "Freek de Lucht", "Marjolein Weideblik"]
+
+    @State private var randomName = ""
+
+    var body: some View {
+        Text(randomName)
+            .font(.caption)
+//            .padding()
+            .onAppear {
+                randomName = names.randomElement() ?? "Geen naam"
+            }
+    }
 }
