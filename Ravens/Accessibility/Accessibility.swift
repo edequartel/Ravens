@@ -51,9 +51,12 @@ let source = LocalizedStringKey("source")
 let group = LocalizedStringKey("group")
 let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
+let secondLanguage = LocalizedStringKey("secondLanguage")
 
 //radius
 let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
+let radius = LocalizedStringKey("radius")
+
 
 // login
 let email = LocalizedStringKey("email")

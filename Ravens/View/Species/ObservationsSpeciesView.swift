@@ -55,18 +55,25 @@ struct ObservationsSpeciesView: View {
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
 
           // Button with accessibility label and hint
-          Button(action: {
-            selectedSpeciesID = item.speciesId
-          }) {
-            Image(systemSymbol: .infoCircle)
-              .foregroundColor(Color.gray.opacity(0.8))
-          }
-
-          //
-          if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-            Image(systemSymbol: SFSpeciesFill)
-              .foregroundColor(Color.gray.opacity(0.8))
-          }
+//          Button(action: {
+//            selectedSpeciesID = item.speciesId
+//          }) {
+//            Image(systemSymbol: .infoCircle)
+//              .uniformSize()
+//          }
+//
+//          Button(action: {
+//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
+//            } else {
+//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
+//            }
+//          }) {
+//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
+//              .uniformSize()
+//          }
+//          .accessibilityLabel(favoriteObserver)
+//          .background(Color.clear)
           Spacer()
         }
       }

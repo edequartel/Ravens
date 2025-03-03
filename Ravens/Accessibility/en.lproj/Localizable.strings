@@ -51,9 +51,11 @@
 "group" = "Group";
 "map" = "Kaart";
 "appDetails" = "App details";
+"secondLanguage" = "Second language";
 
 //radius
 "obsAroundPoint" = "Observations round point";
+"radius" = "Radius";
 
 //login
 "email" = "email";

@@ -55,7 +55,7 @@ struct RadiusListView: View {
           settings: settings,
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
-          radius: circleRadius,
+          radius: settings.radius,
           timePeriod: timePeriod ?? .fourWeeks)
         observationsRadiusViewModel.hasLoadedData = true
       }
@@ -108,7 +108,7 @@ struct RadiusMapView: View {
           center: CLLocationCoordinate2D(
             latitude: observationsRadiusViewModel.circleCenter.latitude,
             longitude: observationsRadiusViewModel.circleCenter.longitude),
-          radius: circleRadius)
+          radius: settings.radius)
         .foregroundStyle(.blue.opacity(0.2)) // Fill the circle with blue color
         .stroke(.blue.opacity(0.7), lineWidth: 1) // Add a border
 
@@ -132,7 +132,7 @@ struct RadiusMapView: View {
             settings: settings,
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
-            radius: circleRadius,
+            radius: settings.radius,
             timePeriod: timePeriod ?? .fourWeeks,
             completion: {
               log.error("tapgesture update userlocation")
@@ -160,8 +160,8 @@ struct RadiusMapView: View {
     let updatedRegion = MKCoordinateRegion(
       center: coordinate,
       span: MKCoordinateSpan(
-        latitudeDelta: circleRadius / 20000,
-        longitudeDelta: circleRadius / 20000)
+        latitudeDelta: settings.radius / 20000,
+        longitudeDelta: settings.radius / 20000)
     )
 
     region = updatedRegion
@@ -231,32 +231,40 @@ struct TabRadiusView: View {
             entity: .radius)
       )
 
+
+      .onChange(of: settings.radius) {//!!
+        log.error("update timePeriod \(String(describing: timePeriod))")
+        observationsRadiusViewModel.observations = []
+        observationsRadiusViewModel.fetchData(
+          settings: settings,
+
+          latitude: observationsRadiusViewModel.circleCenter.latitude,
+          longitude: observationsRadiusViewModel.circleCenter.longitude,
+
+
+          radius: settings.radius, //circleRadius,
+          timePeriod: timePeriod ?? .fourWeeks,
+          completion: {
+            log.error("update timePeriod")
+          })
+      }
+
+
       .onChange(of: timePeriod) {//!!
         log.error("update timePeriod \(String(describing: timePeriod))")
         observationsRadiusViewModel.observations = []
+        observationsRadiusViewModel.fetchData(
+          settings: settings,
+
+          latitude: observationsRadiusViewModel.circleCenter.latitude,
+          longitude: observationsRadiusViewModel.circleCenter.longitude,
 
 
-        //get the location which is onTappedbefore!!
-//        observationsRadiusViewModel.circleCenter
-
-//        if let location = locationManager.getCurrentLocation() {
-//          observationsRadiusViewModel.circleCenter = location.coordinate
-
-          observationsRadiusViewModel.fetchData(
-            settings: settings,
-
-            latitude: observationsRadiusViewModel.circleCenter.latitude,
-            longitude: observationsRadiusViewModel.circleCenter.longitude,
-
-//            latitude: location.coordinate.latitude,
-//            longitude: location.coordinate.longitude,
-
-            radius: circleRadius, //circleRadius,
-            timePeriod: timePeriod ?? .fourWeeks,
-            completion: {
-              log.error("update timePeriod")
-            })
-//        }
+          radius: settings.radius, //circleRadius,
+          timePeriod: timePeriod ?? .fourWeeks,
+          completion: {
+            log.error("update timePeriod")
+          })
       }
 
       .toolbar {
@@ -285,7 +293,7 @@ struct TabRadiusView: View {
                 settings: settings,
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
-                radius: circleRadius, //circleRadius,
+                radius: settings.radius, //circleRadius,
                 timePeriod: timePeriod ?? .fourWeeks,
                 completion: {
                   log.error("tapgesture update userlocation")
@@ -310,8 +318,8 @@ struct TabRadiusView: View {
     let updatedRegion = MKCoordinateRegion(
       center: coordinate,
       span: MKCoordinateSpan(
-        latitudeDelta: circleRadius / 20000,
-        longitudeDelta: circleRadius / 20000)
+        latitudeDelta: settings.radius / 20000,
+        longitudeDelta: settings.radius / 20000)
     )
 
     region = updatedRegion

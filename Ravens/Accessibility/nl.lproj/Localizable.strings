@@ -47,9 +47,11 @@
 "group" = "Groep";
 "map" = "Kaart";
 "appDetails" = "App gegevens";
+"secondLanguage" = "Tweede taal";
 
 //radius
 "obsAroundPoint" = "Waarnemingen rond een punt";
+"radius" = "Straal";
 
 //login
 "email" = "email";

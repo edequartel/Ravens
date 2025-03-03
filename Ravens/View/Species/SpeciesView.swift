@@ -14,6 +14,7 @@ struct SpeciesView: View {
 
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
+  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
 
   var item: Species
   @Binding var selectedSpeciesID: Int?
@@ -45,7 +46,44 @@ struct SpeciesView: View {
           }
           .accessibility(label: Text("Switch view"))
         }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            selectedSpeciesID = item.speciesId
+          }) {
+            Image(systemSymbol: .infoCircle)
+              .uniformSize()
+          }
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
+            } else {
+              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
+            }
+          }) {
+            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
+              .uniformSize()
+          }
+          .accessibilityLabel(favoriteObserver)
+          .background(Color.clear)
+        }
       }
+
+//      ToolbarItem(action: {
+//        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+//          bookMarksViewModel.removeRecord(speciesID: item.speciesId)
+//        } else {
+//          bookMarksViewModel.appendRecord(speciesID: item.speciesId)
+//        }
+//      }) {
+//        Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
+//          .uniformSize()
+//      }
+//      .accessibilityLabel(favoriteObserver)
+//      .background(Color.clear)
 
     }
     .onAppear() {

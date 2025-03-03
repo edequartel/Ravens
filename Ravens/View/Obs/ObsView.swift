@@ -115,7 +115,10 @@ struct ObsView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       if !keyChainViewModel.token.isEmpty { //??
         AreaButtonView(obs: obs, colorOn: true)
-        BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs. //???
+
+        if (entity != .species) {
+          BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs. //???
+        }
 
         if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
           ObserversButtonView(obs: obs, colorOn: true)
@@ -127,7 +130,9 @@ struct ObsView: View {
     //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
-      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+      if (entity != .species) {
+        InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+      }
       LinkButtonView(obs: obs)
     }
   }

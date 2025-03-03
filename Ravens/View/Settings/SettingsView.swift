@@ -47,7 +47,11 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-        Section(language) {
+        Section() {
+          RadiusPickerView(selectedRadius: $settings.radius)
+        }
+
+        Section() {
           LanguageView()
         }
 
@@ -175,3 +179,23 @@ struct SpeciesPickerView: View {
         }
     }
 }
+
+import SwiftUI
+
+struct RadiusPickerView: View {
+    @Binding var selectedRadius: Double // Binding for Double radius selection
+
+    let radiusOptions = Array(stride(from: 1000.0, through: 10000.0, by: 1000.0)) // Double values
+
+    var body: some View {
+        VStack {
+            Picker(radius, selection: $selectedRadius) {
+                ForEach(radiusOptions, id: \.self) { radius in
+                    Text("\(Int(radius)) m").tag(radius) // Convert to Int for display
+                }
+            }
+            .pickerStyle(.menu) // Wheel picker style
+        }
+    }
+}
+
