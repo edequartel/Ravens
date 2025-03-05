@@ -120,12 +120,10 @@ struct RavensApp: App {
 
       .alert(isPresented: $showingAlert) {
         Alert(title: Text("Add Observer"),
-//              message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "%20", with: " ")) \(parts[1])?"),
-              message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "%20", with: " ").replacingOccurrences(of: "_", with: " "))"),
+              message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " "))"),
               primaryButton: .default(Text("Yes")) {
           print("Appending \(parts[0]) \(parts[1])")
-//          observersViewModel.appendRecord(name: self.parts[0], userID:  Int(self.parts[1]) ?? 0)
-          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "%20", with: " ").replacingOccurrences(of: "_", with: " "), userID:  Int(self.parts[1]) ?? 0)
+          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "_", with: " "), userID:  Int(self.parts[1]) ?? 0)
         },
               secondaryButton: .cancel(Text("No")))
       }
