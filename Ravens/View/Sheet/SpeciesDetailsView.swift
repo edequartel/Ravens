@@ -80,6 +80,11 @@ struct SpeciesDetailsView: View {
                 .accessibility(hidden: true)
             }
 
+            //share the image
+            if !imageURL.isEmpty {
+                URLButtonView(urlShare: imageURL)
+            }
+
             // Information Text
             if species.infoText != "" {
               RichText(html: species.infoText)

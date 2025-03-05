@@ -38,14 +38,16 @@ struct SpeciesView: View {
     .toolbar {
       if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            showFirstView.toggle()
-          }) {
-            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
-              .uniformSize()
-          }
-          .accessibility(label: Text(switchView)) //??
+          BookmarkButtonView(speciesID: item.speciesId)
+//          Button(action: {
+//            showFirstView.toggle()
+//          }) {
+//            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
+//              .uniformSize()
+//          }
+//          .accessibility(label: Text(switchView)) //??
         }
+      }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
@@ -72,7 +74,7 @@ struct SpeciesView: View {
           .accessibilityLabel(favoriteObserver)
           .background(Color.clear)
         }
-      }
+
 
 //      ToolbarItem(action: {
 //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {

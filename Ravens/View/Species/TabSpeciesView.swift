@@ -24,7 +24,7 @@ struct TabSpeciesView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
 
-  @State private var selectedSortOption: SortNameOption = .lastSeen
+  @State private var selectedSortOption: SortNameOption = .name
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
@@ -70,18 +70,22 @@ struct TabSpeciesView: View {
                 Image(systemSymbol: .infoCircle)
               }
               .tint(.blue)
-
-              Button(action: {
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-                } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-                }
-
-              } ) {
-                Image(systemSymbol: .star)
+              Button("test") {
+                print("xxx")
               }
-              .tint(.obsStar)
+//              Text("xxx")
+              BookmarkButtonView(speciesID:species.speciesId)
+//              Button(action: {
+//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+//                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
+//                } else {
+//                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
+//                }
+//
+//              } ) {
+//                Image(systemSymbol: .star)
+//              }
+//              .tint(.obsStar)
               .accessibilityLabel(species.name)
             }
           }
@@ -121,13 +125,13 @@ struct TabSpeciesView: View {
       )
 
 //    }
-    .refreshable {
-      speciesViewModel.parseHTMLFromURL(
-        settings: settings,
-        completion: {
-          log.error("from refreshable... parsed from html")
-        })
-    }
+//    .refreshable {
+//      speciesViewModel.parseHTMLFromURL(
+//        settings: settings,
+//        completion: {
+//          log.error("from refreshable... parsed from html")
+//        })
+//    }
   }
   }
 
@@ -187,7 +191,7 @@ struct SortFilterSpeciesView: View {
 enum SortNameOption: String, CaseIterable {
   case name
   case scientificName
-  case lastSeen
+//**  case lastSeen
 
   var localized: LocalizedStringKey {
     LocalizedStringKey(self.rawValue)

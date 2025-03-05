@@ -58,7 +58,7 @@ struct ObsDetailView: View {
           Spacer()
           //          (obs.userDetail?.id != (userViewModel.user?.id ?? 0))
           if !keyChainViewModel.token.isEmpty { //??
-            BookmarkButtonView(obs: obs, colorOn: false)
+            BookmarkButtonView(speciesID: obs.species ?? 100)
             if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
               ObserversButtonView(obs: obs, colorOn: false)
             }

@@ -117,7 +117,7 @@ struct ObsView: View {
         AreaButtonView(obs: obs, colorOn: true)
 
         if (entity != .species) {
-          BookmarkButtonView(obs: obs, colorOn: true) //@@ deze uitzetten wanener obs. //???
+          BookmarkButtonView(speciesID: obs.species ?? 0)
         }
 
         if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {

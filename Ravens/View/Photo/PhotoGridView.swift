@@ -52,6 +52,11 @@ struct PhotoGridViewLP: View {
           KFImage(URL(string: photo))
               .resizable()
               .scaledToFit()
+        //share the image
+//        if !imageURL.isEmpty {
+//        Text("\(photo)")
+//        URLButtonView(urlShare: photo)
+//        }
       }
       .zoomable(min: 1, max: 5)
     }
