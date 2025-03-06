@@ -11,8 +11,8 @@ import AudioToolbox
 import SFSafeSymbols
 import MapKit
 
-let showView = false
-//let showView = true
+//let showView = false
+let showView = true
 
 // werkhoven
 // let longitude = 5.243376
