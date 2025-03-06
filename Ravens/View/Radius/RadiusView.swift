@@ -222,7 +222,6 @@ struct TabRadiusView: View {
         showFirstView ?
         ObservationToolbarModifier(
           currentFilteringOption: $currentFilteringOption,
-//          timePeriod: $timePeriod,
           entity: .radius)
         :
           ObservationToolbarModifier(

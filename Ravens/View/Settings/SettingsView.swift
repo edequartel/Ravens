@@ -47,9 +47,9 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-        Section() {
-          RadiusPickerView(selectedRadius: $settings.radius)
-        }
+//        Section() {
+//          RadiusPickerView(selectedRadius: $settings.radius)
+//        }
 
         Section() {
           LanguageView()

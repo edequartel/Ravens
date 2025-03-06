@@ -190,6 +190,7 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
+  @EnvironmentObject var settings: Settings
 
   var entity: EntityType
 
@@ -201,7 +202,13 @@ struct CombinedOptionsMenuView: View {
           PeriodView(timePeriod: $timePeriod, entity: entity)
         }
       }
-      
+
+      if entity == .radius {
+        Section() {
+          RadiusPickerView(selectedRadius: $settings.radius)
+        }
+      }
+
       // Sorting Option
       if currentSortingOption != nil {
         Section(header: Text(sort)) {
@@ -260,6 +267,7 @@ struct CombinedOptionsMenuView: View {
           }
         }
       }
+
     }
   }
 }
