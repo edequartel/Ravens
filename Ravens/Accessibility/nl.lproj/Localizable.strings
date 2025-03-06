@@ -11,9 +11,12 @@
 "shareThisObservation" = "Deel deze waarneming";
 "informationSpecies" = "Bekijk informatie over de soort";
 "linkObservation" = "Ga naar de waarneming op waarneming.nl";
-"favoriteSpecies" = "Voeg soort toe aan favorieten of verwijder deze";
-"favoriteObserver" = "Voeg waarnemer toe aan favorieten of verwijder deze";
-"favoriteLocation" = "Voeg locatie toe aan favorieten of verwijder deze";
+"favoriteSpeciesOff" = "Voeg soort toe aan favorieten";
+"favoriteSpeciesOn" = "Verwijder soort van favorieten";
+"favoriteObserverOff" = "Voeg waarnemer toe aan favorieten";
+"favoriteObserverOn" = "Verwijder waarnemer uit favorieten";
+"favoriteLocationOff" = "Voeg locatie toe aan favorieten";
+"favoriteLocationOn" = "Verwijder locatie uit favorieten";
 "sortAndFilterObservationList" = "Sorteer en filter de lijst met waarnemingen";
 "updateLocation" = "Werk de locatie van de waarnemingen bij";
 "listWithFavoriteLocation" = "Lijst met favoriete locaties";
@@ -40,6 +43,8 @@
 "observerList" = "lijst met favoriete waarnemers";
 "sortAndFilterObs" = "Sorteer of filter de lijst met waarnemingen";
 "sortAndFilterSpecies" = "Sorteer of filter de lijst met soorten";
+"sharePictureLink" = "Deel de afbeelding van de soort";
+"mostRecent" = "recente waarnemingen van zeldzame soorten op waarneming.nl";
 
 //setting
 "language" = "Taal";

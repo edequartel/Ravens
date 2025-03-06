@@ -36,18 +36,11 @@ struct SpeciesView: View {
     }
 
     .toolbar {
-      if !accessibilityManager.isVoiceOverEnabled {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          BookmarkButtonView(speciesID: item.speciesId)
-//          Button(action: {
-//            showFirstView.toggle()
-//          }) {
-//            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
-//              .uniformSize()
-//          }
-//          .accessibility(label: Text(switchView)) //??
-        }
-      }
+//      if !accessibilityManager.isVoiceOverEnabled {
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          BookmarkButtonView(speciesID: item.speciesId)
+//        }
+//      }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
@@ -60,20 +53,20 @@ struct SpeciesView: View {
         }
 
 
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-            } else {
-              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-            }
-          }) {
-            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-              .uniformSize()
-          }
-          .accessibilityLabel(favoriteObserver)
-          .background(Color.clear)
-        }
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          Button(action: {
+//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
+//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
+//            } else {
+//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
+//            }
+//          }) {
+//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
+//              .uniformSize()
+//          }
+//          .accessibilityLabel(favoriteObserver)
+//          .background(Color.clear)
+//        }
 
 
 //      ToolbarItem(action: {

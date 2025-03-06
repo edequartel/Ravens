@@ -23,6 +23,7 @@ struct SpeciesDetailsView: View {
 
   var body: some View {
       ScrollView {
+        if showView { Text("SpeciesDetailsView").font(.customTiny) }
         VStack(alignment: .leading, spacing: 16) {
           // Species Details Header
           if let species = viewSpeciesDetailsDModel.speciesDetails {
@@ -82,8 +83,10 @@ struct SpeciesDetailsView: View {
 
             //share the image
             if !imageURL.isEmpty {
-                URLButtonView(urlShare: imageURL)
+                URLShareButtonView(urlShare: imageURL)
+                .accessibilityLabel(sharePictureLink)
             }
+
 
             // Information Text
             if species.infoText != "" {

@@ -31,10 +31,6 @@ struct SpeciesInfoView: View {
 
         }
 
-//        if species.recent ?? false {
-//          Text("!")
-//        }
-
         if !(species.name.isEmpty) {
           Text("\(species.name)")
             .bold()
@@ -50,19 +46,17 @@ struct SpeciesInfoView: View {
         }
 
         Spacer()
-        //        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.id) {
+
         if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
           Image(systemName: "star.fill")
             .foregroundColor(Color.gray.opacity(0.8))
         }
       }
 
-      //      if let date = species.date {
+
       if let date = species.date {
         HStack {
           DateConversionView(dateString: date, timeString: species.time ?? "")
-//          Text("\(species.nrof ?? 0) x \(NSLocalizedString("observations", comment: ""))")
-//                      .footnoteGrayStyle()
         }
         .font(.caption)
       }
@@ -91,8 +85,6 @@ struct SpeciesInfoView: View {
         }
       }
     }
-    //            .accessibilityElement(children: .combine)
-//    .accessibilityLabel(Text("\(navigateTo) \(species.name)"))
   }
 }
 

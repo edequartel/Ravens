@@ -73,7 +73,6 @@ struct ObsView: View {
         // User Info Section
         if (entity != .user) && (entity != .radius) {
           HStack {
-//            RandomTextView()
             Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
             Spacer()
@@ -84,11 +83,6 @@ struct ObsView: View {
           }
         }
 
-        //
-        //(obs.userDetail?.id != (userViewModel.user?.id ?? 0)
-//        Text("\(obs.userDetail?.id ?? -1)")
-//        Text("\(userViewModel.user?.id ?? -1)")
-        //
 
         if (entity != .location) {
           HStack {
@@ -114,14 +108,15 @@ struct ObsView: View {
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       if !keyChainViewModel.token.isEmpty { //??
-        AreaButtonView(obs: obs, colorOn: true)
+        AreaButtonView(obs: obs)
+          .tint(.yellow)
 
-        if (entity != .species) {
-          BookmarkButtonView(speciesID: obs.species ?? 0)
-        }
+        BookmarkButtonView(speciesID: obs.species ?? 0)
+          .tint(.green)
 
         if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-          ObserversButtonView(obs: obs, colorOn: true)
+          ObserversButtonView(obs: obs)
+            .tint(.red)
         }
 
       }

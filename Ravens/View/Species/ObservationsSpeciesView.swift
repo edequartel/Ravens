@@ -128,6 +128,7 @@ struct ObservationsSpeciesView: View {
         log.error("refreshing... observation species")
         fetchDataModel()
       }
+      
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {

@@ -28,6 +28,7 @@ struct ObservationsUserView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @EnvironmentObject var observersViewModel: ObserversViewModel
 
   @Binding var selectedSpeciesID: Int?
   @Binding var currentSortingOption: SortingOption?
@@ -39,6 +40,19 @@ struct ObservationsUserView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
+
+      HStack {
+        if observersViewModel.isObserverInRecords(userID: observersViewModel.observerId) {
+          Image(systemSymbol: SFObserverFill)
+        }
+        Text("\(observersViewModel.observerName)")
+          .bold()
+          .lineLimit(1)
+          .truncationMode(.tail)
+        Spacer()
+      }
+      .padding(.horizontal,10)
+      .accessibilityLabel(observersViewModel.observerName)
 
       if let observations = observationUser.observations, !observations.isEmpty {
         HorizontalLine()

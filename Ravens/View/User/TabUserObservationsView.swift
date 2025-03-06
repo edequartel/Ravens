@@ -19,7 +19,6 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
-
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
@@ -124,6 +123,16 @@ struct TabUserObservationsView: View {
             }
           }
 
+//          ToolbarItem(placement: .principal) {
+//            HStack {
+//              if obsObserversViewModel.isObserverInRecords(userID: obsObserversViewModel.observerId) {
+//                Image(systemSymbol: SFObserverFill)
+//              }
+//              Text("\(obsObserversViewModel.observerName)")
+//                .font(.headline)
+//            }
+//            .accessibilityLabel(obsObserversViewModel.observerName)
+//          }
 
           //add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
@@ -141,7 +150,8 @@ struct TabUserObservationsView: View {
         }
       }
 
-      .navigationTitle("\(obsObserversViewModel.observerName)")
+//      .navigationTitle("\(obsObserversViewModel.observerName)")
+
       .navigationBarTitleDisplayMode(.inline)
 
       .onAppear {

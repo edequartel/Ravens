@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 
 struct ShareLinkButtonView: View {
     var obs: Observation
@@ -13,9 +14,28 @@ struct ShareLinkButtonView: View {
         let url = URL(string: obs.permalink)!
         ShareLink(item: url) {
             Image(systemSymbol: SFShareLink)
+            .uniformSize()
         }
         .tint(.obsShareLink)
         .accessibilityLabel(shareThisObservation)
+    }
+}
+
+struct URLButtonView: View {
+  var url: String
+
+    var body: some View {
+        Button(action: {
+            if let url = URL(string: url) {
+              UIApplication.shared.open(url)
+
+            }
+        }) {
+          Image(systemSymbol: .clock)
+            .uniformSize()
+        }
+        .tint(.obsObservation)
+        .accessibilityLabel(linkObservation)
     }
 }
 
@@ -29,21 +49,23 @@ struct LinkButtonView: View {
             }
         }) {
             Image(systemSymbol: SFObservation)
+            .uniformSize()
         }
         .tint(.obsObservation)
         .accessibilityLabel(linkObservation)
     }
 }
 
-struct URLButtonView: View {
+struct URLShareButtonView: View {
   var urlShare: String
 
   var body: some View {
       let url = URL(string: urlShare)!
       ShareLink(item: url) {
           Image(systemSymbol: SFShareLink)
+          .uniformSize()
       }
-      .tint(.obsShareLink)
+//      .tint(.obsInformation)
       .accessibilityLabel(shareThisObservation)
   }
 }
@@ -66,7 +88,6 @@ struct InformationSpeciesButtonView: View {
 struct AreaButtonView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   var obs: Observation
-  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -84,23 +105,21 @@ struct AreaButtonView: View {
         )
       }
     }) {
-      if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
+//      if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
         Image(systemSymbol: SFAreaFill)
           .uniformSize()
-      } else {
-        Image(systemSymbol: SFArea)
-          .uniformSize()
-      }
+//      } else {
+//        Image(systemSymbol: SFArea)
+//          .uniformSize()
+//      }
     }
-    .tint(colorOn ? .obsArea : nil)
-    .accessibilityLabel(favoriteLocation)
+    .accessibilityLabel(areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) ? favoriteLocationOn : favoriteLocationOff)
   }
 }
 
 struct ObserversButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   var obs: Observation
-  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -112,24 +131,21 @@ struct ObserversButtonView: View {
           userID: obs.userDetail?.id ?? 0)
       }
     }) {
-      if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
+//      if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
         Image(systemSymbol: SFObserverFill)
           .uniformSize()
-      } else {
-        Image(systemSymbol: SFObserver)
-          .uniformSize()
-      }
+//      } else {
+//        Image(systemSymbol: SFObserver)
+//          .uniformSize()
+//      }
     }
-    .tint(colorOn ? .obsObserver : nil)
-    .accessibilityLabel(favoriteObserver)
+    .accessibilityLabel(observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) ? favoriteObserverOn : favoriteObserverOff)
   }
 }
 
 struct BookmarkButtonView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
-
   var speciesID: Int
-//  var colorOn: Bool
 
   var body: some View {
     Button(action: {
@@ -139,39 +155,15 @@ struct BookmarkButtonView: View {
         bookMarksViewModel.appendRecord(speciesID: speciesID)
       }
     }) {
-      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
+
+//      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
+      Image(systemSymbol: SFSpeciesFill)
         .uniformSize()
-      Text(bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? "on" : "off")
     }
-//    .tint(colorOn ? .obsBookmark : nil)
-    .accessibilityLabel(favoriteSpecies)
+    .accessibilityLabel(bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? favoriteSpeciesOn : favoriteSpeciesOff)
     .background(Color.clear)
   }
 }
-
-//struct BookmarkButtonView: View {
-//  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
-//
-//  var obs: Observation
-//  var colorOn: Bool
-//
-//  var body: some View {
-//    Button(action: {
-//      if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) {
-//        bookMarksViewModel.removeRecord(speciesID: obs.speciesDetail.id)
-//      } else {
-//        bookMarksViewModel.appendRecord(speciesID: obs.speciesDetail.id)
-//      }
-//    }) {
-//      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) ? SFSpeciesFill : SFSpecies)
-//        .uniformSize()
-//      Text(bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) ? "on" : "off")
-//    }
-//    .tint(colorOn ? .obsBookmark : nil)
-//    .accessibilityLabel(favoriteSpecies)
-//    .background(Color.clear)
-//  }
-//}
 
 struct BookmarkButtonView_Previews: PreviewProvider {
   static var previews: some View {

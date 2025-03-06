@@ -64,29 +64,9 @@ struct TabSpeciesView: View {
 
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              Button(action: {
-                selectedSpeciesID = species.speciesId
-              }) {
-                Image(systemSymbol: .infoCircle)
-              }
-              .tint(.blue)
-              Button("test") {
-                print("xxx")
-              }
-//              Text("xxx")
-              BookmarkButtonView(speciesID:species.speciesId)
-//              Button(action: {
-//                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-//                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-//                } else {
-//                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-//                }
-//
-//              } ) {
-//                Image(systemSymbol: .star)
-//              }
-//              .tint(.obsStar)
-              .accessibilityLabel(species.name)
+              BookmarkButtonView(speciesID: species.speciesId)
+                .tint(.green)
+              //              .accessibilityLabel(species.name)
             }
           }
         }
@@ -95,6 +75,21 @@ struct TabSpeciesView: View {
       }
 
       .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            settings.isBookMarkVisible.toggle()
+          }) {
+            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
+              .uniformSize()
+          }
+          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) { //????
+          URLButtonView(url: "https://waarneming.nl")
+          .accessibilityLabel(mostRecent)
+        }
+
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
@@ -103,7 +98,7 @@ struct TabSpeciesView: View {
             timePeriod: $settings.timePeriodSpecies
           )) {
             Image(systemSymbol: .ellipsisCircle)
-              .uniformSize(color: .orange)
+              .uniformSize()
               .accessibility(label: Text(sortAndFilterSpecies))
           }
         }
@@ -112,27 +107,18 @@ struct TabSpeciesView: View {
       .navigationBarTitle(settings.selectedSpeciesGroupName)
       .navigationBarTitleDisplayMode(.inline)
 
-      .navigationBarItems(
-        leading: HStack {
-          Button(action: {
-            settings.isBookMarkVisible.toggle()
-          }) {
-            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
-              .uniformSize(color: .cyan)
-          }
-          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
-        }
-      )
-
-//    }
-//    .refreshable {
-//      speciesViewModel.parseHTMLFromURL(
-//        settings: settings,
-//        completion: {
-//          log.error("from refreshable... parsed from html")
-//        })
-//    }
-  }
+//      .navigationBarItems(
+//        leading: HStack {
+//          Button(action: {
+//            settings.isBookMarkVisible.toggle()
+//          }) {
+//            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
+//              .uniformSize(color: .cyan)
+//          }
+//          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
+//        }
+//      )
+    }
   }
 
   var searchResults: [Species] {
