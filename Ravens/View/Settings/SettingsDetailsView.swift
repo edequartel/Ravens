@@ -15,19 +15,21 @@ struct SettingsDetailsView: View {
     VStack() {
       VStack {
         HStack {
-          if areasViewModel.isIDInRecords(areaID: settings.locationId) {
-            Image(systemSymbol: SFAreaFill)
-              .foregroundColor(.blue)
-          }
+//          if areasViewModel.isIDInRecords(areaID: settings.locationId) {
+//            Image(systemSymbol: SFAreaFill)
+//              .foregroundColor(.blue)
+//          }
 
           Text(settings.locationName)
             .bold()
             .lineLimit(1)
             .truncationMode(.tail)
+//          Text("\(settings.locationId)")
           Spacer()
         }
       }
-      .padding(.horizontal,10)
+      .padding(.horizontal, 10)
+      .padding(.vertical, 4)
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel("\(settings.locationName)")

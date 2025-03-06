@@ -185,6 +185,8 @@ struct TabLocationView: View {
             }
           }
 
+
+
         //choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
@@ -192,7 +194,8 @@ struct TabLocationView: View {
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,
-              setLocation: $setLocation)) {
+              setLocation: $setLocation,
+              locationId: settings.locationId)) {
                 Image(systemSymbol: .listBullet)
                   .uniformSize()
               }

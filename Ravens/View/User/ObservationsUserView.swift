@@ -42,16 +42,17 @@ struct ObservationsUserView: View {
       if showView { Text("ObservationsUserView").font(.customTiny) }
 
       HStack {
-        if observersViewModel.isObserverInRecords(userID: observersViewModel.observerId) {
-          Image(systemSymbol: SFObserverFill)
-        }
+//        if observersViewModel.isObserverInRecords(userID: observersViewModel.observerId) {
+//          Image(systemSymbol: SFObserverFill)
+//        }
         Text("\(observersViewModel.observerName)")
           .bold()
           .lineLimit(1)
           .truncationMode(.tail)
         Spacer()
       }
-      .padding(.horizontal,10)
+      .padding(.horizontal, 10)
+      .padding(.vertical, 4)
       .accessibilityLabel(observersViewModel.observerName)
 
       if let observations = observationUser.observations, !observations.isEmpty {

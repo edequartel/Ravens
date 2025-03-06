@@ -123,17 +123,6 @@ struct TabUserObservationsView: View {
             }
           }
 
-//          ToolbarItem(placement: .principal) {
-//            HStack {
-//              if obsObserversViewModel.isObserverInRecords(userID: obsObserversViewModel.observerId) {
-//                Image(systemSymbol: SFObserverFill)
-//              }
-//              Text("\(obsObserversViewModel.observerName)")
-//                .font(.headline)
-//            }
-//            .accessibilityLabel(obsObserversViewModel.observerName)
-//          }
-
           //add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(
@@ -152,7 +141,7 @@ struct TabUserObservationsView: View {
 
 //      .navigationTitle("\(obsObserversViewModel.observerName)")
 
-      .navigationBarTitleDisplayMode(.inline)
+//      .navigationBarTitleDisplayMode(.inline)
 
       .onAppear {
         if firstTime {
