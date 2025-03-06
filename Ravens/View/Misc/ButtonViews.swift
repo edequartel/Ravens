@@ -34,7 +34,6 @@ struct URLButtonView: View {
           Image(systemSymbol: .clock)
             .uniformSize()
         }
-        .tint(.obsObservation)
         .accessibilityLabel(linkObservation)
     }
 }
@@ -49,7 +48,6 @@ struct LinkButtonView: View {
             }
         }) {
             Image(systemSymbol: SFObservation)
-            .uniformSize()
         }
         .tint(.obsObservation)
         .accessibilityLabel(linkObservation)
@@ -65,7 +63,7 @@ struct URLShareButtonView: View {
           Image(systemSymbol: SFShareLink)
           .uniformSize()
       }
-//      .tint(.obsInformation)
+//      .tint(.blue)
       .accessibilityLabel(shareThisObservation)
   }
 }
@@ -105,13 +103,8 @@ struct AreaButtonView: View {
         )
       }
     }) {
-//      if areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) {
-        Image(systemSymbol: SFAreaFill)
+        Image(systemSymbol: areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) ? SFAreaFill: SFArea)
           .uniformSize()
-//      } else {
-//        Image(systemSymbol: SFArea)
-//          .uniformSize()
-//      }
     }
     .accessibilityLabel(areasViewModel.isIDInRecords(areaID: obs.locationDetail?.id ?? 0) ? favoriteLocationOn : favoriteLocationOff)
   }
@@ -131,13 +124,8 @@ struct ObserversButtonView: View {
           userID: obs.userDetail?.id ?? 0)
       }
     }) {
-//      if observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) {
-        Image(systemSymbol: SFObserverFill)
-          .uniformSize()
-//      } else {
-//        Image(systemSymbol: SFObserver)
-//          .uniformSize()
-//      }
+      Image(systemSymbol: observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) ? SFObserverFill : SFObserver)
+        .uniformSize()
     }
     .accessibilityLabel(observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) ? favoriteObserverOn : favoriteObserverOff)
   }
@@ -156,8 +144,8 @@ struct BookmarkButtonView: View {
       }
     }) {
 
-//      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
-      Image(systemSymbol: SFSpeciesFill)
+      Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
+//      Image(systemSymbol: SFSpeciesFill)
         .uniformSize()
     }
     .accessibilityLabel(bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? favoriteSpeciesOn : favoriteSpeciesOff)

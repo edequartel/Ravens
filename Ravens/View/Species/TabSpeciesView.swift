@@ -13,11 +13,10 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
 
 
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -85,9 +84,10 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
-        ToolbarItem(placement: .navigationBarTrailing) { //????
-          URLButtonView(url: "https://waarneming.nl")
-          .accessibilityLabel(mostRecent)
+        if !accessibilityManager.isVoiceOverEnabled {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            URLButtonView(url: "https://waarneming.nl")
+          }
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -104,20 +104,9 @@ struct TabSpeciesView: View {
         }
       }
 
-      .navigationBarTitle(settings.selectedSpeciesGroupName)
-      .navigationBarTitleDisplayMode(.inline)
+//      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
+//      .navigationBarTitleDisplayMode(.inline)
 
-//      .navigationBarItems(
-//        leading: HStack {
-//          Button(action: {
-//            settings.isBookMarkVisible.toggle()
-//          }) {
-//            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
-//              .uniformSize(color: .cyan)
-//          }
-//          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
-//        }
-//      )
     }
   }
 
