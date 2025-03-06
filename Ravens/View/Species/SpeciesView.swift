@@ -42,16 +42,27 @@ struct SpeciesView: View {
 //        }
 //      }
 
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {
+          selectedSpeciesID = item.speciesId
+        }) {
+          Image(systemSymbol: .infoCircle)
+            .uniformSize()
+        }
+        .background(Color.clear)
+      }
+
+      if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
-            selectedSpeciesID = item.speciesId
+            showFirstView.toggle()
           }) {
-            Image(systemSymbol: .infoCircle)
+            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
               .uniformSize()
           }
-          .background(Color.clear)
+          .accessibility(label: Text("Switch view"))
         }
-
+      }
 
 //        ToolbarItem(placement: .navigationBarTrailing) {
 //          Button(action: {

@@ -125,9 +125,9 @@ struct ObsView: View {
     //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
-      if (entity != .species) {
+//      if (entity != .species) {
         InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
-      }
+//      }
       LinkButtonView(obs: obs)
     }
   }
