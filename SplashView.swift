@@ -124,11 +124,11 @@ struct SplashView: View {
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
       log.info("speciesViewModel First language data loaded")
-      speciesViewModel.parseHTMLFromURL(settings: settings) {
-        log.info("HTML parsed from start")
+//**      speciesViewModel.parseHTMLFromURL(settings: settings) {
+//        log.info("HTML parsed from start")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()
-      }
+//      }
     }
   }
 

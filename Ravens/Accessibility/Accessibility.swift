@@ -15,9 +15,12 @@ let previous = LocalizedStringKey("previous")
 let shareThisObservation = LocalizedStringKey("shareThisObservation")
 let informationSpecies = LocalizedStringKey("informationSpecies")
 let linkObservation = LocalizedStringKey("linkObservation")
-let favoriteSpecies = LocalizedStringKey("favoriteSpecies")
-let favoriteObserver = LocalizedStringKey("favoriteObserver")
-let favoriteLocation = LocalizedStringKey("favoriteLocation")
+let favoriteSpeciesOff = LocalizedStringKey("favoriteSpeciesOff")
+let favoriteSpeciesOn = LocalizedStringKey("favoriteSpeciesOn")
+let favoriteObserverOff = LocalizedStringKey("favoriteObserverOff")
+let favoriteObserverOn = LocalizedStringKey("favoriteObserverOn")
+let favoriteLocationOff = LocalizedStringKey("favoriteLocationOff")
+let favoriteLocationOn = LocalizedStringKey("favoriteLocationOn")
 let sortAndFilterObservationList = LocalizedStringKey("sortAndFilterObservationList")
 let updateLocation = LocalizedStringKey("updateLocation")
 let listWithFavoriteLocation = LocalizedStringKey("listWithFavoriteLocation")
@@ -44,6 +47,8 @@ let swap = LocalizedStringKey("swap")
 let observersList = LocalizedStringKey("observerList")
 let sortAndFilterObs = LocalizedStringKey("sortAndFilterObs")
 let sortAndFilterSpecies = LocalizedStringKey("sortAndFilterSpecies")
+let sharePictureLink = LocalizedStringKey("sharePictureLink")
+let mostRecent = LocalizedStringKey("mostRecent")
 
 // settings
 let language = LocalizedStringKey("language")
@@ -51,9 +56,12 @@ let source = LocalizedStringKey("source")
 let group = LocalizedStringKey("group")
 let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
+let secondLanguage = LocalizedStringKey("secondLanguage")
 
 //radius
 let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
+let radius = LocalizedStringKey("radius")
+
 
 // login
 let email = LocalizedStringKey("email")
@@ -84,7 +92,8 @@ let halfAYear = LocalizedStringKey("halfayear")
 let oneYear = LocalizedStringKey("oneyear")
 let infinite = LocalizedStringKey("infinite")
 
-let noObservations = LocalizedStringKey("noObservations")
+let noObservations = LocalizedStringKey("noObservations");
+let switchView = LocalizedStringKey("switchView")
 
 
 

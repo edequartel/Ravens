@@ -39,7 +39,7 @@ struct RavensView: View {
         TabRadiusView(observationsRadiusViewModel: observationsRadiusViewModel,
                       selectedSpeciesID: $selectedSpeciesID)
         .tabItem {
-          Text("Radius")
+          Text(radius)
           Image(systemSymbol: .circle)
         }
         // Tab 3

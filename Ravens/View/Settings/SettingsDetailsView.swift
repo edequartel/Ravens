@@ -8,40 +8,42 @@
 import SwiftUI
 
 struct SettingsDetailsView: View {
-    @EnvironmentObject var settings: Settings
-    @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
-    @EnvironmentObject var keyChainViewModel: KeychainViewModel
-    
-//    var count: Int = 0
-//    var results: Int = 0
-    var showInfinity: Bool = true
-    
-    var body: some View {
-        VStack() {
-            VStack {
-                HStack {
-                    Text(settings.locationName)
-                        .bold()
-               }
-            }
-            .padding(.horizontal,10)
+  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var areasViewModel: AreasViewModel
 
+  var body: some View {
+    VStack() {
+      VStack {
+        HStack {
+//          if areasViewModel.isIDInRecords(areaID: settings.locationId) {
+//            Image(systemSymbol: SFAreaFill)
+//              .foregroundColor(.blue)
+//          }
+
+          Text(settings.locationName)
+            .bold()
+            .lineLimit(1)
+            .truncationMode(.tail)
+//          Text("\(settings.locationId)")
+          Spacer()
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(settings.locationName)")
+      }
+      .padding(.horizontal, 10)
+      .padding(.vertical, 4)
     }
+    .accessibilityElement(children: .combine)
+    .accessibilityLabel("\(settings.locationName)")
+  }
 
-    
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EE dd-MM"
-        return formatter
-    }
+
+  private var dateFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "EE dd-MM"
+    return formatter
+  }
 }
 
 #Preview {
-    SettingsDetailsView()
-        .environmentObject(Settings())
-//        .environmentObject(SpeciesGroupViewModel(settings: Settings())
-        .environmentObject(KeychainViewModel())
+  SettingsDetailsView()
+    .environmentObject(Settings())
 }

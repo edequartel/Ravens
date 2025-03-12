@@ -19,7 +19,6 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
-
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
@@ -124,7 +123,6 @@ struct TabUserObservationsView: View {
             }
           }
 
-
           //add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(
@@ -141,8 +139,9 @@ struct TabUserObservationsView: View {
         }
       }
 
-      .navigationTitle("\(obsObserversViewModel.observerName)")
-      .navigationBarTitleDisplayMode(.inline)
+//      .navigationTitle("\(obsObserversViewModel.observerName)")
+
+//      .navigationBarTitleDisplayMode(.inline)
 
       .onAppear {
         if firstTime {

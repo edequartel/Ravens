@@ -47,7 +47,11 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-        Section(language) {
+//        Section() {
+//          RadiusPickerView(selectedRadius: $settings.radius)
+//        }
+
+        Section() {
           LanguageView()
         }
 
@@ -76,13 +80,13 @@ struct SettingsView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: { //xxxx
+          Button(action: { 
             if let url = URL(string: "https://edequartel.github.io/Ravens/") {
               UIApplication.shared.open(url)
             }
           }) {
             Image(systemName: "info.circle") // Example: a "plus" icon
-              .uniformSize(color: .red)
+              .uniformSize()
               .accessibilityLabel(information)
           }
         }
@@ -157,7 +161,7 @@ struct SpeciesPickerView: View {
                 }
             }
             .pickerStyle(.navigationLink)
-            .onChange(of: settings.selectedSpeciesGroupId) { _ in
+            .onChange(of: settings.selectedSpeciesGroupId) { //_ in
                 log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
                 settings.selectedRegionListId = regionListViewModel.getId(
                     region: settings.selectedRegionId,
@@ -175,3 +179,23 @@ struct SpeciesPickerView: View {
         }
     }
 }
+
+import SwiftUI
+
+struct RadiusPickerView: View {
+    @Binding var selectedRadius: Double // Binding for Double radius selection
+
+    let radiusOptions = Array(stride(from: 1000.0, through: 10000.0, by: 1000.0)) // Double values
+
+    var body: some View {
+        VStack {
+            Picker(radius, selection: $selectedRadius) {
+                ForEach(radiusOptions, id: \.self) { radius in
+                    Text("\(Int(radius)) m").tag(radius) // Convert to Int for display
+                }
+            }
+            .pickerStyle(.menu) // Wheel picker style
+        }
+    }
+}
+

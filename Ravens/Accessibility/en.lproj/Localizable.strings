@@ -15,9 +15,12 @@
 "shareThisObservation" = "Share this observation";
 "informationSpecies" = "Get information about the species";
 "linkObservation" = "Go to the observation at waarneming.nl";
-"favoriteSpecies" = "Add or remove species to favorites";
-"favoriteObserver" = "Add or remove observer to favorites";
-"favoriteLocation" = "Add or Remove location to favorites";
+"favoriteSpeciesOff" = "Add species to favorites";
+"favoriteSpeciesOn" = "Remove species to favorites";
+"favoriteObserverOff" = "Add observer to favorites";
+"favoriteObserverOn" = "Remove observer to favorites";
+"favoriteLocationOff" = "Add location to favorites";
+"favoriteLocationOn" = "Remove location to favorites";
 "sortAndFilterObservationList" = "Sort and filter the list with observations";
 "updateLocation" = "Update the location of the observations";
 "listWithFavoriteLocation" = "List with favorite locations";
@@ -44,6 +47,8 @@
 "observerList" = "list with favorite observers";
 "sortAndFilterObs" = "Sort or filter the list with observations";
 "sortAndFilterSpecies" = "Sort or filter the list with species";
+"sharePictureLink" = "Share the picture of the species";
+"mostRecent" = "last observations of rare species at waarneming.nl";
 
 // settings
 "language" = "Language";
@@ -51,9 +56,11 @@
 "group" = "Group";
 "map" = "Kaart";
 "appDetails" = "App details";
+"secondLanguage" = "Second language";
 
 //radius
 "obsAroundPoint" = "Observations round point";
+"radius" = "Radius";
 
 //login
 "email" = "email";
@@ -102,3 +109,4 @@
 "infinite" = "years";
 
 "noObservations" = "If no observations appear, \nwider your scope.";
+"switchView" = "Switch view";

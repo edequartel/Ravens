@@ -54,6 +54,7 @@ struct ObservationsLocationView: View {
       } else {
         if let observations = observationsLocation.observations, observations.count > 0 {
           SettingsDetailsView()
+
           HorizontalLine()
           ObservationListView(
             observations: observations,
@@ -78,12 +79,8 @@ struct ObservationsLocationView: View {
       
     }
     .refreshable {
-      log.error("refreshing... ObservationsLocationsView")  //?? de vraag is of setLocation wel echt in the onchange of the TabListView wordt aangeroepen want de waarde veranderd niet
-//      if let location = locationManager.getCurrentLocation() {
-        //here getting the data for the location forced
-//        forceUpdateLocation(location.coordinate)
-        setRefresh.toggle()
-//      }
+      log.error("refreshing... ObservationsLocationsView")
+      setRefresh.toggle()
     }
     .onAppear()  {
       if !settings.hasLocationLoaded {

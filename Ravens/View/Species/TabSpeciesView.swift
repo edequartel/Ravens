@@ -13,18 +13,17 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
+  @EnvironmentObject var accessibilityManager: AccessibilityManager
 
 
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
 
-  @State private var selectedSortOption: SortNameOption = .lastSeen
+  @State private var selectedSortOption: SortNameOption = .name
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
@@ -64,26 +63,9 @@ struct TabSpeciesView: View {
 
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              Button(action: {
-                selectedSpeciesID = species.speciesId
-              }) {
-                Image(systemSymbol: .infoCircle)
-              }
-              .tint(.blue)
-
-              Button(action: {
-                if bookMarksViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-                  bookMarksViewModel.removeRecord(speciesID: species.speciesId)
-                } else {
-                  bookMarksViewModel.appendRecord(speciesID: species.speciesId)
-                }
-
-              } ) {
-                Image(systemSymbol: .star)
-              }
-              .tint(.obsStar)
-              //            .background(Color.gray.opacity(0.1))
-              .accessibilityLabel(species.name)
+              BookmarkButtonView(speciesID: species.speciesId)
+                .tint(.green)
+              //              .accessibilityLabel(species.name)
             }
           }
         }
@@ -92,6 +74,22 @@ struct TabSpeciesView: View {
       }
 
       .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            settings.isBookMarkVisible.toggle()
+          }) {
+            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
+              .uniformSize()
+          }
+          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
+        }
+
+        if !accessibilityManager.isVoiceOverEnabled {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            URLButtonView(url: "https://waarneming.nl")
+          }
+        }
+
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
@@ -100,36 +98,16 @@ struct TabSpeciesView: View {
             timePeriod: $settings.timePeriodSpecies
           )) {
             Image(systemSymbol: .ellipsisCircle)
-              .uniformSize(color: .orange)
+              .uniformSize()
               .accessibility(label: Text(sortAndFilterSpecies))
           }
         }
       }
 
-      .navigationBarTitle(settings.selectedSpeciesGroupName)
-      .navigationBarTitleDisplayMode(.inline)
+//      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
+//      .navigationBarTitleDisplayMode(.inline)
 
-      .navigationBarItems(
-        leading: HStack {
-          Button(action: {
-            settings.isBookMarkVisible.toggle()
-          }) {
-            Image(systemSymbol: settings.isBookMarkVisible ? .starFill : .star)
-              .uniformSize(color: .cyan)
-          }
-          .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
-        }
-      )
-
-//    }
-    .refreshable {
-      speciesViewModel.parseHTMLFromURL(
-        settings: settings,
-        completion: {
-          log.error("from refreshable... parsed from html")
-        })
     }
-  }
   }
 
   var searchResults: [Species] {
@@ -188,7 +166,7 @@ struct SortFilterSpeciesView: View {
 enum SortNameOption: String, CaseIterable {
   case name
   case scientificName
-  case lastSeen
+//**  case lastSeen
 
   var localized: LocalizedStringKey {
     LocalizedStringKey(self.rawValue)

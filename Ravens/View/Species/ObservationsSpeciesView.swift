@@ -53,26 +53,12 @@ struct ObservationsSpeciesView: View {
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
-
-          // Button with accessibility label and hint
-          Button(action: {
-            selectedSpeciesID = item.speciesId
-          }) {
-            Image(systemSymbol: .infoCircle)
-              .foregroundColor(Color.gray.opacity(0.8))
-          }
-
-          //
-          if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-            Image(systemSymbol: SFSpeciesFill)
-              .foregroundColor(Color.gray.opacity(0.8))
-          }
           Spacer()
         }
       }
       .padding(.horizontal,10)
       .accessibilityElement(children: .combine)
-      .accessibilityLabel(Text("\(item.name), \(item.rarity) \(information)"))
+      .accessibilityLabel(item.name)
       Spacer()
 
       VStack {
@@ -87,7 +73,6 @@ struct ObservationsSpeciesView: View {
 
           if let observations = observationsSpecies.observations, observations.count > 0 {
             if showView { Text("ObservationListView").font(.customTiny) }
-
             HorizontalLine()
             ObservationListView(
               observations: observations,
@@ -121,6 +106,7 @@ struct ObservationsSpeciesView: View {
         log.error("refreshing... observation species")
         fetchDataModel()
       }
+      
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {

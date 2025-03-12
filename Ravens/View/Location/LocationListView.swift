@@ -22,6 +22,7 @@ struct LocationListView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
   @Binding var setLocation: CLLocationCoordinate2D
+  var locationId: Int
 
   var body: some View {
     VStack {
@@ -37,11 +38,18 @@ struct LocationListView: View {
 
               self.presentationMode.wrappedValue.dismiss()
             }) {
-              Text(record.name)
-                .lineLimit(1)
+              HStack {
+                Text(record.name)
+                  .lineLimit(1)
+                  .truncationMode(.tail)
+                Spacer()
+                if (record.areaID == locationId) {
+                  Image(systemName: "checkmark").foregroundColor(.blue)
+                }
+              }
             }
-            Spacer()
           }
+          .padding(.vertical, 4)
           .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(role: .destructive) {
               areasViewModel.removeRecord(areaID: record.areaID)

@@ -39,7 +39,7 @@ struct LanguageView: View {
             
 
             
-            Picker("Second language", selection: $settings.selectedSecondLanguage) {
+            Picker(secondLanguage, selection: $settings.selectedSecondLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
                     Text(language.nameNative).tag(language.code)
                 }

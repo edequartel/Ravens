@@ -186,30 +186,6 @@ struct TabLocationView: View {
           }
 
 
-        //favo location
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            if areasViewModel.isIDInRecords(areaID: settings.locationId) {
-              areasViewModel.removeRecord(areaID: settings.locationId)
-            } else {
-              log.error("\(settings.locationName) \(settings.locationId) \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-
-              areasViewModel.appendRecord(
-                areaName: settings.locationName,
-                areaID: settings.locationId,
-                latitude: settings.locationCoordinate?.latitude ?? 0,
-                longitude: settings.locationCoordinate?.longitude ?? 0
-              )
-              //
-
-            }
-          }) {
-            Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill : SFArea)
-              .uniformSize()
-              .accessibility(
-                label: Text(areasViewModel.isIDInRecords(areaID: settings.locationId) ? removeLocationFromFavorite : addLocationToFavorite))
-          }
-        }
 
         //choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -218,7 +194,8 @@ struct TabLocationView: View {
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,
-              setLocation: $setLocation)) {
+              setLocation: $setLocation,
+              locationId: settings.locationId)) {
                 Image(systemSymbol: .listBullet)
                   .uniformSize()
               }

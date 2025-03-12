@@ -25,7 +25,7 @@ let longitude = 4.713450+0.1
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
 
-let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
+//let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
 func cleanName(_ name: String) -> String {
   var cleanName = name.replacingOccurrences(of: " ", with: "_")
@@ -89,34 +89,6 @@ let SFObserver = SFSymbol.person
 let SFObserverFill = SFSymbol.personFill
 let SFObserverPlus = SFSymbol.personFillBadgePlus
 let SFObserverMin = SFSymbol.personFillBadgeMinus
-
-// func GroupColor(value: Int) -> Color {
-//    switch value {
-//    case 0: return .gray   // all
-//    case 1: return .green  // birds
-//    case 2: return .blue   // mammals
-//    case 3: return .orange // reptiles and amfibian
-//    case 5: return .yellow    // butterflies
-//    case 6: return .pink    // dragonflies
-//    case 7: return .purple    // molluscs
-//    case 8: return .brown    // moth and micros
-//    case 9: return .gray    // fish
-//    case 10: return .obsBackground   // plants
-//    case 11: return .white   // fungi
-//    case 12: return .indigo   // mosses and lichen
-//    case 13: return .mint   // geleedpotigen
-//    case 14: return .teal   // locusts and crickets
-//    case 15: return .cyan   // wantsen cicaden en plantenluizen
-////    case 16: return .olive   // bugs
-////    case 17: return .lavender   // bees wasp ants
-////    case 18: return .amber   // flies and mossies
-////    case 19: return .coral   // algea
-////    case 20: return .peach   // overige invertabrates
-////    case 30: return .red   // verstoringen
-//    default:
-//        return .gray //You can provide a default color or handle other cases as needed
-//    }
-//}
 
 func rarityColor(value: Int) -> Color {
   switch value {
@@ -464,7 +436,7 @@ extension String: @retroactive Identifiable {
 
 
 extension Image {
-  func uniformSize(color: Color? = nil) -> some View {
+  func uniformSize() -> some View {
         self
             .resizable() // Makes the image resizable
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
@@ -517,12 +489,3 @@ struct ImageWithOverlay_Previews: PreviewProvider {
         ImageWithOverlay(systemName: "star", value: false)
     }
 }
-
-//struct ClearButtonStyle: ButtonStyle {
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration.label
-////            .padding()
-//            .background(Color.clear) // Clear background
-//            .foregroundColor(.blue)  // Customize text color
-//    }
-//}

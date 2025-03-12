@@ -22,36 +22,36 @@ class SpeciesViewModel: ObservableObject {
   
   var datum: String = ""
   
-  func parseHTMLFromURL(settings: Settings, completion: @escaping () -> Void) {
-    //  func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("(settings.parseHTMLFromURL)")
-    log.info("groupID \(settings.selectedSpeciesGroupId)")
-    
-    let urlString = "https://waarneming.nl/recent-species/?species_group=\(settings.selectedSpeciesGroupId)"
-    log.info("parsing... urlString: \(urlString)")
-
-    // Continue with your URL session or network request setup here
-    let headers: HTTPHeaders = [
-      "Accept-Language": settings.selectedLanguage
-    ]
-    
-    AF.request(urlString, headers: headers).responseString { response in
-      switch response.result {
-      case .success(let html):
-        // Parse the HTML content
-        do {
-          try self.parseHTML(html: html)
-          completion()
-        } catch {
-          print("Error parsing HTML: \(error.localizedDescription)")
-        }
-        
-      case .failure(let error):
-        print("'Error fetching HTML from URL: \(error.localizedDescription)")
-        
-      }
-    }
-  }
+//  func parseHTMLFromURL(settings: Settings, completion: @escaping () -> Void) {
+//    //  func parseHTMLFromURL(settings: Settings, completion: (() -> Void)? = nil) {
+//    log.info("(settings.parseHTMLFromURL)")
+//    log.info("groupID \(settings.selectedSpeciesGroupId)")
+//    
+//    let urlString = "https://waarneming.nl/recent-species/?species_group=\(settings.selectedSpeciesGroupId)"
+//    log.info("parsing... urlString: \(urlString)")
+//
+//    // Continue with your URL session or network request setup here
+//    let headers: HTTPHeaders = [
+//      "Accept-Language": settings.selectedLanguage
+//    ]
+//    
+//    AF.request(urlString, headers: headers).responseString { response in
+//      switch response.result {
+//      case .success(let html):
+//        // Parse the HTML content
+//        do {
+//          try self.parseHTML(html: html)
+//          completion()
+//        } catch {
+//          print("Error parsing HTML: \(error.localizedDescription)")
+//        }
+//        
+//      case .failure(let error):
+//        print("'Error fetching HTML from URL: \(error.localizedDescription)")
+//        
+//      }
+//    }
+//  }
   
   private func parseHTML(html: String) throws {
     let parseDoc = "<html><body><table>" + html + "</table></body></html>"
@@ -290,26 +290,26 @@ class SpeciesViewModel: ObservableObject {
       return species.sorted { $0.name < $1.name }
     case .scientificName:
       return species.sorted { $0.scientificName < $1.scientificName }
-    case .lastSeen:
-      return species.sorted { (species1, species2) -> Bool in
-        // Convert date and time to Date objects for both species
-        let date1 = species1.dateTime
-        let date2 = species2.dateTime
-        
-        // Sort based on date first (latest at the top)
-        if let date1 = date1, let date2 = date2 {
-          return date1 > date2
-        } else if date1 != nil {
-          // If only species1 has a date, it comes first
-          return true
-        } else if date2 != nil {
-          // If only species2 has a date, it comes first
-          return false
-        }
-        
-        // If both dates are nil, sort based on rarity
-        return species1.rarity > species2.rarity
-      }
+//**    case .lastSeen:
+//      return species.sorted { (species1, species2) -> Bool in
+//        // Convert date and time to Date objects for both species
+//        let date1 = species1.dateTime
+//        let date2 = species2.dateTime
+//        
+//        // Sort based on date first (latest at the top)
+//        if let date1 = date1, let date2 = date2 {
+//          return date1 > date2
+//        } else if date1 != nil {
+//          // If only species1 has a date, it comes first
+//          return true
+//        } else if date2 != nil {
+//          // If only species2 has a date, it comes first
+//          return false
+//        }
+//        
+//        // If both dates are nil, sort based on rarity
+//        return species1.rarity > species2.rarity
+//      }
     }
   }
 }
