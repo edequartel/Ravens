@@ -248,6 +248,23 @@ struct TabRadiusView: View {
           })
       }
 
+//      .onChange(of: settings.selectedSpeciesGroupId) {//!!
+//        log.error("update settings. \(String(describing: settings.selectedSpeciesGroupId))")
+//        observationsRadiusViewModel.observations = []
+//        observationsRadiusViewModel.fetchData(
+//          settings: settings,
+//
+//          latitude: observationsRadiusViewModel.circleCenter.latitude,
+//          longitude: observationsRadiusViewModel.circleCenter.longitude,
+//
+//
+//          radius: settings.radius, //circleRadius,
+//          timePeriod: timePeriod ?? .fourWeeks,
+//          completion: {
+//            log.error("update timePeriod")
+//          })
+//      }
+
 
       .onChange(of: timePeriod) {//!!
         log.error("update timePeriod \(String(describing: timePeriod))")

@@ -27,7 +27,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     let parameters: [String: Any] = [
       "days": timePeriod.rawValue,
       "end_date": dateFormatted,
-      "species_group": settings.selectedSpeciesGroup,
+//      "species_group": settings.selectedSpeciesGroupId, //<<??
       "radius": radius,
       "lat": latitude,
       "lng": longitude

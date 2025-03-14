@@ -204,10 +204,14 @@ struct CombinedOptionsMenuView: View {
       }
 
       if entity == .radius {
-        Section() {
+        Section(distance) {
           RadiusPickerView(selectedRadius: $settings.radius)
         }
       }
+
+//      if entity == .radius {
+//          SpeciesPickerView()
+//      }
 
       // Sorting Option
       if currentSortingOption != nil {
