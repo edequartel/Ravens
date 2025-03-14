@@ -41,6 +41,7 @@ let species = LocalizedStringKey("species")
 let observation = LocalizedStringKey("observation")
 let observations = LocalizedStringKey("observations")
 let settingsName = LocalizedStringKey("settings")
+let distance = LocalizedStringKey("distance")
 
 // icons
 let swap = LocalizedStringKey("swap")

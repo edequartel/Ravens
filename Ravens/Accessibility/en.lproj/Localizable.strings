@@ -41,6 +41,7 @@
 "observation" = "Observation";
 "observations" = "observations";
 "settings" = "Settings";
+"distance" = "Distance";
 
 //icons
 "swap" = "change between list and map view";

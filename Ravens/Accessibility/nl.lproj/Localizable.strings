@@ -37,6 +37,7 @@
 "observation" = "Waarneming";
 "observations" = "waarnemingen";
 "settings" = "Instellingen";
+"distance" = "Afstand";
 
 //icons
 "swap" = "Wissel tussen lijst en kaart weergave";
