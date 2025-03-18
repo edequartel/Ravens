@@ -3,7 +3,7 @@
 //  Ravens
 //
 //  Created by Eric de Quartel on 08/01/2024.
-// 
+//
 
 import SwiftUI
 import SwiftyBeaver
@@ -29,6 +29,8 @@ struct TabSpeciesView: View {
   @State private var searchText = ""
 
   @Binding var selectedSpeciesID: Int?
+
+  @State private var showSpeciesXC: Species?
 
   var body: some View {
     NavigationStack {
@@ -65,12 +67,23 @@ struct TabSpeciesView: View {
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
-              //              .accessibilityLabel(species.name)
+
+              Button {
+                showSpeciesXC = species
+              } label: {
+                Label("XC", systemImage: "waveform")
+              }
+              .tint(Color(red: 0.5, green: 0, blue: 0)) // Darker Blood Red
+
             }
           }
         }
         .listStyle(PlainListStyle())
         .searchable(text: $searchText) //een niveau lager geplaatst
+      }
+
+      .sheet(item: $showSpeciesXC) { species in
+        BirdListView(scientificName: species.scientificName, nativeName: species.name)
       }
 
       .toolbar {
@@ -104,8 +117,8 @@ struct TabSpeciesView: View {
         }
       }
 
-//      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
-//      .navigationBarTitleDisplayMode(.inline)
+      //      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
+      //      .navigationBarTitleDisplayMode(.inline)
 
     }
   }
@@ -157,16 +170,16 @@ struct SortFilterSpeciesView: View {
     }
   }
 
-//  /// Filters `TimePeriod.allCases` based on entity
-//  private var filteredTimePeriods: [TimePeriod] {
-//    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
-//  }
+  //  /// Filters `TimePeriod.allCases` based on entity
+  //  private var filteredTimePeriods: [TimePeriod] {
+  //    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
+  //  }
 }
 
 enum SortNameOption: String, CaseIterable {
   case name
   case scientificName
-//**  case lastSeen
+  //**  case lastSeen
 
   var localized: LocalizedStringKey {
     LocalizedStringKey(self.rawValue)

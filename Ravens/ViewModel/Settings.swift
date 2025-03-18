@@ -32,10 +32,10 @@ class Settings: ObservableObject {
       timePeriodLocationStored = timePeriodLocation
     }
   }
-  @AppStorage("timePeriodSpeciesStored") var timePeriodSpeciesStored: TimePeriod = .twoDays
-  @Published var timePeriodSpecies: TimePeriod = .twoDays {
+  @AppStorage("timePeriodSpeciesStored") var timePeriodSpeciesStored: TimePeriod = .twoWeeks
+  @Published var timePeriodSpecies: TimePeriod = .twoWeeks {
     didSet {
-      timePeriodSpeciesStored = timePeriodSpeciesStored
+      timePeriodSpeciesStored = timePeriodSpecies
     }
   }
 

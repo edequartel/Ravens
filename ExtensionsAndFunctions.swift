@@ -5,6 +5,8 @@
 //  Created by Eric de Quartel on 15/01/2024.
 //
 
+//BirdListView(scientificName: bird.scientificName, nativeName: bird.name)
+
 import Foundation
 import SwiftUI
 import AudioToolbox

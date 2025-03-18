@@ -102,6 +102,12 @@
 		47AB459F2CE262C900842877 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 47AB459E2CE262C900842877 /* LazyPager */; };
 		47AB45A12CE3276500842877 /* RavensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A02CE3276000842877 /* RavensView.swift */; };
 		47AB45A32CE327AD00842877 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A22CE327A300842877 /* SplashView.swift */; };
+		47AC07662D88AD03002FB433 /* BirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07622D88AD03002FB433 /* BirdDetailView.swift */; };
+		47AC07672D88AD03002FB433 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07612D88AD03002FB433 /* Bird.swift */; };
+		47AC07682D88AD03002FB433 /* BirdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07632D88AD03002FB433 /* BirdListView.swift */; };
+		47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07642D88AD03002FB433 /* BirdRowView.swift */; };
+		47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07652D88AD03002FB433 /* BirdViewModel.swift */; };
+		47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC076B2D88AE64002FB433 /* AudioManager.swift */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
@@ -207,6 +213,12 @@
 		47AB45992CE2042100842877 /* species.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = species.json; sourceTree = "<group>"; };
 		47AB45A02CE3276000842877 /* RavensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensView.swift; sourceTree = "<group>"; };
 		47AB45A22CE327A300842877 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		47AC07612D88AD03002FB433 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
+		47AC07622D88AD03002FB433 /* BirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailView.swift; sourceTree = "<group>"; };
+		47AC07632D88AD03002FB433 /* BirdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdListView.swift; sourceTree = "<group>"; };
+		47AC07642D88AD03002FB433 /* BirdRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRowView.swift; sourceTree = "<group>"; };
+		47AC07652D88AD03002FB433 /* BirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewModel.swift; sourceTree = "<group>"; };
+		47AC076B2D88AE64002FB433 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
@@ -334,6 +346,7 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
+				47AC07302D88AC7A002FB433 /* Xeno Canto */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
@@ -510,6 +523,19 @@
 				4738B6402BF4E7C900BF7557 /* ObsView.swift */,
 			);
 			path = Obs;
+			sourceTree = "<group>";
+		};
+		47AC07302D88AC7A002FB433 /* Xeno Canto */ = {
+			isa = PBXGroup;
+			children = (
+				47AC076B2D88AE64002FB433 /* AudioManager.swift */,
+				47AC07612D88AD03002FB433 /* Bird.swift */,
+				47AC07622D88AD03002FB433 /* BirdDetailView.swift */,
+				47AC07632D88AD03002FB433 /* BirdListView.swift */,
+				47AC07642D88AD03002FB433 /* BirdRowView.swift */,
+				47AC07652D88AD03002FB433 /* BirdViewModel.swift */,
+			);
+			path = "Xeno Canto";
 			sourceTree = "<group>";
 		};
 		47AD8FC72CF1BF02007155A4 /* Managers */ = {
@@ -698,6 +724,7 @@
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
 				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* TabSpeciesView.swift in Sources */,
+				47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
@@ -736,6 +763,11 @@
 				47A588522D1018CF00D9CFE1 /* PeriodView.swift in Sources */,
 				47AB45A32CE327AD00842877 /* SplashView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
+				47AC07662D88AD03002FB433 /* BirdDetailView.swift in Sources */,
+				47AC07672D88AD03002FB433 /* Bird.swift in Sources */,
+				47AC07682D88AD03002FB433 /* BirdListView.swift in Sources */,
+				47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */,
+				47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 				471F7A592CF78E4F00BF529C /* Accessibility.swift in Sources */,
 			);

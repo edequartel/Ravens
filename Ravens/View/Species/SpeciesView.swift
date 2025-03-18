@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct SpeciesView: View {
   @State private var showFirstView = false
@@ -15,6 +16,8 @@ struct SpeciesView: View {
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+
+  @State var showChart: Bool = false
 
   var item: Species
   @Binding var selectedSpeciesID: Int?
@@ -27,21 +30,18 @@ struct SpeciesView: View {
           observationsSpecies: observationsSpecies,
           item: item)
       } else {
-        ObservationsSpeciesView(
-          observationsSpecies: observationsSpecies,
-          item: item,
-          selectedSpeciesID: $selectedSpeciesID
-        )
+        VStack {
+
+          ObservationsSpeciesView(
+            observationsSpecies: observationsSpecies,
+            item: item,
+            selectedSpeciesID: $selectedSpeciesID
+          )
+        }
       }
     }
 
     .toolbar {
-//      if !accessibilityManager.isVoiceOverEnabled {
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          BookmarkButtonView(speciesID: item.speciesId)
-//        }
-//      }
-
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: {
           selectedSpeciesID = item.speciesId
@@ -51,6 +51,17 @@ struct SpeciesView: View {
         }
         .background(Color.clear)
       }
+
+      //      ToolbarItem(placement: .navigationBarTrailing) {
+      //        Button(action: {
+      //          showChart.toggle()
+      //        }) {
+      //          Image(systemSymbol: .chartBarXaxis)
+      //            .uniformSize()
+      //        }
+      //        .background(Color.clear)
+      //      }
+
 
       if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -64,41 +75,59 @@ struct SpeciesView: View {
         }
       }
 
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          Button(action: {
-//            if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-//              bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-//            } else {
-//              bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-//            }
-//          }) {
-//            Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-//              .uniformSize()
-//          }
-//          .accessibilityLabel(favoriteObserver)
-//          .background(Color.clear)
-//        }
-
-
-//      ToolbarItem(action: {
-//        if bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) {
-//          bookMarksViewModel.removeRecord(speciesID: item.speciesId)
-//        } else {
-//          bookMarksViewModel.appendRecord(speciesID: item.speciesId)
-//        }
-//      }) {
-//        Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: item.speciesId) ? SFSpeciesFill : SFSpecies)
-//          .uniformSize()
-//      }
-//      .accessibilityLabel(favoriteObserver)
-//      .background(Color.clear)
 
     }
+    .sheet(isPresented: $showChart) {
+      ObservationsChartView(observations: observationsSpecies.observations ?? [], name: item.name)
+    }
+
     .onAppear() {
       settings.initialSpeciesLoad = true
     }
   }
 }
 
+
+import SwiftUI
+import Charts
+
+struct ObservationsChartView: View {
+  var observations: [Observation]
+  var name : String = ""
+
+  // Step 1: Group and count observations by DD-MM
+  private var groupedObservations: [(date: String, count: Int)] {
+    let grouped = Dictionary(grouping: observations, by: { dateToDayMonth($0.date) })
+    return grouped.map { (date: $0.key, count: $0.value.count) }
+      .sorted { $0.date < $1.date } // Ensure chronological order
+  }
+
+  // Extracts "DD-MM" from "YY-MM-DD"
+  private func dateToDayMonth(_ fullDate: String) -> String {
+    let components = fullDate.split(separator: "-")
+    guard components.count == 3 else { return fullDate }
+    return "\(components[2])-\(components[1])"  // Extracts "DD-MM"
+  }
+
+  var body: some View {
+    VStack {
+      Text("Laatste \(observations.count) obs \(name)")
+        .font(.caption)
+        .padding()
+      Chart {
+        ForEach(groupedObservations, id: \.date) { entry in
+          BarMark(
+            x: .value("Date", entry.date),
+            y: .value("Observations", entry.count)
+          )
+        }
+      }
+      .rotationEffect(.degrees(90)) // Rotate chart
+      .frame(height: 300)
+      .frame(width: 500)
+      .padding()
+    }
+  }
+}
 
 
