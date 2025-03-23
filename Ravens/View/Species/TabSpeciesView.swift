@@ -63,10 +63,15 @@ struct TabSpeciesView: View {
 
             }
 
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
 
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              BookmarkButtonView(speciesID: species.speciesId)
-                .tint(.green)
+                Button(action: {
+                  selectedSpeciesID = species.speciesId
+                }) {
+                  Image(systemSymbol: .infoCircle)
+                    .uniformSize()
+                }
+                .tint(.blue)
 
               Button {
                 showSpeciesXC = species
@@ -74,7 +79,12 @@ struct TabSpeciesView: View {
                 Label("XC", systemImage: "waveform")
               }
               .tint(Color(red: 0.5, green: 0, blue: 0)) // Darker Blood Red
+            }
 
+
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              BookmarkButtonView(speciesID: species.speciesId)
+                .tint(.green)
             }
           }
         }
@@ -82,7 +92,7 @@ struct TabSpeciesView: View {
         .searchable(text: $searchText) //een niveau lager geplaatst
       }
 
-      .sheet(item: $showSpeciesXC) { species in
+      .navigationDestination(item: $showSpeciesXC) { species in
         BirdListView(scientificName: species.scientificName, nativeName: species.name)
       }
 
@@ -169,11 +179,6 @@ struct SortFilterSpeciesView: View {
       }
     }
   }
-
-  //  /// Filters `TimePeriod.allCases` based on entity
-  //  private var filteredTimePeriods: [TimePeriod] {
-  //    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
-  //  }
 }
 
 enum SortNameOption: String, CaseIterable {

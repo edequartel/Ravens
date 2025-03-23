@@ -42,15 +42,15 @@ struct SpeciesView: View {
     }
 
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: {
-          selectedSpeciesID = item.speciesId
-        }) {
-          Image(systemSymbol: .infoCircle)
-            .uniformSize()
-        }
-        .background(Color.clear)
-      }
+//      ToolbarItem(placement: .navigationBarTrailing) {
+//        Button(action: {
+//          selectedSpeciesID = item.speciesId
+//        }) {
+//          Image(systemSymbol: .infoCircle)
+//            .uniformSize()
+//        }
+//        .background(Color.clear)
+//      }
 
       //      ToolbarItem(placement: .navigationBarTrailing) {
       //        Button(action: {
@@ -77,9 +77,9 @@ struct SpeciesView: View {
 
 
     }
-    .sheet(isPresented: $showChart) {
-      ObservationsChartView(observations: observationsSpecies.observations ?? [], name: item.name)
-    }
+//    .sheet(isPresented: $showChart) {
+//      ObservationsChartView(observations: observationsSpecies.observations ?? [], name: item.name)
+//    }
 
     .onAppear() {
       settings.initialSpeciesLoad = true

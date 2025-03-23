@@ -106,7 +106,10 @@ struct ObservationsSpeciesView: View {
         log.error("refreshing... observation species")
         fetchDataModel()
       }
-      
+
+      .navigationBarTitleDisplayMode(.inline)
+//      .navigationTitle("test")
+
       .onAppear() {
         if !hasAppeared {
           if settings.initialSpeciesLoad {

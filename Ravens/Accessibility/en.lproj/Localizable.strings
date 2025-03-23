@@ -111,3 +111,38 @@
 
 "noObservations" = "If no observations appear, \nwider your scope.";
 "switchView" = "Switch view";
+
+// Xeno Canto
+"sound" = "Sound";
+"mixed" = "Mixed";
+"aberrant" = "Aberrant";
+"advertisement call" = "Advertisement Call";
+"agonistic call" = "Agonistic Call";
+"alarm call" = "Alarm Call";
+"begging call" = "Begging Call";
+"call" = "Call";
+"calling song" = "Calling Song";
+"courtship song" = "Courtship Song";
+"dawn song" = "Dawn Song";
+"defensive call" = "Defensive Call";
+"distress call" = "Distress Call";
+"disturbance song" = "Disturbance Song";
+"drumming" = "Drumming";
+"duet" = "Duet";
+"echolocation" = "Echolocation";
+"feeding buzz" = "Feeding Buzz";
+"female song" = "Female Song";
+"flight call" = "Flight Call";
+"flight song" = "Flight Song";
+"imitation" = "Imitation";
+"mating call" = "Mating Call";
+"mechanical sound" = "Mechanical Sound";
+"nocturnal flight call" = "Nocturnal Flight Call";
+"night call" = "Night Call";
+"release call" = "Release Call";
+"rivalry song" = "Rivalry Song";
+"searching song" = "Searching Song";
+"social call" = "Social Call";
+"song" = "Song";
+"subsong" = "Subsong";
+"territorial call" = "Territorial Call";

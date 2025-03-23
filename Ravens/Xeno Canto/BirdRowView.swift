@@ -48,13 +48,18 @@ struct BirdRowView: View {
           VStack {
             HStack {
               Image(systemName: "\(bird.q?.lowercased() ?? "").square.fill")
-                .font(.caption)
                 .foregroundColor(.gray)
+
               Text("XC\(bird.id)")
-                .font(.caption)
-                .bold(true)
-              Text("\(bird.type ?? "")")
-                .font(.caption)
+                .bold()
+              Spacer()
+            }
+
+            HStack {
+              localizedSoundTypes2(from: bird.type ?? "")
+                .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
               Spacer()
             }
 
@@ -70,9 +75,9 @@ struct BirdRowView: View {
             ProgressView()
               .progressViewStyle(CircularProgressViewStyle())
           } else if isPlayingThisBird {
-            Image(systemName: "waveform")
+            Image(systemSymbol: .waveform)
               .font(.title)
-              .foregroundColor(.gray)
+              .foregroundColor(.blue)
           }
         }
       }
@@ -114,21 +119,114 @@ struct BirdRowView: View {
       }
     }
   }
+
+  func localizedSoundTypes(from string: String) -> Text {
+    let parts = string
+      .split(separator: ",")
+      .map { $0.trimmingCharacters(in: .whitespaces) }
+
+    // Map each part to a localized Text
+    let localizedParts = parts.map { LocalizedStringKey($0) }
+
+    // Combine into a single Text with comma separation
+    return localizedParts
+      .enumerated()
+      .map { index, key in
+        index == 0 ? Text(key) : Text(", ") + Text(key)
+      }
+      .reduce(Text(""), +)
+  }
+
+  func localizedSoundTypes2(from string: String) -> Text {
+    let validOptions = Set(SoundOption.allCases.map { $0.rawValue })
+
+    let parts = string
+      .split(separator: ",")
+      .map { $0.trimmingCharacters(in: .whitespaces) }
+      .filter { validOptions.contains($0) }
+
+    let localizedParts = parts.map { LocalizedStringKey($0) }
+
+    return localizedParts
+      .enumerated()
+      .map { index, key in
+        index == 0 ? Text(key) : Text(", ") + Text(key)
+      }
+      .reduce(Text(""), +)
+  }
+}
+
+enum SoundOption: String, CaseIterable {
+  case mixed
+  case song
+  case aberrant
+  case advertisementCall = "advertisement call"
+  case agonisticCall = "agonistic call"
+  case alarmCall = "alarm call"
+  case beggingCall = "begging call"
+  case call
+  case callingSong = "calling song"
+  case courtshipSong = "courtship song"
+  case dawnSong = "dawn song"
+  case defensiveCall = "defensive call"
+  case distressCall = "distress call"
+  case disturbanceSong = "disturbance song"
+  case drumming
+  case duet
+  case echolocation
+  case feedingBuzz = "feeding buzz"
+  case femaleSong = "female song"
+  case flightCall = "flight call"
+  case flightSong = "flight song"
+  case imitation
+  case matingCall = "mating call"
+  case mechanicalSound = "mechanical sound"
+  case nocturnalFlightCall = "nocturnal flight call"
+  case nightCall = "night call"
+  case releaseCall = "release call"
+  case rivalrySong = "rivalry song"
+  case searchingSong = "searching song"
+  case socialCall = "social call"
+  case subsong
+  case territorialCall = "territorial call"
+
+
+  var intValue: Int? {
+    return SoundOption.allCases.firstIndex(of: self)
+  }
+
+  var localized: LocalizedStringKey {
+    LocalizedStringKey(self.rawValue)
+  }
 }
 
 // MARK: - SoundTypePickerView
 struct SoundTypePickerView: View {
-  @Binding var typeSound: String
-
-  let soundOptions = ["mixed", "call", "song", "alarm call", "flight call", "night calls", "begging calls"]
+  @Binding var selectedSound: SoundOption
 
   var body: some View {
-    Picker("Select", selection: $typeSound) {
-      ForEach(soundOptions, id: \.self) { sound in
-        Text(sound).tag(sound)
+    HStack {
+      Text(soundXC)
+        .foregroundColor(.blue)
+        .font(.headline)
+
+      Spacer()
+
+      Menu {
+        ForEach(SoundOption.allCases, id: \.self) { sound in
+          Button(action: {
+            selectedSound = sound
+          }) {
+            Text(sound.localized)
+              .font(.headline)
+          }
+        }
+      } label: {
+        Text(selectedSound.localized)
+          .font(.headline)
+          .foregroundColor(.blue)
       }
     }
-    .pickerStyle(.menu)
   }
 }
 

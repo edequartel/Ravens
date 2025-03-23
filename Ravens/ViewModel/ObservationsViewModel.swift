@@ -24,7 +24,7 @@ class ObservationsViewModel: ObservableObject {
   
   @Published var observations: [Observation]? {
     didSet {
-      print("Array updated \(observations?.count ?? 0)")
+      //print("Array updated \(observations?.count ?? 0)") to update the ModelView
     }
   }
 

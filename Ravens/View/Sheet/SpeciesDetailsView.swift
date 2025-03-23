@@ -21,86 +21,103 @@ struct SpeciesDetailsView: View {
   var speciesID: Int
   @State private var imageURL: String = ""
 
+  @State private var showSpeciesXC: Species?
+
   var body: some View {
-      ScrollView {
-        if showView { Text("SpeciesDetailsView").font(.customTiny) }
-        VStack(alignment: .leading, spacing: 16) {
-          // Species Details Header
-          if let species = viewSpeciesDetailsDModel.speciesDetails {
-            HStack {
-              Link(destination: URL(string: species.permalink)!) {
-                Label("More Info", systemImage: "arrow.up.right.square")
-                  .font(.headline)
-                  .padding()
-                  .foregroundColor(.blue)
-                  .islandBackground() // Assuming this is a custom modifier
-              }
-              Spacer()
-              Button(action: {
-                openWikipediaPage(for: species.scientificName)
-              }) {
-                Label("Wikipedia", systemImage: "book.fill")
-                  .font(.headline)
-                  .padding()
-                  .foregroundColor(.blue)
-                  .islandBackground() // Assuming this is a custom modifier
-              }
-            }
-            VStack(alignment: .leading, spacing: 8) {
-              Text(species.name)
-                .font(.title)
-                .bold()
-
-              Text(species.scientificName)
-                .italic()
-                .foregroundColor(.gray)
-
-              HStack {
-                Text("\(species.groupName) - ")
-                //                                Spacer()
-                Text("\(species.status) - ")
-                //                                Spacer()
-                Text("\(species.rarity)")
-                Spacer()
-              }
-              .font(.footnote)
-              .foregroundColor(.gray)
-            }
-            .padding()
-            .islandBackground()
-            .accessibilityElement(children: .combine)
-
-            // Image Display
-            if !imageURL.isEmpty {
-              KFImage(URL(string: imageURL))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .islandBackground()
-                .accessibility(hidden: true)
-            }
-
-            //share the image
-            if !imageURL.isEmpty {
-                URLShareButtonView(urlShare: imageURL)
-                .accessibilityLabel(sharePictureLink)
-            }
-
-
-            // Information Text
-            if species.infoText != "" {
-              RichText(html: species.infoText)
+    NavigationStack {
+    ScrollView {
+      if showView { Text("SpeciesDetailsView").font(.customTiny) }
+      VStack(alignment: .leading, spacing: 16) {
+        // Species Details Header
+        if let species = viewSpeciesDetailsDModel.speciesDetails {
+          HStack {
+            Link(destination: URL(string: species.permalink)!) {
+              Label("More Info", systemImage: "arrow.up.right.square")
+                .font(.headline)
                 .padding()
-                .islandBackground()
+                .foregroundColor(.blue)
+                .islandBackground() // Assuming this is a custom modifier
+            }
+            Spacer()
+
+//            NavigationLink {
+//              BirdListView(scientificName: species.scientificName, nativeName: species.name)
+//            } label: {
+//              Image(systemSymbol: .waveform)
+//                .font(.headline)
+//                .padding()
+//                .foregroundColor(.blue)
+//                .islandBackground() // optional
+//            }
+
+            Spacer()
+            Button(action: {
+              openWikipediaPage(for: species.scientificName)
+            }) {
+              Label("Wikipedia", systemImage: "book.fill")
+                .font(.headline)
+                .padding()
+                .foregroundColor(.blue)
+                .islandBackground() // Assuming this is a custom modifier
             }
 
-          } else {
-            ProgressView()
           }
+          VStack(alignment: .leading, spacing: 8) {
+            Text(species.name)
+              .font(.title)
+              .bold()
+
+            Text(species.scientificName)
+              .italic()
+              .foregroundColor(.gray)
+
+            HStack {
+              Text("\(species.groupName) - ")
+              //                                Spacer()
+              Text("\(species.status) - ")
+              //                                Spacer()
+              Text("\(species.rarity)")
+              Spacer()
+            }
+            .font(.footnote)
+            .foregroundColor(.gray)
+          }
+          .padding()
+          .islandBackground()
+          .accessibilityElement(children: .combine)
+
+          // Image Display
+          if !imageURL.isEmpty {
+            KFImage(URL(string: imageURL))
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .clipShape(RoundedRectangle(cornerRadius: 12))
+              .frame(maxWidth: .infinity, maxHeight: .infinity)
+              .islandBackground()
+              .accessibility(hidden: true)
+          }
+
+          //share the image
+          if !imageURL.isEmpty {
+            URLShareButtonView(urlShare: imageURL)
+              .accessibilityLabel(sharePictureLink)
+          }
+
+
+          // Information Text
+          if species.infoText != "" {
+            RichText(html: species.infoText)
+              .padding()
+              .islandBackground()
+          }
+
+        } else {
+          ProgressView()
         }
-        .padding()
       }
+      .padding()
+    }
+  }
 //    }
     .presentationDragIndicator(.visible)
     .onAppear {

@@ -146,7 +146,7 @@ struct LocationDetail: Codable, Equatable {
   }
 }
 
-struct Species: Codable, Identifiable, Equatable { //equatable
+struct Species: Codable, Identifiable, Hashable, Equatable { //equatable
   var id = UUID()  // Unique identifier for SwiftUI
   let speciesId: Int  // Maps to JSON `id`
   let name: String

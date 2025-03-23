@@ -25,6 +25,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     let date = Date()
     let dateFormatted = formatDate(date: date)
     let parameters: [String: Any] = [
+      "Accept-Language" : settings.selectedLanguage,
       "days": timePeriod.rawValue,
       "end_date": dateFormatted,
 //      "species_group": settings.selectedSpeciesGroupId, //<<??
