@@ -23,7 +23,7 @@ struct BirdRowView: View {
 
 
   var isPlayingThisBird: Bool {
-    currentlyPlayingBirdID == bird.id && audioPlayerManager.isPlaying
+    currentlyPlayingBirdID == bird.id_species && audioPlayerManager.isPlaying
   }
 
   var body: some View {
@@ -36,7 +36,7 @@ struct BirdRowView: View {
         if currentlyPlayingBirdID != nil {
           audioPlayerManager.stopAudio()
         }
-        currentlyPlayingBirdID = bird.id
+        currentlyPlayingBirdID = bird.id_species
         isLoadingAudio = true
         audioPlayerManager.playAudio(from: bird.file) {
           isLoadingAudio = false
@@ -50,7 +50,7 @@ struct BirdRowView: View {
               Image(systemName: "\(bird.q?.lowercased() ?? "").square.fill")
                 .foregroundColor(.gray)
 
-              Text("XC\(bird.id)")
+              Text("XC\(bird.id_species)")
                 .bold()
 
               Text("\(bird.length ?? "")")

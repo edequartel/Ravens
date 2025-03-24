@@ -20,12 +20,9 @@ struct BirdListView: View {
   var nativeName: String?
 
   var body: some View {
+    NavigationStack {
     VStack {
-//        SoundTypePickerView(selectedSound: $selectedSound)
-//          .padding(.horizontal)
-
       HorizontalLine()
-
       Group {
         if viewModel.isLoading {
           ProgressView(loadindData)
@@ -57,6 +54,7 @@ struct BirdListView: View {
 
       Spacer()
     }
+  }
 
     .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -71,9 +69,10 @@ struct BirdListView: View {
 
     .sheet(item: $selectedBird) { bird in
       BirdDetailView(bird: bird, nativeName: nativeName)
-        .presentationDetents([.fraction(0.7)])
+        .presentationDetents([.fraction(0.8)])
         .presentationDragIndicator(.visible)
     }
+
     .navigationBarTitleDisplayMode(.inline)
     .navigationTitle(nativeName ?? "")
     .onAppear {

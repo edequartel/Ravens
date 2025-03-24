@@ -39,28 +39,28 @@ struct PositionOnMapView: View {
   }
 }
 
-//struct PositionLatitideLongitudeOnMapView: View {
-//  let latitude: Double
-//  let longitude: Double
-//
-//  @EnvironmentObject var settings: Settings
-//  @State private var cameraPosition: MapCameraPosition = .automatic
-//
-//  var body: some View {
-//    Map(position: $cameraPosition) {
-//      Annotation("", coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
-//        Circle()
-//          .fill(.red)
-//          .frame(width: 12, height: 12)
-//
-//      }
-//    }
-//    .mapStyle(settings.mapStyle)
-//    .onAppear() {
-//      cameraPosition = .camera(
-//        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 1000)
-//      )
-//    }
-//    .allowsHitTesting(false)
-//  }
-//}
+struct PositionLatitideLongitudeOnMapView: View {
+  let latitude: Double
+  let longitude: Double
+
+  @EnvironmentObject var settings: Settings
+  @State private var cameraPosition: MapCameraPosition = .automatic
+
+  var body: some View {
+    Map(position: $cameraPosition) {
+      Annotation("", coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
+        Circle()
+          .fill(.red)
+          .frame(width: 12, height: 12)
+
+      }
+    }
+    .mapStyle(settings.mapStyle)
+    .onAppear() {
+      cameraPosition = .camera(
+        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 150000)
+      )
+    }
+    .allowsHitTesting(false)
+  }
+}

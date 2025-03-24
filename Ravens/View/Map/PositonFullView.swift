@@ -10,12 +10,12 @@ import SwiftUI
 import MapKit
 
 struct PositonFullView: View {
-    var obs: Observation
-    @EnvironmentObject var settings: Settings
+  var obs: Observation
+  @EnvironmentObject var settings: Settings
 
-    @State private var cameraPosition: MapCameraPosition = .automatic
+  @State private var cameraPosition: MapCameraPosition = .automatic
 
-    var body: some View {
+  var body: some View {
     Map(position: $cameraPosition) {
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
@@ -32,15 +32,16 @@ struct PositonFullView: View {
     }
     .mapStyle(settings.mapStyle)
     .mapControls() {
-        MapUserLocationButton()
-        MapPitchToggle()
-        MapCompass() //tapping this makes it north
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() //tapping this makes it north
     }
 
     .onAppear() {
       cameraPosition = .camera(
-        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 50000)
+        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
     }
   }
 }
+
