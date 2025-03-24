@@ -48,6 +48,19 @@ struct BirdDetailView: View {
             .stroke(Color.gray, lineWidth: 1)
         )
 
+//        NavigationLink(destination: Text("placeholder")) {
+//          if let lat = Double(bird.lat ?? "0.0"), let long = Double(bird.lng ?? "0.0")  {
+//            PositionLatitideLongitudeOnMapView(latitude: lat, longitude: long)
+//              .frame(height: UIScreen.main.bounds.width / 2)
+//              .cornerRadius(8)
+//              .contentShape(Rectangle())
+//          }
+//        }
+//        .buttonStyle(PlainButtonStyle())
+//        .accessibilityHidden(true)
+        
+//        //show the location
+//        Text("\(bird.lat) + \(bird.lng)")
 
 
         //images

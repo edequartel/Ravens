@@ -14,20 +14,21 @@ struct BirdListView: View {
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @State private var currentlyPlayingBirdID: String? = nil
   @State private var selectedBird: Bird?
+  @State private var firstTime: Bool = true
 
   let scientificName: String
   var nativeName: String?
 
   var body: some View {
     VStack {
-        SoundTypePickerView(selectedSound: $selectedSound)
-          .padding(.horizontal)
+//        SoundTypePickerView(selectedSound: $selectedSound)
+//          .padding(.horizontal)
 
       HorizontalLine()
 
       Group {
         if viewModel.isLoading {
-          ProgressView("Loading data...")
+          ProgressView(loadindData)
             .progressViewStyle(CircularProgressViewStyle())
         } else if let errorMessage = viewModel.errorMessage {
           Text("Error: \(errorMessage)")
@@ -56,6 +57,18 @@ struct BirdListView: View {
 
       Spacer()
     }
+
+    .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: SoundTypePickerView(selectedSound: $selectedSound)
+          ) {
+            Image(systemSymbol: .ellipsisCircle)
+              .uniformSize()
+              .accessibility(label: Text(observersList))
+          }
+        }
+    }
+
     .sheet(item: $selectedBird) { bird in
       BirdDetailView(bird: bird, nativeName: nativeName)
         .presentationDetents([.fraction(0.7)])
@@ -64,7 +77,10 @@ struct BirdListView: View {
     .navigationBarTitleDisplayMode(.inline)
     .navigationTitle(nativeName ?? "")
     .onAppear {
-      viewModel.fetchBirds(name: scientificName)
+      if firstTime {
+        viewModel.fetchBirds(name: scientificName)
+        firstTime = false
+      }
     }
   }
 

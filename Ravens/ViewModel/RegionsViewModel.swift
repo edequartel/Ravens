@@ -19,7 +19,7 @@ class RegionsViewModel: ObservableObject {
         log.info("fetchData RegionViewModel \(settings.selectedLanguage)")
         let url = endPoint(value: settings.selectedInBetween) + "regions/"
 
-        log.info("url RegionViewModel \(url)")
+        log.error("url RegionViewModel \(url)")
 
         // Add the custom header 'Accept-Language: nl' eng, nl, de, fr
         let headers: HTTPHeaders = [

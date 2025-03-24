@@ -52,16 +52,22 @@ struct BirdRowView: View {
 
               Text("XC\(bird.id)")
                 .bold()
+
+              Text("\(bird.length ?? "")")
+                .foregroundColor(.gray)
+
               Spacer()
             }
 
             HStack {
-              localizedSoundTypes2(from: bird.type ?? "")
+              localizedSoundTypes(from: bird.type ?? "")
                 .bold()
                 .lineLimit(1)
                 .truncationMode(.tail)
               Spacer()
             }
+
+
 
             HStack {
               Text("\(bird.rec ?? "")")
@@ -103,9 +109,9 @@ struct BirdRowView: View {
       Button(action: {
         selectedBird = bird
       }) {
-        Label("Info", systemImage: "info.circle")
+        Image(systemSymbol: .infoCircle)
       }
-      .tint(.blue)
+      .tint(.orange)
 
 
 
@@ -121,23 +127,6 @@ struct BirdRowView: View {
   }
 
   func localizedSoundTypes(from string: String) -> Text {
-    let parts = string
-      .split(separator: ",")
-      .map { $0.trimmingCharacters(in: .whitespaces) }
-
-    // Map each part to a localized Text
-    let localizedParts = parts.map { LocalizedStringKey($0) }
-
-    // Combine into a single Text with comma separation
-    return localizedParts
-      .enumerated()
-      .map { index, key in
-        index == 0 ? Text(key) : Text(", ") + Text(key)
-      }
-      .reduce(Text(""), +)
-  }
-
-  func localizedSoundTypes2(from string: String) -> Text {
     let validOptions = Set(SoundOption.allCases.map { $0.rawValue })
 
     let parts = string
@@ -159,12 +148,13 @@ struct BirdRowView: View {
 enum SoundOption: String, CaseIterable {
   case mixed
   case song
+  case call
+  case imitation
   case aberrant
   case advertisementCall = "advertisement call"
   case agonisticCall = "agonistic call"
   case alarmCall = "alarm call"
   case beggingCall = "begging call"
-  case call
   case callingSong = "calling song"
   case courtshipSong = "courtship song"
   case dawnSong = "dawn song"
@@ -178,7 +168,6 @@ enum SoundOption: String, CaseIterable {
   case femaleSong = "female song"
   case flightCall = "flight call"
   case flightSong = "flight song"
-  case imitation
   case matingCall = "mating call"
   case mechanicalSound = "mechanical sound"
   case nocturnalFlightCall = "nocturnal flight call"
@@ -205,28 +194,27 @@ struct SoundTypePickerView: View {
   @Binding var selectedSound: SoundOption
 
   var body: some View {
-    HStack {
-      Text(soundXC)
-        .foregroundColor(.blue)
-        .font(.headline)
-
-      Spacer()
-
-      Menu {
-        ForEach(SoundOption.allCases, id: \.self) { sound in
-          Button(action: {
-            selectedSound = sound
-          }) {
-            Text(sound.localized)
-              .font(.headline)
+    Form {
+      Section(soundXC) {
+        List {
+          ForEach(SoundOption.allCases, id: \.self) { sound in
+            Button(action: {
+              selectedSound = sound
+            }) {
+              HStack {
+                Text(sound.localized)
+                Spacer()
+                if selectedSound == sound {
+                  Image(systemSymbol: .checkmark)
+                }
+              }
+            }
+            .foregroundColor(.primary)
           }
         }
-      } label: {
-        Text(selectedSound.localized)
-          .font(.headline)
-          .foregroundColor(.blue)
       }
     }
+    .navigationBarTitleDisplayMode(.inline)
   }
 }
 

@@ -27,7 +27,7 @@ class SpeciesGroupsViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
         
-        log.info("url SpeciesGroupViewModel: \(url)")
+        log.error("url SpeciesGroupViewModel: \(url)")
         
         // Use Alamofire to make the API request
         AF.request(url, headers: headers)
@@ -51,7 +51,7 @@ class SpeciesGroupsViewModel: ObservableObject {
                 }
             case .failure(let error):
                 self.log.error("Error SpeciesGroupViewModel fetching data: \(error)")
-//                completion(false)
+                self.log.error(String(data: response.data ?? Data(), encoding: .utf8) ?? "No data") //html text
             }
         }
     }

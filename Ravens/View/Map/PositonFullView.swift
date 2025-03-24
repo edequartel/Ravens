@@ -42,7 +42,5 @@ struct PositonFullView: View {
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 50000)
       )
     }
-
-//    .allowsHitTesting(false)
   }
 }

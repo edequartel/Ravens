@@ -129,3 +129,5 @@ let socialCallXC = LocalizedStringKey("social call")
 let songXC = LocalizedStringKey("song")
 let subsongXC = LocalizedStringKey("subsong")
 let territorialCallXC = LocalizedStringKey("territorial call")
+
+let loadindData = LocalizedStringKey("loadingData")

@@ -4,11 +4,9 @@
 //
 //  Created by Eric de Quartel on 09/09/2024.
 //
-
 import Foundation
 import SwiftUI
 import MapKit
-
 
 struct PositionOnMapView: View {
   var obs: Observation
@@ -32,11 +30,6 @@ struct PositionOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
-//    .mapControls() {
-//        MapUserLocationButton()
-//        MapPitchToggle()
-//        MapCompass() //tapping this makes it north
-//    }
     .onAppear() {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
@@ -45,3 +38,29 @@ struct PositionOnMapView: View {
     .allowsHitTesting(false)
   }
 }
+
+//struct PositionLatitideLongitudeOnMapView: View {
+//  let latitude: Double
+//  let longitude: Double
+//
+//  @EnvironmentObject var settings: Settings
+//  @State private var cameraPosition: MapCameraPosition = .automatic
+//
+//  var body: some View {
+//    Map(position: $cameraPosition) {
+//      Annotation("", coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
+//        Circle()
+//          .fill(.red)
+//          .frame(width: 12, height: 12)
+//
+//      }
+//    }
+//    .mapStyle(settings.mapStyle)
+//    .onAppear() {
+//      cameraPosition = .camera(
+//        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 1000)
+//      )
+//    }
+//    .allowsHitTesting(false)
+//  }
+//}

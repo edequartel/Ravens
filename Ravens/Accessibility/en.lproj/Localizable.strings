@@ -146,3 +146,5 @@
 "song" = "Song";
 "subsong" = "Subsong";
 "territorial call" = "Territorial Call";
+
+"loadingData" = "Loading sounds...";
