@@ -64,21 +64,27 @@ struct TabSpeciesView: View {
             }
 
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
-
-                Button(action: {
-                  selectedSpeciesID = species.speciesId
-                }) {
+                NavigationLink(destination: SpeciesDetailsView(speciesID: species.speciesId)) {
                   Image(systemSymbol: .infoCircle)
-                    .uniformSize()
-                }
-                .tint(.blue)
+                          .uniformSize()
+                  }
+                  .tint(.blue)
 
-              Button {
-                showSpeciesXC = species
-              } label: {
-                Label("XC", systemImage: "waveform")
-              }
-              .tint(Color(red: 0.5, green: 0, blue: 0)) // Darker Blood Red
+//
+//                Button(action: {
+//                  selectedSpeciesID = species.speciesId
+//                }) {
+//                  Image(systemSymbol: .infoCircle)
+//                    .uniformSize()
+//                }
+//                .tint(.blue)
+//
+//              Button {
+//                showSpeciesXC = species
+//              } label: {
+//                Label("XC", systemImage: "waveform")
+//              }
+//              .tint(Color(red: 0.5, green: 0, blue: 0)) // Darker Blood Red
             }
 
 

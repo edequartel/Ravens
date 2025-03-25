@@ -5,7 +5,6 @@
 //  Created by Eric de Quartel on 15/01/2024.
 //
 
-
 import Foundation
 import SwiftUI
 import AudioToolbox
@@ -74,6 +73,9 @@ extension Color {
   static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
   static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
   static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
+
+  static let obsBirdInfo = Color(red: 240/255, green: 94/255, blue: 35/255) //orange
+  static let obsXCred = Color(red: 0.5, green: 0.0, blue: 0.0) //darkred
 }
 
 

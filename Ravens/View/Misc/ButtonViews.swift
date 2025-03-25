@@ -73,13 +73,20 @@ struct InformationSpeciesButtonView: View {
     var obs: Observation
 
     var body: some View {
-        Button(action: {
-            selectedSpeciesID = obs.speciesDetail.id
-        }) {
-            Image(systemSymbol: SFInformation)
+      NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+        Image(systemSymbol: .infoCircle)
+                .uniformSize()
         }
-        .tint(.obsInformation)
+        .tint(.blue)
         .accessibilityLabel(informationSpecies)
+
+//        Button(action: {
+//            selectedSpeciesID = obs.speciesDetail.id
+//        }) {
+//            Image(systemSymbol: SFInformation)
+//        }
+//        .tint(.blue) 
+//        .accessibilityLabel(informationSpecies)
     }
 }
 

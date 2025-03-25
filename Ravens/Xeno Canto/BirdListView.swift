@@ -65,6 +65,17 @@ struct BirdListView: View {
               .accessibility(label: Text(observersList))
           }
         }
+
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          NavigationLink(destination: SoundTypePickerView(selectedSound: $selectedSound)
+//          ) {
+//            Image(systemSymbol: .ellipsisCircle)
+//              .uniformSize()
+//              .accessibility(label: Text(observersList))
+//          }
+//        }
+
+      
     }
 
     .sheet(item: $selectedBird) { bird in

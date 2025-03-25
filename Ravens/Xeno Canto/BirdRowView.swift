@@ -83,7 +83,7 @@ struct BirdRowView: View {
           } else if isPlayingThisBird {
             Image(systemSymbol: .waveform)
               .font(.title)
-              .foregroundColor(.blue)
+              .foregroundColor(.obsInformation)
           }
         }
       }
@@ -102,16 +102,16 @@ struct BirdRowView: View {
         }
       }) {
         Text("XC")
+          .bold()
       }
-
-      .tint(Color(red: 0.5, green: 0.0, blue: 0.0)) // Dark red tint
+      .tint(.obsXCred) // Dark red tint
 
       Button(action: {
         selectedBird = bird
       }) {
         Image(systemSymbol: .infoCircle)
       }
-      .tint(.orange)
+      .tint(.obsBirdInfo)
 
 
 

@@ -42,6 +42,23 @@ struct SpeciesView: View {
     }
 
     .toolbar {
+
+      ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
+              Image(systemSymbol: .waveform)
+                  .uniformSize()
+          }
+          .background(Color.clear)
+      }
+
+      ToolbarItem(placement: .navigationBarTrailing) { //@@
+        NavigationLink(destination: SpeciesDetailsView(speciesID: item.speciesId)) {
+          Image(systemSymbol: .infoCircle)
+                  .uniformSize()
+          }
+          .background(Color.clear)
+      }
+
 //      ToolbarItem(placement: .navigationBarTrailing) {
 //        Button(action: {
 //          selectedSpeciesID = item.speciesId
@@ -49,8 +66,9 @@ struct SpeciesView: View {
 //          Image(systemSymbol: .infoCircle)
 //            .uniformSize()
 //        }
-//        .background(Color.clear)
+//        .tint(.blue)
 //      }
+
 
       //      ToolbarItem(placement: .navigationBarTrailing) {
       //        Button(action: {
@@ -74,8 +92,6 @@ struct SpeciesView: View {
           .accessibility(label: Text("Switch view"))
         }
       }
-
-
     }
 //    .sheet(isPresented: $showChart) {
 //      ObservationsChartView(observations: observationsSpecies.observations ?? [], name: item.name)

@@ -129,8 +129,9 @@ struct TabLocationView: View {
       //set sort, filter and timePeriod
       .modifier(
         showFirstView ?
-       ObservationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption)
+        ObservationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $timePeriod)
         :
           ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,

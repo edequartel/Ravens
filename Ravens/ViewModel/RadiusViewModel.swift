@@ -21,22 +21,25 @@ class ObservationsRadiusViewModel: ObservableObject {
   
   func fetchData(settings: Settings, latitude: Double, longitude: Double, radius: Double,timePeriod: TimePeriod, completion: (() -> Void)? = nil) {
 
+//    print("--->>>>\(settings.selectedLanguage)")
+    let headers: HTTPHeaders = [
+        "Accept-Language": settings.selectedLanguage
+    ]
+
     let url = "https://waarnemingen.be/api/v1/observations/around-point/"
     let date = Date()
     let dateFormatted = formatDate(date: date)
     let parameters: [String: Any] = [
-      "Accept-Language" : settings.selectedLanguage,
       "days": timePeriod.rawValue,
       "end_date": dateFormatted,
-//      "species_group": settings.selectedSpeciesGroupId, //<<??
       "radius": radius,
       "lat": latitude,
       "lng": longitude
     ]
     
     log.info("Fetching data from: \(url) +\(parameters)")
-
-    AF.request(url, parameters: parameters).responseString { response in
+    AF.request(url, parameters: parameters, headers: headers).responseString { response in
+//    AF.request(url, parameters: parameters).responseString { response in
       switch response.result {
       case .success(let stringResponse):
         // Now you can convert the stringResponse to Data and decode it

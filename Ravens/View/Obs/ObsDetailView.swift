@@ -29,14 +29,21 @@ struct ObsDetailView: View {
       VStack() {
         HStack {
 
-          Button(action: {
-            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
-            selectedSpeciesID = obs.speciesDetail.id
-          }) {
-            Image(systemSymbol: SFInformation)
-              .uniformSize()
-          }
-          .accessibility(label: Text(informationSpecies))
+          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+            Image(systemSymbol: .infoCircle)
+                    .uniformSize()
+            }
+            .tint(.blue)
+            .accessibility(label: Text(informationSpecies))
+
+//          Button(action: {
+//            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
+//            selectedSpeciesID = obs.speciesDetail.id
+//          }) {
+//            Image(systemSymbol: SFInformation)
+//              .uniformSize()
+//          }
+//          .accessibility(label: Text(informationSpecies))
 
           let url = URL(string: obs.permalink)!
           ShareLink(item: url) {
