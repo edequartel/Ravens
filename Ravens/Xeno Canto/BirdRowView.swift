@@ -80,11 +80,13 @@ struct BirdRowView: View {
           if isLoadingAudio {
             ProgressView()
               .progressViewStyle(CircularProgressViewStyle())
+              .foregroundColor(.blue)
           } else if isPlayingThisBird {
             Image(systemSymbol: .waveform)
               .font(.title)
-              .foregroundColor(.obsInformation)
+              .foregroundColor(.blue)
           }
+
         }
       }
       .frame(maxWidth: .infinity, minHeight: 40)
@@ -117,7 +119,7 @@ struct BirdRowView: View {
 
     }
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("\(birdName) \(bird.type ?? "")")
+    .accessibilityLabel("birdRowView \(birdName) \(bird.type ?? "")")
     .onDisappear {
       // Stop audio when leaving the BirdListView
       if isPlayingThisBird {

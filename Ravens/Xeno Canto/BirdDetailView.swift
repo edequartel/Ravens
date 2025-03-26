@@ -144,7 +144,7 @@ struct BirdDetailView: View {
         }
         
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(bird.rec ?? "") \(bird.id)")
+        .accessibilityLabel("BirdDetailView \(bird.rec ?? "") \(bird.id)")
         
       }
       //    }

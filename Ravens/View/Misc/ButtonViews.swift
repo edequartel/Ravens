@@ -117,6 +117,34 @@ struct AreaButtonView: View {
   }
 }
 
+struct AreaLocationButtonView: View {
+  @EnvironmentObject var areasViewModel: AreasViewModel
+  var locationDetail: LocationDetail?
+  var locationPoint: Point?
+
+  var body: some View {
+    Button(action: {
+      if areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) {
+        print("remove areas \(locationDetail?.id ?? 0)")
+        areasViewModel.removeRecord(
+          areaID: locationDetail?.id ?? 0)
+      } else {
+        print("adding area \(locationDetail?.id ?? 0)")
+        areasViewModel.appendRecord(
+          areaName: locationDetail?.name ?? "unknown",
+          areaID: locationDetail?.id ?? 0,
+          latitude: locationPoint?.coordinates[1] ?? 0,
+          longitude: locationPoint?.coordinates[0] ?? 0
+        )
+      }
+    }) {
+        Image(systemSymbol: areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) ? SFAreaFill: SFArea)
+          .uniformSize()
+    }
+    .accessibilityLabel(areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) ? favoriteLocationOn : favoriteLocationOff)
+  }
+}
+
 struct ObserversButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   var obs: Observation

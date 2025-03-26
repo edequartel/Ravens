@@ -203,6 +203,18 @@ struct TabLocationView: View {
               .accessibilityLabel(listWithFavoriteLocation)
         }
 
+        //male location favorite @@@
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          Button("location") {
+//            print("location")
+//          }
+////          AreaLocationButtonView(
+////            locationDetail: locationDetail,
+////            locationPoint: $setlocation)
+////              .accessibilityLabel(listWithFavoriteLocation
+////              )
+//        }
+
       }
       .onAppear {
         log.info("LocationView onAppear")

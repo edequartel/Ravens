@@ -49,6 +49,7 @@ struct SpeciesView: View {
                   .uniformSize()
           }
           .background(Color.clear)
+          .accessibility(label: Text("Audio BirdListView"))
       }
 
       ToolbarItem(placement: .navigationBarTrailing) { //@@
@@ -57,6 +58,8 @@ struct SpeciesView: View {
                   .uniformSize()
           }
           .background(Color.clear)
+          .accessibility(label: Text("SpeciesDetailsView"))
+
       }
 
 //      ToolbarItem(placement: .navigationBarTrailing) {
