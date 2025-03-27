@@ -108,8 +108,11 @@ struct ObsView: View {
     //trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
       if !keyChainViewModel.token.isEmpty { //??
-        AreaButtonView(obs: obs)
-          .tint(.yellow)
+
+        if (entity != .location) {
+          AreaButtonView(obs: obs)
+            .tint(.yellow)
+        }
 
         BookmarkButtonView(speciesID: obs.species ?? 0)
           .tint(.green)
@@ -118,6 +121,17 @@ struct ObsView: View {
           ObserversButtonView(obs: obs)
             .tint(.red)
         }
+
+        if (entity != .species) {
+          NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
+            Image(systemSymbol: .waveform)
+              .uniformSize()
+          }
+          .tint(.blue)
+          .accessibility(label: Text("Audio BirdListView"))
+        }
+
+        
 
       }
     }

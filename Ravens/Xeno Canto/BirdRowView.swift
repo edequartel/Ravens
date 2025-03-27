@@ -60,20 +60,22 @@ struct BirdRowView: View {
             }
 
             HStack {
-              localizedSoundTypes(from: bird.type ?? "")
+              Text(localizedSoundTypesString(from: bird.type ?? ""))
+//              localizedSoundTypes(from: bird.type ?? "")
                 .bold()
                 .lineLimit(1)
                 .truncationMode(.tail)
               Spacer()
             }
 
-
-
             HStack {
               Text("\(bird.rec ?? "")")
                 .font(.caption)
               Spacer()
             }
+
+//            let label = "\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.id_species)  \(bird.rec ?? "")"
+//            Text(label)
 
           }
           Spacer()
@@ -119,7 +121,10 @@ struct BirdRowView: View {
 
     }
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("birdRowView \(birdName) \(bird.type ?? "")")
+    .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.id_species)  \(bird.rec ?? "")")
+
+
+
     .onDisappear {
       // Stop audio when leaving the BirdListView
       if isPlayingThisBird {
@@ -144,6 +149,19 @@ struct BirdRowView: View {
         index == 0 ? Text(key) : Text(", ") + Text(key)
       }
       .reduce(Text(""), +)
+  }
+
+  func localizedSoundTypesString(from string: String) -> String {
+    let validOptions = Set(SoundOption.allCases.map { $0.rawValue })
+
+    let parts = string
+      .split(separator: ",")
+      .map { $0.trimmingCharacters(in: .whitespaces) }
+      .filter { validOptions.contains($0) }
+
+    let localizedParts = parts.map { NSLocalizedString($0, comment: "") }
+
+    return localizedParts.joined(separator: ", ")
   }
 }
 

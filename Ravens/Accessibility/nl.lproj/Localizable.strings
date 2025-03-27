@@ -145,4 +145,6 @@
 
 "loadingData" = "Laden geluiden...";
 
+// sounds
 "birdRowView" = "birdRowView";
+"soundsList" = "Lijst met geluiden";

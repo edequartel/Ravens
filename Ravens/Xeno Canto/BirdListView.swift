@@ -15,6 +15,7 @@ struct BirdListView: View {
   @State private var currentlyPlayingBirdID: String? = nil
   @State private var selectedBird: Bird?
   @State private var firstTime: Bool = true
+  @State private var statusFetch: String = "statusFetch"
 
   let scientificName: String
   var nativeName: String?
@@ -22,6 +23,7 @@ struct BirdListView: View {
   var body: some View {
     NavigationStack {
     VStack {
+      Text(statusFetch)
       HorizontalLine()
       Group {
         if viewModel.isLoading {
@@ -62,7 +64,7 @@ struct BirdListView: View {
           ) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
-              .accessibility(label: Text(observersList))
+              .accessibility(label: Text(soundsList))
           }
         }
 
@@ -88,7 +90,14 @@ struct BirdListView: View {
     .navigationTitle(nativeName ?? "")
     .onAppear {
       if firstTime {
-        viewModel.fetchBirds(name: scientificName)
+        viewModel.fetchBirds(name: scientificName) { count in
+          print("Number of recordings: \(count)")
+          if count == 0 {
+            statusFetch = "geen opnames"
+          } else {
+            statusFetch = "aantal opnames: \(count)"
+          }
+        }
         firstTime = false
       }
     }

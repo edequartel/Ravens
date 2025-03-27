@@ -119,29 +119,31 @@ struct AreaButtonView: View {
 
 struct AreaLocationButtonView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
-  var locationDetail: LocationDetail?
-  var locationPoint: Point?
+  @EnvironmentObject private var settings: Settings
+  
+//  var locationDetail: LocationDetail?
+//  var locationPoint: Point?
 
   var body: some View {
     Button(action: {
-      if areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) {
-        print("remove areas \(locationDetail?.id ?? 0)")
+      if areasViewModel.isIDInRecords(areaID: settings.locationId) {
+        print("remove areas \(settings.locationId)")
         areasViewModel.removeRecord(
-          areaID: locationDetail?.id ?? 0)
+          areaID: settings.locationId)
       } else {
-        print("adding area \(locationDetail?.id ?? 0)")
+        print("adding area \(settings.locationId)")
         areasViewModel.appendRecord(
-          areaName: locationDetail?.name ?? "unknown",
-          areaID: locationDetail?.id ?? 0,
-          latitude: locationPoint?.coordinates[1] ?? 0,
-          longitude: locationPoint?.coordinates[0] ?? 0
+          areaName: settings.locationName,
+          areaID: settings.locationId,
+          latitude: settings.locationCoordinate?.latitude ?? 0,
+          longitude: settings.locationCoordinate?.longitude ?? 0
         )
       }
     }) {
-        Image(systemSymbol: areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) ? SFAreaFill: SFArea)
+        Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill: SFArea)
           .uniformSize()
     }
-    .accessibilityLabel(areasViewModel.isIDInRecords(areaID: locationDetail?.id ?? 0) ? favoriteLocationOn : favoriteLocationOff)
+    .accessibilityLabel(areasViewModel.isIDInRecords(areaID: settings.locationId) ? favoriteLocationOn : favoriteLocationOff)
   }
 }
 
@@ -165,6 +167,29 @@ struct ObserversButtonView: View {
     .accessibilityLabel(observersViewModel.isObserverInRecords(userID: obs.userDetail?.id ?? 0) ? favoriteObserverOn : favoriteObserverOff)
   }
 }
+
+struct ObserversXXXButtonView: View {
+  @EnvironmentObject var observersViewModel: ObserversViewModel
+  let userId: Int?
+  let userName: String?
+
+  var body: some View {
+    Button(action: {
+      if observersViewModel.isObserverInRecords(userID: userId ?? 0) {
+        observersViewModel.removeRecord(userID: userId ?? 0)
+      } else {
+        observersViewModel.appendRecord(
+          name: userName ?? "unknown",
+          userID: userId ?? 0)
+      }
+    }) {
+      Image(systemSymbol: observersViewModel.isObserverInRecords(userID: userId ?? 0) ? SFObserverFill : SFObserver)
+        .uniformSize()
+    }
+    .accessibilityLabel(observersViewModel.isObserverInRecords(userID:userId ?? 0) ? favoriteObserverOn : favoriteObserverOff)
+  }
+}
+
 
 struct BookmarkButtonView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel

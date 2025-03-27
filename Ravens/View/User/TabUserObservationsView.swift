@@ -136,13 +136,21 @@ struct TabUserObservationsView: View {
                 .accessibility(label: Text(observersList))
             }
           }
+
+          //show observersbutton not whenm its me
+          if (obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0)) {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              ObserversXXXButtonView(
+                userId: obsObserversViewModel.observerId,
+                userName: obsObserversViewModel.observerName
+              )
+            }
+          }
+
         }
+
+
       }
-
-//      .navigationTitle("\(obsObserversViewModel.observerName)")
-
-//      .navigationBarTitleDisplayMode(.inline)
-
       .onAppear {
         if firstTime {
           log.info("Onappear first time")

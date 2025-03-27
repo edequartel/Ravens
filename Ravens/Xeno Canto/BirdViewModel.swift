@@ -19,7 +19,7 @@ class BirdViewModel: ObservableObject {
 
   var hasFetchedBirds: Bool = false //for progressview
 
-  func fetchBirds(name: String, onComplete: (() -> Void)? = nil) {
+  func fetchBirds(name: String, onComplete: ((_ numRecordings: Int) -> Void)? = nil) {
     let checkedName = name.lowercased()
     let url = "https://xeno-canto.org/api/2/recordings?query=gen:\(checkedName)&page=1"
 
@@ -31,6 +31,7 @@ class BirdViewModel: ObservableObject {
     AF.request(url).responseDecodable(of: BirdResponse.self) { response in
       DispatchQueue.main.async {
         self.isLoading = false
+
         switch response.result {
         case .success(let birdResponse):
           self.birds = birdResponse.recordings
@@ -38,15 +39,14 @@ class BirdViewModel: ObservableObject {
           self.totalPages = birdResponse.numPages
           self.currentPage = birdResponse.page
           self.totalSpecies = Int(birdResponse.numSpecies) ?? 0
+          self.hasFetchedBirds = true
+          onComplete?(self.totalRecordings)
 
-          onComplete?() // Execute completion handler
-
-          self.hasFetchedBirds = true // Mark as fetched
         case .failure(let error):
           self.errorMessage = "Failed to fetch birds: \(error.localizedDescription)"
+          onComplete?(0) // or use -1 if you want to indicate failure explicitly
         }
       }
     }
   }
-
 }

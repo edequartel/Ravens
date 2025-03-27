@@ -45,6 +45,7 @@ let distance = LocalizedStringKey("distance")
 
 // icons
 let swap = LocalizedStringKey("swap")
+let soundsList = LocalizedStringKey("soundsList")
 let observersList = LocalizedStringKey("observerList")
 let sortAndFilterObs = LocalizedStringKey("sortAndFilterObs")
 let sortAndFilterSpecies = LocalizedStringKey("sortAndFilterSpecies")

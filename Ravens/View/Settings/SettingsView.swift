@@ -12,7 +12,6 @@ struct SettingsView: View {
   let log = SwiftyBeaver.self
   @Environment(\.locale) private var locale
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
-//  @EnvironmentObject var observationsRadiusViewModel: ObservationsRadiusViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
@@ -36,7 +35,7 @@ struct SettingsView: View {
             Text("Login \(settings.selectedInBetween)")
           }
         }
-        
+
         Picker(source, selection: $settings.selectedInBetween) {
           Text("waarneming.nl")
             .tag("waarneming.nl")
@@ -47,9 +46,9 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-//        Section() {
-//          RadiusPickerView(selectedRadius: $settings.radius)
-//        }
+        //        Section() {
+        //          RadiusPickerView(selectedRadius: $settings.radius)
+        //        }
 
         Section() {
           LanguageView()
@@ -80,7 +79,7 @@ struct SettingsView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: { 
+          Button(action: {
             if let url = URL(string: "https://edequartel.github.io/Ravens/") {
               UIApplication.shared.open(url)
             }
@@ -117,12 +116,12 @@ struct SettingsView: View {
   }
 
   func version() -> String {
-      guard let dictionary = Bundle.main.infoDictionary,
-            let version = dictionary["CFBundleShortVersionString"] as? String,
-            let build = dictionary["CFBundleVersion"] as? String else {
-          return "Version information not available"
-      }
-      return "Version \(version) build \(build)"
+    guard let dictionary = Bundle.main.infoDictionary,
+          let version = dictionary["CFBundleShortVersionString"] as? String,
+          let build = dictionary["CFBundleVersion"] as? String else {
+      return "Version information not available"
+    }
+    return "Version \(version) build \(build)"
   }
 }
 
@@ -131,7 +130,7 @@ struct SettingsView_Previews: PreviewProvider {
     // Setting up the environment objects for the preview
     SettingsView()
       .environmentObject(Settings())
-//      .environmentObject(ObservationsRadiusViewModel())
+    //      .environmentObject(ObservationsRadiusViewModel())
   }
 }
 
@@ -139,63 +138,59 @@ import SwiftUI
 
 struct SpeciesPickerView: View {
   let log = SwiftyBeaver.self
-//    @ObservedObject var settings: Settings
-//    @ObservedObject var speciesGroupsViewModel: SpeciesGroupsViewModel
-//    @ObservedObject var regionListViewModel: RegionListViewModel
-    @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
-//  @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var settings: Settings
 
-    var body: some View {
-        Section(header: Text(species)) {
-            Picker(group, selection: $settings.selectedSpeciesGroupId) {
-                ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
-                    Text(speciesGroup.name)
-                        .tag(speciesGroup.id)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .onChange(of: settings.selectedSpeciesGroupId) { //_ in
-                log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
-                settings.selectedRegionListId = regionListViewModel.getId(
-                    region: settings.selectedRegionId,
-                    speciesGroup: settings.selectedSpeciesGroupId)
-
-                if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
-                    settings.selectedSpeciesGroupName = selectedGroup.name
-                }
-
-                log.info("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
-
-                speciesViewModel.fetchDataFirst(settings: settings)
-                speciesViewModel.fetchDataSecondLanguage(settings: settings)
-            }
+  var body: some View {
+    Section(header: Text(species)) {
+      Picker(group, selection: $settings.selectedSpeciesGroupId) {
+        ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
+          Text(speciesGroup.name)
+            .tag(speciesGroup.id)
+            .lineLimit(1)
+            .truncationMode(.tail)
         }
+      }
+      .pickerStyle(.navigationLink)
+      .onChange(of: settings.selectedSpeciesGroupId) { //_ in
+        log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
+        settings.selectedRegionListId = regionListViewModel.getId(
+          region: settings.selectedRegionId,
+          speciesGroup: settings.selectedSpeciesGroupId)
+
+        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
+          settings.selectedSpeciesGroupName = selectedGroup.name
+        }
+
+        log.info("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
+
+        speciesViewModel.fetchDataFirst(settings: settings)
+        speciesViewModel.fetchDataSecondLanguage(settings: settings)
+      }
     }
+  }
 }
 
 import SwiftUI
 
 struct RadiusPickerView: View {
-    @Binding var selectedRadius: Double // Binding for Double radius selection
+  @Binding var selectedRadius: Double // Binding for Double radius selection
 
-    let radiusOptions = Array(stride(from: 1000.0, through: 10000.0, by: 1000.0)) // Double values
+  let radiusOptions = Array(stride(from: 1000.0, through: 10000.0, by: 1000.0)) // Double values
 
-    var body: some View {
-        VStack {
-            Picker(radius, selection: $selectedRadius) {
-                ForEach(radiusOptions, id: \.self) { radius in
-                    Text("\(Int(radius)) m").tag(radius) // Convert to Int for display
-                }
-            }
-            .pickerStyle(.menu) // Wheel picker style
+  var body: some View {
+    VStack {
+      Picker(radius, selection: $selectedRadius) {
+        ForEach(radiusOptions, id: \.self) { radius in
+          Text("\(Int(radius)) m").tag(radius) // Convert to Int for display
         }
+      }
+      .pickerStyle(.menu) // Wheel picker style
     }
+  }
 }
 
