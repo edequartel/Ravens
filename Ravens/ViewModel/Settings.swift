@@ -20,7 +20,7 @@ class Settings: ObservableObject {
   @AppStorage("radius") var radius = 5000.0
 
   //timePeriod are retrieved in init()
-  @AppStorage("timePeriodUser") var timePeriodUserStored: TimePeriod = .infinite
+  @AppStorage("timePeriodUser") var timePeriodUserStored: TimePeriod = .fourWeeks
   @Published var timePeriodUser: TimePeriod = .infinite {
     didSet {
       timePeriodUserStored = timePeriodUser

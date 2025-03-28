@@ -41,6 +41,8 @@ struct ObsView: View {
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
+        
+//        Text("id :\(obs.speciesDetail.id)  \(obs.speciesDetail.group)")
 
         HStack {
           if entity != .species {
@@ -58,7 +60,7 @@ struct ObsView: View {
           }
         }
 
-        if (entity != .species) && (obs.speciesDetail.name.isEmpty) { //?!
+        if (entity != .species) && (!obs.speciesDetail.name.isEmpty) { 
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
@@ -122,12 +124,12 @@ struct ObsView: View {
             .tint(.red)
         }
 
-        if (entity != .species) {
+        if entity != .species && [1, 2, 14].contains(obs.speciesDetail.group) {
           NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
             Image(systemSymbol: .waveform)
               .uniformSize()
           }
-          .tint(.blue)
+          .tint(.purple)
           .accessibility(label: Text("Audio BirdListView"))
         }
 
@@ -139,9 +141,9 @@ struct ObsView: View {
     //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
-//      if (entity != .species) {
-        InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
-//      }
+
+      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+
       LinkButtonView(obs: obs)
     }
   }

@@ -150,5 +150,5 @@
 "loadingData" = "Loading sounds...";
 
 // sounds
-"birdRowView" = "birdRowView";
+"noRecordings" = "No recordings for this species";
 "soundsList" = "List with sounds";

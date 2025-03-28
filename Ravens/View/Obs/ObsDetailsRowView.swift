@@ -23,6 +23,7 @@ struct ObsDetailsRowView: View {
           .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       } else {
         Text("\(obs.speciesDetail.scientificName)")// \(obs.species_detail.id)")
+          .bold()
           .italic()
           .lineLimit(1) // Set the maximum number of lines to 1
           .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated

@@ -146,5 +146,5 @@
 "loadingData" = "Laden geluiden...";
 
 // sounds
-"birdRowView" = "birdRowView";
+"noRecordings" = "Geen opnames voor deze soort";
 "soundsList" = "Lijst met geluiden";

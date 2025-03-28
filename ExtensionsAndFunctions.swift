@@ -11,8 +11,8 @@ import AudioToolbox
 import SFSafeSymbols
 import MapKit
 
-let showView = false
-//let showView = true
+//let showView = false
+let showView = true
 
 // werkhoven
 // let longitude = 5.243376
@@ -75,7 +75,7 @@ extension Color {
   static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
 
   static let obsBirdInfo = Color(red: 240/255, green: 94/255, blue: 35/255) //orange
-  static let obsXCred = Color(red: 0.5, green: 0.0, blue: 0.0) //darkred
+//  static let obsXCred = .purple Color(red: 0.5, green: 0.0, blue: 0.0) //darkred
 }
 
 

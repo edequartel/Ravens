@@ -131,6 +131,6 @@ let songXC = LocalizedStringKey("song")
 let subsongXC = LocalizedStringKey("subsong")
 let territorialCallXC = LocalizedStringKey("territorial call")
 
+// sounds
 let loadindData = LocalizedStringKey("loadingData")
-
-let birdRowView = LocalizedStringKey("birdRowView")
+let noRecordings = LocalizedStringKey("noRecordings")

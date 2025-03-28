@@ -97,18 +97,17 @@ struct BirdRowView: View {
       .contentShape(Rectangle())
     }
     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-
-      Button(action: {
-        if let url = modifyURL(from: bird.url) {
-          UIApplication.shared.open(url)
-        } else {
-          print("Invalid URL")
-        }
-      }) {
-        Text("XC")
-          .bold()
-      }
-      .tint(.obsXCred) // Dark red tint
+//      Button(action: {
+//        if let url = modifyURL(from: bird.url) {
+//          UIApplication.shared.open(url)
+//        } else {
+//          print("Invalid URL")
+//        }
+//      }) {
+//        Text("XC")
+//          .bold()
+//      }
+//      .tint(.purple) // Dark red tint
 
       Button(action: {
         selectedBird = bird

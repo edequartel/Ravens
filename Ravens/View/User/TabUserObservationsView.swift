@@ -137,7 +137,7 @@ struct TabUserObservationsView: View {
             }
           }
 
-          //show observersbutton not whenm its me
+          //add choose observers
           if (obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0)) {
             ToolbarItem(placement: .navigationBarTrailing) {
               ObserversXXXButtonView(
