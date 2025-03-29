@@ -63,7 +63,6 @@ class ObservationsViewModel: ObservableObject {
     }
 
     url += "&ordering=-datetime"
-//      print("====>\(url)")
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }

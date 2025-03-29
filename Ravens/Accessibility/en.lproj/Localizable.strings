@@ -147,8 +147,9 @@
 "subsong" = "Subsong";
 "territorial call" = "Territorial Call";
 
-"loadingData" = "Loading sounds...";
-
 // sounds
+"loadingData" = "Loading sounds...";
 "noRecordings" = "No recordings for this species";
-"soundsList" = "List with sounds";
+"typeSoundsList" = "List with type of sounds";
+"infoSpecies" = "Information species";
+"audioListView" = "List audio sounds species";

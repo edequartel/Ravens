@@ -124,17 +124,14 @@ struct ObsView: View {
             .tint(.red)
         }
 
-        if entity != .species && [1, 2, 14].contains(obs.speciesDetail.group) {
+        if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
           NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
             Image(systemSymbol: .waveform)
               .uniformSize()
           }
           .tint(.purple)
-          .accessibility(label: Text("Audio BirdListView"))
+          .accessibility(label: Text(audioListView))
         }
-
-        
-
       }
     }
 

@@ -127,12 +127,12 @@ struct TabLocationView: View {
       }
 
       //set sort, filter and timePeriod
-      .modifier(
-        showFirstView ?
-        ObservationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption,
-          timePeriod: $timePeriod)
-        :
+      .modifier(//?? why firstview
+//        showFirstView ?
+//        ObservationToolbarModifier(
+//          currentFilteringOption: $currentFilteringOption,
+//          timePeriod: $timePeriod)
+//        :
           ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
@@ -206,7 +206,6 @@ struct TabLocationView: View {
         //male location favorite @@@
         ToolbarItem(placement: .navigationBarTrailing) {
           AreaLocationButtonView()
-            .accessibilityLabel(listWithFavoriteLocation)
         }
 
       }

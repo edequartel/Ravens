@@ -138,8 +138,8 @@ struct FilterOptionsView: View {
     }
   }
 }
-// swiftlint:enable multiple_closures_with_trailing_closure
 
+// swiftlint:enable multiple_closures_with_trailing_closure
 struct ObservationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
@@ -208,10 +208,6 @@ struct CombinedOptionsMenuView: View {
           RadiusPickerView(selectedRadius: $settings.radius)
         }
       }
-
-//      if entity == .radius {
-//          SpeciesPickerView()
-//      }
 
       // Sorting Option
       if currentSortingOption != nil {
@@ -294,5 +290,3 @@ struct PeriodView: View {
     entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
   }
 }
-
-

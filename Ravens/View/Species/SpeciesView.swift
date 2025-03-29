@@ -25,6 +25,7 @@ struct SpeciesView: View {
   var body: some View {
     VStack {
       if showView { Text("SpeciesView").font(.customTiny) }
+
       if showFirstView && !accessibilityManager.isVoiceOverEnabled {
         MapObservationsSpeciesView(
           observationsSpecies: observationsSpecies,
@@ -43,13 +44,16 @@ struct SpeciesView: View {
 
     .toolbar {
 
-      ToolbarItem(placement: .navigationBarTrailing) {
+      if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
+        ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
-              Image(systemSymbol: .waveform)
-                  .uniformSize()
+            Image(systemSymbol: .waveform)
+              .uniformSize()
           }
           .background(Color.clear)
-          .accessibility(label: Text("Audio BirdListView"))
+          .accessibility(label: Text(audioListView))
+        }
+
       }
 
       ToolbarItem(placement: .navigationBarTrailing) { //@@
@@ -58,7 +62,7 @@ struct SpeciesView: View {
                   .uniformSize()
           }
           .background(Color.clear)
-          .accessibility(label: Text("SpeciesDetailsView"))
+          .accessibility(label: Text(infoSpecies))
 
       }
 

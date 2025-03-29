@@ -11,12 +11,8 @@ import AudioToolbox
 import SFSafeSymbols
 import MapKit
 
-//let showView = false
-let showView = true
-
-// werkhoven
-// let longitude = 5.243376
-// let latitude = 52.023861
+let showView = false
+//let showView = true
 
 // gouda en span nederland
 let latitude = 52.013077-0.2
@@ -24,8 +20,6 @@ let longitude = 4.713450+0.1
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
-
-//let circleRadius: CLLocationDistance = 1000.0 // Radius in meters
 
 func cleanName(_ name: String) -> String {
   var cleanName = name.replacingOccurrences(of: " ", with: "_")
@@ -195,13 +189,6 @@ struct RoundedCorner: Shape {
   }
 }
 #endif
-
-class Constants {
-  static let privacyPolicy = """
-    Lorem ipsum
-    Maecenas eget felis in lacus
-  """
-}
 
 struct Triangle: Shape {
   func path(in rect: CGRect) -> Path {

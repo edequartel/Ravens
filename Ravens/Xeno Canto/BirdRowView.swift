@@ -21,7 +21,6 @@ struct BirdRowView: View {
   let birdName : String
   @Binding var selectedBird: Bird?
 
-
   var isPlayingThisBird: Bool {
     currentlyPlayingBirdID == bird.id_species && audioPlayerManager.isPlaying
   }
@@ -61,7 +60,6 @@ struct BirdRowView: View {
 
             HStack {
               Text(localizedSoundTypesString(from: bird.type ?? ""))
-//              localizedSoundTypes(from: bird.type ?? "")
                 .bold()
                 .lineLimit(1)
                 .truncationMode(.tail)
@@ -73,12 +71,10 @@ struct BirdRowView: View {
                 .font(.caption)
               Spacer()
             }
-
-//            let label = "\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.id_species)  \(bird.rec ?? "")"
-//            Text(label)
-
           }
+
           Spacer()
+
           if isLoadingAudio {
             ProgressView()
               .progressViewStyle(CircularProgressViewStyle())
@@ -97,17 +93,7 @@ struct BirdRowView: View {
       .contentShape(Rectangle())
     }
     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//      Button(action: {
-//        if let url = modifyURL(from: bird.url) {
-//          UIApplication.shared.open(url)
-//        } else {
-//          print("Invalid URL")
-//        }
-//      }) {
-//        Text("XC")
-//          .bold()
-//      }
-//      .tint(.purple) // Dark red tint
+
 
       Button(action: {
         selectedBird = bird

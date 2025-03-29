@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import CoreLocation
 
 struct ObsDetailView: View {
   var obs: Observation
@@ -163,14 +164,13 @@ struct ObsDetailView: View {
           .islandBackground()
           .accessibility(label: Text(notesAboutObservation))
 
-
-        NavigationLink(destination: PositonFullView(obs: obs)) {
+//        NavigationLink(destination: PositonFullView(obs: obs)) {
           PositionOnMapView(obs: obs) // Replace with your view's content
             .frame(height: UIScreen.main.bounds.width / 2)
             .cornerRadius(8)
             .contentShape(Rectangle())
-        }
-        .buttonStyle(PlainButtonStyle())
+//        }
+//        .buttonStyle(PlainButtonStyle())
         .accessibilityHidden(true)
 
       }

@@ -12,7 +12,6 @@ import SwiftyBeaver
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self
     
-//    @EnvironmentObject var viewModel: ObservationsViewModel
     @ObservedObject var observationsSpecies: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
@@ -37,7 +36,6 @@ struct ObservationDetailsView: View {
                     token: keyChainviewModel.token,
                     id: speciesID,
                     completion: {
-//                      isLoaded = true
                       log.info("observationsSpeciesViewModel data loaded")
                     }
                 )
@@ -45,10 +43,5 @@ struct ObservationDetailsView: View {
     }
 }
 
-//struct ObservationDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      observationsSpecies(speciesID: 20)
-//            .environmentObject(Settings())
-//    }
-//}
+
 

@@ -9,11 +9,11 @@ import Foundation
 
 // MARK: - BirdResponse
 struct BirdResponse: Codable {
-    let numRecordings: String //Int
-    let numSpecies: String //Int
-    let page: Int
-    let numPages: Int
-    let recordings: [Bird]
+  let numRecordings: String //Int
+  let numSpecies: String //Int
+  let page: Int
+  let numPages: Int
+  let recordings: [Bird]
 }
 
 // MARK: - Bird
@@ -73,15 +73,15 @@ struct Bird: Codable, Identifiable {
 
 // MARK: - Sono
 struct Sono: Codable {
-    let small: String
-    let med: String
-    let large: String
-    let full: String
+  let small: String
+  let med: String
+  let large: String
+  let full: String
 }
 
 // MARK: - Osci
 struct Osci: Codable {
-    let small: String
-    let med: String
-    let large: String
+  let small: String
+  let med: String
+  let large: String
 }
