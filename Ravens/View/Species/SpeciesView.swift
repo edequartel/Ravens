@@ -20,6 +20,7 @@ struct SpeciesView: View {
   @State var showChart: Bool = false
 
   var item: Species
+
   @Binding var selectedSpeciesID: Int?
 
   var body: some View {
@@ -32,18 +33,17 @@ struct SpeciesView: View {
           item: item)
       } else {
         VStack {
-
           ObservationsSpeciesView(
             observationsSpecies: observationsSpecies,
             item: item,
-            selectedSpeciesID: $selectedSpeciesID
+            selectedSpeciesID: $selectedSpeciesID,
+            timePeriod: $settings.timePeriodSpecies
           )
         }
       }
     }
 
     .toolbar {
-
       if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
@@ -66,27 +66,15 @@ struct SpeciesView: View {
 
       }
 
-//      ToolbarItem(placement: .navigationBarTrailing) {
-//        Button(action: {
-//          selectedSpeciesID = item.speciesId
-//        }) {
-//          Image(systemSymbol: .infoCircle)
-//            .uniformSize()
-//        }
-//        .tint(.blue)
-//      }
-
-
-      //      ToolbarItem(placement: .navigationBarTrailing) {
-      //        Button(action: {
-      //          showChart.toggle()
-      //        }) {
-      //          Image(systemSymbol: .chartBarXaxis)
-      //            .uniformSize()
-      //        }
-      //        .background(Color.clear)
-      //      }
-
+      ToolbarItem(placement: .navigationBarTrailing) {
+        NavigationLink(destination: SortFilterSpeciesViewXXX(
+          timePeriod: $settings.timePeriodSpecies
+        )) {
+          Image(systemSymbol: .ellipsisCircle)
+            .uniformSize()
+            .accessibility(label: Text(sortAndFilterSpecies))
+        }
+      }
 
       if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -100,9 +88,6 @@ struct SpeciesView: View {
         }
       }
     }
-//    .sheet(isPresented: $showChart) {
-//      ObservationsChartView(observations: observationsSpecies.observations ?? [], name: item.name)
-//    }
 
     .onAppear() {
       settings.initialSpeciesLoad = true

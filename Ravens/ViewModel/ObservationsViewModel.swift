@@ -64,54 +64,15 @@ class ObservationsViewModel: ObservableObject {
 
     url += "&ordering=-datetime"
 
+
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }
 
-  func fetchDataInit(
+
+  func fetchData(
     settings: Settings,
-    entity: EntityType,
-    token: String,
-    id: Int, completion: @escaping () -> Void) {
-    log.info("FetchDataInit")
-    //reset
-    self.observations = []
-
-    var days: Int = 14
-    switch entity {
-    case .user:
-        days = settings.timePeriodUser.rawValue
-    case .location:
-        days = settings.timePeriodLocation.rawValue
-    case .species:
-        days = settings.timePeriodSpecies.rawValue
-    case .radius:
-        days = settings.timePeriodSpecies.rawValue
-    }
-    days = days-1 //today is also also a day
-    
-    //datetime
-    let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
-    let dateBefore = formatCurrentDate(value: date)
-    //add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"//+
-      //"&species_group=\(settings.selectedSpeciesGroupId)"
-
-    if ((settings.timePeriodUser != .infinite) && ( entity == .user)) ||
-        ((settings.timePeriodLocation != .infinite) && ( entity == .location)) ||
-        ((settings.timePeriodSpecies != .infinite) && ( entity == .species)) {
-      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
-//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
-    }
-
-//      print("----->\(url)")
-    url += "&ordering=-datetime"
-
-    fetchData(settings: settings, url: url, token: token, completion: completion)
-  }
-
-
-  func fetchData(settings: Settings, url: String, token: String, completion: @escaping () -> Void) {
+    url: String, token: String,
+    completion: @escaping () -> Void) {
     log.info("fetchData url: [\(url)]")
     if url.isEmpty { return }
     //

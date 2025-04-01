@@ -37,6 +37,7 @@ struct ObservationsSpeciesView: View {
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
 
+  @Binding var timePeriod: TimePeriod
 
   var body: some View {
     VStack {
@@ -102,13 +103,31 @@ struct ObservationsSpeciesView: View {
         }
       }
 
+      //---->>>> hier no update
+      .onChange(of: timePeriod) {
+        log.error("--->>> update timePeriodUser")
+
+        //deze aanpassen
+
+        observationsSpecies.fetchDataInitXXX(
+          settings: settings,
+          entity: .species,
+          token: keyChainviewModel.token,
+          id: item.speciesId,
+          timePeriod: timePeriod,
+          completion: {
+            isLoaded = true
+            log.info("observationsSpeciesViewModel data loaded")
+          }
+        )
+      }
+
       .refreshable {
         log.error("refreshing... observation species")
         fetchDataModel()
       }
 
       .navigationBarTitleDisplayMode(.inline)
-//      .navigationTitle("test")
 
       .onAppear() {
         if !hasAppeared {
@@ -123,11 +142,14 @@ struct ObservationsSpeciesView: View {
   }
 
   func fetchDataModel() {
-    observationsSpecies.fetchDataInit(
+    observationsSpecies.fetchDataInitXXX(
       settings: settings,
       entity: .species,
       token: keyChainviewModel.token,
       id: item.speciesId,
+
+      timePeriod: .infinite, //added this
+      
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")

@@ -186,6 +186,22 @@ struct SortFilterSpeciesView: View {
     }
   }
 }
+struct SortFilterSpeciesViewXXX: View { //??
+  @Binding var timePeriod: TimePeriod
+
+  var body: some View {
+    Form {
+      Section(period) {
+        Picker(timePeriodlabel, selection: $timePeriod) {
+          ForEach(TimePeriod.allCases, id: \.self) { period in
+            Text(period.localized).tag(period)
+          }
+        }
+        .pickerStyle(.menu)
+      }
+    }
+  }
+}
 
 enum SortNameOption: String, CaseIterable {
   case name

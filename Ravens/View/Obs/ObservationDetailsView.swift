@@ -30,11 +30,14 @@ struct ObservationDetailsView: View {
             }
             .onAppear {
                 log.info("speciesID \(speciesID)")
-              observationsSpecies.fetchDataInit(
+              observationsSpecies.fetchDataInitXXX(
                     settings: settings,
                     entity: .species,
                     token: keyChainviewModel.token,
                     id: speciesID,
+
+                    timePeriod: .infinite, //added this
+
                     completion: {
                       log.info("observationsSpeciesViewModel data loaded")
                     }

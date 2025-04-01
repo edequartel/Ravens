@@ -110,6 +110,7 @@ struct TabUserObservationsView: View {
             timePeriod: $timePeriod)
       )
 
+
       .toolbar {
         //set map or list
         if !accessibilityManager.isVoiceOverEnabled {
