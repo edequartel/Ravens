@@ -12,6 +12,18 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
   case year = 365
   case infinite = 1024
 
+  var tagValue: String {
+    switch self {
+    case .twoDays: return "2d"
+    case .week: return "1w"
+    case .twoWeeks: return "2w"
+    case .fourWeeks: return "4w"
+    case .halfYear: return "6m"
+    case .year: return "1y"
+    case .infinite: return "∞"
+    }
+  }
+
   // Computed property for description
   var description: String {
     switch self {

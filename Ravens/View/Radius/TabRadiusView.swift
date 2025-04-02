@@ -61,14 +61,12 @@ struct TabRadiusView: View {
         }
       }
 
-
-//      .modifier(
-//        ObservationToolbarModifier(
-//          currentFilteringOption: $currentFilteringOption,
-//          timePeriod: $timePeriod,
-//          entity: .radius)
-//      )
-
+      .modifier(
+        ObservationToolbarModifier(
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $settings.timePeriodRadius,
+          entity: .radius)
+      )
 
       .onChange(of: settings.radius) {//!!
         log.error("update timePeriod \(String(describing: timePeriod))")
@@ -105,8 +103,8 @@ struct TabRadiusView: View {
       }
 
 
-      .onChange(of: timePeriod) {//!!
-        log.error("update timePeriod \(String(describing: timePeriod))")
+      .onChange(of: settings.timePeriodRadius) {//!!
+        log.error("update timePeriod \(String(describing: settings.timePeriodRadius))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
           settings: settings,
@@ -135,26 +133,6 @@ struct TabRadiusView: View {
             }
           }
         }
-
-        //????
-            ToolbarItem(placement: .navigationBarTrailing) {
-              NavigationLink(
-                destination: CombinedOptionsMenuView(
-                  currentSortingOption: $currentSortingOption,
-                  currentFilteringAllOption: $currentFilteringAllOption,
-                  currentFilteringOption: $currentFilteringOption,
-                  timePeriod: $timePeriod,
-//                  timePeriod: $settings.timePeriodUser,
-                  entity: .radius
-                )
-              ) {
-                Image(systemName: "ellipsis.circle")
-                  .uniformSize()
-                  .accessibilityLabel(sortAndFilterObservationList)
-              }
-            }
-//???
-
 
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {

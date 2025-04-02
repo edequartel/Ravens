@@ -103,8 +103,8 @@ struct TabUserObservationsView: View {
           ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod)
-//            timePeriod: $settings.timePeriodUser)
+//            timePeriod: $timePeriod)
+            timePeriod: $settings.timePeriodUser)
       )
 
 

@@ -37,7 +37,7 @@ struct ObservationsSpeciesView: View {
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
 
-  @Binding var timePeriod: TimePeriod
+  @Binding var timePeriod: TimePeriod?
 
   var body: some View {
     VStack {

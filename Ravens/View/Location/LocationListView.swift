@@ -25,41 +25,44 @@ struct LocationListView: View {
   var locationId: Int
 
   var body: some View {
-    VStack {
-      List {
-        ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
-          HStack {
-            Button(action: {
-              settings.locationName = record.name
-              settings.locationId = record.areaID
-
-              setLocation.latitude = record.latitude
-              setLocation.longitude = record.longitude
-
-              self.presentationMode.wrappedValue.dismiss()
-            }) {
-              HStack {
-                Text(record.name)
-                  .lineLimit(1)
-                  .truncationMode(.tail)
-                Spacer()
-                if (record.areaID == locationId) {
-                  Image(systemName: "checkmark").foregroundColor(.blue)
+    NavigationStack {
+      VStack {
+        List {
+          ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
+            HStack {
+              Button(action: {
+                settings.locationName = record.name
+                settings.locationId = record.areaID
+                
+                setLocation.latitude = record.latitude
+                setLocation.longitude = record.longitude
+                
+                self.presentationMode.wrappedValue.dismiss()
+              }) {
+                HStack {
+                  Text(record.name)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                  Spacer()
+                  if (record.areaID == locationId) {
+                    Image(systemName: "checkmark").foregroundColor(.blue)
+                  }
                 }
               }
             }
-          }
-          .padding(.vertical, 4)
-          .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(role: .destructive) {
-              areasViewModel.removeRecord(areaID: record.areaID)
-            } label: {
-              Label("Delete", systemImage: "trash")
+            .padding(.vertical, 4)
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              Button(role: .destructive) {
+                areasViewModel.removeRecord(areaID: record.areaID)
+              } label: {
+                Label("Delete", systemImage: "trash")
+              }
             }
           }
         }
       }
     }
+
 //    .toolbar { //deze werkt niet goed en is misschien onnodig
 //      ToolbarItem(placement: .navigationBarTrailing) {
 //        NavigationLink(destination: SearchLocationView()) {

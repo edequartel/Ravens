@@ -41,53 +41,55 @@ struct ObservationsLocationView: View {
   }
 
   var body: some View {
-    VStack {
-      if showView { Text("ObservationsLocationView").font(.customTiny) }
-
-      if let observations = observationsLocation.observations, observations.count == 0 {
-        Text(noObsLastPeriod)
-          .font(.headline) // Set font style
-          .foregroundColor(.secondary) // Adjust text color
-          .multilineTextAlignment(.center) // Align text to the center
-          .padding() // Add padding around the text
-        Spacer()
-      } else {
-        if let observations = observationsLocation.observations, observations.count > 0 {
-          SettingsDetailsView()
-
-          HorizontalLine()
-          ObservationListView(
-            observations: observations,
-            selectedSpeciesID: $selectedSpeciesID,
-            timePeriod: $settings.timePeriodLocation,
-            entity: .location,
-            currentSortingOption: $currentSortingOption,
-            currentFilteringAllOption: $currentFilteringAllOption,
-            currentFilteringOption: $currentFilteringOption) {
-            // Handle end of list event
-             print("End of list reached in ParentView observationsLocation")
-              observationsLocation.fetchData(
-                settings: settings, url: observationsLocation.next,
-                token: keyChainviewModel.token,
-                completion: { log.error("observationsLocation.fetchData") })
-
-          }
+    NavigationStack {
+      VStack {
+        if showView { Text("ObservationsLocationView").font(.customTiny) }
+        
+        if let observations = observationsLocation.observations, observations.count == 0 {
+          Text(noObsLastPeriod)
+            .font(.headline) // Set font style
+            .foregroundColor(.secondary) // Adjust text color
+            .multilineTextAlignment(.center) // Align text to the center
+            .padding() // Add padding around the text
+          Spacer()
         } else {
-          NoObservationsView()
+          if let observations = observationsLocation.observations, observations.count > 0 {
+            SettingsDetailsView()
+            
+            HorizontalLine()
+            ObservationListView(
+              observations: observations,
+              selectedSpeciesID: $selectedSpeciesID,
+              timePeriod: $settings.timePeriodLocation,
+              entity: .location,
+              currentSortingOption: $currentSortingOption,
+              currentFilteringAllOption: $currentFilteringAllOption,
+              currentFilteringOption: $currentFilteringOption) {
+                // Handle end of list event
+                print("End of list reached in ParentView observationsLocation")
+                observationsLocation.fetchData(
+                  settings: settings, url: observationsLocation.next,
+                  token: keyChainviewModel.token,
+                  completion: { log.error("observationsLocation.fetchData") })
+                
+              }
+          } else {
+            NoObservationsView()
+          }
         }
+        
       }
-      
-    }
-    .refreshable {
-      log.error("refreshing... ObservationsLocationsView")
-      setRefresh.toggle()
-    }
-    .onAppear()  {
-      if !settings.hasLocationLoaded {
-        log.info("ObservationsLocationsView onAppear")
-        if let location = locationManager.getCurrentLocation() {
-          //here getting the data for the location
-          setLocation = location.coordinate
+      .refreshable {
+        log.error("refreshing... ObservationsLocationsView")
+        setRefresh.toggle()
+      }
+      .onAppear()  {
+        if !settings.hasLocationLoaded {
+          log.info("ObservationsLocationsView onAppear")
+          if let location = locationManager.getCurrentLocation() {
+            //here getting the data for the location
+            setLocation = location.coordinate
+          }
         }
       }
     }

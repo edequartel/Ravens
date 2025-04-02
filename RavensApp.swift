@@ -55,9 +55,7 @@ struct RavensApp: App {
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
   @StateObject private var observationsLocation = ObservationsViewModel()
-
   @StateObject private var observationsRadiusViewModel = ObservationsRadiusViewModel()
-
   @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
   @StateObject private var observationsSpecies = ObservationsViewModel()
   @StateObject private var observationsViewModel = ObservationsViewModel()
@@ -69,14 +67,10 @@ struct RavensApp: App {
   @StateObject var observersViewModel = ObserversViewModel() //??
   @StateObject var areasViewModel = AreasViewModel() //??
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
-
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
-
   @StateObject var observationUser = ObservationsViewModel()
-
-
   @StateObject var player = Player()
 
   @State private var showingAlert = false

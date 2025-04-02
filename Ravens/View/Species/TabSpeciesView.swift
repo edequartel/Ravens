@@ -135,7 +135,7 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-  @Binding var timePeriod: TimePeriod
+  @Binding var timePeriod: TimePeriod?
 
   var body: some View {
     Form {
@@ -167,7 +167,7 @@ struct SortFilterSpeciesView: View {
   }
 }
 struct SortFilterSpeciesViewXXX: View { //??
-  @Binding var timePeriod: TimePeriod
+  @Binding var timePeriod: TimePeriod?
 
   var body: some View {
     Form {

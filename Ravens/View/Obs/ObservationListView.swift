@@ -16,7 +16,7 @@ struct ObservationListView: View {
 
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
-  @Binding var timePeriod: TimePeriod
+  @Binding var timePeriod: TimePeriod?
 
   var entity: EntityType
 

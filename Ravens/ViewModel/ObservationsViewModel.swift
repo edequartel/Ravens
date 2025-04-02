@@ -42,13 +42,13 @@ class ObservationsViewModel: ObservableObject {
     entity: EntityType,
     token: String,
     id: Int,
-    timePeriod: TimePeriod,
+    timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
     log.info("ObservationsViewModel FetchDataInit")
 
     // reset
     self.observations = []
-    var days = timePeriod.rawValue
+      var days = (timePeriod ?? .twoWeeks).rawValue 
     days -= 1 //today is also also a day
 
     // datetime

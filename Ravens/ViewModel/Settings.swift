@@ -19,33 +19,30 @@ class Settings: ObservableObject {
   //radius
   @AppStorage("radius") var radius = 5000.0
 
-  //timePeriod are retrieved in init()
-//  @AppStorage("timePeriodUser") var timePeriodUserStored: TimePeriod = .fourWeeks
-//  @Published var timePeriodUser: TimePeriod? = .infinite {
-//    didSet {
-//      if let unwrapped = timePeriodUser {
-//        timePeriodUserStored = unwrapped
-//      }
-//    }
-//  }
+  @AppStorage("timePeriodRadius") var timePeriodRadiusStored: TimePeriod = .fourWeeks
+  @Published var timePeriodRadius: TimePeriod? = .twoDays {
+    didSet {
+      timePeriodRadiusStored = timePeriodRadius ?? .twoDays
+    }
+  }
 
   @AppStorage("timePeriodUser") var timePeriodUserStored: TimePeriod = .fourWeeks
-  @Published var timePeriodUser: TimePeriod = .infinite {
+  @Published var timePeriodUser: TimePeriod? = .twoWeeks {
     didSet {
-      timePeriodUserStored = timePeriodUser
+      timePeriodUserStored = timePeriodUser ?? .twoDays
     }
   }
   
   @AppStorage("timePeriodLocation") var timePeriodLocationStored: TimePeriod = .halfYear
-  @Published var timePeriodLocation: TimePeriod = .halfYear {
+  @Published var timePeriodLocation: TimePeriod? = .twoWeeks {
     didSet {
-      timePeriodLocationStored = timePeriodLocation
+      timePeriodLocationStored = timePeriodLocation ?? .fourWeeks
     }
   }
   @AppStorage("timePeriodSpeciesStored") var timePeriodSpeciesStored: TimePeriod = .twoWeeks
-  @Published var timePeriodSpecies: TimePeriod = .twoWeeks {
+  @Published var timePeriodSpecies: TimePeriod? = .twoWeeks {
     didSet {
-      timePeriodSpeciesStored = timePeriodSpecies
+      timePeriodSpeciesStored = timePeriodSpecies ?? .twoWeeks
     }
   }
 
@@ -198,7 +195,7 @@ class Settings: ObservableObject {
 //    hasUserLoaded = false
 //    hasLocationLoaded = false
 //    hasSpeciesLoaded = false
-
+    timePeriodRadius = timePeriodRadiusStored
     timePeriodUser = timePeriodUserStored
     timePeriodLocation = timePeriodLocationStored
     timePeriodSpecies = timePeriodSpeciesStored

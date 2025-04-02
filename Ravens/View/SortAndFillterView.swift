@@ -198,82 +198,84 @@ struct CombinedOptionsMenuView: View {
   var entity: EntityType
 
   var body: some View {
-    Form {
-      // Period Filter
-      if timePeriod != nil {
-        Section(header: Text(period)) {
-          PeriodView(timePeriod: $timePeriod, entity: entity)
+    NavigationStack{
+      Form {
+        // Period Filter
+        if timePeriod != nil {
+          Section(header: Text(period)) {
+            PeriodView(timePeriod: $timePeriod, entity: entity)
+          }
         }
-      }
-
-      if entity == .radius {
-        Section(distance) {
-          RadiusPickerView(selectedRadius: $settings.radius)
+        
+        if entity == .radius {
+          Section(distance) {
+            RadiusPickerView(selectedRadius: $settings.radius)
+          }
         }
-      }
-
-      // Sorting Option
-      if currentSortingOption != nil {
-        Section(header: Text(sort)) {
-          ForEach(SortingOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentSortingOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentSortingOption == option {
-                  Image(systemName: "checkmark")
+        
+        // Sorting Option
+        if currentSortingOption != nil {
+          Section(header: Text(sort)) {
+            ForEach(SortingOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentSortingOption = option
+              }) {
+                HStack {
+                  Text(option.localized)
+                  Spacer()
+                  if currentSortingOption == option {
+                    Image(systemName: "checkmark")
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Filter All/Native
+        if currentFilteringAllOption != nil {
+          Section(header: Text(filter)) {
+            ForEach(FilterAllOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentFilteringAllOption = option
+              }) {
+                HStack {
+                  Text(option.localized)
+                  Spacer()
+                  if currentFilteringAllOption == option {
+                    Image(systemName: "checkmark")
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Rarity Filter
+        if currentFilteringOption != nil {
+          Section(header: Text(rarity)) {
+            ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentFilteringOption = option
+              }) {
+                HStack {
+                  Image(systemName: "circle.fill")
+                    .foregroundColor(rarityColor(value: option.intValue ?? 0))
+                  Text(option.localized)
+                  Spacer()
+                  if currentFilteringOption == option {
+                    Image(systemName: "checkmark")
+                  }
                 }
               }
             }
           }
         }
       }
-      
-      // Filter All/Native
-      if currentFilteringAllOption != nil {
-        Section(header: Text(filter)) {
-          ForEach(FilterAllOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringAllOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentFilteringAllOption == option {
-                  Image(systemName: "checkmark")
-                }
-              }
-            }
-          }
-        }
-      }
-      
-      // Rarity Filter
-      if currentFilteringOption != nil {
-        Section(header: Text(rarity)) {
-          ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringOption = option
-            }) {
-              HStack {
-                Image(systemName: "circle.fill")
-                  .foregroundColor(rarityColor(value: option.intValue ?? 0))
-                Text(option.localized)
-                Spacer()
-                if currentFilteringOption == option {
-                  Image(systemName: "checkmark")
-                }
-              }
-            }
-          }
-        }
-      }
-
     }
   }
 }
+
 
 struct PeriodView: View {
   @Binding var timePeriod: TimePeriod?
@@ -293,3 +295,4 @@ struct PeriodView: View {
     entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
   }
 }
+
