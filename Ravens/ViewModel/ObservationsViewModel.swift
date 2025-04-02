@@ -37,7 +37,7 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-  func fetchDataInitXXX(
+  func fetchDataInit(
     settings: Settings,
     entity: EntityType,
     token: String,

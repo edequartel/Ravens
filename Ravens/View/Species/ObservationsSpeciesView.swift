@@ -84,15 +84,15 @@ struct ObservationsSpeciesView: View {
               currentFilteringAllOption: $currentFilteringAllOption,
               currentFilteringOption: $currentFilteringOption
             ) {
-
-              // Handle end of list event
-              log.info("End of list reached in ParentView observationsSpecies")
+              // Handle end of list event with endOfList Closure
+              log.info("End of list reached in parent View closure observationsSpecies")
+              log.info("url: \(observationsSpecies.next)")
               observationsSpecies.fetchData(
                 settings: settings,
                 url: observationsSpecies.next,
                 token: keyChainviewModel.token,
                 completion: {
-                  log.error("observationUser.fetchData")
+                  log.error("observationSpecies.fetchData")
                 })
             }
               .environmentObject(Settings()) // Pass environment object
@@ -103,13 +103,11 @@ struct ObservationsSpeciesView: View {
         }
       }
 
-      //---->>>> hier no update
       .onChange(of: timePeriod) {
-        log.error("--->>> update timePeriodUser")
+        log.error("update timePeriodUser")
 
         //deze aanpassen
-
-        observationsSpecies.fetchDataInitXXX(
+        observationsSpecies.fetchDataInit(
           settings: settings,
           entity: .species,
           token: keyChainviewModel.token,
@@ -117,7 +115,7 @@ struct ObservationsSpeciesView: View {
           timePeriod: timePeriod,
           completion: {
             isLoaded = true
-            log.info("observationsSpeciesViewModel data loaded")
+            log.error("observationsSpeciesViewModel data loaded")
           }
         )
       }
@@ -142,7 +140,7 @@ struct ObservationsSpeciesView: View {
   }
 
   func fetchDataModel() {
-    observationsSpecies.fetchDataInitXXX(
+    observationsSpecies.fetchDataInit(
       settings: settings,
       entity: .species,
       token: keyChainviewModel.token,

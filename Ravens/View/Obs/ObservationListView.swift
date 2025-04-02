@@ -47,8 +47,8 @@ struct ObservationListView: View {
                  }
                  .onAppear {
                      if obs == filteredAndSortedObservations.last {
-                       log.info("end of list reached")
-                         onEndOfList?()
+                       log.error("end of list reached")
+                       onEndOfList?()  // this is closure in observationSpeciesView(..) { closure() }
                      }
                  }
          }

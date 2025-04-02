@@ -71,7 +71,7 @@ struct ObservationsUserView: View {
               settings: settings,
               url: observationUser.next,
               token: keyChainviewModel.token,
-              completion: { log.error("observationUser.fetchData")
+              completion: { log.error("END OF LIST -->> observationUser.fetchData")
               })
           }
       } else {

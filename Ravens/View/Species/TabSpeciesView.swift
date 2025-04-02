@@ -69,22 +69,6 @@ struct TabSpeciesView: View {
                           .uniformSize()
                   }
                   .tint(.blue)
-
-//
-//                Button(action: {
-//                  selectedSpeciesID = species.speciesId
-//                }) {
-//                  Image(systemSymbol: .infoCircle)
-//                    .uniformSize()
-//                }
-//                .tint(.blue)
-//
-//              Button {
-//                showSpeciesXC = species
-//              } label: {
-//                Label("XC", systemImage: "waveform")
-//              }
-//              .tint(Color(red: 0.5, green: 0, blue: 0)) // Darker Blood Red
             }
 
 

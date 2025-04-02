@@ -65,7 +65,7 @@ struct TabUserObservationsView: View {
       .onChange(of: timePeriod) {
         log.error("update timePeriodUser")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
@@ -77,7 +77,7 @@ struct TabUserObservationsView: View {
       .onChange(of: refresh) {
         log.info("update refresh")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
@@ -89,7 +89,7 @@ struct TabUserObservationsView: View {
       .onChange(of: obsObserversViewModel.observerId) {
         log.info("update obsObserversViewModel.observerId")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
@@ -100,10 +100,6 @@ struct TabUserObservationsView: View {
 
       //sort filter and periodTime
       .modifier(
-        showFirstView ?
-        ObservationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption)
-        :
           ObservationToolbarModifier(
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
@@ -176,7 +172,7 @@ struct TabUserObservationsView: View {
   }
 
   private func loadUserData() async {
-    observationUser.fetchDataInitXXX(
+    observationUser.fetchDataInit(
       settings: settings,
       entity: .user,
       token: keyChainViewModel.token,

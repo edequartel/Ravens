@@ -128,8 +128,7 @@ func fetchDataLocation(
       )
 
       //2b. get the observations for this area
-//      observationsLocation.fetchDataInitXXX(//@@
-      observationsLocation.fetchDataInitXXX(
+      observationsLocation.fetchDataInit(
         settings: settings,
         entity: .location,
         token: token,
