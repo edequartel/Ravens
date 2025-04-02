@@ -14,6 +14,7 @@ import AVFoundation
 
 
 struct ObsView: View {
+  let index: Int?
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
@@ -41,10 +42,12 @@ struct ObsView: View {
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }
-        
-//        Text("id :\(obs.speciesDetail.id)  \(obs.speciesDetail.group)")
 
         HStack {
+          if let index = index {
+            Text("\(index+1)")
+          }
+
           if entity != .species {
             ObsDetailsRowView(obs: obs)
           }

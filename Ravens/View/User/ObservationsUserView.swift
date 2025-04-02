@@ -42,9 +42,6 @@ struct ObservationsUserView: View {
       if showView { Text("ObservationsUserView").font(.customTiny) }
 
       HStack {
-//        if observersViewModel.isObserverInRecords(userID: observersViewModel.observerId) {
-//          Image(systemSymbol: SFObserverFill)
-//        }
         Text("\(observersViewModel.observerName)")
           .bold()
           .lineLimit(1)
@@ -67,11 +64,12 @@ struct ObservationsUserView: View {
           currentFilteringOption: $currentFilteringOption
         ) {
             // Handle end of list event
+//          log.error("END OF LIST observationUser.fetchData observationUser.next")
             observationUser.fetchData(
               settings: settings,
               url: observationUser.next,
               token: keyChainviewModel.token,
-              completion: { log.error("END OF LIST -->> observationUser.fetchData")
+              completion: { log.info("END OF LIST -->> observationUser.fetchData")
               })
           }
       } else {

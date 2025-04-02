@@ -27,7 +27,7 @@ class SpeciesGroupsViewModel: ObservableObject {
             "Accept-Language": settings.selectedLanguage
         ]
         
-        log.error("url SpeciesGroupViewModel: \(url)")
+        log.info("url SpeciesGroupViewModel: \(url)")
         
         // Use Alamofire to make the API request
         AF.request(url, headers: headers)

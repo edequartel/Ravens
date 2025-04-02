@@ -110,7 +110,7 @@
 		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
-		47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* RadiusView.swift */; };
+		47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */; };
 		47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942D2D3F7247009D734F /* RadiusViewModel.swift */; };
 		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
@@ -121,6 +121,8 @@
 		47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */; };
 		47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD0E42C1AE9D8007D0F63 /* dataloading.json */; };
 		47FDCAE02D96B4A000D01F6A /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCADF2D96B48F00D01F6A /* MapsView.swift */; };
+		47FDCAE42D9D8A2F00D01F6A /* RadiusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */; };
+		47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -219,7 +221,7 @@
 		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
-		47CF942B2D3EEDD2009D734F /* RadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusView.swift; sourceTree = "<group>"; };
+		47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRadiusView.swift; sourceTree = "<group>"; };
 		47CF942D2D3F7247009D734F /* RadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusViewModel.swift; sourceTree = "<group>"; };
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
@@ -230,6 +232,8 @@
 		47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		47FAD0E42C1AE9D8007D0F63 /* dataloading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataloading.json; sourceTree = "<group>"; };
 		47FDCADF2D96B48F00D01F6A /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
+		47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusListView.swift; sourceTree = "<group>"; };
+		47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -546,7 +550,9 @@
 		47CF942A2D3EEDC1009D734F /* Radius */ = {
 			isa = PBXGroup;
 			children = (
-				47CF942B2D3EEDD2009D734F /* RadiusView.swift */,
+				47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */,
+				47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */,
+				47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */,
 			);
 			path = Radius;
 			sourceTree = "<group>";
@@ -701,7 +707,7 @@
 				47D4B7732D00546800D46050 /* ObserversView.swift in Sources */,
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
-				47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */,
+				47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
@@ -714,6 +720,7 @@
 				47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
+				47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */,
 				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* TabSpeciesView.swift in Sources */,
 				47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */,
@@ -723,6 +730,7 @@
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
 				4738B6412BF4E7C900BF7557 /* ObsView.swift in Sources */,
 				471875392BFB938500EF9F1F /* AreasViewModel.swift in Sources */,
+				47FDCAE42D9D8A2F00D01F6A /* RadiusListView.swift in Sources */,
 				474C408C2B4DAC590038B3A5 /* RegionsViewModel.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,

@@ -51,6 +51,7 @@ struct ObservationsSpeciesView: View {
 
           // Text with accessibility label
           Text("\(item.name)")
+//          Text("\(item.name) \(observationsSpecies.count)")
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -112,7 +113,7 @@ struct ObservationsSpeciesView: View {
           entity: .species,
           token: keyChainviewModel.token,
           id: item.speciesId,
-          timePeriod: timePeriod,
+          timePeriod: settings.timePeriodSpecies,
           completion: {
             isLoaded = true
             log.error("observationsSpeciesViewModel data loaded")
@@ -145,9 +146,7 @@ struct ObservationsSpeciesView: View {
       entity: .species,
       token: keyChainviewModel.token,
       id: item.speciesId,
-
-      timePeriod: .infinite, //added this
-      
+      timePeriod: settings.timePeriodSpecies, //.infinite, //added this
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")

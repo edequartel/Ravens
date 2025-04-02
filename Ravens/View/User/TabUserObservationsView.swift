@@ -104,6 +104,7 @@ struct TabUserObservationsView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringOption: $currentFilteringOption,
             timePeriod: $timePeriod)
+//            timePeriod: $settings.timePeriodUser)
       )
 
 

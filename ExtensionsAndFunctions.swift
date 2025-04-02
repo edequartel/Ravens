@@ -15,8 +15,8 @@ let showView = false
 //let showView = true
 
 // gouda en span nederland
-let latitude = 52.013077-0.2
-let longitude = 4.713450+0.1
+//let latitude = 52,013077
+//let longitude = 4,713450
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
@@ -478,4 +478,10 @@ struct ImageWithOverlay_Previews: PreviewProvider {
     static var previews: some View {
         ImageWithOverlay(systemName: "star", value: false)
     }
+}
+
+func formatDate(date: Date) -> String {
+  let formatter = DateFormatter()
+  formatter.dateFormat = "yyyy-MM-dd"
+  return formatter.string(from: date)
 }

@@ -44,7 +44,7 @@ class ObservationsViewModel: ObservableObject {
     id: Int,
     timePeriod: TimePeriod,
     completion: @escaping () -> Void) {
-    log.info("FetchDataInit")
+    log.info("ObservationsViewModel FetchDataInit")
 
     // reset
     self.observations = []
@@ -68,15 +68,13 @@ class ObservationsViewModel: ObservableObject {
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }
 
-
   func fetchData(
     settings: Settings,
     url: String, token: String,
     completion: @escaping () -> Void) {
-    log.info("fetchData url: [\(url)]")
+    log.info("ObservationsViewModel fetchData url: [\(url)]")
     if url.isEmpty { return }
-    //
-    log.info("fetchData ObservationsViewModel userId: \(url)")
+
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -98,8 +96,9 @@ class ObservationsViewModel: ObservableObject {
 
             DispatchQueue.main.async {
               self.observations = (self.observations ?? []) + (observations.results ?? [])
-              //              self.observations = observations.results
+
               self.count = observations.count ?? 0
+              self.log.error("observations count \(self.count)")
 
               self.getTimeData()
 

@@ -116,10 +116,6 @@ struct TabSpeciesView: View {
           }
         }
       }
-
-      //      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
-      //      .navigationBarTitleDisplayMode(.inline)
-
     }
   }
 

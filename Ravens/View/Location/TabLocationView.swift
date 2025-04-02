@@ -98,7 +98,8 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-      .onChange(of: setLocation) {
+      //      .onChange(of: setLocation) {
+      .onChange(of: settings.locationId) {
         log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -127,17 +128,12 @@ struct TabLocationView: View {
       }
 
       //set sort, filter and timePeriod
-      .modifier(//?? why firstview
-//        showFirstView ?
-//        ObservationToolbarModifier(
-//          currentFilteringOption: $currentFilteringOption,
-//          timePeriod: $timePeriod)
-//        :
-          ObservationToolbarModifier(
-            currentSortingOption: $currentSortingOption,
-            currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod
-          )
+      .modifier(
+        ObservationToolbarModifier(
+          currentSortingOption: $currentSortingOption,
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $timePeriod
+        )
       )
 
       .toolbar {
@@ -155,36 +151,34 @@ struct TabLocationView: View {
         }
 
         //update my locationData
-//        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: {
-              log.info("getMyLocation")
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            log.info("getMyLocation")
 
-              if let location = locationManager.getCurrentLocation() {
+            if let location = locationManager.getCurrentLocation() {
+              fetchDataLocation(
+                settings: settings,
+                token: keyChainviewModel.token,
+                observationsLocation: observationsLocation,
+                locationIdViewModel: locationIdViewModel,
+                geoJSONViewModel: geoJSONViewModel,
+                coordinate: CLLocationCoordinate2D(
+                  latitude: location.coordinate.latitude,
+                  longitude: location.coordinate.longitude),
+                timePeriod: timePeriod ?? .week)
+              //              }
 
-                fetchDataLocation(
-                  settings: settings,
-                  token: keyChainviewModel.token,
-                  observationsLocation: observationsLocation,
-                  locationIdViewModel: locationIdViewModel,
-                  geoJSONViewModel: geoJSONViewModel,
-                  coordinate: CLLocationCoordinate2D(
-                    latitude: location.coordinate.latitude,
-                    longitude: location.coordinate.longitude),
-                  timePeriod: timePeriod ?? .week)
-                //              }
-
-              } else if let errorMessage = locationManager.errorMessage {
-                log.error("Error: \(errorMessage)")
-              } else {
-                log.error("Retrieving location...")
-              }
-            }) {
-              Image(systemName: "smallcircle.filled.circle")
-                .uniformSize()
-                .accessibilityLabel(updateLocation)
+            } else if let errorMessage = locationManager.errorMessage {
+              log.error("Error: \(errorMessage)")
+            } else {
+              log.error("Retrieving location...")
             }
+          }) {
+            Image(systemName: "smallcircle.filled.circle")
+              .uniformSize()
+              .accessibilityLabel(updateLocation)
           }
+        }
 
 
 

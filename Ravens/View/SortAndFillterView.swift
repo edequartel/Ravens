@@ -92,6 +92,7 @@ struct FilteringAllOptionsView: View {
 
 //==========================================================================================
 struct ObservationRowView: View {
+  let index: Int?
   var obs: Observation
   @Binding var selectedSpeciesID: Int?
   
@@ -102,6 +103,7 @@ struct ObservationRowView: View {
       if showView { Text("ObservationRowView").font(.customTiny) }
       NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID,  entity: entity)) {
         ObsView(
+          index: index,
           selectedSpeciesID: $selectedSpeciesID,
           entity: entity,
           obs: obs
@@ -190,6 +192,7 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
+
   @EnvironmentObject var settings: Settings
 
   var entity: EntityType
