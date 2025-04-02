@@ -98,8 +98,8 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-      //      .onChange(of: setLocation) {
-      .onChange(of: settings.locationId) {
+            .onChange(of: setLocation) {
+//      .onChange(of: settings.locationId) {
         log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,

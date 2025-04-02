@@ -60,15 +60,15 @@ struct LocationListView: View {
         }
       }
     }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: SearchLocationView()) {
-          Image(systemSymbol: .magnifyingglass)
-            .uniformSize()
-            .accessibilityLabel(searchForLocation)
-        }
-      }
-    }
+//    .toolbar { //deze werkt niet goed en is misschien onnodig
+//      ToolbarItem(placement: .navigationBarTrailing) {
+//        NavigationLink(destination: SearchLocationView()) {
+//          Image(systemSymbol: .magnifyingglass)
+//            .uniformSize()
+//            .accessibilityLabel(searchForLocation)
+//        }
+//      }
+//    }
     .onAppear {
       areasViewModel.loadRecords()
     }
