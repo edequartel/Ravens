@@ -37,23 +37,29 @@ struct ObservationsUserView: View {
 
   @Binding var setRefresh: Bool
 
+  @State private var getObservations: String = "loading Observations"
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
 
-      HStack {
-        Text("\(observersViewModel.observerName)")
-          .bold()
-          .lineLimit(1)
-          .truncationMode(.tail)
-        Spacer()
+      VStack {
+        HStack {
+          Text("\(observersViewModel.observerName ?? "noName")")
+            .bold()
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .accessibilityLabel(observersViewModel.observerName ?? "noName")
+
+        ObservationsCountView(count: observationUser.count)
+
+        HorizontalLine()
       }
-      .padding(.horizontal, 10)
-      .padding(.vertical, 4)
-      .accessibilityLabel(observersViewModel.observerName)
 
       if let observations = observationUser.observations, !observations.isEmpty {
-        HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
@@ -64,12 +70,12 @@ struct ObservationsUserView: View {
           currentFilteringOption: $currentFilteringOption
         ) {
             // Handle end of list event
-//          log.error("END OF LIST observationUser.fetchData observationUser.next")
             observationUser.fetchData(
               settings: settings,
               url: observationUser.next,
               token: keyChainviewModel.token,
-              completion: { log.info("END OF LIST -->> observationUser.fetchData")
+              completion: {
+                log.info("end of list, observationUser.fetchData")
               })
           }
       } else {

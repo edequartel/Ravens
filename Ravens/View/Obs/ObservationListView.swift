@@ -36,7 +36,6 @@ struct ObservationListView: View {
         .sorted(by: compareObservations)
 
       ForEach(Array(filteredAndSortedObservations.enumerated()), id: \.element.id) { index, obs in
-//      ForEach(filteredAndSortedObservations, id: \.id) { obs in
         ObservationRowView(
           index: index,
           obs: obs,
@@ -49,7 +48,7 @@ struct ObservationListView: View {
         .onAppear {
           if obs.id == filteredAndSortedObservations.last?.id {
             log.error("end of list reached")
-            onEndOfList?()  // this is closure in observationSpeciesView(..) { closure() }
+            onEndOfList?()  
           }
         }
       }

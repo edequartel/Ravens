@@ -27,20 +27,17 @@ struct RadiusListView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
+  
   @Binding var region: MKCoordinateRegion
   @Binding var cameraPosition: MapCameraPosition
 
   var body: some View {
     VStack {
+      if showView { Text("RadiusListView").font(.customTiny) }
+      ObservationsCountView(count: observationsRadiusViewModel.count)
+      HorizontalLine()
+
       if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
-        HStack {
-          Text("\(observationsRadiusViewModel.count) waarnemingen")
-            .font(.caption)
-            .bold()
-            .padding(.horizontal)
-          Spacer()
-        }
-        HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,

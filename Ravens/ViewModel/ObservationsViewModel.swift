@@ -48,7 +48,8 @@ class ObservationsViewModel: ObservableObject {
 
     // reset
     self.observations = []
-      var days = (timePeriod ?? .twoWeeks).rawValue 
+
+    var days = (timePeriod ?? .twoWeeks).rawValue
     days -= 1 //today is also also a day
 
     // datetime
@@ -70,7 +71,8 @@ class ObservationsViewModel: ObservableObject {
 
   func fetchData(
     settings: Settings,
-    url: String, token: String,
+    url: String,
+    token: String,
     completion: @escaping () -> Void) {
     log.info("ObservationsViewModel fetchData url: [\(url)]")
     if url.isEmpty { return }

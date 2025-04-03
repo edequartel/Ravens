@@ -38,6 +38,7 @@
 "observations" = "waarnemingen";
 "settings" = "Instellingen";
 "distance" = "Afstand";
+"noName" = "Naam onbekend";
 
 //icons
 "swap" = "Wissel tussen lijst en kaart weergave";
@@ -105,7 +106,7 @@
 "oneyear" = "1 jaar";
 "infinite" = "jaren";
 
-"noObservations" = "Wanneer er \ngeen waarnemingen verschijnen,\nvergroot dan de periode.";
+"noObservations" = "Wanneer er \ngeen waarnemingen verschijnen,\nwijzig dan de parameters.";
 "switchView" = "Wissel view";
 
 // Xeno Canto

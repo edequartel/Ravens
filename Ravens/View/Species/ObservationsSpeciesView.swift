@@ -13,7 +13,7 @@ struct ObservationsSpeciesView: View {
 
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-  
+
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
@@ -51,7 +51,7 @@ struct ObservationsSpeciesView: View {
 
           // Text with accessibility label
           Text("\(item.name)")
-//          Text("\(item.name) \(observationsSpecies.count)")
+          //          Text("\(item.name) \(observationsSpecies.count)")
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1
             .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
@@ -61,81 +61,70 @@ struct ObservationsSpeciesView: View {
       .padding(.horizontal,10)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(item.name)
+      ObservationsCountView(count: observationsSpecies.count)
+      HorizontalLine()
       Spacer()
 
-      VStack {
-        if let observations = observationsSpecies.observations, observations.count == 0 {
-          Text(noObsLastPeriod)// \(item.name)")
-            .font(.headline) // Set font style
-            .foregroundColor(.secondary) // Adjust text color
-            .multilineTextAlignment(.center) // Align text to the center
-            .padding() // Add padding around the text
-          Spacer()
-        } else {
-
-          if let observations = observationsSpecies.observations, observations.count > 0 {
-            if showView { Text("ObservationListView").font(.customTiny) }
-            HorizontalLine()
-            ObservationListView(
-              observations: observations,
-              selectedSpeciesID: $selectedSpeciesID,
-              timePeriod: $settings.timePeriodSpecies,
-              entity: .species,
-              currentSortingOption: $currentSortingOption,
-              currentFilteringAllOption: $currentFilteringAllOption,
-              currentFilteringOption: $currentFilteringOption
-            ) {
-              // Handle end of list event with endOfList Closure
-              log.info("End of list reached in parent View closure observationsSpecies")
-              log.info("url: \(observationsSpecies.next)")
-              observationsSpecies.fetchData(
-                settings: settings,
-                url: observationsSpecies.next,
-                token: keyChainviewModel.token,
-                completion: {
-                  log.error("observationSpecies.fetchData")
-                })
-            }
-              .environmentObject(Settings()) // Pass environment object
-
-          } else {
-            NoObservationsView()
-          }
-        }
-      }
-
-      .onChange(of: timePeriod) {
-        log.error("update timePeriodUser")
-
-        //deze aanpassen
-        observationsSpecies.fetchDataInit(
-          settings: settings,
+      if let observations = observationsSpecies.observations, !observations.isEmpty {
+        if showView { Text("ObservationListView").font(.customTiny) }
+        ObservationListView(
+          observations: observations,
+          selectedSpeciesID: $selectedSpeciesID,
+          timePeriod: $settings.timePeriodSpecies,
           entity: .species,
-          token: keyChainviewModel.token,
-          id: item.speciesId,
-          timePeriod: settings.timePeriodSpecies,
-          completion: {
-            isLoaded = true
-            log.error("observationsSpeciesViewModel data loaded")
-          }
-        )
-      }
-
-      .refreshable {
-        log.error("refreshing... observation species")
-        fetchDataModel()
-      }
-
-      .navigationBarTitleDisplayMode(.inline)
-
-      .onAppear() {
-        if !hasAppeared {
-          if settings.initialSpeciesLoad {
-            fetchDataModel()
-            settings.initialSpeciesLoad = false
-          }
-          hasAppeared = true // Prevent re-execution
+          currentSortingOption: $currentSortingOption,
+          currentFilteringAllOption: $currentFilteringAllOption,
+          currentFilteringOption: $currentFilteringOption
+        ) {
+          // Handle end of list event with endOfList Closure
+          log.info("End of list reached in parent View closure observationsSpecies")
+          log.info("url: \(observationsSpecies.next)")
+          observationsSpecies.fetchData(
+            settings: settings,
+            url: observationsSpecies.next,
+            token: keyChainviewModel.token,
+            completion: {
+              log.error("observationSpecies.fetchData")
+            })
         }
+        .environmentObject(Settings()) // Pass environment object
+
+      } else {
+        NoObservationsView()
+      }
+    }
+
+    .onChange(of: timePeriod) {
+      log.error("update timePeriodUser")
+
+      //deze aanpassen
+      observationsSpecies.fetchDataInit(
+        settings: settings,
+        entity: .species,
+        token: keyChainviewModel.token,
+        id: item.speciesId,
+        timePeriod: settings.timePeriodSpecies,
+        completion: {
+          isLoaded = true
+          log.error("observationsSpeciesViewModel data loaded")
+        }
+      )
+    }
+
+    .refreshable {
+      log.error("refreshing... observation species")
+      fetchDataModel()
+    }
+
+    .navigationBarTitleDisplayMode(.inline)
+
+    .onAppear() {
+      if !hasAppeared {
+        if settings.initialSpeciesLoad {
+          fetchDataModel()
+          settings.initialSpeciesLoad = false
+        }
+        hasAppeared = true // Prevent re-execution
       }
     }
   }
@@ -155,3 +144,21 @@ struct ObservationsSpeciesView: View {
   }
 }
 
+
+struct ObservationsCountView: View {
+  let count: Int
+
+  var body: some View {
+    HStack {
+      HStack {
+        Text("\(count)")
+        Text(observationsLocStr)
+      }
+      .font(.caption)
+      .foregroundColor(.gray)
+      .bold()
+      .padding(.horizontal, 10)
+      Spacer()
+    }
+  }
+}

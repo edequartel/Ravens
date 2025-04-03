@@ -16,6 +16,7 @@ import MapKit
 struct TabRadiusView: View {
   let log = SwiftyBeaver.self
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
+  
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject private var settings: Settings
@@ -76,7 +77,7 @@ struct TabRadiusView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
-          radius: settings.radius, //circleRadius,
+          radius: settings.radius,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update radius")
@@ -93,8 +94,8 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
 
-          radius: settings.radius, //circleRadius,
-          timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
+          radius: settings.radius,
+          timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod")
           })
@@ -110,8 +111,8 @@ struct TabRadiusView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
-          radius: settings.radius, //circleRadius,
-          timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
+          radius: settings.radius,
+          timePeriod: settings.timePeriodRadius, 
           completion: {
             log.error("update timePeriod count: \(observationsRadiusViewModel.count)")
           })

@@ -415,11 +415,11 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				47FDCAE92D9DD21E00D01F6A /* CalenderView */,
 				47FDCADF2D96B48F00D01F6A /* MapsView.swift */,
 				47A588512D1018C700D9CFE1 /* PeriodView.swift */,
 				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
 				47D4B7722D00546300D46050 /* ObserversView.swift */,
+				47FDCAE92D9DD21E00D01F6A /* CalenderView */,
 				476843D22BA9D333004EF208 /* StartUp */,
 				471F7A612CF792A500BF529C /* Misc */,
 				471F7A5E2CF7915200BF529C /* Map */,
@@ -589,6 +589,7 @@
 				474C40242B4BC4040038B3A5 /* Sources */,
 				474C40252B4BC4040038B3A5 /* Frameworks */,
 				474C40262B4BC4040038B3A5 /* Resources */,
+				47FDCAF32D9EEEA900D01F6A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -688,6 +689,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47FDCAF32D9EEEA900D01F6A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		474C40242B4BC4040038B3A5 /* Sources */ = {

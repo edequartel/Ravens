@@ -44,6 +44,18 @@ struct SpeciesView: View {
     }
 
     .toolbar {
+      if !accessibilityManager.isVoiceOverEnabled {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            showFirstView.toggle()
+          }) {
+            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
+              .uniformSize()
+          }
+          .accessibility(label: Text("Switch view"))
+        }
+      }
+      
       if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
@@ -56,7 +68,7 @@ struct SpeciesView: View {
 
       }
 
-      ToolbarItem(placement: .navigationBarTrailing) { //@@
+      ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: SpeciesDetailsView(speciesID: item.speciesId)) {
           Image(systemSymbol: .infoCircle)
                   .uniformSize()
@@ -67,24 +79,12 @@ struct SpeciesView: View {
       }
 
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: SortFilterSpeciesViewXXX(
+        NavigationLink(destination: PickTimePeriodeSpeciesView(
           timePeriod: $settings.timePeriodSpecies
         )) {
           Image(systemSymbol: .ellipsisCircle)
             .uniformSize()
             .accessibility(label: Text(sortAndFilterSpecies))
-        }
-      }
-
-      if !accessibilityManager.isVoiceOverEnabled {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            showFirstView.toggle()
-          }) {
-            Image(systemSymbol: .rectangle2Swap) // Replace with your desired image
-              .uniformSize()
-          }
-          .accessibility(label: Text("Switch view"))
         }
       }
     }

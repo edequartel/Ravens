@@ -22,7 +22,7 @@ struct BirdRowView: View {
   @Binding var selectedBird: Bird?
 
   var isPlayingThisBird: Bool {
-    currentlyPlayingBirdID == bird.id_species && audioPlayerManager.isPlaying
+    currentlyPlayingBirdID == bird.idSpecies && audioPlayerManager.isPlaying
   }
 
   var body: some View {
@@ -35,7 +35,7 @@ struct BirdRowView: View {
         if currentlyPlayingBirdID != nil {
           audioPlayerManager.stopAudio()
         }
-        currentlyPlayingBirdID = bird.id_species
+        currentlyPlayingBirdID = bird.idSpecies
         isLoadingAudio = true
         audioPlayerManager.playAudio(from: bird.file) {
           isLoadingAudio = false
@@ -49,7 +49,7 @@ struct BirdRowView: View {
               Image(systemName: "\(bird.q?.lowercased() ?? "").square.fill")
                 .foregroundColor(.gray)
 
-              Text("XC\(bird.id_species)")
+              Text("XC\(bird.idSpecies)")
                 .bold()
 
               Text("\(bird.length ?? "")")
@@ -106,7 +106,7 @@ struct BirdRowView: View {
 
     }
     .accessibilityElement(children: .combine)
-    .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.id_species)  \(bird.rec ?? "")")
+    .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.idSpecies)  \(bird.rec ?? "")")
 
 
 

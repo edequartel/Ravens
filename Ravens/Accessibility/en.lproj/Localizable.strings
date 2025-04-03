@@ -42,6 +42,7 @@
 "observations" = "observations";
 "settings" = "Settings";
 "distance" = "Distance";
+"noName" = "Name unknown";
 
 //icons
 "swap" = "change between list and map view";
@@ -109,7 +110,7 @@
 "oneyear" = "year";
 "infinite" = "years";
 
-"noObservations" = "If no observations appear, \nwider your scope.";
+"noObservations" = "When no observations appear, \nchange the parameters.";
 "switchView" = "Switch view";
 
 // Xeno Canto

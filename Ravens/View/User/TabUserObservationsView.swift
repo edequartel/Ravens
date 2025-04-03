@@ -22,7 +22,6 @@ struct TabUserObservationsView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .fourWeeks
 
   @Binding var selectedSpeciesID: Int?
 
@@ -62,7 +61,7 @@ struct TabUserObservationsView: View {
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
-      .onChange(of: timePeriod) {
+      .onChange(of: settings.timePeriodUser) {
         log.error("update timePeriodUser")
 
         observationUser.fetchDataInit(
@@ -70,7 +69,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodUser,
           completion: { log.error("fetch data complete") } )
       }
 
@@ -82,7 +81,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") } )
       }
 
@@ -94,17 +93,16 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") } )
-      } 
+      }
 
       //sort filter and periodTime
       .modifier(
-          ObservationToolbarModifier(
-            currentSortingOption: $currentSortingOption,
-            currentFilteringOption: $currentFilteringOption,
-//            timePeriod: $timePeriod)
-            timePeriod: $settings.timePeriodUser)
+        ObservationToolbarModifier(
+          currentSortingOption: $currentSortingOption,
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $settings.timePeriodUser)
       )
 
 
@@ -138,16 +136,13 @@ struct TabUserObservationsView: View {
           //add choose observers
           if (obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0)) {
             ToolbarItem(placement: .navigationBarTrailing) {
-              ObserversXXXButtonView(
+              ObserversButtonView(
                 userId: obsObserversViewModel.observerId,
                 userName: obsObserversViewModel.observerName
               )
             }
           }
-
         }
-
-
       }
       .onAppear {
         if firstTime {
@@ -155,9 +150,9 @@ struct TabUserObservationsView: View {
           firstTime = false
           showFirstView = settings.mapPreference
           // Run loadUserData asynchronously
-                  Task {
-                      await loadUserData()
-                  }
+          Task {
+            await loadUserData()
+          }
 
         }
       }
@@ -178,7 +173,7 @@ struct TabUserObservationsView: View {
       entity: .user,
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
-      timePeriod: timePeriod ?? .fourWeeks,
+      timePeriod: settings.timePeriodUser,
       completion: {
         log.info("fetch loadUserData observationUser.fetchDataInit complete")
         userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {

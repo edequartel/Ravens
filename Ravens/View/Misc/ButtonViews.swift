@@ -147,7 +147,7 @@ struct AreaLocationButtonView: View {
   }
 }
 
-struct ObserversButtonView: View {
+struct ObserversObsButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   var obs: Observation
 
@@ -168,7 +168,7 @@ struct ObserversButtonView: View {
   }
 }
 
-struct ObserversXXXButtonView: View {
+struct ObserversButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   let userId: Int?
   let userName: String?

@@ -39,9 +39,10 @@ let usName = LocalizedStringKey("us")
 let location = LocalizedStringKey("location")
 let species = LocalizedStringKey("species")
 let observation = LocalizedStringKey("observation")
-let observations = LocalizedStringKey("observations")
+let observationsLocStr = LocalizedStringKey("observations")
 let settingsName = LocalizedStringKey("settings")
 let distance = LocalizedStringKey("distance")
+let noName = LocalizedStringKey("noName")
 
 // icons
 let swap = LocalizedStringKey("swap")

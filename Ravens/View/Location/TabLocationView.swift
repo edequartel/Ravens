@@ -45,8 +45,6 @@ struct TabLocationView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .week
-
 
   @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
   @State private var setRefresh: Bool = false
@@ -67,7 +65,7 @@ struct TabLocationView: View {
             setLocation: $setLocation,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod)
+            timePeriod: $settings.timePeriodLocation)
         } else {
           ObservationsLocationView(
             observationsLocation: observationsLocation,
@@ -85,7 +83,7 @@ struct TabLocationView: View {
         }
       }
 
-      .onChange(of: timePeriod) {
+      .onChange(of: settings.timePeriodLocation) {
         log.error("-->> update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -94,12 +92,11 @@ struct TabLocationView: View {
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
           coordinate: setLocation, //!!
-          timePeriod: timePeriod ?? .week)
+          timePeriod: settings.timePeriodLocation)
         settings.hasLocationLoaded = true
       }
 
-            .onChange(of: setLocation) {
-//      .onChange(of: settings.locationId) {
+        .onChange(of: setLocation) {
         log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -108,7 +105,7 @@ struct TabLocationView: View {
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
           coordinate: setLocation,
-          timePeriod: timePeriod ?? .week)
+          timePeriod: settings.timePeriodLocation)
         settings.hasLocationLoaded = true
       }
 
@@ -122,7 +119,7 @@ struct TabLocationView: View {
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
           coordinate: setLocation,
-          timePeriod: timePeriod ?? .week
+          timePeriod: settings.timePeriodLocation
         )
         settings.hasLocationLoaded = true
       }
@@ -132,7 +129,7 @@ struct TabLocationView: View {
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
           currentFilteringOption: $currentFilteringOption,
-          timePeriod: $timePeriod
+          timePeriod: $settings.timePeriodLocation
         )
       )
 
@@ -165,8 +162,7 @@ struct TabLocationView: View {
                 coordinate: CLLocationCoordinate2D(
                   latitude: location.coordinate.latitude,
                   longitude: location.coordinate.longitude),
-                timePeriod: timePeriod ?? .week)
-              //              }
+                timePeriod: settings.timePeriodLocation)
 
             } else if let errorMessage = locationManager.errorMessage {
               log.error("Error: \(errorMessage)")
@@ -181,7 +177,6 @@ struct TabLocationView: View {
         }
 
 
-
         //choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
@@ -189,8 +184,8 @@ struct TabLocationView: View {
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,
-              setLocation: $setLocation,
-              locationId: settings.locationId)) {
+              setLocation: $setLocation)
+          ) {
                 Image(systemSymbol: .listBullet)
                   .uniformSize()
               }

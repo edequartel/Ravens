@@ -19,9 +19,7 @@ struct ObservationsLocationView: View {
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var locationManager: LocationManagerModel
-
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
-
   @EnvironmentObject var settings: Settings
   
   @Binding var selectedSpeciesID: Int?
@@ -44,19 +42,10 @@ struct ObservationsLocationView: View {
     NavigationStack {
       VStack {
         if showView { Text("ObservationsLocationView").font(.customTiny) }
-        
-        if let observations = observationsLocation.observations, observations.count == 0 {
-          Text(noObsLastPeriod)
-            .font(.headline) // Set font style
-            .foregroundColor(.secondary) // Adjust text color
-            .multilineTextAlignment(.center) // Align text to the center
-            .padding() // Add padding around the text
-          Spacer()
-        } else {
-          if let observations = observationsLocation.observations, observations.count > 0 {
-            SettingsDetailsView()
-            
-            HorizontalLine()
+        ObservationsCountView(count: observationsLocation.count)
+        HorizontalLine()
+
+        if let observations = observationsLocation.observations, !observations.isEmpty {
             ObservationListView(
               observations: observations,
               selectedSpeciesID: $selectedSpeciesID,
@@ -77,12 +66,12 @@ struct ObservationsLocationView: View {
             NoObservationsView()
           }
         }
-        
-      }
+
       .refreshable {
         log.error("refreshing... ObservationsLocationsView")
         setRefresh.toggle()
       }
+
       .onAppear()  {
         if !settings.hasLocationLoaded {
           log.info("ObservationsLocationsView onAppear")
@@ -96,7 +85,6 @@ struct ObservationsLocationView: View {
   }
 }
 
-
 func fetchDataLocation(
   settings: Settings,
   token: String,
@@ -104,7 +92,7 @@ func fetchDataLocation(
   locationIdViewModel: LocationIdViewModel,
   geoJSONViewModel: GeoJSONViewModel,
   coordinate: CLLocationCoordinate2D,
-  timePeriod: TimePeriod
+  timePeriod: TimePeriod?
 ) {
 //  log.info("fetchDataLocation")
   //1. get the id from the location
@@ -113,7 +101,7 @@ func fetchDataLocation(
     longitude: coordinate.longitude,
     token: token,
     completion: { fetchedLocations in
-//      log.info("locationIdViewModel data loaded")
+
       // Use fetchedLocations here, actually it is one location,. the first
       settings.locationName = fetchedLocations[0].name
       settings.locationId = fetchedLocations[0].id
@@ -122,11 +110,7 @@ func fetchDataLocation(
 
       //2a. get the geoJSON for this area, and we pick the first one = 0
       geoJSONViewModel.fetchGeoJsonData(
-        for: fetchedLocations[0].id,
-        completion:
-          {
-//            log.info("geoJSONViewModel data loaded")
-          }
+        for: fetchedLocations[0].id
       )
 
       //2b. get the observations for this area
@@ -145,15 +129,13 @@ func fetchDataLocation(
   
 }
 
-
+//
 struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
       EmptyView()
       Text(noObservations)
         .foregroundColor(.secondary)
-//      ProgressView()
-//        .frame(width: 100, height: 100)
     }
     .padding() // Adds padding around VStack content
     .frame(maxWidth: .infinity, maxHeight: .infinity) // Expands VStack to fill parent

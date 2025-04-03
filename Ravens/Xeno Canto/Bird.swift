@@ -9,8 +9,8 @@ import Foundation
 
 // MARK: - BirdResponse
 struct BirdResponse: Codable {
-  let numRecordings: String //Int
-  let numSpecies: String //Int
+  let numRecordings: String
+  let numSpecies: String
   let page: Int
   let numPages: Int
   let recordings: [Bird]
@@ -19,7 +19,7 @@ struct BirdResponse: Codable {
 // MARK: - Bird
 struct Bird: Codable, Identifiable {
   let id: UUID = UUID()  // Generates unique ID per instance
-  let id_species: String
+  let idSpecies: String
   let gen: String?
   let sp: String?
   let ssp: String?
@@ -59,7 +59,7 @@ struct Bird: Codable, Identifiable {
   let smp: String?
 
   enum CodingKeys: String, CodingKey {
-    case id_species = "id"
+    case idSpecies = "id"
     case gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file
     case fileName = "file-name"
     case sono, osci, lic, q, length, time, date, uploaded, also, rmk

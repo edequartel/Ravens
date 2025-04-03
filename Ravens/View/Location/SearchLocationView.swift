@@ -81,20 +81,19 @@ class SearchLocationViewModel: ObservableObject {
 struct SearchLocationView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject private var areasViewModel: AreasViewModel
-  @EnvironmentObject private var settings: Settings
-
   @EnvironmentObject private var geoJSONViewModel: GeoJSONViewModel
-
   @EnvironmentObject private var viewModel: SearchLocationViewModel
-
+  @EnvironmentObject private var settings: Settings
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
+  @Binding var setLocation: CLLocationCoordinate2D
+  @Binding var locationID: Int
 
   @State private var searchText = ""
-  @State private var locationID: Int = 0
   @State private var isFocused: Bool = true
   @State private var isLoading = false // Loading indicator
   @FocusState private var isSearchFieldFocused: Bool
+  
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   var body: some View {
@@ -107,9 +106,9 @@ struct SearchLocationView: View {
           token: keyChainviewModel.token ) { success in
           isLoading = false
           if success {
-            print("Location fetch completed successfully")
+            log.error("Location fetch completed successfully")
           } else {
-            print("Location fetch failed")
+            log.error("Location fetch failed")
           }
         }
       })
@@ -139,41 +138,22 @@ struct SearchLocationView: View {
     }
 
 
-
     Section() {
       // SwiftUI List
       List(viewModel.locations, id: \.id) { location in
         Button(action: {
-          log.info("Location ID set to: \(locationID)")
-          log.info("Settings locationName: \(settings.locationName), locationId: \(settings.locationId)")
-
+          log.error("Location ID set to: \(locationID)")
 
           locationID = location.locationId
+          settings.locationId = location.locationId
           settings.locationName = location.name
-          settings.locationId = locationID
-
 
           // Trigger geoJSON data fetching and update settings
           geoJSONViewModel.fetchGeoJsonData(
-            for: locationID,
+            for: location.locationId,
             completion: {
-              log.error("Selected locationID: \(settings.locationName),\(settings.locationId)")
-
-              log.error("Span: \(geoJSONViewModel.span.latitude),\(geoJSONViewModel.span.longitude)")
-
-              settings.currentLocation = CLLocation(
-                latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude
-              )
-
-              settings.locationCoordinate = CLLocationCoordinate2D(
-                latitude: geoJSONViewModel.span.latitude,
-                longitude: geoJSONViewModel.span.longitude
-              )
-
-              log.error("LocationCoordinate: \(settings.locationCoordinate?.latitude ?? 0) \(settings.locationCoordinate?.longitude ?? 0)")
-
-              log.info("Latitude: \(geoJSONViewModel.span.latitude), Longitude: \(geoJSONViewModel.span.longitude)")
+              setLocation.latitude = geoJSONViewModel.span.latitude
+              setLocation.longitude = geoJSONViewModel.span.longitude
 
               areasViewModel.appendRecord(
                 areaName: location.name,
@@ -195,10 +175,4 @@ struct SearchLocationView: View {
   }
 }
 
-// MARK: - Preview
-struct SearchLocationView_Previews: PreviewProvider {
-  static var previews: some View {
-    SearchLocationView()
-  }
-}
 

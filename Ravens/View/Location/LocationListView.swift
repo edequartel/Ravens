@@ -21,19 +21,21 @@ struct LocationListView: View {
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-  @Binding var setLocation: CLLocationCoordinate2D
-  var locationId: Int
+  @Binding var setLocation: CLLocationCoordinate2D //for the onchange in TabLocationView to update
+  @State private var locationID: Int = 0
 
   var body: some View {
     NavigationStack {
       VStack {
+        if showView { Text("LocationListView").font(.customTiny) }
+
         List {
           ForEach(areasViewModel.records.sorted { $0.name < $1.name }) { record in
             HStack {
               Button(action: {
+
                 settings.locationName = record.name
                 settings.locationId = record.areaID
-                
                 setLocation.latitude = record.latitude
                 setLocation.longitude = record.longitude
                 
@@ -44,7 +46,7 @@ struct LocationListView: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                   Spacer()
-                  if (record.areaID == locationId) {
+                  if (record.areaID == settings.locationId) {
                     Image(systemName: "checkmark").foregroundColor(.blue)
                   }
                 }
@@ -63,15 +65,19 @@ struct LocationListView: View {
       }
     }
 
-//    .toolbar { //deze werkt niet goed en is misschien onnodig
-//      ToolbarItem(placement: .navigationBarTrailing) {
-//        NavigationLink(destination: SearchLocationView()) {
-//          Image(systemSymbol: .magnifyingglass)
-//            .uniformSize()
-//            .accessibilityLabel(searchForLocation)
-//        }
-//      }
-//    }
+    .toolbar { //deze werkt niet goed en is misschien onnodig
+      ToolbarItem(placement: .navigationBarTrailing) {
+        NavigationLink(
+          destination: SearchLocationView(
+            setLocation: $setLocation,
+            locationID: $locationID
+          )) {
+          Image(systemSymbol: .magnifyingglass)
+            .uniformSize()
+            .accessibilityLabel(searchForLocation)
+        }
+      }
+    }
     .onAppear {
       areasViewModel.loadRecords()
     }

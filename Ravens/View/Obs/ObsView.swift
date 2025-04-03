@@ -44,9 +44,9 @@ struct ObsView: View {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
-          if let index = index {
-            Text("\(index+1)")
-          }
+//        if let index = index { //edq
+//            Text("\(index+1)")
+//          }
 
           if entity != .species {
             ObsDetailsRowView(obs: obs)
@@ -123,7 +123,7 @@ struct ObsView: View {
           .tint(.green)
 
         if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-          ObserversButtonView(obs: obs)
+          ObserversObsButtonView(obs: obs)
             .tint(.red)
         }
 

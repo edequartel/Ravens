@@ -97,18 +97,12 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
-        if !accessibilityManager.isVoiceOverEnabled {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            URLButtonView(url: "https://waarneming.nl")
-          }
-        }
-
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption,
-            timePeriod: $settings.timePeriodSpecies
+            selectedRarityOption: $selectedRarityOption //,
+//            timePeriod: $settings.timePeriodSpecies
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
@@ -135,18 +129,18 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-  @Binding var timePeriod: TimePeriod?
+//  @Binding var timePeriod: TimePeriod?
 
   var body: some View {
     Form {
-      Section(period) {
-        Picker(timePeriodlabel, selection: $timePeriod) {
-          ForEach(TimePeriod.allCases, id: \.self) { period in
-            Text(period.localized).tag(period)
-          }
-        }
-        .pickerStyle(.menu)
-      }
+//      Section(period) {
+//        Picker(timePeriodlabel, selection: $timePeriod) {
+//          ForEach(TimePeriod.allCases, id: \.self) { period in
+//            Text(period.localized).tag(period)
+//          }
+//        }
+//        .pickerStyle(.menu)
+//      }
 
       SpeciesPickerView()
 
@@ -166,7 +160,7 @@ struct SortFilterSpeciesView: View {
     }
   }
 }
-struct SortFilterSpeciesViewXXX: View { //??
+struct PickTimePeriodeSpeciesView: View { //??
   @Binding var timePeriod: TimePeriod?
 
   var body: some View {
