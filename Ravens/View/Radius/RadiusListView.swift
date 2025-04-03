@@ -9,7 +9,6 @@ import SwiftUI
 import Foundation
 import Alamofire
 import Combine
-import Foundation
 import SwiftyBeaver
 import MapKit
 

@@ -9,7 +9,6 @@ import SwiftUI
 import Foundation
 import Alamofire
 import Combine
-import Foundation
 import SwiftyBeaver
 import MapKit
 
@@ -84,7 +83,7 @@ struct TabRadiusView: View {
           })
       }
 
-      .onChange(of: settings.selectedLanguage) {//!!
+      .onChange(of: settings.selectedLanguage) {
         log.error("update selectedLanguage \(String(describing: settings.selectedLanguage))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
@@ -93,14 +92,12 @@ struct TabRadiusView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
-
           radius: settings.radius,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod")
           })
       }
-
 
       .onChange(of: settings.timePeriodRadius) {
         log.error("update timePeriod \(String(describing: settings.timePeriodRadius))")
@@ -119,7 +116,7 @@ struct TabRadiusView: View {
       }
 
       .toolbar {
-        //map or list
+        // map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -143,8 +140,8 @@ struct TabRadiusView: View {
                 settings: settings,
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
-                radius: settings.radius, //circleRadius,
-                timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
+                radius: settings.radius,
+                timePeriod: settings.timePeriodRadius,
                 completion: {
                   log.error("tapgesture update userlocation")
                   updateRegionToUserLocation(coordinate: location.coordinate)
@@ -177,4 +174,3 @@ struct TabRadiusView: View {
   }
 
 }
-

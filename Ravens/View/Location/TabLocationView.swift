@@ -30,7 +30,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
 
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -66,7 +66,7 @@ struct TabLocationView: View {
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
-            selectedSpeciesID:  $selectedSpeciesID,
+            selectedSpeciesID: $selectedSpeciesID,
 
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
@@ -86,7 +86,7 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation, //!!
+          coordinate: setLocation,
           timePeriod: settings.timePeriodLocation)
         settings.hasLocationLoaded = true
       }
@@ -104,7 +104,6 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-
       .onChange(of: setRefresh) {
         log.info("update setRefresh so new data fetch for this period")
         fetchDataLocation(
@@ -119,7 +118,7 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-      //set sort, filter and timePeriod
+      //s et sort, filter and timePeriod
       .modifier(
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
@@ -129,7 +128,7 @@ struct TabLocationView: View {
       )
 
       .toolbar {
-        //map or list
+        // map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -142,7 +141,7 @@ struct TabLocationView: View {
           }
         }
 
-        //update my locationData
+        // update my locationData
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
             log.info("getMyLocation")
@@ -171,8 +170,7 @@ struct TabLocationView: View {
           }
         }
 
-
-        //choose a location from a list
+        // choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
             destination: LocationListView(
@@ -187,7 +185,6 @@ struct TabLocationView: View {
               .accessibilityLabel(listWithFavoriteLocation)
         }
 
-        //male location favorite @@@
         ToolbarItem(placement: .navigationBarTrailing) {
           AreaLocationButtonView()
         }

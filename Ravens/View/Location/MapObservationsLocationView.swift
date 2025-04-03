@@ -56,14 +56,12 @@ struct MapObservationsLocationView: View {
 
           ForEach(filteredObs) { observation in
             Annotation(observation.speciesDetail.name,
-                       coordinate:  CLLocationCoordinate2D(
+                       coordinate: CLLocationCoordinate2D(
                         latitude: observation.point.coordinates[1],
-                        longitude: observation.point.coordinates[0]))
-            {
+                        longitude: observation.point.coordinates[0])) {
               ObservationAnnotationView(observation: observation)
             }
           }
-
 
           // geoJSON
           ForEach(geoJSONViewModel.polyOverlays, id: \.self) { polyOverlay in
@@ -74,8 +72,8 @@ struct MapObservationsLocationView: View {
 
         }
         .mapStyle(settings.mapStyle)
-        .mapControls() {
-          MapCompass() //tapping this makes it north
+        .mapControls {
+          MapCompass() // tapping this makes it north
         }
         .safeAreaInset(edge: .bottom) {
           VStack {
@@ -86,22 +84,13 @@ struct MapObservationsLocationView: View {
           .foregroundColor(.obsGreenFlower)
           .background(Color.obsGreenEagle.opacity(0.8))
         }
-        .onTapGesture() { position in
+        .onTapGesture { position in
           if let coordinate = proxy.convert(position, from: .local) {
             setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-
-//            fetchDataLocation(
-//              settings: settings,
-//              token: keyChainViewModel.token,
-//              observationsLocation: observationsLocation,
-//              locationIdViewModel: locationIdViewModel,
-//              geoJSONViewModel: geoJSONViewModel,
-//              coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
-//              timePeriod: timePeriod ?? .week)
           }
         }
       }
-      .onAppear() {
+      .onAppear {
         log.info("MapObservationsLocationView onAppear")
 
       }
@@ -125,11 +114,7 @@ struct MapObservationsLocationView: View {
       latitudeDelta: geoJSONViewModel.span.latitudeDelta,
       longitudeDelta: geoJSONViewModel.span.longitudeDelta)
 
-
     let region = MKCoordinateRegion(center: center, span: span)
     return MapCameraPosition.region(region)
   }
 }
-
-
-

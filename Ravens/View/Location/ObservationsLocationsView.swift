@@ -12,7 +12,6 @@ import MapKit
 struct ObservationsLocationView: View {
   let log = SwiftyBeaver.self
 
-  
   @ObservedObject var observationsLocation: ObservationsViewModel
   @ObservedObject var locationIdViewModel: LocationIdViewModel
   @ObservedObject var geoJSONViewModel: GeoJSONViewModel
@@ -33,9 +32,8 @@ struct ObservationsLocationView: View {
   @Binding var setLocation: CLLocationCoordinate2D
   @Binding var setRefresh: Bool
 
-
   func forceUpdateLocation(_ coordinate: CLLocationCoordinate2D) {
-      setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude) // Force reassign
+      setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
   }
 
   var body: some View {
@@ -72,7 +70,7 @@ struct ObservationsLocationView: View {
         setRefresh.toggle()
       }
 
-      .onAppear()  {
+      .onAppear {
         if !settings.hasLocationLoaded {
           log.info("ObservationsLocationsView onAppear")
           if let location = locationManager.getCurrentLocation() {
@@ -92,44 +90,38 @@ func fetchDataLocation(
   locationIdViewModel: LocationIdViewModel,
   geoJSONViewModel: GeoJSONViewModel,
   coordinate: CLLocationCoordinate2D,
-  timePeriod: TimePeriod?
-) {
-//  log.info("fetchDataLocation")
-  //1. get the id from the location
-  locationIdViewModel.fetchLocations(
-    latitude: coordinate.latitude,
-    longitude: coordinate.longitude,
-    token: token,
-    completion: { fetchedLocations in
+  timePeriod: TimePeriod?) {
+    //  log.info("fetchDataLocation")
+    // 1. get the id from the location
+    locationIdViewModel.fetchLocations(
+      latitude: coordinate.latitude,
+      longitude: coordinate.longitude,
+      token: token,
+      completion: { fetchedLocations in
 
-      // Use fetchedLocations here, actually it is one location,. the first
-      settings.locationName = fetchedLocations[0].name
-      settings.locationId = fetchedLocations[0].id
-      settings.locationCoordinate = coordinate 
+        // Use fetchedLocations here, actually it is one location,. the first
+        settings.locationName = fetchedLocations[0].name
+        settings.locationId = fetchedLocations[0].id
+        settings.locationCoordinate = coordinate
 
+        // 2a. get the geoJSON for this area, and we pick the first one = 0
+        geoJSONViewModel.fetchGeoJsonData(
+          for: fetchedLocations[0].id
+        )
 
-      //2a. get the geoJSON for this area, and we pick the first one = 0
-      geoJSONViewModel.fetchGeoJsonData(
-        for: fetchedLocations[0].id
-      )
+        // 2b. get the observations for this area
+        observationsLocation.fetchDataInit(
+          settings: settings,
+          entity: .location,
+          token: token,
+          id: fetchedLocations[0].id,
+          timePeriod: timePeriod,
+          completion: {
+            settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
+          })
+      })
+  }
 
-      //2b. get the observations for this area
-      observationsLocation.fetchDataInit(
-        settings: settings,
-        entity: .location,
-        token: token,
-        id: fetchedLocations[0].id,
-        timePeriod: timePeriod,
-        completion: {
-//          log.info("observationsLocationViewModel data loaded")
-          settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()
-        })
-    })
-
-  
-}
-
-//
 struct NoObservationsView: View {
   var body: some View {
     VStack(spacing: 16) {  // Adds spacing between elements
@@ -151,4 +143,3 @@ struct NoObservationsView_Previews: PreviewProvider {
       .padding()
   }
 }
-

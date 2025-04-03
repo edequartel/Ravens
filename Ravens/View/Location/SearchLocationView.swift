@@ -128,17 +128,13 @@ struct SearchLocationView: View {
         RoundedRectangle(cornerRadius: 8)
           .stroke(Color.gray, lineWidth: 1) // Add the border
       )
-
-
-
     }
     .padding(.horizontal) // Adjust spacing from other components
     .onAppear {
       isSearchFieldFocused = true // Set the focus state on appear
     }
 
-
-    Section() {
+    Section {
       // SwiftUI List
       List(viewModel.locations, id: \.id) { location in
         Button(action: {
@@ -162,7 +158,6 @@ struct SearchLocationView: View {
                 longitude: geoJSONViewModel.span.longitude
               )
 
-
               self.presentationMode.wrappedValue.dismiss()
             }
           )
@@ -174,5 +169,3 @@ struct SearchLocationView: View {
     }
   }
 }
-
-

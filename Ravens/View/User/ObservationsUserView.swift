@@ -19,12 +19,10 @@ struct CustomDivider: View {
     }
 }
 
-
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser : ObservationsViewModel
-
+  @ObservedObject var observationUser: ObservationsViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
@@ -92,16 +90,3 @@ struct ObservationsUserView: View {
     }
   }
 }
-
-//struct ObservationsUserView_Previews: PreviewProvider {
-//  @State static var selectedObservation: Observation? = nil
-//  @State static var selectedObservationSound: Observation? = nil
-//
-//  static var previews: some View {
-//    ObservationsUserView(selectedSpeciesID: .constant(nil))
-//    .environmentObject(ObservationsViewModel())
-//    .environmentObject(UserViewModel())
-//    .environmentObject(Settings())
-//  }
-//}
-

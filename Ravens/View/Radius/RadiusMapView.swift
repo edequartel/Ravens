@@ -8,7 +8,6 @@ import SwiftUI
 import Foundation
 import Alamofire
 import Combine
-import Foundation
 import SwiftyBeaver
 import MapKit
 
@@ -31,7 +30,7 @@ struct RadiusMapView: View {
       Map(position: $cameraPosition) {
         UserAnnotation()
 
-        //observations
+        // observations
         let obs = observationsRadiusViewModel.observations ?? []
         let filteredObs = obs.filter {
           $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0
@@ -44,7 +43,6 @@ struct RadiusMapView: View {
             }
         }
 
-
         MapCircle(
           center: CLLocationCoordinate2D(
             latitude: observationsRadiusViewModel.circleCenter.latitude,
@@ -53,14 +51,12 @@ struct RadiusMapView: View {
         .foregroundStyle(.blue.opacity(0.2)) // Fill the circle with blue color
         .stroke(.blue.opacity(0.7), lineWidth: 1) // Add a border
 
-
-
       }
       .mapStyle(settings.mapStyle)
-      .mapControls() {
+      .mapControls {
         MapUserLocationButton()
         MapPitchToggle()
-        MapCompass() //tapping this makes it north
+        MapCompass() // tapping this makes it north
       }
 
       .onTapGesture() { position in

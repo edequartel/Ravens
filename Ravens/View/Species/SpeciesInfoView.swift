@@ -53,7 +53,6 @@ struct SpeciesInfoView: View {
         }
       }
 
-
       if let date = species.date {
         HStack {
           DateConversionView(dateString: date, timeString: species.time ?? "")
@@ -71,7 +70,7 @@ struct SpeciesInfoView: View {
         }
       }
 
-      HStack{
+      HStack {
         let speciesLang = speciesSecondLangViewModel.findSpeciesByID(
           speciesID: species.speciesId)
         if speciesLang?.lowercased() != species.scientificName.lowercased() {
@@ -87,4 +86,3 @@ struct SpeciesInfoView: View {
     }
   }
 }
-

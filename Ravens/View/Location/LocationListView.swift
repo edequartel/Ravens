@@ -21,7 +21,7 @@ struct LocationListView: View {
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-  @Binding var setLocation: CLLocationCoordinate2D //for the onchange in TabLocationView to update
+  @Binding var setLocation: CLLocationCoordinate2D
   @State private var locationID: Int = 0
 
   var body: some View {
@@ -46,7 +46,7 @@ struct LocationListView: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                   Spacer()
-                  if (record.areaID == settings.locationId) {
+                  if record.areaID == settings.locationId {
                     Image(systemName: "checkmark").foregroundColor(.blue)
                   }
                 }
@@ -65,7 +65,7 @@ struct LocationListView: View {
       }
     }
 
-    .toolbar { //deze werkt niet goed en is misschien onnodig
+    .toolbar { 
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(
           destination: SearchLocationView(
