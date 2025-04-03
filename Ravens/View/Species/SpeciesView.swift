@@ -88,20 +88,15 @@ struct SpeciesView: View {
         }
       }
     }
-
-    .onAppear() {
+    .onAppear {
       settings.initialSpeciesLoad = true
     }
   }
 }
 
-
-import SwiftUI
-import Charts
-
 struct ObservationsChartView: View {
   var observations: [Observation]
-  var name : String = ""
+  var name: String = ""
 
   // Step 1: Group and count observations by DD-MM
   private var groupedObservations: [(date: String, count: Int)] {
@@ -137,5 +132,3 @@ struct ObservationsChartView: View {
     }
   }
 }
-
-

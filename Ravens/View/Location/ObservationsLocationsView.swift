@@ -74,7 +74,7 @@ struct ObservationsLocationView: View {
         if !settings.hasLocationLoaded {
           log.info("ObservationsLocationsView onAppear")
           if let location = locationManager.getCurrentLocation() {
-            //here getting the data for the location
+
             setLocation = location.coordinate
           }
         }

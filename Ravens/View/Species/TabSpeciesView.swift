@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftyBeaver
 
-
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
@@ -17,7 +16,6 @@ struct TabSpeciesView: View {
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-
 
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -44,13 +42,13 @@ struct TabSpeciesView: View {
             searchText: searchText,
             filterOption: selectedFilterOption,
             rarityFilterOption: selectedRarityOption,
-            isLatest: false, //settings.isLatestVisible,
+            isLatest: false,
             isBookmarked: settings.isBookMarkVisible,
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
 
 
-            NavigationLink( //???
+            NavigationLink(
               destination: SpeciesView(
                 observationsSpecies: observationsSpecies,
                 item: species,
@@ -79,7 +77,7 @@ struct TabSpeciesView: View {
           }
         }
         .listStyle(PlainListStyle())
-        .searchable(text: $searchText) //een niveau lager geplaatst
+        .searchable(text: $searchText)
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in
@@ -101,8 +99,7 @@ struct TabSpeciesView: View {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption //,
-//            timePeriod: $settings.timePeriodSpecies
+            selectedRarityOption: $selectedRarityOption
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
@@ -129,19 +126,9 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-//  @Binding var timePeriod: TimePeriod?
 
   var body: some View {
     Form {
-//      Section(period) {
-//        Picker(timePeriodlabel, selection: $timePeriod) {
-//          ForEach(TimePeriod.allCases, id: \.self) { period in
-//            Text(period.localized).tag(period)
-//          }
-//        }
-//        .pickerStyle(.menu)
-//      }
-
       SpeciesPickerView()
 
       // First Menu for Sorting
@@ -160,7 +147,7 @@ struct SortFilterSpeciesView: View {
     }
   }
 }
-struct PickTimePeriodeSpeciesView: View { //??
+struct PickTimePeriodeSpeciesView: View {
   @Binding var timePeriod: TimePeriod?
 
   var body: some View {
@@ -180,7 +167,6 @@ struct PickTimePeriodeSpeciesView: View { //??
 enum SortNameOption: String, CaseIterable {
   case name
   case scientificName
-  //**  case lastSeen
 
   var localized: LocalizedStringKey {
     LocalizedStringKey(self.rawValue)
@@ -208,7 +194,6 @@ struct SortNameOptionsView: View {
   }
 }
 
-
 struct FilteringAllMenu: View {
   @Binding var currentFilteringAllOption: FilterAllOption
 
@@ -222,7 +207,6 @@ struct FilteringAllMenu: View {
     .accessibility(label: Text("Menu filter"))
   }
 }
-
 
 extension SpeciesViewModel {
   func filteredSpecies(
@@ -286,4 +270,3 @@ extension SpeciesViewModel {
     }
   }
 }
-

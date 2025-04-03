@@ -11,7 +11,6 @@ import SwiftyBeaver
 struct ObservationsSpeciesView: View {
   let log = SwiftyBeaver.self
 
-
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -31,7 +30,6 @@ struct ObservationsSpeciesView: View {
   @State private var isLoaded = false
 
   @Binding var selectedSpeciesID: Int?
-
 
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
@@ -58,7 +56,7 @@ struct ObservationsSpeciesView: View {
           Spacer()
         }
       }
-      .padding(.horizontal,10)
+      .padding(.horizontal, 10)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(item.name)
       ObservationsCountView(count: observationsSpecies.count)
@@ -97,7 +95,6 @@ struct ObservationsSpeciesView: View {
     .onChange(of: timePeriod) {
       log.error("update timePeriodUser")
 
-      //deze aanpassen
       observationsSpecies.fetchDataInit(
         settings: settings,
         entity: .species,
@@ -118,7 +115,7 @@ struct ObservationsSpeciesView: View {
 
     .navigationBarTitleDisplayMode(.inline)
 
-    .onAppear() {
+    .onAppear {
       if !hasAppeared {
         if settings.initialSpeciesLoad {
           fetchDataModel()
@@ -135,7 +132,7 @@ struct ObservationsSpeciesView: View {
       entity: .species,
       token: keyChainviewModel.token,
       id: item.speciesId,
-      timePeriod: settings.timePeriodSpecies, //.infinite, //added this
+      timePeriod: settings.timePeriodSpecies,
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")
@@ -143,7 +140,6 @@ struct ObservationsSpeciesView: View {
     )
   }
 }
-
 
 struct ObservationsCountView: View {
   let count: Int
