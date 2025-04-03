@@ -103,7 +103,7 @@ struct BirdDetailView: View {
           )
 
           // xeno canto
-          HStack  {
+          HStack {
             HStack {
               OpenURLView(birdURL: bird.url)
             }
@@ -154,11 +154,8 @@ struct BirdDetailView: View {
 }
 
 func isMP3(filename: String) -> Bool {
-  let pattern = #"^.+\.mp3$"# // Regex pattern to match filenames ending with .mp3
-  if let _ = filename.range(of: pattern, options: .regularExpression) {
-    return true
-  }
-  return false
+  let pattern = #"^.+\.mp3$"#
+  return filename.range(of: pattern, options: .regularExpression) != nil
 }
 
 func openMapsApp(coordinate: CLLocationCoordinate2D, name: String) {

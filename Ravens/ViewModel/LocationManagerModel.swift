@@ -36,5 +36,3 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
   }
 
 }
-
-

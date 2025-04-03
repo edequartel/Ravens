@@ -29,10 +29,9 @@ class SpeciesGroupsViewModel: ObservableObject {
         
         // Use Alamofire to make the API request
         AF.request(url, headers: headers)
-            .responseDecodable(of: [SpeciesGroup].self)
-        { response in
+            .responseDecodable(of: [SpeciesGroup].self) { response in
             switch response.result {
-            case .success(_):
+            case .success:
                 do {
                     // Decode the JSON response into an array of SpeciesGroup objects
                     let decoder = JSONDecoder()
@@ -49,7 +48,7 @@ class SpeciesGroupsViewModel: ObservableObject {
                 }
             case .failure(let error):
                 self.log.error("Error SpeciesGroupViewModel fetching data: \(error)")
-                self.log.error(String(data: response.data ?? Data(), encoding: .utf8) ?? "No data") //html text
+                self.log.error(String(data: response.data ?? Data(), encoding: .utf8) ?? "No data") // html text
             }
         }
     }
@@ -59,4 +58,3 @@ class SpeciesGroupsViewModel: ObservableObject {
         return speciesDictionary[id]
     }
 }
-

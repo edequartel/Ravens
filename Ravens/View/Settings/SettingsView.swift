@@ -26,7 +26,6 @@ struct SettingsView: View {
   let maximumRadius = 10000.0
   let step = 500.0
 
-
   var body: some View {
     NavigationStack {
       List {
@@ -46,11 +45,7 @@ struct SettingsView: View {
         .onChange(of: settings.selectedInBetween) {
         }
 
-        //        Section() {
-        //          RadiusPickerView(selectedRadius: $settings.radius)
-        //        }
-
-        Section() {
+        Section {
           LanguageView()
         }
 
@@ -62,7 +57,6 @@ struct SettingsView: View {
           }
           .pickerStyle(SegmentedPickerStyle())
         }
-
 
         Section(header: Text(appDetails)) {
           VStack(alignment: .leading) {
@@ -130,11 +124,9 @@ struct SettingsView_Previews: PreviewProvider {
     // Setting up the environment objects for the preview
     SettingsView()
       .environmentObject(Settings())
-    //      .environmentObject(ObservationsRadiusViewModel())
   }
 }
 
-import SwiftUI
 
 struct SpeciesPickerView: View {
   let log = SwiftyBeaver.self
@@ -175,8 +167,6 @@ struct SpeciesPickerView: View {
   }
 }
 
-import SwiftUI
-
 struct RadiusPickerView: View {
   @Binding var selectedRadius: Int // Binding for Int radius selection
 
@@ -193,4 +183,3 @@ struct RadiusPickerView: View {
     }
   }
 }
-

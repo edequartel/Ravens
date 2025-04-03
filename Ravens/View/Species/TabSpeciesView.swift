@@ -47,7 +47,6 @@ struct TabSpeciesView: View {
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
 
-
             NavigationLink(
               destination: SpeciesView(
                 observationsSpecies: observationsSpecies,

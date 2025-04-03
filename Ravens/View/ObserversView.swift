@@ -28,7 +28,7 @@ struct ObserversView: View {
   @State private var showingShareSheet = false
   @State private var showingQRCodeSheet = false
   @State private var textToShare: String = "your text"
-  @State var QRCode: IdentifiableString? = nil //deze moet identifiable zijn en nil anders wordt de sheet gelijk geopend
+  @State var QRCode: IdentifiableString?
   @State private var userName: String = "unknown"
 
   @Binding var observerId: Int

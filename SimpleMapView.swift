@@ -8,7 +8,7 @@ struct SimpleMapView: View {
     var body: some View {
         Map(position: $position) {
         }
-        .mapControls() {
+        .mapControls {
             MapUserLocationButton()
                 .frame(width: 44, height: 44)
         }

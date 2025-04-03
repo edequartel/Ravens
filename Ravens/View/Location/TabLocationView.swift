@@ -118,7 +118,7 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-      //s et sort, filter and timePeriod
+      // set sort, filter and timePeriod
       .modifier(
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,

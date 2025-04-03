@@ -54,12 +54,12 @@ class ObservationsViewModel: ObservableObject {
 
     // datetime
     let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
+    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
     // add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
-    if (timePeriod != .infinite) {
+    if timePeriod != .infinite {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
     }
 

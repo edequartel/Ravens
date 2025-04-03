@@ -63,7 +63,7 @@ extension Color {
   static let obsInformation = Color(red: 0/255, green: 0/255, blue: 255/255) // blue
   static let obsObserver = Color(red: 255/255, green: 0/255, blue: 0/255) // red
   static let obsBookmark = Color(red: 29/255, green: 148/255, blue: 49/255) // green
-  static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //o range
+  static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) // orange
   static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) // lightblue
   static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
   static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) // lightblue
@@ -71,7 +71,6 @@ extension Color {
   static let obsBirdInfo = Color(red: 240/255, green: 94/255, blue: 35/255) // orange
 //  static let obsXCred = .purple Color(red: 0.5, green: 0.0, blue: 0.0) // darkred
 }
-
 
 let obsStrDutchOrange = "f7b731"
 
@@ -90,7 +89,7 @@ let SFObserverMin = SFSymbol.personFillBadgeMinus
 func rarityColor(value: Int) -> Color {
   switch value {
   case 0:
-    return .gray //o nbekend
+    return .gray // onbekend
   case 1:
     return .green // algemeen
   case 2:

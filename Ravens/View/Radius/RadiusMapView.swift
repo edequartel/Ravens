@@ -36,7 +36,7 @@ struct RadiusMapView: View {
           $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0
         }
         ForEach(filteredObs) { observation in
-          Annotation(observation.speciesDetail.name, coordinate:  CLLocationCoordinate2D(
+          Annotation(observation.speciesDetail.name, coordinate: CLLocationCoordinate2D(
             latitude: observation.point.coordinates[1],
             longitude: observation.point.coordinates[0])) {
               ObservationAnnotationView(observation: observation)

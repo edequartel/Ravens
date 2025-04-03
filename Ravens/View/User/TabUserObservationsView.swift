@@ -133,7 +133,7 @@ struct TabUserObservationsView: View {
           }
 
           // add choose observers
-          if (obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0)) {
+          if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
             ToolbarItem(placement: .navigationBarTrailing) {
               ObserversButtonView(
                 userId: obsObserversViewModel.observerId,

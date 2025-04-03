@@ -117,7 +117,7 @@ struct RavensApp: App {
               message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " "))"),
               primaryButton: .default(Text("Yes")) {
           print("Appending \(parts[0]) \(parts[1])")
-          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "_", with: " "), userID:  Int(self.parts[1]) ?? 0)
+          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "_", with: " "), userID: Int(self.parts[1]) ?? 0)
         },
               secondaryButton: .cancel(Text("No")))
       }

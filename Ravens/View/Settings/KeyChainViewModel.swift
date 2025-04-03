@@ -23,7 +23,7 @@ class KeychainViewModel: ObservableObject {
   
   @Published var loginFailed = false
 
-  init(){
+  init() {
     retrieveCredentials()
   }
 
@@ -45,7 +45,6 @@ class KeychainViewModel: ObservableObject {
       log.error("Error retrieving credentials: \(error)")
     }
   }
-
 
   func fetchData(username: String, password: String, settings: Settings, completion: ((Bool) -> Void)? = nil) {
     log.info("KeychainViewModel fetchData()")

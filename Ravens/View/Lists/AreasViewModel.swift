@@ -12,7 +12,7 @@ import SwiftyBeaver
 struct Area: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
     var name: String
-    var areaID: Int //locatiobID
+    var areaID: Int // locatiobID
     var latitude: CLLocationDegrees = 0
     var longitude: CLLocationDegrees = 0
 }

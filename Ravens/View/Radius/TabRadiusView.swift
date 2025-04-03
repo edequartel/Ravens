@@ -147,8 +147,6 @@ struct TabRadiusView: View {
                   updateRegionToUserLocation(coordinate: location.coordinate)
                 })
             }
-
-
           }) {
             Image(systemName: "smallcircle.filled.circle")
               .uniformSize()
