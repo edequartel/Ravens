@@ -8,7 +8,7 @@ import SwiftUI
 import MijickCalendarView
 
 struct CalenderView: View {
-    @State private var selectedDate: Date? = nil
+    @State private var selectedDate: Date?
     @State private var selectedRange: MDateRange? = .init()
 
     var body: some View {

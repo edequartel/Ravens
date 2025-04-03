@@ -29,7 +29,6 @@ struct ObsDetailsRowView: View {
           .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       }
 
-
       Spacer()
       
       if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) {
@@ -39,9 +38,3 @@ struct ObsDetailsRowView: View {
     }
   }
 }
-
-//#Preview {
-//  ObsDetailsRowView()
-//    .obs(.constant(nil))
-//    .bookMarksViewModel(.constant(nil))
-//}

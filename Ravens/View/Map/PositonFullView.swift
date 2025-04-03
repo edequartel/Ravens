@@ -20,7 +20,7 @@ struct PositonFullView: View {
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.hasSound ?? false ? Color.white : Color.clear,lineWidth: 1)
+          .stroke(obs.hasSound ?? false ? Color.white : Color.clear, lineWidth: 1)
           .frame(width: 12, height: 12)
 
           .overlay(
@@ -31,17 +31,16 @@ struct PositonFullView: View {
       }
     }
     .mapStyle(settings.mapStyle)
-    .mapControls() {
+    .mapControls {
       MapUserLocationButton()
       MapPitchToggle()
-      MapCompass() //tapping this makes it north
+      MapCompass() // tapping this makes it north
     }
 
-    .onAppear() {
+    .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
     }
   }
 }
-

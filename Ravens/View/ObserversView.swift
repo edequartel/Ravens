@@ -17,10 +17,10 @@ struct IdentifiableString: Identifiable {
 struct ObserversView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser : ObservationsViewModel
+  @ObservedObject var observationUser: ObservationsViewModel
 
   @EnvironmentObject private var observersViewModel: ObserversViewModel
-  @EnvironmentObject private var userViewModel:  UserViewModel
+  @EnvironmentObject private var userViewModel: UserViewModel
 
   @EnvironmentObject private var settings: Settings
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -41,7 +41,7 @@ struct ObserversView: View {
       VStack {
         if showView { Text("ObserversView").font(.customTiny) }
         Form {
-          Section() {
+          Section {
             HStack {
               Button(userViewModel.user?.name ?? "") {
                 observerId = userViewModel.user?.id ?? 0
@@ -73,15 +73,11 @@ struct ObserversView: View {
               Spacer()
               if (observerId) == (userViewModel.user?.id ?? 0) {
                 Image(systemName: "checkmark").foregroundColor(.blue) }
-
-
             }
           }
-
-
-          Section () {
+        Section {
             List {
-              //all other saved observers
+              // all other saved observers
               ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
                 HStack{
                   Button("\(record.name)") {
@@ -146,4 +142,3 @@ struct ObserversView: View {
     }
   }
 }
-

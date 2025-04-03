@@ -37,7 +37,7 @@ class RegionListViewModel: ObservableObject {
         // Use Alamofire to make the API request
         AF.request(url, headers: headers).responseDecodable(of: [RegionList].self) {   response in
             switch response.result {
-            case .success(_):
+            case .success:
                 do {
                     // Decode the JSON response into an array of Species objects
                     let decoder = JSONDecoder()

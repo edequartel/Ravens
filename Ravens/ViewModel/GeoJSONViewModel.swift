@@ -38,7 +38,7 @@ class GeoJSONViewModel: ObservableObject {
         }
     }
 
-    func parseGeoJSON(_ geoJSON: [MKGeoJSONObject])->[MKPolygon] {
+    func parseGeoJSON(_ geoJSON: [MKGeoJSONObject]) -> [MKPolygon] {
         var overlays = [MKPolygon]()
         for item in geoJSON {
             if let feature = item as? MKGeoJSONFeature {

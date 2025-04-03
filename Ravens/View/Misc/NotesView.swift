@@ -21,9 +21,3 @@ struct NotesView: View {
     }
   }
 }
-
-
-
-//#Preview {
-//  NotesView(obs: <#Observation#>)
-//}

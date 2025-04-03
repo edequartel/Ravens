@@ -186,10 +186,9 @@ struct ObserversButtonView: View {
       Image(systemSymbol: observersViewModel.isObserverInRecords(userID: userId ?? 0) ? SFObserverFill : SFObserver)
         .uniformSize()
     }
-    .accessibilityLabel(observersViewModel.isObserverInRecords(userID:userId ?? 0) ? favoriteObserverOn : favoriteObserverOff)
+    .accessibilityLabel(observersViewModel.isObserverInRecords(userID: userId ?? 0) ? favoriteObserverOn : favoriteObserverOff)
   }
 }
-
 
 struct BookmarkButtonView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -205,7 +204,6 @@ struct BookmarkButtonView: View {
     }) {
 
       Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
-//      Image(systemSymbol: SFSpeciesFill)
         .uniformSize()
     }
     .accessibilityLabel(bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? favoriteSpeciesOn : favoriteSpeciesOff)
@@ -219,8 +217,7 @@ struct BookmarkButtonView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
 
     // Return the BookmarkButtonView with the mock data
-    BookmarkButtonView(speciesID: 100)//obs: mockObservation, colorOn: true)
+    BookmarkButtonView(speciesID: 100)
       .environmentObject(mockBookMarksViewModel)
   }
 }
-

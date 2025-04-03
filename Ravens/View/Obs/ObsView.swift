@@ -9,9 +9,7 @@
 import SwiftUI
 import SwiftyBeaver
 import Alamofire
-//import AlamofireImage
 import AVFoundation
-
 
 struct ObsView: View {
   let index: Int?
@@ -21,7 +19,7 @@ struct ObsView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @Binding var selectedSpeciesID: Int?
@@ -36,7 +34,7 @@ struct ObsView: View {
 
   var body: some View {
     HStack {
-      if (entity != .radius) {
+      if entity != .radius {
         PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
       }
 
@@ -88,8 +86,7 @@ struct ObsView: View {
           }
         }
 
-
-        if (entity != .location) {
+        if entity != .location {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
@@ -110,11 +107,11 @@ struct ObsView: View {
     .accessibilityLabel(accessibilityObsDetail(obs: obs))
     .accessibilityHint("Tap for more details about the observation information.")
 
-    //trailing
+    // trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      if !keyChainViewModel.token.isEmpty { //??
+      if !keyChainViewModel.token.isEmpty {
 
-        if (entity != .location) {
+        if entity != .location {
           AreaButtonView(obs: obs)
             .tint(.yellow)
         }
@@ -138,7 +135,6 @@ struct ObsView: View {
       }
     }
 
-    //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
 
@@ -169,9 +165,6 @@ func formatDate(_ date: Date) -> String {
     return formatter.string(from: date)
 }
 
-
-import SwiftUI
-
 struct RandomTextView: View {
     let names = ["Loof de Bos", "Storm Vogelaar", "Flora Fauna", "Henk de Uitzicht", "Bart Kikker",
                  "Madelief Kijkers", "Oogje Bladgroen", "Frits de Horizon",
@@ -182,7 +175,6 @@ struct RandomTextView: View {
     var body: some View {
         Text(randomName)
             .font(.caption)
-//            .padding()
             .onAppear {
                 randomName = names.randomElement() ?? "Geen naam"
             }

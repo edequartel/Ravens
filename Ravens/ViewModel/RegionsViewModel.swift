@@ -30,10 +30,9 @@ class RegionsViewModel: ObservableObject {
         urlRequest.headers = headers // Set the custom headers
 
         // Use Alamofire to make the API request with the configured URLRequest
-        AF.request(url, headers: headers).responseDecodable(of: [Region].self)
-        { response in
+        AF.request(url, headers: headers).responseDecodable(of: [Region].self) { response in
             switch response.result {
-            case .success(_):
+            case .success:
                 do {
                     // Decode the JSON response into an array of Region objects
                     let decoder = JSONDecoder()

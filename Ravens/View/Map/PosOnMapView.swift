@@ -19,7 +19,7 @@ struct PositionOnMapView: View {
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.hasSound ?? false ? Color.white : Color.clear,lineWidth: 1)
+          .stroke(obs.hasSound ?? false ? Color.white : Color.clear, lineWidth: 1)
           .frame(width: 12, height: 12)
 
           .overlay(
@@ -30,7 +30,7 @@ struct PositionOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
-    .onAppear() {
+    .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
@@ -56,7 +56,7 @@ struct PositionLatitideLongitudeOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
-    .onAppear() {
+    .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 150000)
       )

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 enum SortingOption: String, CaseIterable {
   case date
   case rarity
@@ -90,7 +89,6 @@ struct FilteringAllOptionsView: View {
   }
 }
 
-//==========================================================================================
 struct ObservationRowView: View {
   let index: Int?
   var obs: Observation

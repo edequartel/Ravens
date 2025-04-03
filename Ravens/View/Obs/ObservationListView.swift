@@ -20,9 +20,9 @@ struct ObservationListView: View {
 
   var entity: EntityType
 
-  @Binding var currentSortingOption: SortingOption? // = .date
-  @Binding var currentFilteringAllOption: FilterAllOption? //= .native
-  @Binding var currentFilteringOption: FilteringRarityOption? //= .all
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   @AccessibilityFocusState private var focusedItemID: Int?
 
@@ -100,5 +100,3 @@ struct ObservationListView: View {
     }
   }
 }
-
-

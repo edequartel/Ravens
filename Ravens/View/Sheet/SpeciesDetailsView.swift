@@ -11,7 +11,6 @@ import SwiftyBeaver
 import Alamofire
 import Kingfisher
 
-
 struct SpeciesDetailsView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
@@ -96,12 +95,11 @@ struct SpeciesDetailsView: View {
                 .accessibility(hidden: true)
             }
 
-            //share the image
+            // share the image
             if !imageURL.isEmpty {
               URLShareButtonView(urlShare: imageURL)
                 .accessibilityLabel(sharePictureLink)
             }
-
 
             // Information Text
             if species.infoText != "" {
@@ -131,7 +129,6 @@ struct SpeciesDetailsView: View {
     }
   }
 
-
   func openWikipediaPage(for searchTerm: String) {
     let formattedTerm = searchTerm.lowercased().replacingOccurrences(of: " ", with: "_")
     if let url = URL(string: "https://\(settings.selectedLanguage).m.wikipedia.org/wiki/\(formattedTerm)") {
@@ -140,14 +137,7 @@ struct SpeciesDetailsView: View {
   }
 }
 
-//}
-
 #Preview {
   SpeciesDetailsView(speciesID: 58)
         .environmentObject(Settings())
 }
-
-
-
-
-
