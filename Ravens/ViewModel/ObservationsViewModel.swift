@@ -24,7 +24,7 @@ class ObservationsViewModel: ObservableObject {
   
   @Published var observations: [Observation]? {
     didSet {
-      //print("Array updated \(observations?.count ?? 0)") to update the ModelView
+      // print("Array updated \(observations?.count ?? 0)") to update the ModelView
     }
   }
 
@@ -50,7 +50,7 @@ class ObservationsViewModel: ObservableObject {
     self.observations = []
 
     var days = (timePeriod ?? .twoWeeks).rawValue
-    days -= 1 //today is also also a day
+    days -= 1 // today is also also a day
 
     // datetime
     let date: Date = Date.now
@@ -65,7 +65,6 @@ class ObservationsViewModel: ObservableObject {
 
     url += "&ordering=-datetime"
 
-
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }
 
@@ -76,7 +75,6 @@ class ObservationsViewModel: ObservableObject {
     completion: @escaping () -> Void) {
     log.info("ObservationsViewModel fetchData url: [\(url)]")
     if url.isEmpty { return }
-
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -122,7 +120,7 @@ class ObservationsViewModel: ObservableObject {
     }
   }
 
-  //to make sorting easier, get the datetime in a seperate field
+  // to make sorting easier, get the datetime in a seperate field
   func getTimeData() {
     let max = (observations?.count ?? 0)
     for index in 0..<max {
@@ -150,5 +148,4 @@ class ObservationsViewModel: ObservableObject {
       }
     }
   }
-
 }

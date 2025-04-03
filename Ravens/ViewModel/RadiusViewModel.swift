@@ -14,7 +14,7 @@ import SwiftyBeaver
 class ObservationsRadiusViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   @Published var observations: [Observation]?
-  @Published var errorMessage: String? = nil
+  @Published var errorMessage: String?
   @Published var hasLoadedData = false
 
   @Published var circleCenter = CLLocationCoordinate2D(latitude: 54.0, longitude: 6.0)
@@ -94,4 +94,3 @@ class ObservationsRadiusViewModel: ObservableObject {
       }
     }
 }
-

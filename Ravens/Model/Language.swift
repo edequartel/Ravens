@@ -24,5 +24,3 @@ struct Result: Codable, Hashable {
         case nameNative = "name_native"
     }
 }
-
-

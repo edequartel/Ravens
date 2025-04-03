@@ -18,4 +18,3 @@ struct RegionList: Codable, Identifiable {
         case speciesGroup = "species_group"
     }
 }
-

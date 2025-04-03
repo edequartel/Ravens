@@ -5,7 +5,6 @@
 //  Created by Eric de Quartel on 09/01/2024.
 //
 
-
 import Foundation
 import SwiftUI
 import SwiftData
@@ -16,7 +15,7 @@ import Combine
 class Settings: ObservableObject {
   let log = SwiftyBeaver.self
 
-  //radius
+  // radius
   @AppStorage("radius") var radiusStored = 1000
   @Published var radius: Int = 1000 {
     didSet {
@@ -51,7 +50,7 @@ class Settings: ObservableObject {
     }
   }
 
-  //user are loaded
+  // user are loaded
   @Published var hasUserLoaded = false
   @Published var hasLocationLoaded = false
   @Published var hasSpeciesLoaded = false
@@ -62,13 +61,12 @@ class Settings: ObservableObject {
     }
   }
 
-  @Published var locationCoordinate: CLLocationCoordinate2D? = nil {
+  @Published var locationCoordinate: CLLocationCoordinate2D? {
     didSet {
       log.info("!!locationCoordinate saving it in locationCoordinate: \(locationCoordinate?.latitude ?? 0)")
     }
   }
 
-//  @AppStorage("savedBookmarks") private var savedBookmarks: String = ""
   @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
 
   @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
@@ -79,8 +77,7 @@ class Settings: ObservableObject {
     }
   }
 
-
-  @AppStorage("mapPreference") var mapPreferenceStored = false //VIP
+  @AppStorage("mapPreference") var mapPreferenceStored = false
   @Published var mapPreference = false {
     didSet {
       log.verbose("!!saving it in storage: \(mapPreference)")
@@ -88,17 +85,13 @@ class Settings: ObservableObject {
     }
   }
 
+  @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard
 
-  @AppStorage("MapStyleChoice") var mapStyleChoice: MapStyleChoice = .standard //should be published??
-
-
-  @Published var currentLocation: CLLocation? = nil //CLLocationManager().location
-  {
+  @Published var currentLocation: CLLocation? {
     didSet {
       log.info("!!currentLocation saving it in currentLocation: \(currentLocation?.coordinate.latitude ?? 0)")
     }
   }
-
 
   @Published var initialSpeciesLoad = true {
     didSet {
@@ -109,7 +102,6 @@ class Settings: ObservableObject {
   @Published var locationId: Int = 0
   @Published var locationName: String = "Unknown Location"
 
-
   @AppStorage("selectedSpeciesGroupName") var selectedSpeciesGroupNameStored: String = ""
   @Published var selectedSpeciesGroupName: String = "" {
     didSet {
@@ -117,7 +109,6 @@ class Settings: ObservableObject {
       selectedSpeciesGroupNameStored = selectedSpeciesGroupName
     }
   }
-
 
   @AppStorage("selectedRegionListId") var selectedRegionListIdStored = 5001
   @Published var selectedRegionListId = 1 {
@@ -203,7 +194,6 @@ class Settings: ObservableObject {
   }
 }
 
-
 enum MapStyleChoice: String, CaseIterable {
   case standard
   case hybrid
@@ -213,5 +203,3 @@ enum MapStyleChoice: String, CaseIterable {
     LocalizedStringKey(self.rawValue)
   }
 }
-
-

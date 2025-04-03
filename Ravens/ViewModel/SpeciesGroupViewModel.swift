@@ -9,8 +9,6 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-
-
 class SpeciesGroupsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesGroups = [SpeciesGroup]()

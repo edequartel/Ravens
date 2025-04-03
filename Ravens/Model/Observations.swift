@@ -10,10 +10,8 @@ import Foundation
 struct Observations: Codable {
   var count: Int?
   var next, previous: URL?
-  var results: [Observation]? //?? madeoptional
+  var results: [Observation]?
 }
-
-//let id: UUID = UUID()
 
 struct Observation: Codable, Identifiable, Equatable {
   let id: UUID = UUID()
@@ -104,7 +102,6 @@ struct Observation: Codable, Identifiable, Equatable {
   }
 }
 
-
 // MARK: - UserDetail
 struct UserDetail: Codable, Equatable {
   var id: Int = 0
@@ -126,7 +123,6 @@ struct SpeciesDetail: Codable, Identifiable, Equatable {
   }
 }
 
-
 struct Point: Codable, Equatable {
   var type: String = ""
   var coordinates: [Double] = [0]
@@ -146,7 +142,7 @@ struct LocationDetail: Codable, Equatable {
   }
 }
 
-struct Species: Codable, Identifiable, Hashable, Equatable { //equatable
+struct Species: Codable, Identifiable, Hashable, Equatable { // equatable
   var id = UUID()  // Unique identifier for SwiftUI
   let speciesId: Int  // Maps to JSON `id`
   let name: String

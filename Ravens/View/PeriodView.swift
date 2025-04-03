@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 // Define the TimePeriod enum
 enum TimePeriod: Int, CaseIterable, Identifiable {
   case twoDays = 2
@@ -45,7 +43,6 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
   }
 }
 
-
 // Define the TimePeriod enum
 enum TimePeriodRadius: Int, CaseIterable, Identifiable {
   case twoDays = 2
@@ -76,31 +73,3 @@ enum TimePeriodRadius: Int, CaseIterable, Identifiable {
     LocalizedStringKey(self.description)
   }
 }
-
-
-import SwiftUI
-
-//struct PeriodViewXXX: View {
-//    // Binding to a timePeriod variable passed in from a parent view
-//    @Binding var timePeriod: TimePeriod
-//
-//    var body: some View {
-//        HStack {
-//            Picker(timePeriodlabel, selection: $timePeriod) {
-//                ForEach(TimePeriod.allCases, id: \.self) { period in
-////                    Text(period.description).tag(period)
-//                    Text(period.localized).tag(period)
-//                }
-//            }
-//            .pickerStyle(.menu)
-//        }
-//    }
-//}
-
-
-// Preview
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PeriodView()
-//    }
-//}

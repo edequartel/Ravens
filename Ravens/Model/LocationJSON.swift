@@ -6,6 +6,9 @@
 //
 import Foundation
 import SwiftUI
+import Alamofire
+import MapKit
+import SwiftyBeaver
 
 struct ApiResponse: Decodable {
     let count: Int
@@ -28,14 +31,7 @@ struct LocationJSON: Decodable {
     }
 }
 
-
-import Foundation
-import SwiftUI
-import Alamofire
-import MapKit
-import SwiftyBeaver
-
-struct Location: Identifiable {//}, Hashable {
+struct Location: Identifiable {
   let id = UUID()
   var name: String
   var coordinate: CLLocationCoordinate2D

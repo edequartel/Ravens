@@ -5,8 +5,6 @@
 //  Created by Eric de Quartel on 09/01/2024.
 //
 
-//header
-
 import Foundation
 import Alamofire
 import SwiftyBeaver

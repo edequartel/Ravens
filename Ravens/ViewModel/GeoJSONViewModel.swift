@@ -29,7 +29,7 @@ class GeoJSONViewModel: ObservableObject {
                        let jsonData = try? JSONSerialization.data(withJSONObject: data),
                        let geoJSON = try? MKGeoJSONDecoder().decode(jsonData) {
                         self.polyOverlays =  self.parseGeoJSON(geoJSON)
-                        self.getSpan() //deze vergeten 19nov24
+                        self.getSpan()
                         completion()
                     }
             case .failure(let error):
@@ -37,8 +37,7 @@ class GeoJSONViewModel: ObservableObject {
             }
         }
     }
-    
-    
+
     func parseGeoJSON(_ geoJSON: [MKGeoJSONObject])->[MKPolygon] {
         var overlays = [MKPolygon]()
         for item in geoJSON {
@@ -89,4 +88,3 @@ class GeoJSONViewModel: ObservableObject {
         return MapCameraPosition.region(region)
     }
 }
-
