@@ -24,7 +24,7 @@ struct Bird: Codable, Identifiable {
   let sp: String?
   let ssp: String?
   let group: String?
-  let en: String?
+  let english: String?
   let rec: String?
   let cnt: String?
   let loc: String?
@@ -41,7 +41,7 @@ struct Bird: Codable, Identifiable {
   let sono: Sono?
   let osci: Osci?
   let lic: String?
-  let q: String?
+  let quality: String?
   let length: String?
   let time: String?
   let date: String?
@@ -60,9 +60,13 @@ struct Bird: Codable, Identifiable {
 
   enum CodingKeys: String, CodingKey {
     case idSpecies = "id"
-    case gen, sp, ssp, group, en, rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file
+    case gen, sp, ssp, group
+    case english = "en"
+    case rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file
     case fileName = "file-name"
-    case sono, osci, lic, q, length, time, date, uploaded, also, rmk
+    case sono, osci, lic
+    case quality = "q"
+    case length, time, date, uploaded, also, rmk
     case birdSeen = "bird-seen"
     case animalSeen = "animal-seen"
     case playbackUsed = "playback-used"

@@ -22,54 +22,54 @@ struct BirdListView: View {
 
   var body: some View {
     NavigationStack {
-      VStack {
-        HorizontalLine()
-        if statusFetch == 0 {
-          Text(noRecordings)
-        }
-
-        Group {
-          if viewModel.isLoading {
-            ProgressView(loadindData)
-              .progressViewStyle(CircularProgressViewStyle())
-          } else if let errorMessage = viewModel.errorMessage {
-            Text("Error: \(errorMessage)")
-          } else {
-            List(viewModel.birds.filter {
-              isMP3(filename: $0.fileName ?? "") &&
-              (
-                selectedSound == .mixed ||
-                ($0.type?
-                  .split(separator: ",")
-                  .map { $0.trimmingCharacters(in: .whitespaces) }
-                  .contains(selectedSound.rawValue) == true)
-              )
-            }) { bird in
-              BirdRowView(
-                bird: bird,
-                audioPlayerManager: audioPlayerManager,
-                currentlyPlayingBirdID: $currentlyPlayingBirdID,
-                birdName: bird.en ?? "",
-                selectedBird: $selectedBird
-              )
-            }
-            .listStyle(PlainListStyle())
-          }
-        }
-
-        Spacer()
+    VStack {
+      HorizontalLine()
+      if statusFetch == 0 {
+        Text(noRecordings)
       }
+
+      Group {
+        if viewModel.isLoading {
+          ProgressView(loadindData)
+            .progressViewStyle(CircularProgressViewStyle())
+        } else if let errorMessage = viewModel.errorMessage {
+          Text("Error: \(errorMessage)")
+        } else {
+          List(viewModel.birds.filter {
+            isMP3(filename: $0.fileName ?? "") &&
+            (
+              selectedSound == .mixed ||
+              ($0.type?
+                .split(separator: ",")
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .contains(selectedSound.rawValue) == true)
+            )
+          }) { bird in
+            BirdRowView(
+              bird: bird,
+              audioPlayerManager: audioPlayerManager,
+              currentlyPlayingBirdID: $currentlyPlayingBirdID,
+              birdName: bird.english ?? "",
+              selectedBird: $selectedBird
+            )
+          }
+          .listStyle(PlainListStyle())
+        }
+      }
+
+      Spacer()
     }
+  }
 
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: SoundTypePickerView(selectedSound: $selectedSound)
-        ) {
-          Image(systemSymbol: .ellipsisCircle)
-            .uniformSize()
-            .accessibility(label: Text(typeSoundsList))
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: SoundTypePickerView(selectedSound: $selectedSound)
+          ) {
+            Image(systemSymbol: .ellipsisCircle)
+              .uniformSize()
+              .accessibility(label: Text(typeSoundsList))
+          }
         }
-      }
     }
 
     .sheet(item: $selectedBird) { bird in

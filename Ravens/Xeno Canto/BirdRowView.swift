@@ -46,7 +46,7 @@ struct BirdRowView: View {
         HStack {
           VStack {
             HStack {
-              Image(systemName: "\(bird.q?.lowercased() ?? "").square.fill")
+              Image(systemName: "\(bird.quality?.lowercased() ?? "").square.fill")
                 .foregroundColor(.gray)
 
               Text("XC\(bird.idSpecies)")

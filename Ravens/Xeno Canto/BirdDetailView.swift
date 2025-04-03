@@ -34,7 +34,7 @@ struct BirdDetailView: View {
 
             HStack {
               Text([
-                bird.en
+                bird.english
               ].compactMap { $0 }.joined(separator: " "))
               .font(.caption)
               Spacer()
@@ -137,7 +137,7 @@ struct BirdDetailView: View {
         .accessibilityLabel(
               """
               \(bird.rec ?? "")
-              \(bird.en ?? "")
+              \(bird.english ?? "")
               \(bird.date ?? "")
               \(bird.time ?? "")
               \(bird.length ?? "")
