@@ -11,9 +11,6 @@ import MapKit
 import SFSafeSymbols
 import CoreLocation
 
-import SwiftUI
-import CoreLocation
-
 // Add Equatable conformance for CLLocationCoordinate2D
 extension CLLocationCoordinate2D: @retroactive Equatable {
   public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -23,7 +20,7 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationsLocation: ObservationsViewModel //???
+  @ObservedObject var observationsLocation: ObservationsViewModel 
 
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
@@ -41,7 +38,6 @@ struct TabLocationView: View {
   @State private var showFirstView = false
   @State private var isShowingLocationList = false
 
-
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
@@ -51,7 +47,6 @@ struct TabLocationView: View {
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
-
 
   var body: some View {
     NavigationStack {
@@ -203,9 +198,4 @@ struct TabLocationView: View {
       }
     }
   }
-
-
 }
-
-
-
