@@ -11,10 +11,10 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationUser : ObservationsViewModel
+  @ObservedObject var observationUser: ObservationsViewModel
 
   @EnvironmentObject var locationManager: LocationManagerModel
-  @EnvironmentObject var settings: Settings //for the mapStyle
+  @EnvironmentObject var settings: Settings
 
   @State private var cameraPosition: MapCameraPosition = .automatic
   @State private var region: MKCoordinateRegion = MKCoordinateRegion(
@@ -36,23 +36,22 @@ struct MapObservationsUserView: View {
 
         ForEach(filteredObs) { observation in
           Annotation(observation.speciesDetail.name,
-                     coordinate:  CLLocationCoordinate2D(
+                     coordinate: CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
-                      longitude: observation.point.coordinates[0]))
-          {
+                      longitude: observation.point.coordinates[0])) {
             ObservationAnnotationView(observation: observation)
           }
         }
       }
       .mapStyle(settings.mapStyle)
-      .mapControls() {
+      .mapControls {
         MapUserLocationButton()
         MapPitchToggle()
-        MapCompass() //tapping this makes it north
+        MapCompass() // tapping this makes it north
       }
     }
     .onAppear {
-      updateRegionToUserLocation() //just around the userlocation
+      updateRegionToUserLocation() // just around the userlocation
     }
   }
 
@@ -74,11 +73,6 @@ struct MapObservationsUserView: View {
   }
 }
 
-
-
-import SwiftUI
-import MapKit
-
 struct ObservationAnnotationView: View {
   let observation: Observation
 
@@ -97,4 +91,3 @@ struct ObservationAnnotationView: View {
       }
   }
 }
-

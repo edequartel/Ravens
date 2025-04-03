@@ -9,7 +9,6 @@ import Foundation
 import MapKit
 import SwiftyBeaver
 
-
 struct Area: Codable, Identifiable {
     var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
     var name: String
@@ -35,7 +34,6 @@ class AreasViewModel: ObservableObject {
             // If the file does not exist, create it
             fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
         }
-        
         loadRecords()
     }
     
@@ -83,6 +81,3 @@ class AreasViewModel: ObservableObject {
         }
     }
 }
-
-
-

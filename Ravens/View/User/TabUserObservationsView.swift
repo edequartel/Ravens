@@ -10,12 +10,12 @@ import SwiftyBeaver
 
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
@@ -29,7 +29,7 @@ struct TabUserObservationsView: View {
   @State private var firstTime: Bool = true
 
   var body: some View {
-    NavigationStack{
+    NavigationStack {
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
@@ -70,7 +70,7 @@ struct TabUserObservationsView: View {
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
           timePeriod: settings.timePeriodUser,
-          completion: { log.error("fetch data complete") } )
+          completion: { log.error("fetch data complete") })
       }
 
       .onChange(of: refresh) {
@@ -82,7 +82,7 @@ struct TabUserObservationsView: View {
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
           timePeriod: settings.timePeriodUser,
-          completion: { log.info("fetch data complete") } )
+          completion: { log.info("fetch data complete") })
       }
 
       .onChange(of: obsObserversViewModel.observerId) {
@@ -94,10 +94,10 @@ struct TabUserObservationsView: View {
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
           timePeriod: settings.timePeriodUser,
-          completion: { log.info("fetch data complete") } )
+          completion: { log.info("fetch data complete") })
       }
 
-      //sort filter and periodTime
+      // sort filter and periodTime
       .modifier(
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
@@ -105,9 +105,8 @@ struct TabUserObservationsView: View {
           timePeriod: $settings.timePeriodUser)
       )
 
-
       .toolbar {
-        //set map or list
+        // set map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -119,7 +118,7 @@ struct TabUserObservationsView: View {
             }
           }
 
-          //add choose observers
+          // add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(
               destination: ObserversView(
@@ -133,7 +132,7 @@ struct TabUserObservationsView: View {
             }
           }
 
-          //add choose observers
+          // add choose observers
           if (obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0)) {
             ToolbarItem(placement: .navigationBarTrailing) {
               ObserversButtonView(
@@ -185,4 +184,3 @@ struct TabUserObservationsView: View {
     )
   }
 }
-

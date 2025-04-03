@@ -10,12 +10,8 @@ import SwiftyBeaver
 
 struct BookMark: Codable, Identifiable {
   var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
-  //    var name: String?
-  //    var group: String?
-  var speciesID: Int //bookmarkID
+  var speciesID: Int // bookmarkID
 }
-
-import SwiftUI
 
 class BookMarksViewModel: ObservableObject {
   let log = SwiftyBeaver.self
@@ -78,7 +74,6 @@ class BookMarksViewModel: ObservableObject {
     records.append(newRecord)
     saveRecords()
   }
-
 
   func removeRecord(speciesID: Int) {
     print("removeRecord(\(speciesID))")
