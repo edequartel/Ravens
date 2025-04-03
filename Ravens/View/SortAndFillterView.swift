@@ -201,7 +201,7 @@ struct CombinedOptionsMenuView: View {
         // Period Filter
         if timePeriod != nil {
           Section(header: Text(period)) {
-            PeriodView(timePeriod: $timePeriod, entity: entity)
+            TimePeriodView(timePeriod: $timePeriod, entity: entity)
           }
         }
         
@@ -274,7 +274,7 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-struct PeriodView: View {
+struct TimePeriodView: View {
   @Binding var timePeriod: TimePeriod?
   var entity: EntityType
 

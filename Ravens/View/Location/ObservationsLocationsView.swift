@@ -40,6 +40,13 @@ struct ObservationsLocationView: View {
     NavigationStack {
       VStack {
         if showView { Text("ObservationsLocationView").font(.customTiny) }
+        HStack {
+          Text("\(settings.locationName)")
+            .bold()
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+        
         ObservationsCountView(count: observationsLocation.count)
         HorizontalLine()
 

@@ -116,6 +116,7 @@
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
+		47E43B492D9F2A9B00020045 /* manual.md in Resources */ = {isa = PBXBuildFile; fileRef = 47E43B482D9F2A9200020045 /* manual.md */; };
 		47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */; };
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
 		47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */; };
@@ -228,6 +229,7 @@
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
+		47E43B482D9F2A9200020045 /* manual.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = manual.md; sourceTree = "<group>"; };
 		47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RavensRelease.entitlements; sourceTree = "<group>"; };
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		471F7A5D2CF790CB00BF529C /* Information */ = {
 			isa = PBXGroup;
 			children = (
+				47E43B482D9F2A9200020045 /* manual.md */,
 				4781539A2B57BDC2005F87CC /* README.md */,
 				47F5D2F02BADDB9F0071BB6E /* Notes.md */,
 			);
@@ -680,6 +683,7 @@
 				471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */,
 				4759E7822D1059E100B60472 /* Assets.xcassets in Resources */,
 				47A862582CF4DC300016BB04 /* ravenssun.json in Resources */,
+				47E43B492D9F2A9B00020045 /* manual.md in Resources */,
 				47AB459A2CE2042100842877 /* species.json in Resources */,
 				476843D42BA9D43D004EF208 /* LottieFile.json in Resources */,
 				47AB45962CE2030E00842877 /* location.json in Resources */,

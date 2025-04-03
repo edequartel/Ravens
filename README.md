@@ -2,7 +2,7 @@
 
 [English](READMEeng.MD)
 
-[Handleiding](manual.md)
+[Handleiding](Ravens/Information/manual.md)
 
 Volg Ravens op 
 
