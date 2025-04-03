@@ -12,7 +12,7 @@ struct BirdListView: View {
   @State private var selectedSound: SoundOption = .mixed
   @StateObject private var audioPlayerManager = AudioPlayerManager()
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-  @State private var currentlyPlayingBirdID: String? = nil
+  @State private var currentlyPlayingBirdID: String?
   @State private var selectedBird: Bird?
   @State private var firstTime: Bool = true
   @State private var statusFetch: Int = -1
@@ -95,4 +95,3 @@ struct BirdListView: View {
     return filename.range(of: pattern, options: .regularExpression) != nil
   }
 }
-

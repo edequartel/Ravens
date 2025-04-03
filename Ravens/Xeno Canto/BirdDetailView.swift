@@ -44,7 +44,7 @@ struct BirdDetailView: View {
               Text([
                 bird.date,
                 bird.time,
-                bird.length,
+                bird.length
               ].compactMap { $0 }.joined(separator: " "))
               .font(.caption)
               Spacer()
@@ -102,13 +102,13 @@ struct BirdDetailView: View {
               .stroke(Color.gray, lineWidth: 1)
           )
 
-          //xeno canto
+          // xeno canto
           HStack  {
             HStack {
               OpenURLView(birdURL: bird.url)
             }
             Spacer()
-            //url
+            // url
             HStack {
               if let licenseURL = bird.lic, let url = URL(string: "https:\(licenseURL)") {
                 Link(destination: url) {
@@ -225,7 +225,6 @@ func convertToDutchDate(dateString: String, timeString: String) -> String? {
   // Capitalize only the first character
   return formattedString.prefix(1).uppercased() + formattedString.dropFirst()
 }
-
 
 struct OpenURLView: View {
   var birdURL: String? // The URL source

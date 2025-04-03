@@ -18,7 +18,7 @@ struct BirdRowView: View {
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @Binding var currentlyPlayingBirdID: String?
   @State private var isLoadingAudio = false
-  let birdName : String
+  let birdName: String
   @Binding var selectedBird: Bird?
 
   var isPlayingThisBird: Bool {
@@ -93,23 +93,15 @@ struct BirdRowView: View {
       .contentShape(Rectangle())
     }
     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-
-
       Button(action: {
         selectedBird = bird
       }) {
         Image(systemSymbol: .infoCircle)
       }
       .tint(.obsBirdInfo)
-
-
-
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.idSpecies)  \(bird.rec ?? "")")
-
-
-
     .onDisappear {
       // Stop audio when leaving the BirdListView
       if isPlayingThisBird {
@@ -183,7 +175,6 @@ enum SoundOption: String, CaseIterable {
   case socialCall = "social call"
   case subsong
   case territorialCall = "territorial call"
-
 
   var intValue: Int? {
     return SoundOption.allCases.firstIndex(of: self)

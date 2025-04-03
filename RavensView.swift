@@ -11,7 +11,7 @@ import SwiftyBeaver
 struct RavensView: View {
   let log = SwiftyBeaver.self
 
-  @EnvironmentObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @ObservedObject var observationsLocation: ObservationsViewModel
@@ -66,7 +66,7 @@ struct RavensView: View {
       .sheet(item: $selectedSpeciesID) { item in
         SpeciesDetailsView(speciesID: item)
       }
-      .onAppear() {
+      .onAppear {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }
     } else {
@@ -89,7 +89,7 @@ struct RavensView: View {
       .sheet(item: $selectedSpeciesID) { item in
         SpeciesDetailsView(speciesID: item)
       }
-      .onAppear() {
+      .onAppear {
         log.error("*** NEW LAUNCHING RAVENS ***")
       }
 

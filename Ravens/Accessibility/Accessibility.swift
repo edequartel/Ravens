@@ -60,10 +60,9 @@ let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
 let secondLanguage = LocalizedStringKey("secondLanguage")
 
-//radius
+// radius
 let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
 let radius = LocalizedStringKey("radius")
-
 
 // login
 let email = LocalizedStringKey("email")
@@ -94,7 +93,7 @@ let halfAYear = LocalizedStringKey("halfayear")
 let oneYear = LocalizedStringKey("oneyear")
 let infinite = LocalizedStringKey("infinite")
 
-let noObservations = LocalizedStringKey("noObservations");
+let noObservations = LocalizedStringKey("noObservations")
 let switchView = LocalizedStringKey("switchView")
 
 // Xeno Canto

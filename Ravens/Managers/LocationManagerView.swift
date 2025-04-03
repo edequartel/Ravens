@@ -13,7 +13,7 @@ struct LocationManagerView: View {
     var body: some View {
         VStack {
             if let location = locationManager.getCurrentLocation() {
-                HStack() {
+                HStack {
                     Text("GPS ")
                         .bold()
                     Text("Lat \(location.coordinate.latitude, format: .number.precision(.fractionLength(2)))")

@@ -15,13 +15,12 @@ struct ContentView: View {
   @ObservedObject var observationsSpecies: ObservationsViewModel
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
-  @EnvironmentObject  var observationUser : ObservationsViewModel
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject  var observationUser: ObservationsViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @State private var dataLoaded = false
   @State private var setObserver: Int = 0
-
 
   var body: some View {
     if dataLoaded {
@@ -37,5 +36,3 @@ struct ContentView: View {
     }
   }
 }
-
-

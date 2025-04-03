@@ -21,7 +21,7 @@ struct Bird: Codable, Identifiable {
   let id: UUID = UUID()  // Generates unique ID per instance
   let idSpecies: String
   let gen: String?
-  let sp: String?
+  let species: String?
   let ssp: String?
   let group: String?
   let english: String?
@@ -60,7 +60,9 @@ struct Bird: Codable, Identifiable {
 
   enum CodingKeys: String, CodingKey {
     case idSpecies = "id"
-    case gen, sp, ssp, group
+    case gen
+    case species = "sp"
+    case ssp, group
     case english = "en"
     case rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file
     case fileName = "file-name"
@@ -73,7 +75,6 @@ struct Bird: Codable, Identifiable {
     case temp, regnr, auto, dvc, mic, smp
   }
 }
-
 
 // MARK: - Sono
 struct Sono: Codable {

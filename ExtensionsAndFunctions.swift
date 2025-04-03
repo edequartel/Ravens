@@ -12,11 +12,11 @@ import SFSafeSymbols
 import MapKit
 
 let showView = false
-//let showView = true
+// let showView = true
 
 // gouda en span nederland
-//let latitude = 52,013077
-//let longitude = 4,713450
+// let latitude = 52,013077
+// let longitude = 4,713450
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
@@ -53,23 +53,23 @@ let VOMapFavorite = "favorite map"
 let VOAreas = "areas"
 
 extension Color {
-  static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255) //4CFDFB
-  static let obsGreenSpider = Color(red: 31/255, green: 94/255, blue: 37/255) //1F5E25
-  static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255) //CBFC45
-  static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
-  static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255) //6AE388
-  static let obsStar = Color(red: 29/255, green: 148/255, blue: 49/255) //1D9431
+  static let obsBlueButterfly = Color(red: 76/255, green: 253/255, blue: 251/255) // 4CFDFB
+  static let obsGreenSpider = Color(red: 31/255, green: 94/255, blue: 37/255) // 1F5E25
+  static let obsGreenFlower = Color(red: 203/255, green: 252/255, blue: 69/255) // CBFC45
+  static let obsGreenEagle = Color(red: 29/255, green: 148/255, blue: 49/255) // 1D9431
+  static let obsBackground = Color(red: 106/255, green: 227/255, blue: 136/255) // 6AE388
+  static let obsStar = Color(red: 29/255, green: 148/255, blue: 49/255) // 1D9431
 
-  static let obsInformation = Color(red: 0/255, green: 0/255, blue: 255/255) //blue
-  static let obsObserver = Color(red: 255/255, green: 0/255, blue: 0/255) //red
-  static let obsBookmark = Color(red: 29/255, green: 148/255, blue: 49/255) //green
-  static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //orange
-  static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
+  static let obsInformation = Color(red: 0/255, green: 0/255, blue: 255/255) // blue
+  static let obsObserver = Color(red: 255/255, green: 0/255, blue: 0/255) // red
+  static let obsBookmark = Color(red: 29/255, green: 148/255, blue: 49/255) // green
+  static let obsArea = Color(red: 255/255, green: 165/255, blue: 0/255) //o range
+  static let obsObservation = Color(red: 89/255, green: 173/255, blue: 195/255) // lightblue
   static let obsShareLink = Color(red: 0.5, green: 0.5, blue: 0.5) // gray
-  static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) //lightblue
+  static let obsToolbar = Color(red: 89/255, green: 173/255, blue: 195/255) // lightblue
 
-  static let obsBirdInfo = Color(red: 240/255, green: 94/255, blue: 35/255) //orange
-//  static let obsXCred = .purple Color(red: 0.5, green: 0.0, blue: 0.0) //darkred
+  static let obsBirdInfo = Color(red: 240/255, green: 94/255, blue: 35/255) // orange
+//  static let obsXCred = .purple Color(red: 0.5, green: 0.0, blue: 0.0) // darkred
 }
 
 
@@ -90,34 +90,34 @@ let SFObserverMin = SFSymbol.personFillBadgeMinus
 func rarityColor(value: Int) -> Color {
   switch value {
   case 0:
-    return .gray //onbekend
+    return .gray //o nbekend
   case 1:
-    return .green //algemeen
+    return .green // algemeen
   case 2:
-    return .blue //vrij algemeen
+    return .blue // vrij algemeen
   case 3:
-    return .orange //rare
+    return .orange // rare
   case 4:
-    return .red //very rare
+    return .red // very rare
   default:
-    return .gray //You can provide a default color or handle other cases as needed
+    return .gray // You can provide a default color or handle other cases as needed
   }
 }
 
 func speciesColor(value: Int) -> Color {
   switch value {
   case 0:
-    return .gray //onbekend
+    return .gray // onbekend
   case 1:
-    return .green //birds
+    return .green // birds
   case 2:
-    return .blue //vrij algemeen
+    return .blue // vrij algemeen
   case 3:
-    return .orange //rare
+    return .orange // rare
   case 4:
-    return .red //very rare
+    return .red // very rare
   default:
-    return .gray //You can provide a default color or handle other cases as needed
+    return .gray // You can provide a default color or handle other cases as needed
   }
 }
 
@@ -128,7 +128,6 @@ extension AnyTransition {
       .combined(with: .asymmetric(insertion: .opacity, removal: .scale))
   }
 }
-
 
 extension View {
 
@@ -347,8 +346,6 @@ extension Text {
   }
 }
 
-
-
 struct RoundButtonStyle: ViewModifier {
   var iconName: String
   var backgroundColor: Color
@@ -424,7 +421,6 @@ extension String: @retroactive Identifiable {
   public var id: String { self }
 }
 
-
 extension Image {
   func uniformSize() -> some View {
         self
@@ -439,7 +435,6 @@ extension Image {
     }
 }
 
-
 extension View {
     func islandBackground(cornerRadius: CGFloat = 8, shadowRadius: CGFloat = 2) -> some View {
         self
@@ -451,7 +446,6 @@ extension View {
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
-
 
 struct ImageWithOverlay: View {
     var systemName: String

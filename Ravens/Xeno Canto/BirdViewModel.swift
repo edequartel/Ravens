@@ -17,7 +17,7 @@ class BirdViewModel: ObservableObject {
   @Published var isLoading = false
   @Published var errorMessage: String?
 
-  var hasFetchedBirds: Bool = false //for progressview
+  var hasFetchedBirds: Bool = false // for progressview
 
   func fetchBirds(name: String, onComplete: ((_ numRecordings: Int) -> Void)? = nil) {
     let checkedName = name.lowercased()
