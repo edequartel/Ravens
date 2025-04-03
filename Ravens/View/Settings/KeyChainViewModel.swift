@@ -53,7 +53,7 @@ class KeychainViewModel: ObservableObject {
 
     let parameters: [String: String] = ["username": username, "password": password]
     let headers: HTTPHeaders = [
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
     ]
 
     AF.request(endPoint() + "auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)

@@ -127,7 +127,6 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
-
 struct SpeciesPickerView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -148,7 +147,7 @@ struct SpeciesPickerView: View {
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: settings.selectedSpeciesGroupId) { //_ in
+      .onChange(of: settings.selectedSpeciesGroupId) { 
         log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
         settings.selectedRegionListId = regionListViewModel.getId(
           region: settings.selectedRegionId,

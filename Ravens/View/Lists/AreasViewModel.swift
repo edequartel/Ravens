@@ -70,7 +70,6 @@ class AreasViewModel: ObservableObject {
         saveRecords()
     }
     
-    
     func removeRecord(areaID: Int) {
         print("removeRecord \(areaID)")
         if let index = records.firstIndex(where: { $0.areaID == areaID }) {

@@ -59,7 +59,7 @@ struct RadiusMapView: View {
         MapCompass() // tapping this makes it north
       }
 
-      .onTapGesture() { position in
+      .onTapGesture { position in
         observationsRadiusViewModel.observations = []
 
         if let coordinate = proxy.convert(position, from: .local) {

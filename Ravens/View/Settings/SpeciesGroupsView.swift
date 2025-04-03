@@ -18,7 +18,7 @@ struct SpeciesGroupsView: View {
         Spacer()
       }
       .font(.caption)
-      ForEach(speciesGroupsViewModel.speciesGroups, id:\.id) { speciesGroup in
+      ForEach(speciesGroupsViewModel.speciesGroups, id: \.id) { speciesGroup in
         HStack {
           Text("\(speciesGroup.id)")
           Text("\(speciesGroup.name)")

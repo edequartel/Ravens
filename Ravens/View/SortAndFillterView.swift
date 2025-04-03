@@ -196,7 +196,7 @@ struct CombinedOptionsMenuView: View {
   var entity: EntityType
 
   var body: some View {
-    NavigationStack{
+    NavigationStack {
       Form {
         // Period Filter
         if timePeriod != nil {
@@ -274,7 +274,6 @@ struct CombinedOptionsMenuView: View {
   }
 }
 
-
 struct PeriodView: View {
   @Binding var timePeriod: TimePeriod?
   var entity: EntityType
@@ -293,4 +292,3 @@ struct PeriodView: View {
     entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
   }
 }
-

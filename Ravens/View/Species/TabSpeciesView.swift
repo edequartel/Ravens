@@ -68,7 +68,6 @@ struct TabSpeciesView: View {
                   .tint(.blue)
             }
 
-
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
