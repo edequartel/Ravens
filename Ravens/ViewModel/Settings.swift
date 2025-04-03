@@ -17,7 +17,12 @@ class Settings: ObservableObject {
   let log = SwiftyBeaver.self
 
   //radius
-  @AppStorage("radius") var radius = 5000.0
+  @AppStorage("radius") var radiusStored = 1000
+  @Published var radius: Int = 1000 {
+    didSet {
+      radiusStored = radius
+    }
+  }
 
   @AppStorage("timePeriodRadius") var timePeriodRadiusStored: TimePeriod = .fourWeeks
   @Published var timePeriodRadius: TimePeriod? = .twoDays {
@@ -100,9 +105,6 @@ class Settings: ObservableObject {
       log.error("!!initialSpeciesLoad saving it to speciesLoad: \(initialSpeciesLoad)")
     }
   }
-
-//  @Published var userId: Int = 0
-//  @Published var userName = "unknown"
 
   @Published var locationId: Int = 0
   @Published var locationName: String = "Unknown Location"
@@ -192,9 +194,8 @@ class Settings: ObservableObject {
 
     isInit = false
 
-//    hasUserLoaded = false
-//    hasLocationLoaded = false
-//    hasSpeciesLoaded = false
+    radius = radiusStored
+
     timePeriodRadius = timePeriodRadiusStored
     timePeriodUser = timePeriodUserStored
     timePeriodLocation = timePeriodLocationStored

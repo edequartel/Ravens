@@ -123,6 +123,8 @@
 		47FDCAE02D96B4A000D01F6A /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCADF2D96B48F00D01F6A /* MapsView.swift */; };
 		47FDCAE42D9D8A2F00D01F6A /* RadiusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */; };
 		47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */; };
+		47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */; };
+		47FDCAEE2D9DD38E00D01F6A /* MijickCalendarView in Frameworks */ = {isa = PBXBuildFile; productRef = 47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -234,6 +236,7 @@
 		47FDCADF2D96B48F00D01F6A /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
 		47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusListView.swift; sourceTree = "<group>"; };
 		47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusMapView.swift; sourceTree = "<group>"; };
+		47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,7 @@
 				47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */,
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
+				47FDCAEE2D9DD38E00D01F6A /* MijickCalendarView in Frameworks */,
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
@@ -411,6 +415,7 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47FDCAE92D9DD21E00D01F6A /* CalenderView */,
 				47FDCADF2D96B48F00D01F6A /* MapsView.swift */,
 				47A588512D1018C700D9CFE1 /* PeriodView.swift */,
 				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
@@ -566,6 +571,14 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		47FDCAE92D9DD21E00D01F6A /* CalenderView */ = {
+			isa = PBXGroup;
+			children = (
+				47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */,
+			);
+			path = CalenderView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,6 +610,7 @@
 				47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */,
 				475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */,
 				47AB459E2CE262C900842877 /* LazyPager */,
+				47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -643,6 +657,7 @@
 				471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				47AB459D2CE262C900842877 /* XCRemoteSwiftPackageReference "LazyPager" */,
+				47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -709,6 +724,7 @@
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
 				47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
+				47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
@@ -1137,6 +1153,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mijick/CalendarView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1209,6 +1233,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */;
+			productName = MijickCalendarView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

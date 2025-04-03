@@ -26,8 +26,7 @@ struct TabRadiusView: View {
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .twoWeeks
-  
+
   @State private var region: MKCoordinateRegion = MKCoordinateRegion(
     center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
     span: MKCoordinateSpan(latitudeDelta: 0.045, longitudeDelta: 0.045) // Default span
@@ -45,7 +44,7 @@ struct TabRadiusView: View {
                         currentSortingOption: $currentSortingOption,
                         currentFilteringAllOption: $currentFilteringAllOption,
                         currentFilteringOption: $currentFilteringOption,
-                        timePeriod: $timePeriod,
+                        timePeriod: $settings.timePeriodRadius,
                         region: $region,
                         cameraPosition: $cameraPosition)
         } else {
@@ -54,7 +53,7 @@ struct TabRadiusView: View {
                          currentSortingOption: $currentSortingOption,
                          currentFilteringAllOption: $currentFilteringAllOption,
                          currentFilteringOption: $currentFilteringOption,
-                         timePeriod: $timePeriod,
+                         timePeriod: $settings.timePeriodRadius,
                          region: $region,
                          cameraPosition: $cameraPosition
           )
@@ -68,8 +67,8 @@ struct TabRadiusView: View {
           entity: .radius)
       )
 
-      .onChange(of: settings.radius) {//!!
-        log.error("update timePeriod \(String(describing: timePeriod))")
+      .onChange(of: settings.radius) {
+        log.error("update radius \(String(describing: settings.radius))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
           settings: settings,
@@ -77,16 +76,15 @@ struct TabRadiusView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
-
           radius: settings.radius, //circleRadius,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodRadius,
           completion: {
-            log.error("update timePeriod")
+            log.error("update radius")
           })
       }
 
       .onChange(of: settings.selectedLanguage) {//!!
-        log.error("update settings. \(String(describing: settings.selectedLanguage))")
+        log.error("update selectedLanguage \(String(describing: settings.selectedLanguage))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
           settings: settings,
@@ -96,14 +94,14 @@ struct TabRadiusView: View {
 
 
           radius: settings.radius, //circleRadius,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
           completion: {
             log.error("update timePeriod")
           })
       }
 
 
-      .onChange(of: settings.timePeriodRadius) {//!!
+      .onChange(of: settings.timePeriodRadius) {
         log.error("update timePeriod \(String(describing: settings.timePeriodRadius))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
@@ -112,9 +110,8 @@ struct TabRadiusView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
-
           radius: settings.radius, //circleRadius,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
           completion: {
             log.error("update timePeriod count: \(observationsRadiusViewModel.count)")
           })
@@ -146,7 +143,7 @@ struct TabRadiusView: View {
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 radius: settings.radius, //circleRadius,
-                timePeriod: timePeriod ?? .fourWeeks,
+                timePeriod: settings.timePeriodRadius, //timePeriod ?? .fourWeeks,
                 completion: {
                   log.error("tapgesture update userlocation")
                   updateRegionToUserLocation(coordinate: location.coordinate)
@@ -170,14 +167,13 @@ struct TabRadiusView: View {
     let updatedRegion = MKCoordinateRegion(
       center: coordinate,
       span: MKCoordinateSpan(
-        latitudeDelta: settings.radius / 20000,
-        longitudeDelta: settings.radius / 20000)
+        latitudeDelta: Double(settings.radius) / 20000,
+        longitudeDelta: Double(settings.radius) / 20000)
     )
 
     region = updatedRegion
     cameraPosition = .region(updatedRegion) // Update camera to this region
   }
-
 
 }
 

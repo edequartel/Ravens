@@ -27,17 +27,22 @@ class ObservationsRadiusViewModel: ObservableObject {
     settings: Settings,
     latitude: Double,
     longitude: Double,
-    radius: Double,
-    timePeriod: TimePeriod,
+    radius: Int,
+    timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
+      observations = []
       var url = "https://waarnemingen.nl/api/v1/observations/around-point/?"
       let date = Date()
       let dateFormatted = formatDate(date: date)
-      url += "days="+String(timePeriod.rawValue)
+      if let days = timePeriod?.rawValue {
+          url += "days=\(days)&"
+      }
       url += "&end_date="+dateFormatted
       url += "&lat="+String(latitude)
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
+
+      self.log.info("url:\(url)")
 
       fetchData(
         settings: settings,

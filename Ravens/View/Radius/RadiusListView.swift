@@ -33,11 +33,18 @@ struct RadiusListView: View {
   var body: some View {
     VStack {
       if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
+        HStack {
+          Text("\(observationsRadiusViewModel.count) waarnemingen")
+            .font(.caption)
+            .bold()
+            .padding(.horizontal)
+          Spacer()
+        }
         HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
-          timePeriod: $settings.timePeriodUser,
+          timePeriod: $settings.timePeriodRadius,
           entity: .radius,
           currentSortingOption: $currentSortingOption,
           currentFilteringAllOption: $currentFilteringAllOption,
@@ -64,7 +71,7 @@ struct RadiusListView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
           radius: settings.radius,
-          timePeriod: timePeriod ?? .fourWeeks,
+          timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("radiusView count \(observationsRadiusViewModel.count)")
           })

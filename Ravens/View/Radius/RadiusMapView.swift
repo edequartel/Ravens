@@ -49,7 +49,7 @@ struct RadiusMapView: View {
           center: CLLocationCoordinate2D(
             latitude: observationsRadiusViewModel.circleCenter.latitude,
             longitude: observationsRadiusViewModel.circleCenter.longitude),
-          radius: settings.radius)
+          radius: Double(settings.radius))
         .foregroundStyle(.blue.opacity(0.2)) // Fill the circle with blue color
         .stroke(.blue.opacity(0.7), lineWidth: 1) // Add a border
 
@@ -74,7 +74,7 @@ struct RadiusMapView: View {
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             radius: settings.radius,
-            timePeriod: timePeriod ?? .fourWeeks,
+            timePeriod: settings.timePeriodRadius,
             completion: {
               log.error("tapgesture update userlocation")
               updateRegionToUserLocation(coordinate: coordinate)
@@ -101,8 +101,8 @@ struct RadiusMapView: View {
     let updatedRegion = MKCoordinateRegion(
       center: coordinate,
       span: MKCoordinateSpan(
-        latitudeDelta: settings.radius / 20000,
-        longitudeDelta: settings.radius / 20000)
+        latitudeDelta: Double(settings.radius) / 20000,
+        longitudeDelta: Double(settings.radius) / 20000)
     )
 
     region = updatedRegion

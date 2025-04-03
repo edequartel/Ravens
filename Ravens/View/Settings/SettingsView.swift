@@ -178,9 +178,9 @@ struct SpeciesPickerView: View {
 import SwiftUI
 
 struct RadiusPickerView: View {
-  @Binding var selectedRadius: Double // Binding for Double radius selection
+  @Binding var selectedRadius: Int // Binding for Int radius selection
 
-  let radiusOptions = Array(stride(from: 1000.0, through: 10000.0, by: 1000.0)) // Double values
+  let radiusOptions = Array(stride(from: 1000, through: 10000, by: 1000)) // Int values
 
   var body: some View {
     VStack {
