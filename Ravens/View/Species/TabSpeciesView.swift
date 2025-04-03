@@ -3,11 +3,10 @@
 //  Ravens
 //
 //  Created by Eric de Quartel on 08/01/2024.
-// 
+//
 
 import SwiftUI
 import SwiftyBeaver
-
 
 struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
@@ -17,7 +16,6 @@ struct TabSpeciesView: View {
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-
 
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
@@ -29,6 +27,8 @@ struct TabSpeciesView: View {
   @State private var searchText = ""
 
   @Binding var selectedSpeciesID: Int?
+
+  @State private var showSpeciesXC: Species?
 
   var body: some View {
     NavigationStack {
@@ -42,13 +42,12 @@ struct TabSpeciesView: View {
             searchText: searchText,
             filterOption: selectedFilterOption,
             rarityFilterOption: selectedRarityOption,
-            isLatest: false, //settings.isLatestVisible,
+            isLatest: false,
             isBookmarked: settings.isBookMarkVisible,
             additionalIntArray: bookMarksViewModel
           ), id: \.id) { species in
 
-
-            NavigationLink( //???
+            NavigationLink(
               destination: SpeciesView(
                 observationsSpecies: observationsSpecies,
                 item: species,
@@ -61,16 +60,26 @@ struct TabSpeciesView: View {
 
             }
 
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                NavigationLink(destination: SpeciesDetailsView(speciesID: species.speciesId)) {
+                  Image(systemSymbol: .infoCircle)
+                          .uniformSize()
+                  }
+                  .tint(.blue)
+            }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
-              //              .accessibilityLabel(species.name)
             }
           }
         }
         .listStyle(PlainListStyle())
-        .searchable(text: $searchText) //een niveau lager geplaatst
+        .searchable(text: $searchText)
+      }
+
+      .navigationDestination(item: $showSpeciesXC) { species in
+        BirdListView(scientificName: species.scientificName, nativeName: species.name)
       }
 
       .toolbar {
@@ -84,18 +93,11 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
-        if !accessibilityManager.isVoiceOverEnabled {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            URLButtonView(url: "https://waarneming.nl")
-          }
-        }
-
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption,
-            timePeriod: $settings.timePeriodSpecies
+            selectedRarityOption: $selectedRarityOption
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
@@ -103,10 +105,6 @@ struct TabSpeciesView: View {
           }
         }
       }
-
-//      .navigationBarTitle(">>"+settings.selectedSpeciesGroupName)
-//      .navigationBarTitleDisplayMode(.inline)
-
     }
   }
 
@@ -126,19 +124,9 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-  @Binding var timePeriod: TimePeriod
 
   var body: some View {
     Form {
-      Section(period) {
-        Picker(timePeriodlabel, selection: $timePeriod) {
-          ForEach(TimePeriod.allCases, id: \.self) { period in
-            Text(period.localized).tag(period)
-          }
-        }
-        .pickerStyle(.menu)
-      }
-
       SpeciesPickerView()
 
       // First Menu for Sorting
@@ -156,17 +144,27 @@ struct SortFilterSpeciesView: View {
       }
     }
   }
+}
+struct PickTimePeriodeSpeciesView: View {
+  @Binding var timePeriod: TimePeriod?
 
-//  /// Filters `TimePeriod.allCases` based on entity
-//  private var filteredTimePeriods: [TimePeriod] {
-//    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
-//  }
+  var body: some View {
+    Form {
+      Section(period) {
+        Picker(timePeriodlabel, selection: $timePeriod) {
+          ForEach(TimePeriod.allCases, id: \.self) { period in
+            Text(period.localized).tag(period)
+          }
+        }
+        .pickerStyle(.menu)
+      }
+    }
+  }
 }
 
 enum SortNameOption: String, CaseIterable {
   case name
   case scientificName
-//**  case lastSeen
 
   var localized: LocalizedStringKey {
     LocalizedStringKey(self.rawValue)
@@ -194,7 +192,6 @@ struct SortNameOptionsView: View {
   }
 }
 
-
 struct FilteringAllMenu: View {
   @Binding var currentFilteringAllOption: FilterAllOption
 
@@ -208,7 +205,6 @@ struct FilteringAllMenu: View {
     .accessibility(label: Text("Menu filter"))
   }
 }
-
 
 extension SpeciesViewModel {
   func filteredSpecies(
@@ -272,4 +268,3 @@ extension SpeciesViewModel {
     }
   }
 }
-

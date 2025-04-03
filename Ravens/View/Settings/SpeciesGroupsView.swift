@@ -12,14 +12,14 @@ struct SpeciesGroupsView: View {
 
   var body: some View {
     List {
-      HStack() {
+      HStack {
         Text("Id")
         Text("Name")
         Spacer()
       }
       .font(.caption)
-      ForEach(speciesGroupsViewModel.speciesGroups, id:\.id) { speciesGroup in
-        HStack() {
+      ForEach(speciesGroupsViewModel.speciesGroups, id: \.id) { speciesGroup in
+        HStack {
           Text("\(speciesGroup.id)")
           Text("\(speciesGroup.name)")
           Spacer()

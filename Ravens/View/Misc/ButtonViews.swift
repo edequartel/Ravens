@@ -73,13 +73,20 @@ struct InformationSpeciesButtonView: View {
     var obs: Observation
 
     var body: some View {
-        Button(action: {
-            selectedSpeciesID = obs.speciesDetail.id
-        }) {
-            Image(systemSymbol: SFInformation)
+      NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+        Image(systemSymbol: .infoCircle)
+                .uniformSize()
         }
-        .tint(.obsInformation)
+        .tint(.blue)
         .accessibilityLabel(informationSpecies)
+
+//        Button(action: {
+//            selectedSpeciesID = obs.speciesDetail.id
+//        }) {
+//            Image(systemSymbol: SFInformation)
+//        }
+//        .tint(.blue) 
+//        .accessibilityLabel(informationSpecies)
     }
 }
 
@@ -110,7 +117,37 @@ struct AreaButtonView: View {
   }
 }
 
-struct ObserversButtonView: View {
+struct AreaLocationButtonView: View {
+  @EnvironmentObject var areasViewModel: AreasViewModel
+  @EnvironmentObject private var settings: Settings
+  
+//  var locationDetail: LocationDetail?
+//  var locationPoint: Point?
+
+  var body: some View {
+    Button(action: {
+      if areasViewModel.isIDInRecords(areaID: settings.locationId) {
+        print("remove areas \(settings.locationId)")
+        areasViewModel.removeRecord(
+          areaID: settings.locationId)
+      } else {
+        print("adding area \(settings.locationId)")
+        areasViewModel.appendRecord(
+          areaName: settings.locationName,
+          areaID: settings.locationId,
+          latitude: settings.locationCoordinate?.latitude ?? 0,
+          longitude: settings.locationCoordinate?.longitude ?? 0
+        )
+      }
+    }) {
+        Image(systemSymbol: areasViewModel.isIDInRecords(areaID: settings.locationId) ? SFAreaFill: SFArea)
+          .uniformSize()
+    }
+    .accessibilityLabel(areasViewModel.isIDInRecords(areaID: settings.locationId) ? favoriteLocationOn : favoriteLocationOff)
+  }
+}
+
+struct ObserversObsButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
   var obs: Observation
 
@@ -131,6 +168,28 @@ struct ObserversButtonView: View {
   }
 }
 
+struct ObserversButtonView: View {
+  @EnvironmentObject var observersViewModel: ObserversViewModel
+  let userId: Int?
+  let userName: String?
+
+  var body: some View {
+    Button(action: {
+      if observersViewModel.isObserverInRecords(userID: userId ?? 0) {
+        observersViewModel.removeRecord(userID: userId ?? 0)
+      } else {
+        observersViewModel.appendRecord(
+          name: userName ?? "unknown",
+          userID: userId ?? 0)
+      }
+    }) {
+      Image(systemSymbol: observersViewModel.isObserverInRecords(userID: userId ?? 0) ? SFObserverFill : SFObserver)
+        .uniformSize()
+    }
+    .accessibilityLabel(observersViewModel.isObserverInRecords(userID: userId ?? 0) ? favoriteObserverOn : favoriteObserverOff)
+  }
+}
+
 struct BookmarkButtonView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   var speciesID: Int
@@ -145,7 +204,6 @@ struct BookmarkButtonView: View {
     }) {
 
       Image(systemSymbol: bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? SFSpeciesFill : SFSpecies)
-//      Image(systemSymbol: SFSpeciesFill)
         .uniformSize()
     }
     .accessibilityLabel(bookMarksViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? favoriteSpeciesOn : favoriteSpeciesOff)
@@ -159,8 +217,7 @@ struct BookmarkButtonView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
 
     // Return the BookmarkButtonView with the mock data
-    BookmarkButtonView(speciesID: 100)//obs: mockObservation, colorOn: true)
+    BookmarkButtonView(speciesID: 100)
       .environmentObject(mockBookMarksViewModel)
   }
 }
-

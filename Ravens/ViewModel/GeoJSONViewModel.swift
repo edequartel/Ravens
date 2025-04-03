@@ -17,7 +17,8 @@ class GeoJSONViewModel: ObservableObject {
     
     var span: Span = Span(latitudeDelta: 0.1, longitudeDelta: 0.1, latitude: 52.024052, longitude: 5.245350)
 
-    func fetchGeoJsonData(for locationID: Int, completion: @escaping () -> Void ) {
+//    func fetchGeoJsonData(for locationID: Int, completion: @escaping () -> Void )
+  func fetchGeoJsonData(for locationID: Int, completion: @escaping () -> Void = {}) {
         let apiUrl = "https://waarneming.nl/api/v1/locations/geojson/?id=\(locationID)"
         log.info("fetchGeoJsonData url \(apiUrl)")
         
@@ -28,7 +29,7 @@ class GeoJSONViewModel: ObservableObject {
                        let jsonData = try? JSONSerialization.data(withJSONObject: data),
                        let geoJSON = try? MKGeoJSONDecoder().decode(jsonData) {
                         self.polyOverlays =  self.parseGeoJSON(geoJSON)
-                        self.getSpan() //deze vergeten 19nov24
+                        self.getSpan()
                         completion()
                     }
             case .failure(let error):
@@ -36,9 +37,8 @@ class GeoJSONViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    func parseGeoJSON(_ geoJSON: [MKGeoJSONObject])->[MKPolygon] {
+
+    func parseGeoJSON(_ geoJSON: [MKGeoJSONObject]) -> [MKPolygon] {
         var overlays = [MKPolygon]()
         for item in geoJSON {
             if let feature = item as? MKGeoJSONFeature {
@@ -88,4 +88,3 @@ class GeoJSONViewModel: ObservableObject {
         return MapCameraPosition.region(region)
     }
 }
-

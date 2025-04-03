@@ -9,28 +9,26 @@ import SwiftUI
 import SwiftyBeaver
 
 struct UserView: View {
-    let log = SwiftyBeaver.self
+  let log = SwiftyBeaver.self
 
-    @EnvironmentObject var userViewModel: UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
 
-    var body: some View {
-        VStack {
+  var body: some View {
+    VStack {
+      Text("\(userViewModel.user?.name ?? "unknown")")// - \(userViewModel.user?.id ?? 0)")
+        .bold()
 
+      Text("ravens://\(cleanName(userViewModel.user?.name ?? "unknown"))/\(userViewModel.user?.id ?? 0)")
+        .font(.caption)
+        .foregroundColor(.secondary)
 
-          Text("\(userViewModel.user?.name ?? "unknown")")// - \(userViewModel.user?.id ?? 0)")
-                .bold()
-
-          Text("ravens://\(cleanName(userViewModel.user?.name ?? "unknown"))/\(userViewModel.user?.id ?? 0)")
-            .font(.caption)
-            .foregroundColor(.secondary)
-
-            QRCodeView(
-                input: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)"
-            )
-            .frame(width: 150, height: 150)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill available space
+      QRCodeView(
+        input: "ravens://\(userViewModel.user?.name ?? "unknown")/\(userViewModel.user?.id ?? 0)"
+      )
+      .frame(width: 150, height: 150)
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill available space
+  }
 }
 
 #Preview {

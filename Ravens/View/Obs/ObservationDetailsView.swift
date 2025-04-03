@@ -7,12 +7,10 @@
 
 import SwiftUI
 import SwiftyBeaver
-//import Popovers
 
 struct ObservationDetailsView: View {
     let log = SwiftyBeaver.self
     
-//    @EnvironmentObject var viewModel: ObservationsViewModel
     @ObservedObject var observationsSpecies: ObservationsViewModel
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var keyChainviewModel: KeychainViewModel
@@ -22,7 +20,7 @@ struct ObservationDetailsView: View {
     var speciesID: Int
     
     var body: some View {
-            HStack() {
+            HStack {
               if let count = observationsSpecies.observations?.count, count > 0 {
                     Image(systemName: "binoculars.fill")
                         .symbolRenderingMode(.palette)
@@ -36,19 +34,11 @@ struct ObservationDetailsView: View {
                     entity: .species,
                     token: keyChainviewModel.token,
                     id: speciesID,
+                    timePeriod: .infinite,
                     completion: {
-//                      isLoaded = true
                       log.info("observationsSpeciesViewModel data loaded")
                     }
                 )
             }
     }
 }
-
-//struct ObservationDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      observationsSpecies(speciesID: 20)
-//            .environmentObject(Settings())
-//    }
-//}
-

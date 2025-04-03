@@ -14,12 +14,12 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
   private let locationManager = CLLocationManager()
 
-  @Published var location: CLLocation? = nil
-  @Published var errorMessage: String? = nil
+  @Published var location: CLLocation?
+  @Published var errorMessage: String?
 
-  @Published var heading: CLHeading? = nil
+  @Published var heading: CLHeading?
 
-  private var locationCompletion: ((CLLocation) -> Void)? = nil
+  private var locationCompletion: ((CLLocation) -> Void)?
 
   override init() {
     super.init()
@@ -36,5 +36,3 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
   }
 
 }
-
-

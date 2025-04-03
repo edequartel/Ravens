@@ -23,7 +23,7 @@ class KeychainViewModel: ObservableObject {
   
   @Published var loginFailed = false
 
-  init(){
+  init() {
     retrieveCredentials()
   }
 
@@ -46,7 +46,6 @@ class KeychainViewModel: ObservableObject {
     }
   }
 
-
   func fetchData(username: String, password: String, settings: Settings, completion: ((Bool) -> Void)? = nil) {
     log.info("KeychainViewModel fetchData()")
 
@@ -54,7 +53,7 @@ class KeychainViewModel: ObservableObject {
 
     let parameters: [String: String] = ["username": username, "password": password]
     let headers: HTTPHeaders = [
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
     ]
 
     AF.request(endPoint() + "auth/login/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)

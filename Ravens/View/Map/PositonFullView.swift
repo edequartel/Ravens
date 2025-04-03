@@ -10,17 +10,17 @@ import SwiftUI
 import MapKit
 
 struct PositonFullView: View {
-    var obs: Observation
-    @EnvironmentObject var settings: Settings
+  var obs: Observation
+  @EnvironmentObject var settings: Settings
 
-    @State private var cameraPosition: MapCameraPosition = .automatic
+  @State private var cameraPosition: MapCameraPosition = .automatic
 
-    var body: some View {
+  var body: some View {
     Map(position: $cameraPosition) {
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.hasSound ?? false ? Color.white : Color.clear,lineWidth: 1)
+          .stroke(obs.hasSound ?? false ? Color.white : Color.clear, lineWidth: 1)
           .frame(width: 12, height: 12)
 
           .overlay(
@@ -31,18 +31,16 @@ struct PositonFullView: View {
       }
     }
     .mapStyle(settings.mapStyle)
-    .mapControls() {
-        MapUserLocationButton()
-        MapPitchToggle()
-        MapCompass() //tapping this makes it north
+    .mapControls {
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() // tapping this makes it north
     }
 
-    .onAppear() {
+    .onAppear {
       cameraPosition = .camera(
-        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 50000)
+        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
     }
-
-//    .allowsHitTesting(false)
   }
 }

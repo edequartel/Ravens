@@ -28,7 +28,7 @@ struct MapObservationsSpeciesView: View {
                 UserAnnotation()
 
                 ForEach(observationsSpecies.observations ?? []) { observation in
-                    Annotation("", coordinate:  CLLocationCoordinate2D(
+                    Annotation("", coordinate: CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
                       longitude: observation.point.coordinates[0])) {
                         ObservationAnnotationView(observation: observation)
@@ -47,10 +47,10 @@ struct MapObservationsSpeciesView: View {
               .background(Color.obsGreenEagle.opacity(0.8))
             }
             .mapStyle(settings.mapStyle)
-            .mapControls() {
+            .mapControls {
                 MapUserLocationButton()
                 MapPitchToggle()
-                MapCompass() //tapping this makes it north
+                MapCompass() // tapping this makes it north
             }
         }
     }
@@ -60,17 +60,4 @@ struct MapObservationsSpeciesView: View {
         formatter.dateFormat = "EE dd-MM"
         return formatter
     }
-
 }
-
-
-//struct MapObservationsSpeciesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Setting up the environment objects for the preview
-//      let testSpecies = Species(speciesId: 62, name: "Unknown", scientificName: "Scientific name", rarity: 1, native: true, time: "00:00", date: "1900-01-01")
-//        MapObservationsSpeciesView(item: testSpecies)
-//            .environmentObject(Settings())
-//            .environmentObject(KeychainViewModel())
-//            .environmentObject(ObservationsViewModel())
-//    }
-//}

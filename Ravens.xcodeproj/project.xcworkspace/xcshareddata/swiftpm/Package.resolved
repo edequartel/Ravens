@@ -1,5 +1,5 @@
 {
-  "originHash" : "a5d0fcf557f26973d9c454ba3a224c491b86b15b03855f75c547c54767095eb6",
+  "originHash" : "f68536c18a963892bd7a8842e84aec32bc0add4b3286febcf0fcce09b3c3fe6f",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "1eaf3b6c6882bed10f6e7b119665599dd2329aa1",
         "version" : "4.3.0"
+      }
+    },
+    {
+      "identity" : "calendarview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mijick/CalendarView.git",
+      "state" : {
+        "revision" : "b347587ba39a023b61881158872db9d01a90a9a6",
+        "version" : "1.0.0"
       }
     },
     {

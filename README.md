@@ -2,6 +2,8 @@
 
 [English](READMEeng.MD)
 
+[Handleiding](manual.md)
+
 Volg Ravens op 
 
 * [Instagram](https://www.instagram.com/ravensobs?igsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qrigsh=MTliemQ4N2tnbDkxbA%3D%3D&utm_source=qr)  

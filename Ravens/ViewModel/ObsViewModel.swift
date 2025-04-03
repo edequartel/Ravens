@@ -13,7 +13,7 @@ class ObsViewModel: ObservableObject {
         let url = endPoint(value: settings.selectedInBetween)+"observations/\(obsID)/"
         
         let headers: HTTPHeaders = [
-            "Accept-Language" : settings.selectedLanguage,
+            "Accept-Language": settings.selectedLanguage,
             "Authorization": "Token " + token
         ]
         
@@ -39,6 +39,3 @@ class ObsViewModel: ObservableObject {
         }
     }
 }
-
-
-

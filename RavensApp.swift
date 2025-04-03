@@ -18,7 +18,7 @@ class URLHandler: ObservableObject {
 class AppDelegate: NSObject, UIApplicationDelegate {
   let log = SwiftyBeaver.self
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
     configureLogging()
 
     return true
@@ -55,9 +55,7 @@ struct RavensApp: App {
   @StateObject var regionsViewModel = RegionsViewModel()
   @StateObject var regionListViewModel = RegionListViewModel()
   @StateObject private var observationsLocation = ObservationsViewModel()
-
   @StateObject private var observationsRadiusViewModel = ObservationsRadiusViewModel()
-
   @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
   @StateObject private var observationsSpecies = ObservationsViewModel()
   @StateObject private var observationsViewModel = ObservationsViewModel()
@@ -66,17 +64,13 @@ struct RavensApp: App {
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
   @StateObject var poiViewModel = POIViewModel()
   @StateObject var bookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
-  @StateObject var observersViewModel = ObserversViewModel() //??
-  @StateObject var areasViewModel = AreasViewModel() //??
+  @StateObject var observersViewModel = ObserversViewModel()
+  @StateObject var areasViewModel = AreasViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
-
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
-
   @StateObject var observationUser = ObservationsViewModel()
-
-
   @StateObject var player = Player()
 
   @State private var showingAlert = false
@@ -86,7 +80,7 @@ struct RavensApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView(
-        observationsLocation : observationsLocation,
+        observationsLocation: observationsLocation,
         observationsSpecies: observationsSpecies,
         observationsRadiusViewModel: observationsRadiusViewModel
       )
@@ -123,12 +117,10 @@ struct RavensApp: App {
               message: Text("Do you want to append this \(parts[0].replacingOccurrences(of: "_", with: " "))"),
               primaryButton: .default(Text("Yes")) {
           print("Appending \(parts[0]) \(parts[1])")
-          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "_", with: " "), userID:  Int(self.parts[1]) ?? 0)
+          observersViewModel.appendRecord(name: self.parts[0].replacingOccurrences(of: "_", with: " "), userID: Int(self.parts[1]) ?? 0)
         },
               secondaryButton: .cancel(Text("No")))
       }
     }
   }
 }
-
-

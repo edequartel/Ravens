@@ -32,7 +32,7 @@ struct MyImageView: View {
           .onChanged { value in
             self.currentPosition = CGSize(width: value.translation.width + self.newPosition.width, height: value.translation.height + self.newPosition.height)
           }
-          .onEnded { value in
+          .onEnded { _ in
             self.newPosition = self.currentPosition
           }
       )
@@ -66,7 +66,7 @@ struct PhotoThumbnailView: View {
             Text("\(photos?.count ?? 0)")
               .font(.caption)
               .foregroundColor(.white)
-              .padding([.trailing, .bottom],8)
+              .padding([.trailing, .bottom], 8)
           }
         }
 
@@ -80,16 +80,8 @@ struct PhotoThumbnailView: View {
       }
     }
 
-    //      if photos?.count ?? 0 > 1 {
-    //        Text("\(photos?.count ?? 0)")
-    //          .font(.caption)
-    //          .foregroundColor(.white)
-    //          .padding([.trailing, .bottom],8)
-    //      }
-    //    }
   }
 }
-
 
 struct PhotoThumbnaiView_Previews: PreviewProvider {
   // Create some static data for the preview
@@ -102,5 +94,3 @@ struct PhotoThumbnaiView_Previews: PreviewProvider {
     PhotoThumbnailView(photos: photos, imageURLStr: .constant(""))
   }
 }
-
-

@@ -23,11 +23,11 @@ struct ObsDetailsRowView: View {
           .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       } else {
         Text("\(obs.speciesDetail.scientificName)")// \(obs.species_detail.id)")
+          .bold()
           .italic()
           .lineLimit(1) // Set the maximum number of lines to 1
           .truncationMode(.tail) // Use ellipsis in the tail if the text is truncated
       }
-
 
       Spacer()
       
@@ -38,9 +38,3 @@ struct ObsDetailsRowView: View {
     }
   }
 }
-
-//#Preview {
-//  ObsDetailsRowView()
-//    .obs(.constant(nil))
-//    .bookMarksViewModel(.constant(nil))
-//}

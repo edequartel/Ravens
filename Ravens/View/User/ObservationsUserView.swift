@@ -19,12 +19,10 @@ struct CustomDivider: View {
     }
 }
 
-
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser : ObservationsViewModel
-
+  @ObservedObject var observationUser: ObservationsViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
@@ -37,26 +35,29 @@ struct ObservationsUserView: View {
 
   @Binding var setRefresh: Bool
 
+  @State private var getObservations: String = "loading Observations"
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
 
-      HStack {
-//        if observersViewModel.isObserverInRecords(userID: observersViewModel.observerId) {
-//          Image(systemSymbol: SFObserverFill)
-//        }
-        Text("\(observersViewModel.observerName)")
-          .bold()
-          .lineLimit(1)
-          .truncationMode(.tail)
-        Spacer()
+      VStack {
+        HStack {
+          Text("\(observersViewModel.observerName ?? "noName")")
+            .bold()
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .accessibilityLabel(observersViewModel.observerName ?? "noName")
+
+        ObservationsCountView(count: observationUser.count)
+
+        HorizontalLine()
       }
-      .padding(.horizontal, 10)
-      .padding(.vertical, 4)
-      .accessibilityLabel(observersViewModel.observerName)
 
       if let observations = observationUser.observations, !observations.isEmpty {
-        HorizontalLine()
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
@@ -71,7 +72,8 @@ struct ObservationsUserView: View {
               settings: settings,
               url: observationUser.next,
               token: keyChainviewModel.token,
-              completion: { log.error("observationUser.fetchData")
+              completion: {
+                log.info("end of list, observationUser.fetchData")
               })
           }
       } else {
@@ -88,16 +90,3 @@ struct ObservationsUserView: View {
     }
   }
 }
-
-//struct ObservationsUserView_Previews: PreviewProvider {
-//  @State static var selectedObservation: Observation? = nil
-//  @State static var selectedObservationSound: Observation? = nil
-//
-//  static var previews: some View {
-//    ObservationsUserView(selectedSpeciesID: .constant(nil))
-//    .environmentObject(ObservationsViewModel())
-//    .environmentObject(UserViewModel())
-//    .environmentObject(Settings())
-//  }
-//}
-

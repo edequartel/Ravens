@@ -71,7 +71,6 @@
 		476843D42BA9D43D004EF208 /* LottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 476843D32BA9D43D004EF208 /* LottieFile.json */; };
 		476FA8A62B9B031B00665613 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FA8A52B9B031B00665613 /* SoundsView.swift */; };
 		4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 4770754A2B711681002D2DD8 /* KeychainAccess */; };
-		4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */; };
 		4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 4774D2C92B5BEE420096A0E3 /* SwiftyBeaver */; };
 		477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED86D2BA9CFE900B0D73C /* LottieView.swift */; };
 		477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 477ED8702BA9D0AD00B0D73C /* Lottie */; };
@@ -95,19 +94,23 @@
 		4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4793A5872C286AF0002739B6 /* SwiftSoup */; };
 		479C352B2D09A224002F1C2A /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479C352A2D09A220002F1C2A /* LocationListView.swift */; };
 		47A588522D1018CF00D9CFE1 /* PeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A588512D1018C700D9CFE1 /* PeriodView.swift */; };
-		47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */; };
 		47A862582CF4DC300016BB04 /* ravenssun.json in Resources */ = {isa = PBXBuildFile; fileRef = 47A862572CF4DC2F0016BB04 /* ravenssun.json */; };
 		47AB45962CE2030E00842877 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45952CE2030100842877 /* location.json */; };
 		47AB459A2CE2042100842877 /* species.json in Resources */ = {isa = PBXBuildFile; fileRef = 47AB45992CE2042100842877 /* species.json */; };
 		47AB459F2CE262C900842877 /* LazyPager in Frameworks */ = {isa = PBXBuildFile; productRef = 47AB459E2CE262C900842877 /* LazyPager */; };
 		47AB45A12CE3276500842877 /* RavensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A02CE3276000842877 /* RavensView.swift */; };
 		47AB45A32CE327AD00842877 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AB45A22CE327A300842877 /* SplashView.swift */; };
+		47AC07662D88AD03002FB433 /* BirdDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07622D88AD03002FB433 /* BirdDetailView.swift */; };
+		47AC07672D88AD03002FB433 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07612D88AD03002FB433 /* Bird.swift */; };
+		47AC07682D88AD03002FB433 /* BirdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07632D88AD03002FB433 /* BirdListView.swift */; };
+		47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07642D88AD03002FB433 /* BirdRowView.swift */; };
+		47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07652D88AD03002FB433 /* BirdViewModel.swift */; };
+		47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC076B2D88AE64002FB433 /* AudioManager.swift */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
-		47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B10CAA2C21BA580092BC66 /* tafeleend.jpg */; };
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
-		47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* RadiusView.swift */; };
+		47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */; };
 		47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942D2D3F7247009D734F /* RadiusViewModel.swift */; };
 		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
@@ -117,6 +120,11 @@
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
 		47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */; };
 		47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD0E42C1AE9D8007D0F63 /* dataloading.json */; };
+		47FDCAE02D96B4A000D01F6A /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCADF2D96B48F00D01F6A /* MapsView.swift */; };
+		47FDCAE42D9D8A2F00D01F6A /* RadiusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */; };
+		47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */; };
+		47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */; };
+		47FDCAEE2D9DD38E00D01F6A /* MijickCalendarView in Frameworks */ = {isa = PBXBuildFile; productRef = 47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,7 +188,6 @@
 		4767F0042BF256B100BACDC6 /* SpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesView.swift; sourceTree = "<group>"; };
 		476843D32BA9D43D004EF208 /* LottieFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LottieFile.json; sourceTree = "<group>"; };
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
-		4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinspingdoorvoer.mp3; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		478262632C88203400DD746C /* ObsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailView.swift; sourceTree = "<group>"; };
@@ -201,18 +208,22 @@
 		479C352A2D09A220002F1C2A /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		47A588512D1018C700D9CFE1 /* PeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodView.swift; sourceTree = "<group>"; };
 		47A79E5F2B98AC22004FBF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = perkinsping.mp3; sourceTree = "<group>"; };
 		47A862572CF4DC2F0016BB04 /* ravenssun.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ravenssun.json; sourceTree = "<group>"; };
 		47AB45952CE2030100842877 /* location.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = location.json; sourceTree = "<group>"; };
 		47AB45992CE2042100842877 /* species.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = species.json; sourceTree = "<group>"; };
 		47AB45A02CE3276000842877 /* RavensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensView.swift; sourceTree = "<group>"; };
 		47AB45A22CE327A300842877 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		47AC07612D88AD03002FB433 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
+		47AC07622D88AD03002FB433 /* BirdDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailView.swift; sourceTree = "<group>"; };
+		47AC07632D88AD03002FB433 /* BirdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdListView.swift; sourceTree = "<group>"; };
+		47AC07642D88AD03002FB433 /* BirdRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRowView.swift; sourceTree = "<group>"; };
+		47AC07652D88AD03002FB433 /* BirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewModel.swift; sourceTree = "<group>"; };
+		47AC076B2D88AE64002FB433 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
-		47B10CAA2C21BA580092BC66 /* tafeleend.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tafeleend.jpg; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
-		47CF942B2D3EEDD2009D734F /* RadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusView.swift; sourceTree = "<group>"; };
+		47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRadiusView.swift; sourceTree = "<group>"; };
 		47CF942D2D3F7247009D734F /* RadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusViewModel.swift; sourceTree = "<group>"; };
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
@@ -222,6 +233,10 @@
 		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		47FAD0E42C1AE9D8007D0F63 /* dataloading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataloading.json; sourceTree = "<group>"; };
+		47FDCADF2D96B48F00D01F6A /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
+		47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusListView.swift; sourceTree = "<group>"; };
+		47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusMapView.swift; sourceTree = "<group>"; };
+		47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +247,7 @@
 				47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */,
 				47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */,
 				474C40412B4BC5780038B3A5 /* Alamofire in Frameworks */,
+				47FDCAEE2D9DD38E00D01F6A /* MijickCalendarView in Frameworks */,
 				4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */,
 				4784B5402B7BDAA60051D03E /* AlamofireImage in Frameworks */,
 				474C404F2B4BD24F0038B3A5 /* RichText in Frameworks */,
@@ -299,12 +315,9 @@
 			isa = PBXGroup;
 			children = (
 				4759E7812D1059E100B60472 /* Assets.xcassets */,
-				4771C2D42B9E229F0044783A /* perkinspingdoorvoer.mp3 */,
 				473F14A22CF49FEB004A9DE4 /* ravens.json */,
 				47A862572CF4DC2F0016BB04 /* ravenssun.json */,
 				47FAD0E42C1AE9D8007D0F63 /* dataloading.json */,
-				47A79E602B98AE5A004FBF20 /* perkinsping.mp3 */,
-				47B10CAA2C21BA580092BC66 /* tafeleend.jpg */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -312,12 +325,11 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
-				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
-				47AB45A02CE3276000842877 /* RavensView.swift */,
-				47AB45A22CE327A300842877 /* SplashView.swift */,
-				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
+				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
+				47AB45A22CE327A300842877 /* SplashView.swift */,
+				47AB45A02CE3276000842877 /* RavensView.swift */,
+				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
@@ -337,12 +349,12 @@
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
-				471F7A622CF7930D00BF529C /* Media */,
-				471F7A5B2CF7905C00BF529C /* Accessibility */,
-				47AD8FC72CF1BF02007155A4 /* Managers */,
-				476843D22BA9D333004EF208 /* StartUp */,
-				474C40812B4D17B40038B3A5 /* Model */,
 				471F7A5D2CF790CB00BF529C /* Information */,
+				471F7A5B2CF7905C00BF529C /* Accessibility */,
+				47AC07302D88AC7A002FB433 /* Xeno Canto */,
+				471F7A622CF7930D00BF529C /* Media */,
+				47AD8FC72CF1BF02007155A4 /* Managers */,
+				474C40812B4D17B40038B3A5 /* Model */,
 				474C40802B4D17AA0038B3A5 /* ViewModel */,
 				474C40822B4D17C00038B3A5 /* View */,
 				474C40312B4BC4080038B3A5 /* Preview Content */,
@@ -403,8 +415,12 @@
 		474C40822B4D17C00038B3A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47FDCADF2D96B48F00D01F6A /* MapsView.swift */,
 				47A588512D1018C700D9CFE1 /* PeriodView.swift */,
+				47D4B7702D004EC900D46050 /* SortAndFillterView.swift */,
 				47D4B7722D00546300D46050 /* ObserversView.swift */,
+				47FDCAE92D9DD21E00D01F6A /* CalenderView */,
+				476843D22BA9D333004EF208 /* StartUp */,
 				471F7A612CF792A500BF529C /* Misc */,
 				471F7A5E2CF7915200BF529C /* Map */,
 				4718753D2BFCA7F600EF9F1F /* Audio */,
@@ -512,9 +528,22 @@
 			path = Obs;
 			sourceTree = "<group>";
 		};
+		47AC07302D88AC7A002FB433 /* Xeno Canto */ = {
+			isa = PBXGroup;
+			children = (
+				47AC07612D88AD03002FB433 /* Bird.swift */,
+				47AC07622D88AD03002FB433 /* BirdDetailView.swift */,
+				47AC07632D88AD03002FB433 /* BirdListView.swift */,
+				47AC07642D88AD03002FB433 /* BirdRowView.swift */,
+				47AC07652D88AD03002FB433 /* BirdViewModel.swift */,
+			);
+			path = "Xeno Canto";
+			sourceTree = "<group>";
+		};
 		47AD8FC72CF1BF02007155A4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				47AC076B2D88AE64002FB433 /* AudioManager.swift */,
 				471875442C00546A00EF9F1F /* LocationManagerView.swift */,
 				47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */,
 				471B4FBD2CC27FDC001302A9 /* TimerManager.swift */,
@@ -526,7 +555,9 @@
 		47CF942A2D3EEDC1009D734F /* Radius */ = {
 			isa = PBXGroup;
 			children = (
-				47CF942B2D3EEDD2009D734F /* RadiusView.swift */,
+				47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */,
+				47FDCAE52D9D8A6600D01F6A /* RadiusMapView.swift */,
+				47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */,
 			);
 			path = Radius;
 			sourceTree = "<group>";
@@ -540,6 +571,14 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		47FDCAE92D9DD21E00D01F6A /* CalenderView */ = {
+			isa = PBXGroup;
+			children = (
+				47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */,
+			);
+			path = CalenderView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -550,6 +589,7 @@
 				474C40242B4BC4040038B3A5 /* Sources */,
 				474C40252B4BC4040038B3A5 /* Frameworks */,
 				474C40262B4BC4040038B3A5 /* Resources */,
+				47FDCAF32D9EEEA900D01F6A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -571,6 +611,7 @@
 				47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */,
 				475628DC2CD8F29F00B0CF2B /* SFSafeSymbols */,
 				47AB459E2CE262C900842877 /* LazyPager */,
+				47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -617,6 +658,7 @@
 				471B4FB92CC22549001302A9 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 				475628DB2CD8F29F00B0CF2B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				47AB459D2CE262C900842877 /* XCRemoteSwiftPackageReference "LazyPager" */,
+				47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -640,16 +682,33 @@
 				47A862582CF4DC300016BB04 /* ravenssun.json in Resources */,
 				47AB459A2CE2042100842877 /* species.json in Resources */,
 				476843D42BA9D43D004EF208 /* LottieFile.json in Resources */,
-				47B10CAB2C21BA580092BC66 /* tafeleend.jpg in Resources */,
 				47AB45962CE2030E00842877 /* location.json in Resources */,
-				4771C2D92B9E229F0044783A /* perkinspingdoorvoer.mp3 in Resources */,
-				47A79E612B98AE5A004FBF20 /* perkinsping.mp3 in Resources */,
 				47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47FDCAF32D9EEEA900D01F6A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		474C40242B4BC4040038B3A5 /* Sources */ = {
@@ -673,6 +732,7 @@
 				47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */,
 				4782626F2C8EBEDE00DD746C /* DateConversionView.swift in Sources */,
 				47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */,
+				47FDCAE02D96B4A000D01F6A /* MapsView.swift in Sources */,
 				4785CD1B2B95C87E002F52BE /* UserView.swift in Sources */,
 				47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */,
 				474C407F2B4D15610038B3A5 /* SettingsView.swift in Sources */,
@@ -683,8 +743,9 @@
 				47D4B7732D00546800D46050 /* ObserversView.swift in Sources */,
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
-				47CF942C2D3EEDD2009D734F /* RadiusView.swift in Sources */,
+				47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
+				47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
@@ -696,14 +757,17 @@
 				47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
+				47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */,
 				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* TabSpeciesView.swift in Sources */,
+				47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
 				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
 				4738B6412BF4E7C900BF7557 /* ObsView.swift in Sources */,
 				471875392BFB938500EF9F1F /* AreasViewModel.swift in Sources */,
+				47FDCAE42D9D8A2F00D01F6A /* RadiusListView.swift in Sources */,
 				474C408C2B4DAC590038B3A5 /* RegionsViewModel.swift in Sources */,
 				4784FA5C2B55039900FEC7F9 /* ExtensionsAndFunctions.swift in Sources */,
 				474C405B2B4C04C70038B3A5 /* SpeciesGroupViewModel.swift in Sources */,
@@ -736,6 +800,11 @@
 				47A588522D1018CF00D9CFE1 /* PeriodView.swift in Sources */,
 				47AB45A32CE327AD00842877 /* SplashView.swift in Sources */,
 				470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */,
+				47AC07662D88AD03002FB433 /* BirdDetailView.swift in Sources */,
+				47AC07672D88AD03002FB433 /* Bird.swift in Sources */,
+				47AC07682D88AD03002FB433 /* BirdListView.swift in Sources */,
+				47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */,
+				47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 				471F7A592CF78E4F00BF529C /* Accessibility.swift in Sources */,
 			);
@@ -906,7 +975,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -948,7 +1017,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1105,6 +1174,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mijick/CalendarView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1177,6 +1254,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47FAD0DF2C19D25C007D0F63 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */;
+			productName = MijickCalendarView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

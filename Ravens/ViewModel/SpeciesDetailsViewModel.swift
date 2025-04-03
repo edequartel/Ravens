@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-
 class SpeciesDetailsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var speciesDetails: SpeciesDetails?

@@ -12,19 +12,13 @@ struct SettingsDetailsView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
 
   var body: some View {
-    VStack() {
+    VStack {
       VStack {
         HStack {
-//          if areasViewModel.isIDInRecords(areaID: settings.locationId) {
-//            Image(systemSymbol: SFAreaFill)
-//              .foregroundColor(.blue)
-//          }
-
           Text(settings.locationName)
             .bold()
             .lineLimit(1)
             .truncationMode(.tail)
-//          Text("\(settings.locationId)")
           Spacer()
         }
       }
@@ -34,7 +28,6 @@ struct SettingsDetailsView: View {
     .accessibilityElement(children: .combine)
     .accessibilityLabel("\(settings.locationName)")
   }
-
 
   private var dateFormatter: DateFormatter {
     let formatter = DateFormatter()

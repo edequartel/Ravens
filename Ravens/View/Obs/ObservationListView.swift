@@ -11,18 +11,18 @@ import SwiftyBeaver
 
 struct ObservationListView: View {
   let log = SwiftyBeaver.self
-  
+
   var observations: [Observation]
 
   @EnvironmentObject var settings: Settings
   @Binding var selectedSpeciesID: Int?
-  @Binding var timePeriod: TimePeriod
+  @Binding var timePeriod: TimePeriod?
 
   var entity: EntityType
 
-  @Binding var currentSortingOption: SortingOption? // = .date
-  @Binding var currentFilteringAllOption: FilterAllOption? //= .native
-  @Binding var currentFilteringOption: FilteringRarityOption? //= .all
+  @Binding var currentSortingOption: SortingOption?
+  @Binding var currentFilteringAllOption: FilterAllOption?
+  @Binding var currentFilteringOption: FilteringRarityOption?
 
   @AccessibilityFocusState private var focusedItemID: Int?
 
@@ -32,40 +32,40 @@ struct ObservationListView: View {
   var body: some View {
     List {
       let filteredAndSortedObservations = observations
-          .filter(meetsCondition)
-          .sorted(by: compareObservations)
+        .filter(meetsCondition)
+        .sorted(by: compareObservations)
 
-      ForEach(filteredAndSortedObservations,
-                 id: \.id) { obs in
-             ObservationRowView(
-              obs: obs,
-              selectedSpeciesID: $selectedSpeciesID,
-              entity: entity)
-                 .accessibilityFocused($focusedItemID, equals: obs.idObs)
-                 .onChange(of: focusedItemID) { newFocusID, oldFocusID in
-                     handleFocusChange(newFocusID, from: filteredAndSortedObservations)
-                 }
-                 .onAppear {
-                     if obs == filteredAndSortedObservations.last {
-                       log.info("end of list reached")
-                         onEndOfList?()
-                     }
-                 }
-         }
+      ForEach(Array(filteredAndSortedObservations.enumerated()), id: \.element.id) { index, obs in
+        ObservationRowView(
+          index: index,
+          obs: obs,
+          selectedSpeciesID: $selectedSpeciesID,
+          entity: entity)
+        .accessibilityFocused($focusedItemID, equals: obs.idObs)
+        .onChange(of: focusedItemID) { newFocusID, oldFocusID in
+          handleFocusChange(newFocusID, from: filteredAndSortedObservations)
+        }
+        .onAppear {
+          if obs.id == filteredAndSortedObservations.last?.id {
+            log.error("end of list reached")
+            onEndOfList?()  
+          }
+        }
+      }
     }
     .listStyle(PlainListStyle()) // No additional styling, plain list look
   }
 
   private func handleFocusChange(_ newFocusID: Int?, from observations: [Observation]) {
-      guard let newFocusID = newFocusID else { return }
-      if let focusedObservation = observations.first(where: { $0.idObs == newFocusID }) {
-        print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
-        if focusedObservation.sounds?.count ?? 0 > 0 {
-              print("vibrate")
-            vibrate()
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-          }
+    guard let newFocusID = newFocusID else { return }
+    if let focusedObservation = observations.first(where: { $0.idObs == newFocusID }) {
+      print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
+      if focusedObservation.sounds?.count ?? 0 > 0 {
+        print("vibrate")
+        vibrate()
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
       }
+    }
   }
 
   func meetsCondition(observation: Observation) -> Bool {
@@ -88,7 +88,7 @@ struct ObservationListView: View {
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
     switch currentSortingOption {
     case .date:
-      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast) 
+      return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)
     case .name:
       return lhs.speciesDetail.name < rhs.speciesDetail.name
     case .rarity:
@@ -100,5 +100,3 @@ struct ObservationListView: View {
     }
   }
 }
-
-

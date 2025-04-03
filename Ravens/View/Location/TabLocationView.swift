@@ -11,9 +11,6 @@ import MapKit
 import SFSafeSymbols
 import CoreLocation
 
-import SwiftUI
-import CoreLocation
-
 // Add Equatable conformance for CLLocationCoordinate2D
 extension CLLocationCoordinate2D: @retroactive Equatable {
   public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -23,7 +20,7 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationsLocation: ObservationsViewModel //???
+  @ObservedObject var observationsLocation: ObservationsViewModel 
 
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
@@ -33,7 +30,7 @@ struct TabLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
 
   @EnvironmentObject var accessibilityManager: AccessibilityManager
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
 
   @Binding var selectedSpeciesID: Int?
 
@@ -41,19 +38,15 @@ struct TabLocationView: View {
   @State private var showFirstView = false
   @State private var isShowingLocationList = false
 
-
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .week
-
 
   @State private var setLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
   @State private var setRefresh: Bool = false
 
   @EnvironmentObject var locationManagerModel: LocationManagerModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
-
 
   var body: some View {
     NavigationStack {
@@ -67,13 +60,13 @@ struct TabLocationView: View {
             setLocation: $setLocation,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod)
+            timePeriod: $settings.timePeriodLocation)
         } else {
           ObservationsLocationView(
             observationsLocation: observationsLocation,
             locationIdViewModel: locationIdViewModel,
             geoJSONViewModel: geoJSONViewModel,
-            selectedSpeciesID:  $selectedSpeciesID,
+            selectedSpeciesID: $selectedSpeciesID,
 
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
@@ -85,7 +78,7 @@ struct TabLocationView: View {
         }
       }
 
-      .onChange(of: timePeriod) {
+      .onChange(of: settings.timePeriodLocation) {
         log.error("-->> update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -93,12 +86,12 @@ struct TabLocationView: View {
           observationsLocation: observationsLocation,
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
-          coordinate: setLocation, //!!
-          timePeriod: timePeriod ?? .week)
+          coordinate: setLocation,
+          timePeriod: settings.timePeriodLocation)
         settings.hasLocationLoaded = true
       }
 
-      .onChange(of: setLocation) {
+        .onChange(of: setLocation) {
         log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -107,10 +100,9 @@ struct TabLocationView: View {
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
           coordinate: setLocation,
-          timePeriod: timePeriod ?? .week)
+          timePeriod: settings.timePeriodLocation)
         settings.hasLocationLoaded = true
       }
-
 
       .onChange(of: setRefresh) {
         log.info("update setRefresh so new data fetch for this period")
@@ -121,26 +113,22 @@ struct TabLocationView: View {
           locationIdViewModel: locationIdViewModel,
           geoJSONViewModel: geoJSONViewModel,
           coordinate: setLocation,
-          timePeriod: timePeriod ?? .week
+          timePeriod: settings.timePeriodLocation
         )
         settings.hasLocationLoaded = true
       }
 
-      //set sort, filter and timePeriod
+      // set sort, filter and timePeriod
       .modifier(
-        showFirstView ?
-       ObservationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption)
-        :
-          ObservationToolbarModifier(
-            currentSortingOption: $currentSortingOption,
-            currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod
-          )
+        ObservationToolbarModifier(
+          currentSortingOption: $currentSortingOption,
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $settings.timePeriodLocation
+        )
       )
 
       .toolbar {
-        //map or list
+        // map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -153,53 +141,52 @@ struct TabLocationView: View {
           }
         }
 
-        //update my locationData
-//        if showFirstView && !accessibilityManager.isVoiceOverEnabled {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: {
-              log.info("getMyLocation")
+        // update my locationData
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            log.info("getMyLocation")
 
-              if let location = locationManager.getCurrentLocation() {
+            if let location = locationManager.getCurrentLocation() {
+              fetchDataLocation(
+                settings: settings,
+                token: keyChainviewModel.token,
+                observationsLocation: observationsLocation,
+                locationIdViewModel: locationIdViewModel,
+                geoJSONViewModel: geoJSONViewModel,
+                coordinate: CLLocationCoordinate2D(
+                  latitude: location.coordinate.latitude,
+                  longitude: location.coordinate.longitude),
+                timePeriod: settings.timePeriodLocation)
 
-                fetchDataLocation(
-                  settings: settings,
-                  token: keyChainviewModel.token,
-                  observationsLocation: observationsLocation,
-                  locationIdViewModel: locationIdViewModel,
-                  geoJSONViewModel: geoJSONViewModel,
-                  coordinate: CLLocationCoordinate2D(
-                    latitude: location.coordinate.latitude,
-                    longitude: location.coordinate.longitude),
-                  timePeriod: timePeriod ?? .week)
-                //              }
-
-              } else if let errorMessage = locationManager.errorMessage {
-                log.error("Error: \(errorMessage)")
-              } else {
-                log.error("Retrieving location...")
-              }
-            }) {
-              Image(systemName: "smallcircle.filled.circle")
-                .uniformSize()
-                .accessibilityLabel(updateLocation)
+            } else if let errorMessage = locationManager.errorMessage {
+              log.error("Error: \(errorMessage)")
+            } else {
+              log.error("Retrieving location...")
             }
+          }) {
+            Image(systemName: "smallcircle.filled.circle")
+              .uniformSize()
+              .accessibilityLabel(updateLocation)
           }
+        }
 
-
-
-        //choose a location from a list
+        // choose a location from a list
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
             destination: LocationListView(
               observationsLocation: observationsLocation,
               locationIdViewModel: locationIdViewModel,
               geoJSONViewModel: geoJSONViewModel,
-              setLocation: $setLocation,
-              locationId: settings.locationId)) {
+              setLocation: $setLocation)
+          ) {
                 Image(systemSymbol: .listBullet)
                   .uniformSize()
               }
               .accessibilityLabel(listWithFavoriteLocation)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+          AreaLocationButtonView()
         }
 
       }
@@ -208,9 +195,4 @@ struct TabLocationView: View {
       }
     }
   }
-
-
 }
-
-
-

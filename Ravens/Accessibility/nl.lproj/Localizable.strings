@@ -38,6 +38,7 @@
 "observations" = "waarnemingen";
 "settings" = "Instellingen";
 "distance" = "Afstand";
+"noName" = "Naam onbekend";
 
 //icons
 "swap" = "Wissel tussen lijst en kaart weergave";
@@ -105,5 +106,47 @@
 "oneyear" = "1 jaar";
 "infinite" = "jaren";
 
-"noObservations" = "Wanneer er \ngeen waarnemingen verschijnen,\nvergroot dan de periode.";
+"noObservations" = "Wanneer er \ngeen waarnemingen verschijnen,\nwijzig dan de parameters.";
 "switchView" = "Wissel view";
+
+// Xeno Canto
+"sound" = "Geluid";
+"mixed" = "Gemengd";
+"aberrant" = "Afwijkend";
+"advertisement call" = "Aantrekkingsroep";
+"agonistic call" = "Agressieve Roep";
+"alarm call" = "Alarmroep";
+"begging call" = "Bedelroep";
+"call" = "Roep";
+"calling song" = "Lokzang";
+"courtship song" = "Baltszang";
+"dawn song" = "Ochtendzang";
+"defensive call" = "Verdedigingsroep";
+"distress call" = "Noodroep";
+"disturbance song" = "Verstoringszang";
+"drumming" = "Trommelen";
+"duet" = "Duet";
+"echolocation" = "Echolocatie";
+"feeding buzz" = "Voedselzoem";
+"female song" = "Vrouwtjeszang";
+"flight call" = "Vliegroep";
+"flight song" = "Vluchtzang";
+"imitation" = "Nabootsing";
+"mating call" = "Paarroep";
+"mechanical sound" = "Mechanisch Geluid";
+"nocturnal flight call" = "Nachtelijke Vliegroep";
+"night call" = "Nachtelijke Roep";
+"release call" = "Loslaatroep";
+"rivalry song" = "Rivaliteitszang";
+"searching song" = "Zoekzang";
+"social call" = "Sociale Roep";
+"song" = "Zang";
+"subsong" = "Subzang";
+"territorial call" = "Territoriumroep";
+
+// sounds
+"loadingData" = "Laden geluiden...";
+"noRecordings" = "Geen opnames voor deze soort";
+"typeSoundsList" = "Keuze lijst van type geluiden";
+"infoSpecies" = "Informatie over de soort";
+"audioListView" = "Lijst met geluiden van deze soort";

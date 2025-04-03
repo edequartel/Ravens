@@ -11,7 +11,6 @@ import SwiftyBeaver
 import Foundation
 import MediaPlayer
 
-
 class Player: ObservableObject {
   let log = SwiftyBeaver.self
   private var queuedAudioPlayer: QueuedAudioPlayer

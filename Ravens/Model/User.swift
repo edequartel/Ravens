@@ -28,4 +28,3 @@ struct UserData: Codable {
         case avatar
     }
 }
-

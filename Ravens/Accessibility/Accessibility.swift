@@ -39,9 +39,10 @@ let usName = LocalizedStringKey("us")
 let location = LocalizedStringKey("location")
 let species = LocalizedStringKey("species")
 let observation = LocalizedStringKey("observation")
-let observations = LocalizedStringKey("observations")
+let observationsLocStr = LocalizedStringKey("observations")
 let settingsName = LocalizedStringKey("settings")
 let distance = LocalizedStringKey("distance")
+let noName = LocalizedStringKey("noName")
 
 // icons
 let swap = LocalizedStringKey("swap")
@@ -59,10 +60,9 @@ let map = LocalizedStringKey("map")
 let appDetails = LocalizedStringKey("appDetails")
 let secondLanguage = LocalizedStringKey("secondLanguage")
 
-//radius
+// radius
 let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
 let radius = LocalizedStringKey("radius")
-
 
 // login
 let email = LocalizedStringKey("email")
@@ -93,8 +93,46 @@ let halfAYear = LocalizedStringKey("halfayear")
 let oneYear = LocalizedStringKey("oneyear")
 let infinite = LocalizedStringKey("infinite")
 
-let noObservations = LocalizedStringKey("noObservations");
+let noObservations = LocalizedStringKey("noObservations")
 let switchView = LocalizedStringKey("switchView")
 
+// Xeno Canto
+let soundXC = LocalizedStringKey("sound")
+let mixedXC = LocalizedStringKey("mixed")
+let aberrantXC = LocalizedStringKey("aberrant")
+let advertisementCallXC = LocalizedStringKey("advertisement call")
+let agonisticCallXC = LocalizedStringKey("agonistic call")
+let alarmCallXC = LocalizedStringKey("alarm call")
+let beggingCallXC = LocalizedStringKey("begging call")
+let callXC = LocalizedStringKey("call")
+let callingSongXC = LocalizedStringKey("calling song")
+let courtshipSongXC = LocalizedStringKey("courtship song")
+let dawnSongXC = LocalizedStringKey("dawn song")
+let defensiveCallXC = LocalizedStringKey("defensive call")
+let distressCallXC = LocalizedStringKey("distress call")
+let disturbanceSongXC = LocalizedStringKey("disturbance song")
+let drummingXC = LocalizedStringKey("drumming")
+let duetXC = LocalizedStringKey("duet")
+let echolocationXC = LocalizedStringKey("echolocation")
+let feedingBuzzXC = LocalizedStringKey("feeding buzz")
+let femaleSongXC = LocalizedStringKey("female song")
+let flightCallXC = LocalizedStringKey("flight call")
+let flightSongXC = LocalizedStringKey("flight song")
+let imitationXC = LocalizedStringKey("imitation")
+let matingCallXC = LocalizedStringKey("mating call")
+let mechanicalSoundXC = LocalizedStringKey("mechanical sound")
+let nocturnalFlightCallXC = LocalizedStringKey("nocturnal flight call")
+let releaseCallXC = LocalizedStringKey("release call")
+let rivalrySongXC = LocalizedStringKey("rivalry song")
+let searchingSongXC = LocalizedStringKey("searching song")
+let socialCallXC = LocalizedStringKey("social call")
+let songXC = LocalizedStringKey("song")
+let subsongXC = LocalizedStringKey("subsong")
+let territorialCallXC = LocalizedStringKey("territorial call")
 
-
+// sounds
+let loadindData = LocalizedStringKey("loadingData")
+let noRecordings = LocalizedStringKey("noRecordings")
+let typeSoundsList = LocalizedStringKey("typeSoundsList")
+let infoSpecies = LocalizedStringKey("infoSpecies")
+let audioListView = LocalizedStringKey("audioListView")

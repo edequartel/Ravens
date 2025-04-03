@@ -32,4 +32,3 @@ struct SpeciesDetails: Codable {
         case permalink
     }
 }
-

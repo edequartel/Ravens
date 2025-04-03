@@ -66,8 +66,7 @@ struct PlayerControlsView: View {
             .accessibilityLabel(next)
           }
 
-          if player.status != .playing // && (player.status != .loading) && (player.status != .buffering))
-          {
+          if player.status != .playing {
             Button(action: {
               player.play()
             }) {
@@ -88,7 +87,7 @@ struct PlayerControlsView: View {
             .accessibilityLabel(pause)
           }
 
-          if (sounds.count > 1) {
+          if sounds.count > 1 {
             Button(action: {
               player.next()
               player.play()
@@ -114,9 +113,6 @@ struct PlayerControlsView: View {
     } else { EmptyView().frame(maxHeight: 300) }
   }
 
-
-
-
   private var closeButton: some View {
     Button {
       presentationMode.wrappedValue.dismiss()
@@ -136,30 +132,3 @@ struct PlayerControlsView_Previews: PreviewProvider {
       .environmentObject(Player())
   }
 }
-
-//struct ContentView: View {
-//    @EnvironmentObject var player: Player
-//
-//    var audio1 = ["https://waarneming.nl/media/sound/235291.mp3",
-//                  "https://waarneming.nl/media/sound/235292.mp3",
-//                  "https://waarneming.nl/media/sound/235293.mp3"]
-//
-//    var audio2 = ["https://waarneming.nl/media/sound/235783.wav",
-//                  "https://waarneming.nl/media/sound/235293.mp3",
-//                  "https://waarneming.nl/media/sound/235770.mp3"]
-//
-//    var audio3 = ["https://waarneming.nl/media/sound/235783.wav",
-//                  "https://waarneming.nl/media/sound/235293.mp3",
-//                  "https://waarneming.nl/media/sound/235770.mp3"]
-//
-//
-//    var body: some View {
-//        VStack {
-//            Text("\(player.statePlayer)")
-//            PlayerControlsView(audio: audio1)
-//            PlayerControlsView(audio: audio2)
-//            PlayerControlsView(audio: audio3)
-//        }
-//        .padding(5)
-//    }
-//}

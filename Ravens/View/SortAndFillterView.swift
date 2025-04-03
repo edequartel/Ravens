@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 enum SortingOption: String, CaseIterable {
   case date
   case rarity
@@ -90,8 +89,8 @@ struct FilteringAllOptionsView: View {
   }
 }
 
-//==========================================================================================
 struct ObservationRowView: View {
+  let index: Int?
   var obs: Observation
   @Binding var selectedSpeciesID: Int?
   
@@ -100,8 +99,9 @@ struct ObservationRowView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
-      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID,  entity: entity)) {
+      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)) {
         ObsView(
+          index: index,
           selectedSpeciesID: $selectedSpeciesID,
           entity: entity,
           obs: obs
@@ -138,8 +138,8 @@ struct FilterOptionsView: View {
     }
   }
 }
-// swiftlint:enable multiple_closures_with_trailing_closure
 
+// swiftlint:enable multiple_closures_with_trailing_closure
 struct ObservationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
@@ -190,88 +190,86 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
+
   @EnvironmentObject var settings: Settings
 
   var entity: EntityType
 
   var body: some View {
-    Form {
-      // Period Filter
-      if timePeriod != nil {
-        Section(header: Text(period)) {
-          PeriodView(timePeriod: $timePeriod, entity: entity)
+    NavigationStack {
+      Form {
+        // Period Filter
+        if timePeriod != nil {
+          Section(header: Text(period)) {
+            PeriodView(timePeriod: $timePeriod, entity: entity)
+          }
         }
-      }
-
-      if entity == .radius {
-        Section(distance) {
-          RadiusPickerView(selectedRadius: $settings.radius)
+        
+        if entity == .radius {
+          Section(distance) {
+            RadiusPickerView(selectedRadius: $settings.radius)
+          }
         }
-      }
-
-//      if entity == .radius {
-//          SpeciesPickerView()
-//      }
-
-      // Sorting Option
-      if currentSortingOption != nil {
-        Section(header: Text(sort)) {
-          ForEach(SortingOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentSortingOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentSortingOption == option {
-                  Image(systemName: "checkmark")
+        
+        // Sorting Option
+        if currentSortingOption != nil {
+          Section(header: Text(sort)) {
+            ForEach(SortingOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentSortingOption = option
+              }) {
+                HStack {
+                  Text(option.localized)
+                  Spacer()
+                  if currentSortingOption == option {
+                    Image(systemName: "checkmark")
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Filter All/Native
+        if currentFilteringAllOption != nil {
+          Section(header: Text(filter)) {
+            ForEach(FilterAllOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentFilteringAllOption = option
+              }) {
+                HStack {
+                  Text(option.localized)
+                  Spacer()
+                  if currentFilteringAllOption == option {
+                    Image(systemName: "checkmark")
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // Rarity Filter
+        if currentFilteringOption != nil {
+          Section(header: Text(rarity)) {
+            ForEach(FilteringRarityOption.allCases, id: \.self) { option in
+              Button(action: {
+                currentFilteringOption = option
+              }) {
+                HStack {
+                  Image(systemName: "circle.fill")
+                    .foregroundColor(rarityColor(value: option.intValue ?? 0))
+                  Text(option.localized)
+                  Spacer()
+                  if currentFilteringOption == option {
+                    Image(systemName: "checkmark")
+                  }
                 }
               }
             }
           }
         }
       }
-      
-      // Filter All/Native
-      if currentFilteringAllOption != nil {
-        Section(header: Text(filter)) {
-          ForEach(FilterAllOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringAllOption = option
-            }) {
-              HStack {
-                Text(option.localized)
-                Spacer()
-                if currentFilteringAllOption == option {
-                  Image(systemName: "checkmark")
-                }
-              }
-            }
-          }
-        }
-      }
-      
-      // Rarity Filter
-      if currentFilteringOption != nil {
-        Section(header: Text(rarity)) {
-          ForEach(FilteringRarityOption.allCases, id: \.self) { option in
-            Button(action: {
-              currentFilteringOption = option
-            }) {
-              HStack {
-                Image(systemName: "circle.fill")
-                  .foregroundColor(rarityColor(value: option.intValue ?? 0))
-                Text(option.localized)
-                Spacer()
-                if currentFilteringOption == option {
-                  Image(systemName: "checkmark")
-                }
-              }
-            }
-          }
-        }
-      }
-
     }
   }
 }
@@ -294,5 +292,3 @@ struct PeriodView: View {
     entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
   }
 }
-
-

@@ -9,18 +9,17 @@
 import SwiftUI
 import SwiftyBeaver
 import Alamofire
-//import AlamofireImage
 import AVFoundation
 
-
 struct ObsView: View {
+  let index: Int?
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observersViewModel: ObserversViewModel
   @EnvironmentObject var areasViewModel: AreasViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var settings: Settings
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @Binding var selectedSpeciesID: Int?
@@ -35,7 +34,7 @@ struct ObsView: View {
 
   var body: some View {
     HStack {
-      if (entity != .radius) {
+      if entity != .radius {
         PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
       }
 
@@ -43,6 +42,10 @@ struct ObsView: View {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
+//        if let index = index { //edq
+//            Text("\(index+1)")
+//          }
+
           if entity != .species {
             ObsDetailsRowView(obs: obs)
           }
@@ -58,7 +61,7 @@ struct ObsView: View {
           }
         }
 
-        if (entity != .species) && (obs.speciesDetail.name.isEmpty) { //?!
+        if (entity != .species) && (!obs.speciesDetail.name.isEmpty) { 
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
@@ -83,8 +86,7 @@ struct ObsView: View {
           }
         }
 
-
-        if (entity != .location) {
+        if entity != .location {
           HStack {
             Text("\(obs.locationDetail?.name ?? "name")")
               .footnoteGrayStyle()// \(obs.location_detail?.id ?? 0)")
@@ -105,29 +107,39 @@ struct ObsView: View {
     .accessibilityLabel(accessibilityObsDetail(obs: obs))
     .accessibilityHint("Tap for more details about the observation information.")
 
-    //trailing
+    // trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      if !keyChainViewModel.token.isEmpty { //??
-        AreaButtonView(obs: obs)
-          .tint(.yellow)
+      if !keyChainViewModel.token.isEmpty {
+
+        if entity != .location {
+          AreaButtonView(obs: obs)
+            .tint(.yellow)
+        }
 
         BookmarkButtonView(speciesID: obs.species ?? 0)
           .tint(.green)
 
         if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-          ObserversButtonView(obs: obs)
+          ObserversObsButtonView(obs: obs)
             .tint(.red)
         }
 
+        if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
+          NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
+            Image(systemSymbol: .waveform)
+              .uniformSize()
+          }
+          .tint(.purple)
+          .accessibility(label: Text(audioListView))
+        }
       }
     }
 
-    //leading SWIPE ACTIONS
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
-//      if (entity != .species) {
-        InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
-//      }
+
+      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+
       LinkButtonView(obs: obs)
     }
   }
@@ -153,9 +165,6 @@ func formatDate(_ date: Date) -> String {
     return formatter.string(from: date)
 }
 
-
-import SwiftUI
-
 struct RandomTextView: View {
     let names = ["Loof de Bos", "Storm Vogelaar", "Flora Fauna", "Henk de Uitzicht", "Bart Kikker",
                  "Madelief Kijkers", "Oogje Bladgroen", "Frits de Horizon",
@@ -166,7 +175,6 @@ struct RandomTextView: View {
     var body: some View {
         Text(randomName)
             .font(.caption)
-//            .padding()
             .onAppear {
                 randomName = names.randomElement() ?? "Geen naam"
             }

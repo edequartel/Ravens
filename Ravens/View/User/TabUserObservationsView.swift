@@ -10,19 +10,18 @@ import SwiftyBeaver
 
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var showFirstView = false
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
-  @State private var timePeriod: TimePeriod? = .fourWeeks
 
   @Binding var selectedSpeciesID: Int?
 
@@ -30,7 +29,7 @@ struct TabUserObservationsView: View {
   @State private var firstTime: Bool = true
 
   var body: some View {
-    NavigationStack{
+    NavigationStack {
       VStack {
         if showView { Text("TabUserObservationsView").font(.customTiny) }
 
@@ -62,56 +61,52 @@ struct TabUserObservationsView: View {
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
-      .onChange(of: timePeriod) {
+      .onChange(of: settings.timePeriodUser) {
         log.error("update timePeriodUser")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
-          completion: { log.error("fetch data complete") } )
+          timePeriod: settings.timePeriodUser,
+          completion: { log.error("fetch data complete") })
       }
 
       .onChange(of: refresh) {
         log.info("update refresh")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
-          completion: { log.info("fetch data complete") } )
+          timePeriod: settings.timePeriodUser,
+          completion: { log.info("fetch data complete") })
       }
 
       .onChange(of: obsObserversViewModel.observerId) {
         log.info("update obsObserversViewModel.observerId")
 
-        observationUser.fetchDataInitXXX(
+        observationUser.fetchDataInit(
           settings: settings,
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          timePeriod: timePeriod ?? .fourWeeks,
-          completion: { log.info("fetch data complete") } )
-      } 
+          timePeriod: settings.timePeriodUser,
+          completion: { log.info("fetch data complete") })
+      }
 
-      //sort filter and periodTime
+      // sort filter and periodTime
       .modifier(
-        showFirstView ?
         ObservationToolbarModifier(
-          currentFilteringOption: $currentFilteringOption)
-        :
-          ObservationToolbarModifier(
-            currentSortingOption: $currentSortingOption,
-            currentFilteringOption: $currentFilteringOption,
-            timePeriod: $timePeriod)
+          currentSortingOption: $currentSortingOption,
+          currentFilteringOption: $currentFilteringOption,
+          timePeriod: $settings.timePeriodUser)
       )
 
       .toolbar {
-        //set map or list
+        // set map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
@@ -123,7 +118,7 @@ struct TabUserObservationsView: View {
             }
           }
 
-          //add choose observers
+          // add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
             NavigationLink(
               destination: ObserversView(
@@ -136,22 +131,27 @@ struct TabUserObservationsView: View {
                 .accessibility(label: Text(observersList))
             }
           }
+
+          // add choose observers
+          if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              ObserversButtonView(
+                userId: obsObserversViewModel.observerId,
+                userName: obsObserversViewModel.observerName
+              )
+            }
+          }
         }
       }
-
-//      .navigationTitle("\(obsObserversViewModel.observerName)")
-
-//      .navigationBarTitleDisplayMode(.inline)
-
       .onAppear {
         if firstTime {
           log.info("Onappear first time")
           firstTime = false
           showFirstView = settings.mapPreference
           // Run loadUserData asynchronously
-                  Task {
-                      await loadUserData()
-                  }
+          Task {
+            await loadUserData()
+          }
 
         }
       }
@@ -167,12 +167,12 @@ struct TabUserObservationsView: View {
   }
 
   private func loadUserData() async {
-    observationUser.fetchDataInitXXX(
+    observationUser.fetchDataInit(
       settings: settings,
       entity: .user,
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
-      timePeriod: timePeriod ?? .fourWeeks,
+      timePeriod: settings.timePeriodUser,
       completion: {
         log.info("fetch loadUserData observationUser.fetchDataInit complete")
         userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
@@ -184,4 +184,3 @@ struct TabUserObservationsView: View {
     )
   }
 }
-

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct WikipediaPage: Decodable {
     let title: String
     let extract: String

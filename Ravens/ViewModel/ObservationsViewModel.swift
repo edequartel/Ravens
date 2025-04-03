@@ -22,7 +22,11 @@ enum EntityType: String {
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
-  @Published var observations: [Observation]?
+  @Published var observations: [Observation]? {
+    didSet {
+      // print("Array updated \(observations?.count ?? 0)") to update the ModelView
+    }
+  }
 
   private var limit = 100
   private var offset = 0
@@ -33,86 +37,44 @@ class ObservationsViewModel: ObservableObject {
 
   private var keyChainViewModel =  KeychainViewModel()
 
-  func fetchDataInitXXX(
-    settings: Settings,
-    entity: EntityType,
-    token: String,
-    id: Int,
-    timePeriod: TimePeriod,
-    completion: @escaping () -> Void) {
-    log.info("FetchDataInit")
-
-    // reset
-    self.observations = []
-    var days = timePeriod.rawValue
-    days -= 1 //today is also also a day
-
-    // datetime
-    let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
-    let dateBefore = formatCurrentDate(value: date)
-    // add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
-
-    if (timePeriod != .infinite) {
-      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
-    }
-
-    url += "&ordering=-datetime"
-//      print("====>\(url)")
-
-    fetchData(settings: settings, url: url, token: token, completion: completion)
-  }
-
   func fetchDataInit(
     settings: Settings,
     entity: EntityType,
     token: String,
-    id: Int, completion: @escaping () -> Void) {
-    log.info("FetchDataInit")
-    //reset
+    id: Int,
+    timePeriod: TimePeriod?,
+    completion: @escaping () -> Void) {
+    log.info("ObservationsViewModel FetchDataInit")
+
+    // reset
     self.observations = []
 
-    var days: Int = 14
-    switch entity {
-    case .user:
-        days = settings.timePeriodUser.rawValue
-    case .location:
-        days = settings.timePeriodLocation.rawValue
-    case .species:
-        days = settings.timePeriodSpecies.rawValue
-    case .radius:
-        days = settings.timePeriodSpecies.rawValue
-    }
-    days = days-1 //today is also also a day
-    
-    //datetime
+    var days = (timePeriod ?? .twoWeeks).rawValue
+    days -= 1 // today is also also a day
+
+    // datetime
     let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day,value: -days, to: date)!)
+    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
-    //add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"//+
-      //"&species_group=\(settings.selectedSpeciesGroupId)"
+    // add the periode to the url
+    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
-    if ((settings.timePeriodUser != .infinite) && ( entity == .user)) ||
-        ((settings.timePeriodLocation != .infinite) && ( entity == .location)) ||
-        ((settings.timePeriodSpecies != .infinite) && ( entity == .species)) {
+    if timePeriod != .infinite {
       url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
-//      url += "&species_group=\(settings.selectedSpeciesGroupId)"
     }
 
-//      print("----->\(url)")
     url += "&ordering=-datetime"
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }
 
-
-  func fetchData(settings: Settings, url: String, token: String, completion: @escaping () -> Void) {
-    log.info("fetchData url: [\(url)]")
+  func fetchData(
+    settings: Settings,
+    url: String,
+    token: String,
+    completion: @escaping () -> Void) {
+    log.info("ObservationsViewModel fetchData url: [\(url)]")
     if url.isEmpty { return }
-    //
-    log.info("fetchData ObservationsViewModel userId: \(url)")
 
     // Add the custom header
     let headers: HTTPHeaders = [
@@ -134,8 +96,9 @@ class ObservationsViewModel: ObservableObject {
 
             DispatchQueue.main.async {
               self.observations = (self.observations ?? []) + (observations.results ?? [])
-              //              self.observations = observations.results
+
               self.count = observations.count ?? 0
+              self.log.error("observations count \(self.count)")
 
               self.getTimeData()
 
@@ -157,7 +120,7 @@ class ObservationsViewModel: ObservableObject {
     }
   }
 
-  //to make sorting easier, get the datetime in a seperate field
+  // to make sorting easier, get the datetime in a seperate field
   func getTimeData() {
     let max = (observations?.count ?? 0)
     for index in 0..<max {
@@ -185,5 +148,4 @@ class ObservationsViewModel: ObservableObject {
       }
     }
   }
-
 }

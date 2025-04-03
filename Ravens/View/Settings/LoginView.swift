@@ -13,7 +13,7 @@ struct LoginView: View {
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
 
-  @EnvironmentObject var userViewModel:  UserViewModel
+  @EnvironmentObject var userViewModel: UserViewModel
 
   @State private var myInlogName = ""
   @State private var myPassword = ""
@@ -50,10 +50,10 @@ struct LoginView: View {
                 ) { success in
                   if success {
                     log.info("token successfully fetched.")
-                    //so we get the user details and use these
+                    // so we get the user details and use these
                     userViewModel.fetchUserData(
                       settings: settings,
-                      token: keyChainviewModel.token ,
+                      token: keyChainviewModel.token,
                       completion:
                         {
                           log.info(">userViewModel fethData")
@@ -68,16 +68,11 @@ struct LoginView: View {
               .buttonStyle(.borderedProminent)
               .frame(maxWidth: .infinity)
 
-//              Button("toggle") {
-//                keyChainviewModel.show.toggle()
-//              }
-
               if keyChainviewModel.loginFailed {
                 Text(logInFailed)
                   .foregroundColor(.red)
                   .padding()
               }
-
 
             } else {
 
@@ -144,4 +139,3 @@ struct LoginView_Previews: PreviewProvider {
       .environmentObject(Settings())
   }
 }
-

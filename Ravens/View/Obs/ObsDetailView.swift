@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import CoreLocation
 
 struct ObsDetailView: View {
   var obs: Observation
@@ -25,18 +26,24 @@ struct ObsDetailView: View {
 
   var body: some View {
     ScrollView {
-
-      VStack() {
+      VStack {
         HStack {
 
-          Button(action: {
-            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
-            selectedSpeciesID = obs.speciesDetail.id
-          }) {
-            Image(systemSymbol: SFInformation)
-              .uniformSize()
-          }
-          .accessibility(label: Text(informationSpecies))
+          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+            Image(systemSymbol: .infoCircle)
+                    .uniformSize()
+            }
+            .tint(.blue)
+            .accessibility(label: Text(informationSpecies))
+
+//          Button(action: {
+//            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
+//            selectedSpeciesID = obs.speciesDetail.id
+//          }) {
+//            Image(systemSymbol: SFInformation)
+//              .uniformSize()
+//          }
+//          .accessibility(label: Text(informationSpecies))
 
           let url = URL(string: obs.permalink)!
           ShareLink(item: url) {
@@ -56,11 +63,11 @@ struct ObsDetailView: View {
           .accessibility(label: Text(linkObservation))
 
           Spacer()
-          //          (obs.userDetail?.id != (userViewModel.user?.id ?? 0))
-          if !keyChainViewModel.token.isEmpty { //??
+
+          if !keyChainViewModel.token.isEmpty { 
             BookmarkButtonView(speciesID: obs.species ?? 100)
             if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-              ObserversButtonView(obs: obs)
+              ObserversObsButtonView(obs: obs)
             }
 
             AreaButtonView(obs: obs)
@@ -69,14 +76,13 @@ struct ObsDetailView: View {
       }
       .padding([.leading, .trailing, .top])
 
-
       VStack(alignment: .leading, spacing: 20) {
         if showView {
           Text("ObsDetailView")
             .font(.customTiny)
             .padding(.bottom, 10)
         }
-        
+
         // Header Section: Species Name & Rarity
         VStack(alignment: .leading, spacing: 10) {
           HStack {
@@ -99,8 +105,6 @@ struct ObsDetailView: View {
         .padding()
         .islandBackground()
         .accessibilityElement(children: .combine)
-//        .accessibility(value: Text("\(obs.speciesDetail.name) \(obs.speciesDetail.scientificName)"))
-
 
         // Scientific Name Section
         VStack(alignment: .leading, spacing: 10) {
@@ -116,7 +120,7 @@ struct ObsDetailView: View {
             Spacer()
           }
 
-          if (entity != .radius) {
+          if entity != .radius {
             HStack {
               Text("\(obs.userDetail?.name ?? "")")
                 .footnoteGrayStyle()
@@ -156,15 +160,12 @@ struct ObsDetailView: View {
           .islandBackground()
           .accessibility(label: Text(notesAboutObservation))
 
+        PositionOnMapView(obs: obs) // Replace with your view's content
+          .frame(height: UIScreen.main.bounds.width / 2)
+          .cornerRadius(8)
+          .contentShape(Rectangle())
 
-        NavigationLink(destination: PositonFullView(obs: obs)) {
-          PositionOnMapView(obs: obs) // Replace with your view's content
-            .frame(height: UIScreen.main.bounds.width / 2)
-            .cornerRadius(8)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(PlainButtonStyle())
-        .accessibilityHidden(true)
+          .accessibilityHidden(true)
 
       }
       .padding()
@@ -183,8 +184,6 @@ struct ObsDetailView: View {
   }
 }
 
-
-
 struct ObsDetailView_Previews: PreviewProvider {
   static var previews: some View {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
@@ -196,5 +195,3 @@ struct ObsDetailView_Previews: PreviewProvider {
     .environmentObject(mockBookMarksViewModel)
   }
 }
-
-

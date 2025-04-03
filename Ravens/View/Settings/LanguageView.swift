@@ -30,14 +30,9 @@ struct LanguageView: View {
             .onChange(of: settings.selectedLanguage) {
                 speciesGroupsViewModel.fetchData(settings: settings) 
                 regionsViewModel.fetchData(settings: settings)
-                //deze variable opslaan bij wijzigingen in region and species group settings
-                //als stored variabele later gebruiken bij opstarten
-                //en als published zodat de gewijzigd wordt en gelijk gebuikt
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataFirst(settings: settings)
             }
-            
-
             
             Picker(secondLanguage, selection: $settings.selectedSecondLanguage) {
                 ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
@@ -49,7 +44,6 @@ struct LanguageView: View {
                 print("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataSecondLanguage(settings: settings)
             }
-//        }
     }
 }
 
@@ -57,6 +51,3 @@ struct LanguageView: View {
     LanguageView()
         .environmentObject(Settings())
 }
-
-
-

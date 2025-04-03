@@ -11,7 +11,6 @@ import SwiftyBeaver
 import Alamofire
 import Kingfisher
 
-
 struct SpeciesDetailsView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
@@ -20,8 +19,10 @@ struct SpeciesDetailsView: View {
 
   var speciesID: Int
   @State private var imageURL: String = ""
+  @State private var showSpeciesXC: Species?
 
   var body: some View {
+    NavigationStack {
       ScrollView {
         if showView { Text("SpeciesDetailsView").font(.customTiny) }
         VStack(alignment: .leading, spacing: 16) {
@@ -36,6 +37,18 @@ struct SpeciesDetailsView: View {
                   .islandBackground() // Assuming this is a custom modifier
               }
               Spacer()
+
+              //            NavigationLink {
+              //              BirdListView(scientificName: species.scientificName, nativeName: species.name)
+              //            } label: {
+              //              Image(systemSymbol: .waveform)
+              //                .font(.headline)
+              //                .padding()
+              //                .foregroundColor(.blue)
+              //                .islandBackground() // optional
+              //            }
+
+              Spacer()
               Button(action: {
                 openWikipediaPage(for: species.scientificName)
               }) {
@@ -45,6 +58,7 @@ struct SpeciesDetailsView: View {
                   .foregroundColor(.blue)
                   .islandBackground() // Assuming this is a custom modifier
               }
+
             }
             VStack(alignment: .leading, spacing: 8) {
               Text(species.name)
@@ -81,12 +95,11 @@ struct SpeciesDetailsView: View {
                 .accessibility(hidden: true)
             }
 
-            //share the image
+            // share the image
             if !imageURL.isEmpty {
-                URLShareButtonView(urlShare: imageURL)
+              URLShareButtonView(urlShare: imageURL)
                 .accessibilityLabel(sharePictureLink)
             }
-
 
             // Information Text
             if species.infoText != "" {
@@ -101,8 +114,9 @@ struct SpeciesDetailsView: View {
         }
         .padding()
       }
-//    }
-    .presentationDragIndicator(.visible)
+    }
+    //    }
+//    .presentationDragIndicator(.visible)
     .onAppear {
       log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
       viewSpeciesDetailsDModel.fetchData(
@@ -115,7 +129,6 @@ struct SpeciesDetailsView: View {
     }
   }
 
-
   func openWikipediaPage(for searchTerm: String) {
     let formattedTerm = searchTerm.lowercased().replacingOccurrences(of: " ", with: "_")
     if let url = URL(string: "https://\(settings.selectedLanguage).m.wikipedia.org/wiki/\(formattedTerm)") {
@@ -124,14 +137,7 @@ struct SpeciesDetailsView: View {
   }
 }
 
-//}
-
 #Preview {
   SpeciesDetailsView(speciesID: 58)
         .environmentObject(Settings())
 }
-
-
-
-
-

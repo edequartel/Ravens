@@ -28,7 +28,7 @@ struct SplashView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
-  @EnvironmentObject var observationUser : ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
 
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
@@ -124,11 +124,8 @@ struct SplashView: View {
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
       log.info("speciesViewModel First language data loaded")
-//**      speciesViewModel.parseHTMLFromURL(settings: settings) {
-//        log.info("HTML parsed from start")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()
-//      }
     }
   }
 
@@ -139,5 +136,4 @@ struct SplashView: View {
       checkDataLoaded()
     }
   }
-
 }

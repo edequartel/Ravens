@@ -1,2 +1,9 @@
 disabled_rules:
   - trailing_whitespace
+  - large_tuple
+  - line_length
+  - file_length
+  - multiple_closures_with_trailing_closure
+  - function_parameter_count
+  - unused_closure_parameter
+  - for_where
