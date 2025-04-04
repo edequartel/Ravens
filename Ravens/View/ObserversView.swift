@@ -43,13 +43,12 @@ struct ObserversView: View {
         Form {
           Section {
             HStack {
-              Button(userViewModel.user?.name ?? "") {
+              Button(demo ? names[11] : userViewModel.user?.name ?? "") {
                 observerId = userViewModel.user?.id ?? 0
                 observerName = userViewModel.user?.name ?? ""
                 self.presentationMode.wrappedValue.dismiss()
               }
 
-              //            .bold()
               .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button(action: {
                   QRCode = IdentifiableString(
@@ -75,12 +74,12 @@ struct ObserversView: View {
                 Image(systemName: "checkmark").foregroundColor(.blue) }
             }
           }
-        Section {
+          Section {
             List {
               // all other saved observers
-              ForEach(observersViewModel.records.sorted { $0.name < $1.name }) { record in
+              ForEach(Array(observersViewModel.records.sorted(by: { $0.name < $1.name }).enumerated()), id: \.element.id) { index, record in
                 HStack {
-                  Button("\(record.name)") {
+                  Button(demo ? names[index] : record.name) {
                     observerId = record.userID
                     observerName = record.name
                     self.presentationMode.wrappedValue.dismiss()

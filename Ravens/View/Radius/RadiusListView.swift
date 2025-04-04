@@ -40,6 +40,7 @@ struct RadiusListView: View {
         ObservationListView(
           observations: observations,
           selectedSpeciesID: $selectedSpeciesID,
+          
           timePeriod: $settings.timePeriodRadius,
           entity: .radius,
           currentSortingOption: $currentSortingOption,

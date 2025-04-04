@@ -98,7 +98,7 @@ class ObservationsViewModel: ObservableObject {
               self.observations = (self.observations ?? []) + (observations.results ?? [])
 
               self.count = observations.count ?? 0
-              self.log.error("observations count \(self.count)")
+              self.log.info("observations count \(self.count)")
 
               self.getTimeData()
 

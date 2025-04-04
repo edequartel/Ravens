@@ -30,7 +30,7 @@ struct ObsDetailsRowView: View {
       }
 
       Spacer()
-      
+
       if bookMarksViewModel.isSpeciesIDInRecords(speciesID: obs.speciesDetail.id) {
         Image(systemSymbol: SFSpeciesFill)
           .foregroundColor(Color.gray.opacity(0.8))

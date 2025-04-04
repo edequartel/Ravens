@@ -230,7 +230,6 @@
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
 		47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RavensRelease.entitlements; sourceTree = "<group>"; };
-		47F5D2F02BADDB9F0071BB6E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		47FAD0E42C1AE9D8007D0F63 /* dataloading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataloading.json; sourceTree = "<group>"; };
 		47FDCADF2D96B48F00D01F6A /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
@@ -286,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				4781539A2B57BDC2005F87CC /* README.md */,
-				47F5D2F02BADDB9F0071BB6E /* Notes.md */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -346,6 +344,7 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
+				47E43B4A2D9FC74400020045 /* Information */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
@@ -560,6 +559,13 @@
 				47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */,
 			);
 			path = Radius;
+			sourceTree = "<group>";
+		};
+		47E43B4A2D9FC74400020045 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Information;
 			sourceTree = "<group>";
 		};
 		47EE13212CAC365B007305E1 /* Photo */ = {
@@ -975,7 +981,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1017,7 +1023,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.Ravens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

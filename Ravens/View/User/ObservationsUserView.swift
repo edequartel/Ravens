@@ -42,7 +42,7 @@ struct ObservationsUserView: View {
 
       VStack {
         HStack {
-          Text("\(observersViewModel.observerName ?? "noName")")
+          Text(demo ? names[11] : observersViewModel.observerName ?? "noName")
             .bold()
             .lineLimit(1)
             .truncationMode(.tail)
@@ -53,7 +53,6 @@ struct ObservationsUserView: View {
         .accessibilityLabel(observersViewModel.observerName ?? "noName")
 
         ObservationsCountView(count: observationUser.count)
-
         HorizontalLine()
       }
 

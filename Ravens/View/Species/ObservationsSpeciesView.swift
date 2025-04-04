@@ -156,5 +156,6 @@ struct ObservationsCountView: View {
       .padding(.horizontal, 10)
       Spacer()
     }
+    .accessibilityElement(children: .combine)
   }
 }
