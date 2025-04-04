@@ -11,7 +11,8 @@ import AudioToolbox
 import SFSafeSymbols
 import MapKit
 
- let showView = false
+let demo = true
+let showView = false
 // let showView = true
 
 // gouda en span nederland

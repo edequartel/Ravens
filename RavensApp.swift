@@ -56,7 +56,7 @@ struct RavensApp: App {
   @StateObject var regionListViewModel = RegionListViewModel()
   @StateObject private var observationsLocation = ObservationsViewModel()
   @StateObject private var observationsRadiusViewModel = ObservationsRadiusViewModel()
-  @StateObject private var observationsSpeciesViewModel = ObservationsViewModel()
+  @StateObject private var observationsSpeciesViewModel = ObservationsViewM#imageLiteral(resourceName: "simulator_screenshot_99492465-23D8-4AB5-BFB1-DDD22DA173ED.png")odel()
   @StateObject private var observationsSpecies = ObservationsViewModel()
   @StateObject private var observationsViewModel = ObservationsViewModel()
   @StateObject private var observationsUser = ObservationsViewModel()

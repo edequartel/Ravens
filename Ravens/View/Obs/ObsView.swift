@@ -42,39 +42,43 @@ struct ObsView: View {
         if showView { Text("ObsView").font(.customTiny) }
 
         HStack {
-//        if let index = index { //edq
-//            Text("\(index+1)")
-//          }
+          //        if let index = index { //edq
+          //            Text("\(index+1)")
+          //          }
 
           if entity != .species {
             ObsDetailsRowView(obs: obs)
           }
 
           if obs.sounds?.count ?? 0 > 0 {
-            Image(systemName: "waveform")
+            Image(systemSymbol: .waveform)
               .foregroundColor(Color.gray.opacity(0.8))
           }
 
           if obs.notes?.count ?? 0 > 0 {
-            Image(systemName: "list.clipboard")
+            Image(systemSymbol: .listClipboard)
               .foregroundColor(Color.gray.opacity(0.8))
           }
         }
 
-        if (entity != .species) && (!obs.speciesDetail.name.isEmpty) { 
+        if (entity != .species) && (!obs.speciesDetail.name.isEmpty) {
           Text(obs.speciesDetail.scientificName)
             .footnoteGrayStyle()
             .italic()
         }
 
-      HStack {
+        HStack {
           DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
           Text("\(obs.number) x")
             .footnoteGrayStyle()
-       }
+        }
 
         // User Info Section
-        if (entity != .user) && (entity != .radius) {
+        if  (demo) && (entity != .user) && (entity != .radius) {
+          RandomTextView()
+        }
+
+        if  (!demo) && (entity != .user) && (entity != .radius) {
           HStack {
             Text("\(obs.userDetail?.name ?? "noName")")
               .footnoteGrayStyle()
@@ -168,18 +172,28 @@ func formatDate(_ date: Date) -> String {
     return formatter.string(from: date)
 }
 
+let names = [
+  "Mees Zilverveer",     // vogel + sierlijke natuurachternaam
+  "Eline Waterman",      // water
+  "Sil Hazelaar",        // boom (hazelaar)
+  "Linde Storm",         // boom + weerfenomeen
+  "Roan Veldhuis",       // open natuur + woning
+  "Fenna Sterrenberg",   // sterren + berg
+  "Thijs Rietveld",      // riet en open land
+  "Bente Moeras",        // naam + natuurgebied
+  "Noor IJsselstein",    // rivier + plaatsnaamachtig
+  "Sterre Zandberg",     // sterren + duin/berg
+  "Mats Wolkenveld",     // luchtig en ruimtelijk
+  "Jule Dennenbosch"    // bosnaam
+]
+
 struct RandomTextView: View {
-    let names = ["Loof de Bos", "Storm Vogelaar", "Flora Fauna", "Henk de Uitzicht", "Bart Kikker",
-                 "Madelief Kijkers", "Oogje Bladgroen", "Frits de Horizon",
-                 "Tina Terras", "Woody Kijkboom", "Lente Zicht", "Freek de Lucht", "Marjolein Weideblik"]
-
-    @State private var randomName = ""
-
-    var body: some View {
-        Text(randomName)
-            .font(.caption)
-            .onAppear {
-                randomName = names.randomElement() ?? "Geen naam"
-            }
-    }
+  @State private var randomName = ""
+  var body: some View {
+    Text(randomName)
+      .font(.caption)
+      .onAppear {
+        randomName = names.randomElement() ?? "Geen naam"
+      }
+  }
 }

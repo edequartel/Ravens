@@ -2,7 +2,7 @@
 
 [English](READMEeng.MD)
 
-[Handleiding](Ravens/Information/manual.md)
+[Handleiding Nederlands](informationmanual.md)
 
 Volg Ravens op 
 
@@ -17,7 +17,10 @@ De **Ravens**-app stelt gebruikers in staat om **waarnemingen** zowel op een kaa
 ## Appstore
 Gebruik de volgende link voor Ravens in de [[Appstore](https://apps.apple.com/nl/app/ravens/id6475675260)]
 
+<img src="./images/02ravens.png" alt="Ravens" width="300">
+<!--
 ![Ravens](./images/02ravens.png)
+-->
 
 ## Goed om te weten
 - Deze app maakt gebruik van de gegevens die zijn ingevoerd door vrijwilligers op [www.waarneming.nl](https://www.waarneming.nl). 
