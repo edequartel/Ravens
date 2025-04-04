@@ -1,0 +1,6 @@
+project: Ravens.xcodeproj
+retain_public: true
+schemes:
+- Ravens
+targets:
+- Ravens

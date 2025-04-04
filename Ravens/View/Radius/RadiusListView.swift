@@ -39,7 +39,7 @@ struct RadiusListView: View {
       if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
         ObservationListView(
           observations: observations,
-          selectedSpeciesID: $selectedSpeciesID,
+          selectedSpeciesID: $selectedSpeciesID, //wordt deze wel gebruikt
           timePeriod: $settings.timePeriodRadius,
           entity: .radius,
           currentSortingOption: $currentSortingOption,

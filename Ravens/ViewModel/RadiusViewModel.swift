@@ -42,7 +42,7 @@ class ObservationsRadiusViewModel: ObservableObject {
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
 
-      self.log.info("url:\(url)")
+      self.log.error("url:\(url)")
 
       fetchData(
         settings: settings,
