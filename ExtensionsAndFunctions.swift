@@ -11,7 +11,7 @@ import AudioToolbox
 import SFSafeSymbols
 import MapKit
 
-let demo = true
+let demo = false
 let showView = false
 // let showView = true
 
