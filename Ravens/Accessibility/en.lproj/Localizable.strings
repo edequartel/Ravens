@@ -154,3 +154,6 @@
 "typeSoundsList" = "List with type of sounds";
 "infoSpecies" = "Information species";
 "audioListView" = "List audio sounds species";
+
+
+"audio_download_message" = "%@ \nAudio\nis downloaded to\nyour folder Ravens\non your device";
