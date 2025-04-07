@@ -156,4 +156,4 @@
 "audioListView" = "List audio sounds species";
 
 
-"audio_download_message" = "%@ \nAudio\nis downloaded to\nyour folder Ravens\non your device";
+"audioDownloadMessage" = "Recording\nis downloaded to\nfolder Ravens\non your device";

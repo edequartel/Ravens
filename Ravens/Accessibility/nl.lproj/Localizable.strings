@@ -151,4 +151,4 @@
 "infoSpecies" = "Informatie over de soort";
 "audioListView" = "Lijst met geluiden van deze soort";
 
-"audio_download_message" = "%@ \nAudio\nis gedownload naar\nje map Ravens\nop je apparaat";
+"audioDownloadMessage" = "Geluidsopname\nis gedownload naar\nmap Ravens\nop je apparaat";

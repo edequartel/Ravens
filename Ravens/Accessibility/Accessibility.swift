@@ -137,4 +137,4 @@ let typeSoundsList = LocalizedStringKey("typeSoundsList")
 let infoSpecies = LocalizedStringKey("infoSpecies")
 let audioListView = LocalizedStringKey("audioListView")
 
-let audioDownloadMessage = LocalizedStringKey("audio_download_message")
+let audioDownloadMessage = LocalizedStringKey("audioDownloadMessage")
