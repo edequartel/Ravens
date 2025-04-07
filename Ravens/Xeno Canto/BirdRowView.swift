@@ -131,7 +131,9 @@ struct BirdRowView: View {
     .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.idSpecies)  \(bird.rec ?? "")")
     .alert(isPresented: $showAlert) {
         Alert(
-            title: Text("\(birdName) \nAudio" + "\nis downloaded to \nyour folder Ravens\n on your device"),
+//            title: Text("\(birdName) \nAudio" + "\nis downloaded to \nyour folder Ravens\n on your device"),
+//            title: Text(String(format: NSLocalizedString("audio_download_message", comment: ""), birdName)),
+            title: Text(String(format: NSLocalizedString("audioListView", comment: ""), birdName)),
             message: Text(alertMessage),
             dismissButton: .default(Text("OK"))
         )
