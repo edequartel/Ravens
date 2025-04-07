@@ -21,6 +21,10 @@ struct BirdRowView: View {
   let birdName: String
   @Binding var selectedBird: Bird?
 
+  @StateObject private var downloader = FileDownloader()
+  @State private var showAlert = false
+  @State private var alertMessage = ""
+
   var isPlayingThisBird: Bool {
     currentlyPlayingBirdID == bird.idSpecies && audioPlayerManager.isPlaying
   }
@@ -99,9 +103,39 @@ struct BirdRowView: View {
         Image(systemSymbol: .infoCircle)
       }
       .tint(.obsBirdInfo)
+// download file as mp3
+      Button(action: {
+        print(bird.file ?? "noSound")
+        downloader.downloadFile(
+          from: bird.file ?? "noSound", // <-- Replace with your real link
+          fileName: birdName + "-XC" + bird.idSpecies
+        ) { fileURL in
+          if let fileURL = fileURL {
+            print("Ready to export: \(fileURL)")
+            showAlert.toggle()
+//            if let scene = UIApplication.shared.connectedScenes
+//              .compactMap({ $0 as? UIWindowScene })
+//              .first,
+//               let rootVC = scene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+//              downloader.exportFile(fileURL, from: rootVC)
+//            }
+          }
+        }
+      }) {
+        Image(systemSymbol: .squareAndArrowDown)
+      }
+      .tint(Color.blue)
+//
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.idSpecies)  \(bird.rec ?? "")")
+    .alert(isPresented: $showAlert) {
+        Alert(
+            title: Text("\(birdName) \nAudio" + "\nis downloaded to \nyour folder Ravens\n on your device"),
+            message: Text(alertMessage),
+            dismissButton: .default(Text("OK"))
+        )
+    }
     .onDisappear {
       // Stop audio when leaving the BirdListView
       if isPlayingThisBird {

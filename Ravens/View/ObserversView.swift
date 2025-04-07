@@ -97,6 +97,8 @@ struct ObserversView: View {
                   }) {
                     Image(systemName: "qrcode")
                   }
+                  
+                  URLShareButtonView(urlShare: "ravens://\(cleanName(record.name))/\(record.userID)")
 
                   Button(action: {
                     observersViewModel.removeRecord(userID: record.userID)

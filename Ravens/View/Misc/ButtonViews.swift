@@ -28,7 +28,6 @@ struct URLButtonView: View {
         Button(action: {
             if let url = URL(string: url) {
               UIApplication.shared.open(url)
-
             }
         }) {
           Image(systemSymbol: .clock)
@@ -63,7 +62,7 @@ struct URLShareButtonView: View {
           Image(systemSymbol: SFShareLink)
           .uniformSize()
       }
-//      .tint(.blue)
+      .tint(.indigo)
       .accessibilityLabel(shareThisObservation)
   }
 }
@@ -79,14 +78,6 @@ struct InformationSpeciesButtonView: View {
         }
         .tint(.blue)
         .accessibilityLabel(informationSpecies)
-
-//        Button(action: {
-//            selectedSpeciesID = obs.speciesDetail.id
-//        }) {
-//            Image(systemSymbol: SFInformation)
-//        }
-//        .tint(.blue) 
-//        .accessibilityLabel(informationSpecies)
     }
 }
 

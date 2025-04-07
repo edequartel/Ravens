@@ -10,6 +10,7 @@
 		4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */; };
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
+		4716F9CD2DA2E90100FCDFB8 /* DownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */; };
 		471875392BFB938500EF9F1F /* AreasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875382BFB938500EF9F1F /* AreasViewModel.swift */; };
 		4718753C2BFCA77000EF9F1F /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4718753B2BFCA77000EF9F1F /* SVGView */; };
 		471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875422C00542100EF9F1F /* LocationManagerModel.swift */; };
@@ -131,6 +132,7 @@
 		4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationsView.swift; sourceTree = "<group>"; };
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
+		4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFile.swift; sourceTree = "<group>"; };
 		471875382BFB938500EF9F1F /* AreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewModel.swift; sourceTree = "<group>"; };
 		471875422C00542100EF9F1F /* LocationManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerModel.swift; sourceTree = "<group>"; };
 		471875442C00546A00EF9F1F /* LocationManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerView.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 		47AC07302D88AC7A002FB433 /* Xeno Canto */ = {
 			isa = PBXGroup;
 			children = (
+				4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */,
 				47AC07612D88AD03002FB433 /* Bird.swift */,
 				47AC07622D88AD03002FB433 /* BirdDetailView.swift */,
 				47AC07632D88AD03002FB433 /* BirdListView.swift */,
@@ -757,6 +760,7 @@
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
+				4716F9CD2DA2E90100FCDFB8 /* DownloadFile.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
@@ -968,6 +972,7 @@
 				INFOPLIST_FILE = Ravens/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ravens uses your location solely to display your position and retrieve nearby observations from Waarneming.nl";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ravens would like to access Photos";
@@ -1010,6 +1015,7 @@
 				INFOPLIST_FILE = Ravens/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ravens uses your location solely to display your position and retrieve nearby observations from Waarneming.nl";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ravens would like to access Photos";
