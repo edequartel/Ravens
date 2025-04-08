@@ -73,6 +73,7 @@ struct ObserversView: View {
               if (observerId) == (userViewModel.user?.id ?? 0) {
                 Image(systemName: "checkmark").foregroundColor(.blue) }
             }
+            .accessibilityElement(children: .combine)
           }
           Section {
             List {
@@ -88,6 +89,8 @@ struct ObserversView: View {
                   if (observerId) == (record.userID) {
                     Image(systemName: "checkmark").foregroundColor(.blue) }
                 }
+                .accessibilityElement(children: .combine)
+                
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                   Button(action: {
                     QRCode = IdentifiableString(
@@ -97,8 +100,10 @@ struct ObserversView: View {
                   }) {
                     Image(systemName: "qrcode")
                   }
-                  
-                  URLShareButtonView(urlShare: "ravens://\(cleanName(record.name))/\(record.userID)")
+                  .accessibilityLabel(qrcodeObserver)
+
+                  URLShareObserverButtonView(urlShare: "ravens://\(cleanName(record.name))/\(record.userID)")
+                    .accessibilityLabel(shareCodeObserver)
 
                   Button(action: {
                     observersViewModel.removeRecord(userID: record.userID)
@@ -109,6 +114,7 @@ struct ObserversView: View {
                     Label("remove", systemImage: "person.fill.badge.minus")
                   }
                   .tint(.red)
+                  .accessibilityLabel(removeObserver)
 
                   Button(action: {
                     if let url = URL(string: "https://waarneming.nl/users/\(record.userID)/") {
@@ -118,6 +124,7 @@ struct ObserversView: View {
                     Image(systemSymbol: SFObservation)
                   }
                   .tint(.obsObservation)
+                  .accessibilityLabel(linkObserver)
                 }
               }
             }

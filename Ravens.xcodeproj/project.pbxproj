@@ -452,7 +452,6 @@
 				47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */,
 				4767F0002BF251C200BACDC6 /* TabLocationView.swift */,
 				470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */,
-				479C352A2D09A220002F1C2A /* LocationListView.swift */,
 				4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */,
 			);
 			path = Location;
@@ -477,6 +476,7 @@
 				4767F0022BF2529000BACDC6 /* TabUserObservationsView.swift */,
 				4785CD202B964FAC002F52BE /* MapObservationsUserView.swift */,
 				4785CD222B965237002F52BE /* ObservationsUserView.swift */,
+				479C352A2D09A220002F1C2A /* LocationListView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";

@@ -67,6 +67,20 @@ struct URLShareButtonView: View {
   }
 }
 
+struct URLShareObserverButtonView: View {
+  var urlShare: String
+
+  var body: some View {
+      let url = URL(string: urlShare)!
+      ShareLink(item: url) {
+          Image(systemSymbol: SFShareLink)
+          .uniformSize()
+      }
+      .tint(.indigo)
+      .accessibilityLabel(shareThisObserver)
+  }
+}
+
 struct InformationSpeciesButtonView: View {
     @Binding var selectedSpeciesID: Int?
     var obs: Observation

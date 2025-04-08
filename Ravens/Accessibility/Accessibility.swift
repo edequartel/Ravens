@@ -13,6 +13,7 @@ let pause = LocalizedStringKey("pause")
 let next = LocalizedStringKey("next")
 let previous = LocalizedStringKey("previous")
 let shareThisObservation = LocalizedStringKey("shareThisObservation")
+let shareThisObserver = LocalizedStringKey("shareThisObserver")
 let informationSpecies = LocalizedStringKey("informationSpecies")
 let linkObservation = LocalizedStringKey("linkObservation")
 let favoriteSpeciesOff = LocalizedStringKey("favoriteSpeciesOff")
@@ -63,6 +64,9 @@ let secondLanguage = LocalizedStringKey("secondLanguage")
 // radius
 let obsAroundPoint = LocalizedStringKey("obsAroundPoint")
 let radius = LocalizedStringKey("radius")
+
+// location
+let deleteLocation = LocalizedStringKey("deleteLocation")
 
 // login
 let email = LocalizedStringKey("email")
@@ -138,3 +142,8 @@ let infoSpecies = LocalizedStringKey("infoSpecies")
 let audioListView = LocalizedStringKey("audioListView")
 
 let audioDownloadMessage = LocalizedStringKey("audioDownloadMessage")
+
+let qrcodeObserver = LocalizedStringKey("qrcodeObserver")
+let removeObserver = LocalizedStringKey("removeObserver")
+let linkObserver = LocalizedStringKey("linkObserver")
+let shareCodeObserver = LocalizedStringKey("shareCodeObserver")

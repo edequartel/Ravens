@@ -57,7 +57,7 @@ struct LocationListView: View {
               Button(role: .destructive) {
                 areasViewModel.removeRecord(areaID: record.areaID)
               } label: {
-                Label("Delete", systemImage: "trash")
+                Label(deleteLocation, systemImage: "trash")
               }
             }
           }
