@@ -12,8 +12,8 @@ import SFSafeSymbols
 import MapKit
 
 let demo = false
-// let showView = false
- let showView = true
+ let showView = false
+// let showView = true
 
 // gouda en span nederland
 // let latitude = 52,013077
