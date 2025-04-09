@@ -127,17 +127,18 @@ struct ObsView: View {
           ObserversObsButtonView(obs: obs)
             .tint(.red)
         }
+      }
 
-        if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
-          NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
-            Image(systemSymbol: .waveform)
-              .uniformSize()
-          }
-          .tint(.purple)
-          .accessibility(label: Text(audioListView))
+      if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
+        NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
+          Image(systemSymbol: .waveform)
+            .uniformSize()
         }
+        .tint(.purple)
+        .accessibility(label: Text(audioListView))
       }
     }
+
 
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
