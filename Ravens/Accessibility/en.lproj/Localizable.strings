@@ -165,3 +165,6 @@
 "removeObserver" = "remove observer from list";
 "linkObserver" = "link observer at waarneming.nl";
 "shareCodeObserver" = "share the code of the observer";
+
+"audioInfo" = "Sound recording information";
+"audioDownload" = "Download sound recording";

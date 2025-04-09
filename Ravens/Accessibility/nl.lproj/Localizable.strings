@@ -153,7 +153,7 @@
 "noRecordings" = "Geen opnames voor deze soort";
 "typeSoundsList" = "Keuze lijst van type geluiden";
 "infoSpecies" = "Informatie over de soort";
-"audioListView" = "Lijst met geluiden van deze soort";
+"audioListView" = "Lijst met geluidsopnames van deze soort";
 
 "audioDownloadMessage" = "Geluidsopname\nis gedownload naar\nmap Ravens\nop je apparaat";
 
@@ -161,3 +161,6 @@
 "removeObserver" = "verwijder waarnemer uit de lijst";
 "linkObserver" = "link naar waarnemer op waarneming.nl";
 "shareCodeObserver" = "deel code van de waarnemer";
+
+"audioInfo" = "Informatie geluidsopname";
+"audioDownload" = "Download geluidsopname";

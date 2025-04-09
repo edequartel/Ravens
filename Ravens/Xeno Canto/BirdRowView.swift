@@ -103,6 +103,7 @@ struct BirdRowView: View {
         Image(systemSymbol: .infoCircle)
       }
       .tint(.obsBirdInfo)
+      .accessibilityLabel(audioInfo)
 
       Button(action: {
         print(bird.file ?? "noSound")
@@ -119,6 +120,7 @@ struct BirdRowView: View {
         Image(systemSymbol: .squareAndArrowDown)
       }
       .tint(Color.blue)
+      .accessibilityLabel(audioDownload)
 
     }
     .accessibilityElement(children: .combine)

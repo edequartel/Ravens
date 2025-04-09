@@ -147,3 +147,6 @@ let qrcodeObserver = LocalizedStringKey("qrcodeObserver")
 let removeObserver = LocalizedStringKey("removeObserver")
 let linkObserver = LocalizedStringKey("linkObserver")
 let shareCodeObserver = LocalizedStringKey("shareCodeObserver")
+
+let audioInfo = LocalizedStringKey("audioInfo")
+let audioDownload = LocalizedStringKey("audioDownload")

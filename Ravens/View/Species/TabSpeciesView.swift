@@ -35,6 +35,7 @@ struct TabSpeciesView: View {
 
       VStack {
         if showView { Text("TabSpeciesView").font(.customTiny) }
+
         HorizontalLine()
         List {
           ForEach(speciesViewModel.filteredSpecies(
@@ -66,12 +67,27 @@ struct TabSpeciesView: View {
                           .uniformSize()
                   }
                   .tint(.blue)
+                  .accessibilityLabel(Text(infoSpecies))
             }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
             }
+
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
+                NavigationLink(destination: BirdListView(
+                  scientificName: species.scientificName,
+                  nativeName: species.name)) {
+                    Image(systemSymbol: .waveform)
+                      .uniformSize()
+                  }
+                  .tint(.purple)
+                  .accessibility(label: Text(audioListView))
+              }
+            }
+
           }
         }
         .listStyle(PlainListStyle())
