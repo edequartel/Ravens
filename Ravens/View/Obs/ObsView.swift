@@ -120,9 +120,6 @@ struct ObsView: View {
             .tint(.yellow)
         }
 
-//        BookmarkButtonView(speciesID: obs.species ?? 0)
-//          .tint(.green)
-
         BookmarkButtonView(speciesID: obs.speciesDetail.id)
           .tint(.green)
 

@@ -13,6 +13,7 @@
 "next" = "play the next sound";
 "previous" = "play the previous sound";
 "shareThisObservation" = "Share this observation";
+"shareThisObserver" = "Share this observer";
 "informationSpecies" = "Get information about the species";
 "linkObservation" = "Go to the observation at waarneming.nl";
 "favoriteSpeciesOff" = "Add species to favorites";
@@ -33,6 +34,9 @@
 "favoriteVisible" ="favorite species in list";
 "notesAboutObservation" = "notes about observation";
 "navigateTo" = "navigate to";
+
+// Location
+"deleteLocation" = "delete location from list";
 
 // user
 "us" = "We";
@@ -154,3 +158,13 @@
 "typeSoundsList" = "List with type of sounds";
 "infoSpecies" = "Information species";
 "audioListView" = "List audio sounds species";
+
+"audioDownloadMessage" = "Recording\nis downloaded to\nfolder Ravens\non your device";
+
+"qrcodeObserver" = "QR code observer";
+"removeObserver" = "remove observer from list";
+"linkObserver" = "link observer at waarneming.nl";
+"shareCodeObserver" = "share the code of the observer";
+
+"audioInfo" = "Sound recording information";
+"audioDownload" = "Download sound recording";

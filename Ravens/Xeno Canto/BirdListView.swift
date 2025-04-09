@@ -49,7 +49,7 @@ struct BirdListView: View {
               bird: bird,
               audioPlayerManager: audioPlayerManager,
               currentlyPlayingBirdID: $currentlyPlayingBirdID,
-              birdName: bird.english ?? "",
+              birdName: nativeName ?? "",
               selectedBird: $selectedBird
             )
           }

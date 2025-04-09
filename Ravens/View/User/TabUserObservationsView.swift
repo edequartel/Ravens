@@ -117,6 +117,7 @@ struct TabUserObservationsView: View {
                 .accessibility(label: Text(swap))
             }
           }
+        }
 
           // add choose observers
           ToolbarItem(placement: .navigationBarTrailing) {
@@ -141,7 +142,7 @@ struct TabUserObservationsView: View {
               )
             }
           }
-        }
+//        }
       }
       .onAppear {
         if firstTime {

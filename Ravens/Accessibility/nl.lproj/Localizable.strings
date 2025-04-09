@@ -1,14 +1,15 @@
 /* 
   Localizable.strings
   Ravens
-
   Created by Eric de Quartel on 29/11/2024.
  */
+
 "play" = "speel het geluid af";
 "pause" = "pauzeer het geluid";
 "next" = "speel het volgende geluid af";
 "previous" = "speel het vorige geluid af";
 "shareThisObservation" = "Deel deze waarneming";
+"shareThisObserver" = "Share this observer";
 "informationSpecies" = "Bekijk informatie over de soort";
 "linkObservation" = "Ga naar de waarneming op waarneming.nl";
 "favoriteSpeciesOff" = "Voeg soort toe aan favorieten";
@@ -29,6 +30,9 @@
 "favoriteVisible" ="favoriete soorten in lijst";
 "notesAboutObservation" = "aantekening over waarneming";
 "navigateTo" = "navigeer naar";
+
+// Location
+"deleteLocation" = "verwijder locatie uit de lijst";
 
 // user
 "us" = "Wij";
@@ -149,4 +153,14 @@
 "noRecordings" = "Geen opnames voor deze soort";
 "typeSoundsList" = "Keuze lijst van type geluiden";
 "infoSpecies" = "Informatie over de soort";
-"audioListView" = "Lijst met geluiden van deze soort";
+"audioListView" = "Lijst met geluidsopnames van deze soort";
+
+"audioDownloadMessage" = "Geluidsopname\nis gedownload naar\nmap Ravens\nop je apparaat";
+
+"qrcodeObserver" = "QR code waarnemer";
+"removeObserver" = "verwijder waarnemer uit de lijst";
+"linkObserver" = "link naar waarnemer op waarneming.nl";
+"shareCodeObserver" = "deel code van de waarnemer";
+
+"audioInfo" = "Informatie geluidsopname";
+"audioDownload" = "Download geluidsopname";
