@@ -56,6 +56,12 @@ struct RavensView: View {
           Text(species)
           Image(systemSymbol: .tree)
         }
+        // Tab ??
+        FavoObservationListView()
+          .tabItem {
+            Text("Favorite")
+            Image(systemSymbol: .circlebadge)
+          }
         // Tab 4
         SettingsView()
           .tabItem {

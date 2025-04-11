@@ -22,6 +22,8 @@ struct ObsView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
+  @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
+
   @Binding var selectedSpeciesID: Int?
 
   var entity: EntityType
@@ -139,13 +141,16 @@ struct ObsView: View {
       }
     }
 
-
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShareLinkButtonView(obs: obs)
 
       InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
 
       LinkButtonView(obs: obs)
+
+      Button("OBS") {
+        favoriteObservationsViewModel.appendRecord(observation: obs)
+      }
     }
   }
 
