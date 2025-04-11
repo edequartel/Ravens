@@ -148,9 +148,12 @@ struct ObsView: View {
 
       LinkButtonView(obs: obs)
 
-      Button("OBS") {
+      Button {
         favoriteObservationsViewModel.appendRecord(observation: obs)
+      } label: {
+        Image(systemName: "plus.circle")
       }
+      .tint(.green)
     }
   }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftyBeaver
+import MijickCalendarView
 
 class FavoriteObservationsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
@@ -75,27 +76,31 @@ class FavoriteObservationsViewModel: ObservableObject {
 import SwiftUI
 
 struct FavoObservationListView: View {
-    @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
+  @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
+  @State private var selectedDate: Date?
+  @State private var selectedRange: MDateRange? = .init()
 
   var body: some View {
     NavigationView {
-      List(favoriteObservationsViewModel.records) { observation in
-        VStack(alignment: .leading) {
-//          Text("\(String(describing: observation.idObs))")
-//            .font(.caption)
-          Text("\(observation.speciesDetail.name)")
-            .bold()
-          Text("\(observation.speciesDetail.scientificName)")
-            .italic()
-          HStack {
-            Text("\(observation.date)")
-            Text("\(observation.time ?? "")")
-            Spacer()
+      VStack {
+        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
+
+        List(favoriteObservationsViewModel.records) { observation in
+          VStack(alignment: .leading) {
+            Text("\(observation.speciesDetail.name)")
+              .bold()
+            Text("\(observation.speciesDetail.scientificName)")
+              .italic()
+            HStack {
+              Text("\(observation.date)")
+              Text("\(observation.time ?? "")")
+              Spacer()
+            }
+            .font(.caption)
           }
-          .font(.caption)
         }
+        Spacer()
       }
-//      .navigationTitle("Favorites")
     }
   }
 }
