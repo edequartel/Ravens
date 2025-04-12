@@ -131,7 +131,6 @@ struct ObsView: View {
         }
       }
 
-
       if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
         NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
           Image(systemSymbol: .waveform)
@@ -152,7 +151,7 @@ struct ObsView: View {
       Button {
         favoriteObservationsViewModel.appendRecord(observation: obs)
       } label: {
-        Image(systemName: "plus.circle")
+        Image(systemSymbol: .bookmarkFill)
       }
       .tint(.green)
     }

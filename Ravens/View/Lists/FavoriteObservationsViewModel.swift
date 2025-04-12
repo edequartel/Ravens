@@ -75,6 +75,7 @@ class FavoriteObservationsViewModel: ObservableObject {
 // MARK: - ObservationListView
 import SwiftUI
 
+
 struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
 //  @State private var selectedDate: Date?
@@ -83,32 +84,44 @@ struct FavoObservationListView: View {
   var body: some View {
     NavigationView {
       VStack {
-//        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
+        //        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
 
-        List(favoriteObservationsViewModel.records) { observation in
-          VStack(alignment: .leading) {
-            Text("\(observation.speciesDetail.name)")
-              .bold()
-            Text("\(observation.speciesDetail.scientificName)")
-              .italic()
-            Text("\(observation.locationDetail?.name ?? "")") //??
-              .font(.caption)
-            Text("\(observation.userDetail?.name ?? "")") //??
-              .font(.caption)
-            HStack {
-              Text("\(observation.date)")
-              Text("\(observation.time ?? "")")
-              Spacer()
+        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+        let sortedKeys = groupedRecords.keys.sorted()
+
+        List {
+          ForEach(sortedKeys, id: \.self) { name in
+            if let records = groupedRecords[name] {
+              Section(header: Text(name).bold()) {
+
+                ForEach(records) { observation in
+                  VStack(alignment: .leading) {
+//                    Text("\(observation.speciesDetail.name)")
+//                      .bold()
+//                    Text("\(observation.speciesDetail.scientificName)")
+//                      .italic()
+                    Text("\(observation.locationDetail?.name ?? "")") //??
+                      .font(.caption)
+//                    Text("\(observation.userDetail?.name ?? "")") //??
+//                      .font(.caption)
+                    HStack {
+                      Text("\(observation.date)")
+                      Text("\(observation.time ?? "")")
+
+                    }
+                    .font(.caption)
+                  }
+                  .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
+                    Button {
+                      favoriteObservationsViewModel.removeRecord(observation: observation)
+                    } label: {
+                      Image(systemSymbol: .bookmarkSlash)
+                    }
+                    .tint(.red)
+                  }
+                }
+              }
             }
-            .font(.caption)
-          }
-          .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-            Button {
-              favoriteObservationsViewModel.removeRecord(observation: observation)
-            } label: {
-              Image(systemName: "minus.circle")
-            }
-            .tint(.red)
           }
         }
         Spacer()
