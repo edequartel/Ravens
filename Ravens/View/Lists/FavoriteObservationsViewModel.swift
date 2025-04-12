@@ -61,12 +61,12 @@ class FavoriteObservationsViewModel: ObservableObject {
         saveRecords()
     }
 
-    func removeRecord(idObs: Int) {
-        if let index = records.firstIndex(where: { $0.idObs == idObs }) {
+  func removeRecord(observation: Observation) {
+        if let index = records.firstIndex(where: { $0.idObs == observation.idObs }) {
             records.remove(at: index)
             saveRecords()
         } else {
-            print("Record with idObs \(idObs) does not exist.")
+          print("Record with idObs \(String(describing: observation.idObs)) does not exist.")
         }
     }
 }
@@ -77,13 +77,13 @@ import SwiftUI
 
 struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
-  @State private var selectedDate: Date?
-  @State private var selectedRange: MDateRange? = .init()
+//  @State private var selectedDate: Date?
+//  @State private var selectedRange: MDateRange? = .init()
 
   var body: some View {
     NavigationView {
       VStack {
-        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
+//        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
 
         List(favoriteObservationsViewModel.records) { observation in
           VStack(alignment: .leading) {
@@ -91,12 +91,24 @@ struct FavoObservationListView: View {
               .bold()
             Text("\(observation.speciesDetail.scientificName)")
               .italic()
+            Text("\(observation.locationDetail?.name ?? "")") //??
+              .font(.caption)
+            Text("\(observation.userDetail?.name ?? "")") //??
+              .font(.caption)
             HStack {
               Text("\(observation.date)")
               Text("\(observation.time ?? "")")
               Spacer()
             }
             .font(.caption)
+          }
+          .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
+            Button {
+              favoriteObservationsViewModel.removeRecord(observation: observation)
+            } label: {
+              Image(systemName: "minus.circle")
+            }
+            .tint(.red)
           }
         }
         Spacer()

@@ -150,3 +150,5 @@ let shareCodeObserver = LocalizedStringKey("shareCodeObserver")
 
 let audioInfo = LocalizedStringKey("audioInfo")
 let audioDownload = LocalizedStringKey("audioDownload")
+
+let favoObservation = LocalizedStringKey("favoObservation")

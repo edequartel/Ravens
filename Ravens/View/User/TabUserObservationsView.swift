@@ -133,6 +133,15 @@ struct TabUserObservationsView: View {
             }
           }
 
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: FavoObservationListView()
+          ) {
+            Image(systemSymbol: .bookmarkCircle)
+              .uniformSize()
+            .accessibility(label: Text(favoObservation))//??
+          }
+        }
+
           // add choose observers
           if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
             ToolbarItem(placement: .navigationBarTrailing) {
