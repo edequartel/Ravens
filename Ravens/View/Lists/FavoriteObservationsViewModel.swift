@@ -75,18 +75,21 @@ class FavoriteObservationsViewModel: ObservableObject {
 // MARK: - ObservationListView
 import SwiftUI
 
-
 struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
 //  @State private var selectedDate: Date?
 //  @State private var selectedRange: MDateRange? = .init()
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
+      HorizontalLine()
       VStack {
         //        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
 
-        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+//        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+
+        let groupedRecords: [String: [Observation]] = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+          .mapValues { $0.sorted(by: { $0.date < $1.date }) }
         let sortedKeys = groupedRecords.keys.sorted()
 
         List {
@@ -100,16 +103,24 @@ struct FavoObservationListView: View {
 //                      .bold()
 //                    Text("\(observation.speciesDetail.scientificName)")
 //                      .italic()
-                    Text("\(observation.locationDetail?.name ?? "")") //??
-                      .font(.caption)
+//                    Text("\(observation.locationDetail?.name ?? "")") //??
+//                      .font(.caption)
 //                    Text("\(observation.userDetail?.name ?? "")") //??
 //                      .font(.caption)
                     HStack {
-                      Text("\(observation.date)")
-                      Text("\(observation.time ?? "")")
+                      HStack {
+                        Text("\(observation.date)")
+                        Text("\(observation.time ?? "")")
 
+                      }
+                      .bold()
+                      .font(.caption)
+
+                      Text("  \(observation.locationDetail?.name ?? "")") //??
+                        .font(.caption)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                     }
-                    .font(.caption)
                   }
                   .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
                     Button {
@@ -124,8 +135,12 @@ struct FavoObservationListView: View {
             }
           }
         }
+        .listStyle(.plain)
         Spacer()
       }
+
+      .navigationBarTitleDisplayMode(.inline)
+      .navigationTitle("Favorites")
     }
   }
 }
