@@ -139,7 +139,10 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
-struct SpeciesPickerView: View {
+
+//deze SpeciesGroupPickerView hier in een ander bestand gaan zetten en meer globaal maken
+
+struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
@@ -148,9 +151,13 @@ struct SpeciesPickerView: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var settings: Settings
 
+  @Binding var selectedSpeciesGroupId: Int
+
   var body: some View {
+
     Section(header: Text(species)) {
-      Picker(group, selection: $settings.selectedSpeciesGroupId) {
+//      if showView { Text("SpeciesPickerView").font(.customTiny) }
+      Picker(group, selection: $selectedSpeciesGroupId) {
         ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
           Text(speciesGroup.name)
             .tag(speciesGroup.id)
@@ -159,11 +166,12 @@ struct SpeciesPickerView: View {
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: settings.selectedSpeciesGroupId) { 
-        log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
+      .onChange(of: selectedSpeciesGroupId) {
+        log.error("Selected Group ID: \(selectedSpeciesGroupId)") //?? check if this is adjusted right $selectedSpeciesGroupId is changed
+
         settings.selectedRegionListId = regionListViewModel.getId(
           region: settings.selectedRegionId,
-          speciesGroup: settings.selectedSpeciesGroupId)
+          speciesGroup: selectedSpeciesGroupId)
 
         if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
           settings.selectedSpeciesGroupName = selectedGroup.name

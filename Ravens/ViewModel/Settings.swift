@@ -134,6 +134,14 @@ class Settings: ObservableObject {
     }
   }
 
+  @AppStorage("selectedUserSpeciesGroupId") var selectedUserSpeciesGroupIdStored = 1
+  @Published var selectedUserSpeciesGroupId = 1 {
+    didSet {
+      log.info("!!saving selectedSpeciesGroupId in storage: \(selectedUserSpeciesGroupId)")
+      selectedUserSpeciesGroupIdStored = selectedUserSpeciesGroupId
+    }
+  }
+
   @AppStorage("selectedRegionId") var selectedRegionIdStored = 200
   @Published var selectedRegionId = 200 {
     didSet {

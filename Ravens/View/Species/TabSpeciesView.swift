@@ -141,9 +141,14 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
 
+  @EnvironmentObject var settings: Settings
+
+//  @State var selectedSpeciesGroupId: Int = 1
+
   var body: some View {
     Form {
-      SpeciesPickerView()
+      // Selected the SpeciesGroup
+      SpeciesGroupPickerView(selectedSpeciesGroupId: $settings.selectedSpeciesGroupId) //??<--
 
       // First Menu for Sorting
       Section(sort) {
@@ -192,6 +197,7 @@ struct SortNameOptionsView: View {
 
   var body: some View {
     if showView { Text("SortNameOptionsView").font(.customTiny) }
+
     List(SortNameOption.allCases, id: \.self) { option in
       Button(action: {
         currentFilteringNameOption = option

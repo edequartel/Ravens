@@ -119,39 +119,39 @@ struct TabUserObservationsView: View {
           }
         }
 
-          // add choose observers
-          ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(
-              destination: ObserversView(
-                observationUser: observationUser,
-                observerId: $obsObserversViewModel.observerId,
-                observerName: $obsObserversViewModel.observerName)
-            ) {
-              Image(systemSymbol: .listBullet)
-                .uniformSize()
-                .accessibility(label: Text(observersList))
-            }
+        // add choose observers
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(
+            destination: ObserversView(
+              observationUser: observationUser,
+              observerId: $obsObserversViewModel.observerId,
+              observerName: $obsObserversViewModel.observerName)
+          ) {
+            Image(systemSymbol: .listBullet)
+              .uniformSize()
+              .accessibility(label: Text(observersList))
           }
+        }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: FavoObservationListView()
           ) {
             Image(systemSymbol: .bookmarkCircle)
               .uniformSize()
-            .accessibility(label: Text(favoObservation))//??
+              .accessibility(label: Text(favoObservation)) //??
           }
         }
 
-          // add choose observers
-          if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
-            ToolbarItem(placement: .navigationBarTrailing) {
-              ObserversButtonView(
-                userId: obsObserversViewModel.observerId,
-                userName: obsObserversViewModel.observerName
-              )
-            }
+        // add choose observers
+        if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            ObserversButtonView(
+              userId: obsObserversViewModel.observerId,
+              userName: obsObserversViewModel.observerName
+            )
           }
-//        }
+        }
+        //        }
       }
       .onAppear {
         if firstTime {

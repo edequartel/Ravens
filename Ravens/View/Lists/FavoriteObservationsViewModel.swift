@@ -83,10 +83,12 @@ struct FavoObservationListView: View {
   var body: some View {
     NavigationStack {
       HorizontalLine()
+      if showView { Text("FavoObservationListView").font(.customTiny) }
       VStack {
         //        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
 
 //        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+        
 
         let groupedRecords: [String: [Observation]] = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
           .mapValues { $0.sorted(by: { $0.date < $1.date }) }

@@ -197,20 +197,25 @@ struct CombinedOptionsMenuView: View {
 
   var body: some View {
     NavigationStack {
+      if showView { Text("CombinedOptionsMenuView").font(.customTiny) }
       Form {
+
+        // Selected the SpeciesGroup
+        SpeciesGroupPickerView(selectedSpeciesGroupId: $settings.selectedUserSpeciesGroupId) //??
+
         // Period Filter
         if timePeriod != nil {
           Section(header: Text(period)) {
             TimePeriodView(timePeriod: $timePeriod, entity: entity)
           }
         }
-        
+
         if entity == .radius {
           Section(distance) {
             RadiusPickerView(selectedRadius: $settings.radius)
           }
         }
-        
+
         // Sorting Option
         if currentSortingOption != nil {
           Section(header: Text(sort)) {
@@ -229,7 +234,7 @@ struct CombinedOptionsMenuView: View {
             }
           }
         }
-        
+
         // Filter All/Native
         if currentFilteringAllOption != nil {
           Section(header: Text(filter)) {
@@ -248,7 +253,7 @@ struct CombinedOptionsMenuView: View {
             }
           }
         }
-        
+
         // Rarity Filter
         if currentFilteringOption != nil {
           Section(header: Text(rarity)) {
