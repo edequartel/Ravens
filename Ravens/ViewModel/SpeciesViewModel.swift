@@ -29,7 +29,7 @@ class SpeciesViewModel: ObservableObject {
   }
   
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
+    log.error("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
     
     log.info("url: \(url)")

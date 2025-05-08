@@ -151,13 +151,12 @@ struct SpeciesGroupPickerView: View {
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var settings: Settings
 
-  @Binding var selectedSpeciesGroupId: Int
+  @Binding var currentSpeciesGroup: Int?
 
   var body: some View {
 
     Section(header: Text(species)) {
-//      if showView { Text("SpeciesPickerView").font(.customTiny) }
-      Picker(group, selection: $selectedSpeciesGroupId) {
+      Picker(group, selection: $currentSpeciesGroup) {
         ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
           Text(speciesGroup.name)
             .tag(speciesGroup.id)
@@ -166,18 +165,18 @@ struct SpeciesGroupPickerView: View {
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: selectedSpeciesGroupId) {
-        log.error("Selected Group ID: \(selectedSpeciesGroupId)") //?? check if this is adjusted right $selectedSpeciesGroupId is changed
+      .onChange(of: currentSpeciesGroup) {
+        log.error("Selected Group ID: \(currentSpeciesGroup)") //?? check if this is adjusted
 
         settings.selectedRegionListId = regionListViewModel.getId(
           region: settings.selectedRegionId,
-          speciesGroup: selectedSpeciesGroupId)
+          speciesGroup: currentSpeciesGroup ?? 0)
 
         if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
           settings.selectedSpeciesGroupName = selectedGroup.name
         }
 
-        log.info("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
+        log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
 
         speciesViewModel.fetchDataFirst(settings: settings)
         speciesViewModel.fetchDataSecondLanguage(settings: settings)

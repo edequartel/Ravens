@@ -144,6 +144,9 @@ struct ObservationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+
+  @Binding var currentSpeciesGroup: Int? //??
+
   @Binding var timePeriod: TimePeriod?
 
   var entity: EntityType
@@ -152,14 +155,22 @@ struct ObservationToolbarModifier: ViewModifier {
     currentSortingOption: Binding<SortingOption?> = .constant(nil),
     currentFilteringAllOption: Binding<FilterAllOption?> = .constant(nil),
     currentFilteringOption: Binding<FilteringRarityOption?> = .constant(nil),
+
+    currentSpeciesGroup: Binding<Int?> = .constant(nil),
+
     timePeriod: Binding<TimePeriod?> = .constant(nil),
+
     entity: EntityType = .user // ✅ Added entity as a parameter with a default
 
   ) {
     self._currentSortingOption = currentSortingOption
     self._currentFilteringAllOption = currentFilteringAllOption
     self._currentFilteringOption = currentFilteringOption
+
+    self._currentSpeciesGroup = currentSpeciesGroup
+
     self._timePeriod = timePeriod
+
     self.entity = entity
   }
   
@@ -172,6 +183,8 @@ struct ObservationToolbarModifier: ViewModifier {
               currentSortingOption: $currentSortingOption,
               currentFilteringAllOption: $currentFilteringAllOption,
               currentFilteringOption: $currentFilteringOption,
+              currentSpeciesGroup: $currentSpeciesGroup,
+
               timePeriod: $timePeriod,
               entity: entity
             )
@@ -189,6 +202,8 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var currentSpeciesGroup: Int? 
+
   @Binding var timePeriod: TimePeriod?
 
   @EnvironmentObject var settings: Settings
@@ -201,7 +216,9 @@ struct CombinedOptionsMenuView: View {
       Form {
 
         // Selected the SpeciesGroup
-        SpeciesGroupPickerView(selectedSpeciesGroupId: $settings.selectedUserSpeciesGroupId) //??
+        if currentSpeciesGroup != nil {
+          SpeciesGroupPickerView(currentSpeciesGroup: $currentSpeciesGroup) 
+        }
 
         // Period Filter
         if timePeriod != nil {

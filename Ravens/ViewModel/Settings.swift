@@ -119,26 +119,42 @@ class Settings: ObservableObject {
   }
 
   @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
-  @Published var selectedSpeciesGroup = 1 {
+  @Published var selectedSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
-      selectedSpeciesGroupStored = selectedSpeciesGroup
+      log.info("!!saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
+      selectedSpeciesGroupStored = selectedSpeciesGroup ?? 1
     }
   }
 
-  @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
-  @Published var selectedSpeciesGroupId = 1 {
+//  @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
+//  @Published var selectedSpeciesGroupId: Int? = 1 {
+//    didSet {
+//      log.info("!!saving selectedSpeciesGroupId in storage: \(String(describing: selectedSpeciesGroupId))")
+//      selectedSpeciesGroupIdStored = selectedSpeciesGroupId ?? 1
+//    }
+//  }
+
+  @AppStorage("selectedUserSpeciesGroup") var selectedUserSpeciesGroupStored = 1
+  @Published var selectedUserSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
-      selectedSpeciesGroupIdStored = selectedSpeciesGroupId
+      log.error("!!saving selectedUserSpeciesGroup in storage: \(String(describing: selectedUserSpeciesGroup))")
+      selectedUserSpeciesGroupStored = selectedUserSpeciesGroup ?? 1
     }
   }
 
-  @AppStorage("selectedUserSpeciesGroupId") var selectedUserSpeciesGroupIdStored = 1
-  @Published var selectedUserSpeciesGroupId = 1 {
+  @AppStorage("selectedRadiusSpeciesGroup") var selectedRadiusSpeciesGroupStored = 1
+  @Published var selectedRadiusSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroupId in storage: \(selectedUserSpeciesGroupId)")
-      selectedUserSpeciesGroupIdStored = selectedUserSpeciesGroupId
+      log.info("!!saving selectedRadiusSpeciesGroup in storage: \(String(describing: selectedRadiusSpeciesGroup))")
+      selectedRadiusSpeciesGroupStored = selectedRadiusSpeciesGroup ?? 1
+    }
+  }
+
+  @AppStorage("selectedLocationSpeciesGroup") var selectedLocationSpeciesGroupStored = 1
+  @Published var selectedLocationSpeciesGroup: Int? = 1 {
+    didSet {
+      log.info("!!saving selectedLocationSpeciesGroup in storage: \(String(describing: selectedLocationSpeciesGroup))")
+      selectedLocationSpeciesGroupStored = selectedLocationSpeciesGroup ?? 1
     }
   }
 
@@ -175,7 +191,7 @@ class Settings: ObservableObject {
     }
   }
 
-  var isInit: Bool = true
+  var isInit: Bool = true //??
   init() {
     log.info("** init Settings **")
     selectedLanguage = selectedLanguageStored
@@ -186,6 +202,10 @@ class Settings: ObservableObject {
     selectedSpeciesGroupId = selectedSpeciesGroupIdStored
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
+
+    selectedUserSpeciesGroup = selectedUserSpeciesGroupStored
+    selectedRadiusSpeciesGroup = selectedRadiusSpeciesGroupStored
+    selectedLocationSpeciesGroup = selectedLocationSpeciesGroupStored
 
     mapPreference = mapPreferenceStored
 

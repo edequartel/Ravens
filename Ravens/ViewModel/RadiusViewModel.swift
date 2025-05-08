@@ -28,6 +28,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     latitude: Double,
     longitude: Double,
     radius: Int,
+    speciesGroup: Int,
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
       observations = []
@@ -41,6 +42,7 @@ class ObservationsRadiusViewModel: ObservableObject {
       url += "&lat="+String(latitude)
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
+      url += "&species_group=\(speciesGroup)" //??
 
       self.log.info("url:\(url)")
 

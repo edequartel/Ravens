@@ -42,6 +42,7 @@ class ObservationsViewModel: ObservableObject {
     entity: EntityType,
     token: String,
     id: Int,
+    speciesGroup: Int,
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
     log.info("ObservationsViewModel FetchDataInit")
@@ -56,7 +57,8 @@ class ObservationsViewModel: ObservableObject {
     let date: Date = Date.now
     let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
     let dateBefore = formatCurrentDate(value: date)
-    // add the periode to the url
+
+      // add the periode to the url
     var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
     if timePeriod != .infinite {
@@ -64,6 +66,7 @@ class ObservationsViewModel: ObservableObject {
     }
 
     url += "&ordering=-datetime"
+    url += "&species_group=\(speciesGroup)" //??
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }

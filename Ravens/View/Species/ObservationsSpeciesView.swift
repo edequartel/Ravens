@@ -100,6 +100,7 @@ struct ObservationsSpeciesView: View {
         entity: .species,
         token: keyChainviewModel.token,
         id: item.speciesId,
+        speciesGroup: settings.selectedSpeciesGroup ?? 1, //??
         timePeriod: settings.timePeriodSpecies,
         completion: {
           isLoaded = true
@@ -132,6 +133,7 @@ struct ObservationsSpeciesView: View {
       entity: .species,
       token: keyChainviewModel.token,
       id: item.speciesId,
+      speciesGroup: settings.selectedSpeciesGroup ?? 1, //??
       timePeriod: settings.timePeriodSpecies,
       completion: {
         isLoaded = true

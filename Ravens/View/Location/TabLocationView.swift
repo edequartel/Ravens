@@ -20,7 +20,7 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
 
 struct TabLocationView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationsLocation: ObservationsViewModel 
+  @ObservedObject var observationsLocation: ObservationsViewModel
 
   @StateObject var locationIdViewModel = LocationIdViewModel()
   @StateObject var geoJSONViewModel = GeoJSONViewModel()
@@ -78,6 +78,19 @@ struct TabLocationView: View {
         }
       }
 
+      .onChange(of: settings.selectedLocationSpeciesGroup) {
+        log.error("-->> update timePeriodLocation so new data fetch for this period")
+        fetchDataLocation(
+          settings: settings,
+          token: keyChainviewModel.token,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: setLocation,
+          timePeriod: settings.timePeriodLocation)
+        settings.hasLocationLoaded = true
+      }
+
       .onChange(of: settings.timePeriodLocation) {
         log.error("-->> update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
@@ -91,7 +104,7 @@ struct TabLocationView: View {
         settings.hasLocationLoaded = true
       }
 
-        .onChange(of: setLocation) {
+      .onChange(of: setLocation) {
         log.info("update setLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
@@ -123,6 +136,7 @@ struct TabLocationView: View {
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
           currentFilteringOption: $currentFilteringOption,
+          currentSpeciesGroup: $settings.selectedLocationSpeciesGroup,
           timePeriod: $settings.timePeriodLocation
         )
       )
@@ -179,10 +193,10 @@ struct TabLocationView: View {
               geoJSONViewModel: geoJSONViewModel,
               setLocation: $setLocation)
           ) {
-                Image(systemSymbol: .listBullet)
-                  .uniformSize()
-              }
-              .accessibilityLabel(listWithFavoriteLocation)
+            Image(systemSymbol: .listBullet)
+              .uniformSize()
+          }
+          .accessibilityLabel(listWithFavoriteLocation)
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {

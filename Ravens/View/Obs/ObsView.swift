@@ -26,6 +26,7 @@ struct ObsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
+
   var entity: EntityType
 
   @State var selectedObservation: Observation?
@@ -142,11 +143,20 @@ struct ObsView: View {
     }
 
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-      ShareLinkButtonView(obs: obs)
+//      ShareLinkButtonView(obs: obs)
 
-      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
+//      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
 
-      LinkButtonView(obs: obs)
+//      LinkButtonView(obs: obs)
+
+      //??! hier een link naar de list met de observations van deze species met boompje
+
+//      Button {
+//        favoriteObservationsViewModel.appendRecord(observation: obs)
+//      } label: {
+//        Image(systemSymbol: .treeFill)
+//      }
+//      .tint(.blue)
 
       Button {
         favoriteObservationsViewModel.appendRecord(observation: obs)

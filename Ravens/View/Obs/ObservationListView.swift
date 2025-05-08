@@ -24,6 +24,7 @@ struct ObservationListView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+
   //@State var currentSpeciesGroupFilteringOption: Int = 1 //? 1=birds ?=mammals 4=butterflies 10=mossen 12=insects
 
   @AccessibilityFocusState private var focusedItemID: Int?
@@ -35,7 +36,7 @@ struct ObservationListView: View {
     List {
       let filteredAndSortedObservations = observations
         .filter(meetsRarityCondition)
-        .filter(meetsSpeciesGroupCondition) //??
+//        .filter(meetsSpeciesGroupCondition) //??
         .sorted(by: compareObservations)
 
       ForEach(Array(filteredAndSortedObservations.enumerated()), id: \.element.id) { index, obs in
@@ -88,10 +89,10 @@ struct ObservationListView: View {
     }
   }
 
-  func meetsSpeciesGroupCondition(observation: Observation) -> Bool { //?
-    print(observation.speciesGroup ?? 0)
-      return observation.speciesGroup == settings.selectedUserSpeciesGroupId || settings.selectedUserSpeciesGroupId == 0
-  }
+//  func meetsSpeciesGroupCondition(observation: Observation) -> Bool { //?
+//  //?? hier is selectedUserSpeciesGroupId
+//      return observation.speciesGroup == settings.selectedUserSpeciesGroupId || settings.selectedUserSpeciesGroupId == 0
+//  }
 
   func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
     switch currentSortingOption {

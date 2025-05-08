@@ -68,6 +68,7 @@ struct RadiusListView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
           radius: settings.radius,
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("radiusView count \(observationsRadiusViewModel.count)")

@@ -12,6 +12,7 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
+
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -25,6 +26,8 @@ struct TabSpeciesView: View {
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
+
+  @State private var currentSpeciesGroup: Int? = 1
 
   @Binding var selectedSpeciesID: Int?
 
@@ -113,7 +116,9 @@ struct TabSpeciesView: View {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption
+            selectedRarityOption: $selectedRarityOption,
+            currentSpeciesGroup: $settings.selectedUserSpeciesGroup
+
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
@@ -140,15 +145,16 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
+  @Binding var currentSpeciesGroup: Int?
 
   @EnvironmentObject var settings: Settings
 
-//  @State var selectedSpeciesGroupId: Int = 1
-
   var body: some View {
+    if showView { Text("SortFilterSpeciesView").font(.customTiny) }
+
     Form {
       // Selected the SpeciesGroup
-      SpeciesGroupPickerView(selectedSpeciesGroupId: $settings.selectedSpeciesGroupId) //??<--
+      SpeciesGroupPickerView(currentSpeciesGroup: $settings.selectedSpeciesGroupId)
 
       // First Menu for Sorting
       Section(sort) {
@@ -274,15 +280,12 @@ extension SpeciesViewModel {
       return species.filter { $0.rarity == 3 }
     case .veryRare:
       return species.filter { $0.rarity == 4 }
-      //        default:
-      //            return species
     }
   }
 
   private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
     if isBookmarked {
       return species.filter { species in
-        //                additionalIntArray.contains(where: { $0.speciesID == species.id })
         additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
       }
     } else {

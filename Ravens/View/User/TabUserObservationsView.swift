@@ -40,7 +40,6 @@ struct TabUserObservationsView: View {
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption
-
           )
         } else {
           ObservationsUserView(
@@ -57,8 +56,23 @@ struct TabUserObservationsView: View {
 
       .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
         log.info("update userViewModel.loginSuccess")
+        
         obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      }
+
+      //??
+      .onChange(of: settings.selectedUserSpeciesGroup) {
+        log.error("update selectedUserSpeciesGroup \(settings.selectedUserSpeciesGroup ?? 1)")
+
+        observationUser.fetchDataInit(
+          settings: settings,
+          entity: .user,
+          token: keyChainviewModel.token,
+          id: obsObserversViewModel.observerId,
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+          timePeriod: settings.timePeriodUser,
+          completion: { log.error("fetch data complete") })
       }
 
       .onChange(of: settings.timePeriodUser) {
@@ -69,6 +83,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodUser,
           completion: { log.error("fetch data complete") })
       }
@@ -81,6 +96,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") })
       }
@@ -93,6 +109,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") })
       }
@@ -102,6 +119,7 @@ struct TabUserObservationsView: View {
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
           currentFilteringOption: $currentFilteringOption,
+          currentSpeciesGroup: $settings.selectedUserSpeciesGroup, //??
           timePeriod: $settings.timePeriodUser)
       )
 
@@ -119,39 +137,39 @@ struct TabUserObservationsView: View {
           }
         }
 
-        // add choose observers
-        ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(
-            destination: ObserversView(
-              observationUser: observationUser,
-              observerId: $obsObserversViewModel.observerId,
-              observerName: $obsObserversViewModel.observerName)
-          ) {
-            Image(systemSymbol: .listBullet)
-              .uniformSize()
-              .accessibility(label: Text(observersList))
+          // add choose observers
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(
+              destination: ObserversView(
+                observationUser: observationUser,
+                observerId: $obsObserversViewModel.observerId,
+                observerName: $obsObserversViewModel.observerName)
+            ) {
+              Image(systemSymbol: .listBullet)
+                .uniformSize()
+                .accessibility(label: Text(observersList))
+            }
           }
-        }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: FavoObservationListView()
           ) {
             Image(systemSymbol: .bookmarkCircle)
               .uniformSize()
-              .accessibility(label: Text(favoObservation)) //??
+            .accessibility(label: Text(favoObservation)) //??
           }
         }
 
-        // add choose observers
-        if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            ObserversButtonView(
-              userId: obsObserversViewModel.observerId,
-              userName: obsObserversViewModel.observerName
-            )
+          // add choose observers
+          if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              ObserversButtonView(
+                userId: obsObserversViewModel.observerId,
+                userName: obsObserversViewModel.observerName
+              )
+            }
           }
-        }
-        //        }
+//        }
       }
       .onAppear {
         if firstTime {
@@ -182,6 +200,7 @@ struct TabUserObservationsView: View {
       entity: .user,
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
+      speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
       timePeriod: settings.timePeriodUser,
       completion: {
         log.info("fetch loadUserData observationUser.fetchDataInit complete")

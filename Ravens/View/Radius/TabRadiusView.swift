@@ -63,9 +63,28 @@ struct TabRadiusView: View {
       .modifier(
         ObservationToolbarModifier(
           currentFilteringOption: $currentFilteringOption,
+          currentSpeciesGroup: $settings.selectedRadiusSpeciesGroup, //?? ?in setttings
           timePeriod: $settings.timePeriodRadius,
           entity: .radius)
       )
+
+      //??
+      .onChange(of: settings.selectedRadiusSpeciesGroup) {
+        log.error("update selectedRadiusSpeciesGroup \(String(describing: settings.radius))")
+        observationsRadiusViewModel.observations = []
+        observationsRadiusViewModel.fetchDataInit(
+          settings: settings,
+
+          latitude: observationsRadiusViewModel.circleCenter.latitude,
+          longitude: observationsRadiusViewModel.circleCenter.longitude,
+
+          radius: settings.radius,
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          timePeriod: settings.timePeriodRadius,
+          completion: {
+            log.error("update selectedRadiusSpeciesGroup")
+          })
+      }
 
       .onChange(of: settings.radius) {
         log.error("update radius \(String(describing: settings.radius))")
@@ -77,6 +96,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update radius")
@@ -93,6 +113,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod")
@@ -109,7 +130,8 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
-          timePeriod: settings.timePeriodRadius, 
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod count: \(observationsRadiusViewModel.count)")
           })
@@ -141,6 +163,7 @@ struct TabRadiusView: View {
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 radius: settings.radius,
+                speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
                 timePeriod: settings.timePeriodRadius,
                 completion: {
                   log.error("tapgesture update userlocation")
