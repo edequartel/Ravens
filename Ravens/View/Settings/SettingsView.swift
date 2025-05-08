@@ -164,7 +164,7 @@ struct SpeciesGroupPickerView: View {
       }
       .pickerStyle(.navigationLink)
       .onChange(of: currentSpeciesGroup) {
-        log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))") //?? check if this is adjusted
+        log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))")
 
         settings.selectedRegionListId = regionListViewModel.getId(
           region: settings.selectedRegionId,

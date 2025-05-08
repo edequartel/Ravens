@@ -78,7 +78,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
-          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update selectedRadiusSpeciesGroup")
@@ -95,7 +95,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
-          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update radius")
@@ -112,7 +112,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
-          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod")
@@ -129,7 +129,7 @@ struct TabRadiusView: View {
           longitude: observationsRadiusViewModel.circleCenter.longitude,
 
           radius: settings.radius,
-          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update timePeriod count: \(observationsRadiusViewModel.count)")
@@ -162,7 +162,7 @@ struct TabRadiusView: View {
                 latitude: location.coordinate.latitude,
                 longitude: location.coordinate.longitude,
                 radius: settings.radius,
-                speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, //??
+                speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, 
                 timePeriod: settings.timePeriodRadius,
                 completion: {
                   log.error("tapgesture update userlocation")

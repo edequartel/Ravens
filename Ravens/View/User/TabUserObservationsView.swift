@@ -199,7 +199,7 @@ struct TabUserObservationsView: View {
       entity: .user,
       token: keyChainViewModel.token,
       id: obsObserversViewModel.observerId,
-      speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+      speciesGroup: settings.selectedUserSpeciesGroup ?? 1, 
       timePeriod: settings.timePeriodUser,
       completion: {
         log.info("fetch loadUserData observationUser.fetchDataInit complete")

@@ -116,7 +116,7 @@ struct FavoObservationListView: View {
                       .bold()
                       .font(.caption)
 
-                      Text("  \(observation.locationDetail?.name ?? "")") //??
+                      Text("  \(observation.locationDetail?.name ?? "")") 
                         .font(.caption)
                         .lineLimit(1)
                         .truncationMode(.tail)
