@@ -86,10 +86,8 @@ struct FavoObservationListView: View {
       if showView { Text("FavoObservationListView").font(.customTiny) }
       VStack {
         //        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
-
 //        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
         
-
         let groupedRecords: [String: [Observation]] = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
           .mapValues { $0.sorted(by: { $0.date < $1.date }) }
         let sortedKeys = groupedRecords.keys.sorted()

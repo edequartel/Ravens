@@ -2,8 +2,8 @@ import Foundation
 import Alamofire
 import SwiftyBeaver
 
-//deze niet verwijderen is zonder cache
-//class ObsViewModel: ObservableObject {
+// deze niet verwijderen is zonder cache
+// class ObsViewModel: ObservableObject {
 //    let log = SwiftyBeaver.self
 //    @Published var observation: Observation?
 //    private var keyChainViewModel =  KeychainViewModel()
@@ -39,10 +39,9 @@ import SwiftyBeaver
 //            }
 //        }
 //    }
-//}
+// }
 
-//?? cache
-
+// ?? cache
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
     @Published var observation: Observation?

@@ -139,9 +139,7 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
-
 //deze SpeciesGroupPickerView hier in een ander bestand gaan zetten en meer globaal maken
-
 struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -166,17 +164,17 @@ struct SpeciesGroupPickerView: View {
       }
       .pickerStyle(.navigationLink)
       .onChange(of: currentSpeciesGroup) {
-        log.error("Selected Group ID: \(currentSpeciesGroup)") //?? check if this is adjusted
+        log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))") //?? check if this is adjusted
 
         settings.selectedRegionListId = regionListViewModel.getId(
           region: settings.selectedRegionId,
           speciesGroup: currentSpeciesGroup ?? 0)
 
-        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
+        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroup }) {
           settings.selectedSpeciesGroupName = selectedGroup.name
         }
 
-        log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
+        log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(String(describing: settings.selectedSpeciesGroup))")
 
         speciesViewModel.fetchDataFirst(settings: settings)
         speciesViewModel.fetchDataSecondLanguage(settings: settings)

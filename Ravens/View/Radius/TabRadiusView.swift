@@ -63,12 +63,11 @@ struct TabRadiusView: View {
       .modifier(
         ObservationToolbarModifier(
           currentFilteringOption: $currentFilteringOption,
-          currentSpeciesGroup: $settings.selectedRadiusSpeciesGroup, //?? ?in setttings
+          currentSpeciesGroup: $settings.selectedRadiusSpeciesGroup,
           timePeriod: $settings.timePeriodRadius,
           entity: .radius)
       )
 
-      //??
       .onChange(of: settings.selectedRadiusSpeciesGroup) {
         log.error("update selectedRadiusSpeciesGroup \(String(describing: settings.radius))")
         observationsRadiusViewModel.observations = []

@@ -5,10 +5,10 @@
 ////  Created by Eric de Quartel on 15/01/2024.
 ////
 //
-//import SwiftUI
-//import SwiftyBeaver
+// import SwiftUI
+// import SwiftyBeaver
 //
-//struct ObservationDetailsView: View {
+// struct ObservationDetailsView: View {
 //    let log = SwiftyBeaver.self
 //    
 //    @ObservedObject var observationsSpecies: ObservationsViewModel
@@ -42,4 +42,4 @@
 //                )
 //            }
 //    }
-//}
+// }

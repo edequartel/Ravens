@@ -122,7 +122,7 @@ func fetchDataLocation(
           entity: .location,
           token: token,
           id: fetchedLocations[0].id,
-          speciesGroup: settings.selectedLocationSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedLocationSpeciesGroup ?? 1, 
           timePeriod: timePeriod,
           completion: {
             settings.cameraAreaPosition = geoJSONViewModel.getCameraPosition()

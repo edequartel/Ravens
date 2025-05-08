@@ -26,7 +26,6 @@ struct ObsView: View {
 
   @Binding var selectedSpeciesID: Int?
 
-
   var entity: EntityType
 
   @State var selectedObservation: Observation?

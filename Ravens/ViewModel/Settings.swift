@@ -121,18 +121,10 @@ class Settings: ObservableObject {
   @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
   @Published var selectedSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
+      log.error("!!saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
       selectedSpeciesGroupStored = selectedSpeciesGroup ?? 1
     }
   }
-
-//  @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
-//  @Published var selectedSpeciesGroupId: Int? = 1 {
-//    didSet {
-//      log.info("!!saving selectedSpeciesGroupId in storage: \(String(describing: selectedSpeciesGroupId))")
-//      selectedSpeciesGroupIdStored = selectedSpeciesGroupId ?? 1
-//    }
-//  }
 
   @AppStorage("selectedUserSpeciesGroup") var selectedUserSpeciesGroupStored = 1
   @Published var selectedUserSpeciesGroup: Int? = 1 {
@@ -191,7 +183,8 @@ class Settings: ObservableObject {
     }
   }
 
-  var isInit: Bool = true //??
+  var isInit: Bool = true
+  
   init() {
     log.info("** init Settings **")
     selectedLanguage = selectedLanguageStored
@@ -199,7 +192,7 @@ class Settings: ObservableObject {
 
     selectedRegionListId = selectedRegionListIdStored
     selectedSpeciesGroup = selectedSpeciesGroupStored
-    selectedSpeciesGroupId = selectedSpeciesGroupIdStored
+    log.error("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
 

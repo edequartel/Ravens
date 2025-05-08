@@ -42,7 +42,7 @@ class ObservationsRadiusViewModel: ObservableObject {
       url += "&lat="+String(latitude)
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
-      url += "&species_group=\(speciesGroup)" //??
+      url += "&species_group=\(speciesGroup)" 
 
       self.log.info("url:\(url)")
 

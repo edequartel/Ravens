@@ -56,7 +56,7 @@ struct SpeciesView: View {
         }
       }
       
-      if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
+      if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
             Image(systemSymbol: .waveform)

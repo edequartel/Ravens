@@ -61,7 +61,6 @@ struct TabUserObservationsView: View {
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
 
-      //??
       .onChange(of: settings.selectedUserSpeciesGroup) {
         log.error("update selectedUserSpeciesGroup \(settings.selectedUserSpeciesGroup ?? 1)")
 
@@ -70,7 +69,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodUser,
           completion: { log.error("fetch data complete") })
       }
@@ -83,7 +82,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodUser,
           completion: { log.error("fetch data complete") })
       }
@@ -96,7 +95,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") })
       }
@@ -109,7 +108,7 @@ struct TabUserObservationsView: View {
           entity: .user,
           token: keyChainviewModel.token,
           id: obsObserversViewModel.observerId,
-          speciesGroup: settings.selectedUserSpeciesGroup ?? 1, //??
+          speciesGroup: settings.selectedUserSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodUser,
           completion: { log.info("fetch data complete") })
       }
@@ -119,7 +118,7 @@ struct TabUserObservationsView: View {
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
           currentFilteringOption: $currentFilteringOption,
-          currentSpeciesGroup: $settings.selectedUserSpeciesGroup, //??
+          currentSpeciesGroup: $settings.selectedUserSpeciesGroup,
           timePeriod: $settings.timePeriodUser)
       )
 
@@ -156,7 +155,7 @@ struct TabUserObservationsView: View {
           ) {
             Image(systemSymbol: .bookmarkCircle)
               .uniformSize()
-            .accessibility(label: Text(favoObservation)) //??
+            .accessibility(label: Text(favoObservation)) 
           }
         }
 

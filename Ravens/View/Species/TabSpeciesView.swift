@@ -79,7 +79,7 @@ struct TabSpeciesView: View {
             }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
+              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
                 NavigationLink(destination: BirdListView(
                   scientificName: species.scientificName,
                   nativeName: species.name)) {
@@ -154,7 +154,7 @@ struct SortFilterSpeciesView: View {
 
     Form {
       // Selected the SpeciesGroup
-      SpeciesGroupPickerView(currentSpeciesGroup: $settings.selectedSpeciesGroupId)
+      SpeciesGroupPickerView(currentSpeciesGroup: $settings.selectedSpeciesGroup)
 
       // First Menu for Sorting
       Section(sort) {
