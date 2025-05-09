@@ -99,7 +99,7 @@ struct ObservationRowView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
-      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)) {
+      NavigationLink(destination: ObsDetailView(obs: obs, entity: entity)) {
         ObsView(
           index: index,
           selectedSpeciesID: $selectedSpeciesID,

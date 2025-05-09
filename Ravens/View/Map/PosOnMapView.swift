@@ -10,6 +10,7 @@ import MapKit
 
 struct PositionOnMapView: View {
   var obs: Observation
+  var allowsHitTesting: Bool = true
 
   @EnvironmentObject var settings: Settings
   @State private var cameraPosition: MapCameraPosition = .automatic
@@ -30,12 +31,18 @@ struct PositionOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
+    .mapControls {
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() // tapping this makes it north
+    }
+
     .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
     }
-    .allowsHitTesting(false)
+    .allowsHitTesting(allowsHitTesting)
   }
 }
 
@@ -56,6 +63,11 @@ struct PositionLatitideLongitudeOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
+    .mapControls {
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() // tapping this makes it north
+    }
     .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 150000)

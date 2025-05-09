@@ -77,6 +77,7 @@ import SwiftUI
 
 struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
+  @State var selectedSpeciesID: Int?
 //  @State private var selectedDate: Date?
 //  @State private var selectedRange: MDateRange? = .init()
 
@@ -96,33 +97,33 @@ struct FavoObservationListView: View {
           ForEach(sortedKeys, id: \.self) { name in
             if let records = groupedRecords[name] {
               Section(header: Text(name).bold()) {
-
                 ForEach(records) { observation in
-                  VStack(alignment: .leading) {
-//                    Text("\(observation.speciesDetail.name)")
-//                      .bold()
-//                    Text("\(observation.speciesDetail.scientificName)")
-//                      .italic()
-//                    Text("\(observation.locationDetail?.name ?? "")") //??
-//                      .font(.caption)
-//                    Text("\(observation.userDetail?.name ?? "")") //??
-//                      .font(.caption)
+
+                  NavigationLink(
+                    destination: ObsDetailView(
+                      obs: observation,
+                      selectedSpeciesID: $selectedSpeciesID,
+                      entity: .species) //??
+                  )  {
                     HStack {
-                      HStack {
-                        Text("\(observation.date)")
-                        Text("\(observation.time ?? "")")
+                      Text("\(observation.date)")
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                        .frame(width: 80, alignment: .leading)
 
-                      }
-                      .bold()
-                      .font(.caption)
+                      Text("\(observation.time ?? "")")
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                        .frame(width: 40, alignment: .leading)
 
-                      Text("  \(observation.locationDetail?.name ?? "")") 
+                      Text("  \(observation.locationDetail?.name ?? "")")
                         .font(.caption)
                         .lineLimit(1)
                         .truncationMode(.tail)
                     }
+                    .font(.caption)
                   }
-                  .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
+                  .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button {
                       favoriteObservationsViewModel.removeRecord(observation: observation)
                     } label: {
@@ -132,10 +133,46 @@ struct FavoObservationListView: View {
                   }
                 }
               }
+//              Section(header: Text(name).bold()) {
+//                ForEach(records) { observation in
+//                  HStack {
+//                    Text("\(observation.date)")
+//                      .lineLimit(1)
+//                      .truncationMode(.tail)
+//                      .frame(width: 80, alignment: .leading)
+//
+//                    Text("\(observation.time ?? "")")
+//                      .lineLimit(1)
+//                      .truncationMode(.tail)
+//                      .frame(width: 40, alignment: .leading)
+//                    //                      }
+//
+//                    Text("  \(observation.locationDetail?.name ?? "")")
+//                      .font(.caption)
+//                      .lineLimit(1)
+//                      .truncationMode(.tail)
+//                  }
+//                  .font(.caption)
+//                  .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
+//                    Button {
+//                      favoriteObservationsViewModel.removeRecord(observation: observation)
+//                    } label: {
+//                      Image(systemSymbol: .bookmarkSlash)
+//                    }
+//                    .tint(.red)
+//                  }
+//                }
+//              }
             }
           }
         }
-        .listStyle(.plain)
+//        .listStyle(.plain)
+//        .listStyle(PlainListStyle())
+        .listStyle(GroupedListStyle())
+//        .listStyle(InsetGroupedListStyle())
+//        .listStyle(SidebarListStyle())
+//        .listStyle(InsetListStyle()) // iOS 14+
+
         Spacer()
       }
 
