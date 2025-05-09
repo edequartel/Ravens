@@ -17,6 +17,7 @@ struct PositionOnMapView: View {
 
   var body: some View {
     Map(position: $cameraPosition) {
+      UserAnnotation()
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))

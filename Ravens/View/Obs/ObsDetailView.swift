@@ -22,7 +22,6 @@ struct ObsDetailView: View {
 
   @State private var showPositionFullView = false
 
-
   var body: some View {
     ScrollView {
       VStack {
