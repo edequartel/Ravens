@@ -77,9 +77,7 @@ import SwiftUI
 
 struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
-  @State var selectedSpeciesID: Int?
-//  @State private var selectedDate: Date?
-//  @State private var selectedRange: MDateRange? = .init()
+
 
   var body: some View {
     NavigationStack {
@@ -102,7 +100,6 @@ struct FavoObservationListView: View {
                   NavigationLink(
                     destination: ObsDetailView(
                       obs: observation,
-                      selectedSpeciesID: $selectedSpeciesID,
                       entity: .species) //??
                   )  {
                     HStack {
@@ -133,36 +130,6 @@ struct FavoObservationListView: View {
                   }
                 }
               }
-//              Section(header: Text(name).bold()) {
-//                ForEach(records) { observation in
-//                  HStack {
-//                    Text("\(observation.date)")
-//                      .lineLimit(1)
-//                      .truncationMode(.tail)
-//                      .frame(width: 80, alignment: .leading)
-//
-//                    Text("\(observation.time ?? "")")
-//                      .lineLimit(1)
-//                      .truncationMode(.tail)
-//                      .frame(width: 40, alignment: .leading)
-//                    //                      }
-//
-//                    Text("  \(observation.locationDetail?.name ?? "")")
-//                      .font(.caption)
-//                      .lineLimit(1)
-//                      .truncationMode(.tail)
-//                  }
-//                  .font(.caption)
-//                  .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-//                    Button {
-//                      favoriteObservationsViewModel.removeRecord(observation: observation)
-//                    } label: {
-//                      Image(systemSymbol: .bookmarkSlash)
-//                    }
-//                    .tint(.red)
-//                  }
-//                }
-//              }
             }
           }
         }

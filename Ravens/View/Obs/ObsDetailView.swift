@@ -11,7 +11,7 @@ import CoreLocation
 
 struct ObsDetailView: View {
   var obs: Observation
-//  @Binding var selectedSpeciesID: Int?
+  var entity: EntityType
 
   @State var imageURLStr: String?
   @State var selectedObservationSound: Observation?
@@ -22,7 +22,6 @@ struct ObsDetailView: View {
 
   @State private var showPositionFullView = false
 
-  var entity: EntityType
 
   var body: some View {
     ScrollView {
@@ -202,7 +201,6 @@ struct ObsDetailView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
     ObsDetailView(
       obs: mockObservation,
-//      selectedSpeciesID: .constant(nil),
       entity: .radius
     )
     .environmentObject(mockBookMarksViewModel)

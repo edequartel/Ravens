@@ -153,7 +153,7 @@ struct TabUserObservationsView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: FavoObservationListView()
           ) {
-            Image(systemSymbol: .bookmarkCircle)
+            Image(systemSymbol: .bookmark) // .bookmarkCircle)
               .uniformSize()
             .accessibility(label: Text(favoObservation)) 
           }
