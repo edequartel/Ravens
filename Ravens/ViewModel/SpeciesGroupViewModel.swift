@@ -36,6 +36,10 @@ class SpeciesGroupsViewModel: ObservableObject {
                     // Decode the JSON response into an array of SpeciesGroup objects
                     let decoder = JSONDecoder()
                     self.speciesGroups = try decoder.decode([SpeciesGroup].self, from: response.data!)
+
+                  // Append the additional species group
+//                  self.speciesGroups.append(SpeciesGroup(id: 0, name: "All"))//??
+
                     self.speciesGroupsByRegion = self.speciesGroups
                     
                     // Update the speciesDictionary

@@ -100,7 +100,7 @@ struct FavoObservationListView: View {
                   NavigationLink(
                     destination: ObsDetailView(
                       obs: observation,
-                      entity: .species) //??
+                      entity: .species)  //??
                   )  {
                     HStack {
                       Text("\(observation.date)")
@@ -108,10 +108,10 @@ struct FavoObservationListView: View {
                         .truncationMode(.tail)
                         .frame(width: 80, alignment: .leading)
 
-                      Text("\(observation.time ?? "")")
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .frame(width: 40, alignment: .leading)
+//                      Text("\(observation.time ?? "")")
+//                        .lineLimit(1)
+//                        .truncationMode(.tail)
+//                        .frame(width: 40, alignment: .leading)
 
                       Text("  \(observation.locationDetail?.name ?? "")")
                         .font(.caption)
