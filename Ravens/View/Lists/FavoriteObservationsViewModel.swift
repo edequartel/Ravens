@@ -106,7 +106,7 @@ struct FavoObservationListView: View {
                       Text("\(observation.date)")
                         .lineLimit(1)
                         .truncationMode(.tail)
-                        .frame(width: 80, alignment: .leading)
+                        .frame(width: 100, alignment: .leading)
 
 //                      Text("\(observation.time ?? "")")
 //                        .lineLimit(1)

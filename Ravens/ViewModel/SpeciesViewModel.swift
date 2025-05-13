@@ -22,6 +22,7 @@ class SpeciesViewModel: ObservableObject {
   var datum: String = ""
 
   // Helper function to convert date and time strings into a Date object
+  //??
   private func convertToDate(dateString: String, timeString: String) -> Date {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // Adjust format as per your date-time strings
