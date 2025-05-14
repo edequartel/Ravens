@@ -88,6 +88,8 @@ struct RavensApp: App {
         observationsSpecies: observationsSpecies,
         observationsRadiusViewModel: observationsRadiusViewModel
       )
+//      .modelContainer(for: Task.self) // <<< VERY IMPORTANT!!
+
       .environmentObject(keychainViewModel)
       .environmentObject(locationManager)
       .environmentObject(settings)

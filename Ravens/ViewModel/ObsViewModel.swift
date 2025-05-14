@@ -90,7 +90,11 @@ class ObsViewModel: ObservableObject {
             case .failure(let error):
                 self.log.error("Error fetching Observation data: \(error)")
                 if let responseData = response.data {
-                    self.log.error("Response data: \(String(decoding: responseData, as: UTF8.self))")
+                  if let responseString = String(data: responseData, encoding: .utf8) {
+                      self.log.error("Response data: \(responseString)")
+                  } else {
+                      self.log.error("Response data could not be decoded as UTF-8.")
+                  }
                 }
             }
         }

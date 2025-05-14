@@ -152,3 +152,4 @@ let audioInfo = LocalizedStringKey("audioInfo")
 let audioDownload = LocalizedStringKey("audioDownload")
 
 let favoObservation = LocalizedStringKey("favoObservation")
+let favoFavorites = LocalizedStringKey("favoFavorites")

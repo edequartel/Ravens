@@ -46,7 +46,7 @@ struct RegionsView: View {
       }
 
       // and set the selectedSpeciesGroupId to the first one at the start
-      settings.selectedSpeciesGroup = speciesGroupsViewModel.speciesGroupsByRegion[0].id //??@@
+      settings.selectedSpeciesGroup = speciesGroupsViewModel.speciesGroupsByRegion[0].id 
       log.error("-->> selectedSpeciesGroup: \(String(describing: settings.selectedSpeciesGroup))")
 
       // and save this

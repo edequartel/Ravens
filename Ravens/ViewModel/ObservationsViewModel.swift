@@ -66,7 +66,7 @@ class ObservationsViewModel: ObservableObject {
     }
 
     url += "&ordering=-datetime"
-    url += "&species_group=\(speciesGroup)" 
+    url += "&species_group=\(speciesGroup)"
 
     fetchData(settings: settings, url: url, token: token, completion: completion)
   }

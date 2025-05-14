@@ -148,8 +148,6 @@ struct ObsView: View {
 
 //      LinkButtonView(obs: obs)
 
-      //??! hier een link naar de list met de observations van deze species met boompje
-
 //      Button {
 //        favoriteObservationsViewModel.appendRecord(observation: obs)
 //      } label: {

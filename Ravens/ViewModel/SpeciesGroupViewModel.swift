@@ -38,13 +38,20 @@ class SpeciesGroupsViewModel: ObservableObject {
                     self.speciesGroups = try decoder.decode([SpeciesGroup].self, from: response.data!)
 
                   // Append the additional species group
-//                  self.speciesGroups.append(SpeciesGroup(id: 0, name: "All"))//??
+                  //-->>
+
+//                  self.speciesGroups.append(SpeciesGroup(id: -1, name: "All"))//??
 
                     self.speciesGroupsByRegion = self.speciesGroups
                     
                     // Update the speciesDictionary
                     self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
-                    
+
+//                  print("--->> \(self.speciesDictionary)")
+
+
+                  //--<<
+                  
                     // Call the completion handler when the data is successfully fetched
                     completion?() // call the completion handler if it exists
                 } catch {
