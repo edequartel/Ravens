@@ -77,7 +77,6 @@
 		477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477ED86D2BA9CFE900B0D73C /* LottieView.swift */; };
 		477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 477ED8702BA9D0AD00B0D73C /* Lottie */; };
 		4781539B2B57BDC2005F87CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4781539A2B57BDC2005F87CC /* README.md */; };
-		47816BE72DD45AB900D793ED /* SwiftDataExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47816BE62DD45AB000D793ED /* SwiftDataExample.swift */; };
 		47816C1F2DD45CE700D793ED /* todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 47816C1E2DD45CDE00D793ED /* todo.md */; };
 		478262642C88203400DD746C /* ObsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262632C88203400DD746C /* ObsDetailView.swift */; };
 		478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478262652C897B7000DD746C /* ObsDetailsRowView.swift */; };
@@ -196,7 +195,6 @@
 		476FA8A52B9B031B00665613 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
 		477ED86D2BA9CFE900B0D73C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		4781539A2B57BDC2005F87CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		47816BE62DD45AB000D793ED /* SwiftDataExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataExample.swift; sourceTree = "<group>"; };
 		47816C1E2DD45CDE00D793ED /* todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = todo.md; sourceTree = "<group>"; };
 		478262632C88203400DD746C /* ObsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailView.swift; sourceTree = "<group>"; };
 		478262652C897B7000DD746C /* ObsDetailsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsDetailsRowView.swift; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				47816C1E2DD45CDE00D793ED /* todo.md */,
-				47816BE62DD45AB000D793ED /* SwiftDataExample.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				47AB45A22CE327A300842877 /* SplashView.swift */,
@@ -798,7 +795,6 @@
 				47568D332B5A724D00E69B1A /* MapObservationsSpeciesView.swift in Sources */,
 				471A45E92C8F2D4A00433C6B /* PosOnMapView.swift in Sources */,
 				474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */,
-				47816BE72DD45AB900D793ED /* SwiftDataExample.swift in Sources */,
 				4738B63B2BF4798800BF7557 /* BookMarksViewModel.swift in Sources */,
 				474C40862B4D84030038B3A5 /* Settings.swift in Sources */,
 				477ED86E2BA9CFE900B0D73C /* LottieView.swift in Sources */,
