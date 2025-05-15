@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct PositionOnMapView: View {
-  var obs: Observation
+  var obs: Obs
   var allowsHitTesting: Bool = true
 
   @EnvironmentObject var settings: Settings

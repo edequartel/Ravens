@@ -91,7 +91,7 @@ struct FilteringAllOptionsView: View {
 
 struct ObservationRowView: View {
   let index: Int?
-  var obs: Observation
+  var obs: Obs
   @Binding var selectedSpeciesID: Int?
   
   var entity: EntityType

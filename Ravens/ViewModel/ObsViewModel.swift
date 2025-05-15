@@ -44,11 +44,11 @@ import SwiftyBeaver
 // ?? cache
 class ObsViewModel: ObservableObject {
     let log = SwiftyBeaver.self
-    @Published var observation: Observation?
+    @Published var observation: Obs?
     private var keyChainViewModel = KeychainViewModel()
 
     // MARK: - Cache using (obsID, language) as key
-    private var observationCache: [String: Observation] = [:]
+    private var observationCache: [String: Obs] = [:]
 
     func fetchData(settings: Settings, for obsID: Int, token: String, completion: @escaping () -> Void) {
         log.info("fetchData called for ObsViewModel \(obsID) at \(Date())")
@@ -79,7 +79,7 @@ class ObsViewModel: ObservableObject {
                 if let utf8Data = String(data: data, encoding: .isoLatin1)?.data(using: .utf8) {
                     let decoder = JSONDecoder()
                     do {
-                        let decodedObservation = try decoder.decode(Observation.self, from: utf8Data)
+                        let decodedObservation = try decoder.decode(Obs.self, from: utf8Data)
                         self.observation = decodedObservation
                         self.observationCache[cacheKey] = decodedObservation // Cache it
                         completion()

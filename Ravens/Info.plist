@@ -27,6 +27,10 @@
 	</array>
 	<key>LSMinimumSystemVersion</key>
 	<string>14.4</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 </dict>

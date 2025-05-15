@@ -14,7 +14,7 @@ import SwiftData
 class FavoriteObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
-  @Published var records: [Observation] = []
+  @Published var records: [Obs] = []
   let filePath: URL
 
   init(fileName: String = "favoriteObservations.json") {
@@ -34,7 +34,7 @@ class FavoriteObservationsViewModel: ObservableObject {
   func loadRecords() {
     do {
       let data = try Data(contentsOf: filePath)
-      records = try JSONDecoder().decode([Observation].self, from: data)
+      records = try JSONDecoder().decode([Obs].self, from: data)
       log.info("Loaded \(records.count) favorite observations")
     } catch {
       log.info("Error loading data from \(filePath.lastPathComponent) - likely empty")
@@ -54,7 +54,7 @@ class FavoriteObservationsViewModel: ObservableObject {
     records.contains(where: { $0.idObs == idObs })
   }
 
-  func appendRecord(observation: Observation) {
+  func appendRecord(observation: Obs) {
     guard !records.contains(where: { $0.idObs == observation.idObs }) else {
       print("Record with idObs \(String(describing: observation.idObs)) already exists.")
       return
@@ -63,7 +63,7 @@ class FavoriteObservationsViewModel: ObservableObject {
     saveRecords()
   }
 
-  func removeRecord(observation: Observation) {
+  func removeRecord(observation: Obs) {
     if let index = records.firstIndex(where: { $0.idObs == observation.idObs }) {
       records.remove(at: index)
       saveRecords()
@@ -88,7 +88,7 @@ struct FavoObservationListView: View {
         //        MCalendarView(selectedDate: $selectedDate, selectedRange: $selectedRange)
         //        let groupedRecords = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
 
-        let groupedRecords: [String: [Observation]] = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
+        let groupedRecords: [String: [Obs]] = Dictionary(grouping: favoriteObservationsViewModel.records) { $0.speciesDetail.name }
           .mapValues { $0.sorted(by: { $0.date < $1.date }) }
         let sortedKeys = groupedRecords.keys.sorted()
 

@@ -22,7 +22,7 @@ enum EntityType: String {
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
-  @Published var observations: [Observation]? {
+  @Published var observations: [Obs]? {
     didSet {
       // print("Array updated \(observations?.count ?? 0)") to update the ModelView
     }

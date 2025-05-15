@@ -10,12 +10,12 @@ import RichText
 import CoreLocation
 
 struct ObsDetailView: View {
-  var obs: Observation
+  var obs: Obs
   var entity: EntityType
 
   @State var imageURLStr: String?
-  @State var selectedObservationSound: Observation?
-  @State private var selectedObservation: Observation?
+  @State var selectedObservationSound: Obs?
+  @State private var selectedObservation: Obs?
 
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -186,7 +186,7 @@ struct ObsDetailView: View {
 
   // Fullscreen destination map view
   struct FullMapView: View {
-    let obs: Observation
+    let obs: Obs
 
     var body: some View {
       PositionOnMapView(obs: obs, allowsHitTesting: true)

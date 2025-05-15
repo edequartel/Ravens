@@ -95,7 +95,7 @@ struct SpeciesView: View {
 }
 
 struct ObservationsChartView: View {
-  var observations: [Observation]
+  var observations: [Obs]
   var name: String = ""
 
   // Step 1: Group and count observations by DD-MM

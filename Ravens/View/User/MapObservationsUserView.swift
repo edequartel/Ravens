@@ -74,7 +74,7 @@ struct MapObservationsUserView: View {
 }
 
 struct ObservationAnnotationView: View {
-  let observation: Observation
+  let observation: Obs
 
   var body: some View {
     Circle()

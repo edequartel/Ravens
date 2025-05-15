@@ -13,7 +13,7 @@ import SwiftyBeaver
 // MARK: - ViewModel
 class ObservationsRadiusViewModel: ObservableObject {
   let log = SwiftyBeaver.self
-  @Published var observations: [Observation]?
+  @Published var observations: [Obs]?
   @Published var errorMessage: String?
   @Published var hasLoadedData = false
 

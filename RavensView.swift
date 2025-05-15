@@ -26,6 +26,13 @@ struct RavensView: View {
   var body: some View {
     if  !keyChainViewModel.token.isEmpty {
       TabView {
+        // Tab 0
+        FavoritesListView()
+          .tabItem {
+            Text("data")
+            Image(systemSymbol: .person)
+          }
+
         // Tab 1
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
           .tabItem {

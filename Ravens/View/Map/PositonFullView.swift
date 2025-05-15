@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 struct PositonFullView: View {
-  var obs: Observation
+  var obs: Obs
   @EnvironmentObject var settings: Settings
 
   @State private var cameraPosition: MapCameraPosition = .automatic

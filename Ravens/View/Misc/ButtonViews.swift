@@ -9,7 +9,7 @@ import SwiftUI
 import SFSafeSymbols
 
 struct ShareLinkButtonView: View {
-    var obs: Observation
+    var obs: Obs
     var body: some View {
         let url = URL(string: obs.permalink)!
         ShareLink(item: url) {
@@ -38,7 +38,7 @@ struct URLButtonView: View {
 }
 
 struct LinkButtonView: View {
-    var obs: Observation
+    var obs: Obs
   
     var body: some View {
         Button(action: {
@@ -83,7 +83,7 @@ struct URLShareObserverButtonView: View {
 
 struct InformationSpeciesButtonView: View {
     @Binding var selectedSpeciesID: Int?
-    var obs: Observation
+    var obs: Obs
 
     var body: some View {
       NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
@@ -97,7 +97,7 @@ struct InformationSpeciesButtonView: View {
 
 struct AreaButtonView: View {
   @EnvironmentObject var areasViewModel: AreasViewModel
-  var obs: Observation
+  var obs: Obs
 
   var body: some View {
     Button(action: {
@@ -154,7 +154,7 @@ struct AreaLocationButtonView: View {
 
 struct ObserversObsButtonView: View {
   @EnvironmentObject var observersViewModel: ObserversViewModel
-  var obs: Observation
+  var obs: Obs
 
   var body: some View {
     Button(action: {
