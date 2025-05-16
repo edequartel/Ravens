@@ -25,6 +25,7 @@
 		471F7A642CF793C400BF529C /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7A632CF793BE00BF529C /* PlayerModel.swift */; };
 		471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 471F7AF22CF9E90A00BF529C /* Localizable.strings */; };
 		471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */; };
+		4720A1BA2DD75B7D007E62A8 /* swiftdataText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4720A1B92DD75B73007E62A8 /* swiftdataText.swift */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -149,6 +150,7 @@
 		471F7AF32CF9E90A00BF529C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		471F7AF52CF9E91E00BF529C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesInfoView.swift; sourceTree = "<group>"; };
+		4720A1B92DD75B73007E62A8 /* swiftdataText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftdataText.swift; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				47816C1E2DD45CDE00D793ED /* todo.md */,
+				4720A1B92DD75B73007E62A8 /* swiftdataText.swift */,
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				47AB45A22CE327A300842877 /* SplashView.swift */,
@@ -741,6 +744,7 @@
 				4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */,
 				4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */,
 				47826CBF2BF62D96003E8F21 /* WikipediaPage.swift in Sources */,
+				4720A1BA2DD75B7D007E62A8 /* swiftdataText.swift in Sources */,
 				478DE5462B6554E600FF7737 /* SettingsDetailsView.swift in Sources */,
 				474C40552B4BFDC90038B3A5 /* RegionListViewModel.swift in Sources */,
 				4785CD232B965237002F52BE /* ObservationsUserView.swift in Sources */,

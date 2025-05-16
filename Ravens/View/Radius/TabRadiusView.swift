@@ -69,7 +69,8 @@ struct TabRadiusView: View {
       )
 
       .onChange(of: settings.selectedRadiusSpeciesGroup) {
-        log.error("update selectedRadiusSpeciesGroup \(String(describing: settings.radius))")
+        log.error("1")
+        log.error("update selectedRadiusSpeciesGroup \(String(describing: settings.selectedRadiusSpeciesGroup))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
           settings: settings,
@@ -81,7 +82,7 @@ struct TabRadiusView: View {
           speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
           timePeriod: settings.timePeriodRadius,
           completion: {
-            log.error("update selectedRadiusSpeciesGroup")
+            log.error("e7 update selectedRadiusSpeciesGroup")
           })
       }
 

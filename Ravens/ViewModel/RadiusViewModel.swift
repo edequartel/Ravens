@@ -56,7 +56,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     settings: Settings,
     url: String,
     completion: @escaping () -> Void) {
-      log.info("ObservationsRadiusViewModel fetchData url: [\(url)]")
+      log.error("ObservationsRadiusViewModel fetchData url: [\(url)]")
       if url.isEmpty { return }
 
       let headers: HTTPHeaders = [
@@ -79,7 +79,7 @@ class ObservationsRadiusViewModel: ObservableObject {
                 self.next = observations.next?.absoluteString ?? ""
                 self.previous = observations.previous?.absoluteString ?? ""
 
-                self.log.error("radius cont: \(self.count)")
+                self.log.info("radius cont: \(self.count)")
                 self.log.info("next: \(self.next)")
                 self.log.info("prev: \(self.previous)")
 

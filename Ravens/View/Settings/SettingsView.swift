@@ -100,7 +100,7 @@ struct SettingsView: View {
   }
 
   func getId(region: Int, speciesGroup: Int) -> Int? {
-    log.error("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
+    log.verbose("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
     if let matchingItem = regionListViewModel.regionLists.first(
       where: { $0.region == region && $0.speciesGroup == speciesGroup }) {
       log.error("getId= \(matchingItem)")
@@ -164,6 +164,7 @@ struct SpeciesGroupPickerView: View {
       }
       .pickerStyle(.navigationLink)
       .onChange(of: currentSpeciesGroup) {
+        log.error("2")
         log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))")
 
         settings.selectedRegionListId = regionListViewModel.getId(
@@ -174,10 +175,11 @@ struct SpeciesGroupPickerView: View {
           settings.selectedSpeciesGroupName = selectedGroup.name
         }
 
+        log.error("3")
         log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(String(describing: settings.selectedSpeciesGroup))")
 
-        speciesViewModel.fetchDataFirst(settings: settings)
-        speciesViewModel.fetchDataSecondLanguage(settings: settings)
+//        speciesViewModel.fetchDataFirst(settings: settings)
+//        speciesViewModel.fetchDataSecondLanguage(settings: settings)
       }
     }
   }
