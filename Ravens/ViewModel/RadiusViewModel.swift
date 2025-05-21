@@ -44,6 +44,7 @@ class ObservationsRadiusViewModel: ObservableObject {
       url += "&radius="+String(radius)
       url += "&species_group=\(speciesGroup)"
 
+
       self.log.info("url:\(url)")
 
       fetchData(

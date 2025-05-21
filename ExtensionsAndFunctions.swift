@@ -15,9 +15,8 @@ let demo = false
  let showView = false
 // let showView = true
 
-// gouda en span nederland
-// let latitude = 52,013077
-// let longitude = 4,713450
+// neeltje jans
+// 51.631732, 3.698586
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0

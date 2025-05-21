@@ -36,6 +36,7 @@ struct ObservationsUserView: View {
   @Binding var setRefresh: Bool
 
   @State private var getObservations: String = "loading Observations"
+  
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }

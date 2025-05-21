@@ -45,31 +45,33 @@ class ObservationsViewModel: ObservableObject {
     speciesGroup: Int,
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
-    log.info("ObservationsViewModel FetchDataInit")
+      log.info("ObservationsViewModel FetchDataInit")
 
-    // reset
-    self.observations = []
+      // reset
+      self.observations = []
 
-    var days = (timePeriod ?? .twoWeeks).rawValue
-    days -= 1 // today is also also a day
+      var days = (timePeriod ?? .twoWeeks).rawValue
+      days -= 1 // today is also also a day
 
-    // datetime
-    let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
-    let dateBefore = formatCurrentDate(value: date)
+      // datetime
+      let date: Date = Date.now
+      let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
+      let dateBefore = formatCurrentDate(value: date)
 
       // add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+      var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
 
-    if timePeriod != .infinite {
-      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+      if timePeriod != .infinite {
+        url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+      }
+
+      url += "&ordering=-datetime"
+      if speciesGroup != -1 {
+        url += "&species_group=\(speciesGroup)"
+      }
+
+      fetchData(settings: settings, url: url, token: token, completion: completion)
     }
-
-    url += "&ordering=-datetime"
-    url += "&species_group=\(speciesGroup)" //??
-
-    fetchData(settings: settings, url: url, token: token, completion: completion)
-  }
 
   func fetchData(
     settings: Settings,

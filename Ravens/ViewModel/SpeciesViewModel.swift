@@ -29,11 +29,11 @@ class SpeciesViewModel: ObservableObject {
   }
   
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("4")
+    log.error("SpeciesViewModel 4")
     log.error("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
     
-    log.error(">>url: \(url)")
+    log.error("url: \(url)")
 
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
@@ -66,11 +66,12 @@ class SpeciesViewModel: ObservableObject {
   }
   
   func fetchDataSecondLanguage(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("5")
+    log.error("SpeciesViewModel 5")
     log.error("SpeciesViewModel fetchDataSecondLanguage \(settings.selectedSecondLanguage) groupID \(settings.selectedRegionListId)")
 
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    
+    log.error("SpeciesViewModel 5 \(url)")
+
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedSecondLanguage

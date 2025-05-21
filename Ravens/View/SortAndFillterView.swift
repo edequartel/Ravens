@@ -165,11 +165,8 @@ struct ObservationToolbarModifier: ViewModifier {
     self._currentSortingOption = currentSortingOption
     self._currentFilteringAllOption = currentFilteringAllOption
     self._currentFilteringOption = currentFilteringOption
-
     self._currentSpeciesGroup = currentSpeciesGroup
-
     self._timePeriod = timePeriod
-
     self.entity = entity
   }
   
@@ -183,7 +180,6 @@ struct ObservationToolbarModifier: ViewModifier {
               currentFilteringAllOption: $currentFilteringAllOption,
               currentFilteringOption: $currentFilteringOption,
               currentSpeciesGroup: $currentSpeciesGroup,
-
               timePeriod: $timePeriod,
               entity: entity
             )
@@ -216,7 +212,9 @@ struct CombinedOptionsMenuView: View {
 
         // Selected the SpeciesGroup
         if currentSpeciesGroup != nil {
-          SpeciesGroupPickerView(currentSpeciesGroup: $currentSpeciesGroup) 
+          SpeciesGroupPickerView(
+            currentSpeciesGroup: $currentSpeciesGroup,
+            entity: entity)
         }
 
         // Period Filter

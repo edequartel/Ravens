@@ -142,7 +142,7 @@ struct SettingsView_Previews: PreviewProvider {
 //deze SpeciesGroupPickerView hier in een ander bestand gaan zetten en meer globaal maken
 struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+//  @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
@@ -151,12 +151,13 @@ struct SpeciesGroupPickerView: View {
 
   @Binding var currentSpeciesGroup: Int?
 
-  var body: some View {
+  var entity: EntityType
 
+  var body: some View {
     Section(header: Text(species)) {
-      Picker(group, selection: $currentSpeciesGroup) {
-        ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
-          Text(speciesGroup.name)
+      Picker(group, selection: $currentSpeciesGroup) { //??
+        ForEach( entity != .species ? speciesGroupsViewModel.speciesGroupsAll : speciesGroupsViewModel.speciesGroups, id: \ .id) { speciesGroup in
+          Text("\(speciesGroup.name)") //??> picture svg
             .tag(speciesGroup.id)
             .lineLimit(1)
             .truncationMode(.tail)
@@ -178,8 +179,9 @@ struct SpeciesGroupPickerView: View {
         log.error("3")
         log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(String(describing: settings.selectedSpeciesGroup))")
 
-//        speciesViewModel.fetchDataFirst(settings: settings)
-//        speciesViewModel.fetchDataSecondLanguage(settings: settings)
+        //speciesViewModel.fetchDataFirst(settings: settings)//??XXX
+        //speciesViewModel.fetchDataSecondLanguage(settings: settings)
+
       }
     }
   }

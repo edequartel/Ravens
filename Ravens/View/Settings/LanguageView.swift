@@ -28,9 +28,9 @@ struct LanguageView: View {
             }
             .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedLanguage) {
-                speciesGroupsViewModel.fetchData(settings: settings) 
+                speciesGroupsViewModel.fetchData(settings: settings)
                 regionsViewModel.fetchData(settings: settings)
-                print("selectedRegionListId: \(settings.selectedRegionListId)")
+                log.error("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataFirst(settings: settings)
             }
             
@@ -41,7 +41,7 @@ struct LanguageView: View {
             }
             .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedSecondLanguage) {
-                print("selectedRegionListId: \(settings.selectedRegionListId)")
+                log.error("selectedRegionListId: \(settings.selectedRegionListId)")
                 speciesViewModel.fetchDataSecondLanguage(settings: settings)
             }
     }

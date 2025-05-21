@@ -97,6 +97,10 @@ struct TabSpeciesView: View {
         .searchable(text: $searchText)
       }
 
+      .onChange(of: settings.selectedSpeciesGroup) {
+        print("xxx")
+      }
+
       .navigationDestination(item: $showSpeciesXC) { species in
         BirdListView(scientificName: species.scientificName, nativeName: species.name)
       }
@@ -116,8 +120,8 @@ struct TabSpeciesView: View {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption,
-            currentSpeciesGroup: $settings.selectedUserSpeciesGroup
+            selectedRarityOption: $selectedRarityOption//,
+            //currentSpeciesGroup: $settings.selectedSpeciesGroup //??
 
           )) {
             Image(systemSymbol: .ellipsisCircle)
@@ -145,16 +149,19 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
-  @Binding var currentSpeciesGroup: Int?
+//  @Binding var currentSpeciesGroup: Int?
 
   @EnvironmentObject var settings: Settings
 
   var body: some View {
+
     if showView { Text("SortFilterSpeciesView").font(.customTiny) }
 
     Form {
       // Selected the SpeciesGroup
-      SpeciesGroupPickerView(currentSpeciesGroup: $settings.selectedSpeciesGroup)
+      SpeciesGroupPickerView(
+        currentSpeciesGroup: $settings.selectedSpeciesGroup,
+        entity: .species)
 
       // First Menu for Sorting
       Section(sort) {

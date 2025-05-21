@@ -78,8 +78,21 @@ struct TabLocationView: View {
         }
       }
 
+      .onChange(of: settings.selectedLanguage) {
+        log.error("update selectedLanguage \(settings.selectedUserSpeciesGroup ?? 1)")
+        fetchDataLocation(
+          settings: settings,
+          token: keyChainviewModel.token,
+          observationsLocation: observationsLocation,
+          locationIdViewModel: locationIdViewModel,
+          geoJSONViewModel: geoJSONViewModel,
+          coordinate: setLocation,
+          timePeriod: settings.timePeriodLocation)
+        settings.hasLocationLoaded = true
+      }
+
       .onChange(of: settings.selectedLocationSpeciesGroup) {
-        log.error("-->> update timePeriodLocation so new data fetch for this period")
+        log.error("update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
@@ -92,7 +105,7 @@ struct TabLocationView: View {
       }
 
       .onChange(of: settings.timePeriodLocation) {
-        log.error("-->> update timePeriodLocation so new data fetch for this period")
+        log.error("update timePeriodLocation so new data fetch for this period")
         fetchDataLocation(
           settings: settings,
           token: keyChainviewModel.token,
