@@ -123,7 +123,7 @@ struct SplashView: View {
 
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
-      log.info("speciesViewModel First language data loaded")
+      log.error("speciesViewModel First language data loaded")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()
     }
@@ -131,7 +131,7 @@ struct SplashView: View {
 
   private func loadSpeciesSecondLanguageData() async {
     speciesViewModel.fetchDataSecondLanguage(settings: settings) {
-      log.info("speciesViewModel Second language data loaded")
+      log.error("speciesViewModel Second language data loaded")
       isSecondLanguageDataLoaded = true
       checkDataLoaded()
     }

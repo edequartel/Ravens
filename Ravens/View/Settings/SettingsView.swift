@@ -155,26 +155,27 @@ struct SpeciesGroupPickerView: View {
 
   var body: some View {
     Section(header: Text(species)) {
+      Text("SpeciesGroupPickerView")
       Picker(group, selection: $currentSpeciesGroup) { //??
         ForEach( entity != .species ? speciesGroupsViewModel.speciesGroupsAll : speciesGroupsViewModel.speciesGroups, id: \ .id) { speciesGroup in
-          Text("\(speciesGroup.name)") //??> picture svg
+          Text("\(speciesGroup.name)") //?? picture svg
             .tag(speciesGroup.id)
             .lineLimit(1)
             .truncationMode(.tail)
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: currentSpeciesGroup) {
+      .onChange(of: currentSpeciesGroup) { //??XX
         log.error("2")
         log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))")
 
-        settings.selectedRegionListId = regionListViewModel.getId(
-          region: settings.selectedRegionId,
-          speciesGroup: currentSpeciesGroup ?? 0)
-
-        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroup }) {
-          settings.selectedSpeciesGroupName = selectedGroup.name
-        }
+//        settings.selectedRegionListId = regionListViewModel.getId(
+//          region: settings.selectedRegionId,
+//          speciesGroup: currentSpeciesGroup ?? 0)
+//
+//        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroup }) {
+//          settings.selectedSpeciesGroupName = selectedGroup.name
+//        }
 
         log.error("3")
         log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(String(describing: settings.selectedSpeciesGroup))")
