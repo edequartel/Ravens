@@ -32,20 +32,22 @@ class ObservationsRadiusViewModel: ObservableObject {
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
       observations = []
-      var url = "https://waarnemingen.nl/api/v1/observations/around-point/?"
+      var url = "https://waarneming.nl/api/v1/observations/around-point/?"
+      
       let date = Date()
       let dateFormatted = formatDate(date: date)
       if let days = timePeriod?.rawValue {
-          url += "days=\(days)&"
+          url += "days=\(days)"
       }
       url += "&end_date="+dateFormatted
       url += "&lat="+String(latitude)
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
-      url += "&species_group=\(speciesGroup)"
+      if speciesGroup != -1 {
+        url += "&species_group=\(speciesGroup)"
+      }
 
-
-      self.log.info("url:\(url)")
+      self.log.info("radius url:\(url)")
 
       fetchData(
         settings: settings,

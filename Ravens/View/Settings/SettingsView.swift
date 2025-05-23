@@ -139,10 +139,8 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
-//deze SpeciesGroupPickerView hier in een ander bestand gaan zetten en meer globaal maken
 struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
-//  @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
@@ -155,8 +153,8 @@ struct SpeciesGroupPickerView: View {
 
   var body: some View {
     Section(header: Text(species)) {
-      Text("SpeciesGroupPickerView")
-      Picker(group, selection: $currentSpeciesGroup) { //??
+      if showView { Text("SpeciesGroupPickerView").font(.customTiny) }
+      Picker(group, selection: $currentSpeciesGroup) {
         ForEach( entity != .species ? speciesGroupsViewModel.speciesGroupsAll : speciesGroupsViewModel.speciesGroups, id: \ .id) { speciesGroup in
           Text("\(speciesGroup.name)") //?? picture svg
             .tag(speciesGroup.id)
@@ -165,24 +163,8 @@ struct SpeciesGroupPickerView: View {
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: currentSpeciesGroup) { //??XX
-        log.error("2")
-        log.error("Selected Group ID: \(String(describing: currentSpeciesGroup))")
-
-//        settings.selectedRegionListId = regionListViewModel.getId(
-//          region: settings.selectedRegionId,
-//          speciesGroup: currentSpeciesGroup ?? 0)
-//
-//        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroup }) {
-//          settings.selectedSpeciesGroupName = selectedGroup.name
-//        }
-
-        log.error("3")
-        log.error("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(String(describing: settings.selectedSpeciesGroup))")
-
-        //speciesViewModel.fetchDataFirst(settings: settings)//??XXX
-        //speciesViewModel.fetchDataSecondLanguage(settings: settings)
-
+      .onChange(of: settings.selectedLanguage) {
+        speciesGroupsViewModel.fetchData(settings: settings)
       }
     }
   }

@@ -68,8 +68,26 @@ struct TabRadiusView: View {
           entity: .radius)
       )
 
-      .onChange(of: settings.selectedLanguage) {
-        log.error("update selectedLanguage \(settings.selectedUserSpeciesGroup ?? 1)")
+      //      .onChange(of: settings.selectedLanguage) {
+      //        log.error("update selectedLanguage \(String(describing: settings.selectedLanguage))")
+      //        observationsRadiusViewModel.observations = []
+      //        observationsRadiusViewModel.fetchDataInit(
+      //          settings: settings,
+      //
+      //          latitude: observationsRadiusViewModel.circleCenter.latitude,
+      //          longitude: observationsRadiusViewModel.circleCenter.longitude,
+      //
+      //          radius: settings.radius,
+      //          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
+      //          timePeriod: settings.timePeriodRadius,
+      //          completion: {
+      //            log.error("update timePeriod")
+      //          })
+      //      }
+      
+      .onChange(of: settings.selectedLanguage) { 
+        log.error("1")
+        log.error("update selectedRadiusSpeciesGroup \(String(describing: settings.selectedRadiusSpeciesGroup))")
         observationsRadiusViewModel.observations = []
         observationsRadiusViewModel.fetchDataInit(
           settings: settings,
@@ -117,23 +135,6 @@ struct TabRadiusView: View {
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("update radius")
-          })
-      }
-
-      .onChange(of: settings.selectedLanguage) {
-        log.error("update selectedLanguage \(String(describing: settings.selectedLanguage))")
-        observationsRadiusViewModel.observations = []
-        observationsRadiusViewModel.fetchDataInit(
-          settings: settings,
-
-          latitude: observationsRadiusViewModel.circleCenter.latitude,
-          longitude: observationsRadiusViewModel.circleCenter.longitude,
-
-          radius: settings.radius,
-          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1,
-          timePeriod: settings.timePeriodRadius,
-          completion: {
-            log.error("update timePeriod")
           })
       }
 
