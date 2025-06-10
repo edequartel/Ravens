@@ -92,6 +92,10 @@ struct ObservationsSpeciesView: View {
       }
     }
 
+    .onChange(of: settings.selectedSpeciesGroup) {
+      print("xxx OBS HIER MOET HET NIET GEBEUREN xxx")
+    }
+
     .onChange(of: timePeriod) {
       log.error("update timePeriodUser")
 

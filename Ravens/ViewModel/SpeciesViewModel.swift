@@ -27,10 +27,13 @@ class SpeciesViewModel: ObservableObject {
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // Adjust format as per your date-time strings
     return dateFormatter.date(from: "\(dateString) \(timeString)") ?? Date.distantPast
   }
-  
+
+  //??HIERO
+
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("-->>> SpeciesViewModel 4 settings.selectedRegionListId: \(settings.selectedRegionListId)")
-    log.error("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
+    log.info("\(settings.selectedSpeciesGroup ?? -1)")
+    
+    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
     
     log.error("url: \(url)")

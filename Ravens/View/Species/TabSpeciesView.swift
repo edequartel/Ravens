@@ -13,6 +13,9 @@ struct TabSpeciesView: View {
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
 
+//  @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
+//  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -98,7 +101,12 @@ struct TabSpeciesView: View {
       }
 
       .onChange(of: settings.selectedSpeciesGroup) {
-        print("xxx")
+        print(">>>>> xxx TAB HIER MOET HET GEBEUREN xxx")
+        speciesViewModel.fetchDataFirst(settings: settings) {
+          log.error(">>>> speciesViewModel First language data loaded")
+//            isFirstLanguageDataLoaded = true
+//            checkDataLoaded()
+        }
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in

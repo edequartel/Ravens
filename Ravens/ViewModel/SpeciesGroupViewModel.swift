@@ -12,15 +12,14 @@ import SwiftyBeaver
 class SpeciesGroupsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   @Published var speciesGroups = [SpeciesGroup]()
-  @Published var speciesGroupsAll = [SpeciesGroup]() //add extra -1,all to dictionary
+  @Published var speciesGroupsAll = [SpeciesGroup]() // add extra -1,all to dictionary
 
   @Published var speciesGroupsByRegion = [SpeciesGroup]() // workarray deze is onduidelijk verder uitzoeken 12mei25
 
   var speciesDictionary: [Int: String] = [:]
-//  var speciesAllDictionary: [Int: String] = [:]
 
   func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
+    log.error("fetchData SpeciesGroupViewModel \(settings.selectedLanguage)")
     let url = endPoint(value: settings.selectedInBetween) + "species-groups"
 
     // Add the custom header 'Accept-Language: nl'
@@ -44,8 +43,8 @@ class SpeciesGroupsViewModel: ObservableObject {
             // Update the speciesDictionary
             self.speciesDictionary = Dictionary(uniqueKeysWithValues: self.speciesGroups.map { ($0.id, $0.name) })
 
-            //added
-            self.speciesGroupsAll = [SpeciesGroup(id: -1, name: "All")] + self.speciesGroups//??
+            // added
+            self.speciesGroupsAll = [SpeciesGroup(id: -1, name: "All")] + self.speciesGroups
 
             // Call the completion handler when the data is successfully fetched
             completion?() // call the completion handler if it exists
@@ -63,4 +62,5 @@ class SpeciesGroupsViewModel: ObservableObject {
   func getName(forID id: Int) -> String? {
     return speciesDictionary[id]
   }
+
 }

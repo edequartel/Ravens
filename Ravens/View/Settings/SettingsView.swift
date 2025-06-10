@@ -49,6 +49,14 @@ struct SettingsView: View {
           LanguageView()
         }
 
+        Section {//!!
+          RegionsView()
+        }
+
+        Section {//!!
+          RegionListView()
+        }
+
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
