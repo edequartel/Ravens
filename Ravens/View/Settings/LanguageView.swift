@@ -28,10 +28,13 @@ struct LanguageView: View {
             }
             .pickerStyle(.navigationLink)
             .onChange(of: settings.selectedLanguage) {
+//              let regionListId = regionListViewModel.getId(
+//                region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1)
+
                 speciesGroupsViewModel.fetchData(settings: settings)
                 regionsViewModel.fetchData(settings: settings)
                 log.error("selectedRegionListId: \(settings.selectedRegionListId)")
-                speciesViewModel.fetchDataFirst(settings: settings)
+              speciesViewModel.fetchDataFirst(settings: settings, regionList: settings.regionListId) //!!
             }
             
             Picker(secondLanguage, selection: $settings.selectedSecondLanguage) {

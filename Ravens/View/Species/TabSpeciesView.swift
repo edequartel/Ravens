@@ -15,6 +15,7 @@ struct TabSpeciesView: View {
 
 //  @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
 //  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  @EnvironmentObject var regionListViewModel: RegionListViewModel
 
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
@@ -102,10 +103,11 @@ struct TabSpeciesView: View {
 
       .onChange(of: settings.selectedSpeciesGroup) {
         print(">>>>> xxx TAB HIER MOET HET GEBEUREN xxx")
-        speciesViewModel.fetchDataFirst(settings: settings) {
+//        let regionListId = regionListViewModel.getId(
+//          region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1)
+
+        speciesViewModel.fetchDataFirst(settings: settings, regionList: settings.regionListId) { //!!
           log.error(">>>> speciesViewModel First language data loaded")
-//            isFirstLanguageDataLoaded = true
-//            checkDataLoaded()
         }
       }
 

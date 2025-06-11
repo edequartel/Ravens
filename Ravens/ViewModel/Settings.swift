@@ -158,6 +158,14 @@ class Settings: ObservableObject {
     }
   }
 
+  @AppStorage("regionListId") var regionListIdStored = 5001
+  @Published var regionListId = 200 {
+    didSet {
+      log.info("!!saving it in storage: \(regionListId)")
+      regionListIdStored = regionListId
+    }
+  }
+
   @AppStorage("selectedLanguage") var selectedLanguageStored = "nl"
   @Published var selectedLanguage: String = "nl" {
     didSet {
@@ -190,8 +198,9 @@ class Settings: ObservableObject {
     selectedLanguage = selectedLanguageStored
     selectedSecondLanguage = selectedSecondLanguageStored
 
-    selectedRegionListId = selectedRegionListIdStored
+    selectedRegionListId = selectedRegionListIdStored //??
     selectedSpeciesGroup = selectedSpeciesGroupStored
+
     log.error("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored

@@ -51,7 +51,6 @@ struct RegionListView: View {
         print("xxxxxx")
       }
   }
-
 }
 
 struct RegionsView_Previews: PreviewProvider {

@@ -29,13 +29,16 @@ class SpeciesViewModel: ObservableObject {
   }
 
   //??HIERO
+  func fetchDataFirst(settings: Settings, regionList: Int, completion: (() -> Void)? = nil) {
+    log.error(">selectedSpeciesGroup   : \(settings.selectedSpeciesGroup ?? -1)")
+    log.error(">selectedRegionIdStored : \(settings.selectedRegionId)")
+    log.error(">selectedRegionListId   : \(settings.selectedRegionListId)")
+    log.error(">regionList             : \(regionList)")
 
-  func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("\(settings.selectedSpeciesGroup ?? -1)")
-    
     log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
-    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    
+//    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
+    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(regionList)/species/"
+
     log.error("url: \(url)")
 
     // Add the custom header 'Accept-Language: nl'

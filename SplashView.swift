@@ -115,6 +115,11 @@ struct SplashView: View {
 
   private func loadRegionListData() async {
     regionListViewModel.fetchData(settings: settings) {
+
+      settings.regionListId = regionListViewModel.getId(
+        region: settings.selectedRegionId,
+        speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+
       log.info("regionListViewModel data loaded")
       isRegionListDataLoaded = true
       checkDataLoaded()
@@ -122,7 +127,11 @@ struct SplashView: View {
   }
 
   private func loadSpeciesFirstLanguageData() async {
-    speciesViewModel.fetchDataFirst(settings: settings) {
+    //!!
+//    let regionListId = regionListViewModel.getId(
+//      region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1)
+
+    speciesViewModel.fetchDataFirst(settings: settings, regionList: settings.regionListId) {
       log.error("speciesViewModel First language data loaded")
         isFirstLanguageDataLoaded = true
         checkDataLoaded()

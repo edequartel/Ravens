@@ -95,7 +95,7 @@ struct RavensApp: App {
       .environmentObject(speciesViewModel)
       .environmentObject(speciesGroupViewModel)
       .environmentObject(regionsViewModel)
-      .environmentObject(regionListViewModel)
+      .environmentObject(regionListViewModel) 
       .environmentObject(userViewModel)
       .environmentObject(observationsSpeciesViewModel)
       .environmentObject(poiViewModel)
