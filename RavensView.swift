@@ -40,6 +40,7 @@ struct RavensView: View {
           Text(radius)
           Image(systemSymbol: .circle)
         }
+
         // Tab 3
         TabLocationView(
           observationsLocation: observationsLocation,
@@ -48,6 +49,7 @@ struct RavensView: View {
           Text(location)
           Image(systemSymbol: SFAreaFill)
         }
+
         // Tab 3
         TabSpeciesView(
           observationsSpecies: observationsSpecies,
@@ -56,12 +58,14 @@ struct RavensView: View {
           Text(species)
           Image(systemSymbol: .tree)
         }
+
         // Tab ??
 //        FavoObservationListView()
 //          .tabItem {
 //            Text("Favorite")
 //            Image(systemSymbol: .circlebadge)
 //          }
+        
         // Tab 4
         SettingsView()
           .tabItem {

@@ -16,7 +16,7 @@ class RegionListViewModel: ObservableObject {
   var entryDict: [Int: Int] = [:]
 
   func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("fetchData RegionListViewModel")
+    log.info("fetchData RegionListViewModel")
     let url = endPoint(value: settings.selectedInBetween)+"region-lists"
 
     log.info("RegionListViewModel url = \(url)")

@@ -197,7 +197,7 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
-  @Binding var currentSpeciesGroup: Int? 
+  @Binding var currentSpeciesGroup: Int?
 
   @Binding var timePeriod: TimePeriod?
 

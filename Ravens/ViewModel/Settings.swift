@@ -121,7 +121,7 @@ class Settings: ObservableObject {
   @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
   @Published var selectedSpeciesGroup: Int? = 1 {
     didSet {
-      log.error("!!saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
+      log.info("saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
       selectedSpeciesGroupStored = selectedSpeciesGroup ?? 1
     }
   }
@@ -129,7 +129,7 @@ class Settings: ObservableObject {
   @AppStorage("selectedUserSpeciesGroup") var selectedUserSpeciesGroupStored = 1
   @Published var selectedUserSpeciesGroup: Int? = 1 {
     didSet {
-      log.error("!!saving selectedUserSpeciesGroup in storage: \(String(describing: selectedUserSpeciesGroup))")
+      log.info("!!saving selectedUserSpeciesGroup in storage: \(String(describing: selectedUserSpeciesGroup))")
       selectedUserSpeciesGroupStored = selectedUserSpeciesGroup ?? 1
     }
   }
@@ -150,6 +150,7 @@ class Settings: ObservableObject {
     }
   }
 
+  //@@
   @AppStorage("selectedRegionId") var selectedRegionIdStored = 200
   @Published var selectedRegionId = 200 {
     didSet {
@@ -198,16 +199,21 @@ class Settings: ObservableObject {
     selectedLanguage = selectedLanguageStored
     selectedSecondLanguage = selectedSecondLanguageStored
 
-    selectedRegionListId = selectedRegionListIdStored //??
+    selectedRegionId = selectedRegionIdStored
+    log.error("selectedRegionId \(selectedRegionId)")
     selectedSpeciesGroup = selectedSpeciesGroupStored
-
     log.error("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
+
+    selectedRegionListId = selectedRegionListIdStored //<< misschien hier getId doen
+    log.error("selectedRegionListId \(selectedRegionListId)")
+
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
 
     selectedUserSpeciesGroup = selectedUserSpeciesGroupStored
     selectedRadiusSpeciesGroup = selectedRadiusSpeciesGroupStored
     selectedLocationSpeciesGroup = selectedLocationSpeciesGroupStored
+    selectedSpeciesGroup = selectedSpeciesGroupStored
 
     mapPreference = mapPreferenceStored
 

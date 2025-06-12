@@ -49,13 +49,13 @@ struct SettingsView: View {
           LanguageView()
         }
 
-        Section {//!!
-          RegionsView()
-        }
+//        Section {
+//          RegionsView()
+//        }
 
-        Section {//!!
-          RegionListView()
-        }
+//        Section {//!!
+//          RegionListView()
+//        }
 
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
@@ -164,10 +164,15 @@ struct SpeciesGroupPickerView: View {
       if showView { Text("SpeciesGroupPickerView").font(.customTiny) }
       Picker(group, selection: $currentSpeciesGroup) {
         ForEach( entity != .species ? speciesGroupsViewModel.speciesGroupsAll : speciesGroupsViewModel.speciesGroups, id: \ .id) { speciesGroup in
-          Text("\(speciesGroup.name)") //?? picture svg
-            .tag(speciesGroup.id)
-            .lineLimit(1)
-            .truncationMode(.tail)
+
+          // only at speciesList we will look if the getId exists for user, radius and location not
+          if (entity != .species) || (regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroup.id) ?? -1 > 0) {
+
+            Text("\(speciesGroup.name)")// \(speciesGroup.id)") //?? picture svg
+              .tag(speciesGroup.id)
+              .lineLimit(1)
+              .truncationMode(.tail)
+          }
         }
       }
       .pickerStyle(.navigationLink)

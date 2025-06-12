@@ -17,6 +17,7 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
 
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
 

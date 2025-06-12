@@ -23,11 +23,6 @@ class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
   @Published var observations: [Obs]? 
-//  @Published var observations: [Obs]? {
-//    didSet {
-//      // print("Array updated \(observations?.count ?? 0)") to update the ModelView
-//    }
-//  }
 
   private var limit = 100
   private var offset = 0
@@ -66,6 +61,8 @@ class ObservationsViewModel: ObservableObject {
         url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
       }
 
+
+      log.info("speciesGroup \(speciesGroup)")
       url += "&ordering=-datetime"
       if speciesGroup != -1 {
         url += "&species_group=\(speciesGroup)"
@@ -89,7 +86,7 @@ class ObservationsViewModel: ObservableObject {
     ]
 
     log.info("fetchData ObservationsUserViewModel token \(token)")
-    log.info("fetchData ObservationsUserViewModel \(url)")
+    log.error("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in
       switch response.result {

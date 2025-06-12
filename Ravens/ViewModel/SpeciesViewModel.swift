@@ -29,17 +29,16 @@ class SpeciesViewModel: ObservableObject {
   }
 
   //??HIERO
-  func fetchDataFirst(settings: Settings, regionList: Int, completion: (() -> Void)? = nil) {
-    log.error(">selectedSpeciesGroup   : \(settings.selectedSpeciesGroup ?? -1)")
-    log.error(">selectedRegionIdStored : \(settings.selectedRegionId)")
-    log.error(">selectedRegionListId   : \(settings.selectedRegionListId)")
-    log.error(">regionList             : \(regionList)")
+  func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
+    log.info("SpeciesViewModel:")
+    log.info(" >selectedSpeciesGroup : \(settings.selectedSpeciesGroup ?? -1)")
+    log.info(" >selectedRegionId     : \(settings.selectedRegionId)")
+    log.info(" >selectedRegionListId : \(settings.selectedRegionListId)")
 
-    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
-//    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(regionList)/species/"
+    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionId)")
 
-    log.error("url: \(url)")
+    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
+    log.info(" >url: \(url)")
 
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
@@ -72,11 +71,11 @@ class SpeciesViewModel: ObservableObject {
   }
   
   func fetchDataSecondLanguage(settings: Settings, completion: (() -> Void)? = nil) {
-    log.error("SpeciesViewModel 5")
-    log.error("SpeciesViewModel fetchDataSecondLanguage \(settings.selectedSecondLanguage) groupID \(settings.selectedRegionListId)")
+    log.info("SpeciesViewModel fetchDataSecondLanguage \(settings.selectedSecondLanguage) groupID \(settings.selectedRegionListId)")
 
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    log.error("SpeciesViewModel 5 \(url)")
+//    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
+    log.info(" > url \(url)")
 
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [

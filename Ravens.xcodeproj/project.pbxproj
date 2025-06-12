@@ -468,8 +468,8 @@
 		4767F0082BF322F000BACDC6 /* Species */ = {
 			isa = PBXGroup;
 			children = (
-				471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */,
 				474C40452B4BC66A0038B3A5 /* TabSpeciesView.swift */,
+				471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */,
 				47568D322B5A724D00E69B1A /* MapObservationsSpeciesView.swift */,
 				47568D302B59BABB00E69B1A /* ObservationsSpeciesView.swift */,
 				4767F0042BF256B100BACDC6 /* SpeciesView.swift */,

@@ -44,6 +44,7 @@ struct TabSpeciesView: View {
         if showView { Text("TabSpeciesView").font(.customTiny) }
 
         HorizontalLine()
+
         List {
           ForEach(speciesViewModel.filteredSpecies(
             by: selectedSortOption,
@@ -101,14 +102,16 @@ struct TabSpeciesView: View {
         .searchable(text: $searchText)
       }
 
-      .onChange(of: settings.selectedSpeciesGroup) {
-        print(">>>>> xxx TAB HIER MOET HET GEBEUREN xxx")
-//        let regionListId = regionListViewModel.getId(
-//          region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1)
+      .onChange(of: settings.selectedRegionId) {
+        log.error("TabSpeciesView  update settings.selectedRegionId \(settings.selectedRegionId)")
+        settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+        speciesViewModel.fetchDataFirst(settings: settings)
+      }
 
-        speciesViewModel.fetchDataFirst(settings: settings, regionList: settings.regionListId) { //!!
-          log.error(">>>> speciesViewModel First language data loaded")
-        }
+      .onChange(of: settings.selectedSpeciesGroup) {
+        log.error("TabSpeciesView  update settings.selectedSpeciesGroup \(String(describing: settings.selectedSpeciesGroup))")
+        settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+        speciesViewModel.fetchDataFirst(settings: settings)
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in
@@ -172,6 +175,10 @@ struct SortFilterSpeciesView: View {
       SpeciesGroupPickerView(
         currentSpeciesGroup: $settings.selectedSpeciesGroup,
         entity: .species)
+
+      Section {
+        RegionsView()
+      }
 
       // First Menu for Sorting
       Section(sort) {
