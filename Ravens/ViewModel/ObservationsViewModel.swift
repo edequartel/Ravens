@@ -61,7 +61,6 @@ class ObservationsViewModel: ObservableObject {
         url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
       }
 
-
       log.info("speciesGroup \(speciesGroup)")
       url += "&ordering=-datetime"
       if speciesGroup != -1 {

@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct RegionList: Hashable, Codable, Identifiable {
     var id: Int
     let region: Int

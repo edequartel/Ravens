@@ -27,6 +27,7 @@ struct ObservationsUserView: View {
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var observersViewModel: ObserversViewModel
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
 
   @Binding var selectedSpeciesID: Int?
   @Binding var currentSortingOption: SortingOption?
@@ -53,7 +54,14 @@ struct ObservationsUserView: View {
         .padding(.vertical, 4)
         .accessibilityLabel(observersViewModel.observerName ?? "noName")
 
-        ObservationsCountView(count: observationUser.count)
+        HStack {
+          let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedUserSpeciesGroup ?? 0] ?? ""
+          SelectedUserSpeciesView(speciesGroup: settings.selectedUserSpeciesGroup != -1 ? speciesGroupName : "∞")
+          ObservationsCountView(count: observationUser.count)
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+
         HorizontalLine()
       }
 

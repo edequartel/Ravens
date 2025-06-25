@@ -25,7 +25,6 @@ class AudioPlayerManager: ObservableObject {
 
   func playAudio(from urlString: String?, completion: (() -> Void)? = nil) {
     print("playAudio \(String(describing: urlString))")
-
     
     guard let urlString = urlString, let url = URL(string: urlString) else {
       print("Invalid URL")

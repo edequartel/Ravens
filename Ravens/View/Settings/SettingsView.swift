@@ -167,11 +167,15 @@ struct SpeciesGroupPickerView: View {
 
           // only at speciesList we will look if the getId exists for user, radius and location not
           if (entity != .species) || (regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroup.id) ?? -1 > 0) {
-
-            Text("\(speciesGroup.name)")// \(speciesGroup.id)") //?? picture svg
-              .tag(speciesGroup.id)
-              .lineLimit(1)
-              .truncationMode(.tail)
+            if speciesGroup.id != -1 {
+              Text("\(speciesGroup.name)")// \(speciesGroup.id)") // ?? picture svg
+                .tag(speciesGroup.id)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            } else {
+              Image(systemSymbol: .infinity)
+                .tag(speciesGroup.id)
+            }
           }
         }
       }

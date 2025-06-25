@@ -28,7 +28,7 @@ class SpeciesViewModel: ObservableObject {
     return dateFormatter.date(from: "\(dateString) \(timeString)") ?? Date.distantPast
   }
 
-  //??HIERO
+  //
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
     log.info("SpeciesViewModel:")
     log.info(" >selectedSpeciesGroup : \(settings.selectedSpeciesGroup ?? -1)")

@@ -10,7 +10,6 @@ import SwiftyBeaver
 import MijickCalendarView
 import SwiftData
 
-
 class FavoriteObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
@@ -101,8 +100,8 @@ struct FavoObservationListView: View {
                   NavigationLink(
                     destination: ObsDetailView(
                       obs: observation,
-                      entity: .species)  //??
-                  )  {
+                      entity: .species)  
+                  ) {
                     HStack {
                       Text("\(observation.date)")
                         .bold()

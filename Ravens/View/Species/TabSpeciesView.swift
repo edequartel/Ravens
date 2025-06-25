@@ -12,9 +12,6 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
-
-//  @EnvironmentObject var speciesGroupViewModel: SpeciesGroupsViewModel
-//  @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
 
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -109,9 +106,11 @@ struct TabSpeciesView: View {
       }
 
       .onChange(of: settings.selectedSpeciesGroup) {
+        print("fetchDataFirst & fetchDataSecondLanguage")
         log.error("TabSpeciesView  update settings.selectedSpeciesGroup \(String(describing: settings.selectedSpeciesGroup))")
         settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
         speciesViewModel.fetchDataFirst(settings: settings)
+        speciesViewModel.fetchDataSecondLanguage(settings: settings) 
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in
@@ -133,9 +132,8 @@ struct TabSpeciesView: View {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
-            selectedRarityOption: $selectedRarityOption//,
-            //currentSpeciesGroup: $settings.selectedSpeciesGroup //??
-
+            selectedRarityOption: $selectedRarityOption
+            // currentSpeciesGroup: $settings.selectedSpeciesGroup 
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()

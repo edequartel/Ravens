@@ -35,11 +35,9 @@ class RegionListViewModel: ObservableObject {
           let decoder = JSONDecoder()
           self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
 
-          //!!
           self.entryDict = Dictionary(uniqueKeysWithValues: self.regionLists.map {
             ($0.region * 100 + $0.speciesGroup, $0.id)
           })
-          //!!
 
           completion?() // call the completion handler if it exists
         } catch {

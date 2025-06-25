@@ -150,7 +150,6 @@ class Settings: ObservableObject {
     }
   }
 
-  //@@
   @AppStorage("selectedRegionId") var selectedRegionIdStored = 200
   @Published var selectedRegionId = 200 {
     didSet {
@@ -204,9 +203,8 @@ class Settings: ObservableObject {
     selectedSpeciesGroup = selectedSpeciesGroupStored
     log.error("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
 
-    selectedRegionListId = selectedRegionListIdStored //<< misschien hier getId doen
+    selectedRegionListId = selectedRegionListIdStored 
     log.error("selectedRegionListId \(selectedRegionListId)")
-
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
 

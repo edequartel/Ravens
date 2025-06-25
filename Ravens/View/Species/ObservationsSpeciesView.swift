@@ -16,7 +16,7 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
-
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var hasAppeared = false
@@ -59,7 +59,15 @@ struct ObservationsSpeciesView: View {
       .padding(.horizontal, 10)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(item.name)
-      ObservationsCountView(count: observationsSpecies.count)
+
+      HStack {
+//        SelectedUserSpeciesView(speciesGroup: speciesGroupsViewModel.speciesDictionary[settings.selectedSpeciesGroup ?? 0] ?? "")
+        Text("XXX")
+        ObservationsCountView(count: observationsSpecies.count)
+        Spacer()
+      }
+      .padding(.horizontal, 10)
+
       HorizontalLine()
       Spacer()
 
@@ -147,6 +155,27 @@ struct ObservationsSpeciesView: View {
   }
 }
 
+struct SelectedUserSpeciesView: View {
+
+
+  let speciesGroup: String
+
+  var body: some View {
+    HStack {
+      HStack {
+        Text("\(speciesGroup)")
+//        Text("\(speciesGroupsViewModel.speciesDictionary[settings.selectedRadiusSpeciesGroup ?? 0] ?? ""),")
+      }
+      .font(.caption)
+      .foregroundColor(.gray)
+      .bold()
+//      .padding(.horizontal, 10)
+//      Spacer()
+    }
+    .accessibilityElement(children: .combine)
+  }
+}
+
 struct ObservationsCountView: View {
   let count: Int
 
@@ -159,8 +188,8 @@ struct ObservationsCountView: View {
       .font(.caption)
       .foregroundColor(.gray)
       .bold()
-      .padding(.horizontal, 10)
-      Spacer()
+//      .padding(.horizontal, 10)
+//      Spacer()
     }
     .accessibilityElement(children: .combine)
   }

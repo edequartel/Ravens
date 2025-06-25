@@ -20,7 +20,8 @@ struct ObservationsLocationView: View {
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var settings: Settings
-  
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
+
   @Binding var selectedSpeciesID: Int?
 
   @Binding var currentSortingOption: SortingOption?
@@ -46,8 +47,15 @@ struct ObservationsLocationView: View {
           Spacer()
         }
         .padding(.horizontal, 10)
-        
-        ObservationsCountView(count: observationsLocation.count)
+
+        HStack {
+          let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedLocationSpeciesGroup ?? 0] ?? ""
+          SelectedUserSpeciesView(speciesGroup: settings.selectedLocationSpeciesGroup != -1 ? speciesGroupName : "∞")
+          ObservationsCountView(count: observationsLocation.count)
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+
         HorizontalLine()
 
         if let observations = observationsLocation.observations, !observations.isEmpty {

@@ -129,7 +129,7 @@ struct TabUserObservationsView: View {
       }
 
       // sort filter and periodTime
-      .modifier( //??
+      .modifier( 
         ObservationToolbarModifier(
           currentSortingOption: $currentSortingOption,
           currentFilteringOption: $currentFilteringOption,
