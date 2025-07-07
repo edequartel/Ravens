@@ -27,6 +27,7 @@ struct RavensView: View {
     if  !keyChainViewModel.token.isEmpty {
       TabView {
         // Tab 1
+
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
           .tabItem {
             Text(usName)
@@ -72,6 +73,13 @@ struct RavensView: View {
             Text(settingsName)
             Image(systemSymbol: .gearshape)
           }
+
+        RingtoneMakerView()
+          .tabItem {
+            Text("ringtone")
+            Image(systemSymbol: .musicNote)
+          }
+
       }
       .sheet(item: $selectedSpeciesID) { item in
         SpeciesDetailsView(speciesID: item)

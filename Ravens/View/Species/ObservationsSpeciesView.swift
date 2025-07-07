@@ -61,8 +61,6 @@ struct ObservationsSpeciesView: View {
       .accessibilityLabel(item.name)
 
       HStack {
-//        SelectedUserSpeciesView(speciesGroup: speciesGroupsViewModel.speciesDictionary[settings.selectedSpeciesGroup ?? 0] ?? "")
-        Text("XXX")
         ObservationsCountView(count: observationsSpecies.count)
         Spacer()
       }
