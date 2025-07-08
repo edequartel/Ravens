@@ -10,7 +10,9 @@ import SwiftyBeaver
 
 struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
+
   @EnvironmentObject var observationUser: ObservationsViewModel
+
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
   @EnvironmentObject var obsObserversViewModel: ObserversViewModel
@@ -38,28 +40,22 @@ struct TabUserObservationsView: View {
 
         if showFirstView && !accessibilityManager.isVoiceOverEnabled {
           MapObservationsUserView(
-            observationUser: observationUser,
-
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption
           )
         } else {
           ObservationsUserView(
-            observationUser: observationUser,
             selectedSpeciesID: $selectedSpeciesID,
-
             currentSortingOption: $currentSortingOption,
             currentFilteringAllOption: $currentFilteringAllOption,
             currentFilteringOption: $currentFilteringOption,
-
             setRefresh: $refresh)
         }
       }
       
       .onChange(of: userViewModel.loginSuccess) { newValue, oldValue in
-        log.info("update userViewModel.loginSuccess")
-
+        log.error("update userViewModel.loginSuccess")
         obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
         obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
       }
@@ -103,7 +99,7 @@ struct TabUserObservationsView: View {
       }
 
       .onChange(of: refresh) {
-        log.info("update refresh")
+        log.error("update refresh")
 
         observationUser.fetchDataInit(
           settings: settings,
@@ -115,7 +111,7 @@ struct TabUserObservationsView: View {
           completion: { log.info("fetch data complete") })
       }
 
-      .onChange(of: obsObserversViewModel.observerId) {
+      .onChange(of: obsObserversViewModel.observerId) { //??!!
         log.info("update obsObserversViewModel.observerId")
 
         observationUser.fetchDataInit(
@@ -156,7 +152,6 @@ struct TabUserObservationsView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
             destination: ObserversView(
-              observationUser: observationUser,
               observerId: $obsObserversViewModel.observerId,
               observerName: $obsObserversViewModel.observerName)
           ) {
@@ -169,7 +164,7 @@ struct TabUserObservationsView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: FavoObservationListView()
           ) {
-            Image(systemSymbol: .bookmark) // .bookmarkCircle)
+            Image(systemSymbol: .bookmark) 
               .uniformSize()
               .accessibility(label: Text(favoObservation))
           }
@@ -210,21 +205,10 @@ struct TabUserObservationsView: View {
   }
 
   private func loadUserData() async {
-    observationUser.fetchDataInit(
-      settings: settings,
-      entity: .user,
-      token: keyChainViewModel.token,
-      id: obsObserversViewModel.observerId,
-      speciesGroup: settings.selectedUserSpeciesGroup ?? 1,
-      timePeriod: settings.timePeriodUser,
-      completion: {
-        log.info("fetch loadUserData observationUser.fetchDataInit complete")
-        userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
-          log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
-          obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
-          obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
-        }
-      }
-    )
+    userViewModel.fetchUserData(settings: settings, token: keyChainViewModel.token) {
+      log.info("userViewModel data loaded: \(userViewModel.user?.id ?? 0)")
+      obsObserversViewModel.observerName = userViewModel.user?.name ?? ""
+      obsObserversViewModel.observerId = userViewModel.user?.id ?? 0
+    }
   }
 }

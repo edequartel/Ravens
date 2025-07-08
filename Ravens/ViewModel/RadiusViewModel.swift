@@ -94,7 +94,7 @@ class ObservationsRadiusViewModel: ObservableObject {
             }
           }
         case .failure(let error):
-          self.log.error("Error ObservationsUserViewModel: \(error)")
+          self.log.error("Error ObservationsRadiusViewModel: \(error)")
         }
       }
     }

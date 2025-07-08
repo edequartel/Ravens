@@ -27,9 +27,6 @@ struct SplashView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
-  @EnvironmentObject var obsObserversViewModel: ObserversViewModel
-  @EnvironmentObject var observationUser: ObservationsViewModel
-
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -115,11 +112,6 @@ struct SplashView: View {
 
   private func loadRegionListData() async {
     regionListViewModel.fetchData(settings: settings) { // getId(region,speciesgroup) = regionListId,  200 + 1 = 5001
-
-//      settings.regionListId = regionListViewModel.getId(
-//        region: settings.selectedRegionId,
-//        speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
-
       log.info("regionListViewModel data loaded ../region-lists")
 
       isRegionListDataLoaded = true
@@ -130,8 +122,8 @@ struct SplashView: View {
   private func loadSpeciesFirstLanguageData() async {
     speciesViewModel.fetchDataFirst(settings: settings) {
       log.info("speciesViewModel First language data loaded ../region-lists/[regionList]/species/")
-        isFirstLanguageDataLoaded = true
-        checkDataLoaded()
+      isFirstLanguageDataLoaded = true
+      checkDataLoaded()
     }
   }
 

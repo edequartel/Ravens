@@ -154,8 +154,6 @@ struct ObservationsSpeciesView: View {
 }
 
 struct SelectedUserSpeciesView: View {
-
-
   let speciesGroup: String
 
   var body: some View {

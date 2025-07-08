@@ -25,13 +25,13 @@ struct ObsDetailView: View {
   var body: some View {
     ScrollView {
       VStack {
+        if showView { Text("ObsDetailView").font(.customTiny) }
         HStack {
 
           NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
             Image(systemSymbol: .infoCircle)
                     .uniformSize()
             }
-            .tint(.blue)
             .accessibility(label: Text(informationSpecies))
 
           let url = URL(string: obs.permalink)!

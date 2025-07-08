@@ -5,9 +5,6 @@
 //  Created by Eric de Quartel on 11/04/2025.
 //
 
-
-//?? omzetten naar swiftData
-
 import Foundation
 import SwiftyBeaver
 import MijickCalendarView

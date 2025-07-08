@@ -68,6 +68,7 @@ class ObservationsViewModel: ObservableObject {
       }
 
       fetchData(settings: settings, url: url, token: token, completion: completion)
+      
     }
 
   func fetchData(
@@ -85,7 +86,7 @@ class ObservationsViewModel: ObservableObject {
     ]
 
     log.info("fetchData ObservationsUserViewModel token \(token)")
-    log.error("fetchData ObservationsUserViewModel \(url)")
+    log.info("fetchData ObservationsUserViewModel \(url)")
 
     AF.request(url, headers: headers).responseString { response in
       switch response.result {

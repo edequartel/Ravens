@@ -199,12 +199,12 @@ class Settings: ObservableObject {
     selectedSecondLanguage = selectedSecondLanguageStored
 
     selectedRegionId = selectedRegionIdStored
-    log.error("selectedRegionId \(selectedRegionId)")
+    log.info("selectedRegionId \(selectedRegionId)")
     selectedSpeciesGroup = selectedSpeciesGroupStored
-    log.error("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
+    log.info("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
 
     selectedRegionListId = selectedRegionListIdStored 
-    log.error("selectedRegionListId \(selectedRegionListId)")
+    log.info("selectedRegionListId \(selectedRegionListId)")
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
 

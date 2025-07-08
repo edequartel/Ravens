@@ -22,7 +22,8 @@ struct CustomDivider: View {
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser: ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
+
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel

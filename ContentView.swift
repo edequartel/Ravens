@@ -15,7 +15,6 @@ struct ContentView: View {
   @ObservedObject var observationsSpecies: ObservationsViewModel
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
-  @EnvironmentObject  var observationUser: ObservationsViewModel
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 

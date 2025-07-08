@@ -17,8 +17,6 @@ struct IdentifiableString: Identifiable {
 struct ObserversView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser: ObservationsViewModel
-
   @EnvironmentObject private var observersViewModel: ObserversViewModel
   @EnvironmentObject private var userViewModel: UserViewModel
 

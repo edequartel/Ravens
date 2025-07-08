@@ -57,6 +57,16 @@ struct SettingsView: View {
 //          RegionListView()
 //        }
 
+//        Section(header: Text("Produce")) {
+//          NavigationLink(destination: RingtoneMakerView()) {
+//              Text("Ringtone")
+//              Image(systemSymbol: .musicNote)
+//            }
+//        }
+        Section {
+          RingtoneMakerView()
+        }
+
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in

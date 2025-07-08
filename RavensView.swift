@@ -18,7 +18,6 @@ struct RavensView: View {
   @ObservedObject var observationsSpecies: ObservationsViewModel
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
-  //  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
   //  @EnvironmentObject var notificationsManager: NotificationsManager
@@ -51,7 +50,7 @@ struct RavensView: View {
           Image(systemSymbol: SFAreaFill)
         }
 
-        // Tab 3
+        // Tab 4
         TabSpeciesView(
           observationsSpecies: observationsSpecies,
           selectedSpeciesID: $selectedSpeciesID)
@@ -60,25 +59,14 @@ struct RavensView: View {
           Image(systemSymbol: .tree)
         }
 
-        // Tab ??
-//        FavoObservationListView()
-//          .tabItem {
-//            Text("Favorite")
-//            Image(systemSymbol: .circlebadge)
-//          }
-        
-        // Tab 4
+        // Tab 5
         SettingsView()
           .tabItem {
             Text(settingsName)
             Image(systemSymbol: .gearshape)
           }
 
-        RingtoneMakerView()
-          .tabItem {
-            Text("ringtone")
-            Image(systemSymbol: .musicNote)
-          }
+
 
       }
       .sheet(item: $selectedSpeciesID) { item in

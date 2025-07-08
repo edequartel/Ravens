@@ -20,8 +20,7 @@ class ObserversViewModel: ObservableObject {
     
   @Published var records: [Observer] = []
 
-  @Published var observerId: Int = 1111
-//  @Published var observerName: String = ""  
+  @Published var observerId: Int = 0
   @Published var observerName: String? = "noName"
 
     let filePath: URL

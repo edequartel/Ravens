@@ -74,7 +74,9 @@ struct RavensApp: App {
   @StateObject var locationViewModel = SearchLocationViewModel()
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
-  @StateObject var observationUser = ObservationsViewModel()
+
+  @StateObject var observationXXXUser = ObservationsViewModel()
+
   @StateObject var player = Player()
 
   @State private var showingAlert = false
@@ -107,7 +109,9 @@ struct RavensApp: App {
       .environmentObject(locationViewModel)
       .environmentObject(accessibilityManager)
       .environmentObject(geoJSONViewModel)
-      .environmentObject(observationUser)
+
+      .environmentObject(observationXXXUser) //injection of the model
+
       .environmentObject(favoObservationsViewModel)
 
       .onOpenURL { url in
@@ -127,7 +131,5 @@ struct RavensApp: App {
               secondaryButton: .cancel(Text("No")))
       }
     }
-//    .modelContainer(for: BookMarkSD.self)
-
   }
 }
