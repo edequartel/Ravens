@@ -12,6 +12,7 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
+
   @EnvironmentObject var regionListViewModel: RegionListViewModel
 
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
@@ -73,6 +74,15 @@ struct TabSpeciesView: View {
                   }
                   .tint(.blue)
                   .accessibilityLabel(Text(infoSpecies))
+            }
+//??
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+              NavigationLink(destination: CreateObservationView(speciesID: species.speciesId, speciesName: species.name)) {
+                  Image(systemSymbol: .plusCircle)
+                          .uniformSize()
+                  }
+                  .tint(.red)
+                  //.accessibilityLabel(Text(infoSpecies))
             }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {

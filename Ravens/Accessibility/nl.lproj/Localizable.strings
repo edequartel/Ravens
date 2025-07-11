@@ -102,6 +102,7 @@
 //period
 "period" = "Periode";
 "timePeriodlabel" = "Laatste";
+"oneday" = "1 dag";
 "twodays" = "2 dagen";
 "sevendays" = "7 dagen";
 "fourteendays" = "14 dagen";

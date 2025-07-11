@@ -65,9 +65,6 @@ struct RavensView: View {
             Text(settingsName)
             Image(systemSymbol: .gearshape)
           }
-
-
-
       }
       .sheet(item: $selectedSpeciesID) { item in
         SpeciesDetailsView(speciesID: item)

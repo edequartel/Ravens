@@ -111,7 +111,7 @@ struct TabUserObservationsView: View {
           completion: { log.info("fetch data complete") })
       }
 
-      .onChange(of: obsObserversViewModel.observerId) { //??!!
+      .onChange(of: obsObserversViewModel.observerId) {
         log.info("update obsObserversViewModel.observerId")
 
         observationUser.fetchDataInit(

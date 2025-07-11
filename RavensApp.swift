@@ -75,7 +75,7 @@ struct RavensApp: App {
   @StateObject var keychainViewModel = KeychainViewModel()
   @StateObject private var accessibilityManager = AccessibilityManager()
 
-  @StateObject var observationXXXUser = ObservationsViewModel()
+  @StateObject var observationUser = ObservationsViewModel()
 
   @StateObject var player = Player()
 
@@ -109,9 +109,7 @@ struct RavensApp: App {
       .environmentObject(locationViewModel)
       .environmentObject(accessibilityManager)
       .environmentObject(geoJSONViewModel)
-
-      .environmentObject(observationXXXUser) //injection of the model
-
+      .environmentObject(observationUser)
       .environmentObject(favoObservationsViewModel)
 
       .onOpenURL { url in

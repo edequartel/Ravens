@@ -106,6 +106,7 @@
 //period
 "period" = "Period";
 "timePeriodlabel" = "Last";
+"oneday" = "1 day";
 "twodays" = "2 days";
 "sevendays" = "7 days";
 "fourteendays" = "14 days";

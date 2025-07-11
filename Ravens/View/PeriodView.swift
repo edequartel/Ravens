@@ -2,6 +2,7 @@ import SwiftUI
 
 // Define the TimePeriod enum
 enum TimePeriod: Int, CaseIterable, Identifiable {
+  case oneDay = 1
   case twoDays = 2
   case week = 7
   case twoWeeks = 14
@@ -12,6 +13,7 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
 
   var tagValue: String {
     switch self {
+    case .oneDay: return "1d"
     case .twoDays: return "2d"
     case .week: return "1w"
     case .twoWeeks: return "2w"
@@ -25,6 +27,7 @@ enum TimePeriod: Int, CaseIterable, Identifiable {
   // Computed property for description
   var description: String {
     switch self {
+    case .oneDay: return "oneday"
     case .twoDays: return "twodays"
     case .week: return "sevendays"
     case .twoWeeks: return "fourteendays"

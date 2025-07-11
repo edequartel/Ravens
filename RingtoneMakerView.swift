@@ -14,13 +14,18 @@ struct RingtoneMakerView: View {
   @State private var startTime: Double = 0
   @State private var duration: Double = 30
   @State private var isExporting = false
+  @State private var alertTitle = ""
   @State private var exportMessage = ""
   @State private var showingImporter = false
   @State private var lastExportedURL: URL?
 
+//  @State private var inputText: String = ""
+  @State private var showAlert: Bool = false
+  @State private var previousText: String = ""
+
   var body: some View {
     HStack {
-      Button("Share audio as Ringtone") {
+      Button("Share downloaded audio as ringtone") {
         showingImporter = true
       }
       Spacer()
@@ -28,11 +33,9 @@ struct RingtoneMakerView: View {
       if isExporting {
         ProgressView()
           .foregroundColor(.blue)
-      } else {
-        Text(exportMessage)
-          .foregroundColor(.blue)
       }
     }
+
     .fileImporter(
       isPresented: $showingImporter,
       allowedContentTypes: [.mp3],
@@ -51,6 +54,24 @@ struct RingtoneMakerView: View {
       }
     }
 
+//    .onChange(of: exportMessage) { newValue in
+//        if newValue != previousText {
+//            showAlert = true
+//            previousText = newValue
+//        }
+//    }
+    .onChange(of: exportMessage) {
+        showAlert = true
+//        previousText = exportMessage
+    }
+
+    .alert(isPresented: $showAlert) {
+        Alert(
+            title: Text("\(alertTitle)"),
+            message: Text("\(exportMessage)"),
+            dismissButton: .default(Text("OK"))
+        )
+    }
   }
 
   func exportRingtone() {
@@ -62,7 +83,7 @@ struct RingtoneMakerView: View {
     defer { mp3URL.stopAccessingSecurityScopedResource() }
 
     isExporting = true
-    exportMessage = "Exporting..."
+    exportMessage = ""
 
     let asset = AVURLAsset(url: mp3URL)
     let tempDir = FileManager.default.temporaryDirectory
@@ -71,6 +92,7 @@ struct RingtoneMakerView: View {
 
     guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
       isExporting = false
+      alertTitle = "Error"
       exportMessage = "Unable to create exporter."
       return
     }
@@ -82,6 +104,7 @@ struct RingtoneMakerView: View {
       duration: CMTime(seconds: duration, preferredTimescale: 600)
     )
 
+    print("before exporting")
     exporter.exportAsynchronously {
       DispatchQueue.main.async {
         self.isExporting = false
@@ -89,16 +112,27 @@ struct RingtoneMakerView: View {
           do {
             let m4rFilename = mp3URL.deletingPathExtension().lastPathComponent + ".m4r"
             let m4rURL = tempDir.appendingPathComponent(m4rFilename)
+
+            if FileManager.default.fileExists(atPath: m4rURL.path) {
+                      try FileManager.default.removeItem(at: m4rURL)
+                    }
+
+            print("\(m4rURL)")
             try FileManager.default.moveItem(at: m4aURL, to: m4rURL)
+
             self.lastExportedURL = m4rURL
+
             if let url = lastExportedURL {
               share(url: url)
             }
+
           } catch {
-            self.exportMessage = "File exists" //Rename error: \(error.localizedDescription)"
+            self.alertTitle = "Error 1"
+            self.exportMessage = "\(error.localizedDescription)"
           }
         } else {
-          self.exportMessage = "Export failed" //Export failed: \(exporter.error?.localizedDescription ?? "Unknown error")"
+          self.alertTitle = "Error 2"
+          self.exportMessage = "\(exporter.error?.localizedDescription ?? "Unknown error")"
         }
       }
     }
@@ -123,11 +157,11 @@ struct RingtoneMakerView: View {
 //
 //  Created by Eric de Quartel on 06/07/2025.
 //
-//import SwiftUI
-//import AVFoundation
-//import UniformTypeIdentifiers
+// import SwiftUI
+// import AVFoundation
+// import UniformTypeIdentifiers
 
-//struct RingtoneMakerView: View {
+// struct RingtoneMakerView: View {
 //  @State private var mp3URL: URL?
 //  @State private var startTime: Double = 0
 //  @State private var duration: Double = 30
@@ -263,8 +297,8 @@ struct RingtoneMakerView: View {
 //      root.present(controller, animated: true)
 //    }
 //  }
-//}
+// }
 
-//#Preview {
+// #Preview {
 //  RingtoneMakerView()
-//}
+// }
