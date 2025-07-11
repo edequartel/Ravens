@@ -51,7 +51,7 @@ class CreateViewModel: ObservableObject {
                          note: String = "verwijderen!",
                          completion: (() -> Void)? = nil) {
 
-    log.error("POST createObservation CreateViewModel")
+    log.error("POST createObservation CreateViewModel \(time)")
 
     let url = "https://waarneming.nl/api/v1/observations/create-single/"
 
@@ -70,17 +70,17 @@ class CreateViewModel: ObservableObject {
 
     AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
       .validate()
-//      .responseDecodable(of: ObservationResponse.self) { response in
-//        switch response.result {
-//        case .success(let obs):
-//          DispatchQueue.main.async {
-//            self.observation = obs
-//            completion?()
-//          }
-//        case .failure(let error):
-//          self.log.error("Error in createObservation: \(error)")
-//        }
-//      }
+      .responseDecodable(of: ObservationResponse.self) { response in
+        switch response.result {
+        case .success(let obs):
+          DispatchQueue.main.async {
+            self.observation = obs
+            completion?()
+          }
+        case .failure(let error):
+          self.log.error("Error in createObservation: \(error)")
+        }
+      }
   }
 }
 
@@ -97,9 +97,9 @@ struct CreateObservationView: View {
 
   @State private var latitude: Double = 52.0
   @State private var longitude: Double = 4.0
-  @State private var number: Int = 3
+  @State private var number: Int = 1
   @State private var date: Date = Date()
-//  @State private var time: Time = Date()
+  @State private var time: Date = Date()
   @State private var note: String = "Verwijderen!"
 
   @State private var submitted = false
@@ -108,20 +108,21 @@ struct CreateObservationView: View {
     NavigationView {
       Form {
         Section(header: Text("Observation Details")) {
-//          Text("Species ID \(speciesID)")
           Stepper(value: $number, in: 1...100) {
-            Text("Number")
+            Text("Aantal \(number)")
           }
           DatePicker("Date", selection: $date, displayedComponents: .date)
-//          DatePicker("Time", selection: $time, displayedComponents: .time)
+          DatePicker("Time", selection: $time, displayedComponents: .hourAndMinute)
         }
 
         Section(header: Text("Note")) {
           TextField("", text: $note)
         }
 
-        NavigationLink(destination: PdfView()) {
-          Text("pdf")
+        Section("pdf") {
+          NavigationLink(destination: PdfView()) {
+            Text("pdf")
+          }
         }
 
         Button("Submit") {
@@ -131,7 +132,8 @@ struct CreateObservationView: View {
           let userLocation = locationManager.getCurrentLocation()
           let timeFormatter = DateFormatter()
           timeFormatter.dateFormat = "HH:mm"
-          let formattedTime = timeFormatter.string(from: Date())
+          let formattedTime = timeFormatter.string(from: time)
+          print("\(formattedDate) \(formattedTime)")
 
           viewModel.createObservation(
             token: keyChainViewModel.token,
