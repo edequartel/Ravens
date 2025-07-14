@@ -308,6 +308,6 @@ struct TimePeriodView: View {
 
   /// Filters `TimePeriod.allCases` based on entity
   private var filteredTimePeriods: [TimePeriod] {
-    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
+    entity == .radius ? Array(TimePeriod.allCases.prefix(4)) : TimePeriod.allCases
   }
 }

@@ -65,20 +65,20 @@ class CreateViewModel: ObservableObject {
       "number": number,
       "date": date,
       "time": time,
-      "notes": note
+      "notes": note,
+      "accuracy": 5,
+      
     ]
 
     AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
       .validate()
       .responseDecodable(of: ObservationResponse.self) { response in
         switch response.result {
-        case .success(let obs):
-          DispatchQueue.main.async {
-            self.observation = obs
-            completion?()
-          }
+        case .success:
+          completion?()
         case .failure(let error):
           self.log.error("Error in createObservation: \(error)")
+          completion?()  // still dismiss even if failed
         }
       }
   }
@@ -92,6 +92,19 @@ struct CreateObservationView: View {
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var locationManager: LocationManagerModel
 
+  @EnvironmentObject var observationUser: ObservationsViewModel
+  var allObservationNamesText: String {
+    let header = "| naam \t\t date |\n|---|---|"
+    let rows = (observationUser.observations ?? [])
+      .compactMap {
+        return "\($0.speciesDetail.name) \t\t \($0.date)"
+      }
+      .joined(separator: "\n")
+    return "\(header)\n\(rows)"
+  }
+
+  @Environment(\.dismiss) private var dismiss  // iOS 15+
+
   var speciesID: Int
   var speciesName: String
 
@@ -100,9 +113,7 @@ struct CreateObservationView: View {
   @State private var number: Int = 1
   @State private var date: Date = Date()
   @State private var time: Date = Date()
-  @State private var note: String = "Verwijderen!"
-
-  @State private var submitted = false
+  @State private var note: String = ""
 
   var body: some View {
     NavigationView {
@@ -119,39 +130,61 @@ struct CreateObservationView: View {
           TextField("", text: $note)
         }
 
-        Section("pdf") {
-          NavigationLink(destination: PdfView()) {
-            Text("pdf")
-          }
-        }
+//        Section("pdf") {
+//          NavigationLink(destination: PdfView()) {
+//            Text("pdf")
+//          }
+//        }
 
-        Button("Submit") {
-          let formatter = DateFormatter()
-          formatter.dateFormat = "yyyy-MM-dd"
-          let formattedDate = formatter.string(from: date)
-          let userLocation = locationManager.getCurrentLocation()
-          let timeFormatter = DateFormatter()
-          timeFormatter.dateFormat = "HH:mm"
-          let formattedTime = timeFormatter.string(from: time)
-          print("\(formattedDate) \(formattedTime)")
-
-          viewModel.createObservation(
-            token: keyChainViewModel.token,
-            species: speciesID,
-            longitude: userLocation?.coordinate.longitude ?? 52,
-            latitude: userLocation?.coordinate.latitude ?? 0,
-            number: number,
-            date: formattedDate,
-            time: formattedTime,
-            note: note
-          ) {
-            submitted = true
-          }
+        ShareLink(item: allObservationNamesText) {
+          Label("Share Observations", systemImage: "square.and.arrow.up")
         }
-        .disabled(keyChainViewModel.token.isEmpty)
+        .padding()
+//
+//        Section("list") {
+//          ScrollView {
+//            Text(allObservationNamesText)
+//              .padding()
+//          }
+//        }
+
+        HStack {
+          Spacer()
+          Button(action: {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let formattedDate = formatter.string(from: date)
+            let userLocation = locationManager.getCurrentLocation()
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            let formattedTime = timeFormatter.string(from: time)
+
+            viewModel.createObservation(
+              token: keyChainViewModel.token,
+              species: speciesID,
+              longitude: userLocation?.coordinate.longitude ?? 52,
+              latitude: userLocation?.coordinate.latitude ?? 0,
+              number: number,
+              date: formattedDate,
+              time: formattedTime,
+              note: note
+            ) {
+              log.error("dismissed")
+              dismiss() // <-- Dismiss view after successful submission
+            }
+          }) {
+            Text("Submit")
+              .foregroundColor(.white)
+              .padding()
+              .background(Color.blue)
+              .cornerRadius(8)
+          }
+          .disabled(keyChainViewModel.token.isEmpty)
+          Spacer()
+        }
       }
+      .navigationTitle("\(speciesName)")
     }
-    .navigationTitle("\(speciesName)")
   }
 }
 

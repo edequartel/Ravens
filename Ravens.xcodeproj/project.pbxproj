@@ -118,7 +118,7 @@
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
 		47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */; };
 		47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942D2D3F7247009D734F /* RadiusViewModel.swift */; };
-		47D460BB2E215EE20078DD72 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D460BA2E215EDF0078DD72 /* Untitled.swift */; };
+		47D460BB2E215EE20078DD72 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D460BA2E215EDF0078DD72 /* PdfView.swift */; };
 		47D4B7712D004ED100D46050 /* SortAndFillterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7702D004EC900D46050 /* SortAndFillterView.swift */; };
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
@@ -238,7 +238,7 @@
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
 		47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRadiusView.swift; sourceTree = "<group>"; };
 		47CF942D2D3F7247009D734F /* RadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusViewModel.swift; sourceTree = "<group>"; };
-		47D460BA2E215EDF0078DD72 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		47D460BA2E215EDF0078DD72 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
-				47D460BA2E215EDF0078DD72 /* Untitled.swift */,
+				47D460BA2E215EDF0078DD72 /* PdfView.swift */,
 				477DAA092E1A9E6000EFC8CB /* RingtoneMakerView.swift */,
 				47816C1E2DD45CDE00D793ED /* todo.md */,
 				4720A1B92DD75B73007E62A8 /* swiftdataText.swift */,
@@ -773,7 +773,7 @@
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
 				47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */,
-				47D460BB2E215EE20078DD72 /* Untitled.swift in Sources */,
+				47D460BB2E215EE20078DD72 /* PdfView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
