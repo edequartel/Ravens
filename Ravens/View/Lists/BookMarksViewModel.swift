@@ -19,29 +19,59 @@ class BookMarksViewModel: ObservableObject {
 
   let fileManager = FileManager.default
   let filePath: URL
-
+  
   init(fileName: String) {
-      // Get the documents directory path
+    let fileManager = FileManager.default
+
+    if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
+        .appendingPathComponent("Documents")
+    {
+      try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
+      self.filePath = ubiquityURL.appendingPathComponent(fileName)
+      log.info("Using iCloud path: \(filePath.path)")
+    } else {
       let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-      filePath = documentsPath.appendingPathComponent(fileName)
+      self.filePath = documentsPath.appendingPathComponent(fileName)
+      log.warning("iCloud unavailable, using local path: \(filePath.path)")
+    }
 
-      // Check if the file exists
-      if fileManager.fileExists(atPath: filePath.path) {
-        log.info("File exists at path: \(filePath.path)")
-          loadRecords()
-      } else {
-        log.info("File does not exist at path: \(filePath.path). Creating file...")
-          let initialContent = "[]" // Default empty JSON content
+    if fileManager.fileExists(atPath: filePath.path) {
+      log.info("File exists at path: \(filePath.path)")
+      loadRecords()
+    } else {
+      log.info("File does not exist at path: \(filePath.path). Creating file...")
+      let initialContent = "[]" // Default empty JSON content
 
-          // Attempt to create the file
-          do {
-              try initialContent.write(to: filePath, atomically: true, encoding: .utf8)
-            log.info("File created successfully at path: \(filePath.path)")
-          } catch {
-            log.info("Failed to create file. Error: \(error.localizedDescription)")
-          }
+      do {
+        try initialContent.write(to: filePath, atomically: true, encoding: .utf8)
+        log.info("File created successfully at path: \(filePath.path)")
+      } catch {
+        log.error("Failed to create file. Error: \(error.localizedDescription)")
       }
+    }
   }
+//  init(fileName: String) {
+//      // Get the documents directory path
+//      let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+//      filePath = documentsPath.appendingPathComponent(fileName)
+//
+//      // Check if the file exists
+//      if fileManager.fileExists(atPath: filePath.path) {
+//        log.info("File exists at path: \(filePath.path)")
+//          loadRecords()
+//      } else {
+//        log.info("File does not exist at path: \(filePath.path). Creating file...")
+//          let initialContent = "[]" // Default empty JSON content
+//
+//          // Attempt to create the file
+//          do {
+//              try initialContent.write(to: filePath, atomically: true, encoding: .utf8)
+//            log.info("File created successfully at path: \(filePath.path)")
+//          } catch {
+//            log.info("Failed to create file. Error: \(error.localizedDescription)")
+//          }
+//      }
+//  }
 
   func loadRecords() {
     do {

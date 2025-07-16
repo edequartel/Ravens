@@ -63,6 +63,18 @@ struct SettingsView: View {
 //              Image(systemSymbol: .musicNote)
 //            }
 //        }
+
+//        Section { // THIS A DEVELOPER BUTTON TO SEE WHICH FILES ARE IN DE ICLOUD HIDDEN
+//          Button("iCloud content") {
+//            let fileManager = FileManager.default
+//            if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
+//                .appendingPathComponent("Documents") {
+//                let files = try? fileManager.contentsOfDirectory(at: ubiquityURL, includingPropertiesForKeys: nil)
+//                print("iCloud files:", files ?? [])
+//            }
+//          }
+//        }
+
         Section {
           RingtoneMakerView()
         }

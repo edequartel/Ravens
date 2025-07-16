@@ -160,7 +160,7 @@ struct ObsView: View {
       } label: {
         Image(systemSymbol: .bookmarkFill)
       }
-      .tint(.green)
+      .tint(.teal)
     }
   }
 

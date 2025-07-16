@@ -12,6 +12,27 @@ struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observationUser: ObservationsViewModel
+  var allObservationNamesText1: String {
+    let rows = (observationUser.observations ?? [])
+      .compactMap {
+        return "\($0.speciesDetail.name) \($0.number)x"
+      }
+      .joined(separator: "\n")
+    return "\(rows)"
+  }
+
+  var allObservationNamesText: String {
+    let header = "Naam            Aantal"
+    let rows = (observationUser.observations ?? [])
+      .map {
+        let name = $0.speciesDetail.name.padding(toLength: 15, withPad: " ", startingAt: 0)
+        let number = "\($0.number)x"
+        return "\(name) \(number)"
+      }
+      .joined(separator: "\n")
+
+    return "\n```\n\(header)\n\(rows)\n```\n"
+  }
 
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accessibilityManager: AccessibilityManager
@@ -169,6 +190,15 @@ struct TabUserObservationsView: View {
               .accessibility(label: Text(favoObservation))
           }
         }
+//??
+        ToolbarItem(placement: .navigationBarTrailing) {
+          ShareLink(
+            item: allObservationNamesText,
+            subject: Text("Share"),
+            message: Text("My observations")
+          )
+//          .accessibility(label: Text(favoObservation))
+        }
 
         // add choose observers
         if obsObserversViewModel.observerId != (userViewModel.user?.id ?? 0) {
@@ -179,7 +209,6 @@ struct TabUserObservationsView: View {
             )
           }
         }
-        //        }
       }
       .onAppear {
         if firstTime {

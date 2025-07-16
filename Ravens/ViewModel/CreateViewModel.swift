@@ -49,6 +49,7 @@ class CreateViewModel: ObservableObject {
                          date: String = "2025-07-11",
                          time: String = "12:00",
                          note: String = "verwijderen!",
+                         accuracy: Int = 5,
                          completion: (() -> Void)? = nil) {
 
     log.error("POST createObservation CreateViewModel \(time)")
@@ -66,8 +67,7 @@ class CreateViewModel: ObservableObject {
       "date": date,
       "time": time,
       "notes": note,
-      "accuracy": 5,
-      
+      "accuracy": accuracy
     ]
 
     AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
@@ -86,24 +86,15 @@ class CreateViewModel: ObservableObject {
 
 // ===
 
+import SwiftUI
+
 struct CreateObservationView: View {
   let log = SwiftyBeaver.self
+
   @StateObject private var viewModel = CreateViewModel()
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var locationManager: LocationManagerModel
-
-  @EnvironmentObject var observationUser: ObservationsViewModel
-  var allObservationNamesText: String {
-    let header = "| naam \t\t date |\n|---|---|"
-    let rows = (observationUser.observations ?? [])
-      .compactMap {
-        return "\($0.speciesDetail.name) \t\t \($0.date)"
-      }
-      .joined(separator: "\n")
-    return "\(header)\n\(rows)"
-  }
-
-  @Environment(\.dismiss) private var dismiss  // iOS 15+
+  @Environment(\.dismiss) private var dismiss
 
   var speciesID: Int
   var speciesName: String
@@ -116,77 +107,84 @@ struct CreateObservationView: View {
   @State private var note: String = ""
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       Form {
         Section(header: Text("Observation Details")) {
           Stepper(value: $number, in: 1...100) {
-            Text("Aantal \(number)")
+            LabeledContent("Aantal", value: "\(number)")
           }
+
           DatePicker("Date", selection: $date, displayedComponents: .date)
+            .datePickerStyle(.compact)
+
           DatePicker("Time", selection: $time, displayedComponents: .hourAndMinute)
+            .datePickerStyle(.compact)
         }
 
         Section(header: Text("Note")) {
-          TextField("", text: $note)
+          TextEditor(text: $note)
+            .frame(height: 100)
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.2)))
         }
 
-//        Section("pdf") {
-//          NavigationLink(destination: PdfView()) {
-//            Text("pdf")
-//          }
-//        }
-
-        ShareLink(item: allObservationNamesText) {
-          Label("Share Observations", systemImage: "square.and.arrow.up")
-        }
-        .padding()
-//
-//        Section("list") {
-//          ScrollView {
-//            Text(allObservationNamesText)
-//              .padding()
-//          }
-//        }
-
-        HStack {
-          Spacer()
-          Button(action: {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            let formattedDate = formatter.string(from: date)
-            let userLocation = locationManager.getCurrentLocation()
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm"
-            let formattedTime = timeFormatter.string(from: time)
-
-            viewModel.createObservation(
-              token: keyChainViewModel.token,
-              species: speciesID,
-              longitude: userLocation?.coordinate.longitude ?? 52,
-              latitude: userLocation?.coordinate.latitude ?? 0,
-              number: number,
-              date: formattedDate,
-              time: formattedTime,
-              note: note
-            ) {
-              log.error("dismissed")
-              dismiss() // <-- Dismiss view after successful submission
-            }
-          }) {
+        Section {
+          Button(action: handleSubmit) {
             Text("Submit")
-              .foregroundColor(.white)
+              .fontWeight(.bold)
+              .frame(maxWidth: .infinity)
               .padding()
-              .background(Color.blue)
-              .cornerRadius(8)
+              .background(keyChainViewModel.token.isEmpty ? Color.gray.opacity(0.3) : Color.blue)
+              .foregroundColor(.white)
+              .cornerRadius(12)
+              .shadow(radius: 3)
           }
           .disabled(keyChainViewModel.token.isEmpty)
-          Spacer()
+//          .buttonStyle(CapsuleButtonStyle())
         }
       }
-      .navigationTitle("\(speciesName)")
+      .navigationTitle(speciesName)
+    }
+  }
+
+  private func handleSubmit() {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let formattedDate = formatter.string(from: date)
+
+    let timeFormatter = DateFormatter()
+    timeFormatter.dateFormat = "HH:mm"
+    let formattedTime = timeFormatter.string(from: time)
+
+    let userLocation = locationManager.getCurrentLocation()
+
+    viewModel.createObservation(
+      token: keyChainViewModel.token,
+      species: speciesID,
+      longitude: userLocation?.coordinate.longitude ?? 52,
+      latitude: userLocation?.coordinate.latitude ?? 0,
+      number: number,
+      date: formattedDate,
+      time: formattedTime,
+      note: note,
+      accuracy: locationManager.getCurrentAccuracy() ?? 999
+    ) {
+      log.error("dismissed")
+      dismiss()
     }
   }
 }
+
+//struct CapsuleButtonStyle: ButtonStyle {
+//  func makeBody(configuration: Configuration) -> some View {
+//    configuration.label
+//      .padding()
+//      .background(Color.accentColor)
+//      .foregroundColor(.white)
+//      .clipShape(Capsule())
+//      .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+//      .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+//  }
+//}
 
 #Preview {
   CreateObservationView(speciesID: 150, speciesName: "Merel")
