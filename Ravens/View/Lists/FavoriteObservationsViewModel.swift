@@ -22,8 +22,7 @@ class FavoriteObservationsViewModel: ObservableObject {
     let fileManager = FileManager.default
 
     if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-        .appendingPathComponent("Documents")
-    {
+      .appendingPathComponent("Documents") {
       try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
       self.filePath = ubiquityURL.appendingPathComponent(fileName)
       log.error("Using iCloud path: \(filePath.path)")
@@ -39,20 +38,6 @@ class FavoriteObservationsViewModel: ObservableObject {
 
     loadRecords()
   }
-
-//  init(fileName: String = "favoriteObservations.json") {
-//    log.info("init FavoriteObservationsViewModel with file: \(fileName)")
-//
-//    let fileManager = FileManager.default
-//    let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-//    self.filePath = documentsPath.appendingPathComponent(fileName)
-//
-//    if !fileManager.fileExists(atPath: filePath.path) {
-//      fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
-//    }
-//
-//    loadRecords()
-//  }
 
   func loadRecords() {
     do {
@@ -104,15 +89,14 @@ struct FavoObservationListView: View {
   @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
 
   var allObservationNamesText: String {
-    let header = "Naam            Datum"
     let rows = favoriteObservationsViewModel.records.map {
-      let name = $0.speciesDetail.name.padding(toLength: 15, withPad: " ", startingAt: 0)
+      let name = $0.speciesDetail.name.padding(toLength: 12, withPad: " ", startingAt: 0)
       let number = "\($0.number)x"
       let date = "\($0.date)"
       return "\(name) \(date) \(number)"
     }.joined(separator: "\n")
 
-    return "\n```\n\(header)\n\(rows)\n```\n"
+    return "```\(rows)\n```"
   }
 
   var body: some View {
@@ -166,10 +150,6 @@ struct FavoObservationListView: View {
         }
         .listStyle(GroupedListStyle())
 
-//        Text(allObservationNamesText)
-//              .font(.system(.body, design: .monospaced))
-//              .padding()
-        
         Spacer()
       }
 
@@ -180,11 +160,15 @@ struct FavoObservationListView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         ShareLink(
-          item: allObservationNamesText,
-          subject: Text("Share"),
-          message: Text("My favorite observations")
-        )
+            item: allObservationNamesText,
+            subject: Text(observations)//,
+//            preview: SharePreview(observations, image: Image("AppIconShare")) //??
+        ) {
+            Label(shareObservations, systemSymbol: .squareAndArrowUp)
+        }
+        .accessibility(label: Text(share))
       }
     }
   }
+
 }

@@ -142,19 +142,6 @@ struct ObsView: View {
     }
 
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-//      ShareLinkButtonView(obs: obs)
-
-//      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
-
-//      LinkButtonView(obs: obs)
-
-//      Button {
-//        favoriteObservationsViewModel.appendRecord(observation: obs)
-//      } label: {
-//        Image(systemSymbol: .treeFill)
-//      }
-//      .tint(.blue)
-
       Button {
         favoriteObservationsViewModel.appendRecord(observation: obs)
       } label: {

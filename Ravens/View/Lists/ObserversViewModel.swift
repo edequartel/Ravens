@@ -32,8 +32,7 @@ class ObserversViewModel: ObservableObject {
     let fileName = "observers.json"
     
     if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-      .appendingPathComponent("Documents")
-    {
+      .appendingPathComponent("Documents") {
       try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
       self.filePath = ubiquityURL.appendingPathComponent(fileName)
       log.info("Using iCloud path: \(filePath.path)")
@@ -55,22 +54,7 @@ class ObserversViewModel: ObservableObject {
     
     loadRecords()
   }
-  
-  //    init() {
-  //        log.info("init ObserversViewModel")
-  //        let fileManager = FileManager.default
-  //        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-  //        filePath = documentsPath.appendingPathComponent("observers.json")
-  //        
-  //        // Check if the file exists
-  //        if !fileManager.fileExists(atPath: filePath.path) {
-  //            // If the file does not exist, create it
-  //            fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
-  //        }
-  //        
-  //        loadRecords()
-  //    }
-  
+
   func loadRecords() {
     do {
       let data = try Data(contentsOf: filePath)

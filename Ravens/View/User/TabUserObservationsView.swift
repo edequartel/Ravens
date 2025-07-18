@@ -22,16 +22,15 @@ struct TabUserObservationsView: View {
   }
 
   var allObservationNamesText: String {
-    let header = "Naam            Aantal"
     let rows = (observationUser.observations ?? [])
       .map {
-        let name = $0.speciesDetail.name.padding(toLength: 15, withPad: " ", startingAt: 0)
+        let name = $0.speciesDetail.name.padding(toLength: 12, withPad: " ", startingAt: 0)
         let number = "\($0.number)x"
         return "\(name) \(number)"
       }
       .joined(separator: "\n")
 
-    return "\n```\n\(header)\n\(rows)\n```\n"
+    return "```\(rows)\n```"
   }
 
   @EnvironmentObject var settings: Settings
@@ -190,14 +189,16 @@ struct TabUserObservationsView: View {
               .accessibility(label: Text(favoObservation))
           }
         }
-//??
+
         ToolbarItem(placement: .navigationBarTrailing) {
           ShareLink(
-            item: allObservationNamesText,
-            subject: Text("Share"),
-            message: Text("My observations")
-          )
-//          .accessibility(label: Text(favoObservation))
+              item: allObservationNamesText,
+              subject: Text(observations)//,
+              //preview: SharePreview(observations, image: Image("AppIconShare")) //??
+          ) {
+              Label(shareObservations, systemSymbol: .squareAndArrowUp)
+          }
+          .accessibility(label: Text(share))
         }
 
         // add choose observers

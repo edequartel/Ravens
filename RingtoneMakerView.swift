@@ -18,14 +18,12 @@ struct RingtoneMakerView: View {
   @State private var exportMessage = ""
   @State private var showingImporter = false
   @State private var lastExportedURL: URL?
-
-//  @State private var inputText: String = ""
   @State private var showAlert: Bool = false
   @State private var previousText: String = ""
 
   var body: some View {
     HStack {
-      Button("Share downloaded audio as ringtone") {
+      Button(shareAudio) {
         showingImporter = true
       }
       Spacer()
@@ -53,16 +51,8 @@ struct RingtoneMakerView: View {
         self.exportMessage = "Import error: \(error.localizedDescription)"
       }
     }
-
-//    .onChange(of: exportMessage) { newValue in
-//        if newValue != previousText {
-//            showAlert = true
-//            previousText = newValue
-//        }
-//    }
     .onChange(of: exportMessage) {
         showAlert = true
-//        previousText = exportMessage
     }
 
     .alert(isPresented: $showAlert) {

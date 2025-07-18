@@ -8,6 +8,8 @@
 "pause" = "pauzeer het geluid";
 "next" = "speel het volgende geluid af";
 "previous" = "speel het vorige geluid af";
+"share" = "Deel";
+"submit" = "Zend";
 "shareThisObservation" = "Deel deze waarneming";
 "shareThisObserver" = "Share this observer";
 "informationSpecies" = "Bekijk informatie over de soort";
@@ -39,7 +41,7 @@
 "location" = "Locatie";
 "species" = "Soorten";
 "observation" = "Waarneming";
-"observations" = "waarnemingen";
+"observations" = "Waarnemingen";
 "settings" = "Instellingen";
 "distance" = "Afstand";
 "noName" = "Naam onbekend";
@@ -73,9 +75,11 @@
 "logOut" = "Log uit";
 "information" = "Informatie";
 "user" = "Waarnemer";
+"produceAudio" = "Maak ringtone";
 "enterEmail" = "Vul hier je email in";
 
 //filter and sort
+"nrof" = "Aantal";
 "date" = "Datum";
 "rarity" = "Zeldzaamheid";
 "name" = "Naam";
@@ -166,7 +170,8 @@
 "audioInfo" = "Informatie geluidsopname";
 "audioDownload" = "Download geluidsopname";
 
-"favoObservation" = "favoObservation";
+"favoObservation" = "Favorite waarneming";
 "favoFavorites" = "Mijn lijst";
 
 "localizedAll" = "Alle";
+"shareObservations" = "Deel waarnemingen";

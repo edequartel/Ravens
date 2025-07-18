@@ -119,9 +119,8 @@ struct SplashView: View {
     }
   }
 
-  //only firsttime then save it todo
   private func loadSpeciesFirstLanguageData() async {
-//    isFirstLanguageDataLoaded = true //??
+//    isFirstLanguageDataLoaded = true // ??
     speciesViewModel.fetchDataFirst(settings: settings) {
       log.error("speciesViewModel First language data loaded ../region-lists/[regionList]/species/")
       isFirstLanguageDataLoaded = true
@@ -130,7 +129,7 @@ struct SplashView: View {
   }
 
   private func loadSpeciesSecondLanguageData() async {
-//    isSecondLanguageDataLoaded = true //??
+//    isSecondLanguageDataLoaded = true // ??
     speciesViewModel.fetchDataSecondLanguage(settings: settings) {
       log.error("speciesViewModel Second language data loaded")
       isSecondLanguageDataLoaded = true

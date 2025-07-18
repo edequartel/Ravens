@@ -75,14 +75,13 @@ struct TabSpeciesView: View {
                   .tint(.blue)
                   .accessibilityLabel(Text(infoSpecies))
             }
-//??
+
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
               NavigationLink(destination: CreateObservationView(speciesID: species.speciesId, speciesName: species.name)) {
                   Image(systemSymbol: .plusCircle)
                           .uniformSize()
                   }
                   .tint(.red)
-                  //.accessibilityLabel(Text(infoSpecies))
             }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {

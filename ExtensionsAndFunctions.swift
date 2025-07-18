@@ -479,13 +479,7 @@ func formatDate(date: Date) -> String {
   return formatter.string(from: date)
 }
 
-
 public struct CapsuleButtonStyle: ButtonStyle {
-
-    public init(){
-
-    }
-
     public func makeBody(configuration: Self.Configuration) -> some View {
 
         configuration.label
@@ -495,10 +489,9 @@ public struct CapsuleButtonStyle: ButtonStyle {
             .background(background)
             .padding(.horizontal, 20)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-            //.hoverEffect(.lift)
     }
 
-    var background : some View {
+    var background: some View {
         Capsule(style: .continuous).stroke(Color.accentColor, lineWidth: 1)
     }
 }
@@ -506,8 +499,7 @@ public struct CapsuleButtonStyle: ButtonStyle {
 struct CapsuleButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Button("Action!"){
-                //
+            Button("Action!") {
             }.buttonStyle(CapsuleButtonStyle())
         }
     }

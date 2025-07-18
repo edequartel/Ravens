@@ -12,6 +12,8 @@
 "pause" = "pause the sound";
 "next" = "play the next sound";
 "previous" = "play the previous sound";
+"submit" = "Submit";
+"share" = "Share";
 "shareThisObservation" = "Share this observation";
 "shareThisObserver" = "Share this observer";
 "informationSpecies" = "Get information about the species";
@@ -77,9 +79,11 @@
 "logOut" = "log out";
 "information" = "Information";
 "user" = "Observer";
+"produceAudio" = "Produce ringtone";
 "enterEmail" = "Enter your email address";
 
 // filter and sort
+"nrof" = "Count";
 "date" = "Date";
 "rarity" = "Rarity";
 "name" = "Name";
@@ -174,5 +178,6 @@
 "favoFavorites" = "My list";
 
 "localizedAll" = "All";
+"shareObservations" = "Share Observations";
 
 

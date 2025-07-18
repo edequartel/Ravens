@@ -84,10 +84,6 @@ class CreateViewModel: ObservableObject {
   }
 }
 
-// ===
-
-import SwiftUI
-
 struct CreateObservationView: View {
   let log = SwiftyBeaver.self
 
@@ -109,19 +105,19 @@ struct CreateObservationView: View {
   var body: some View {
     NavigationStack {
       Form {
-        Section(header: Text("Observation Details")) {
+        Section(header: Text(observations)) {
           Stepper(value: $number, in: 1...100) {
-            LabeledContent("Aantal", value: "\(number)")
+            LabeledContent(nrof, value: "\(number)")
           }
 
-          DatePicker("Date", selection: $date, displayedComponents: .date)
+          DatePicker(dateName, selection: $date, displayedComponents: .date)
             .datePickerStyle(.compact)
 
-          DatePicker("Time", selection: $time, displayedComponents: .hourAndMinute)
+          DatePicker(timeName, selection: $time, displayedComponents: .hourAndMinute)
             .datePickerStyle(.compact)
         }
 
-        Section(header: Text("Note")) {
+        Section(header: Text(note)) {
           TextEditor(text: $note)
             .frame(height: 100)
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.2)))
@@ -129,7 +125,7 @@ struct CreateObservationView: View {
 
         Section {
           Button(action: handleSubmit) {
-            Text("Submit")
+            Text(submit)
               .fontWeight(.bold)
               .frame(maxWidth: .infinity)
               .padding()
@@ -173,18 +169,6 @@ struct CreateObservationView: View {
     }
   }
 }
-
-//struct CapsuleButtonStyle: ButtonStyle {
-//  func makeBody(configuration: Configuration) -> some View {
-//    configuration.label
-//      .padding()
-//      .background(Color.accentColor)
-//      .foregroundColor(.white)
-//      .clipShape(Capsule())
-//      .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-//      .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
-//  }
-//}
 
 #Preview {
   CreateObservationView(speciesID: 150, speciesName: "Merel")

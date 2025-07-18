@@ -26,6 +26,7 @@
 		471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 471F7AF22CF9E90A00BF529C /* Localizable.strings */; };
 		471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */; };
 		4720A1BA2DD75B7D007E62A8 /* swiftdataText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4720A1B92DD75B73007E62A8 /* swiftdataText.swift */; };
+		472180622E2A10AC00C092B0 /* AppIconShare.png in Resources */ = {isa = PBXBuildFile; fileRef = 472180612E2A10AC00C092B0 /* AppIconShare.png */; };
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
@@ -154,6 +155,7 @@
 		471F7AF52CF9E91E00BF529C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		471F7AF72CFED78300BF529C /* SpeciesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesInfoView.swift; sourceTree = "<group>"; };
 		4720A1B92DD75B73007E62A8 /* swiftdataText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftdataText.swift; sourceTree = "<group>"; };
+		472180612E2A10AC00C092B0 /* AppIconShare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconShare.png; sourceTree = "<group>"; };
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		471F7A622CF7930D00BF529C /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				472180612E2A10AC00C092B0 /* AppIconShare.png */,
 				4759E7812D1059E100B60472 /* Assets.xcassets */,
 				473F14A22CF49FEB004A9DE4 /* ravens.json */,
 				47A862572CF4DC2F0016BB04 /* ravenssun.json */,
@@ -704,6 +707,7 @@
 				47816C1F2DD45CE700D793ED /* todo.md in Resources */,
 				472633212BB5981A00CEA05E /* poi.json in Resources */,
 				474C40332B4BC4080038B3A5 /* Preview Assets.xcassets in Resources */,
+				472180622E2A10AC00C092B0 /* AppIconShare.png in Resources */,
 				473F14A32CF49FEB004A9DE4 /* ravens.json in Resources */,
 				471F7AF42CF9E90A00BF529C /* Localizable.strings in Resources */,
 				4759E7822D1059E100B60472 /* Assets.xcassets in Resources */,
@@ -987,7 +991,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -1029,7 +1033,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
