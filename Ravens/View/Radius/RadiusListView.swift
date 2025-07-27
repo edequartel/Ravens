@@ -38,8 +38,8 @@ struct RadiusListView: View {
       HStack {
         let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedRadiusSpeciesGroup ?? 0] ?? ""
         SelectedUserSpeciesView(speciesGroup: settings.selectedRadiusSpeciesGroup != -1 ? speciesGroupName : "∞")
-
         ObservationsCountView(count: observationsRadiusViewModel.count)
+        ObservationsTimePeriodView(timePeriod: settings.timePeriodRadius ?? .fourWeeks)
         Spacer()
       }
       .padding(.horizontal, 10)

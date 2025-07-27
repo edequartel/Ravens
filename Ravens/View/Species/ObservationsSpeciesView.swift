@@ -62,6 +62,7 @@ struct ObservationsSpeciesView: View {
 
       HStack {
         ObservationsCountView(count: observationsSpecies.count)
+        ObservationsTimePeriodView(timePeriod: settings.timePeriodSpecies ?? .fourWeeks)
         Spacer()
       }
       .padding(.horizontal, 10)
@@ -184,8 +185,22 @@ struct ObservationsCountView: View {
       .font(.caption)
       .foregroundColor(.gray)
       .bold()
-//      .padding(.horizontal, 10)
-//      Spacer()
+    }
+    .accessibilityElement(children: .combine)
+  }
+}
+
+struct ObservationsTimePeriodView: View {
+  let timePeriod: TimePeriod
+
+  var body: some View {
+    HStack {
+      HStack {
+        Text(timePeriod.localized)
+      }
+      .font(.caption)
+      .foregroundColor(.gray)
+      .bold()
     }
     .accessibilityElement(children: .combine)
   }

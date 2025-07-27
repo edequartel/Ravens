@@ -87,9 +87,9 @@
 "lastSeen" = "Recent";
 
 "all" = "Alle";
-"common" = "Algemeen";
-"uncommon" = "Vrij algemeen";
-"rare" = "Zeldzaam";
+"common" = "Algemeen >";
+"uncommon" = "Vrij algemeen >";
+"rare" = "Zeldzaam >";
 "veryRare" = "Zeer zeldzaam";
 
 "moreAtWaarneming" = "waarneming.nl";

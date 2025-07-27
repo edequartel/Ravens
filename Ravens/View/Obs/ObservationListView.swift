@@ -74,16 +74,29 @@ struct ObservationListView: View {
     case .all:
       return true
     case .common:
-      return observation.rarity == 1
+      return observation.rarity >= 1
     case .uncommon:
-      return observation.rarity == 2
+      return observation.rarity >= 2
     case .rare:
-      return observation.rarity == 3
+      return observation.rarity >= 3
     case .veryRare:
-      return observation.rarity == 4
+      return observation.rarity >= 4
     case .none:
       return true
     }
+//    case .all:
+//      return true
+//    case .common:
+//      return observation.rarity == 1
+//    case .uncommon:
+//      return observation.rarity == 2
+//    case .rare:
+//      return observation.rarity == 3
+//    case .veryRare:
+//      return observation.rarity == 4
+//    case .none:
+//      return true
+//    }
   }
 
   func compareObservations(lhs: Obs, rhs: Obs) -> Bool {

@@ -76,13 +76,14 @@ struct TabSpeciesView: View {
                   .accessibilityLabel(Text(infoSpecies))
             }
 
-            .swipeActions(edge: .leading, allowsFullSwipe: false) {
-              NavigationLink(destination: CreateObservationView(speciesID: species.speciesId, speciesName: species.name)) {
-                  Image(systemSymbol: .plusCircle)
-                          .uniformSize()
-                  }
-                  .tint(.red)
-            }
+// Deze voorlopig uit laten staan en niet gebruiken
+//            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+//              NavigationLink(destination: CreateObservationView(speciesID: species.speciesId, speciesName: species.name)) {
+//                  Image(systemSymbol: .plusCircle)
+//                          .uniformSize()
+//                  }
+//                  .tint(.red)
+//            }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
@@ -255,7 +256,6 @@ struct FilteringAllMenu: View {
   @Binding var currentFilteringAllOption: FilterAllOption
 
   var body: some View {
-
     NavigationLink(destination: FilteringAllOptionsView(currentFilteringAllOption: $currentFilteringAllOption)) {
       Image(systemName: "line.3.horizontal.decrease")
         .accessibilityElement(children: .combine)
@@ -304,14 +304,26 @@ extension SpeciesViewModel {
     case .all:
       return species
     case .common:
-      return species.filter { $0.rarity == 1 }
+      return species.filter { $0.rarity >= 1 }
     case .uncommon:
-      return species.filter { $0.rarity == 2 }
+      return species.filter { $0.rarity >= 2 }
     case .rare:
-      return species.filter { $0.rarity == 3 }
+      return species.filter { $0.rarity >= 3 }
     case .veryRare:
-      return species.filter { $0.rarity == 4 }
+      return species.filter { $0.rarity >= 4 }
     }
+//    switch filterOption {
+//    case .all:
+//      return species
+//    case .common:
+//      return species.filter { $0.rarity == 1 }
+//    case .uncommon:
+//      return species.filter { $0.rarity == 2 }
+//    case .rare:
+//      return species.filter { $0.rarity == 3 }
+//    case .veryRare:
+//      return species.filter { $0.rarity == 4 }
+//    }
   }
 
   private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
