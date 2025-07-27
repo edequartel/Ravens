@@ -104,7 +104,8 @@ struct SettingsView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
-            if let url = URL(string: "https://www.ravensobs.com") {
+//            if let url = URL(string: "https://www.ravensobs.com") {
+            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
               UIApplication.shared.open(url)
             }
           }) {
@@ -116,7 +117,8 @@ struct SettingsView: View {
 
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
-            if let url = URL(string: "https://www.ravensobs.com/manual.html") {
+//            if let url = URL(string: "https://www.ravensobs.com/manual.html") {
+            if let url = URL(string: "https://edequartel.github.io/Ravens/manual.html") {
               UIApplication.shared.open(url)
             }
           }) {

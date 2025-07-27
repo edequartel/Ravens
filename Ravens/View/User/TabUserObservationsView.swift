@@ -29,8 +29,7 @@ struct TabUserObservationsView: View {
         return "\(name) \(number)"
       }
       .joined(separator: "\n")
-
-    return "```\(rows)\n```"
+    return "\(rows)"
   }
 
   @EnvironmentObject var settings: Settings

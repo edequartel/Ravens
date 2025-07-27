@@ -96,7 +96,7 @@ struct FavoObservationListView: View {
       return "\(name) \(date) \(number)"
     }.joined(separator: "\n")
 
-    return "```\(rows)\n```"
+    return "\(rows)"
   }
 
   var body: some View {
@@ -161,7 +161,7 @@ struct FavoObservationListView: View {
       ToolbarItem(placement: .navigationBarTrailing) {
         ShareLink(
             item: allObservationNamesText,
-            subject: Text(observations)//,
+            subject: Text(observations) 
 //            preview: SharePreview(observations, image: Image("AppIconShare")) //??
         ) {
             Label(shareObservations, systemSymbol: .squareAndArrowUp)
