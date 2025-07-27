@@ -91,9 +91,9 @@
 "lastSeen" = "Recent";
 
 "all" = "All";
-"common" = "Common";
-"uncommon" = "Uncommon";
-"rare" = "Rare";
+"common" = "Common >";
+"uncommon" = "Uncommon >";
+"rare" = "Rare >";
 "veryRare" = "Very rare";
 
 "moreAtWaarneming" = "waarneming.nl";
