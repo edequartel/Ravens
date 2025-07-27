@@ -119,18 +119,34 @@ class Settings: ObservableObject {
   }
 
   @AppStorage("selectedSpeciesGroup") var selectedSpeciesGroupStored = 1
-  @Published var selectedSpeciesGroup = 1 {
+  @Published var selectedSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroup in storage: \(selectedSpeciesGroup)")
-      selectedSpeciesGroupStored = selectedSpeciesGroup
+      log.info("saving selectedSpeciesGroup in storage: \(String(describing: selectedSpeciesGroup))")
+      selectedSpeciesGroupStored = selectedSpeciesGroup ?? 1
     }
   }
 
-  @AppStorage("selectedSpeciesGroupId") var selectedSpeciesGroupIdStored = 1
-  @Published var selectedSpeciesGroupId = 1 {
+  @AppStorage("selectedUserSpeciesGroup") var selectedUserSpeciesGroupStored = 1
+  @Published var selectedUserSpeciesGroup: Int? = 1 {
     didSet {
-      log.info("!!saving selectedSpeciesGroupId in storage: \(selectedSpeciesGroupId)")
-      selectedSpeciesGroupIdStored = selectedSpeciesGroupId
+      log.info("!!saving selectedUserSpeciesGroup in storage: \(String(describing: selectedUserSpeciesGroup))")
+      selectedUserSpeciesGroupStored = selectedUserSpeciesGroup ?? 1
+    }
+  }
+
+  @AppStorage("selectedRadiusSpeciesGroup") var selectedRadiusSpeciesGroupStored = 1
+  @Published var selectedRadiusSpeciesGroup: Int? = 1 {
+    didSet {
+      log.info("!!saving selectedRadiusSpeciesGroup in storage: \(String(describing: selectedRadiusSpeciesGroup))")
+      selectedRadiusSpeciesGroupStored = selectedRadiusSpeciesGroup ?? 1
+    }
+  }
+
+  @AppStorage("selectedLocationSpeciesGroup") var selectedLocationSpeciesGroupStored = 1
+  @Published var selectedLocationSpeciesGroup: Int? = 1 {
+    didSet {
+      log.info("!!saving selectedLocationSpeciesGroup in storage: \(String(describing: selectedLocationSpeciesGroup))")
+      selectedLocationSpeciesGroupStored = selectedLocationSpeciesGroup ?? 1
     }
   }
 
@@ -139,6 +155,14 @@ class Settings: ObservableObject {
     didSet {
       log.info("!!saving it in storage: \(selectedRegionId)")
       selectedRegionIdStored = selectedRegionId
+    }
+  }
+
+  @AppStorage("regionListId") var regionListIdStored = 5001
+  @Published var regionListId = 200 {
+    didSet {
+      log.info("!!saving it in storage: \(regionListId)")
+      regionListIdStored = regionListId
     }
   }
 
@@ -168,16 +192,26 @@ class Settings: ObservableObject {
   }
 
   var isInit: Bool = true
+  
   init() {
     log.info("** init Settings **")
     selectedLanguage = selectedLanguageStored
     selectedSecondLanguage = selectedSecondLanguageStored
 
-    selectedRegionListId = selectedRegionListIdStored
+    selectedRegionId = selectedRegionIdStored
+    log.info("selectedRegionId \(selectedRegionId)")
     selectedSpeciesGroup = selectedSpeciesGroupStored
-    selectedSpeciesGroupId = selectedSpeciesGroupIdStored
+    log.info("selectedSpeciesGroup \(String(describing: selectedSpeciesGroup))")
+
+    selectedRegionListId = selectedRegionListIdStored 
+    log.info("selectedRegionListId \(selectedRegionListId)")
 
     selectedSpeciesGroupName = selectedSpeciesGroupNameStored
+
+    selectedUserSpeciesGroup = selectedUserSpeciesGroupStored
+    selectedRadiusSpeciesGroup = selectedRadiusSpeciesGroupStored
+    selectedLocationSpeciesGroup = selectedLocationSpeciesGroupStored
+    selectedSpeciesGroup = selectedSpeciesGroupStored
 
     mapPreference = mapPreferenceStored
 

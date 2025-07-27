@@ -6,7 +6,12 @@
 	<array>
 		<string>www.tastenbraille.com.Ravens.background</string>
 	</array>
-
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleSignature</key>
+	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -20,41 +25,17 @@
 			</array>
 		</dict>
 	</array>
-
 	<key>LSMinimumSystemVersion</key>
 	<string>14.4</string>
-
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
-
 	<key>UIFileSharingEnabled</key>
 	<true/>
-
 	<key>UTImportedTypeDeclarations</key>
 	<array>
-		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>public.mp3</string>
-			<key>UTTypeDescription</key>
-			<string>MP3 Audio</string>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.audio</string>
-			</array>
-			<key>UTTypeIconFiles</key>
-			<array/>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mp3</string>
-				</array>
-				<key>public.mime-type</key>
-				<string>audio/mpeg</string>
-			</dict>
-		</dict>
+		<string></string>
 	</array>
 </dict>
 </plist>

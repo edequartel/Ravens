@@ -49,6 +49,36 @@ struct SettingsView: View {
           LanguageView()
         }
 
+//        Section {
+//          RegionsView()
+//        }
+
+//        Section {//!!
+//          RegionListView()
+//        }
+
+//        Section(header: Text("Produce")) {
+//          NavigationLink(destination: RingtoneMakerView()) {
+//              Text("Ringtone")
+//              Image(systemSymbol: .musicNote)
+//            }
+//        }
+
+//        Section { // THIS A DEVELOPER BUTTON TO SEE WHICH FILES ARE IN DE ICLOUD HIDDEN
+//          Button("iCloud content") {
+//            let fileManager = FileManager.default
+//            if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
+//                .appendingPathComponent("Documents") {
+//                let files = try? fileManager.contentsOfDirectory(at: ubiquityURL, includingPropertiesForKeys: nil)
+//                print("iCloud files:", files ?? [])
+//            }
+//          }
+//        }
+
+        Section {
+          RingtoneMakerView()
+        }
+
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
@@ -100,7 +130,7 @@ struct SettingsView: View {
   }
 
   func getId(region: Int, speciesGroup: Int) -> Int? {
-    log.error("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
+    log.verbose("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
     if let matchingItem = regionListViewModel.regionLists.first(
       where: { $0.region == region && $0.speciesGroup == speciesGroup }) {
       log.error("getId= \(matchingItem)")
@@ -139,40 +169,41 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
-struct SpeciesPickerView: View {
+struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var regionsViewModel: RegionsViewModel
   @EnvironmentObject var regionListViewModel: RegionListViewModel
   @EnvironmentObject var settings: Settings
 
+  @Binding var currentSpeciesGroup: Int?
+
+  var entity: EntityType
+
   var body: some View {
     Section(header: Text(species)) {
-      Picker(group, selection: $settings.selectedSpeciesGroupId) {
-        ForEach(speciesGroupsViewModel.speciesGroupsByRegion, id: \ .id) { speciesGroup in
-          Text(speciesGroup.name)
-            .tag(speciesGroup.id)
-            .lineLimit(1)
-            .truncationMode(.tail)
+      if showView { Text("SpeciesGroupPickerView").font(.customTiny) }
+      Picker(group, selection: $currentSpeciesGroup) {
+        ForEach( entity != .species ? speciesGroupsViewModel.speciesGroupsAll : speciesGroupsViewModel.speciesGroups, id: \ .id) { speciesGroup in
+
+          // only at speciesList we will look if the getId exists for user, radius and location not
+          if (entity != .species) || (regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroup.id) ?? -1 > 0) {
+            if speciesGroup.id != -1 {
+              Text("\(speciesGroup.name)")// \(speciesGroup.id)") // ?? picture svg
+                .tag(speciesGroup.id)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            } else {
+              Image(systemSymbol: .infinity)
+                .tag(speciesGroup.id)
+            }
+          }
         }
       }
       .pickerStyle(.navigationLink)
-      .onChange(of: settings.selectedSpeciesGroupId) { 
-        log.error("Selected Group ID: \(settings.selectedSpeciesGroupId)")
-        settings.selectedRegionListId = regionListViewModel.getId(
-          region: settings.selectedRegionId,
-          speciesGroup: settings.selectedSpeciesGroupId)
-
-        if let selectedGroup = speciesGroupsViewModel.speciesGroupsByRegion.first(where: { $0.id == settings.selectedSpeciesGroupId }) {
-          settings.selectedSpeciesGroupName = selectedGroup.name
-        }
-
-        log.info("Region List ID: \(settings.selectedRegionListId), Region ID: \(settings.selectedRegionId), Species Group ID: \(settings.selectedSpeciesGroupId)")
-
-        speciesViewModel.fetchDataFirst(settings: settings)
-        speciesViewModel.fetchDataSecondLanguage(settings: settings)
+      .onChange(of: settings.selectedLanguage) {
+        speciesGroupsViewModel.fetchData(settings: settings)
       }
     }
   }

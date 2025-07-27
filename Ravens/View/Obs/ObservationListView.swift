@@ -12,9 +12,10 @@ import SwiftyBeaver
 struct ObservationListView: View {
   let log = SwiftyBeaver.self
 
-  var observations: [Observation]
+  var observations: [Obs]
 
   @EnvironmentObject var settings: Settings
+
   @Binding var selectedSpeciesID: Int?
   @Binding var timePeriod: TimePeriod?
 
@@ -32,7 +33,7 @@ struct ObservationListView: View {
   var body: some View {
     List {
       let filteredAndSortedObservations = observations
-        .filter(meetsCondition)
+        .filter(meetsRarityCondition)
         .sorted(by: compareObservations)
 
       ForEach(Array(filteredAndSortedObservations.enumerated()), id: \.element.id) { index, obs in
@@ -56,7 +57,7 @@ struct ObservationListView: View {
     .listStyle(PlainListStyle()) // No additional styling, plain list look
   }
 
-  private func handleFocusChange(_ newFocusID: Int?, from observations: [Observation]) {
+  private func handleFocusChange(_ newFocusID: Int?, from observations: [Obs]) {
     guard let newFocusID = newFocusID else { return }
     if let focusedObservation = observations.first(where: { $0.idObs == newFocusID }) {
       print("\(focusedObservation.speciesDetail.name) \(focusedObservation.sounds?.count ?? 0)")
@@ -68,7 +69,7 @@ struct ObservationListView: View {
     }
   }
 
-  func meetsCondition(observation: Observation) -> Bool {
+  func meetsRarityCondition(observation: Obs) -> Bool {
     switch currentFilteringOption {
     case .all:
       return true
@@ -85,7 +86,7 @@ struct ObservationListView: View {
     }
   }
 
-  func compareObservations(lhs: Observation, rhs: Observation) -> Bool {
+  func compareObservations(lhs: Obs, rhs: Obs) -> Bool {
     switch currentSortingOption {
     case .date:
       return (lhs.timeDate ?? Date.distantPast) > (rhs.timeDate ?? Date.distantPast)

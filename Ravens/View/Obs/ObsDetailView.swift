@@ -10,40 +10,29 @@ import RichText
 import CoreLocation
 
 struct ObsDetailView: View {
-  var obs: Observation
-  @Binding var selectedSpeciesID: Int?
+  var obs: Obs
+  var entity: EntityType
 
   @State var imageURLStr: String?
-  @State var selectedObservationSound: Observation?
-  @State private var selectedObservationXX: Observation?
+  @State var selectedObservationSound: Obs?
+  @State private var selectedObservation: Obs?
 
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
   @State private var showPositionFullView = false
 
-  var entity: EntityType
-
   var body: some View {
     ScrollView {
       VStack {
+        if showView { Text("ObsDetailView").font(.customTiny) }
         HStack {
 
           NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
             Image(systemSymbol: .infoCircle)
                     .uniformSize()
             }
-            .tint(.blue)
             .accessibility(label: Text(informationSpecies))
-
-//          Button(action: {
-//            print("Information \(obs.speciesDetail.name) \(obs.speciesDetail.id)")
-//            selectedSpeciesID = obs.speciesDetail.id
-//          }) {
-//            Image(systemSymbol: SFInformation)
-//              .uniformSize()
-//          }
-//          .accessibility(label: Text(informationSpecies))
 
           let url = URL(string: obs.permalink)!
           ShareLink(item: url) {
@@ -83,23 +72,35 @@ struct ObsDetailView: View {
             .padding(.bottom, 10)
         }
 
-        // Header Section: Species Name & Rarity
+        // Alternative when name isEmpty
         VStack(alignment: .leading, spacing: 10) {
-          HStack {
-            Image(systemName: "circle.fill")
-              .foregroundColor(rarityColor(value: obs.rarity))
-            Text("\(obs.speciesDetail.name)")
-              .bold()
-              .lineLimit(1)
-              .truncationMode(.tail)
-            Spacer()
-          }
-          HStack {
-            Text("\(obs.speciesDetail.scientificName)")
-              .italic()
-              .lineLimit(1)
-              .truncationMode(.tail)
-            Spacer()
+          if obs.speciesDetail.name.isEmpty {
+            HStack {
+              Image(systemName: "circle.fill")
+                .foregroundColor(rarityColor(value: obs.rarity))
+              Text("\(obs.speciesDetail.scientificName)")
+                .italic()
+                .lineLimit(1)
+                .truncationMode(.tail)
+              Spacer()
+            }
+          } else {
+            HStack {
+              Image(systemName: "circle.fill")
+                .foregroundColor(rarityColor(value: obs.rarity))
+              Text("\(obs.speciesDetail.name)")
+                .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
+              Spacer()
+            }
+            HStack {
+              Text("\(obs.speciesDetail.scientificName)")
+                .italic()
+                .lineLimit(1)
+                .truncationMode(.tail)
+              Spacer()
+            }
           }
         }
         .padding()
@@ -160,13 +161,14 @@ struct ObsDetailView: View {
           .islandBackground()
           .accessibility(label: Text(notesAboutObservation))
 
-        PositionOnMapView(obs: obs) // Replace with your view's content
-          .frame(height: UIScreen.main.bounds.width / 2)
-          .cornerRadius(8)
-          .contentShape(Rectangle())
-
-          .accessibilityHidden(true)
-
+        NavigationLink(destination: FullMapView(obs: obs)) {
+                           PositionOnMapView(obs: obs)
+                               .frame(height: UIScreen.main.bounds.width / 2)
+                               .cornerRadius(8)
+                               .contentShape(Rectangle())
+                               .accessibilityHidden(true)
+                       }
+                       .buttonStyle(PlainButtonStyle()) // Removes tap effects
       }
       .padding()
     }
@@ -177,10 +179,19 @@ struct ObsDetailView: View {
         .presentationDragIndicator(.visible)
     }
     //
-    .sheet(item: $selectedObservationXX) { item in
+    .sheet(item: $selectedObservation) { item in
       SpeciesDetailsView(speciesID: item.speciesDetail.id)
     }
+  }
 
+  // Fullscreen destination map view
+  struct FullMapView: View {
+    let obs: Obs
+
+    var body: some View {
+      PositionOnMapView(obs: obs, allowsHitTesting: true)
+        .navigationBarTitleDisplayMode(.inline)
+    }
   }
 }
 
@@ -189,7 +200,6 @@ struct ObsDetailView_Previews: PreviewProvider {
     let mockBookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
     ObsDetailView(
       obs: mockObservation,
-      selectedSpeciesID: .constant(nil),
       entity: .radius
     )
     .environmentObject(mockBookMarksViewModel)

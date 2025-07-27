@@ -13,7 +13,7 @@ import SwiftyBeaver
 // MARK: - ViewModel
 class ObservationsRadiusViewModel: ObservableObject {
   let log = SwiftyBeaver.self
-  @Published var observations: [Observation]?
+  @Published var observations: [Obs]?
   @Published var errorMessage: String?
   @Published var hasLoadedData = false
 
@@ -28,21 +28,26 @@ class ObservationsRadiusViewModel: ObservableObject {
     latitude: Double,
     longitude: Double,
     radius: Int,
+    speciesGroup: Int,
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
       observations = []
-      var url = "https://waarnemingen.nl/api/v1/observations/around-point/?"
+      var url = "https://waarneming.nl/api/v1/observations/around-point/?"
+      
       let date = Date()
       let dateFormatted = formatDate(date: date)
       if let days = timePeriod?.rawValue {
-          url += "days=\(days)&"
+          url += "days=\(days)"
       }
       url += "&end_date="+dateFormatted
       url += "&lat="+String(latitude)
       url += "&lng="+String(longitude)
       url += "&radius="+String(radius)
+      if speciesGroup != -1 {
+        url += "&species_group=\(speciesGroup)"
+      }
 
-      self.log.info("url:\(url)")
+      self.log.info("radius url:\(url)")
 
       fetchData(
         settings: settings,
@@ -54,7 +59,7 @@ class ObservationsRadiusViewModel: ObservableObject {
     settings: Settings,
     url: String,
     completion: @escaping () -> Void) {
-      log.info("ObservationsRadiusViewModel fetchData url: [\(url)]")
+      log.error("ObservationsRadiusViewModel fetchData url: [\(url)]")
       if url.isEmpty { return }
 
       let headers: HTTPHeaders = [
@@ -77,7 +82,7 @@ class ObservationsRadiusViewModel: ObservableObject {
                 self.next = observations.next?.absoluteString ?? ""
                 self.previous = observations.previous?.absoluteString ?? ""
 
-                self.log.error("radius cont: \(self.count)")
+                self.log.info("radius cont: \(self.count)")
                 self.log.info("next: \(self.next)")
                 self.log.info("prev: \(self.previous)")
 
@@ -89,7 +94,7 @@ class ObservationsRadiusViewModel: ObservableObject {
             }
           }
         case .failure(let error):
-          self.log.error("Error ObservationsUserViewModel: \(error)")
+          self.log.error("Error ObservationsRadiusViewModel: \(error)")
         }
       }
     }

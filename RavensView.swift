@@ -18,7 +18,6 @@ struct RavensView: View {
   @ObservedObject var observationsSpecies: ObservationsViewModel
   @ObservedObject var observationsRadiusViewModel: ObservationsRadiusViewModel
 
-  //  @EnvironmentObject var settings: Settings
   @State private var selectedSpeciesID: Int?
 
   //  @EnvironmentObject var notificationsManager: NotificationsManager
@@ -27,6 +26,7 @@ struct RavensView: View {
     if  !keyChainViewModel.token.isEmpty {
       TabView {
         // Tab 1
+
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
           .tabItem {
             Text(usName)
@@ -40,6 +40,7 @@ struct RavensView: View {
           Text(radius)
           Image(systemSymbol: .circle)
         }
+
         // Tab 3
         TabLocationView(
           observationsLocation: observationsLocation,
@@ -48,7 +49,8 @@ struct RavensView: View {
           Text(location)
           Image(systemSymbol: SFAreaFill)
         }
-        // Tab 3
+
+        // Tab 4
         TabSpeciesView(
           observationsSpecies: observationsSpecies,
           selectedSpeciesID: $selectedSpeciesID)
@@ -56,7 +58,8 @@ struct RavensView: View {
           Text(species)
           Image(systemSymbol: .tree)
         }
-        // Tab 4
+
+        // Tab 5
         SettingsView()
           .tabItem {
             Text(settingsName)

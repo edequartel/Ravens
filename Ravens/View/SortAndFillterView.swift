@@ -91,7 +91,7 @@ struct FilteringAllOptionsView: View {
 
 struct ObservationRowView: View {
   let index: Int?
-  var obs: Observation
+  var obs: Obs
   @Binding var selectedSpeciesID: Int?
   
   var entity: EntityType
@@ -99,7 +99,7 @@ struct ObservationRowView: View {
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
-      NavigationLink(destination: ObsDetailView(obs: obs, selectedSpeciesID: $selectedSpeciesID, entity: entity)) {
+      NavigationLink(destination: ObsDetailView(obs: obs, entity: entity)) {
         ObsView(
           index: index,
           selectedSpeciesID: $selectedSpeciesID,
@@ -144,6 +144,8 @@ struct ObservationToolbarModifier: ViewModifier {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var currentSpeciesGroup: Int?
+
   @Binding var timePeriod: TimePeriod?
 
   var entity: EntityType
@@ -152,13 +154,18 @@ struct ObservationToolbarModifier: ViewModifier {
     currentSortingOption: Binding<SortingOption?> = .constant(nil),
     currentFilteringAllOption: Binding<FilterAllOption?> = .constant(nil),
     currentFilteringOption: Binding<FilteringRarityOption?> = .constant(nil),
+
+    currentSpeciesGroup: Binding<Int?> = .constant(nil),
+
     timePeriod: Binding<TimePeriod?> = .constant(nil),
+
     entity: EntityType = .user // ✅ Added entity as a parameter with a default
 
   ) {
     self._currentSortingOption = currentSortingOption
     self._currentFilteringAllOption = currentFilteringAllOption
     self._currentFilteringOption = currentFilteringOption
+    self._currentSpeciesGroup = currentSpeciesGroup
     self._timePeriod = timePeriod
     self.entity = entity
   }
@@ -172,6 +179,7 @@ struct ObservationToolbarModifier: ViewModifier {
               currentSortingOption: $currentSortingOption,
               currentFilteringAllOption: $currentFilteringAllOption,
               currentFilteringOption: $currentFilteringOption,
+              currentSpeciesGroup: $currentSpeciesGroup,
               timePeriod: $timePeriod,
               entity: entity
             )
@@ -189,6 +197,8 @@ struct CombinedOptionsMenuView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  @Binding var currentSpeciesGroup: Int?
+
   @Binding var timePeriod: TimePeriod?
 
   @EnvironmentObject var settings: Settings
@@ -197,20 +207,29 @@ struct CombinedOptionsMenuView: View {
 
   var body: some View {
     NavigationStack {
+      if showView { Text("CombinedOptionsMenuView").font(.customTiny) }
       Form {
+
+        // Selected the SpeciesGroup
+        if currentSpeciesGroup != nil {
+          SpeciesGroupPickerView(
+            currentSpeciesGroup: $currentSpeciesGroup,
+            entity: entity)
+        }
+
         // Period Filter
         if timePeriod != nil {
           Section(header: Text(period)) {
             TimePeriodView(timePeriod: $timePeriod, entity: entity)
           }
         }
-        
+
         if entity == .radius {
           Section(distance) {
             RadiusPickerView(selectedRadius: $settings.radius)
           }
         }
-        
+
         // Sorting Option
         if currentSortingOption != nil {
           Section(header: Text(sort)) {
@@ -229,7 +248,7 @@ struct CombinedOptionsMenuView: View {
             }
           }
         }
-        
+
         // Filter All/Native
         if currentFilteringAllOption != nil {
           Section(header: Text(filter)) {
@@ -248,7 +267,7 @@ struct CombinedOptionsMenuView: View {
             }
           }
         }
-        
+
         // Rarity Filter
         if currentFilteringOption != nil {
           Section(header: Text(rarity)) {
@@ -289,6 +308,6 @@ struct TimePeriodView: View {
 
   /// Filters `TimePeriod.allCases` based on entity
   private var filteredTimePeriods: [TimePeriod] {
-    entity == .radius ? Array(TimePeriod.allCases.prefix(3)) : TimePeriod.allCases
+    entity == .radius ? Array(TimePeriod.allCases.prefix(4)) : TimePeriod.allCases
   }
 }

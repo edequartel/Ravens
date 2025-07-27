@@ -70,6 +70,7 @@ struct RadiusMapView: View {
             latitude: coordinate.latitude,
             longitude: coordinate.longitude,
             radius: settings.radius,
+            speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, 
             timePeriod: settings.timePeriodRadius,
             completion: {
               log.error("tapgesture update userlocation")

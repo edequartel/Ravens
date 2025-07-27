@@ -27,13 +27,19 @@ class SpeciesViewModel: ObservableObject {
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // Adjust format as per your date-time strings
     return dateFormatter.date(from: "\(dateString) \(timeString)") ?? Date.distantPast
   }
-  
+
+  //
   func fetchDataFirst(settings: Settings, completion: (() -> Void)? = nil) {
-    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionListId)")
+    log.info("SpeciesViewModel:")
+    log.info(" >selectedSpeciesGroup : \(settings.selectedSpeciesGroup ?? -1)")
+    log.info(" >selectedRegionId     : \(settings.selectedRegionId)")
+    log.info(" >selectedRegionListId : \(settings.selectedRegionListId)")
+
+    log.info("SpeciesViewModel fetchDataFirst \(settings.selectedLanguage) groupID \(settings.selectedRegionId)")
+
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    
-    log.info("url: \(url)")
-    
+    log.info(" >url: \(url)")
+
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedLanguage
@@ -56,19 +62,21 @@ class SpeciesViewModel: ObservableObject {
           completion?() // call the completion handler if it exists
           //          self.parseHTMLFromURL(settings: settings, completion: {print("parseHTMLFromURL done")})xxz
         } catch {
-          self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
+          self.log.error("Error 3 SpeciesViewModel decoding JSON: \(error)")
         }
       case .failure(let error):
-        self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
+        self.log.error("Error 4 SpeciesViewModel fetching data \(url) \(error)")
       }
     }
   }
   
   func fetchDataSecondLanguage(settings: Settings, completion: (() -> Void)? = nil) {
     log.info("SpeciesViewModel fetchDataSecondLanguage \(settings.selectedSecondLanguage) groupID \(settings.selectedRegionListId)")
-    
+
     let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
-    
+//    let url = endPoint(value: settings.selectedInBetween)+"region-lists/\(settings.selectedRegionListId)/species/"
+    log.info(" > url \(url)")
+
     // Add the custom header 'Accept-Language: nl'
     let headers: HTTPHeaders = [
       "Accept-Language": settings.selectedSecondLanguage
@@ -90,10 +98,10 @@ class SpeciesViewModel: ObservableObject {
           self.speciesSecondLanguage = try decoder.decode([Species].self, from: response.data!)
           completion?() // call the completion handler if it exists
         } catch {
-          self.log.error("Error SpeciesViewModel decoding JSON: \(error)")
+          self.log.error("Error 1 SpeciesViewModel decoding JSON: \(error)")
         }
       case .failure(let error):
-        self.log.error("Error SpeciesViewModel fetching data \(url) \(error)")
+        self.log.error("Error 2 SpeciesViewModel fetching data \(url) \(error)")
       }
     }
   }

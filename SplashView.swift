@@ -27,9 +27,6 @@ struct SplashView: View {
   @EnvironmentObject var geoJSONViewModel: GeoJSONViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
-  @EnvironmentObject var obsObserversViewModel: ObserversViewModel
-  @EnvironmentObject var observationUser: ObservationsViewModel
-
   @State private var isLanguageDataLoaded = false
   @State private var isFirstLanguageDataLoaded = false
   @State private var isSecondLanguageDataLoaded = false
@@ -91,7 +88,7 @@ struct SplashView: View {
 
   private func loadLanguagesData() async {
     languagesViewModel.fetchLanguageData(settings: settings) {
-      log.info("languagesViewModel Language data loaded")
+      log.error("languagesViewModel Language data loaded ../languages") // Nederlands, Engels, Afrikaans...
       isLanguageDataLoaded = true
       checkDataLoaded()
     }
@@ -99,7 +96,7 @@ struct SplashView: View {
 
   private func loadSpeciesGroupData() async {
     speciesGroupViewModel.fetchData(settings: settings) {
-      log.info("speciesGroupViewModel group data loaded")
+      log.error("speciesGroupViewModel group data loaded ../species-groups") // Vogels (1), zoogdieren, insecten...
       isSpeciesGroupDataLoaded = true
       checkDataLoaded()
     }
@@ -107,31 +104,34 @@ struct SplashView: View {
 
   private func loadRegionsData() async {
     regionsViewModel.fetchData(settings: settings) {
-      log.info("regionsViewModel data loaded")
+      log.error("regionsViewModel data loaded ../regions/") // Nederland (200) , Engeland, Antartica, Africa...
       isRegionDataLoaded = true
       checkDataLoaded()
     }
   }
 
   private func loadRegionListData() async {
-    regionListViewModel.fetchData(settings: settings) {
-      log.info("regionListViewModel data loaded")
+    regionListViewModel.fetchData(settings: settings) { // getId(region,speciesgroup) = regionListId,  200 + 1 = 5001
+      log.error("regionListViewModel data loaded ../region-lists")
+
       isRegionListDataLoaded = true
       checkDataLoaded()
     }
   }
 
   private func loadSpeciesFirstLanguageData() async {
+//    isFirstLanguageDataLoaded = true // ??
     speciesViewModel.fetchDataFirst(settings: settings) {
-      log.info("speciesViewModel First language data loaded")
-        isFirstLanguageDataLoaded = true
-        checkDataLoaded()
+      log.error("speciesViewModel First language data loaded ../region-lists/[regionList]/species/")
+      isFirstLanguageDataLoaded = true
+      checkDataLoaded()
     }
   }
 
   private func loadSpeciesSecondLanguageData() async {
+//    isSecondLanguageDataLoaded = true // ??
     speciesViewModel.fetchDataSecondLanguage(settings: settings) {
-      log.info("speciesViewModel Second language data loaded")
+      log.error("speciesViewModel Second language data loaded")
       isSecondLanguageDataLoaded = true
       checkDataLoaded()
     }

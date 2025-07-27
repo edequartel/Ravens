@@ -12,6 +12,9 @@ struct TabSpeciesView: View {
   let log = SwiftyBeaver.self
 
   @ObservedObject var observationsSpecies: ObservationsViewModel
+
+  @EnvironmentObject var regionListViewModel: RegionListViewModel
+
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
@@ -26,6 +29,8 @@ struct TabSpeciesView: View {
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
 
+  @State private var currentSpeciesGroup: Int? = 1
+
   @Binding var selectedSpeciesID: Int?
 
   @State private var showSpeciesXC: Species?
@@ -37,6 +42,7 @@ struct TabSpeciesView: View {
         if showView { Text("TabSpeciesView").font(.customTiny) }
 
         HorizontalLine()
+
         List {
           ForEach(speciesViewModel.filteredSpecies(
             by: selectedSortOption,
@@ -70,13 +76,21 @@ struct TabSpeciesView: View {
                   .accessibilityLabel(Text(infoSpecies))
             }
 
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+              NavigationLink(destination: CreateObservationView(speciesID: species.speciesId, speciesName: species.name)) {
+                  Image(systemSymbol: .plusCircle)
+                          .uniformSize()
+                  }
+                  .tint(.red)
+            }
+
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
             }
 
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroupId) {
+              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
                 NavigationLink(destination: BirdListView(
                   scientificName: species.scientificName,
                   nativeName: species.name)) {
@@ -92,6 +106,20 @@ struct TabSpeciesView: View {
         }
         .listStyle(PlainListStyle())
         .searchable(text: $searchText)
+      }
+
+      .onChange(of: settings.selectedRegionId) {
+        log.error("TabSpeciesView  update settings.selectedRegionId \(settings.selectedRegionId)")
+        settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+        speciesViewModel.fetchDataFirst(settings: settings)
+      }
+
+      .onChange(of: settings.selectedSpeciesGroup) {
+        print("fetchDataFirst & fetchDataSecondLanguage")
+        log.error("TabSpeciesView  update settings.selectedSpeciesGroup \(String(describing: settings.selectedSpeciesGroup))")
+        settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+        speciesViewModel.fetchDataFirst(settings: settings)
+        speciesViewModel.fetchDataSecondLanguage(settings: settings) 
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in
@@ -114,6 +142,7 @@ struct TabSpeciesView: View {
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
             selectedRarityOption: $selectedRarityOption
+            // currentSpeciesGroup: $settings.selectedSpeciesGroup 
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()
@@ -140,10 +169,23 @@ struct SortFilterSpeciesView: View {
   @Binding var selectedSortOption: SortNameOption
   @Binding var selectedFilterAllOption: FilterAllOption
   @Binding var selectedRarityOption: FilteringRarityOption
+//  @Binding var currentSpeciesGroup: Int?
+
+  @EnvironmentObject var settings: Settings
 
   var body: some View {
+
+    if showView { Text("SortFilterSpeciesView").font(.customTiny) }
+
     Form {
-      SpeciesPickerView()
+      // Selected the SpeciesGroup
+      SpeciesGroupPickerView(
+        currentSpeciesGroup: $settings.selectedSpeciesGroup,
+        entity: .species)
+
+      Section {
+        RegionsView()
+      }
 
       // First Menu for Sorting
       Section(sort) {
@@ -192,6 +234,7 @@ struct SortNameOptionsView: View {
 
   var body: some View {
     if showView { Text("SortNameOptionsView").font(.customTiny) }
+
     List(SortNameOption.allCases, id: \.self) { option in
       Button(action: {
         currentFilteringNameOption = option
@@ -268,15 +311,12 @@ extension SpeciesViewModel {
       return species.filter { $0.rarity == 3 }
     case .veryRare:
       return species.filter { $0.rarity == 4 }
-      //        default:
-      //            return species
     }
   }
 
   private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
     if isBookmarked {
       return species.filter { species in
-        //                additionalIntArray.contains(where: { $0.speciesID == species.id })
         additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
       }
     } else {

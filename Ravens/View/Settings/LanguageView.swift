@@ -9,45 +9,45 @@ import SwiftUI
 import SwiftyBeaver
 
 struct LanguageView: View {
-    let log = SwiftyBeaver.self
-    @EnvironmentObject private var languagesViewModel: LanguagesViewModel
-    @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
-    
-    @EnvironmentObject private var regionsViewModel: RegionsViewModel
-    @EnvironmentObject private var regionListViewModel: RegionListViewModel
-    
-    // State variable to hold the selected option
-    @EnvironmentObject var settings: Settings
-    @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  let log = SwiftyBeaver.self
+  @EnvironmentObject private var languagesViewModel: LanguagesViewModel
+  @EnvironmentObject private var speciesGroupsViewModel: SpeciesGroupsViewModel
 
-    var body: some View {
-            Picker(language, selection: $settings.selectedLanguage) {
-                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
-                    Text(language.nameNative).tag(language.code)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .onChange(of: settings.selectedLanguage) {
-                speciesGroupsViewModel.fetchData(settings: settings) 
-                regionsViewModel.fetchData(settings: settings)
-                print("selectedRegionListId: \(settings.selectedRegionListId)")
-                speciesViewModel.fetchDataFirst(settings: settings)
-            }
-            
-            Picker(secondLanguage, selection: $settings.selectedSecondLanguage) {
-                ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
-                    Text(language.nameNative).tag(language.code)
-                }
-            }
-            .pickerStyle(.navigationLink)
-            .onChange(of: settings.selectedSecondLanguage) {
-                print("selectedRegionListId: \(settings.selectedRegionListId)")
-                speciesViewModel.fetchDataSecondLanguage(settings: settings)
-            }
+  @EnvironmentObject private var regionsViewModel: RegionsViewModel
+  @EnvironmentObject private var regionListViewModel: RegionListViewModel
+
+  // State variable to hold the selected option
+  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+
+  var body: some View {
+    Picker(language, selection: $settings.selectedLanguage) {
+      ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
+        Text(language.nameNative).tag(language.code)
+      }
     }
+    .pickerStyle(.navigationLink)
+    .onChange(of: settings.selectedLanguage) {
+      speciesGroupsViewModel.fetchData(settings: settings)
+      regionsViewModel.fetchData(settings: settings)
+      log.info("selectedRegionListId: \(settings.selectedRegionListId)")
+      speciesViewModel.fetchDataFirst(settings: settings)
+    }
+
+    Picker(secondLanguage, selection: $settings.selectedSecondLanguage) {
+      ForEach(languagesViewModel.language?.results ?? [], id: \.self) { language in
+        Text(language.nameNative).tag(language.code)
+      }
+    }
+    .pickerStyle(.navigationLink)
+    .onChange(of: settings.selectedSecondLanguage) {
+      log.info("selectedRegionListId: \(settings.selectedRegionListId)")
+      speciesViewModel.fetchDataSecondLanguage(settings: settings)
+    }
+  }
 }
 
 #Preview {
-    LanguageView()
-        .environmentObject(Settings())
+  LanguageView()
+    .environmentObject(Settings())
 }

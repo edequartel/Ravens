@@ -15,9 +15,8 @@ let demo = false
  let showView = false
 // let showView = true
 
-// gouda en span nederland
-// let latitude = 52,013077
-// let longitude = 4,713450
+// neeltje jans
+// 51.631732, 3.698586
 
 let latitudeDelta = 4.5
 let longitudeDelta = 3.0
@@ -428,10 +427,10 @@ extension Image {
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
             .frame(width: 24, height: 24) // Sets the uniform siz#
             .padding(4) // Adds padding around the image
-            .overlay(
-                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
-                  .stroke(Color.blue, lineWidth: 1)
-            )
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
+//                  .stroke(Color.blue, lineWidth: 1)
+//            )
     }
 }
 
@@ -478,4 +477,30 @@ func formatDate(date: Date) -> String {
   let formatter = DateFormatter()
   formatter.dateFormat = "yyyy-MM-dd"
   return formatter.string(from: date)
+}
+
+public struct CapsuleButtonStyle: ButtonStyle {
+    public func makeBody(configuration: Self.Configuration) -> some View {
+
+        configuration.label
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding(6)
+            .foregroundColor(.accentColor)
+            .background(background)
+            .padding(.horizontal, 20)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+    }
+
+    var background: some View {
+        Capsule(style: .continuous).stroke(Color.accentColor, lineWidth: 1)
+    }
+}
+
+struct CapsuleButtonStyle_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            Button("Action!") {
+            }.buttonStyle(CapsuleButtonStyle())
+        }
+    }
 }

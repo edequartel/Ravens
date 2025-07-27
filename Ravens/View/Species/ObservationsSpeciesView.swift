@@ -16,7 +16,7 @@ struct ObservationsSpeciesView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
   @EnvironmentObject var settings: Settings
-
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
 
   @State private var hasAppeared = false
@@ -59,7 +59,13 @@ struct ObservationsSpeciesView: View {
       .padding(.horizontal, 10)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(item.name)
-      ObservationsCountView(count: observationsSpecies.count)
+
+      HStack {
+        ObservationsCountView(count: observationsSpecies.count)
+        Spacer()
+      }
+      .padding(.horizontal, 10)
+
       HorizontalLine()
       Spacer()
 
@@ -92,6 +98,10 @@ struct ObservationsSpeciesView: View {
       }
     }
 
+    .onChange(of: settings.selectedSpeciesGroup) {
+      print("xxx OBS HIER MOET HET NIET GEBEUREN xxx")
+    }
+
     .onChange(of: timePeriod) {
       log.error("update timePeriodUser")
 
@@ -100,6 +110,7 @@ struct ObservationsSpeciesView: View {
         entity: .species,
         token: keyChainviewModel.token,
         id: item.speciesId,
+        speciesGroup: settings.selectedSpeciesGroup ?? 1, 
         timePeriod: settings.timePeriodSpecies,
         completion: {
           isLoaded = true
@@ -132,12 +143,32 @@ struct ObservationsSpeciesView: View {
       entity: .species,
       token: keyChainviewModel.token,
       id: item.speciesId,
+      speciesGroup: settings.selectedSpeciesGroup ?? 1, 
       timePeriod: settings.timePeriodSpecies,
       completion: {
         isLoaded = true
         log.info("observationsSpeciesViewModel data loaded")
       }
     )
+  }
+}
+
+struct SelectedUserSpeciesView: View {
+  let speciesGroup: String
+
+  var body: some View {
+    HStack {
+      HStack {
+        Text("\(speciesGroup)")
+//        Text("\(speciesGroupsViewModel.speciesDictionary[settings.selectedRadiusSpeciesGroup ?? 0] ?? ""),")
+      }
+      .font(.caption)
+      .foregroundColor(.gray)
+      .bold()
+//      .padding(.horizontal, 10)
+//      Spacer()
+    }
+    .accessibilityElement(children: .combine)
   }
 }
 
@@ -153,8 +184,8 @@ struct ObservationsCountView: View {
       .font(.caption)
       .foregroundColor(.gray)
       .bold()
-      .padding(.horizontal, 10)
-      Spacer()
+//      .padding(.horizontal, 10)
+//      Spacer()
     }
     .accessibilityElement(children: .combine)
   }

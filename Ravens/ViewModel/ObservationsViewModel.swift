@@ -22,11 +22,7 @@ enum EntityType: String {
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
-  @Published var observations: [Observation]? {
-    didSet {
-      // print("Array updated \(observations?.count ?? 0)") to update the ModelView
-    }
-  }
+  @Published var observations: [Obs]? 
 
   private var limit = 100
   private var offset = 0
@@ -42,31 +38,38 @@ class ObservationsViewModel: ObservableObject {
     entity: EntityType,
     token: String,
     id: Int,
+    speciesGroup: Int,
     timePeriod: TimePeriod?,
     completion: @escaping () -> Void) {
-    log.info("ObservationsViewModel FetchDataInit")
+      log.info("ObservationsViewModel FetchDataInit")
 
-    // reset
-    self.observations = []
+      // reset
+      self.observations = []
 
-    var days = (timePeriod ?? .twoWeeks).rawValue
-    days -= 1 // today is also also a day
+      var days = (timePeriod ?? .twoWeeks).rawValue
+      days -= 1 // today is also also a day
 
-    // datetime
-    let date: Date = Date.now
-    let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
-    let dateBefore = formatCurrentDate(value: date)
-    // add the periode to the url
-    var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+      // datetime
+      let date: Date = Date.now
+      let dateAfter = formatCurrentDate(value: Calendar.current.date(byAdding: .day, value: -days, to: date)!)
+      let dateBefore = formatCurrentDate(value: date)
 
-    if timePeriod != .infinite {
-      url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+      // add the periode to the url
+      var url = endPoint(value: settings.selectedInBetween) + "\(entity.rawValue)/\(id)/observations/"+"?limit=\(self.limit)&offset=\(self.offset)"
+
+      if timePeriod != .infinite {
+        url += "&date_after=\(dateAfter)&date_before=\(dateBefore)"
+      }
+
+      log.info("speciesGroup \(speciesGroup)")
+      url += "&ordering=-datetime"
+      if speciesGroup != -1 {
+        url += "&species_group=\(speciesGroup)"
+      }
+
+      fetchData(settings: settings, url: url, token: token, completion: completion)
+      
     }
-
-    url += "&ordering=-datetime"
-
-    fetchData(settings: settings, url: url, token: token, completion: completion)
-  }
 
   func fetchData(
     settings: Settings,

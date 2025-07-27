@@ -10,45 +10,49 @@ import Alamofire
 import SwiftyBeaver
 
 class RegionListViewModel: ObservableObject {
-    let log = SwiftyBeaver.self
-    @Published var regionLists = [RegionList]()
-    func getId(region: Int, speciesGroup: Int) -> Int {
-        log.verbose("getID from regionListViewModel region: \(region) species_group: \(speciesGroup)")
-        if let matchingItem = regionLists.first(
-            where: { $0.region == region && $0.speciesGroup == speciesGroup }) {
-            log.verbose("getId= \(matchingItem.id)")
-            return matchingItem.id
-        }
-        log.verbose("getId: not found")
-        return -1
-    }
+  let log = SwiftyBeaver.self
+  @Published var regionLists = [RegionList]()
 
-    func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
-        log.info("fetchData RegionListViewModel")
-        let url = endPoint(value: settings.selectedInBetween)+"region-lists"
-        
-        log.info("RegionListViewModel url = \(url)")
-        
-        // Add the custom header 'Accept-Language: nl'
-        let headers: HTTPHeaders = [
-            "Accept-Language": settings.selectedLanguage
-        ]
+  var entryDict: [Int: Int] = [:]
 
-        // Use Alamofire to make the API request
-        AF.request(url, headers: headers).responseDecodable(of: [RegionList].self) {   response in
-            switch response.result {
-            case .success:
-                do {
-                    // Decode the JSON response into an array of Species objects
-                    let decoder = JSONDecoder()
-                    self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
-                    completion?() // call the completion handler if it exists
-                } catch {
-                    self.log.error("Error RegionListViewModel decoding JSON: \(error)")
-                }
-            case .failure(let error):
-                self.log.error("Error RegionListViewModel fetching data: \(error)")
-            }
+  func fetchData(settings: Settings, completion: (() -> Void)? = nil) {
+    log.info("fetchData RegionListViewModel")
+    let url = endPoint(value: settings.selectedInBetween)+"region-lists"
+
+    log.info("RegionListViewModel url = \(url)")
+
+    // Add the custom header 'Accept-Language: nl'
+    let headers: HTTPHeaders = [
+      "Accept-Language": settings.selectedLanguage
+    ]
+
+    // Use Alamofire to make the API request
+    AF.request(url, headers: headers).responseDecodable(of: [RegionList].self) {   response in
+      switch response.result {
+      case .success:
+        do {
+          // Decode the JSON response into an array of Species objects
+          let decoder = JSONDecoder()
+          self.regionLists = try decoder.decode([RegionList].self, from: response.data!)
+
+          self.entryDict = Dictionary(uniqueKeysWithValues: self.regionLists.map {
+            ($0.region * 100 + $0.speciesGroup, $0.id)
+          })
+
+          completion?() // call the completion handler if it exists
+        } catch {
+          self.log.error("Error RegionListViewModel decoding JSON: \(error)")
         }
+      case .failure(let error):
+        self.log.error("Error RegionListViewModel fetching data: \(error)")
+      }
     }
+  }
+
+  // Function to get ID by region and speciesGroup
+  func getId(region: Int, speciesGroup: Int) -> Int? {
+    let key = region * 100 + speciesGroup
+    return entryDict[key]
+  }
+
 }

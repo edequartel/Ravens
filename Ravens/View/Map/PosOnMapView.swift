@@ -9,13 +9,15 @@ import SwiftUI
 import MapKit
 
 struct PositionOnMapView: View {
-  var obs: Observation
+  var obs: Obs
+  var allowsHitTesting: Bool = true
 
   @EnvironmentObject var settings: Settings
   @State private var cameraPosition: MapCameraPosition = .automatic
 
   var body: some View {
     Map(position: $cameraPosition) {
+      UserAnnotation()
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
         Circle()
           .fill(rarityColor(value: obs.rarity))
@@ -30,12 +32,18 @@ struct PositionOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
+    .mapControls {
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() // tapping this makes it north
+    }
+
     .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
       )
     }
-    .allowsHitTesting(false)
+    .allowsHitTesting(allowsHitTesting)
   }
 }
 
@@ -56,6 +64,11 @@ struct PositionLatitideLongitudeOnMapView: View {
       }
     }
     .mapStyle(settings.mapStyle)
+    .mapControls {
+      MapUserLocationButton()
+      MapPitchToggle()
+      MapCompass() // tapping this makes it north
+    }
     .onAppear {
       cameraPosition = .camera(
         MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), distance: 150000)

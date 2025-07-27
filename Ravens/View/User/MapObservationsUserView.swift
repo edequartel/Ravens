@@ -11,8 +11,8 @@ import SwiftyBeaver
 
 struct MapObservationsUserView: View {
   let log = SwiftyBeaver.self
-  @ObservedObject var observationUser: ObservationsViewModel
-
+  
+  @EnvironmentObject var observationUser: ObservationsViewModel
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var settings: Settings
 
@@ -74,7 +74,7 @@ struct MapObservationsUserView: View {
 }
 
 struct ObservationAnnotationView: View {
-  let observation: Observation
+  let observation: Obs
 
   var body: some View {
     Circle()

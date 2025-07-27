@@ -35,4 +35,11 @@ class LocationManagerModel: NSObject, ObservableObject, CLLocationManagerDelegat
     return locationManager.location
   }
 
+  func getCurrentAccuracy() -> Int? {
+    guard let accuracy = locationManager.location?.horizontalAccuracy else {
+      return nil
+    }
+    return Int(accuracy)
+  }
+
 }

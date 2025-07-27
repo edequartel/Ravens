@@ -18,6 +18,7 @@ struct RadiusListView: View {
 
   @EnvironmentObject var locationManager: LocationManagerModel
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
 
   @State private var once: Bool = false
 
@@ -33,7 +34,16 @@ struct RadiusListView: View {
   var body: some View {
     VStack {
       if showView { Text("RadiusListView").font(.customTiny) }
-      ObservationsCountView(count: observationsRadiusViewModel.count)
+
+      HStack {
+        let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedRadiusSpeciesGroup ?? 0] ?? ""
+        SelectedUserSpeciesView(speciesGroup: settings.selectedRadiusSpeciesGroup != -1 ? speciesGroupName : "∞")
+
+        ObservationsCountView(count: observationsRadiusViewModel.count)
+        Spacer()
+      }
+      .padding(.horizontal, 10)
+
       HorizontalLine()
 
       if let observations = observationsRadiusViewModel.observations, !observations.isEmpty {
@@ -68,6 +78,7 @@ struct RadiusListView: View {
           latitude: observationsRadiusViewModel.circleCenter.latitude,
           longitude: observationsRadiusViewModel.circleCenter.longitude,
           radius: settings.radius,
+          speciesGroup: settings.selectedRadiusSpeciesGroup ?? 1, 
           timePeriod: settings.timePeriodRadius,
           completion: {
             log.error("radiusView count \(observationsRadiusViewModel.count)")

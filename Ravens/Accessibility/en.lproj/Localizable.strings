@@ -12,6 +12,8 @@
 "pause" = "pause the sound";
 "next" = "play the next sound";
 "previous" = "play the previous sound";
+"submit" = "Submit";
+"share" = "Share";
 "shareThisObservation" = "Share this observation";
 "shareThisObserver" = "Share this observer";
 "informationSpecies" = "Get information about the species";
@@ -77,9 +79,11 @@
 "logOut" = "log out";
 "information" = "Information";
 "user" = "Observer";
+"produceAudio" = "Produce ringtone";
 "enterEmail" = "Enter your email address";
 
 // filter and sort
+"nrof" = "Count";
 "date" = "Date";
 "rarity" = "Rarity";
 "name" = "Name";
@@ -106,6 +110,7 @@
 //period
 "period" = "Period";
 "timePeriodlabel" = "Last";
+"oneday" = "1 day";
 "twodays" = "2 days";
 "sevendays" = "7 days";
 "fourteendays" = "14 days";
@@ -168,3 +173,11 @@
 
 "audioInfo" = "Sound recording information";
 "audioDownload" = "Download sound recording";
+
+"favoObservation" = "favoObservation";
+"favoFavorites" = "My list";
+
+"localizedAll" = "All";
+"shareObservations" = "Share Observations";
+
+

@@ -9,57 +9,67 @@ import SwiftUI
 import SwiftyBeaver
 
 struct RegionsView: View {
-    let log = SwiftyBeaver.self
-    
-    @EnvironmentObject private var regionsViewModel: RegionsViewModel
-    @EnvironmentObject private var regionListViewModel: RegionListViewModel
-    
-    @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
-    
-    @EnvironmentObject var settings: Settings
-    
-    private var speciesGroups = [SpeciesGroup]()
+  let log = SwiftyBeaver.self
 
-    var body: some View {
-        Picker("Region", selection: $settings.selectedRegionId) {
-            ForEach(regionsViewModel.regions, id: \.id) { region in
-                Text("\(region.name)").tag(region.id)
-            }
-        }
-        .pickerStyle(.navigationLink)
-        .onChange(of: settings.selectedRegionId) {
-            // get the copy of speciesGroupsViewModel.speciesGroups
-            speciesGroupsViewModel.speciesGroupsByRegion = speciesGroupsViewModel.speciesGroups
-            // see which are not present in the selectedregion and prepare to remove
-            var indicesToRemove = [Int]()
+  @EnvironmentObject private var regionsViewModel: RegionsViewModel
+  @EnvironmentObject private var regionListViewModel: RegionListViewModel
 
-            for index in 0..<speciesGroupsViewModel.speciesGroupsByRegion.count {
-                if regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: speciesGroupsViewModel.speciesGroups[index].id) == -1 {
-                    indicesToRemove.append(speciesGroupsViewModel.speciesGroups[index].id)
-                }
-            }            
-            // remove them so the are edited in the picker
-            for index in indicesToRemove {
-                speciesGroupsViewModel.speciesGroupsByRegion.removeAll { speciesGroup in
-                    speciesGroup.id == index
-                }
-            }
-            // and set the selectedSpeciesGroupId to the first one at the start
-            settings.selectedSpeciesGroupId = speciesGroupsViewModel.speciesGroupsByRegion[0].id
-            print(">>selectedSpeciesGroupId: \(settings.selectedSpeciesGroupId)")
-            
-            // and save this
-            settings.selectedRegionListId = regionListViewModel.getId(
-                region: settings.selectedRegionId,
-                speciesGroup: settings.selectedSpeciesGroupId)
-            print(">>selectedRegionListId: \(settings.selectedRegionListId)")
+  @EnvironmentObject var settings: Settings
+
+  var body: some View {
+    Picker("Region", selection: $settings.selectedRegionId) {
+      ForEach(regionsViewModel.regions, id: \.id) { region in
+        HStack {
+          //          Text("\(region.id)").tag(region.id)
+          Text("\(region.name)").tag(region.name)
+//          Text("\(region.type)")
         }
+      }
     }
+    .pickerStyle(.navigationLink)
+    .onChange(of: settings.selectedRegionId) {
+
+      print("settings.selectedRegionId \(settings.selectedRegionId)")
+      print("settings.selectedSpeciesGroup \(settings.selectedSpeciesGroup ?? 1)")
+
+      settings.regionListId = regionListViewModel.getId(
+        region: settings.selectedRegionId,
+        speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
+      print("settings.regionListId \(settings.regionListId)")
+
+      settings.selectedSpeciesGroup = 1
+    }
+  }
+}
+
+struct RegionListView: View {
+  let log = SwiftyBeaver.self
+
+  @EnvironmentObject private var regionListViewModel: RegionListViewModel
+  @EnvironmentObject var settings: Settings
+
+  var body: some View {
+    Picker("RegionList", selection: $settings.selectedRegionListIdStored) {
+      ForEach(regionListViewModel.regionLists.sorted {
+        $0.region != $1.region ? $0.region < $1.region : $0.speciesGroup < $1.speciesGroup
+      }, id: \.id) { regionList in
+        HStack {
+          Text("\(regionList.region)")
+          Text("\(regionList.speciesGroup)")
+          Text(": \(regionList.id)")
+        }
+      }
+    }
+    .pickerStyle(.navigationLink)
+    //      .onChange(of: settings.selectedRegionListIdStored) {
+    //        print("xxxxxx")
+    //      }
+  }
 }
 
 struct RegionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegionsView()
-            .environmentObject(Settings())
-    }
+  static var previews: some View {
+    RegionsView()
+      .environmentObject(Settings())
+  }
 }

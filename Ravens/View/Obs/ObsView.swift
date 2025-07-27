@@ -22,13 +22,15 @@ struct ObsView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
 
+  @EnvironmentObject var favoriteObservationsViewModel: FavoriteObservationsViewModel
+
   @Binding var selectedSpeciesID: Int?
 
   var entity: EntityType
 
-  @State var selectedObservation: Observation?
+  @State var selectedObservation: Obs?
   @State var imageURLStr: String?
-  @State var obs: Observation
+  @State var obs: Obs
   
   private let appIcon = Image("AppIconShare")
 
@@ -139,17 +141,17 @@ struct ObsView: View {
       }
     }
 
-
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-      ShareLinkButtonView(obs: obs)
-
-      InformationSpeciesButtonView(selectedSpeciesID: $selectedSpeciesID, obs: obs)
-
-      LinkButtonView(obs: obs)
+      Button {
+        favoriteObservationsViewModel.appendRecord(observation: obs)
+      } label: {
+        Image(systemSymbol: .bookmarkFill)
+      }
+      .tint(.teal)
     }
   }
 
-  func accessibilityObsDetail(obs: Observation) -> String {
+  func accessibilityObsDetail(obs: Obs) -> String {
     let formattedDate = convertStringToFormattedDate(dateString: obs.date, timeString: obs.time ?? "") ?? ""
     let speciesName = obs.speciesDetail.name
     let locationName = obs.locationDetail?.name ?? ""

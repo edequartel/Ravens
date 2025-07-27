@@ -10,10 +10,10 @@ import Foundation
 struct Observations: Codable {
   var count: Int?
   var next, previous: URL?
-  var results: [Observation]?
+  var results: [Obs]?
 }
 
-struct Observation: Codable, Identifiable, Equatable {
+struct Obs: Codable, Identifiable, Equatable {
   let id: UUID = UUID()
 //  let id: UUID
   var idObs: Int?
@@ -186,7 +186,7 @@ let mockSpeciesDetail = SpeciesDetail(id: 1, scientificName: "Limosa Limosa", na
 let mockUserDetail = UserDetail(id: 1, name: "Evert Jansen", avatar: URL(string: "https://example.com")) // replace with mock UserDetail data
 let mockLocationDetail = LocationDetail(id: 1, name: "Ibiza", countryCode: "NL-nl", permalink: "https://example.com") // replace with mock LocationDetail data
 
-let mockObservation = Observation(
+let mockObservation = Obs(
 //  id: 0,
   idObs: 1,
   species: 2,

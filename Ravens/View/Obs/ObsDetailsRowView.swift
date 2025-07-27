@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ObsDetailsRowView: View {
-  var obs: Observation
+  var obs: Obs
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
 
   var body: some View {

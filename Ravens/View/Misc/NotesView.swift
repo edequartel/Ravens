@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NotesView: View {
-  var obs: Observation // Assuming `Observation` has a `notes` property
+  var obs: Obs // Assuming `Observation` has a `notes` property
 
   var body: some View {
     if !(obs.notes?.isEmpty ?? true) {

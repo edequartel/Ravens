@@ -22,11 +22,13 @@ struct CustomDivider: View {
 struct ObservationsUserView: View {
   let log = SwiftyBeaver.self
 
-  @ObservedObject var observationUser: ObservationsViewModel
+  @EnvironmentObject var observationUser: ObservationsViewModel
+
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var observersViewModel: ObserversViewModel
+  @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
 
   @Binding var selectedSpeciesID: Int?
   @Binding var currentSortingOption: SortingOption?
@@ -36,6 +38,7 @@ struct ObservationsUserView: View {
   @Binding var setRefresh: Bool
 
   @State private var getObservations: String = "loading Observations"
+  
   var body: some View {
     VStack {
       if showView { Text("ObservationsUserView").font(.customTiny) }
@@ -52,7 +55,14 @@ struct ObservationsUserView: View {
         .padding(.vertical, 4)
         .accessibilityLabel(observersViewModel.observerName ?? "noName")
 
-        ObservationsCountView(count: observationUser.count)
+        HStack {
+          let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedUserSpeciesGroup ?? 0] ?? ""
+          SelectedUserSpeciesView(speciesGroup: settings.selectedUserSpeciesGroup != -1 ? speciesGroupName : "∞")
+          ObservationsCountView(count: observationUser.count)
+          Spacer()
+        }
+        .padding(.horizontal, 10)
+
         HorizontalLine()
       }
 
