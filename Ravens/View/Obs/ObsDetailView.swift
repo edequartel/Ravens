@@ -26,112 +26,104 @@ struct ObsDetailView: View {
     ScrollView {
       VStack {
         if showView { Text("ObsDetailView").font(.customTiny) }
-        HStack {
 
-          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
-            Image(systemSymbol: .infoCircle)
-                    .uniformSize()
+        VStack(alignment: .leading, spacing: 20) {
+          // Alternative when name isEmpty
+          VStack(alignment: .leading, spacing: 10) {
+            if obs.speciesDetail.name.isEmpty {
+              HStack {
+                Image(systemName: "circle.fill")
+                  .foregroundColor(rarityColor(value: obs.rarity))
+                Text("\(obs.speciesDetail.scientificName)")
+                  .italic()
+                  .lineLimit(1)
+                  .truncationMode(.tail)
+                Spacer()
+              }
+            } else {
+              HStack {
+                Image(systemName: "circle.fill")
+                  .foregroundColor(rarityColor(value: obs.rarity))
+                Text("\(obs.speciesDetail.name)")
+                  .bold()
+                  .lineLimit(1)
+                  .truncationMode(.tail)
+                Spacer()
+              }
+              HStack {
+                Text("\(obs.speciesDetail.scientificName)")
+                  .italic()
+                  .lineLimit(1)
+                  .truncationMode(.tail)
+                Spacer()
+              }
             }
-            .accessibility(label: Text(informationSpecies))
-
-          let url = URL(string: obs.permalink)!
-          ShareLink(item: url) {
-            Image(systemSymbol: SFShareLink)
-              .uniformSize()
           }
-          .accessibility(label: Text(shareThisObservation))
+          .padding()
+          .islandBackground()
+          .accessibilityElement(children: .combine)
 
-          Button(action: {
-            if let url = URL(string: obs.permalink) {
-              UIApplication.shared.open(url)
-            }
-          }) {
-            Image(systemSymbol: SFObservation)
-              .uniformSize()
-          }
-          .accessibility(label: Text(linkObservation))
-
-          Spacer()
-
-          if !keyChainViewModel.token.isEmpty { 
-            BookmarkButtonView(speciesID: obs.species ?? 100)
-            if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-              ObserversObsButtonView(obs: obs)
-            }
-
-            AreaButtonView(obs: obs)
-          }
-        }
-      }
-      .padding([.leading, .trailing, .top])
-
-      VStack(alignment: .leading, spacing: 20) {
-        if showView {
-          Text("ObsDetailView")
-            .font(.customTiny)
-            .padding(.bottom, 10)
-        }
-
-        // Alternative when name isEmpty
-        VStack(alignment: .leading, spacing: 10) {
-          if obs.speciesDetail.name.isEmpty {
+          // Scientific Name Section
+          VStack(alignment: .leading, spacing: 10) {
             HStack {
-              Image(systemName: "circle.fill")
-                .foregroundColor(rarityColor(value: obs.rarity))
-              Text("\(obs.speciesDetail.scientificName)")
-                .italic()
-                .lineLimit(1)
-                .truncationMode(.tail)
-              Spacer()
-            }
-          } else {
-            HStack {
-              Image(systemName: "circle.fill")
-                .foregroundColor(rarityColor(value: obs.rarity))
-              Text("\(obs.speciesDetail.name)")
-                .bold()
-                .lineLimit(1)
-                .truncationMode(.tail)
-              Spacer()
+              DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+              Text("\(obs.number) x")
+                .footnoteGrayStyle()
             }
             HStack {
-              Text("\(obs.speciesDetail.scientificName)")
-                .italic()
-                .lineLimit(1)
-                .truncationMode(.tail)
-              Spacer()
-            }
-          }
-        }
-        .padding()
-        .islandBackground()
-        .accessibilityElement(children: .combine)
-
-        // Scientific Name Section
-        VStack(alignment: .leading, spacing: 10) {
-
-          HStack {
-            DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-            Text("\(obs.number) x")
-              .footnoteGrayStyle()
-          }
-          HStack {
-            Text("\(obs.locationDetail?.name ?? "")")
-              .footnoteGrayStyle()
-            Spacer()
-          }
-
-          if entity != .radius {
-            HStack {
-              Text("\(obs.userDetail?.name ?? "")")
+              Text("\(obs.locationDetail?.name ?? "")")
                 .footnoteGrayStyle()
               Spacer()
             }
+
+            if entity != .radius {
+              HStack {
+                Text("\(obs.userDetail?.name ?? "")")
+                  .footnoteGrayStyle()
+                Spacer()
+              }
+            }
+          }
+          .padding()
+          .islandBackground()
+          .accessibilityElement(children: .combine)
+
+          HStack {
+            NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+              Image(systemSymbol: .infoCircle)
+                .uniformSize()
+            }
+            .accessibility(label: Text(informationSpecies))
+
+            let url = URL(string: obs.permalink)!
+            ShareLink(item: url) {
+              Image(systemSymbol: SFShareLink)
+                .uniformSize()
+            }
+            .accessibility(label: Text(shareThisObservation))
+
+            Button(action: {
+              if let url = URL(string: obs.permalink) {
+                UIApplication.shared.open(url)
+              }
+            }) {
+              Image(systemSymbol: SFObservation)
+                .uniformSize()
+            }
+            .accessibility(label: Text(linkObservation))
+
+            Spacer()
+
+            if !keyChainViewModel.token.isEmpty {
+              BookmarkButtonView(speciesID: obs.species ?? 100)
+              if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+                ObserversObsButtonView(obs: obs)
+              }
+
+              AreaButtonView(obs: obs)
+            }
           }
         }
-        .padding()
-        .islandBackground()
-        .accessibilityElement(children: .combine)
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
@@ -162,13 +154,13 @@ struct ObsDetailView: View {
           .accessibility(label: Text(notesAboutObservation))
 
         NavigationLink(destination: FullMapView(obs: obs)) {
-                           PositionOnMapView(obs: obs)
-                               .frame(height: UIScreen.main.bounds.width / 2)
-                               .cornerRadius(8)
-                               .contentShape(Rectangle())
-                               .accessibilityHidden(true)
-                       }
-                       .buttonStyle(PlainButtonStyle()) // Removes tap effects
+          PositionOnMapView(obs: obs)
+            .frame(height: UIScreen.main.bounds.width / 2)
+            .cornerRadius(8)
+            .contentShape(Rectangle())
+            .accessibilityHidden(true)
+        }
+        .buttonStyle(PlainButtonStyle()) // Removes tap effects
       }
       .padding()
     }
