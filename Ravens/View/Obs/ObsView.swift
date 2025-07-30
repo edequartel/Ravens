@@ -54,7 +54,9 @@ struct ObsView: View {
 
           if obs.sounds?.count ?? 0 > 0 {
             Image(systemSymbol: .waveform)
-              .foregroundColor(Color.gray.opacity(0.8))
+//            SVGImage(svg: "waveform")
+//            Image(systemSymbol: .waveform)
+//              .foregroundColor(Color.gray.opacity(0.8))
           }
 
           if obs.notes?.count ?? 0 > 0 {
@@ -131,14 +133,14 @@ struct ObsView: View {
         }
       }
 
-      if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
-        NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
-          Image(systemSymbol: .waveform)
-            .uniformSize()
-        }
-        .tint(.purple)
-        .accessibility(label: Text(audioListView))
-      }
+//      if entity != .species && [1, 2, 3, 14].contains(obs.speciesDetail.group) {
+//        NavigationLink(destination: BirdListView(scientificName: obs.speciesDetail.scientificName, nativeName: obs.speciesDetail.name)) {
+//          Image(systemSymbol: .waveform)
+//            .uniformSize()
+//        }
+//        .tint(.purple)
+//        .accessibility(label: Text(audioListView))
+//      }
     }
 
     .swipeActions(edge: .leading, allowsFullSwipe: false) {

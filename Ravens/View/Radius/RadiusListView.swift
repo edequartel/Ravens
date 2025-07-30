@@ -39,6 +39,10 @@ struct RadiusListView: View {
         let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedRadiusSpeciesGroup ?? 0] ?? ""
         SelectedUserSpeciesView(speciesGroup: settings.selectedRadiusSpeciesGroup != -1 ? speciesGroupName : "∞")
         ObservationsCountView(count: observationsRadiusViewModel.count)
+        Text("in")
+          .font(.caption)
+          .foregroundColor(.gray)
+          .bold()
         ObservationsTimePeriodView(timePeriod: settings.timePeriodRadius ?? .fourWeeks)
         Spacer()
       }

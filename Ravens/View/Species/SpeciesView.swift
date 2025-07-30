@@ -59,18 +59,22 @@ struct SpeciesView: View {
       if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
-            Image(systemSymbol: .waveform)
-              .uniformSize()
+            SVGImage(svg: "waveform")
+//            Image(systemSymbol: .waveform)
+//              .uniformSize()
           }
           .background(Color.clear)
           .accessibility(label: Text(audioListView))
         }
+      }
 
+      ToolbarItem(placement: .navigationBarTrailing) {
+        BookmarkButtonView(speciesID: item.speciesId)
       }
 
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: SpeciesDetailsView(speciesID: item.speciesId)) {
-          Image(systemSymbol: .infoCircle)
+          Image(systemSymbol: .info)
                   .uniformSize()
           }
           .background(Color.clear)

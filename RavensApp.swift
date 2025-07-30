@@ -90,6 +90,8 @@ struct RavensApp: App {
         observationsSpecies: observationsSpecies,
         observationsRadiusViewModel: observationsRadiusViewModel
       )
+//      .modifier(GlobalFontModifier())
+
       .environmentObject(keychainViewModel)
       .environmentObject(locationManager)
       .environmentObject(settings)
@@ -130,4 +132,10 @@ struct RavensApp: App {
       }
     }
   }
+}
+
+struct GlobalFontModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.font(.custom("Aptos", size: 17))
+    }
 }

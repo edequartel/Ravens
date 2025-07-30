@@ -51,8 +51,12 @@ struct ObservationsLocationView: View {
         HStack {
           let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedLocationSpeciesGroup ?? 0] ?? ""
           SelectedUserSpeciesView(speciesGroup: settings.selectedLocationSpeciesGroup != -1 ? speciesGroupName : "∞")
-          ObservationsTimePeriodView(timePeriod: settings.timePeriodLocation ?? .fourWeeks)
           ObservationsCountView(count: observationsLocation.count)
+          Text("in")
+            .font(.caption)
+            .foregroundColor(.gray)
+            .bold()
+          ObservationsTimePeriodView(timePeriod: settings.timePeriodLocation ?? .fourWeeks)
           Spacer()
         }
         .padding(.horizontal, 10)

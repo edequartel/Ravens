@@ -1,5 +1,5 @@
 {
-  "originHash" : "f68536c18a963892bd7a8842e84aec32bc0add4b3286febcf0fcce09b3c3fe6f",
+  "originHash" : "69f743f39691152e863b3d7228e42948637b299c54d49a6468b5b43f89cbeba1",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -152,6 +152,24 @@
       "state" : {
         "revision" : "8cba041db09596183331d123f337d0eb2e6e8e91",
         "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "waterfallgrid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/paololeonardi/WaterfallGrid.git",
+      "state" : {
+        "revision" : "c7c08652c3540adf8e48409c351879b4caea7e89",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "zoomimageview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ronaldo-avalos/ZoomImageView",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ebf5d4dcb8abc2c23d4cb2ee123729e365d3fd35"
       }
     }
   ],

@@ -62,6 +62,10 @@ struct ObservationsSpeciesView: View {
 
       HStack {
         ObservationsCountView(count: observationsSpecies.count)
+        Text("in")
+          .font(.caption)
+          .foregroundColor(.gray)
+          .bold()
         ObservationsTimePeriodView(timePeriod: settings.timePeriodSpecies ?? .fourWeeks)
         Spacer()
       }

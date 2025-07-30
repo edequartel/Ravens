@@ -27,101 +27,42 @@ struct ObsDetailView: View {
       VStack {
         if showView { Text("ObsDetailView").font(.customTiny) }
 
-        VStack(alignment: .leading, spacing: 20) {
-          // Alternative when name isEmpty
-          VStack(alignment: .leading, spacing: 10) {
-            if obs.speciesDetail.name.isEmpty {
-              HStack {
-                Image(systemName: "circle.fill")
-                  .foregroundColor(rarityColor(value: obs.rarity))
-                Text("\(obs.speciesDetail.scientificName)")
-                  .italic()
-                  .lineLimit(1)
-                  .truncationMode(.tail)
-                Spacer()
-              }
-            } else {
-              HStack {
-                Image(systemName: "circle.fill")
-                  .foregroundColor(rarityColor(value: obs.rarity))
-                Text("\(obs.speciesDetail.name)")
-                  .bold()
-                  .lineLimit(1)
-                  .truncationMode(.tail)
-                Spacer()
-              }
-              HStack {
-                Text("\(obs.speciesDetail.scientificName)")
-                  .italic()
-                  .lineLimit(1)
-                  .truncationMode(.tail)
-                Spacer()
-              }
-            }
+        SpeciesLabelCard(obs: obs, entity: entity)
+
+        HStack {
+          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+            Image(systemSymbol: .info)
+              .uniformSize()
           }
-          .padding()
-          .islandBackground()
-          .accessibilityElement(children: .combine)
+          .accessibility(label: Text(informationSpecies))
 
-          // Scientific Name Section
-          VStack(alignment: .leading, spacing: 10) {
-            HStack {
-              DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
-              Text("\(obs.number) x")
-                .footnoteGrayStyle()
-            }
-            HStack {
-              Text("\(obs.locationDetail?.name ?? "")")
-                .footnoteGrayStyle()
-              Spacer()
-            }
-
-            if entity != .radius {
-              HStack {
-                Text("\(obs.userDetail?.name ?? "")")
-                  .footnoteGrayStyle()
-                Spacer()
-              }
-            }
+          let url = URL(string: obs.permalink)!
+          ShareLink(item: url) {
+            Image(systemSymbol: SFShareLink)
+              .uniformSize()
           }
-          .padding()
-          .islandBackground()
-          .accessibilityElement(children: .combine)
+          .accessibility(label: Text(shareThisObservation))
 
-          HStack {
-            NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
-              Image(systemSymbol: .infoCircle)
-                .uniformSize()
+          Button(action: {
+            if let url = URL(string: obs.permalink) {
+              UIApplication.shared.open(url)
             }
-            .accessibility(label: Text(informationSpecies))
+          }) {
+            SVGImage(svg: "waarneming")
+//            Image(systemSymbol: SFObservation)
+//              .uniformSize()
+          }
+          .accessibility(label: Text(linkObservation))
 
-            let url = URL(string: obs.permalink)!
-            ShareLink(item: url) {
-              Image(systemSymbol: SFShareLink)
-                .uniformSize()
+          Spacer()
+
+          if !keyChainViewModel.token.isEmpty {
+            BookmarkButtonView(speciesID: obs.species ?? 100)
+            if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+              ObserversObsButtonView(obs: obs)
             }
-            .accessibility(label: Text(shareThisObservation))
 
-            Button(action: {
-              if let url = URL(string: obs.permalink) {
-                UIApplication.shared.open(url)
-              }
-            }) {
-              Image(systemSymbol: SFObservation)
-                .uniformSize()
-            }
-            .accessibility(label: Text(linkObservation))
-
-            Spacer()
-
-            if !keyChainViewModel.token.isEmpty {
-              BookmarkButtonView(speciesID: obs.species ?? 100)
-              if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-                ObserversObsButtonView(obs: obs)
-              }
-
-              AreaButtonView(obs: obs)
-            }
+            AreaButtonView(obs: obs)
           }
         }
 
@@ -184,6 +125,69 @@ struct ObsDetailView: View {
       PositionOnMapView(obs: obs, allowsHitTesting: true)
         .navigationBarTitleDisplayMode(.inline)
     }
+  }
+}
+
+struct SpeciesLabelCard: View {
+  let obs: Obs
+  var entity: EntityType
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      if obs.speciesDetail.name.isEmpty {
+        HStack {
+          Image(systemName: "circle.fill")
+            .foregroundColor(rarityColor(value: obs.rarity))
+          Text(obs.speciesDetail.scientificName)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        }
+      } else {
+        HStack {
+          Image(systemName: "circle.fill")
+            .foregroundColor(rarityColor(value: obs.rarity))
+          Text(obs.speciesDetail.name)
+            .bold()
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        }
+        HStack {
+          Text(obs.speciesDetail.scientificName)
+            .italic()
+            .lineLimit(1)
+            .truncationMode(.tail)
+          Spacer()
+        }
+      }
+
+// information
+      VStack(alignment: .leading, spacing: 4) {
+        HStack {
+          DateConversionView(dateString: obs.date, timeString: obs.time ?? "")
+          Text("\(obs.number) x")
+            .footnoteGrayStyle()
+        }
+        HStack {
+          Text("\(obs.locationDetail?.name ?? "")")
+            .footnoteGrayStyle()
+          Spacer()
+        }
+
+        if entity != .radius {
+          HStack {
+            Text("\(obs.userDetail?.name ?? "")")
+              .footnoteGrayStyle()
+            Spacer()
+          }
+        }
+      }
+    }
+    .padding()
+    .islandBackground()
+    .accessibilityElement(children: .combine)
   }
 }
 

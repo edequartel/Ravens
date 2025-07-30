@@ -104,25 +104,12 @@ struct SettingsView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
-//            if let url = URL(string: "https://www.ravensobs.com") {
-            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
+            if let url = URL(string: "https://www.ravensobs.com") {
+//            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
               UIApplication.shared.open(url)
             }
           }) {
-            Image(systemSymbol: .infoCircle)
-              .uniformSize()
-              .accessibilityLabel(information)
-          }
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-//            if let url = URL(string: "https://www.ravensobs.com/manual.html") {
-            if let url = URL(string: "https://edequartel.github.io/Ravens/manual.html") {
-              UIApplication.shared.open(url)
-            }
-          }) {
-            Image(systemSymbol: .questionmarkCircle)
+            Image(systemSymbol: .info)
               .uniformSize()
               .accessibilityLabel(information)
           }

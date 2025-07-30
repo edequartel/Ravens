@@ -10,7 +10,7 @@ import MapKit
 
 struct PositionOnMapView: View {
   var obs: Obs
-  var allowsHitTesting: Bool = true
+  var allowsHitTesting: Bool = false // so the map is not moving
 
   @EnvironmentObject var settings: Settings
   @State private var cameraPosition: MapCameraPosition = .automatic

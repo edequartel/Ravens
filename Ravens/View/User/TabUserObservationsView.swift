@@ -167,6 +167,16 @@ struct TabUserObservationsView: View {
           }
         }
 
+        ToolbarItem(placement: .navigationBarLeading) {
+          ShareLink(
+              item: allObservationNamesText,
+              subject: Text(observations)
+          ) {
+              Label(shareObservations, systemSymbol: .squareAndArrowUp)
+          }
+          .accessibility(label: Text(share))
+        }
+
         // add choose observers
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(
@@ -187,17 +197,6 @@ struct TabUserObservationsView: View {
               .uniformSize()
               .accessibility(label: Text(favoObservation))
           }
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
-          ShareLink(
-              item: allObservationNamesText,
-              subject: Text(observations)//,
-              //preview: SharePreview(observations, image: Image("AppIconShare")) //??
-          ) {
-              Label(shareObservations, systemSymbol: .squareAndArrowUp)
-          }
-          .accessibility(label: Text(share))
         }
 
         // add choose observers

@@ -64,68 +64,149 @@ struct RingtoneMakerView: View {
     }
   }
 
+//  func exportRingtone() {
+//    guard let mp3URL else { return }
+//    guard mp3URL.startAccessingSecurityScopedResource() else {
+//      exportMessage = "Could not access selected file."
+//      return
+//    }
+//    defer { mp3URL.stopAccessingSecurityScopedResource() }
+//
+//    isExporting = true
+//    exportMessage = ""
+//
+//    let asset = AVURLAsset(url: mp3URL)
+//    let tempDir = FileManager.default.temporaryDirectory
+//    let m4aFilename = mp3URL.deletingPathExtension().lastPathComponent + ".m4a"
+//    let m4aURL = tempDir.appendingPathComponent(m4aFilename)
+//
+//    guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
+//      isExporting = false
+//      alertTitle = "Error"
+//      exportMessage = "Unable to create exporter."
+//      return
+//    }
+//
+//    exporter.outputURL = m4aURL
+//    exporter.outputFileType = .m4a
+//    exporter.timeRange = CMTimeRange(
+//      start: CMTime(seconds: startTime, preferredTimescale: 600),
+//      duration: CMTime(seconds: duration, preferredTimescale: 600)
+//    )
+//
+//    print("before exporting")
+//    exporter.exportAsynchronously {
+//      DispatchQueue.main.async {
+//        self.isExporting = false
+//        if exporter.status == .completed {
+//          do {
+//            let m4rFilename = mp3URL.deletingPathExtension().lastPathComponent + ".m4r"
+//            let m4rURL = tempDir.appendingPathComponent(m4rFilename)
+//
+//            if FileManager.default.fileExists(atPath: m4rURL.path) {
+//                      try FileManager.default.removeItem(at: m4rURL)
+//                    }
+//
+//            print("\(m4rURL)")
+//            try FileManager.default.moveItem(at: m4aURL, to: m4rURL)
+//
+//            self.lastExportedURL = m4rURL
+//
+//            if let url = lastExportedURL {
+//              share(url: url)
+//            }
+//
+//          } catch {
+//            self.alertTitle = "Error 1"
+//            self.exportMessage = "\(error.localizedDescription)"
+//          }
+//        } else {
+//          self.alertTitle = "Error 2"
+//          self.exportMessage = "\(exporter.error?.localizedDescription ?? "Unknown error")"
+//        }
+//      }
+//    }
+//  }
+
   func exportRingtone() {
-    guard let mp3URL else { return }
-    guard mp3URL.startAccessingSecurityScopedResource() else {
-      exportMessage = "Could not access selected file."
-      return
-    }
-    defer { mp3URL.stopAccessingSecurityScopedResource() }
-
-    isExporting = true
-    exportMessage = ""
-
-    let asset = AVURLAsset(url: mp3URL)
-    let tempDir = FileManager.default.temporaryDirectory
-    let m4aFilename = mp3URL.deletingPathExtension().lastPathComponent + ".m4a"
-    let m4aURL = tempDir.appendingPathComponent(m4aFilename)
-
-    guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
-      isExporting = false
-      alertTitle = "Error"
-      exportMessage = "Unable to create exporter."
-      return
-    }
-
-    exporter.outputURL = m4aURL
-    exporter.outputFileType = .m4a
-    exporter.timeRange = CMTimeRange(
-      start: CMTime(seconds: startTime, preferredTimescale: 600),
-      duration: CMTime(seconds: duration, preferredTimescale: 600)
-    )
-
-    print("before exporting")
-    exporter.exportAsynchronously {
-      DispatchQueue.main.async {
-        self.isExporting = false
-        if exporter.status == .completed {
-          do {
-            let m4rFilename = mp3URL.deletingPathExtension().lastPathComponent + ".m4r"
-            let m4rURL = tempDir.appendingPathComponent(m4rFilename)
-
-            if FileManager.default.fileExists(atPath: m4rURL.path) {
-                      try FileManager.default.removeItem(at: m4rURL)
-                    }
-
-            print("\(m4rURL)")
-            try FileManager.default.moveItem(at: m4aURL, to: m4rURL)
-
-            self.lastExportedURL = m4rURL
-
-            if let url = lastExportedURL {
-              share(url: url)
-            }
-
-          } catch {
-            self.alertTitle = "Error 1"
-            self.exportMessage = "\(error.localizedDescription)"
-          }
-        } else {
-          self.alertTitle = "Error 2"
-          self.exportMessage = "\(exporter.error?.localizedDescription ?? "Unknown error")"
-        }
+      guard let mp3URL else { return }
+      guard mp3URL.startAccessingSecurityScopedResource() else {
+          exportMessage = "Could not access selected file."
+          return
       }
-    }
+      defer { mp3URL.stopAccessingSecurityScopedResource() }
+
+      isExporting = true
+      exportMessage = ""
+
+      let asset = AVURLAsset(url: mp3URL)
+      let tempDir = FileManager.default.temporaryDirectory
+      let m4aURL = getTempM4AURL(from: mp3URL, tempDir: tempDir)
+
+      guard let exporter = createExporter(for: asset, outputURL: m4aURL) else {
+          isExporting = false
+          alertTitle = "Error"
+          exportMessage = "Unable to create exporter."
+          return
+      }
+
+      performExport(exporter: exporter, originalURL: mp3URL, m4aURL: m4aURL, tempDir: tempDir)
+  }
+
+  private func getTempM4AURL(from url: URL, tempDir: URL) -> URL {
+      let filename = url.deletingPathExtension().lastPathComponent + ".m4a"
+      return tempDir.appendingPathComponent(filename)
+  }
+
+  private func createExporter(for asset: AVAsset, outputURL: URL) -> AVAssetExportSession? {
+      guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
+          return nil
+      }
+      exporter.outputURL = outputURL
+      exporter.outputFileType = .m4a
+      exporter.timeRange = CMTimeRange(
+          start: CMTime(seconds: startTime, preferredTimescale: 600),
+          duration: CMTime(seconds: duration, preferredTimescale: 600)
+      )
+      return exporter
+  }
+
+  private func performExport(exporter: AVAssetExportSession, originalURL: URL, m4aURL: URL, tempDir: URL) {
+      print("before exporting")
+      exporter.exportAsynchronously {
+          DispatchQueue.main.async {
+              self.isExporting = false
+              if exporter.status == .completed {
+                  self.handleExportCompletion(originalURL: originalURL, m4aURL: m4aURL, tempDir: tempDir)
+              } else {
+                  self.alertTitle = "Error 2"
+                  self.exportMessage = exporter.error?.localizedDescription ?? "Unknown error"
+              }
+          }
+      }
+  }
+
+  private func handleExportCompletion(originalURL: URL, m4aURL: URL, tempDir: URL) {
+      do {
+          let m4rFilename = originalURL.deletingPathExtension().lastPathComponent + ".m4r"
+          let m4rURL = tempDir.appendingPathComponent(m4rFilename)
+
+          if FileManager.default.fileExists(atPath: m4rURL.path) {
+              try FileManager.default.removeItem(at: m4rURL)
+          }
+
+          print("\(m4rURL)")
+          try FileManager.default.moveItem(at: m4aURL, to: m4rURL)
+          self.lastExportedURL = m4rURL
+
+          if let url = self.lastExportedURL {
+              share(url: url)
+          }
+
+      } catch {
+          self.alertTitle = "Error 1"
+          self.exportMessage = error.localizedDescription
+      }
   }
 
   func share(url: URL) {

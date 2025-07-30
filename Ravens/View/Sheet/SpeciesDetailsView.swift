@@ -10,32 +10,33 @@ import RichText
 import SwiftyBeaver
 import Alamofire
 import Kingfisher
+import SVGView
 
 struct SpeciesDetailsView: View {
   let log = SwiftyBeaver.self
-  @EnvironmentObject var viewSpeciesDetailsDModel: SpeciesDetailsViewModel
+  @EnvironmentObject var viewSpeciesDetailsModel: SpeciesDetailsViewModel
+
   @StateObject private var observationsSpecies = ObservationsViewModel()
-//  @ObservedObject var observationsSpecies: ObservationsViewModel
-//  @EnvironmentObject var observationsSpecies: ObservationsViewModel //??
 
   @State private var isSharing = false
 
   @EnvironmentObject var settings: Settings
 
   var speciesID: Int
+
   @State private var imageURL: String = ""
   @State private var showSpeciesXC: Species?
 
-//  private var item: Species
-//  @State var selectedSpeciesID: Int?
+  var item: Species?
+  var selectedSpeciesID: Int?
 
   var body: some View {
     NavigationStack {
       ScrollView {
         if showView { Text("SpeciesDetailsView").font(.customTiny) }
-        VStack{ //}(alignment: .leading, spacing: 16) {
+        VStack { 
           // Species Details Header
-          if let species = viewSpeciesDetailsDModel.speciesDetails {
+          if let species = viewSpeciesDetailsModel.speciesDetails {
             VStack(alignment: .leading, spacing: 8) {
               Text(species.name)
                 .font(.title)
@@ -58,39 +59,28 @@ struct SpeciesDetailsView: View {
 
             // Image Display
             if let url = URL(string: imageURL), !imageURL.isEmpty {
-                    ShareLink(item: url) {
-                      KFImage(url)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                        .islandBackground()
-                    }
-                    .accessibilityLabel("Share image")
-                  }
-
+              ShareLink(item: url) {
+                KFImage(url)
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .clipShape(RoundedRectangle(cornerRadius: 12))
+                  .frame(maxWidth: .infinity, maxHeight: .infinity)
+              }
+              .buttonStyle(.plain)
+              .accessibilityLabel("Share image")
+            }
 
             HStack {
-//              Spacer()
-
-//                            NavigationLink(destination: ObservationsSpeciesView(
-//                              observationsSpecies: observationsSpecies,
-//                              item: item,
-//                              selectedSpeciesID: $selectedSpeciesID,
-//                              timePeriod: $settings.timePeriodSpecies
-//                            )) {
-//                              Text("obs")
-//                            }
-
               Link(destination: URL(string: species.permalink)!) {
-                Image(systemSymbol: .binocularsFill)
-                  .uniformSize()
+                SVGImage(svg: "waarneming")
               }
 
               if [1, 2, 3, 14].contains(species.group) {
                 NavigationLink(destination: BirdListView(scientificName: species.scientificName)) {
-                  Image(systemSymbol: .waveform)
-                    .uniformSize()
+                  SVGImage(svg: "waveform")
+//                  Image(systemSymbol: .waveform)
+//                    .uniformSize()
+
                 }
                 .accessibility(label: Text(audioListView))
               }
@@ -98,9 +88,16 @@ struct SpeciesDetailsView: View {
               Button(action: {
                 openWikipediaPage(for: species.scientificName)
               }) {
-                Image(systemName: "book.fill")
-                  .uniformSize()
+                SVGImage(svg: "wikipedia")
               }
+
+              ShareLink(item: "Provide the etymology of the following species name in plain text, along with an optional fun fact. " + species.scientificName) {
+                SVGImage(svg: "artificialintel")
+//                artificialintel
+//                Image(systemSymbol: .sharedWithYou)
+//                  .uniformSize()
+              }
+              Spacer()
             }
 
             // Information Text
@@ -121,11 +118,11 @@ struct SpeciesDetailsView: View {
 //    .presentationDragIndicator(.visible)
     .onAppear {
       log.info("Calling SpeciesDetailsView FetchData \(speciesID)")
-      viewSpeciesDetailsDModel.fetchData(
+      viewSpeciesDetailsModel.fetchData(
         settings: settings,
         for: speciesID,
         onCompletion: {
-          imageURL = viewSpeciesDetailsDModel.speciesDetails?.photo ?? ""
+          imageURL = viewSpeciesDetailsModel.speciesDetails?.photo ?? ""
         }
       )
     }
@@ -139,7 +136,7 @@ struct SpeciesDetailsView: View {
   }
 }
 
-//#Preview {
-//  SpeciesDetailsView(speciesID: 58)
-//        .environmentObject(Settings())
-//}
+#Preview {
+  SpeciesDetailsView(speciesID: 58)
+        .environmentObject(Settings())
+}

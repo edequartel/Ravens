@@ -10,6 +10,7 @@ import SwiftUI
 import AudioToolbox
 import SFSafeSymbols
 import MapKit
+import SVGView
 
 let demo = false
 // let showView = false
@@ -75,7 +76,7 @@ extension Color {
 let obsStrDutchOrange = "f7b731"
 
 let SFShareLink = SFSymbol.squareAndArrowUp
-let SFInformation = SFSymbol.infoCircle
+let SFInformation = SFSymbol.info
 let SFArea = SFSymbol.map
 let SFAreaFill = SFSymbol.mapFill
 let SFSpecies = SFSymbol.star
@@ -420,6 +421,9 @@ extension String: @retroactive Identifiable {
   public var id: String { self }
 }
 
+/// Applies a consistent size, aspect ratio, and optional padding to system images for visual alignment across the UI.
+///
+/// - Returns: A view that renders the image at 24×24 points with a 4-point padding and aspect fit scaling.
 extension Image {
   func uniformSize() -> some View {
         self
@@ -427,13 +431,19 @@ extension Image {
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
             .frame(width: 24, height: 24) // Sets the uniform siz#
             .padding(4) // Adds padding around the image
-//            .overlay(
-//                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
-//                  .stroke(Color.blue, lineWidth: 1)
-//            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
+                  .stroke(Color.blue, lineWidth: 1)
+            )
     }
 }
 
+/// Applies a soft, rounded, lightly shadowed background to the view—similar to a floating "island" appearance.
+///
+/// - Parameters:
+///   - cornerRadius: The corner radius of the rounded rectangle. Default is `8`.
+///   - shadowRadius: The shadow blur radius applied around the background. Default is `2`.
+/// - Returns: A view with a rounded, translucent gray background and subtle shadow.
 extension View {
     func islandBackground(cornerRadius: CGFloat = 8, shadowRadius: CGFloat = 2) -> some View {
         self
@@ -504,3 +514,47 @@ struct CapsuleButtonStyle_Previews: PreviewProvider {
         }
     }
 }
+
+extension SVGView {
+  /// Applies a consistent size, aspect ratio, and optional padding to SVGView
+  /// for alignment with other system icons or images.
+  func uniformSize() -> some View {
+    self
+      .aspectRatio(contentMode: .fit)
+      .frame(width: 24, height: 24)
+      .padding(4)
+//      .overlay(
+//        RoundedRectangle(cornerRadius: 4)
+//          .stroke(Color.blue, lineWidth: 1)
+//      )
+  }
+}
+
+struct SVGImage: View {
+  let svg: String
+  let width: CGFloat?
+  let height: CGFloat?
+  let padding: CGFloat
+
+  init(svg: String, width: CGFloat = 24, height: CGFloat = 24, padding: CGFloat = 4) {
+    self.svg = svg
+    self.width = width
+    self.height = height
+    self.padding = padding
+  }
+
+  var body: some View {
+    if let url = Bundle.main.url(forResource: svg, withExtension: "svg") {
+      SVGView(contentsOf: url)
+        .aspectRatio(contentMode: .fit)
+        .frame(width: width, height: height)
+        .padding(padding)
+            .overlay(
+              RoundedRectangle(cornerRadius: 4)
+                .stroke(Color.blue, lineWidth: 1)
+            )
+    } else {
+      EmptyView()
+    }
+  }
+} 

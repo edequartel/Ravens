@@ -69,7 +69,7 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 NavigationLink(destination: SpeciesDetailsView(speciesID: species.speciesId)) {
-                  Image(systemSymbol: .infoCircle)
+                  Image(systemSymbol: .info)
                           .uniformSize()
                   }
                   .tint(.blue)
@@ -90,18 +90,20 @@ struct TabSpeciesView: View {
                 .tint(.green)
             }
 
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
-                NavigationLink(destination: BirdListView(
-                  scientificName: species.scientificName,
-                  nativeName: species.name)) {
-                    Image(systemSymbol: .waveform)
-                      .uniformSize()
-                  }
-                  .tint(.purple)
-                  .accessibility(label: Text(audioListView))
-              }
-            }
+// prefer not here birdlistview/audio is species specific moved to info
+//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//              if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
+//                NavigationLink(destination: BirdListView(
+//                  scientificName: species.scientificName,
+//                  nativeName: species.name)) {
+////                    SVGImage(svg: "waveform")
+//                    Image(systemSymbol: .waveform)
+//                      .uniformSize()
+//                  }
+//                  .tint(.purple)
+//                  .accessibility(label: Text(audioListView))
+//              }
+//            }
 
           }
         }

@@ -59,6 +59,10 @@ struct ObservationsUserView: View {
           let speciesGroupName = speciesGroupsViewModel.speciesDictionary[settings.selectedUserSpeciesGroup ?? 0] ?? ""
           SelectedUserSpeciesView(speciesGroup: settings.selectedUserSpeciesGroup != -1 ? speciesGroupName : "∞")
           ObservationsCountView(count: observationUser.count)
+          Text("in")
+            .font(.caption)
+            .foregroundColor(.gray)
+            .bold()
           ObservationsTimePeriodView(timePeriod: settings.timePeriodUser ?? .fourWeeks)
           Spacer()
         }
