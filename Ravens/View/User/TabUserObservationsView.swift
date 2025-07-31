@@ -24,7 +24,7 @@ struct TabUserObservationsView: View {
   var allObservationNamesText: String {
     let rows = (observationUser.observations ?? [])
       .map {
-        let name = $0.speciesDetail.name.padding(toLength: 12, withPad: " ", startingAt: 0)
+        let name = ("\($0.speciesDetail.name)")  //.padding(toLength: 12, withPad: " ", startingAt: 0)
         let number = "\($0.number)x"
         return "\(name) \(number)"
       }

@@ -90,7 +90,7 @@ struct FavoObservationListView: View {
 
   var allObservationNamesText: String {
     let rows = favoriteObservationsViewModel.records.map {
-      let name = $0.speciesDetail.name.padding(toLength: 12, withPad: " ", startingAt: 0)
+      let name = "\($0.speciesDetail.name)" // .padding(toLength: 12, withPad: " ", startingAt: 0)
       let number = "\($0.number)x"
       let date = "\($0.date)"
       return "\(name) \(date) \(number)"

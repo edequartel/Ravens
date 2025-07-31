@@ -40,7 +40,7 @@
 		474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 474093862B55B7AC004F10C5 /* MarkdownUI */; };
 		4744749B2E37E74000F965EB /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 4744749A2E37E74000F965EB /* SVGView */; };
 		474474CC2E392D8200F965EB /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 474474CB2E392D8200F965EB /* WaterfallGrid */; };
-		474474CF2E3935DD00F965EB /* ZoomImageView in Frameworks */ = {isa = PBXBuildFile; productRef = 474474CE2E3935DD00F965EB /* ZoomImageView */; };
+		474474D62E3A740100F965EB /* Zoomable in Frameworks */ = {isa = PBXBuildFile; productRef = 474474D52E3A740100F965EB /* Zoomable */; };
 		4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
@@ -276,7 +276,7 @@
 				475628DD2CD8F29F00B0CF2B /* SFSafeSymbols in Frameworks */,
 				4770754B2B711681002D2DD8 /* KeychainAccess in Frameworks */,
 				47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */,
-				474474CF2E3935DD00F965EB /* ZoomImageView in Frameworks */,
+				474474D62E3A740100F965EB /* Zoomable in Frameworks */,
 				4793A5882C286AF0002739B6 /* SwiftSoup in Frameworks */,
 				474093872B55B7AC004F10C5 /* MarkdownUI in Frameworks */,
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
@@ -655,7 +655,7 @@
 				47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */,
 				4744749A2E37E74000F965EB /* SVGView */,
 				474474CB2E392D8200F965EB /* WaterfallGrid */,
-				474474CE2E3935DD00F965EB /* ZoomImageView */,
+				474474D52E3A740100F965EB /* Zoomable */,
 			);
 			productName = Ravens;
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
@@ -704,7 +704,7 @@
 				47FDCAEC2D9DD38E00D01F6A /* XCRemoteSwiftPackageReference "CalendarView" */,
 				474474992E37E74000F965EB /* XCRemoteSwiftPackageReference "SVGView" */,
 				474474CA2E392D8200F965EB /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
-				474474CD2E3935DD00F965EB /* XCRemoteSwiftPackageReference "ZoomImageView" */,
+				474474D42E3A740100F965EB /* XCRemoteSwiftPackageReference "Zoomable" */,
 			);
 			productRefGroup = 474C40292B4BC4040038B3A5 /* Products */;
 			projectDirPath = "";
@@ -1140,9 +1140,9 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		474474CD2E3935DD00F965EB /* XCRemoteSwiftPackageReference "ZoomImageView" */ = {
+		474474D42E3A740100F965EB /* XCRemoteSwiftPackageReference "Zoomable" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ronaldo-avalos/ZoomImageView";
+			repositoryURL = "https://github.com/ryohey/Zoomable.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -1270,10 +1270,10 @@
 			package = 474474CA2E392D8200F965EB /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
 			productName = WaterfallGrid;
 		};
-		474474CE2E3935DD00F965EB /* ZoomImageView */ = {
+		474474D52E3A740100F965EB /* Zoomable */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 474474CD2E3935DD00F965EB /* XCRemoteSwiftPackageReference "ZoomImageView" */;
-			productName = ZoomImageView;
+			package = 474474D42E3A740100F965EB /* XCRemoteSwiftPackageReference "Zoomable" */;
+			productName = Zoomable;
 		};
 		474C40402B4BC5780038B3A5 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

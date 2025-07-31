@@ -11,7 +11,7 @@ import Kingfisher
 import LazyPager
 
 import WaterfallGrid
-import ZoomImageView
+import Zoomable
 
 struct PhotoGridView: View {
   @State var photos: [String] = []
@@ -57,7 +57,7 @@ struct PhotoGridView: View {
     }
 //    .sheet(isPresented: $isImagePresented) {
 //      if let selected = selectedPhoto {
-//        FullscreenPhotoView(photoURL: selected)
+//        ZoomableKFImageView(imageURL: selected)
 //      }
 //    }
   }

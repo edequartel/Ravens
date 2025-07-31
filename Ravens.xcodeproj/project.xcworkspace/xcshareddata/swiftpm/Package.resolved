@@ -1,5 +1,5 @@
 {
-  "originHash" : "69f743f39691152e863b3d7228e42948637b299c54d49a6468b5b43f89cbeba1",
+  "originHash" : "9a9322027c58375de74952d05ac96c477a52917ce3e50858794c7be83384af7c",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -164,12 +164,12 @@
       }
     },
     {
-      "identity" : "zoomimageview",
+      "identity" : "zoomable",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ronaldo-avalos/ZoomImageView",
+      "location" : "https://github.com/ryohey/Zoomable.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ebf5d4dcb8abc2c23d4cb2ee123729e365d3fd35"
+        "revision" : "525c0e1784825261b84d21c5cd5a159245a40ea6"
       }
     }
   ],
