@@ -26,7 +26,6 @@ struct RavensView: View {
     if  !keyChainViewModel.token.isEmpty {
       TabView {
         // Tab 1
-
         TabUserObservationsView(selectedSpeciesID: $selectedSpeciesID)
           .tabItem {
             Text(usName)

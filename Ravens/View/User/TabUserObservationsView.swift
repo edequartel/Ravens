@@ -12,6 +12,7 @@ struct TabUserObservationsView: View {
   let log = SwiftyBeaver.self
 
   @EnvironmentObject var observationUser: ObservationsViewModel
+
   var allObservationNamesText1: String {
     let rows = (observationUser.observations ?? [])
       .compactMap {
@@ -39,7 +40,6 @@ struct TabUserObservationsView: View {
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainviewModel: KeychainViewModel
   @EnvironmentObject var speciesGroupsViewModel: SpeciesGroupsViewModel
-
   @EnvironmentObject var speciesViewModel: SpeciesViewModel
 
   @State private var showFirstView = false
@@ -175,6 +175,17 @@ struct TabUserObservationsView: View {
               Label(shareObservations, systemSymbol: .squareAndArrowUp)
           }
           .accessibility(label: Text(share))
+        }
+
+        // Quiz
+        if let obs = observationUser.observations, !obs.isEmpty {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(destination: BirdQuizView()) {
+              Image(systemSymbol: .questionmark)
+                .uniformSize()
+                .accessibility(label: Text(observersList))
+            }
+          }
         }
 
         // add choose observers

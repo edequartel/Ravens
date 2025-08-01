@@ -13,8 +13,8 @@ import MapKit
 import SVGView
 
 let demo = false
-// let showView = false
- let showView = true
+ let showView = false
+// let showView = true
 
 // neeltje jans
 // 51.631732, 3.698586
@@ -491,18 +491,18 @@ func formatDate(date: Date) -> String {
 
 public struct CapsuleButtonStyle: ButtonStyle {
     public func makeBody(configuration: Self.Configuration) -> some View {
-
         configuration.label
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding(6)
+            .frame(minWidth: 0, minHeight: 44) // Minimum height for tap target
+            .padding(.horizontal, 20)
             .foregroundColor(.accentColor)
             .background(background)
-            .padding(.horizontal, 20)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .bold()
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 
     var background: some View {
-        Capsule(style: .continuous).stroke(Color.accentColor, lineWidth: 1)
+        Capsule(style: .continuous)
+            .stroke(Color.accentColor, lineWidth: 1)
     }
 }
 
@@ -558,3 +558,5 @@ struct SVGImage: View {
     }
   }
 } 
+
+
