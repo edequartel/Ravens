@@ -177,16 +177,16 @@ struct TabUserObservationsView: View {
           .accessibility(label: Text(share))
         }
 
-        // Quiz
-        if let obs = observationUser.observations, !obs.isEmpty {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination: BirdQuizView()) {
-              Image(systemSymbol: .questionmark)
-                .uniformSize()
-                .accessibility(label: Text(observersList))
+        // Quiz-knop op basis van unieke soorten
+          if let obs = observationUser.observations, !obs.isEmpty {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              NavigationLink(destination: BirdQuizView(speciesNames: observationUser.uniqueNames())) {
+                Image(systemSymbol: .questionmark)
+                  .uniformSize()
+                  .accessibility(label: Text(observersList))
+              }
             }
           }
-        }
 
         // add choose observers
         ToolbarItem(placement: .navigationBarTrailing) {

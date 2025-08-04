@@ -138,3 +138,21 @@ class SpeciesViewModel: ObservableObject {
     }
   }
 }
+
+extension SpeciesViewModel {
+  func uniqueNames() -> [SpeciesName] {
+    var seen = Set<String>()
+    var result: [SpeciesName] = []
+
+    for species in species {
+      let key = "\(species.name)-\(species.scientificName)"
+      if !seen.contains(key) {
+        seen.insert(key)
+        result.append(SpeciesName(commonName: species.name, scientificName: species.scientificName))
+      }
+    }
+
+    return result
+  }
+}
+

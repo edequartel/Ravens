@@ -42,6 +42,7 @@
 		474474CC2E392D8200F965EB /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 474474CB2E392D8200F965EB /* WaterfallGrid */; };
 		474474D62E3A740100F965EB /* Zoomable in Frameworks */ = {isa = PBXBuildFile; productRef = 474474D52E3A740100F965EB /* Zoomable */; };
 		474474D82E3CAC6B00F965EB /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474474D72E3CAC6700F965EB /* Quiz.swift */; };
+		474474DA2E40993E00F965EB /* FlashCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474474D92E40993600F965EB /* FlashCard.swift */; };
 		4749194B2BD8F0690076F6F0 /* ObservationsYearViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */; };
 		474C402C2B4BC4040038B3A5 /* RavensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402B2B4BC4040038B3A5 /* RavensApp.swift */; };
 		474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C402D2B4BC4040038B3A5 /* ContentView.swift */; };
@@ -171,6 +172,7 @@
 		474093812B558F82004F10C5 /* ObservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationDetailsView.swift; sourceTree = "<group>"; };
 		474093832B55B5DE004F10C5 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		474474D72E3CAC6700F965EB /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		474474D92E40993600F965EB /* FlashCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCard.swift; sourceTree = "<group>"; };
 		4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsYearViewModel.swift; sourceTree = "<group>"; };
 		474C40282B4BC4040038B3A5 /* Ravens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ravens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		474C402B2B4BC4040038B3A5 /* RavensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RavensApp.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		474C401F2B4BC4040038B3A5 = {
 			isa = PBXGroup;
 			children = (
+				474474D92E40993600F965EB /* FlashCard.swift */,
 				474474D72E3CAC6700F965EB /* Quiz.swift */,
 				47D460BA2E215EDF0078DD72 /* PdfView.swift */,
 				477DAA092E1A9E6000EFC8CB /* RingtoneMakerView.swift */,
@@ -359,6 +362,7 @@
 				474C402B2B4BC4040038B3A5 /* RavensApp.swift */,
 				474C402D2B4BC4040038B3A5 /* ContentView.swift */,
 				47AB45A22CE327A300842877 /* SplashView.swift */,
+				471F7A5D2CF790CB00BF529C /* Information */,
 				47AB45A02CE3276000842877 /* RavensView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
@@ -381,7 +385,6 @@
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
-				471F7A5D2CF790CB00BF529C /* Information */,
 				471F7A5B2CF7905C00BF529C /* Accessibility */,
 				47AC07302D88AC7A002FB433 /* Xeno Canto */,
 				471F7A622CF7930D00BF529C /* Media */,
@@ -800,6 +803,7 @@
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
+				474474DA2E40993E00F965EB /* FlashCard.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
 				475875462E1FE60E00E40AEB /* CreateViewModel.swift in Sources */,

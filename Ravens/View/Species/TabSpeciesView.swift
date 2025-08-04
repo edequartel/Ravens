@@ -122,7 +122,7 @@ struct TabSpeciesView: View {
         log.error("TabSpeciesView  update settings.selectedSpeciesGroup \(String(describing: settings.selectedSpeciesGroup))")
         settings.selectedRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: settings.selectedSpeciesGroup ?? 1) ?? 5001
         speciesViewModel.fetchDataFirst(settings: settings)
-        speciesViewModel.fetchDataSecondLanguage(settings: settings) 
+        speciesViewModel.fetchDataSecondLanguage(settings: settings)
       }
 
       .navigationDestination(item: $showSpeciesXC) { species in
@@ -140,7 +140,18 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
-        //?? access
+        // Quiz-knop gebaseerd op unieke soortnamen
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: BirdFlashcardView(
+            speciesNames: speciesViewModel.uniqueNames(),
+            showScientificNameFirst: false // or true depending on preference
+          )) {
+            Image(systemSymbol: .exclamationmark)
+              .uniformSize()
+              .accessibility(label: Text(observersList))
+          }
+        }
+
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {
                       if let url = URL(string: "https://www.waarneming.nl") {
@@ -157,7 +168,7 @@ struct TabSpeciesView: View {
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
             selectedRarityOption: $selectedRarityOption
-            // currentSpeciesGroup: $settings.selectedSpeciesGroup 
+            // currentSpeciesGroup: $settings.selectedSpeciesGroup
           )) {
             Image(systemSymbol: .ellipsisCircle)
               .uniformSize()

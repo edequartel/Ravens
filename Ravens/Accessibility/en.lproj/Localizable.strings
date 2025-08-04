@@ -180,4 +180,7 @@
 "localizedAll" = "All";
 "shareObservations" = "Share Observations";
 
+"aiChat" = "Provide the etymology of the following species name in plain text, along with an optional fun fact. ";
+
+"helpEtymology" = "Share species name for AI";
 

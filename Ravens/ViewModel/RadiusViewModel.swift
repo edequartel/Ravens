@@ -99,3 +99,21 @@ class ObservationsRadiusViewModel: ObservableObject {
       }
     }
 }
+
+extension ObservationsRadiusViewModel {
+  func uniqueNames() -> [SpeciesName] {
+    guard let observations = observations else { return [] }
+
+    var seen = Set<String>()
+    var result: [SpeciesName] = []
+
+    for obs in observations {
+      let key = "\(obs.speciesDetail.name)-\(obs.speciesDetail.scientificName)"
+      if !seen.contains(key) {
+        seen.insert(key)
+        result.append(SpeciesName(commonName: obs.speciesDetail.name, scientificName: obs.speciesDetail.scientificName))
+      }
+    }
+    return result
+  }
+}

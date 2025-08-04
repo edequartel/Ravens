@@ -175,3 +175,6 @@
 
 "localizedAll" = "Alle";
 "shareObservations" = "Deel waarnemingen";
+
+"aiChat" = "Geef de etymologie van de volgende soortnaam in platte tekst, met eventueel een leuk feitje. ";
+"helpEtymology" = "Deel soortnaam voor AI";

@@ -69,7 +69,7 @@ struct ObsDetailView: View {
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
           PhotoGridView(photos: photos)
-            .islandBackground()
+//            .islandBackground()
             .accessibilityHidden(true)
         }
 

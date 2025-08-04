@@ -19,6 +19,12 @@ enum EntityType: String {
   case radius = "radius"
 }
 
+struct SpeciesName: Identifiable, Hashable {
+    let id = UUID()
+    let commonName: String
+    let scientificName: String
+}
+
 class ObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
@@ -150,5 +156,23 @@ class ObservationsViewModel: ObservableObject {
         log.info("Error: Missing date or time for index \(index)")
       }
     }
+  }
+}
+
+extension ObservationsViewModel {
+  func uniqueNames() -> [SpeciesName] {
+    guard let observations = observations else { return [] }
+
+    var seen = Set<String>()
+    var result: [SpeciesName] = []
+
+    for obs in observations {
+      let key = "\(obs.speciesDetail.name)-\(obs.speciesDetail.scientificName)"
+      if !seen.contains(key) {
+        seen.insert(key)
+        result.append(SpeciesName(commonName: obs.speciesDetail.name, scientificName: obs.speciesDetail.scientificName))
+      }
+    }
+    return result
   }
 }

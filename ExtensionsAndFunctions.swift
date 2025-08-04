@@ -13,8 +13,8 @@ import MapKit
 import SVGView
 
 let demo = false
- let showView = false
-// let showView = true
+// let showView = false
+ let showView = true
 
 // neeltje jans
 // 51.631732, 3.698586
@@ -559,4 +559,9 @@ struct SVGImage: View {
   }
 } 
 
-
+extension Array where Element: Identifiable {
+  func uniqued() -> [Element] {
+    var seen = Set<Element.ID>()
+    return filter { seen.insert($0.id).inserted }
+  }
+}

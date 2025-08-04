@@ -14,50 +14,39 @@ import Zoomable
 
 struct PhotoGridView: View {
   @State var photos: [String] = []
-  @State private var selectedPhoto: String?
   @State private var imageSizes: [String: CGSize] = [:]
 
   var body: some View {
-    ScrollView {
-      WaterfallGrid(photos, id: \.self) { photo in
-        GeometryReader { geometry in
-          VStack {
-            KFImage(URL(string: photo))
-              .onSuccess { result in
-                DispatchQueue.main.async {
-                  imageSizes[photo] = result.image.size
+    NavigationStack {
+      ScrollView {
+        WaterfallGrid(photos, id: \.self) { photo in
+          GeometryReader { geometry in
+            NavigationLink(destination: KFImageFullScreen(urlString: photo)) {
+              KFImage(URL(string: photo))
+                .onSuccess { result in
+                  DispatchQueue.main.async {
+                    imageSizes[photo] = result.image.size
+                  }
                 }
-              }
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: geometry.size.width)
-              .cornerRadius(4)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: geometry.size.width)
+//                .cornerRadius(0)
+//                .background(Color(.secondarySystemBackground))
+                .cornerRadius(4)
+                .background(Color.clear) // prevent implicit island effect
+            }
+            .buttonStyle(.plain) // removes iOS17 background effects
           }
-          .frame(width: geometry.size.width)
-          .background(Color(.secondarySystemBackground))
-          .cornerRadius(12)
-          .onTapGesture {
-//            NavigationLink(destination: KFImageFullScreen(urlString: photo)) {
-//              KFImageFullScreen(urlString: photo)
-//            }
-            print("selected \(photo)")
-            selectedPhoto = photo
-          }
+          .frame(height: getHeight(for: photo, in: UIScreen.main.bounds.width / 2 - 24))
         }
-        .frame(height: getHeight(for: photo, in: UIScreen.main.bounds.width / 2 - 24))
-      }
-      .gridStyle(
-        columnsInPortrait: 2,
-        columnsInLandscape: 3,
-        spacing: 12,
-        animation: .easeInOut(duration: 0.3)
-      )
-      .padding()
-    }
-    .sheet(item: $selectedPhoto) { photo in
-      VStack {
-//        Text("Selected photo: \(photo)")
-        KFImageFullScreen(urlString: photo)
+        .gridStyle(
+          columnsInPortrait: 2,
+          columnsInLandscape: 3,
+          spacing: 12,
+          animation: .easeInOut(duration: 0.3)
+        )
+//        .padding()
       }
     }
   }
@@ -70,9 +59,6 @@ struct PhotoGridView: View {
     return width * aspectRatio
   }
 }
-
-//import SwiftUI
-//import Kingfisher
 
 struct KFImageFullScreen: View {
     let urlString: String

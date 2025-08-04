@@ -163,3 +163,6 @@ let favoFavorites = LocalizedStringKey("favoFavorites")
 
 let localizedAll = LocalizedStringKey("localizedAll")
 let shareObservations = LocalizedStringKey("shareObservations")
+// AI
+let aiChat = LocalizedStringKey("aiChat")
+let helpEtymology = LocalizedStringKey("helpEtymology")

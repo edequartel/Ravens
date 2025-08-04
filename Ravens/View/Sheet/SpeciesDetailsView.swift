@@ -91,12 +91,21 @@ struct SpeciesDetailsView: View {
                 SVGImage(svg: "wikipedia")
               }
 
-              ShareLink(item: "Provide the etymology of the following species name in plain text, along with an optional fun fact. " + species.scientificName) {
-                SVGImage(svg: "artificialintel")
-//                artificialintel
-//                Image(systemSymbol: .sharedWithYou)
-//                  .uniformSize()
+              let localizedIntro = String(localized: "aiChat") // bijv. "Praat met AI over:"
+              let message = "\(localizedIntro) \(species.scientificName)"
+
+//              ToolbarItem(placement: .navigationBarTrailing) {
+//                  ShareLink(item: message) {
+//                      Image(systemName: "square.and.arrow.up")
+//                  }
+//                  .help("Stuur soortinfo naar AI")
+//              }
+
+              ShareLink(item: message) {
+                  Image(systemName: "square.and.arrow.up")
               }
+//              .help(helpEtymology)
+
               Spacer()
             }
 
