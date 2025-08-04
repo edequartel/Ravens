@@ -102,7 +102,8 @@ struct SpeciesDetailsView: View {
 //              }
 
               ShareLink(item: message) {
-                  Image(systemName: "square.and.arrow.up")
+//                  Image(systemName: "square.and.arrow.up")
+                SVGImage(svg: "artificialintel")
               }
 //              .help(helpEtymology)
 

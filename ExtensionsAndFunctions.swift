@@ -13,8 +13,8 @@ import MapKit
 import SVGView
 
 let demo = false
-// let showView = false
- let showView = true
+ let showView = false
+// let showView = true
 
 // neeltje jans
 // 51.631732, 3.698586

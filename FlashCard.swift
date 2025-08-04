@@ -31,6 +31,7 @@ struct BirdFlashcardView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .padding()
+                .rotation3DEffect(.degrees(-rotation), axis: (x: 0, y: 1, z: 0)) // Counter rotation
             )
             .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
             .onTapGesture {
@@ -41,7 +42,6 @@ struct BirdFlashcardView: View {
             }
         }
         .padding(.horizontal)
-        .shadow(radius: 5)
 
         Button(action: {
           showNextCard()
