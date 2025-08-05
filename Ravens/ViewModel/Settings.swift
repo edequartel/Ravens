@@ -68,6 +68,7 @@ class Settings: ObservableObject {
   }
 
   @AppStorage("isBookMarksVisible") var isBookMarkVisible: Bool = false
+  @AppStorage("isNotificationVisible") var isNotificationVisible: Bool = false
 
   @AppStorage("selectedInBetween") var selectedInBetweenStored: String = "waarneming.nl"
   @Published var selectedInBetween: String = "waarneming.nl" {

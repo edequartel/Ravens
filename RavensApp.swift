@@ -64,7 +64,8 @@ struct RavensApp: App {
   @StateObject var speciesDetailsViewModel = SpeciesDetailsViewModel()
   @StateObject var poiViewModel = POIViewModel()
   @StateObject var bookMarksViewModel = BookMarksViewModel(fileName: "bookmarks.json")
-  
+  @StateObject var notificationsViewModel = NotificationsViewModel(fileName: "notfications.json")
+
   @StateObject var favoObservationsViewModel = FavoriteObservationsViewModel(
     fileName: "favoriteObservations.json")
 
@@ -105,6 +106,7 @@ struct RavensApp: App {
       .environmentObject(poiViewModel)
       .environmentObject(speciesDetailsViewModel)
       .environmentObject(bookMarksViewModel)
+      .environmentObject(notificationsViewModel)
       .environmentObject(observersViewModel)
       .environmentObject(areasViewModel)
       .environmentObject(player)

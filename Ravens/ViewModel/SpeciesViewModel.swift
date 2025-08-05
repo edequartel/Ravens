@@ -140,15 +140,16 @@ class SpeciesViewModel: ObservableObject {
 }
 
 extension SpeciesViewModel {
-  func uniqueNames() -> [SpeciesName] {
+  /// Returns unique SpeciesName objects from any list of Species.
+  /// Uniqueness is based on (name, scientificName) combo.
+  func uniqueNames(from speciesList: [Species]) -> [SpeciesName] {
     var seen = Set<String>()
     var result: [SpeciesName] = []
 
-    for species in species {
-      let key = "\(species.name)-\(species.scientificName)"
-      if !seen.contains(key) {
-        seen.insert(key)
-        result.append(SpeciesName(commonName: species.name, scientificName: species.scientificName))
+    for item in speciesList {
+      let key = "\(item.name)-\(item.scientificName)"
+      if seen.insert(key).inserted {
+        result.append(SpeciesName(commonName: item.name, scientificName: item.scientificName))
       }
     }
 
@@ -156,3 +157,77 @@ extension SpeciesViewModel {
   }
 }
 
+extension SpeciesViewModel {
+  func filteredSpecies(
+    by sortOption: SortNameOption,
+    searchText: String,
+    filterOption: FilterAllOption,
+    rarityFilterOption: FilteringRarityOption,
+    isLatest: Bool,
+    isBookmarked: Bool,
+    isNotificationed: Bool,
+    additionalIntArray: BookMarksViewModel,
+    additionalNotificationIntArray: NotificationsViewModel
+  ) -> [Species] {
+    let sortedSpeciesList = sortedSpecies(by: sortOption)
+
+    // Filter by search text if not empty
+    var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
+      species.name.lowercased().contains(searchText.lowercased()) ||
+      species.scientificName.lowercased().contains(searchText.lowercased())
+    }
+
+    // Apply other filters
+    filteredList = applyFilter(to: filteredList, with: filterOption)
+    filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
+    filteredList = applyNotificationFilter(to: filteredList, isNotificationed: isNotificationed, additionalIntArray: additionalNotificationIntArray.records)
+
+    // Apply latest filter
+    return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
+  }
+
+  private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
+    switch filterOption {
+    case .all:
+      return species
+    case .native:
+      return species.filter { $0.native }
+    }
+  }
+
+  private func applyRarityFilter(to species: [Species], with filterOption: FilteringRarityOption) -> [Species] {
+    switch filterOption {
+    case .all:
+      return species
+    case .common:
+      return species.filter { $0.rarity >= 1 }
+    case .uncommon:
+      return species.filter { $0.rarity >= 2 }
+    case .rare:
+      return species.filter { $0.rarity >= 3 }
+    case .veryRare:
+      return species.filter { $0.rarity >= 4 }
+    }
+  }
+
+  private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
+    if isBookmarked {
+      return species.filter { species in
+        additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
+      }
+    } else {
+      return species
+    }
+  }
+
+  private func applyNotificationFilter(to species: [Species], isNotificationed: Bool, additionalIntArray: [Notification]) -> [Species] {
+    if isNotificationed {
+      return species.filter { species in
+        additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
+      }
+    } else {
+      return species
+    }
+  }
+
+}

@@ -22,6 +22,7 @@ struct TabSpeciesView: View {
 
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+  @EnvironmentObject var notificationsViewModel: NotificationsViewModel
   @EnvironmentObject var settings: Settings
 
   @State private var selectedSortOption: SortNameOption = .name
@@ -51,7 +52,9 @@ struct TabSpeciesView: View {
             rarityFilterOption: selectedRarityOption,
             isLatest: false,
             isBookmarked: settings.isBookMarkVisible,
-            additionalIntArray: bookMarksViewModel
+            isNotificationed: settings.isNotificationVisible,
+            additionalIntArray: bookMarksViewModel,
+            additionalNotificationIntArray: notificationsViewModel
           ), id: \.id) { species in
 
             NavigationLink(
@@ -88,6 +91,11 @@ struct TabSpeciesView: View {
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
               BookmarkButtonView(speciesID: species.speciesId)
                 .tint(.green)
+            }
+
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+              NotificationButtonView(speciesID: species.speciesId)
+                .tint(.yellow)
             }
 
 // prefer not here birdlistview/audio is species specific moved to info
@@ -140,15 +148,52 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            settings.isNotificationVisible.toggle()
+          }) {
+            Image(systemSymbol: settings.isNotificationVisible ? .clockFill : .clock)
+              .uniformSize()
+          }
+//          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
+        }
+
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            for notification in notificationsViewModel.records {
+              print("Species ID: \(notification.speciesID)")
+            }
+//            notificationsViewModel.printAllSpeciesIDs()
+          }) {
+            Image(systemSymbol: .pawprintFill)
+              .uniformSize()
+          }
+//          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
+        }
+
         // Quiz-knop gebaseerd op unieke soortnamen
         ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: BirdFlashcardView(
-            speciesNames: speciesViewModel.uniqueNames(),
-            showScientificNameFirst: false // or true depending on preference
-          )) {
-            Image(systemSymbol: .exclamationmark)
+          let filteredSpecies = speciesViewModel.filteredSpecies(
+            by: selectedSortOption,
+            searchText: searchText,
+            filterOption: selectedFilterOption,
+            rarityFilterOption: selectedRarityOption,
+            isLatest: false,
+            isBookmarked: settings.isBookMarkVisible,
+            isNotificationed: settings.isNotificationVisible,
+            additionalIntArray: bookMarksViewModel,
+            additionalNotificationIntArray: notificationsViewModel
+          )
+
+          NavigationLink(
+            destination: BirdFlashcardView(
+              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
+              showScientificNameFirst: false
+            )
+          ) {
+            Image(systemName: "exclamationmark")
               .uniformSize()
-              .accessibility(label: Text(observersList))
+              .accessibilityLabel(Text("Start filtered bird quiz"))
           }
         }
 
@@ -291,74 +336,3 @@ struct FilteringAllMenu: View {
   }
 }
 
-extension SpeciesViewModel {
-  func filteredSpecies(
-    by sortOption: SortNameOption,
-    searchText: String,
-    filterOption: FilterAllOption,
-    rarityFilterOption: FilteringRarityOption,
-    isLatest: Bool,
-    isBookmarked: Bool,
-    additionalIntArray: BookMarksViewModel
-  ) -> [Species] {
-    let sortedSpeciesList = sortedSpecies(by: sortOption)
-
-    // Filter by search text if not empty
-    var filteredList = searchText.isEmpty ? sortedSpeciesList : sortedSpeciesList.filter { species in
-      species.name.lowercased().contains(searchText.lowercased()) ||
-      species.scientificName.lowercased().contains(searchText.lowercased())
-    }
-
-    // Apply other filters
-    filteredList = applyFilter(to: filteredList, with: filterOption)
-    filteredList = applyRarityFilter(to: filteredList, with: rarityFilterOption)
-    // Apply latest filter
-    return applyBookmarkFilter(to: filteredList, isBookmarked: isBookmarked, additionalIntArray: additionalIntArray.records)
-  }
-
-  private func applyFilter(to species: [Species], with filterOption: FilterAllOption) -> [Species] {
-    switch filterOption {
-    case .all:
-      return species
-    case .native:
-      return species.filter { $0.native }
-    }
-  }
-
-  private func applyRarityFilter(to species: [Species], with filterOption: FilteringRarityOption) -> [Species] {
-    switch filterOption {
-    case .all:
-      return species
-    case .common:
-      return species.filter { $0.rarity >= 1 }
-    case .uncommon:
-      return species.filter { $0.rarity >= 2 }
-    case .rare:
-      return species.filter { $0.rarity >= 3 }
-    case .veryRare:
-      return species.filter { $0.rarity >= 4 }
-    }
-//    switch filterOption {
-//    case .all:
-//      return species
-//    case .common:
-//      return species.filter { $0.rarity == 1 }
-//    case .uncommon:
-//      return species.filter { $0.rarity == 2 }
-//    case .rare:
-//      return species.filter { $0.rarity == 3 }
-//    case .veryRare:
-//      return species.filter { $0.rarity == 4 }
-//    }
-  }
-
-  private func applyBookmarkFilter(to species: [Species], isBookmarked: Bool, additionalIntArray: [BookMark]) -> [Species] {
-    if isBookmarked {
-      return species.filter { species in
-        additionalIntArray.contains(where: { $0.speciesID == species.speciesId })
-      }
-    } else {
-      return species
-    }
-  }
-}

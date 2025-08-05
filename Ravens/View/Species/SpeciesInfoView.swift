@@ -10,8 +10,9 @@ import SwiftyBeaver
 struct SpeciesInfoView: View {
   var species: Species // Assuming Species is your data model
   var showView: Bool
-  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel // Assuming BookMarksViewModel is your ViewModel
-  @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel // Assuming SpeciesSecondLangViewModel is your ViewModel
+  @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
+  @EnvironmentObject var notificationViewModel: NotificationsViewModel
+  @EnvironmentObject var speciesSecondLangViewModel: SpeciesViewModel
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -51,6 +52,12 @@ struct SpeciesInfoView: View {
           Image(systemName: "star.fill")
             .foregroundColor(Color.gray.opacity(0.8))
         }
+
+        if notificationViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+          Image(systemSymbol: .clock)
+            .foregroundColor(Color.gray.opacity(0.8))
+        }
+
       }
 
       if let date = species.date {

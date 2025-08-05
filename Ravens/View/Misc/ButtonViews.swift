@@ -216,6 +216,7 @@ struct BookmarkButtonView: View {
   }
 }
 
+
 struct BookmarkButtonView_Previews: PreviewProvider {
   static var previews: some View {
     // Create a mock BookMarksViewModel
@@ -224,5 +225,26 @@ struct BookmarkButtonView_Previews: PreviewProvider {
     // Return the BookmarkButtonView with the mock data
     BookmarkButtonView(speciesID: 100)
       .environmentObject(mockBookMarksViewModel)
+  }
+}
+
+struct NotificationButtonView: View {
+  @EnvironmentObject var notificationsViewModel: NotificationsViewModel
+  var speciesID: Int
+
+  var body: some View {
+    Button(action: {
+      if notificationsViewModel.isSpeciesIDInRecords(speciesID: speciesID) {
+        notificationsViewModel.removeRecord(speciesID: speciesID)
+      } else {
+        notificationsViewModel.appendRecord(speciesID: speciesID)
+      }
+    }) {
+
+      Image(systemSymbol: notificationsViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? .clockFill : .clock)
+        .uniformSize()
+    }
+//    .accessibilityLabel(notificationsViewModel.isSpeciesIDInRecords(speciesID: speciesID) ? favoriteSpeciesOn : favoriteSpeciesOff)
+//    .background(Color.clear)
   }
 }

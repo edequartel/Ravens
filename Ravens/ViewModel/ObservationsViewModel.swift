@@ -20,9 +20,15 @@ enum EntityType: String {
 }
 
 struct SpeciesName: Identifiable, Hashable {
-    let id = UUID()
+    let id: UUID
     let commonName: String
     let scientificName: String
+
+    init(commonName: String, scientificName: String, id: UUID = UUID()) {
+        self.id = id
+        self.commonName = commonName
+        self.scientificName = scientificName
+    }
 }
 
 class ObservationsViewModel: ObservableObject {
@@ -177,3 +183,25 @@ extension ObservationsViewModel {
   }
 }
 
+//extension ObservationsViewModel {
+//  func uniqueNames() -> [SpeciesName] {
+//    guard let observationsList = observations else { return [] }
+//    return Self.uniqueNames(from: observationsList)
+//  }
+//
+//  static func uniqueNames(from observations: [Obs]) -> [SpeciesName] {
+//    var seen = Set<String>()
+//    var result: [SpeciesName] = []
+//
+//    for obs in observations {
+//      let key = "\(obs.speciesDetail.name)-\(obs.speciesDetail.scientificName)"
+//      if seen.insert(key).inserted {
+//        result.append(SpeciesName(
+//          commonName: obs.speciesDetail.name,
+//          scientificName: obs.speciesDetail.scientificName
+//        ))
+//      }
+//    }
+//    return result
+//  }
+//}
