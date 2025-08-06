@@ -33,12 +33,13 @@ struct BirdFlashcardView: View {
                 .padding()
                 .rotation3DEffect(.degrees(-rotation), axis: (x: 0, y: 1, z: 0)) // Counter rotation
             )
+            
             .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
             .onTapGesture {
-              withAnimation(.easeInOut(duration: 0.6)) {
+//              withAnimation(.easeInOut(duration: 0.1)) {
                 rotation += 180
                 isFlipped.toggle()
-              }
+//              }
             }
         }
         .padding(.horizontal)

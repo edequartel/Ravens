@@ -383,7 +383,6 @@
 		474C402A2B4BC4040038B3A5 /* Ravens */ = {
 			isa = PBXGroup;
 			children = (
-				47E43B4A2D9FC74400020045 /* Information */,
 				47A79E5F2B98AC22004FBF20 /* Info.plist */,
 				47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */,
 				47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */,
@@ -601,13 +600,6 @@
 				47FDCAE32D9D8A2700D01F6A /* RadiusListView.swift */,
 			);
 			path = Radius;
-			sourceTree = "<group>";
-		};
-		47E43B4A2D9FC74400020045 /* Information */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Information;
 			sourceTree = "<group>";
 		};
 		47EE13212CAC365B007305E1 /* Photo */ = {

@@ -48,7 +48,7 @@ struct ObservationsSpeciesView: View {
             .foregroundColor(rarityColor(value: item.rarity))
 
           // Text with accessibility label
-          Text("\(item.name)")
+          Text("\(item.name) \(item.speciesId)")
           //          Text("\(item.name) \(observationsSpecies.count)")
             .bold()
             .lineLimit(1) // Set the maximum number of lines to 1

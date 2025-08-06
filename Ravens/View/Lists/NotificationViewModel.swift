@@ -7,10 +7,13 @@
 
 import Foundation
 import SwiftyBeaver
+import Combine
+import Alamofire
 
 struct Notification: Codable, Identifiable {
   var id: UUID = UUID()  // Unique identifier for SwiftUI List operations
   var speciesID: Int // bookmarkID
+  var scientificName: String?
 }
 
 class NotificationsViewModel: ObservableObject {
@@ -48,6 +51,9 @@ class NotificationsViewModel: ObservableObject {
         log.error("Failed to create file. Error: \(error.localizedDescription)")
       }
     }
+
+    //
+    startPolling()
   }
 
   func printAllSpeciesIDs() {
@@ -97,4 +103,60 @@ class NotificationsViewModel: ObservableObject {
       log.info("BookMarksViewModel Record with speciesID \(speciesID) does not exist.")
     }
   }
+
+  // --------------------------- this has to be in the background even when app is not active
+
+  private let interval: TimeInterval = 20 // every 2 minutes
+  @Published var observations: [Obs] = []
+  private var timer: AnyCancellable?
+  private let endpoint = "https://waarneming.nl/api/v1/species/122/observations/"
+  private var lastObservationIDs: Set<Int> = []
+
+  func startPolling() {
+      timer = Timer
+          .publish(every: interval, on: .main, in: .common) // 5 minutes
+          .autoconnect()
+          .sink { [weak self] _ in
+              self?.fetchObservations()
+          }
+
+      fetchObservations() // Initial fetch
+  }
+
+  private func fetchObservations() {
+    AF.request(endpoint)
+      .validate()
+      .responseDecodable(of: Observations.self) { response in
+        switch response.result {
+        case .success(let decodedResponse):
+          let newObservations = decodedResponse.results ?? []
+          let newOnes = newObservations.filter { obs in
+            guard let id = obs.idObs else { return false }
+            return !self.lastObservationIDs.contains(id)
+          }
+
+          if !newOnes.isEmpty {
+            print("🆕 New observations:")
+            newOnes.forEach {
+              print("• speciesID: \(String(describing: $0.species)) at \(String(describing: $0.date)) \($0.time ?? "")")
+            }
+          } else {
+            print("✅ No new observations.")
+          }
+
+          DispatchQueue.main.async {
+            self.lastObservationIDs = Set(newObservations.compactMap { $0.idObs })
+            self.observations = newObservations
+          }
+
+        case .failure(let error):
+          print("❌ Alamofire decoding error: \(error)")
+          if let data = response.data, let raw = String(data: data, encoding: .utf8) {
+            print("🔍 Raw response:\n\(raw)")
+          }
+        }
+      }
+  }
 }
+
+
