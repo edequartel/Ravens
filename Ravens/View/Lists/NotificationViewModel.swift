@@ -104,26 +104,27 @@ class NotificationsViewModel: ObservableObject {
     }
   }
 
-  // --------------------------- this has to be in the background even when app is not active
+  // --- this has to be in the background even when app is not active
 
-  private let interval: TimeInterval = 20 // every 2 minutes
+  private let interval: TimeInterval = 300 // 900 // every 15 minutes
   @Published var observations: [Obs] = []
   private var timer: AnyCancellable?
-  private let endpoint = "https://waarneming.nl/api/v1/species/122/observations/"
   private var lastObservationIDs: Set<Int> = []
+  private var hasFetchedOnce = false
 
   func startPolling() {
       timer = Timer
           .publish(every: interval, on: .main, in: .common) // 5 minutes
           .autoconnect()
           .sink { [weak self] _ in
-              self?.fetchObservations()
+            self?.fetchObservations(speciesId: 122)
           }
 
-      fetchObservations() // Initial fetch
+      fetchObservations(speciesId: 122) // Initial fetch
   }
 
-  private func fetchObservations() {
+  private func fetchObservations(speciesId: Int) {
+    let endpoint = "https://waarneming.nl/api/v1/species/\(speciesId)/observations/?date_after=2025-08-05&date_before=2025-08-07"
     AF.request(endpoint)
       .validate()
       .responseDecodable(of: Observations.self) { response in
@@ -135,14 +136,18 @@ class NotificationsViewModel: ObservableObject {
             return !self.lastObservationIDs.contains(id)
           }
 
-          if !newOnes.isEmpty {
-            print("🆕 New observations:")
-            newOnes.forEach {
-              print("• speciesID: \(String(describing: $0.species)) at \(String(describing: $0.date)) \($0.time ?? "")")
+//          if self.hasFetchedOnce {
+            if !newOnes.isEmpty {
+              LogStore.shared.log("🆕 New observations:")
+              newOnes.forEach {
+                LogStore.shared.log("•\($0.species ?? 0) at \($0.date) - \($0.time ?? "?")")
+              }
+            } else {
+              LogStore.shared.log("✅ No new observations.")
             }
-          } else {
-            print("✅ No new observations.")
-          }
+//          } else {
+//            self.hasFetchedOnce = true
+//          }
 
           DispatchQueue.main.async {
             self.lastObservationIDs = Set(newObservations.compactMap { $0.idObs })
@@ -158,5 +163,3 @@ class NotificationsViewModel: ObservableObject {
       }
   }
 }
-
-

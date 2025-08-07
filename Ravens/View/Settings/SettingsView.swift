@@ -28,6 +28,8 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationStack {
+      LiveLogView()
+      
       List {
         Section(header: Text("Ravens")) {
           NavigationLink(destination: LoginView()) {
