@@ -46,6 +46,7 @@ struct ObservationsLocationView: View {
             .bold()
           Spacer()
         }
+//        .padding(4)
         .padding(.horizontal, 10)
 
         HStack {
@@ -59,6 +60,7 @@ struct ObservationsLocationView: View {
           ObservationsTimePeriodView(timePeriod: settings.timePeriodLocation ?? .fourWeeks)
           Spacer()
         }
+//        .padding(4)
         .padding(.horizontal, 10)
 
         HorizontalLine()

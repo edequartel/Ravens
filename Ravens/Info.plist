@@ -4,9 +4,12 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>www.tastenbraille.com.Ravens.background</string>
+		<string>com.ravens.observation</string>
 	</array>
-
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleSignature</key>
+	<string></string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -20,31 +23,27 @@
 			</array>
 		</dict>
 	</array>
-
 	<key>LSMinimumSystemVersion</key>
 	<string>14.4</string>
-
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>remote-notification</string>
+		<string>Fetch</string>
 	</array>
-
 	<key>UIFileSharingEnabled</key>
 	<true/>
-
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>public.mp3</string>
-			<key>UTTypeDescription</key>
-			<string>MP3 Audio</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.audio</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>MP3 Audio</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>public.mp3</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
