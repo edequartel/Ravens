@@ -53,10 +53,11 @@ struct SpeciesInfoView: View {
             .foregroundColor(Color.gray.opacity(0.8))
         }
 
-        if notificationViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
-          Image(systemSymbol: .clock)
-            .foregroundColor(Color.gray.opacity(0.8))
-        }
+        // Notifications
+//        if notificationViewModel.isSpeciesIDInRecords(speciesID: species.speciesId) {
+//          Image(systemSymbol: .clock)
+//            .foregroundColor(Color.gray.opacity(0.8))
+//        }
 
       }
 

@@ -91,7 +91,7 @@ struct RavensApp: App {
         observationsSpecies: observationsSpecies,
         observationsRadiusViewModel: observationsRadiusViewModel
       )
-//      .modifier(GlobalFontModifier())
+      .modifier(GlobalFontModifier())
 
       .environmentObject(keychainViewModel)
       .environmentObject(locationManager)

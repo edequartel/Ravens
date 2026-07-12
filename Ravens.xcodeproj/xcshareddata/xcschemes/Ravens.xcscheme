@@ -34,14 +34,14 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       enableThreadSanitizer = "YES"
-      disablePerformanceAntipatternChecker = "YES"
       language = "nl"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "NO">
+      allowLocationSimulation = "NO"
+      disablePerformanceAntipatternChecker = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

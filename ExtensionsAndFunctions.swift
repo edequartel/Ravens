@@ -431,10 +431,10 @@ extension Image {
             .aspectRatio(contentMode: .fit) // Maintains aspect ratio
             .frame(width: 24, height: 24) // Sets the uniform siz#
             .padding(4) // Adds padding around the image
-            .overlay(
-                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
-                  .stroke(Color.blue, lineWidth: 1)
-            )
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 4) // Adds a rounded rectangle border
+//                  .stroke(Color.blue, lineWidth: 1)
+//            )
     }
 }
 
@@ -535,24 +535,30 @@ struct SVGImage: View {
   let width: CGFloat?
   let height: CGFloat?
   let padding: CGFloat
+  let tint: Color
 
-  init(svg: String, width: CGFloat = 24, height: CGFloat = 24, padding: CGFloat = 4) {
+  init(svg: String, width: CGFloat = 24, height: CGFloat = 24, padding: CGFloat = 4, tint: Color = .primary) {
     self.svg = svg
     self.width = width
     self.height = height
     self.padding = padding
+    self.tint = tint
   }
 
   var body: some View {
     if let url = Bundle.main.url(forResource: svg, withExtension: "svg") {
-      SVGView(contentsOf: url)
-        .aspectRatio(contentMode: .fit)
+      tint
         .frame(width: width, height: height)
+        .mask(
+          SVGView(contentsOf: url)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: width, height: height)
+        )
         .padding(padding)
-            .overlay(
-              RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.blue, lineWidth: 1)
-            )
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 4)
+//                .stroke(Color.blue, lineWidth: 1)
+//            )
     } else {
       EmptyView()
     }

@@ -1,8 +1,8 @@
 //
-//  poi.swift
+//  PoiViewModel.swift
 //  Ravens
 //
-//  Created by Eric de Quartel on 28/03/2024.
+//  Ensures correct capitalization to match Xcode project reference.
 //
 
 import Alamofire
@@ -38,15 +38,12 @@ class POIViewModel: ObservableObject {
         fetchPOIs()
     }
 
-//    func fetchPOIs(completion: @escaping () -> Void = {}) {
     func fetchPOIs() {
         // Try to load from local JSON file
         if let localData = self.loadJsonFromFile() {
             let decoder = JSONDecoder()
             if let POIs = try? decoder.decode(POIList.self, from: localData) {
                 self.POIs = POIs.poi
-//                completion()
-        
             }
             return
         }

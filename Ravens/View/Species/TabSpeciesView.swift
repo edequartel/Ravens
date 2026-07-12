@@ -93,10 +93,10 @@ struct TabSpeciesView: View {
                 .tint(.green)
             }
 
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-              NotificationButtonView(speciesID: species.speciesId)
-                .tint(.yellow)
-            }
+//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//              NotificationButtonView(speciesID: species.speciesId)
+//                .tint(.yellow)
+//            }
 
 // prefer not here birdlistview/audio is species specific moved to info
 //            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -148,54 +148,54 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            settings.isNotificationVisible.toggle()
-          }) {
-            Image(systemSymbol: settings.isNotificationVisible ? .clockFill : .clock)
-              .uniformSize()
-          }
-//          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
-        }
+//        ToolbarItem(placement: .navigationBarLeading) {
+//          Button(action: {
+//            settings.isNotificationVisible.toggle()
+//          }) {
+//            Image(systemSymbol: settings.isNotificationVisible ? .clockFill : .clock)
+//              .uniformSize()
+//          }
+////          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
+//        }
 
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            for notification in notificationsViewModel.records {
-              print("Species ID: \(notification.speciesID)")
-            }
-//            notificationsViewModel.printAllSpeciesIDs()
-          }) {
-            Image(systemSymbol: .pawprintFill)
-              .uniformSize()
-          }
-//          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
-        }
+//        ToolbarItem(placement: .navigationBarLeading) {
+//          Button(action: {
+//            for notification in notificationsViewModel.records {
+//              print("Species ID: \(notification.speciesID)")
+//            }
+////            notificationsViewModel.printAllSpeciesIDs()
+//          }) {
+//            Image(systemSymbol: .pawprintFill)
+//              .uniformSize()
+//          }
+////          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
+//        }
 
         // Quiz-knop gebaseerd op unieke soortnamen
-        ToolbarItem(placement: .navigationBarTrailing) {
-          let filteredSpecies = speciesViewModel.filteredSpecies(
-            by: selectedSortOption,
-            searchText: searchText,
-            filterOption: selectedFilterOption,
-            rarityFilterOption: selectedRarityOption,
-            isLatest: false,
-            isBookmarked: settings.isBookMarkVisible,
-            isNotificationed: settings.isNotificationVisible,
-            additionalIntArray: bookMarksViewModel,
-            additionalNotificationIntArray: notificationsViewModel
-          )
-
-          NavigationLink(
-            destination: BirdFlashcardView(
-              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
-              showScientificNameFirst: false
-            )
-          ) {
-            Image(systemName: "exclamationmark")
-              .uniformSize()
-              .accessibilityLabel(Text("Start filtered bird quiz"))
-          }
-        }
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          let filteredSpecies = speciesViewModel.filteredSpecies(
+//            by: selectedSortOption,
+//            searchText: searchText,
+//            filterOption: selectedFilterOption,
+//            rarityFilterOption: selectedRarityOption,
+//            isLatest: false,
+//            isBookmarked: settings.isBookMarkVisible,
+//            isNotificationed: settings.isNotificationVisible,
+//            additionalIntArray: bookMarksViewModel,
+//            additionalNotificationIntArray: notificationsViewModel
+//          )
+//
+//          NavigationLink(
+//            destination: BirdFlashcardView(
+//              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
+//              showScientificNameFirst: false
+//            )
+//          ) {
+//            Image(systemName: "exclamationmark")
+//              .uniformSize()
+//              .accessibilityLabel(Text("Start filtered bird quiz"))
+//          }
+//        }
 
         // ???
         ToolbarItem(placement: .navigationBarLeading) {
@@ -204,7 +204,7 @@ struct TabSpeciesView: View {
                           UIApplication.shared.open(url)
                       }
                   }) {
-                    SVGImage(svg: "waarneming")
+                    SVGImage(svg: "waarnemingmono")
                       .accessibilityLabel(Text(settings.isBookMarkVisible ? favoriteVisible : allVisible))
                   }
         }

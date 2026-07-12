@@ -28,7 +28,7 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationStack {
-      LiveLogView()
+//      LiveLogView()
       
       List {
         Section(header: Text("Ravens")) {

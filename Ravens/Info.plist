@@ -27,7 +27,7 @@
 	<string>14.4</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>Fetch</string>
+		<string>fetch</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>

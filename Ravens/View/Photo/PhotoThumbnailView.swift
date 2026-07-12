@@ -50,23 +50,32 @@ struct PhotoThumbnailView: View {
 
   var body: some View {
     //    ZStack(alignment: .bottomTrailing) {
-    LazyHStack {
+    HStack {
       if (photos?.first) != nil {
 
         ZStack(alignment: .bottomTrailing) {
           KFImage(URL(string: photos?.first ?? ""))
-            .resizable()    // Make the image resizable
+            .placeholder {
+              ZStack {
+                Color.gray.opacity(0.2)
+                ProgressView()
+              }
+            }
+            .onFailure { _ in
+              // show a simple fallback
+            }
+            .resizable()
             .aspectRatio(contentMode: .fill)
-          // Set the frame width and height as a fraction of the screen size
             .frame(width: screenWidth * downSize, height: screenWidth * downSize)
+            .clipped()
             .clipShape(RoundedRectangle(cornerRadius: 8))
-          //
 
           if photos?.count ?? 0 > 1 {
             Text("\(photos?.count ?? 0)")
               .font(.caption)
               .foregroundColor(.white)
               .padding([.trailing, .bottom], 8)
+              .accessibilityLabel("\(photos?.count ?? 0) photos")
           }
         }
 

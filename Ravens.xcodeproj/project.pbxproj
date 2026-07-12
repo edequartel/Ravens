@@ -12,6 +12,8 @@
 		47085F172E4262790005FE4D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47085F162E42626C0005FE4D /* NotificationViewModel.swift */; };
 		47085F192E438C050005FE4D /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47085F182E438C020005FE4D /* Logging.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
+		47135EF32FF69D090078D04E /* poiViewModel 4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47135EF22FF69D090078D04E /* poiViewModel 4.swift */; };
+		47135EF52FF6A05F0078D04E /* POIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47135EF42FF6A05F0078D04E /* POIViewModel.swift */; };
 		4716F9CD2DA2E90100FCDFB8 /* DownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */; };
 		471875392BFB938500EF9F1F /* AreasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875382BFB938500EF9F1F /* AreasViewModel.swift */; };
 		471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471875422C00542100EF9F1F /* LocationManagerModel.swift */; };
@@ -31,7 +33,7 @@
 		4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */; };
 		4725B9632BB14C2C00F6F137 /* LocationJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725B9622BB14C2C00F6F137 /* LocationJSON.swift */; };
 		472633212BB5981A00CEA05E /* poi.json in Resources */ = {isa = PBXBuildFile; fileRef = 472633202BB5981A00CEA05E /* poi.json */; };
-		472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633222BB598E600CEA05E /* PoiViewModel.swift */; };
+		472633232BB598E600CEA05E /* POIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472633222BB598E600CEA05E /* POIViewModel.swift */; };
 		4730FE632DA9816F007C4341 /* FavoriteObservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4730FE622DA98165007C4341 /* FavoriteObservationsViewModel.swift */; };
 		4738B6392BF380B500BF7557 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B6382BF380B500BF7557 /* LocationViewModel.swift */; };
 		4738B63B2BF4798800BF7557 /* BookMarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */; };
@@ -129,6 +131,7 @@
 		47D4B7732D00546800D46050 /* ObserversView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4B7722D00546300D46050 /* ObserversView.swift */; };
 		47D99A3E2B9ED73A0012F0DE /* SwiftAudioEx in Frameworks */ = {isa = PBXBuildFile; productRef = 47D99A3D2B9ED73A0012F0DE /* SwiftAudioEx */; };
 		47DB89B42B7A397F0093C1ED /* ObsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */; };
+		47E948CE2FF644F1006B3E90 /* PoiViewModel 3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E948CD2FF644F0006B3E90 /* PoiViewModel 3.swift */; };
 		47EE13202CAC35DF007305E1 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */; };
 		47FAD0E12C19D25C007D0F63 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 47FAD0E02C19D25C007D0F63 /* Kingfisher */; };
 		47FAD0E32C19DB56007D0F63 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */; };
@@ -146,6 +149,8 @@
 		47085F162E42626C0005FE4D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		47085F182E438C020005FE4D /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
+		47135EF22FF69D090078D04E /* poiViewModel 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "poiViewModel 4.swift"; sourceTree = "<group>"; };
+		47135EF42FF6A05F0078D04E /* POIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIViewModel.swift; sourceTree = "<group>"; };
 		4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFile.swift; sourceTree = "<group>"; };
 		471875382BFB938500EF9F1F /* AreasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewModel.swift; sourceTree = "<group>"; };
 		471875422C00542100EF9F1F /* LocationManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerModel.swift; sourceTree = "<group>"; };
@@ -166,7 +171,7 @@
 		4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIdViewModel.swift; sourceTree = "<group>"; };
 		4725B9622BB14C2C00F6F137 /* LocationJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationJSON.swift; sourceTree = "<group>"; };
 		472633202BB5981A00CEA05E /* poi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi.json; sourceTree = "<group>"; };
-		472633222BB598E600CEA05E /* PoiViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoiViewModel.swift; sourceTree = "<group>"; };
+		472633222BB598E600CEA05E /* POIViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIViewModel.swift; sourceTree = "<group>"; };
 		4730FE622DA98165007C4341 /* FavoriteObservationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteObservationsViewModel.swift; sourceTree = "<group>"; };
 		4738B6382BF380B500BF7557 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarksViewModel.swift; sourceTree = "<group>"; };
@@ -253,6 +258,7 @@
 		47D4B7702D004EC900D46050 /* SortAndFillterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFillterView.swift; sourceTree = "<group>"; };
 		47D4B7722D00546300D46050 /* ObserversView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserversView.swift; sourceTree = "<group>"; };
 		47DB89B32B7A397F0093C1ED /* ObsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObsViewModel.swift; sourceTree = "<group>"; };
+		47E948CD2FF644F0006B3E90 /* PoiViewModel 3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PoiViewModel 3.swift"; sourceTree = "<group>"; };
 		47EE131F2CAC35DF007305E1 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 		47EF8FA72CC7F62000EE72F7 /* RavensRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RavensRelease.entitlements; sourceTree = "<group>"; };
 		47FAD0E22C19DB56007D0F63 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
@@ -427,8 +433,11 @@
 				4725B9602BB14BD400F6F137 /* LocationIdViewModel.swift */,
 				470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */,
 				4749194A2BD8F0690076F6F0 /* ObservationsYearViewModel.swift */,
-				472633222BB598E600CEA05E /* PoiViewModel.swift */,
+				472633222BB598E600CEA05E /* POIViewModel.swift */,
 				4738B6382BF380B500BF7557 /* LocationViewModel.swift */,
+				47E948CD2FF644F0006B3E90 /* PoiViewModel 3.swift */,
+				47135EF22FF69D090078D04E /* poiViewModel 4.swift */,
+				47135EF42FF6A05F0078D04E /* POIViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -793,11 +802,13 @@
 				478262662C897B7000DD746C /* ObsDetailsRowView.swift in Sources */,
 				471F7A602CF7918900BF529C /* PositonFullView.swift in Sources */,
 				47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */,
+				47E948CE2FF644F1006B3E90 /* PoiViewModel 3.swift in Sources */,
 				47D460BB2E215EE20078DD72 /* PdfView.swift in Sources */,
 				474C40532B4BFD090038B3A5 /* RegionList.swift in Sources */,
 				47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */,
 				47AB45A12CE3276500842877 /* RavensView.swift in Sources */,
 				474474DA2E40993E00F965EB /* FlashCard.swift in Sources */,
+				47135EF32FF69D090078D04E /* poiViewModel 4.swift in Sources */,
 				47085F172E4262790005FE4D /* NotificationViewModel.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
@@ -811,12 +822,13 @@
 				47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */,
 				4767EFF72BF1F07700BACDC6 /* QRCodeView.swift in Sources */,
 				478262642C88203400DD746C /* ObsDetailView.swift in Sources */,
+				47135EF52FF6A05F0078D04E /* POIViewModel.swift in Sources */,
 				47FDCAE62D9D8A6D00D01F6A /* RadiusMapView.swift in Sources */,
 				471875432C00542100EF9F1F /* LocationManagerModel.swift in Sources */,
 				474C40462B4BC66A0038B3A5 /* TabSpeciesView.swift in Sources */,
 				47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */,
 				4704110F2BB1EF1B00A498F5 /* ObservationsLocationsView.swift in Sources */,
-				472633232BB598E600CEA05E /* PoiViewModel.swift in Sources */,
+				472633232BB598E600CEA05E /* POIViewModel.swift in Sources */,
 				474093822B558F82004F10C5 /* ObservationDetailsView.swift in Sources */,
 				47085F192E438C050005FE4D /* Logging.swift in Sources */,
 				474C405F2B4C08750038B3A5 /* Language.swift in Sources */,
@@ -1011,7 +1023,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -1053,7 +1065,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
