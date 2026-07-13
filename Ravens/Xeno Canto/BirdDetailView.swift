@@ -10,7 +10,13 @@ let creativeCommonsLicenses: [String: String] = [
   "//creativecommons.org/licenses/by-nc-nd/2.5/": "CC BY-ND",
   "//creativecommons.org/licenses/by-nc-nc/2.5/": "CC BY-NC",
   "//creativecommons.org/licenses/by-nc-sa/4.0/": "CC BY-NC-SA",
-  "//creativecommons.org/licenses/by-nc-nd/4.0/": "CC BY-NC-ND"
+  "//creativecommons.org/licenses/by-nc-nd/4.0/": "CC BY-NC-ND",
+  "https://creativecommons.org/licenses/by-nc/2.5/": "CC BY",
+  "https://creativecommons.org/licenses/by-nc-sa/2.5/": "CC BY-SA",
+  "https://creativecommons.org/licenses/by-nc-nd/2.5/": "CC BY-ND",
+  "https://creativecommons.org/licenses/by-nc-nc/2.5/": "CC BY-NC",
+  "https://creativecommons.org/licenses/by-nc-sa/4.0/": "CC BY-NC-SA",
+  "https://creativecommons.org/licenses/by-nc-nd/4.0/": "CC BY-NC-ND"
 ]
 
 struct BirdDetailView: View {
@@ -78,7 +84,7 @@ struct BirdDetailView: View {
           }
 
           VStack(spacing: 12) {
-            if let smallSono = bird.sono?.small, let sonoURL = URL(string: "https:" + smallSono) {
+            if let smallSono = bird.sono?.small, let sonoURL = xenoCantoURL(from: smallSono) {
               KFImage(sonoURL)
                 .resizable()
                 .scaledToFit()
@@ -86,7 +92,7 @@ struct BirdDetailView: View {
                 .accessibilityHidden(true)
             }
 
-            if let smallOsci = bird.osci?.small, let osciURL1 = URL(string: "https:" + smallOsci) {
+            if let smallOsci = bird.osci?.small, let osciURL1 = xenoCantoURL(from: smallOsci) {
               KFImage(osciURL1)
                 .resizable()
                 .scaledToFit()
@@ -110,7 +116,7 @@ struct BirdDetailView: View {
             Spacer()
             // url
             HStack {
-              if let licenseURL = bird.lic, let url = URL(string: "https:\(licenseURL)") {
+              if let licenseURL = bird.lic, let url = xenoCantoURL(from: licenseURL) {
                 Link(destination: url) {
                   Image(creativeCommonsLicenses[bird.lic ?? "CC-ZERO"] ?? "Unknown License")
                     .resizable()
@@ -156,6 +162,16 @@ struct BirdDetailView: View {
 func isMP3(filename: String) -> Bool {
   let pattern = #"^.+\.mp3$"#
   return filename.range(of: pattern, options: .regularExpression) != nil
+}
+
+func xenoCantoURL(from string: String?) -> URL? {
+  guard let string, !string.isEmpty else { return nil }
+
+  if string.hasPrefix("//") {
+    return URL(string: "https:\(string)")
+  }
+
+  return URL(string: string)
 }
 
 func openMapsApp(coordinate: CLLocationCoordinate2D, name: String) {
@@ -227,11 +243,7 @@ struct OpenURLView: View {
   var birdURL: String? // The URL source
 
   var modifiedURL: URL? {
-    guard let urlString = birdURL?.replacingOccurrences(of: "//", with: "https://www."),
-          let url = URL(string: urlString) else {
-      return nil
-    }
-    return url
+    xenoCantoURL(from: birdURL)
   }
 
   var body: some View {
@@ -249,9 +261,5 @@ struct OpenURLView: View {
 }
 
 func modifyURL(from birdURL: String?) -> URL? {
-  guard let urlString = birdURL?.replacingOccurrences(of: "//", with: "https://www."),
-        let url = URL(string: urlString) else {
-    return nil
-  }
-  return url
+  xenoCantoURL(from: birdURL)
 }

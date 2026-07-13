@@ -8,6 +8,11 @@ import SwiftUI
 import Alamofire
 
 class BirdViewModel: ObservableObject {
+  private enum XenoCantoAPI {
+    static let endpoint = "https://xeno-canto.org/api/3/recordings"
+    static let key = "14ebe5991397d4cbf818d54f31a9014d250a1855"
+    static let perPage = 100
+  }
 
   @Published var birds: [Bird] = []
   @Published var totalRecordings: Int = 0
@@ -20,15 +25,19 @@ class BirdViewModel: ObservableObject {
   var hasFetchedBirds: Bool = false // for progressview
 
   func fetchBirds(name: String, onComplete: ((_ numRecordings: Int) -> Void)? = nil) {
-    let checkedName = name.lowercased()
-    let url = "https://xeno-canto.org/api/2/recordings?query=gen:\(checkedName)&page=1"
-
-    print(url)
+    let parameters: Parameters = [
+      "query": xenoCantoQuery(for: name),
+      "key": XenoCantoAPI.key,
+      "page": 1,
+      "per_page": XenoCantoAPI.perPage
+    ]
 
     isLoading = true
     errorMessage = nil
 
-    AF.request(url).responseDecodable(of: BirdResponse.self) { response in
+    AF.request(XenoCantoAPI.endpoint, parameters: parameters)
+      .validate()
+      .responseDecodable(of: BirdResponse.self) { response in
       DispatchQueue.main.async {
         self.isLoading = false
 
@@ -48,5 +57,26 @@ class BirdViewModel: ObservableObject {
         }
       }
     }
+  }
+
+  private func xenoCantoQuery(for scientificName: String) -> String {
+    let parts = scientificName
+      .lowercased()
+      .split(separator: " ")
+      .map(String.init)
+
+    guard let genus = parts.first else {
+      return "grp:birds"
+    }
+
+    if parts.count == 1 {
+      return "gen:\(genus)"
+    }
+
+    if parts.count == 2 {
+      return "gen:\(genus) sp:\(parts[1])"
+    }
+
+    return "gen:\(genus) sp:\(parts[1]) ssp:\"\(parts.joined(separator: " "))\""
   }
 }

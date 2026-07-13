@@ -9,6 +9,99 @@ import SwiftUI
 import AVFoundation
 import UniformTypeIdentifiers
 
+enum RingtoneExportError: LocalizedError {
+  case exporterUnavailable
+  case exportFailed(String)
+  case outputUnavailable
+
+  var errorDescription: String? {
+    switch self {
+    case .exporterUnavailable:
+      return "Unable to create ringtone exporter."
+    case .exportFailed(let message):
+      return message
+    case .outputUnavailable:
+      return "The ringtone file could not be created."
+    }
+  }
+}
+
+enum RingtoneExporter {
+  static func exportRingtone(
+    from mp3URL: URL,
+    startTime: Double = 0,
+    duration: Double = 30,
+    completion: @escaping (Swift.Result<URL, Error>) -> Void
+  ) {
+    let asset = AVURLAsset(url: mp3URL)
+    let tempDir = FileManager.default.temporaryDirectory
+    let baseName = mp3URL.deletingPathExtension().lastPathComponent
+    let m4aURL = tempDir.appendingPathComponent("\(baseName).m4a")
+    let m4rURL = tempDir.appendingPathComponent("\(baseName).m4r")
+
+    do {
+      if FileManager.default.fileExists(atPath: m4aURL.path) {
+        try FileManager.default.removeItem(at: m4aURL)
+      }
+
+      if FileManager.default.fileExists(atPath: m4rURL.path) {
+        try FileManager.default.removeItem(at: m4rURL)
+      }
+    } catch {
+      completion(.failure(error))
+      return
+    }
+
+    guard let exporter = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
+      completion(.failure(RingtoneExportError.exporterUnavailable))
+      return
+    }
+
+    let sourceDuration = CMTimeGetSeconds(asset.duration)
+    let exportDuration = sourceDuration.isFinite
+      ? min(duration, max(sourceDuration - startTime, 1))
+      : duration
+
+    exporter.outputURL = m4aURL
+    exporter.outputFileType = .m4a
+    exporter.timeRange = CMTimeRange(
+      start: CMTime(seconds: startTime, preferredTimescale: 600),
+      duration: CMTime(seconds: exportDuration, preferredTimescale: 600)
+    )
+
+    exporter.exportAsynchronously {
+      DispatchQueue.main.async {
+        guard exporter.status == .completed else {
+          completion(.failure(RingtoneExportError.exportFailed(
+            exporter.error?.localizedDescription ?? "Unknown ringtone export error."
+          )))
+          return
+        }
+
+        do {
+          guard FileManager.default.fileExists(atPath: m4aURL.path) else {
+            completion(.failure(RingtoneExportError.outputUnavailable))
+            return
+          }
+
+          try FileManager.default.moveItem(at: m4aURL, to: m4rURL)
+          completion(.success(m4rURL))
+        } catch {
+          completion(.failure(error))
+        }
+      }
+    }
+  }
+
+  static func share(url: URL) {
+    let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+       let root = scene.windows.first?.rootViewController {
+      root.present(controller, animated: true)
+    }
+  }
+}
+
 struct RingtoneMakerView: View {
   @State private var mp3URL: URL?
   @State private var startTime: Double = 0
@@ -139,18 +232,17 @@ struct RingtoneMakerView: View {
       isExporting = true
       exportMessage = ""
 
-      let asset = AVURLAsset(url: mp3URL)
-      let tempDir = FileManager.default.temporaryDirectory
-      let m4aURL = getTempM4AURL(from: mp3URL, tempDir: tempDir)
-
-      guard let exporter = createExporter(for: asset, outputURL: m4aURL) else {
-          isExporting = false
+      RingtoneExporter.exportRingtone(from: mp3URL, startTime: startTime, duration: duration) { result in
+        isExporting = false
+        switch result {
+        case .success(let url):
+          lastExportedURL = url
+          RingtoneExporter.share(url: url)
+        case .failure(let error):
           alertTitle = "Error"
-          exportMessage = "Unable to create exporter."
-          return
+          exportMessage = error.localizedDescription
+        }
       }
-
-      performExport(exporter: exporter, originalURL: mp3URL, m4aURL: m4aURL, tempDir: tempDir)
   }
 
   private func getTempM4AURL(from url: URL, tempDir: URL) -> URL {

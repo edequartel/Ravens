@@ -23,7 +23,9 @@ struct BirdRowView: View {
 
   @StateObject private var downloader = FileDownloader()
   @State private var showAlert = false
+  @State private var alertTitle = ""
   @State private var alertMessage = ""
+  @State private var isMakingRingtone = false
 
   var isPlayingThisBird: Bool {
     currentlyPlayingBirdID == bird.idSpecies && audioPlayerManager.isPlaying
@@ -107,14 +109,32 @@ struct BirdRowView: View {
       .accessibilityLabel(audioInfo)
 
       Button(action: {
-        print(bird.file ?? "noSound")
+        makeRingtone()
+      }) {
+        if isMakingRingtone {
+          ProgressView()
+        } else {
+          Image(systemName: "bell.fill")
+        }
+      }
+      .tint(.purple)
+      .accessibilityLabel(shareAudio)
+      .disabled(isMakingRingtone)
+
+      Button(action: {
         downloader.downloadFile(
           from: bird.file ?? "noSound", // <-- Replace with your real link
           fileName: birdName + "-XC" + bird.idSpecies
         ) { fileURL in
           if let fileURL = fileURL {
             print("Ready to export: \(fileURL)")
+            alertTitle = String(localized: "audioDownloadMessage")
+            alertMessage = fileURL.lastPathComponent
             showAlert.toggle()
+          } else {
+            alertTitle = String(localized: "Error")
+            alertMessage = "Could not download sound recording."
+            showAlert = true
           }
         }
       }) {
@@ -128,7 +148,7 @@ struct BirdRowView: View {
     .accessibilityLabel("\(localizedSoundTypesString(from: bird.type ?? "")) XC\(bird.idSpecies)  \(bird.rec ?? "")")
     .alert(isPresented: $showAlert) {
       Alert(
-        title: Text(audioDownloadMessage),
+        title: Text(alertTitle),
         message: Text(alertMessage),
         dismissButton: .default(Text("OK"))
       )
@@ -137,6 +157,36 @@ struct BirdRowView: View {
       // Stop audio when leaving the BirdListView
       if isPlayingThisBird {
         audioPlayerManager.stopAudio()
+      }
+    }
+  }
+
+  private func makeRingtone() {
+    guard !isMakingRingtone else { return }
+
+    isMakingRingtone = true
+    downloader.downloadFile(
+      from: bird.file ?? "noSound",
+      fileName: "\(birdName)-XC\(bird.idSpecies)-ringtone"
+    ) { fileURL in
+      guard let fileURL else {
+        isMakingRingtone = false
+        alertTitle = String(localized: "Error")
+        alertMessage = "Could not download sound recording."
+        showAlert = true
+        return
+      }
+
+      RingtoneExporter.exportRingtone(from: fileURL) { result in
+        isMakingRingtone = false
+        switch result {
+        case .success(let ringtoneURL):
+          RingtoneExporter.share(url: ringtoneURL)
+        case .failure(let error):
+          alertTitle = String(localized: "Error")
+          alertMessage = error.localizedDescription
+          showAlert = true
+        }
       }
     }
   }

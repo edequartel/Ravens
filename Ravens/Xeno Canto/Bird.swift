@@ -62,9 +62,12 @@ struct Bird: Codable, Identifiable {
     case idSpecies = "id"
     case gen
     case species = "sp"
-    case ssp, group
+    case ssp
+    case group = "grp"
     case english = "en"
-    case rec, cnt, loc, lat, lng, alt, type, sex, stage, method, url, file
+    case rec, cnt, loc, lat
+    case lng = "lon"
+    case alt, type, sex, stage, method, url, file
     case fileName = "file-name"
     case sono, osci, lic
     case quality = "q"
@@ -78,15 +81,15 @@ struct Bird: Codable, Identifiable {
 
 // MARK: - Sono
 struct Sono: Codable {
-  let small: String
-  let med: String
-  let large: String
-  let full: String
+  let small: String?
+  let med: String?
+  let large: String?
+  let full: String?
 }
 
 // MARK: - Osci
 struct Osci: Codable {
-  let small: String
-  let med: String
-  let large: String
+  let small: String?
+  let med: String?
+  let large: String?
 }
