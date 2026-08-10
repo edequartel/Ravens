@@ -154,7 +154,6 @@ struct ImagePagerView: View {
 
     @State private var currentIndex: Int = 0
     @State private var isZoomed: Bool = false
-    @State private var dragOffset: CGFloat = 0
 
     private var clampedStartIndex: Int {
         guard !imageURLs.isEmpty else { return 0 }
@@ -167,34 +166,23 @@ struct ImagePagerView: View {
                 Color.black.ignoresSafeArea()
 
                 if imageURLs.indices.contains(currentIndex) {
-                    KFZoomableImage(url: imageURLs[currentIndex], isZoomed: $isZoomed)
+                    KFZoomableImage(
+                        url: imageURLs[currentIndex],
+                        isZoomed: $isZoomed,
+                        onSwipe: { direction in
+                            guard !isZoomed, imageURLs.count > 1 else { return }
+
+                            withAnimation(.spring(response: 0.25, dampingFraction: 0.9)) {
+                                if direction < 0, currentIndex < imageURLs.count - 1 {
+                                    currentIndex += 1
+                                } else if direction > 0, currentIndex > 0 {
+                                    currentIndex -= 1
+                                }
+                            }
+                        }
+                    )
                         .frame(width: geo.size.width, height: geo.size.height)
                         .background(Color.black)
-                        .offset(x: dragOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    guard !isZoomed, imageURLs.count > 1 else { return }
-                                    dragOffset = value.translation.width
-                                }
-                                .onEnded { value in
-                                    guard !isZoomed, imageURLs.count > 1 else {
-                                        dragOffset = 0
-                                        return
-                                    }
-
-                                    let threshold = geo.size.width * 0.2
-                                    if value.translation.width < -threshold, currentIndex < imageURLs.count - 1 {
-                                        currentIndex += 1
-                                    } else if value.translation.width > threshold, currentIndex > 0 {
-                                        currentIndex -= 1
-                                    }
-
-                                    withAnimation(.spring(response: 0.25, dampingFraction: 0.9)) {
-                                        dragOffset = 0
-                                    }
-                                }
-                        )
                 }
 
                 // Top overlay: close + share
@@ -249,6 +237,7 @@ struct ImagePagerView: View {
 struct KFZoomableImage: View {
     let url: URL
     @Binding var isZoomed: Bool
+    var onSwipe: ((Int) -> Void)?
 
     @State private var imageSize: CGSize = .zero
     @State private var scale: CGFloat = 1.0
@@ -281,10 +270,17 @@ struct KFZoomableImage: View {
                     )
                     isZoomed = true
                 }
-                .onEnded { _ in
-                    guard scale > 1.01 else { return }
-                    lastOffset = offset
-                    isZoomed = true
+                .onEnded { value in
+                    if scale > 1.01 {
+                        lastOffset = offset
+                        isZoomed = true
+                        return
+                    }
+
+                    let horizontal = value.translation.width
+                    let vertical = value.translation.height
+                    guard abs(horizontal) > 60, abs(horizontal) > abs(vertical) * 1.4 else { return }
+                    onSwipe?(horizontal < 0 ? -1 : 1)
                 }
         )
     }
