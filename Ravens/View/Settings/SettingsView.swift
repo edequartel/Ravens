@@ -59,13 +59,6 @@ struct SettingsView: View {
 //          RegionListView()
 //        }
 
-//        Section(header: Text("Produce")) {
-//          NavigationLink(destination: RingtoneMakerView()) {
-//              Text("Ringtone")
-//              Image(systemSymbol: .musicNote)
-//            }
-//        }
-
 //        Section { // THIS A DEVELOPER BUTTON TO SEE WHICH FILES ARE IN DE ICLOUD HIDDEN
 //          Button("iCloud content") {
 //            let fileManager = FileManager.default
@@ -76,10 +69,6 @@ struct SettingsView: View {
 //            }
 //          }
 //        }
-
-        Section {
-          RingtoneMakerView()
-        }
 
         Section(map) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
