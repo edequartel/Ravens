@@ -41,12 +41,15 @@ struct MyImageView: View {
 
 struct PhotoThumbnailView: View {
   var photos: [String]?
+  var fallbackScientificName: String?
+  var observationBorderColor: Color = .accentColor
   @Binding var imageURLStr: String?
 
   // Get the screen's width and height
   let screenWidth = UIScreen.main.bounds.width
   let screenHeight = UIScreen.main.bounds.height
   let downSize = 0.2
+  private var thumbnailSize: CGFloat { screenWidth * downSize }
 
   var body: some View {
     //    ZStack(alignment: .bottomTrailing) {
@@ -66,25 +69,38 @@ struct PhotoThumbnailView: View {
             }
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: screenWidth * downSize, height: screenWidth * downSize)
+            .frame(width: thumbnailSize, height: thumbnailSize)
             .clipped()
             .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay {
+              RoundedRectangle(cornerRadius: 8)
+                .strokeBorder(observationBorderColor.opacity(0.85), lineWidth: 2)
+            }
 
           if photos?.count ?? 0 > 1 {
             Text("\(photos?.count ?? 0)")
               .font(.caption)
+              .bold()
               .foregroundColor(.white)
-              .padding([.trailing, .bottom], 8)
+              .padding(.horizontal, 6)
+              .padding(.vertical, 3)
+              .background(.black.opacity(0.55), in: Capsule())
+              .padding([.trailing, .bottom], 6)
               .accessibilityLabel("\(photos?.count ?? 0) photos")
           }
         }
 
         //
 
+      } else if let fallbackScientificName, !fallbackScientificName.isEmpty {
+        SpeciesINaturalistThumbnailView(
+          scientificName: fallbackScientificName,
+          thumbnailSize: thumbnailSize
+        )
       } else {
         ImageWithOverlay(systemName: "photo", value: false)
         // Set the frame width and height as a fraction of the screen size
-          .frame(width: screenWidth * downSize, height: screenWidth * downSize)
+          .frame(width: thumbnailSize, height: thumbnailSize)
           .foregroundColor(.gray) // You can change the color if needed
       }
     }

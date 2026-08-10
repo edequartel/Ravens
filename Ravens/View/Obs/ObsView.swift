@@ -36,9 +36,12 @@ struct ObsView: View {
 
   var body: some View {
     HStack {
-      if entity != .radius {
-        PhotoThumbnailView(photos: obs.photos ?? [], imageURLStr: $imageURLStr)
-      }
+      PhotoThumbnailView(
+        photos: obs.photos ?? [],
+        fallbackScientificName: obs.speciesDetail.scientificName,
+        observationBorderColor: rarityColor(value: obs.rarity),
+        imageURLStr: $imageURLStr
+      )
 
       VStack(alignment: .leading) {
         if showView { Text("ObsView").font(.customTiny) }

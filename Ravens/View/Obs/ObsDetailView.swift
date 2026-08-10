@@ -71,6 +71,8 @@ struct ObsDetailView: View {
           PhotoGridView(photos: photos)
 //            .islandBackground()
             .accessibilityHidden(true)
+        } else if !obs.speciesDetail.scientificName.isEmpty {
+          SpeciesINaturalistDetailPhotoView(scientificName: obs.speciesDetail.scientificName)
         }
 
         // Sounds Section
