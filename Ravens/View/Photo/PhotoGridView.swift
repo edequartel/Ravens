@@ -154,6 +154,7 @@ struct ImagePagerView: View {
 
     @State private var currentIndex: Int = 0
     @State private var isZoomed: Bool = false
+    @State private var dragOffset: CGFloat = 0
 
     private var clampedStartIndex: Int {
         guard !imageURLs.isEmpty else { return 0 }
@@ -165,16 +166,36 @@ struct ImagePagerView: View {
             ZStack {
                 Color.black.ignoresSafeArea()
 
-                TabView(selection: $currentIndex) {
-                    ForEach(imageURLs.indices, id: \.self) { idx in
-                        KFZoomableImage(url: imageURLs[idx], isZoomed: $isZoomed)
-                            .frame(width: geo.size.width, height: geo.size.height)
-                            .background(Color.black)
-                            .tag(idx)
-                    }
+                if imageURLs.indices.contains(currentIndex) {
+                    KFZoomableImage(url: imageURLs[currentIndex], isZoomed: $isZoomed)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .background(Color.black)
+                        .offset(x: dragOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    guard !isZoomed, imageURLs.count > 1 else { return }
+                                    dragOffset = value.translation.width
+                                }
+                                .onEnded { value in
+                                    guard !isZoomed, imageURLs.count > 1 else {
+                                        dragOffset = 0
+                                        return
+                                    }
+
+                                    let threshold = geo.size.width * 0.2
+                                    if value.translation.width < -threshold, currentIndex < imageURLs.count - 1 {
+                                        currentIndex += 1
+                                    } else if value.translation.width > threshold, currentIndex > 0 {
+                                        currentIndex -= 1
+                                    }
+
+                                    withAnimation(.spring(response: 0.25, dampingFraction: 0.9)) {
+                                        dragOffset = 0
+                                    }
+                                }
+                        )
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .ignoresSafeArea()
 
                 // Top overlay: close + share
                 VStack {
@@ -235,6 +256,39 @@ struct KFZoomableImage: View {
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
 
+    private var imageGesture: some Gesture {
+        SimultaneousGesture(
+            MagnificationGesture()
+                .onChanged { value in
+                    scale = clampedScale(lastScale * value)
+                    isZoomed = scale > 1.01
+                }
+                .onEnded { _ in
+                    scale = clampedScale(scale)
+                    lastScale = scale
+                    if scale <= 1.01 {
+                        resetZoom()
+                    } else {
+                        isZoomed = true
+                    }
+                },
+            DragGesture()
+                .onChanged { value in
+                    guard scale > 1.01 else { return }
+                    offset = CGSize(
+                        width: lastOffset.width + value.translation.width,
+                        height: lastOffset.height + value.translation.height
+                    )
+                    isZoomed = true
+                }
+                .onEnded { _ in
+                    guard scale > 1.01 else { return }
+                    lastOffset = offset
+                    isZoomed = true
+                }
+        )
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -250,43 +304,7 @@ struct KFZoomableImage: View {
                     .scaleEffect(scale)
                     .offset(offset)
                     .contentShape(Rectangle())
-                    .simultaneousGesture(
-                        MagnificationGesture()
-                            .onChanged { value in
-                                scale = clampedScale(lastScale * value)
-                                isZoomed = scale > 1.01
-                            }
-                            .onEnded { _ in
-                                scale = clampedScale(scale)
-                                lastScale = scale
-                                offset = clampedOffset(for: offset, in: geometry.size, scale: scale)
-                                lastOffset = offset
-                                isZoomed = scale > 1.01
-                            }
-                    )
-                    .highPriorityGesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                guard scale > 1.01 else { return }
-                                let proposedOffset = CGSize(
-                                    width: lastOffset.width + value.translation.width,
-                                    height: lastOffset.height + value.translation.height
-                                )
-                                offset = clampedOffset(for: proposedOffset, in: geometry.size, scale: scale)
-                                isZoomed = true
-                            }
-                            .onEnded { value in
-                                guard scale > 1.01 else { return }
-                                let projectedOffset = CGSize(
-                                    width: lastOffset.width + value.predictedEndTranslation.width,
-                                    height: lastOffset.height + value.predictedEndTranslation.height
-                                )
-                                offset = clampedOffset(for: projectedOffset, in: geometry.size, scale: scale)
-                                lastOffset = offset
-                                isZoomed = true
-                            },
-                        including: scale > 1.01 ? .all : .none
-                    )
+                    .gesture(imageGesture)
                     .onTapGesture(count: 2) {
                         withAnimation(.spring(response: 0.28, dampingFraction: 0.86)) {
                             if scale > 1.01 {

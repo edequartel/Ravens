@@ -64,7 +64,7 @@
 
 //radius
 "obsAroundPoint" = "Waarnemingen rond een punt";
-"radius" = "Straal";
+"radius" = "Dichtbij";
 
 //login
 "email" = "email";

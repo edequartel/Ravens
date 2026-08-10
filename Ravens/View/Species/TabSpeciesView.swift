@@ -172,30 +172,30 @@ struct TabSpeciesView: View {
 //        }
 
         // Quiz-knop gebaseerd op unieke soortnamen
-//        ToolbarItem(placement: .navigationBarTrailing) {
-//          let filteredSpecies = speciesViewModel.filteredSpecies(
-//            by: selectedSortOption,
-//            searchText: searchText,
-//            filterOption: selectedFilterOption,
-//            rarityFilterOption: selectedRarityOption,
-//            isLatest: false,
-//            isBookmarked: settings.isBookMarkVisible,
-//            isNotificationed: settings.isNotificationVisible,
-//            additionalIntArray: bookMarksViewModel,
-//            additionalNotificationIntArray: notificationsViewModel
-//          )
-//
-//          NavigationLink(
-//            destination: BirdFlashcardView(
-//              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
-//              showScientificNameFirst: false
-//            )
-//          ) {
-//            Image(systemName: "exclamationmark")
-//              .uniformSize()
-//              .accessibilityLabel(Text("Start filtered bird quiz"))
-//          }
-//        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          let filteredSpecies = speciesViewModel.filteredSpecies(
+            by: selectedSortOption,
+            searchText: searchText,
+            filterOption: selectedFilterOption,
+            rarityFilterOption: selectedRarityOption,
+            isLatest: false,
+            isBookmarked: settings.isBookMarkVisible,
+            isNotificationed: settings.isNotificationVisible,
+            additionalIntArray: bookMarksViewModel,
+            additionalNotificationIntArray: notificationsViewModel
+          )
+
+          NavigationLink(
+            destination: BirdFlashcardView(
+              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
+              showScientificNameFirst: false
+            )
+          ) {
+            Image(systemName: "exclamationmark")
+              .uniformSize()
+              .accessibilityLabel(Text("Start filtered bird quiz"))
+          }
+        }
 
         // ???
         ToolbarItem(placement: .navigationBarLeading) {
@@ -335,4 +335,3 @@ struct FilteringAllMenu: View {
     .accessibility(label: Text("Menu filter"))
   }
 }
-
