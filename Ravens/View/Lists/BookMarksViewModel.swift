@@ -17,37 +17,11 @@ class BookMarksViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   @Published var records: [BookMark] = []
 
-  let fileManager = FileManager.default
   let filePath: URL
   
   init(fileName: String) {
-    let fileManager = FileManager.default
-
-    if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-        .appendingPathComponent("Documents") {
-      try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
-      self.filePath = ubiquityURL.appendingPathComponent(fileName)
-      log.info("Using iCloud path: \(filePath.path)")
-    } else {
-      let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-      self.filePath = documentsPath.appendingPathComponent(fileName)
-      log.warning("iCloud unavailable, using local path: \(filePath.path)")
-    }
-
-    if fileManager.fileExists(atPath: filePath.path) {
-      log.info("File exists at path: \(filePath.path)")
-      loadRecords()
-    } else {
-      log.info("File does not exist at path: \(filePath.path). Creating file...")
-      let initialContent = "[]" // Default empty JSON content
-
-      do {
-        try initialContent.write(to: filePath, atomically: true, encoding: .utf8)
-        log.info("File created successfully at path: \(filePath.path)")
-      } catch {
-        log.error("Failed to create file. Error: \(error.localizedDescription)")
-      }
-    }
+    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
+    loadRecords()
   }
 
   func loadRecords() {

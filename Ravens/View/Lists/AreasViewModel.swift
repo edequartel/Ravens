@@ -26,24 +26,9 @@ class AreasViewModel: ObservableObject {
   init() {
     log.info("init AreasViewModel")
 
-    let fileManager = FileManager.default
     let fileName = "areas.json"
 
-    if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-      .appendingPathComponent("Documents") {
-      try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
-      self.filePath = ubiquityURL.appendingPathComponent(fileName)
-      log.info("Using iCloud path: \(filePath.path)")
-    } else {
-      let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-      self.filePath = documentsPath.appendingPathComponent(fileName)
-      log.warning("iCloud unavailable, using local path: \(filePath.path)")
-    }
-
-    if !fileManager.fileExists(atPath: filePath.path) {
-      fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
-    }
-
+    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
     loadRecords()
   }
 

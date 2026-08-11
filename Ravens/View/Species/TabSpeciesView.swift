@@ -196,18 +196,6 @@ struct TabSpeciesView: View {
           }
         }
 
-        // ???
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-                      if let url = URL(string: "https://www.waarneming.nl") {
-                          UIApplication.shared.open(url)
-                      }
-                  }) {
-                    SVGImage(svg: "waarnemingmono")
-                      .accessibilityLabel(Text(settings.isBookMarkVisible ? favoriteVisible : allVisible))
-                  }
-        }
-
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,

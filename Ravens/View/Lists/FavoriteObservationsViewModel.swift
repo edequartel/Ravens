@@ -19,23 +19,7 @@ class FavoriteObservationsViewModel: ObservableObject {
   init(fileName: String = "") {
     log.error("init FavoriteObservationsViewModel with file: \(fileName)")
 
-    let fileManager = FileManager.default
-
-    if let ubiquityURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-      .appendingPathComponent("Documents") {
-      try? fileManager.createDirectory(at: ubiquityURL, withIntermediateDirectories: true)
-      self.filePath = ubiquityURL.appendingPathComponent(fileName)
-      log.error("Using iCloud path: \(filePath.path)")
-    } else {
-      let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-      self.filePath = documentsPath.appendingPathComponent(fileName)
-      log.error("iCloud unavailable, using local path: \(filePath.path)")
-    }
-
-    if !fileManager.fileExists(atPath: filePath.path) {
-      fileManager.createFile(atPath: filePath.path, contents: nil, attributes: nil)
-    }
-
+    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
     loadRecords()
   }
 

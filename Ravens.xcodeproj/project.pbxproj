@@ -11,6 +11,7 @@
 		470411112BB2B61800A498F5 /* MapObservationsLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */; };
 		47085F172E4262790005FE4D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47085F162E42626C0005FE4D /* NotificationViewModel.swift */; };
 		47085F192E438C050005FE4D /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47085F182E438C020005FE4D /* Logging.swift */; };
+		47085F1B2E43B6A30005FE4D /* iCloudJSONFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47085F1A2E43B6A30005FE4D /* iCloudJSONFileStore.swift */; };
 		470F112F2BB18C5E003FE0C0 /* GeoJSONViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */; };
 		47135EF32FF69D090078D04E /* poiViewModel 4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47135EF22FF69D090078D04E /* poiViewModel 4.swift */; };
 		47135EF52FF6A05F0078D04E /* POIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47135EF42FF6A05F0078D04E /* POIViewModel.swift */; };
@@ -148,6 +149,7 @@
 		470411102BB2B61800A498F5 /* MapObservationsLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObservationsLocationView.swift; sourceTree = "<group>"; };
 		47085F162E42626C0005FE4D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		47085F182E438C020005FE4D /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		47085F1A2E43B6A30005FE4D /* iCloudJSONFileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudJSONFileStore.swift; sourceTree = "<group>"; };
 		470F112E2BB18C5E003FE0C0 /* GeoJSONViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONViewModel.swift; sourceTree = "<group>"; };
 		47135EF22FF69D090078D04E /* poiViewModel 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "poiViewModel 4.swift"; sourceTree = "<group>"; };
 		47135EF42FF6A05F0078D04E /* POIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIViewModel.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				478EABE42BEB8A3E00414431 /* ObserversViewModel.swift */,
 				4738B63A2BF4798800BF7557 /* BookMarksViewModel.swift */,
 				471875382BFB938500EF9F1F /* AreasViewModel.swift */,
+				47085F1A2E43B6A30005FE4D /* iCloudJSONFileStore.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				474474DA2E40993E00F965EB /* FlashCard.swift in Sources */,
 				47135EF32FF69D090078D04E /* poiViewModel 4.swift in Sources */,
 				47085F172E4262790005FE4D /* NotificationViewModel.swift in Sources */,
+				47085F1B2E43B6A30005FE4D /* iCloudJSONFileStore.swift in Sources */,
 				474C408A2B4DAA110038B3A5 /* Region.swift in Sources */,
 				471F7AF82CFED78800BF529C /* SpeciesInfoView.swift in Sources */,
 				475875462E1FE60E00E40AEB /* CreateViewModel.swift in Sources */,
