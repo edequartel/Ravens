@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handleiding - Ravens</title>
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef6f0 100%);
+      color: #14213d;
+      font-size: 16px;
+    }
+
+    .app-logo {
+      border-radius: 14px;
+      height: 48px;
+      width: 48px;
+    }
+
+    .manual-card {
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(20, 33, 61, .08);
+      border-radius: 16px;
+      box-shadow: 0 14px 36px rgba(20, 33, 61, .08);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .manual-card h1,
+    .manual-card h2 {
+      letter-spacing: 0;
+    }
+
+    .manual-card h2 {
+      font-size: 1.35rem;
+      margin-bottom: .45rem;
+    }
+
+    .manual-card p {
+      color: #526071;
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    .manual-image {
+      align-items: center;
+      background: #f2f5f8;
+      border: 1px solid rgba(20, 33, 61, .06);
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      padding: .75rem;
+      text-align: center;
+    }
+
+    .manual-image img {
+      border-radius: 12px;
+      display: block;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      width: auto;
+    }
+
+    .manual-image.phone img {
+      max-height: 360px;
+      max-width: 180px;
+    }
+
+    .manual-image.wide img {
+      max-height: 250px;
+      max-width: 100%;
+    }
+
+    .section-icon {
+      align-items: center;
+      background: #dff3e7;
+      border-radius: 14px;
+      color: #1b8a5a;
+      display: inline-flex;
+      font-size: 1.2rem;
+      height: 42px;
+      justify-content: center;
+      width: 42px;
+    }
+
+    .manual-hero {
+      padding: 1.25rem;
+    }
+
+    .manual-section {
+      padding: 1rem;
+    }
+
+    @media (min-width: 576px) {
+      .app-logo {
+        height: 64px;
+        width: 64px;
+      }
+
+      .manual-hero {
+        padding: 2rem;
+      }
+
+      .manual-section {
+        padding: 1.25rem;
+      }
+
+      .manual-image.phone img {
+        max-height: 440px;
+        max-width: 220px;
+      }
+
+      .manual-image.wide img {
+        max-height: 310px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar .container-xl {
+        align-items: center;
+        gap: .75rem;
+        justify-content: space-between;
+      }
+
+      .navbar-brand {
+        min-width: 0;
+      }
+
+      .navbar-brand span {
+        font-size: 1.25rem !important;
+      }
+
+      .manual-card {
+        border-radius: 14px;
+        margin-left: -.25rem;
+        margin-right: -.25rem;
+      }
+
+      .manual-card h1 {
+        font-size: 1.75rem;
+      }
+
+      .manual-card .lead-text {
+        font-size: 1rem !important;
+      }
+
+      .manual-image {
+        border-radius: 14px;
+        padding: .55rem;
+      }
+
+      .manual-image.phone img {
+        max-height: 300px;
+        max-width: 150px;
+      }
+
+      .manual-image.wide img {
+        max-height: 190px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="navbar navbar-expand-md bg-transparent py-4">
+      <div class="container-xl">
+        <a class="navbar-brand d-flex align-items-center gap-3" href="index.php">
+          <img src="images/ravens.png" class="app-logo" alt="Ravens logo">
+          <span class="fw-bold fs-2">Ravens</span>
+        </a>
+        <a class="btn btn-outline-primary" href="index.php">
+          <i class="ti ti-arrow-left me-2"></i>Terug
+        </a>
+      </div>
+    </header>
+
+    <main class="container-xl pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+          <div class="manual-card manual-hero">
+            <span class="section-icon mb-3"><i class="ti ti-book"></i></span>
+            <h1 class="display-5 fw-bold">Handleiding - Ravens</h1>
+            <p class="fs-3 lead-text mb-0">
+              Met Ravens bekijk je eenvoudig waarnemingen van Waarneming.nl en Observation.org. De app toont waarnemingen in tabbladen voor Wij, Straal, Locatie, Soorten en Instellingen.
+            </p>
+          </div>
+
+          <section class="manual-card manual-section">
+            <h2>Knoppen</h2>
+            <p>Bovenaan het scherm vind je knoppen voor lijst/kaart, huidige locatie, favoriete waarnemers, favoriete gebieden en sorteer- of filteropties.</p>
+            <div class="manual-image wide">
+              <img src="images/buttons.png" alt="Knoppen in Ravens">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Waarnemingen</h2>
+            <p>Elke waarneming is zichtbaar in een lijst of op de kaart. Tik op een waarneming voor meer informatie.</p>
+            <div class="manual-image wide">
+              <img src="images/obs.png" alt="Waarnemingen in Ravens">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Vegen</h2>
+            <p>Veeg naar rechts voor snelle acties zoals geluiden, waarnemer favoriet maken en soort favoriet maken.</p>
+            <div class="manual-image wide">
+              <img src="images/obsSwipeRight.png" alt="Naar rechts vegen">
+            </div>
+            <p class="mt-4">Veeg naar links om te delen, meer informatie te openen of naar Waarneming.nl te gaan.</p>
+            <div class="manual-image wide">
+              <img src="images/obsSwipeLeft.png" alt="Naar links vegen">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Tabs</h2>
+            <p>Onderaan staan de vaste tabbladen: Wij, Straal, Locatie, Soorten en Instellingen.</p>
+            <div class="manual-image wide">
+              <img src="images/tabsView.png" alt="Tabbladen in Ravens">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Wij</h2>
+            <p>Hier vind je je eigen waarnemingen en favoriete waarnemers. Je kunt filteren, sorteren en wisselen tussen lijst en kaart.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsObservers.png" alt="Wij scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Straal</h2>
+            <p>Bekijk waarnemingen binnen een ingestelde straal. Gebruik je huidige locatie of kies een positie op de kaart.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsRadius.png" alt="Straal scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Locatie</h2>
+            <p>Kies favoriete locaties of zoek een locatie om de bijbehorende waarnemingen te zien.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsLocation.png" alt="Locatie scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Soorten</h2>
+            <p>Bekijk soorten binnen een geselecteerde soortgroep, zoek op naam en open waarnemingen per soort.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsSpecies.png" alt="Soorten scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Audio</h2>
+            <p>Bij onder andere vogels, zoogdieren, krekels en sprinkhanen kun je geluidsopnames beluisteren via Xeno-Canto.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsAudio.png" alt="Audio scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Informatie</h2>
+            <p>Bij soorten, waarnemingen en audio is aanvullende informatie beschikbaar.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsInfo.png" alt="Informatie scherm">
+            </div>
+          </section>
+
+          <section class="manual-card manual-section">
+            <h2>Instellingen</h2>
+            <p>Stel talen in, log in op Waarneming.nl of Observation.org en beheer je QR-code.</p>
+            <div class="manual-image wide">
+              <img src="images/viewsSetting.png" alt="Instellingen scherm">
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+</html>

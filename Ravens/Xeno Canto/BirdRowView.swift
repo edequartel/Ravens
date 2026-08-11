@@ -86,10 +86,9 @@ struct BirdRowView: View {
               .progressViewStyle(CircularProgressViewStyle())
               .foregroundColor(.blue)
           } else if isPlayingThisBird {
-            SVGImage(svg: "waveform")
-//            Image(systemSymbol: .waveform)
-//              .font(.title)
-//              .foregroundColor(.blue)
+            Image(systemName: "waveform")
+              .font(.title)
+              .foregroundColor(.blue)
           }
 
         }
@@ -103,7 +102,7 @@ struct BirdRowView: View {
       Button(action: {
         selectedBird = bird
       }) {
-        Image(systemSymbol: .info)
+        Image(systemName: "arrowshape.turn.up.forward")
       }
       .tint(.obsBirdInfo)
       .accessibilityLabel(audioInfo)

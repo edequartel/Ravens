@@ -57,8 +57,6 @@ struct ObsView: View {
 
           if obs.sounds?.count ?? 0 > 0 {
             Image(systemSymbol: .waveform)
-//            SVGImage(svg: "waveform")
-//            Image(systemSymbol: .waveform)
 //              .foregroundColor(Color.gray.opacity(0.8))
           }
 

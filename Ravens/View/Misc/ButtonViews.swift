@@ -87,7 +87,7 @@ struct InformationSpeciesButtonView: View {
 
     var body: some View {
       NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
-        Image(systemSymbol: .info)
+        Image(systemName: "arrowshape.turn.up.forward")
                 .uniformSize()
         }
         .tint(.blue)

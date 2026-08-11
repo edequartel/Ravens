@@ -25,15 +25,7 @@ struct ObsDetailView: View {
   var body: some View {
     ScrollView {
       VStack {
-        if showView { Text("ObsDetailView").font(.customTiny) }move 
-
-        HStack {
-          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
-            Image(systemSymbol: .info)
-              .uniformSize()
-          }
-          .accessibility(label: Text(informationSpecies))
-        }
+        if showView { Text("ObsDetailView").font(.customTiny) }
 
         SpeciesLabelCard(obs: obs, entity: entity)
 
@@ -65,7 +57,6 @@ struct ObsDetailView: View {
 //
 //            AreaButtonView(obs: obs)
 //          }
-
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
@@ -117,6 +108,15 @@ struct ObsDetailView: View {
     //
     .sheet(item: $selectedObservation) { item in
       SpeciesDetailsView(speciesID: item.speciesDetail.id)
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+          Image(systemName: "arrowshape.turn.up.forward")
+            .uniformSize()
+        }
+        .accessibility(label: Text(informationSpecies))
+      }
     }
   }
 

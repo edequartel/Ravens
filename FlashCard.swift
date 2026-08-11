@@ -66,7 +66,8 @@ struct BirdFlashcardView: View {
           ShareLink(
             item: String(localized: "aiChat") + " " + currentSpeciesName.scientificName
           ) {
-            SVGImage(svg: "artificialintel")
+            Image(systemName: "brain.head.profile")
+              .uniformSize()
           }
         }
       }

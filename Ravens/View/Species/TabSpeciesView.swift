@@ -72,7 +72,7 @@ struct TabSpeciesView: View {
 
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 NavigationLink(destination: SpeciesDetailsView(speciesID: species.speciesId)) {
-                  Image(systemSymbol: .info)
+                  Image(systemName: "arrowshape.turn.up.forward")
                           .uniformSize()
                   }
                   .tint(.blue)
@@ -104,8 +104,7 @@ struct TabSpeciesView: View {
 //                NavigationLink(destination: BirdListView(
 //                  scientificName: species.scientificName,
 //                  nativeName: species.name)) {
-////                    SVGImage(svg: "waveform")
-//                    Image(systemSymbol: .waveform)
+//                    Image(systemName: "waveform")
 //                      .uniformSize()
 //                  }
 //                  .tint(.purple)

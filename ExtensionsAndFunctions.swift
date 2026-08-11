@@ -13,8 +13,8 @@ import MapKit
 import SVGView
 
 let demo = false
-//let showView = falseobs
-let showView = true
+let showView = false
+//let showView = true
 
 // neeltje jans
 // 51.631732, 3.698586
@@ -76,7 +76,7 @@ extension Color {
 let obsStrDutchOrange = "f7b731"
 
 let SFShareLink = SFSymbol.squareAndArrowUp
-let SFInformation = SFSymbol.info
+let SFInformation = SFSymbol.arrowshapeTurnUpForward
 let SFArea = SFSymbol.map
 let SFAreaFill = SFSymbol.mapFill
 let SFSpecies = SFSymbol.star

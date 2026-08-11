@@ -22,6 +22,7 @@ class QuizViewModel: ObservableObject {
   @Published var isFlippedMode: Bool = false
   @Published var timeRemaining: Int = 10
   @Published var isFinished: Bool = false
+  @Published var selectedAnswerID: UUID?
 
   private var player: AVAudioPlayer?
 
@@ -42,6 +43,7 @@ class QuizViewModel: ObservableObject {
 
     feedback = ""
     showNext = false
+    selectedAnswerID = nil
     timeRemaining = 10
 
     currentSpeciesName = speciesNames.randomElement() ?? SpeciesName(commonName: "", scientificName: "")
@@ -62,6 +64,8 @@ class QuizViewModel: ObservableObject {
     let correct = isFlippedMode ? currentSpeciesName.commonName : currentSpeciesName.scientificName
     let answer = isFlippedMode ? selected.commonName : selected.scientificName
 
+    selectedAnswerID = selected.id
+
     if answer == correct {
       feedback = "Correct!"
       score += 1
@@ -80,6 +84,7 @@ class QuizViewModel: ObservableObject {
       timeRemaining -= 1
     } else {
       feedback = isFlippedMode ? currentSpeciesName.commonName : currentSpeciesName.scientificName
+      selectedAnswerID = nil
       showNext = true
       playSound(named: "wrong")
     }
@@ -167,25 +172,19 @@ struct BirdQuizView: View {
       ForEach(viewModel.options, id: \.id) { option in
         let answerText = viewModel.isFlippedMode ? option.commonName : option.scientificName
         Button {
+          guard !viewModel.showNext else { return }
           viewModel.checkAnswer(option)
         } label: {
           Text(answerText)
+            .foregroundStyle(answerForeground(for: option))
             .padding()
             .frame(maxWidth: .infinity)
-            .background(
-              Group {
-                if viewModel.showNext && option.id == viewModel.currentSpeciesName.id {
-                  (viewModel.feedback == "Correct!" ? Color.green : Color.red)
-                } else {
-                  Color.clear
-                }
-              }
-            )
+            .background(answerBackground(for: option))
             .background(.thinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.3)))
         }
-        .disabled(viewModel.showNext)
+        .allowsHitTesting(!viewModel.showNext)
       }
     }
     .toolbar {
@@ -194,8 +193,9 @@ struct BirdQuizView: View {
           viewModel.isFlippedMode.toggle()
           viewModel.updateOptions()
         } label: {
-          Image(systemName: viewModel.isFlippedMode ? "checkmark.square" : "square")
+          Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
             .uniformSize()
+            .foregroundStyle(viewModel.isFlippedMode ? .blue : .primary)
         }
       }
 
@@ -204,9 +204,38 @@ struct BirdQuizView: View {
         let message = "\(localizedIntro) \(viewModel.currentSpeciesName.scientificName)"
 
         ShareLink(item: message) {
-          SVGImage(svg: "artificialintel")
+          Image(systemName: "brain.head.profile")
+            .uniformSize()
         }
       }
     }
+  }
+
+  private func answerBackground(for option: SpeciesName) -> Color {
+    guard viewModel.showNext else {
+      return .clear
+    }
+
+    if option.id == viewModel.currentSpeciesName.id {
+      return .green
+    }
+
+    if option.id == viewModel.selectedAnswerID {
+      return .red
+    }
+
+    return .clear
+  }
+
+  private func answerForeground(for option: SpeciesName) -> Color {
+    guard viewModel.showNext else {
+      return .primary
+    }
+
+    if option.id == viewModel.currentSpeciesName.id || option.id == viewModel.selectedAnswerID {
+      return .white
+    }
+
+    return .secondary
   }
 }

@@ -95,12 +95,12 @@ struct SettingsView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
-            if let url = URL(string: "https://www.ravensobs.com") {
+            if let url = URL(string: "https://www.tastenbraille.com/ravens/index.php") {
 //            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
               UIApplication.shared.open(url)
             }
           }) {
-            Image(systemSymbol: .info)
+            Image(systemName: "link")
               .uniformSize()
               .accessibilityLabel(information)
           }

@@ -59,9 +59,8 @@ struct SpeciesView: View {
       if [1, 2, 3, 14].contains(settings.selectedSpeciesGroup) {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: BirdListView(scientificName: item.scientificName, nativeName: item.name)) {
-            SVGImage(svg: "waveform")
-//            Image(systemSymbol: .waveform)
-//              .uniformSize()
+            Image(systemName: "waveform")
+              .uniformSize()
           }
           .background(Color.clear)
           .accessibility(label: Text(audioListView))
@@ -74,7 +73,7 @@ struct SpeciesView: View {
 
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: SpeciesDetailsView(speciesID: item.speciesId)) {
-          Image(systemSymbol: .info)
+          Image(systemName: "arrowshape.turn.up.forward")
                   .uniformSize()
           }
           .background(Color.clear)

@@ -39,7 +39,7 @@ struct WebViewContainer: UIViewRepresentable {
 
 struct ManualView: View {
   var body: some View {
-    WebViewContainer(urlString: "https://www.ravensobs.com/manual.html")
+    WebViewContainer(urlString: "https://www.tastenbraille.com/ravens/manual.html")
   }
 }
 
