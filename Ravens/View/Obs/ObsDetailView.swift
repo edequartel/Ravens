@@ -25,9 +25,7 @@ struct ObsDetailView: View {
   var body: some View {
     ScrollView {
       VStack {
-        if showView { Text("ObsDetailView").font(.customTiny) }
-
-        SpeciesLabelCard(obs: obs, entity: entity)
+        if showView { Text("ObsDetailView").font(.customTiny) }move 
 
         HStack {
           NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
@@ -35,36 +33,39 @@ struct ObsDetailView: View {
               .uniformSize()
           }
           .accessibility(label: Text(informationSpecies))
-
-          let url = URL(string: obs.permalink)!
-          ShareLink(item: url) {
-            Image(systemSymbol: SFShareLink)
-              .uniformSize()
-          }
-          .accessibility(label: Text(shareThisObservation))
-
-          Button(action: {
-            if let url = URL(string: obs.permalink) {
-              UIApplication.shared.open(url)
-            }
-          }) {
-            SVGImage(svg: "waarneming")
-//            Image(systemSymbol: SFObservation)
-//              .uniformSize()
-          }
-          .accessibility(label: Text(linkObservation))
-
-          Spacer()
-
-          if !keyChainViewModel.token.isEmpty {
-            BookmarkButtonView(speciesID: obs.species ?? 100)
-            if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
-              ObserversObsButtonView(obs: obs)
-            }
-
-            AreaButtonView(obs: obs)
-          }
         }
+
+        SpeciesLabelCard(obs: obs, entity: entity)
+
+//          let url = URL(string: obs.permalink)!
+//          ShareLink(item: url) {
+//            Image(systemSymbol: SFShareLink)
+//              .uniformSize()
+//          }
+//          .accessibility(label: Text(shareThisObservation))
+
+//          Button(action: {
+//            if let url = URL(string: obs.permalink) {
+//              UIApplication.shared.open(url)
+//            }
+//          }) {
+//            SVGImage(svg: "waarneming")
+////            Image(systemSymbol: SFObservation)
+////              .uniformSize()
+//          }
+//          .accessibility(label: Text(linkObservation))
+
+//          Spacer()
+//
+//          if !keyChainViewModel.token.isEmpty {
+//            BookmarkButtonView(speciesID: obs.species ?? 100)
+//            if (entity != .radius) && (obs.userDetail?.id != (userViewModel.user?.id ?? 0)) {
+//              ObserversObsButtonView(obs: obs)
+//            }
+//
+//            AreaButtonView(obs: obs)
+//          }
+
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
