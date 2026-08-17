@@ -18,6 +18,7 @@ struct SpeciesView: View {
   @EnvironmentObject var bookMarksViewModel: BookMarksViewModel
 
   @State var showChart: Bool = false
+  @State private var showHelpOverlay = false
 
   var item: Species
 
@@ -44,6 +45,10 @@ struct SpeciesView: View {
     }
 
     .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        HelpOverlayButton(isPresented: $showHelpOverlay)
+      }
+
       if !accessibilityManager.isVoiceOverEnabled {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
@@ -94,6 +99,7 @@ struct SpeciesView: View {
     .onAppear {
       settings.initialSpeciesLoad = true
     }
+    .ravensHelpOverlay(title: item.name, items: RavensHelp.speciesObservationItems, isPresented: $showHelpOverlay)
   }
 }
 

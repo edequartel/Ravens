@@ -19,6 +19,7 @@ struct SettingsView: View {
   @EnvironmentObject var settings: Settings
 
   @State private var storage: String = ""
+  @State private var showHelpOverlay = false
 
   let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
@@ -37,14 +38,16 @@ struct SettingsView: View {
           }
         }
 
-        Picker(source, selection: $settings.selectedInBetween) {
-          Text("waarneming.nl")
-            .tag("waarneming.nl")
-          Text("observation.org")
-            .tag("observation.org")
-        }
-        .pickerStyle(.inline)
-        .onChange(of: settings.selectedInBetween) {
+        Section(header: Text(source)) {
+          Picker(source, selection: $settings.selectedInBetween) {
+            Text("waarneming.nl")
+              .tag("waarneming.nl")
+            Text("observation.org")
+              .tag("observation.org")
+          }
+          .pickerStyle(.inline)
+          .onChange(of: settings.selectedInBetween) {
+          }
         }
 
         Section {
@@ -70,7 +73,7 @@ struct SettingsView: View {
 //          }
 //        }
 
-        Section(map) {
+        Section(header: Text(map)) {
           Picker("Map Style", selection: $settings.mapStyleChoice) {
             ForEach(MapStyleChoice.allCases, id: \.self) { choice in
               Text(choice.localized).tag(choice)
@@ -94,6 +97,10 @@ struct SettingsView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
             if let url = URL(string: "https://www.tastenbraille.com/ravens/index.php") {
 //            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
@@ -106,6 +113,7 @@ struct SettingsView: View {
           }
         }
       }
+      .ravensHelpOverlay(title: "Instellingen", items: RavensHelp.settingsItems, isPresented: $showHelpOverlay)
     }
   }
 
@@ -158,6 +166,7 @@ struct AIPromptOption: Identifiable {
 struct AIPromptSettingsView: View {
   @EnvironmentObject var settings: Settings
   @State private var filterText = ""
+  @State private var showHelpOverlay = false
 
   private var promptOptions: [AIPromptOption] {
     [
@@ -225,6 +234,12 @@ struct AIPromptSettingsView: View {
     }
     .navigationTitle("AI prompt")
     .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        HelpOverlayButton(isPresented: $showHelpOverlay)
+      }
+    }
+    .ravensHelpOverlay(title: "AI prompt", items: RavensHelp.aiPromptItems, isPresented: $showHelpOverlay)
   }
 }
 

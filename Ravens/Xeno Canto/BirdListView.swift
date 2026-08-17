@@ -16,6 +16,7 @@ struct BirdListView: View {
   @State private var selectedBird: Bird?
   @State private var firstTime: Bool = true
   @State private var statusFetch: Int = -1
+  @State private var showHelpOverlay = false
 
   let scientificName: String
   var nativeName: String?
@@ -63,6 +64,10 @@ struct BirdListView: View {
 
     .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SoundTypePickerView(selectedSound: $selectedSound)
           ) {
             Image(systemSymbol: .ellipsisCircle)
@@ -88,6 +93,7 @@ struct BirdListView: View {
         firstTime = false
       }
     }
+    .ravensHelpOverlay(title: nativeName ?? "Geluiden", items: RavensHelp.xenoCantoItems, isPresented: $showHelpOverlay)
   }
 
   func isMP3(filename: String) -> Bool {

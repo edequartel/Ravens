@@ -23,6 +23,7 @@ struct TabRadiusView: View {
   @Binding var selectedSpeciesID: Int?
 
   @State private var showFirstView = false
+  @State private var showHelpOverlay = false
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
   @State private var currentFilteringOption: FilteringRarityOption? = .all
@@ -156,6 +157,10 @@ struct TabRadiusView: View {
       }
 
       .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
         // map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -206,6 +211,7 @@ struct TabRadiusView: View {
           }
         }
       }
+      .ravensHelpOverlay(title: "Radius", items: RavensHelp.radiusItems, isPresented: $showHelpOverlay)
     }
   }
 

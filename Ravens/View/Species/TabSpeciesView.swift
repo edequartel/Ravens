@@ -29,6 +29,7 @@ struct TabSpeciesView: View {
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
+  @State private var showHelpOverlay = false
 
   @State private var currentSpeciesGroup: Int? = 1
 
@@ -197,6 +198,10 @@ struct TabSpeciesView: View {
 //        }
 
         ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
@@ -209,6 +214,7 @@ struct TabSpeciesView: View {
           }
         }
       }
+      .ravensHelpOverlay(title: "Soorten", items: RavensHelp.speciesSearchItems, isPresented: $showHelpOverlay)
     }
   }
 
@@ -231,6 +237,7 @@ struct SortFilterSpeciesView: View {
 //  @Binding var currentSpeciesGroup: Int?
 
   @EnvironmentObject var settings: Settings
+  @State private var showHelpOverlay = false
 
   var body: some View {
 
@@ -242,24 +249,30 @@ struct SortFilterSpeciesView: View {
         currentSpeciesGroup: $settings.selectedSpeciesGroup,
         entity: .species)
 
-      Section {
+      Section(header: Text("Regio")) {
         RegionsView()
       }
 
       // First Menu for Sorting
-      Section(sort) {
+      Section(header: Text(sort)) {
         SortNameOptionsView(currentFilteringNameOption: $selectedSortOption)
       }
 
       // Second Menu for Filtering
-      Section(status) {
+      Section(header: Text(status)) {
         FilteringAllOptionsView(currentFilteringAllOption: $selectedFilterAllOption)
       }
 
-      Section(rarity) {
+      Section(header: Text(rarity)) {
         FilterOptionsView(currentFilteringOption: $selectedRarityOption)
       }
     }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        HelpOverlayButton(isPresented: $showHelpOverlay)
+      }
+    }
+    .ravensHelpOverlay(title: "Filters", items: RavensHelp.filterItems, isPresented: $showHelpOverlay)
   }
 }
 struct PickTimePeriodeSpeciesView: View {

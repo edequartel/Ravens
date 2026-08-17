@@ -51,6 +51,7 @@ struct TabUserObservationsView: View {
 
   @State private var refresh: Bool = false
   @State private var firstTime: Bool = true
+  @State private var showHelpOverlay = false
 
   var body: some View {
     NavigationStack {
@@ -154,6 +155,10 @@ struct TabUserObservationsView: View {
       )
 
       .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
         // set map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -220,6 +225,7 @@ struct TabUserObservationsView: View {
           }
         }
       }
+      .ravensHelpOverlay(title: "Waarnemingen", items: RavensHelp.userItems, isPresented: $showHelpOverlay)
       .onAppear {
         if firstTime {
           log.info("Onappear first time")

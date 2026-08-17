@@ -16,6 +16,7 @@ struct ObsDetailView: View {
   @State var imageURLStr: String?
   @State var selectedObservationSound: Obs?
   @State private var selectedObservation: Obs?
+  @State private var showHelpOverlay = false
 
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -111,6 +112,10 @@ struct ObsDetailView: View {
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
+        HelpOverlayButton(isPresented: $showHelpOverlay)
+      }
+
+      ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
           Image(systemName: "arrowshape.turn.up.forward")
             .uniformSize()
@@ -118,6 +123,7 @@ struct ObsDetailView: View {
         .accessibility(label: Text(informationSpecies))
       }
     }
+    .ravensHelpOverlay(title: obs.speciesDetail.name, items: RavensHelp.observationDetailItems, isPresented: $showHelpOverlay)
   }
 
   // Fullscreen destination map view

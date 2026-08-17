@@ -121,13 +121,14 @@
 		47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07642D88AD03002FB433 /* BirdRowView.swift */; };
 		47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07652D88AD03002FB433 /* BirdViewModel.swift */; };
 		47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC076B2D88AE64002FB433 /* AudioManager.swift */; };
+		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
+		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
+		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
 		47B100012FF9000000B10001 /* XenoCantoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100002FF9000000B10001 /* XenoCantoService.swift */; };
 		47B100032FF9000000B10001 /* TaxonomyResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100022FF9000000B10001 /* TaxonomyResolver.swift */; };
 		47B100052FF9000000B10001 /* BirdSoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100042FF9000000B10001 /* BirdSoundService.swift */; };
 		47B100072FF9000000B10001 /* BirdSoundServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */; };
-		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
-		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
-		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
+		47B200012FFA000000B20001 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B200002FFA000000B20001 /* HelpButton.swift */; };
 		47C620CF2CA6758C007241F4 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C620CE2CA6758C007241F4 /* SwiftUIImageViewer */; };
 		47CF942C2D3EEDD2009D734F /* TabRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */; };
 		47CF942E2D3F7256009D734F /* RadiusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CF942D2D3F7247009D734F /* RadiusViewModel.swift */; };
@@ -264,14 +265,15 @@
 		47AC07642D88AD03002FB433 /* BirdRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRowView.swift; sourceTree = "<group>"; };
 		47AC07652D88AD03002FB433 /* BirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewModel.swift; sourceTree = "<group>"; };
 		47AC076B2D88AE64002FB433 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
+		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
+		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		47B100002FF9000000B10001 /* XenoCantoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XenoCantoService.swift; sourceTree = "<group>"; };
 		47B100022FF9000000B10001 /* TaxonomyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyResolver.swift; sourceTree = "<group>"; };
 		47B100042FF9000000B10001 /* BirdSoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdSoundService.swift; sourceTree = "<group>"; };
 		47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdSoundServiceTests.swift; sourceTree = "<group>"; };
 		47B1000B2FF9000000B10001 /* RavensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RavensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
-		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
-		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
+		47B200002FFA000000B20001 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		47C8E9AF2BC9798500234EF4 /* Ravens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ravens.entitlements; sourceTree = "<group>"; };
 		47CF942B2D3EEDD2009D734F /* TabRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRadiusView.swift; sourceTree = "<group>"; };
 		47CF942D2D3F7247009D734F /* RadiusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusViewModel.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				47AD97682CAAD0D500A4B510 /* ButtonViews.swift */,
+				47B200002FFA000000B20001 /* HelpButton.swift */,
 				478262672C89EF7600DD746C /* NotesView.swift */,
 				4782626E2C8EBEDE00DD746C /* DateConversionView.swift */,
 				4767EFF62BF1F07700BACDC6 /* QRCodeView.swift */,
@@ -624,14 +627,6 @@
 			path = "Xeno Canto";
 			sourceTree = "<group>";
 		};
-		47B100082FF9000000B10001 /* RavensTests */ = {
-			isa = PBXGroup;
-			children = (
-				47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */,
-			);
-			path = RavensTests;
-			sourceTree = "<group>";
-		};
 		47AD8FC72CF1BF02007155A4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +637,14 @@
 				471B4FBB2CC268F7001302A9 /* NotificationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		47B100082FF9000000B10001 /* RavensTests */ = {
+			isa = PBXGroup;
+			children = (
+				47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */,
+			);
+			path = RavensTests;
 			sourceTree = "<group>";
 		};
 		47CF942A2D3EEDC1009D734F /* Radius */ = {
@@ -890,6 +893,7 @@
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
 				4716F9CD2DA2E90100FCDFB8 /* DownloadFile.swift in Sources */,
 				47B100052FF9000000B10001 /* BirdSoundService.swift in Sources */,
+				47B200012FFA000000B20001 /* HelpButton.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
@@ -1115,7 +1119,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/Ravens.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;
@@ -1157,7 +1161,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ravens/RavensRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Ravens/Preview Content\"";
 				DEVELOPMENT_TEAM = 278BFDM8KA;
 				ENABLE_PREVIEWS = YES;

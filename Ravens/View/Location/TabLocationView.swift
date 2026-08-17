@@ -37,6 +37,7 @@ struct TabLocationView: View {
   @State private var searchText: String = ""
   @State private var showFirstView = false
   @State private var isShowingLocationList = false
+  @State private var showHelpOverlay = false
 
   @State private var currentSortingOption: SortingOption? = .date
   @State private var currentFilteringAllOption: FilterAllOption? = .native
@@ -155,6 +156,10 @@ struct TabLocationView: View {
       )
 
       .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          HelpOverlayButton(isPresented: $showHelpOverlay)
+        }
+
         // map or list
         if !accessibilityManager.isVoiceOverEnabled {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -234,6 +239,7 @@ struct TabLocationView: View {
       .onAppear {
         log.info("LocationView onAppear")
       }
+      .ravensHelpOverlay(title: "Locatie", items: RavensHelp.locationItems, isPresented: $showHelpOverlay)
     }
   }
 }
