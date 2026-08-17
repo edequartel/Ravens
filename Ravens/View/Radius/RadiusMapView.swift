@@ -39,7 +39,7 @@ struct RadiusMapView: View {
           Annotation(observation.speciesDetail.name, coordinate: CLLocationCoordinate2D(
             latitude: observation.point.coordinates[1],
             longitude: observation.point.coordinates[0])) {
-              ObservationAnnotationView(observation: observation)
+              ObservationAnnotationView(observation: observation, entity: .radius)
             }
         }
 

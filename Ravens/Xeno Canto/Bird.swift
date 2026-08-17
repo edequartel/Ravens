@@ -16,6 +16,8 @@ struct BirdResponse: Codable {
   let recordings: [Bird]
 }
 
+typealias XenoCantoRecording = Bird
+
 // MARK: - Bird
 struct Bird: Codable, Identifiable {
   let id: UUID = UUID()  // Generates unique ID per instance

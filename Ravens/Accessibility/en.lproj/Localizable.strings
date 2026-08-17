@@ -180,6 +180,15 @@
 "localizedAll" = "All";
 "shareObservations" = "Share Observations";
 
-"aiChat" = "Provide the etymology of the following species name in plain text, along with an optional fun fact. ";
+"aiChat" = "Explain the etymology of the scientific name _[species name]_. What do the genus and species names mean?";
+"aiPromptEtymologyTitle" = "Etymology";
+"aiPromptTaxonomyTitle" = "Taxonomy";
+"aiPromptEcologyTitle" = "Ecology";
+"aiPromptBiologyTitle" = "Biology and adaptations";
+"aiPromptProfileTitle" = "Complete species profile";
+"aiPromptTaxonomy" = "Explain the taxonomy of _[species name]_, from kingdom to species, and mention its closest relatives.";
+"aiPromptEcology" = "Describe the ecology of _[species name]_: habitat, diet, behaviour, predators, and ecological role.";
+"aiPromptBiology" = "Explain the most important biological characteristics and adaptations of _[species name]_ and how they help it survive.";
+"aiPromptProfile" = "Give a concise profile of _[species name]_ including etymology, taxonomy, distribution, habitat, ecology, adaptations, and one interesting fact.";
 
 "helpEtymology" = "Share species name for AI";

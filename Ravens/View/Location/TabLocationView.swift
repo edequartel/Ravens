@@ -168,19 +168,19 @@ struct TabLocationView: View {
           }
         }
 
-        // Quiz
-        if let obs = observationsLocation.observations, !obs.isEmpty {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination:
-                            BirdQuizView(
-                              speciesNames: observationsLocation.uniqueNames()
-                            )) {
-              Image(systemSymbol: .questionmark)
-                .uniformSize()
-                .accessibility(label: Text(observersList))
-            }
-          }
-        }
+//        // Quiz
+//        if let obs = observationsLocation.observations, !obs.isEmpty {
+//          ToolbarItem(placement: .navigationBarTrailing) {
+//            NavigationLink(destination:
+//                            BirdQuizView(
+//                              speciesNames: observationsLocation.uniqueNames()
+//                            )) {
+//              Image(systemSymbol: .questionmark)
+//                .uniformSize()
+//                .accessibility(label: Text(observersList))
+//            }
+//          }
+//        }
 
         // update my locationData
         ToolbarItem(placement: .navigationBarLeading) {

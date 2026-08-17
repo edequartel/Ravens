@@ -121,6 +121,10 @@
 		47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07642D88AD03002FB433 /* BirdRowView.swift */; };
 		47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC07652D88AD03002FB433 /* BirdViewModel.swift */; };
 		47AC076C2D88AE64002FB433 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC076B2D88AE64002FB433 /* AudioManager.swift */; };
+		47B100012FF9000000B10001 /* XenoCantoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100002FF9000000B10001 /* XenoCantoService.swift */; };
+		47B100032FF9000000B10001 /* TaxonomyResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100022FF9000000B10001 /* TaxonomyResolver.swift */; };
+		47B100052FF9000000B10001 /* BirdSoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100042FF9000000B10001 /* BirdSoundService.swift */; };
+		47B100072FF9000000B10001 /* BirdSoundServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */; };
 		47AC7D672CB50F7400B1E929 /* KeyChainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */; };
 		47AD8FC62CF1B8BE007155A4 /* AccessibilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */; };
 		47AD97692CAAD0D500A4B510 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD97682CAAD0D500A4B510 /* ButtonViews.swift */; };
@@ -143,6 +147,16 @@
 		47FDCAEB2D9DD23200D01F6A /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FDCAEA2D9DD22C00D01F6A /* CalenderView.swift */; };
 		47FDCAEE2D9DD38E00D01F6A /* MijickCalendarView in Frameworks */ = {isa = PBXBuildFile; productRef = 47FDCAED2D9DD38E00D01F6A /* MijickCalendarView */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47B1000E2FF9000000B10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 474C40202B4BC4040038B3A5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 474C40272B4BC4040038B3A5;
+			remoteInfo = Ravens;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4704110E2BB1EF1B00A498F5 /* ObservationsLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationsLocationsView.swift; sourceTree = "<group>"; };
@@ -250,6 +264,11 @@
 		47AC07642D88AD03002FB433 /* BirdRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRowView.swift; sourceTree = "<group>"; };
 		47AC07652D88AD03002FB433 /* BirdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewModel.swift; sourceTree = "<group>"; };
 		47AC076B2D88AE64002FB433 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		47B100002FF9000000B10001 /* XenoCantoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XenoCantoService.swift; sourceTree = "<group>"; };
+		47B100022FF9000000B10001 /* TaxonomyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyResolver.swift; sourceTree = "<group>"; };
+		47B100042FF9000000B10001 /* BirdSoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdSoundService.swift; sourceTree = "<group>"; };
+		47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdSoundServiceTests.swift; sourceTree = "<group>"; };
+		47B1000B2FF9000000B10001 /* RavensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RavensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AC7D662CB50F7400B1E929 /* KeyChainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainViewModel.swift; sourceTree = "<group>"; };
 		47AD8FC52CF1B8BA007155A4 /* AccessibilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityManager.swift; sourceTree = "<group>"; };
 		47AD97682CAAD0D500A4B510 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
@@ -296,6 +315,13 @@
 				4774D2CA2B5BEE420096A0E3 /* SwiftyBeaver in Frameworks */,
 				47AB459F2CE262C900842877 /* LazyPager in Frameworks */,
 				477ED8712BA9D0AD00B0D73C /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47B1000A2FF9000000B10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +403,7 @@
 				47AB45A02CE3276000842877 /* RavensView.swift */,
 				4784FA5B2B55039900FEC7F9 /* ExtensionsAndFunctions.swift */,
 				474C402A2B4BC4040038B3A5 /* Ravens */,
+				47B100082FF9000000B10001 /* RavensTests */,
 				474C40292B4BC4040038B3A5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -385,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				474C40282B4BC4040038B3A5 /* Ravens.app */,
+				47B1000B2FF9000000B10001 /* RavensTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -585,12 +613,23 @@
 			children = (
 				4716F9CC2DA2E8F100FCDFB8 /* DownloadFile.swift */,
 				47AC07612D88AD03002FB433 /* Bird.swift */,
+				47B100042FF9000000B10001 /* BirdSoundService.swift */,
 				47AC07622D88AD03002FB433 /* BirdDetailView.swift */,
 				47AC07632D88AD03002FB433 /* BirdListView.swift */,
 				47AC07642D88AD03002FB433 /* BirdRowView.swift */,
 				47AC07652D88AD03002FB433 /* BirdViewModel.swift */,
+				47B100022FF9000000B10001 /* TaxonomyResolver.swift */,
+				47B100002FF9000000B10001 /* XenoCantoService.swift */,
 			);
 			path = "Xeno Canto";
+			sourceTree = "<group>";
+		};
+		47B100082FF9000000B10001 /* RavensTests */ = {
+			isa = PBXGroup;
+			children = (
+				47B100062FF9000000B10001 /* BirdSoundServiceTests.swift */,
+			);
+			path = RavensTests;
 			sourceTree = "<group>";
 		};
 		47AD8FC72CF1BF02007155A4 /* Managers */ = {
@@ -674,6 +713,24 @@
 			productReference = 474C40282B4BC4040038B3A5 /* Ravens.app */;
 			productType = "com.apple.product-type.application";
 		};
+		47B1000C2FF9000000B10001 /* RavensTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47B100112FF9000000B10001 /* Build configuration list for PBXNativeTarget "RavensTests" */;
+			buildPhases = (
+				47B100092FF9000000B10001 /* Sources */,
+				47B1000A2FF9000000B10001 /* Frameworks */,
+				47B100102FF9000000B10001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47B1000F2FF9000000B10001 /* PBXTargetDependency */,
+			);
+			name = RavensTests;
+			productName = RavensTests;
+			productReference = 47B1000B2FF9000000B10001 /* RavensTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -686,6 +743,10 @@
 				TargetAttributes = {
 					474C40272B4BC4040038B3A5 = {
 						CreatedOnToolsVersion = 15.1;
+					};
+					47B1000C2FF9000000B10001 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 474C40272B4BC4040038B3A5;
 					};
 				};
 			};
@@ -723,6 +784,7 @@
 			projectRoot = "";
 			targets = (
 				474C40272B4BC4040038B3A5 /* Ravens */,
+				47B1000C2FF9000000B10001 /* RavensTests */,
 			);
 		};
 /* End PBXProject section */
@@ -745,6 +807,13 @@
 				47AB45962CE2030E00842877 /* location.json in Resources */,
 				47FAD0E52C1AE9D8007D0F63 /* dataloading.json in Resources */,
 				4781539B2B57BDC2005F87CC /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47B100102FF9000000B10001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +889,7 @@
 				4725B9612BB14BD400F6F137 /* LocationIdViewModel.swift in Sources */,
 				47568D2D2B59B54500E69B1A /* Observations.swift in Sources */,
 				4716F9CD2DA2E90100FCDFB8 /* DownloadFile.swift in Sources */,
+				47B100052FF9000000B10001 /* BirdSoundService.swift in Sources */,
 				474C404C2B4BCE340038B3A5 /* SpeciesDetailsView.swift in Sources */,
 				4719C36C2C944F47000A11D1 /* ObservationListView.swift in Sources */,
 				474C402E2B4BC4040038B3A5 /* ContentView.swift in Sources */,
@@ -879,12 +949,30 @@
 				47AC07682D88AD03002FB433 /* BirdListView.swift in Sources */,
 				47AC07692D88AD03002FB433 /* BirdRowView.swift in Sources */,
 				47AC076A2D88AD03002FB433 /* BirdViewModel.swift in Sources */,
+				47B100032FF9000000B10001 /* TaxonomyResolver.swift in Sources */,
+				47B100012FF9000000B10001 /* XenoCantoService.swift in Sources */,
 				4785CD212B964FAC002F52BE /* MapObservationsUserView.swift in Sources */,
 				471F7A592CF78E4F00BF529C /* Accessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47B100092FF9000000B10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47B100072FF9000000B10001 /* BirdSoundServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47B1000F2FF9000000B10001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 474C40272B4BC4040038B3A5 /* Ravens */;
+			targetProxy = 47B1000E2FF9000000B10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		471F7AF22CF9E90A00BF529C /* Localizable.strings */ = {
@@ -1104,6 +1192,54 @@
 			};
 			name = Release;
 		};
+		47B100122FF9000000B10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 278BFDM8KA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.RavensTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ravens.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ravens";
+			};
+			name = Debug;
+		};
+		47B100132FF9000000B10001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 278BFDM8KA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.tastenbraille.com.RavensTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ravens.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ravens";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1121,6 +1257,15 @@
 			buildConfigurations = (
 				474C40372B4BC4080038B3A5 /* Debug */,
 				474C40382B4BC4080038B3A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47B100112FF9000000B10001 /* Build configuration list for PBXNativeTarget "RavensTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47B100122FF9000000B10001 /* Debug */,
+				47B100132FF9000000B10001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

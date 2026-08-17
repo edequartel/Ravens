@@ -169,16 +169,16 @@ struct TabRadiusView: View {
           }
         }
 
-        // Quiz
-        if let obs = observationsRadiusViewModel.observations, !obs.isEmpty {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            NavigationLink(destination: BirdQuizView(speciesNames: observationsRadiusViewModel.uniqueNames())) {
-              Image(systemSymbol: .questionmark)
-                .uniformSize()
-                .accessibility(label: Text(observersList))
-            }
-          }
-        }
+//        // Quiz
+//        if let obs = observationsRadiusViewModel.observations, !obs.isEmpty {
+//          ToolbarItem(placement: .navigationBarTrailing) {
+//            NavigationLink(destination: BirdQuizView(speciesNames: observationsRadiusViewModel.uniqueNames())) {
+//              Image(systemSymbol: .questionmark)
+//                .uniformSize()
+//                .accessibility(label: Text(observersList))
+//            }
+//          }
+//        }
 
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {

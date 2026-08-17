@@ -109,6 +109,7 @@ import SwiftUI
 struct BirdQuizView: View {
   var speciesNames: [SpeciesName]
 
+  @EnvironmentObject var settings: Settings
   @StateObject private var viewModel: QuizViewModel
   let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -200,13 +201,7 @@ struct BirdQuizView: View {
       }
 
       ToolbarItem(placement: .navigationBarTrailing) {
-        let localizedIntro = String(localized: "aiChat") // bijv. "Praat met AI over:"
-        let message = "\(localizedIntro) \(viewModel.currentSpeciesName.scientificName)"
-
-        ShareLink(item: message) {
-          Image(systemName: "brain.head.profile")
-            .uniformSize()
-        }
+        AIPromptShareButton(speciesName: viewModel.currentSpeciesName.scientificName)
       }
     }
   }

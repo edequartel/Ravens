@@ -80,7 +80,7 @@ struct MapObservationsLocationView: View {
                        coordinate: CLLocationCoordinate2D(
                         latitude: observation.point.coordinates[1],
                         longitude: observation.point.coordinates[0])) {
-              ObservationAnnotationView(observation: observation)
+              ObservationAnnotationView(observation: observation, entity: .location)
             }
           }
 

@@ -149,6 +149,110 @@ struct SettingsView_Previews: PreviewProvider {
   }
 }
 
+struct AIPromptOption: Identifiable {
+  let id: String
+  let titleKey: String
+  let prompt: String
+}
+
+struct AIPromptSettingsView: View {
+  @EnvironmentObject var settings: Settings
+  @State private var filterText = ""
+
+  private var promptOptions: [AIPromptOption] {
+    [
+      AIPromptOption(id: "etymology", titleKey: "aiPromptEtymologyTitle", prompt: String(localized: "aiChat")),
+      AIPromptOption(id: "taxonomy", titleKey: "aiPromptTaxonomyTitle", prompt: String(localized: "aiPromptTaxonomy")),
+      AIPromptOption(id: "ecology", titleKey: "aiPromptEcologyTitle", prompt: String(localized: "aiPromptEcology")),
+      AIPromptOption(id: "biology", titleKey: "aiPromptBiologyTitle", prompt: String(localized: "aiPromptBiology")),
+      AIPromptOption(id: "profile", titleKey: "aiPromptProfileTitle", prompt: String(localized: "aiPromptProfile"))
+    ]
+  }
+
+  private var filteredPromptOptions: [AIPromptOption] {
+    let filter = filterText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+    guard !filter.isEmpty else {
+      return promptOptions
+    }
+
+    return promptOptions.filter {
+      NSLocalizedString($0.titleKey, comment: "").localizedCaseInsensitiveContains(filter) ||
+      $0.prompt.localizedCaseInsensitiveContains(filter)
+    }
+  }
+
+  var body: some View {
+    List {
+      Section(header: Text("AI prompt")) {
+        TextEditor(text: $settings.aiChatPrompt)
+          .frame(minHeight: 120)
+          .autocorrectionDisabled()
+
+        TextField("Filter", text: $filterText)
+          .autocorrectionDisabled()
+      }
+
+      Section {
+        ForEach(filteredPromptOptions) { promptOption in
+          Button {
+            settings.aiChatPrompt = promptOption.prompt
+            filterText = ""
+          } label: {
+            HStack(alignment: .top) {
+              VStack(alignment: .leading, spacing: 4) {
+                Text(LocalizedStringKey(promptOption.titleKey))
+                  .font(.headline)
+                Text(promptOption.prompt)
+                  .font(.footnote)
+                  .foregroundColor(.secondary)
+              }
+              Spacer()
+              if settings.aiChatPrompt == promptOption.prompt {
+                Image(systemName: "checkmark")
+              }
+            }
+          }
+        }
+      }
+
+      Section {
+        Button("Reset") {
+          settings.aiChatPrompt = String(localized: "aiChat")
+          filterText = ""
+        }
+      }
+    }
+    .navigationTitle("AI prompt")
+    .navigationBarTitleDisplayMode(.inline)
+  }
+}
+
+struct AIPromptShareButton: View {
+  @EnvironmentObject var settings: Settings
+  @State private var showPromptSettings = false
+
+  let speciesName: String
+
+  var body: some View {
+    ShareLink(item: settings.aiPromptMessage(for: speciesName)) {
+      Image(systemName: "brain.head.profile")
+        .uniformSize()
+    }
+    .simultaneousGesture(
+      LongPressGesture(minimumDuration: 0.5)
+        .onEnded { _ in
+          showPromptSettings = true
+        }
+    )
+    .sheet(isPresented: $showPromptSettings) {
+      NavigationStack {
+        AIPromptSettingsView()
+      }
+    }
+  }
+}
+
 struct SpeciesGroupPickerView: View {
   let log = SwiftyBeaver.self
 

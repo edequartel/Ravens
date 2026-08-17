@@ -39,7 +39,7 @@ struct MapObservationsUserView: View {
                      coordinate: CLLocationCoordinate2D(
                       latitude: observation.point.coordinates[1],
                       longitude: observation.point.coordinates[0])) {
-            ObservationAnnotationView(observation: observation)
+            ObservationAnnotationView(observation: observation, entity: .user)
           }
         }
       }
@@ -75,19 +75,34 @@ struct MapObservationsUserView: View {
 
 struct ObservationAnnotationView: View {
   let observation: Obs
+  let entity: EntityType
+
+  @State private var selectedObservation: Obs?
 
   var body: some View {
-    Circle()
-      .fill(rarityColor(value: observation.rarity))
-      .stroke(!(observation.sounds?.isEmpty ?? true) ? Color.white : Color.clear, lineWidth: 1)
-      .frame(width: 12, height: 12)
-      .overlay(
-        Circle()
-          .fill(!(observation.photos?.isEmpty ?? true) ? Color.white : Color.clear)
-          .frame(width: 6, height: 6)
-      )
-      .onTapGesture {
-        print("Tapped observation \(observation.speciesDetail.name)")
+    Button {
+      selectedObservation = observation
+    } label: {
+      Circle()
+        .fill(rarityColor(value: observation.rarity))
+        .stroke(!(observation.sounds?.isEmpty ?? true) ? Color.white : Color.clear, lineWidth: 1)
+        .frame(width: 12, height: 12)
+        .overlay(
+          Circle()
+            .fill(!(observation.photos?.isEmpty ?? true) ? Color.white : Color.clear)
+            .frame(width: 6, height: 6)
+        )
+        .frame(width: 44, height: 44)
+        .contentShape(Circle())
+    }
+    .buttonStyle(.plain)
+    .accessibilityLabel(observation.speciesDetail.name.isEmpty ? observation.speciesDetail.scientificName : observation.speciesDetail.name)
+    .sheet(item: $selectedObservation) { item in
+      NavigationStack {
+        ObsDetailView(obs: item, entity: entity)
       }
+      .presentationDetents([.medium, .large])
+      .presentationDragIndicator(.visible)
+    }
   }
 }

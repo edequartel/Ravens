@@ -176,5 +176,14 @@
 "localizedAll" = "Alle";
 "shareObservations" = "Deel waarnemingen";
 
-"aiChat" = "Geef de etymologie van de volgende soortnaam in platte tekst, met eventueel een leuk feitje. ";
+"aiChat" = "Explain the etymology of the scientific name _[species name]_. What do the genus and species names mean?";
+"aiPromptEtymologyTitle" = "Etymology";
+"aiPromptTaxonomyTitle" = "Taxonomy";
+"aiPromptEcologyTitle" = "Ecology";
+"aiPromptBiologyTitle" = "Biology and adaptations";
+"aiPromptProfileTitle" = "Complete species profile";
+"aiPromptTaxonomy" = "Explain the taxonomy of _[species name]_, from kingdom to species, and mention its closest relatives.";
+"aiPromptEcology" = "Describe the ecology of _[species name]_: habitat, diet, behaviour, predators, and ecological role.";
+"aiPromptBiology" = "Explain the most important biological characteristics and adaptations of _[species name]_ and how they help it survive.";
+"aiPromptProfile" = "Give a concise profile of _[species name]_ including etymology, taxonomy, distribution, habitat, ecology, adaptations, and one interesting fact.";
 "helpEtymology" = "Deel soortnaam voor AI";

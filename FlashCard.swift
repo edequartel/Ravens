@@ -12,6 +12,7 @@ struct BirdFlashcardView: View {
   var speciesNames: [SpeciesName]
   var showScientificNameFirst: Bool
 
+  @EnvironmentObject var settings: Settings
   @State private var currentSpeciesName: SpeciesName = SpeciesName(commonName: "", scientificName: "")
   @State private var isFlipped: Bool = false
   @State private var rotation: Double = 0
@@ -63,12 +64,7 @@ struct BirdFlashcardView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          ShareLink(
-            item: String(localized: "aiChat") + " " + currentSpeciesName.scientificName
-          ) {
-            Image(systemName: "brain.head.profile")
-              .uniformSize()
-          }
+          AIPromptShareButton(speciesName: currentSpeciesName.scientificName)
         }
       }
     }

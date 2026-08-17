@@ -170,31 +170,31 @@ struct TabSpeciesView: View {
 ////          .accessibilityLabel(settings.isNotificationVisible ? favoriteVisible : allVisible)
 //        }
 
-        // Quiz-knop gebaseerd op unieke soortnamen
-        ToolbarItem(placement: .navigationBarTrailing) {
-          let filteredSpecies = speciesViewModel.filteredSpecies(
-            by: selectedSortOption,
-            searchText: searchText,
-            filterOption: selectedFilterOption,
-            rarityFilterOption: selectedRarityOption,
-            isLatest: false,
-            isBookmarked: settings.isBookMarkVisible,
-            isNotificationed: settings.isNotificationVisible,
-            additionalIntArray: bookMarksViewModel,
-            additionalNotificationIntArray: notificationsViewModel
-          )
-
-          NavigationLink(
-            destination: BirdFlashcardView(
-              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
-              showScientificNameFirst: false
-            )
-          ) {
-            Image(systemName: "exclamationmark")
-              .uniformSize()
-              .accessibilityLabel(Text("Start filtered bird quiz"))
-          }
-        }
+//        // Quiz-knop gebaseerd op unieke soortnamen
+//        ToolbarItem(placement: .navigationBarTrailing) {
+//          let filteredSpecies = speciesViewModel.filteredSpecies(
+//            by: selectedSortOption,
+//            searchText: searchText,
+//            filterOption: selectedFilterOption,
+//            rarityFilterOption: selectedRarityOption,
+//            isLatest: false,
+//            isBookmarked: settings.isBookMarkVisible,
+//            isNotificationed: settings.isNotificationVisible,
+//            additionalIntArray: bookMarksViewModel,
+//            additionalNotificationIntArray: notificationsViewModel
+//          )
+//
+//          NavigationLink(
+//            destination: BirdFlashcardView(
+//              speciesNames: speciesViewModel.uniqueNames(from: filteredSpecies),
+//              showScientificNameFirst: false
+//            )
+//          ) {
+//            Image(systemName: "exclamationmark")
+//              .uniformSize()
+//              .accessibilityLabel(Text("Start filtered bird quiz"))
+//          }
+//        }
 
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(

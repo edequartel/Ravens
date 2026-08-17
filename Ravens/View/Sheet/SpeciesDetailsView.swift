@@ -120,13 +120,7 @@ struct SpeciesDetailsView: View {
           }
 
           ToolbarItem(placement: .navigationBarTrailing) {
-            let localizedIntro = String(localized: "aiChat")
-            let message = "\(localizedIntro) \(species.scientificName)"
-
-            ShareLink(item: message) {
-              Image(systemName: "brain.head.profile")
-                .uniformSize()
-            }
+            AIPromptShareButton(speciesName: species.scientificName)
           }
         }
       }

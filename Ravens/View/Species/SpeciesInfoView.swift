@@ -198,8 +198,8 @@ struct SpeciesINaturalistDetailPhotoView: View {
 final class INaturalistSpeciesPhotoCache {
   static let shared = INaturalistSpeciesPhotoCache()
 
-  private let cacheKeyPrefix = "inaturalistSpeciesPhoto.v2."
-  private let missingCacheKeyPrefix = "inaturalistSpeciesPhotoMissing.v2."
+  private let cacheKeyPrefix = "inaturalistSpeciesPhoto.v3."
+  private let missingCacheKeyPrefix = "inaturalistSpeciesPhotoMissing.v3."
   private var memoryCache: [String: URL?] = [:]
   private var missingPhotoCache = Set<String>()
   private var inFlight: [String: [(URL?) -> Void]] = [:]
@@ -258,7 +258,7 @@ final class INaturalistSpeciesPhotoCache {
   }
 
   private func fetchPhotoURL(for scientificName: String, completion: @escaping (URL?) -> Void) {
-    var components = URLComponents(string: "https://api.inaturalist.org/v1/taxa")
+    var components = URLComponents(string: "https://api.inaturalist.org/v1/taxa/autocomplete")
     components?.queryItems = [
       URLQueryItem(name: "q", value: scientificName),
       URLQueryItem(name: "is_active", value: "true"),
@@ -298,8 +298,6 @@ private struct INaturalistTaxaResponse: Decodable {
 
     return results.first {
       $0.name.lowercased() == normalizedName && $0.defaultPhoto != nil
-    } ?? results.first {
-      $0.defaultPhoto != nil
     }
   }
 }

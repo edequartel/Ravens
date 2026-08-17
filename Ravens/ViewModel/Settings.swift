@@ -183,6 +183,26 @@ class Settings: ObservableObject {
     }
   }
 
+  @AppStorage("aiChatPrompt") var aiChatPromptStored = ""
+  @Published var aiChatPrompt: String = "" {
+    didSet {
+      aiChatPromptStored = aiChatPrompt
+    }
+  }
+
+  var effectiveAIChatPrompt: String {
+    let prompt = aiChatPrompt.trimmingCharacters(in: .whitespacesAndNewlines)
+    return prompt.isEmpty ? String(localized: "aiChat") : prompt
+  }
+
+  func aiPromptMessage(for speciesName: String) -> String {
+    let prompt = effectiveAIChatPrompt
+    if prompt.contains("[species name]") {
+      return prompt.replacingOccurrences(of: "[species name]", with: speciesName)
+    }
+    return "\(prompt) \(speciesName)"
+  }
+
   var mapStyle: MapStyle {
     switch mapStyleChoice {
     case .standard:
@@ -226,6 +246,13 @@ class Settings: ObservableObject {
     timePeriodUser = timePeriodUserStored
     timePeriodLocation = timePeriodLocationStored
     timePeriodSpecies = timePeriodSpeciesStored
+
+    let storedPrompt = aiChatPromptStored.trimmingCharacters(in: .whitespacesAndNewlines)
+    let legacyDefaultPrompts = [
+      "Geef de etymologie van de volgende soortnaam in platte tekst, met eventueel een leuk feitje.",
+      "Provide the etymology of the following species name in plain text, along with an optional fun fact."
+    ]
+    aiChatPrompt = storedPrompt.isEmpty || legacyDefaultPrompts.contains(storedPrompt) ? String(localized: "aiChat") : aiChatPromptStored
   }
 }
 
