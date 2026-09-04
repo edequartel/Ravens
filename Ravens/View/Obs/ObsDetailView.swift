@@ -16,7 +16,6 @@ struct ObsDetailView: View {
   @State var imageURLStr: String?
   @State var selectedObservationSound: Obs?
   @State private var selectedObservation: Obs?
-  @State private var showHelpOverlay = false
 
   @EnvironmentObject var userViewModel: UserViewModel
   @EnvironmentObject var keyChainViewModel: KeychainViewModel
@@ -61,10 +60,22 @@ struct ObsDetailView: View {
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
+          HStack {
+            Text("Foto")
+            Spacer()
+          }
+          .padding(.horizontal, 4)
+
           PhotoGridView(photos: photos)
 //            .islandBackground()
             .accessibilityHidden(true)
         } else if !obs.speciesDetail.scientificName.isEmpty {
+          HStack {
+            Text("Foto")
+            Spacer()
+          }
+          .padding(.horizontal, 4)
+
           SpeciesINaturalistDetailPhotoView(scientificName: obs.speciesDetail.scientificName)
         }
 
@@ -111,19 +122,16 @@ struct ObsDetailView: View {
       SpeciesDetailsView(speciesID: item.speciesDetail.id)
     }
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        HelpOverlayButton(isPresented: $showHelpOverlay)
-      }
-
-      ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
-          Image(systemName: "arrowshape.turn.up.forward")
-            .uniformSize()
+      if obs.speciesDetail.id > 0 {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink(destination: SpeciesDetailsView(speciesID: obs.speciesDetail.id)) {
+            Image(systemName: "arrowshape.turn.up.forward")
+              .uniformSize()
+          }
+          .accessibility(label: Text(informationSpecies))
         }
-        .accessibility(label: Text(informationSpecies))
       }
     }
-    .ravensHelpOverlay(title: obs.speciesDetail.name, items: RavensHelp.observationDetailItems, isPresented: $showHelpOverlay)
   }
 
   // Fullscreen destination map view

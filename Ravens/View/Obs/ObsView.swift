@@ -118,7 +118,7 @@ struct ObsView: View {
 
     // trailing
     .swipeActions(edge: .trailing, allowsFullSwipe: false ) {
-      if !keyChainViewModel.token.isEmpty {
+      if !keyChainViewModel.token.isEmpty && entity != .ebird {
 
         if entity != .location {
           AreaButtonView(obs: obs)

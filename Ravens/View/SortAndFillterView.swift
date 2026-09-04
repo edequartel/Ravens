@@ -202,7 +202,6 @@ struct CombinedOptionsMenuView: View {
   @Binding var timePeriod: TimePeriod?
 
   @EnvironmentObject var settings: Settings
-  @State private var showHelpOverlay = false
 
   var entity: EntityType
 
@@ -290,12 +289,6 @@ struct CombinedOptionsMenuView: View {
           }
         }
       }
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          HelpOverlayButton(isPresented: $showHelpOverlay)
-        }
-      }
-      .ravensHelpOverlay(title: "Filters", items: RavensHelp.filterItems, isPresented: $showHelpOverlay)
     }
   }
 }

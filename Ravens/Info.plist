@@ -10,6 +10,8 @@
 	<string></string>
 	<key>CFBundleSignature</key>
 	<string></string>
+	<key>EBIRD_API_TOKEN</key>
+	<string>19mofj5tgbfu</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

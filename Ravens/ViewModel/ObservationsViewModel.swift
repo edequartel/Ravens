@@ -17,6 +17,7 @@ enum EntityType: String {
   case user = "user"
   case species = "species"
   case radius = "radius"
+  case ebird = "ebird"
 }
 
 struct SpeciesName: Identifiable, Hashable {

@@ -19,7 +19,6 @@ struct SettingsView: View {
   @EnvironmentObject var settings: Settings
 
   @State private var storage: String = ""
-  @State private var showHelpOverlay = false
 
   let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
@@ -82,6 +81,13 @@ struct SettingsView: View {
           .pickerStyle(SegmentedPickerStyle())
         }
 
+        Section {
+          NavigationLink(destination: ColofonView()) {
+            Label("Colofon", systemImage: "info.circle")
+          }
+          .accessibilityLabel("Colofon")
+        }
+
         Section(header: Text(appDetails)) {
           VStack(alignment: .leading) {
             Text(version())
@@ -97,10 +103,6 @@ struct SettingsView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          HelpOverlayButton(isPresented: $showHelpOverlay)
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: {
             if let url = URL(string: "https://www.tastenbraille.com/ravens/index.php") {
 //            if let url = URL(string: "https://edequartel.github.io/Ravens/") {
@@ -113,7 +115,6 @@ struct SettingsView: View {
           }
         }
       }
-      .ravensHelpOverlay(title: "Instellingen", items: RavensHelp.settingsItems, isPresented: $showHelpOverlay)
     }
   }
 
@@ -149,6 +150,197 @@ struct SettingsView: View {
   }
 }
 
+struct ColofonView: View {
+  private let dataSources = [
+    ColofonItem(
+      title: "Waarneming.nl / Observation.org",
+      detail: "Waarnemingen, soortnamen, locaties en soortgroepen.",
+      url: "https://waarneming.nl"
+    ),
+    ColofonItem(
+      title: "GBIF",
+      detail: "Taxonomische naamcontrole, accepted names en synoniemen.",
+      url: "https://www.gbif.org"
+    ),
+    ColofonItem(
+      title: "iNaturalist",
+      detail: "Aanvullende soortfoto's wanneer een waarneming geen foto heeft.",
+      url: "https://www.inaturalist.org"
+    ),
+    ColofonItem(
+      title: "Xeno-canto",
+      detail: "Vogelgeluiden en geluidsmetadata.",
+      url: "https://xeno-canto.org"
+    )
+  ]
+
+  private let packages = [
+    ColofonItem(
+      title: "Alamofire",
+      detail: "Netwerkverzoeken.",
+      url: "https://github.com/Alamofire/Alamofire"
+    ),
+    ColofonItem(
+      title: "AlamofireImage",
+      detail: "Afbeeldingen laden en verwerken.",
+      url: "https://github.com/Alamofire/AlamofireImage"
+    ),
+    ColofonItem(
+      title: "Kingfisher",
+      detail: "Afbeeldingen downloaden en cachen.",
+      url: "https://github.com/onevcat/Kingfisher"
+    ),
+    ColofonItem(
+      title: "SwiftAudioEx",
+      detail: "Audio afspelen.",
+      url: "https://github.com/doublesymmetry/SwiftAudioEx"
+    ),
+    ColofonItem(
+      title: "SwiftSoup",
+      detail: "HTML uitlezen.",
+      url: "https://github.com/scinfu/SwiftSoup"
+    ),
+    ColofonItem(
+      title: "Swift Markdown UI",
+      detail: "Markdown tonen in SwiftUI.",
+      url: "https://github.com/gonzalezreal/swift-markdown-ui"
+    ),
+    ColofonItem(
+      title: "RichText",
+      detail: "Rijke tekstweergave.",
+      url: "https://github.com/NuPlay/RichText"
+    ),
+    ColofonItem(
+      title: "SFSafeSymbols",
+      detail: "Veilig gebruik van SF Symbols.",
+      url: "https://github.com/SFSafeSymbols/SFSafeSymbols"
+    ),
+    ColofonItem(
+      title: "KeychainAccess",
+      detail: "Opslag van gevoelige instellingen.",
+      url: "https://github.com/kishikawakatsumi/KeychainAccess"
+    ),
+    ColofonItem(
+      title: "Lottie",
+      detail: "Animaties.",
+      url: "https://github.com/airbnb/lottie-ios"
+    ),
+    ColofonItem(
+      title: "SVGView",
+      detail: "SVG-afbeeldingen tonen.",
+      url: "https://github.com/exyte/SVGView"
+    ),
+    ColofonItem(
+      title: "WaterfallGrid",
+      detail: "Rasterweergave voor fotolijsten.",
+      url: "https://github.com/paololeonardi/WaterfallGrid"
+    ),
+    ColofonItem(
+      title: "LazyPager",
+      detail: "Bladerbare detailweergaves.",
+      url: "https://github.com/gh123man/LazyPager"
+    ),
+    ColofonItem(
+      title: "MijickCalendarView",
+      detail: "Kalenderweergave.",
+      url: "https://github.com/Mijick/CalendarView"
+    ),
+    ColofonItem(
+      title: "NetworkImage",
+      detail: "Afbeeldingen via netwerk tonen.",
+      url: "https://github.com/gonzalezreal/NetworkImage"
+    ),
+    ColofonItem(
+      title: "SwiftUIImageViewer",
+      detail: "Afbeeldingen vergroot bekijken.",
+      url: "https://github.com/fuzzzlove/swiftui-image-viewer"
+    ),
+    ColofonItem(
+      title: "SwiftLintPlugins",
+      detail: "Codecontrole tijdens het bouwen.",
+      url: "https://github.com/SimplyDanny/SwiftLintPlugins"
+    ),
+    ColofonItem(
+      title: "SwiftyBeaver",
+      detail: "Logging.",
+      url: "https://github.com/SwiftyBeaver/SwiftyBeaver"
+    )
+  ]
+
+  var body: some View {
+    List {
+      Section("Ravens") {
+        Text("Ravens gebruikt gegevens, media en open-source software van meerdere externe bronnen en contributors.")
+          .font(.footnote)
+          .foregroundColor(.secondary)
+      }
+
+      Section("Data en media") {
+        ForEach(dataSources) { item in
+          ColofonLinkRow(item: item)
+        }
+      }
+
+      Section("Open-source packages") {
+        ForEach(packages) { item in
+          ColofonLinkRow(item: item)
+        }
+      }
+
+      Section("Dank") {
+        Text("Dank aan alle waarnemers, geluidsrecordisten, fotografen, databeheerders en open-source maintainers die Ravens mogelijk maken.")
+          .font(.footnote)
+          .foregroundColor(.secondary)
+      }
+    }
+    .navigationTitle("Colofon")
+    .navigationBarTitleDisplayMode(.inline)
+  }
+}
+
+private struct ColofonItem: Identifiable {
+  let id = UUID()
+  let title: String
+  let detail: String
+  let url: String
+}
+
+private struct ColofonRow: View {
+  let item: ColofonItem
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 4) {
+      Text(item.title)
+        .foregroundColor(.primary)
+      Text(item.detail)
+        .font(.footnote)
+        .foregroundColor(.secondary)
+    }
+  }
+}
+
+private struct ColofonLinkRow: View {
+  let item: ColofonItem
+
+  var body: some View {
+    Button {
+      if let url = URL(string: item.url) {
+        UIApplication.shared.open(url)
+      }
+    } label: {
+      HStack(spacing: 12) {
+        ColofonRow(item: item)
+        Spacer()
+        Image(systemName: "safari")
+          .foregroundColor(.secondary)
+      }
+      .contentShape(Rectangle())
+    }
+    .buttonStyle(.plain)
+    .accessibilityHint("Opent de link in de browser")
+  }
+}
+
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
     // Setting up the environment objects for the preview
@@ -166,7 +358,6 @@ struct AIPromptOption: Identifiable {
 struct AIPromptSettingsView: View {
   @EnvironmentObject var settings: Settings
   @State private var filterText = ""
-  @State private var showHelpOverlay = false
 
   private var promptOptions: [AIPromptOption] {
     [
@@ -234,12 +425,6 @@ struct AIPromptSettingsView: View {
     }
     .navigationTitle("AI prompt")
     .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        HelpOverlayButton(isPresented: $showHelpOverlay)
-      }
-    }
-    .ravensHelpOverlay(title: "AI prompt", items: RavensHelp.aiPromptItems, isPresented: $showHelpOverlay)
   }
 }
 

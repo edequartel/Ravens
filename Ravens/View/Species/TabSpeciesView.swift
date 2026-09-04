@@ -29,7 +29,6 @@ struct TabSpeciesView: View {
   @State private var selectedFilterOption: FilterAllOption = .all
   @State private var selectedRarityOption: FilteringRarityOption = .all
   @State private var searchText = ""
-  @State private var showHelpOverlay = false
 
   @State private var currentSpeciesGroup: Int? = 1
 
@@ -148,6 +147,15 @@ struct TabSpeciesView: View {
           .accessibilityLabel(settings.isBookMarkVisible ? favoriteVisible : allVisible)
         }
 
+        ToolbarItem(placement: .navigationBarLeading) {
+          NavigationLink(destination: EbirdNotableObservationsView(selectedSpeciesID: $selectedSpeciesID)) {
+            Image(systemName: "exclamationmark.circle")
+              .uniformSize()
+          }
+          .background(Color.clear)
+          .accessibility(label: Text("eBird notable observations"))
+        }
+
 //        ToolbarItem(placement: .navigationBarLeading) {
 //          Button(action: {
 //            settings.isNotificationVisible.toggle()
@@ -198,10 +206,6 @@ struct TabSpeciesView: View {
 //        }
 
         ToolbarItem(placement: .navigationBarTrailing) {
-          HelpOverlayButton(isPresented: $showHelpOverlay)
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: SortFilterSpeciesView(
             selectedSortOption: $selectedSortOption,
             selectedFilterAllOption: $selectedFilterOption,
@@ -214,7 +218,6 @@ struct TabSpeciesView: View {
           }
         }
       }
-      .ravensHelpOverlay(title: "Soorten", items: RavensHelp.speciesSearchItems, isPresented: $showHelpOverlay)
     }
   }
 
@@ -237,7 +240,6 @@ struct SortFilterSpeciesView: View {
 //  @Binding var currentSpeciesGroup: Int?
 
   @EnvironmentObject var settings: Settings
-  @State private var showHelpOverlay = false
 
   var body: some View {
 
@@ -267,12 +269,6 @@ struct SortFilterSpeciesView: View {
         FilterOptionsView(currentFilteringOption: $selectedRarityOption)
       }
     }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        HelpOverlayButton(isPresented: $showHelpOverlay)
-      }
-    }
-    .ravensHelpOverlay(title: "Filters", items: RavensHelp.filterItems, isPresented: $showHelpOverlay)
   }
 }
 struct PickTimePeriodeSpeciesView: View {
