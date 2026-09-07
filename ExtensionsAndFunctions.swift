@@ -14,7 +14,7 @@ import SVGView
 
 let demo = false
 let showView = false
-//let showView = true
+// let showView = true
 
 // neeltje jans
 // 51.631732, 3.698586
@@ -101,6 +101,91 @@ func rarityColor(value: Int) -> Color {
     return .red // very rare
   default:
     return .gray // You can provide a default color or handle other cases as needed
+  }
+}
+
+struct MapControlButtons: View {
+  @Binding var cameraPosition: MapCameraPosition
+  @Binding var region: MKCoordinateRegion
+  @State private var isPitched = false
+
+  var body: some View {
+    VStack(spacing: 10) {
+      Button {
+        zoom(by: 0.5)
+      } label: {
+        Image(systemName: "plus")
+          .frame(width: 44, height: 44)
+      }
+      .mapButtonStyle()
+
+      Button {
+        zoom(by: 2.0)
+      } label: {
+        Image(systemName: "minus")
+          .frame(width: 44, height: 44)
+      }
+      .mapButtonStyle()
+
+      Button {
+        togglePitch()
+      } label: {
+        Image(systemName: "cube")
+          .frame(width: 44, height: 44)
+      }
+      .mapButtonStyle(isActive: isPitched)
+
+      Button {
+        cameraPosition = .userLocation(fallback: .region(region))
+      } label: {
+        Image(systemName: "location.fill")
+          .frame(width: 44, height: 44)
+      }
+      .mapButtonStyle()
+    }
+    .buttonStyle(.plain)
+    .padding(10)
+    .accessibilityElement(children: .contain)
+  }
+
+  private func zoom(by factor: Double) {
+    let span = MKCoordinateSpan(
+      latitudeDelta: max(0.0005, min(180, region.span.latitudeDelta * factor)),
+      longitudeDelta: max(0.0005, min(180, region.span.longitudeDelta * factor))
+    )
+    let updatedRegion = MKCoordinateRegion(center: region.center, span: span)
+
+    region = updatedRegion
+    if isPitched {
+      cameraPosition = .camera(camera(for: updatedRegion, pitch: 60))
+    } else {
+      cameraPosition = .region(updatedRegion)
+    }
+  }
+
+  private func togglePitch() {
+    isPitched.toggle()
+    cameraPosition = .camera(camera(for: region, pitch: isPitched ? 60 : 0))
+  }
+
+  private func camera(for region: MKCoordinateRegion, pitch: CGFloat) -> MapCamera {
+    let distance = max(region.span.latitudeDelta, region.span.longitudeDelta) * 111_000
+    return MapCamera(
+      centerCoordinate: region.center,
+      distance: max(500, distance),
+      heading: 0,
+      pitch: pitch
+    )
+  }
+}
+
+private extension View {
+  func mapButtonStyle(isActive: Bool = false) -> some View {
+    foregroundStyle(isActive ? Color.obsGreenEagle : Color.primary)
+      .background(.regularMaterial)
+      .clipShape(Circle())
+      .contentShape(Circle())
+      .shadow(radius: 2)
   }
 }
 

@@ -95,11 +95,12 @@ struct ObservationRowView: View {
   @Binding var selectedSpeciesID: Int?
   
   var entity: EntityType
+  @StateObject private var observationsSpecies = ObservationsViewModel()
   
   var body: some View {
     VStack {
       if showView { Text("ObservationRowView").font(.customTiny) }
-      NavigationLink(destination: ObsDetailView(obs: obs, entity: entity)) {
+      NavigationLink(destination: destinationView) {
         ObsView(
           index: index,
           selectedSpeciesID: $selectedSpeciesID,
@@ -112,6 +113,32 @@ struct ObservationRowView: View {
     }
     .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)) // Remove default padding
     .listRowSeparator(.hidden)  // Remove separator line
+  }
+
+  @ViewBuilder
+  private var destinationView: some View {
+    if entity == .ebird, let species = speciesFromObservation {
+      SpeciesView(
+        observationsSpecies: observationsSpecies,
+        item: species,
+        selectedSpeciesID: $selectedSpeciesID
+      )
+    } else {
+      ObsDetailView(obs: obs, entity: entity)
+    }
+  }
+
+  private var speciesFromObservation: Species? {
+    guard obs.speciesDetail.id > 0 else { return nil }
+    return Species(
+      speciesId: obs.speciesDetail.id,
+      name: obs.speciesDetail.name,
+      scientificName: obs.speciesDetail.scientificName,
+      rarity: obs.rarity,
+      native: true,
+      time: obs.time,
+      date: obs.date
+    )
   }
 }
 

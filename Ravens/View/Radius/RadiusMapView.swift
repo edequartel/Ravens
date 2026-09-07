@@ -31,11 +31,7 @@ struct RadiusMapView: View {
         UserAnnotation()
 
         // observations
-        let obs = observationsRadiusViewModel.observations ?? []
-        let filteredObs = obs.filter {
-          $0.rarity == currentFilteringOption?.intValue ?? 0  || currentFilteringOption?.intValue ?? 0 == 0
-        }
-        ForEach(filteredObs) { observation in
+        ForEach(filteredObservations) { observation in
           Annotation(observation.speciesDetail.name, coordinate: CLLocationCoordinate2D(
             latitude: observation.point.coordinates[1],
             longitude: observation.point.coordinates[0])) {
@@ -54,15 +50,23 @@ struct RadiusMapView: View {
       }
       .mapStyle(settings.mapStyle)
       .mapControls {
-        MapUserLocationButton()
-        MapPitchToggle()
         MapCompass() // tapping this makes it north
       }
+      .onMapCameraChange { context in
+        region = context.region
+      }
+      .overlay(alignment: .topTrailing) {
+        MapControlButtons(cameraPosition: $cameraPosition, region: $region)
+      }
 
-      .onTapGesture { position in
+      .simultaneousGesture(
+        SpatialTapGesture()
+          .onEnded { value in
+            guard !isObservationTap(value.location, proxy: proxy) else { return }
+
         observationsRadiusViewModel.observations = []
 
-        if let coordinate = proxy.convert(position, from: .local) {
+        if let coordinate = proxy.convert(value.location, from: .local) {
           observationsRadiusViewModel.circleCenter = coordinate
 
           observationsRadiusViewModel.fetchDataInit(
@@ -78,6 +82,7 @@ struct RadiusMapView: View {
             })
         }
       }
+      )
     }
     .onAppear {
       log.error("radiusMapView onAppear")
@@ -104,5 +109,23 @@ struct RadiusMapView: View {
 
     region = updatedRegion
     cameraPosition = .region(updatedRegion) // Update camera to this region
+  }
+
+  private var filteredObservations: [Obs] {
+    let observations = observationsRadiusViewModel.observations ?? []
+    return observations.filter {
+      $0.rarity == currentFilteringOption?.intValue ?? 0 || currentFilteringOption?.intValue ?? 0 == 0
+    }
+  }
+
+  private func isObservationTap(_ point: CGPoint, proxy: MapProxy) -> Bool {
+    filteredObservations.contains { observation in
+      let coordinate = CLLocationCoordinate2D(
+        latitude: observation.point.coordinates[1],
+        longitude: observation.point.coordinates[0]
+      )
+      guard let annotationPoint = proxy.convert(coordinate, to: .local) else { return false }
+      return hypot(annotationPoint.x - point.x, annotationPoint.y - point.y) <= 28
+    }
   }
 }

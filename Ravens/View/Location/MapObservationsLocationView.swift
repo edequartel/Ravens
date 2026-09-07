@@ -25,6 +25,11 @@ struct MapObservationsLocationView: View {
   @Binding var currentFilteringOption: FilteringRarityOption?
   @Binding var timePeriod: TimePeriod?
 
+  @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+    center: CLLocationCoordinate2D(latitude: 52.0, longitude: 5.0),
+    span: MKCoordinateSpan(latitudeDelta: 4.5, longitudeDelta: 3.0)
+  )
+
   var body: some View {
     VStack {
       HStack {
@@ -70,12 +75,7 @@ struct MapObservationsLocationView: View {
           }
 
           // Observations (filtered)
-          let obs = observationsLocation.observations ?? []
-          let filteredObs = obs.filter {
-            $0.rarity == currentFilteringOption?.intValue ?? 0 || currentFilteringOption?.intValue ?? 0 == 0
-          }
-
-          ForEach(filteredObs) { observation in
+          ForEach(filteredObservations) { observation in
             Annotation(observation.speciesDetail.name,
                        coordinate: CLLocationCoordinate2D(
                         latitude: observation.point.coordinates[1],
@@ -95,10 +95,17 @@ struct MapObservationsLocationView: View {
         .mapControls {
           MapCompass() // north reset
         }
+        .onMapCameraChange { context in
+          region = context.region
+        }
+        .overlay(alignment: .topTrailing) {
+          MapControlButtons(cameraPosition: $settings.cameraAreaPosition, region: $region)
+        }
         // Use SpatialTapGesture to get tap location in view space and convert to geo coords.
         .simultaneousGesture(
           SpatialTapGesture()
             .onEnded { value in
+              guard !isObservationTap(value.location, proxy: proxy) else { return }
 //              print("okidoki") // ensure it fires on any map tap not hitting an annotation
               if let coordinate = proxy.convert(value.location, from: .local) {
                 setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -149,6 +156,24 @@ struct MapObservationsLocationView: View {
 
     let region = MKCoordinateRegion(center: center, span: span)
     return MapCameraPosition.region(region)
+  }
+
+  private var filteredObservations: [Obs] {
+    let observations = observationsLocation.observations ?? []
+    return observations.filter {
+      $0.rarity == currentFilteringOption?.intValue ?? 0 || currentFilteringOption?.intValue ?? 0 == 0
+    }
+  }
+
+  private func isObservationTap(_ point: CGPoint, proxy: MapProxy) -> Bool {
+    filteredObservations.contains { observation in
+      let coordinate = CLLocationCoordinate2D(
+        latitude: observation.point.coordinates[1],
+        longitude: observation.point.coordinates[0]
+      )
+      guard let annotationPoint = proxy.convert(coordinate, to: .local) else { return false }
+      return hypot(annotationPoint.x - point.x, annotationPoint.y - point.y) <= 28
+    }
   }
 }
 ////

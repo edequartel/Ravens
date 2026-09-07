@@ -21,6 +21,10 @@ struct MapObservationsSpeciesView: View {
     @State private var offset = 0
     @State private var showFullScreenMap = false
     @State private var cameraPosition: MapCameraPosition = .automatic
+    @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+      center: CLLocationCoordinate2D(latitude: 52.0, longitude: 5.0),
+      span: MKCoordinateSpan(latitudeDelta: 4.5, longitudeDelta: 3.0)
+    )
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -48,9 +52,13 @@ struct MapObservationsSpeciesView: View {
             }
             .mapStyle(settings.mapStyle)
             .mapControls {
-                MapUserLocationButton()
-                MapPitchToggle()
                 MapCompass() // tapping this makes it north
+            }
+            .onMapCameraChange { context in
+                region = context.region
+            }
+            .overlay(alignment: .topTrailing) {
+                MapControlButtons(cameraPosition: $cameraPosition, region: $region)
             }
         }
     }

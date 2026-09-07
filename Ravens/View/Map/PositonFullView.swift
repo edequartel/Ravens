@@ -14,6 +14,10 @@ struct PositonFullView: View {
   @EnvironmentObject var settings: Settings
 
   @State private var cameraPosition: MapCameraPosition = .automatic
+  @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+    center: CLLocationCoordinate2D(latitude: 52.0, longitude: 5.0),
+    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+  )
 
   var body: some View {
     Map(position: $cameraPosition) {
@@ -32,15 +36,21 @@ struct PositonFullView: View {
     }
     .mapStyle(settings.mapStyle)
     .mapControls {
-      MapUserLocationButton()
-      MapPitchToggle()
       MapCompass() // tapping this makes it north
+    }
+    .onMapCameraChange { context in
+      region = context.region
+    }
+    .overlay(alignment: .topTrailing) {
+      MapControlButtons(cameraPosition: $cameraPosition, region: $region)
     }
 
     .onAppear {
-      cameraPosition = .camera(
-        MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]), distance: 1000)
+      region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0]),
+        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
       )
+      cameraPosition = .region(region)
     }
   }
 }

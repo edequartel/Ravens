@@ -179,7 +179,7 @@ class EbirdNotableObservationsViewModel: ObservableObject {
 
   private let endpoint = "https://api.ebird.org/v2/data/obs/NL/recent/notable?back=7&detail=full"
 
-  func fetchData(settings: Settings) {
+  func fetchData(settings: Settings, speciesViewModel: SpeciesViewModel) {
     guard let url = URL(string: endpoint) else { return }
 
     guard let token = Self.apiToken, !token.isEmpty else {
@@ -220,7 +220,10 @@ class EbirdNotableObservationsViewModel: ObservableObject {
 
         do {
           let ebirdObservations = try JSONDecoder().decode([EbirdNotableObservation].self, from: data)
-          let observations = Self.uniqueObservations(from: ebirdObservations)
+          let observations = Self.uniqueObservations(
+            from: ebirdObservations,
+            speciesList: speciesViewModel.species
+          )
           self.observations = observations
           self.count = observations.count
         } catch {
@@ -249,20 +252,26 @@ class EbirdNotableObservationsViewModel: ObservableObject {
     return value
   }
 
-  private static func uniqueObservations(from ebirdObservations: [EbirdNotableObservation]) -> [Obs] {
+  private static func uniqueObservations(
+    from ebirdObservations: [EbirdNotableObservation],
+    speciesList: [Species]
+  ) -> [Obs] {
     var seen = Set<String>()
 
     return ebirdObservations.enumerated().compactMap { index, observation in
       let uniqueKey = observation.obsId ?? "\(observation.subId ?? "")-\(observation.speciesCode ?? "")"
       guard seen.insert(uniqueKey).inserted else { return nil }
-      return observation.asObservation(index: index)
+      let localSpecies = speciesList.first {
+        $0.scientificName.caseInsensitiveCompare(observation.sciName ?? "") == .orderedSame
+      }
+      return observation.asObservation(index: index, localSpecies: localSpecies)
     }
   }
 }
 
 // swiftlint:disable function_body_length
 extension EbirdNotableObservation {
-  func asObservation(index: Int) -> Obs {
+  func asObservation(index: Int, localSpecies: Species?) -> Obs {
     let parsedDateTime = parseObservationDateTime(obsDt)
     let location = LocationDetail(
       id: index,
@@ -271,9 +280,9 @@ extension EbirdNotableObservation {
       permalink: locId ?? ""
     )
     let species = SpeciesDetail(
-      id: 0,
+      id: localSpecies?.speciesId ?? 0,
       scientificName: sciName ?? "",
-      name: comName ?? speciesCode ?? "",
+      name: localSpecies?.name ?? comName ?? speciesCode ?? "",
       group: 1
     )
     let noteParts = [
@@ -290,7 +299,7 @@ extension EbirdNotableObservation {
 
     return Obs(
       idObs: numericID,
-      species: nil,
+      species: localSpecies?.speciesId,
       date: parsedDateTime.date,
       time: parsedDateTime.time,
       number: howMany ?? 1,
@@ -368,6 +377,9 @@ struct EbirdNotableObservationsView: View {
   @StateObject private var viewModel = EbirdNotableObservationsViewModel()
 
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var speciesViewModel: SpeciesViewModel
+  @EnvironmentObject var regionListViewModel: RegionListViewModel
+  @StateObject private var ebirdSpeciesViewModel = SpeciesViewModel()
 
   @Binding var selectedSpeciesID: Int?
 
@@ -425,13 +437,30 @@ struct EbirdNotableObservationsView: View {
       }
     }
     .refreshable {
-      viewModel.fetchData(settings: settings)
+      fetchEbirdObservations()
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       if viewModel.observations == nil {
-        viewModel.fetchData(settings: settings)
+        fetchEbirdObservations()
       }
+    }
+  }
+
+  private func fetchEbirdObservations() {
+    if settings.selectedSpeciesGroup == 1, !speciesViewModel.species.isEmpty {
+      viewModel.fetchData(settings: settings, speciesViewModel: speciesViewModel)
+      return
+    }
+
+    if !ebirdSpeciesViewModel.species.isEmpty {
+      viewModel.fetchData(settings: settings, speciesViewModel: ebirdSpeciesViewModel)
+      return
+    }
+
+    let birdRegionListId = regionListViewModel.getId(region: settings.selectedRegionId, speciesGroup: 1) ?? 5001
+    ebirdSpeciesViewModel.fetchDataFirst(settings: settings, regionListId: birdRegionListId) {
+      viewModel.fetchData(settings: settings, speciesViewModel: ebirdSpeciesViewModel)
     }
   }
 }

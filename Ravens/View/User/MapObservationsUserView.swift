@@ -45,9 +45,13 @@ struct MapObservationsUserView: View {
       }
       .mapStyle(settings.mapStyle)
       .mapControls {
-        MapUserLocationButton()
-        MapPitchToggle()
         MapCompass() // tapping this makes it north
+      }
+      .onMapCameraChange { context in
+        region = context.region
+      }
+      .overlay(alignment: .topTrailing) {
+        MapControlButtons(cameraPosition: $cameraPosition, region: $region)
       }
     }
     .onAppear {
