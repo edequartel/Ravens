@@ -13,33 +13,24 @@ struct BookMark: Codable, Identifiable {
   var speciesID: Int // bookmarkID
 }
 
+@MainActor
 class BookMarksViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   @Published var records: [BookMark] = []
 
-  let filePath: URL
+  private let collectionName: String
   
   init(fileName: String) {
-    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
+    self.collectionName = fileName
     loadRecords()
   }
 
   func loadRecords() {
-    do {
-      let data = try Data(contentsOf: filePath)
-      records = try JSONDecoder().decode([BookMark].self, from: data)
-    } catch {
-      log.info("BookMarksViewModel Error loading data: \(error)")
-    }
+    records = SwiftDataJSONCollectionStore.shared.loadRecords(named: collectionName, as: [BookMark].self)
   }
 
   func saveRecords() {
-    do {
-      let data = try JSONEncoder().encode(records)
-      try data.write(to: filePath, options: .atomicWrite)
-    } catch {
-      log.info("BookMarksViewModel Error saving data: \(error)")
-    }
+    SwiftDataJSONCollectionStore.shared.saveRecords(records, named: collectionName)
   }
 
   func isSpeciesIDInRecords(speciesID: Int) -> Bool {

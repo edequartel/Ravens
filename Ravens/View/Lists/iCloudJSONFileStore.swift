@@ -6,101 +6,181 @@
 //
 
 import Foundation
+import SwiftData
 import SwiftyBeaver
 
-enum ICloudJSONFileStore {
-  private static let documentsFolderName = "Documents"
+@Model
+final class PersistentJSONCollection {
+  var name: String = ""
+  var payload: Data = Data("[]".utf8)
+  var updatedAt: Date = Date()
 
-  static func url(for fileName: String, log: SwiftyBeaver.Type) -> URL {
-    let fileManager = FileManager.default
-    let localURL = localDocumentsURL(fileName: fileName, fileManager: fileManager)
+  init(name: String, payload: Data = Data("[]".utf8), updatedAt: Date = Date()) {
+    self.name = name
+    self.payload = payload
+    self.updatedAt = updatedAt
+  }
+}
 
-    guard let iCloudDocumentsURL = fileManager.url(forUbiquityContainerIdentifier: nil)?
-      .appendingPathComponent(documentsFolderName, isDirectory: true) else {
-      log.warning("iCloud unavailable, using local JSON path: \(localURL.path)")
-      ensureJSONFileExists(at: localURL, fileManager: fileManager, log: log)
-      return localURL
+enum RavensModelContainer {
+  static let shared: ModelContainer = {
+    let schema = Schema([
+      PersistentJSONCollection.self
+    ])
+
+    let cloudKitDatabase: ModelConfiguration.CloudKitDatabase
+    if let bundleIdentifier = Bundle.main.bundleIdentifier {
+      cloudKitDatabase = .private("iCloud.\(bundleIdentifier)")
+    } else {
+      cloudKitDatabase = .automatic
+    }
+
+    let configuration = ModelConfiguration(
+      schema: schema,
+      isStoredInMemoryOnly: false,
+      cloudKitDatabase: cloudKitDatabase
+    )
+
+    do {
+      return try ModelContainer(for: schema, configurations: [configuration])
+    } catch {
+      fatalError("Could not create SwiftData model container: \(error)")
+    }
+  }()
+}
+
+@MainActor
+final class SwiftDataJSONCollectionStore {
+  static let shared = SwiftDataJSONCollectionStore()
+
+  private let log = SwiftyBeaver.self
+  private let modelContext: ModelContext
+  private let fileManager = FileManager.default
+
+  private init(modelContainer: ModelContainer = RavensModelContainer.shared) {
+    self.modelContext = ModelContext(modelContainer)
+  }
+
+  func loadRecords<T: Codable>(named collectionName: String, as type: [T].Type) -> [T] {
+    migrateLegacyJSONIfNeeded(named: collectionName)
+
+    guard let data = collection(named: collectionName)?.payload else {
+      return []
     }
 
     do {
-      try fileManager.createDirectory(at: iCloudDocumentsURL, withIntermediateDirectories: true)
+      return try JSONDecoder().decode(type, from: data)
     } catch {
-      log.error("Could not create iCloud Documents folder: \(error.localizedDescription)")
-      ensureJSONFileExists(at: localURL, fileManager: fileManager, log: log)
-      return localURL
+      log.info("SwiftData decode failed for \(collectionName): \(error)")
+      return []
     }
-
-    let iCloudURL = iCloudDocumentsURL.appendingPathComponent(fileName)
-    migrateLocalJSONIfNeeded(from: localURL, to: iCloudURL, fileManager: fileManager, log: log)
-    ensureJSONFileExists(at: iCloudURL, fileManager: fileManager, log: log)
-    startDownloadingIfNeeded(iCloudURL, fileManager: fileManager, log: log)
-
-    log.info("Using iCloud JSON path: \(iCloudURL.path)")
-    return iCloudURL
   }
 
-  private static func localDocumentsURL(fileName: String, fileManager: FileManager) -> URL {
+  func saveRecords<T: Codable>(_ records: [T], named collectionName: String) {
+    do {
+      let data = try JSONEncoder().encode(records)
+      let record: PersistentJSONCollection
+      if let existingRecord = collection(named: collectionName) {
+        record = existingRecord
+      } else {
+        record = PersistentJSONCollection(name: collectionName)
+        modelContext.insert(record)
+      }
+
+      record.payload = data
+      record.updatedAt = Date()
+
+      try modelContext.save()
+    } catch {
+      log.info("SwiftData save failed for \(collectionName): \(error)")
+    }
+  }
+
+  private func collection(named collectionName: String) -> PersistentJSONCollection? {
+    let descriptor = FetchDescriptor<PersistentJSONCollection>(
+      predicate: #Predicate { $0.name == collectionName }
+    )
+
+    do {
+      let records = try modelContext.fetch(descriptor)
+      if records.count > 1 {
+        mergeDuplicateCollections(records, named: collectionName)
+      }
+      return records.first
+    } catch {
+      log.info("SwiftData fetch failed for \(collectionName): \(error)")
+      return nil
+    }
+  }
+
+  private func mergeDuplicateCollections(_ records: [PersistentJSONCollection], named collectionName: String) {
+    guard let keeper = records.max(by: { $0.updatedAt < $1.updatedAt }) else {
+      return
+    }
+
+    for record in records where record !== keeper {
+      modelContext.delete(record)
+    }
+
+    do {
+      try modelContext.save()
+    } catch {
+      log.info("SwiftData duplicate cleanup failed for \(collectionName): \(error)")
+    }
+  }
+
+  private func migrateLegacyJSONIfNeeded(named collectionName: String) {
+    guard collection(named: collectionName) == nil,
+          let legacyData = bestLegacyData(for: collectionName) else {
+      return
+    }
+
+    let record = PersistentJSONCollection(name: collectionName, payload: legacyData, updatedAt: Date())
+    modelContext.insert(record)
+
+    do {
+      try modelContext.save()
+      log.info("Migrated \(collectionName) JSON into SwiftData")
+    } catch {
+      log.info("SwiftData migration failed for \(collectionName): \(error)")
+    }
+  }
+
+  private func bestLegacyData(for fileName: String) -> Data? {
+    let candidates = [
+      iCloudDocumentsURL(fileName: fileName),
+      localDocumentsURL(fileName: fileName)
+    ].compactMap { $0 }
+
+    for url in candidates {
+      guard hasUsableContent(at: url),
+            let data = try? Data(contentsOf: url),
+            (try? JSONSerialization.jsonObject(with: data)) != nil else {
+        continue
+      }
+      return data
+    }
+
+    return nil
+  }
+
+  private func iCloudDocumentsURL(fileName: String) -> URL? {
+    fileManager.url(forUbiquityContainerIdentifier: nil)?
+      .appendingPathComponent("Documents", isDirectory: true)
+      .appendingPathComponent(fileName)
+  }
+
+  private func localDocumentsURL(fileName: String) -> URL {
     fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
       .appendingPathComponent(fileName)
   }
 
-  private static func migrateLocalJSONIfNeeded(
-    from localURL: URL,
-    to iCloudURL: URL,
-    fileManager: FileManager,
-    log: SwiftyBeaver.Type
-  ) {
-    guard fileManager.fileExists(atPath: localURL.path),
-          hasUsableContent(at: localURL),
-          !hasUsableContent(at: iCloudURL) else {
-      return
-    }
-
-    do {
-      if fileManager.fileExists(atPath: iCloudURL.path) {
-        try fileManager.removeItem(at: iCloudURL)
-      }
-      try fileManager.copyItem(at: localURL, to: iCloudURL)
-      log.info("Migrated local JSON to iCloud: \(iCloudURL.lastPathComponent)")
-    } catch {
-      log.error("Could not migrate local JSON to iCloud: \(error.localizedDescription)")
-    }
-  }
-
-  private static func ensureJSONFileExists(
-    at url: URL,
-    fileManager: FileManager,
-    log: SwiftyBeaver.Type
-  ) {
-    guard !fileManager.fileExists(atPath: url.path) || !hasUsableContent(at: url) else {
-      return
-    }
-
-    do {
-      try "[]".write(to: url, atomically: true, encoding: .utf8)
-    } catch {
-      log.error("Could not create JSON file \(url.lastPathComponent): \(error.localizedDescription)")
-    }
-  }
-
-  private static func hasUsableContent(at url: URL) -> Bool {
-    guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
+  private func hasUsableContent(at url: URL) -> Bool {
+    guard let attributes = try? fileManager.attributesOfItem(atPath: url.path),
           let fileSize = attributes[.size] as? NSNumber else {
       return false
     }
 
     return fileSize.intValue > 0
-  }
-
-  private static func startDownloadingIfNeeded(
-    _ url: URL,
-    fileManager: FileManager,
-    log: SwiftyBeaver.Type
-  ) {
-    do {
-      try fileManager.startDownloadingUbiquitousItem(at: url)
-    } catch {
-      log.warning("Could not start iCloud download for \(url.lastPathComponent): \(error.localizedDescription)")
-    }
   }
 }

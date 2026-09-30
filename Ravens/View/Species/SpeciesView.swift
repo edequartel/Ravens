@@ -22,6 +22,7 @@ struct SpeciesView: View {
   var item: Species
 
   @Binding var selectedSpeciesID: Int?
+  var highlightedObservation: Obs?
 
   var body: some View {
     VStack {
@@ -37,7 +38,8 @@ struct SpeciesView: View {
             observationsSpecies: observationsSpecies,
             item: item,
             selectedSpeciesID: $selectedSpeciesID,
-            timePeriod: $settings.timePeriodSpecies
+            timePeriod: $settings.timePeriodSpecies,
+            highlightedObservation: highlightedObservation
           )
         }
       }
@@ -324,7 +326,7 @@ extension EbirdNotableObservation {
       observerLocation: nil,
       transectUUID: nil,
       speciesDetail: species,
-      rarity: 4,
+      rarity: localSpecies?.rarity ?? 4,
       user: numericID,
       userDetail: userDisplayName == nil ? nil : userDetail,
       modified: nil,

@@ -36,6 +36,7 @@ struct ObservationsSpeciesView: View {
   @State private var currentFilteringOption: FilteringRarityOption? = .all
 
   @Binding var timePeriod: TimePeriod?
+  var highlightedObservation: Obs?
 
   var body: some View {
     VStack {
@@ -83,7 +84,8 @@ struct ObservationsSpeciesView: View {
           entity: .species,
           currentSortingOption: $currentSortingOption,
           currentFilteringAllOption: $currentFilteringAllOption,
-          currentFilteringOption: $currentFilteringOption
+          currentFilteringOption: $currentFilteringOption,
+          highlightedObservation: highlightedObservation
         ) {
           // Handle end of list event with endOfList Closure
           log.info("End of list reached in parent View closure observationsSpecies")

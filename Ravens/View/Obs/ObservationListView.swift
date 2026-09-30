@@ -24,6 +24,7 @@ struct ObservationListView: View {
   @Binding var currentSortingOption: SortingOption?
   @Binding var currentFilteringAllOption: FilterAllOption?
   @Binding var currentFilteringOption: FilteringRarityOption?
+  var highlightedObservation: Obs?
 
   @AccessibilityFocusState private var focusedItemID: Int?
 
@@ -35,6 +36,15 @@ struct ObservationListView: View {
       let filteredAndSortedObservations = observations
         .filter(meetsRarityCondition)
         .sorted(by: compareObservations)
+
+      if let highlightedObservation {
+        ObservationRowView(
+          index: nil,
+          obs: highlightedObservation,
+          selectedSpeciesID: $selectedSpeciesID,
+          entity: .ebird,
+          opensObservationDetail: true)
+      }
 
       ForEach(Array(filteredAndSortedObservations.enumerated()), id: \.element.id) { index, obs in
         ObservationRowView(

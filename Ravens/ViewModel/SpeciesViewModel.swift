@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyBeaver
 import SwiftSoup
 
+@MainActor
 class SpeciesViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   

@@ -60,22 +60,10 @@ struct ObsDetailView: View {
 
         // Photos Section
         if let photos = obs.photos, photos.count > 0 {
-          HStack {
-            Text("Foto")
-            Spacer()
-          }
-          .padding(.horizontal, 4)
-
           PhotoGridView(photos: photos)
 //            .islandBackground()
             .accessibilityHidden(true)
         } else if !obs.speciesDetail.scientificName.isEmpty {
-          HStack {
-            Text("Foto")
-            Spacer()
-          }
-          .padding(.horizontal, 4)
-
           SpeciesINaturalistDetailPhotoView(scientificName: obs.speciesDetail.scientificName)
         }
 
@@ -100,7 +88,7 @@ struct ObsDetailView: View {
           .islandBackground()
           .accessibility(label: Text(notesAboutObservation))
 
-        NavigationLink(destination: FullMapView(obs: obs)) {
+        NavigationLink(destination: FullMapView(obs: obs, entity: entity)) {
           PositionOnMapView(obs: obs)
             .frame(height: UIScreen.main.bounds.width / 2)
             .cornerRadius(8)
@@ -137,9 +125,10 @@ struct ObsDetailView: View {
   // Fullscreen destination map view
   struct FullMapView: View {
     let obs: Obs
+    let entity: EntityType
 
     var body: some View {
-      PositionOnMapView(obs: obs, allowsHitTesting: true)
+      PositionOnMapView(obs: obs, allowsHitTesting: true, entity: entity)
         .navigationBarTitleDisplayMode(.inline)
     }
   }

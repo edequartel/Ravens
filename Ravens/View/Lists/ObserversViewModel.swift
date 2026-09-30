@@ -15,6 +15,7 @@ struct Observer: Codable, Identifiable {
   var userID: Int
 }
 
+@MainActor
 class ObserversViewModel: ObservableObject {
   let log = SwiftyBeaver.self
   
@@ -23,33 +24,23 @@ class ObserversViewModel: ObservableObject {
   @Published var observerId: Int = 0
   @Published var observerName: String? = "noName"
   
-  let filePath: URL
+  private let collectionName: String
   
   init() {
     log.info("init ObserversViewModel")
     
     let fileName = "observers.json"
-    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
+    self.collectionName = fileName
     loadRecords()
   }
 
   func loadRecords() {
-    do {
-      let data = try Data(contentsOf: filePath)
-      records = try JSONDecoder().decode([Observer].self, from: data)
-      log.info("Loaded \(records.count) observers")
-    } catch {
-      log.info("Error loading data observers.json - is empty")
-    }
+    records = SwiftDataJSONCollectionStore.shared.loadRecords(named: collectionName, as: [Observer].self)
+    log.info("Loaded \(records.count) observers")
   }
   
   func saveRecords() {
-    do {
-      let data = try JSONEncoder().encode(records)
-      try data.write(to: filePath, options: .atomicWrite)
-    } catch {
-      print("Error saving data: \(error)")
-    }
+    SwiftDataJSONCollectionStore.shared.saveRecords(records, named: collectionName)
   }
   
   func isObserverInRecords(userID: Int) -> Bool {

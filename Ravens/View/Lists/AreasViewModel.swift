@@ -17,38 +17,29 @@ struct Area: Codable, Identifiable {
   var longitude: CLLocationDegrees = 0
 }
 
+@MainActor
 class AreasViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
   @Published var records: [Area] = []
-  let filePath: URL
+  private let collectionName: String
 
   init() {
     log.info("init AreasViewModel")
 
     let fileName = "areas.json"
 
-    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
+    self.collectionName = fileName
     loadRecords()
   }
 
   func loadRecords() {
-    do {
-      let data = try Data(contentsOf: filePath)
-      records = try JSONDecoder().decode([Area].self, from: data)
-      log.info("Loaded \(records.count) areas")
-    } catch {
-      log.info("Error loading data areas.json - is empty")
-    }
+    records = SwiftDataJSONCollectionStore.shared.loadRecords(named: collectionName, as: [Area].self)
+    log.info("Loaded \(records.count) areas")
   }
 
   func saveRecords() {
-    do {
-      let data = try JSONEncoder().encode(records)
-      try data.write(to: filePath, options: .atomicWrite)
-    } catch {
-      print("Error saving data: \(error)")
-    }
+    SwiftDataJSONCollectionStore.shared.saveRecords(records, named: collectionName)
   }
 
   func isIDInRecords(areaID: Int) -> Bool {

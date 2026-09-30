@@ -106,6 +106,7 @@ struct SpeciesINaturalistThumbnailView: View {
 
   @State private var photoURL: URL?
   @State private var didLoad = false
+  @State private var didRetryAfterFailure = false
 
   var body: some View {
     ZStack {
@@ -114,6 +115,9 @@ struct SpeciesINaturalistThumbnailView: View {
           .cacheOriginalImage()
           .placeholder {
             placeholder
+          }
+          .onFailure { _ in
+            retryPhotoLookupAfterImageFailure()
           }
           .resizable()
           .aspectRatio(contentMode: .fill)
@@ -134,6 +138,16 @@ struct SpeciesINaturalistThumbnailView: View {
     }
   }
 
+  private func retryPhotoLookupAfterImageFailure() {
+    guard !didRetryAfterFailure else { return }
+    didRetryAfterFailure = true
+
+    INaturalistSpeciesPhotoCache.shared.invalidatePhotoURL(for: scientificName)
+    INaturalistSpeciesPhotoCache.shared.photoURL(for: scientificName, forceRefresh: true) { url in
+      photoURL = url
+    }
+  }
+
   private var placeholder: some View {
     ZStack {
       Color.gray.opacity(0.2)
@@ -148,6 +162,7 @@ struct SpeciesINaturalistDetailPhotoView: View {
 
   @State private var photoURL: URL?
   @State private var didLoad = false
+  @State private var didRetryAfterFailure = false
   @State private var showPhoto = false
 
   var body: some View {
@@ -157,6 +172,9 @@ struct SpeciesINaturalistDetailPhotoView: View {
           .cacheOriginalImage()
           .placeholder {
             placeholder
+          }
+          .onFailure { _ in
+            retryPhotoLookupAfterImageFailure()
           }
           .resizable()
           .aspectRatio(contentMode: .fit)
@@ -186,6 +204,16 @@ struct SpeciesINaturalistDetailPhotoView: View {
     }
   }
 
+  private func retryPhotoLookupAfterImageFailure() {
+    guard !didRetryAfterFailure else { return }
+    didRetryAfterFailure = true
+
+    INaturalistSpeciesPhotoCache.shared.invalidatePhotoURL(for: scientificName)
+    INaturalistSpeciesPhotoCache.shared.photoURL(for: scientificName, forceRefresh: true) { url in
+      photoURL = url
+    }
+  }
+
   private var placeholder: some View {
     ZStack {
       Color.gray.opacity(0.2)
@@ -200,13 +228,18 @@ final class INaturalistSpeciesPhotoCache {
 
   private let cacheKeyPrefix = "inaturalistSpeciesPhoto.v3."
   private let missingCacheKeyPrefix = "inaturalistSpeciesPhotoMissing.v3."
+  private let missingCacheDuration: TimeInterval = 60 * 60 * 24
   private var memoryCache: [String: URL?] = [:]
-  private var missingPhotoCache = Set<String>()
+  private var missingPhotoCache: [String: Date] = [:]
   private var inFlight: [String: [(URL?) -> Void]] = [:]
 
   private init() {}
 
-  func photoURL(for scientificName: String, completion: @escaping (URL?) -> Void) {
+  func photoURL(
+    for scientificName: String,
+    forceRefresh: Bool = false,
+    completion: @escaping (URL?) -> Void
+  ) {
     let normalizedName = scientificName.trimmingCharacters(in: .whitespacesAndNewlines)
     guard !normalizedName.isEmpty else {
       completion(nil)
@@ -215,18 +248,17 @@ final class INaturalistSpeciesPhotoCache {
 
     let cacheKey = normalizedName.lowercased()
 
-    if let cachedURL = memoryCache[cacheKey] {
+    if !forceRefresh, let cachedURL = memoryCache[cacheKey] {
       completion(cachedURL)
       return
     }
 
-    if missingPhotoCache.contains(cacheKey) || UserDefaults.standard.bool(forKey: missingCacheKeyPrefix + cacheKey) {
-      missingPhotoCache.insert(cacheKey)
+    if !forceRefresh, isMissingPhotoCacheValid(for: cacheKey) {
       completion(nil)
       return
     }
 
-    if let cachedString = UserDefaults.standard.string(forKey: cacheKeyPrefix + cacheKey) {
+    if !forceRefresh, let cachedString = UserDefaults.standard.string(forKey: cacheKeyPrefix + cacheKey) {
       let cachedURL = URL(string: cachedString)
       memoryCache[cacheKey] = cachedURL
       completion(cachedURL)
@@ -247,14 +279,47 @@ final class INaturalistSpeciesPhotoCache {
           UserDefaults.standard.set(url.absoluteString, forKey: self.cacheKeyPrefix + cacheKey)
           UserDefaults.standard.removeObject(forKey: self.missingCacheKeyPrefix + cacheKey)
         } else {
-          self.missingPhotoCache.insert(cacheKey)
-          UserDefaults.standard.set(true, forKey: self.missingCacheKeyPrefix + cacheKey)
+          let now = Date()
+          self.missingPhotoCache[cacheKey] = now
+          UserDefaults.standard.set(now, forKey: self.missingCacheKeyPrefix + cacheKey)
         }
 
         let completions = self.inFlight.removeValue(forKey: cacheKey) ?? []
         completions.forEach { $0(url) }
       }
     }
+  }
+
+  func invalidatePhotoURL(for scientificName: String) {
+    let cacheKey = scientificName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    guard !cacheKey.isEmpty else { return }
+
+    memoryCache.removeValue(forKey: cacheKey)
+    missingPhotoCache.removeValue(forKey: cacheKey)
+    UserDefaults.standard.removeObject(forKey: cacheKeyPrefix + cacheKey)
+    UserDefaults.standard.removeObject(forKey: missingCacheKeyPrefix + cacheKey)
+  }
+
+  private func isMissingPhotoCacheValid(for cacheKey: String) -> Bool {
+    if let cachedDate = missingPhotoCache[cacheKey] {
+      return Date().timeIntervalSince(cachedDate) < missingCacheDuration
+    }
+
+    if let cachedDate = UserDefaults.standard.object(forKey: missingCacheKeyPrefix + cacheKey) as? Date {
+      if Date().timeIntervalSince(cachedDate) < missingCacheDuration {
+        missingPhotoCache[cacheKey] = cachedDate
+        return true
+      }
+
+      UserDefaults.standard.removeObject(forKey: missingCacheKeyPrefix + cacheKey)
+      return false
+    }
+
+    if UserDefaults.standard.bool(forKey: missingCacheKeyPrefix + cacheKey) {
+      UserDefaults.standard.removeObject(forKey: missingCacheKeyPrefix + cacheKey)
+    }
+
+    return false
   }
 
   private func fetchPhotoURL(for scientificName: String, completion: @escaping (URL?) -> Void) {

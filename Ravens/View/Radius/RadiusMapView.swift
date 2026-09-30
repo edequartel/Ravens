@@ -24,6 +24,7 @@ struct RadiusMapView: View {
   @Binding var timePeriod: TimePeriod?
   @Binding var region: MKCoordinateRegion
   @Binding var cameraPosition: MapCameraPosition
+  @State private var selectedObservation: Obs?
 
   var body: some View {
     MapReader { proxy in
@@ -62,7 +63,10 @@ struct RadiusMapView: View {
       .simultaneousGesture(
         SpatialTapGesture()
           .onEnded { value in
-            guard !isObservationTap(value.location, proxy: proxy) else { return }
+            if let observation = observation(at: value.location, proxy: proxy) {
+              selectedObservation = observation
+              return
+            }
 
         observationsRadiusViewModel.observations = []
 
@@ -87,6 +91,13 @@ struct RadiusMapView: View {
     .onAppear {
       log.error("radiusMapView onAppear")
       updateRegionToUserLocation(coordinate: observationsRadiusViewModel.circleCenter)
+    }
+    .sheet(item: $selectedObservation) { item in
+      NavigationStack {
+        ObsDetailView(obs: item, entity: .radius)
+      }
+      .presentationDetents([.medium, .large])
+      .presentationDragIndicator(.visible)
     }
   }
 
@@ -118,8 +129,8 @@ struct RadiusMapView: View {
     }
   }
 
-  private func isObservationTap(_ point: CGPoint, proxy: MapProxy) -> Bool {
-    filteredObservations.contains { observation in
+  private func observation(at point: CGPoint, proxy: MapProxy) -> Obs? {
+    filteredObservations.first { observation in
       let coordinate = CLLocationCoordinate2D(
         latitude: observation.point.coordinates[1],
         longitude: observation.point.coordinates[0]

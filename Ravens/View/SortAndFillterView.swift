@@ -95,6 +95,7 @@ struct ObservationRowView: View {
   @Binding var selectedSpeciesID: Int?
   
   var entity: EntityType
+  var opensObservationDetail: Bool = false
   @StateObject private var observationsSpecies = ObservationsViewModel()
   
   var body: some View {
@@ -111,21 +112,40 @@ struct ObservationRowView: View {
       }
       Divider()
     }
+    .listRowBackground(rowBackgroundColor)
     .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)) // Remove default padding
     .listRowSeparator(.hidden)  // Remove separator line
   }
 
   @ViewBuilder
   private var destinationView: some View {
-    if entity == .ebird, let species = speciesFromObservation {
+    if entity == .ebird && !opensObservationDetail, let species = speciesFromObservation {
       SpeciesView(
         observationsSpecies: observationsSpecies,
         item: species,
-        selectedSpeciesID: $selectedSpeciesID
+        selectedSpeciesID: $selectedSpeciesID,
+        highlightedObservation: obs
       )
     } else {
       ObsDetailView(obs: obs, entity: entity)
     }
+  }
+
+  private var rowBackgroundColor: Color {
+    if entity == .ebird && !isObservationToday {
+      return Color(.systemGray6)
+    }
+
+    return Color.clear
+  }
+
+  private var isObservationToday: Bool {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.dateFormat = "yyyy-MM-dd"
+
+    guard let date = formatter.date(from: obs.date) else { return false }
+    return Calendar.current.isDateInToday(date)
   }
 
   private var speciesFromObservation: Species? {

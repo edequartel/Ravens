@@ -80,11 +80,13 @@ struct MapObservationsUserView: View {
 struct ObservationAnnotationView: View {
   let observation: Obs
   let entity: EntityType
+  var opensDetail = true
 
   @State private var selectedObservation: Obs?
 
   var body: some View {
     Button {
+      guard opensDetail else { return }
       selectedObservation = observation
     } label: {
       Circle()

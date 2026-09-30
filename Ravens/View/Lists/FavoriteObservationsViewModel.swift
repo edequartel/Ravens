@@ -10,36 +10,27 @@ import SwiftyBeaver
 import MijickCalendarView
 import SwiftData
 
+@MainActor
 class FavoriteObservationsViewModel: ObservableObject {
   let log = SwiftyBeaver.self
 
   @Published var records: [Obs] = []
-  let filePath: URL
+  private let collectionName: String
 
   init(fileName: String = "") {
     log.error("init FavoriteObservationsViewModel with file: \(fileName)")
 
-    self.filePath = ICloudJSONFileStore.url(for: fileName, log: log)
+    self.collectionName = fileName
     loadRecords()
   }
 
   func loadRecords() {
-    do {
-      let data = try Data(contentsOf: filePath)
-      records = try JSONDecoder().decode([Obs].self, from: data)
-      log.info("Loaded \(records.count) favorite observations")
-    } catch {
-      log.info("Error loading data from \(filePath.lastPathComponent) - likely empty")
-    }
+    records = SwiftDataJSONCollectionStore.shared.loadRecords(named: collectionName, as: [Obs].self)
+    log.info("Loaded \(records.count) favorite observations")
   }
 
   func saveRecords() {
-    do {
-      let data = try JSONEncoder().encode(records)
-      try data.write(to: filePath, options: .atomicWrite)
-    } catch {
-      print("Error saving data: \(error)")
-    }
+    SwiftDataJSONCollectionStore.shared.saveRecords(records, named: collectionName)
   }
 
   func isObservationInRecords(idObs: Int) -> Bool {

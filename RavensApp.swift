@@ -31,7 +31,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     file.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"  // full datetime, colored log level and message
     file.minLevel = .warning
     file.levelString.error = "Ravens"
-    file.logFileURL = URL(fileURLWithPath: "/Users/ericdequartel/Developer/_myApps/Ravens/ravens.log")
+    file.logFileURL = FileManager.default
+      .urls(for: .cachesDirectory, in: .userDomainMask)
+      .first?
+      .appendingPathComponent("ravens.log")
     // Console logging destination
     let console = ConsoleDestination()
     console.levelString.error = "Ravens"
@@ -92,6 +95,7 @@ struct RavensApp: App {
         observationsRadiusViewModel: observationsRadiusViewModel
       )
       .modifier(GlobalFontModifier())
+      .modelContainer(RavensModelContainer.shared)
 
       .environmentObject(keychainViewModel)
       .environmentObject(locationManager)

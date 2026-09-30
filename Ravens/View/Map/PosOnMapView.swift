@@ -11,6 +11,7 @@ import MapKit
 struct PositionOnMapView: View {
   var obs: Obs
   var allowsHitTesting: Bool = false // so the map is not moving
+  var entity: EntityType = .species
 
   @EnvironmentObject var settings: Settings
   @State private var cameraPosition: MapCameraPosition = .automatic
@@ -23,16 +24,7 @@ struct PositionOnMapView: View {
     Map(position: $cameraPosition) {
       UserAnnotation()
       Annotation(obs.speciesDetail.name, coordinate: CLLocationCoordinate2D(latitude: obs.point.coordinates[1], longitude: obs.point.coordinates[0])) {
-        Circle()
-          .fill(rarityColor(value: obs.rarity))
-          .stroke(obs.hasSound ?? false ? Color.white : Color.clear, lineWidth: 1)
-          .frame(width: 12, height: 12)
-
-          .overlay(
-            Circle()
-              .fill(obs.hasPhoto ?? false ? Color.white : Color.clear)
-              .frame(width: 6, height: 6)
-          )
+        ObservationAnnotationView(observation: obs, entity: entity, opensDetail: false)
       }
     }
     .mapStyle(settings.mapStyle)

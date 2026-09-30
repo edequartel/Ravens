@@ -29,6 +29,7 @@ struct MapObservationsLocationView: View {
     center: CLLocationCoordinate2D(latitude: 52.0, longitude: 5.0),
     span: MKCoordinateSpan(latitudeDelta: 4.5, longitudeDelta: 3.0)
   )
+  @State private var selectedObservation: Obs?
 
   var body: some View {
     VStack {
@@ -105,7 +106,10 @@ struct MapObservationsLocationView: View {
         .simultaneousGesture(
           SpatialTapGesture()
             .onEnded { value in
-              guard !isObservationTap(value.location, proxy: proxy) else { return }
+              if let observation = observation(at: value.location, proxy: proxy) {
+                selectedObservation = observation
+                return
+              }
 //              print("okidoki") // ensure it fires on any map tap not hitting an annotation
               if let coordinate = proxy.convert(value.location, from: .local) {
                 setLocation = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -131,6 +135,13 @@ struct MapObservationsLocationView: View {
       }
       .onAppear {
         log.info("MapObservationsLocationView onAppear")
+      }
+      .sheet(item: $selectedObservation) { item in
+        NavigationStack {
+          ObsDetailView(obs: item, entity: .location)
+        }
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
       }
     }
   }
@@ -165,8 +176,8 @@ struct MapObservationsLocationView: View {
     }
   }
 
-  private func isObservationTap(_ point: CGPoint, proxy: MapProxy) -> Bool {
-    filteredObservations.contains { observation in
+  private func observation(at point: CGPoint, proxy: MapProxy) -> Obs? {
+    filteredObservations.first { observation in
       let coordinate = CLLocationCoordinate2D(
         latitude: observation.point.coordinates[1],
         longitude: observation.point.coordinates[0]
